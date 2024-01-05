@@ -149,6 +149,7 @@ type CompromisedCredentialsRiskConfigurationInitParameters struct {
 	Actions []CompromisedCredentialsRiskConfigurationActionsInitParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
+	// +listType=set
 	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 }
 
@@ -158,6 +159,7 @@ type CompromisedCredentialsRiskConfigurationObservation struct {
 	Actions []CompromisedCredentialsRiskConfigurationActionsObservation `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
+	// +listType=set
 	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 }
 
@@ -169,6 +171,7 @@ type CompromisedCredentialsRiskConfigurationParameters struct {
 
 	// Perform the action for these events. The default is to perform all events if no event filter is specified. Valid values are SIGN_IN, PASSWORD_CHANGE, and SIGN_UP.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EventFilter []*string `json:"eventFilter,omitempty" tf:"event_filter,omitempty"`
 }
 
@@ -419,6 +422,19 @@ type RiskConfigurationInitParameters struct {
 
 	// The configuration to override the risk decision. See details below.
 	RiskExceptionConfiguration []RiskExceptionConfigurationInitParameters `json:"riskExceptionConfiguration,omitempty" tf:"risk_exception_configuration,omitempty"`
+
+	// The user pool ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// Reference to a UserPool in cognitoidp to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool in cognitoidp to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type RiskConfigurationObservation struct {
@@ -485,11 +501,13 @@ type RiskExceptionConfigurationInitParameters struct {
 	// Overrides the risk decision to always block the pre-authentication requests.
 	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
 	// Can contain a maximum of 200 items.
+	// +listType=set
 	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
 
 	// Risk detection isn't performed on the IP addresses in this range list.
 	// The IP range is in CIDR notation.
 	// Can contain a maximum of 200 items.
+	// +listType=set
 	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }
 
@@ -498,11 +516,13 @@ type RiskExceptionConfigurationObservation struct {
 	// Overrides the risk decision to always block the pre-authentication requests.
 	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
 	// Can contain a maximum of 200 items.
+	// +listType=set
 	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
 
 	// Risk detection isn't performed on the IP addresses in this range list.
 	// The IP range is in CIDR notation.
 	// Can contain a maximum of 200 items.
+	// +listType=set
 	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }
 
@@ -512,12 +532,14 @@ type RiskExceptionConfigurationParameters struct {
 	// The IP range is in CIDR notation, a compact representation of an IP address and its routing prefix.
 	// Can contain a maximum of 200 items.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	BlockedIPRangeList []*string `json:"blockedIpRangeList,omitempty" tf:"blocked_ip_range_list,omitempty"`
 
 	// Risk detection isn't performed on the IP addresses in this range list.
 	// The IP range is in CIDR notation.
 	// Can contain a maximum of 200 items.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SkippedIPRangeList []*string `json:"skippedIpRangeList,omitempty" tf:"skipped_ip_range_list,omitempty"`
 }
 

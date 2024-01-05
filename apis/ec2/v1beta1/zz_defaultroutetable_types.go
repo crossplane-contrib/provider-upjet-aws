@@ -19,13 +19,28 @@ import (
 
 type DefaultRouteTableInitParameters struct {
 
+	// ID of the default route table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("default_route_table_id",true)
+	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate defaultRouteTableId.
+	// +kubebuilder:validation:Optional
+	DefaultRouteTableIDRef *v1.Reference `json:"defaultRouteTableIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate defaultRouteTableId.
+	// +kubebuilder:validation:Optional
+	DefaultRouteTableIDSelector *v1.Selector `json:"defaultRouteTableIdSelector,omitempty" tf:"-"`
+
 	// List of virtual gateways for propagation.
+	// +listType=set
 	PropagatingVgws []*string `json:"propagatingVgws,omitempty" tf:"propagating_vgws,omitempty"`
 
 	// Configuration block of routes. Detailed below. This argument is processed in attribute-as-blocks mode. This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified. See the example above.
 	Route []RouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,15 +59,18 @@ type DefaultRouteTableObservation struct {
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	// List of virtual gateways for propagation.
+	// +listType=set
 	PropagatingVgws []*string `json:"propagatingVgws,omitempty" tf:"propagating_vgws,omitempty"`
 
 	// Configuration block of routes. Detailed below. This argument is processed in attribute-as-blocks mode. This means that omitting this argument is interpreted as ignoring any existing routes. To remove all managed routes an empty list should be specified. See the example above.
 	Route []RouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// ID of the VPC.
@@ -77,6 +95,7 @@ type DefaultRouteTableParameters struct {
 
 	// List of virtual gateways for propagation.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PropagatingVgws []*string `json:"propagatingVgws,omitempty" tf:"propagating_vgws,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -90,6 +109,7 @@ type DefaultRouteTableParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -103,6 +123,32 @@ type RouteInitParameters struct {
 
 	// The ID of a managed prefix list destination of the route.
 	DestinationPrefixListID *string `json:"destinationPrefixListId,omitempty" tf:"destination_prefix_list_id"`
+
+	// Identifier of a VPC Egress Only Internet Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EgressOnlyInternetGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	EgressOnlyGatewayID *string `json:"egressOnlyGatewayId,omitempty" tf:"egress_only_gateway_id"`
+
+	// Reference to a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
+	// +kubebuilder:validation:Optional
+	EgressOnlyGatewayIDRef *v1.Reference `json:"egressOnlyGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a EgressOnlyInternetGateway in ec2 to populate egressOnlyGatewayId.
+	// +kubebuilder:validation:Optional
+	EgressOnlyGatewayIDSelector *v1.Selector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
+
+	// Identifier of a VPC internet gateway or a virtual private gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.InternetGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id"`
+
+	// Reference to a InternetGateway in ec2 to populate gatewayId.
+	// +kubebuilder:validation:Optional
+	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a InternetGateway in ec2 to populate gatewayId.
+	// +kubebuilder:validation:Optional
+	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// The Ipv6 CIDR block of the route
 	IPv6CidrBlock *string `json:"ipv6CidrBlock,omitempty" tf:"ipv6_cidr_block"`

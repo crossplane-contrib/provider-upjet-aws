@@ -59,6 +59,7 @@ type AuditLogConfigurationParameters struct {
 type SelfManagedActiveDirectoryInitParameters struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
+	// +listType=set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
@@ -77,6 +78,7 @@ type SelfManagedActiveDirectoryInitParameters struct {
 type SelfManagedActiveDirectoryObservation struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
+	// +listType=set
 	DNSIps []*string `json:"dnsIps,omitempty" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
@@ -96,6 +98,7 @@ type SelfManagedActiveDirectoryParameters struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the file system or in the private IP version 4 (IPv4) address ranges as specified in RFC 1918.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DNSIps []*string `json:"dnsIps" tf:"dns_ips,omitempty"`
 
 	// The fully qualified domain name of the self-managed AD directory. For example, corp.example.com.
@@ -121,7 +124,21 @@ type SelfManagedActiveDirectoryParameters struct {
 
 type WindowsFileSystemInitParameters struct {
 
+	// The ID for an existing Microsoft Active Directory instance that the file system should join when it's created. Cannot be specified with self_managed_active_directory.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta1.Directory
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
+
+	// Reference to a Directory in ds to populate activeDirectoryId.
+	// +kubebuilder:validation:Optional
+	ActiveDirectoryIDRef *v1.Reference `json:"activeDirectoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Directory in ds to populate activeDirectoryId.
+	// +kubebuilder:validation:Optional
+	ActiveDirectoryIDSelector *v1.Selector `json:"activeDirectoryIdSelector,omitempty" tf:"-"`
+
 	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
+	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See below.
@@ -142,8 +159,36 @@ type WindowsFileSystemInitParameters struct {
 	// Specifies the file system deployment type, valid values are MULTI_AZ_1, SINGLE_AZ_1 and SINGLE_AZ_2. Default value is SINGLE_AZ_1.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
+	// ARN for the KMS Key to encrypt the file system at rest. Defaults to an AWS managed KMS Key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// Specifies the subnet in which you want the preferred file server to be located. Required for when deployment type is MULTI_AZ_1.
 	PreferredSubnetID *string `json:"preferredSubnetId,omitempty" tf:"preferred_subnet_id,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
+	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. Detailed below.
 	SelfManagedActiveDirectory []SelfManagedActiveDirectoryInitParameters `json:"selfManagedActiveDirectory,omitempty" tf:"self_managed_active_directory,omitempty"`
@@ -157,7 +202,22 @@ type WindowsFileSystemInitParameters struct {
 	// Specifies the storage type, Valid values are SSD and HDD. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system deployment types. Default value is SSD.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// A list of IDs for the subnets that the file system will be accessible from. To specify more than a single subnet set deployment_type to MULTI_AZ_1.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
@@ -173,6 +233,7 @@ type WindowsFileSystemObservation struct {
 	ActiveDirectoryID *string `json:"activeDirectoryId,omitempty" tf:"active_directory_id,omitempty"`
 
 	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
+	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// Amazon Resource Name of the file system.
@@ -206,6 +267,7 @@ type WindowsFileSystemObservation struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Set of Elastic Network Interface identifiers from which the file system is accessible.
+	// +listType=set
 	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
 
 	// AWS account identifier that created the file system.
@@ -221,6 +283,7 @@ type WindowsFileSystemObservation struct {
 	RemoteAdministrationEndpoint *string `json:"remoteAdministrationEndpoint,omitempty" tf:"remote_administration_endpoint,omitempty"`
 
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. Detailed below.
@@ -239,9 +302,11 @@ type WindowsFileSystemObservation struct {
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
@@ -272,6 +337,7 @@ type WindowsFileSystemParameters struct {
 
 	// An array DNS alias names that you want to associate with the Amazon FSx file system.  For more information, see Working with DNS Aliases
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Aliases []*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
 	// The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. See below.
@@ -334,6 +400,7 @@ type WindowsFileSystemParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Configuration block that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. Cannot be specified with active_directory_id. Detailed below.
@@ -369,6 +436,7 @@ type WindowsFileSystemParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.

@@ -186,6 +186,19 @@ type ImageRecipeBlockDeviceMappingParameters struct {
 
 type ImageRecipeComponentInitParameters struct {
 
+	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.Component
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
+
+	// Reference to a Component in imagebuilder to populate componentArn.
+	// +kubebuilder:validation:Optional
+	ComponentArnRef *v1.Reference `json:"componentArnRef,omitempty" tf:"-"`
+
+	// Selector for a Component in imagebuilder to populate componentArn.
+	// +kubebuilder:validation:Optional
+	ComponentArnSelector *v1.Selector `json:"componentArnSelector,omitempty" tf:"-"`
+
 	// Configuration block(s) for parameters to configure the component. Detailed below.
 	Parameter []ComponentParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 }
@@ -241,6 +254,7 @@ type ImageRecipeInitParameters struct {
 	SystemsManagerAgent []SystemsManagerAgentInitParameters `json:"systemsManagerAgent,omitempty" tf:"systems_manager_agent,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Base64 encoded user data. Use this to provide commands or a command script to run when you launch your build instance.
@@ -288,9 +302,11 @@ type ImageRecipeObservation struct {
 	SystemsManagerAgent []SystemsManagerAgentObservation `json:"systemsManagerAgent,omitempty" tf:"systems_manager_agent,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Base64 encoded user data. Use this to provide commands or a command script to run when you launch your build instance.
@@ -336,6 +352,7 @@ type ImageRecipeParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Base64 encoded user data. Use this to provide commands or a command script to run when you launch your build instance.

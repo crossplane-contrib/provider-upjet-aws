@@ -22,7 +22,20 @@ type VPCIpamScopeInitParameters struct {
 	// A description for the scope you're creating.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the IPAM for which you're creating this scope.
+	// +crossplane:generate:reference:type=VPCIpam
+	IpamID *string `json:"ipamId,omitempty" tf:"ipam_id,omitempty"`
+
+	// Reference to a VPCIpam to populate ipamId.
+	// +kubebuilder:validation:Optional
+	IpamIDRef *v1.Reference `json:"ipamIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCIpam to populate ipamId.
+	// +kubebuilder:validation:Optional
+	IpamIDSelector *v1.Selector `json:"ipamIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,8 +66,10 @@ type VPCIpamScopeObservation struct {
 	PoolCount *float64 `json:"poolCount,omitempty" tf:"pool_count,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -84,6 +99,7 @@ type VPCIpamScopeParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

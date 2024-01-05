@@ -259,6 +259,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   jwtConfiguration:
                     description: Configuration of a JWT authorizer. Required for the
                       JWT authorizer type. Supported only for HTTP APIs.
@@ -271,6 +272,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         issuer:
                           description: Base domain of the identity provider that issues
                             JSON Web Tokens, such as the endpoint attribute of the
@@ -301,6 +303,82 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  apiId:
+                    description: API identifier.
+                    type: string
+                  apiIdRef:
+                    description: Reference to a API to populate apiId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  apiIdSelector:
+                    description: Selector for a API to populate apiId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   authorizerCredentialsArn:
                     description: Required credentials as an IAM role for API Gateway
                       to invoke the authorizer. Supported only for REQUEST authorizers.
@@ -322,6 +400,86 @@ spec:
                       REQUEST for a Lambda function using incoming request parameters.
                       For HTTP APIs, specify JWT to use JSON Web Tokens.'
                     type: string
+                  authorizerUri:
+                    description: Authorizer's Uniform Resource Identifier (URI). For
+                      REQUEST authorizers this must be a well-formed Lambda function
+                      URI, such as the invoke_arn attribute of the aws_lambda_function
+                      resource. Supported only for REQUEST authorizers. Must be between
+                      1 and 2048 characters in length.
+                    type: string
+                  authorizerUriRef:
+                    description: Reference to a Function in lambda to populate authorizerUri.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  authorizerUriSelector:
+                    description: Selector for a Function in lambda to populate authorizerUri.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   enableSimpleResponses:
                     description: Whether a Lambda authorizer returns a response in
                       a simple format. If enabled, the Lambda authorizer can return
@@ -337,6 +495,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   jwtConfiguration:
                     description: Configuration of a JWT authorizer. Required for the
                       JWT authorizer type. Supported only for HTTP APIs.
@@ -349,6 +508,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         issuer:
                           description: Base domain of the identity provider that issues
                             JSON Web Tokens, such as the endpoint attribute of the
@@ -584,6 +744,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   jwtConfiguration:
                     description: Configuration of a JWT authorizer. Required for the
                       JWT authorizer type. Supported only for HTTP APIs.
@@ -596,6 +757,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         issuer:
                           description: Base domain of the identity provider that issues
                             JSON Web Tokens, such as the endpoint attribute of the

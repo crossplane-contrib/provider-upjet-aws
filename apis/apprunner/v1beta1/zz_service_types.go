@@ -21,6 +21,19 @@ type AuthenticationConfigurationInitParameters struct {
 
 	// ARN of the IAM role that grants the App Runner service access to a source repository. Required for ECR image repositories (but not for ECR Public)
 	AccessRoleArn *string `json:"accessRoleArn,omitempty" tf:"access_role_arn,omitempty"`
+
+	// ARN of the App Runner connection that enables the App Runner service to connect to a source repository. Required for GitHub code repositories.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.Connection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ConnectionArn *string `json:"connectionArn,omitempty" tf:"connection_arn,omitempty"`
+
+	// Reference to a Connection in apprunner to populate connectionArn.
+	// +kubebuilder:validation:Optional
+	ConnectionArnRef *v1.Reference `json:"connectionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Connection in apprunner to populate connectionArn.
+	// +kubebuilder:validation:Optional
+	ConnectionArnSelector *v1.Selector `json:"connectionArnSelector,omitempty" tf:"-"`
 }
 
 type AuthenticationConfigurationObservation struct {
@@ -94,9 +107,11 @@ type CodeConfigurationValuesInitParameters struct {
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
+	// +mapType=granular
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
+	// +mapType=granular
 	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
 
 	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
@@ -115,9 +130,11 @@ type CodeConfigurationValuesObservation struct {
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
+	// +mapType=granular
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
+	// +mapType=granular
 	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
 
 	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
@@ -140,10 +157,12 @@ type CodeConfigurationValuesParameters struct {
 
 	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
 
 	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
@@ -194,6 +213,19 @@ type EgressConfigurationInitParameters struct {
 
 	// Type of egress configuration.Set to DEFAULT for access to resources hosted on public networks.Set to VPC to associate your service to a custom VPC specified by VpcConnectorArn.
 	EgressType *string `json:"egressType,omitempty" tf:"egress_type,omitempty"`
+
+	// ARN of the App Runner VPC connector that you want to associate with your App Runner service. Only valid when EgressType = VPC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.VPCConnector
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	VPCConnectorArn *string `json:"vpcConnectorArn,omitempty" tf:"vpc_connector_arn,omitempty"`
+
+	// Reference to a VPCConnector in apprunner to populate vpcConnectorArn.
+	// +kubebuilder:validation:Optional
+	VPCConnectorArnRef *v1.Reference `json:"vpcConnectorArnRef,omitempty" tf:"-"`
+
+	// Selector for a VPCConnector in apprunner to populate vpcConnectorArn.
+	// +kubebuilder:validation:Optional
+	VPCConnectorArnSelector *v1.Selector `json:"vpcConnectorArnSelector,omitempty" tf:"-"`
 }
 
 type EgressConfigurationObservation struct {
@@ -320,9 +352,11 @@ type ImageConfigurationInitParameters struct {
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
+	// +mapType=granular
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
+	// +mapType=granular
 	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
 
 	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
@@ -335,9 +369,11 @@ type ImageConfigurationObservation struct {
 	Port *string `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
+	// +mapType=granular
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
+	// +mapType=granular
 	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
 
 	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
@@ -352,10 +388,12 @@ type ImageConfigurationParameters struct {
 
 	// Secrets and parameters available to your service as environment variables. A map of key/value pairs, where the key is the desired name of the Secret in the environment (i.e. it does not have to match the name of the secret in Secrets Manager or SSM Parameter Store), and the value is the ARN of the secret from AWS Secrets Manager or the ARN of the parameter in AWS SSM Parameter Store.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RuntimeEnvironmentSecrets map[string]*string `json:"runtimeEnvironmentSecrets,omitempty" tf:"runtime_environment_secrets,omitempty"`
 
 	// Environment variables available to your running App Runner service. A map of key/value pairs. Keys with a prefix of AWSAPPRUNNER are reserved for system use and aren't valid.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RuntimeEnvironmentVariables map[string]*string `json:"runtimeEnvironmentVariables,omitempty" tf:"runtime_environment_variables,omitempty"`
 
 	// Command App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start command.
@@ -519,10 +557,24 @@ type ServiceInitParameters struct {
 	SourceConfiguration []SourceConfigurationInitParameters `json:"sourceConfiguration,omitempty" tf:"source_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ServiceObservabilityConfigurationInitParameters struct {
+
+	// ARN of the observability configuration that is associated with the service. Specified only when observability_enabled is true.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apprunner/v1beta1.ObservabilityConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ObservabilityConfigurationArn *string `json:"observabilityConfigurationArn,omitempty" tf:"observability_configuration_arn,omitempty"`
+
+	// Reference to a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ObservabilityConfigurationArnRef *v1.Reference `json:"observabilityConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a ObservabilityConfiguration in apprunner to populate observabilityConfigurationArn.
+	// +kubebuilder:validation:Optional
+	ObservabilityConfigurationArnSelector *v1.Selector `json:"observabilityConfigurationArnSelector,omitempty" tf:"-"`
 
 	// When true, an observability configuration resource is associated with the service.
 	ObservabilityEnabled *bool `json:"observabilityEnabled,omitempty" tf:"observability_enabled,omitempty"`
@@ -599,9 +651,11 @@ type ServiceObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -646,6 +700,7 @@ type ServiceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

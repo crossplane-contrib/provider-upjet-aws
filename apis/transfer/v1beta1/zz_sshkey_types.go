@@ -21,6 +21,31 @@ type SSHKeyInitParameters struct {
 
 	// (Requirement) The public key portion of an SSH key pair.
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// (Requirement) The Server ID of the Transfer Server (e.g., s-12345678)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/transfer/v1beta1.Server
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// Reference to a Server in transfer to populate serverId.
+	// +kubebuilder:validation:Optional
+	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+
+	// Selector for a Server in transfer to populate serverId.
+	// +kubebuilder:validation:Optional
+	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+
+	// (Requirement) The name of the user account that is assigned to one or more servers.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/transfer/v1beta1.User
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
+
+	// Reference to a User in transfer to populate userName.
+	// +kubebuilder:validation:Optional
+	UserNameRef *v1.Reference `json:"userNameRef,omitempty" tf:"-"`
+
+	// Selector for a User in transfer to populate userName.
+	// +kubebuilder:validation:Optional
+	UserNameSelector *v1.Selector `json:"userNameSelector,omitempty" tf:"-"`
 }
 
 type SSHKeyObservation struct {

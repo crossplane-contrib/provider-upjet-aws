@@ -72,6 +72,56 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicyArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.FirewallPolicyArnRef,
+		Selector:     mg.Spec.InitProvider.FirewallPolicyArnSelector,
+		To: reference.To{
+			List:    &FirewallPolicyList{},
+			Managed: &FirewallPolicy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FirewallPolicyArn")
+	}
+	mg.Spec.InitProvider.FirewallPolicyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FirewallPolicyArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SubnetMapping); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetMapping[i3].SubnetID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.SubnetMapping[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.SubnetMapping[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.SubnetMapping[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.SubnetMapping[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.SubnetMapping[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VPCIDRef,
+		Selector:     mg.Spec.InitProvider.VPCIDSelector,
+		To: reference.To{
+			List:    &v1beta1.VPCList{},
+			Managed: &v1beta1.VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCID")
+	}
+	mg.Spec.InitProvider.VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -122,6 +172,46 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.FirewallPolicy); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnRef,
+				Selector:     mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnSelector,
+				To: reference.To{
+					List:    &RuleGroupList{},
+					Managed: &RuleGroup{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn")
+			}
+			mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.FirewallPolicy[i3].StatefulRuleGroupReference[i4].ResourceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.FirewallPolicy); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnRef,
+				Selector:     mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnSelector,
+				To: reference.To{
+					List:    &RuleGroupList{},
+					Managed: &RuleGroup{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArn")
+			}
+			mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.FirewallPolicy[i3].StatelessRuleGroupReference[i4].ResourceArnRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -148,6 +238,22 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.FirewallArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FirewallArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirewallArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.FirewallArnRef,
+		Selector:     mg.Spec.InitProvider.FirewallArnSelector,
+		To: reference.To{
+			List:    &FirewallList{},
+			Managed: &Firewall{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FirewallArn")
+	}
+	mg.Spec.InitProvider.FirewallArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FirewallArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -178,6 +284,30 @@ func (mg *RuleGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					}
 					mg.Spec.ForProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArn = reference.ToPtrValue(rsp.ResolvedValue)
 					mg.Spec.ForProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArnRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.RuleGroup); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArn),
+						Extract:      resource.ExtractParamPath("arn", true),
+						Reference:    mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArnRef,
+						Selector:     mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArnSelector,
+						To: reference.To{
+							List:    &v1beta1.ManagedPrefixListList{},
+							Managed: &v1beta1.ManagedPrefixList{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArn")
+					}
+					mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArn = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.InitProvider.RuleGroup[i3].ReferenceSets[i4].IPSetReferences[i5].IPSetReference[i6].ReferenceArnRef = rsp.ResolvedReference
 
 				}
 			}

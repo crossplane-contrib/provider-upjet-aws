@@ -20,6 +20,7 @@ import (
 type ExcludeFilterInitParameters struct {
 
 	// An array that defines the metrics you want to exclude for this metric namespace
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -29,6 +30,7 @@ type ExcludeFilterInitParameters struct {
 type ExcludeFilterObservation struct {
 
 	// An array that defines the metrics you want to exclude for this metric namespace
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -39,6 +41,7 @@ type ExcludeFilterParameters struct {
 
 	// An array that defines the metrics you want to exclude for this metric namespace
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -49,6 +52,7 @@ type ExcludeFilterParameters struct {
 type IncludeFilterInitParameters struct {
 
 	// An array that defines the metrics you want to include for this metric namespace
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -58,6 +62,7 @@ type IncludeFilterInitParameters struct {
 type IncludeFilterObservation struct {
 
 	// An array that defines the metrics you want to include for this metric namespace
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -68,6 +73,7 @@ type IncludeFilterParameters struct {
 
 	// An array that defines the metrics you want to include for this metric namespace
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MetricNames []*string `json:"metricNames,omitempty" tf:"metric_names,omitempty"`
 
 	// Name of the metric namespace in the filter.
@@ -109,6 +115,19 @@ type MetricStreamInitParameters struct {
 	// List of exclusive metric filters. If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces and the conditional metric names that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is excluded. Conflicts with include_filter.
 	ExcludeFilter []ExcludeFilterInitParameters `json:"excludeFilter,omitempty" tf:"exclude_filter,omitempty"`
 
+	// ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate firehoseArn.
+	// +kubebuilder:validation:Optional
+	FirehoseArnRef *v1.Reference `json:"firehoseArnRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate firehoseArn.
+	// +kubebuilder:validation:Optional
+	FirehoseArnSelector *v1.Selector `json:"firehoseArnSelector,omitempty" tf:"-"`
+
 	// List of inclusive metric filters. If you specify this parameter, the stream sends only the conditional metric names from the metric namespaces that you specify here. If you don't specify metric names or provide empty metric names whole metric namespace is included. Conflicts with exclude_filter.
 	IncludeFilter []IncludeFilterInitParameters `json:"includeFilter,omitempty" tf:"include_filter,omitempty"`
 
@@ -121,10 +140,24 @@ type MetricStreamInitParameters struct {
 	// Output format for the stream. Possible values are json and opentelemetry0.7. For more information about output formats, see Metric streams output formats.
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
+	// ARN of the IAM role that this metric stream will use to access Amazon Kinesis Firehose resources. For more information about role permissions, see Trust between CloudWatch and Kinesis Data Firehose.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics (p99 etc.). See details below.
 	StatisticsConfiguration []StatisticsConfigurationInitParameters `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -169,9 +202,11 @@ type MetricStreamObservation struct {
 	StatisticsConfiguration []StatisticsConfigurationObservation `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -236,12 +271,14 @@ type MetricStreamParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StatisticsConfigurationInitParameters struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
+	// +listType=set
 	AdditionalStatistics []*string `json:"additionalStatistics,omitempty" tf:"additional_statistics,omitempty"`
 
 	// An array that defines the metrics that are to have additional statistics streamed. See details below.
@@ -251,6 +288,7 @@ type StatisticsConfigurationInitParameters struct {
 type StatisticsConfigurationObservation struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
+	// +listType=set
 	AdditionalStatistics []*string `json:"additionalStatistics,omitempty" tf:"additional_statistics,omitempty"`
 
 	// An array that defines the metrics that are to have additional statistics streamed. See details below.
@@ -261,6 +299,7 @@ type StatisticsConfigurationParameters struct {
 
 	// The additional statistics to stream for the metrics listed in include_metrics.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AdditionalStatistics []*string `json:"additionalStatistics" tf:"additional_statistics,omitempty"`
 
 	// An array that defines the metrics that are to have additional statistics streamed. See details below.

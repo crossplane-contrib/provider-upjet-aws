@@ -18,6 +18,32 @@ import (
 )
 
 type PrincipalAssociationInitParameters struct {
+
+	// The principal to associate with the resource share. Possible values are an AWS account ID, an AWS Organizations Organization ARN, or an AWS Organizations Organization Unit ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/organizations/v1beta1.Organization
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
+
+	// Reference to a Organization in organizations to populate principal.
+	// +kubebuilder:validation:Optional
+	PrincipalRef *v1.Reference `json:"principalRef,omitempty" tf:"-"`
+
+	// Selector for a Organization in organizations to populate principal.
+	// +kubebuilder:validation:Optional
+	PrincipalSelector *v1.Selector `json:"principalSelector,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) of the resource share.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.ResourceShare
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
+
+	// Reference to a ResourceShare in ram to populate resourceShareArn.
+	// +kubebuilder:validation:Optional
+	ResourceShareArnRef *v1.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceShare in ram to populate resourceShareArn.
+	// +kubebuilder:validation:Optional
+	ResourceShareArnSelector *v1.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
 }
 
 type PrincipalAssociationObservation struct {

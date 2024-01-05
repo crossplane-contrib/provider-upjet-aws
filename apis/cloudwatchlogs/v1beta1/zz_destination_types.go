@@ -19,8 +19,35 @@ import (
 
 type DestinationInitParameters struct {
 
+	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to put data into the target.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ARN of the target Amazon Kinesis stream resource for the destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type DestinationObservation struct {
@@ -34,9 +61,11 @@ type DestinationObservation struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ARN of the target Amazon Kinesis stream resource for the destination.
@@ -66,6 +95,7 @@ type DestinationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ARN of the target Amazon Kinesis stream resource for the destination.

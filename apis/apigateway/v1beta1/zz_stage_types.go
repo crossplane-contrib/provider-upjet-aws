@@ -55,6 +55,7 @@ type CanarySettingsInitParameters struct {
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
+	// +mapType=granular
 	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
@@ -67,6 +68,7 @@ type CanarySettingsObservation struct {
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
+	// +mapType=granular
 	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
@@ -81,6 +83,7 @@ type CanarySettingsParameters struct {
 
 	// Map of overridden stage variables (including new variables) for the canary deployment.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
 
 	// Whether the canary deployment uses the stage cache. Defaults to false.
@@ -105,19 +108,47 @@ type StageInitParameters struct {
 	// Identifier of a client certificate for the stage.
 	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
 
+	// ID of the deployment that the stage points to
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Deployment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
+
+	// Reference to a Deployment in apigateway to populate deploymentId.
+	// +kubebuilder:validation:Optional
+	DeploymentIDRef *v1.Reference `json:"deploymentIdRef,omitempty" tf:"-"`
+
+	// Selector for a Deployment in apigateway to populate deploymentId.
+	// +kubebuilder:validation:Optional
+	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
+
 	// Description of the stage.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Version of the associated API documentation
 	DocumentationVersion *string `json:"documentationVersion,omitempty" tf:"documentation_version,omitempty"`
 
+	// ID of the associated REST API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+
 	// Name of the stage
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map that defines the stage variables
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
 	// Whether active tracing with X-ray is enabled. Defaults to false.
@@ -172,12 +203,15 @@ type StageObservation struct {
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Map that defines the stage variables
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
 	// ARN of the WebAcl associated with the Stage.
@@ -256,10 +290,12 @@ type StageParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map that defines the stage variables
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
 	// Whether active tracing with X-ray is enabled. Defaults to false.

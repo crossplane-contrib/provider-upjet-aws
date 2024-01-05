@@ -151,6 +151,7 @@ type PresetInitParameters struct {
 	Video []VideoInitParameters `json:"video,omitempty" tf:"video,omitempty"`
 
 	// Codec options for the video parameters
+	// +mapType=granular
 	VideoCodecOptions map[string]*string `json:"videoCodecOptions,omitempty" tf:"video_codec_options,omitempty"`
 
 	// Watermark parameters for the video parameters (documented below)
@@ -189,6 +190,7 @@ type PresetObservation struct {
 	Video []VideoObservation `json:"video,omitempty" tf:"video,omitempty"`
 
 	// Codec options for the video parameters
+	// +mapType=granular
 	VideoCodecOptions map[string]*string `json:"videoCodecOptions,omitempty" tf:"video_codec_options,omitempty"`
 
 	// Watermark parameters for the video parameters (documented below)
@@ -235,6 +237,7 @@ type PresetParameters struct {
 
 	// Codec options for the video parameters
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	VideoCodecOptions map[string]*string `json:"videoCodecOptions,omitempty" tf:"video_codec_options,omitempty"`
 
 	// Watermark parameters for the video parameters (documented below)

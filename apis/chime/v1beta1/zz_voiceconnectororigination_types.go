@@ -83,6 +83,19 @@ type VoiceConnectorOriginationInitParameters struct {
 
 	// Set of call distribution properties defined for your SIP hosts. See route below for more details. Minimum of 1. Maximum of 20.
 	Route []RouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
+
+	// The Amazon Chime Voice Connector ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/chime/v1beta1.VoiceConnector
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
+
+	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
+	// +kubebuilder:validation:Optional
+	VoiceConnectorIDRef *v1.Reference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
+
+	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
+	// +kubebuilder:validation:Optional
+	VoiceConnectorIDSelector *v1.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
 }
 
 type VoiceConnectorOriginationObservation struct {

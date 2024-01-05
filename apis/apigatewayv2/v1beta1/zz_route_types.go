@@ -48,10 +48,23 @@ type RequestParameterParameters struct {
 
 type RouteInitParameters struct {
 
+	// API identifier.
+	// +crossplane:generate:reference:type=API
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
 	// Boolean whether an API key is required for the route. Defaults to false. Supported only for WebSocket APIs.
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
 	// Authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
+	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
 	// Authorization type for the route.
@@ -60,6 +73,18 @@ type RouteInitParameters struct {
 	// Defaults to NONE.
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
+	// Identifier of the aws_apigatewayv2_authorizer resource to be associated with this route.
+	// +crossplane:generate:reference:type=Authorizer
+	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
+
+	// Reference to a Authorizer to populate authorizerId.
+	// +kubebuilder:validation:Optional
+	AuthorizerIDRef *v1.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Authorizer to populate authorizerId.
+	// +kubebuilder:validation:Optional
+	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
+
 	// The model selection expression for the route. Supported only for WebSocket APIs.
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
@@ -67,6 +92,7 @@ type RouteInitParameters struct {
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
 	// Request models for the route. Supported only for WebSocket APIs.
+	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Request parameters for the route. Supported only for WebSocket APIs.
@@ -77,6 +103,19 @@ type RouteInitParameters struct {
 
 	// The route response selection expression for the route. Supported only for WebSocket APIs.
 	RouteResponseSelectionExpression *string `json:"routeResponseSelectionExpression,omitempty" tf:"route_response_selection_expression,omitempty"`
+
+	// Target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
+	// +crossplane:generate:reference:type=Integration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Reference to a Integration to populate target.
+	// +kubebuilder:validation:Optional
+	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+
+	// Selector for a Integration to populate target.
+	// +kubebuilder:validation:Optional
+	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
 
 type RouteObservation struct {
@@ -88,6 +127,7 @@ type RouteObservation struct {
 	APIKeyRequired *bool `json:"apiKeyRequired,omitempty" tf:"api_key_required,omitempty"`
 
 	// Authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
+	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
 	// Authorization type for the route.
@@ -109,6 +149,7 @@ type RouteObservation struct {
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
 	// Request models for the route. Supported only for WebSocket APIs.
+	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Request parameters for the route. Supported only for WebSocket APIs.
@@ -145,6 +186,7 @@ type RouteParameters struct {
 
 	// Authorization scopes supported by this route. The scopes are used with a JWT authorizer to authorize the method invocation.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
 	// Authorization type for the route.
@@ -182,6 +224,7 @@ type RouteParameters struct {
 
 	// Request models for the route. Supported only for WebSocket APIs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Request parameters for the route. Supported only for WebSocket APIs.

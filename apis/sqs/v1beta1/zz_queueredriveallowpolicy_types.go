@@ -19,6 +19,19 @@ import (
 
 type QueueRedriveAllowPolicyInitParameters struct {
 
+	// The URL of the SQS Queue to which to attach the policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// Reference to a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLRef *v1.Reference `json:"queueUrlRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLSelector *v1.Selector `json:"queueUrlSelector,omitempty" tf:"-"`
+
 	// The JSON redrive allow policy for the SQS queue. Learn more in the Amazon SQS dead-letter queues documentation.
 	RedriveAllowPolicy *string `json:"redriveAllowPolicy,omitempty" tf:"redrive_allow_policy,omitempty"`
 }

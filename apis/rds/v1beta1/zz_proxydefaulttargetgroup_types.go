@@ -32,6 +32,7 @@ type ConnectionPoolConfigInitParameters struct {
 	MaxIdleConnectionsPercent *float64 `json:"maxIdleConnectionsPercent,omitempty" tf:"max_idle_connections_percent,omitempty"`
 
 	// Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
+	// +listType=set
 	SessionPinningFilters []*string `json:"sessionPinningFilters,omitempty" tf:"session_pinning_filters,omitempty"`
 }
 
@@ -50,6 +51,7 @@ type ConnectionPoolConfigObservation struct {
 	MaxIdleConnectionsPercent *float64 `json:"maxIdleConnectionsPercent,omitempty" tf:"max_idle_connections_percent,omitempty"`
 
 	// Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
+	// +listType=set
 	SessionPinningFilters []*string `json:"sessionPinningFilters,omitempty" tf:"session_pinning_filters,omitempty"`
 }
 
@@ -73,6 +75,7 @@ type ConnectionPoolConfigParameters struct {
 
 	// Each item in the list represents a class of SQL operations that normally cause all later statements in a session using a proxy to be pinned to the same underlying database connection. Including an item in the list exempts that class of SQL operations from the pinning behavior. Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SessionPinningFilters []*string `json:"sessionPinningFilters,omitempty" tf:"session_pinning_filters,omitempty"`
 }
 
@@ -80,6 +83,18 @@ type ProxyDefaultTargetGroupInitParameters struct {
 
 	// The settings that determine the size and behavior of the connection pool for the target group.
 	ConnectionPoolConfig []ConnectionPoolConfigInitParameters `json:"connectionPoolConfig,omitempty" tf:"connection_pool_config,omitempty"`
+
+	// Name of the RDS DB Proxy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Proxy
+	DBProxyName *string `json:"dbProxyName,omitempty" tf:"db_proxy_name,omitempty"`
+
+	// Reference to a Proxy in rds to populate dbProxyName.
+	// +kubebuilder:validation:Optional
+	DBProxyNameRef *v1.Reference `json:"dbProxyNameRef,omitempty" tf:"-"`
+
+	// Selector for a Proxy in rds to populate dbProxyName.
+	// +kubebuilder:validation:Optional
+	DBProxyNameSelector *v1.Selector `json:"dbProxyNameSelector,omitempty" tf:"-"`
 }
 
 type ProxyDefaultTargetGroupObservation struct {

@@ -19,6 +19,18 @@ import (
 
 type AccessPointInitParameters struct {
 
+	// ID of the file system for which the access point is intended.
+	// +crossplane:generate:reference:type=FileSystem
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// Reference to a FileSystem to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a FileSystem to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+
 	// Operating system user and group applied to all file system requests made using the access point. Detailed below.
 	PosixUser []PosixUserInitParameters `json:"posixUser,omitempty" tf:"posix_user,omitempty"`
 
@@ -26,6 +38,7 @@ type AccessPointInitParameters struct {
 	RootDirectory []RootDirectoryInitParameters `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,9 +66,11 @@ type AccessPointObservation struct {
 	RootDirectory []RootDirectoryObservation `json:"rootDirectory,omitempty" tf:"root_directory,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -89,6 +104,7 @@ type AccessPointParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -137,6 +153,7 @@ type PosixUserInitParameters struct {
 	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// Secondary POSIX group IDs used for all file system operations using this access point.
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// POSIX user ID used for all file system operations using this access point.
@@ -149,6 +166,7 @@ type PosixUserObservation struct {
 	GID *float64 `json:"gid,omitempty" tf:"gid,omitempty"`
 
 	// Secondary POSIX group IDs used for all file system operations using this access point.
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// POSIX user ID used for all file system operations using this access point.
@@ -163,6 +181,7 @@ type PosixUserParameters struct {
 
 	// Secondary POSIX group IDs used for all file system operations using this access point.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecondaryGids []*float64 `json:"secondaryGids,omitempty" tf:"secondary_gids,omitempty"`
 
 	// POSIX user ID used for all file system operations using this access point.

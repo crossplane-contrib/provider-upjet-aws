@@ -34,6 +34,19 @@ type MaintenanceWindowTargetInitParameters struct {
 	// The targets to register with the maintenance window. In other words, the instances to run commands on when the maintenance window runs. You can specify targets using instance IDs, resource group names, or tags that have been applied to instances. For more information about these examples formats see
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html)
 	Targets []MaintenanceWindowTargetTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
+
+	// The Id of the maintenance window to register the target with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.MaintenanceWindow
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
+
+	// Reference to a MaintenanceWindow in ssm to populate windowId.
+	// +kubebuilder:validation:Optional
+	WindowIDRef *v1.Reference `json:"windowIdRef,omitempty" tf:"-"`
+
+	// Selector for a MaintenanceWindow in ssm to populate windowId.
+	// +kubebuilder:validation:Optional
+	WindowIDSelector *v1.Selector `json:"windowIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowTargetObservation struct {

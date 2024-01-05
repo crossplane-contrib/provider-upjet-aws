@@ -28,6 +28,19 @@ type EncryptionEntitiesItemsInitParameters struct {
 
 	// The provider associated with the public key being used for encryption.
 	ProviderID *string `json:"providerId,omitempty" tf:"provider_id,omitempty"`
+
+	// The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.PublicKey
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PublicKeyID *string `json:"publicKeyId,omitempty" tf:"public_key_id,omitempty"`
+
+	// Reference to a PublicKey in cloudfront to populate publicKeyId.
+	// +kubebuilder:validation:Optional
+	PublicKeyIDRef *v1.Reference `json:"publicKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicKey in cloudfront to populate publicKeyId.
+	// +kubebuilder:validation:Optional
+	PublicKeyIDSelector *v1.Selector `json:"publicKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionEntitiesItemsObservation struct {
@@ -131,16 +144,21 @@ type FieldLevelEncryptionProfileParameters struct {
 }
 
 type FieldPatternsInitParameters struct {
+
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type FieldPatternsObservation struct {
+
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 
 type FieldPatternsParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 }
 

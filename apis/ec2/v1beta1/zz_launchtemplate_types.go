@@ -202,6 +202,20 @@ type EBSInitParameters struct {
 	// This must be set with a volume_type of "io1/io2/gp3".
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
+	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume.
+	// encrypted must be set to true when this is set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// The Snapshot ID to mount.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
@@ -356,6 +370,31 @@ type HibernationOptionsParameters struct {
 }
 
 type IAMInstanceProfileInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the instance profile.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a InstanceProfile in iam to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a InstanceProfile in iam to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+
+	// The name of the instance profile.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a InstanceProfile in iam to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a InstanceProfile in iam to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type IAMInstanceProfileObservation struct {
@@ -432,18 +471,22 @@ type InstanceRequirementsInitParameters struct {
 	AcceleratorCount []AcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
+	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
 	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
+	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -456,18 +499,22 @@ type InstanceRequirementsInitParameters struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// List of CPU manufacturer names. Default is any manufacturer.
+	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
+	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
 	// List of local storage type names. Default any storage type.
+	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
@@ -504,18 +551,22 @@ type InstanceRequirementsObservation struct {
 	AcceleratorCount []AcceleratorCountObservation `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
+	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
 	AcceleratorTotalMemoryMib []AcceleratorTotalMemoryMibObservation `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
+	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -528,18 +579,22 @@ type InstanceRequirementsObservation struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// List of CPU manufacturer names. Default is any manufacturer.
+	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
+	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
 	// List of local storage type names. Default any storage type.
+	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
@@ -578,10 +633,12 @@ type InstanceRequirementsParameters struct {
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
@@ -590,10 +647,12 @@ type InstanceRequirementsParameters struct {
 
 	// List of accelerator types. Default is any accelerator type.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -610,14 +669,17 @@ type InstanceRequirementsParameters struct {
 
 	// List of CPU manufacturer names. Default is any manufacturer.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
@@ -626,6 +688,7 @@ type InstanceRequirementsParameters struct {
 
 	// List of local storage type names. Default any storage type.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
@@ -886,10 +949,27 @@ type LaunchTemplateInitParameters_2 struct {
 	// The ID of the RAM disk.
 	RAMDiskID *string `json:"ramDiskId,omitempty" tf:"ram_disk_id,omitempty"`
 
+	// References to SecurityGroup to populate securityGroupNames.
+	// +kubebuilder:validation:Optional
+	SecurityGroupNameRefs []v1.Reference `json:"securityGroupNameRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup to populate securityGroupNames.
+	// +kubebuilder:validation:Optional
+	SecurityGroupNameSelector *v1.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
+
+	// A list of security group names to associate with. If you are creating Instances in a VPC, use
+	// vpc_security_group_ids instead.
+	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
+	// +listType=set
+	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
+
 	// The tags to apply to the resources during launch. See Tag Specifications below for more details.
 	TagSpecifications []TagSpecificationsInitParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to update Default Version each update. Conflicts with default_version.
@@ -897,6 +977,21 @@ type LaunchTemplateInitParameters_2 struct {
 
 	// The base64-encoded user data to provide when launching the instance.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	VPCSecurityGroupIDRefs []v1.Reference `json:"vpcSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate vpcSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	VPCSecurityGroupIDSelector *v1.Selector `json:"vpcSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// A list of security group IDs to associate with. Conflicts with network_interfaces.security_groups
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
+	// +listType=set
+	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
 type LaunchTemplateMaintenanceOptionsInitParameters struct {
@@ -1088,15 +1183,18 @@ type LaunchTemplateObservation_2 struct {
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
+	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// The tags to apply to the resources during launch. See Tag Specifications below for more details.
 	TagSpecifications []TagSpecificationsObservation `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Whether to update Default Version each update. Conflicts with default_version.
@@ -1106,6 +1204,7 @@ type LaunchTemplateObservation_2 struct {
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// A list of security group IDs to associate with. Conflicts with network_interfaces.security_groups
+	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
@@ -1258,6 +1357,7 @@ type LaunchTemplateParameters_2 struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// The tags to apply to the resources during launch. See Tag Specifications below for more details.
@@ -1266,6 +1366,7 @@ type LaunchTemplateParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to update Default Version each update. Conflicts with default_version.
@@ -1289,6 +1390,7 @@ type LaunchTemplateParameters_2 struct {
 	// +crossplane:generate:reference:refFieldName=VPCSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
@@ -1509,24 +1611,28 @@ type NetworkInterfacesInitParameters struct {
 	IPv4AddressCount *float64 `json:"ipv4AddressCount,omitempty" tf:"ipv4_address_count,omitempty"`
 
 	// One or more private IPv4 addresses to associate. Conflicts with ipv4_address_count
+	// +listType=set
 	IPv4Addresses []*string `json:"ipv4Addresses,omitempty" tf:"ipv4_addresses,omitempty"`
 
 	// The number of IPv4 prefixes to be automatically assigned to the network interface. Conflicts with ipv4_prefixes
 	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
 
 	// One or more IPv4 prefixes to be assigned to the network interface. Conflicts with ipv4_prefix_count
+	// +listType=set
 	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
 
 	// The number of IPv6 addresses to assign to a network interface. Conflicts with ipv6_addresses
 	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Conflicts with ipv6_address_count
+	// +listType=set
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
 	// The number of IPv6 prefixes to be automatically assigned to the network interface. Conflicts with ipv6_prefixes
 	IPv6PrefixCount *float64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
 
 	// One or more IPv6 prefixes to be assigned to the network interface. Conflicts with ipv6_prefix_count
+	// +listType=set
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
 
 	// The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa.
@@ -1535,8 +1641,47 @@ type NetworkInterfacesInitParameters struct {
 	// The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.
 	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
+	// The ID of the network interface to attach.
+	// +crossplane:generate:reference:type=NetworkInterface
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
+
 	// The primary private IPv4 address.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// References to SecurityGroup to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+
+	// A list of security group IDs to associate.
+	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
+	// +listType=set
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The VPC Subnet ID to associate.
+	// +crossplane:generate:reference:type=Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfacesObservation struct {
@@ -1563,24 +1708,28 @@ type NetworkInterfacesObservation struct {
 	IPv4AddressCount *float64 `json:"ipv4AddressCount,omitempty" tf:"ipv4_address_count,omitempty"`
 
 	// One or more private IPv4 addresses to associate. Conflicts with ipv4_address_count
+	// +listType=set
 	IPv4Addresses []*string `json:"ipv4Addresses,omitempty" tf:"ipv4_addresses,omitempty"`
 
 	// The number of IPv4 prefixes to be automatically assigned to the network interface. Conflicts with ipv4_prefixes
 	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
 
 	// One or more IPv4 prefixes to be assigned to the network interface. Conflicts with ipv4_prefix_count
+	// +listType=set
 	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
 
 	// The number of IPv6 addresses to assign to a network interface. Conflicts with ipv6_addresses
 	IPv6AddressCount *float64 `json:"ipv6AddressCount,omitempty" tf:"ipv6_address_count,omitempty"`
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Conflicts with ipv6_address_count
+	// +listType=set
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
 	// The number of IPv6 prefixes to be automatically assigned to the network interface. Conflicts with ipv6_prefixes
 	IPv6PrefixCount *float64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
 
 	// One or more IPv6 prefixes to be assigned to the network interface. Conflicts with ipv6_prefix_count
+	// +listType=set
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
 
 	// The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa.
@@ -1596,6 +1745,7 @@ type NetworkInterfacesObservation struct {
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// A list of security group IDs to associate.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The VPC Subnet ID to associate.
@@ -1633,6 +1783,7 @@ type NetworkInterfacesParameters struct {
 
 	// One or more private IPv4 addresses to associate. Conflicts with ipv4_address_count
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv4Addresses []*string `json:"ipv4Addresses,omitempty" tf:"ipv4_addresses,omitempty"`
 
 	// The number of IPv4 prefixes to be automatically assigned to the network interface. Conflicts with ipv4_prefixes
@@ -1641,6 +1792,7 @@ type NetworkInterfacesParameters struct {
 
 	// One or more IPv4 prefixes to be assigned to the network interface. Conflicts with ipv4_prefix_count
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
 
 	// The number of IPv6 addresses to assign to a network interface. Conflicts with ipv6_addresses
@@ -1649,6 +1801,7 @@ type NetworkInterfacesParameters struct {
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Conflicts with ipv6_address_count
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
 	// The number of IPv6 prefixes to be automatically assigned to the network interface. Conflicts with ipv6_prefixes
@@ -1657,6 +1810,7 @@ type NetworkInterfacesParameters struct {
 
 	// One or more IPv6 prefixes to be assigned to the network interface. Conflicts with ipv6_prefix_count
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
 
 	// The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa.
@@ -1697,6 +1851,7 @@ type NetworkInterfacesParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The VPC Subnet ID to associate.
@@ -1870,6 +2025,7 @@ type TagSpecificationsInitParameters struct {
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// A map of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -1879,6 +2035,7 @@ type TagSpecificationsObservation struct {
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// A map of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -1890,6 +2047,7 @@ type TagSpecificationsParameters struct {
 
 	// A map of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

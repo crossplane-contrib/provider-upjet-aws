@@ -19,6 +19,19 @@ import (
 
 type SpaceInitParameters struct {
 
+	// The ID of the associated Domain.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
+
+	// Reference to a Domain in sagemaker to populate domainId.
+	// +kubebuilder:validation:Optional
+	DomainIDRef *v1.Reference `json:"domainIdRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in sagemaker to populate domainId.
+	// +kubebuilder:validation:Optional
+	DomainIDSelector *v1.Selector `json:"domainIdSelector,omitempty" tf:"-"`
+
 	// The name of the space.
 	SpaceName *string `json:"spaceName,omitempty" tf:"space_name,omitempty"`
 
@@ -26,6 +39,7 @@ type SpaceInitParameters struct {
 	SpaceSettings []SpaceSettingsInitParameters `json:"spaceSettings,omitempty" tf:"space_settings,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -50,9 +64,11 @@ type SpaceObservation struct {
 	SpaceSettings []SpaceSettingsObservation `json:"spaceSettings,omitempty" tf:"space_settings,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -87,6 +103,7 @@ type SpaceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -176,6 +193,7 @@ type SpaceSettingsJupyterServerAppSettingsInitParameters struct {
 	DefaultResourceSpec []SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -188,6 +206,7 @@ type SpaceSettingsJupyterServerAppSettingsObservation struct {
 	DefaultResourceSpec []SpaceSettingsJupyterServerAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -203,6 +222,7 @@ type SpaceSettingsJupyterServerAppSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -303,6 +323,7 @@ type SpaceSettingsKernelGatewayAppSettingsInitParameters struct {
 	DefaultResourceSpec []SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -315,6 +336,7 @@ type SpaceSettingsKernelGatewayAppSettingsObservation struct {
 	DefaultResourceSpec []SpaceSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -330,6 +352,7 @@ type SpaceSettingsKernelGatewayAppSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 

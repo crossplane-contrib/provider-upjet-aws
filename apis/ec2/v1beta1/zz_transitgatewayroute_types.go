@@ -24,6 +24,30 @@ type TransitGatewayRouteInitParameters struct {
 
 	// IPv4 or IPv6 RFC1924 CIDR used for destination matches. Routing decisions are based on the most specific match.
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
+	// Identifier of EC2 Transit Gateway Attachment .
+	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Reference to a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
+
+	// Identifier of EC2 Transit Gateway Route Table.
+	// +crossplane:generate:reference:type=TransitGatewayRouteTable
+	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
+
+	// Reference to a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayRouteObservation struct {

@@ -19,6 +19,18 @@ import (
 
 type InvocationInitParameters struct {
 
+	// Name of the lambda function.
+	// +crossplane:generate:reference:type=Function
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// Reference to a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+
+	// Selector for a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+
 	// JSON payload to the lambda function.
 	Input *string `json:"input,omitempty" tf:"input,omitempty"`
 
@@ -26,6 +38,7 @@ type InvocationInitParameters struct {
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger a re-invocation.
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -46,6 +59,7 @@ type InvocationObservation struct {
 	Result *string `json:"result,omitempty" tf:"result,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger a re-invocation.
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 
@@ -79,6 +93,7 @@ type InvocationParameters struct {
 
 	// Map of arbitrary keys and values that, when changed, will trigger a re-invocation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 }
 

@@ -19,8 +19,34 @@ import (
 
 type ResourceInitParameters struct {
 
+	// ID of the parent API resource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("root_resource_id",true)
+	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate parentId.
+	// +kubebuilder:validation:Optional
+	ParentIDRef *v1.Reference `json:"parentIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate parentId.
+	// +kubebuilder:validation:Optional
+	ParentIDSelector *v1.Selector `json:"parentIdSelector,omitempty" tf:"-"`
+
 	// Last path segment of this API resource.
 	PathPart *string `json:"pathPart,omitempty" tf:"path_part,omitempty"`
+
+	// ID of the associated REST API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 }
 
 type ResourceObservation struct {

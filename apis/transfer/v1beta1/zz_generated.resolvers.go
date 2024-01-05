@@ -58,6 +58,38 @@ func (mg *SSHKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.UserName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ServerIDRef,
+		Selector:     mg.Spec.InitProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &ServerList{},
+			Managed: &Server{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerID")
+	}
+	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserNameRef,
+		Selector:     mg.Spec.InitProvider.UserNameSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserName")
+	}
+	mg.Spec.InitProvider.UserName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -118,6 +150,56 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mg.Spec.ForProvider.EndpointDetails[i3].VPCIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Certificate),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.CertificateRef,
+		Selector:     mg.Spec.InitProvider.CertificateSelector,
+		To: reference.To{
+			List:    &v1beta1.CertificateList{},
+			Managed: &v1beta1.Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Certificate")
+	}
+	mg.Spec.InitProvider.Certificate = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DirectoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DirectoryIDRef,
+		Selector:     mg.Spec.InitProvider.DirectoryIDSelector,
+		To: reference.To{
+			List:    &v1beta11.DirectoryList{},
+			Managed: &v1beta11.Directory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DirectoryID")
+	}
+	mg.Spec.InitProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DirectoryIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EndpointDetails); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EndpointDetails[i3].VPCID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.EndpointDetails[i3].VPCIDRef,
+			Selector:     mg.Spec.InitProvider.EndpointDetails[i3].VPCIDSelector,
+			To: reference.To{
+				List:    &v1beta12.VPCList{},
+				Managed: &v1beta12.VPC{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EndpointDetails[i3].VPCID")
+		}
+		mg.Spec.InitProvider.EndpointDetails[i3].VPCID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EndpointDetails[i3].VPCIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -144,6 +226,22 @@ func (mg *Tag) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ResourceArnRef,
+		Selector:     mg.Spec.InitProvider.ResourceArnSelector,
+		To: reference.To{
+			List:    &ServerList{},
+			Managed: &Server{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceArn")
+	}
+	mg.Spec.InitProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -187,6 +285,38 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Role),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleRef,
+		Selector:     mg.Spec.InitProvider.RoleSelector,
+		To: reference.To{
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Role")
+	}
+	mg.Spec.InitProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServerIDRef,
+		Selector:     mg.Spec.InitProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &ServerList{},
+			Managed: &Server{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerID")
+	}
+	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -214,6 +344,26 @@ func (mg *Workflow) ResolveReferences(ctx context.Context, c client.Reader) erro
 			}
 			mg.Spec.ForProvider.Steps[i3].CustomStepDetails[i4].Target = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Steps[i3].CustomStepDetails[i4].TargetRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Steps); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Steps[i3].CustomStepDetails); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Steps[i3].CustomStepDetails[i4].Target),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.Steps[i3].CustomStepDetails[i4].TargetRef,
+				Selector:     mg.Spec.InitProvider.Steps[i3].CustomStepDetails[i4].TargetSelector,
+				To: reference.To{
+					List:    &v1beta14.FunctionList{},
+					Managed: &v1beta14.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Steps[i3].CustomStepDetails[i4].Target")
+			}
+			mg.Spec.InitProvider.Steps[i3].CustomStepDetails[i4].Target = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Steps[i3].CustomStepDetails[i4].TargetRef = rsp.ResolvedReference
 
 		}
 	}

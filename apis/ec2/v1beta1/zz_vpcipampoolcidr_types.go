@@ -54,6 +54,19 @@ type VPCIpamPoolCidrInitParameters struct {
 	// A signed document that proves that you are authorized to bring the specified IP address range to Amazon using BYOIP. This is not stored in the state file. See cidr_authorization_context for more information.
 	CidrAuthorizationContext []CidrAuthorizationContextInitParameters `json:"cidrAuthorizationContext,omitempty" tf:"cidr_authorization_context,omitempty"`
 
+	// The ID of the pool to which you want to assign a CIDR.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIpamPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
+
+	// Reference to a VPCIpamPool in ec2 to populate ipamPoolId.
+	// +kubebuilder:validation:Optional
+	IpamPoolIDRef *v1.Reference `json:"ipamPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCIpamPool in ec2 to populate ipamPoolId.
+	// +kubebuilder:validation:Optional
+	IpamPoolIDSelector *v1.Selector `json:"ipamPoolIdSelector,omitempty" tf:"-"`
+
 	// If provided, the cidr provisioned into the specified pool will be the next available cidr given this declared netmask length. Conflicts with cidr.
 	NetmaskLength *float64 `json:"netmaskLength,omitempty" tf:"netmask_length,omitempty"`
 }

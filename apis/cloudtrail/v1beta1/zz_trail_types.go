@@ -81,6 +81,7 @@ type EventSelectorInitParameters struct {
 	DataResource []DataResourceInitParameters `json:"dataResource,omitempty" tf:"data_resource,omitempty"`
 
 	// A set of event sources to exclude. Valid values include: kms.amazonaws.com and rdsdata.amazonaws.com. include_management_events must be set totrue to allow this.
+	// +listType=set
 	ExcludeManagementEventSources []*string `json:"excludeManagementEventSources,omitempty" tf:"exclude_management_event_sources,omitempty"`
 
 	// Whether to include management events for your trail. Defaults to true.
@@ -96,6 +97,7 @@ type EventSelectorObservation struct {
 	DataResource []DataResourceObservation `json:"dataResource,omitempty" tf:"data_resource,omitempty"`
 
 	// A set of event sources to exclude. Valid values include: kms.amazonaws.com and rdsdata.amazonaws.com. include_management_events must be set totrue to allow this.
+	// +listType=set
 	ExcludeManagementEventSources []*string `json:"excludeManagementEventSources,omitempty" tf:"exclude_management_event_sources,omitempty"`
 
 	// Whether to include management events for your trail. Defaults to true.
@@ -113,6 +115,7 @@ type EventSelectorParameters struct {
 
 	// A set of event sources to exclude. Valid values include: kms.amazonaws.com and rdsdata.amazonaws.com. include_management_events must be set totrue to allow this.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludeManagementEventSources []*string `json:"excludeManagementEventSources,omitempty" tf:"exclude_management_event_sources,omitempty"`
 
 	// Whether to include management events for your trail. Defaults to true.
@@ -230,6 +233,19 @@ type TrailInitParameters struct {
 	// Log group name using an ARN that represents the log group to which CloudTrail logs will be delivered. Note that CloudTrail requires the Log Stream wildcard.
 	CloudWatchLogsGroupArn *string `json:"cloudWatchLogsGroupArn,omitempty" tf:"cloud_watch_logs_group_arn,omitempty"`
 
+	// Role for the CloudWatch Logs endpoint to assume to write to a user’s log group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	CloudWatchLogsRoleArn *string `json:"cloudWatchLogsRoleArn,omitempty" tf:"cloud_watch_logs_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate cloudWatchLogsRoleArn.
+	// +kubebuilder:validation:Optional
+	CloudWatchLogsRoleArnRef *v1.Reference `json:"cloudWatchLogsRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate cloudWatchLogsRoleArn.
+	// +kubebuilder:validation:Optional
+	CloudWatchLogsRoleArnSelector *v1.Selector `json:"cloudWatchLogsRoleArnSelector,omitempty" tf:"-"`
+
 	// Whether log file integrity validation is enabled. Defaults to false.
 	EnableLogFileValidation *bool `json:"enableLogFileValidation,omitempty" tf:"enable_log_file_validation,omitempty"`
 
@@ -251,6 +267,31 @@ type TrailInitParameters struct {
 	// Whether the trail is an AWS Organizations trail. Organization trails log events for the master account and all member accounts. Can only be created in the organization master account. Defaults to false.
 	IsOrganizationTrail *bool `json:"isOrganizationTrail,omitempty" tf:"is_organization_trail,omitempty"`
 
+	// KMS key ARN to use to encrypt the logs delivered by CloudTrail.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
+	// Name of the S3 bucket designated for publishing log files.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
+
 	// S3 key prefix that follows the name of the bucket you have designated for log file delivery.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 
@@ -258,6 +299,7 @@ type TrailInitParameters struct {
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -315,9 +357,11 @@ type TrailObservation struct {
 	SnsTopicName *string `json:"snsTopicName,omitempty" tf:"sns_topic_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -415,6 +459,7 @@ type TrailParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

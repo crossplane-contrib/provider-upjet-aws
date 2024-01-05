@@ -172,6 +172,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   description:
                     description: Description of the StackSet.
                     type: string
@@ -227,6 +228,7 @@ spec:
                       be ignored with the lifecycle configuration block ignore_changes
                       argument.
                     type: object
+                    x-kubernetes-map-type: granular
                   permissionModel:
                     description: 'Describes how the IAM roles required for your StackSet
                       are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.'
@@ -240,6 +242,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateBody:
                     description: 'String containing the CloudFormation template body.
                       Maximum size: 51,200 bytes. Conflicts with template_url.'
@@ -265,6 +268,84 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  administrationRoleArn:
+                    description: Amazon Resource Number (ARN) of the IAM Role in the
+                      administrator account. This must be defined when using the SELF_MANAGED
+                      permission model.
+                    type: string
+                  administrationRoleArnRef:
+                    description: Reference to a Role in iam to populate administrationRoleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  administrationRoleArnSelector:
+                    description: Selector for a Role in iam to populate administrationRoleArn.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   autoDeployment:
                     description: Configuration block containing the auto-deployment
                       model for your StackSet. This can only be defined when using
@@ -292,6 +373,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   description:
                     description: Description of the StackSet.
                     type: string
@@ -347,6 +429,7 @@ spec:
                       be ignored with the lifecycle configuration block ignore_changes
                       argument.
                     type: object
+                    x-kubernetes-map-type: granular
                   permissionModel:
                     description: 'Describes how the IAM roles required for your StackSet
                       are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.'
@@ -356,6 +439,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateBody:
                     description: 'String containing the CloudFormation template body.
                       Maximum size: 51,200 bytes. Conflicts with template_url.'
@@ -567,6 +651,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   description:
                     description: Description of the StackSet.
                     type: string
@@ -625,6 +710,7 @@ spec:
                       be ignored with the lifecycle configuration block ignore_changes
                       argument.
                     type: object
+                    x-kubernetes-map-type: granular
                   permissionModel:
                     description: 'Describes how the IAM roles required for your StackSet
                       are created. Valid values: SELF_MANAGED (default), SERVICE_MANAGED.'
@@ -637,6 +723,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -644,6 +731,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateBody:
                     description: 'String containing the CloudFormation template body.
                       Maximum size: 51,200 bytes. Conflicts with template_url.'

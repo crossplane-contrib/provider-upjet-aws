@@ -36,6 +36,22 @@ func (mg *ControlPanel) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.ClusterArnRef,
+		Selector:     mg.Spec.InitProvider.ClusterArnSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterArn")
+	}
+	mg.Spec.InitProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -77,6 +93,38 @@ func (mg *RoutingControl) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.ControlPanelArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ControlPanelArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.ClusterArnRef,
+		Selector:     mg.Spec.InitProvider.ClusterArnSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterArn")
+	}
+	mg.Spec.InitProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ControlPanelArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.ControlPanelArnRef,
+		Selector:     mg.Spec.InitProvider.ControlPanelArnSelector,
+		To: reference.To{
+			List:    &ControlPanelList{},
+			Managed: &ControlPanel{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ControlPanelArn")
+	}
+	mg.Spec.InitProvider.ControlPanelArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ControlPanelArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -120,6 +168,38 @@ func (mg *SafetyRule) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.ControlPanelArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ControlPanelArnRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AssertedControls),
+		Extract:       common.TerraformID(),
+		References:    mg.Spec.InitProvider.AssertedControlsRefs,
+		Selector:      mg.Spec.InitProvider.AssertedControlsSelector,
+		To: reference.To{
+			List:    &RoutingControlList{},
+			Managed: &RoutingControl{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AssertedControls")
+	}
+	mg.Spec.InitProvider.AssertedControls = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.AssertedControlsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ControlPanelArn),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.ControlPanelArnRef,
+		Selector:     mg.Spec.InitProvider.ControlPanelArnSelector,
+		To: reference.To{
+			List:    &ControlPanelList{},
+			Managed: &ControlPanel{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ControlPanelArn")
+	}
+	mg.Spec.InitProvider.ControlPanelArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ControlPanelArnRef = rsp.ResolvedReference
 
 	return nil
 }

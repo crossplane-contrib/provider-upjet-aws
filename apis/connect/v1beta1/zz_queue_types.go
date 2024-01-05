@@ -61,6 +61,32 @@ type QueueInitParameters struct {
 	// Specifies the description of the Queue.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the identifier of the Hours of Operation.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.HoursOfOperation
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("hours_of_operation_id",true)
+	HoursOfOperationID *string `json:"hoursOfOperationId,omitempty" tf:"hours_of_operation_id,omitempty"`
+
+	// Reference to a HoursOfOperation in connect to populate hoursOfOperationId.
+	// +kubebuilder:validation:Optional
+	HoursOfOperationIDRef *v1.Reference `json:"hoursOfOperationIdRef,omitempty" tf:"-"`
+
+	// Selector for a HoursOfOperation in connect to populate hoursOfOperationId.
+	// +kubebuilder:validation:Optional
+	HoursOfOperationIDSelector *v1.Selector `json:"hoursOfOperationIdSelector,omitempty" tf:"-"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+
 	// Specifies the maximum number of contacts that can be in the queue before it is considered full. Minimum value of 0.
 	MaxContacts *float64 `json:"maxContacts,omitempty" tf:"max_contacts,omitempty"`
 
@@ -71,12 +97,14 @@ type QueueInitParameters struct {
 	OutboundCallerConfig []OutboundCallerConfigInitParameters `json:"outboundCallerConfig,omitempty" tf:"outbound_caller_config,omitempty"`
 
 	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
+	// +listType=set
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
 
 	// Specifies the description of the Queue. Valid values are ENABLED, DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -110,17 +138,21 @@ type QueueObservation struct {
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 
 	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
+	// +listType=set
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
 
+	// +listType=set
 	QuickConnectIdsAssociated []*string `json:"quickConnectIdsAssociated,omitempty" tf:"quick_connect_ids_associated,omitempty"`
 
 	// Specifies the description of the Queue. Valid values are ENABLED, DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -172,6 +204,7 @@ type QueueParameters struct {
 
 	// Specifies a list of quick connects ids that determine the quick connects available to agents who are working the queue.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -185,6 +218,7 @@ type QueueParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

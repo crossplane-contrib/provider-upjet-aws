@@ -22,7 +22,20 @@ type BackendServerPolicyInitParameters struct {
 	// The instance port to apply the policy to.
 	InstancePort *float64 `json:"instancePort,omitempty" tf:"instance_port,omitempty"`
 
+	// The load balancer to attach the policy to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
+
+	// Reference to a ELB in elb to populate loadBalancerName.
+	// +kubebuilder:validation:Optional
+	LoadBalancerNameRef *v1.Reference `json:"loadBalancerNameRef,omitempty" tf:"-"`
+
+	// Selector for a ELB in elb to populate loadBalancerName.
+	// +kubebuilder:validation:Optional
+	LoadBalancerNameSelector *v1.Selector `json:"loadBalancerNameSelector,omitempty" tf:"-"`
+
 	// List of Policy Names to apply to the backend server.
+	// +listType=set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 }
 
@@ -38,6 +51,7 @@ type BackendServerPolicyObservation struct {
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
+	// +listType=set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 }
 
@@ -62,6 +76,7 @@ type BackendServerPolicyParameters struct {
 
 	// List of Policy Names to apply to the backend server.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

@@ -21,6 +21,19 @@ type DomainServiceAccessPolicyInitParameters struct {
 
 	// The access rules you want to configure. These rules replace any existing rules. See the AWS documentation for details.
 	AccessPolicy *string `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// The CloudSearch domain name the policy applies to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudsearch/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Reference to a Domain in cloudsearch to populate domainName.
+	// +kubebuilder:validation:Optional
+	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in cloudsearch to populate domainName.
+	// +kubebuilder:validation:Optional
+	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 }
 
 type DomainServiceAccessPolicyObservation struct {

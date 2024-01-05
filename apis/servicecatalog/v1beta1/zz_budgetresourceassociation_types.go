@@ -18,6 +18,30 @@ import (
 )
 
 type BudgetResourceAssociationInitParameters struct {
+
+	// Budget name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta1.Budget
+	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
+
+	// Reference to a Budget in budgets to populate budgetName.
+	// +kubebuilder:validation:Optional
+	BudgetNameRef *v1.Reference `json:"budgetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Budget in budgets to populate budgetName.
+	// +kubebuilder:validation:Optional
+	BudgetNameSelector *v1.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
+
+	// Resource identifier.
+	// +crossplane:generate:reference:type=Product
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a Product to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Product to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type BudgetResourceAssociationObservation struct {

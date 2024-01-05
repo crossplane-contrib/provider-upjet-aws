@@ -21,6 +21,19 @@ type EncryptionConfigurationInitParameters struct {
 
 	// The encryption type to use for the repository. Valid values are AES256 or KMS. Defaults to AES256.
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// The ARN of the KMS key to use when encryption_type is KMS. If not specified, uses the default AWS managed key for ECR.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKey.
+	// +kubebuilder:validation:Optional
+	KMSKeyRef *v1.Reference `json:"kmsKeyRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKey.
+	// +kubebuilder:validation:Optional
+	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 }
 
 type EncryptionConfigurationObservation struct {
@@ -88,6 +101,7 @@ type RepositoryInitParameters struct {
 	ImageTagMutability *string `json:"imageTagMutability,omitempty" tf:"image_tag_mutability,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -118,9 +132,11 @@ type RepositoryObservation struct {
 	RepositoryURL *string `json:"repositoryUrl,omitempty" tf:"repository_url,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -150,6 +166,7 @@ type RepositoryParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

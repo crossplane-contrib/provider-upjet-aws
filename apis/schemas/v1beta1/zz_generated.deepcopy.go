@@ -48,6 +48,21 @@ func (in *DiscovererInitParameters) DeepCopyInto(out *DiscovererInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.SourceArn != nil {
+		in, out := &in.SourceArn, &out.SourceArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceArnRef != nil {
+		in, out := &in.SourceArnRef, &out.SourceArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceArnSelector != nil {
+		in, out := &in.SourceArnSelector, &out.SourceArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -543,6 +558,21 @@ func (in *SchemaInitParameters) DeepCopyInto(out *SchemaInitParameters) {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.RegistryName != nil {
+		in, out := &in.RegistryName, &out.RegistryName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RegistryNameRef != nil {
+		in, out := &in.RegistryNameRef, &out.RegistryNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RegistryNameSelector != nil {
+		in, out := &in.RegistryNameSelector, &out.RegistryNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags

@@ -139,6 +139,7 @@ spec:
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         search:
@@ -291,6 +292,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userContextPolicy:
                     description: The user context policy. Valid values are ATTRIBUTE_FILTER
                       or USER_TOKEN. For more information, refer to UserContextPolicy.
@@ -457,6 +459,7 @@ spec:
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         search:
@@ -507,6 +510,86 @@ spec:
                   name:
                     description: Specifies the name of the Index.
                     type: string
+                  roleArn:
+                    description: An AWS Identity and Access Management (IAM) role
+                      that gives Amazon Kendra permissions to access your Amazon CloudWatch
+                      logs and metrics. This is also the role you use when you call
+                      the BatchPutDocument API to index documents from an Amazon S3
+                      bucket.
+                    type: string
+                  roleArnRef:
+                    description: Reference to a Role in iam to populate roleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  roleArnSelector:
+                    description: Selector for a Role in iam to populate roleArn.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   serverSideEncryptionConfiguration:
                     description: A block that specifies the identifier of the AWS
                       KMS customer managed key (CMK) that's used to encrypt data indexed
@@ -525,6 +608,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userContextPolicy:
                     description: The user context policy. Valid values are ATTRIBUTE_FILTER
                       or USER_TOKEN. For more information, refer to UserContextPolicy.
@@ -853,6 +937,7 @@ spec:
                                   a different boost when they appear in the result
                                   list. For more information, refer to ValueImportanceMap.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         search:
@@ -974,6 +1059,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -981,6 +1067,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   updatedAt:
                     description: The Unix datetime that the index was last updated.
                     type: string

@@ -20,7 +20,20 @@ import (
 type CiphertextInitParameters struct {
 
 	// An optional mapping that makes up the encryption context.
+	// +mapType=granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
+
+	// Globally unique key ID for the customer master key.
+	// +crossplane:generate:reference:type=Key
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Reference to a Key to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
 
 type CiphertextObservation struct {
@@ -29,6 +42,7 @@ type CiphertextObservation struct {
 	CiphertextBlob *string `json:"ciphertextBlob,omitempty" tf:"ciphertext_blob,omitempty"`
 
 	// An optional mapping that makes up the encryption context.
+	// +mapType=granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -41,6 +55,7 @@ type CiphertextParameters struct {
 
 	// An optional mapping that makes up the encryption context.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// Globally unique key ID for the customer master key.

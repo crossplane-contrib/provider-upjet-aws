@@ -23,7 +23,33 @@ type HostedPrivateVirtualInterfaceAccepterInitParameters struct {
 	DxGatewayID *string `json:"dxGatewayId,omitempty" tf:"dx_gateway_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the virtual private gateway to which to connect the virtual interface.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
+
+	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
+	// +kubebuilder:validation:Optional
+	VPNGatewayIDRef *v1.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
+	// +kubebuilder:validation:Optional
+	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Direct Connect virtual interface to accept.
+	// +crossplane:generate:reference:type=HostedPrivateVirtualInterface
+	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
+
+	// Reference to a HostedPrivateVirtualInterface to populate virtualInterfaceId.
+	// +kubebuilder:validation:Optional
+	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a HostedPrivateVirtualInterface to populate virtualInterfaceId.
+	// +kubebuilder:validation:Optional
+	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type HostedPrivateVirtualInterfaceAccepterObservation struct {
@@ -38,9 +64,11 @@ type HostedPrivateVirtualInterfaceAccepterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the virtual private gateway to which to connect the virtual interface.
@@ -63,6 +91,7 @@ type HostedPrivateVirtualInterfaceAccepterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the virtual private gateway to which to connect the virtual interface.

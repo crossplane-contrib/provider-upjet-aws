@@ -19,6 +19,18 @@ import (
 
 type InstancePublicPortsInitParameters struct {
 
+	// Name of the Lightsail Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Instance
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// Reference to a Instance in lightsail to populate instanceName.
+	// +kubebuilder:validation:Optional
+	InstanceNameRef *v1.Reference `json:"instanceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in lightsail to populate instanceName.
+	// +kubebuilder:validation:Optional
+	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
+
 	// Configuration block with port information. AWS closes all currently open ports that are not included in the port_info. Detailed below.
 	PortInfo []PortInfoInitParameters `json:"portInfo,omitempty" tf:"port_info,omitempty"`
 }
@@ -63,14 +75,17 @@ type InstancePublicPortsParameters struct {
 type PortInfoInitParameters struct {
 
 	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
+	// +listType=set
 	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
 
 	// Set of CIDR blocks.
+	// +listType=set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
 	// First port in a range of open ports on an instance.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// +listType=set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.
@@ -83,14 +98,17 @@ type PortInfoInitParameters struct {
 type PortInfoObservation struct {
 
 	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
+	// +listType=set
 	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
 
 	// Set of CIDR blocks.
+	// +listType=set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
 	// First port in a range of open ports on an instance.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
+	// +listType=set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.
@@ -104,10 +122,12 @@ type PortInfoParameters struct {
 
 	// Set of CIDR aliases that define access for a preconfigured range of IP addresses.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CidrListAliases []*string `json:"cidrListAliases,omitempty" tf:"cidr_list_aliases,omitempty"`
 
 	// Set of CIDR blocks.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
 	// First port in a range of open ports on an instance.
@@ -115,6 +135,7 @@ type PortInfoParameters struct {
 	FromPort *float64 `json:"fromPort" tf:"from_port,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Cidrs []*string `json:"ipv6Cidrs,omitempty" tf:"ipv6_cidrs,omitempty"`
 
 	// IP protocol name. Valid values are tcp, all, udp, and icmp.

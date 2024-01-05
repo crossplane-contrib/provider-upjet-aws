@@ -22,6 +22,19 @@ type DNSConfigInitParameters struct {
 	// An array that contains one DnsRecord object for each resource record set.
 	DNSRecords []DNSRecordsInitParameters `json:"dnsRecords,omitempty" tf:"dns_records,omitempty"`
 
+	// The ID of the namespace to use for DNS configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicediscovery/v1beta1.PrivateDNSNamespace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Reference to a PrivateDNSNamespace in servicediscovery to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateDNSNamespace in servicediscovery to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
+
 	// The routing policy that you want to apply to all records that Route 53 creates when you register an instance and specify the service. Valid Values: MULTIVALUE, WEIGHTED
 	RoutingPolicy *string `json:"routingPolicy,omitempty" tf:"routing_policy,omitempty"`
 }
@@ -174,6 +187,7 @@ type ServiceInitParameters struct {
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// If present, specifies that the service instances are only discoverable using the DiscoverInstances API operation. No DNS records is registered for the service instances. The only valid value is HTTP.
@@ -210,9 +224,11 @@ type ServiceObservation struct {
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// If present, specifies that the service instances are only discoverable using the DiscoverInstances API operation. No DNS records is registered for the service instances. The only valid value is HTTP.
@@ -256,6 +272,7 @@ type ServiceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// If present, specifies that the service instances are only discoverable using the DiscoverInstances API operation. No DNS records is registered for the service instances. The only valid value is HTTP.

@@ -20,6 +20,7 @@ import (
 type AlarmConfigurationInitParameters struct {
 
 	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
 	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
@@ -32,6 +33,7 @@ type AlarmConfigurationInitParameters struct {
 type AlarmConfigurationObservation struct {
 
 	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
 	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
@@ -45,6 +47,7 @@ type AlarmConfigurationParameters struct {
 
 	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
 	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
@@ -62,6 +65,7 @@ type AutoRollbackConfigurationInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
@@ -71,6 +75,7 @@ type AutoRollbackConfigurationObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
@@ -82,6 +87,7 @@ type AutoRollbackConfigurationParameters struct {
 
 	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
 
@@ -133,6 +139,7 @@ type DeploymentGroupInitParameters struct {
 	AutoRollbackConfiguration []AutoRollbackConfigurationInitParameters `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
 	// Autoscaling groups associated with the deployment group.
+	// +listType=set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
 	// Configuration block of the blue/green deployment options for a deployment group (documented below).
@@ -159,7 +166,21 @@ type DeploymentGroupInitParameters struct {
 	// On premise tag filters associated with the group. See the AWS docs for details.
 	OnPremisesInstanceTagFilter []OnPremisesInstanceTagFilterInitParameters `json:"onPremisesInstanceTagFilter,omitempty" tf:"on_premises_instance_tag_filter,omitempty"`
 
+	// The service role ARN that allows deployments.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
@@ -181,6 +202,7 @@ type DeploymentGroupObservation struct {
 	AutoRollbackConfiguration []AutoRollbackConfigurationObservation `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
 	// Autoscaling groups associated with the deployment group.
+	// +listType=set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
 	// Configuration block of the blue/green deployment options for a deployment group (documented below).
@@ -220,9 +242,11 @@ type DeploymentGroupObservation struct {
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
@@ -254,6 +278,7 @@ type DeploymentGroupParameters struct {
 
 	// Autoscaling groups associated with the deployment group.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AutoscalingGroups []*string `json:"autoscalingGroups,omitempty" tf:"autoscaling_groups,omitempty"`
 
 	// Configuration block of the blue/green deployment options for a deployment group (documented below).
@@ -309,6 +334,7 @@ type DeploymentGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
@@ -472,6 +498,18 @@ type EC2TagSetParameters struct {
 }
 
 type ELBInfoInitParameters struct {
+
+	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a ELB in elb to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a ELB in elb to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type ELBInfoObservation struct {
@@ -497,6 +535,30 @@ type ELBInfoParameters struct {
 }
 
 type EcsServiceInitParameters struct {
+
+	// The name of the ECS cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Cluster
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Reference to a Cluster in ecs to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in ecs to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+
+	// The name of the ECS service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Service
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// Reference to a Service in ecs to populate serviceName.
+	// +kubebuilder:validation:Optional
+	ServiceNameRef *v1.Reference `json:"serviceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Service in ecs to populate serviceName.
+	// +kubebuilder:validation:Optional
+	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 }
 
 type EcsServiceObservation struct {
@@ -637,12 +699,14 @@ type OnPremisesInstanceTagFilterParameters struct {
 type ProdTrafficRouteInitParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type ProdTrafficRouteObservation struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
@@ -650,6 +714,7 @@ type ProdTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
 }
 
@@ -673,6 +738,19 @@ type TargetGroupInfoParameters struct {
 }
 
 type TargetGroupInitParameters struct {
+
+	// The name of the target group that instances in the original environment are deregistered from, and instances in the replacement environment registered with. For in-place deployments, the name of the target group that instances are deregistered from, so they are not serving traffic during a deployment, and then re-registered with after the deployment completes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a LBTargetGroup in elbv2 to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup in elbv2 to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type TargetGroupObservation struct {
@@ -769,12 +847,14 @@ type TerminateBlueInstancesOnDeploymentSuccessParameters struct {
 type TestTrafficRouteInitParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
 type TestTrafficRouteObservation struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 }
 
@@ -782,21 +862,37 @@ type TestTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
 }
 
 type TriggerConfigurationInitParameters struct {
 
 	// The event type or types for which notifications are triggered. Some values that are supported: DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure.  See the CodeDeploy documentation for all possible values.
+	// +listType=set
 	TriggerEvents []*string `json:"triggerEvents,omitempty" tf:"trigger_events,omitempty"`
 
 	// The name of the notification trigger.
 	TriggerName *string `json:"triggerName,omitempty" tf:"trigger_name,omitempty"`
+
+	// The ARN of the SNS topic through which notifications are sent.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TriggerTargetArn *string `json:"triggerTargetArn,omitempty" tf:"trigger_target_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate triggerTargetArn.
+	// +kubebuilder:validation:Optional
+	TriggerTargetArnRef *v1.Reference `json:"triggerTargetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate triggerTargetArn.
+	// +kubebuilder:validation:Optional
+	TriggerTargetArnSelector *v1.Selector `json:"triggerTargetArnSelector,omitempty" tf:"-"`
 }
 
 type TriggerConfigurationObservation struct {
 
 	// The event type or types for which notifications are triggered. Some values that are supported: DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure.  See the CodeDeploy documentation for all possible values.
+	// +listType=set
 	TriggerEvents []*string `json:"triggerEvents,omitempty" tf:"trigger_events,omitempty"`
 
 	// The name of the notification trigger.
@@ -810,6 +906,7 @@ type TriggerConfigurationParameters struct {
 
 	// The event type or types for which notifications are triggered. Some values that are supported: DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure.  See the CodeDeploy documentation for all possible values.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TriggerEvents []*string `json:"triggerEvents" tf:"trigger_events,omitempty"`
 
 	// The name of the notification trigger.

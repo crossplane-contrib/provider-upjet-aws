@@ -22,6 +22,19 @@ type DeploymentInitParameters struct {
 	// Description of the deployment
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// REST API identifier.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
+
 	// Description to set on the stage managed by the stage_name argument.
 	StageDescription *string `json:"stageDescription,omitempty" tf:"stage_description,omitempty"`
 
@@ -29,9 +42,11 @@ type DeploymentInitParameters struct {
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Map to set on the stage managed by the stage_name argument.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -65,9 +80,11 @@ type DeploymentObservation struct {
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Map to set on the stage managed by the stage_name argument.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -106,10 +123,12 @@ type DeploymentParameters struct {
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Map to set on the stage managed by the stage_name argument.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 

@@ -24,6 +24,19 @@ type DocumentationPartInitParameters struct {
 
 	// Content map of API-specific key-value pairs describing the targeted API entity. The map must be encoded as a JSON string, e.g., "{ "description": "The API does ..." }". Only Swagger-compliant key-value pairs can be exported and, hence, published.
 	Properties *string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// ID of the associated Rest API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 }
 
 type DocumentationPartObservation struct {

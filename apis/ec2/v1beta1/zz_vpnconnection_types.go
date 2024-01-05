@@ -153,6 +153,19 @@ type Tunnel2LogOptionsParameters struct {
 
 type VPNConnectionInitParameters_2 struct {
 
+	// The ID of the customer gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.CustomerGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CustomerGatewayID *string `json:"customerGatewayId,omitempty" tf:"customer_gateway_id,omitempty"`
+
+	// Reference to a CustomerGateway in ec2 to populate customerGatewayId.
+	// +kubebuilder:validation:Optional
+	CustomerGatewayIDRef *v1.Reference `json:"customerGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a CustomerGateway in ec2 to populate customerGatewayId.
+	// +kubebuilder:validation:Optional
+	CustomerGatewayIDSelector *v1.Selector `json:"customerGatewayIdSelector,omitempty" tf:"-"`
+
 	// Indicate whether to enable acceleration for the VPN connection. Supports only EC2 Transit Gateway.
 	EnableAcceleration *bool `json:"enableAcceleration,omitempty" tf:"enable_acceleration,omitempty"`
 
@@ -175,7 +188,21 @@ type VPNConnectionInitParameters_2 struct {
 	StaticRoutesOnly *bool `json:"staticRoutesOnly,omitempty" tf:"static_routes_only,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the EC2 Transit Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// . The attachment ID of the Transit Gateway attachment to Direct Connect Gateway. The ID is obtained through a data source only.
 	TransportTransitGatewayAttachmentID *string `json:"transportTransitGatewayAttachmentId,omitempty" tf:"transport_transit_gateway_attachment_id,omitempty"`
@@ -190,6 +217,7 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
 
 	// The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
+	// +listType=set
 	Tunnel1IkeVersions []*string `json:"tunnel1IkeVersions,omitempty" tf:"tunnel1_ike_versions,omitempty"`
 
 	// The CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
@@ -202,24 +230,30 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel1LogOptions []Tunnel1LogOptionsInitParameters `json:"tunnel1LogOptions,omitempty" tf:"tunnel1_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
+	// +listType=set
 	Tunnel1Phase1DhGroupNumbers []*float64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
+	// +listType=set
 	Tunnel1Phase1EncryptionAlgorithms []*string `json:"tunnel1Phase1EncryptionAlgorithms,omitempty" tf:"tunnel1_phase1_encryption_algorithms,omitempty"`
 
 	// One or more integrity algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
+	// +listType=set
 	Tunnel1Phase1IntegrityAlgorithms []*string `json:"tunnel1Phase1IntegrityAlgorithms,omitempty" tf:"tunnel1_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	Tunnel1Phase1LifetimeSeconds *float64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
+	// +listType=set
 	Tunnel1Phase2DhGroupNumbers []*float64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
+	// +listType=set
 	Tunnel1Phase2EncryptionAlgorithms []*string `json:"tunnel1Phase2EncryptionAlgorithms,omitempty" tf:"tunnel1_phase2_encryption_algorithms,omitempty"`
 
 	// List of one or more integrity algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
+	// +listType=set
 	Tunnel1Phase2IntegrityAlgorithms []*string `json:"tunnel1Phase2IntegrityAlgorithms,omitempty" tf:"tunnel1_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
@@ -247,6 +281,7 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
 
 	// The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
+	// +listType=set
 	Tunnel2IkeVersions []*string `json:"tunnel2IkeVersions,omitempty" tf:"tunnel2_ike_versions,omitempty"`
 
 	// The CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
@@ -259,24 +294,30 @@ type VPNConnectionInitParameters_2 struct {
 	Tunnel2LogOptions []Tunnel2LogOptionsInitParameters `json:"tunnel2LogOptions,omitempty" tf:"tunnel2_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
+	// +listType=set
 	Tunnel2Phase1DhGroupNumbers []*float64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
+	// +listType=set
 	Tunnel2Phase1EncryptionAlgorithms []*string `json:"tunnel2Phase1EncryptionAlgorithms,omitempty" tf:"tunnel2_phase1_encryption_algorithms,omitempty"`
 
 	// One or more integrity algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
+	// +listType=set
 	Tunnel2Phase1IntegrityAlgorithms []*string `json:"tunnel2Phase1IntegrityAlgorithms,omitempty" tf:"tunnel2_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	Tunnel2Phase1LifetimeSeconds *float64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
+	// +listType=set
 	Tunnel2Phase2DhGroupNumbers []*float64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
+	// +listType=set
 	Tunnel2Phase2EncryptionAlgorithms []*string `json:"tunnel2Phase2EncryptionAlgorithms,omitempty" tf:"tunnel2_phase2_encryption_algorithms,omitempty"`
 
 	// List of one or more integrity algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
+	// +listType=set
 	Tunnel2Phase2IntegrityAlgorithms []*string `json:"tunnel2Phase2IntegrityAlgorithms,omitempty" tf:"tunnel2_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
@@ -296,6 +337,31 @@ type VPNConnectionInitParameters_2 struct {
 
 	// Indicate whether the VPN tunnels process IPv4 or IPv6 traffic. Valid values are ipv4 | ipv6. ipv6 Supports only EC2 Transit Gateway.
 	TunnelInsideIPVersion *string `json:"tunnelInsideIpVersion,omitempty" tf:"tunnel_inside_ip_version,omitempty"`
+
+	// The type of VPN connection. The only type AWS supports at this time is "ipsec.1".
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.CustomerGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("type",false)
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Reference to a CustomerGateway in ec2 to populate type.
+	// +kubebuilder:validation:Optional
+	TypeRef *v1.Reference `json:"typeRef,omitempty" tf:"-"`
+
+	// Selector for a CustomerGateway in ec2 to populate type.
+	// +kubebuilder:validation:Optional
+	TypeSelector *v1.Selector `json:"typeSelector,omitempty" tf:"-"`
+
+	// The ID of the Virtual Private Gateway.
+	// +crossplane:generate:reference:type=VPNGateway
+	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
+
+	// Reference to a VPNGateway to populate vpnGatewayId.
+	// +kubebuilder:validation:Optional
+	VPNGatewayIDRef *v1.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPNGateway to populate vpnGatewayId.
+	// +kubebuilder:validation:Optional
+	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type VPNConnectionObservation_2 struct {
@@ -340,9 +406,11 @@ type VPNConnectionObservation_2 struct {
 	StaticRoutesOnly *bool `json:"staticRoutesOnly,omitempty" tf:"static_routes_only,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// When associated with an EC2 Transit Gateway (transit_gateway_id argument), the attachment ID. See also the aws_ec2_tag resource for tagging the EC2 Transit Gateway VPN Attachment.
@@ -376,6 +444,7 @@ type VPNConnectionObservation_2 struct {
 	Tunnel1EnableTunnelLifecycleControl *bool `json:"tunnel1EnableTunnelLifecycleControl,omitempty" tf:"tunnel1_enable_tunnel_lifecycle_control,omitempty"`
 
 	// The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
+	// +listType=set
 	Tunnel1IkeVersions []*string `json:"tunnel1IkeVersions,omitempty" tf:"tunnel1_ike_versions,omitempty"`
 
 	// The CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
@@ -388,24 +457,30 @@ type VPNConnectionObservation_2 struct {
 	Tunnel1LogOptions []Tunnel1LogOptionsObservation `json:"tunnel1LogOptions,omitempty" tf:"tunnel1_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
+	// +listType=set
 	Tunnel1Phase1DhGroupNumbers []*float64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
+	// +listType=set
 	Tunnel1Phase1EncryptionAlgorithms []*string `json:"tunnel1Phase1EncryptionAlgorithms,omitempty" tf:"tunnel1_phase1_encryption_algorithms,omitempty"`
 
 	// One or more integrity algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
+	// +listType=set
 	Tunnel1Phase1IntegrityAlgorithms []*string `json:"tunnel1Phase1IntegrityAlgorithms,omitempty" tf:"tunnel1_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	Tunnel1Phase1LifetimeSeconds *float64 `json:"tunnel1Phase1LifetimeSeconds,omitempty" tf:"tunnel1_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
+	// +listType=set
 	Tunnel1Phase2DhGroupNumbers []*float64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
+	// +listType=set
 	Tunnel1Phase2EncryptionAlgorithms []*string `json:"tunnel1Phase2EncryptionAlgorithms,omitempty" tf:"tunnel1_phase2_encryption_algorithms,omitempty"`
 
 	// List of one or more integrity algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
+	// +listType=set
 	Tunnel1Phase2IntegrityAlgorithms []*string `json:"tunnel1Phase2IntegrityAlgorithms,omitempty" tf:"tunnel1_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
@@ -448,6 +523,7 @@ type VPNConnectionObservation_2 struct {
 	Tunnel2EnableTunnelLifecycleControl *bool `json:"tunnel2EnableTunnelLifecycleControl,omitempty" tf:"tunnel2_enable_tunnel_lifecycle_control,omitempty"`
 
 	// The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
+	// +listType=set
 	Tunnel2IkeVersions []*string `json:"tunnel2IkeVersions,omitempty" tf:"tunnel2_ike_versions,omitempty"`
 
 	// The CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
@@ -460,24 +536,30 @@ type VPNConnectionObservation_2 struct {
 	Tunnel2LogOptions []Tunnel2LogOptionsObservation `json:"tunnel2LogOptions,omitempty" tf:"tunnel2_log_options,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
+	// +listType=set
 	Tunnel2Phase1DhGroupNumbers []*float64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
+	// +listType=set
 	Tunnel2Phase1EncryptionAlgorithms []*string `json:"tunnel2Phase1EncryptionAlgorithms,omitempty" tf:"tunnel2_phase1_encryption_algorithms,omitempty"`
 
 	// One or more integrity algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
+	// +listType=set
 	Tunnel2Phase1IntegrityAlgorithms []*string `json:"tunnel2Phase1IntegrityAlgorithms,omitempty" tf:"tunnel2_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
 	Tunnel2Phase1LifetimeSeconds *float64 `json:"tunnel2Phase1LifetimeSeconds,omitempty" tf:"tunnel2_phase1_lifetime_seconds,omitempty"`
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
+	// +listType=set
 	Tunnel2Phase2DhGroupNumbers []*float64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
+	// +listType=set
 	Tunnel2Phase2EncryptionAlgorithms []*string `json:"tunnel2Phase2EncryptionAlgorithms,omitempty" tf:"tunnel2_phase2_encryption_algorithms,omitempty"`
 
 	// List of one or more integrity algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
+	// +listType=set
 	Tunnel2Phase2IntegrityAlgorithms []*string `json:"tunnel2Phase2IntegrityAlgorithms,omitempty" tf:"tunnel2_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
@@ -562,6 +644,7 @@ type VPNConnectionParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the EC2 Transit Gateway.
@@ -596,6 +679,7 @@ type VPNConnectionParameters_2 struct {
 
 	// The IKE versions that are permitted for the first VPN tunnel. Valid values are ikev1 | ikev2.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel1IkeVersions []*string `json:"tunnel1IkeVersions,omitempty" tf:"tunnel1_ike_versions,omitempty"`
 
 	// The CIDR block of the inside IP addresses for the first VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
@@ -612,14 +696,17 @@ type VPNConnectionParameters_2 struct {
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel1Phase1DhGroupNumbers []*float64 `json:"tunnel1Phase1DhGroupNumbers,omitempty" tf:"tunnel1_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel1Phase1EncryptionAlgorithms []*string `json:"tunnel1Phase1EncryptionAlgorithms,omitempty" tf:"tunnel1_phase1_encryption_algorithms,omitempty"`
 
 	// One or more integrity algorithms that are permitted for the first VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel1Phase1IntegrityAlgorithms []*string `json:"tunnel1Phase1IntegrityAlgorithms,omitempty" tf:"tunnel1_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 28800.
@@ -628,14 +715,17 @@ type VPNConnectionParameters_2 struct {
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel1Phase2DhGroupNumbers []*float64 `json:"tunnel1Phase2DhGroupNumbers,omitempty" tf:"tunnel1_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel1Phase2EncryptionAlgorithms []*string `json:"tunnel1Phase2EncryptionAlgorithms,omitempty" tf:"tunnel1_phase2_encryption_algorithms,omitempty"`
 
 	// List of one or more integrity algorithms that are permitted for the first VPN tunnel for phase 2 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel1Phase2IntegrityAlgorithms []*string `json:"tunnel1Phase2IntegrityAlgorithms,omitempty" tf:"tunnel1_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
@@ -676,6 +766,7 @@ type VPNConnectionParameters_2 struct {
 
 	// The IKE versions that are permitted for the second VPN tunnel. Valid values are ikev1 | ikev2.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel2IkeVersions []*string `json:"tunnel2IkeVersions,omitempty" tf:"tunnel2_ike_versions,omitempty"`
 
 	// The CIDR block of the inside IP addresses for the second VPN tunnel. Valid value is a size /30 CIDR block from the 169.254.0.0/16 range.
@@ -692,14 +783,17 @@ type VPNConnectionParameters_2 struct {
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are  2 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel2Phase1DhGroupNumbers []*float64 `json:"tunnel2Phase1DhGroupNumbers,omitempty" tf:"tunnel2_phase1_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel2Phase1EncryptionAlgorithms []*string `json:"tunnel2Phase1EncryptionAlgorithms,omitempty" tf:"tunnel2_phase1_encryption_algorithms,omitempty"`
 
 	// One or more integrity algorithms that are permitted for the second VPN tunnel for phase 1 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel2Phase1IntegrityAlgorithms []*string `json:"tunnel2Phase1IntegrityAlgorithms,omitempty" tf:"tunnel2_phase1_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 1 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 28800.
@@ -708,14 +802,17 @@ type VPNConnectionParameters_2 struct {
 
 	// List of one or more Diffie-Hellman group numbers that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are 2 | 5 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel2Phase2DhGroupNumbers []*float64 `json:"tunnel2Phase2DhGroupNumbers,omitempty" tf:"tunnel2_phase2_dh_group_numbers,omitempty"`
 
 	// List of one or more encryption algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are AES128 | AES256 | AES128-GCM-16 | AES256-GCM-16.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel2Phase2EncryptionAlgorithms []*string `json:"tunnel2Phase2EncryptionAlgorithms,omitempty" tf:"tunnel2_phase2_encryption_algorithms,omitempty"`
 
 	// List of one or more integrity algorithms that are permitted for the second VPN tunnel for phase 2 IKE negotiations. Valid values are SHA1 | SHA2-256 | SHA2-384 | SHA2-512.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Tunnel2Phase2IntegrityAlgorithms []*string `json:"tunnel2Phase2IntegrityAlgorithms,omitempty" tf:"tunnel2_phase2_integrity_algorithms,omitempty"`
 
 	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.

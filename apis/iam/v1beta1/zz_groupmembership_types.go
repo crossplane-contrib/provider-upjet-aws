@@ -19,8 +19,35 @@ import (
 
 type GroupMembershipInitParameters struct {
 
+	// –  The IAM Group name to attach the list of users to
+	// +crossplane:generate:reference:type=Group
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
+	// Reference to a Group to populate group.
+	// +kubebuilder:validation:Optional
+	GroupRef *v1.Reference `json:"groupRef,omitempty" tf:"-"`
+
+	// Selector for a Group to populate group.
+	// +kubebuilder:validation:Optional
+	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
+
 	// The name to identify the Group Membership
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// References to User to populate users.
+	// +kubebuilder:validation:Optional
+	UserRefs []v1.Reference `json:"userRefs,omitempty" tf:"-"`
+
+	// Selector for a list of User to populate users.
+	// +kubebuilder:validation:Optional
+	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
+
+	// A list of IAM User names to associate with the Group
+	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:refFieldName=UserRefs
+	// +crossplane:generate:reference:selectorFieldName=UserSelector
+	// +listType=set
+	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
 type GroupMembershipObservation struct {
@@ -34,6 +61,7 @@ type GroupMembershipObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of IAM User names to associate with the Group
+	// +listType=set
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 
@@ -69,6 +97,7 @@ type GroupMembershipParameters struct {
 	// +crossplane:generate:reference:refFieldName=UserRefs
 	// +crossplane:generate:reference:selectorFieldName=UserSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
 }
 

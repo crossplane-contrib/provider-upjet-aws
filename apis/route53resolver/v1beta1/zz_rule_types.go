@@ -25,10 +25,25 @@ type RuleInitParameters struct {
 	// A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
+	// This argument should only be specified for FORWARD type rules.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53resolver/v1beta1.Endpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
+
+	// Reference to a Endpoint in route53resolver to populate resolverEndpointId.
+	// +kubebuilder:validation:Optional
+	ResolverEndpointIDRef *v1.Reference `json:"resolverEndpointIdRef,omitempty" tf:"-"`
+
+	// Selector for a Endpoint in route53resolver to populate resolverEndpointId.
+	// +kubebuilder:validation:Optional
+	ResolverEndpointIDSelector *v1.Selector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
+
 	// The rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
 	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).
@@ -65,9 +80,11 @@ type RuleObservation struct {
 	ShareStatus *string `json:"shareStatus,omitempty" tf:"share_status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).
@@ -111,6 +128,7 @@ type RuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration block(s) indicating the IPs that you want Resolver to forward DNS queries to (documented below).

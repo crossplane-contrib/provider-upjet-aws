@@ -1100,6 +1100,36 @@ func (in *ScheduledActionInitParameters) DeepCopyInto(out *ScheduledActionInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceID != nil {
+		in, out := &in.ResourceID, &out.ResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceIDRef != nil {
+		in, out := &in.ResourceIDRef, &out.ResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceIDSelector != nil {
+		in, out := &in.ResourceIDSelector, &out.ResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ScalableDimension != nil {
+		in, out := &in.ScalableDimension, &out.ScalableDimension
+		*out = new(string)
+		**out = **in
+	}
+	if in.ScalableDimensionRef != nil {
+		in, out := &in.ScalableDimensionRef, &out.ScalableDimensionRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ScalableDimensionSelector != nil {
+		in, out := &in.ScalableDimensionSelector, &out.ScalableDimensionSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ScalableTargetAction != nil {
 		in, out := &in.ScalableTargetAction, &out.ScalableTargetAction
 		*out = make([]ScalableTargetActionInitParameters, len(*in))
@@ -1111,6 +1141,21 @@ func (in *ScheduledActionInitParameters) DeepCopyInto(out *ScheduledActionInitPa
 		in, out := &in.Schedule, &out.Schedule
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServiceNamespace != nil {
+		in, out := &in.ServiceNamespace, &out.ServiceNamespace
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceNamespaceRef != nil {
+		in, out := &in.ServiceNamespaceRef, &out.ServiceNamespaceRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceNamespaceSelector != nil {
+		in, out := &in.ServiceNamespaceSelector, &out.ServiceNamespaceSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StartTime != nil {
 		in, out := &in.StartTime, &out.StartTime
@@ -1630,6 +1675,21 @@ func (in *TargetInitParameters) DeepCopyInto(out *TargetInitParameters) {
 		in, out := &in.ResourceID, &out.ResourceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArn != nil {
+		in, out := &in.RoleArn, &out.RoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ScalableDimension != nil {
 		in, out := &in.ScalableDimension, &out.ScalableDimension

@@ -79,7 +79,21 @@ type VPCPeeringConnectionAccepterInitParameters struct {
 	Requester []VPCPeeringConnectionAccepterRequesterInitParameters `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The VPC Peering Connection ID to manage.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCPeeringConnection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
+
+	// Reference to a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
+	// +kubebuilder:validation:Optional
+	VPCPeeringConnectionIDRef *v1.Reference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
+	// +kubebuilder:validation:Optional
+	VPCPeeringConnectionIDSelector *v1.Selector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
 }
 
 type VPCPeeringConnectionAccepterObservation struct {
@@ -111,9 +125,11 @@ type VPCPeeringConnectionAccepterObservation struct {
 	Requester []VPCPeeringConnectionAccepterRequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the accepter VPC.
@@ -146,6 +162,7 @@ type VPCPeeringConnectionAccepterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The VPC Peering Connection ID to manage.

@@ -37,8 +37,34 @@ type PlatformApplicationInitParameters struct {
 	// The ARN of the SNS Topic triggered when an existing platform endpoint is changed from your platform application.
 	EventEndpointUpdatedTopicArn *string `json:"eventEndpointUpdatedTopicArn,omitempty" tf:"event_endpoint_updated_topic_arn,omitempty"`
 
+	// The IAM role ARN permitted to receive failure feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	FailureFeedbackRoleArn *string `json:"failureFeedbackRoleArn,omitempty" tf:"failure_feedback_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate failureFeedbackRoleArn.
+	// +kubebuilder:validation:Optional
+	FailureFeedbackRoleArnRef *v1.Reference `json:"failureFeedbackRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate failureFeedbackRoleArn.
+	// +kubebuilder:validation:Optional
+	FailureFeedbackRoleArnSelector *v1.Selector `json:"failureFeedbackRoleArnSelector,omitempty" tf:"-"`
+
 	// The platform that the app is registered with. See Platform for supported platforms.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
+
+	// The IAM role ARN permitted to receive success feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	SuccessFeedbackRoleArn *string `json:"successFeedbackRoleArn,omitempty" tf:"success_feedback_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate successFeedbackRoleArn.
+	// +kubebuilder:validation:Optional
+	SuccessFeedbackRoleArnRef *v1.Reference `json:"successFeedbackRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate successFeedbackRoleArn.
+	// +kubebuilder:validation:Optional
+	SuccessFeedbackRoleArnSelector *v1.Selector `json:"successFeedbackRoleArnSelector,omitempty" tf:"-"`
 
 	// The sample rate percentage (0-100) of successfully delivered messages.
 	SuccessFeedbackSampleRate *string `json:"successFeedbackSampleRate,omitempty" tf:"success_feedback_sample_rate,omitempty"`

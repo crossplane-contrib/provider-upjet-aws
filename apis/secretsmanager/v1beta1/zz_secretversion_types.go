@@ -19,7 +19,21 @@ import (
 
 type SecretVersionInitParameters struct {
 
+	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
+
 	// Specifies a list of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
+	// +listType=set
 	VersionStages []*string `json:"versionStages,omitempty" tf:"version_stages,omitempty"`
 }
 
@@ -38,6 +52,7 @@ type SecretVersionObservation struct {
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 
 	// Specifies a list of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
+	// +listType=set
 	VersionStages []*string `json:"versionStages,omitempty" tf:"version_stages,omitempty"`
 }
 
@@ -72,6 +87,7 @@ type SecretVersionParameters struct {
 
 	// Specifies a list of staging labels that are attached to this version of the secret. A staging label must be unique to a single version of the secret. If you specify a staging label that's already associated with a different version of the same secret then that staging label is automatically removed from the other version and attached to this version. If you do not specify a value, then AWS Secrets Manager automatically moves the staging label AWSCURRENT to this new version on creation.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VersionStages []*string `json:"versionStages,omitempty" tf:"version_stages,omitempty"`
 }
 

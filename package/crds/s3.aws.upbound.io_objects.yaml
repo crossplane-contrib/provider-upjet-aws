@@ -290,6 +290,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   objectLockLegalHoldStatus:
                     description: Legal hold status that you want to apply to the specified
                       object. Valid values are ON and OFF.
@@ -327,6 +328,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   websiteRedirect:
                     description: Target URL for website redirect.
                     type: string
@@ -350,9 +352,86 @@ spec:
                       public-read-write, aws-exec-read, authenticated-read, bucket-owner-read,
                       and bucket-owner-full-control. Defaults to private.
                     type: string
+                  bucket:
+                    description: Name of the bucket to put the file in. Alternatively,
+                      an S3 access point ARN can be specified.
+                    type: string
                   bucketKeyEnabled:
                     description: Whether or not to use Amazon S3 Bucket Keys for SSE-KMS.
                     type: boolean
+                  bucketRef:
+                    description: Reference to a Bucket in s3 to populate bucket.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  bucketSelector:
+                    description: Selector for a Bucket in s3 to populate bucket.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   cacheControl:
                     description: Caching behavior along the request/reply chain Read
                       w3c cache_control for further details.
@@ -404,6 +483,86 @@ spec:
                   key:
                     description: Name of the object once it is in the bucket.
                     type: string
+                  kmsKeyId:
+                    description: ARN of the KMS Key to use for object encryption.
+                      If the S3 Bucket has server-side encryption enabled, that value
+                      will automatically be used. If referencing the aws_kms_key resource,
+                      use the arn attribute. If referencing the aws_kms_alias data
+                      source or resource, use the target_key_arn attribute.
+                    type: string
+                  kmsKeyIdRef:
+                    description: Reference to a Key in kms to populate kmsKeyId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  kmsKeyIdSelector:
+                    description: Selector for a Key in kms to populate kmsKeyId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   metadata:
                     additionalProperties:
                       type: string
@@ -411,6 +570,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   objectLockLegalHoldStatus:
                     description: Legal hold status that you want to apply to the specified
                       object. Valid values are ON and OFF.
@@ -444,6 +604,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   websiteRedirect:
                     description: Target URL for website redirect.
                     type: string
@@ -698,6 +859,7 @@ spec:
                       automatically prefixed by x-amz-meta-, note that only lowercase
                       label are currently supported by the AWS Go API).
                     type: object
+                    x-kubernetes-map-type: granular
                   objectLockLegalHoldStatus:
                     description: Legal hold status that you want to apply to the specified
                       object. Valid values are ON and OFF.
@@ -731,12 +893,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   versionId:
                     description: Unique version ID value for the object, if bucket
                       versioning is enabled.

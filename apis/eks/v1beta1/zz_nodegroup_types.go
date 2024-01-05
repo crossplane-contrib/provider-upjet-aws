@@ -86,10 +86,24 @@ type NodeGroupInitParameters struct {
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Configuration block with Launch Template settings. Detailed below.
 	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
+
+	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate nodeRoleArn.
+	// +kubebuilder:validation:Optional
+	NodeRoleArnRef *v1.Reference `json:"nodeRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate nodeRoleArn.
+	// +kubebuilder:validation:Optional
+	NodeRoleArnSelector *v1.Selector `json:"nodeRoleArnSelector,omitempty" tf:"-"`
 
 	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
@@ -100,13 +114,42 @@ type NodeGroupInitParameters struct {
 	// Configuration block with scaling settings. Detailed below.
 	ScalingConfig []ScalingConfigInitParameters `json:"scalingConfig,omitempty" tf:"scaling_config,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// Identifiers of EC2 Subnets to associate with the EKS Node Group. Amazon EKS managed node groups can be launched in both public and private subnets. If you plan to deploy load balancers to a subnet, the private subnet must have tag kubernetes.io/role/internal-elb, the public subnet must have tag kubernetes.io/role/elb.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
 	Taint []TaintInitParameters `json:"taint,omitempty" tf:"taint,omitempty"`
 
 	UpdateConfig []UpdateConfigInitParameters `json:"updateConfig,omitempty" tf:"update_config,omitempty"`
+
+	// –  Kubernetes version. Defaults to EKS Cluster Kubernetes version.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",false)
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Reference to a Cluster in eks to populate version.
+	// +kubebuilder:validation:Optional
+	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in eks to populate version.
+	// +kubebuilder:validation:Optional
+	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type NodeGroupObservation struct {
@@ -136,6 +179,7 @@ type NodeGroupObservation struct {
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Configuration block with Launch Template settings. Detailed below.
@@ -160,12 +204,15 @@ type NodeGroupObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Identifiers of EC2 Subnets to associate with the EKS Node Group. Amazon EKS managed node groups can be launched in both public and private subnets. If you plan to deploy load balancers to a subnet, the private subnet must have tag kubernetes.io/role/internal-elb, the public subnet must have tag kubernetes.io/role/elb.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
@@ -215,6 +262,7 @@ type NodeGroupParameters struct {
 
 	// Key-value map of Kubernetes labels. Only labels that are applied with the EKS API are managed by this argument. Other Kubernetes labels applied to the EKS Node Group will not be managed.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Configuration block with Launch Template settings. Detailed below.
@@ -265,10 +313,12 @@ type NodeGroupParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Kubernetes taints to be applied to the nodes in the node group. Maximum of 50 taints per node group. Detailed below.
@@ -297,6 +347,21 @@ type RemoteAccessInitParameters struct {
 
 	// EC2 Key Pair name that provides access for remote communication with the worker nodes in the EKS Node Group. If you specify this configuration, but do not specify source_security_group_ids when you create an EKS Node Group, either port 3389 for Windows, or port 22 for all other operating systems is opened on the worker nodes to the Internet (0.0.0.0/0). For Windows nodes, this will allow you to use RDP, for all others this allows you to SSH into the worker nodes.
 	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate sourceSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	SourceSecurityGroupIDRefs []v1.Reference `json:"sourceSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate sourceSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// Set of EC2 Security Group IDs to allow SSH access (port 22) from on the worker nodes. If you specify ec2_ssh_key, but do not specify this configuration when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SourceSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SourceSecurityGroupIDSelector
+	// +listType=set
+	SourceSecurityGroupIds []*string `json:"sourceSecurityGroupIds,omitempty" tf:"source_security_group_ids,omitempty"`
 }
 
 type RemoteAccessObservation struct {
@@ -305,6 +370,7 @@ type RemoteAccessObservation struct {
 	EC2SSHKey *string `json:"ec2SshKey,omitempty" tf:"ec2_ssh_key,omitempty"`
 
 	// Set of EC2 Security Group IDs to allow SSH access (port 22) from on the worker nodes. If you specify ec2_ssh_key, but do not specify this configuration when you create an EKS Node Group, port 22 on the worker nodes is opened to the Internet (0.0.0.0/0).
+	// +listType=set
 	SourceSecurityGroupIds []*string `json:"sourceSecurityGroupIds,omitempty" tf:"source_security_group_ids,omitempty"`
 }
 
@@ -327,6 +393,7 @@ type RemoteAccessParameters struct {
 	// +crossplane:generate:reference:refFieldName=SourceSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SourceSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SourceSecurityGroupIds []*string `json:"sourceSecurityGroupIds,omitempty" tf:"source_security_group_ids,omitempty"`
 }
 

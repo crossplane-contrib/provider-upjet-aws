@@ -22,7 +22,21 @@ type DiscovererInitParameters struct {
 	// The description of the discoverer. Maximum of 256 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ARN of the event bus to discover event schemas on.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
+
+	// Reference to a Bus in cloudwatchevents to populate sourceArn.
+	// +kubebuilder:validation:Optional
+	SourceArnRef *v1.Reference `json:"sourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bus in cloudwatchevents to populate sourceArn.
+	// +kubebuilder:validation:Optional
+	SourceArnSelector *v1.Selector `json:"sourceArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -41,9 +55,11 @@ type DiscovererObservation struct {
 	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -74,6 +90,7 @@ type DiscovererParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -77,6 +77,60 @@ func (mg *Permissions) ResolveReferences(ctx context.Context, c client.Reader) e
 		mg.Spec.ForProvider.TableWithColumns[i3].NameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DataLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataLocation[i3].Arn),
+			Extract:      resource.ExtractParamPath("arn", false),
+			Reference:    mg.Spec.InitProvider.DataLocation[i3].ArnRef,
+			Selector:     mg.Spec.InitProvider.DataLocation[i3].ArnSelector,
+			To: reference.To{
+				List:    &ResourceList{},
+				Managed: &Resource{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DataLocation[i3].Arn")
+		}
+		mg.Spec.InitProvider.DataLocation[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DataLocation[i3].ArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Database); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Database[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.Database[i3].NameSelector,
+			To: reference.To{
+				List:    &v1beta1.CatalogDatabaseList{},
+				Managed: &v1beta1.CatalogDatabase{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Database[i3].Name")
+		}
+		mg.Spec.InitProvider.Database[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Database[i3].NameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.TableWithColumns); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableWithColumns[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.TableWithColumns[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.TableWithColumns[i3].NameSelector,
+			To: reference.To{
+				List:    &v1beta1.CatalogTableList{},
+				Managed: &v1beta1.CatalogTable{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.TableWithColumns[i3].Name")
+		}
+		mg.Spec.InitProvider.TableWithColumns[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.TableWithColumns[i3].NameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -103,6 +157,22 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
 
 	return nil
 }

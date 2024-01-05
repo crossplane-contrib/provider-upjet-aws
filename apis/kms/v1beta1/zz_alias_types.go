@@ -18,6 +18,18 @@ import (
 )
 
 type AliasInitParameters struct {
+
+	// Identifier for the key for which the alias is for, can be either an ARN or key_id.
+	// +crossplane:generate:reference:type=Key
+	TargetKeyID *string `json:"targetKeyId,omitempty" tf:"target_key_id,omitempty"`
+
+	// Reference to a Key to populate targetKeyId.
+	// +kubebuilder:validation:Optional
+	TargetKeyIDRef *v1.Reference `json:"targetKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key to populate targetKeyId.
+	// +kubebuilder:validation:Optional
+	TargetKeyIDSelector *v1.Selector `json:"targetKeyIdSelector,omitempty" tf:"-"`
 }
 
 type AliasObservation struct {

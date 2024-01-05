@@ -20,18 +20,33 @@ import (
 type RoleAssociationInitParameters struct {
 
 	// The AWS SSO group ids to be assigned the role given in role.
+	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
 
 	// The grafana role. Valid values can be found here.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// The AWS SSO user ids to be assigned the role given in role.
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
+
+	// The workspace id.
+	// +crossplane:generate:reference:type=Workspace
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Reference to a Workspace to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type RoleAssociationObservation struct {
 
 	// The AWS SSO group ids to be assigned the role given in role.
+	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -40,6 +55,7 @@ type RoleAssociationObservation struct {
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// The AWS SSO user ids to be assigned the role given in role.
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 
 	// The workspace id.
@@ -50,6 +66,7 @@ type RoleAssociationParameters struct {
 
 	// The AWS SSO group ids to be assigned the role given in role.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	GroupIds []*string `json:"groupIds,omitempty" tf:"group_ids,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -63,6 +80,7 @@ type RoleAssociationParameters struct {
 
 	// The AWS SSO user ids to be assigned the role given in role.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 
 	// The workspace id.

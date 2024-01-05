@@ -103,6 +103,19 @@ type TrafficMirrorFilterRuleInitParameters struct {
 
 	// Direction of traffic to be captured. Valid values are ingress and egress
 	TrafficDirection *string `json:"trafficDirection,omitempty" tf:"traffic_direction,omitempty"`
+
+	// ID of the traffic mirror filter to which this rule should be added
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TrafficMirrorFilter
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TrafficMirrorFilterID *string `json:"trafficMirrorFilterId,omitempty" tf:"traffic_mirror_filter_id,omitempty"`
+
+	// Reference to a TrafficMirrorFilter in ec2 to populate trafficMirrorFilterId.
+	// +kubebuilder:validation:Optional
+	TrafficMirrorFilterIDRef *v1.Reference `json:"trafficMirrorFilterIdRef,omitempty" tf:"-"`
+
+	// Selector for a TrafficMirrorFilter in ec2 to populate trafficMirrorFilterId.
+	// +kubebuilder:validation:Optional
+	TrafficMirrorFilterIDSelector *v1.Selector `json:"trafficMirrorFilterIdSelector,omitempty" tf:"-"`
 }
 
 type TrafficMirrorFilterRuleObservation struct {

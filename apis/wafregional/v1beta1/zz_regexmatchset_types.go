@@ -100,6 +100,19 @@ type RegexMatchTupleInitParameters struct {
 	// The part of a web request that you want to search, such as a specified header or a query string.
 	FieldToMatch []RegexMatchTupleFieldToMatchInitParameters `json:"fieldToMatch,omitempty" tf:"field_to_match,omitempty"`
 
+	// The ID of a Regex Pattern Set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.RegexPatternSet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RegexPatternSetID *string `json:"regexPatternSetId,omitempty" tf:"regex_pattern_set_id,omitempty"`
+
+	// Reference to a RegexPatternSet in wafregional to populate regexPatternSetId.
+	// +kubebuilder:validation:Optional
+	RegexPatternSetIDRef *v1.Reference `json:"regexPatternSetIdRef,omitempty" tf:"-"`
+
+	// Selector for a RegexPatternSet in wafregional to populate regexPatternSetId.
+	// +kubebuilder:validation:Optional
+	RegexPatternSetIDSelector *v1.Selector `json:"regexPatternSetIdSelector,omitempty" tf:"-"`
+
 	// Text transformations used to eliminate unusual formatting that attackers use in web requests in an effort to bypass AWS WAF.
 	// e.g., CMD_LINE, HTML_ENTITY_DECODE or NONE.
 	// See docs

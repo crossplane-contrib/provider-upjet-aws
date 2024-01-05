@@ -124,10 +124,24 @@ type IndexInitParameters struct {
 	// Specifies the name of the Index.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role you use when you call the BatchPutDocument API to index documents from an Amazon S3 bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// A block that specifies the identifier of the AWS KMS customer managed key (CMK) that's used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs. Detailed below.
 	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationInitParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The user context policy. Valid values are ATTRIBUTE_FILTER or USER_TOKEN. For more information, refer to UserContextPolicy. Defaults to ATTRIBUTE_FILTER.
@@ -182,9 +196,11 @@ type IndexObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The Unix datetime that the index was last updated.
@@ -247,6 +263,7 @@ type IndexParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The user context policy. Valid values are ATTRIBUTE_FILTER or USER_TOKEN. For more information, refer to UserContextPolicy. Defaults to ATTRIBUTE_FILTER.
@@ -400,6 +417,7 @@ type RelevanceInitParameters struct {
 	RankOrder *string `json:"rankOrder,omitempty" tf:"rank_order,omitempty"`
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
+	// +mapType=granular
 	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
@@ -418,6 +436,7 @@ type RelevanceObservation struct {
 	RankOrder *string `json:"rankOrder,omitempty" tf:"rank_order,omitempty"`
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
+	// +mapType=granular
 	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 
@@ -441,6 +460,7 @@ type RelevanceParameters struct {
 
 	// A list of values that should be given a different boost when they appear in the result list. For more information, refer to ValueImportanceMap.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ValuesImportanceMap map[string]*float64 `json:"valuesImportanceMap,omitempty" tf:"values_importance_map,omitempty"`
 }
 

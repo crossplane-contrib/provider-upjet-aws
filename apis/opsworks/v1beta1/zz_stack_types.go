@@ -101,6 +101,19 @@ type StackInitParameters struct {
 	// Cannot be set when vpc_id is set.
 	DefaultAvailabilityZone *string `json:"defaultAvailabilityZone,omitempty" tf:"default_availability_zone,omitempty"`
 
+	// The ARN of an IAM Instance Profile that created instances will have by default.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	DefaultInstanceProfileArn *string `json:"defaultInstanceProfileArn,omitempty" tf:"default_instance_profile_arn,omitempty"`
+
+	// Reference to a InstanceProfile in iam to populate defaultInstanceProfileArn.
+	// +kubebuilder:validation:Optional
+	DefaultInstanceProfileArnRef *v1.Reference `json:"defaultInstanceProfileArnRef,omitempty" tf:"-"`
+
+	// Selector for a InstanceProfile in iam to populate defaultInstanceProfileArn.
+	// +kubebuilder:validation:Optional
+	DefaultInstanceProfileArnSelector *v1.Selector `json:"defaultInstanceProfileArnSelector,omitempty" tf:"-"`
+
 	// Name of OS that will be installed on instances by default.
 	DefaultOs *string `json:"defaultOs,omitempty" tf:"default_os,omitempty"`
 
@@ -109,6 +122,19 @@ type StackInitParameters struct {
 
 	// Name of the SSH keypair that instances will have by default.
 	DefaultSSHKeyName *string `json:"defaultSshKeyName,omitempty" tf:"default_ssh_key_name,omitempty"`
+
+	// ID of the subnet in which instances will be created by default.
+	// Required if vpc_id is set to a VPC other than the default VPC, and forbidden if it isn't.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	DefaultSubnetID *string `json:"defaultSubnetId,omitempty" tf:"default_subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate defaultSubnetId.
+	// +kubebuilder:validation:Optional
+	DefaultSubnetIDRef *v1.Reference `json:"defaultSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate defaultSubnetId.
+	// +kubebuilder:validation:Optional
+	DefaultSubnetIDSelector *v1.Selector `json:"defaultSubnetIdSelector,omitempty" tf:"-"`
 
 	// Keyword representing the naming scheme that will be used for instance hostnames within this stack.
 	HostnameTheme *string `json:"hostnameTheme,omitempty" tf:"hostname_theme,omitempty"`
@@ -119,7 +145,21 @@ type StackInitParameters struct {
 	// The name of the stack.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ARN of an IAM role that the OpsWorks service will act as.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnRef *v1.Reference `json:"serviceRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceRoleArnSelector *v1.Selector `json:"serviceRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Boolean value controlling whether the custom cookbook settings are enabled.
@@ -127,6 +167,19 @@ type StackInitParameters struct {
 
 	// Boolean value controlling whether the standard OpsWorks security groups apply to created instances.
 	UseOpsworksSecurityGroups *bool `json:"useOpsworksSecurityGroups,omitempty" tf:"use_opsworks_security_groups,omitempty"`
+
+	// ID of the VPC that this stack belongs to.
+	// Defaults to the region's default VPC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type StackObservation struct {
@@ -195,9 +248,11 @@ type StackObservation struct {
 	StackEndpoint *string `json:"stackEndpoint,omitempty" tf:"stack_endpoint,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Boolean value controlling whether the custom cookbook settings are enabled.
@@ -318,6 +373,7 @@ type StackParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Boolean value controlling whether the custom cookbook settings are enabled.

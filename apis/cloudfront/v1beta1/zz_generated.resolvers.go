@@ -102,6 +102,84 @@ func (mg *Distribution) ResolveReferences(ctx context.Context, c client.Reader) 
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrderedCacheBehavior); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnRef,
+				Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnSelector,
+				To: reference.To{
+					List:    &FunctionList{},
+					Managed: &Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn")
+			}
+			mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.OrderedCacheBehavior[i3].FunctionAssociation[i4].FunctionArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OrderedCacheBehavior); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn),
+				Extract:      resource.ExtractParamPath("qualified_arn", true),
+				Reference:    mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef,
+				Selector:     mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnSelector,
+				To: reference.To{
+					List:    &v1beta1.FunctionList{},
+					Managed: &v1beta1.Function{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn")
+			}
+			mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.OrderedCacheBehavior[i3].LambdaFunctionAssociation[i4].LambdaArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Origin); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Origin[i3].OriginAccessControlID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Origin[i3].OriginAccessControlIDRef,
+			Selector:     mg.Spec.InitProvider.Origin[i3].OriginAccessControlIDSelector,
+			To: reference.To{
+				List:    &OriginAccessControlList{},
+				Managed: &OriginAccessControl{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Origin[i3].OriginAccessControlID")
+		}
+		mg.Spec.InitProvider.Origin[i3].OriginAccessControlID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Origin[i3].OriginAccessControlIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Origin); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Origin[i3].S3OriginConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentity),
+				Extract:      resource.ExtractParamPath("cloudfront_access_identity_path", true),
+				Reference:    mg.Spec.InitProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentityRef,
+				Selector:     mg.Spec.InitProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentitySelector,
+				To: reference.To{
+					List:    &OriginAccessIdentityList{},
+					Managed: &OriginAccessIdentity{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentity")
+			}
+			mg.Spec.InitProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentity = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Origin[i3].S3OriginConfig[i4].OriginAccessIdentityRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -131,6 +209,28 @@ func (mg *FieldLevelEncryptionConfig) ResolveReferences(ctx context.Context, c c
 				}
 				mg.Spec.ForProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items[i5].ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 				mg.Spec.ForProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items[i5].ProfileIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.QueryArgProfileConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.QueryArgProfileConfig[i3].QueryArgProfiles); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items[i5].ProfileID),
+					Extract:      resource.ExtractResourceID(),
+					Reference:    mg.Spec.InitProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items[i5].ProfileIDRef,
+					Selector:     mg.Spec.InitProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items[i5].ProfileIDSelector,
+					To: reference.To{
+						List:    &FieldLevelEncryptionProfileList{},
+						Managed: &FieldLevelEncryptionProfile{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items[i5].ProfileID")
+				}
+				mg.Spec.InitProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items[i5].ProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.QueryArgProfileConfig[i3].QueryArgProfiles[i4].Items[i5].ProfileIDRef = rsp.ResolvedReference
 
 			}
 		}
@@ -166,6 +266,26 @@ func (mg *FieldLevelEncryptionProfile) ResolveReferences(ctx context.Context, c 
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptionEntities); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.EncryptionEntities[i3].Items); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionEntities[i3].Items[i4].PublicKeyID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.EncryptionEntities[i3].Items[i4].PublicKeyIDRef,
+				Selector:     mg.Spec.InitProvider.EncryptionEntities[i3].Items[i4].PublicKeyIDSelector,
+				To: reference.To{
+					List:    &PublicKeyList{},
+					Managed: &PublicKey{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionEntities[i3].Items[i4].PublicKeyID")
+			}
+			mg.Spec.InitProvider.EncryptionEntities[i3].Items[i4].PublicKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.EncryptionEntities[i3].Items[i4].PublicKeyIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -193,6 +313,22 @@ func (mg *KeyGroup) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.Items = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.ItemRefs = mrsp.ResolvedReferences
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Items),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.ItemRefs,
+		Selector:      mg.Spec.InitProvider.ItemSelector,
+		To: reference.To{
+			List:    &PublicKeyList{},
+			Managed: &PublicKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Items")
+	}
+	mg.Spec.InitProvider.Items = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ItemRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -218,6 +354,22 @@ func (mg *MonitoringSubscription) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.DistributionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DistributionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DistributionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DistributionIDRef,
+		Selector:     mg.Spec.InitProvider.DistributionIDSelector,
+		To: reference.To{
+			List:    &DistributionList{},
+			Managed: &Distribution{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DistributionID")
+	}
+	mg.Spec.InitProvider.DistributionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DistributionIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -266,6 +418,46 @@ func (mg *RealtimeLogConfig) ResolveReferences(ctx context.Context, c client.Rea
 			}
 			mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Endpoint); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Endpoint); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArn),
+				Extract:      common.TerraformID(),
+				Reference:    mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArnRef,
+				Selector:     mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArnSelector,
+				To: reference.To{
+					List:    &v1beta12.StreamList{},
+					Managed: &v1beta12.Stream{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArn")
+			}
+			mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Endpoint[i3].KinesisStreamConfig[i4].StreamArnRef = rsp.ResolvedReference
 
 		}
 	}

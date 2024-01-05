@@ -20,7 +20,20 @@ import (
 type HostedPublicVirtualInterfaceAccepterInitParameters struct {
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Direct Connect virtual interface to accept.
+	// +crossplane:generate:reference:type=HostedPublicVirtualInterface
+	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
+
+	// Reference to a HostedPublicVirtualInterface to populate virtualInterfaceId.
+	// +kubebuilder:validation:Optional
+	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a HostedPublicVirtualInterface to populate virtualInterfaceId.
+	// +kubebuilder:validation:Optional
+	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type HostedPublicVirtualInterfaceAccepterObservation struct {
@@ -32,9 +45,11 @@ type HostedPublicVirtualInterfaceAccepterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the Direct Connect virtual interface to accept.
@@ -50,6 +65,7 @@ type HostedPublicVirtualInterfaceAccepterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Direct Connect virtual interface to accept.

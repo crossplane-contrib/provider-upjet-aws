@@ -20,7 +20,21 @@ import (
 type LocationS3InitParameters struct {
 
 	// A list of DataSync Agent ARNs with which this location will be associated.
+	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
+
+	// Amazon Resource Name (ARN) of the S3 Bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3BucketArn.
+	// +kubebuilder:validation:Optional
+	S3BucketArnRef *v1.Reference `json:"s3BucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3BucketArn.
+	// +kubebuilder:validation:Optional
+	S3BucketArnSelector *v1.Selector `json:"s3BucketArnSelector,omitempty" tf:"-"`
 
 	// Configuration block containing information for connecting to S3.
 	S3Config []S3ConfigInitParameters `json:"s3Config,omitempty" tf:"s3_config,omitempty"`
@@ -32,12 +46,14 @@ type LocationS3InitParameters struct {
 	Subdirectory *string `json:"subdirectory,omitempty" tf:"subdirectory,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LocationS3Observation struct {
 
 	// A list of DataSync Agent ARNs with which this location will be associated.
+	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
 	// Amazon Resource Name (ARN) of the DataSync Location.
@@ -59,9 +75,11 @@ type LocationS3Observation struct {
 	Subdirectory *string `json:"subdirectory,omitempty" tf:"subdirectory,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
@@ -71,6 +89,7 @@ type LocationS3Parameters struct {
 
 	// A list of DataSync Agent ARNs with which this location will be associated.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AgentArns []*string `json:"agentArns,omitempty" tf:"agent_arns,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -106,10 +125,24 @@ type LocationS3Parameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type S3ConfigInitParameters struct {
+
+	// ARN of the IAM Role used to connect to the S3 Bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate bucketAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	BucketAccessRoleArnRef *v1.Reference `json:"bucketAccessRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate bucketAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	BucketAccessRoleArnSelector *v1.Selector `json:"bucketAccessRoleArnSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigObservation struct {

@@ -157,10 +157,24 @@ type EcsTargetInitParameters struct {
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// A map of tags to assign to ecs resources.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
 	TaskCount *float64 `json:"taskCount,omitempty" tf:"task_count,omitempty"`
+
+	// The ARN of the task definition to use if the event target is an Amazon ECS cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.TaskDefinition
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TaskDefinitionArn *string `json:"taskDefinitionArn,omitempty" tf:"task_definition_arn,omitempty"`
+
+	// Reference to a TaskDefinition in ecs to populate taskDefinitionArn.
+	// +kubebuilder:validation:Optional
+	TaskDefinitionArnRef *v1.Reference `json:"taskDefinitionArnRef,omitempty" tf:"-"`
+
+	// Selector for a TaskDefinition in ecs to populate taskDefinitionArn.
+	// +kubebuilder:validation:Optional
+	TaskDefinitionArnSelector *v1.Selector `json:"taskDefinitionArnSelector,omitempty" tf:"-"`
 }
 
 type EcsTargetObservation struct {
@@ -196,6 +210,7 @@ type EcsTargetObservation struct {
 	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
 
 	// A map of tags to assign to ecs resources.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
@@ -249,6 +264,7 @@ type EcsTargetParameters struct {
 
 	// A map of tags to assign to ecs resources.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create based on the TaskDefinition. Defaults to 1.
@@ -273,24 +289,28 @@ type EcsTargetParameters struct {
 type HTTPTargetInitParameters struct {
 
 	// Enables you to specify HTTP headers to add to the request.
+	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
 	// The list of values that correspond sequentially to any path variables in your endpoint ARN (for example arn:aws:execute-api:us-east-1:123456:myapi/*/POST/pets/*).
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
 	// Represents keys/values of query string parameters that are appended to the invoked endpoint.
+	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
 type HTTPTargetObservation struct {
 
 	// Enables you to specify HTTP headers to add to the request.
+	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
 	// The list of values that correspond sequentially to any path variables in your endpoint ARN (for example arn:aws:execute-api:us-east-1:123456:myapi/*/POST/pets/*).
 	PathParameterValues []*string `json:"pathParameterValues,omitempty" tf:"path_parameter_values,omitempty"`
 
 	// Represents keys/values of query string parameters that are appended to the invoked endpoint.
+	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
@@ -298,6 +318,7 @@ type HTTPTargetParameters struct {
 
 	// Enables you to specify HTTP headers to add to the request.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	HeaderParameters map[string]*string `json:"headerParameters,omitempty" tf:"header_parameters,omitempty"`
 
 	// The list of values that correspond sequentially to any path variables in your endpoint ARN (for example arn:aws:execute-api:us-east-1:123456:myapi/*/POST/pets/*).
@@ -306,12 +327,14 @@ type HTTPTargetParameters struct {
 
 	// Represents keys/values of query string parameters that are appended to the invoked endpoint.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	QueryStringParameters map[string]*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
 type InputTransformerInitParameters struct {
 
 	// Key value pairs specified in the form of JSONPath (for example, time = $.time)
+	// +mapType=granular
 	InputPaths map[string]*string `json:"inputPaths,omitempty" tf:"input_paths,omitempty"`
 
 	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
@@ -321,6 +344,7 @@ type InputTransformerInitParameters struct {
 type InputTransformerObservation struct {
 
 	// Key value pairs specified in the form of JSONPath (for example, time = $.time)
+	// +mapType=granular
 	InputPaths map[string]*string `json:"inputPaths,omitempty" tf:"input_paths,omitempty"`
 
 	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
@@ -331,6 +355,7 @@ type InputTransformerParameters struct {
 
 	// Key value pairs specified in the form of JSONPath (for example, time = $.time)
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	InputPaths map[string]*string `json:"inputPaths,omitempty" tf:"input_paths,omitempty"`
 
 	// Template to customize data sent to the target. Must be valid JSON. To send a string value, the string value must include double quotes.g., "\"Your string goes here.\\nA new line.\""
@@ -363,9 +388,11 @@ type NetworkConfigurationInitParameters struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The subnets associated with the task or service.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -375,9 +402,11 @@ type NetworkConfigurationObservation struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The subnets associated with the task or service.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -389,10 +418,12 @@ type NetworkConfigurationParameters struct {
 
 	// The security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The subnets associated with the task or service.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
 }
 
@@ -614,6 +645,19 @@ type TargetInitParameters struct {
 	// Parameters used when you are using the rule to invoke Amazon ECS Task. Documented below. A maximum of 1 are allowed.
 	EcsTarget []EcsTargetInitParameters `json:"ecsTarget,omitempty" tf:"ecs_target,omitempty"`
 
+	// The name or ARN of the event bus to associate with the rule.
+	// If you omit this, the default event bus is used.
+	// +crossplane:generate:reference:type=Bus
+	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
+
+	// Reference to a Bus to populate eventBusName.
+	// +kubebuilder:validation:Optional
+	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bus to populate eventBusName.
+	// +kubebuilder:validation:Optional
+	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
+
 	// Parameters used when you are using the rule to invoke an API Gateway REST endpoint. Documented below. A maximum of 1 is allowed.
 	HTTPTarget []HTTPTargetInitParameters `json:"httpTarget,omitempty" tf:"http_target,omitempty"`
 
@@ -634,6 +678,31 @@ type TargetInitParameters struct {
 
 	// Parameters used when you are providing retry policies. Documented below. A maximum of 1 are allowed.
 	RetryPolicy []RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the IAM role to be used for this target when the rule is triggered. Required if ecs_target is used or target in arn is EC2 instance, Kinesis data stream, Step Functions state machine, or Event Bus in different account or region.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// The name of the rule you want to add targets to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Rule
+	Rule *string `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// Reference to a Rule in cloudwatchevents to populate rule.
+	// +kubebuilder:validation:Optional
+	RuleRef *v1.Reference `json:"ruleRef,omitempty" tf:"-"`
+
+	// Selector for a Rule in cloudwatchevents to populate rule.
+	// +kubebuilder:validation:Optional
+	RuleSelector *v1.Selector `json:"ruleSelector,omitempty" tf:"-"`
 
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	RunCommandTargets []RunCommandTargetsInitParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`

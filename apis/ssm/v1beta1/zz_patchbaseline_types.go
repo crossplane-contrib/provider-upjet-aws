@@ -142,6 +142,7 @@ type PatchBaselineInitParameters struct {
 
 	// A list of explicitly approved patches for the baseline.
 	// Cannot be specified with approval_rule.
+	// +listType=set
 	ApprovedPatches []*string `json:"approvedPatches,omitempty" tf:"approved_patches,omitempty"`
 
 	// The compliance level for approved patches.
@@ -184,6 +185,7 @@ type PatchBaselineInitParameters struct {
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
 	// A list of rejected patches.
+	// +listType=set
 	RejectedPatches []*string `json:"rejectedPatches,omitempty" tf:"rejected_patches,omitempty"`
 
 	// The action for Patch Manager to take on patches included in the rejected_patches list.
@@ -196,6 +198,7 @@ type PatchBaselineInitParameters struct {
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -208,6 +211,7 @@ type PatchBaselineObservation struct {
 
 	// A list of explicitly approved patches for the baseline.
 	// Cannot be specified with approval_rule.
+	// +listType=set
 	ApprovedPatches []*string `json:"approvedPatches,omitempty" tf:"approved_patches,omitempty"`
 
 	// The compliance level for approved patches.
@@ -256,6 +260,7 @@ type PatchBaselineObservation struct {
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
 	// A list of rejected patches.
+	// +listType=set
 	RejectedPatches []*string `json:"rejectedPatches,omitempty" tf:"rejected_patches,omitempty"`
 
 	// The action for Patch Manager to take on patches included in the rejected_patches list.
@@ -268,9 +273,11 @@ type PatchBaselineObservation struct {
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -285,6 +292,7 @@ type PatchBaselineParameters struct {
 	// A list of explicitly approved patches for the baseline.
 	// Cannot be specified with approval_rule.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ApprovedPatches []*string `json:"approvedPatches,omitempty" tf:"approved_patches,omitempty"`
 
 	// The compliance level for approved patches.
@@ -339,6 +347,7 @@ type PatchBaselineParameters struct {
 
 	// A list of rejected patches.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	RejectedPatches []*string `json:"rejectedPatches,omitempty" tf:"rejected_patches,omitempty"`
 
 	// The action for Patch Manager to take on patches included in the rejected_patches list.
@@ -354,6 +363,7 @@ type PatchBaselineParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

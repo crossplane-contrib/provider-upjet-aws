@@ -18,6 +18,48 @@ import (
 )
 
 type DefaultPatchBaselineInitParameters struct {
+
+	// ID of the patch baseline.
+	// Can be an ID or an ARN.
+	// When specifying an AWS-provided patch baseline, must be the ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.PatchBaseline
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
+
+	// Reference to a PatchBaseline in ssm to populate baselineId.
+	// +kubebuilder:validation:Optional
+	BaselineIDRef *v1.Reference `json:"baselineIdRef,omitempty" tf:"-"`
+
+	// Selector for a PatchBaseline in ssm to populate baselineId.
+	// +kubebuilder:validation:Optional
+	BaselineIDSelector *v1.Selector `json:"baselineIdSelector,omitempty" tf:"-"`
+
+	// The operating system the patch baseline applies to.
+	// Valid values are
+	// AMAZON_LINUX,
+	// AMAZON_LINUX_2,
+	// AMAZON_LINUX_2022,
+	// CENTOS,
+	// DEBIAN,
+	// MACOS,
+	// ORACLE_LINUX,
+	// RASPBIAN,
+	// REDHAT_ENTERPRISE_LINUX,
+	// ROCKY_LINUX,
+	// SUSE,
+	// UBUNTU, and
+	// WINDOWS.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.PatchBaseline
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("operating_system",false)
+	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
+
+	// Reference to a PatchBaseline in ssm to populate operatingSystem.
+	// +kubebuilder:validation:Optional
+	OperatingSystemRef *v1.Reference `json:"operatingSystemRef,omitempty" tf:"-"`
+
+	// Selector for a PatchBaseline in ssm to populate operatingSystem.
+	// +kubebuilder:validation:Optional
+	OperatingSystemSelector *v1.Selector `json:"operatingSystemSelector,omitempty" tf:"-"`
 }
 
 type DefaultPatchBaselineObservation struct {

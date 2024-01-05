@@ -19,6 +19,19 @@ import (
 
 type DomainNameConfigurationInitParameters struct {
 
+	// ARN of an AWS-managed certificate that will be used by the endpoint for the domain name. AWS Certificate Manager is the only supported source. Use the aws_acm_certificate resource to configure an ACM certificate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Reference to a Certificate in acm to populate certificateArn.
+	// +kubebuilder:validation:Optional
+	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+
+	// Selector for a Certificate in acm to populate certificateArn.
+	// +kubebuilder:validation:Optional
+	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+
 	// Endpoint type. Valid values: REGIONAL.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
@@ -88,6 +101,7 @@ type DomainNameInitParameters struct {
 	MutualTLSAuthentication []MutualTLSAuthenticationInitParameters `json:"mutualTlsAuthentication,omitempty" tf:"mutual_tls_authentication,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -109,9 +123,11 @@ type DomainNameObservation struct {
 	MutualTLSAuthentication []MutualTLSAuthenticationObservation `json:"mutualTlsAuthentication,omitempty" tf:"mutual_tls_authentication,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -132,6 +148,7 @@ type DomainNameParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

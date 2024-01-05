@@ -18,6 +18,32 @@ import (
 )
 
 type AttachmentAccepterInitParameters struct {
+
+	// The ID of the attachment.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AttachmentID *string `json:"attachmentId,omitempty" tf:"attachment_id,omitempty"`
+
+	// Reference to a VPCAttachment in networkmanager to populate attachmentId.
+	// +kubebuilder:validation:Optional
+	AttachmentIDRef *v1.Reference `json:"attachmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCAttachment in networkmanager to populate attachmentId.
+	// +kubebuilder:validation:Optional
+	AttachmentIDSelector *v1.Selector `json:"attachmentIdSelector,omitempty" tf:"-"`
+
+	// The type of attachment. Valid values can be found in the AWS Documentation
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("attachment_type",true)
+	AttachmentType *string `json:"attachmentType,omitempty" tf:"attachment_type,omitempty"`
+
+	// Reference to a VPCAttachment in networkmanager to populate attachmentType.
+	// +kubebuilder:validation:Optional
+	AttachmentTypeRef *v1.Reference `json:"attachmentTypeRef,omitempty" tf:"-"`
+
+	// Selector for a VPCAttachment in networkmanager to populate attachmentType.
+	// +kubebuilder:validation:Optional
+	AttachmentTypeSelector *v1.Selector `json:"attachmentTypeSelector,omitempty" tf:"-"`
 }
 
 type AttachmentAccepterObservation struct {

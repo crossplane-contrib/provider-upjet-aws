@@ -22,13 +22,28 @@ type SecurityProfileInitParameters struct {
 	// Specifies the description of the Security Profile.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the Security Profile.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of permissions assigned to the security profile.
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,15 +68,18 @@ type SecurityProfileObservation struct {
 	OrganizationResourceID *string `json:"organizationResourceId,omitempty" tf:"organization_resource_id,omitempty"`
 
 	// Specifies a list of permissions assigned to the security profile.
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The identifier for the Security Profile.
 	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -91,6 +109,7 @@ type SecurityProfileParameters struct {
 
 	// Specifies a list of permissions assigned to the security profile.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -100,6 +119,7 @@ type SecurityProfileParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

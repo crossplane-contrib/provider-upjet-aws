@@ -44,6 +44,7 @@ type NetworkInterfaceInitParameters_2 struct {
 	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
 
 	// One or more IPv4 prefixes assigned to the network interface.
+	// +listType=set
 	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
 
 	// Number of IPv6 addresses to assign to a network interface. You can't use this option if specifying specific ipv6_addresses. If your subnet has the AssignIpv6AddressOnCreation attribute set to true, you can specify 0 to override this setting.
@@ -56,12 +57,14 @@ type NetworkInterfaceInitParameters_2 struct {
 	IPv6AddressListEnabled *bool `json:"ipv6AddressListEnabled,omitempty" tf:"ipv6_address_list_enabled,omitempty"`
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Addresses are assigned without regard to order. You can't use this option if you're specifying ipv6_address_count.
+	// +listType=set
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
 	// Number of IPv6 prefixes that AWS automatically assigns to the network interface.
 	IPv6PrefixCount *float64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
 
 	// One or more IPv6 prefixes assigned to the network interface.
+	// +listType=set
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
 
 	// Type of network interface to create. Set to efa for Elastic Fabric Adapter. Changing interface_type will cause the resource to be destroyed and re-created.
@@ -76,15 +79,44 @@ type NetworkInterfaceInitParameters_2 struct {
 	PrivateIPListEnabled *bool `json:"privateIpListEnabled,omitempty" tf:"private_ip_list_enabled,omitempty"`
 
 	// List of private IPs to assign to the ENI without regard to order.
+	// +listType=set
 	PrivateIps []*string `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
 	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 
+	// References to SecurityGroup to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+
+	// List of security group IDs to assign to the ENI.
+	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
+	// +listType=set
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
 	// Whether to enable source destination checking for the ENI. Default true.
 	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
 
+	// Subnet ID to create the ENI in.
+	// +crossplane:generate:reference:type=Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -106,6 +138,7 @@ type NetworkInterfaceObservation_2 struct {
 	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
 
 	// One or more IPv4 prefixes assigned to the network interface.
+	// +listType=set
 	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
 
 	// Number of IPv6 addresses to assign to a network interface. You can't use this option if specifying specific ipv6_addresses. If your subnet has the AssignIpv6AddressOnCreation attribute set to true, you can specify 0 to override this setting.
@@ -118,12 +151,14 @@ type NetworkInterfaceObservation_2 struct {
 	IPv6AddressListEnabled *bool `json:"ipv6AddressListEnabled,omitempty" tf:"ipv6_address_list_enabled,omitempty"`
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Addresses are assigned without regard to order. You can't use this option if you're specifying ipv6_address_count.
+	// +listType=set
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
 	// Number of IPv6 prefixes that AWS automatically assigns to the network interface.
 	IPv6PrefixCount *float64 `json:"ipv6PrefixCount,omitempty" tf:"ipv6_prefix_count,omitempty"`
 
 	// One or more IPv6 prefixes assigned to the network interface.
+	// +listType=set
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
 
 	// Type of network interface to create. Set to efa for Elastic Fabric Adapter. Changing interface_type will cause the resource to be destroyed and re-created.
@@ -150,12 +185,14 @@ type NetworkInterfaceObservation_2 struct {
 	PrivateIPListEnabled *bool `json:"privateIpListEnabled,omitempty" tf:"private_ip_list_enabled,omitempty"`
 
 	// List of private IPs to assign to the ENI without regard to order.
+	// +listType=set
 	PrivateIps []*string `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
 	PrivateIpsCount *float64 `json:"privateIpsCount,omitempty" tf:"private_ips_count,omitempty"`
 
 	// List of security group IDs to assign to the ENI.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Whether to enable source destination checking for the ENI. Default true.
@@ -165,9 +202,11 @@ type NetworkInterfaceObservation_2 struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -183,6 +222,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// One or more IPv4 prefixes assigned to the network interface.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv4Prefixes []*string `json:"ipv4Prefixes,omitempty" tf:"ipv4_prefixes,omitempty"`
 
 	// Number of IPv6 addresses to assign to a network interface. You can't use this option if specifying specific ipv6_addresses. If your subnet has the AssignIpv6AddressOnCreation attribute set to true, you can specify 0 to override this setting.
@@ -199,6 +239,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Addresses are assigned without regard to order. You can't use this option if you're specifying ipv6_address_count.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
 
 	// Number of IPv6 prefixes that AWS automatically assigns to the network interface.
@@ -207,6 +248,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// One or more IPv6 prefixes assigned to the network interface.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPv6Prefixes []*string `json:"ipv6Prefixes,omitempty" tf:"ipv6_prefixes,omitempty"`
 
 	// Type of network interface to create. Set to efa for Elastic Fabric Adapter. Changing interface_type will cause the resource to be destroyed and re-created.
@@ -226,6 +268,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// List of private IPs to assign to the ENI without regard to order.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PrivateIps []*string `json:"privateIps,omitempty" tf:"private_ips,omitempty"`
 
 	// Number of secondary private IPs to assign to the ENI. The total number of private IPs will be 1 + private_ips_count, as a primary private IP will be assiged to an ENI by default.
@@ -250,6 +293,7 @@ type NetworkInterfaceParameters_2 struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Whether to enable source destination checking for the ENI. Default true.
@@ -271,6 +315,7 @@ type NetworkInterfaceParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

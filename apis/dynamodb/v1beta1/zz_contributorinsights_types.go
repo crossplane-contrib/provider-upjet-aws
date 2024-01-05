@@ -21,6 +21,18 @@ type ContributorInsightsInitParameters struct {
 
 	// The global secondary index name
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
+
+	// The name of the table to enable contributor insights
+	// +crossplane:generate:reference:type=Table
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type ContributorInsightsObservation struct {

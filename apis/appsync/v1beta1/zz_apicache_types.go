@@ -22,6 +22,19 @@ type APICacheInitParameters struct {
 	// Caching behavior. Valid values are FULL_REQUEST_CACHING and PER_RESOLVER_CACHING.
 	APICachingBehavior *string `json:"apiCachingBehavior,omitempty" tf:"api_caching_behavior,omitempty"`
 
+	// GraphQL API ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a GraphQLAPI in appsync to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a GraphQLAPI in appsync to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
 	// At-rest encryption flag for cache. You cannot update this setting after creation.
 	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 

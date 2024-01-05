@@ -19,7 +19,21 @@ import (
 
 type BackupInitParameters struct {
 
+	// The ID of the file system to back up. Required if backing up Lustre or Windows file systems.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta1.LustreFileSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// Reference to a LustreFileSystem in fsx to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a LustreFileSystem in fsx to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the volume to back up. Required if backing up a ONTAP Volume.
@@ -44,9 +58,11 @@ type BackupObservation struct {
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The type of the file system backup.
@@ -79,6 +95,7 @@ type BackupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the volume to back up. Required if backing up a ONTAP Volume.

@@ -133,6 +133,7 @@ type ResourceSetInitParameters struct {
 	Resources []ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -150,9 +151,11 @@ type ResourceSetObservation struct {
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -173,6 +176,7 @@ type ResourceSetParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -183,6 +187,19 @@ type ResourcesInitParameters struct {
 
 	// Recovery group ARN or cell ARN that contains this resource set.
 	ReadinessScopes []*string `json:"readinessScopes,omitempty" tf:"readiness_scopes,omitempty"`
+
+	// ARN of the resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.MetricAlarm
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a MetricAlarm in cloudwatch to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a MetricAlarm in cloudwatch to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type ResourcesObservation struct {

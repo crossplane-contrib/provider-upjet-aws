@@ -205,6 +205,19 @@ type UserHierarchyStructureInitParameters struct {
 
 	// A block that defines the hierarchy structure's levels. The hierarchy_structure block is documented below.
 	HierarchyStructure []HierarchyStructureInitParameters `json:"hierarchyStructure,omitempty" tf:"hierarchy_structure,omitempty"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 }
 
 type UserHierarchyStructureObservation struct {

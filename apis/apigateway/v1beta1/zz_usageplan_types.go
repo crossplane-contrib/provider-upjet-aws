@@ -19,6 +19,32 @@ import (
 
 type APIStagesInitParameters struct {
 
+	// API Id of the associated API stage in a usage plan.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
+	// API stage name of the associated API stage in a usage plan.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Stage
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("stage_name",false)
+	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+
+	// Reference to a Stage in apigateway to populate stage.
+	// +kubebuilder:validation:Optional
+	StageRef *v1.Reference `json:"stageRef,omitempty" tf:"-"`
+
+	// Selector for a Stage in apigateway to populate stage.
+	// +kubebuilder:validation:Optional
+	StageSelector *v1.Selector `json:"stageSelector,omitempty" tf:"-"`
+
 	// The throttling limits of the usage plan.
 	Throttle []ThrottleInitParameters `json:"throttle,omitempty" tf:"throttle,omitempty"`
 }
@@ -166,6 +192,7 @@ type UsagePlanInitParameters struct {
 	QuotaSettings []QuotaSettingsInitParameters `json:"quotaSettings,omitempty" tf:"quota_settings,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The throttling limits of the usage plan.
@@ -196,9 +223,11 @@ type UsagePlanObservation struct {
 	QuotaSettings []QuotaSettingsObservation `json:"quotaSettings,omitempty" tf:"quota_settings,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The throttling limits of the usage plan.
@@ -234,6 +263,7 @@ type UsagePlanParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The throttling limits of the usage plan.

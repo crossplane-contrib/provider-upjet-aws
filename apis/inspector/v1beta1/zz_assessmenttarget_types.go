@@ -21,6 +21,19 @@ type AssessmentTargetInitParameters struct {
 
 	// The name of the assessment target.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Inspector Resource Group Amazon Resource Name (ARN) stating tags for instance matching. If not specified, all EC2 instances in the current AWS account and region are included in the assessment target.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/inspector/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceGroupArn *string `json:"resourceGroupArn,omitempty" tf:"resource_group_arn,omitempty"`
+
+	// Reference to a ResourceGroup in inspector to populate resourceGroupArn.
+	// +kubebuilder:validation:Optional
+	ResourceGroupArnRef *v1.Reference `json:"resourceGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in inspector to populate resourceGroupArn.
+	// +kubebuilder:validation:Optional
+	ResourceGroupArnSelector *v1.Selector `json:"resourceGroupArnSelector,omitempty" tf:"-"`
 }
 
 type AssessmentTargetObservation struct {

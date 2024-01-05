@@ -25,8 +25,35 @@ type TransitGatewayPeeringAttachmentInitParameters struct {
 	// Region of EC2 Transit Gateway to peer with.
 	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
 
+	// Identifier of EC2 Transit Gateway to peer with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
+
+	// Reference to a TransitGateway in ec2 to populate peerTransitGatewayId.
+	// +kubebuilder:validation:Optional
+	PeerTransitGatewayIDRef *v1.Reference `json:"peerTransitGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGateway in ec2 to populate peerTransitGatewayId.
+	// +kubebuilder:validation:Optional
+	PeerTransitGatewayIDSelector *v1.Selector `json:"peerTransitGatewayIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifier of EC2 Transit Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type TransitGatewayPeeringAttachmentObservation struct {
@@ -44,9 +71,11 @@ type TransitGatewayPeeringAttachmentObservation struct {
 	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Identifier of EC2 Transit Gateway.
@@ -84,6 +113,7 @@ type TransitGatewayPeeringAttachmentParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Identifier of EC2 Transit Gateway.

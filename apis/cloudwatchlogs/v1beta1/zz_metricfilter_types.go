@@ -19,6 +19,18 @@ import (
 
 type MetricFilterInitParameters struct {
 
+	// The name of the log group to associate the metric filter with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
+
 	// A block defining collection of information needed to define how metric data gets emitted. See below.
 	MetricTransformation []MetricTransformationInitParameters `json:"metricTransformation,omitempty" tf:"metric_transformation,omitempty"`
 
@@ -79,6 +91,7 @@ type MetricTransformationInitParameters struct {
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 
 	// Map of fields to use as dimensions for the metric. Up to 3 dimensions are allowed. Conflicts with default_value.
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)
@@ -100,6 +113,7 @@ type MetricTransformationObservation struct {
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 
 	// Map of fields to use as dimensions for the metric. Up to 3 dimensions are allowed. Conflicts with default_value.
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)
@@ -123,6 +137,7 @@ type MetricTransformationParameters struct {
 
 	// Map of fields to use as dimensions for the metric. Up to 3 dimensions are allowed. Conflicts with default_value.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Dimensions map[string]*string `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// The name of the CloudWatch metric to which the monitored log information should be published (e.g., ErrorCount)

@@ -10,19 +10,15 @@ import (
 	"reflect"
 	"unsafe"
 
-	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
-
-	tfawsbase "github.com/hashicorp/aws-sdk-go-base/v2"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-aws/xpprovider"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"k8s.io/apimachinery/pkg/types"
-
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
+	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/upbound/provider-aws/apis/v1beta1"
@@ -39,10 +35,6 @@ const (
 	keyRoleArn                   = "role_arn"
 	keySessionName               = "session_name"
 	keyWebIdentityTokenFile      = "web_identity_token_file"
-	keyAssumeRole                = "assume_role"
-	keyTags                      = "tags"
-	keyTransitiveTagKeys         = "transitive_tag_keys"
-	keyExternalID                = "external_id"
 	keySkipCredsValidation       = "skip_credentials_validation"
 	keyS3UsePathStyle            = "s3_use_path_style"
 	keySkipMetadataApiCheck      = "skip_metadata_api_check"
@@ -58,6 +50,7 @@ type SetupConfig struct {
 	TerraformVersion      *string
 	DefaultScheduler      terraform.ProviderScheduler
 	TerraformProvider     *schema.Provider
+	AWSClient             *xpprovider.AWSClient
 }
 
 func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
@@ -75,9 +68,19 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			},
 			Scheduler: config.DefaultScheduler,
 		}
+		awsCfg, err := getAWSConfig(ctx, c, mg)
+		if err != nil {
+			return terraform.Setup{}, errors.Wrap(err, "cannot get aws config")
+		} else if awsCfg == nil {
+			return terraform.Setup{}, errors.Wrap(err, "obtained aws config cannot be nil")
+		}
+		creds, err := awsCfg.Credentials.Retrieve(ctx)
+		if err != nil {
+			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
+		}
 		account := "000000000"
 		if !pc.Spec.SkipCredsValidation {
-			account, err = getAccountId(ctx, c, mg)
+			account, err = getAccountId(ctx, awsCfg, creds)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
 			}
@@ -87,8 +90,8 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			keyAccountId: account,
 		}
 
-		if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
-			err = DefaultTerraformSetupBuilder(ctx, c, mg, pc, &ps)
+		if len(pc.Spec.AssumeRoleChain) > 0 || pc.Spec.Endpoint != nil {
+			err = DefaultTerraformSetupBuilder(ctx, pc, &ps, awsCfg, creds)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
 			}
@@ -98,40 +101,26 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 				ps.Scheduler = terraform.NewWorkspaceProviderScheduler(log, terraform.WithNativeProviderPath(*config.NativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*config.NativeProviderSource))
 			}
 		} else {
-			err = pushDownTerraformSetupBuilder(ctx, c, mg, pc, &ps)
+			err = pushDownTerraformSetupBuilder(ctx, c, pc, &ps, awsCfg)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
 			}
 		}
 
-		awsConfig, err := configureNoForkAWSClient(ctx, c, mg, pc, &ps)
-		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "could not configure no-fork AWS client")
+		if config.TerraformProvider == nil {
+			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
-		p := config.TerraformProvider.Meta()
-		tfClient, diag := awsConfig.GetClient(ctx, &xpprovider.AWSClient{
-			// #nosec G103
-			ServicePackages: (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p).Pointer())).ServicePackages,
-		})
-		if diag != nil && diag.HasError() {
-			return terraform.Setup{}, errors.Errorf("failed to configure the AWS client: %v", diag)
-		}
-		ps.Meta = tfClient
 
-		return ps, nil
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config), "could not configure no-fork AWS client")
 	}
 }
 
-func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error { //nolint:gocyclo
-	if len(pc.Spec.AssumeRoleChain) > 1 || pc.Spec.Endpoint != nil {
+func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, pc *v1beta1.ProviderConfig, ps *terraform.Setup, cfg *aws.Config) error { //nolint:gocyclo
+	if len(pc.Spec.AssumeRoleChain) > 0 || pc.Spec.Endpoint != nil {
 		return errors.New("shared scheduler cannot be used because the length of assume role chain array " +
-			"is more than 1 or endpoint configuration is not nil")
+			"is more than 0 or endpoint configuration is not nil")
 	}
 
-	cfg, err := getAWSConfig(ctx, c, mg)
-	if err != nil {
-		return errors.Wrap(err, "cannot get AWS config")
-	}
 	ps.Configuration = map[string]any{
 		keyRegion: cfg.Region,
 	}
@@ -141,23 +130,29 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 		if pc.Spec.Credentials.WebIdentity == nil {
 			return errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
 		}
-		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
+		webIdentityConfig := map[string]any{
 			keyRoleArn:              aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
 			keyWebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
 		}
 		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
-			ps.Configuration[keySessionName] = pc.Spec.Credentials.WebIdentity.RoleSessionName
+			webIdentityConfig[keySessionName] = pc.Spec.Credentials.WebIdentity.RoleSessionName
+		}
+		ps.Configuration[keyAssumeRoleWithWebIdentity] = []any{
+			webIdentityConfig,
 		}
 	case authKeyUpbound:
 		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
 			return errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
 		}
-		ps.Configuration[keyAssumeRoleWithWebIdentity] = map[string]any{
+		webIdentityConfig := map[string]any{
 			keyRoleArn:              aws.ToString(pc.Spec.Credentials.Upbound.WebIdentity.RoleARN),
 			keyWebIdentityTokenFile: upboundProviderIdentityTokenFile,
 		}
 		if pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName != "" {
-			ps.Configuration[keySessionName] = pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName
+			webIdentityConfig[keySessionName] = pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName
+		}
+		ps.Configuration[keyAssumeRoleWithWebIdentity] = []any{
+			webIdentityConfig,
 		}
 	case authKeySecret:
 		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
@@ -179,27 +174,10 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, mg reso
 			keySessionToken:    creds.SessionToken,
 		}
 	}
-	if len(pc.Spec.AssumeRoleChain) != 0 {
-		ps.Configuration[keyAssumeRole] = map[string]any{
-			keyRoleArn:           pc.Spec.AssumeRoleChain[0].RoleARN,
-			keyTags:              pc.Spec.AssumeRoleChain[0].Tags,
-			keyTransitiveTagKeys: pc.Spec.AssumeRoleChain[0].TransitiveTagKeys,
-			keyExternalID:        pc.Spec.AssumeRoleChain[0].ExternalID,
-		}
-	}
 	return nil
 }
 
-func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
-	cfg, err := getAWSConfig(ctx, c, mg)
-	if err != nil {
-		return errors.Wrap(err, "cannot get AWS config")
-	}
-	creds, err := cfg.Credentials.Retrieve(ctx)
-	if err != nil {
-		return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
-	}
-
+func DefaultTerraformSetupBuilder(_ context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup, cfg *aws.Config, creds aws.Credentials) error {
 	ps.Configuration = map[string]any{
 		keyRegion:               cfg.Region,
 		keyAccessKeyID:          creds.AccessKeyID,
@@ -215,7 +193,7 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 	if pc.Spec.Endpoint != nil {
 		if pc.Spec.Endpoint.URL.Static != nil {
 			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
-				return errors.Wrap(err, "endpoint is wrong")
+				return errors.New("endpoint.url.static cannot be empty")
 			} else {
 				endpoints := make(map[string]string)
 				for _, service := range pc.Spec.Endpoint.Services {
@@ -225,18 +203,10 @@ func DefaultTerraformSetupBuilder(ctx context.Context, c client.Client, mg resou
 			}
 		}
 	}
-	return err
+	return nil
 }
 
-func getAccountId(ctx context.Context, c client.Client, mg resource.Managed) (string, error) {
-	cfg, err := getAWSConfig(ctx, c, mg)
-	if err != nil {
-		return "", errors.Wrap(err, "cannot get AWS config")
-	}
-	creds, err := cfg.Credentials.Retrieve(ctx)
-	if err != nil {
-		return "", errors.Wrap(err, "failed to retrieve aws credentials from aws config")
-	}
+func getAccountId(ctx context.Context, cfg *aws.Config, creds aws.Credentials) (string, error) {
 	identity, err := GlobalCallerIdentityCache.GetCallerIdentity(ctx, *cfg, creds)
 	if err != nil {
 		return "", errors.Wrap(err, "cannot get the caller identity")
@@ -255,120 +225,17 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 	return cfg, nil
 }
 
-func configureNoForkAWSClient(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig, ps *terraform.Setup) (xpprovider.AWSConfig, error) { //nolint:gocyclo
-	// Terraform AWS provider does not support role chaining via provider configuration
-	// https://github.com/hashicorp/terraform-provider-aws/issues/22728
-	if len(pc.Spec.AssumeRoleChain) > 1 {
-		return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client because the length of assume role chain array " +
-			"is more than 1")
+func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
+	p := *config.TerraformProvider
+	// TODO: use context.WithoutCancel(ctx) after switching to Go >=1.21
+	diag := p.Configure(context.TODO(), &tfsdk.ResourceConfig{ //nolint:contextcheck
+		Config: ps.Configuration,
+	})
+	if diag != nil && diag.HasError() {
+		return errors.Errorf("failed to configure the provider: %v", diag)
 	}
-
-	cfg, err := getAWSConfig(ctx, c, mg)
-	if err != nil {
-		return xpprovider.AWSConfig{}, errors.Wrap(err, "cannot get AWS config")
-	}
-
-	awsConfig := xpprovider.AWSConfig{
-		Region:           cfg.Region,
-		TerraformVersion: ps.Version,
-	}
-
-	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
-	case authKeyWebIdentity:
-		if pc.Spec.Credentials.WebIdentity == nil {
-			return xpprovider.AWSConfig{}, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
-		}
-		awsConfig.AssumeRoleWithWebIdentity = &tfawsbase.AssumeRoleWithWebIdentity{
-			RoleARN:              aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
-			WebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
-		}
-		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
-			awsConfig.AssumeRoleWithWebIdentity.SessionName = pc.Spec.Credentials.WebIdentity.RoleSessionName
-		}
-	case authKeyUpbound:
-		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
-			return xpprovider.AWSConfig{}, errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
-		}
-		awsConfig.AssumeRoleWithWebIdentity = &tfawsbase.AssumeRoleWithWebIdentity{
-			RoleARN:              aws.ToString(pc.Spec.Credentials.Upbound.WebIdentity.RoleARN),
-			WebIdentityTokenFile: upboundProviderIdentityTokenFile,
-		}
-
-		if pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName != "" {
-			awsConfig.AssumeRoleWithWebIdentity.SessionName = pc.Spec.Credentials.WebIdentity.RoleSessionName
-		}
-	case authKeySecret:
-		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
-		if err != nil {
-			return xpprovider.AWSConfig{}, errors.Wrap(err, "cannot get credentials")
-		}
-		cfg, err = UseProviderSecret(ctx, data, DefaultSection, cfg.Region)
-		if err != nil {
-			return xpprovider.AWSConfig{}, errors.Wrap(err, errAWSConfig)
-		}
-		creds, err := cfg.Credentials.Retrieve(ctx)
-		if err != nil {
-			return xpprovider.AWSConfig{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
-		}
-
-		awsConfig.Region = cfg.Region
-		awsConfig.AccessKey = creds.AccessKeyID
-		awsConfig.SecretKey = creds.SecretAccessKey
-		awsConfig.Token = creds.SessionToken
-
-	}
-	if len(pc.Spec.AssumeRoleChain) != 0 {
-		if pc.Spec.AssumeRoleChain[0].RoleARN == nil {
-			return xpprovider.AWSConfig{}, errors.New("cannot configure no-fork client: RoleARN cannot be nil in spec.AssumeRoleChain[0]")
-		}
-		awsConfig.AssumeRole = &tfawsbase.AssumeRole{
-			RoleARN:           *pc.Spec.AssumeRoleChain[0].RoleARN,
-			TransitiveTagKeys: pc.Spec.AssumeRoleChain[0].TransitiveTagKeys,
-		}
-
-		if pc.Spec.AssumeRoleChain[0].ExternalID != nil {
-			awsConfig.AssumeRole.ExternalID = *pc.Spec.AssumeRoleChain[0].ExternalID
-		}
-
-		tags := make(map[string]string)
-		for i, tag := range pc.Spec.AssumeRoleChain[0].Tags {
-			if tag.Key == nil || tag.Value == nil {
-				return xpprovider.AWSConfig{}, errors.Errorf("cannot configure no-fork client: tag key or value cannot be nil in spec.AssumeRoleChain[0].Tags[%d]", i)
-			}
-			tags[*tag.Key] = *tag.Value
-		}
-
-		awsConfig.AssumeRole.Tags = tags
-	}
-
-	if pc.Spec.Endpoint != nil {
-		if pc.Spec.Endpoint.URL.Static != nil {
-			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
-				return xpprovider.AWSConfig{}, errors.New("endpoint URL cannot be empty")
-			} else {
-				awsConfig.Endpoints = make(map[string]string)
-				for _, service := range pc.Spec.Endpoint.Services {
-					awsConfig.Endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
-				}
-			}
-		} else if pc.Spec.Endpoint.URL.Dynamic != nil && cfg.EndpointResolverWithOptions != nil {
-			for _, service := range pc.Spec.Endpoint.Services {
-				svcEndpoint, err := cfg.EndpointResolverWithOptions.ResolveEndpoint(service, cfg.Region, nil)
-				if err != nil {
-					return xpprovider.AWSConfig{}, errors.Wrapf(err, "cannot resolve dynamic endpoint URL for AWS service: %s", service)
-				}
-				awsConfig.Endpoints[service] = svcEndpoint.URL
-			}
-		}
-	}
-
-	awsConfig.SkipCredsValidation = pc.Spec.SkipCredsValidation
-	awsConfig.S3UsePathStyle = pc.Spec.S3UsePathStyle
-	awsConfig.SkipRegionValidation = pc.Spec.SkipRegionValidation
-	if pc.Spec.SkipMetadataApiCheck {
-		awsConfig.EC2MetadataServiceEnableState = imds.ClientDisabled
-	}
-	awsConfig.SkipRequestingAccountId = pc.Spec.SkipReqAccountId
-
-	return awsConfig, nil
+	ps.Meta = p.Meta()
+	// #nosec G103
+	(*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(ps.Meta).Pointer())).ServicePackages = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(config.AWSClient).Pointer())).ServicePackages
+	return nil
 }

@@ -26,6 +26,7 @@ type ObjectCopyGrantInitParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of permissions to grant to grantee. Valid values are READ, READ_ACP, WRITE_ACP, FULL_CONTROL.
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// - Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
@@ -44,6 +45,7 @@ type ObjectCopyGrantObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of permissions to grant to grantee. Valid values are READ, READ_ACP, WRITE_ACP, FULL_CONTROL.
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// - Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
@@ -65,6 +67,7 @@ type ObjectCopyGrantParameters struct {
 
 	// List of permissions to grant to grantee. Valid values are READ, READ_ACP, WRITE_ACP, FULL_CONTROL.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
 
 	// - Type of grantee. Valid values are CanonicalUser, Group, and AmazonCustomerByEmail.
@@ -138,6 +141,7 @@ type ObjectCopyInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
@@ -174,6 +178,7 @@ type ObjectCopyInitParameters struct {
 	TaggingDirective *string `json:"taggingDirective,omitempty" tf:"tagging_directive,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a target URL for website redirect.
@@ -254,6 +259,7 @@ type ObjectCopyObservation struct {
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
@@ -296,9 +302,11 @@ type ObjectCopyObservation struct {
 	TaggingDirective *string `json:"taggingDirective,omitempty" tf:"tagging_directive,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Version ID of the newly created copy.
@@ -403,6 +411,7 @@ type ObjectCopyParameters struct {
 
 	// Map of keys/values to provision metadata (will be automatically prefixed by x-amz-meta-, note that only lowercase label are currently supported by the AWS Go API).
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request. Valid values are COPY and REPLACE.
@@ -460,6 +469,7 @@ type ObjectCopyParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a target URL for website redirect.

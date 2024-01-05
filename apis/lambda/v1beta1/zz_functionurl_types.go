@@ -23,15 +23,19 @@ type CorsInitParameters struct {
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
 	// The HTTP headers that origins can include in requests to the function URL. For example: ["date", "keep-alive", "x-custom-header"].
+	// +listType=set
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
 	// The HTTP methods that are allowed when calling the function URL. For example: ["GET", "POST", "DELETE"], or the wildcard character (["*"]).
+	// +listType=set
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
 	// The origins that can access the function URL. You can list any number of specific origins (or the wildcard character ("*")), separated by a comma. For example: ["https://www.example.com", "http://localhost:60905"].
+	// +listType=set
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
 	// The HTTP headers in your function response that you want to expose to origins that call the function URL.
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
@@ -44,15 +48,19 @@ type CorsObservation struct {
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
 	// The HTTP headers that origins can include in requests to the function URL. For example: ["date", "keep-alive", "x-custom-header"].
+	// +listType=set
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
 	// The HTTP methods that are allowed when calling the function URL. For example: ["GET", "POST", "DELETE"], or the wildcard character (["*"]).
+	// +listType=set
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
 	// The origins that can access the function URL. You can list any number of specific origins (or the wildcard character ("*")), separated by a comma. For example: ["https://www.example.com", "http://localhost:60905"].
+	// +listType=set
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
 	// The HTTP headers in your function response that you want to expose to origins that call the function URL.
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
@@ -67,18 +75,22 @@ type CorsParameters struct {
 
 	// The HTTP headers that origins can include in requests to the function URL. For example: ["date", "keep-alive", "x-custom-header"].
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
 	// The HTTP methods that are allowed when calling the function URL. For example: ["GET", "POST", "DELETE"], or the wildcard character (["*"]).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
 	// The origins that can access the function URL. You can list any number of specific origins (or the wildcard character ("*")), separated by a comma. For example: ["https://www.example.com", "http://localhost:60905"].
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
 	// The HTTP headers in your function response that you want to expose to origins that call the function URL.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// The maximum amount of time, in seconds, that web browsers can cache results of a preflight request. By default, this is set to 0, which means that the browser doesn't cache results. The maximum value is 86400.
@@ -93,6 +105,18 @@ type FunctionURLInitParameters struct {
 
 	// The cross-origin resource sharing (CORS) settings for the function URL. Documented below.
 	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// The name (or ARN) of the Lambda function.
+	// +crossplane:generate:reference:type=Function
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// Reference to a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+
+	// Selector for a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
 	// Determines how the Lambda function responds to an invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM. See more in Configuring a Lambda function to stream responses.
 	InvokeMode *string `json:"invokeMode,omitempty" tf:"invoke_mode,omitempty"`

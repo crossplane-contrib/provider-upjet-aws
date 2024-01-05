@@ -146,6 +146,7 @@ type DefaultSpaceSettingsInitParameters struct {
 	KernelGatewayAppSettings []KernelGatewayAppSettingsInitParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 }
 
@@ -161,6 +162,7 @@ type DefaultSpaceSettingsObservation struct {
 	KernelGatewayAppSettings []KernelGatewayAppSettingsObservation `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 }
 
@@ -180,6 +182,7 @@ type DefaultSpaceSettingsParameters struct {
 
 	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 }
 
@@ -187,6 +190,19 @@ type DefaultUserSettingsInitParameters struct {
 
 	// The Canvas app settings. See Canvas App Settings below.
 	CanvasAppSettings []CanvasAppSettingsInitParameters `json:"canvasAppSettings,omitempty" tf:"canvas_app_settings,omitempty"`
+
+	// The execution role ARN for the user.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
+	// Reference to a Role in iam to populate executionRole.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleRef *v1.Reference `json:"executionRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate executionRole.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleSelector *v1.Selector `json:"executionRoleSelector,omitempty" tf:"-"`
 
 	// The Jupyter server's app settings. See Jupyter Server App Settings below.
 	JupyterServerAppSettings []DefaultUserSettingsJupyterServerAppSettingsInitParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
@@ -201,6 +217,7 @@ type DefaultUserSettingsInitParameters struct {
 	RStudioServerProAppSettings []RStudioServerProAppSettingsInitParameters `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
 
 	// A list of security group IDs that will be attached to the user.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The sharing settings. See Sharing Settings below.
@@ -238,6 +255,7 @@ type DefaultUserSettingsJupyterServerAppSettingsInitParameters struct {
 	DefaultResourceSpec []JupyterServerAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -250,6 +268,7 @@ type DefaultUserSettingsJupyterServerAppSettingsObservation struct {
 	DefaultResourceSpec []JupyterServerAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -265,6 +284,7 @@ type DefaultUserSettingsJupyterServerAppSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -326,6 +346,7 @@ type DefaultUserSettingsKernelGatewayAppSettingsInitParameters struct {
 	DefaultResourceSpec []DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -338,6 +359,7 @@ type DefaultUserSettingsKernelGatewayAppSettingsObservation struct {
 	DefaultResourceSpec []DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -353,6 +375,7 @@ type DefaultUserSettingsKernelGatewayAppSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -377,6 +400,7 @@ type DefaultUserSettingsObservation struct {
 	RStudioServerProAppSettings []RStudioServerProAppSettingsObservation `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
 
 	// A list of security group IDs that will be attached to the user.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The sharing settings. See Sharing Settings below.
@@ -424,6 +448,7 @@ type DefaultUserSettingsParameters struct {
 
 	// A list of security group IDs that will be attached to the user.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The sharing settings. See Sharing Settings below.
@@ -457,11 +482,51 @@ type DomainInitParameters struct {
 	// The domain settings. See Domain Settings below.
 	DomainSettings []DomainSettingsInitParameters `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
+	// The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the domain.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See Retention Policy below.
 	RetentionPolicy []RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// The VPC subnets that Studio uses for communication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type DomainObservation struct {
@@ -508,12 +573,15 @@ type DomainObservation struct {
 	SingleSignOnManagedApplicationInstanceID *string `json:"singleSignOnManagedApplicationInstanceId,omitempty" tf:"single_sign_on_managed_application_instance_id,omitempty"`
 
 	// The VPC subnets that Studio uses for communication.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The domain's URL.
@@ -587,10 +655,12 @@ type DomainParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
@@ -616,6 +686,7 @@ type DomainSettingsInitParameters struct {
 	RStudioServerProDomainSettings []RStudioServerProDomainSettingsInitParameters `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 }
 
@@ -628,6 +699,7 @@ type DomainSettingsObservation struct {
 	RStudioServerProDomainSettings []RStudioServerProDomainSettingsObservation `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 }
 
@@ -643,6 +715,7 @@ type DomainSettingsParameters struct {
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 }
 
@@ -723,6 +796,7 @@ type JupyterServerAppSettingsInitParameters struct {
 	DefaultResourceSpec []DefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -735,6 +809,7 @@ type JupyterServerAppSettingsObservation struct {
 	DefaultResourceSpec []DefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -750,10 +825,36 @@ type JupyterServerAppSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
 type KernelGatewayAppSettingsCustomImageInitParameters struct {
+
+	// The name of the App Image Config.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.AppImageConfig
+	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+
+	// Reference to a AppImageConfig in sagemaker to populate appImageConfigName.
+	// +kubebuilder:validation:Optional
+	AppImageConfigNameRef *v1.Reference `json:"appImageConfigNameRef,omitempty" tf:"-"`
+
+	// Selector for a AppImageConfig in sagemaker to populate appImageConfigName.
+	// +kubebuilder:validation:Optional
+	AppImageConfigNameSelector *v1.Selector `json:"appImageConfigNameSelector,omitempty" tf:"-"`
+
+	// The name of the Custom Image.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.ImageVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("image_name",false)
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// Reference to a ImageVersion in sagemaker to populate imageName.
+	// +kubebuilder:validation:Optional
+	ImageNameRef *v1.Reference `json:"imageNameRef,omitempty" tf:"-"`
+
+	// Selector for a ImageVersion in sagemaker to populate imageName.
+	// +kubebuilder:validation:Optional
+	ImageNameSelector *v1.Selector `json:"imageNameSelector,omitempty" tf:"-"`
 
 	// The version number of the Custom Image.
 	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
@@ -863,6 +964,7 @@ type KernelGatewayAppSettingsInitParameters struct {
 	DefaultResourceSpec []KernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -875,6 +977,7 @@ type KernelGatewayAppSettingsObservation struct {
 	DefaultResourceSpec []KernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
@@ -890,6 +993,7 @@ type KernelGatewayAppSettingsParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 

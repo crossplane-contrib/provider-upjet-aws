@@ -25,13 +25,39 @@ type DBSnapshotCopyInitParameters struct {
 	// The Destination region to place snapshot copy.
 	DestinationRegion *string `json:"destinationRegion,omitempty" tf:"destination_region,omitempty"`
 
+	// KMS key ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// The name of an option group to associate with the copy of the snapshot.
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
 	// he URL that contains a Signature Version 4 signed request.
 	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
 
+	// Snapshot identifier of the source snapshot.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Snapshot
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("db_snapshot_arn",true)
+	SourceDBSnapshotIdentifier *string `json:"sourceDbSnapshotIdentifier,omitempty" tf:"source_db_snapshot_identifier,omitempty"`
+
+	// Reference to a Snapshot in rds to populate sourceDbSnapshotIdentifier.
+	// +kubebuilder:validation:Optional
+	SourceDBSnapshotIdentifierRef *v1.Reference `json:"sourceDbSnapshotIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Snapshot in rds to populate sourceDbSnapshotIdentifier.
+	// +kubebuilder:validation:Optional
+	SourceDBSnapshotIdentifierSelector *v1.Selector `json:"sourceDbSnapshotIdentifierSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The external custom Availability Zone.
@@ -99,9 +125,11 @@ type DBSnapshotCopyObservation struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The external custom Availability Zone.
@@ -166,6 +194,7 @@ type DBSnapshotCopyParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The external custom Availability Zone.

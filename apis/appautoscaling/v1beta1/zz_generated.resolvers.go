@@ -128,6 +128,54 @@ func (mg *ScheduledAction) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.ServiceNamespace = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceNamespaceRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      resource.ExtractParamPath("resource_id", false),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &TargetList{},
+			Managed: &Target{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScalableDimension),
+		Extract:      resource.ExtractParamPath("scalable_dimension", false),
+		Reference:    mg.Spec.InitProvider.ScalableDimensionRef,
+		Selector:     mg.Spec.InitProvider.ScalableDimensionSelector,
+		To: reference.To{
+			List:    &TargetList{},
+			Managed: &Target{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ScalableDimension")
+	}
+	mg.Spec.InitProvider.ScalableDimension = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScalableDimensionRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceNamespace),
+		Extract:      resource.ExtractParamPath("service_namespace", false),
+		Reference:    mg.Spec.InitProvider.ServiceNamespaceRef,
+		Selector:     mg.Spec.InitProvider.ServiceNamespaceSelector,
+		To: reference.To{
+			List:    &TargetList{},
+			Managed: &Target{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceNamespace")
+	}
+	mg.Spec.InitProvider.ServiceNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceNamespaceRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -153,6 +201,22 @@ func (mg *Target) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
 
 	return nil
 }

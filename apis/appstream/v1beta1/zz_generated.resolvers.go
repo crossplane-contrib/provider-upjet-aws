@@ -58,6 +58,40 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
+		Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IAMRoleArn")
+	}
+	mg.Spec.InitProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IAMRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCConfig); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SubnetIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs,
+			Selector:      mg.Spec.InitProvider.VPCConfig[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCConfig[i3].SubnetIds")
+		}
+		mg.Spec.InitProvider.VPCConfig[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }
@@ -144,6 +178,40 @@ func (mg *ImageBuilder) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 		mg.Spec.ForProvider.VPCConfig[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.IAMRoleArnRef,
+		Selector:     mg.Spec.InitProvider.IAMRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IAMRoleArn")
+	}
+	mg.Spec.InitProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IAMRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCConfig); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SubnetIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs,
+			Selector:      mg.Spec.InitProvider.VPCConfig[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCConfig[i3].SubnetIds")
+		}
+		mg.Spec.InitProvider.VPCConfig[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
 
 	}
 

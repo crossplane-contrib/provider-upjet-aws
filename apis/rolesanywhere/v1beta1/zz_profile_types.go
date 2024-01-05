@@ -26,6 +26,7 @@ type ProfileInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A list of managed policy ARNs that apply to the vended session credentials.
+	// +listType=set
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
 
 	// The name of the Profile.
@@ -34,10 +35,25 @@ type ProfileInitParameters struct {
 	// Specifies whether instance properties are required in CreateSession requests with this profile.
 	RequireInstanceProperties *bool `json:"requireInstanceProperties,omitempty" tf:"require_instance_properties,omitempty"`
 
+	// A list of IAM roles that this profile can assume
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +listType=set
+	RoleArns []*string `json:"roleArns,omitempty" tf:"role_arns,omitempty"`
+
+	// References to Role in iam to populate roleArns.
+	// +kubebuilder:validation:Optional
+	RoleArnsRefs []v1.Reference `json:"roleArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Role in iam to populate roleArns.
+	// +kubebuilder:validation:Optional
+	RoleArnsSelector *v1.Selector `json:"roleArnsSelector,omitempty" tf:"-"`
+
 	// A session policy that applies to the trust boundary of the vended session credentials.
 	SessionPolicy *string `json:"sessionPolicy,omitempty" tf:"session_policy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -56,6 +72,7 @@ type ProfileObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of managed policy ARNs that apply to the vended session credentials.
+	// +listType=set
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
 
 	// The name of the Profile.
@@ -65,15 +82,18 @@ type ProfileObservation struct {
 	RequireInstanceProperties *bool `json:"requireInstanceProperties,omitempty" tf:"require_instance_properties,omitempty"`
 
 	// A list of IAM roles that this profile can assume
+	// +listType=set
 	RoleArns []*string `json:"roleArns,omitempty" tf:"role_arns,omitempty"`
 
 	// A session policy that applies to the trust boundary of the vended session credentials.
 	SessionPolicy *string `json:"sessionPolicy,omitempty" tf:"session_policy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -89,6 +109,7 @@ type ProfileParameters struct {
 
 	// A list of managed policy ARNs that apply to the vended session credentials.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
 
 	// The name of the Profile.
@@ -108,6 +129,7 @@ type ProfileParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	RoleArns []*string `json:"roleArns,omitempty" tf:"role_arns,omitempty"`
 
 	// References to Role in iam to populate roleArns.
@@ -124,6 +146,7 @@ type ProfileParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

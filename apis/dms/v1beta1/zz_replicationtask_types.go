@@ -28,8 +28,34 @@ type ReplicationTaskInitParameters struct {
 	// The migration type. Can be one of full-load | cdc | full-load-and-cdc.
 	MigrationType *string `json:"migrationType,omitempty" tf:"migration_type,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the replication instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.ReplicationInstance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("replication_instance_arn",true)
+	ReplicationInstanceArn *string `json:"replicationInstanceArn,omitempty" tf:"replication_instance_arn,omitempty"`
+
+	// Reference to a ReplicationInstance in dms to populate replicationInstanceArn.
+	// +kubebuilder:validation:Optional
+	ReplicationInstanceArnRef *v1.Reference `json:"replicationInstanceArnRef,omitempty" tf:"-"`
+
+	// Selector for a ReplicationInstance in dms to populate replicationInstanceArn.
+	// +kubebuilder:validation:Optional
+	ReplicationInstanceArnSelector *v1.Selector `json:"replicationInstanceArnSelector,omitempty" tf:"-"`
+
 	// An escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
 	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
+
+	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
+	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
+
+	// Reference to a Endpoint in dms to populate sourceEndpointArn.
+	// +kubebuilder:validation:Optional
+	SourceEndpointArnRef *v1.Reference `json:"sourceEndpointArnRef,omitempty" tf:"-"`
+
+	// Selector for a Endpoint in dms to populate sourceEndpointArn.
+	// +kubebuilder:validation:Optional
+	SourceEndpointArnSelector *v1.Selector `json:"sourceEndpointArnSelector,omitempty" tf:"-"`
 
 	// Whether to run or stop the replication task.
 	StartReplicationTask *bool `json:"startReplicationTask,omitempty" tf:"start_replication_task,omitempty"`
@@ -38,7 +64,21 @@ type ReplicationTaskInitParameters struct {
 	TableMappings *string `json:"tableMappings,omitempty" tf:"table_mappings,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Amazon Resource Name (ARN) string that uniquely identifies the target endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
+	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`
+
+	// Reference to a Endpoint in dms to populate targetEndpointArn.
+	// +kubebuilder:validation:Optional
+	TargetEndpointArnRef *v1.Reference `json:"targetEndpointArnRef,omitempty" tf:"-"`
+
+	// Selector for a Endpoint in dms to populate targetEndpointArn.
+	// +kubebuilder:validation:Optional
+	TargetEndpointArnSelector *v1.Selector `json:"targetEndpointArnSelector,omitempty" tf:"-"`
 }
 
 type ReplicationTaskObservation struct {
@@ -76,9 +116,11 @@ type ReplicationTaskObservation struct {
 	TableMappings *string `json:"tableMappings,omitempty" tf:"table_mappings,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the target endpoint.
@@ -146,6 +188,7 @@ type ReplicationTaskParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the target endpoint.

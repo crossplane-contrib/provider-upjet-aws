@@ -20,18 +20,22 @@ import (
 type NetworkAccessControlInitParameters struct {
 
 	// - An array of prefix list IDs.
+	// +listType=set
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
 	// - An array of Amazon VPC endpoint IDs for the workspace. The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored.
+	// +listType=set
 	VpceIds []*string `json:"vpceIds,omitempty" tf:"vpce_ids,omitempty"`
 }
 
 type NetworkAccessControlObservation struct {
 
 	// - An array of prefix list IDs.
+	// +listType=set
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
 	// - An array of Amazon VPC endpoint IDs for the workspace. The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored.
+	// +listType=set
 	VpceIds []*string `json:"vpceIds,omitempty" tf:"vpce_ids,omitempty"`
 }
 
@@ -39,28 +43,34 @@ type NetworkAccessControlParameters struct {
 
 	// - An array of prefix list IDs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PrefixListIds []*string `json:"prefixListIds" tf:"prefix_list_ids,omitempty"`
 
 	// - An array of Amazon VPC endpoint IDs for the workspace. The only VPC endpoints that can be specified here are interface VPC endpoints for Grafana workspaces (using the com.amazonaws.[region].grafana-workspace service endpoint). Other VPC endpoints will be ignored.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VpceIds []*string `json:"vpceIds" tf:"vpce_ids,omitempty"`
 }
 
 type VPCConfigurationInitParameters struct {
 
 	// - The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// - The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCConfigurationObservation struct {
 
 	// - The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// - The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -68,10 +78,12 @@ type VPCConfigurationParameters struct {
 
 	// - The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// - The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
@@ -113,10 +125,24 @@ type WorkspaceInitParameters struct {
 	// The permission type of the workspace. If SERVICE_MANAGED is specified, the IAM roles and IAM policy attachments are generated automatically. If CUSTOMER_MANAGED is specified, the IAM roles and IAM policy attachments will not be created.
 	PermissionType *string `json:"permissionType,omitempty" tf:"permission_type,omitempty"`
 
+	// The IAM role ARN that the workspace assumes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The AWS CloudFormation stack set name that provisions IAM roles to be used by the workspace.
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to. See VPC Configuration below.
@@ -178,9 +204,11 @@ type WorkspaceObservation struct {
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to. See VPC Configuration below.
@@ -262,6 +290,7 @@ type WorkspaceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to. See VPC Configuration below.

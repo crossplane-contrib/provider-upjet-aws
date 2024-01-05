@@ -19,8 +19,34 @@ import (
 
 type SecretRotationInitParameters struct {
 
+	// Specifies the ARN of the Lambda function that can rotate the secret.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RotationLambdaArn *string `json:"rotationLambdaArn,omitempty" tf:"rotation_lambda_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate rotationLambdaArn.
+	// +kubebuilder:validation:Optional
+	RotationLambdaArnRef *v1.Reference `json:"rotationLambdaArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate rotationLambdaArn.
+	// +kubebuilder:validation:Optional
+	RotationLambdaArnSelector *v1.Selector `json:"rotationLambdaArnSelector,omitempty" tf:"-"`
+
 	// A structure that defines the rotation configuration for this secret. Defined below.
 	RotationRules []SecretRotationRotationRulesInitParameters `json:"rotationRules,omitempty" tf:"rotation_rules,omitempty"`
+
+	// Specifies the secret to which you want to add a new version. You can specify either the Amazon Resource Name (ARN) or the friendly name of the secret. The secret must already exist.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in secretsmanager to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type SecretRotationObservation struct {

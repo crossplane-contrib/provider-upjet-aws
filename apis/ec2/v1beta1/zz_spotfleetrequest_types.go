@@ -421,6 +421,19 @@ type LaunchSpecificationInitParameters struct {
 
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
+	// takes aws_iam_instance_profile attribute arn as input.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	IAMInstanceProfileArn *string `json:"iamInstanceProfileArn,omitempty" tf:"iam_instance_profile_arn,omitempty"`
+
+	// Reference to a InstanceProfile in iam to populate iamInstanceProfileArn.
+	// +kubebuilder:validation:Optional
+	IAMInstanceProfileArnRef *v1.Reference `json:"iamInstanceProfileArnRef,omitempty" tf:"-"`
+
+	// Selector for a InstanceProfile in iam to populate iamInstanceProfileArn.
+	// +kubebuilder:validation:Optional
+	IAMInstanceProfileArnSelector *v1.Selector `json:"iamInstanceProfileArnSelector,omitempty" tf:"-"`
+
 	// The type of instance to request.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -442,10 +455,12 @@ type LaunchSpecificationInitParameters struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
+	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// The capacity added to the fleet by a fulfilled request.
@@ -492,10 +507,12 @@ type LaunchSpecificationObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
+	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// The capacity added to the fleet by a fulfilled request.
@@ -570,12 +587,14 @@ type LaunchSpecificationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// The capacity added to the fleet by a fulfilled request.
@@ -673,8 +692,34 @@ type LaunchTemplateConfigParameters struct {
 
 type LaunchTemplateSpecificationInitParameters struct {
 
+	// The ID of the launch template. Conflicts with name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Reference to a LaunchTemplate in ec2 to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
 	// The name of the launch template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Template version. Unlike the autoscaling equivalent, does not support $Latest or $Default, so use the launch_template resource's attribute, e.g., "${aws_launch_template.foo.latest_version}". It will use the default version if omitted.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.LaunchTemplate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("latest_version",true)
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Reference to a LaunchTemplate in ec2 to populate version.
+	// +kubebuilder:validation:Optional
+	VersionRef *v1.Reference `json:"versionRef,omitempty" tf:"-"`
+
+	// Selector for a LaunchTemplate in ec2 to populate version.
+	// +kubebuilder:validation:Optional
+	VersionSelector *v1.Selector `json:"versionSelector,omitempty" tf:"-"`
 }
 
 type LaunchTemplateSpecificationObservation struct {
@@ -754,18 +799,22 @@ type OverridesInstanceRequirementsInitParameters struct {
 	AcceleratorCount []InstanceRequirementsAcceleratorCountInitParameters `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
+	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
 	AcceleratorTotalMemoryMib []InstanceRequirementsAcceleratorTotalMemoryMibInitParameters `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
+	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -778,18 +827,22 @@ type OverridesInstanceRequirementsInitParameters struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// List of CPU manufacturer names. Default is any manufacturer.
+	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
+	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
 	// List of local storage type names. Default any storage type.
+	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
@@ -826,18 +879,22 @@ type OverridesInstanceRequirementsObservation struct {
 	AcceleratorCount []InstanceRequirementsAcceleratorCountObservation `json:"acceleratorCount,omitempty" tf:"accelerator_count,omitempty"`
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
+	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
+	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
 	AcceleratorTotalMemoryMib []InstanceRequirementsAcceleratorTotalMemoryMibObservation `json:"acceleratorTotalMemoryMib,omitempty" tf:"accelerator_total_memory_mib,omitempty"`
 
 	// List of accelerator types. Default is any accelerator type.
+	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
+	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -850,18 +907,22 @@ type OverridesInstanceRequirementsObservation struct {
 	BurstablePerformance *string `json:"burstablePerformance,omitempty" tf:"burstable_performance,omitempty"`
 
 	// List of CPU manufacturer names. Default is any manufacturer.
+	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
+	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
+	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
 	LocalStorage *string `json:"localStorage,omitempty" tf:"local_storage,omitempty"`
 
 	// List of local storage type names. Default any storage type.
+	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
@@ -900,10 +961,12 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// List of accelerator manufacturer names. Default is any manufacturer.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AcceleratorManufacturers []*string `json:"acceleratorManufacturers,omitempty" tf:"accelerator_manufacturers,omitempty"`
 
 	// List of accelerator names. Default is any acclerator.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AcceleratorNames []*string `json:"acceleratorNames,omitempty" tf:"accelerator_names,omitempty"`
 
 	// Block describing the minimum and maximum total memory of the accelerators. Default is no minimum or maximum.
@@ -912,10 +975,12 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// List of accelerator types. Default is any accelerator type.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AcceleratorTypes []*string `json:"acceleratorTypes,omitempty" tf:"accelerator_types,omitempty"`
 
 	// List of instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (*), to allow an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are allowing the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are allowing all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is all instance types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedInstanceTypes []*string `json:"allowedInstanceTypes,omitempty" tf:"allowed_instance_types,omitempty"`
 
 	// Indicate whether bare metal instace types should be included, excluded, or required. Default is excluded.
@@ -932,14 +997,17 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// List of CPU manufacturer names. Default is any manufacturer.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CPUManufacturers []*string `json:"cpuManufacturers,omitempty" tf:"cpu_manufacturers,omitempty"`
 
 	// List of instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (*), to exclude an instance type, size, or generation. The following are examples: m5.8xlarge, c5*.*, m5a.*, r*, *3*. For example, if you specify c5*, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify m5a.*, you are excluding all the M5a instance types, but not the M5n instance types. Maximum of 400 entries in the list; each entry is limited to 30 characters. Default is no excluded instance types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludedInstanceTypes []*string `json:"excludedInstanceTypes,omitempty" tf:"excluded_instance_types,omitempty"`
 
 	// List of instance generation names. Default is any generation.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InstanceGenerations []*string `json:"instanceGenerations,omitempty" tf:"instance_generations,omitempty"`
 
 	// Indicate whether instance types with local storage volumes are included, excluded, or required. Default is included.
@@ -948,6 +1016,7 @@ type OverridesInstanceRequirementsParameters struct {
 
 	// List of local storage type names. Default any storage type.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
@@ -1087,6 +1156,7 @@ type SpotFleetRequestInitParameters struct {
 	LaunchTemplateConfig []LaunchTemplateConfigInitParameters `json:"launchTemplateConfig,omitempty" tf:"launch_template_config,omitempty"`
 
 	// A list of elastic load balancer names to add to the Spot fleet.
+	// +listType=set
 	LoadBalancers []*string `json:"loadBalancers,omitempty" tf:"load_balancers,omitempty"`
 
 	// The order of the launch template overrides to use in fulfilling On-Demand capacity. the possible values are: lowestPrice and prioritized. the default is lowestPrice.
@@ -1108,6 +1178,7 @@ type SpotFleetRequestInitParameters struct {
 	SpotPrice *string `json:"spotPrice,omitempty" tf:"spot_price,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of units to request. You can choose to set the
@@ -1119,6 +1190,7 @@ type SpotFleetRequestInitParameters struct {
 	TargetCapacityUnitType *string `json:"targetCapacityUnitType,omitempty" tf:"target_capacity_unit_type,omitempty"`
 
 	// A list of aws_alb_target_group ARNs, for use with Application Load Balancing.
+	// +listType=set
 	TargetGroupArns []*string `json:"targetGroupArns,omitempty" tf:"target_group_arns,omitempty"`
 
 	// Indicates whether running Spot
@@ -1189,6 +1261,7 @@ type SpotFleetRequestObservation struct {
 	LaunchTemplateConfig []LaunchTemplateConfigObservation `json:"launchTemplateConfig,omitempty" tf:"launch_template_config,omitempty"`
 
 	// A list of elastic load balancer names to add to the Spot fleet.
+	// +listType=set
 	LoadBalancers []*string `json:"loadBalancers,omitempty" tf:"load_balancers,omitempty"`
 
 	// The order of the launch template overrides to use in fulfilling On-Demand capacity. the possible values are: lowestPrice and prioritized. the default is lowestPrice.
@@ -1213,9 +1286,11 @@ type SpotFleetRequestObservation struct {
 	SpotRequestState *string `json:"spotRequestState,omitempty" tf:"spot_request_state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The number of units to request. You can choose to set the
@@ -1227,6 +1302,7 @@ type SpotFleetRequestObservation struct {
 	TargetCapacityUnitType *string `json:"targetCapacityUnitType,omitempty" tf:"target_capacity_unit_type,omitempty"`
 
 	// A list of aws_alb_target_group ARNs, for use with Application Load Balancing.
+	// +listType=set
 	TargetGroupArns []*string `json:"targetGroupArns,omitempty" tf:"target_group_arns,omitempty"`
 
 	// Indicates whether running Spot
@@ -1302,6 +1378,7 @@ type SpotFleetRequestParameters struct {
 
 	// A list of elastic load balancer names to add to the Spot fleet.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LoadBalancers []*string `json:"loadBalancers,omitempty" tf:"load_balancers,omitempty"`
 
 	// The order of the launch template overrides to use in fulfilling On-Demand capacity. the possible values are: lowestPrice and prioritized. the default is lowestPrice.
@@ -1335,6 +1412,7 @@ type SpotFleetRequestParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of units to request. You can choose to set the
@@ -1349,6 +1427,7 @@ type SpotFleetRequestParameters struct {
 
 	// A list of aws_alb_target_group ARNs, for use with Application Load Balancing.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TargetGroupArns []*string `json:"targetGroupArns,omitempty" tf:"target_group_arns,omitempty"`
 
 	// Indicates whether running Spot

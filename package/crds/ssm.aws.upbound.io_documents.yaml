@@ -105,6 +105,7 @@ spec:
                     description: Additional Permissions to attach to the document.
                       See Permissions below for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -114,6 +115,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetType:
                     description: The target type which defines the kinds of resources
                       the document can run on. For example, /AWS::EC2::Instance. For
@@ -179,11 +181,13 @@ spec:
                     description: Additional Permissions to attach to the document.
                       See Permissions below for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetType:
                     description: The target type which defines the kinds of resources
                       the document can run on. For example, /AWS::EC2::Instance. For
@@ -457,6 +461,7 @@ spec:
                     description: Additional Permissions to attach to the document.
                       See Permissions below for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   platformTypes:
                     description: A list of OS platforms compatible with this SSM document,
                       either "Windows" or "Linux".
@@ -475,6 +480,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -482,6 +488,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetType:
                     description: The target type which defines the kinds of resources
                       the document can run on. For example, /AWS::EC2::Instance. For

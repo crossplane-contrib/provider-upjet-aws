@@ -241,6 +241,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         securityGroupIds:
                           description: A list of security groups IDs that are available
                             to attach to your server's endpoint. If no security groups
@@ -250,6 +251,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: A list of subnet IDs that are required to host
                             your SFTP server endpoint in your VPC. This property can
@@ -257,6 +259,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcEndpointId:
                           description: The ID of the VPC endpoint. This property can
                             only be used when endpoint_type is set to VPC_ENDPOINT
@@ -455,6 +458,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         passiveIp:
                           description: Indicates passive mode, for FTP and FTPS protocols.
                             Enter a single IPv4 address, such as the public IP address
@@ -483,6 +487,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -498,6 +503,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   url:
                     description: '- URL of the service endpoint used to authenticate
                       users with an identity_provider_type of API_GATEWAY.'
@@ -557,6 +563,161 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  certificate:
+                    description: The Amazon Resource Name (ARN) of the AWS Certificate
+                      Manager (ACM) certificate. This is required when protocols is
+                      set to FTPS
+                    type: string
+                  certificateRef:
+                    description: Reference to a Certificate in acm to populate certificate.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  certificateSelector:
+                    description: Selector for a Certificate in acm to populate certificate.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  directoryId:
+                    description: The directory service ID of the directory service
+                      you want to connect to with an identity_provider_type of AWS_DIRECTORY_SERVICE.
+                    type: string
+                  directoryIdRef:
+                    description: Reference to a Directory in ds to populate directoryId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  directoryIdSelector:
+                    description: Selector for a Directory in ds to populate directoryId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   domain:
                     description: 'The domain of the storage system that is used for
                       file transfers. Valid values are: S3 and EFS. The default value
@@ -576,6 +737,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         securityGroupIds:
                           description: A list of security groups IDs that are available
                             to attach to your server's endpoint. If no security groups
@@ -585,6 +747,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: A list of subnet IDs that are required to host
                             your SFTP server endpoint in your VPC. This property can
@@ -592,10 +755,93 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcEndpointId:
                           description: The ID of the VPC endpoint. This property can
                             only be used when endpoint_type is set to VPC_ENDPOINT
                           type: string
+                        vpcId:
+                          description: The VPC ID of the virtual private cloud in
+                            which the SFTP server's endpoint will be hosted. This
+                            property can only be used when endpoint_type is set to
+                            VPC.
+                          type: string
+                        vpcIdRef:
+                          description: Reference to a VPC in ec2 to populate vpcId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        vpcIdSelector:
+                          description: Selector for a VPC in ec2 to populate vpcId.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   endpointType:
@@ -650,6 +896,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         passiveIp:
                           description: Indicates passive mode, for FTP and FTPS protocols.
                             Enter a single IPv4 address, such as the public IP address
@@ -678,6 +925,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   securityPolicyName:
                     description: 'Specifies the name of the security policy that is
                       attached to the server. Possible values are TransferSecurityPolicy-2018-11,
@@ -689,6 +937,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   url:
                     description: '- URL of the service endpoint used to authenticate
                       users with an identity_provider_type of API_GATEWAY.'
@@ -933,6 +1182,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         securityGroupIds:
                           description: A list of security groups IDs that are available
                             to attach to your server's endpoint. If no security groups
@@ -942,6 +1192,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         subnetIds:
                           description: A list of subnet IDs that are required to host
                             your SFTP server endpoint in your VPC. This property can
@@ -949,6 +1200,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         vpcEndpointId:
                           description: The ID of the VPC endpoint. This property can
                             only be used when endpoint_type is set to VPC_ENDPOINT
@@ -1022,6 +1274,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         passiveIp:
                           description: Indicates passive mode, for FTP and FTPS protocols.
                             Enter a single IPv4 address, such as the public IP address
@@ -1050,6 +1303,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   securityPolicyName:
                     description: 'Specifies the name of the security policy that is
                       attached to the server. Possible values are TransferSecurityPolicy-2018-11,
@@ -1061,6 +1315,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -1068,6 +1323,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   url:
                     description: '- URL of the service endpoint used to authenticate
                       users with an identity_provider_type of API_GATEWAY.'

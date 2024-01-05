@@ -28,6 +28,19 @@ type UsageLimitInitParameters struct {
 	// The time period that the amount applies to. A weekly period begins on Sunday. Valid values are daily, weekly, and monthly. The default is monthly.
 	Period *string `json:"period,omitempty" tf:"period,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the Amazon Redshift Serverless resource to create the usage limit for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshiftserverless/v1beta1.Workgroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a Workgroup in redshiftserverless to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a Workgroup in redshiftserverless to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
+
 	// The type of Amazon Redshift Serverless usage to create a usage limit for. Valid values are serverless-compute or cross-region-datasharing.
 	UsageType *string `json:"usageType,omitempty" tf:"usage_type,omitempty"`
 }

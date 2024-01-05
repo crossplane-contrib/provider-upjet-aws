@@ -37,6 +37,19 @@ type ProvisioningArtifactInitParameters struct {
 	// Name of the provisioning artifact (for example, v1, v2beta). No spaces are allowed.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Identifier of the product.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// Reference to a Product in servicecatalog to populate productId.
+	// +kubebuilder:validation:Optional
+	ProductIDRef *v1.Reference `json:"productIdRef,omitempty" tf:"-"`
+
+	// Selector for a Product in servicecatalog to populate productId.
+	// +kubebuilder:validation:Optional
+	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
+
 	// Template source as the physical ID of the resource that contains the template. Currently only supports CloudFormation stack ARN. Specify the physical ID as arn:[partition]:cloudformation:[region]:[account ID]:stack/[stack name]/[resource ID].
 	TemplatePhysicalID *string `json:"templatePhysicalId,omitempty" tf:"template_physical_id,omitempty"`
 

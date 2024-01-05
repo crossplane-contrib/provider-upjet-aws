@@ -434,6 +434,7 @@ spec:
                       them to the backend. See the Amazon API Gateway Developer Guide
                       for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
@@ -441,6 +442,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client. Supported only for WebSocket APIs.
                     type: object
+                    x-kubernetes-map-type: granular
                   responseParameters:
                     description: Mappings to transform the HTTP response from a backend
                       integration before returning the response to clients. Supported
@@ -456,6 +458,7 @@ spec:
                             data for the parameter. See the Amazon API Gateway Developer
                             Guide for details.
                           type: object
+                          x-kubernetes-map-type: granular
                         statusCode:
                           description: HTTP status code in the range 200-599.
                           type: string
@@ -498,6 +501,162 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  apiId:
+                    description: API identifier.
+                    type: string
+                  apiIdRef:
+                    description: Reference to a API to populate apiId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  apiIdSelector:
+                    description: Selector for a API to populate apiId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  connectionId:
+                    description: ID of the VPC link for a private integration. Supported
+                      only for HTTP APIs. Must be between 1 and 1024 characters in
+                      length.
+                    type: string
+                  connectionIdRef:
+                    description: Reference to a VPCLink in apigatewayv2 to populate
+                      connectionId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  connectionIdSelector:
+                    description: Selector for a VPCLink in apigatewayv2 to populate
+                      connectionId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   connectionType:
                     description: 'Type of the network connection to the integration
                       endpoint. Valid values: INTERNET, VPC_LINK. Default is INTERNET.'
@@ -507,6 +666,82 @@ spec:
                       Valid values: CONVERT_TO_BINARY, CONVERT_TO_TEXT. Supported
                       only for WebSocket APIs.'
                     type: string
+                  credentialsArn:
+                    description: Credentials required for the integration, if any.
+                    type: string
+                  credentialsArnRef:
+                    description: Reference to a Role in iam to populate credentialsArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  credentialsArnSelector:
+                    description: Selector for a Role in iam to populate credentialsArn.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   description:
                     description: Description of the integration.
                     type: string
@@ -526,6 +761,86 @@ spec:
                       only for WebSocket APIs), HTTP_PROXY, MOCK (supported only for
                       WebSocket APIs). For an HTTP API private integration, use HTTP_PROXY.'
                     type: string
+                  integrationUri:
+                    description: URI of the Lambda function for a Lambda proxy integration,
+                      when integration_type is AWS_PROXY. For an HTTP integration,
+                      specify a fully-qualified URL. For an HTTP API private integration,
+                      specify the ARN of an Application Load Balancer listener, Network
+                      Load Balancer listener, or AWS Cloud Map service.
+                    type: string
+                  integrationUriRef:
+                    description: Reference to a Function in lambda to populate integrationUri.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  integrationUriSelector:
+                    description: Selector for a Function in lambda to populate integrationUri.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   passthroughBehavior:
                     description: 'Pass-through behavior for incoming requests based
                       on the Content-Type header in the request, and the available
@@ -549,6 +864,7 @@ spec:
                       them to the backend. See the Amazon API Gateway Developer Guide
                       for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
@@ -556,6 +872,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client. Supported only for WebSocket APIs.
                     type: object
+                    x-kubernetes-map-type: granular
                   responseParameters:
                     description: Mappings to transform the HTTP response from a backend
                       integration before returning the response to clients. Supported
@@ -571,6 +888,7 @@ spec:
                             data for the parameter. See the Amazon API Gateway Developer
                             Guide for details.
                           type: object
+                          x-kubernetes-map-type: granular
                         statusCode:
                           description: HTTP status code in the range 200-599.
                           type: string
@@ -845,6 +1163,7 @@ spec:
                       them to the backend. See the Amazon API Gateway Developer Guide
                       for details.
                     type: object
+                    x-kubernetes-map-type: granular
                   requestTemplates:
                     additionalProperties:
                       type: string
@@ -852,6 +1171,7 @@ spec:
                       request payload based on the value of the Content-Type header
                       sent by the client. Supported only for WebSocket APIs.
                     type: object
+                    x-kubernetes-map-type: granular
                   responseParameters:
                     description: Mappings to transform the HTTP response from a backend
                       integration before returning the response to clients. Supported
@@ -867,6 +1187,7 @@ spec:
                             data for the parameter. See the Amazon API Gateway Developer
                             Guide for details.
                           type: object
+                          x-kubernetes-map-type: granular
                         statusCode:
                           description: HTTP status code in the range 200-599.
                           type: string

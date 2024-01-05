@@ -54,5 +54,37 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LicenseConfigurationArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.LicenseConfigurationArnRef,
+		Selector:     mg.Spec.InitProvider.LicenseConfigurationArnSelector,
+		To: reference.To{
+			List:    &LicenseConfigurationList{},
+			Managed: &LicenseConfiguration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LicenseConfigurationArn")
+	}
+	mg.Spec.InitProvider.LicenseConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LicenseConfigurationArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ResourceArnRef,
+		Selector:     mg.Spec.InitProvider.ResourceArnSelector,
+		To: reference.To{
+			List:    &v1beta1.InstanceList{},
+			Managed: &v1beta1.Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceArn")
+	}
+	mg.Spec.InitProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceArnRef = rsp.ResolvedReference
+
 	return nil
 }

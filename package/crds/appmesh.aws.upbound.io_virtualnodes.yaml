@@ -233,6 +233,7 @@ spec:
                                                   items:
                                                     type: number
                                                   type: array
+                                                  x-kubernetes-list-type: set
                                                 validation:
                                                   description: TLS validation context.
                                                   items:
@@ -256,6 +257,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                           type: object
@@ -279,6 +281,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                             file:
@@ -395,6 +398,7 @@ spec:
                                             items:
                                               type: number
                                             type: array
+                                            x-kubernetes-list-type: set
                                           validation:
                                             description: TLS validation context.
                                             items:
@@ -416,6 +420,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                     type: object
@@ -438,6 +443,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                       file:
@@ -873,6 +879,7 @@ spec:
                                                         items:
                                                           type: string
                                                         type: array
+                                                        x-kubernetes-list-type: set
                                                     type: object
                                                   type: array
                                               type: object
@@ -992,6 +999,7 @@ spec:
                                         that match all of the specified key/value
                                         pairs will be returned.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     namespaceName:
                                       description: Name of the AWS Cloud Map namespace
                                         to use. Use the aws_service_discovery_http_namespace
@@ -1117,6 +1125,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -1132,6 +1141,83 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  meshName:
+                    description: Name of the service mesh in which to create the virtual
+                      node. Must be between 1 and 255 characters in length.
+                    type: string
+                  meshNameRef:
+                    description: Reference to a Mesh in appmesh to populate meshName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  meshNameSelector:
+                    description: Selector for a Mesh in appmesh to populate meshName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   meshOwner:
                     description: AWS account ID of the service mesh's owner. Defaults
                       to the account ID the AWS provider is currently connected to.
@@ -1217,6 +1303,7 @@ spec:
                                                   items:
                                                     type: number
                                                   type: array
+                                                  x-kubernetes-list-type: set
                                                 validation:
                                                   description: TLS validation context.
                                                   items:
@@ -1240,6 +1327,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                           type: object
@@ -1263,6 +1351,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                             file:
@@ -1379,6 +1468,7 @@ spec:
                                             items:
                                               type: number
                                             type: array
+                                            x-kubernetes-list-type: set
                                           validation:
                                             description: TLS validation context.
                                             items:
@@ -1400,6 +1490,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                     type: object
@@ -1422,6 +1513,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                       file:
@@ -1857,6 +1949,7 @@ spec:
                                                         items:
                                                           type: string
                                                         type: array
+                                                        x-kubernetes-list-type: set
                                                     type: object
                                                   type: array
                                               type: object
@@ -1976,6 +2069,97 @@ spec:
                                         that match all of the specified key/value
                                         pairs will be returned.
                                       type: object
+                                      x-kubernetes-map-type: granular
+                                    namespaceName:
+                                      description: Name of the AWS Cloud Map namespace
+                                        to use. Use the aws_service_discovery_http_namespace
+                                        resource to configure a Cloud Map namespace.
+                                        Must be between 1 and 1024 characters in length.
+                                      type: string
+                                    namespaceNameRef:
+                                      description: Reference to a HTTPNamespace in
+                                        servicediscovery to populate namespaceName.
+                                      properties:
+                                        name:
+                                          description: Name of the referenced object.
+                                          type: string
+                                        policy:
+                                          description: Policies for referencing.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      required:
+                                      - name
+                                      type: object
+                                    namespaceNameSelector:
+                                      description: Selector for a HTTPNamespace in
+                                        servicediscovery to populate namespaceName.
+                                      properties:
+                                        matchControllerRef:
+                                          description: MatchControllerRef ensures
+                                            an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
                                     serviceName:
                                       description: attribute of the dns object to
                                         hostname.
@@ -2011,6 +2195,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -2290,6 +2475,7 @@ spec:
                                                   items:
                                                     type: number
                                                   type: array
+                                                  x-kubernetes-list-type: set
                                                 validation:
                                                   description: TLS validation context.
                                                   items:
@@ -2313,6 +2499,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                           type: object
@@ -2336,6 +2523,7 @@ spec:
                                                                     items:
                                                                       type: string
                                                                     type: array
+                                                                    x-kubernetes-list-type: set
                                                                 type: object
                                                               type: array
                                                             file:
@@ -2452,6 +2640,7 @@ spec:
                                             items:
                                               type: number
                                             type: array
+                                            x-kubernetes-list-type: set
                                           validation:
                                             description: TLS validation context.
                                             items:
@@ -2473,6 +2662,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                     type: object
@@ -2495,6 +2685,7 @@ spec:
                                                               items:
                                                                 type: string
                                                               type: array
+                                                              x-kubernetes-list-type: set
                                                           type: object
                                                         type: array
                                                       file:
@@ -2930,6 +3121,7 @@ spec:
                                                         items:
                                                           type: string
                                                         type: array
+                                                        x-kubernetes-list-type: set
                                                     type: object
                                                   type: array
                                               type: object
@@ -3049,6 +3241,7 @@ spec:
                                         that match all of the specified key/value
                                         pairs will be returned.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     namespaceName:
                                       description: Name of the AWS Cloud Map namespace
                                         to use. Use the aws_service_discovery_http_namespace
@@ -3090,12 +3283,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

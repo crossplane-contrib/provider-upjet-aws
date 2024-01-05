@@ -66,6 +66,19 @@ type DataRepositoryAssociationInitParameters struct {
 	// Set to true to delete files from the file system upon deleting this data repository association. Defaults to false.
 	DeleteDataInFilesystem *bool `json:"deleteDataInFilesystem,omitempty" tf:"delete_data_in_filesystem,omitempty"`
 
+	// The ID of the Amazon FSx file system to on which to create a data repository association.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta1.LustreFileSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// Reference to a LustreFileSystem in fsx to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDRef *v1.Reference `json:"fileSystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a LustreFileSystem in fsx to populate fileSystemId.
+	// +kubebuilder:validation:Optional
+	FileSystemIDSelector *v1.Selector `json:"fileSystemIdSelector,omitempty" tf:"-"`
+
 	// A path on the file system that points to a high-level directory (such as /ns1/) or subdirectory (such as /ns1/subdir/) that will be mapped 1-1 with data_repository_path. The leading forward slash in the name is required. Two data repository associations cannot have overlapping file system paths. For example, if a data repository is associated with file system path /ns1/, then you cannot link another data repository with file system path /ns1/ns2. This path specifies where in your file system files will be exported from or imported to. This file system directory can be linked to only one Amazon S3 bucket, and no other S3 bucket can be linked to the directory.
 	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
 
@@ -77,6 +90,7 @@ type DataRepositoryAssociationInitParameters struct {
 	S3 []S3InitParameters `json:"s3,omitempty" tf:"s3,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -114,9 +128,11 @@ type DataRepositoryAssociationObservation struct {
 	S3 []S3Observation `json:"s3,omitempty" tf:"s3,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -168,6 +184,7 @@ type DataRepositoryAssociationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

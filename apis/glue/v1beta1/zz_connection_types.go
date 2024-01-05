@@ -32,6 +32,7 @@ type ConnectionInitParameters struct {
 	PhysicalConnectionRequirements []PhysicalConnectionRequirementsInitParameters `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,9 +60,11 @@ type ConnectionObservation struct {
 	PhysicalConnectionRequirements []PhysicalConnectionRequirementsObservation `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -98,13 +101,41 @@ type ConnectionParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PhysicalConnectionRequirementsInitParameters struct {
 
+	// The availability zone of the connection. This field is redundant and implied by subnet_id, but is currently an api requirement.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("availability_zone",false)
+	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate availabilityZone.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneRef *v1.Reference `json:"availabilityZoneRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate availabilityZone.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneSelector *v1.Selector `json:"availabilityZoneSelector,omitempty" tf:"-"`
+
 	// The security group ID list used by the connection.
+	// +listType=set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
+
+	// The subnet ID used by the connection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type PhysicalConnectionRequirementsObservation struct {
@@ -113,6 +144,7 @@ type PhysicalConnectionRequirementsObservation struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The security group ID list used by the connection.
+	// +listType=set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
 
 	// The subnet ID used by the connection.
@@ -137,6 +169,7 @@ type PhysicalConnectionRequirementsParameters struct {
 
 	// The security group ID list used by the connection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
 
 	// The subnet ID used by the connection.

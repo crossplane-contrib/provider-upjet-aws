@@ -58,6 +58,7 @@ type APIInitParameters struct {
 	RouteSelectionExpression *string `json:"routeSelectionExpression,omitempty" tf:"route_selection_expression,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
@@ -124,9 +125,11 @@ type APIObservation struct {
 	RouteSelectionExpression *string `json:"routeSelectionExpression,omitempty" tf:"route_selection_expression,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
@@ -196,6 +199,7 @@ type APIParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Part of quick create. Quick create produces an API with an integration, a default catch-all route, and a default stage which is configured to automatically deploy changes.
@@ -215,15 +219,19 @@ type CorsConfigurationInitParameters struct {
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
 	// Set of allowed HTTP headers.
+	// +listType=set
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
 	// Set of allowed HTTP methods.
+	// +listType=set
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
 	// Set of allowed origins.
+	// +listType=set
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
 	// Set of exposed HTTP headers.
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Number of seconds that the browser should cache preflight request results.
@@ -236,15 +244,19 @@ type CorsConfigurationObservation struct {
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
 	// Set of allowed HTTP headers.
+	// +listType=set
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
 	// Set of allowed HTTP methods.
+	// +listType=set
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
 	// Set of allowed origins.
+	// +listType=set
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
 	// Set of exposed HTTP headers.
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Number of seconds that the browser should cache preflight request results.
@@ -259,18 +271,22 @@ type CorsConfigurationParameters struct {
 
 	// Set of allowed HTTP headers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowHeaders []*string `json:"allowHeaders,omitempty" tf:"allow_headers,omitempty"`
 
 	// Set of allowed HTTP methods.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowMethods []*string `json:"allowMethods,omitempty" tf:"allow_methods,omitempty"`
 
 	// Set of allowed origins.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowOrigins []*string `json:"allowOrigins,omitempty" tf:"allow_origins,omitempty"`
 
 	// Set of exposed HTTP headers.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Number of seconds that the browser should cache preflight request results.

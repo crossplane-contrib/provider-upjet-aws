@@ -239,6 +239,7 @@ spec:
                             provide the Container Network Interface (CNI) plugin,
                             specified a key-value mapping.
                           type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Proxy type. The default value is APPMESH. The
                             only supported value is APPMESH.
@@ -255,6 +256,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   runtimePlatform:
                     description: Configuration block for runtime_platform that containers
                       in your task may use.
@@ -281,6 +283,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskRoleArn:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
@@ -310,12 +313,14 @@ spec:
                                   type: string
                                 description: Map of Docker driver specific options.
                                 type: object
+                                x-kubernetes-map-type: granular
                               labels:
                                 additionalProperties:
                                   type: string
                                 description: Map of custom metadata to add to your
                                   Docker volume.
                                 type: object
+                                x-kubernetes-map-type: granular
                               scope:
                                 description: Scope for the Docker volume, which determines
                                   its lifecycle, either task or shared.  Docker volumes
@@ -474,6 +479,83 @@ spec:
                           type: number
                       type: object
                     type: array
+                  executionRoleArn:
+                    description: ARN of the task execution role that the Amazon ECS
+                      container agent and the Docker daemon can assume.
+                    type: string
+                  executionRoleArnRef:
+                    description: Reference to a Role in iam to populate executionRoleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  executionRoleArnSelector:
+                    description: Selector for a Role in iam to populate executionRoleArn.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   family:
                     description: A unique name for your task definition.
                     type: string
@@ -543,6 +625,7 @@ spec:
                             provide the Container Network Interface (CNI) plugin,
                             specified a key-value mapping.
                           type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Proxy type. The default value is APPMESH. The
                             only supported value is APPMESH.
@@ -555,6 +638,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   runtimePlatform:
                     description: Configuration block for runtime_platform that containers
                       in your task may use.
@@ -581,6 +665,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskRoleArn:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
@@ -610,12 +695,14 @@ spec:
                                   type: string
                                 description: Map of Docker driver specific options.
                                 type: object
+                                x-kubernetes-map-type: granular
                               labels:
                                 additionalProperties:
                                   type: string
                                 description: Map of custom metadata to add to your
                                   Docker volume.
                                 type: object
+                                x-kubernetes-map-type: granular
                               scope:
                                 description: Scope for the Docker volume, which determines
                                   its lifecycle, either task or shared.  Docker volumes
@@ -1020,6 +1107,7 @@ spec:
                             provide the Container Network Interface (CNI) plugin,
                             specified a key-value mapping.
                           type: object
+                          x-kubernetes-map-type: granular
                         type:
                           description: Proxy type. The default value is APPMESH. The
                             only supported value is APPMESH.
@@ -1032,6 +1120,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   revision:
                     description: Revision of the task in a particular family.
                     type: number
@@ -1061,12 +1150,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskRoleArn:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
@@ -1096,12 +1187,14 @@ spec:
                                   type: string
                                 description: Map of Docker driver specific options.
                                 type: object
+                                x-kubernetes-map-type: granular
                               labels:
                                 additionalProperties:
                                   type: string
                                 description: Map of custom metadata to add to your
                                   Docker volume.
                                 type: object
+                                x-kubernetes-map-type: granular
                               scope:
                                 description: Scope for the Docker volume, which determines
                                   its lifecycle, either task or shared.  Docker volumes

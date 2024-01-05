@@ -37,6 +37,19 @@ type NetworkACLRuleInitParameters struct {
 	// ICMP protocol: The ICMP type. Required if specifying ICMP for the protocolE.g., -1
 	IcmpType *float64 `json:"icmpType,omitempty" tf:"icmp_type,omitempty"`
 
+	// The ID of the network ACL.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkACL
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	NetworkACLID *string `json:"networkAclId,omitempty" tf:"network_acl_id,omitempty"`
+
+	// Reference to a NetworkACL in ec2 to populate networkAclId.
+	// +kubebuilder:validation:Optional
+	NetworkACLIDRef *v1.Reference `json:"networkAclIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkACL in ec2 to populate networkAclId.
+	// +kubebuilder:validation:Optional
+	NetworkACLIDSelector *v1.Selector `json:"networkAclIdSelector,omitempty" tf:"-"`
+
 	// The protocol. A value of -1 means all protocols.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 

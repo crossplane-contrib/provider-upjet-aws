@@ -15,6 +15,7 @@ import (
 	device "github.com/upbound/provider-aws/internal/controller/sagemaker/device"
 	devicefleet "github.com/upbound/provider-aws/internal/controller/sagemaker/devicefleet"
 	domain "github.com/upbound/provider-aws/internal/controller/sagemaker/domain"
+	endpoint "github.com/upbound/provider-aws/internal/controller/sagemaker/endpoint"
 	endpointconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/endpointconfiguration"
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
 	image "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
@@ -42,6 +43,7 @@ func Setup_sagemaker(mgr ctrl.Manager, o controller.Options) error {
 		device.Setup,
 		devicefleet.Setup,
 		domain.Setup,
+		endpoint.Setup,
 		endpointconfiguration.Setup,
 		featuregroup.Setup,
 		image.Setup,

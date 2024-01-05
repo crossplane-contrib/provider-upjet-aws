@@ -20,7 +20,32 @@ import (
 type ActionsInitParameters struct {
 
 	// Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.
+	// +mapType=granular
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
+
+	// The name of the crawler to be executed. Conflicts with job_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Crawler
+	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
+
+	// Reference to a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
+
+	// The name of a job to be executed. Conflicts with crawler_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Job
+	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+
+	// Reference to a Job in glue to populate jobName.
+	// +kubebuilder:validation:Optional
+	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job in glue to populate jobName.
+	// +kubebuilder:validation:Optional
+	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// Specifies configuration properties of a job run notification. See Notification Property details below.
 	NotificationProperty []ActionsNotificationPropertyInitParameters `json:"notificationProperty,omitempty" tf:"notification_property,omitempty"`
@@ -54,6 +79,7 @@ type ActionsNotificationPropertyParameters struct {
 type ActionsObservation struct {
 
 	// Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.
+	// +mapType=granular
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
 	// The name of the crawler to be executed. Conflicts with job_name.
@@ -76,6 +102,7 @@ type ActionsParameters struct {
 
 	// Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Arguments map[string]*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
 	// The name of the crawler to be executed. Conflicts with job_name.
@@ -121,6 +148,30 @@ type ConditionsInitParameters struct {
 
 	// The condition crawl state. Currently, the values supported are RUNNING, SUCCEEDED, CANCELLED, and FAILED. If this is specified, crawler_name must also be specified. Conflicts with state.
 	CrawlState *string `json:"crawlState,omitempty" tf:"crawl_state,omitempty"`
+
+	// The name of the crawler to be executed. Conflicts with job_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Crawler
+	CrawlerName *string `json:"crawlerName,omitempty" tf:"crawler_name,omitempty"`
+
+	// Reference to a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameRef *v1.Reference `json:"crawlerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Crawler in glue to populate crawlerName.
+	// +kubebuilder:validation:Optional
+	CrawlerNameSelector *v1.Selector `json:"crawlerNameSelector,omitempty" tf:"-"`
+
+	// The name of a job to be executed. Conflicts with crawler_name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Job
+	JobName *string `json:"jobName,omitempty" tf:"job_name,omitempty"`
+
+	// Reference to a Job in glue to populate jobName.
+	// +kubebuilder:validation:Optional
+	JobNameRef *v1.Reference `json:"jobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job in glue to populate jobName.
+	// +kubebuilder:validation:Optional
+	JobNameSelector *v1.Selector `json:"jobNameSelector,omitempty" tf:"-"`
 
 	// A logical operator. Defaults to EQUALS.
 	LogicalOperator *string `json:"logicalOperator,omitempty" tf:"logical_operator,omitempty"`
@@ -270,6 +321,7 @@ type TriggerInitParameters struct {
 	StartOnCreation *bool `json:"startOnCreation,omitempty" tf:"start_on_creation,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
@@ -312,9 +364,11 @@ type TriggerObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.
@@ -361,6 +415,7 @@ type TriggerParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  The type of trigger. Valid values are CONDITIONAL, EVENT, ON_DEMAND, and SCHEDULED.

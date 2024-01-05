@@ -26,6 +26,7 @@ type CatalogTableInitParameters struct {
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// Properties associated with this table, as a list of key-value pairs.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Configuration block for a maximum of 3 partition indexes. See partition_index below.
@@ -74,6 +75,7 @@ type CatalogTableObservation struct {
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// Properties associated with this table, as a list of key-value pairs.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Configuration block for a maximum of 3 partition indexes. See partition_index below.
@@ -130,6 +132,7 @@ type CatalogTableParameters struct {
 
 	// Properties associated with this table, as a list of key-value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Configuration block for a maximum of 3 partition indexes. See partition_index below.
@@ -179,6 +182,7 @@ type ColumnsInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value pairs defining properties associated with the column.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Datatype of data in the Column.
@@ -194,6 +198,7 @@ type ColumnsObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value pairs defining properties associated with the column.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Datatype of data in the Column.
@@ -212,6 +217,7 @@ type ColumnsParameters struct {
 
 	// Key-value pairs defining properties associated with the column.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Datatype of data in the Column.
@@ -373,6 +379,7 @@ type SerDeInfoInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Map of initialization parameters for the SerDe, in key-value form.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Usually the class that implements the SerDe. An example is org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
@@ -385,6 +392,7 @@ type SerDeInfoObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Map of initialization parameters for the SerDe, in key-value form.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Usually the class that implements the SerDe. An example is org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
@@ -399,6 +407,7 @@ type SerDeInfoParameters struct {
 
 	// Map of initialization parameters for the SerDe, in key-value form.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Usually the class that implements the SerDe. An example is org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
@@ -412,6 +421,7 @@ type SkewedInfoInitParameters struct {
 	SkewedColumnNames []*string `json:"skewedColumnNames,omitempty" tf:"skewed_column_names,omitempty"`
 
 	// List of values that appear so frequently as to be considered skewed.
+	// +mapType=granular
 	SkewedColumnValueLocationMaps map[string]*string `json:"skewedColumnValueLocationMaps,omitempty" tf:"skewed_column_value_location_maps,omitempty"`
 
 	// Map of skewed values to the columns that contain them.
@@ -424,6 +434,7 @@ type SkewedInfoObservation struct {
 	SkewedColumnNames []*string `json:"skewedColumnNames,omitempty" tf:"skewed_column_names,omitempty"`
 
 	// List of values that appear so frequently as to be considered skewed.
+	// +mapType=granular
 	SkewedColumnValueLocationMaps map[string]*string `json:"skewedColumnValueLocationMaps,omitempty" tf:"skewed_column_value_location_maps,omitempty"`
 
 	// Map of skewed values to the columns that contain them.
@@ -438,6 +449,7 @@ type SkewedInfoParameters struct {
 
 	// List of values that appear so frequently as to be considered skewed.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	SkewedColumnValueLocationMaps map[string]*string `json:"skewedColumnValueLocationMaps,omitempty" tf:"skewed_column_value_location_maps,omitempty"`
 
 	// Map of skewed values to the columns that contain them.
@@ -498,6 +510,7 @@ type StorageDescriptorInitParameters struct {
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
 	// User-supplied properties in key-value form.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Object that references a schema stored in the AWS Glue Schema Registry. When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference. See Schema Reference below.
@@ -540,6 +553,7 @@ type StorageDescriptorObservation struct {
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
 	// User-supplied properties in key-value form.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Object that references a schema stored in the AWS Glue Schema Registry. When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference. See Schema Reference below.
@@ -590,6 +604,7 @@ type StorageDescriptorParameters struct {
 
 	// User-supplied properties in key-value form.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Object that references a schema stored in the AWS Glue Schema Registry. When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference. See Schema Reference below.

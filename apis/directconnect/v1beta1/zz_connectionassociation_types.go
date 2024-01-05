@@ -18,6 +18,32 @@ import (
 )
 
 type ConnectionAssociationInitParameters struct {
+
+	// The ID of the connection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
+	// Reference to a Connection in directconnect to populate connectionId.
+	// +kubebuilder:validation:Optional
+	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+
+	// Selector for a Connection in directconnect to populate connectionId.
+	// +kubebuilder:validation:Optional
+	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
+
+	// The ID of the LAG with which to associate the connection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Lag
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	LagID *string `json:"lagId,omitempty" tf:"lag_id,omitempty"`
+
+	// Reference to a Lag in directconnect to populate lagId.
+	// +kubebuilder:validation:Optional
+	LagIDRef *v1.Reference `json:"lagIdRef,omitempty" tf:"-"`
+
+	// Selector for a Lag in directconnect to populate lagId.
+	// +kubebuilder:validation:Optional
+	LagIDSelector *v1.Selector `json:"lagIdSelector,omitempty" tf:"-"`
 }
 
 type ConnectionAssociationObservation struct {

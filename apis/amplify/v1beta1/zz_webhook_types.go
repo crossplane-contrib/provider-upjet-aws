@@ -19,6 +19,31 @@ import (
 
 type WebhookInitParameters struct {
 
+	// Unique ID for an Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta1.App
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// Reference to a App in amplify to populate appId.
+	// +kubebuilder:validation:Optional
+	AppIDRef *v1.Reference `json:"appIdRef,omitempty" tf:"-"`
+
+	// Selector for a App in amplify to populate appId.
+	// +kubebuilder:validation:Optional
+	AppIDSelector *v1.Selector `json:"appIdSelector,omitempty" tf:"-"`
+
+	// Name for a branch that is part of the Amplify app.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta1.Branch
+	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+
+	// Reference to a Branch in amplify to populate branchName.
+	// +kubebuilder:validation:Optional
+	BranchNameRef *v1.Reference `json:"branchNameRef,omitempty" tf:"-"`
+
+	// Selector for a Branch in amplify to populate branchName.
+	// +kubebuilder:validation:Optional
+	BranchNameSelector *v1.Selector `json:"branchNameSelector,omitempty" tf:"-"`
+
 	// Description for a webhook.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }

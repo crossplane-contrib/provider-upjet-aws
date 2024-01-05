@@ -67,6 +67,32 @@ type FlowLogInitParameters struct {
 	// Elastic Network Interface ID to attach to
 	EniID *string `json:"eniId,omitempty" tf:"eni_id,omitempty"`
 
+	// The ARN for the IAM role that's used to post flow logs to a CloudWatch Logs log group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+
+	// The ARN of the logging destination. Either log_destination or log_group_name must be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logDestination.
+	// +kubebuilder:validation:Optional
+	LogDestinationRef *v1.Reference `json:"logDestinationRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logDestination.
+	// +kubebuilder:validation:Optional
+	LogDestinationSelector *v1.Selector `json:"logDestinationSelector,omitempty" tf:"-"`
+
 	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
@@ -82,7 +108,20 @@ type FlowLogInitParameters struct {
 	// minutes). Default: 600. When transit_gateway_id or transit_gateway_attachment_id is specified, max_aggregation_interval must be 60 seconds (1 minute).
 	MaxAggregationInterval *float64 `json:"maxAggregationInterval,omitempty" tf:"max_aggregation_interval,omitempty"`
 
+	// Subnet ID to attach to
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
@@ -93,6 +132,18 @@ type FlowLogInitParameters struct {
 
 	// Transit Gateway ID to attach to
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
+
+	// VPC ID to attach to
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type FlowLogObservation struct {
@@ -137,9 +188,11 @@ type FlowLogObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.
@@ -236,6 +289,7 @@ type FlowLogParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of traffic to capture. Valid values: ACCEPT,REJECT, ALL.

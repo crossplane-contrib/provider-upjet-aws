@@ -39,6 +39,24 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.ForProvider.Notification[i3].SnsTopicRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Notification); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Notification[i3].SnsTopic),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.Notification[i3].SnsTopicRef,
+			Selector:     mg.Spec.InitProvider.Notification[i3].SnsTopicSelector,
+			To: reference.To{
+				List:    &v1beta1.TopicList{},
+				Managed: &v1beta1.Topic{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Notification[i3].SnsTopic")
+		}
+		mg.Spec.InitProvider.Notification[i3].SnsTopic = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Notification[i3].SnsTopicRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -65,6 +83,22 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	mg.Spec.ForProvider.VaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VaultName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VaultNameRef,
+		Selector:     mg.Spec.InitProvider.VaultNameSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VaultName")
+	}
+	mg.Spec.InitProvider.VaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VaultNameRef = rsp.ResolvedReference
 
 	return nil
 }

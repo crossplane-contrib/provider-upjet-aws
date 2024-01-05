@@ -177,6 +177,18 @@ type RecordInitParameters struct {
 	// A block indicating a routing policy based on the geolocation of the requestor. Conflicts with any other routing policy. Documented below.
 	GeolocationRoutingPolicy []GeolocationRoutingPolicyInitParameters `json:"geolocationRoutingPolicy,omitempty" tf:"geolocation_routing_policy,omitempty"`
 
+	// The health check the record should be associated with.
+	// +crossplane:generate:reference:type=HealthCheck
+	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
+
+	// Reference to a HealthCheck to populate healthCheckId.
+	// +kubebuilder:validation:Optional
+	HealthCheckIDRef *v1.Reference `json:"healthCheckIdRef,omitempty" tf:"-"`
+
+	// Selector for a HealthCheck to populate healthCheckId.
+	// +kubebuilder:validation:Optional
+	HealthCheckIDSelector *v1.Selector `json:"healthCheckIdSelector,omitempty" tf:"-"`
+
 	// A block indicating a routing policy based on the latency between the requestor and an AWS region. Conflicts with any other routing policy. Documented below.
 	LatencyRoutingPolicy []LatencyRoutingPolicyInitParameters `json:"latencyRoutingPolicy,omitempty" tf:"latency_routing_policy,omitempty"`
 
@@ -187,6 +199,7 @@ type RecordInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
@@ -200,6 +213,18 @@ type RecordInitParameters struct {
 
 	// A block indicating a weighted routing policy. Conflicts with any other routing policy. Documented below.
 	WeightedRoutingPolicy []WeightedRoutingPolicyInitParameters `json:"weightedRoutingPolicy,omitempty" tf:"weighted_routing_policy,omitempty"`
+
+	// The ID of the hosted zone to contain this record.
+	// +crossplane:generate:reference:type=Zone
+	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
+
+	// Reference to a Zone to populate zoneId.
+	// +kubebuilder:validation:Optional
+	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
+
+	// Selector for a Zone to populate zoneId.
+	// +kubebuilder:validation:Optional
+	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 type RecordObservation struct {
@@ -238,6 +263,7 @@ type RecordObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
@@ -306,6 +332,7 @@ type RecordParameters struct {
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency

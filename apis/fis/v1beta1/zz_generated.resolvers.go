@@ -37,5 +37,21 @@ func (mg *ExperimentTemplate) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+
 	return nil
 }

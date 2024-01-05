@@ -20,6 +20,7 @@ import (
 type ActionAuthenticateCognitoInitParameters struct {
 
 	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
@@ -33,11 +34,51 @@ type ActionAuthenticateCognitoInitParameters struct {
 
 	// The maximum duration of the authentication session, in seconds.
 	SessionTimeout *float64 `json:"sessionTimeout,omitempty" tf:"session_timeout,omitempty"`
+
+	// The ARN of the Cognito user pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	UserPoolArn *string `json:"userPoolArn,omitempty" tf:"user_pool_arn,omitempty"`
+
+	// Reference to a UserPool in cognitoidp to populate userPoolArn.
+	// +kubebuilder:validation:Optional
+	UserPoolArnRef *v1.Reference `json:"userPoolArnRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool in cognitoidp to populate userPoolArn.
+	// +kubebuilder:validation:Optional
+	UserPoolArnSelector *v1.Selector `json:"userPoolArnSelector,omitempty" tf:"-"`
+
+	// The ID of the Cognito user pool client.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	UserPoolClientID *string `json:"userPoolClientId,omitempty" tf:"user_pool_client_id,omitempty"`
+
+	// Reference to a UserPoolClient in cognitoidp to populate userPoolClientId.
+	// +kubebuilder:validation:Optional
+	UserPoolClientIDRef *v1.Reference `json:"userPoolClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolClient in cognitoidp to populate userPoolClientId.
+	// +kubebuilder:validation:Optional
+	UserPoolClientIDSelector *v1.Selector `json:"userPoolClientIdSelector,omitempty" tf:"-"`
+
+	// The domain prefix or fully-qualified domain name of the Cognito user pool.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolDomain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",false)
+	UserPoolDomain *string `json:"userPoolDomain,omitempty" tf:"user_pool_domain,omitempty"`
+
+	// Reference to a UserPoolDomain in cognitoidp to populate userPoolDomain.
+	// +kubebuilder:validation:Optional
+	UserPoolDomainRef *v1.Reference `json:"userPoolDomainRef,omitempty" tf:"-"`
+
+	// Selector for a UserPoolDomain in cognitoidp to populate userPoolDomain.
+	// +kubebuilder:validation:Optional
+	UserPoolDomainSelector *v1.Selector `json:"userPoolDomainSelector,omitempty" tf:"-"`
 }
 
 type ActionAuthenticateCognitoObservation struct {
 
 	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
@@ -66,6 +107,7 @@ type ActionAuthenticateCognitoParameters struct {
 
 	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The behavior if the user is not authenticated. Valid values: deny, allow and authenticate
@@ -130,6 +172,7 @@ type ActionAuthenticateCognitoParameters struct {
 type ActionAuthenticateOidcInitParameters struct {
 
 	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The authorization endpoint of the IdP.
@@ -163,6 +206,7 @@ type ActionAuthenticateOidcInitParameters struct {
 type ActionAuthenticateOidcObservation struct {
 
 	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The authorization endpoint of the IdP.
@@ -197,6 +241,7 @@ type ActionAuthenticateOidcParameters struct {
 
 	// The query parameters to include in the redirect request to the authorization endpoint. Max: 10.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The authorization endpoint of the IdP.
@@ -326,6 +371,19 @@ type ActionInitParameters struct {
 
 	// Information for creating a redirect action. Required if type is redirect.
 	Redirect []ActionRedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
+
+	// The ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// The type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -570,6 +628,19 @@ type ForwardStickinessParameters struct {
 
 type ForwardTargetGroupInitParameters struct {
 
+	// The Amazon Resource Name (ARN) of the target group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a LBTargetGroup in elbv2 to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup in elbv2 to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+
 	// The weight. The range is 0 to 999.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
@@ -610,6 +681,7 @@ type HTTPHeaderInitParameters struct {
 	HTTPHeaderName *string `json:"httpHeaderName,omitempty" tf:"http_header_name,omitempty"`
 
 	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -619,6 +691,7 @@ type HTTPHeaderObservation struct {
 	HTTPHeaderName *string `json:"httpHeaderName,omitempty" tf:"http_header_name,omitempty"`
 
 	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -630,18 +703,21 @@ type HTTPHeaderParameters struct {
 
 	// List of header value patterns to match. Maximum size of each pattern is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). If the same header appears multiple times in the request they will be searched in order until a match is found. Only one pattern needs to match for the condition to be satisfied. To require that all of the strings are a match, create one condition block per string.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type HTTPRequestMethodInitParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HTTPRequestMethodObservation struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -649,18 +725,21 @@ type HTTPRequestMethodParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type HostHeaderInitParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HostHeaderObservation struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -668,6 +747,7 @@ type HostHeaderParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
@@ -679,10 +759,24 @@ type LBListenerRuleInitParameters struct {
 	// A Condition block. Multiple condition blocks of different types can be set and all must be satisfied for the rule to match. Condition blocks are documented below.
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// The ARN of the listener to which to attach the rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBListener
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
+
+	// Reference to a LBListener in elbv2 to populate listenerArn.
+	// +kubebuilder:validation:Optional
+	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBListener in elbv2 to populate listenerArn.
+	// +kubebuilder:validation:Optional
+	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
+
 	// The priority for the rule between 1 and 50000. Leaving it unset will automatically set the rule with next available priority after currently existing highest rule. A listener can't have multiple rules with the same priority.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -707,9 +801,11 @@ type LBListenerRuleObservation struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -748,18 +844,21 @@ type LBListenerRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PathPatternInitParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type PathPatternObservation struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -767,6 +866,7 @@ type PathPatternParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
@@ -802,12 +902,14 @@ type QueryStringParameters struct {
 type SourceIPInitParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type SourceIPObservation struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -815,6 +917,7 @@ type SourceIPParameters struct {
 
 	// Query string pairs or values to match. Query String Value blocks documented below. Multiple values blocks can be specified, see example above. Maximum size of each string is 128 characters. Comparison is case insensitive. Wildcard characters supported: * (matches 0 or more characters) and ? (matches exactly 1 character). To search for a literal '*' or '?' character in a query string, escape the character with a backslash (\). Only one pair needs to match for the condition to be satisfied.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 

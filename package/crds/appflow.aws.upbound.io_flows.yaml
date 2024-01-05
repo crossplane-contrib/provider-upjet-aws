@@ -110,6 +110,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -838,6 +839,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -1140,6 +1142,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   task:
                     description: A Task that Amazon AppFlow performs while transferring
                       the data in the flow run.
@@ -1258,6 +1261,7 @@ spec:
                             MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP,
                             and EXCLUDE_SOURCE_FIELDS_LIST.
                           type: object
+                          x-kubernetes-map-type: granular
                         taskType:
                           description: Particular task implementation that Amazon
                             AppFlow performs. Valid values are Arithmetic, Filter,
@@ -1382,6 +1386,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -1600,6 +1605,94 @@ spec:
                                   details.
                                 items:
                                   properties:
+                                    bucketName:
+                                      description: Amazon S3 bucket name in which
+                                        Amazon AppFlow places the transferred data.
+                                      type: string
+                                    bucketNameRef:
+                                      description: Reference to a BucketPolicy in
+                                        s3 to populate bucketName.
+                                      properties:
+                                        name:
+                                          description: Name of the referenced object.
+                                          type: string
+                                        policy:
+                                          description: Policies for referencing.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      required:
+                                      - name
+                                      type: object
+                                    bucketNameSelector:
+                                      description: Selector for a BucketPolicy in
+                                        s3 to populate bucketName.
+                                      properties:
+                                        matchControllerRef:
+                                          description: MatchControllerRef ensures
+                                            an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
                                     bucketPrefix:
                                       description: Object key for the bucket in which
                                         Amazon AppFlow places the destination files.
@@ -2018,6 +2111,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -2088,6 +2182,94 @@ spec:
                                   details.
                                 items:
                                   properties:
+                                    bucketName:
+                                      description: Amazon S3 bucket name in which
+                                        Amazon AppFlow places the transferred data.
+                                      type: string
+                                    bucketNameRef:
+                                      description: Reference to a BucketPolicy in
+                                        s3 to populate bucketName.
+                                      properties:
+                                        name:
+                                          description: Name of the referenced object.
+                                          type: string
+                                        policy:
+                                          description: Policies for referencing.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      required:
+                                      - name
+                                      type: object
+                                    bucketNameSelector:
+                                      description: Selector for a BucketPolicy in
+                                        s3 to populate bucketName.
+                                      properties:
+                                        matchControllerRef:
+                                          description: MatchControllerRef ensures
+                                            an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
                                     bucketPrefix:
                                       description: Object key for the bucket in which
                                         Amazon AppFlow places the destination files.
@@ -2232,6 +2414,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   task:
                     description: A Task that Amazon AppFlow performs while transferring
                       the data in the flow run.
@@ -2350,6 +2533,7 @@ spec:
                             MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP,
                             and EXCLUDE_SOURCE_FIELDS_LIST.
                           type: object
+                          x-kubernetes-map-type: granular
                         taskType:
                           description: Particular task implementation that Amazon
                             AppFlow performs. Valid values are Arithmetic, Filter,
@@ -2645,6 +2829,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -3287,6 +3472,7 @@ spec:
                                         to the connector when it's used as a destination
                                         in the flow. Maximum of 50 items.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     entityName:
                                       description: Entity specified in the custom
                                         connector as a destination in the flow.
@@ -3505,12 +3691,14 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   task:
                     description: A Task that Amazon AppFlow performs while transferring
                       the data in the flow run.
@@ -3629,6 +3817,7 @@ spec:
                             MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP,
                             and EXCLUDE_SOURCE_FIELDS_LIST.
                           type: object
+                          x-kubernetes-map-type: granular
                         taskType:
                           description: Particular task implementation that Amazon
                             AppFlow performs. Valid values are Arithmetic, Filter,

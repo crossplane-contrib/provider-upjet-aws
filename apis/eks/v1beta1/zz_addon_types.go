@@ -27,6 +27,18 @@ type AddonInitParameters struct {
 	// match one of the versions returned by describe-addon-versions.
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
+	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// +crossplane:generate:reference:type=Cluster
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Reference to a Cluster to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+
 	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
 	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
 
@@ -38,7 +50,26 @@ type AddonInitParameters struct {
 	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
 
+	// The Amazon Resource Name (ARN) of an
+	// existing IAM role to bind to the add-on's service account. The role must be
+	// assigned the IAM permissions required by the add-on. If you don't specify
+	// an existing IAM role, then the add-on uses the permissions assigned to the node
+	// IAM role. For more information, see Amazon EKS node IAM role
+	// in the Amazon EKS User Guide.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceAccountRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceAccountRoleArnRef *v1.Reference `json:"serviceAccountRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceAccountRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceAccountRoleArnSelector *v1.Selector `json:"serviceAccountRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -87,9 +118,11 @@ type AddonObservation struct {
 	ServiceAccountRoleArn *string `json:"serviceAccountRoleArn,omitempty" tf:"service_account_role_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Key-value map of resource tags, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -158,6 +191,7 @@ type AddonParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

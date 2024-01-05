@@ -19,6 +19,32 @@ import (
 
 type RoutingControlInitParameters struct {
 
+	// ARN of the cluster in which this routing control will reside.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
+
+	// Reference to a Cluster in route53recoverycontrolconfig to populate clusterArn.
+	// +kubebuilder:validation:Optional
+	ClusterArnRef *v1.Reference `json:"clusterArnRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in route53recoverycontrolconfig to populate clusterArn.
+	// +kubebuilder:validation:Optional
+	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
+
+	// ARN of the control panel in which this routing control will reside.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.ControlPanel
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
+
+	// Reference to a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
+	// +kubebuilder:validation:Optional
+	ControlPanelArnRef *v1.Reference `json:"controlPanelArnRef,omitempty" tf:"-"`
+
+	// Selector for a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
+	// +kubebuilder:validation:Optional
+	ControlPanelArnSelector *v1.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
+
 	// The name describing the routing control.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }

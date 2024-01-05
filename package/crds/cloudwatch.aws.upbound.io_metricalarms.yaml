@@ -78,6 +78,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   alarmDescription:
                     description: The description for the alarm.
                     type: string
@@ -100,6 +101,7 @@ spec:
                     description: The dimensions for the alarm's associated metric.  For
                       the list of available dimensions see the AWS documentation here.
                     type: object
+                    x-kubernetes-map-type: granular
                   evaluateLowSampleCountPercentiles:
                     description: 'Used only for alarms based on percentiles. If you
                       specify ignore, the alarm state will not change during periods
@@ -124,6 +126,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   metricName:
                     description: The name for the alarm's associated metric. See docs
                       for supported metrics.
@@ -174,6 +177,7 @@ spec:
                                   the list of available dimensions see the AWS documentation
                                   here.
                                 type: object
+                                x-kubernetes-map-type: granular
                               metricName:
                                 description: The name for this metric. See docs for
                                   supported metrics.
@@ -223,6 +227,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   period:
                     description: The period in seconds over which the specified statistic
                       is applied. Valid values are 10, 30, or any multiple of 60.
@@ -241,6 +246,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   threshold:
                     description: The value against which the specified statistic is
                       compared. This parameter is required for alarms based on static
@@ -286,6 +292,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   alarmDescription:
                     description: The description for the alarm.
                     type: string
@@ -308,6 +315,7 @@ spec:
                     description: The dimensions for the alarm's associated metric.  For
                       the list of available dimensions see the AWS documentation here.
                     type: object
+                    x-kubernetes-map-type: granular
                   evaluateLowSampleCountPercentiles:
                     description: 'Used only for alarms based on percentiles. If you
                       specify ignore, the alarm state will not change during periods
@@ -332,6 +340,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   metricName:
                     description: The name for the alarm's associated metric. See docs
                       for supported metrics.
@@ -382,6 +391,7 @@ spec:
                                   the list of available dimensions see the AWS documentation
                                   here.
                                 type: object
+                                x-kubernetes-map-type: granular
                               metricName:
                                 description: The name for this metric. See docs for
                                   supported metrics.
@@ -431,6 +441,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   period:
                     description: The period in seconds over which the specified statistic
                       is applied. Valid values are 10, 30, or any multiple of 60.
@@ -445,6 +456,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   threshold:
                     description: The value against which the specified statistic is
                       compared. This parameter is required for alarms based on static
@@ -650,6 +662,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   alarmDescription:
                     description: The description for the alarm.
                     type: string
@@ -675,6 +688,7 @@ spec:
                     description: The dimensions for the alarm's associated metric.  For
                       the list of available dimensions see the AWS documentation here.
                     type: object
+                    x-kubernetes-map-type: granular
                   evaluateLowSampleCountPercentiles:
                     description: 'Used only for alarms based on percentiles. If you
                       specify ignore, the alarm state will not change during periods
@@ -702,6 +716,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   metricName:
                     description: The name for the alarm's associated metric. See docs
                       for supported metrics.
@@ -752,6 +767,7 @@ spec:
                                   the list of available dimensions see the AWS documentation
                                   here.
                                 type: object
+                                x-kubernetes-map-type: granular
                               metricName:
                                 description: The name for this metric. See docs for
                                   supported metrics.
@@ -801,6 +817,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   period:
                     description: The period in seconds over which the specified statistic
                       is applied. Valid values are 10, 30, or any multiple of 60.
@@ -815,6 +832,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -822,6 +840,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   threshold:
                     description: The value against which the specified statistic is
                       compared. This parameter is required for alarms based on static

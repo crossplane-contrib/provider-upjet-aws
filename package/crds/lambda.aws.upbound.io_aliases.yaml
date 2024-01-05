@@ -166,6 +166,7 @@ spec:
                             that should be sent to different versions of a lambda
                             function.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                 required:
@@ -202,6 +203,7 @@ spec:
                             that should be sent to different versions of a lambda
                             function.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                 type: object
@@ -407,6 +409,7 @@ spec:
                             that should be sent to different versions of a lambda
                             function.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                 type: object

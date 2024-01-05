@@ -65,6 +65,7 @@ type ConfigurationAggregatorInitParameters struct {
 	OrganizationAggregationSource []OrganizationAggregationSourceInitParameters `json:"organizationAggregationSource,omitempty" tf:"organization_aggregation_source,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -82,9 +83,11 @@ type ConfigurationAggregatorObservation struct {
 	OrganizationAggregationSource []OrganizationAggregationSourceObservation `json:"organizationAggregationSource,omitempty" tf:"organization_aggregation_source,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -105,6 +108,7 @@ type ConfigurationAggregatorParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -115,6 +119,19 @@ type OrganizationAggregationSourceInitParameters struct {
 
 	// List of source regions being aggregated.
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
+
+	// ARN of the IAM role used to retrieve AWS Organization details associated with the aggregator account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type OrganizationAggregationSourceObservation struct {

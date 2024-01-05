@@ -509,6 +509,9 @@ import (
 	userpolicyattachment "github.com/upbound/provider-aws/internal/controller/iam/userpolicyattachment"
 	usersshkey "github.com/upbound/provider-aws/internal/controller/iam/usersshkey"
 	virtualmfadevice "github.com/upbound/provider-aws/internal/controller/iam/virtualmfadevice"
+	groupidentitystore "github.com/upbound/provider-aws/internal/controller/identitystore/group"
+	groupmembershipidentitystore "github.com/upbound/provider-aws/internal/controller/identitystore/groupmembership"
+	useridentitystore "github.com/upbound/provider-aws/internal/controller/identitystore/user"
 	component "github.com/upbound/provider-aws/internal/controller/imagebuilder/component"
 	containerrecipe "github.com/upbound/provider-aws/internal/controller/imagebuilder/containerrecipe"
 	distributionconfiguration "github.com/upbound/provider-aws/internal/controller/imagebuilder/distributionconfiguration"
@@ -533,6 +536,7 @@ import (
 	thingprincipalattachment "github.com/upbound/provider-aws/internal/controller/iot/thingprincipalattachment"
 	thingtype "github.com/upbound/provider-aws/internal/controller/iot/thingtype"
 	topicrule "github.com/upbound/provider-aws/internal/controller/iot/topicrule"
+	topicruledestination "github.com/upbound/provider-aws/internal/controller/iot/topicruledestination"
 	channel "github.com/upbound/provider-aws/internal/controller/ivs/channel"
 	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
@@ -785,6 +789,7 @@ import (
 	devicesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/device"
 	devicefleet "github.com/upbound/provider-aws/internal/controller/sagemaker/devicefleet"
 	domainsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/domain"
+	endpointsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/endpoint"
 	endpointconfiguration "github.com/upbound/provider-aws/internal/controller/sagemaker/endpointconfiguration"
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
 	imagesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
@@ -881,7 +886,10 @@ import (
 	resourcedatasync "github.com/upbound/provider-aws/internal/controller/ssm/resourcedatasync"
 	servicesetting "github.com/upbound/provider-aws/internal/controller/ssm/servicesetting"
 	accountassignment "github.com/upbound/provider-aws/internal/controller/ssoadmin/accountassignment"
+	customermanagedpolicyattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/customermanagedpolicyattachment"
+	instanceaccesscontrolattributes "github.com/upbound/provider-aws/internal/controller/ssoadmin/instanceaccesscontrolattributes"
 	managedpolicyattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/managedpolicyattachment"
+	permissionsboundaryattachment "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionsboundaryattachment"
 	permissionset "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionset"
 	permissionsetinlinepolicy "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionsetinlinepolicy"
 	domainswf "github.com/upbound/provider-aws/internal/controller/swf/domain"
@@ -1431,6 +1439,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		userpolicyattachment.Setup,
 		usersshkey.Setup,
 		virtualmfadevice.Setup,
+		groupidentitystore.Setup,
+		groupmembershipidentitystore.Setup,
+		useridentitystore.Setup,
 		component.Setup,
 		containerrecipe.Setup,
 		distributionconfiguration.Setup,
@@ -1455,6 +1466,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		thingprincipalattachment.Setup,
 		thingtype.Setup,
 		topicrule.Setup,
+		topicruledestination.Setup,
 		channel.Setup,
 		recordingconfiguration.Setup,
 		clusterkafka.Setup,
@@ -1707,6 +1719,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		devicesagemaker.Setup,
 		devicefleet.Setup,
 		domainsagemaker.Setup,
+		endpointsagemaker.Setup,
 		endpointconfiguration.Setup,
 		featuregroup.Setup,
 		imagesagemaker.Setup,
@@ -1803,7 +1816,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcedatasync.Setup,
 		servicesetting.Setup,
 		accountassignment.Setup,
+		customermanagedpolicyattachment.Setup,
+		instanceaccesscontrolattributes.Setup,
 		managedpolicyattachment.Setup,
+		permissionsboundaryattachment.Setup,
 		permissionset.Setup,
 		permissionsetinlinepolicy.Setup,
 		domainswf.Setup,

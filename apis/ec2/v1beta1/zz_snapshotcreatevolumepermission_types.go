@@ -21,6 +21,19 @@ type SnapshotCreateVolumePermissionInitParameters struct {
 
 	// An AWS Account ID to add create volume permissions. The AWS Account cannot be the snapshot's owner
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// A snapshot ID
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EBSSnapshot
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Reference to a EBSSnapshot in ec2 to populate snapshotId.
+	// +kubebuilder:validation:Optional
+	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
+
+	// Selector for a EBSSnapshot in ec2 to populate snapshotId.
+	// +kubebuilder:validation:Optional
+	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 }
 
 type SnapshotCreateVolumePermissionObservation struct {

@@ -28,6 +28,18 @@ type ComponentInitParameters struct {
 	// Description of the component.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Amazon Resource Name (ARN) of the Key Management Service (KMS) Key used to encrypt the component.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// Name of the component.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -38,9 +50,11 @@ type ComponentInitParameters struct {
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Set of Operating Systems (OS) supported by the component.
+	// +listType=set
 	SupportedOsVersions []*string `json:"supportedOsVersions,omitempty" tf:"supported_os_versions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// S3 URI with data of the component. Exactly one of data and uri can be specified.
@@ -88,12 +102,15 @@ type ComponentObservation struct {
 	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// Set of Operating Systems (OS) supported by the component.
+	// +listType=set
 	SupportedOsVersions []*string `json:"supportedOsVersions,omitempty" tf:"supported_os_versions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Type of the component.
@@ -152,10 +169,12 @@ type ComponentParameters struct {
 
 	// Set of Operating Systems (OS) supported by the component.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SupportedOsVersions []*string `json:"supportedOsVersions,omitempty" tf:"supported_os_versions,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// S3 URI with data of the component. Exactly one of data and uri can be specified.

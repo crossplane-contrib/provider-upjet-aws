@@ -222,6 +222,21 @@ type NodeJSAppLayerInitParameters struct {
 	// Custom JSON attributes to apply to the layer.
 	CustomJSON *string `json:"customJson,omitempty" tf:"custom_json,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate customSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	CustomSecurityGroupIDRefs []v1.Reference `json:"customSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate customSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	CustomSecurityGroupIDSelector *v1.Selector `json:"customSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// Ids for a set of security groups to apply to the layer's instances.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=CustomSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=CustomSecurityGroupIDSelector
+	// +listType=set
+	CustomSecurityGroupIds []*string `json:"customSecurityGroupIds,omitempty" tf:"custom_security_group_ids,omitempty"`
+
 	CustomSetupRecipes []*string `json:"customSetupRecipes,omitempty" tf:"custom_setup_recipes,omitempty"`
 
 	CustomShutdownRecipes []*string `json:"customShutdownRecipes,omitempty" tf:"custom_shutdown_recipes,omitempty"`
@@ -251,10 +266,25 @@ type NodeJSAppLayerInitParameters struct {
 	// The version of NodeJS to use. Defaults to "0.10.38".
 	NodeJSVersion *string `json:"nodejsVersion,omitempty" tf:"nodejs_version,omitempty"`
 
+	// ID of the stack the layer will belong to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
+
+	// Reference to a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDRef *v1.Reference `json:"stackIdRef,omitempty" tf:"-"`
+
+	// Selector for a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDSelector *v1.Selector `json:"stackIdSelector,omitempty" tf:"-"`
+
 	// Names of a set of system packages to install on the layer's instances.
+	// +listType=set
 	SystemPackages []*string `json:"systemPackages,omitempty" tf:"system_packages,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to use EBS-optimized instances.
@@ -428,6 +458,7 @@ type NodeJSAppLayerObservation struct {
 	CustomJSON *string `json:"customJson,omitempty" tf:"custom_json,omitempty"`
 
 	// Ids for a set of security groups to apply to the layer's instances.
+	// +listType=set
 	CustomSecurityGroupIds []*string `json:"customSecurityGroupIds,omitempty" tf:"custom_security_group_ids,omitempty"`
 
 	CustomSetupRecipes []*string `json:"customSetupRecipes,omitempty" tf:"custom_setup_recipes,omitempty"`
@@ -466,12 +497,15 @@ type NodeJSAppLayerObservation struct {
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
 	// Names of a set of system packages to install on the layer's instances.
+	// +listType=set
 	SystemPackages []*string `json:"systemPackages,omitempty" tf:"system_packages,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Whether to use EBS-optimized instances.
@@ -522,6 +556,7 @@ type NodeJSAppLayerParameters struct {
 	// +crossplane:generate:reference:refFieldName=CustomSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=CustomSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CustomSecurityGroupIds []*string `json:"customSecurityGroupIds,omitempty" tf:"custom_security_group_ids,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -580,10 +615,12 @@ type NodeJSAppLayerParameters struct {
 
 	// Names of a set of system packages to install on the layer's instances.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SystemPackages []*string `json:"systemPackages,omitempty" tf:"system_packages,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to use EBS-optimized instances.

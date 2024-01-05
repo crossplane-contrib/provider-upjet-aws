@@ -19,11 +19,50 @@ import (
 
 type ConnectAttachmentInitParameters struct {
 
+	// The ID of a core network where you want to create the attachment.
+	// +crossplane:generate:reference:type=CoreNetwork
+	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
+
+	// Reference to a CoreNetwork to populate coreNetworkId.
+	// +kubebuilder:validation:Optional
+	CoreNetworkIDRef *v1.Reference `json:"coreNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a CoreNetwork to populate coreNetworkId.
+	// +kubebuilder:validation:Optional
+	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
+
+	// The Region where the edge is located.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("edge_location",true)
+	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
+
+	// Reference to a VPCAttachment in networkmanager to populate edgeLocation.
+	// +kubebuilder:validation:Optional
+	EdgeLocationRef *v1.Reference `json:"edgeLocationRef,omitempty" tf:"-"`
+
+	// Selector for a VPCAttachment in networkmanager to populate edgeLocation.
+	// +kubebuilder:validation:Optional
+	EdgeLocationSelector *v1.Selector `json:"edgeLocationSelector,omitempty" tf:"-"`
+
 	// Options for creating an attachment.
 	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the attachment between the two connections.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.VPCAttachment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TransportAttachmentID *string `json:"transportAttachmentId,omitempty" tf:"transport_attachment_id,omitempty"`
+
+	// Reference to a VPCAttachment in networkmanager to populate transportAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransportAttachmentIDRef *v1.Reference `json:"transportAttachmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCAttachment in networkmanager to populate transportAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransportAttachmentIDSelector *v1.Selector `json:"transportAttachmentIdSelector,omitempty" tf:"-"`
 }
 
 type ConnectAttachmentObservation struct {
@@ -68,9 +107,11 @@ type ConnectAttachmentObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the attachment between the two connections.
@@ -117,6 +158,7 @@ type ConnectAttachmentParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the attachment between the two connections.

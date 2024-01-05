@@ -19,13 +19,42 @@ import (
 
 type DefaultNetworkACLInitParameters struct {
 
+	// Network ACL ID to manage. This attribute is exported from aws_vpc, or manually found via the AWS Console.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("default_network_acl_id",true)
+	DefaultNetworkACLID *string `json:"defaultNetworkAclId,omitempty" tf:"default_network_acl_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate defaultNetworkAclId.
+	// +kubebuilder:validation:Optional
+	DefaultNetworkACLIDRef *v1.Reference `json:"defaultNetworkAclIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate defaultNetworkAclId.
+	// +kubebuilder:validation:Optional
+	DefaultNetworkACLIDSelector *v1.Selector `json:"defaultNetworkAclIdSelector,omitempty" tf:"-"`
+
 	// Configuration block for an egress rule. Detailed below.
 	Egress []EgressInitParameters `json:"egress,omitempty" tf:"egress,omitempty"`
 
 	// Configuration block for an ingress rule. Detailed below.
 	Ingress []IngressInitParameters `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -50,12 +79,15 @@ type DefaultNetworkACLObservation struct {
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
 	// List of Subnet IDs to apply the ACL to. See the notes above on Managing Subnets in the Default Network ACL
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// ID of the associated VPC
@@ -104,10 +136,12 @@ type DefaultNetworkACLParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -214,6 +248,19 @@ type IngressInitParameters struct {
 
 	// The action to take.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The CIDR block to match. This must be a valid network mask.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.DefaultVPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",true)
+	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
+
+	// Reference to a DefaultVPC in ec2 to populate cidrBlock.
+	// +kubebuilder:validation:Optional
+	CidrBlockRef *v1.Reference `json:"cidrBlockRef,omitempty" tf:"-"`
+
+	// Selector for a DefaultVPC in ec2 to populate cidrBlock.
+	// +kubebuilder:validation:Optional
+	CidrBlockSelector *v1.Selector `json:"cidrBlockSelector,omitempty" tf:"-"`
 
 	// The from port to match.
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`

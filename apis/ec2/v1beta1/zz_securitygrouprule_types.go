@@ -31,11 +31,49 @@ type SecurityGroupRuleInitParameters_2 struct {
 	// List of IPv6 CIDR blocks. Cannot be specified with source_security_group_id or self.
 	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
 
+	// References to ManagedPrefixList in ec2 to populate prefixListIds.
+	// +kubebuilder:validation:Optional
+	PrefixListIDRefs []v1.Reference `json:"prefixListIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ManagedPrefixList in ec2 to populate prefixListIds.
+	// +kubebuilder:validation:Optional
+	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
+
+	// List of Prefix List IDs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:refFieldName=PrefixListIDRefs
+	// +crossplane:generate:reference:selectorFieldName=PrefixListIDSelector
+	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
+
 	// Protocol. If not icmp, icmpv6, tcp, udp, or all use the protocol number
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// Security group to apply this rule to.
+	// +crossplane:generate:reference:type=SecurityGroup
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup to populate securityGroupId.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup to populate securityGroupId.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// Whether the security group itself will be added as a source to this ingress rule. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or source_security_group_id.
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
+
+	// Security group id to allow access to/from, depending on the type. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or self.
+	// +crossplane:generate:reference:type=SecurityGroup
+	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup to populate sourceSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	SourceSecurityGroupIDRef *v1.Reference `json:"sourceSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup to populate sourceSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// End port (or ICMP code if protocol is "icmp").
 	ToPort *float64 `json:"toPort,omitempty" tf:"to_port,omitempty"`

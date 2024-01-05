@@ -48,6 +48,21 @@ func (in *ResourceInitParameters) DeepCopyInto(out *ResourceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArn != nil {
+		in, out := &in.RoleArn, &out.RoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TypeName != nil {
 		in, out := &in.TypeName, &out.TypeName
 		*out = new(string)

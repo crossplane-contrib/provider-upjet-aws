@@ -41,6 +41,22 @@ func (mg *Activation) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.IAMRole = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMRoleRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRole),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.IAMRoleRef,
+		Selector:     mg.Spec.InitProvider.IAMRoleSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IAMRole")
+	}
+	mg.Spec.InitProvider.IAMRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IAMRoleRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -66,6 +82,22 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.Name = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Name),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NameRef,
+		Selector:     mg.Spec.InitProvider.NameSelector,
+		To: reference.To{
+			List:    &DocumentList{},
+			Managed: &Document{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Name")
+	}
+	mg.Spec.InitProvider.Name = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -109,6 +141,38 @@ func (mg *DefaultPatchBaseline) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.OperatingSystem = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.OperatingSystemRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BaselineID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.BaselineIDRef,
+		Selector:     mg.Spec.InitProvider.BaselineIDSelector,
+		To: reference.To{
+			List:    &PatchBaselineList{},
+			Managed: &PatchBaseline{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BaselineID")
+	}
+	mg.Spec.InitProvider.BaselineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BaselineIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OperatingSystem),
+		Extract:      resource.ExtractParamPath("operating_system", false),
+		Reference:    mg.Spec.InitProvider.OperatingSystemRef,
+		Selector:     mg.Spec.InitProvider.OperatingSystemSelector,
+		To: reference.To{
+			List:    &PatchBaselineList{},
+			Managed: &PatchBaseline{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.OperatingSystem")
+	}
+	mg.Spec.InitProvider.OperatingSystem = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.OperatingSystemRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -134,6 +198,22 @@ func (mg *MaintenanceWindowTarget) ResolveReferences(ctx context.Context, c clie
 	}
 	mg.Spec.ForProvider.WindowID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WindowIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WindowID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.WindowIDRef,
+		Selector:     mg.Spec.InitProvider.WindowIDSelector,
+		To: reference.To{
+			List:    &MaintenanceWindowList{},
+			Managed: &MaintenanceWindow{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WindowID")
+	}
+	mg.Spec.InitProvider.WindowID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WindowIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -255,6 +335,116 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.WindowID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WindowIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ServiceRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ServiceRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceRoleArn")
+	}
+	mg.Spec.InitProvider.ServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.TaskArnRef,
+		Selector:     mg.Spec.InitProvider.TaskArnSelector,
+		To: reference.To{
+			List:    &v1beta11.FunctionList{},
+			Managed: &v1beta11.Function{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TaskArn")
+	}
+	mg.Spec.InitProvider.TaskArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TaskArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.TaskInvocationParameters); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig[i5].NotificationArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig[i5].NotificationArnRef,
+					Selector:     mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig[i5].NotificationArnSelector,
+					To: reference.To{
+						List:    &v1beta12.TopicList{},
+						Managed: &v1beta12.Topic{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig[i5].NotificationArn")
+				}
+				mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig[i5].NotificationArn = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig[i5].NotificationArnRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.TaskInvocationParameters); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3Bucket),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketRef,
+				Selector:     mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketSelector,
+				To: reference.To{
+					List:    &v1beta13.BucketList{},
+					Managed: &v1beta13.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3Bucket")
+			}
+			mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].OutputS3BucketRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.TaskInvocationParameters); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArnRef,
+				Selector:     mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArnSelector,
+				To: reference.To{
+					List:    &v1beta1.RoleList{},
+					Managed: &v1beta1.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArn")
+			}
+			mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].ServiceRoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WindowID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.WindowIDRef,
+		Selector:     mg.Spec.InitProvider.WindowIDSelector,
+		To: reference.To{
+			List:    &MaintenanceWindowList{},
+			Managed: &MaintenanceWindow{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WindowID")
+	}
+	mg.Spec.InitProvider.WindowID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WindowIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -280,6 +470,22 @@ func (mg *PatchGroup) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.BaselineID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BaselineIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BaselineID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.BaselineIDRef,
+		Selector:     mg.Spec.InitProvider.BaselineIDSelector,
+		To: reference.To{
+			List:    &PatchBaselineList{},
+			Managed: &PatchBaseline{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BaselineID")
+	}
+	mg.Spec.InitProvider.BaselineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BaselineIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -325,6 +531,24 @@ func (mg *ResourceDataSync) ResolveReferences(ctx context.Context, c client.Read
 		}
 		mg.Spec.ForProvider.S3Destination[i3].Region = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.S3Destination[i3].RegionRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.S3Destination); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Destination[i3].BucketName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.S3Destination[i3].BucketNameRef,
+			Selector:     mg.Spec.InitProvider.S3Destination[i3].BucketNameSelector,
+			To: reference.To{
+				List:    &v1beta13.BucketList{},
+				Managed: &v1beta13.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.S3Destination[i3].BucketName")
+		}
+		mg.Spec.InitProvider.S3Destination[i3].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.S3Destination[i3].BucketNameRef = rsp.ResolvedReference
 
 	}
 

@@ -19,10 +19,76 @@ import (
 
 type DeploymentInitParameters struct {
 
+	// Application ID. Must be between 4 and 7 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	// Reference to a Application in appconfig to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+
+	// Selector for a Application in appconfig to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+
+	// Configuration profile ID. Must be between 4 and 7 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.ConfigurationProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("configuration_profile_id",true)
+	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
+
+	// Reference to a ConfigurationProfile in appconfig to populate configurationProfileId.
+	// +kubebuilder:validation:Optional
+	ConfigurationProfileIDRef *v1.Reference `json:"configurationProfileIdRef,omitempty" tf:"-"`
+
+	// Selector for a ConfigurationProfile in appconfig to populate configurationProfileId.
+	// +kubebuilder:validation:Optional
+	ConfigurationProfileIDSelector *v1.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
+
+	// Configuration version to deploy. Can be at most 1024 characters.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.HostedConfigurationVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version_number",true)
+	ConfigurationVersion *string `json:"configurationVersion,omitempty" tf:"configuration_version,omitempty"`
+
+	// Reference to a HostedConfigurationVersion in appconfig to populate configurationVersion.
+	// +kubebuilder:validation:Optional
+	ConfigurationVersionRef *v1.Reference `json:"configurationVersionRef,omitempty" tf:"-"`
+
+	// Selector for a HostedConfigurationVersion in appconfig to populate configurationVersion.
+	// +kubebuilder:validation:Optional
+	ConfigurationVersionSelector *v1.Selector `json:"configurationVersionSelector,omitempty" tf:"-"`
+
+	// Deployment strategy ID or name of a predefined deployment strategy. See Predefined Deployment Strategies for more details.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.DeploymentStrategy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DeploymentStrategyID *string `json:"deploymentStrategyId,omitempty" tf:"deployment_strategy_id,omitempty"`
+
+	// Reference to a DeploymentStrategy in appconfig to populate deploymentStrategyId.
+	// +kubebuilder:validation:Optional
+	DeploymentStrategyIDRef *v1.Reference `json:"deploymentStrategyIdRef,omitempty" tf:"-"`
+
+	// Selector for a DeploymentStrategy in appconfig to populate deploymentStrategyId.
+	// +kubebuilder:validation:Optional
+	DeploymentStrategyIDSelector *v1.Selector `json:"deploymentStrategyIdSelector,omitempty" tf:"-"`
+
 	// Description of the deployment. Can be at most 1024 characters.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Environment ID. Must be between 4 and 7 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Environment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("environment_id",true)
+	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
+
+	// Reference to a Environment in appconfig to populate environmentId.
+	// +kubebuilder:validation:Optional
+	EnvironmentIDRef *v1.Reference `json:"environmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a Environment in appconfig to populate environmentId.
+	// +kubebuilder:validation:Optional
+	EnvironmentIDSelector *v1.Selector `json:"environmentIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,9 +125,11 @@ type DeploymentObservation struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -148,6 +216,7 @@ type DeploymentParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

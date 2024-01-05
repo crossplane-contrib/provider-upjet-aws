@@ -115,6 +115,18 @@ type S3EndpointInitParameters struct {
 	// Whether to enable a full load to write INSERT operations to the .csv output files only to indicate how the rows were added to the source database. Default is false.
 	IncludeOpForFullLoad *bool `json:"includeOpForFullLoad,omitempty" tf:"include_op_for_full_load,omitempty"`
 
+	// ARN for the KMS key that will be used to encrypt the connection parameters. If you do not specify a value for kms_key_arn, then AWS DMS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS region.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
 	// Maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load. Valid values are from 1 to 1048576. (AWS default is 1 GB, i.e., 1048576.)
 	MaxFileSize *float64 `json:"maxFileSize,omitempty" tf:"max_file_size,omitempty"`
 
@@ -136,7 +148,34 @@ type S3EndpointInitParameters struct {
 	// SSL mode to use for the connection. Valid values are none, require, verify-ca, verify-full. (AWS default is none.)
 	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
 
+	// When encryption_mode is SSE_KMS, ARN for the AWS KMS key. (Ignored for source endpoints -- only SSE_S3 encryption_mode is valid.)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ServerSideEncryptionKMSKeyID *string `json:"serverSideEncryptionKmsKeyId,omitempty" tf:"server_side_encryption_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate serverSideEncryptionKmsKeyId.
+	// +kubebuilder:validation:Optional
+	ServerSideEncryptionKMSKeyIDRef *v1.Reference `json:"serverSideEncryptionKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate serverSideEncryptionKmsKeyId.
+	// +kubebuilder:validation:Optional
+	ServerSideEncryptionKMSKeyIDSelector *v1.Selector `json:"serverSideEncryptionKmsKeyIdSelector,omitempty" tf:"-"`
+
+	// ARN of the IAM role with permissions to the S3 Bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceAccessRoleArn *string `json:"serviceAccessRoleArn,omitempty" tf:"service_access_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate serviceAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleArnRef *v1.Reference `json:"serviceAccessRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceAccessRoleArn.
+	// +kubebuilder:validation:Optional
+	ServiceAccessRoleArnSelector *v1.Selector `json:"serviceAccessRoleArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Column to add with timestamp information to the endpoint data for an Amazon S3 target.
@@ -292,9 +331,11 @@ type S3EndpointObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Column to add with timestamp information to the endpoint data for an Amazon S3 target.
@@ -513,6 +554,7 @@ type S3EndpointParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Column to add with timestamp information to the endpoint data for an Amazon S3 target.

@@ -73,6 +73,54 @@ func (mg *Endpoint) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.ServiceAccessRole = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceAccessRoleRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
+	}
+	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretsManagerAccessRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.SecretsManagerAccessRoleArnRef,
+		Selector:     mg.Spec.InitProvider.SecretsManagerAccessRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecretsManagerAccessRoleArn")
+	}
+	mg.Spec.InitProvider.SecretsManagerAccessRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecretsManagerAccessRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceAccessRole),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ServiceAccessRoleRef,
+		Selector:     mg.Spec.InitProvider.ServiceAccessRoleSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceAccessRole")
+	}
+	mg.Spec.InitProvider.ServiceAccessRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceAccessRoleRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -98,6 +146,22 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.SnsTopicArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SnsTopicArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnsTopicArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.SnsTopicArnRef,
+		Selector:     mg.Spec.InitProvider.SnsTopicArnSelector,
+		To: reference.To{
+			List:    &v1beta12.TopicList{},
+			Managed: &v1beta12.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SnsTopicArn")
+	}
+	mg.Spec.InitProvider.SnsTopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SnsTopicArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -158,6 +222,54 @@ func (mg *ReplicationInstance) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
+	}
+	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicationSubnetGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ReplicationSubnetGroupIDRef,
+		Selector:     mg.Spec.InitProvider.ReplicationSubnetGroupIDSelector,
+		To: reference.To{
+			List:    &ReplicationSubnetGroupList{},
+			Managed: &ReplicationSubnetGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ReplicationSubnetGroupID")
+	}
+	mg.Spec.InitProvider.ReplicationSubnetGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ReplicationSubnetGroupIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.VPCSecurityGroupIDRefs,
+		Selector:      mg.Spec.InitProvider.VPCSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta13.SecurityGroupList{},
+			Managed: &v1beta13.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCSecurityGroupIds")
+	}
+	mg.Spec.InitProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -183,6 +295,22 @@ func (mg *ReplicationSubnetGroup) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.SubnetIDRefs,
+		Selector:      mg.Spec.InitProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta13.SubnetList{},
+			Managed: &v1beta13.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetIds")
+	}
+	mg.Spec.InitProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SubnetIDRefs = mrsp.ResolvedReferences
 
 	return nil
 }
@@ -242,6 +370,54 @@ func (mg *ReplicationTask) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.TargetEndpointArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetEndpointArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicationInstanceArn),
+		Extract:      resource.ExtractParamPath("replication_instance_arn", true),
+		Reference:    mg.Spec.InitProvider.ReplicationInstanceArnRef,
+		Selector:     mg.Spec.InitProvider.ReplicationInstanceArnSelector,
+		To: reference.To{
+			List:    &ReplicationInstanceList{},
+			Managed: &ReplicationInstance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ReplicationInstanceArn")
+	}
+	mg.Spec.InitProvider.ReplicationInstanceArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ReplicationInstanceArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceEndpointArn),
+		Extract:      resource.ExtractParamPath("endpoint_arn", true),
+		Reference:    mg.Spec.InitProvider.SourceEndpointArnRef,
+		Selector:     mg.Spec.InitProvider.SourceEndpointArnSelector,
+		To: reference.To{
+			List:    &EndpointList{},
+			Managed: &Endpoint{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceEndpointArn")
+	}
+	mg.Spec.InitProvider.SourceEndpointArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceEndpointArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetEndpointArn),
+		Extract:      resource.ExtractParamPath("endpoint_arn", true),
+		Reference:    mg.Spec.InitProvider.TargetEndpointArnRef,
+		Selector:     mg.Spec.InitProvider.TargetEndpointArnSelector,
+		To: reference.To{
+			List:    &EndpointList{},
+			Managed: &Endpoint{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetEndpointArn")
+	}
+	mg.Spec.InitProvider.TargetEndpointArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetEndpointArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -299,6 +475,54 @@ func (mg *S3Endpoint) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.ServiceAccessRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceAccessRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
+	}
+	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerSideEncryptionKMSKeyID),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ServerSideEncryptionKMSKeyIDRef,
+		Selector:     mg.Spec.InitProvider.ServerSideEncryptionKMSKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerSideEncryptionKMSKeyID")
+	}
+	mg.Spec.InitProvider.ServerSideEncryptionKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerSideEncryptionKMSKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceAccessRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ServiceAccessRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ServiceAccessRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceAccessRoleArn")
+	}
+	mg.Spec.InitProvider.ServiceAccessRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceAccessRoleArnRef = rsp.ResolvedReference
 
 	return nil
 }

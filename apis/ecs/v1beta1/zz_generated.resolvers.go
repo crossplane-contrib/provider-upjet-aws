@@ -42,6 +42,24 @@ func (mg *CapacityProvider) ResolveReferences(ctx context.Context, c client.Read
 		mg.Spec.ForProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.AutoScalingGroupProvider); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArnRef,
+			Selector:     mg.Spec.InitProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArnSelector,
+			To: reference.To{
+				List:    &v1beta1.AutoscalingGroupList{},
+				Managed: &v1beta1.AutoscalingGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArn")
+		}
+		mg.Spec.InitProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AutoScalingGroupProvider[i3].AutoScalingGroupArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -68,6 +86,22 @@ func (mg *ClusterCapacityProviders) ResolveReferences(ctx context.Context, c cli
 	}
 	mg.Spec.ForProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ClusterNameRef,
+		Selector:     mg.Spec.InitProvider.ClusterNameSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterName")
+	}
+	mg.Spec.InitProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -182,6 +216,108 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.TaskDefinition = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TaskDefinitionRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Cluster),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ClusterRef,
+		Selector:     mg.Spec.InitProvider.ClusterSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Cluster")
+	}
+	mg.Spec.InitProvider.Cluster = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRole),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.IAMRoleRef,
+		Selector:     mg.Spec.InitProvider.IAMRoleSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IAMRole")
+	}
+	mg.Spec.InitProvider.IAMRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IAMRoleRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoadBalancer); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArnRef,
+			Selector:     mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArnSelector,
+			To: reference.To{
+				List:    &v1beta12.LBTargetGroupList{},
+				Managed: &v1beta12.LBTargetGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArn")
+		}
+		mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LoadBalancer[i3].TargetGroupArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkConfiguration); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkConfiguration[i3].SecurityGroups),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.NetworkConfiguration[i3].SecurityGroupRefs,
+			Selector:      mg.Spec.InitProvider.NetworkConfiguration[i3].SecurityGroupSelector,
+			To: reference.To{
+				List:    &v1beta13.SecurityGroupList{},
+				Managed: &v1beta13.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkConfiguration[i3].SecurityGroups")
+		}
+		mg.Spec.InitProvider.NetworkConfiguration[i3].SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.NetworkConfiguration[i3].SecurityGroupRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkConfiguration); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkConfiguration[i3].Subnets),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.NetworkConfiguration[i3].SubnetRefs,
+			Selector:      mg.Spec.InitProvider.NetworkConfiguration[i3].SubnetSelector,
+			To: reference.To{
+				List:    &v1beta13.SubnetList{},
+				Managed: &v1beta13.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkConfiguration[i3].Subnets")
+		}
+		mg.Spec.InitProvider.NetworkConfiguration[i3].Subnets = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.NetworkConfiguration[i3].SubnetRefs = mrsp.ResolvedReferences
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskDefinition),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TaskDefinitionRef,
+		Selector:     mg.Spec.InitProvider.TaskDefinitionSelector,
+		To: reference.To{
+			List:    &TaskDefinitionList{},
+			Managed: &TaskDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TaskDefinition")
+	}
+	mg.Spec.InitProvider.TaskDefinition = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TaskDefinitionRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -207,6 +343,22 @@ func (mg *TaskDefinition) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ExecutionRoleArn")
+	}
+	mg.Spec.InitProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ExecutionRoleArnRef = rsp.ResolvedReference
 
 	return nil
 }

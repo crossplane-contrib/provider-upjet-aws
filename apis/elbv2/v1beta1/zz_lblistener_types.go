@@ -20,6 +20,7 @@ import (
 type AuthenticateCognitoInitParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
@@ -47,6 +48,7 @@ type AuthenticateCognitoInitParameters struct {
 type AuthenticateCognitoObservation struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
@@ -75,6 +77,7 @@ type AuthenticateCognitoParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Behavior if the user is not authenticated. Valid values are deny, allow and authenticate.
@@ -109,6 +112,7 @@ type AuthenticateCognitoParameters struct {
 type AuthenticateOidcInitParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Authorization endpoint of the IdP.
@@ -142,6 +146,7 @@ type AuthenticateOidcInitParameters struct {
 type AuthenticateOidcObservation struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Authorization endpoint of the IdP.
@@ -176,6 +181,7 @@ type AuthenticateOidcParameters struct {
 
 	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// Authorization endpoint of the IdP.
@@ -238,6 +244,18 @@ type DefaultActionInitParameters struct {
 
 	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
 	Redirect []RedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
+
+	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead.
+	// +crossplane:generate:reference:type=LBTargetGroup
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// Reference to a LBTargetGroup to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
 	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -393,6 +411,18 @@ type LBListenerInitParameters struct {
 	// Configuration block for default actions. Detailed below.
 	DefaultAction []DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
+	// ARN of the load balancer.
+	// +crossplane:generate:reference:type=LB
+	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
+
+	// Reference to a LB to populate loadBalancerArn.
+	// +kubebuilder:validation:Optional
+	LoadBalancerArnRef *v1.Reference `json:"loadBalancerArnRef,omitempty" tf:"-"`
+
+	// Selector for a LB to populate loadBalancerArn.
+	// +kubebuilder:validation:Optional
+	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
+
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -403,6 +433,7 @@ type LBListenerInitParameters struct {
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -436,9 +467,11 @@ type LBListenerObservation struct {
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -488,6 +521,7 @@ type LBListenerParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -590,6 +624,18 @@ type StickinessParameters struct {
 }
 
 type TargetGroupInitParameters struct {
+
+	// ARN of the target group.
+	// +crossplane:generate:reference:type=LBTargetGroup
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a LBTargetGroup to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Weight. The range is 0 to 999.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`

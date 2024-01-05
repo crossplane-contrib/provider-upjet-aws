@@ -19,6 +19,32 @@ import (
 
 type HostedConfigurationVersionInitParameters struct {
 
+	// Application ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.Application
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
+
+	// Reference to a Application in appconfig to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDRef *v1.Reference `json:"applicationIdRef,omitempty" tf:"-"`
+
+	// Selector for a Application in appconfig to populate applicationId.
+	// +kubebuilder:validation:Optional
+	ApplicationIDSelector *v1.Selector `json:"applicationIdSelector,omitempty" tf:"-"`
+
+	// Configuration profile ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appconfig/v1beta1.ConfigurationProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("configuration_profile_id",true)
+	ConfigurationProfileID *string `json:"configurationProfileId,omitempty" tf:"configuration_profile_id,omitempty"`
+
+	// Reference to a ConfigurationProfile in appconfig to populate configurationProfileId.
+	// +kubebuilder:validation:Optional
+	ConfigurationProfileIDRef *v1.Reference `json:"configurationProfileIdRef,omitempty" tf:"-"`
+
+	// Selector for a ConfigurationProfile in appconfig to populate configurationProfileId.
+	// +kubebuilder:validation:Optional
+	ConfigurationProfileIDSelector *v1.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
+
 	// Standard MIME type describing the format of the configuration content. For more information, see Content-Type.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 

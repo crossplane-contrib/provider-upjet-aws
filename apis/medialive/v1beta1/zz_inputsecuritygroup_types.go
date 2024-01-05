@@ -20,6 +20,7 @@ import (
 type InputSecurityGroupInitParameters struct {
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whitelist rules. See Whitelist Rules for more details.
@@ -38,8 +39,10 @@ type InputSecurityGroupObservation struct {
 	Inputs []*string `json:"inputs,omitempty" tf:"inputs,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Whitelist rules. See Whitelist Rules for more details.
@@ -55,6 +58,7 @@ type InputSecurityGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whitelist rules. See Whitelist Rules for more details.

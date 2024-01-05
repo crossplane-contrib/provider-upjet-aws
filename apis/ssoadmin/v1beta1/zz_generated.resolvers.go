@@ -10,8 +10,116 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
+	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+	v1beta1 "github.com/upbound/provider-aws/apis/identitystore/v1beta1"
+	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
+
+// ResolveReferences of this AccountAssignment.
+func (mg *AccountAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
+		Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
+		To: reference.To{
+			List:    &PermissionSetList{},
+			Managed: &PermissionSet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PermissionSetArn")
+	}
+	mg.Spec.ForProvider.PermissionSetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PermissionSetArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrincipalID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.PrincipalIDFromGroupRef,
+		Selector:     mg.Spec.ForProvider.PrincipalIDFromGroupSelector,
+		To: reference.To{
+			List:    &v1beta1.GroupList{},
+			Managed: &v1beta1.Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrincipalID")
+	}
+	mg.Spec.ForProvider.PrincipalID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrincipalIDFromGroupRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CustomerManagedPolicyAttachment.
+func (mg *CustomerManagedPolicyAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CustomerManagedPolicyReference); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CustomerManagedPolicyReference[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.CustomerManagedPolicyReference[i3].PolicyNameRef,
+			Selector:     mg.Spec.ForProvider.CustomerManagedPolicyReference[i3].PolicyNameSelector,
+			To: reference.To{
+				List:    &v1beta11.PolicyList{},
+				Managed: &v1beta11.Policy{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CustomerManagedPolicyReference[i3].Name")
+		}
+		mg.Spec.ForProvider.CustomerManagedPolicyReference[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CustomerManagedPolicyReference[i3].PolicyNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
+		Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
+		To: reference.To{
+			List:    &PermissionSetList{},
+			Managed: &PermissionSet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PermissionSetArn")
+	}
+	mg.Spec.ForProvider.PermissionSetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PermissionSetArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CustomerManagedPolicyReference); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomerManagedPolicyReference[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.CustomerManagedPolicyReference[i3].PolicyNameRef,
+			Selector:     mg.Spec.InitProvider.CustomerManagedPolicyReference[i3].PolicyNameSelector,
+			To: reference.To{
+				List:    &v1beta11.PolicyList{},
+				Managed: &v1beta11.Policy{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CustomerManagedPolicyReference[i3].Name")
+		}
+		mg.Spec.InitProvider.CustomerManagedPolicyReference[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CustomerManagedPolicyReference[i3].PolicyNameRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
 
 // ResolveReferences of this ManagedPolicyAttachment.
 func (mg *ManagedPolicyAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -61,6 +169,73 @@ func (mg *PermissionSetInlinePolicy) ResolveReferences(ctx context.Context, c cl
 	}
 	mg.Spec.ForProvider.PermissionSetArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PermissionSetArnRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this PermissionsBoundaryAttachment.
+func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionSetArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.PermissionSetArnRef,
+		Selector:     mg.Spec.ForProvider.PermissionSetArnSelector,
+		To: reference.To{
+			List:    &PermissionSetList{},
+			Managed: &PermissionSet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PermissionSetArn")
+	}
+	mg.Spec.ForProvider.PermissionSetArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PermissionSetArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PermissionsBoundary); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].Name),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].NameRef,
+				Selector:     mg.Spec.ForProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].NameSelector,
+				To: reference.To{
+					List:    &v1beta11.PolicyList{},
+					Managed: &v1beta11.Policy{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].Name")
+			}
+			mg.Spec.ForProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].NameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PermissionsBoundary); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].Name),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].NameRef,
+				Selector:     mg.Spec.InitProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].NameSelector,
+				To: reference.To{
+					List:    &v1beta11.PolicyList{},
+					Managed: &v1beta11.Policy{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].Name")
+			}
+			mg.Spec.InitProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PermissionsBoundary[i3].CustomerManagedPolicyReference[i4].NameRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }

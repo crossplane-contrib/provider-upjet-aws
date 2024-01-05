@@ -61,6 +61,18 @@ type EventDestinationInitParameters struct {
 	// CloudWatch destination for the events
 	CloudwatchDestination []CloudwatchDestinationInitParameters `json:"cloudwatchDestination,omitempty" tf:"cloudwatch_destination,omitempty"`
 
+	// The name of the configuration set
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ses/v1beta1.ConfigurationSet
+	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
+
+	// Reference to a ConfigurationSet in ses to populate configurationSetName.
+	// +kubebuilder:validation:Optional
+	ConfigurationSetNameRef *v1.Reference `json:"configurationSetNameRef,omitempty" tf:"-"`
+
+	// Selector for a ConfigurationSet in ses to populate configurationSetName.
+	// +kubebuilder:validation:Optional
+	ConfigurationSetNameSelector *v1.Selector `json:"configurationSetNameSelector,omitempty" tf:"-"`
+
 	// If true, the event destination will be enabled
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -68,6 +80,7 @@ type EventDestinationInitParameters struct {
 	KinesisDestination []KinesisDestinationInitParameters `json:"kinesisDestination,omitempty" tf:"kinesis_destination,omitempty"`
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
+	// +listType=set
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
 	// Send the events to an SNS Topic destination
@@ -95,6 +108,7 @@ type EventDestinationObservation struct {
 	KinesisDestination []KinesisDestinationObservation `json:"kinesisDestination,omitempty" tf:"kinesis_destination,omitempty"`
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
+	// +listType=set
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
 	// Send the events to an SNS Topic destination
@@ -130,6 +144,7 @@ type EventDestinationParameters struct {
 
 	// A list of matching types. May be any of "send", "reject", "bounce", "complaint", "delivery", "open", "click", or "renderingFailure".
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchingTypes []*string `json:"matchingTypes,omitempty" tf:"matching_types,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -143,6 +158,32 @@ type EventDestinationParameters struct {
 }
 
 type KinesisDestinationInitParameters struct {
+
+	// The ARN of the role that has permissions to access the Kinesis Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// The ARN of the Kinesis Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate streamArn.
+	// +kubebuilder:validation:Optional
+	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate streamArn.
+	// +kubebuilder:validation:Optional
+	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisDestinationObservation struct {
@@ -186,6 +227,19 @@ type KinesisDestinationParameters struct {
 }
 
 type SnsDestinationInitParameters struct {
+
+	// The ARN of the SNS topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate topicArn.
+	// +kubebuilder:validation:Optional
+	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
 
 type SnsDestinationObservation struct {

@@ -19,11 +19,36 @@ import (
 
 type MetricsDestinationInitParameters struct {
 
+	// The name of the CloudWatch RUM app monitor that will send the metrics.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rum/v1beta1.AppMonitor
+	AppMonitorName *string `json:"appMonitorName,omitempty" tf:"app_monitor_name,omitempty"`
+
+	// Reference to a AppMonitor in rum to populate appMonitorName.
+	// +kubebuilder:validation:Optional
+	AppMonitorNameRef *v1.Reference `json:"appMonitorNameRef,omitempty" tf:"-"`
+
+	// Selector for a AppMonitor in rum to populate appMonitorName.
+	// +kubebuilder:validation:Optional
+	AppMonitorNameSelector *v1.Selector `json:"appMonitorNameSelector,omitempty" tf:"-"`
+
 	// Defines the destination to send the metrics to. Valid values are CloudWatch and Evidently. If you specify Evidently, you must also specify the ARN of the CloudWatchEvidently experiment that is to be the destination and an IAM role that has permission to write to the experiment.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Use this parameter only if Destination is Evidently. This parameter specifies the ARN of the Evidently experiment that will receive the extended metrics.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// This parameter is required if Destination is Evidently. If Destination is CloudWatch, do not use this parameter.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 }
 
 type MetricsDestinationObservation struct {

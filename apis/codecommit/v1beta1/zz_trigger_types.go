@@ -18,6 +18,19 @@ import (
 )
 
 type TriggerInitParameters struct {
+
+	// The name for the repository. This needs to be less than 100 characters.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codecommit/v1beta1.Repository
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// Reference to a Repository in codecommit to populate repositoryName.
+	// +kubebuilder:validation:Optional
+	RepositoryNameRef *v1.Reference `json:"repositoryNameRef,omitempty" tf:"-"`
+
+	// Selector for a Repository in codecommit to populate repositoryName.
+	// +kubebuilder:validation:Optional
+	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
+
 	Trigger []TriggerTriggerInitParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
@@ -65,6 +78,19 @@ type TriggerTriggerInitParameters struct {
 
 	// Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
 	CustomData *string `json:"customData,omitempty" tf:"custom_data,omitempty"`
+
+	// The ARN of the resource that is the target for a trigger. For example, the ARN of a topic in Amazon Simple Notification Service (SNS).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// The repository events that will cause the trigger to run actions in another service, such as sending a notification through Amazon Simple Notification Service (SNS). If no events are specified, the trigger will run for all repository events. Event types include: all, updateReference, createReference, deleteReference.
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`

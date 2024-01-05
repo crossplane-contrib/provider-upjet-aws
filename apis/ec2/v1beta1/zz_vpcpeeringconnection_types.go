@@ -76,8 +76,33 @@ type VPCPeeringConnectionInitParameters_2 struct {
 	// and use the aws_vpc_peering_connection_accepter to manage the accepter side.
 	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
 
+	// The ID of the VPC with which you are creating the VPC Peering Connection.
+	// +crossplane:generate:reference:type=VPC
+	PeerVPCID *string `json:"peerVpcId,omitempty" tf:"peer_vpc_id,omitempty"`
+
+	// Reference to a VPC to populate peerVpcId.
+	// +kubebuilder:validation:Optional
+	PeerVPCIDRef *v1.Reference `json:"peerVpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC to populate peerVpcId.
+	// +kubebuilder:validation:Optional
+	PeerVPCIDSelector *v1.Selector `json:"peerVpcIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the requester VPC.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type VPCPeeringConnectionObservation_2 struct {
@@ -111,9 +136,11 @@ type VPCPeeringConnectionObservation_2 struct {
 	Requester []RequesterObservation `json:"requester,omitempty" tf:"requester,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the requester VPC.
@@ -156,6 +183,7 @@ type VPCPeeringConnectionParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the requester VPC.

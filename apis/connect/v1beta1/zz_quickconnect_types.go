@@ -119,6 +119,19 @@ type QuickConnectInitParameters struct {
 	// Specifies the description of the Quick Connect.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the Quick Connect.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -126,6 +139,7 @@ type QuickConnectInitParameters struct {
 	QuickConnectConfig []QuickConnectConfigInitParameters `json:"quickConnectConfig,omitempty" tf:"quick_connect_config,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -153,9 +167,11 @@ type QuickConnectObservation struct {
 	QuickConnectID *string `json:"quickConnectId,omitempty" tf:"quick_connect_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -194,6 +210,7 @@ type QuickConnectParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -18,6 +18,19 @@ import (
 )
 
 type ResourceShareAccepterInitParameters struct {
+
+	// The ARN of the resource share.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.PrincipalAssociation
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_share_arn",false)
+	ShareArn *string `json:"shareArn,omitempty" tf:"share_arn,omitempty"`
+
+	// Reference to a PrincipalAssociation in ram to populate shareArn.
+	// +kubebuilder:validation:Optional
+	ShareArnRef *v1.Reference `json:"shareArnRef,omitempty" tf:"-"`
+
+	// Selector for a PrincipalAssociation in ram to populate shareArn.
+	// +kubebuilder:validation:Optional
+	ShareArnSelector *v1.Selector `json:"shareArnSelector,omitempty" tf:"-"`
 }
 
 type ResourceShareAccepterObservation struct {

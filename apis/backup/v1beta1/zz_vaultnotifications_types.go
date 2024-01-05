@@ -20,7 +20,33 @@ import (
 type VaultNotificationsInitParameters struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the backup vault.
+	// +listType=set
 	BackupVaultEvents []*string `json:"backupVaultEvents,omitempty" tf:"backup_vault_events,omitempty"`
+
+	// Name of the backup vault to add notifications for.
+	// +crossplane:generate:reference:type=Vault
+	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
+
+	// Reference to a Vault to populate backupVaultName.
+	// +kubebuilder:validation:Optional
+	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault to populate backupVaultName.
+	// +kubebuilder:validation:Optional
+	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
+
+	// The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s events
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate snsTopicArn.
+	// +kubebuilder:validation:Optional
+	SnsTopicArnRef *v1.Reference `json:"snsTopicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate snsTopicArn.
+	// +kubebuilder:validation:Optional
+	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 }
 
 type VaultNotificationsObservation struct {
@@ -29,6 +55,7 @@ type VaultNotificationsObservation struct {
 	BackupVaultArn *string `json:"backupVaultArn,omitempty" tf:"backup_vault_arn,omitempty"`
 
 	// An array of events that indicate the status of jobs to back up resources to the backup vault.
+	// +listType=set
 	BackupVaultEvents []*string `json:"backupVaultEvents,omitempty" tf:"backup_vault_events,omitempty"`
 
 	// Name of the backup vault to add notifications for.
@@ -45,6 +72,7 @@ type VaultNotificationsParameters struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the backup vault.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	BackupVaultEvents []*string `json:"backupVaultEvents,omitempty" tf:"backup_vault_events,omitempty"`
 
 	// Name of the backup vault to add notifications for.

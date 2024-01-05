@@ -179,6 +179,7 @@ type DeliveryStreamInitParameters struct {
 	SplunkConfiguration []SplunkConfigurationInitParameters `json:"splunkConfiguration,omitempty" tf:"splunk_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
@@ -232,9 +233,11 @@ type DeliveryStreamObservation struct {
 	SplunkConfiguration []SplunkConfigurationObservation `json:"splunkConfiguration,omitempty" tf:"splunk_configuration,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
@@ -306,6 +309,7 @@ type DeliveryStreamParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
@@ -385,6 +389,19 @@ type ElasticsearchConfigurationInitParameters struct {
 	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
+	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticsearch/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
+
+	// Reference to a Domain in elasticsearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnRef *v1.Reference `json:"domainArnRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in elasticsearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnSelector *v1.Selector `json:"domainArnSelector,omitempty" tf:"-"`
+
 	// The Elasticsearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
@@ -396,6 +413,19 @@ type ElasticsearchConfigurationInitParameters struct {
 
 	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
@@ -565,6 +595,19 @@ type ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
 type ExtendedS3ConfigurationInitParameters struct {
 
+	// The ARN of the S3 bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+
 	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	BufferInterval *float64 `json:"bufferInterval,omitempty" tf:"buffer_interval,omitempty"`
 
@@ -596,6 +639,19 @@ type ExtendedS3ConfigurationInitParameters struct {
 
 	// The data processing configuration.  More details are given below.
 	ProcessingConfiguration []ExtendedS3ConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
 	S3BackupConfiguration []S3BackupConfigurationInitParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
@@ -822,6 +878,19 @@ type HTTPEndpointConfigurationInitParameters struct {
 
 	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
@@ -1051,6 +1120,7 @@ type OpenXJSONSerDeInitParameters struct {
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty" tf:"case_insensitive,omitempty"`
 
 	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
+	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
 	// When set to true, specifies that the names of the keys include dots and that you want Kinesis Data Firehose to replace them with underscores. This is useful because Apache Hive does not allow dots in column names. For example, if the JSON contains a key whose name is "a.b", you can define the column name to be "a_b" when using this option. Defaults to false.
@@ -1063,6 +1133,7 @@ type OpenXJSONSerDeObservation struct {
 	CaseInsensitive *bool `json:"caseInsensitive,omitempty" tf:"case_insensitive,omitempty"`
 
 	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
+	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
 	// When set to true, specifies that the names of the keys include dots and that you want Kinesis Data Firehose to replace them with underscores. This is useful because Apache Hive does not allow dots in column names. For example, if the JSON contains a key whose name is "a.b", you can define the column name to be "a_b" when using this option. Defaults to false.
@@ -1077,6 +1148,7 @@ type OpenXJSONSerDeParameters struct {
 
 	// A map of column names to JSON keys that aren't identical to the column names. This is useful when the JSON contains keys that are Hive keywords. For example, timestamp is a Hive keyword. If you have a JSON key named timestamp, set this parameter to { ts = "timestamp" } to map this key to a column named ts.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ColumnToJSONKeyMappings map[string]*string `json:"columnToJsonKeyMappings,omitempty" tf:"column_to_json_key_mappings,omitempty"`
 
 	// When set to true, specifies that the names of the keys include dots and that you want Kinesis Data Firehose to replace them with underscores. This is useful because Apache Hive does not allow dots in column names. For example, if the JSON contains a key whose name is "a.b", you can define the column name to be "a_b" when using this option. Defaults to false.
@@ -1137,6 +1209,19 @@ type OpensearchConfigurationInitParameters struct {
 	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
+	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta1.Domain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
+
+	// Reference to a Domain in opensearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnRef *v1.Reference `json:"domainArnRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in opensearch to populate domainArn.
+	// +kubebuilder:validation:Optional
+	DomainArnSelector *v1.Selector `json:"domainArnSelector,omitempty" tf:"-"`
+
 	// The Elasticsearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
@@ -1148,6 +1233,19 @@ type OpensearchConfigurationInitParameters struct {
 
 	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
@@ -1365,10 +1463,25 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParametersParameter
 
 type OpensearchConfigurationVPCConfigInitParameters struct {
 
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -1378,9 +1491,11 @@ type OpensearchConfigurationVPCConfigObservation struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -1404,10 +1519,12 @@ type OpensearchConfigurationVPCConfigParameters struct {
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 
@@ -1844,6 +1961,19 @@ type RedshiftConfigurationInitParameters struct {
 	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
 	S3BackupConfiguration []RedshiftConfigurationS3BackupConfigurationInitParameters `json:"s3BackupConfiguration,omitempty" tf:"s3_backup_configuration,omitempty"`
 
@@ -2079,6 +2209,19 @@ type RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameter
 
 type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 
+	// The ARN of the S3 bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+
 	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	BufferInterval *float64 `json:"bufferInterval,omitempty" tf:"buffer_interval,omitempty"`
 
@@ -2101,6 +2244,19 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type RedshiftConfigurationS3BackupConfigurationObservation struct {
@@ -2410,6 +2566,19 @@ type S3ConfigurationCloudwatchLoggingOptionsParameters struct {
 
 type S3ConfigurationInitParameters struct {
 
+	// The ARN of the S3 bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+
 	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300.
 	BufferInterval *float64 `json:"bufferInterval,omitempty" tf:"buffer_interval,omitempty"`
 
@@ -2432,6 +2601,19 @@ type S3ConfigurationInitParameters struct {
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type S3ConfigurationObservation struct {
@@ -2534,6 +2716,31 @@ type SchemaConfigurationInitParameters struct {
 
 	// Specifies the name of the AWS Glue database that contains the schema for the output data.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogTable
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a CatalogTable in glue to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogTable in glue to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Specifies the table version for the output data schema. Defaults to LATEST.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
@@ -2885,10 +3092,25 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersParameters st
 
 type VPCConfigInitParameters struct {
 
+	// The ARN of the AWS credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -2898,9 +3120,11 @@ type VPCConfigObservation struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -2924,10 +3148,12 @@ type VPCConfigParameters struct {
 
 	// A list of security group IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// A list of subnet IDs to associate with Kinesis Firehose.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 

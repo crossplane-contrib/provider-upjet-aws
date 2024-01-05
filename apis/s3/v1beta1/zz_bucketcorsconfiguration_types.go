@@ -20,15 +20,19 @@ import (
 type BucketCorsConfigurationCorsRuleInitParameters struct {
 
 	// Set of Headers that are specified in the Access-Control-Request-Headers header.
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Set of HTTP methods that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, and DELETE.
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Set of origins you want customers to be able to access the bucket from.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Set of headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -41,15 +45,19 @@ type BucketCorsConfigurationCorsRuleInitParameters struct {
 type BucketCorsConfigurationCorsRuleObservation struct {
 
 	// Set of Headers that are specified in the Access-Control-Request-Headers header.
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Set of HTTP methods that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, and DELETE.
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Set of origins you want customers to be able to access the bucket from.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Set of headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -63,18 +71,22 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 
 	// Set of Headers that are specified in the Access-Control-Request-Headers header.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Set of HTTP methods that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, and DELETE.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// Set of origins you want customers to be able to access the bucket from.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// Set of headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExposeHeaders []*string `json:"exposeHeaders,omitempty" tf:"expose_headers,omitempty"`
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -87,6 +99,19 @@ type BucketCorsConfigurationCorsRuleParameters struct {
 }
 
 type BucketCorsConfigurationInitParameters struct {
+
+	// Name of the bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
 	// Set of origins and methods (cross-origin access that you want to allow). See below. You can configure up to 100 rules.
 	CorsRule []BucketCorsConfigurationCorsRuleInitParameters `json:"corsRule,omitempty" tf:"cors_rule,omitempty"`

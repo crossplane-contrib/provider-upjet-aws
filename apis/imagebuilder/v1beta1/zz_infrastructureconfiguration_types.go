@@ -25,8 +25,33 @@ type InfrastructureConfigurationInitParameters struct {
 	// Configuration block with instance metadata options for the HTTP requests that pipeline builds use to launch EC2 build and test instances. Detailed below.
 	InstanceMetadataOptions []InstanceMetadataOptionsInitParameters `json:"instanceMetadataOptions,omitempty" tf:"instance_metadata_options,omitempty"`
 
+	// Name of IAM Instance Profile.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	InstanceProfileName *string `json:"instanceProfileName,omitempty" tf:"instance_profile_name,omitempty"`
+
+	// Reference to a InstanceProfile in iam to populate instanceProfileName.
+	// +kubebuilder:validation:Optional
+	InstanceProfileNameRef *v1.Reference `json:"instanceProfileNameRef,omitempty" tf:"-"`
+
+	// Selector for a InstanceProfile in iam to populate instanceProfileName.
+	// +kubebuilder:validation:Optional
+	InstanceProfileNameSelector *v1.Selector `json:"instanceProfileNameSelector,omitempty" tf:"-"`
+
 	// Set of EC2 Instance Types.
+	// +listType=set
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
+
+	// Name of EC2 Key Pair.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.KeyPair
+	KeyPair *string `json:"keyPair,omitempty" tf:"key_pair,omitempty"`
+
+	// Reference to a KeyPair in ec2 to populate keyPair.
+	// +kubebuilder:validation:Optional
+	KeyPairRef *v1.Reference `json:"keyPairRef,omitempty" tf:"-"`
+
+	// Selector for a KeyPair in ec2 to populate keyPair.
+	// +kubebuilder:validation:Optional
+	KeyPairSelector *v1.Selector `json:"keyPairSelector,omitempty" tf:"-"`
 
 	// Configuration block with logging settings. Detailed below.
 	Logging []LoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
@@ -35,9 +60,51 @@ type InfrastructureConfigurationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
+	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
+	// Set of EC2 Security Group identifiers.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Amazon Resource Name (ARN) of SNS Topic.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate snsTopicArn.
+	// +kubebuilder:validation:Optional
+	SnsTopicArnRef *v1.Reference `json:"snsTopicArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate snsTopicArn.
+	// +kubebuilder:validation:Optional
+	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
+
+	// EC2 Subnet identifier. Also requires security_group_ids argument.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Enable if the instance should be terminated when the pipeline fails. Defaults to false.
@@ -68,6 +135,7 @@ type InfrastructureConfigurationObservation struct {
 	InstanceProfileName *string `json:"instanceProfileName,omitempty" tf:"instance_profile_name,omitempty"`
 
 	// Set of EC2 Instance Types.
+	// +listType=set
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Name of EC2 Key Pair.
@@ -80,9 +148,11 @@ type InfrastructureConfigurationObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
+	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
 
 	// Set of EC2 Security Group identifiers.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Amazon Resource Name (ARN) of SNS Topic.
@@ -92,9 +162,11 @@ type InfrastructureConfigurationObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Enable if the instance should be terminated when the pipeline fails. Defaults to false.
@@ -126,6 +198,7 @@ type InfrastructureConfigurationParameters struct {
 
 	// Set of EC2 Instance Types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InstanceTypes []*string `json:"instanceTypes,omitempty" tf:"instance_types,omitempty"`
 
 	// Name of EC2 Key Pair.
@@ -156,6 +229,7 @@ type InfrastructureConfigurationParameters struct {
 
 	// Key-value map of resource tags to assign to infrastructure created by the configuration.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ResourceTags map[string]*string `json:"resourceTags,omitempty" tf:"resource_tags,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -171,6 +245,7 @@ type InfrastructureConfigurationParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Amazon Resource Name (ARN) of SNS Topic.
@@ -202,6 +277,7 @@ type InfrastructureConfigurationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Enable if the instance should be terminated when the pipeline fails. Defaults to false.
@@ -258,6 +334,18 @@ type LoggingParameters struct {
 }
 
 type S3LogsInitParameters struct {
+
+	// Name of the S3 Bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameRef *v1.Reference `json:"s3BucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3BucketName.
+	// +kubebuilder:validation:Optional
+	S3BucketNameSelector *v1.Selector `json:"s3BucketNameSelector,omitempty" tf:"-"`
 
 	// Prefix to use for S3 logs. Defaults to /.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`

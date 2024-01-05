@@ -90,6 +90,74 @@ func (mg *Pipeline) ResolveReferences(ctx context.Context, c client.Reader) erro
 		mg.Spec.ForProvider.ThumbnailConfig[i3].BucketRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ContentConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContentConfig[i3].Bucket),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ContentConfig[i3].BucketRef,
+			Selector:     mg.Spec.InitProvider.ContentConfig[i3].BucketSelector,
+			To: reference.To{
+				List:    &v1beta1.BucketList{},
+				Managed: &v1beta1.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ContentConfig[i3].Bucket")
+		}
+		mg.Spec.InitProvider.ContentConfig[i3].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ContentConfig[i3].BucketRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputBucket),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InputBucketRef,
+		Selector:     mg.Spec.InitProvider.InputBucketSelector,
+		To: reference.To{
+			List:    &v1beta1.BucketList{},
+			Managed: &v1beta1.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InputBucket")
+	}
+	mg.Spec.InitProvider.InputBucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InputBucketRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Role),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.RoleRef,
+		Selector:     mg.Spec.InitProvider.RoleSelector,
+		To: reference.To{
+			List:    &v1beta11.RoleList{},
+			Managed: &v1beta11.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Role")
+	}
+	mg.Spec.InitProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ThumbnailConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ThumbnailConfig[i3].Bucket),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ThumbnailConfig[i3].BucketRef,
+			Selector:     mg.Spec.InitProvider.ThumbnailConfig[i3].BucketSelector,
+			To: reference.To{
+				List:    &v1beta1.BucketList{},
+				Managed: &v1beta1.Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ThumbnailConfig[i3].Bucket")
+		}
+		mg.Spec.InitProvider.ThumbnailConfig[i3].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ThumbnailConfig[i3].BucketRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

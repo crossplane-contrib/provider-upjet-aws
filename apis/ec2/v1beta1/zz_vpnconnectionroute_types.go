@@ -21,6 +21,19 @@ type VPNConnectionRouteInitParameters struct {
 
 	// The CIDR block associated with the local subnet of the customer network.
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
+
+	// The ID of the VPN connection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNConnection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`
+
+	// Reference to a VPNConnection in ec2 to populate vpnConnectionId.
+	// +kubebuilder:validation:Optional
+	VPNConnectionIDRef *v1.Reference `json:"vpnConnectionIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPNConnection in ec2 to populate vpnConnectionId.
+	// +kubebuilder:validation:Optional
+	VPNConnectionIDSelector *v1.Selector `json:"vpnConnectionIdSelector,omitempty" tf:"-"`
 }
 
 type VPNConnectionRouteObservation struct {

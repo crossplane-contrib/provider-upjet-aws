@@ -438,6 +438,21 @@ func (in *SigningJobInitParameters) DeepCopyInto(out *SigningJobInitParameters) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ProfileName != nil {
+		in, out := &in.ProfileName, &out.ProfileName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProfileNameRef != nil {
+		in, out := &in.ProfileNameRef, &out.ProfileNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ProfileNameSelector != nil {
+		in, out := &in.ProfileNameSelector, &out.ProfileNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Source != nil {
 		in, out := &in.Source, &out.Source
 		*out = make([]SourceInitParameters, len(*in))
@@ -981,6 +996,21 @@ func (in *SigningProfilePermissionInitParameters) DeepCopyInto(out *SigningProfi
 		in, out := &in.Principal, &out.Principal
 		*out = new(string)
 		**out = **in
+	}
+	if in.ProfileVersion != nil {
+		in, out := &in.ProfileVersion, &out.ProfileVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.ProfileVersionRef != nil {
+		in, out := &in.ProfileVersionRef, &out.ProfileVersionRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ProfileVersionSelector != nil {
+		in, out := &in.ProfileVersionSelector, &out.ProfileVersionSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StatementIDPrefix != nil {
 		in, out := &in.StatementIDPrefix, &out.StatementIDPrefix

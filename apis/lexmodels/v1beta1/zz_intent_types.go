@@ -384,6 +384,7 @@ type IntentInitParameters_2 struct {
 	// An array of utterances (strings) that a user might say to signal
 	// the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
 	// In each utterance, a slot name is enclosed in curly braces. Must have between 1 and 10 items in the list, and each item must be less than or equal to 200 characters in length.
+	// +listType=set
 	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
 
 	// An list of intent slots. At runtime, Amazon Lex elicits required slot values
@@ -457,6 +458,7 @@ type IntentObservation_2 struct {
 	// An array of utterances (strings) that a user might say to signal
 	// the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
 	// In each utterance, a slot name is enclosed in curly braces. Must have between 1 and 10 items in the list, and each item must be less than or equal to 200 characters in length.
+	// +listType=set
 	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
 
 	// An list of intent slots. At runtime, Amazon Lex elicits required slot values
@@ -533,6 +535,7 @@ type IntentParameters_2 struct {
 	// the intent. For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
 	// In each utterance, a slot name is enclosed in curly braces. Must have between 1 and 10 items in the list, and each item must be less than or equal to 200 characters in length.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SampleUtterances []*string `json:"sampleUtterances,omitempty" tf:"sample_utterances,omitempty"`
 
 	// An list of intent slots. At runtime, Amazon Lex elicits required slot values

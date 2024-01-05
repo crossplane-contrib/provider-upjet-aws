@@ -55,6 +55,38 @@ func (mg *PlatformApplication) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.SuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SuccessFeedbackRoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FailureFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.FailureFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.FailureFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FailureFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.FailureFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FailureFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SuccessFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.SuccessFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.SuccessFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SuccessFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.SuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SuccessFeedbackRoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -80,6 +112,22 @@ func (mg *SMSPreferences) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.DeliveryStatusIAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DeliveryStatusIAMRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeliveryStatusIAMRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.DeliveryStatusIAMRoleArnRef,
+		Selector:     mg.Spec.InitProvider.DeliveryStatusIAMRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DeliveryStatusIAMRoleArn")
+	}
+	mg.Spec.InitProvider.DeliveryStatusIAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DeliveryStatusIAMRoleArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -251,6 +299,166 @@ func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.SqsSuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SqsSuccessFeedbackRoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationFailureFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ApplicationFailureFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ApplicationFailureFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationFailureFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.ApplicationFailureFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ApplicationFailureFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationSuccessFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ApplicationSuccessFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ApplicationSuccessFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationSuccessFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.ApplicationSuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ApplicationSuccessFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirehoseFailureFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.FirehoseFailureFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.FirehoseFailureFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FirehoseFailureFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.FirehoseFailureFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FirehoseFailureFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FirehoseSuccessFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.FirehoseSuccessFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.FirehoseSuccessFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FirehoseSuccessFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.FirehoseSuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FirehoseSuccessFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPFailureFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.HTTPFailureFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.HTTPFailureFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HTTPFailureFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.HTTPFailureFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HTTPFailureFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.HTTPSuccessFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.HTTPSuccessFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.HTTPSuccessFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.HTTPSuccessFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.HTTPSuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.HTTPSuccessFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaFailureFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.LambdaFailureFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.LambdaFailureFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LambdaFailureFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.LambdaFailureFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LambdaFailureFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LambdaSuccessFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.LambdaSuccessFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.LambdaSuccessFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LambdaSuccessFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.LambdaSuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LambdaSuccessFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SqsFailureFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.SqsFailureFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.SqsFailureFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SqsFailureFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.SqsFailureFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SqsFailureFeedbackRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SqsSuccessFeedbackRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.SqsSuccessFeedbackRoleArnRef,
+		Selector:     mg.Spec.InitProvider.SqsSuccessFeedbackRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SqsSuccessFeedbackRoleArn")
+	}
+	mg.Spec.InitProvider.SqsSuccessFeedbackRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SqsSuccessFeedbackRoleArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -276,6 +484,22 @@ func (mg *TopicPolicy) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.Arn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Arn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ArnRef,
+		Selector:     mg.Spec.InitProvider.ArnSelector,
+		To: reference.To{
+			List:    &TopicList{},
+			Managed: &Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Arn")
+	}
+	mg.Spec.InitProvider.Arn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ArnRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -334,6 +558,54 @@ func (mg *TopicSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TopicArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Endpoint),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.EndpointRef,
+		Selector:     mg.Spec.InitProvider.EndpointSelector,
+		To: reference.To{
+			List:    &v1beta11.QueueList{},
+			Managed: &v1beta11.Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Endpoint")
+	}
+	mg.Spec.InitProvider.Endpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EndpointRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubscriptionRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.SubscriptionRoleArnRef,
+		Selector:     mg.Spec.InitProvider.SubscriptionRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubscriptionRoleArn")
+	}
+	mg.Spec.InitProvider.SubscriptionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubscriptionRoleArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TopicArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.TopicArnRef,
+		Selector:     mg.Spec.InitProvider.TopicArnSelector,
+		To: reference.To{
+			List:    &TopicList{},
+			Managed: &Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TopicArn")
+	}
+	mg.Spec.InitProvider.TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TopicArnRef = rsp.ResolvedReference
 
 	return nil
 }

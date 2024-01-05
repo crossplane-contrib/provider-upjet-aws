@@ -38,6 +38,24 @@ func (mg *VoiceConnectorGroup) ResolveReferences(ctx context.Context, c client.R
 		mg.Spec.ForProvider.Connector[i3].VoiceConnectorIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Connector); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Connector[i3].VoiceConnectorID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Connector[i3].VoiceConnectorIDRef,
+			Selector:     mg.Spec.InitProvider.Connector[i3].VoiceConnectorIDSelector,
+			To: reference.To{
+				List:    &VoiceConnectorList{},
+				Managed: &VoiceConnector{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Connector[i3].VoiceConnectorID")
+		}
+		mg.Spec.InitProvider.Connector[i3].VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Connector[i3].VoiceConnectorIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -65,6 +83,22 @@ func (mg *VoiceConnectorLogging) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VoiceConnectorIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
+		Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
+		To: reference.To{
+			List:    &VoiceConnectorList{},
+			Managed: &VoiceConnector{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VoiceConnectorID")
+	}
+	mg.Spec.InitProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VoiceConnectorIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -90,6 +124,22 @@ func (mg *VoiceConnectorOrigination) ResolveReferences(ctx context.Context, c cl
 	}
 	mg.Spec.ForProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VoiceConnectorIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
+		Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
+		To: reference.To{
+			List:    &VoiceConnectorList{},
+			Managed: &VoiceConnector{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VoiceConnectorID")
+	}
+	mg.Spec.InitProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VoiceConnectorIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -117,6 +167,22 @@ func (mg *VoiceConnectorStreaming) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VoiceConnectorIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
+		Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
+		To: reference.To{
+			List:    &VoiceConnectorList{},
+			Managed: &VoiceConnector{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VoiceConnectorID")
+	}
+	mg.Spec.InitProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VoiceConnectorIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -143,6 +209,22 @@ func (mg *VoiceConnectorTermination) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VoiceConnectorIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
+		Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
+		To: reference.To{
+			List:    &VoiceConnectorList{},
+			Managed: &VoiceConnector{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VoiceConnectorID")
+	}
+	mg.Spec.InitProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VoiceConnectorIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -168,6 +250,22 @@ func (mg *VoiceConnectorTerminationCredentials) ResolveReferences(ctx context.Co
 	}
 	mg.Spec.ForProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VoiceConnectorIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VoiceConnectorID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VoiceConnectorIDRef,
+		Selector:     mg.Spec.InitProvider.VoiceConnectorIDSelector,
+		To: reference.To{
+			List:    &VoiceConnectorList{},
+			Managed: &VoiceConnector{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VoiceConnectorID")
+	}
+	mg.Spec.InitProvider.VoiceConnectorID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VoiceConnectorIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -21,6 +21,19 @@ type ResourceAssociationInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the resource to associate with the RAM Resource Share.
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Amazon Resource Name (ARN) of the RAM Resource Share.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.ResourceShare
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceShareArn *string `json:"resourceShareArn,omitempty" tf:"resource_share_arn,omitempty"`
+
+	// Reference to a ResourceShare in ram to populate resourceShareArn.
+	// +kubebuilder:validation:Optional
+	ResourceShareArnRef *v1.Reference `json:"resourceShareArnRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceShare in ram to populate resourceShareArn.
+	// +kubebuilder:validation:Optional
+	ResourceShareArnSelector *v1.Selector `json:"resourceShareArnSelector,omitempty" tf:"-"`
 }
 
 type ResourceAssociationObservation struct {

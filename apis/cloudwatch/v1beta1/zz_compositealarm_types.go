@@ -22,6 +22,20 @@ type CompositeAlarmInitParameters struct {
 	// Indicates whether actions should be executed during any changes to the alarm state of the composite alarm. Defaults to true.
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
+	// The set of actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +listType=set
+	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
+
+	// References to Topic in sns to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Topic in sns to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+
 	// The description for the composite alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
 
@@ -29,9 +43,25 @@ type CompositeAlarmInitParameters struct {
 	AlarmRule *string `json:"alarmRule,omitempty" tf:"alarm_rule,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
+	// The set of actions to execute when this alarm transitions to an OK state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +listType=set
+	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
+
+	// References to Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -41,6 +71,7 @@ type CompositeAlarmObservation struct {
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to the ALARM state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
 	// The description for the composite alarm.
@@ -56,15 +87,19 @@ type CompositeAlarmObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to an OK state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
+	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -78,6 +113,7 @@ type CompositeAlarmParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
 	// References to Topic in sns to populate alarmActions.
@@ -98,12 +134,14 @@ type CompositeAlarmParameters struct {
 
 	// The set of actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	InsufficientDataActions []*string `json:"insufficientDataActions,omitempty" tf:"insufficient_data_actions,omitempty"`
 
 	// The set of actions to execute when this alarm transitions to an OK state from any other state. Each action is specified as an ARN. Up to 5 actions are allowed.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
 
 	// References to Topic in sns to populate okActions.
@@ -121,6 +159,7 @@ type CompositeAlarmParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

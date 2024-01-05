@@ -39,6 +39,22 @@ func (mg *Ledger) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.KMSKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKey),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyRef,
+		Selector:     mg.Spec.InitProvider.KMSKeySelector,
+		To: reference.To{
+			List:    &v1beta1.KeyList{},
+			Managed: &v1beta1.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKey")
+	}
+	mg.Spec.InitProvider.KMSKey = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -98,6 +114,56 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KinesisConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KinesisConfiguration[i3].StreamArn),
+			Extract:      common.TerraformID(),
+			Reference:    mg.Spec.InitProvider.KinesisConfiguration[i3].StreamArnRef,
+			Selector:     mg.Spec.InitProvider.KinesisConfiguration[i3].StreamArnSelector,
+			To: reference.To{
+				List:    &v1beta11.StreamList{},
+				Managed: &v1beta11.Stream{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.KinesisConfiguration[i3].StreamArn")
+		}
+		mg.Spec.InitProvider.KinesisConfiguration[i3].StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KinesisConfiguration[i3].StreamArnRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LedgerName),
+		Extract:      common.TerraformID(),
+		Reference:    mg.Spec.InitProvider.LedgerNameRef,
+		Selector:     mg.Spec.InitProvider.LedgerNameSelector,
+		To: reference.To{
+			List:    &LedgerList{},
+			Managed: &Ledger{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LedgerName")
+	}
+	mg.Spec.InitProvider.LedgerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LedgerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.RoleArnRef,
+		Selector:     mg.Spec.InitProvider.RoleArnSelector,
+		To: reference.To{
+			List:    &v1beta12.RoleList{},
+			Managed: &v1beta12.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
+	}
+	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
 
 	return nil
 }

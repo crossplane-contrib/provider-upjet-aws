@@ -22,6 +22,30 @@ type ProductPortfolioAssociationInitParameters struct {
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
+	// Portfolio identifier.
+	// +crossplane:generate:reference:type=Portfolio
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Reference to a Portfolio to populate portfolioId.
+	// +kubebuilder:validation:Optional
+	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
+
+	// Selector for a Portfolio to populate portfolioId.
+	// +kubebuilder:validation:Optional
+	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
+
+	// Product identifier.
+	// +crossplane:generate:reference:type=Product
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// Reference to a Product to populate productId.
+	// +kubebuilder:validation:Optional
+	ProductIDRef *v1.Reference `json:"productIdRef,omitempty" tf:"-"`
+
+	// Selector for a Product to populate productId.
+	// +kubebuilder:validation:Optional
+	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
+
 	// Identifier of the source portfolio.
 	SourcePortfolioID *string `json:"sourcePortfolioId,omitempty" tf:"source_portfolio_id,omitempty"`
 }

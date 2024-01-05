@@ -18,6 +18,32 @@ import (
 )
 
 type AssociationInitParameters struct {
+
+	// ARN of the license configuration.
+	// +crossplane:generate:reference:type=LicenseConfiguration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
+
+	// Reference to a LicenseConfiguration to populate licenseConfigurationArn.
+	// +kubebuilder:validation:Optional
+	LicenseConfigurationArnRef *v1.Reference `json:"licenseConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a LicenseConfiguration to populate licenseConfigurationArn.
+	// +kubebuilder:validation:Optional
+	LicenseConfigurationArnSelector *v1.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
+
+	// ARN of the resource associated with the license configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a Instance in ec2 to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in ec2 to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type AssociationObservation struct {

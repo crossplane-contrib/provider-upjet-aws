@@ -19,6 +19,18 @@ import (
 
 type StreamInitParameters struct {
 
+	// The name of the log group under which the log stream is to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
+
 	// The name of the log stream. Must not be longer than 512 characters and must not contain :
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }

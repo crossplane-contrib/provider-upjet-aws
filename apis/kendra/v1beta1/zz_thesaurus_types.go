@@ -22,13 +22,40 @@ type ThesaurusInitParameters struct {
 	// The description for a thesaurus.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The identifier of the index for a thesaurus.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta1.Index
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
+
+	// Reference to a Index in kendra to populate indexId.
+	// +kubebuilder:validation:Optional
+	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+
+	// Selector for a Index in kendra to populate indexId.
+	// +kubebuilder:validation:Optional
+	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+
 	// The name for the thesaurus.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The IAM (Identity and Access Management) role used to access the thesaurus file in S3.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The S3 path where your thesaurus file sits in S3. Detailed below.
 	SourceS3Path []ThesaurusSourceS3PathInitParameters `json:"sourceS3Path,omitempty" tf:"source_s3_path,omitempty"`
 
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,9 +86,11 @@ type ThesaurusObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The unique identifiers of the thesaurus and index separated by a slash (/).
@@ -117,10 +146,37 @@ type ThesaurusParameters struct {
 
 	// Key-value map of resource tags. If configured with a provider default_tags configuration block present, tags with matching keys will overwrite those defined at the provider-level.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ThesaurusSourceS3PathInitParameters struct {
+
+	// The name of the S3 bucket that contains the file.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// The name of the file.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Object
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Reference to a Object in s3 to populate key.
+	// +kubebuilder:validation:Optional
+	KeyRef *v1.Reference `json:"keyRef,omitempty" tf:"-"`
+
+	// Selector for a Object in s3 to populate key.
+	// +kubebuilder:validation:Optional
+	KeySelector *v1.Selector `json:"keySelector,omitempty" tf:"-"`
 }
 
 type ThesaurusSourceS3PathObservation struct {

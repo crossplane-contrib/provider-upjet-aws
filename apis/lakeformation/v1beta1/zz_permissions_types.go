@@ -19,6 +19,19 @@ import (
 
 type DataLocationInitParameters struct {
 
+	// –  Amazon Resource Name (ARN) that uniquely identifies the data location resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lakeformation/v1beta1.Resource
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a Resource in lakeformation to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a Resource in lakeformation to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+
 	// Identifier for the Data Catalog where the location is registered with Lake Formation. By default, it is the account ID of the caller.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 }
@@ -57,6 +70,18 @@ type DatabaseInitParameters struct {
 
 	// Identifier for the Data Catalog. By default, it is the account ID of the caller.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
+
+	// –  Name of the database resource. Unique to the Data Catalog.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a CatalogDatabase in glue to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogDatabase in glue to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type DatabaseObservation struct {
@@ -94,6 +119,7 @@ type ExpressionInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values of an LF-Tag.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -103,6 +129,7 @@ type ExpressionObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values of an LF-Tag.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -114,6 +141,7 @@ type ExpressionParameters struct {
 
 	// A list of possible values of an LF-Tag.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
@@ -126,6 +154,7 @@ type LfTagInitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values an attribute can take.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -138,6 +167,7 @@ type LfTagObservation struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// A list of possible values an attribute can take.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -153,6 +183,7 @@ type LfTagParameters struct {
 
 	// A list of possible values an attribute can take.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
@@ -376,13 +407,27 @@ type TableWithColumnsInitParameters struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Set of column names for the table.
+	// +listType=set
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
 	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Set of column names for the table to exclude.
+	// +listType=set
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
+
+	// –  Name of the table resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogTable
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a CatalogTable in glue to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogTable in glue to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// Whether to use a column wildcard.
 	Wildcard *bool `json:"wildcard,omitempty" tf:"wildcard,omitempty"`
@@ -394,12 +439,14 @@ type TableWithColumnsObservation struct {
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
 	// Set of column names for the table.
+	// +listType=set
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
 	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// Set of column names for the table to exclude.
+	// +listType=set
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
 	// –  Name of the table resource.
@@ -417,6 +464,7 @@ type TableWithColumnsParameters struct {
 
 	// Set of column names for the table.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ColumnNames []*string `json:"columnNames,omitempty" tf:"column_names,omitempty"`
 
 	// –  Name of the database for the table with columns resource. Unique to the Data Catalog.
@@ -425,6 +473,7 @@ type TableWithColumnsParameters struct {
 
 	// Set of column names for the table to exclude.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludedColumnNames []*string `json:"excludedColumnNames,omitempty" tf:"excluded_column_names,omitempty"`
 
 	// –  Name of the table resource.

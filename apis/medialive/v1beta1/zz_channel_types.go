@@ -1014,10 +1014,24 @@ type ChannelInitParameters struct {
 	// Name of the Channel.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Concise argument description.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// Whether to start/stop channel. Default: false
 	StartChannel *bool `json:"startChannel,omitempty" tf:"start_channel,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Settings for the VPC outputs.
@@ -1090,8 +1104,10 @@ type ChannelObservation struct {
 	StartChannel *bool `json:"startChannel,omitempty" tf:"start_channel,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Settings for the VPC outputs.
@@ -1161,6 +1177,7 @@ type ChannelParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Settings for the VPC outputs.
@@ -4127,6 +4144,19 @@ type InputAttachmentsInitParameters struct {
 	// User-specified name for the attachment.
 	InputAttachmentName *string `json:"inputAttachmentName,omitempty" tf:"input_attachment_name,omitempty"`
 
+	// The ID of the input.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/medialive/v1beta1.Input
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InputID *string `json:"inputId,omitempty" tf:"input_id,omitempty"`
+
+	// Reference to a Input in medialive to populate inputId.
+	// +kubebuilder:validation:Optional
+	InputIDRef *v1.Reference `json:"inputIdRef,omitempty" tf:"-"`
+
+	// Selector for a Input in medialive to populate inputId.
+	// +kubebuilder:validation:Optional
+	InputIDSelector *v1.Selector `json:"inputIdSelector,omitempty" tf:"-"`
+
 	// Settings of an input. See Input Settings for more details
 	InputSettings []InputSettingsInitParameters `json:"inputSettings,omitempty" tf:"input_settings,omitempty"`
 }
@@ -5840,9 +5870,11 @@ type OutputSettingsParameters struct {
 type OutputsInitParameters struct {
 
 	// The names of the audio descriptions used as audio sources for the output.
+	// +listType=set
 	AudioDescriptionNames []*string `json:"audioDescriptionNames,omitempty" tf:"audio_description_names,omitempty"`
 
 	// The names of the caption descriptions used as caption sources for the output.
+	// +listType=set
 	CaptionDescriptionNames []*string `json:"captionDescriptionNames,omitempty" tf:"caption_description_names,omitempty"`
 
 	// The name used to identify an output.
@@ -5858,9 +5890,11 @@ type OutputsInitParameters struct {
 type OutputsObservation struct {
 
 	// The names of the audio descriptions used as audio sources for the output.
+	// +listType=set
 	AudioDescriptionNames []*string `json:"audioDescriptionNames,omitempty" tf:"audio_description_names,omitempty"`
 
 	// The names of the caption descriptions used as caption sources for the output.
+	// +listType=set
 	CaptionDescriptionNames []*string `json:"captionDescriptionNames,omitempty" tf:"caption_description_names,omitempty"`
 
 	// The name used to identify an output.
@@ -5877,10 +5911,12 @@ type OutputsParameters struct {
 
 	// The names of the audio descriptions used as audio sources for the output.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AudioDescriptionNames []*string `json:"audioDescriptionNames,omitempty" tf:"audio_description_names,omitempty"`
 
 	// The names of the caption descriptions used as caption sources for the output.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CaptionDescriptionNames []*string `json:"captionDescriptionNames,omitempty" tf:"caption_description_names,omitempty"`
 
 	// The name used to identify an output.

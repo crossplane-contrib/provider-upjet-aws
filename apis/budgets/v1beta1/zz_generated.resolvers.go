@@ -74,5 +74,57 @@ func (mg *BudgetAction) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExecutionRoleArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BudgetName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BudgetNameRef,
+		Selector:     mg.Spec.InitProvider.BudgetNameSelector,
+		To: reference.To{
+			List:    &BudgetList{},
+			Managed: &Budget{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BudgetName")
+	}
+	mg.Spec.InitProvider.BudgetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BudgetNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Definition); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Definition[i3].IAMActionDefinition); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArnRef,
+				Selector:     mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArnSelector,
+				To: reference.To{
+					List:    &v1beta1.PolicyList{},
+					Managed: &v1beta1.Policy{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArn")
+			}
+			mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Definition[i3].IAMActionDefinition[i4].PolicyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExecutionRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ExecutionRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ExecutionRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ExecutionRoleArn")
+	}
+	mg.Spec.InitProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ExecutionRoleArnRef = rsp.ResolvedReference
+
 	return nil
 }

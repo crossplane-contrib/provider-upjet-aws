@@ -142,10 +142,24 @@ type ApplicationInitParameters struct {
 	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15.
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 
+	// The ARN of the IAM role used by the application to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	ServiceExecutionRole *string `json:"serviceExecutionRole,omitempty" tf:"service_execution_role,omitempty"`
+
+	// Reference to a Role in iam to populate serviceExecutionRole.
+	// +kubebuilder:validation:Optional
+	ServiceExecutionRoleRef *v1.Reference `json:"serviceExecutionRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceExecutionRole.
+	// +kubebuilder:validation:Optional
+	ServiceExecutionRoleSelector *v1.Selector `json:"serviceExecutionRoleSelector,omitempty" tf:"-"`
+
 	// Whether to start or stop the application.
 	StartApplication *bool `json:"startApplication,omitempty" tf:"start_application,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -188,9 +202,11 @@ type ApplicationObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The current application version. Kinesis Data Analytics updates the version_id each time the application is updated.
@@ -244,6 +260,7 @@ type ApplicationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -345,6 +362,19 @@ type CheckpointConfigurationParameters struct {
 }
 
 type CloudwatchLoggingOptionsInitParameters struct {
+
+	// The ARN of the CloudWatch log stream to receive application messages.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	LogStreamArn *string `json:"logStreamArn,omitempty" tf:"log_stream_arn,omitempty"`
+
+	// Reference to a Stream in cloudwatchlogs to populate logStreamArn.
+	// +kubebuilder:validation:Optional
+	LogStreamArnRef *v1.Reference `json:"logStreamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in cloudwatchlogs to populate logStreamArn.
+	// +kubebuilder:validation:Optional
+	LogStreamArnSelector *v1.Selector `json:"logStreamArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLoggingOptionsObservation struct {
@@ -767,6 +797,19 @@ type KinesisFirehoseInputParameters struct {
 }
 
 type KinesisFirehoseOutputInitParameters struct {
+
+	// The ARN of the Lambda function that operates on records in the stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisFirehoseOutputObservation struct {
@@ -793,6 +836,19 @@ type KinesisFirehoseOutputParameters struct {
 }
 
 type KinesisStreamsInputInitParameters struct {
+
+	// The ARN of the Lambda function that operates on records in the stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamsInputObservation struct {
@@ -838,6 +894,19 @@ type KinesisStreamsOutputParameters struct {
 }
 
 type LambdaOutputInitParameters struct {
+
+	// The ARN of the Lambda function that operates on records in the stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnRef *v1.Reference `json:"resourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate resourceArn.
+	// +kubebuilder:validation:Optional
+	ResourceArnSelector *v1.Selector `json:"resourceArnSelector,omitempty" tf:"-"`
 }
 
 type LambdaOutputObservation struct {
@@ -1096,6 +1165,7 @@ type PropertyGroupInitParameters struct {
 	PropertyGroupID *string `json:"propertyGroupId,omitempty" tf:"property_group_id,omitempty"`
 
 	// Application execution property key-value map.
+	// +mapType=granular
 	PropertyMap map[string]*string `json:"propertyMap,omitempty" tf:"property_map,omitempty"`
 }
 
@@ -1105,6 +1175,7 @@ type PropertyGroupObservation struct {
 	PropertyGroupID *string `json:"propertyGroupId,omitempty" tf:"property_group_id,omitempty"`
 
 	// Application execution property key-value map.
+	// +mapType=granular
 	PropertyMap map[string]*string `json:"propertyMap,omitempty" tf:"property_map,omitempty"`
 }
 
@@ -1116,6 +1187,7 @@ type PropertyGroupParameters struct {
 
 	// Application execution property key-value map.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	PropertyMap map[string]*string `json:"propertyMap" tf:"property_map,omitempty"`
 }
 
@@ -1396,6 +1468,32 @@ type RunConfigurationParameters struct {
 
 type S3ContentLocationInitParameters struct {
 
+	// The ARN for the S3 bucket containing the application code.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+
+	// The file key for the object containing the application code.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Object
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("key",false)
+	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
+
+	// Reference to a Object in s3 to populate fileKey.
+	// +kubebuilder:validation:Optional
+	FileKeyRef *v1.Reference `json:"fileKeyRef,omitempty" tf:"-"`
+
+	// Selector for a Object in s3 to populate fileKey.
+	// +kubebuilder:validation:Optional
+	FileKeySelector *v1.Selector `json:"fileKeySelector,omitempty" tf:"-"`
+
 	// The version of the object containing the application code.
 	ObjectVersion *string `json:"objectVersion,omitempty" tf:"object_version,omitempty"`
 }
@@ -1448,6 +1546,19 @@ type S3ContentLocationParameters struct {
 }
 
 type S3ReferenceDataSourceInitParameters struct {
+
+	// The ARN for the S3 bucket containing the application code.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
 	// The file key for the object containing the application code.
 	FileKey *string `json:"fileKey,omitempty" tf:"file_key,omitempty"`
@@ -1525,18 +1636,22 @@ type SQLApplicationConfigurationParameters struct {
 type VPCConfigurationInitParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The Subnet IDs used by the VPC configuration.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCConfigurationObservation struct {
 
 	// The Security Group IDs used by the VPC configuration.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The Subnet IDs used by the VPC configuration.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// The application identifier.
@@ -1550,10 +1665,12 @@ type VPCConfigurationParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
 
 	// The Subnet IDs used by the VPC configuration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`
 }
 

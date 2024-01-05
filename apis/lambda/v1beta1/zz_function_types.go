@@ -39,12 +39,14 @@ type DeadLetterConfigParameters struct {
 type EnvironmentInitParameters struct {
 
 	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
 type EnvironmentObservation struct {
 
 	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -52,6 +54,7 @@ type EnvironmentParameters struct {
 
 	// Map of environment variables that are accessible from the function code during execution. If provided at least one key must be present.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -75,6 +78,19 @@ type EphemeralStorageParameters struct {
 }
 
 type FileSystemConfigInitParameters struct {
+
+	// Amazon Resource Name (ARN) of the Amazon EFS Access Point that provides access to the file system.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a AccessPoint in efs to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in efs to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Path where the function can access the file system, starting with /mnt/.
 	LocalMountPath *string `json:"localMountPath,omitempty" tf:"local_mount_path,omitempty"`
@@ -142,6 +158,18 @@ type FunctionInitParameters struct {
 	// ECR image URI containing the function's deployment package. Exactly one of filename, image_uri,  or s3_bucket must be specified.
 	ImageURI *string `json:"imageUri,omitempty" tf:"image_uri,omitempty"`
 
+	// Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key that is used to encrypt environment variables. If this configuration is not provided when environment variables are in use, AWS Lambda uses a default service key. To fix the perpetual difference, remove this configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
@@ -157,11 +185,51 @@ type FunctionInitParameters struct {
 	// Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	ReplacementSecurityGroupIDRefs []v1.Reference `json:"replacementSecurityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate replacementSecurityGroupIds.
+	// +kubebuilder:validation:Optional
+	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
+	// +listType=set
+	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
+
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
 	ReservedConcurrentExecutions *float64 `json:"reservedConcurrentExecutions,omitempty" tf:"reserved_concurrent_executions,omitempty"`
 
+	// Amazon Resource Name (ARN) of the function's execution role. The role provides the function's identity and access to AWS services and resources.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// Reference to a Role in iam to populate role.
+	// +kubebuilder:validation:Optional
+	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate role.
+	// +kubebuilder:validation:Optional
+	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+
 	// Identifier of the function's runtime. See Runtimes for valid values.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// S3 bucket location containing the function's deployment package. This bucket must reside in the same AWS region where you are creating the Lambda function. Exactly one of filename, image_uri, or s3_bucket must be specified. When s3_bucket is set, s3_key is required.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate s3Bucket.
+	// +kubebuilder:validation:Optional
+	S3BucketRef *v1.Reference `json:"s3BucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate s3Bucket.
+	// +kubebuilder:validation:Optional
+	S3BucketSelector *v1.Selector `json:"s3BucketSelector,omitempty" tf:"-"`
 
 	// S3 key of an object containing the function's deployment package. When s3_bucket is set, s3_key is required.
 	S3Key *string `json:"s3Key,omitempty" tf:"s3_key,omitempty"`
@@ -178,6 +246,7 @@ type FunctionInitParameters struct {
 	SourceCodeHash *string `json:"sourceCodeHash,omitempty" tf:"source_code_hash,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
@@ -258,6 +327,7 @@ type FunctionObservation struct {
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
 	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// +listType=set
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
@@ -296,9 +366,11 @@ type FunctionObservation struct {
 	SourceCodeSize *float64 `json:"sourceCodeSize,omitempty" tf:"source_code_size,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
@@ -407,6 +479,7 @@ type FunctionParameters struct {
 	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
 	// Amount of reserved concurrent executions for this lambda function. A value of 0 disables lambda from being triggered and -1 removes any concurrency limitations. Defaults to Unreserved Concurrency Limits -1. See Managing Concurrency
@@ -465,6 +538,7 @@ type FunctionParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Amount of time your Lambda Function has to run in seconds. Defaults to 3. See Limits.
@@ -561,14 +635,46 @@ type TracingConfigParameters struct {
 }
 
 type VPCConfigInitParameters struct {
+
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
+	// List of security group IDs associated with the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// List of subnet IDs associated with the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
 type VPCConfigObservation struct {
 
 	// List of security group IDs associated with the Lambda function.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// List of subnet IDs associated with the Lambda function.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// ID of the VPC.
@@ -590,6 +696,7 @@ type VPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -605,6 +712,7 @@ type VPCConfigParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 

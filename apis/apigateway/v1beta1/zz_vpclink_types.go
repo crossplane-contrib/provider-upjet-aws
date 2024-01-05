@@ -26,7 +26,23 @@ type VPCLinkInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// References to LB in elbv2 to populate targetArns.
+	// +kubebuilder:validation:Optional
+	TargetArnRefs []v1.Reference `json:"targetArnRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LB in elbv2 to populate targetArns.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
+
+	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LB
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:refFieldName=TargetArnRefs
+	// +crossplane:generate:reference:selectorFieldName=TargetArnSelector
+	TargetArns []*string `json:"targetArns,omitempty" tf:"target_arns,omitempty"`
 }
 
 type VPCLinkObservation struct {
@@ -42,9 +58,11 @@ type VPCLinkObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// List of network load balancer arns in the VPC targeted by the VPC link. Currently AWS only supports 1 target.
@@ -68,6 +86,7 @@ type VPCLinkParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// References to LB in elbv2 to populate targetArns.

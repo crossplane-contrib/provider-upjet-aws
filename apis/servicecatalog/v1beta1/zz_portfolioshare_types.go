@@ -22,6 +22,19 @@ type PortfolioShareInitParameters struct {
 	// Language code. Valid values: en (English), jp (Japanese), zh (Chinese). Default value is en.
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
+	// Portfolio identifier.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
+
+	// Reference to a Portfolio in servicecatalog to populate portfolioId.
+	// +kubebuilder:validation:Optional
+	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
+
+	// Selector for a Portfolio in servicecatalog to populate portfolioId.
+	// +kubebuilder:validation:Optional
+	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
+
 	// Identifier of the principal with whom you will share the portfolio. Valid values AWS account IDs and ARNs of AWS Organizations and organizational units.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 

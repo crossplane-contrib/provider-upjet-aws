@@ -20,6 +20,7 @@ import (
 type EnumerationValueInitParameters struct {
 
 	// Additional values related to the slot type value. Each item must be less than or equal to 140 characters in length.
+	// +listType=set
 	Synonyms []*string `json:"synonyms,omitempty" tf:"synonyms,omitempty"`
 
 	// The value of the slot type. Must be less than or equal to 140 characters in length.
@@ -29,6 +30,7 @@ type EnumerationValueInitParameters struct {
 type EnumerationValueObservation struct {
 
 	// Additional values related to the slot type value. Each item must be less than or equal to 140 characters in length.
+	// +listType=set
 	Synonyms []*string `json:"synonyms,omitempty" tf:"synonyms,omitempty"`
 
 	// The value of the slot type. Must be less than or equal to 140 characters in length.
@@ -39,6 +41,7 @@ type EnumerationValueParameters struct {
 
 	// Additional values related to the slot type value. Each item must be less than or equal to 140 characters in length.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Synonyms []*string `json:"synonyms,omitempty" tf:"synonyms,omitempty"`
 
 	// The value of the slot type. Must be less than or equal to 140 characters in length.

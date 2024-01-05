@@ -24,6 +24,7 @@ type ApplicationInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -39,9 +40,11 @@ type ApplicationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -61,6 +64,7 @@ type ApplicationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -74,6 +78,19 @@ type AppversionLifecycleInitParameters struct {
 
 	// The maximum number of application versions to retain ('max_age_in_days' and 'max_count' cannot be enabled simultaneously.).
 	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
+
+	// The ARN of an IAM service role under which the application version is deleted.  Elastic Beanstalk must have permission to assume this role.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
+
+	// Reference to a Role in iam to populate serviceRole.
+	// +kubebuilder:validation:Optional
+	ServiceRoleRef *v1.Reference `json:"serviceRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate serviceRole.
+	// +kubebuilder:validation:Optional
+	ServiceRoleSelector *v1.Selector `json:"serviceRoleSelector,omitempty" tf:"-"`
 }
 
 type AppversionLifecycleObservation struct {

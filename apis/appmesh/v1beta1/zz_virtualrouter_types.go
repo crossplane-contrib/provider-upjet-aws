@@ -48,6 +48,19 @@ type SpecListenerPortMappingParameters struct {
 
 type VirtualRouterInitParameters struct {
 
+	// Name of the service mesh in which to create the virtual router. Must be between 1 and 255 characters in length.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.Mesh
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
+
+	// Reference to a Mesh in appmesh to populate meshName.
+	// +kubebuilder:validation:Optional
+	MeshNameRef *v1.Reference `json:"meshNameRef,omitempty" tf:"-"`
+
+	// Selector for a Mesh in appmesh to populate meshName.
+	// +kubebuilder:validation:Optional
+	MeshNameSelector *v1.Selector `json:"meshNameSelector,omitempty" tf:"-"`
+
 	// AWS account ID of the service mesh's owner. Defaults to the account ID the AWS provider is currently connected to.
 	MeshOwner *string `json:"meshOwner,omitempty" tf:"mesh_owner,omitempty"`
 
@@ -58,6 +71,7 @@ type VirtualRouterInitParameters struct {
 	Spec []VirtualRouterSpecInitParameters `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -91,9 +105,11 @@ type VirtualRouterObservation struct {
 	Spec []VirtualRouterSpecObservation `json:"spec,omitempty" tf:"spec,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -132,6 +148,7 @@ type VirtualRouterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

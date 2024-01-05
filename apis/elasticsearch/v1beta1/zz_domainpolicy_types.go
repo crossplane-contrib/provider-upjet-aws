@@ -21,6 +21,18 @@ type DomainPolicyInitParameters struct {
 
 	// IAM policy document specifying the access policies for the domain
 	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
+
+	// Name of the domain.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticsearch/v1beta1.Domain
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// Reference to a Domain in elasticsearch to populate domainName.
+	// +kubebuilder:validation:Optional
+	DomainNameRef *v1.Reference `json:"domainNameRef,omitempty" tf:"-"`
+
+	// Selector for a Domain in elasticsearch to populate domainName.
+	// +kubebuilder:validation:Optional
+	DomainNameSelector *v1.Selector `json:"domainNameSelector,omitempty" tf:"-"`
 }
 
 type DomainPolicyObservation struct {

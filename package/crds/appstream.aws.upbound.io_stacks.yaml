@@ -110,6 +110,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   feedbackUrl:
                     description: URL that users are redirected to after they click
                       the Send Feedback link. If no URL is specified, no Send Feedback
@@ -164,6 +165,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userSettings:
                     description: Configuration block for the actions that are enabled
                       or disabled for users during their streaming sessions. If not
@@ -241,6 +243,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   feedbackUrl:
                     description: URL that users are redirected to after they click
                       the Send Feedback link. If no URL is specified, no Send Feedback
@@ -291,6 +294,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   userSettings:
                     description: Configuration block for the actions that are enabled
                       or disabled for users during their streaming sessions. If not
@@ -531,6 +535,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   feedbackUrl:
                     description: URL that users are redirected to after they click
                       the Send Feedback link. If no URL is specified, no Send Feedback
@@ -584,10 +589,12 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   userSettings:
                     description: Configuration block for the actions that are enabled
                       or disabled for users during their streaming sessions. If not

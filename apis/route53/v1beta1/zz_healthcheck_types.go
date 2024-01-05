@@ -23,7 +23,20 @@ type HealthCheckInitParameters struct {
 	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
+	// +listType=set
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
+
+	// The name of the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.MetricAlarm
+	CloudwatchAlarmName *string `json:"cloudwatchAlarmName,omitempty" tf:"cloudwatch_alarm_name,omitempty"`
+
+	// Reference to a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
+	// +kubebuilder:validation:Optional
+	CloudwatchAlarmNameRef *v1.Reference `json:"cloudwatchAlarmNameRef,omitempty" tf:"-"`
+
+	// Selector for a MetricAlarm in cloudwatch to populate cloudwatchAlarmName.
+	// +kubebuilder:validation:Optional
+	CloudwatchAlarmNameSelector *v1.Selector `json:"cloudwatchAlarmNameSelector,omitempty" tf:"-"`
 
 	// The CloudWatchRegion that the CloudWatch alarm was created in.
 	CloudwatchAlarmRegion *string `json:"cloudwatchAlarmRegion,omitempty" tf:"cloudwatch_alarm_region,omitempty"`
@@ -60,6 +73,7 @@ type HealthCheckInitParameters struct {
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 
 	// A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from.
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request.
@@ -75,6 +89,7 @@ type HealthCheckInitParameters struct {
 	SearchString *string `json:"searchString,omitempty" tf:"search_string,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The protocol to use when performing health checks. Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
@@ -90,6 +105,7 @@ type HealthCheckObservation struct {
 	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
+	// +listType=set
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
 
 	// The name of the CloudWatch alarm.
@@ -133,6 +149,7 @@ type HealthCheckObservation struct {
 	ReferenceName *string `json:"referenceName,omitempty" tf:"reference_name,omitempty"`
 
 	// A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from.
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request.
@@ -148,9 +165,11 @@ type HealthCheckObservation struct {
 	SearchString *string `json:"searchString,omitempty" tf:"search_string,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The protocol to use when performing health checks. Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.
@@ -165,6 +184,7 @@ type HealthCheckParameters struct {
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
 
 	// The name of the CloudWatch alarm.
@@ -232,6 +252,7 @@ type HealthCheckParameters struct {
 
 	// A list of AWS regions that you want Amazon Route 53 health checkers to check the specified endpoint from.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// The number of seconds between the time that Amazon Route 53 gets a response from your endpoint and the time that it sends the next health-check request.
@@ -252,6 +273,7 @@ type HealthCheckParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The protocol to use when performing health checks. Valid values are HTTP, HTTPS, HTTP_STR_MATCH, HTTPS_STR_MATCH, TCP, CALCULATED, CLOUDWATCH_METRIC and RECOVERY_CONTROL.

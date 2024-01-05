@@ -47,6 +47,33 @@ type EndpointParameters struct {
 }
 
 type KinesisStreamConfigInitParameters struct {
+
+	// The ARN of an IAM role that CloudFront can use to send real-time log data to the Kinesis data stream.
+	// See the AWS documentation for more information.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// The ARN of the Kinesis data stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate streamArn.
+	// +kubebuilder:validation:Optional
+	StreamArnRef *v1.Reference `json:"streamArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate streamArn.
+	// +kubebuilder:validation:Optional
+	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 }
 
 type KinesisStreamConfigObservation struct {
@@ -97,6 +124,7 @@ type RealtimeLogConfigInitParameters struct {
 	Endpoint []EndpointInitParameters `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
+	// +listType=set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
 	// The unique name to identify this real-time log configuration.
@@ -115,6 +143,7 @@ type RealtimeLogConfigObservation struct {
 	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
+	// +listType=set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
 	// The ID of the CloudFront real-time log configuration.
@@ -135,6 +164,7 @@ type RealtimeLogConfigParameters struct {
 
 	// The fields that are included in each real-time log record. See the AWS documentation for supported values.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Fields []*string `json:"fields,omitempty" tf:"fields,omitempty"`
 
 	// The unique name to identify this real-time log configuration.

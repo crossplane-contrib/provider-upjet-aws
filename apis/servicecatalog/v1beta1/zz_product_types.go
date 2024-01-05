@@ -47,6 +47,7 @@ type ProductInitParameters struct {
 	SupportURL *string `json:"supportUrl,omitempty" tf:"support_url,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of product. See AWS Docs for valid list of values.
@@ -98,9 +99,11 @@ type ProductObservation struct {
 	SupportURL *string `json:"supportUrl,omitempty" tf:"support_url,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Type of product. See AWS Docs for valid list of values.
@@ -152,6 +155,7 @@ type ProductParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Type of product. See AWS Docs for valid list of values.

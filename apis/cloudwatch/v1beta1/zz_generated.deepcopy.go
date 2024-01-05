@@ -48,6 +48,29 @@ func (in *CompositeAlarmInitParameters) DeepCopyInto(out *CompositeAlarmInitPara
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AlarmActions != nil {
+		in, out := &in.AlarmActions, &out.AlarmActions
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.AlarmActionsRefs != nil {
+		in, out := &in.AlarmActionsRefs, &out.AlarmActionsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AlarmActionsSelector != nil {
+		in, out := &in.AlarmActionsSelector, &out.AlarmActionsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AlarmDescription != nil {
 		in, out := &in.AlarmDescription, &out.AlarmDescription
 		*out = new(string)
@@ -68,6 +91,29 @@ func (in *CompositeAlarmInitParameters) DeepCopyInto(out *CompositeAlarmInitPara
 				**out = **in
 			}
 		}
+	}
+	if in.OkActions != nil {
+		in, out := &in.OkActions, &out.OkActions
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.OkActionsRefs != nil {
+		in, out := &in.OkActionsRefs, &out.OkActionsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.OkActionsSelector != nil {
+		in, out := &in.OkActionsSelector, &out.OkActionsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -1779,6 +1825,21 @@ func (in *MetricStreamInitParameters) DeepCopyInto(out *MetricStreamInitParamete
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FirehoseArn != nil {
+		in, out := &in.FirehoseArn, &out.FirehoseArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.FirehoseArnRef != nil {
+		in, out := &in.FirehoseArnRef, &out.FirehoseArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FirehoseArnSelector != nil {
+		in, out := &in.FirehoseArnSelector, &out.FirehoseArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.IncludeFilter != nil {
 		in, out := &in.IncludeFilter, &out.IncludeFilter
 		*out = make([]IncludeFilterInitParameters, len(*in))
@@ -1800,6 +1861,21 @@ func (in *MetricStreamInitParameters) DeepCopyInto(out *MetricStreamInitParamete
 		in, out := &in.OutputFormat, &out.OutputFormat
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArn != nil {
+		in, out := &in.RoleArn, &out.RoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StatisticsConfiguration != nil {
 		in, out := &in.StatisticsConfiguration, &out.StatisticsConfiguration

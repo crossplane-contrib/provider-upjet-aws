@@ -36,5 +36,21 @@ func (mg *ReportDefinition) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.S3Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.S3BucketRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Bucket),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.S3BucketRef,
+		Selector:     mg.Spec.InitProvider.S3BucketSelector,
+		To: reference.To{
+			List:    &v1beta1.BucketList{},
+			Managed: &v1beta1.Bucket{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.S3Bucket")
+	}
+	mg.Spec.InitProvider.S3Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.S3BucketRef = rsp.ResolvedReference
+
 	return nil
 }

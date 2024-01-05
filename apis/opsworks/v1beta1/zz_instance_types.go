@@ -171,6 +171,18 @@ type InstanceInitParameters struct {
 	// Type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// List of the layers the instance will belong to.
+	// +crossplane:generate:reference:type=CustomLayer
+	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
+
+	// References to CustomLayer to populate layerIds.
+	// +kubebuilder:validation:Optional
+	LayerIdsRefs []v1.Reference `json:"layerIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of CustomLayer to populate layerIds.
+	// +kubebuilder:validation:Optional
+	LayerIdsSelector *v1.Selector `json:"layerIdsSelector,omitempty" tf:"-"`
+
 	// Name of operating system that will be installed.
 	Os *string `json:"os,omitempty" tf:"os,omitempty"`
 
@@ -183,11 +195,50 @@ type InstanceInitParameters struct {
 	// Name of the SSH keypair that instances will have by default.
 	SSHKeyName *string `json:"sshKeyName,omitempty" tf:"ssh_key_name,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
+	// Associated security groups.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// Identifier of the stack the instance will belong to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
+
+	// Reference to a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDRef *v1.Reference `json:"stackIdRef,omitempty" tf:"-"`
+
+	// Selector for a Stack in opsworks to populate stackId.
+	// +kubebuilder:validation:Optional
+	StackIDSelector *v1.Selector `json:"stackIdSelector,omitempty" tf:"-"`
+
 	// Desired state of the instance. Valid values are running or stopped.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Instance status. Will be one of booting, connection_lost, online, pending, rebooting, requested, running_setup, setup_failed, shutting_down, start_failed, stop_failed, stopped, stopping, terminated, or terminating.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Subnet ID to attach to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Instance tenancy to use. Valid values are default, dedicated or host.
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`

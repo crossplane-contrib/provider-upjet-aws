@@ -85,6 +85,9 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("aws_lambda_permission", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"statement_id_prefix"},
+		}
 		r.References["function_name"] = config.Reference{
 			Type: "Function",
 		}

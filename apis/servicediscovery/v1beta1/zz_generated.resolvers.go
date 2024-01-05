@@ -37,6 +37,22 @@ func (mg *PrivateDNSNamespace) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.VPC = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPC),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.VPCRef,
+		Selector:     mg.Spec.InitProvider.VPCSelector,
+		To: reference.To{
+			List:    &v1beta1.VPCList{},
+			Managed: &v1beta1.VPC{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPC")
+	}
+	mg.Spec.InitProvider.VPC = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VPCRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -63,6 +79,24 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 		mg.Spec.ForProvider.DNSConfig[i3].NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.DNSConfig[i3].NamespaceIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DNSConfig); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DNSConfig[i3].NamespaceID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.DNSConfig[i3].NamespaceIDRef,
+			Selector:     mg.Spec.InitProvider.DNSConfig[i3].NamespaceIDSelector,
+			To: reference.To{
+				List:    &PrivateDNSNamespaceList{},
+				Managed: &PrivateDNSNamespace{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DNSConfig[i3].NamespaceID")
+		}
+		mg.Spec.InitProvider.DNSConfig[i3].NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DNSConfig[i3].NamespaceIDRef = rsp.ResolvedReference
 
 	}
 

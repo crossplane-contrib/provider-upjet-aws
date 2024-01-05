@@ -1,0 +1,27 @@
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  name: namevalidinbothk8sandsnsendsin.fifo
+  labels:
+    testing.upbound.io/example-name: sns
+  annotations:
+    meta.upbound.io/example-id: sns/v1beta1/topic
+spec:
+  forProvider:
+    region: us-west-1
+    fifoTopic: true
+
+---
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  name: name-that-follows-k8s-conventions
+  annotations:
+    crossplane.io/external-name: AWSSpecificName.fifo
+    meta.upbound.io/example-id: sns/v1beta1/topic
+  labels:
+    testing.upbound.io/example-name: sns
+spec:
+  forProvider:
+    region: us-west-1
+    fifoTopic: true

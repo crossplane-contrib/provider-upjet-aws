@@ -19,11 +19,36 @@ import (
 
 type RouteResponseInitParameters struct {
 
+	// API identifier.
+	// +crossplane:generate:reference:type=API
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Reference to a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
+
+	// Selector for a API to populate apiId.
+	// +kubebuilder:validation:Optional
+	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
+
 	// The model selection expression for the route response.
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
 	// Response models for the route response.
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
+
+	// Identifier of the aws_apigatewayv2_route.
+	// +crossplane:generate:reference:type=Route
+	RouteID *string `json:"routeId,omitempty" tf:"route_id,omitempty"`
+
+	// Reference to a Route to populate routeId.
+	// +kubebuilder:validation:Optional
+	RouteIDRef *v1.Reference `json:"routeIdRef,omitempty" tf:"-"`
+
+	// Selector for a Route to populate routeId.
+	// +kubebuilder:validation:Optional
+	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 
 	// Route response key.
 	RouteResponseKey *string `json:"routeResponseKey,omitempty" tf:"route_response_key,omitempty"`
@@ -41,6 +66,7 @@ type RouteResponseObservation struct {
 	ModelSelectionExpression *string `json:"modelSelectionExpression,omitempty" tf:"model_selection_expression,omitempty"`
 
 	// Response models for the route response.
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_route.
@@ -76,6 +102,7 @@ type RouteResponseParameters struct {
 
 	// Response models for the route response.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_route.

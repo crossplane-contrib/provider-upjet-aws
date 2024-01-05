@@ -18,6 +18,19 @@ import (
 )
 
 type DestinationConfigOnFailureInitParameters struct {
+
+	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Reference to a Queue in sqs to populate destination.
+	// +kubebuilder:validation:Optional
+	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate destination.
+	// +kubebuilder:validation:Optional
+	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
 
 type DestinationConfigOnFailureObservation struct {
@@ -140,6 +153,19 @@ type FunctionEventInvokeConfigParameters struct {
 }
 
 type OnSuccessInitParameters struct {
+
+	// Amazon Resource Name (ARN) of the destination resource. See the Lambda Developer Guide for acceptable resource types and associated IAM permissions.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Reference to a Topic in sns to populate destination.
+	// +kubebuilder:validation:Optional
+	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate destination.
+	// +kubebuilder:validation:Optional
+	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
 }
 
 type OnSuccessObservation struct {

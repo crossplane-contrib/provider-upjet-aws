@@ -34,7 +34,44 @@ type SecurityGroupEgressRuleInitParameters struct {
 	// The IP protocol name or number. Use -1 to specify all protocols.
 	IPProtocol *string `json:"ipProtocol,omitempty" tf:"ip_protocol,omitempty"`
 
+	// The ID of the destination prefix list.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
+
+	// Reference to a ManagedPrefixList in ec2 to populate prefixListId.
+	// +kubebuilder:validation:Optional
+	PrefixListIDRef *v1.Reference `json:"prefixListIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedPrefixList in ec2 to populate prefixListId.
+	// +kubebuilder:validation:Optional
+	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
+
+	// The destination security group that is referenced in the rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	ReferencedSecurityGroupID *string `json:"referencedSecurityGroupId,omitempty" tf:"referenced_security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup in ec2 to populate referencedSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	ReferencedSecurityGroupIDRef *v1.Reference `json:"referencedSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup in ec2 to populate referencedSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	ReferencedSecurityGroupIDSelector *v1.Selector `json:"referencedSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// The ID of the security group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
@@ -76,9 +113,11 @@ type SecurityGroupEgressRuleObservation struct {
 	SecurityGroupRuleID *string `json:"securityGroupRuleId,omitempty" tf:"security_group_rule_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
@@ -153,6 +192,7 @@ type SecurityGroupEgressRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.

@@ -28,6 +28,20 @@ type LBCookieStickinessPolicyInitParameters struct {
 	// balancer.
 	LBPort *float64 `json:"lbPort,omitempty" tf:"lb_port,omitempty"`
 
+	// The load balancer to which the policy
+	// should be attached.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	LoadBalancer *string `json:"loadBalancer,omitempty" tf:"load_balancer,omitempty"`
+
+	// Reference to a ELB in elb to populate loadBalancer.
+	// +kubebuilder:validation:Optional
+	LoadBalancerRef *v1.Reference `json:"loadBalancerRef,omitempty" tf:"-"`
+
+	// Selector for a ELB in elb to populate loadBalancer.
+	// +kubebuilder:validation:Optional
+	LoadBalancerSelector *v1.Selector `json:"loadBalancerSelector,omitempty" tf:"-"`
+
 	// The name of the stickiness policy.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }

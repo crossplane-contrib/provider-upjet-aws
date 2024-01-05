@@ -20,6 +20,7 @@ import (
 type WorkflowInitParameters struct {
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
@@ -29,6 +30,7 @@ type WorkflowInitParameters struct {
 	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -38,6 +40,7 @@ type WorkflowObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
+	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
@@ -50,9 +53,11 @@ type WorkflowObservation struct {
 	MaxConcurrentRuns *float64 `json:"maxConcurrentRuns,omitempty" tf:"max_concurrent_runs,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -60,6 +65,7 @@ type WorkflowParameters struct {
 
 	// –  A map of default run properties for this workflow. These properties are passed to all jobs associated to the workflow.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	DefaultRunProperties map[string]*string `json:"defaultRunProperties,omitempty" tf:"default_run_properties,omitempty"`
 
 	// –  Description of the workflow.
@@ -77,6 +83,7 @@ type WorkflowParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

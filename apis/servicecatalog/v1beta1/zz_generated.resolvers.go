@@ -55,6 +55,38 @@ func (mg *BudgetResourceAssociation) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BudgetName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.BudgetNameRef,
+		Selector:     mg.Spec.InitProvider.BudgetNameSelector,
+		To: reference.To{
+			List:    &v1beta1.BudgetList{},
+			Managed: &v1beta1.Budget{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.BudgetName")
+	}
+	mg.Spec.InitProvider.BudgetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.BudgetNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &ProductList{},
+			Managed: &Product{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -97,6 +129,38 @@ func (mg *Constraint) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ProductID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProductIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PortfolioID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PortfolioIDRef,
+		Selector:     mg.Spec.InitProvider.PortfolioIDSelector,
+		To: reference.To{
+			List:    &PortfolioList{},
+			Managed: &Portfolio{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PortfolioID")
+	}
+	mg.Spec.InitProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PortfolioIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProductID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ProductIDRef,
+		Selector:     mg.Spec.InitProvider.ProductIDSelector,
+		To: reference.To{
+			List:    &ProductList{},
+			Managed: &Product{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ProductID")
+	}
+	mg.Spec.InitProvider.ProductID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ProductIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -122,6 +186,22 @@ func (mg *PortfolioShare) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PortfolioIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PortfolioID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PortfolioIDRef,
+		Selector:     mg.Spec.InitProvider.PortfolioIDSelector,
+		To: reference.To{
+			List:    &PortfolioList{},
+			Managed: &Portfolio{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PortfolioID")
+	}
+	mg.Spec.InitProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PortfolioIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -165,6 +245,38 @@ func (mg *PrincipalPortfolioAssociation) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.PrincipalArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrincipalArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PortfolioID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.PortfolioIDRef,
+		Selector:     mg.Spec.InitProvider.PortfolioIDSelector,
+		To: reference.To{
+			List:    &PortfolioList{},
+			Managed: &Portfolio{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PortfolioID")
+	}
+	mg.Spec.InitProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PortfolioIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrincipalArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.PrincipalArnRef,
+		Selector:     mg.Spec.InitProvider.PrincipalArnSelector,
+		To: reference.To{
+			List:    &v1beta11.UserList{},
+			Managed: &v1beta11.User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrincipalArn")
+	}
+	mg.Spec.InitProvider.PrincipalArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrincipalArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -207,6 +319,38 @@ func (mg *ProductPortfolioAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.ProductID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProductIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PortfolioID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.PortfolioIDRef,
+		Selector:     mg.Spec.InitProvider.PortfolioIDSelector,
+		To: reference.To{
+			List:    &PortfolioList{},
+			Managed: &Portfolio{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PortfolioID")
+	}
+	mg.Spec.InitProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PortfolioIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProductID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ProductIDRef,
+		Selector:     mg.Spec.InitProvider.ProductIDSelector,
+		To: reference.To{
+			List:    &ProductList{},
+			Managed: &Product{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ProductID")
+	}
+	mg.Spec.InitProvider.ProductID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ProductIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -232,6 +376,22 @@ func (mg *ProvisioningArtifact) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.ProductID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProductIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ProductID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ProductIDRef,
+		Selector:     mg.Spec.InitProvider.ProductIDSelector,
+		To: reference.To{
+			List:    &ProductList{},
+			Managed: &Product{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ProductID")
+	}
+	mg.Spec.InitProvider.ProductID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ProductIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -274,6 +434,38 @@ func (mg *TagOptionResourceAssociation) ResolveReferences(ctx context.Context, c
 	}
 	mg.Spec.ForProvider.TagOptionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TagOptionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &ProductList{},
+			Managed: &Product{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TagOptionID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TagOptionIDRef,
+		Selector:     mg.Spec.InitProvider.TagOptionIDSelector,
+		To: reference.To{
+			List:    &TagOptionList{},
+			Managed: &TagOption{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TagOptionID")
+	}
+	mg.Spec.InitProvider.TagOptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TagOptionIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -21,13 +21,28 @@ type StackInitParameters struct {
 
 	// A list of capabilities.
 	// Valid values: CAPABILITY_IAM, CAPABILITY_NAMED_IAM, or CAPABILITY_AUTO_EXPAND
+	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
 	// Set to true to disable rollback of the stack if stack creation failed.
 	// Conflicts with on_failure.
 	DisableRollback *bool `json:"disableRollback,omitempty" tf:"disable_rollback,omitempty"`
 
+	// The ARN of an IAM role that AWS CloudFormation assumes to create the stack. If you don't specify a value, AWS CloudFormation uses the role that was previously associated with the stack. If no role is available, AWS CloudFormation uses a temporary session that is generated from your user credentials.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+
 	// A list of SNS topic ARNs to publish stack related events.
+	// +listType=set
 	NotificationArns []*string `json:"notificationArns,omitempty" tf:"notification_arns,omitempty"`
 
 	// Action to be taken if stack creation fails. This must be
@@ -35,6 +50,7 @@ type StackInitParameters struct {
 	OnFailure *string `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 
 	// A map of Parameter structures that specify input parameters for the stack.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Structure containing the stack policy body.
@@ -46,6 +62,7 @@ type StackInitParameters struct {
 	PolicyURL *string `json:"policyUrl,omitempty" tf:"policy_url,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Structure containing the template body (max size: 51,200 bytes).
@@ -62,6 +79,7 @@ type StackObservation struct {
 
 	// A list of capabilities.
 	// Valid values: CAPABILITY_IAM, CAPABILITY_NAMED_IAM, or CAPABILITY_AUTO_EXPAND
+	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
 	// Set to true to disable rollback of the stack if stack creation failed.
@@ -78,6 +96,7 @@ type StackObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of SNS topic ARNs to publish stack related events.
+	// +listType=set
 	NotificationArns []*string `json:"notificationArns,omitempty" tf:"notification_arns,omitempty"`
 
 	// Action to be taken if stack creation fails. This must be
@@ -85,9 +104,11 @@ type StackObservation struct {
 	OnFailure *string `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
 
 	// A map of outputs from the stack.
+	// +mapType=granular
 	Outputs map[string]*string `json:"outputs,omitempty" tf:"outputs,omitempty"`
 
 	// A map of Parameter structures that specify input parameters for the stack.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Structure containing the stack policy body.
@@ -99,9 +120,11 @@ type StackObservation struct {
 	PolicyURL *string `json:"policyUrl,omitempty" tf:"policy_url,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Structure containing the template body (max size: 51,200 bytes).
@@ -119,6 +142,7 @@ type StackParameters struct {
 	// A list of capabilities.
 	// Valid values: CAPABILITY_IAM, CAPABILITY_NAMED_IAM, or CAPABILITY_AUTO_EXPAND
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Capabilities []*string `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
 	// Set to true to disable rollback of the stack if stack creation failed.
@@ -146,6 +170,7 @@ type StackParameters struct {
 
 	// A list of SNS topic ARNs to publish stack related events.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	NotificationArns []*string `json:"notificationArns,omitempty" tf:"notification_arns,omitempty"`
 
 	// Action to be taken if stack creation fails. This must be
@@ -155,6 +180,7 @@ type StackParameters struct {
 
 	// A map of Parameter structures that specify input parameters for the stack.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Structure containing the stack policy body.
@@ -174,6 +200,7 @@ type StackParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Structure containing the template body (max size: 51,200 bytes).

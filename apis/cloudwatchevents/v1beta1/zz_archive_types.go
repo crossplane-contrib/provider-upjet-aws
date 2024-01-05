@@ -25,6 +25,19 @@ type ArchiveInitParameters struct {
 	// Instructs the new event archive to only capture events matched by this pattern. By default, it attempts to archive every event received in the event_source_arn.
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
+	// Event bus source ARN from where these events should be archived.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	EventSourceArn *string `json:"eventSourceArn,omitempty" tf:"event_source_arn,omitempty"`
+
+	// Reference to a Bus in cloudwatchevents to populate eventSourceArn.
+	// +kubebuilder:validation:Optional
+	EventSourceArnRef *v1.Reference `json:"eventSourceArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bus in cloudwatchevents to populate eventSourceArn.
+	// +kubebuilder:validation:Optional
+	EventSourceArnSelector *v1.Selector `json:"eventSourceArnSelector,omitempty" tf:"-"`
+
 	// The maximum number of days to retain events in the new event archive. By default, it archives indefinitely.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }

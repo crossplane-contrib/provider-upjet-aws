@@ -20,9 +20,11 @@ import (
 type VoiceConnectorTerminationInitParameters struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
+	// +listType=set
 	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
 
 	// The IP addresses allowed to make calls, in CIDR format.
+	// +listType=set
 	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.
@@ -33,14 +35,29 @@ type VoiceConnectorTerminationInitParameters struct {
 
 	// When termination settings are disabled, outbound calls can not be made.
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
+
+	// The Amazon Chime Voice Connector ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/chime/v1beta1.VoiceConnector
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VoiceConnectorID *string `json:"voiceConnectorId,omitempty" tf:"voice_connector_id,omitempty"`
+
+	// Reference to a VoiceConnector in chime to populate voiceConnectorId.
+	// +kubebuilder:validation:Optional
+	VoiceConnectorIDRef *v1.Reference `json:"voiceConnectorIdRef,omitempty" tf:"-"`
+
+	// Selector for a VoiceConnector in chime to populate voiceConnectorId.
+	// +kubebuilder:validation:Optional
+	VoiceConnectorIDSelector *v1.Selector `json:"voiceConnectorIdSelector,omitempty" tf:"-"`
 }
 
 type VoiceConnectorTerminationObservation struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
+	// +listType=set
 	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
 
 	// The IP addresses allowed to make calls, in CIDR format.
+	// +listType=set
 	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.
@@ -63,10 +80,12 @@ type VoiceConnectorTerminationParameters struct {
 
 	// The countries to which calls are allowed, in ISO 3166-1 alpha-2 format.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CallingRegions []*string `json:"callingRegions,omitempty" tf:"calling_regions,omitempty"`
 
 	// The IP addresses allowed to make calls, in CIDR format.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CidrAllowList []*string `json:"cidrAllowList,omitempty" tf:"cidr_allow_list,omitempty"`
 
 	// The limit on calls per second. Max value based on account service quota. Default value of 1.

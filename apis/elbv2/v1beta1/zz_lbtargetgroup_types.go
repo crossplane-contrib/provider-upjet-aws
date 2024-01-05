@@ -164,6 +164,7 @@ type LBTargetGroupInitParameters struct {
 	Stickiness []LBTargetGroupStickinessInitParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
@@ -171,6 +172,18 @@ type LBTargetGroupInitParameters struct {
 
 	// (May be required, Forces new resource) Type of target that you must specify when registering targets with this target group. See doc for supported values. The default is instance.
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
+
+	// Identifier of the VPC in which to create the target group. Required when target_type is instance, ip or alb. Does not apply when target_type is lambda.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type LBTargetGroupObservation struct {
@@ -230,9 +243,11 @@ type LBTargetGroupObservation struct {
 	Stickiness []LBTargetGroupStickinessObservation `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
@@ -314,6 +329,7 @@ type LBTargetGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.

@@ -22,6 +22,18 @@ type CatalogTargetInitParameters struct {
 	// The name of the connection to use to connect to the JDBC target.
 	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
 
+	// Glue database where results are written.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a CatalogDatabase in glue to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogDatabase in glue to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+
 	// The ARN of the dead-letter SQS queue.
 	DlqEventQueueArn *string `json:"dlqEventQueueArn,omitempty" tf:"dlq_event_queue_arn,omitempty"`
 
@@ -91,6 +103,18 @@ type CrawlerInitParameters struct {
 	// JSON string of configuration information. For more details see Setting Crawler Configuration Options.
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
+	// Glue database where results are written.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a CatalogDatabase in glue to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogDatabase in glue to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+
 	DeltaTarget []DeltaTargetInitParameters `json:"deltaTarget,omitempty" tf:"delta_target,omitempty"`
 
 	// Description of the crawler.
@@ -114,6 +138,19 @@ type CrawlerInitParameters struct {
 	// A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.. See Recrawl Policy below.
 	RecrawlPolicy []RecrawlPolicyInitParameters `json:"recrawlPolicy,omitempty" tf:"recrawl_policy,omitempty"`
 
+	// The IAM role friendly name (including path without leading slash), or ARN of an IAM role, used by the crawler to access other resources.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// Reference to a Role in iam to populate role.
+	// +kubebuilder:validation:Optional
+	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate role.
+	// +kubebuilder:validation:Optional
+	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
+
 	// List nested Amazon S3 target arguments. See S3 Target below.
 	S3Target []S3TargetInitParameters `json:"s3Target,omitempty" tf:"s3_target,omitempty"`
 
@@ -130,6 +167,7 @@ type CrawlerInitParameters struct {
 	TablePrefix *string `json:"tablePrefix,omitempty" tf:"table_prefix,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -194,9 +232,11 @@ type CrawlerObservation struct {
 	TablePrefix *string `json:"tablePrefix,omitempty" tf:"table_prefix,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -298,6 +338,7 @@ type CrawlerParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -310,6 +351,7 @@ type DeltaTargetInitParameters struct {
 	CreateNativeDeltaTable *bool `json:"createNativeDeltaTable,omitempty" tf:"create_native_delta_table,omitempty"`
 
 	// A list of the Amazon S3 paths to the Delta tables.
+	// +listType=set
 	DeltaTables []*string `json:"deltaTables,omitempty" tf:"delta_tables,omitempty"`
 
 	// Specifies whether to write the manifest files to the Delta table path.
@@ -325,6 +367,7 @@ type DeltaTargetObservation struct {
 	CreateNativeDeltaTable *bool `json:"createNativeDeltaTable,omitempty" tf:"create_native_delta_table,omitempty"`
 
 	// A list of the Amazon S3 paths to the Delta tables.
+	// +listType=set
 	DeltaTables []*string `json:"deltaTables,omitempty" tf:"delta_tables,omitempty"`
 
 	// Specifies whether to write the manifest files to the Delta table path.
@@ -343,6 +386,7 @@ type DeltaTargetParameters struct {
 
 	// A list of the Amazon S3 paths to the Delta tables.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DeltaTables []*string `json:"deltaTables" tf:"delta_tables,omitempty"`
 
 	// Specifies whether to write the manifest files to the Delta table path.
@@ -390,6 +434,18 @@ type DynamodbTargetParameters struct {
 }
 
 type JdbcTargetInitParameters struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Connection
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// Reference to a Connection in glue to populate connectionName.
+	// +kubebuilder:validation:Optional
+	ConnectionNameRef *v1.Reference `json:"connectionNameRef,omitempty" tf:"-"`
+
+	// Selector for a Connection in glue to populate connectionName.
+	// +kubebuilder:validation:Optional
+	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
 	// Specify a value of RAWTYPES or COMMENTS to enable additional metadata intable responses. RAWTYPES provides the native-level datatype. COMMENTS provides comments associated with a column or table in the database.
 	EnableAdditionalMetadata []*string `json:"enableAdditionalMetadata,omitempty" tf:"enable_additional_metadata,omitempty"`
@@ -493,6 +549,18 @@ type LineageConfigurationParameters struct {
 }
 
 type MongodbTargetInitParameters struct {
+
+	// The name of the connection to use to connect to the JDBC target.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Connection
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// Reference to a Connection in glue to populate connectionName.
+	// +kubebuilder:validation:Optional
+	ConnectionNameRef *v1.Reference `json:"connectionNameRef,omitempty" tf:"-"`
+
+	// Selector for a Connection in glue to populate connectionName.
+	// +kubebuilder:validation:Optional
+	ConnectionNameSelector *v1.Selector `json:"connectionNameSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table to crawl.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`

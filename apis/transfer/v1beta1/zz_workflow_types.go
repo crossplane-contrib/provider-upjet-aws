@@ -648,6 +648,19 @@ type StepsCustomStepDetailsInitParameters struct {
 	// Specifies which file to use as input to the workflow step: either the output from the previous step, or the originally uploaded file for the workflow. Enter ${previous.file} to use the previous file as the input. In this case, this workflow step uses the output file from the previous workflow step as input. This is the default value. Enter ${original.file} to use the originally-uploaded file location as input for this step.
 	SourceFileLocation *string `json:"sourceFileLocation,omitempty" tf:"source_file_location,omitempty"`
 
+	// The ARN for the lambda function that is being called.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// Reference to a Function in lambda to populate target.
+	// +kubebuilder:validation:Optional
+	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate target.
+	// +kubebuilder:validation:Optional
+	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
+
 	// Timeout, in seconds, for the step.
 	TimeoutSeconds *float64 `json:"timeoutSeconds,omitempty" tf:"timeout_seconds,omitempty"`
 }
@@ -1030,6 +1043,7 @@ type WorkflowInitParameters struct {
 	Steps []StepsInitParameters `json:"steps,omitempty" tf:"steps,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -1051,9 +1065,11 @@ type WorkflowObservation struct {
 	Steps []StepsObservation `json:"steps,omitempty" tf:"steps,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -1078,6 +1094,7 @@ type WorkflowParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

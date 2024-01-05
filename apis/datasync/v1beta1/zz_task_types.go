@@ -245,6 +245,31 @@ type ScheduleParameters struct {
 
 type TaskInitParameters struct {
 
+	// Amazon Resource Name (ARN) of the CloudWatch Log Group that is used to monitor and log events in the sync task.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	CloudwatchLogGroupArn *string `json:"cloudwatchLogGroupArn,omitempty" tf:"cloudwatch_log_group_arn,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogGroupArnRef *v1.Reference `json:"cloudwatchLogGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate cloudwatchLogGroupArn.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
+
+	// Amazon Resource Name (ARN) of destination DataSync Location.
+	// +crossplane:generate:reference:type=LocationS3
+	DestinationLocationArn *string `json:"destinationLocationArn,omitempty" tf:"destination_location_arn,omitempty"`
+
+	// Reference to a LocationS3 to populate destinationLocationArn.
+	// +kubebuilder:validation:Optional
+	DestinationLocationArnRef *v1.Reference `json:"destinationLocationArnRef,omitempty" tf:"-"`
+
+	// Selector for a LocationS3 to populate destinationLocationArn.
+	// +kubebuilder:validation:Optional
+	DestinationLocationArnSelector *v1.Selector `json:"destinationLocationArnSelector,omitempty" tf:"-"`
+
 	// Filter rules that determines which files to exclude from a task.
 	Excludes []ExcludesInitParameters `json:"excludes,omitempty" tf:"excludes,omitempty"`
 
@@ -260,7 +285,20 @@ type TaskInitParameters struct {
 	// Specifies a schedule used to periodically transfer files from a source to a destination location.
 	Schedule []ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
+	// Amazon Resource Name (ARN) of source DataSync Location.
+	// +crossplane:generate:reference:type=LocationS3
+	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`
+
+	// Reference to a LocationS3 to populate sourceLocationArn.
+	// +kubebuilder:validation:Optional
+	SourceLocationArnRef *v1.Reference `json:"sourceLocationArnRef,omitempty" tf:"-"`
+
+	// Selector for a LocationS3 to populate sourceLocationArn.
+	// +kubebuilder:validation:Optional
+	SourceLocationArnSelector *v1.Selector `json:"sourceLocationArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -297,9 +335,11 @@ type TaskObservation struct {
 	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -372,6 +412,7 @@ type TaskParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -137,6 +137,118 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IAMRoles),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.IAMRoleRefs,
+		Selector:      mg.Spec.InitProvider.IAMRoleSelector,
+		To: reference.To{
+			List:    &v1beta1.RoleList{},
+			Managed: &v1beta1.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IAMRoles")
+	}
+	mg.Spec.InitProvider.IAMRoles = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.IAMRoleRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+		Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+		To: reference.To{
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
+	}
+	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NeptuneClusterParameterGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NeptuneClusterParameterGroupNameRef,
+		Selector:     mg.Spec.InitProvider.NeptuneClusterParameterGroupNameSelector,
+		To: reference.To{
+			List:    &ClusterParameterGroupList{},
+			Managed: &ClusterParameterGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NeptuneClusterParameterGroupName")
+	}
+	mg.Spec.InitProvider.NeptuneClusterParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NeptuneClusterParameterGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NeptuneSubnetGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NeptuneSubnetGroupNameRef,
+		Selector:     mg.Spec.InitProvider.NeptuneSubnetGroupNameSelector,
+		To: reference.To{
+			List:    &SubnetGroupList{},
+			Managed: &SubnetGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NeptuneSubnetGroupName")
+	}
+	mg.Spec.InitProvider.NeptuneSubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NeptuneSubnetGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ReplicationSourceIdentifier),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ReplicationSourceIdentifierRef,
+		Selector:     mg.Spec.InitProvider.ReplicationSourceIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ReplicationSourceIdentifier")
+	}
+	mg.Spec.InitProvider.ReplicationSourceIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ReplicationSourceIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnapshotIdentifier),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.SnapshotIdentifierRef,
+		Selector:     mg.Spec.InitProvider.SnapshotIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterSnapshotList{},
+			Managed: &ClusterSnapshot{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SnapshotIdentifier")
+	}
+	mg.Spec.InitProvider.SnapshotIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SnapshotIdentifierRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSecurityGroupIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.VPCSecurityGroupIDRefs,
+		Selector:      mg.Spec.InitProvider.VPCSecurityGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SecurityGroupList{},
+			Managed: &v1beta12.SecurityGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCSecurityGroupIds")
+	}
+	mg.Spec.InitProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -162,6 +274,22 @@ func (mg *ClusterEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterIdentifier),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ClusterIdentifierRef,
+		Selector:     mg.Spec.InitProvider.ClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterIdentifier")
+	}
+	mg.Spec.InitProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIdentifierRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -221,6 +349,54 @@ func (mg *ClusterInstance) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.NeptuneSubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NeptuneSubnetGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterIdentifier),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ClusterIdentifierRef,
+		Selector:     mg.Spec.InitProvider.ClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterIdentifier")
+	}
+	mg.Spec.InitProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NeptuneParameterGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NeptuneParameterGroupNameRef,
+		Selector:     mg.Spec.InitProvider.NeptuneParameterGroupNameSelector,
+		To: reference.To{
+			List:    &ParameterGroupList{},
+			Managed: &ParameterGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NeptuneParameterGroupName")
+	}
+	mg.Spec.InitProvider.NeptuneParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NeptuneParameterGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NeptuneSubnetGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NeptuneSubnetGroupNameRef,
+		Selector:     mg.Spec.InitProvider.NeptuneSubnetGroupNameSelector,
+		To: reference.To{
+			List:    &SubnetGroupList{},
+			Managed: &SubnetGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NeptuneSubnetGroupName")
+	}
+	mg.Spec.InitProvider.NeptuneSubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NeptuneSubnetGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -246,6 +422,22 @@ func (mg *ClusterSnapshot) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.DBClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DBClusterIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBClusterIdentifier),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DBClusterIdentifierRef,
+		Selector:     mg.Spec.InitProvider.DBClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBClusterIdentifier")
+	}
+	mg.Spec.InitProvider.DBClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBClusterIdentifierRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -273,6 +465,22 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.SnsTopicArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SnsTopicArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnsTopicArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.SnsTopicArnRef,
+		Selector:     mg.Spec.InitProvider.SnsTopicArnSelector,
+		To: reference.To{
+			List:    &v1beta13.TopicList{},
+			Managed: &v1beta13.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SnsTopicArn")
+	}
+	mg.Spec.InitProvider.SnsTopicArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SnsTopicArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -299,6 +507,22 @@ func (mg *GlobalCluster) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.SourceDBClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceDBClusterIdentifierRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceDBClusterIdentifier),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.SourceDBClusterIdentifierRef,
+		Selector:     mg.Spec.InitProvider.SourceDBClusterIdentifierSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceDBClusterIdentifier")
+	}
+	mg.Spec.InitProvider.SourceDBClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceDBClusterIdentifierRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -324,6 +548,22 @@ func (mg *SubnetGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.SubnetIDRefs,
+		Selector:      mg.Spec.InitProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetIds")
+	}
+	mg.Spec.InitProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SubnetIDRefs = mrsp.ResolvedReferences
 
 	return nil
 }

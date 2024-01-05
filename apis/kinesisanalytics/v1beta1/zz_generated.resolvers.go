@@ -141,6 +141,122 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CloudwatchLoggingOptions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef,
+			Selector:     mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArnSelector,
+			To: reference.To{
+				List:    &v1beta1.StreamList{},
+				Managed: &v1beta1.Stream{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArn")
+		}
+		mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].LogStreamArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CloudwatchLoggingOptions); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArnRef,
+			Selector:     mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArnSelector,
+			To: reference.To{
+				List:    &v1beta11.RoleList{},
+				Managed: &v1beta11.Role{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CloudwatchLoggingOptions[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Inputs); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Inputs[i3].KinesisStream); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArn),
+				Extract:      common.TerraformID(),
+				Reference:    mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArnRef,
+				Selector:     mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArnSelector,
+				To: reference.To{
+					List:    &v1beta12.StreamList{},
+					Managed: &v1beta12.Stream{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArn")
+			}
+			mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].ResourceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Inputs); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Inputs[i3].KinesisStream); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Inputs[i3].KinesisStream[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Outputs); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Outputs[i3].KinesisFirehose); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArn),
+				Extract:      resource.ExtractParamPath("arn", false),
+				Reference:    mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnRef,
+				Selector:     mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnSelector,
+				To: reference.To{
+					List:    &v1beta13.DeliveryStreamList{},
+					Managed: &v1beta13.DeliveryStream{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArn")
+			}
+			mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].ResourceArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Outputs); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Outputs[i3].KinesisFirehose); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArnSelector,
+				To: reference.To{
+					List:    &v1beta11.RoleList{},
+					Managed: &v1beta11.Role{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Outputs[i3].KinesisFirehose[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }

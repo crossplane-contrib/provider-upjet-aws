@@ -20,24 +20,28 @@ import (
 type ContentSourceConfigurationInitParameters struct {
 
 	// The identifiers of the data sources you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	// +listType=set
 	DataSourceIds []*string `json:"dataSourceIds,omitempty" tf:"data_source_ids,omitempty"`
 
 	// Whether to use documents you indexed directly using the BatchPutDocument API. Defaults to false.
 	DirectPutContent *bool `json:"directPutContent,omitempty" tf:"direct_put_content,omitempty"`
 
 	// The identifier of the FAQs that you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	// +listType=set
 	FaqIds []*string `json:"faqIds,omitempty" tf:"faq_ids,omitempty"`
 }
 
 type ContentSourceConfigurationObservation struct {
 
 	// The identifiers of the data sources you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	// +listType=set
 	DataSourceIds []*string `json:"dataSourceIds,omitempty" tf:"data_source_ids,omitempty"`
 
 	// Whether to use documents you indexed directly using the BatchPutDocument API. Defaults to false.
 	DirectPutContent *bool `json:"directPutContent,omitempty" tf:"direct_put_content,omitempty"`
 
 	// The identifier of the FAQs that you want to use for your Amazon Kendra experience. Maximum number of 100 items.
+	// +listType=set
 	FaqIds []*string `json:"faqIds,omitempty" tf:"faq_ids,omitempty"`
 }
 
@@ -45,6 +49,7 @@ type ContentSourceConfigurationParameters struct {
 
 	// The identifiers of the data sources you want to use for your Amazon Kendra experience. Maximum number of 100 items.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DataSourceIds []*string `json:"dataSourceIds,omitempty" tf:"data_source_ids,omitempty"`
 
 	// Whether to use documents you indexed directly using the BatchPutDocument API. Defaults to false.
@@ -53,6 +58,7 @@ type ContentSourceConfigurationParameters struct {
 
 	// The identifier of the FAQs that you want to use for your Amazon Kendra experience. Maximum number of 100 items.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	FaqIds []*string `json:"faqIds,omitempty" tf:"faq_ids,omitempty"`
 }
 
@@ -108,8 +114,34 @@ type ExperienceInitParameters struct {
 	// A description for your Amazon Kendra experience.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The identifier of the index for your Amazon Kendra experience.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kendra/v1beta1.Index
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IndexID *string `json:"indexId,omitempty" tf:"index_id,omitempty"`
+
+	// Reference to a Index in kendra to populate indexId.
+	// +kubebuilder:validation:Optional
+	IndexIDRef *v1.Reference `json:"indexIdRef,omitempty" tf:"-"`
+
+	// Selector for a Index in kendra to populate indexId.
+	// +kubebuilder:validation:Optional
+	IndexIDSelector *v1.Selector `json:"indexIdSelector,omitempty" tf:"-"`
+
 	// A name for your Amazon Kendra experience.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Amazon Resource Name (ARN) of a role with permission to access Query API, QuerySuggestions API, SubmitFeedback API, and AWS SSO that stores your user and group information. For more information, see IAM roles for Amazon Kendra.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ExperienceObservation struct {

@@ -25,6 +25,19 @@ type SigningProfilePermissionInitParameters struct {
 	// The AWS principal to be granted a cross-account permission.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// The signing profile version that a permission applies to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/signer/v1beta1.SigningProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("version",true)
+	ProfileVersion *string `json:"profileVersion,omitempty" tf:"profile_version,omitempty"`
+
+	// Reference to a SigningProfile in signer to populate profileVersion.
+	// +kubebuilder:validation:Optional
+	ProfileVersionRef *v1.Reference `json:"profileVersionRef,omitempty" tf:"-"`
+
+	// Selector for a SigningProfile in signer to populate profileVersion.
+	// +kubebuilder:validation:Optional
+	ProfileVersionSelector *v1.Selector `json:"profileVersionSelector,omitempty" tf:"-"`
+
 	// A statement identifier prefix. Conflicts with statement_id.
 	StatementIDPrefix *string `json:"statementIdPrefix,omitempty" tf:"statement_id_prefix,omitempty"`
 }

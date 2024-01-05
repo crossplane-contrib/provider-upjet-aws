@@ -58,6 +58,32 @@ type RuleConfigParameters struct {
 
 type SafetyRuleInitParameters struct {
 
+	// Routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	AssertedControls []*string `json:"assertedControls,omitempty" tf:"asserted_controls,omitempty"`
+
+	// References to RoutingControl in route53recoverycontrolconfig to populate assertedControls.
+	// +kubebuilder:validation:Optional
+	AssertedControlsRefs []v1.Reference `json:"assertedControlsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate assertedControls.
+	// +kubebuilder:validation:Optional
+	AssertedControlsSelector *v1.Selector `json:"assertedControlsSelector,omitempty" tf:"-"`
+
+	// ARN of the control panel in which this safety rule will reside.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.ControlPanel
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
+
+	// Reference to a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
+	// +kubebuilder:validation:Optional
+	ControlPanelArnRef *v1.Reference `json:"controlPanelArnRef,omitempty" tf:"-"`
+
+	// Selector for a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
+	// +kubebuilder:validation:Optional
+	ControlPanelArnSelector *v1.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
+
 	// Gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
 	GatingControls []*string `json:"gatingControls,omitempty" tf:"gating_controls,omitempty"`
 

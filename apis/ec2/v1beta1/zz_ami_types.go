@@ -68,6 +68,7 @@ type AMIInitParameters struct {
 	SriovNetSupport *string `json:"sriovNetSupport,omitempty" tf:"sriov_net_support,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
@@ -162,9 +163,11 @@ type AMIObservation struct {
 	SriovNetSupport *string `json:"sriovNetSupport,omitempty" tf:"sriov_net_support,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
@@ -250,6 +253,7 @@ type AMIParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// If the image is configured for NitroTPM support, the value is v2.0. For more information, see NitroTPM in the Amazon Elastic Compute Cloud User Guide.
@@ -281,6 +285,20 @@ type EBSBlockDeviceInitParameters struct {
 
 	// ARN of the Outpost on which the snapshot is stored.
 	OutpostArn *string `json:"outpostArn,omitempty" tf:"outpost_arn,omitempty"`
+
+	// ID of an EBS snapshot that will be used to initialize the created
+	// EBS volumes. If set, the volume_size attribute must be at least as large as the referenced
+	// snapshot.
+	// +crossplane:generate:reference:type=EBSSnapshot
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Reference to a EBSSnapshot to populate snapshotId.
+	// +kubebuilder:validation:Optional
+	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
+
+	// Selector for a EBSSnapshot to populate snapshotId.
+	// +kubebuilder:validation:Optional
+	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 
 	// Throughput that the EBS volume supports, in MiB/s. Only valid for volume_type of gp3.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`

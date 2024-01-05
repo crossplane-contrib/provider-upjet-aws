@@ -22,10 +22,52 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	// The name of the first database created in the namespace.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
+	// The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace. When specifying default_iam_role_arn, it also must be part of iam_roles.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate defaultIamRoleArn.
+	// +kubebuilder:validation:Optional
+	DefaultIAMRoleArnRef *v1.Reference `json:"defaultIamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate defaultIamRoleArn.
+	// +kubebuilder:validation:Optional
+	DefaultIAMRoleArnSelector *v1.Selector `json:"defaultIamRoleArnSelector,omitempty" tf:"-"`
+
+	// References to Role in iam to populate iamRoles.
+	// +kubebuilder:validation:Optional
+	IAMRoleRefs []v1.Reference `json:"iamRoleRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Role in iam to populate iamRoles.
+	// +kubebuilder:validation:Optional
+	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
+
+	// A list of IAM roles to associate with the namespace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
+	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
+	// +listType=set
+	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
+
+	// The ARN of the Amazon Web Services Key Management Service key used to encrypt your data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
+	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -41,6 +83,7 @@ type RedshiftServerlessNamespaceObservation struct {
 	DefaultIAMRoleArn *string `json:"defaultIamRoleArn,omitempty" tf:"default_iam_role_arn,omitempty"`
 
 	// A list of IAM roles to associate with the namespace.
+	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The Redshift Namespace Name.
@@ -50,15 +93,18 @@ type RedshiftServerlessNamespaceObservation struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
+	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// The Redshift Namespace ID.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -103,6 +149,7 @@ type RedshiftServerlessNamespaceParameters struct {
 	// +crossplane:generate:reference:refFieldName=IAMRoleRefs
 	// +crossplane:generate:reference:selectorFieldName=IAMRoleSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IAMRoles []*string `json:"iamRoles,omitempty" tf:"iam_roles,omitempty"`
 
 	// The ARN of the Amazon Web Services Key Management Service key used to encrypt your data.
@@ -120,6 +167,7 @@ type RedshiftServerlessNamespaceParameters struct {
 
 	// The types of logs the namespace can export. Available export types are userlog, connectionlog, and useractivitylog.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LogExports []*string `json:"logExports,omitempty" tf:"log_exports,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -129,6 +177,7 @@ type RedshiftServerlessNamespaceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

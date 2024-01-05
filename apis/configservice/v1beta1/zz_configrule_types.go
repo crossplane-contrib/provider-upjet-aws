@@ -35,6 +35,7 @@ type ConfigRuleInitParameters struct {
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -64,9 +65,11 @@ type ConfigRuleObservation struct {
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -99,6 +102,7 @@ type ConfigRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -147,6 +151,7 @@ type ScopeInitParameters struct {
 	ComplianceResourceID *string `json:"complianceResourceId,omitempty" tf:"compliance_resource_id,omitempty"`
 
 	// A list of resource types of only those AWS resources that you want to trigger an evaluation for the ruleE.g., AWS::EC2::Instance. You can only specify one type if you also specify a resource ID for compliance_resource_id. See relevant part of AWS Docs for available types.
+	// +listType=set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// The tag key that is applied to only those AWS resources that you want you want to trigger an evaluation for the rule.
@@ -162,6 +167,7 @@ type ScopeObservation struct {
 	ComplianceResourceID *string `json:"complianceResourceId,omitempty" tf:"compliance_resource_id,omitempty"`
 
 	// A list of resource types of only those AWS resources that you want to trigger an evaluation for the ruleE.g., AWS::EC2::Instance. You can only specify one type if you also specify a resource ID for compliance_resource_id. See relevant part of AWS Docs for available types.
+	// +listType=set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// The tag key that is applied to only those AWS resources that you want you want to trigger an evaluation for the rule.
@@ -179,6 +185,7 @@ type ScopeParameters struct {
 
 	// A list of resource types of only those AWS resources that you want to trigger an evaluation for the ruleE.g., AWS::EC2::Instance. You can only specify one type if you also specify a resource ID for compliance_resource_id. See relevant part of AWS Docs for available types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ComplianceResourceTypes []*string `json:"complianceResourceTypes,omitempty" tf:"compliance_resource_types,omitempty"`
 
 	// The tag key that is applied to only those AWS resources that you want you want to trigger an evaluation for the rule.
@@ -239,6 +246,19 @@ type SourceInitParameters struct {
 
 	// Provides the source and type of the event that causes AWS Config to evaluate your AWS resources. Only valid if owner is CUSTOM_LAMBDA or CUSTOM_POLICY. See Source Detail Below.
 	SourceDetail []SourceDetailInitParameters `json:"sourceDetail,omitempty" tf:"source_detail,omitempty"`
+
+	// For AWS Config managed rules, a predefined identifier, e.g IAM_PASSWORD_POLICY. For custom Lambda rules, the identifier is the ARN of the Lambda Function, such as arn:aws:lambda:us-east-1:123456789012:function:custom_rule_name or the arn attribute of the aws_lambda_function resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	SourceIdentifier *string `json:"sourceIdentifier,omitempty" tf:"source_identifier,omitempty"`
+
+	// Reference to a Function in lambda to populate sourceIdentifier.
+	// +kubebuilder:validation:Optional
+	SourceIdentifierRef *v1.Reference `json:"sourceIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate sourceIdentifier.
+	// +kubebuilder:validation:Optional
+	SourceIdentifierSelector *v1.Selector `json:"sourceIdentifierSelector,omitempty" tf:"-"`
 }
 
 type SourceObservation struct {

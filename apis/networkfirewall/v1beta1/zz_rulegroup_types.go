@@ -204,12 +204,14 @@ type HeaderParameters struct {
 type IPSetInitParameters struct {
 
 	// Set of port ranges.
+	// +listType=set
 	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
 }
 
 type IPSetObservation struct {
 
 	// Set of port ranges.
+	// +listType=set
 	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
 }
 
@@ -217,10 +219,24 @@ type IPSetParameters struct {
 
 	// Set of port ranges.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Definition []*string `json:"definition" tf:"definition,omitempty"`
 }
 
 type IPSetReferenceInitParameters struct {
+
+	// Set of Managed Prefix IP ARN(s)
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ReferenceArn *string `json:"referenceArn,omitempty" tf:"reference_arn,omitempty"`
+
+	// Reference to a ManagedPrefixList in ec2 to populate referenceArn.
+	// +kubebuilder:validation:Optional
+	ReferenceArnRef *v1.Reference `json:"referenceArnRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedPrefixList in ec2 to populate referenceArn.
+	// +kubebuilder:validation:Optional
+	ReferenceArnSelector *v1.Selector `json:"referenceArnSelector,omitempty" tf:"-"`
 }
 
 type IPSetReferenceObservation struct {
@@ -313,6 +329,7 @@ type MatchAttributesInitParameters struct {
 	DestinationPort []DestinationPortInitParameters `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
 	// Set of protocols to inspect for, specified using the protocol's assigned internet protocol number (IANA). If not specified, this matches with any protocol.
+	// +listType=set
 	Protocols []*float64 `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// Set of configuration blocks describing the source IP address and address ranges to inspect for, in CIDR notation. If not specified, this matches with any source address. See Source below for details.
@@ -334,6 +351,7 @@ type MatchAttributesObservation struct {
 	DestinationPort []DestinationPortObservation `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
 	// Set of protocols to inspect for, specified using the protocol's assigned internet protocol number (IANA). If not specified, this matches with any protocol.
+	// +listType=set
 	Protocols []*float64 `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// Set of configuration blocks describing the source IP address and address ranges to inspect for, in CIDR notation. If not specified, this matches with any source address. See Source below for details.
@@ -358,6 +376,7 @@ type MatchAttributesParameters struct {
 
 	// Set of protocols to inspect for, specified using the protocol's assigned internet protocol number (IANA). If not specified, this matches with any protocol.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Protocols []*float64 `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// Set of configuration blocks describing the source IP address and address ranges to inspect for, in CIDR notation. If not specified, this matches with any source address. See Source below for details.
@@ -376,12 +395,14 @@ type MatchAttributesParameters struct {
 type PortSetInitParameters struct {
 
 	// Set of port ranges.
+	// +listType=set
 	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
 }
 
 type PortSetObservation struct {
 
 	// Set of port ranges.
+	// +listType=set
 	Definition []*string `json:"definition,omitempty" tf:"definition,omitempty"`
 }
 
@@ -389,6 +410,7 @@ type PortSetParameters struct {
 
 	// Set of port ranges.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Definition []*string `json:"definition" tf:"definition,omitempty"`
 }
 
@@ -457,6 +479,7 @@ type ReferenceSetsParameters struct {
 type RuleDefinitionInitParameters struct {
 
 	// Set of actions to take on a packet that matches one of the stateless rule definition's match_attributes. For every rule you must specify 1 standard action, and you can add custom actions. Standard actions include: aws:pass, aws:drop, aws:forward_to_sfe.
+	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// A configuration block containing criteria for AWS Network Firewall to use to inspect an individual packet in stateless rule inspection. See Match Attributes below for details.
@@ -466,6 +489,7 @@ type RuleDefinitionInitParameters struct {
 type RuleDefinitionObservation struct {
 
 	// Set of actions to take on a packet that matches one of the stateless rule definition's match_attributes. For every rule you must specify 1 standard action, and you can add custom actions. Standard actions include: aws:pass, aws:drop, aws:forward_to_sfe.
+	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// A configuration block containing criteria for AWS Network Firewall to use to inspect an individual packet in stateless rule inspection. See Match Attributes below for details.
@@ -476,6 +500,7 @@ type RuleDefinitionParameters struct {
 
 	// Set of actions to take on a packet that matches one of the stateless rule definition's match_attributes. For every rule you must specify 1 standard action, and you can add custom actions. Standard actions include: aws:pass, aws:drop, aws:forward_to_sfe.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Actions []*string `json:"actions" tf:"actions,omitempty"`
 
 	// A configuration block containing criteria for AWS Network Firewall to use to inspect an individual packet in stateless rule inspection. See Match Attributes below for details.
@@ -533,6 +558,7 @@ type RuleGroupInitParameters struct {
 	Rules *string `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether the rule group is stateless (containing stateless rules) or stateful (containing stateful rules). Valid values include: STATEFUL or STATELESS.
@@ -566,9 +592,11 @@ type RuleGroupObservation struct {
 	Rules *string `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Whether the rule group is stateless (containing stateless rules) or stateful (containing stateful rules). Valid values include: STATEFUL or STATELESS.
@@ -611,6 +639,7 @@ type RuleGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether the rule group is stateless (containing stateless rules) or stateful (containing stateful rules). Valid values include: STATEFUL or STATELESS.
@@ -674,6 +703,7 @@ type RuleOptionInitParameters struct {
 	Keyword *string `json:"keyword,omitempty" tf:"keyword,omitempty"`
 
 	// Set of strings for additional settings to use in stateful rule inspection.
+	// +listType=set
 	Settings []*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 
@@ -684,6 +714,7 @@ type RuleOptionObservation struct {
 	Keyword *string `json:"keyword,omitempty" tf:"keyword,omitempty"`
 
 	// Set of strings for additional settings to use in stateful rule inspection.
+	// +listType=set
 	Settings []*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 
@@ -696,6 +727,7 @@ type RuleOptionParameters struct {
 
 	// Set of strings for additional settings to use in stateful rule inspection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Settings []*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 
@@ -749,9 +781,11 @@ type RulesSourceListInitParameters struct {
 	GeneratedRulesType *string `json:"generatedRulesType,omitempty" tf:"generated_rules_type,omitempty"`
 
 	// Set of types of domain specifications that are provided in the targets argument. Valid values: HTTP_HOST, TLS_SNI.
+	// +listType=set
 	TargetTypes []*string `json:"targetTypes,omitempty" tf:"target_types,omitempty"`
 
 	// Set of domains that you want to inspect for in your traffic flows.
+	// +listType=set
 	Targets []*string `json:"targets,omitempty" tf:"targets,omitempty"`
 }
 
@@ -761,9 +795,11 @@ type RulesSourceListObservation struct {
 	GeneratedRulesType *string `json:"generatedRulesType,omitempty" tf:"generated_rules_type,omitempty"`
 
 	// Set of types of domain specifications that are provided in the targets argument. Valid values: HTTP_HOST, TLS_SNI.
+	// +listType=set
 	TargetTypes []*string `json:"targetTypes,omitempty" tf:"target_types,omitempty"`
 
 	// Set of domains that you want to inspect for in your traffic flows.
+	// +listType=set
 	Targets []*string `json:"targets,omitempty" tf:"targets,omitempty"`
 }
 
@@ -775,10 +811,12 @@ type RulesSourceListParameters struct {
 
 	// Set of types of domain specifications that are provided in the targets argument. Valid values: HTTP_HOST, TLS_SNI.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TargetTypes []*string `json:"targetTypes" tf:"target_types,omitempty"`
 
 	// Set of domains that you want to inspect for in your traffic flows.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Targets []*string `json:"targets" tf:"targets,omitempty"`
 }
 
@@ -984,10 +1022,12 @@ type TCPFlagInitParameters struct {
 
 	// Set of flags to look for in a packet. This setting can only specify values that are also specified in masks.
 	// Valid values: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR.
+	// +listType=set
 	Flags []*string `json:"flags,omitempty" tf:"flags,omitempty"`
 
 	// Set of flags to consider in the inspection. To inspect all flags, leave this empty.
 	// Valid values: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR.
+	// +listType=set
 	Masks []*string `json:"masks,omitempty" tf:"masks,omitempty"`
 }
 
@@ -995,10 +1035,12 @@ type TCPFlagObservation struct {
 
 	// Set of flags to look for in a packet. This setting can only specify values that are also specified in masks.
 	// Valid values: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR.
+	// +listType=set
 	Flags []*string `json:"flags,omitempty" tf:"flags,omitempty"`
 
 	// Set of flags to consider in the inspection. To inspect all flags, leave this empty.
 	// Valid values: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR.
+	// +listType=set
 	Masks []*string `json:"masks,omitempty" tf:"masks,omitempty"`
 }
 
@@ -1007,11 +1049,13 @@ type TCPFlagParameters struct {
 	// Set of flags to look for in a packet. This setting can only specify values that are also specified in masks.
 	// Valid values: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Flags []*string `json:"flags" tf:"flags,omitempty"`
 
 	// Set of flags to consider in the inspection. To inspect all flags, leave this empty.
 	// Valid values: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Masks []*string `json:"masks,omitempty" tf:"masks,omitempty"`
 }
 

@@ -27,6 +27,18 @@ type UserSSHKeyInitParameters struct {
 
 	// The status to assign to the SSH public key. Active means the key can be used for authentication with an AWS CodeCommit repository. Inactive means the key cannot be used. Default is active.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The name of the IAM user to associate the SSH public key with.
+	// +crossplane:generate:reference:type=User
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// Reference to a User to populate username.
+	// +kubebuilder:validation:Optional
+	UsernameRef *v1.Reference `json:"usernameRef,omitempty" tf:"-"`
+
+	// Selector for a User to populate username.
+	// +kubebuilder:validation:Optional
+	UsernameSelector *v1.Selector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 type UserSSHKeyObservation struct {

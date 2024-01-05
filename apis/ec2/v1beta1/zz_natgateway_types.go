@@ -19,13 +19,39 @@ import (
 
 type NATGatewayInitParameters_2 struct {
 
+	// The Allocation ID of the Elastic IP address for the gateway. Required for connectivity_type of public.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
+
+	// Reference to a EIP in ec2 to populate allocationId.
+	// +kubebuilder:validation:Optional
+	AllocationIDRef *v1.Reference `json:"allocationIdRef,omitempty" tf:"-"`
+
+	// Selector for a EIP in ec2 to populate allocationId.
+	// +kubebuilder:validation:Optional
+	AllocationIDSelector *v1.Selector `json:"allocationIdSelector,omitempty" tf:"-"`
+
 	// Connectivity type for the gateway. Valid values are private and public. Defaults to public.
 	ConnectivityType *string `json:"connectivityType,omitempty" tf:"connectivity_type,omitempty"`
 
 	// The private IPv4 address to assign to the NAT gateway. If you don't provide an address, a private IPv4 address will be automatically assigned.
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// The Subnet ID of the subnet in which to place the gateway.
+	// +crossplane:generate:reference:type=Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -56,9 +82,11 @@ type NATGatewayObservation_2 struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -106,6 +134,7 @@ type NATGatewayParameters_2 struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

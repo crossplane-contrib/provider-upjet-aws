@@ -18,6 +18,18 @@ import (
 )
 
 type CertificateAuthorityCertificateInitParameters struct {
+
+	// ARN of the Certificate Authority.
+	// +crossplane:generate:reference:type=CertificateAuthority
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// Reference to a CertificateAuthority to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+
+	// Selector for a CertificateAuthority to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 }
 
 type CertificateAuthorityCertificateObservation struct {

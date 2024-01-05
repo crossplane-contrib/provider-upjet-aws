@@ -28,6 +28,19 @@ type SchemaInitParameters struct {
 	// –  A description of the schema.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ARN of the Glue Registry to create the schema in.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Registry
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
+
+	// Reference to a Registry in glue to populate registryArn.
+	// +kubebuilder:validation:Optional
+	RegistryArnRef *v1.Reference `json:"registryArnRef,omitempty" tf:"-"`
+
+	// Selector for a Registry in glue to populate registryArn.
+	// +kubebuilder:validation:Optional
+	RegistryArnSelector *v1.Selector `json:"registryArnSelector,omitempty" tf:"-"`
+
 	// The schema definition using the data_format setting for schema_name.
 	SchemaDefinition *string `json:"schemaDefinition,omitempty" tf:"schema_definition,omitempty"`
 
@@ -35,6 +48,7 @@ type SchemaInitParameters struct {
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -77,9 +91,11 @@ type SchemaObservation struct {
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -126,6 +142,7 @@ type SchemaParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

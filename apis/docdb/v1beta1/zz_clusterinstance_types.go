@@ -32,6 +32,18 @@ type ClusterInstanceInitParameters struct {
 	// The identifier of the CA certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
+	// The identifier of the aws_docdb_cluster in which to launch this instance.
+	// +crossplane:generate:reference:type=Cluster
+	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// Reference to a Cluster to populate clusterIdentifier.
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate clusterIdentifier.
+	// +kubebuilder:validation:Optional
+	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+
 	// A value that indicates whether to enable Performance Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html) about the details.
 	EnablePerformanceInsights *bool `json:"enablePerformanceInsights,omitempty" tf:"enable_performance_insights,omitempty"`
 
@@ -54,6 +66,7 @@ type ClusterInstanceInitParameters struct {
 	PromotionTier *float64 `json:"promotionTier,omitempty" tf:"promotion_tier,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -128,9 +141,11 @@ type ClusterInstanceObservation struct {
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// – Boolean indicating if this instance is writable. False indicates this instance is a read replica.
@@ -203,6 +218,7 @@ type ClusterInstanceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -73,6 +73,56 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 		mg.Spec.ForProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DirectoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DirectoryIDRef,
+		Selector:     mg.Spec.InitProvider.DirectoryIDSelector,
+		To: reference.To{
+			List:    &v1beta1.DirectoryList{},
+			Managed: &v1beta1.Directory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DirectoryID")
+	}
+	mg.Spec.InitProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DirectoryIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SubnetIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.SubnetIDRefs,
+		Selector:      mg.Spec.InitProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetIds")
+	}
+	mg.Spec.InitProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SubnetIDRefs = mrsp.ResolvedReferences
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.WorkspaceCreationProperties); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupIDRef,
+			Selector:     mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupIDSelector,
+			To: reference.To{
+				List:    &v1beta11.SecurityGroupList{},
+				Managed: &v1beta11.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupID")
+		}
+		mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.WorkspaceCreationProperties[i3].CustomSecurityGroupIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

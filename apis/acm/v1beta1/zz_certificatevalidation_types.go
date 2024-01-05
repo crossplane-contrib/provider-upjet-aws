@@ -19,7 +19,20 @@ import (
 
 type CertificateValidationInitParameters struct {
 
+	// ARN of the certificate that is being validated.
+	// +crossplane:generate:reference:type=Certificate
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+
+	// Reference to a Certificate to populate certificateArn.
+	// +kubebuilder:validation:Optional
+	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
+
+	// Selector for a Certificate to populate certificateArn.
+	// +kubebuilder:validation:Optional
+	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
+
 	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
+	// +listType=set
 	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
 }
 
@@ -32,6 +45,7 @@ type CertificateValidationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
+	// +listType=set
 	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
 }
 
@@ -57,6 +71,7 @@ type CertificateValidationParameters struct {
 
 	// List of FQDNs that implement the validation. Only valid for DNS validation method ACM certificates. If this is set, the resource can implement additional sanity checks and has an explicit dependency on the resource that is implementing the validation
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ValidationRecordFqdns []*string `json:"validationRecordFqdns,omitempty" tf:"validation_record_fqdns,omitempty"`
 }
 

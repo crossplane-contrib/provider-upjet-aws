@@ -19,6 +19,19 @@ import (
 
 type AutoScalingGroupProviderInitParameters struct {
 
+	// - ARN of the associated auto scaling group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
+
+	// Reference to a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
+	// +kubebuilder:validation:Optional
+	AutoScalingGroupArnRef *v1.Reference `json:"autoScalingGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
+	// +kubebuilder:validation:Optional
+	AutoScalingGroupArnSelector *v1.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
+
 	// - Configuration block defining the parameters of the auto scaling. Detailed below.
 	ManagedScaling []ManagedScalingInitParameters `json:"managedScaling,omitempty" tf:"managed_scaling,omitempty"`
 
@@ -69,6 +82,7 @@ type CapacityProviderInitParameters struct {
 	AutoScalingGroupProvider []AutoScalingGroupProviderInitParameters `json:"autoScalingGroupProvider,omitempty" tf:"auto_scaling_group_provider,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -84,9 +98,11 @@ type CapacityProviderObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -103,6 +119,7 @@ type CapacityProviderParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

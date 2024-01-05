@@ -120,7 +120,21 @@ type EventSourceMappingInitParameters struct {
 	// The criteria to use for event filtering Kinesis stream, DynamoDB stream, SQS queue event sources. Detailed below.
 	FilterCriteria []FilterCriteriaInitParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
 
+	// The name or the ARN of the Lambda function that will be subscribing to events.
+	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// Reference to a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
+
+	// Selector for a Function to populate functionName.
+	// +kubebuilder:validation:Optional
+	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
+
 	// A list of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
+	// +listType=set
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
 	// The maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer (or accumulate in the case of an SQS queue event source) until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. If the batch it reads from the stream/queue only has one record in it, Lambda only sends one record to the function. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
@@ -136,6 +150,7 @@ type EventSourceMappingInitParameters struct {
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
+	// +listType=set
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
 	// Scaling configuration of the event source. Only available for SQS queues. Detailed below.
@@ -157,6 +172,7 @@ type EventSourceMappingInitParameters struct {
 	StartingPositionTimestamp *string `json:"startingPositionTimestamp,omitempty" tf:"starting_position_timestamp,omitempty"`
 
 	// The name of the Kafka topics. Only available for MSK sources. A single topic name must be specified.
+	// +listType=set
 	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 
 	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
@@ -196,6 +212,7 @@ type EventSourceMappingObservation struct {
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// A list of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
+	// +listType=set
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -219,6 +236,7 @@ type EventSourceMappingObservation struct {
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
+	// +listType=set
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
 	// Scaling configuration of the event source. Only available for SQS queues. Detailed below.
@@ -246,6 +264,7 @@ type EventSourceMappingObservation struct {
 	StateTransitionReason *string `json:"stateTransitionReason,omitempty" tf:"state_transition_reason,omitempty"`
 
 	// The name of the Kafka topics. Only available for MSK sources. A single topic name must be specified.
+	// +listType=set
 	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 
 	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
@@ -305,6 +324,7 @@ type EventSourceMappingParameters struct {
 
 	// A list of current response type enums applied to the event source mapping for AWS Lambda checkpointing. Only available for SQS and stream sources (DynamoDB and Kinesis). Valid values: ReportBatchItemFailures.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	FunctionResponseTypes []*string `json:"functionResponseTypes,omitempty" tf:"function_response_types,omitempty"`
 
 	// The maximum amount of time to gather records before invoking the function, in seconds (between 0 and 300). Records will continue to buffer (or accumulate in the case of an SQS queue event source) until either maximum_batching_window_in_seconds expires or batch_size has been met. For streaming event sources, defaults to as soon as records are available in the stream. If the batch it reads from the stream/queue only has one record in it, Lambda only sends one record to the function. Only available for stream sources (DynamoDB and Kinesis) and SQS standard queues.
@@ -325,6 +345,7 @@ type EventSourceMappingParameters struct {
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -358,6 +379,7 @@ type EventSourceMappingParameters struct {
 
 	// The name of the Kafka topics. Only available for MSK sources. A single topic name must be specified.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
 
 	// The duration in seconds of a processing window for AWS Lambda streaming analytics. The range is between 1 second up to 900 seconds. Only available for stream sources (DynamoDB and Kinesis).
@@ -444,12 +466,14 @@ type ScalingConfigParameters struct {
 type SelfManagedEventSourceInitParameters struct {
 
 	// A map of endpoints for the self managed source.  For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS and the value should be a string with a comma separated list of broker endpoints.
+	// +mapType=granular
 	Endpoints map[string]*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 }
 
 type SelfManagedEventSourceObservation struct {
 
 	// A map of endpoints for the self managed source.  For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS and the value should be a string with a comma separated list of broker endpoints.
+	// +mapType=granular
 	Endpoints map[string]*string `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
 }
 
@@ -457,6 +481,7 @@ type SelfManagedEventSourceParameters struct {
 
 	// A map of endpoints for the self managed source.  For Kafka self-managed sources, the key should be KAFKA_BOOTSTRAP_SERVERS and the value should be a string with a comma separated list of broker endpoints.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Endpoints map[string]*string `json:"endpoints" tf:"endpoints,omitempty"`
 }
 

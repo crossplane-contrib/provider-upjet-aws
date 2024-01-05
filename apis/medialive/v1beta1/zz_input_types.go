@@ -72,10 +72,24 @@ type InputInitParameters struct {
 	// Name of the input.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ARN of the role this input assumes during and after creation.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The source URLs for a PULL-type input. See Sources for more details.
 	Sources []SourcesInitParameters `json:"sources,omitempty" tf:"sources,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The different types of inputs that AWS Elemental MediaLive supports.
@@ -127,8 +141,10 @@ type InputObservation struct {
 	Sources []SourcesObservation `json:"sources,omitempty" tf:"sources,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The different types of inputs that AWS Elemental MediaLive supports.
@@ -185,6 +201,7 @@ type InputParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The different types of inputs that AWS Elemental MediaLive supports.

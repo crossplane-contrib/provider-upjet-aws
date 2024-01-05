@@ -35,6 +35,22 @@ func (mg *EndpointGroup) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ListenerArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ListenerArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ListenerArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ListenerArnRef,
+		Selector:     mg.Spec.InitProvider.ListenerArnSelector,
+		To: reference.To{
+			List:    &ListenerList{},
+			Managed: &Listener{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ListenerArn")
+	}
+	mg.Spec.InitProvider.ListenerArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ListenerArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -60,6 +76,22 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.AcceleratorArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AcceleratorArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AcceleratorArn),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.AcceleratorArnRef,
+		Selector:     mg.Spec.InitProvider.AcceleratorArnSelector,
+		To: reference.To{
+			List:    &AcceleratorList{},
+			Managed: &Accelerator{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AcceleratorArn")
+	}
+	mg.Spec.InitProvider.AcceleratorArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AcceleratorArnRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -19,13 +19,43 @@ import (
 
 type DirectoryInitParameters struct {
 
+	// The directory identifier for registration in WorkSpaces service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ds/v1beta1.Directory
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DirectoryID *string `json:"directoryId,omitempty" tf:"directory_id,omitempty"`
+
+	// Reference to a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDRef *v1.Reference `json:"directoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Directory in ds to populate directoryId.
+	// +kubebuilder:validation:Optional
+	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
+
 	// The identifiers of the IP access control groups associated with the directory.
+	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
 	// service capabilities. Defined below.
 	SelfServicePermissions []SelfServicePermissionsInitParameters `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
 
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// The identifiers of the subnets where the directory resides.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  Specifies which devices and operating systems users can use to access their WorkSpaces. Defined below.
@@ -44,6 +74,7 @@ type DirectoryObservation struct {
 	CustomerUserName *string `json:"customerUserName,omitempty" tf:"customer_user_name,omitempty"`
 
 	// The IP addresses of the DNS servers for the directory.
+	// +listType=set
 	DNSIPAddresses []*string `json:"dnsIpAddresses,omitempty" tf:"dns_ip_addresses,omitempty"`
 
 	// The directory identifier for registration in WorkSpaces service.
@@ -62,6 +93,7 @@ type DirectoryObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The identifiers of the IP access control groups associated with the directory.
+	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
 	// The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
@@ -71,12 +103,15 @@ type DirectoryObservation struct {
 	SelfServicePermissions []SelfServicePermissionsObservation `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
 
 	// The identifiers of the subnets where the directory resides.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// –  Specifies which devices and operating systems users can use to access their WorkSpaces. Defined below.
@@ -107,6 +142,7 @@ type DirectoryParameters struct {
 
 	// The identifiers of the IP access control groups associated with the directory.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -131,10 +167,12 @@ type DirectoryParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// –  Specifies which devices and operating systems users can use to access their WorkSpaces. Defined below.
@@ -295,6 +333,19 @@ type WorkspaceAccessPropertiesParameters struct {
 }
 
 type WorkspaceCreationPropertiesInitParameters struct {
+
+	// –  The identifier of your custom security group. Should relate to the same VPC, where workspaces reside in.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CustomSecurityGroupID *string `json:"customSecurityGroupId,omitempty" tf:"custom_security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup in ec2 to populate customSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	CustomSecurityGroupIDRef *v1.Reference `json:"customSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup in ec2 to populate customSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	CustomSecurityGroupIDSelector *v1.Selector `json:"customSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// –  The default organizational unit (OU) for your WorkSpace directories. Should conform "OU=<value>,DC=<value>,...,DC=<value>" pattern.
 	DefaultOu *string `json:"defaultOu,omitempty" tf:"default_ou,omitempty"`

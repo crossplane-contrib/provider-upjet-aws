@@ -50,6 +50,19 @@ type BrokerNodeGroupInfoInitParameters struct {
 	// The distribution of broker nodes across availability zones (documentation). Currently the only valid value is DEFAULT.
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
+	// A list of subnets to connect to in client VPC (documentation).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +listType=set
+	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
+
+	// References to Subnet in ec2 to populate clientSubnets.
+	// +kubebuilder:validation:Optional
+	ClientSubnetsRefs []v1.Reference `json:"clientSubnetsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate clientSubnets.
+	// +kubebuilder:validation:Optional
+	ClientSubnetsSelector *v1.Selector `json:"clientSubnetsSelector,omitempty" tf:"-"`
+
 	// Information about the cluster access configuration. See below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
 	ConnectivityInfo []ConnectivityInfoInitParameters `json:"connectivityInfo,omitempty" tf:"connectivity_info,omitempty"`
 
@@ -58,6 +71,19 @@ type BrokerNodeGroupInfoInitParameters struct {
 
 	// Specify the instance type to use for the kafka brokersE.g., kafka.m5.large. (Pricing info)
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +listType=set
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsRefs []v1.Reference `json:"securityGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupsSelector *v1.Selector `json:"securityGroupsSelector,omitempty" tf:"-"`
 
 	// A block that contains information about storage volumes attached to MSK broker nodes. See below.
 	StorageInfo []StorageInfoInitParameters `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
@@ -69,6 +95,7 @@ type BrokerNodeGroupInfoObservation struct {
 	AzDistribution *string `json:"azDistribution,omitempty" tf:"az_distribution,omitempty"`
 
 	// A list of subnets to connect to in client VPC (documentation).
+	// +listType=set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
 
 	// Information about the cluster access configuration. See below. For security reasons, you can't turn on public access while creating an MSK cluster. However, you can update an existing cluster to make it publicly accessible. You can also create a new cluster and then update it to make it publicly accessible (documentation).
@@ -81,6 +108,7 @@ type BrokerNodeGroupInfoObservation struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// A block that contains information about storage volumes attached to MSK broker nodes. See below.
@@ -96,6 +124,7 @@ type BrokerNodeGroupInfoParameters struct {
 	// A list of subnets to connect to in client VPC (documentation).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ClientSubnets []*string `json:"clientSubnets,omitempty" tf:"client_subnets,omitempty"`
 
 	// References to Subnet in ec2 to populate clientSubnets.
@@ -121,6 +150,7 @@ type BrokerNodeGroupInfoParameters struct {
 	// A list of the security groups to associate with the elastic network interfaces to control who can communicate with the cluster.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroups.
@@ -179,6 +209,18 @@ type CloudwatchLogsInitParameters struct {
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Name of the Cloudwatch Log Group to deliver logs to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupRef *v1.Reference `json:"logGroupRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroup.
+	// +kubebuilder:validation:Optional
+	LogGroupSelector *v1.Selector `json:"logGroupSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsObservation struct {
@@ -246,6 +288,7 @@ type ClusterInitParameters struct {
 	StorageMode *string `json:"storageMode,omitempty" tf:"storage_mode,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -314,9 +357,11 @@ type ClusterObservation struct {
 	StorageMode *string `json:"storageMode,omitempty" tf:"storage_mode,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// A comma separated list of one or more hostname:port pairs to use to connect to the Apache Zookeeper cluster. The returned values are sorted alphabetically. The AWS API may not return all endpoints, so this value is not guaranteed to be stable across applies.
@@ -379,10 +424,24 @@ type ClusterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ConfigurationInfoInitParameters struct {
+
+	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
+	// +crossplane:generate:reference:type=Configuration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a Configuration to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a Configuration to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
 	// Revision of the MSK Configuration to use in the cluster.
 	Revision *float64 `json:"revision,omitempty" tf:"revision,omitempty"`
@@ -497,6 +556,19 @@ type EncryptionInTransitParameters struct {
 
 type EncryptionInfoInitParameters struct {
 
+	// The ARN of the KMS key used for encryption at rest of the broker data volumes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	EncryptionAtRestKMSKeyArn *string `json:"encryptionAtRestKmsKeyArn,omitempty" tf:"encryption_at_rest_kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate encryptionAtRestKmsKeyArn.
+	// +kubebuilder:validation:Optional
+	EncryptionAtRestKMSKeyArnRef *v1.Reference `json:"encryptionAtRestKmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate encryptionAtRestKmsKeyArn.
+	// +kubebuilder:validation:Optional
+	EncryptionAtRestKMSKeyArnSelector *v1.Selector `json:"encryptionAtRestKmsKeyArnSelector,omitempty" tf:"-"`
+
 	// Configuration block to specify encryption in transit. See below.
 	EncryptionInTransit []EncryptionInTransitInitParameters `json:"encryptionInTransit,omitempty" tf:"encryption_in_transit,omitempty"`
 }
@@ -532,6 +604,19 @@ type EncryptionInfoParameters struct {
 }
 
 type FirehoseInitParameters struct {
+
+	// Name of the Kinesis Data Firehose delivery stream to deliver logs to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	DeliveryStream *string `json:"deliveryStream,omitempty" tf:"delivery_stream,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate deliveryStream.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamRef *v1.Reference `json:"deliveryStreamRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate deliveryStream.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamSelector *v1.Selector `json:"deliveryStreamSelector,omitempty" tf:"-"`
 
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -722,6 +807,18 @@ type PublicAccessParameters struct {
 
 type S3InitParameters struct {
 
+	// Name of the S3 bucket to deliver logs to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
 	// Controls whether provisioned throughput is enabled or not. Default value: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -816,12 +913,14 @@ type StorageInfoParameters struct {
 type TLSInitParameters struct {
 
 	// List of ACM Certificate Authority Amazon Resource Names (ARNs).
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
 type TLSObservation struct {
 
 	// List of ACM Certificate Authority Amazon Resource Names (ARNs).
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 
@@ -829,6 +928,7 @@ type TLSParameters struct {
 
 	// List of ACM Certificate Authority Amazon Resource Names (ARNs).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CertificateAuthorityArns []*string `json:"certificateAuthorityArns,omitempty" tf:"certificate_authority_arns,omitempty"`
 }
 

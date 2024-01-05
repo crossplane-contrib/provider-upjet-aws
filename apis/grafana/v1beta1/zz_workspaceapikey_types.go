@@ -27,6 +27,19 @@ type WorkspaceAPIKeyInitParameters struct {
 
 	// Specifies the time in seconds until the API key expires. Keys can be valid for up to 30 days.
 	SecondsToLive *float64 `json:"secondsToLive,omitempty" tf:"seconds_to_live,omitempty"`
+
+	// The ID of the workspace that the API key is valid for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/grafana/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Reference to a Workspace in grafana to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in grafana to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceAPIKeyObservation struct {

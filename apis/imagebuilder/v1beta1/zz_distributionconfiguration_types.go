@@ -20,6 +20,7 @@ import (
 type AMIDistributionConfigurationInitParameters struct {
 
 	// Key-value map of tags to apply to the distributed AMI.
+	// +mapType=granular
 	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
 
 	// Description to apply to the distributed AMI.
@@ -35,12 +36,14 @@ type AMIDistributionConfigurationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Set of AWS Account identifiers to distribute the AMI.
+	// +listType=set
 	TargetAccountIds []*string `json:"targetAccountIds,omitempty" tf:"target_account_ids,omitempty"`
 }
 
 type AMIDistributionConfigurationObservation struct {
 
 	// Key-value map of tags to apply to the distributed AMI.
+	// +mapType=granular
 	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
 
 	// Description to apply to the distributed AMI.
@@ -56,6 +59,7 @@ type AMIDistributionConfigurationObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Set of AWS Account identifiers to distribute the AMI.
+	// +listType=set
 	TargetAccountIds []*string `json:"targetAccountIds,omitempty" tf:"target_account_ids,omitempty"`
 }
 
@@ -63,6 +67,7 @@ type AMIDistributionConfigurationParameters struct {
 
 	// Key-value map of tags to apply to the distributed AMI.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AMITags map[string]*string `json:"amiTags,omitempty" tf:"ami_tags,omitempty"`
 
 	// Description to apply to the distributed AMI.
@@ -83,12 +88,14 @@ type AMIDistributionConfigurationParameters struct {
 
 	// Set of AWS Account identifiers to distribute the AMI.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TargetAccountIds []*string `json:"targetAccountIds,omitempty" tf:"target_account_ids,omitempty"`
 }
 
 type ContainerDistributionConfigurationInitParameters struct {
 
 	// Set of tags that are attached to the container distribution configuration.
+	// +listType=set
 	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
 
 	// Description of the container distribution configuration.
@@ -101,6 +108,7 @@ type ContainerDistributionConfigurationInitParameters struct {
 type ContainerDistributionConfigurationObservation struct {
 
 	// Set of tags that are attached to the container distribution configuration.
+	// +listType=set
 	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
 
 	// Description of the container distribution configuration.
@@ -114,6 +122,7 @@ type ContainerDistributionConfigurationParameters struct {
 
 	// Set of tags that are attached to the container distribution configuration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
 
 	// Description of the container distribution configuration.
@@ -166,6 +175,7 @@ type DistributionConfigurationInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -192,9 +202,11 @@ type DistributionConfigurationObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -220,6 +232,7 @@ type DistributionConfigurationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -238,6 +251,7 @@ type DistributionInitParameters struct {
 	LaunchTemplateConfiguration []LaunchTemplateConfigurationInitParameters `json:"launchTemplateConfiguration,omitempty" tf:"launch_template_configuration,omitempty"`
 
 	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
+	// +listType=set
 	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`
 }
 
@@ -256,6 +270,7 @@ type DistributionObservation struct {
 	LaunchTemplateConfiguration []LaunchTemplateConfigurationObservation `json:"launchTemplateConfiguration,omitempty" tf:"launch_template_configuration,omitempty"`
 
 	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
+	// +listType=set
 	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`
 
 	// AWS Region for the distribution.
@@ -282,6 +297,7 @@ type DistributionParameters struct {
 
 	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`
 
 	// AWS Region for the distribution.
@@ -351,30 +367,38 @@ type FastLaunchConfigurationParameters struct {
 type LaunchPermissionInitParameters struct {
 
 	// Set of AWS Organization ARNs to assign.
+	// +listType=set
 	OrganizationArns []*string `json:"organizationArns,omitempty" tf:"organization_arns,omitempty"`
 
 	// Set of AWS Organizational Unit ARNs to assign.
+	// +listType=set
 	OrganizationalUnitArns []*string `json:"organizationalUnitArns,omitempty" tf:"organizational_unit_arns,omitempty"`
 
 	// Set of EC2 launch permission user groups to assign. Use all to distribute a public AMI.
+	// +listType=set
 	UserGroups []*string `json:"userGroups,omitempty" tf:"user_groups,omitempty"`
 
 	// Set of AWS Account identifiers to assign.
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
 type LaunchPermissionObservation struct {
 
 	// Set of AWS Organization ARNs to assign.
+	// +listType=set
 	OrganizationArns []*string `json:"organizationArns,omitempty" tf:"organization_arns,omitempty"`
 
 	// Set of AWS Organizational Unit ARNs to assign.
+	// +listType=set
 	OrganizationalUnitArns []*string `json:"organizationalUnitArns,omitempty" tf:"organizational_unit_arns,omitempty"`
 
 	// Set of EC2 launch permission user groups to assign. Use all to distribute a public AMI.
+	// +listType=set
 	UserGroups []*string `json:"userGroups,omitempty" tf:"user_groups,omitempty"`
 
 	// Set of AWS Account identifiers to assign.
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 
@@ -382,18 +406,22 @@ type LaunchPermissionParameters struct {
 
 	// Set of AWS Organization ARNs to assign.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OrganizationArns []*string `json:"organizationArns,omitempty" tf:"organization_arns,omitempty"`
 
 	// Set of AWS Organizational Unit ARNs to assign.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OrganizationalUnitArns []*string `json:"organizationalUnitArns,omitempty" tf:"organizational_unit_arns,omitempty"`
 
 	// Set of EC2 launch permission user groups to assign. Use all to distribute a public AMI.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	UserGroups []*string `json:"userGroups,omitempty" tf:"user_groups,omitempty"`
 
 	// Set of AWS Account identifiers to assign.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	UserIds []*string `json:"userIds,omitempty" tf:"user_ids,omitempty"`
 }
 

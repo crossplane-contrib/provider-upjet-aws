@@ -19,10 +19,23 @@ import (
 
 type IdentityProviderConfigInitParameters struct {
 
+	// –  Name of the EKS Cluster.
+	// +crossplane:generate:reference:type=Cluster
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Reference to a Cluster to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate clusterName.
+	// +kubebuilder:validation:Optional
+	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
+
 	// Nested attribute containing OpenID Connect identity provider information for the cluster. Detailed below.
 	Oidc []IdentityProviderConfigOidcInitParameters `json:"oidc,omitempty" tf:"oidc,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,9 +57,11 @@ type IdentityProviderConfigObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -65,6 +80,7 @@ type IdentityProviderConfigOidcInitParameters struct {
 	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
 
 	// The key value pairs that describe required claims in the identity token.
+	// +mapType=granular
 	RequiredClaims map[string]*string `json:"requiredClaims,omitempty" tf:"required_claims,omitempty"`
 
 	// The JWT claim that the provider will use as the username.
@@ -89,6 +105,7 @@ type IdentityProviderConfigOidcObservation struct {
 	IssuerURL *string `json:"issuerUrl,omitempty" tf:"issuer_url,omitempty"`
 
 	// The key value pairs that describe required claims in the identity token.
+	// +mapType=granular
 	RequiredClaims map[string]*string `json:"requiredClaims,omitempty" tf:"required_claims,omitempty"`
 
 	// The JWT claim that the provider will use as the username.
@@ -118,6 +135,7 @@ type IdentityProviderConfigOidcParameters struct {
 
 	// The key value pairs that describe required claims in the identity token.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RequiredClaims map[string]*string `json:"requiredClaims,omitempty" tf:"required_claims,omitempty"`
 
 	// The JWT claim that the provider will use as the username.
@@ -155,6 +173,7 @@ type IdentityProviderConfigParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

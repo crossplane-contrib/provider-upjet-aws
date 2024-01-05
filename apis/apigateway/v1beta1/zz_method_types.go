@@ -26,7 +26,21 @@ type MethodInitParameters struct {
 	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
 	// Authorization scopes used when the authorization is COGNITO_USER_POOLS
+	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
+
+	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Authorizer
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
+
+	// Reference to a Authorizer in apigateway to populate authorizerId.
+	// +kubebuilder:validation:Optional
+	AuthorizerIDRef *v1.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Authorizer in apigateway to populate authorizerId.
+	// +kubebuilder:validation:Optional
+	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
 	// HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS, ANY)
 	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
@@ -37,14 +51,42 @@ type MethodInitParameters struct {
 	// Map of the API models used for the request's content type
 	// where key is the content type (e.g., application/json)
 	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
+	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
 	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
+	// +mapType=granular
 	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// ID of a aws_api_gateway_request_validator
 	RequestValidatorID *string `json:"requestValidatorId,omitempty" tf:"request_validator_id,omitempty"`
+
+	// API resource ID
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Resource
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a Resource in apigateway to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Resource in apigateway to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+
+	// ID of the associated REST API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 }
 
 type MethodObservation struct {
@@ -56,6 +98,7 @@ type MethodObservation struct {
 	Authorization *string `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
 	// Authorization scopes used when the authorization is COGNITO_USER_POOLS
+	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
 	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
@@ -72,10 +115,12 @@ type MethodObservation struct {
 	// Map of the API models used for the request's content type
 	// where key is the content type (e.g., application/json)
 	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
+	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
 	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
+	// +mapType=granular
 	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// ID of a aws_api_gateway_request_validator
@@ -100,6 +145,7 @@ type MethodParameters struct {
 
 	// Authorization scopes used when the authorization is COGNITO_USER_POOLS
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AuthorizationScopes []*string `json:"authorizationScopes,omitempty" tf:"authorization_scopes,omitempty"`
 
 	// Authorizer id to be used when the authorization is CUSTOM or COGNITO_USER_POOLS
@@ -133,11 +179,13 @@ type MethodParameters struct {
 	// where key is the content type (e.g., application/json)
 	// and value is either Error, Empty (built-in models) or aws_api_gateway_model's name.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RequestModels map[string]*string `json:"requestModels,omitempty" tf:"request_models,omitempty"`
 
 	// Map of request parameters (from the path, query string and headers) that should be passed to the integration. The boolean value indicates whether the parameter is required (true) or optional (false).
 	// For example: request_parameters = {"method.request.header.X-Some-Header" = true "method.request.querystring.some-query-param" = true} would define that the header X-Some-Header and the query string some-query-param must be provided in the request.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RequestParameters map[string]*bool `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// ID of a aws_api_gateway_request_validator

@@ -19,6 +19,19 @@ import (
 
 type SnapshotInitParameters struct {
 
+	// The namespace to create a snapshot for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshiftserverless/v1beta1.Workgroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("namespace_name",false)
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// Reference to a Workgroup in redshiftserverless to populate namespaceName.
+	// +kubebuilder:validation:Optional
+	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Workgroup in redshiftserverless to populate namespaceName.
+	// +kubebuilder:validation:Optional
+	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
+
 	// How long to retain the created snapshot. Default value is -1.
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
@@ -26,9 +39,11 @@ type SnapshotInitParameters struct {
 type SnapshotObservation struct {
 
 	// All of the Amazon Web Services accounts that have access to restore a snapshot to a provisioned cluster.
+	// +listType=set
 	AccountsWithProvisionedRestoreAccess []*string `json:"accountsWithProvisionedRestoreAccess,omitempty" tf:"accounts_with_provisioned_restore_access,omitempty"`
 
 	// All of the Amazon Web Services accounts that have access to restore a snapshot to a namespace.
+	// +listType=set
 	AccountsWithRestoreAccess []*string `json:"accountsWithRestoreAccess,omitempty" tf:"accounts_with_restore_access,omitempty"`
 
 	// The username of the database within a snapshot.

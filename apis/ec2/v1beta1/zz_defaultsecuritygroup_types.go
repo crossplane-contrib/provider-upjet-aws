@@ -38,6 +38,7 @@ type DefaultSecurityGroupEgressInitParameters struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol"`
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
 
 	// Whether the security group itself will be added as a source to this egress rule.
@@ -68,6 +69,7 @@ type DefaultSecurityGroupEgressObservation struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Whether the security group itself will be added as a source to this egress rule.
@@ -105,6 +107,7 @@ type DefaultSecurityGroupEgressParameters struct {
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
 
 	// Whether the security group itself will be added as a source to this egress rule.
@@ -137,6 +140,7 @@ type DefaultSecurityGroupIngressInitParameters struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol"`
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
 
 	// Whether the security group itself will be added as a source to this egress rule.
@@ -167,6 +171,7 @@ type DefaultSecurityGroupIngressObservation struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Whether the security group itself will be added as a source to this egress rule.
@@ -204,6 +209,7 @@ type DefaultSecurityGroupIngressParameters struct {
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups"`
 
 	// Whether the security group itself will be added as a source to this egress rule.
@@ -226,7 +232,20 @@ type DefaultSecurityGroupInitParameters struct {
 	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// VPC ID. Note that changing the  It will be left in its current state.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDRef *v1.Reference `json:"vpcIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate vpcId.
+	// +kubebuilder:validation:Optional
+	VPCIDSelector *v1.Selector `json:"vpcIdSelector,omitempty" tf:"-"`
 }
 
 type DefaultSecurityGroupObservation struct {
@@ -255,9 +274,11 @@ type DefaultSecurityGroupObservation struct {
 	RevokeRulesOnDelete *bool `json:"revokeRulesOnDelete,omitempty" tf:"revoke_rules_on_delete,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// VPC ID. Note that changing the  It will be left in its current state.
@@ -284,6 +305,7 @@ type DefaultSecurityGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// VPC ID. Note that changing the  It will be left in its current state.

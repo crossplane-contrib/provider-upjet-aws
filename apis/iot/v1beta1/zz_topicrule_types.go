@@ -1130,6 +1130,7 @@ type IotEventsParameters struct {
 type KafkaInitParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1148,6 +1149,7 @@ type KafkaInitParameters struct {
 type KafkaObservation struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1167,6 +1169,7 @@ type KafkaParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1355,6 +1358,32 @@ type SnsInitParameters struct {
 
 	// The message format of the message to publish. Accepted values are "JSON" and "RAW".
 	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// The ARN of the SNS topic.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type SnsObservation struct {
@@ -1769,6 +1798,7 @@ type TopicRuleInitParameters struct {
 	StepFunctions []TopicRuleStepFunctionsInitParameters `json:"stepFunctions,omitempty" tf:"step_functions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	Timestream []TopicRuleTimestreamInitParameters `json:"timestream,omitempty" tf:"timestream,omitempty"`
@@ -1865,6 +1895,7 @@ type TopicRuleIotEventsParameters struct {
 type TopicRuleKafkaInitParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1883,6 +1914,7 @@ type TopicRuleKafkaInitParameters struct {
 type TopicRuleKafkaObservation struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -1902,6 +1934,7 @@ type TopicRuleKafkaParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
@@ -2039,9 +2072,11 @@ type TopicRuleObservation struct {
 	StepFunctions []TopicRuleStepFunctionsObservation `json:"stepFunctions,omitempty" tf:"step_functions,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	Timestream []TopicRuleTimestreamObservation `json:"timestream,omitempty" tf:"timestream,omitempty"`
@@ -2130,6 +2165,7 @@ type TopicRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -2228,6 +2264,32 @@ type TopicRuleSnsInitParameters struct {
 
 	// The message format of the message to publish. Accepted values are "JSON" and "RAW".
 	MessageFormat *string `json:"messageFormat,omitempty" tf:"message_format,omitempty"`
+
+	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// The ARN of the SNS topic.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// Reference to a Topic in sns to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleSnsObservation struct {

@@ -20,6 +20,7 @@ import (
 type AlarmsInitParameters struct {
 
 	// One or more CloudWatch alarm names.
+	// +listType=set
 	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
 
 	// Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -32,6 +33,7 @@ type AlarmsInitParameters struct {
 type AlarmsObservation struct {
 
 	// One or more CloudWatch alarm names.
+	// +listType=set
 	AlarmNames []*string `json:"alarmNames,omitempty" tf:"alarm_names,omitempty"`
 
 	// Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -45,6 +47,7 @@ type AlarmsParameters struct {
 
 	// One or more CloudWatch alarm names.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AlarmNames []*string `json:"alarmNames" tf:"alarm_names,omitempty"`
 
 	// Determines whether to use the CloudWatch alarm option in the service deployment process.
@@ -182,6 +185,18 @@ type LoadBalancerInitParameters struct {
 
 	// Name of the ELB (Classic) to associate with the service.
 	ELBName *string `json:"elbName,omitempty" tf:"elb_name,omitempty"`
+
+	// ARN of the Load Balancer target group to associate with the service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerObservation struct {
@@ -231,6 +246,36 @@ type NetworkConfigurationInitParameters struct {
 
 	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
+	// +kubebuilder:validation:Optional
+	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
+
+	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
+	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
+	// +listType=set
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// References to Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnets.
+	// +kubebuilder:validation:Optional
+	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
+
+	// Subnets associated with the task or service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:refFieldName=SubnetRefs
+	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
+	// +listType=set
+	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
 type NetworkConfigurationObservation struct {
@@ -239,9 +284,11 @@ type NetworkConfigurationObservation struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// Security groups associated with the task or service. If you do not specify a security group, the default security group for the VPC is used.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Subnets associated with the task or service.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -264,6 +311,7 @@ type NetworkConfigurationParameters struct {
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// References to Subnet in ec2 to populate subnets.
@@ -279,6 +327,7 @@ type NetworkConfigurationParameters struct {
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -399,6 +448,7 @@ type ServiceConnectConfigurationLogConfigurationInitParameters struct {
 	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
 
 	// The configuration options to send to the log driver.
+	// +mapType=granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The secrets to pass to the log configuration. See below.
@@ -411,6 +461,7 @@ type ServiceConnectConfigurationLogConfigurationObservation struct {
 	LogDriver *string `json:"logDriver,omitempty" tf:"log_driver,omitempty"`
 
 	// The configuration options to send to the log driver.
+	// +mapType=granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The secrets to pass to the log configuration. See below.
@@ -425,6 +476,7 @@ type ServiceConnectConfigurationLogConfigurationParameters struct {
 
 	// The configuration options to send to the log driver.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Options map[string]*string `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The secrets to pass to the log configuration. See below.
@@ -523,6 +575,18 @@ type ServiceInitParameters struct {
 	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below.
 	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
+	// Name of an ECS cluster.
+	// +crossplane:generate:reference:type=Cluster
+	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
+
+	// Reference to a Cluster to populate cluster.
+	// +kubebuilder:validation:Optional
+	ClusterRef *v1.Reference `json:"clusterRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate cluster.
+	// +kubebuilder:validation:Optional
+	ClusterSelector *v1.Selector `json:"clusterSelector,omitempty" tf:"-"`
+
 	// Configuration block for deployment circuit breaker. See below.
 	DeploymentCircuitBreaker []DeploymentCircuitBreakerInitParameters `json:"deploymentCircuitBreaker,omitempty" tf:"deployment_circuit_breaker,omitempty"`
 
@@ -549,6 +613,19 @@ type ServiceInitParameters struct {
 
 	// Seconds to ignore failing load balancer health checks on newly instantiated tasks to prevent premature shutdown, up to 2147483647. Only valid for services configured to use load balancers.
 	HealthCheckGracePeriodSeconds *float64 `json:"healthCheckGracePeriodSeconds,omitempty" tf:"health_check_grace_period_seconds,omitempty"`
+
+	// ARN of the IAM role that allows Amazon ECS to make calls to your load balancer on your behalf. This parameter is required if you are using a load balancer with your service, but only if your task definition does not use the awsvpc network mode. If using awsvpc network mode, do not specify this role. If your account has already created the Amazon ECS service-linked role, that role is used by default for your service unless you specify a role here.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	IAMRole *string `json:"iamRole,omitempty" tf:"iam_role,omitempty"`
+
+	// Reference to a Role in iam to populate iamRole.
+	// +kubebuilder:validation:Optional
+	IAMRoleRef *v1.Reference `json:"iamRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRole.
+	// +kubebuilder:validation:Optional
+	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
 	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
@@ -581,9 +658,23 @@ type ServiceInitParameters struct {
 	ServiceRegistries []ServiceRegistriesInitParameters `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
+	// +crossplane:generate:reference:type=TaskDefinition
+	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
+
+	// Reference to a TaskDefinition to populate taskDefinition.
+	// +kubebuilder:validation:Optional
+	TaskDefinitionRef *v1.Reference `json:"taskDefinitionRef,omitempty" tf:"-"`
+
+	// Selector for a TaskDefinition to populate taskDefinition.
+	// +kubebuilder:validation:Optional
+	TaskDefinitionSelector *v1.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
+
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Default false.
@@ -665,15 +756,18 @@ type ServiceObservation struct {
 	ServiceRegistries []ServiceRegistriesObservation `json:"serviceRegistries,omitempty" tf:"service_registries,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Default false.
@@ -800,6 +894,7 @@ type ServiceParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
@@ -818,6 +913,7 @@ type ServiceParameters struct {
 
 	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Default false.

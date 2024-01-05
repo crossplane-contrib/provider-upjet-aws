@@ -83,6 +83,7 @@ spec:
                             encryption context in the request is the same as the encryption
                             context specified in this constraint. Conflicts with encryption_context_subset.
                           type: object
+                          x-kubernetes-map-type: granular
                         encryptionContextSubset:
                           additionalProperties:
                             type: string
@@ -94,6 +95,7 @@ spec:
                             although it can include additional key-value pairs. Conflicts
                             with encryption_context_equals.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   grantCreationTokens:
@@ -102,6 +104,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   granteePrincipal:
                     description: The principal that is given permission to perform
                       the operations that the grant permits in ARN format.
@@ -269,6 +272,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -316,6 +320,7 @@ spec:
                             encryption context in the request is the same as the encryption
                             context specified in this constraint. Conflicts with encryption_context_subset.
                           type: object
+                          x-kubernetes-map-type: granular
                         encryptionContextSubset:
                           additionalProperties:
                             type: string
@@ -327,6 +332,7 @@ spec:
                             although it can include additional key-value pairs. Conflicts
                             with encryption_context_equals.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   grantCreationTokens:
@@ -335,6 +341,163 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
+                  granteePrincipal:
+                    description: The principal that is given permission to perform
+                      the operations that the grant permits in ARN format.
+                    type: string
+                  granteePrincipalRef:
+                    description: Reference to a Role in iam to populate granteePrincipal.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  granteePrincipalSelector:
+                    description: Selector for a Role in iam to populate granteePrincipal.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  keyId:
+                    description: The unique identifier for the customer master key
+                      (CMK) that the grant applies to. Specify the key ID or the Amazon
+                      Resource Name (ARN) of the CMK. To specify a CMK in a different
+                      AWS account, you must use the key ARN.
+                    type: string
+                  keyIdRef:
+                    description: Reference to a Key to populate keyId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  keyIdSelector:
+                    description: Selector for a Key to populate keyId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   name:
                     description: A friendly name for identifying the grant.
                     type: string
@@ -346,6 +509,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   retireOnDelete:
                     description: (Defaults to false, Forces new resources) If set
                       to false (the default) the grants will be revoked upon deletion,
@@ -545,6 +709,7 @@ spec:
                             encryption context in the request is the same as the encryption
                             context specified in this constraint. Conflicts with encryption_context_subset.
                           type: object
+                          x-kubernetes-map-type: granular
                         encryptionContextSubset:
                           additionalProperties:
                             type: string
@@ -556,6 +721,7 @@ spec:
                             although it can include additional key-value pairs. Conflicts
                             with encryption_context_equals.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   grantCreationTokens:
@@ -564,6 +730,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   grantId:
                     description: The unique identifier for the grant.
                     type: string
@@ -594,6 +761,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   retireOnDelete:
                     description: (Defaults to false, Forces new resources) If set
                       to false (the default) the grants will be revoked upon deletion,

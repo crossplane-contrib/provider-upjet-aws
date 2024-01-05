@@ -2536,6 +2536,21 @@ func (in *ChannelInitParameters) DeepCopyInto(out *ChannelInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArn != nil {
+		in, out := &in.RoleArn, &out.RoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StartChannel != nil {
 		in, out := &in.StartChannel, &out.StartChannel
 		*out = new(bool)
@@ -9550,6 +9565,21 @@ func (in *InputAttachmentsInitParameters) DeepCopyInto(out *InputAttachmentsInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.InputID != nil {
+		in, out := &in.InputID, &out.InputID
+		*out = new(string)
+		**out = **in
+	}
+	if in.InputIDRef != nil {
+		in, out := &in.InputIDRef, &out.InputIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InputIDSelector != nil {
+		in, out := &in.InputIDSelector, &out.InputIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.InputSettings != nil {
 		in, out := &in.InputSettings, &out.InputSettings
 		*out = make([]InputSettingsInitParameters, len(*in))
@@ -9891,6 +9921,21 @@ func (in *InputInitParameters) DeepCopyInto(out *InputInitParameters) {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArn != nil {
+		in, out := &in.RoleArn, &out.RoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Sources != nil {
 		in, out := &in.Sources, &out.Sources

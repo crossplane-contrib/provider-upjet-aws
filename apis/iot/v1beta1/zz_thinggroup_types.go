@@ -20,12 +20,14 @@ import (
 type AttributePayloadInitParameters struct {
 
 	// Key-value map.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 }
 
 type AttributePayloadObservation struct {
 
 	// Key-value map.
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 }
 
@@ -33,6 +35,7 @@ type AttributePayloadParameters struct {
 
 	// Key-value map.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 }
 
@@ -97,10 +100,23 @@ type RootToParentGroupsParameters struct {
 
 type ThingGroupInitParameters struct {
 
+	// The name of the parent Thing Group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.ThingGroup
+	ParentGroupName *string `json:"parentGroupName,omitempty" tf:"parent_group_name,omitempty"`
+
+	// Reference to a ThingGroup in iot to populate parentGroupName.
+	// +kubebuilder:validation:Optional
+	ParentGroupNameRef *v1.Reference `json:"parentGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ThingGroup in iot to populate parentGroupName.
+	// +kubebuilder:validation:Optional
+	ParentGroupNameSelector *v1.Selector `json:"parentGroupNameSelector,omitempty" tf:"-"`
+
 	// The Thing Group properties. Defined below.
 	Properties []PropertiesInitParameters `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -121,8 +137,10 @@ type ThingGroupObservation struct {
 	Properties []PropertiesObservation `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The current version of the Thing Group record in the registry.
@@ -155,6 +173,7 @@ type ThingGroupParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -21,6 +21,19 @@ type ResolverConfigInitParameters struct {
 
 	// Indicates whether or not the Resolver will create autodefined rules for reverse DNS lookups. Valid values: ENABLE, DISABLE.
 	AutodefinedReverseFlag *string `json:"autodefinedReverseFlag,omitempty" tf:"autodefined_reverse_flag,omitempty"`
+
+	// The ID of the VPC that the configuration is for.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a VPC in ec2 to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPC in ec2 to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type ResolverConfigObservation struct {

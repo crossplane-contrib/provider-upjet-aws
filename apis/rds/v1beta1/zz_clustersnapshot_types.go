@@ -19,10 +19,24 @@ import (
 
 type ClusterSnapshotInitParameters struct {
 
+	// The DB Cluster Identifier from which to take the snapshot.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
+
+	// Reference to a Cluster in rds to populate dbClusterIdentifier.
+	// +kubebuilder:validation:Optional
+	DBClusterIdentifierRef *v1.Reference `json:"dbClusterIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in rds to populate dbClusterIdentifier.
+	// +kubebuilder:validation:Optional
+	DBClusterIdentifierSelector *v1.Selector `json:"dbClusterIdentifierSelector,omitempty" tf:"-"`
+
 	// The Identifier for the snapshot.
 	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -72,9 +86,11 @@ type ClusterSnapshotObservation struct {
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The VPC ID associated with the DB cluster snapshot.
@@ -108,6 +124,7 @@ type ClusterSnapshotParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -47,6 +47,7 @@ type ContainersInitParameters struct {
 type ContainersObservation struct {
 
 	// Set of URIs for created containers.
+	// +listType=set
 	ImageUris []*string `json:"imageUris,omitempty" tf:"image_uris,omitempty"`
 
 	// Region of the AMI.
@@ -61,13 +62,53 @@ type ImageInitParameters struct {
 	// - Amazon Resource Name (ARN) of the container recipe.
 	ContainerRecipeArn *string `json:"containerRecipeArn,omitempty" tf:"container_recipe_arn,omitempty"`
 
+	// Amazon Resource Name (ARN) of the Image Builder Distribution Configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.DistributionConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	DistributionConfigurationArn *string `json:"distributionConfigurationArn,omitempty" tf:"distribution_configuration_arn,omitempty"`
+
+	// Reference to a DistributionConfiguration in imagebuilder to populate distributionConfigurationArn.
+	// +kubebuilder:validation:Optional
+	DistributionConfigurationArnRef *v1.Reference `json:"distributionConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a DistributionConfiguration in imagebuilder to populate distributionConfigurationArn.
+	// +kubebuilder:validation:Optional
+	DistributionConfigurationArnSelector *v1.Selector `json:"distributionConfigurationArnSelector,omitempty" tf:"-"`
+
 	// Whether additional information about the image being created is collected. Defaults to true.
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
+
+	// Amazon Resource Name (ARN) of the image recipe.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.ImageRecipe
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
+
+	// Reference to a ImageRecipe in imagebuilder to populate imageRecipeArn.
+	// +kubebuilder:validation:Optional
+	ImageRecipeArnRef *v1.Reference `json:"imageRecipeArnRef,omitempty" tf:"-"`
+
+	// Selector for a ImageRecipe in imagebuilder to populate imageRecipeArn.
+	// +kubebuilder:validation:Optional
+	ImageRecipeArnSelector *v1.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
 
 	// Configuration block with image tests configuration. Detailed below.
 	ImageTestsConfiguration []ImageTestsConfigurationInitParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
 
+	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.InfrastructureConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
+
+	// Reference to a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
+	// +kubebuilder:validation:Optional
+	InfrastructureConfigurationArnRef *v1.Reference `json:"infrastructureConfigurationArnRef,omitempty" tf:"-"`
+
+	// Selector for a InfrastructureConfiguration in imagebuilder to populate infrastructureConfigurationArn.
+	// +kubebuilder:validation:Optional
+	InfrastructureConfigurationArnSelector *v1.Selector `json:"infrastructureConfigurationArnSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -112,9 +153,11 @@ type ImageObservation struct {
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Version of the image.
@@ -185,6 +228,7 @@ type ImageParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

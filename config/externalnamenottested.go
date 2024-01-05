@@ -313,12 +313,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// FSx Volumes can be imported using the id
 	"aws_fsx_openzfs_volume": config.IdentifierFromProvider,
 
-	// iot
-	//
-	// IoT topic rule destinations can be imported using the arn
-	// arn:aws:iot:us-west-2:123456789012:ruledestination/vpc/2ce781c8-68a6-4c52-9c62-63fe489ecc60
-	"aws_iot_topic_rule_destination": config.IdentifierFromProvider,
-
 	// macie
 	//
 	// No import
@@ -387,8 +381,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// sagemaker
 	//
-	// Endpoints can be imported using the name
-	"aws_sagemaker_endpoint": config.NameAsIdentifier,
 	// SageMaker Flow Definitions can be imported using the flow_definition_name
 	"aws_sagemaker_flow_definition": config.ParameterAsIdentifier("flow_definition_name"),
 	// SageMaker Human Task UIs can be imported using the human_task_ui_name
@@ -616,15 +608,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Amazon File Cache cache can be imported using the resource id
 	"aws_fsx_file_cache": config.IdentifierFromProvider,
 
-	// identitystore
-	//
-	// An Identity Store Group can be imported using the combination identity_store_id/group_id
-	"aws_identitystore_group": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-	// aws_identitystore_group_membership can be imported using the identity_store_id/membership_id
-	"aws_identitystore_group_membership": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-	// An Identity Store User can be imported using the combination identity_store_id/user_id
-	"aws_identitystore_user": config.TemplatedStringAsIdentifier("", "{{ .parameters.identity_store_id }}/{{ .external_name }}"),
-
 	// inspector2
 	//
 	// Inspector V2 Delegated Admin Account can be imported using the account_id
@@ -753,16 +736,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// SESv2 (Simple Email V2) Dedicated IP Assignment can be imported using the id, which is a comma-separated string made up of ip and destination_pool_name
 	"aws_sesv2_dedicated_ip_assignment": config.IdentifierFromProvider,
-
-	// ssoadmin
-	//
-	// SSO Managed Policy Attachments can be imported using the name, path, permission_set_arn, and instance_arn separated by a comma (,)
-	// Example: TestPolicy,/,arn:aws:sso:::permissionSet/ssoins-2938j0x8920sbj72/ps-80383020jr9302rk,arn:aws:sso:::instance/ssoins-2938j0x8920sbj72
-	"aws_ssoadmin_customer_managed_policy_attachment": config.IdentifierFromProvider,
-	// SSO Account Assignments can be imported using the instance_arn
-	"aws_ssoadmin_instance_access_control_attributes": config.ParameterAsIdentifier("instance_arn"),
-	// SSO Admin Permissions Boundary Attachments can be imported using the permission_set_arn and instance_arn, separated by a comma (,)
-	"aws_ssoadmin_permissions_boundary_attachment": config.IdentifierFromProvider,
 
 	// transcribe
 	//

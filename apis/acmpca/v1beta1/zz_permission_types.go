@@ -20,7 +20,21 @@ import (
 type PermissionInitParameters struct {
 
 	// Actions that the specified AWS service principal can use. These include IssueCertificate, GetCertificate, and ListPermissions. Note that in order for ACM to automatically rotate certificates issued by a PCA, it must be granted permission on all 3 actions, as per the example above.
+	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// ARN of the CA that grants the permissions.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acmpca/v1beta1.CertificateAuthority
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+
+	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
@@ -32,6 +46,7 @@ type PermissionInitParameters struct {
 type PermissionObservation struct {
 
 	// Actions that the specified AWS service principal can use. These include IssueCertificate, GetCertificate, and ListPermissions. Note that in order for ACM to automatically rotate certificates issued by a PCA, it must be granted permission on all 3 actions, as per the example above.
+	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// ARN of the CA that grants the permissions.
@@ -53,6 +68,7 @@ type PermissionParameters struct {
 
 	// Actions that the specified AWS service principal can use. These include IssueCertificate, GetCertificate, and ListPermissions. Note that in order for ACM to automatically rotate certificates issued by a PCA, it must be granted permission on all 3 actions, as per the example above.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// ARN of the CA that grants the permissions.

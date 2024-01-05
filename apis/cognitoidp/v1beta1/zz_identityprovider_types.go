@@ -20,12 +20,14 @@ import (
 type IdentityProviderInitParameters struct {
 
 	// The map of attribute mapping of user pool attributes. AttributeMapping in AWS API documentation
+	// +mapType=granular
 	AttributeMapping map[string]*string `json:"attributeMapping,omitempty" tf:"attribute_mapping,omitempty"`
 
 	// The list of identity providers.
 	IdpIdentifiers []*string `json:"idpIdentifiers,omitempty" tf:"idp_identifiers,omitempty"`
 
 	// The map of identity details, such as access token
+	// +mapType=granular
 	ProviderDetails map[string]*string `json:"providerDetails,omitempty" tf:"provider_details,omitempty"`
 
 	// The provider name
@@ -33,11 +35,24 @@ type IdentityProviderInitParameters struct {
 
 	// The provider type.  See AWS API for valid values
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
+	// The user pool id
+	// +crossplane:generate:reference:type=UserPool
+	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
+
+	// Reference to a UserPool to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserPool to populate userPoolId.
+	// +kubebuilder:validation:Optional
+	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
 
 type IdentityProviderObservation struct {
 
 	// The map of attribute mapping of user pool attributes. AttributeMapping in AWS API documentation
+	// +mapType=granular
 	AttributeMapping map[string]*string `json:"attributeMapping,omitempty" tf:"attribute_mapping,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -46,6 +61,7 @@ type IdentityProviderObservation struct {
 	IdpIdentifiers []*string `json:"idpIdentifiers,omitempty" tf:"idp_identifiers,omitempty"`
 
 	// The map of identity details, such as access token
+	// +mapType=granular
 	ProviderDetails map[string]*string `json:"providerDetails,omitempty" tf:"provider_details,omitempty"`
 
 	// The provider name
@@ -62,6 +78,7 @@ type IdentityProviderParameters struct {
 
 	// The map of attribute mapping of user pool attributes. AttributeMapping in AWS API documentation
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AttributeMapping map[string]*string `json:"attributeMapping,omitempty" tf:"attribute_mapping,omitempty"`
 
 	// The list of identity providers.
@@ -70,6 +87,7 @@ type IdentityProviderParameters struct {
 
 	// The map of identity details, such as access token
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ProviderDetails map[string]*string `json:"providerDetails,omitempty" tf:"provider_details,omitempty"`
 
 	// The provider name

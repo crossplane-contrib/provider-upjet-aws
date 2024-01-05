@@ -25,16 +25,42 @@ type EBSSnapshotCopyInitParameters struct {
 	// Whether the snapshot is encrypted.
 	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
 
+	// The ARN for the KMS encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// Indicates whether to permanently restore an archived snapshot.
 	PermanentRestore *bool `json:"permanentRestore,omitempty" tf:"permanent_restore,omitempty"`
 
 	// The region of the source snapshot.
 	SourceRegion *string `json:"sourceRegion,omitempty" tf:"source_region,omitempty"`
 
+	// The ARN for the snapshot to be copied.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EBSSnapshot
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SourceSnapshotID *string `json:"sourceSnapshotId,omitempty" tf:"source_snapshot_id,omitempty"`
+
+	// Reference to a EBSSnapshot in ec2 to populate sourceSnapshotId.
+	// +kubebuilder:validation:Optional
+	SourceSnapshotIDRef *v1.Reference `json:"sourceSnapshotIdRef,omitempty" tf:"-"`
+
+	// Selector for a EBSSnapshot in ec2 to populate sourceSnapshotId.
+	// +kubebuilder:validation:Optional
+	SourceSnapshotIDSelector *v1.Selector `json:"sourceSnapshotIdSelector,omitempty" tf:"-"`
+
 	// The name of the storage tier. Valid values are archive and standard. Default value is standard.
 	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
@@ -83,9 +109,11 @@ type EBSSnapshotCopyObservation struct {
 	StorageTier *string `json:"storageTier,omitempty" tf:"storage_tier,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.
@@ -154,6 +182,7 @@ type EBSSnapshotCopyParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the number of days for which to temporarily restore an archived snapshot. Required for temporary restores only. The snapshot will be automatically re-archived after this period.

@@ -41,6 +41,19 @@ type DatabaseInitParameters struct {
 	// That an Amazon S3 canned ACL should be set to control ownership of stored query results. See ACL Configuration below.
 	ACLConfiguration []ACLConfigurationInitParameters `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
 
+	// Name of S3 bucket to save the results of the query execution.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
 	// Description of the database.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -54,6 +67,7 @@ type DatabaseInitParameters struct {
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Key-value map of custom metadata properties for the database definition.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
@@ -81,6 +95,7 @@ type DatabaseObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of custom metadata properties for the database definition.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
@@ -122,6 +137,7 @@ type DatabaseParameters struct {
 
 	// Key-value map of custom metadata properties for the database definition.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.

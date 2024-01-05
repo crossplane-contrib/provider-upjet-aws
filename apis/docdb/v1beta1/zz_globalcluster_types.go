@@ -34,6 +34,19 @@ type GlobalClusterInitParameters struct {
 	// The global cluster identifier.
 	GlobalClusterIdentifier *string `json:"globalClusterIdentifier,omitempty" tf:"global_cluster_identifier,omitempty"`
 
+	// Amazon Resource Name (ARN) to use as the primary DB Cluster of the Global Cluster on creation.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	SourceDBClusterIdentifier *string `json:"sourceDbClusterIdentifier,omitempty" tf:"source_db_cluster_identifier,omitempty"`
+
+	// Reference to a Cluster in docdb to populate sourceDbClusterIdentifier.
+	// +kubebuilder:validation:Optional
+	SourceDBClusterIdentifierRef *v1.Reference `json:"sourceDbClusterIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in docdb to populate sourceDbClusterIdentifier.
+	// +kubebuilder:validation:Optional
+	SourceDBClusterIdentifierSelector *v1.Selector `json:"sourceDbClusterIdentifierSelector,omitempty" tf:"-"`
+
 	// Specifies whether the DB cluster is encrypted. The default is false unless source_db_cluster_identifier is specified and encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 }

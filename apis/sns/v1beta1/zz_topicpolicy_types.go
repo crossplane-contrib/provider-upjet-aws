@@ -19,6 +19,19 @@ import (
 
 type TopicPolicyInitParameters struct {
 
+	// The ARN of the SNS topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a Topic in sns to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+
 	// The fully-formed AWS policy as JSON.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }

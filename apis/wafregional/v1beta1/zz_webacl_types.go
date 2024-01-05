@@ -57,6 +57,19 @@ type DefaultActionParameters struct {
 
 type LoggingConfigurationInitParameters struct {
 
+	// Amazon Resource Name (ARN) of Kinesis Firehose Delivery Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
+	LogDestination *string `json:"logDestination,omitempty" tf:"log_destination,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate logDestination.
+	// +kubebuilder:validation:Optional
+	LogDestinationRef *v1.Reference `json:"logDestinationRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate logDestination.
+	// +kubebuilder:validation:Optional
+	LogDestinationSelector *v1.Selector `json:"logDestinationSelector,omitempty" tf:"-"`
+
 	// Configuration block containing parts of the request that you want redacted from the logs. Detailed below.
 	RedactedFields []RedactedFieldsInitParameters `json:"redactedFields,omitempty" tf:"redacted_fields,omitempty"`
 }
@@ -176,6 +189,7 @@ type WebACLInitParameters struct {
 	Rule []WebACLRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -203,9 +217,11 @@ type WebACLObservation struct {
 	Rule []WebACLRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -238,6 +254,7 @@ type WebACLParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -252,6 +269,19 @@ type WebACLRuleInitParameters struct {
 	// Specifies the order in which the rules in a WebACL are evaluated.
 	// Rules with a lower value are evaluated before rules with a higher value.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// ID of the associated WAF (Regional) rule (e.g., aws_wafregional_rule). WAF (Global) rules cannot be used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.Rule
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
+
+	// Reference to a Rule in wafregional to populate ruleId.
+	// +kubebuilder:validation:Optional
+	RuleIDRef *v1.Reference `json:"ruleIdRef,omitempty" tf:"-"`
+
+	// Selector for a Rule in wafregional to populate ruleId.
+	// +kubebuilder:validation:Optional
+	RuleIDSelector *v1.Selector `json:"ruleIdSelector,omitempty" tf:"-"`
 
 	// The rule type, either REGULAR, as defined by Rule, RATE_BASED, as defined by RateBasedRule, or GROUP, as defined by RuleGroup. The default is REGULAR. If you add a RATE_BASED rule, you need to set type as RATE_BASED. If you add a GROUP rule, you need to set type as GROUP.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

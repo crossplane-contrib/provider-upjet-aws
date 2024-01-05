@@ -19,19 +19,46 @@ import (
 
 type NetworkInsightsPathInitParameters struct {
 
+	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
 	// IP address of the destination resource.
 	DestinationIP *string `json:"destinationIp,omitempty" tf:"destination_ip,omitempty"`
 
 	// Destination port to analyze access to.
 	DestinationPort *float64 `json:"destinationPort,omitempty" tf:"destination_port,omitempty"`
 
+	// Reference to a NetworkInterface in ec2 to populate destination.
+	// +kubebuilder:validation:Optional
+	DestinationRef *v1.Reference `json:"destinationRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface in ec2 to populate destination.
+	// +kubebuilder:validation:Optional
+	DestinationSelector *v1.Selector `json:"destinationSelector,omitempty" tf:"-"`
+
 	// Protocol to use for analysis. Valid options are tcp or udp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// IP address of the source resource.
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
+	// Reference to a NetworkInterface in ec2 to populate source.
+	// +kubebuilder:validation:Optional
+	SourceRef *v1.Reference `json:"sourceRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface in ec2 to populate source.
+	// +kubebuilder:validation:Optional
+	SourceSelector *v1.Selector `json:"sourceSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -62,9 +89,11 @@ type NetworkInsightsPathObservation struct {
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -121,6 +150,7 @@ type NetworkInsightsPathParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

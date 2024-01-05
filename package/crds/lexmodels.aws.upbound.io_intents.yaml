@@ -369,6 +369,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   slot:
                     description: An list of intent slots. At runtime, Amazon Lex elicits
                       required slot values from the user using prompts defined in
@@ -781,6 +782,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   slot:
                     description: An list of intent slots. At runtime, Amazon Lex elicits
                       required slot values from the user using prompts defined in
@@ -1366,6 +1368,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   slot:
                     description: An list of intent slots. At runtime, Amazon Lex elicits
                       required slot values from the user using prompts defined in

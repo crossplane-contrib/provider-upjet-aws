@@ -111,6 +111,7 @@ type EcsParametersInitParameters struct {
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
@@ -156,6 +157,7 @@ type EcsParametersObservation struct {
 	ReferenceID *string `json:"referenceId,omitempty" tf:"reference_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
@@ -213,6 +215,7 @@ type EcsParametersParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of tasks to create. Ranges from 1 (default) to 10.
@@ -307,9 +310,11 @@ type NetworkConfigurationInitParameters struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// Set of 1 to 5 Security Group ID-s to be associated with the task. These security groups must all be in the same VPC.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -319,9 +324,11 @@ type NetworkConfigurationObservation struct {
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
 	// Set of 1 to 5 Security Group ID-s to be associated with the task. These security groups must all be in the same VPC.
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 }
 
@@ -333,10 +340,12 @@ type NetworkConfigurationParameters struct {
 
 	// Set of 1 to 5 Security Group ID-s to be associated with the task. These security groups must all be in the same VPC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// Set of 1 to 16 subnets to be associated with the task. These subnets must all be in the same VPC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
 }
 
@@ -489,6 +498,18 @@ type ScheduleInitParameters struct {
 	// Name of the schedule group to associate with this schedule. When omitted, the default schedule group is used.
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
+	// ARN for the customer managed KMS key that EventBridge Scheduler will use to encrypt and decrypt your data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
 	// Name of the schedule. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -632,6 +653,19 @@ type SqsParametersParameters struct {
 
 type TargetInitParameters struct {
 
+	// ARN of the target of this schedule, such as a SQS queue or ECS cluster. For universal targets, this is a Service ARN specific to the target service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Reference to a Queue in sqs to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate arn.
+	// +kubebuilder:validation:Optional
+	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
+
 	// Information about an Amazon SQS queue that EventBridge Scheduler uses as a dead-letter queue for your schedule. If specified, EventBridge Scheduler delivers failed events that could not be successfully delivered to a target to the queue. Detailed below.
 	DeadLetterConfig []DeadLetterConfigInitParameters `json:"deadLetterConfig,omitempty" tf:"dead_letter_config,omitempty"`
 
@@ -649,6 +683,19 @@ type TargetInitParameters struct {
 
 	// Information about the retry policy settings. Detailed below.
 	RetryPolicy []RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
+	// ARN of the IAM role that EventBridge Scheduler will use for this target when the schedule is invoked. Read more in Set up the execution role.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Templated target type for the Amazon SageMaker StartPipelineExecution API operation. Detailed below.
 	SagemakerPipelineParameters []SagemakerPipelineParametersInitParameters `json:"sagemakerPipelineParameters,omitempty" tf:"sagemaker_pipeline_parameters,omitempty"`

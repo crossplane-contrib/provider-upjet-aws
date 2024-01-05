@@ -101,6 +101,7 @@ spec:
                       job, see the Special Parameters Used by AWS Glue topic in the
                       developer guide.
                     type: object
+                    x-kubernetes-map-type: granular
                   description:
                     description: –  Description of the job.
                     type: string
@@ -142,6 +143,7 @@ spec:
                     description: overridable arguments for this job, specified as
                       name-value pairs.
                     type: object
+                    x-kubernetes-map-type: granular
                   notificationProperty:
                     description: Notification property of the job. Defined below.
                     items:
@@ -245,6 +247,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeout:
                     description: –  The job timeout in minutes. The default is 2880
                       minutes (48 hours) for glueetl and pythonshell jobs, and null
@@ -304,6 +307,7 @@ spec:
                       job, see the Special Parameters Used by AWS Glue topic in the
                       developer guide.
                     type: object
+                    x-kubernetes-map-type: granular
                   description:
                     description: –  Description of the job.
                     type: string
@@ -345,6 +349,7 @@ spec:
                     description: overridable arguments for this job, specified as
                       name-value pairs.
                     type: object
+                    x-kubernetes-map-type: granular
                   notificationProperty:
                     description: Notification property of the job. Defined below.
                     items:
@@ -359,6 +364,82 @@ spec:
                     description: The number of workers of a defined workerType that
                       are allocated when a job runs.
                     type: number
+                  roleArn:
+                    description: –  The ARN of the IAM role associated with this job.
+                    type: string
+                  roleArnRef:
+                    description: Reference to a Role in iam to populate roleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  roleArnSelector:
+                    description: Selector for a Role in iam to populate roleArn.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   securityConfiguration:
                     description: The name of the Security Configuration to be associated
                       with the job.
@@ -368,6 +449,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeout:
                     description: –  The job timeout in minutes. The default is 2880
                       minutes (48 hours) for glueetl and pythonshell jobs, and null
@@ -586,6 +668,7 @@ spec:
                       job, see the Special Parameters Used by AWS Glue topic in the
                       developer guide.
                     type: object
+                    x-kubernetes-map-type: granular
                   description:
                     description: –  Description of the job.
                     type: string
@@ -630,6 +713,7 @@ spec:
                     description: overridable arguments for this job, specified as
                       name-value pairs.
                     type: object
+                    x-kubernetes-map-type: granular
                   notificationProperty:
                     description: Notification property of the job. Defined below.
                     items:
@@ -656,6 +740,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -663,6 +748,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeout:
                     description: –  The job timeout in minutes. The default is 2880
                       minutes (48 hours) for glueetl and pythonshell jobs, and null

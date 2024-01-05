@@ -98,18 +98,22 @@ type AsyncInferenceConfigParameters struct {
 type CaptureContentTypeHeaderInitParameters struct {
 
 	// The CSV content type headers to capture.
+	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
+	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
 
 type CaptureContentTypeHeaderObservation struct {
 
 	// The CSV content type headers to capture.
+	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
+	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
 
@@ -117,10 +121,12 @@ type CaptureContentTypeHeaderParameters struct {
 
 	// The CSV content type headers to capture.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CsvContentTypes []*string `json:"csvContentTypes,omitempty" tf:"csv_content_types,omitempty"`
 
 	// The JSON content type headers to capture.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	JSONContentTypes []*string `json:"jsonContentTypes,omitempty" tf:"json_content_types,omitempty"`
 }
 
@@ -268,6 +274,18 @@ type EndpointConfigurationInitParameters struct {
 	// Specifies the parameters to capture input/output of SageMaker models endpoints. Fields are documented below.
 	DataCaptureConfig []DataCaptureConfigInitParameters `json:"dataCaptureConfig,omitempty" tf:"data_capture_config,omitempty"`
 
+	// Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
 	// An list of ProductionVariant objects, one for each model that you want to host at this endpoint. Fields are documented below.
 	ProductionVariants []ProductionVariantsInitParameters `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
 
@@ -275,6 +293,7 @@ type EndpointConfigurationInitParameters struct {
 	ShadowProductionVariants []ShadowProductionVariantsInitParameters `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -301,9 +320,11 @@ type EndpointConfigurationObservation struct {
 	ShadowProductionVariants []ShadowProductionVariantsObservation `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -345,6 +366,7 @@ type EndpointConfigurationParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -354,6 +376,7 @@ type NotificationConfigInitParameters struct {
 	ErrorTopic *string `json:"errorTopic,omitempty" tf:"error_topic,omitempty"`
 
 	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
+	// +listType=set
 	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
 
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
@@ -366,6 +389,7 @@ type NotificationConfigObservation struct {
 	ErrorTopic *string `json:"errorTopic,omitempty" tf:"error_topic,omitempty"`
 
 	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
+	// +listType=set
 	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
 
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
@@ -380,6 +404,7 @@ type NotificationConfigParameters struct {
 
 	// The Amazon SNS topics where you want the inference response to be included. Valid values are SUCCESS_NOTIFICATION_TOPIC and ERROR_NOTIFICATION_TOPIC.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IncludeInferenceResponseIn []*string `json:"includeInferenceResponseIn,omitempty" tf:"include_inference_response_in,omitempty"`
 
 	// Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
@@ -412,6 +437,18 @@ type ProductionVariantsInitParameters struct {
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
+
+	// The name of the model to use.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Model
+	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
+
+	// Reference to a Model in sagemaker to populate modelName.
+	// +kubebuilder:validation:Optional
+	ModelNameRef *v1.Reference `json:"modelNameRef,omitempty" tf:"-"`
+
+	// Selector for a Model in sagemaker to populate modelName.
+	// +kubebuilder:validation:Optional
+	ModelNameSelector *v1.Selector `json:"modelNameSelector,omitempty" tf:"-"`
 
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	ServerlessConfig []ServerlessConfigInitParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`

@@ -166,6 +166,144 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.BrokerNodeGroupInfo); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnets),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnetsRefs,
+			Selector:      mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnetsSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnets")
+		}
+		mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnets = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnetsRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.BrokerNodeGroupInfo); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroups),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroupsRefs,
+			Selector:      mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroupsSelector,
+			To: reference.To{
+				List:    &v1beta1.SecurityGroupList{},
+				Managed: &v1beta1.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroups")
+		}
+		mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroupsRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ConfigurationInfo); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationInfo[i3].Arn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.ConfigurationInfo[i3].ArnRef,
+			Selector:     mg.Spec.InitProvider.ConfigurationInfo[i3].ArnSelector,
+			To: reference.To{
+				List:    &ConfigurationList{},
+				Managed: &Configuration{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ConfigurationInfo[i3].Arn")
+		}
+		mg.Spec.InitProvider.ConfigurationInfo[i3].Arn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ConfigurationInfo[i3].ArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptionInfo); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnRef,
+			Selector:     mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnSelector,
+			To: reference.To{
+				List:    &v1beta11.KeyList{},
+				Managed: &v1beta11.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn")
+		}
+		mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingInfo); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupRef,
+					Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupSelector,
+					To: reference.To{
+						List:    &v1beta12.GroupList{},
+						Managed: &v1beta12.Group{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup")
+				}
+				mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingInfo); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream),
+					Extract:      resource.ExtractParamPath("name", false),
+					Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef,
+					Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamSelector,
+					To: reference.To{
+						List:    &v1beta13.DeliveryStreamList{},
+						Managed: &v1beta13.DeliveryStream{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream")
+				}
+				mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingInfo); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketRef,
+					Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketSelector,
+					To: reference.To{
+						List:    &v1beta14.BucketList{},
+						Managed: &v1beta14.Bucket{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket")
+				}
+				mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }
@@ -209,6 +347,38 @@ func (mg *ScramSecretAssociation) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.SecretArnList = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SecretArnRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterArn),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.ClusterArnRef,
+		Selector:     mg.Spec.InitProvider.ClusterArnSelector,
+		To: reference.To{
+			List:    &ClusterList{},
+			Managed: &Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterArn")
+	}
+	mg.Spec.InitProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterArnRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecretArnList),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.SecretArnRefs,
+		Selector:      mg.Spec.InitProvider.SecretArnSelector,
+		To: reference.To{
+			List:    &v1beta15.SecretList{},
+			Managed: &v1beta15.Secret{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecretArnList")
+	}
+	mg.Spec.InitProvider.SecretArnList = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecretArnRefs = mrsp.ResolvedReferences
 
 	return nil
 }
@@ -254,6 +424,42 @@ func (mg *ServerlessCluster) ResolveReferences(ctx context.Context, c client.Rea
 		}
 		mg.Spec.ForProvider.VPCConfig[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCConfig); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDRefs,
+			Selector:      mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SecurityGroupList{},
+				Managed: &v1beta1.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIds")
+		}
+		mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCConfig); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SubnetIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs,
+			Selector:      mg.Spec.InitProvider.VPCConfig[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCConfig[i3].SubnetIds")
+		}
+		mg.Spec.InitProvider.VPCConfig[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs = mrsp.ResolvedReferences
 
 	}
 

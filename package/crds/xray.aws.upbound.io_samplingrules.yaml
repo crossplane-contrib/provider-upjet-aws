@@ -72,6 +72,7 @@ spec:
                       type: string
                     description: Matches attributes derived from the request.
                     type: object
+                    x-kubernetes-map-type: granular
                   fixedRate:
                     description: The percentage of matching requests to instrument,
                       after the reservoir is exhausted.
@@ -112,6 +113,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   urlPath:
                     description: Matches the path from a request URL.
                     type: string
@@ -138,6 +140,7 @@ spec:
                       type: string
                     description: Matches attributes derived from the request.
                     type: object
+                    x-kubernetes-map-type: granular
                   fixedRate:
                     description: The percentage of matching requests to instrument,
                       after the reservoir is exhausted.
@@ -174,6 +177,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   urlPath:
                     description: Matches the path from a request URL.
                     type: string
@@ -395,6 +399,7 @@ spec:
                       type: string
                     description: Matches attributes derived from the request.
                     type: object
+                    x-kubernetes-map-type: granular
                   fixedRate:
                     description: The percentage of matching requests to instrument,
                       after the reservoir is exhausted.
@@ -434,6 +439,7 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
@@ -441,6 +447,7 @@ spec:
                       those inherited from the provider default_tags configuration
                       block.
                     type: object
+                    x-kubernetes-map-type: granular
                   urlPath:
                     description: Matches the path from a request URL.
                     type: string

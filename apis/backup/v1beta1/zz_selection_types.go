@@ -57,13 +57,40 @@ type SelectionInitParameters struct {
 	// A list of conditions that you define to assign resources to your backup plans using tags.
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnRef *v1.Reference `json:"iamRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate iamRoleArn.
+	// +kubebuilder:validation:Optional
+	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
+
 	// The display name of a resource selection document.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// +listType=set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
+	// The backup plan ID to be associated with the selection of resources.
+	// +crossplane:generate:reference:type=Plan
+	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
+
+	// Reference to a Plan to populate planId.
+	// +kubebuilder:validation:Optional
+	PlanIDRef *v1.Reference `json:"planIdRef,omitempty" tf:"-"`
+
+	// Selector for a Plan to populate planId.
+	// +kubebuilder:validation:Optional
+	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
+
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
@@ -85,12 +112,14 @@ type SelectionObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// +listType=set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
@@ -123,6 +152,7 @@ type SelectionParameters struct {
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
@@ -145,6 +175,7 @@ type SelectionParameters struct {
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan.

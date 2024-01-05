@@ -29,6 +29,7 @@ type RuleInitParameters struct {
 	Predicate []RulePredicateInitParameters `json:"predicate,omitempty" tf:"predicate,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -50,9 +51,11 @@ type RuleObservation struct {
 	Predicate []RulePredicateObservation `json:"predicate,omitempty" tf:"predicate,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -77,10 +80,24 @@ type RuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type RulePredicateInitParameters struct {
+
+	// The unique identifier of a predicate, such as the ID of a ByteMatchSet or IPSet.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/wafregional/v1beta1.IPSet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataID *string `json:"dataId,omitempty" tf:"data_id,omitempty"`
+
+	// Reference to a IPSet in wafregional to populate dataId.
+	// +kubebuilder:validation:Optional
+	DataIDRef *v1.Reference `json:"dataIdRef,omitempty" tf:"-"`
+
+	// Selector for a IPSet in wafregional to populate dataId.
+	// +kubebuilder:validation:Optional
+	DataIDSelector *v1.Selector `json:"dataIdSelector,omitempty" tf:"-"`
 
 	// Whether to use the settings or the negated settings that you specified in the objects.
 	Negated *bool `json:"negated,omitempty" tf:"negated,omitempty"`

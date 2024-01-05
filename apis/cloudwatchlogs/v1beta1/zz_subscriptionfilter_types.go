@@ -19,6 +19,19 @@ import (
 
 type SubscriptionFilterInitParameters struct {
 
+	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// Reference to a Stream in kinesis to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
+
 	// The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. Valid values are "Random" and "ByLogStream".
 	Distribution *string `json:"distribution,omitempty" tf:"distribution,omitempty"`
 
@@ -30,6 +43,19 @@ type SubscriptionFilterInitParameters struct {
 
 	// A name for the subscription filter
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ARN of an IAM role that grants Amazon CloudWatch Logs permissions to deliver ingested log events to the destination. If you use Lambda as a destination, you should skip this argument and use aws_lambda_permission resource for granting access from CloudWatch logs to the destination Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type SubscriptionFilterObservation struct {

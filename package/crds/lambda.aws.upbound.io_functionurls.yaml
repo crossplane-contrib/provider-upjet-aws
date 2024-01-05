@@ -89,6 +89,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: 'The HTTP methods that are allowed when calling
                             the function URL. For example: ["GET", "POST", "DELETE"],
@@ -96,6 +97,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: 'The origins that can access the function URL.
                             You can list any number of specific origins (or the wildcard
@@ -104,6 +106,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: The HTTP headers in your function response
                             that you want to expose to origins that call the function
@@ -111,6 +114,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: The maximum amount of time, in seconds, that
                             web browsers can cache results of a preflight request.
@@ -244,6 +248,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: 'The HTTP methods that are allowed when calling
                             the function URL. For example: ["GET", "POST", "DELETE"],
@@ -251,6 +256,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: 'The origins that can access the function URL.
                             You can list any number of specific origins (or the wildcard
@@ -259,6 +265,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: The HTTP headers in your function response
                             that you want to expose to origins that call the function
@@ -266,6 +273,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: The maximum amount of time, in seconds, that
                             web browsers can cache results of a preflight request.
@@ -274,6 +282,82 @@ spec:
                           type: number
                       type: object
                     type: array
+                  functionName:
+                    description: The name (or ARN) of the Lambda function.
+                    type: string
+                  functionNameRef:
+                    description: Reference to a Function to populate functionName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  functionNameSelector:
+                    description: Selector for a Function to populate functionName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   invokeMode:
                     description: Determines how the Lambda function responds to an
                       invocation. Valid values are BUFFERED (default) and RESPONSE_STREAM.
@@ -475,6 +559,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowMethods:
                           description: 'The HTTP methods that are allowed when calling
                             the function URL. For example: ["GET", "POST", "DELETE"],
@@ -482,6 +567,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowOrigins:
                           description: 'The origins that can access the function URL.
                             You can list any number of specific origins (or the wildcard
@@ -490,6 +576,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         exposeHeaders:
                           description: The HTTP headers in your function response
                             that you want to expose to origins that call the function
@@ -497,6 +584,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAge:
                           description: The maximum amount of time, in seconds, that
                             web browsers can cache results of a preflight request.

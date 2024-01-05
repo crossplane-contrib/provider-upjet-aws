@@ -20,10 +20,24 @@ import (
 type IntegrationInitParameters struct {
 
 	// List of cache key parameters for the integration.
+	// +listType=set
 	CacheKeyParameters []*string `json:"cacheKeyParameters,omitempty" tf:"cache_key_parameters,omitempty"`
 
 	// Integration's cache namespace.
 	CacheNamespace *string `json:"cacheNamespace,omitempty" tf:"cache_namespace,omitempty"`
+
+	// ID of the VpcLink used for the integration. Required if connection_type is VPC_LINK
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.VPCLink
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+
+	// Reference to a VPCLink in apigateway to populate connectionId.
+	// +kubebuilder:validation:Optional
+	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPCLink in apigateway to populate connectionId.
+	// +kubebuilder:validation:Optional
+	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// Integration input's connectionType. Valid values are INTERNET (default for connections through the public routable internet), and VPC_LINK (for private connections between API Gateway and a network load balancer in a VPC).
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
@@ -33,6 +47,20 @@ type IntegrationInitParameters struct {
 
 	// Credentials required for the integration. For AWS integrations, 2 options are available. To specify an IAM Role for Amazon API Gateway to assume, use the role's ARN. To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::\*:user/\*.
 	Credentials *string `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// HTTP method (GET, POST, PUT, DELETE, HEAD, OPTION, ANY)
+	// when calling the associated resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Method
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("http_method",false)
+	HTTPMethod *string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// Reference to a Method in apigateway to populate httpMethod.
+	// +kubebuilder:validation:Optional
+	HTTPMethodRef *v1.Reference `json:"httpMethodRef,omitempty" tf:"-"`
+
+	// Selector for a Method in apigateway to populate httpMethod.
+	// +kubebuilder:validation:Optional
+	HTTPMethodSelector *v1.Selector `json:"httpMethodSelector,omitempty" tf:"-"`
 
 	// Integration HTTP method
 	// (GET, POST, PUT, DELETE, HEAD, OPTIONs, ANY, PATCH) specifying how API Gateway will interact with the back end.
@@ -46,10 +74,38 @@ type IntegrationInitParameters struct {
 
 	// Map of request query string parameters and headers that should be passed to the backend responder.
 	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
+	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of the integration's request templates.
+	// +mapType=granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
+
+	// API resource ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.Resource
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a Resource in apigateway to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Resource in apigateway to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
+
+	// ID of the associated REST API.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
+
+	// Reference to a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDRef *v1.Reference `json:"restApiIdRef,omitempty" tf:"-"`
+
+	// Selector for a RestAPI in apigateway to populate restApiId.
+	// +kubebuilder:validation:Optional
+	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// TLS configuration. See below.
 	TLSConfig []TLSConfigInitParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
@@ -59,11 +115,27 @@ type IntegrationInitParameters struct {
 
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Input's URI. Required if type is AWS, AWS_PROXY, HTTP or HTTP_PROXY.
+	// For HTTP integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification . For AWS integrations, the URI should be of the form arn:aws:apigateway:{region}:{subdomain.service|service}:{path|action}/{service_api}. region, subdomain and service are used to determine the right endpoint.
+	// e.g., arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:eu-west-1:012345678901:function:my-func/invocations. For private integrations, the URI parameter is not used for routing requests to your endpoint, but is used for setting the Host header and for certificate validation.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("invoke_arn",true)
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Reference to a Function in lambda to populate uri.
+	// +kubebuilder:validation:Optional
+	URIRef *v1.Reference `json:"uriRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate uri.
+	// +kubebuilder:validation:Optional
+	URISelector *v1.Selector `json:"uriSelector,omitempty" tf:"-"`
 }
 
 type IntegrationObservation struct {
 
 	// List of cache key parameters for the integration.
+	// +listType=set
 	CacheKeyParameters []*string `json:"cacheKeyParameters,omitempty" tf:"cache_key_parameters,omitempty"`
 
 	// Integration's cache namespace.
@@ -99,9 +171,11 @@ type IntegrationObservation struct {
 
 	// Map of request query string parameters and headers that should be passed to the backend responder.
 	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
+	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of the integration's request templates.
+	// +mapType=granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
 	// API resource ID.
@@ -129,6 +203,7 @@ type IntegrationParameters struct {
 
 	// List of cache key parameters for the integration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CacheKeyParameters []*string `json:"cacheKeyParameters,omitempty" tf:"cache_key_parameters,omitempty"`
 
 	// Integration's cache namespace.
@@ -196,10 +271,12 @@ type IntegrationParameters struct {
 	// Map of request query string parameters and headers that should be passed to the backend responder.
 	// For example: request_parameters = { "integration.request.header.X-Some-Other-Header" = "method.request.header.X-Some-Header" }
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RequestParameters map[string]*string `json:"requestParameters,omitempty" tf:"request_parameters,omitempty"`
 
 	// Map of the integration's request templates.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	RequestTemplates map[string]*string `json:"requestTemplates,omitempty" tf:"request_templates,omitempty"`
 
 	// API resource ID.

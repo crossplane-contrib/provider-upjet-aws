@@ -245,6 +245,21 @@ func (in *ApplicationInitParameters) DeepCopyInto(out *ApplicationInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -1058,6 +1073,29 @@ func (in *CustomLayerInitParameters) DeepCopyInto(out *CustomLayerInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -1134,6 +1172,21 @@ func (in *CustomLayerInitParameters) DeepCopyInto(out *CustomLayerInitParameters
 		in, out := &in.ShortName, &out.ShortName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -2450,6 +2503,29 @@ func (in *EcsClusterLayerInitParameters) DeepCopyInto(out *EcsClusterLayerInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -2495,6 +2571,21 @@ func (in *EcsClusterLayerInitParameters) DeepCopyInto(out *EcsClusterLayerInitPa
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.EcsClusterArn != nil {
+		in, out := &in.EcsClusterArn, &out.EcsClusterArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.EcsClusterArnRef != nil {
+		in, out := &in.EcsClusterArnRef, &out.EcsClusterArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.EcsClusterArnSelector != nil {
+		in, out := &in.EcsClusterArnSelector, &out.EcsClusterArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ElasticLoadBalancer != nil {
 		in, out := &in.ElasticLoadBalancer, &out.ElasticLoadBalancer
 		*out = new(string)
@@ -2521,6 +2612,21 @@ func (in *EcsClusterLayerInitParameters) DeepCopyInto(out *EcsClusterLayerInitPa
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -3871,6 +3977,29 @@ func (in *GangliaLayerInitParameters) DeepCopyInto(out *GangliaLayerInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -3947,6 +4076,21 @@ func (in *GangliaLayerInitParameters) DeepCopyInto(out *GangliaLayerInitParamete
 		in, out := &in.Password, &out.Password
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -5488,6 +5632,29 @@ func (in *HAProxyLayerInitParameters) DeepCopyInto(out *HAProxyLayerInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -5569,6 +5736,21 @@ func (in *HAProxyLayerInitParameters) DeepCopyInto(out *HAProxyLayerInitParamete
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StatsEnabled != nil {
 		in, out := &in.StatsEnabled, &out.StatsEnabled
@@ -6749,6 +6931,29 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.LayerIds != nil {
+		in, out := &in.LayerIds, &out.LayerIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.LayerIdsRefs != nil {
+		in, out := &in.LayerIdsRefs, &out.LayerIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.LayerIdsSelector != nil {
+		in, out := &in.LayerIdsSelector, &out.LayerIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Os != nil {
 		in, out := &in.Os, &out.Os
 		*out = new(string)
@@ -6771,6 +6976,44 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupIDRefs != nil {
+		in, out := &in.SecurityGroupIDRefs, &out.SecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIDSelector != nil {
+		in, out := &in.SecurityGroupIDSelector, &out.SecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -6780,6 +7023,21 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		in, out := &in.Status, &out.Status
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tenancy != nil {
 		in, out := &in.Tenancy, &out.Tenancy
@@ -7895,6 +8153,29 @@ func (in *JavaAppLayerInitParameters) DeepCopyInto(out *JavaAppLayerInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -7981,6 +8262,21 @@ func (in *JavaAppLayerInitParameters) DeepCopyInto(out *JavaAppLayerInitParamete
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -10185,6 +10481,29 @@ func (in *MemcachedLayerInitParameters) DeepCopyInto(out *MemcachedLayerInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -10256,6 +10575,21 @@ func (in *MemcachedLayerInitParameters) DeepCopyInto(out *MemcachedLayerInitPara
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -11767,6 +12101,29 @@ func (in *MySQLLayerInitParameters) DeepCopyInto(out *MySQLLayerInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -11848,6 +12205,21 @@ func (in *MySQLLayerInitParameters) DeepCopyInto(out *MySQLLayerInitParameters) 
 		in, out := &in.RootPasswordOnAllInstances, &out.RootPasswordOnAllInstances
 		*out = new(bool)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -13369,6 +13741,29 @@ func (in *NodeJSAppLayerInitParameters) DeepCopyInto(out *NodeJSAppLayerInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -13445,6 +13840,21 @@ func (in *NodeJSAppLayerInitParameters) DeepCopyInto(out *NodeJSAppLayerInitPara
 		in, out := &in.NodeJSVersion, &out.NodeJSVersion
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -14956,6 +15366,29 @@ func (in *PHPAppLayerInitParameters) DeepCopyInto(out *PHPAppLayerInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -15027,6 +15460,21 @@ func (in *PHPAppLayerInitParameters) DeepCopyInto(out *PHPAppLayerInitParameters
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -16048,6 +16496,36 @@ func (in *PermissionInitParameters) DeepCopyInto(out *PermissionInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.UserArn != nil {
+		in, out := &in.UserArn, &out.UserArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.UserArnRef != nil {
+		in, out := &in.UserArnRef, &out.UserArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.UserArnSelector != nil {
+		in, out := &in.UserArnSelector, &out.UserArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PermissionInitParameters.
@@ -16266,6 +16744,36 @@ func (in *RDSDBInstanceInitParameters) DeepCopyInto(out *RDSDBInstanceInitParame
 		in, out := &in.DBUser, &out.DBUser
 		*out = new(string)
 		**out = **in
+	}
+	if in.RDSDBInstanceArn != nil {
+		in, out := &in.RDSDBInstanceArn, &out.RDSDBInstanceArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.RDSDBInstanceArnRef != nil {
+		in, out := &in.RDSDBInstanceArnRef, &out.RDSDBInstanceArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RDSDBInstanceArnSelector != nil {
+		in, out := &in.RDSDBInstanceArnSelector, &out.RDSDBInstanceArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -16967,6 +17475,29 @@ func (in *RailsAppLayerInitParameters) DeepCopyInto(out *RailsAppLayerInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -17058,6 +17589,21 @@ func (in *RailsAppLayerInitParameters) DeepCopyInto(out *RailsAppLayerInitParame
 		in, out := &in.RubygemsVersion, &out.RubygemsVersion
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -18347,6 +18893,21 @@ func (in *StackInitParameters) DeepCopyInto(out *StackInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultInstanceProfileArn != nil {
+		in, out := &in.DefaultInstanceProfileArn, &out.DefaultInstanceProfileArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DefaultInstanceProfileArnRef != nil {
+		in, out := &in.DefaultInstanceProfileArnRef, &out.DefaultInstanceProfileArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DefaultInstanceProfileArnSelector != nil {
+		in, out := &in.DefaultInstanceProfileArnSelector, &out.DefaultInstanceProfileArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DefaultOs != nil {
 		in, out := &in.DefaultOs, &out.DefaultOs
 		*out = new(string)
@@ -18362,6 +18923,21 @@ func (in *StackInitParameters) DeepCopyInto(out *StackInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultSubnetID != nil {
+		in, out := &in.DefaultSubnetID, &out.DefaultSubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DefaultSubnetIDRef != nil {
+		in, out := &in.DefaultSubnetIDRef, &out.DefaultSubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DefaultSubnetIDSelector != nil {
+		in, out := &in.DefaultSubnetIDSelector, &out.DefaultSubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.HostnameTheme != nil {
 		in, out := &in.HostnameTheme, &out.HostnameTheme
 		*out = new(string)
@@ -18376,6 +18952,21 @@ func (in *StackInitParameters) DeepCopyInto(out *StackInitParameters) {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.ServiceRoleArn != nil {
+		in, out := &in.ServiceRoleArn, &out.ServiceRoleArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceRoleArnRef != nil {
+		in, out := &in.ServiceRoleArnRef, &out.ServiceRoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceRoleArnSelector != nil {
+		in, out := &in.ServiceRoleArnSelector, &out.ServiceRoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -18402,6 +18993,21 @@ func (in *StackInitParameters) DeepCopyInto(out *StackInitParameters) {
 		in, out := &in.UseOpsworksSecurityGroups, &out.UseOpsworksSecurityGroups
 		*out = new(bool)
 		**out = **in
+	}
+	if in.VPCID != nil {
+		in, out := &in.VPCID, &out.VPCID
+		*out = new(string)
+		**out = **in
+	}
+	if in.VPCIDRef != nil {
+		in, out := &in.VPCIDRef, &out.VPCIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.VPCIDSelector != nil {
+		in, out := &in.VPCIDSelector, &out.VPCIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -19354,6 +19960,29 @@ func (in *StaticWebLayerInitParameters) DeepCopyInto(out *StaticWebLayerInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomSecurityGroupIDRefs != nil {
+		in, out := &in.CustomSecurityGroupIDRefs, &out.CustomSecurityGroupIDRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CustomSecurityGroupIDSelector != nil {
+		in, out := &in.CustomSecurityGroupIDSelector, &out.CustomSecurityGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CustomSecurityGroupIds != nil {
+		in, out := &in.CustomSecurityGroupIds, &out.CustomSecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.CustomSetupRecipes != nil {
 		in, out := &in.CustomSetupRecipes, &out.CustomSetupRecipes
 		*out = make([]*string, len(*in))
@@ -19425,6 +20054,21 @@ func (in *StaticWebLayerInitParameters) DeepCopyInto(out *StaticWebLayerInitPara
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.StackID != nil {
+		in, out := &in.StackID, &out.StackID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StackIDRef != nil {
+		in, out := &in.StackIDRef, &out.StackIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StackIDSelector != nil {
+		in, out := &in.StackIDSelector, &out.StackIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SystemPackages != nil {
 		in, out := &in.SystemPackages, &out.SystemPackages
@@ -20613,6 +21257,21 @@ func (in *UserProfileInitParameters) DeepCopyInto(out *UserProfileInitParameters
 		in, out := &in.SSHUsername, &out.SSHUsername
 		*out = new(string)
 		**out = **in
+	}
+	if in.UserArn != nil {
+		in, out := &in.UserArn, &out.UserArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.UserArnRef != nil {
+		in, out := &in.UserArnRef, &out.UserArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.UserArnSelector != nil {
+		in, out := &in.UserArnSelector, &out.UserArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

@@ -25,6 +25,18 @@ type LBTargetGroupAttachmentInitParameters struct {
 	// The port on which targets receive traffic.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// The ARN of the target group with which to register targets
+	// +crossplane:generate:reference:type=LBTargetGroup
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+
+	// Reference to a LBTargetGroup to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a LBTargetGroup to populate targetGroupArn.
+	// +kubebuilder:validation:Optional
+	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
+
 	// The ID of the target. This is the Instance ID for an instance, or the container ID for an ECS container. If the target type is ip, specify an IP address. If the target type is lambda, specify the arn of lambda. If the target type is alb, specify the arn of alb.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 }

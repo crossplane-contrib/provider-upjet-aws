@@ -29,7 +29,21 @@ type PhoneNumberInitParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
+
+	// Reference to a Instance in connect to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnRef *v1.Reference `json:"targetArnRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate targetArn.
+	// +kubebuilder:validation:Optional
+	TargetArnSelector *v1.Selector `json:"targetArnSelector,omitempty" tf:"-"`
 
 	// The type of phone number. Valid Values: TOLL_FREE | DID.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -59,9 +73,11 @@ type PhoneNumberObservation struct {
 	Status []StatusObservation `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.
@@ -92,6 +108,7 @@ type PhoneNumberParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances that phone numbers are claimed to.

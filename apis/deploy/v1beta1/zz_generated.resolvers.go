@@ -154,6 +154,118 @@ func (mg *DeploymentGroup) ResolveReferences(ctx context.Context, c client.Reade
 		mg.Spec.ForProvider.TriggerConfiguration[i3].TriggerTargetArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EcsService); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EcsService[i3].ClusterName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.EcsService[i3].ClusterNameRef,
+			Selector:     mg.Spec.InitProvider.EcsService[i3].ClusterNameSelector,
+			To: reference.To{
+				List:    &v1beta1.ClusterList{},
+				Managed: &v1beta1.Cluster{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EcsService[i3].ClusterName")
+		}
+		mg.Spec.InitProvider.EcsService[i3].ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EcsService[i3].ClusterNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EcsService); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EcsService[i3].ServiceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.EcsService[i3].ServiceNameRef,
+			Selector:     mg.Spec.InitProvider.EcsService[i3].ServiceNameSelector,
+			To: reference.To{
+				List:    &v1beta1.ServiceList{},
+				Managed: &v1beta1.Service{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EcsService[i3].ServiceName")
+		}
+		mg.Spec.InitProvider.EcsService[i3].ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EcsService[i3].ServiceNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoadBalancerInfo); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo[i4].Name),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo[i4].NameRef,
+				Selector:     mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo[i4].NameSelector,
+				To: reference.To{
+					List:    &v1beta11.ELBList{},
+					Managed: &v1beta11.ELB{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo[i4].Name")
+			}
+			mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo[i4].Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo[i4].NameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoadBalancerInfo); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].TargetGroup); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].TargetGroup[i5].Name),
+					Extract:      resource.ExtractParamPath("name", false),
+					Reference:    mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].TargetGroup[i5].NameRef,
+					Selector:     mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].TargetGroup[i5].NameSelector,
+					To: reference.To{
+						List:    &v1beta12.LBTargetGroupList{},
+						Managed: &v1beta12.LBTargetGroup{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].TargetGroup[i5].Name")
+				}
+				mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].TargetGroup[i5].Name = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].TargetGroup[i5].NameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRoleArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.ServiceRoleArnRef,
+		Selector:     mg.Spec.InitProvider.ServiceRoleArnSelector,
+		To: reference.To{
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceRoleArn")
+	}
+	mg.Spec.InitProvider.ServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.TriggerConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArnRef,
+			Selector:     mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArnSelector,
+			To: reference.To{
+				List:    &v1beta14.TopicList{},
+				Managed: &v1beta14.Topic{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArn")
+		}
+		mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.TriggerConfiguration[i3].TriggerTargetArnRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

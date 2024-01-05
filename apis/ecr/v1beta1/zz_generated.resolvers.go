@@ -37,6 +37,22 @@ func (mg *LifecyclePolicy) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Repository),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RepositoryRef,
+		Selector:     mg.Spec.InitProvider.RepositorySelector,
+		To: reference.To{
+			List:    &RepositoryList{},
+			Managed: &Repository{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Repository")
+	}
+	mg.Spec.InitProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RepositoryRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -65,6 +81,24 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.EncryptionConfiguration[i3].KMSKeyRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptionConfiguration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKey),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyRef,
+			Selector:     mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeySelector,
+			To: reference.To{
+				List:    &v1beta1.KeyList{},
+				Managed: &v1beta1.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKey")
+		}
+		mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKey = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EncryptionConfiguration[i3].KMSKeyRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -91,6 +125,22 @@ func (mg *RepositoryPolicy) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Repository),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RepositoryRef,
+		Selector:     mg.Spec.InitProvider.RepositorySelector,
+		To: reference.To{
+			List:    &RepositoryList{},
+			Managed: &Repository{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Repository")
+	}
+	mg.Spec.InitProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RepositoryRef = rsp.ResolvedReference
 
 	return nil
 }

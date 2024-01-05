@@ -20,7 +20,20 @@ import (
 type TransitGatewayVPCAttachmentAccepterInitParameters struct {
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the EC2 Transit Gateway Attachment to manage.
+	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
+	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
+
+	// Reference to a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// +kubebuilder:validation:Optional
+	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Boolean whether the VPC Attachment should be associated with the EC2 Transit Gateway association default route table. Default value: true.
 	TransitGatewayDefaultRouteTableAssociation *bool `json:"transitGatewayDefaultRouteTableAssociation,omitempty" tf:"transit_gateway_default_route_table_association,omitempty"`
@@ -44,12 +57,15 @@ type TransitGatewayVPCAttachmentAccepterObservation struct {
 	IPv6Support *string `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 
 	// Identifiers of EC2 Subnets.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The ID of the EC2 Transit Gateway Attachment to manage.
@@ -80,6 +96,7 @@ type TransitGatewayVPCAttachmentAccepterParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the EC2 Transit Gateway Attachment to manage.

@@ -22,6 +22,21 @@ type KeyGroupInitParameters struct {
 	// A comment to describe the key group..
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// References to PublicKey to populate items.
+	// +kubebuilder:validation:Optional
+	ItemRefs []v1.Reference `json:"itemRefs,omitempty" tf:"-"`
+
+	// Selector for a list of PublicKey to populate items.
+	// +kubebuilder:validation:Optional
+	ItemSelector *v1.Selector `json:"itemSelector,omitempty" tf:"-"`
+
+	// A list of the identifiers of the public keys in the key group.
+	// +crossplane:generate:reference:type=PublicKey
+	// +crossplane:generate:reference:refFieldName=ItemRefs
+	// +crossplane:generate:reference:selectorFieldName=ItemSelector
+	// +listType=set
+	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
+
 	// A name to identify the key group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -38,6 +53,7 @@ type KeyGroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of the identifiers of the public keys in the key group.
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 
 	// A name to identify the key group.
@@ -63,6 +79,7 @@ type KeyGroupParameters struct {
 	// +crossplane:generate:reference:refFieldName=ItemRefs
 	// +crossplane:generate:reference:selectorFieldName=ItemSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Items []*string `json:"items,omitempty" tf:"items,omitempty"`
 
 	// A name to identify the key group.

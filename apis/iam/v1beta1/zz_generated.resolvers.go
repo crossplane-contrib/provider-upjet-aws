@@ -37,6 +37,22 @@ func (mg *AccessKey) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.User),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserRef,
+		Selector:     mg.Spec.InitProvider.UserSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.User")
+	}
+	mg.Spec.InitProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -80,6 +96,38 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.Users = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.UserRefs = mrsp.ResolvedReferences
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Group),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.GroupRef,
+		Selector:     mg.Spec.InitProvider.GroupSelector,
+		To: reference.To{
+			List:    &GroupList{},
+			Managed: &Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Group")
+	}
+	mg.Spec.InitProvider.Group = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GroupRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Users),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.UserRefs,
+		Selector:      mg.Spec.InitProvider.UserSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Users")
+	}
+	mg.Spec.InitProvider.Users = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.UserRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -122,6 +170,38 @@ func (mg *GroupPolicyAttachment) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.PolicyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyArnRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Group),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.GroupRef,
+		Selector:     mg.Spec.InitProvider.GroupSelector,
+		To: reference.To{
+			List:    &GroupList{},
+			Managed: &Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Group")
+	}
+	mg.Spec.InitProvider.Group = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GroupRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.PolicyArnRef,
+		Selector:     mg.Spec.InitProvider.PolicyArnSelector,
+		To: reference.To{
+			List:    &PolicyList{},
+			Managed: &Policy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyArn")
+	}
+	mg.Spec.InitProvider.PolicyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyArnRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -147,6 +227,22 @@ func (mg *InstanceProfile) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Role),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RoleRef,
+		Selector:     mg.Spec.InitProvider.RoleSelector,
+		To: reference.To{
+			List:    &RoleList{},
+			Managed: &Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Role")
+	}
+	mg.Spec.InitProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -216,6 +312,38 @@ func (mg *RolePolicyAttachment) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.PolicyArnRef,
+		Selector:     mg.Spec.InitProvider.PolicyArnSelector,
+		To: reference.To{
+			List:    &PolicyList{},
+			Managed: &Policy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyArn")
+	}
+	mg.Spec.InitProvider.PolicyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Role),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RoleRef,
+		Selector:     mg.Spec.InitProvider.RoleSelector,
+		To: reference.To{
+			List:    &RoleList{},
+			Managed: &Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Role")
+	}
+	mg.Spec.InitProvider.Role = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -241,6 +369,22 @@ func (mg *ServiceSpecificCredential) ResolveReferences(ctx context.Context, c cl
 	}
 	mg.Spec.ForProvider.UserName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserNameRef,
+		Selector:     mg.Spec.InitProvider.UserNameSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserName")
+	}
+	mg.Spec.InitProvider.UserName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -285,6 +429,38 @@ func (mg *UserGroupMembership) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserRef = rsp.ResolvedReference
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Groups),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.GroupRefs,
+		Selector:      mg.Spec.InitProvider.GroupSelector,
+		To: reference.To{
+			List:    &GroupList{},
+			Managed: &Group{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Groups")
+	}
+	mg.Spec.InitProvider.Groups = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.GroupRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.User),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserRef,
+		Selector:     mg.Spec.InitProvider.UserSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.User")
+	}
+	mg.Spec.InitProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -310,6 +486,22 @@ func (mg *UserLoginProfile) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.User),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserRef,
+		Selector:     mg.Spec.InitProvider.UserSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.User")
+	}
+	mg.Spec.InitProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -353,6 +545,38 @@ func (mg *UserPolicyAttachment) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyArn),
+		Extract:      common.ARNExtractor(),
+		Reference:    mg.Spec.InitProvider.PolicyArnRef,
+		Selector:     mg.Spec.InitProvider.PolicyArnSelector,
+		To: reference.To{
+			List:    &PolicyList{},
+			Managed: &Policy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyArn")
+	}
+	mg.Spec.InitProvider.PolicyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyArnRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.User),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UserRef,
+		Selector:     mg.Spec.InitProvider.UserSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.User")
+	}
+	mg.Spec.InitProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -378,6 +602,22 @@ func (mg *UserSSHKey) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.Username = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UsernameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Username),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.UsernameRef,
+		Selector:     mg.Spec.InitProvider.UsernameSelector,
+		To: reference.To{
+			List:    &UserList{},
+			Managed: &User{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Username")
+	}
+	mg.Spec.InitProvider.Username = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UsernameRef = rsp.ResolvedReference
 
 	return nil
 }

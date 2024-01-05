@@ -24,15 +24,30 @@ type NotificationRuleInitParameters struct {
 
 	// A list of event types associated with this notification rule.
 	// For list of allowed events see here.
+	// +listType=set
 	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
 
 	// The name of notification rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ARN of the resource to associate with the notification rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codecommit/v1beta1.Repository
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// Reference to a Repository in codecommit to populate resource.
+	// +kubebuilder:validation:Optional
+	ResourceRef *v1.Reference `json:"resourceRef,omitempty" tf:"-"`
+
+	// Selector for a Repository in codecommit to populate resource.
+	// +kubebuilder:validation:Optional
+	ResourceSelector *v1.Selector `json:"resourceSelector,omitempty" tf:"-"`
+
 	// The status of the notification rule. Possible values are ENABLED and DISABLED, default is ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration blocks containing notification target information. Can be specified multiple times. At least one target must be specified on creation.
@@ -49,6 +64,7 @@ type NotificationRuleObservation struct {
 
 	// A list of event types associated with this notification rule.
 	// For list of allowed events see here.
+	// +listType=set
 	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
 
 	// The codestar notification rule ARN.
@@ -64,9 +80,11 @@ type NotificationRuleObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Configuration blocks containing notification target information. Can be specified multiple times. At least one target must be specified on creation.
@@ -82,6 +100,7 @@ type NotificationRuleParameters struct {
 	// A list of event types associated with this notification rule.
 	// For list of allowed events see here.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EventTypeIds []*string `json:"eventTypeIds,omitempty" tf:"event_type_ids,omitempty"`
 
 	// The name of notification rule.
@@ -113,6 +132,7 @@ type NotificationRuleParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Configuration blocks containing notification target information. Can be specified multiple times. At least one target must be specified on creation.
@@ -121,6 +141,19 @@ type NotificationRuleParameters struct {
 }
 
 type TargetInitParameters struct {
+
+	// The ARN of notification rule target. For example, a SNS Topic ARN.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// Reference to a Topic in sns to populate address.
+	// +kubebuilder:validation:Optional
+	AddressRef *v1.Reference `json:"addressRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in sns to populate address.
+	// +kubebuilder:validation:Optional
+	AddressSelector *v1.Selector `json:"addressSelector,omitempty" tf:"-"`
 
 	// The type of the notification target. Default value is SNS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

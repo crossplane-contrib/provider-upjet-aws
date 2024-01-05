@@ -14,4 +14,10 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_sagemaker_device_fleet", func(r *config.Resource) {
 		r.Path = "devicefleet"
 	})
+	p.AddResourceConfigurator("aws_sagemaker_endpoint", func(r *config.Resource) {
+		r.References["endpoint_config_name"] = config.Reference{
+			TerraformName: "aws_sagemaker_endpoint_configuration",
+		}
+		r.UseAsync = true
+	})
 }

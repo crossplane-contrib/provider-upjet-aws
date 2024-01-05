@@ -73,6 +73,7 @@ spec:
                     description: The map of attribute mapping of user pool attributes.
                       AttributeMapping in AWS API documentation
                     type: object
+                    x-kubernetes-map-type: granular
                   idpIdentifiers:
                     description: The list of identity providers.
                     items:
@@ -83,6 +84,7 @@ spec:
                       type: string
                     description: The map of identity details, such as access token
                     type: object
+                    x-kubernetes-map-type: granular
                   providerName:
                     description: The provider name
                     type: string
@@ -190,6 +192,7 @@ spec:
                     description: The map of attribute mapping of user pool attributes.
                       AttributeMapping in AWS API documentation
                     type: object
+                    x-kubernetes-map-type: granular
                   idpIdentifiers:
                     description: The list of identity providers.
                     items:
@@ -200,12 +203,89 @@ spec:
                       type: string
                     description: The map of identity details, such as access token
                     type: object
+                    x-kubernetes-map-type: granular
                   providerName:
                     description: The provider name
                     type: string
                   providerType:
                     description: The provider type.  See AWS API for valid values
                     type: string
+                  userPoolId:
+                    description: The user pool id
+                    type: string
+                  userPoolIdRef:
+                    description: Reference to a UserPool to populate userPoolId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  userPoolIdSelector:
+                    description: Selector for a UserPool to populate userPoolId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -391,6 +471,7 @@ spec:
                     description: The map of attribute mapping of user pool attributes.
                       AttributeMapping in AWS API documentation
                     type: object
+                    x-kubernetes-map-type: granular
                   id:
                     type: string
                   idpIdentifiers:
@@ -403,6 +484,7 @@ spec:
                       type: string
                     description: The map of identity details, such as access token
                     type: object
+                    x-kubernetes-map-type: granular
                   providerName:
                     description: The provider name
                     type: string

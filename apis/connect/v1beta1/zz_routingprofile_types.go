@@ -130,8 +130,34 @@ type QueueConfigsParameters struct {
 
 type RoutingProfileInitParameters struct {
 
+	// Specifies the default outbound queue for the Routing Profile.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Queue
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("queue_id",true)
+	DefaultOutboundQueueID *string `json:"defaultOutboundQueueId,omitempty" tf:"default_outbound_queue_id,omitempty"`
+
+	// Reference to a Queue in connect to populate defaultOutboundQueueId.
+	// +kubebuilder:validation:Optional
+	DefaultOutboundQueueIDRef *v1.Reference `json:"defaultOutboundQueueIdRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in connect to populate defaultOutboundQueueId.
+	// +kubebuilder:validation:Optional
+	DefaultOutboundQueueIDSelector *v1.Selector `json:"defaultOutboundQueueIdSelector,omitempty" tf:"-"`
+
 	// Specifies the description of the Routing Profile.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the identifier of the hosting Amazon Connect Instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
+
+	// Reference to a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDRef *v1.Reference `json:"instanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Instance in connect to populate instanceId.
+	// +kubebuilder:validation:Optional
+	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
 	// One or more media_concurrencies blocks that specify the channels that agents can handle in the Contact Control Panel (CCP) for this Routing Profile. The media_concurrencies block is documented below.
 	MediaConcurrencies []MediaConcurrenciesInitParameters `json:"mediaConcurrencies,omitempty" tf:"media_concurrencies,omitempty"`
@@ -143,6 +169,7 @@ type RoutingProfileInitParameters struct {
 	QueueConfigs []QueueConfigsInitParameters `json:"queueConfigs,omitempty" tf:"queue_configs,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -178,9 +205,11 @@ type RoutingProfileObservation struct {
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
@@ -237,6 +266,7 @@ type RoutingProfileParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

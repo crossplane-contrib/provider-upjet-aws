@@ -22,6 +22,19 @@ type ObjectLambdaAccessPointPolicyInitParameters struct {
 	// The AWS account ID for the account that owns the Object Lambda Access Point.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
+	// The name of the Object Lambda Access Point.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3control/v1beta1.ObjectLambdaAccessPoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a ObjectLambdaAccessPoint in s3control to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a ObjectLambdaAccessPoint in s3control to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+
 	// The Object Lambda Access Point resource policy document.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 }

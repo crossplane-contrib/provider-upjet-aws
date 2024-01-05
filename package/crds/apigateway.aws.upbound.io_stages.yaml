@@ -109,6 +109,7 @@ spec:
                           description: Map of overridden stage variables (including
                             new variables) for the canary deployment.
                           type: object
+                          x-kubernetes-map-type: granular
                         useStageCache:
                           description: Whether the canary deployment uses the stage
                             cache. Defaults to false.
@@ -292,11 +293,13 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map that defines the stage variables
                     type: object
+                    x-kubernetes-map-type: granular
                   xrayTracingEnabled:
                     description: Whether active tracing with X-ray is enabled. Defaults
                       to false.
@@ -358,6 +361,7 @@ spec:
                           description: Map of overridden stage variables (including
                             new variables) for the canary deployment.
                           type: object
+                          x-kubernetes-map-type: granular
                         useStageCache:
                           description: Whether the canary deployment uses the stage
                             cache. Defaults to false.
@@ -367,12 +371,168 @@ spec:
                   clientCertificateId:
                     description: Identifier of a client certificate for the stage.
                     type: string
+                  deploymentId:
+                    description: ID of the deployment that the stage points to
+                    type: string
+                  deploymentIdRef:
+                    description: Reference to a Deployment in apigateway to populate
+                      deploymentId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  deploymentIdSelector:
+                    description: Selector for a Deployment in apigateway to populate
+                      deploymentId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   description:
                     description: Description of the stage.
                     type: string
                   documentationVersion:
                     description: Version of the associated API documentation
                     type: string
+                  restApiId:
+                    description: ID of the associated REST API
+                    type: string
+                  restApiIdRef:
+                    description: Reference to a RestAPI in apigateway to populate
+                      restApiId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  restApiIdSelector:
+                    description: Selector for a RestAPI in apigateway to populate
+                      restApiId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   stageName:
                     description: Name of the stage
                     type: string
@@ -381,11 +541,13 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map that defines the stage variables
                     type: object
+                    x-kubernetes-map-type: granular
                   xrayTracingEnabled:
                     description: Whether active tracing with X-ray is enabled. Defaults
                       to false.
@@ -606,6 +768,7 @@ spec:
                           description: Map of overridden stage variables (including
                             new variables) for the canary deployment.
                           type: object
+                          x-kubernetes-map-type: granular
                         useStageCache:
                           description: Whether the canary deployment uses the stage
                             cache. Defaults to false.
@@ -647,17 +810,20 @@ spec:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
+                    x-kubernetes-map-type: granular
                   tagsAll:
                     additionalProperties:
                       type: string
                     description: Map of tags assigned to the resource, including those
                       inherited from the provider default_tags configuration block.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: Map that defines the stage variables
                     type: object
+                    x-kubernetes-map-type: granular
                   webAclArn:
                     description: ARN of the WebAcl associated with the Stage.
                     type: string

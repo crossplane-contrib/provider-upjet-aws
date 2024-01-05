@@ -81,10 +81,23 @@ type WebhookInitParameters struct {
 	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
 	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
+
+	// The name of the pipeline.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codepipeline/v1beta1.Codepipeline
+	TargetPipeline *string `json:"targetPipeline,omitempty" tf:"target_pipeline,omitempty"`
+
+	// Reference to a Codepipeline in codepipeline to populate targetPipeline.
+	// +kubebuilder:validation:Optional
+	TargetPipelineRef *v1.Reference `json:"targetPipelineRef,omitempty" tf:"-"`
+
+	// Selector for a Codepipeline in codepipeline to populate targetPipeline.
+	// +kubebuilder:validation:Optional
+	TargetPipelineSelector *v1.Selector `json:"targetPipelineSelector,omitempty" tf:"-"`
 }
 
 type WebhookObservation struct {
@@ -105,9 +118,11 @@ type WebhookObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Key-value map of resource tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
@@ -141,6 +156,7 @@ type WebhookParameters struct {
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name of the action in a pipeline you want to connect to the webhook. The action must be from the source (first) stage of the pipeline.
