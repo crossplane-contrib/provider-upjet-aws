@@ -6,8 +6,9 @@ package ecs
 
 import (
 	"context"
-	"github.com/pkg/errors"
 	"path/filepath"
+
+	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/pkg/config"
 

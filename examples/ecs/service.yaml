@@ -4,7 +4,6 @@ metadata:
   name: sample-service
   annotations:
     meta.upbound.io/example-id: ecs/v1beta1/service
-    upjet.upbound.io/manual-intervention: "Resourrce stuck in update loop"
 spec:
   forProvider:
     taskDefinitionSelector:
