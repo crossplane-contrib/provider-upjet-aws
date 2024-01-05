@@ -199,7 +199,7 @@ func DefaultTerraformSetupBuilder(_ context.Context, pc *v1beta1.ProviderConfig,
 				for _, service := range pc.Spec.Endpoint.Services {
 					endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
 				}
-				ps.Configuration[keyEndpoints] = endpoints
+				ps.Configuration[keyEndpoints] = []any{endpoints}
 			}
 		}
 	}
