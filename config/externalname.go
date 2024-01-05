@@ -370,7 +370,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 
 	// ecs
 	//
-	"aws_ecs_cluster":           config.NameAsIdentifier,
+	"aws_ecs_cluster":           config.TemplatedStringAsIdentifier("name", "arn:aws:ecs:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:cluster/{{ .external_name }}"),
 	"aws_ecs_service":           config.TemplatedStringAsIdentifier("name", "{{ .parameters.cluster }}/{{ .external_name }}"),
 	"aws_ecs_capacity_provider": config.TemplatedStringAsIdentifier("name", "arn:aws:ecs:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:capacity-provider/{{ .external_name }}"),
 	// Imported using ARN that has a random substring, revision at the end:
