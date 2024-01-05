@@ -575,18 +575,6 @@ type ServiceInitParameters struct {
 	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below.
 	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
-	// Name of an ECS cluster.
-	// +crossplane:generate:reference:type=Cluster
-	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
-
-	// Reference to a Cluster to populate cluster.
-	// +kubebuilder:validation:Optional
-	ClusterRef *v1.Reference `json:"clusterRef,omitempty" tf:"-"`
-
-	// Selector for a Cluster to populate cluster.
-	// +kubebuilder:validation:Optional
-	ClusterSelector *v1.Selector `json:"clusterSelector,omitempty" tf:"-"`
-
 	// Configuration block for deployment circuit breaker. See below.
 	DeploymentCircuitBreaker []DeploymentCircuitBreakerInitParameters `json:"deploymentCircuitBreaker,omitempty" tf:"deployment_circuit_breaker,omitempty"`
 
@@ -663,6 +651,7 @@ type ServiceInitParameters struct {
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
 	// +crossplane:generate:reference:type=TaskDefinition
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 
 	// Reference to a TaskDefinition to populate taskDefinition.

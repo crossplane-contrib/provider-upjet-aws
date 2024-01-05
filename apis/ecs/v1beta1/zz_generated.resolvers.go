@@ -217,22 +217,6 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.TaskDefinitionRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Cluster),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.ClusterRef,
-		Selector:     mg.Spec.InitProvider.ClusterSelector,
-		To: reference.To{
-			List:    &ClusterList{},
-			Managed: &Cluster{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.Cluster")
-	}
-	mg.Spec.InitProvider.Cluster = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ClusterRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IAMRole),
 		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.InitProvider.IAMRoleRef,
@@ -304,7 +288,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskDefinition),
-		Extract:      reference.ExternalName(),
+		Extract:      common.ARNExtractor(),
 		Reference:    mg.Spec.InitProvider.TaskDefinitionRef,
 		Selector:     mg.Spec.InitProvider.TaskDefinitionSelector,
 		To: reference.To{
