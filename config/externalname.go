@@ -20,10 +20,22 @@ import (
 // resources to be reconciled under the no-fork architecture for this
 // provider.
 var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
+	// ec2
+	//
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+
+	// cognito
+	//
+	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
+	"aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
+
+	// simpledb
+	//
+	// SimpleDB Domains can be imported using the name
+	"aws_simpledb_domain": config.NameAsIdentifier,
 }
 
 // NoForkExternalNameConfigs contains all external name configurations
