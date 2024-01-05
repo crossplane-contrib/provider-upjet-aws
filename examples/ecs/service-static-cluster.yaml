@@ -4,7 +4,6 @@ metadata:
   name: example-service
   annotations:
     meta.upbound.io/example-id: ecs/v1beta1/service-static-cluster
-    upjet.upbound.io/manual-intervention: "Resource stuck in update loop, see https://github.com/upbound/provider-aws/issues/585"
   labels:
     testing.upbound.io/example-name: example-service
 spec:
