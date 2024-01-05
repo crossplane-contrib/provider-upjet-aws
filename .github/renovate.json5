@@ -114,5 +114,45 @@
       ],
       "pinDigests": true
     }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Bump up version in the Makefile",
+      "fileMatch": ["^Makefile$"],
+      "matchStrings": [
+        "UP_VERSION = (?<currentValue>.*?)\\n"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "upbound/up",
+    }, {
+      "customType": "regex",
+      "description": "Bump uptest version in the Makefile",
+      "fileMatch": ["^Makefile$"],
+      "matchStrings": [
+        "UPTEST_VERSION = (?<currentValue>.*?)\\n"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "upbound/uptest",
+    }, {
+      "customType": "regex",
+      "description": "Bump kind version in the Makefile",
+      "fileMatch": ["^Makefile$"],
+      "matchStrings": [
+        "KIND_VERSION = (?<currentValue>.*?)\\n"
+      ],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "kubernetes-sigs/kind",
+    }, {
+      "customType": "regex",
+      "description": "Bump golangci-lint version in workflows and the Makefile",
+      "fileMatch": ["^\\.github\\/workflows\\/[^/]+\\.ya?ml$","^Makefile$"],
+      "matchStrings": [
+        "GOLANGCILINT_VERSION = (?<currentValue>.*?)\\n"
+      ],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "golangci/golangci-lint",
+      "extractVersionTemplate": "^v(?<version>.*)$"
+    }
   ]
 }
