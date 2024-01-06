@@ -33,7 +33,16 @@ type ClusterInitParameters struct {
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.ClusterParameterGroup
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
+
+	// Reference to a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameRef *v1.Reference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameSelector *v1.Selector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A DB subnet group to associate with this DB instance.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -236,8 +245,17 @@ type ClusterParameters struct {
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.ClusterParameterGroup
 	// +kubebuilder:validation:Optional
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
+
+	// Reference to a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameRef *v1.Reference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameSelector *v1.Selector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A DB subnet group to associate with this DB instance.
 	// +kubebuilder:validation:Optional

@@ -25,6 +25,22 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBClusterParameterGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DBClusterParameterGroupNameRef,
+		Selector:     mg.Spec.ForProvider.DBClusterParameterGroupNameSelector,
+		To: reference.To{
+			List:    &ClusterParameterGroupList{},
+			Managed: &ClusterParameterGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBClusterParameterGroupName")
+	}
+	mg.Spec.ForProvider.DBClusterParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBClusterParameterGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
@@ -55,6 +71,22 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBClusterParameterGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DBClusterParameterGroupNameRef,
+		Selector:     mg.Spec.InitProvider.DBClusterParameterGroupNameSelector,
+		To: reference.To{
+			List:    &ClusterParameterGroupList{},
+			Managed: &ClusterParameterGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBClusterParameterGroupName")
+	}
+	mg.Spec.InitProvider.DBClusterParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBClusterParameterGroupNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),

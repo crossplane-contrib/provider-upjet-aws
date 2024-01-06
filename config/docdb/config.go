@@ -17,6 +17,9 @@ func Configure(p *config.Provider) {
 			}
 			return conn, nil
 		}
+		r.References["db_cluster_parameter_group_name"] = config.Reference{
+			TerraformName: "aws_docdb_cluster_parameter_group",
+		}
 	})
 
 	p.AddResourceConfigurator("aws_docdb_cluster_instance", func(r *config.Resource) {
