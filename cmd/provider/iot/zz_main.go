@@ -51,7 +51,7 @@ func main() {
 		essTLSCertsPath            = app.Flag("ess-tls-cert-dir", "Path of ESS TLS certificates.").Envar("ESS_TLS_CERTS_DIR").String()
 		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 
-		certsDir = app.Flag("certs-dir", "The directory that contains the server key and certificate.").Default(filepath.Join(os.TempDir(), "k8s-webhook-server", "serving-certs")).Envar("CERTS_DIR").ExistingFileOrDir()
+		certsDir = app.Flag("certs-dir", "The directory that contains the server key and certificate.").Default("/tls/server").Envar("CERTS_DIR").ExistingFileOrDir()
 	)
 	setupConfig := &clients.SetupConfig{}
 	setupConfig.TerraformVersion = app.Flag("terraform-version", "Terraform version.").Required().Envar("TERRAFORM_VERSION").String()
