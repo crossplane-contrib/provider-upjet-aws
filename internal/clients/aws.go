@@ -6,6 +6,7 @@ package clients
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-provider-aws/xpfwprovider"
 	"os"
 	"reflect"
 	"unsafe"
@@ -225,6 +226,14 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 	return cfg, nil
 }
 
+type metaOnlyPrimary struct {
+	meta any
+}
+
+func (m *metaOnlyPrimary) Meta() any {
+	return m.meta
+}
+
 func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
 	p := *config.TerraformProvider
 	// TODO: use context.WithoutCancel(ctx) after switching to Go >=1.21
@@ -237,5 +246,7 @@ func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *Se
 	ps.Meta = p.Meta()
 	// #nosec G103
 	(*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(ps.Meta).Pointer())).ServicePackages = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(config.AWSClient).Pointer())).ServicePackages
+	fwProvider := xpfwprovider.GetFrameworkProviderWithPrimary(&metaOnlyPrimary{meta: p.Meta()})
+	ps.FrameworkProvider = fwProvider
 	return nil
 }

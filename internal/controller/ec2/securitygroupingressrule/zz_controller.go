@@ -44,7 +44,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.SecurityGroupIngressRule_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
-			tjcontroller.NewTerraformPluginFrameworkAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_vpc_security_group_ingress_rule"], o.Provider.TerraformPluginFrameworkProvider,
+			tjcontroller.NewTerraformPluginFrameworkAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_vpc_security_group_ingress_rule"],
 				tjcontroller.WithTerraformPluginFrameworkAsyncLogger(o.Logger),
 				tjcontroller.WithTerraformPluginFrameworkAsyncConnectorEventHandler(eventHandler),
 				tjcontroller.WithTerraformPluginFrameworkAsyncCallbackProvider(ac),

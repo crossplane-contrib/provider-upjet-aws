@@ -41,7 +41,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.UserPoolClient_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
-			tjcontroller.NewTerraformPluginFrameworkAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_cognito_user_pool_client"], o.Provider.TerraformPluginFrameworkProvider,
+			tjcontroller.NewTerraformPluginFrameworkAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_cognito_user_pool_client"],
 				tjcontroller.WithTerraformPluginFrameworkAsyncLogger(o.Logger),
 				tjcontroller.WithTerraformPluginFrameworkAsyncConnectorEventHandler(eventHandler),
 				tjcontroller.WithTerraformPluginFrameworkAsyncCallbackProvider(ac),

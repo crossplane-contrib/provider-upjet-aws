@@ -164,7 +164,7 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 // the CRDs.
 func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, *xpprovider.AWSClient, error) {
 	var p *schema.Provider
-	var fwProvider *fwprovider.Provider
+	var fwProvider fwprovider.Provider
 	var err error
 	if generationProvider {
 		p, err = getProviderSchema(providerSchema)
@@ -185,8 +185,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		// #nosec G103
 		awsClient = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p.Meta()).Pointer()))
 	}
-	// TODO: Following line is commented out for plugin framework development purposes only. Make sure that it is uncommented in production.
-	// p.SetMeta(nil)
+
 	modulePath := "github.com/upbound/provider-aws"
 	pc := config.NewProvider(ctx, []byte(providerSchema), "aws",
 		modulePath, providerMetadata,
@@ -214,6 +213,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 			DocumentationForTags(),
 		),
 	)
+	p.SetMeta(nil)
 	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
 
 	for _, configure := range []func(provider *config.Provider){

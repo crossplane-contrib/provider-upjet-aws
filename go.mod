@@ -16,7 +16,7 @@ require (
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/terraform-json v0.18.0
-	github.com/hashicorp/terraform-plugin-framework v1.3.5
+	github.com/hashicorp/terraform-plugin-framework v1.4.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.30.0
 	github.com/hashicorp/terraform-provider-aws v0.0.0-00010101000000-000000000000
 	github.com/pkg/errors v0.9.1
@@ -211,10 +211,12 @@ require (
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )
 
-replace golang.org/x/exp => golang.org/x/exp v0.0.0-20231006140011-7918f672742d
+replace golang.org/x/exp => golang.org/x/exp v0.0.0-20230206171751-46f607a40771
 
-replace github.com/crossplane/upjet => github.com/mergenci/upjet v0.0.0-20240108092735-719470dc0ba1
+replace github.com/crossplane/upjet => github.com/mergenci/upjet v0.0.0-20240113220720-3c5e0f29903c
 
-replace github.com/hashicorp/terraform-provider-aws => github.com/mergenci/terraform-provider-aws v0.0.0-20231228201726-d0cf792bb860
+replace github.com/hashicorp/terraform-provider-aws => github.com/mergenci/terraform-provider-aws v0.0.0-20240109114903-360a8d224c21
 
 replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terraform-plugin-log v0.0.0-20230928191232-6c653d8ef8fb
+
+replace github.com/hashicorp/terraform-plugin-mux => github.com/hashicorp/terraform-plugin-mux v0.12.0
