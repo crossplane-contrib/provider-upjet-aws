@@ -6,6 +6,7 @@ package elasticache
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 )
 
 // Configure adds configurations for the elasticache group.
@@ -36,6 +37,12 @@ func Configure(p *config.Provider) {
 				"replication_group_description",
 				"description",
 			},
+		}
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "security_group_names.#")
+			}
+			return diff, nil
 		}
 		delete(r.References, "log_delivery_configuration.destination")
 		r.UseAsync = true
