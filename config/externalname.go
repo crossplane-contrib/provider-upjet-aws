@@ -91,8 +91,8 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 
 	// cloudtrail
 	//
-	// Cloudtrails can be imported using the name
-	"aws_cloudtrail": config.NameAsIdentifier,
+	// Cloudtrails can be imported using the name arn:aws:cloudtrail:us-west-1:153891904029:trail/foobar
+	"aws_cloudtrail": config.TemplatedStringAsIdentifier("name", "arn:aws:cloudtrail:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:trail/{{ .external_name }}"),
 	// Event data stores can be imported using their arn
 	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
 
