@@ -15,6 +15,9 @@ func Configure(p *config.Provider) {
 			if a, ok := attr["arn"].(string); ok {
 				conn["arn"] = []byte(a)
 			}
+			if a, ok := attr["master_password"].(string); ok {
+				conn["password"] = []byte(a)
+			}
 			return conn, nil
 		}
 		r.References["db_cluster_parameter_group_name"] = config.Reference{
