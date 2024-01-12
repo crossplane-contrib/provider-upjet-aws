@@ -92,7 +92,7 @@ XPKG_REG_ORGS ?= xpkg.upbound.io/upbound
 # inferred.
 XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
 XPKG_DIR = $(OUTPUT_DIR)/package
-XPKG_IGNORE = kustomize/*,crds/*
+XPKG_IGNORE = kustomize/*,crds/kustomization.yaml,crds.yaml
 
 export XPKG_REG_ORGS := $(XPKG_REG_ORGS)
 export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)
@@ -315,10 +315,12 @@ go.mod.cachedir:
 build.init: kustomize-crds
 
 kustomize-crds: output.init
-	rm -fr $(OUTPUT_DIR)/package
-	cp -R package $(OUTPUT_DIR) && \
+	@$(INFO) Kustomizing CRDs...
+	@rm -fr $(OUTPUT_DIR)/package || $(FAIL)
+	@cp -R package $(OUTPUT_DIR) && \
 	cd $(OUTPUT_DIR)/package/crds && \
-	kustomize create --autodetect
-	kustomize build $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml
+	kustomize create --autodetect || $(FAIL)
+	@XDG_CONFIG_HOME=$(PWD)/package kustomize build --enable-alpha-plugins $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml || $(FAIL)
+	@$(OK) Kustomizing CRDs.
 
 .PHONY: kustomize-crds

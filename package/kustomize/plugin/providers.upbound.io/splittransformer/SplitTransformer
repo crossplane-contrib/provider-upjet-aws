@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -aeuo pipefail
+
+# skip the config directory argument
+shift
+output_dir="$1"
+
+temp_file="$(mktemp)"
+
+function save_crd {
+    group="$(sed -nr 's/^[[:space:]]*group:[[:space:]]*(.+)/\1/p' "${temp_file}")"
+    plural="$(sed -nr 's/^[[:space:]]*plural:[[:space:]]*(.+)/\1/p' "${temp_file}")"
+    tee < "${temp_file}" "${output_dir}/${group//apiextensions.k8s.io?/}_${plural}.yaml"
+
+    # Reset the temporary file
+    : > "${temp_file}"
+}
+
+while IFS= read -r line || [[ -n "${line}" ]]; do
+    if [[ "$line" == "---" && -s "${temp_file}" ]]; then
+        save_crd
+    else
+        if [[ ! -s "${temp_file}" ]]; then
+            echo "---" >> "${temp_file}"
+        fi
+
+        echo "${line}" >> "${temp_file}"
+    fi
+done
+
+# Save the last document if there is one
+if [[ -s "${temp_file}" ]]; then
+    save_crd
+fi
+
+function cleanup {
+  # Clean up the temporary file
+  rm "${temp_file}"
+}
+
+trap cleanup EXIT

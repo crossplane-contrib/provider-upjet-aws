@@ -77,10 +77,11 @@ batch-process: $(UP)
 		--build-only=$(BUILD_ONLY) \
 		--examples-root $(ROOT_DIR)/examples \
 		--examples-group-override monolith=* --examples-group-override config=providerconfig \
-		--auth-ext $(ROOT_DIR)/package/auth.yaml \
-		--crd-root $(ROOT_DIR)/package/crds \
+		--auth-ext $(XPKG_DIR)/auth.yaml \
+		--crd-root $(XPKG_DIR)/crds \
+		--ignore $(XPKG_IGNORE) \
 		--crd-group-override monolith=* --crd-group-override config=$(PROVIDER_NAME) \
-		--package-metadata-template $(ROOT_DIR)/package/crossplane.yaml.tmpl \
+		--package-metadata-template $(XPKG_DIR)/crossplane.yaml.tmpl \
 		--template-var XpkgRegOrg=$(XPKG_REG_ORGS) --template-var DepConstraint="$(DEP_CONSTRAINT)" --template-var ProviderName=$(PROVIDER_NAME) \
 		--concurrency $(CONCURRENCY) \
 		--push-retry 10 || $(FAIL)
