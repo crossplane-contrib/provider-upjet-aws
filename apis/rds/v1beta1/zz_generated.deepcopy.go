@@ -5550,6 +5550,16 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Identifier != nil {
+		in, out := &in.Identifier, &out.Identifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.IdentifierPrefix != nil {
+		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
+		*out = new(string)
+		**out = **in
+	}
 	if in.InstanceClass != nil {
 		in, out := &in.InstanceClass, &out.InstanceClass
 		*out = new(string)
@@ -6008,6 +6018,16 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Identifier != nil {
+		in, out := &in.Identifier, &out.Identifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.IdentifierPrefix != nil {
+		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
+		*out = new(string)
+		**out = **in
+	}
 	if in.InstanceClass != nil {
 		in, out := &in.InstanceClass, &out.InstanceClass
 		*out = new(string)
@@ -6411,6 +6431,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	if in.IAMDatabaseAuthenticationEnabled != nil {
 		in, out := &in.IAMDatabaseAuthenticationEnabled, &out.IAMDatabaseAuthenticationEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Identifier != nil {
+		in, out := &in.Identifier, &out.Identifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.IdentifierPrefix != nil {
+		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
+		*out = new(string)
 		**out = **in
 	}
 	if in.InstanceClass != nil {

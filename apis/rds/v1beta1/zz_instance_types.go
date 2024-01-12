@@ -152,6 +152,12 @@ type InstanceInitParameters struct {
 	// accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
+	// Required if restore_to_point_in_time is specified.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
+	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
+
 	// The instance type of the RDS instance.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
@@ -282,6 +288,7 @@ type InstanceInitParameters struct {
 	// PostgreSQL and MySQL Read Replicas
 	// for more information on using Replication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
 
 	// Reference to a Instance in rds to populate replicateSourceDb.
@@ -478,6 +485,12 @@ type InstanceObservation struct {
 
 	// RDS DBI resource ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Required if restore_to_point_in_time is specified.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
+	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
 
 	// The instance type of the RDS instance.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
@@ -790,6 +803,14 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
+	// Required if restore_to_point_in_time is specified.
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
+	// +kubebuilder:validation:Optional
+	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
+
 	// The instance type of the RDS instance.
 	// +kubebuilder:validation:Optional
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
@@ -952,6 +973,7 @@ type InstanceParameters struct {
 	// PostgreSQL and MySQL Read Replicas
 	// for more information on using Replication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
 

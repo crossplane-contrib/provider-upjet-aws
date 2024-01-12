@@ -298,6 +298,13 @@ spec:
                     description: Specifies whether mappings of AWS Identity and Access
                       Management (IAM) accounts to database accounts is enabled.
                     type: boolean
+                  identifier:
+                    description: Required if restore_to_point_in_time is specified.
+                    type: string
+                  identifierPrefix:
+                    description: Creates a unique identifier beginning with the specified
+                      prefix. Conflicts with identifier.
+                    type: string
                   instanceClass:
                     description: The instance type of the RDS instance.
                     type: string
@@ -1229,6 +1236,13 @@ spec:
                     description: Specifies whether mappings of AWS Identity and Access
                       Management (IAM) accounts to database accounts is enabled.
                     type: boolean
+                  identifier:
+                    description: Required if restore_to_point_in_time is specified.
+                    type: string
+                  identifierPrefix:
+                    description: Creates a unique identifier beginning with the specified
+                      prefix. Conflicts with identifier.
+                    type: string
                   instanceClass:
                     description: The instance type of the RDS instance.
                     type: string
@@ -2236,6 +2250,13 @@ spec:
                     type: boolean
                   id:
                     description: RDS DBI resource ID.
+                    type: string
+                  identifier:
+                    description: Required if restore_to_point_in_time is specified.
+                    type: string
+                  identifierPrefix:
+                    description: Creates a unique identifier beginning with the specified
+                      prefix. Conflicts with identifier.
                     type: string
                   instanceClass:
                     description: The instance type of the RDS instance.
