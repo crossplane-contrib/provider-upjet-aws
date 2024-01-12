@@ -687,6 +687,11 @@ func (in *TopicInitParameters) DeepCopyInto(out *TopicInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ArchivePolicy != nil {
+		in, out := &in.ArchivePolicy, &out.ArchivePolicy
+		*out = new(string)
+		**out = **in
+	}
 	if in.ContentBasedDeduplication != nil {
 		in, out := &in.ContentBasedDeduplication, &out.ContentBasedDeduplication
 		*out = new(bool)
@@ -945,8 +950,18 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ArchivePolicy != nil {
+		in, out := &in.ArchivePolicy, &out.ArchivePolicy
+		*out = new(string)
+		**out = **in
+	}
 	if in.Arn != nil {
 		in, out := &in.Arn, &out.Arn
+		*out = new(string)
+		**out = **in
+	}
+	if in.BeginningArchiveTime != nil {
+		in, out := &in.BeginningArchiveTime, &out.BeginningArchiveTime
 		*out = new(string)
 		**out = **in
 	}
@@ -1140,6 +1155,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	if in.ApplicationSuccessFeedbackSampleRate != nil {
 		in, out := &in.ApplicationSuccessFeedbackSampleRate, &out.ApplicationSuccessFeedbackSampleRate
 		*out = new(float64)
+		**out = **in
+	}
+	if in.ArchivePolicy != nil {
+		in, out := &in.ArchivePolicy, &out.ArchivePolicy
+		*out = new(string)
 		**out = **in
 	}
 	if in.ContentBasedDeduplication != nil {
@@ -1679,6 +1699,11 @@ func (in *TopicSubscriptionInitParameters) DeepCopyInto(out *TopicSubscriptionIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.ReplayPolicy != nil {
+		in, out := &in.ReplayPolicy, &out.ReplayPolicy
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubscriptionRoleArn != nil {
 		in, out := &in.SubscriptionRoleArn, &out.SubscriptionRoleArn
 		*out = new(string)
@@ -1826,6 +1851,11 @@ func (in *TopicSubscriptionObservation) DeepCopyInto(out *TopicSubscriptionObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.ReplayPolicy != nil {
+		in, out := &in.ReplayPolicy, &out.ReplayPolicy
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubscriptionRoleArn != nil {
 		in, out := &in.SubscriptionRoleArn, &out.SubscriptionRoleArn
 		*out = new(string)
@@ -1908,6 +1938,11 @@ func (in *TopicSubscriptionParameters) DeepCopyInto(out *TopicSubscriptionParame
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.ReplayPolicy != nil {
+		in, out := &in.ReplayPolicy, &out.ReplayPolicy
 		*out = new(string)
 		**out = **in
 	}

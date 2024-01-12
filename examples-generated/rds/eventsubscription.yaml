@@ -24,7 +24,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: default
     sourceIds:
-    - ${aws_db_instance.default.id}
+    - ${aws_db_instance.default.identifier}
     sourceType: db-instance
 
 ---
@@ -40,14 +40,16 @@ metadata:
 spec:
   forProvider:
     allocatedStorage: 10
+    dbName: mydb
     dbSubnetGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     engine: mysql
     engineVersion: 5.6.17
     instanceClass: db.t2.micro
-    name: mydb
-    parameterGroupName: default.mysql5.6
+    parameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     passwordSecretRef:
       key: example-key
       name: example-secret

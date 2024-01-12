@@ -46,6 +46,38 @@ type AttributeParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type CsvInitParameters struct {
+
+	// The delimiter used for separating items in the CSV file being imported.
+	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
+
+	// List of the headers used to specify a common header for all source CSV files being imported.
+	// +listType=set
+	HeaderList []*string `json:"headerList,omitempty" tf:"header_list,omitempty"`
+}
+
+type CsvObservation struct {
+
+	// The delimiter used for separating items in the CSV file being imported.
+	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
+
+	// List of the headers used to specify a common header for all source CSV files being imported.
+	// +listType=set
+	HeaderList []*string `json:"headerList,omitempty" tf:"header_list,omitempty"`
+}
+
+type CsvParameters struct {
+
+	// The delimiter used for separating items in the CSV file being imported.
+	// +kubebuilder:validation:Optional
+	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
+
+	// List of the headers used to specify a common header for all source CSV files being imported.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	HeaderList []*string `json:"headerList,omitempty" tf:"header_list,omitempty"`
+}
+
 type GlobalSecondaryIndexInitParameters struct {
 
 	// Name of the hash key in the index; must be defined as an attribute in the resource.
@@ -128,6 +160,89 @@ type GlobalSecondaryIndexParameters struct {
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
+type ImportTableInitParameters struct {
+
+	// Type of compression to be used on the input coming from the imported table.
+	// Valid values are GZIP, ZSTD and NONE.
+	InputCompressionType *string `json:"inputCompressionType,omitempty" tf:"input_compression_type,omitempty"`
+
+	// The format of the source data.
+	// Valid values are CSV, DYNAMODB_JSON, and ION.
+	InputFormat *string `json:"inputFormat,omitempty" tf:"input_format,omitempty"`
+
+	// Describe the format options for the data that was imported into the target table.
+	// There is one value, csv.
+	// See below.
+	InputFormatOptions []InputFormatOptionsInitParameters `json:"inputFormatOptions,omitempty" tf:"input_format_options,omitempty"`
+
+	// Values for the S3 bucket the source file is imported from.
+	// See below.
+	S3BucketSource []S3BucketSourceInitParameters `json:"s3BucketSource,omitempty" tf:"s3_bucket_source,omitempty"`
+}
+
+type ImportTableObservation struct {
+
+	// Type of compression to be used on the input coming from the imported table.
+	// Valid values are GZIP, ZSTD and NONE.
+	InputCompressionType *string `json:"inputCompressionType,omitempty" tf:"input_compression_type,omitempty"`
+
+	// The format of the source data.
+	// Valid values are CSV, DYNAMODB_JSON, and ION.
+	InputFormat *string `json:"inputFormat,omitempty" tf:"input_format,omitempty"`
+
+	// Describe the format options for the data that was imported into the target table.
+	// There is one value, csv.
+	// See below.
+	InputFormatOptions []InputFormatOptionsObservation `json:"inputFormatOptions,omitempty" tf:"input_format_options,omitempty"`
+
+	// Values for the S3 bucket the source file is imported from.
+	// See below.
+	S3BucketSource []S3BucketSourceObservation `json:"s3BucketSource,omitempty" tf:"s3_bucket_source,omitempty"`
+}
+
+type ImportTableParameters struct {
+
+	// Type of compression to be used on the input coming from the imported table.
+	// Valid values are GZIP, ZSTD and NONE.
+	// +kubebuilder:validation:Optional
+	InputCompressionType *string `json:"inputCompressionType,omitempty" tf:"input_compression_type,omitempty"`
+
+	// The format of the source data.
+	// Valid values are CSV, DYNAMODB_JSON, and ION.
+	// +kubebuilder:validation:Optional
+	InputFormat *string `json:"inputFormat" tf:"input_format,omitempty"`
+
+	// Describe the format options for the data that was imported into the target table.
+	// There is one value, csv.
+	// See below.
+	// +kubebuilder:validation:Optional
+	InputFormatOptions []InputFormatOptionsParameters `json:"inputFormatOptions,omitempty" tf:"input_format_options,omitempty"`
+
+	// Values for the S3 bucket the source file is imported from.
+	// See below.
+	// +kubebuilder:validation:Optional
+	S3BucketSource []S3BucketSourceParameters `json:"s3BucketSource" tf:"s3_bucket_source,omitempty"`
+}
+
+type InputFormatOptionsInitParameters struct {
+
+	// This block contains the processing options for the CSV file being imported:
+	Csv []CsvInitParameters `json:"csv,omitempty" tf:"csv,omitempty"`
+}
+
+type InputFormatOptionsObservation struct {
+
+	// This block contains the processing options for the CSV file being imported:
+	Csv []CsvObservation `json:"csv,omitempty" tf:"csv,omitempty"`
+}
+
+type InputFormatOptionsParameters struct {
+
+	// This block contains the processing options for the CSV file being imported:
+	// +kubebuilder:validation:Optional
+	Csv []CsvParameters `json:"csv,omitempty" tf:"csv,omitempty"`
+}
+
 type LocalSecondaryIndexInitParameters struct {
 
 	// Name of the index
@@ -194,6 +309,45 @@ type PointInTimeRecoveryParameters struct {
 	// Whether to enable point-in-time recovery. It can take 10 minutes to enable for new tables. If the point_in_time_recovery block is not provided, this defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+}
+
+type S3BucketSourceInitParameters struct {
+
+	// The S3 bucket that is being imported from.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account number of the S3 bucket that is being imported from.
+	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
+
+	// The key prefix shared by all S3 Objects that are being imported.
+	KeyPrefix *string `json:"keyPrefix,omitempty" tf:"key_prefix,omitempty"`
+}
+
+type S3BucketSourceObservation struct {
+
+	// The S3 bucket that is being imported from.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The account number of the S3 bucket that is being imported from.
+	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
+
+	// The key prefix shared by all S3 Objects that are being imported.
+	KeyPrefix *string `json:"keyPrefix,omitempty" tf:"key_prefix,omitempty"`
+}
+
+type S3BucketSourceParameters struct {
+
+	// The S3 bucket that is being imported from.
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+
+	// The account number of the S3 bucket that is being imported from.
+	// +kubebuilder:validation:Optional
+	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
+
+	// The key prefix shared by all S3 Objects that are being imported.
+	// +kubebuilder:validation:Optional
+	KeyPrefix *string `json:"keyPrefix,omitempty" tf:"key_prefix,omitempty"`
 }
 
 type ServerSideEncryptionInitParameters struct {
@@ -271,6 +425,9 @@ type TableInitParameters struct {
 	// Attribute to use as the hash (partition) key. Must also be defined as an attribute. See below.
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
 
+	// Import Amazon S3 data into a new table. See below.
+	ImportTable []ImportTableInitParameters `json:"importTable,omitempty" tf:"import_table,omitempty"`
+
 	// Describe an LSI on the table; these can only be allocated at creation so you cannot change this definition after you have created the resource. See below.
 	LocalSecondaryIndex []LocalSecondaryIndexInitParameters `json:"localSecondaryIndex,omitempty" tf:"local_secondary_index,omitempty"`
 
@@ -342,6 +499,9 @@ type TableObservation struct {
 
 	// Name of the table
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Import Amazon S3 data into a new table. See below.
+	ImportTable []ImportTableObservation `json:"importTable,omitempty" tf:"import_table,omitempty"`
 
 	// Describe an LSI on the table; these can only be allocated at creation so you cannot change this definition after you have created the resource. See below.
 	LocalSecondaryIndex []LocalSecondaryIndexObservation `json:"localSecondaryIndex,omitempty" tf:"local_secondary_index,omitempty"`
@@ -423,6 +583,10 @@ type TableParameters struct {
 	// Attribute to use as the hash (partition) key. Must also be defined as an attribute. See below.
 	// +kubebuilder:validation:Optional
 	HashKey *string `json:"hashKey,omitempty" tf:"hash_key,omitempty"`
+
+	// Import Amazon S3 data into a new table. See below.
+	// +kubebuilder:validation:Optional
+	ImportTable []ImportTableParameters `json:"importTable,omitempty" tf:"import_table,omitempty"`
 
 	// Describe an LSI on the table; these can only be allocated at creation so you cannot change this definition after you have created the resource. See below.
 	// +kubebuilder:validation:Optional

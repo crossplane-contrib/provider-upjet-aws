@@ -17,6 +17,45 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CompositePartitionKeyInitParameters struct {
+
+	// The level of enforcement for the specification of a dimension key in ingested records. Valid values: REQUIRED, OPTIONAL.
+	EnforcementInRecord *string `json:"enforcementInRecord,omitempty" tf:"enforcement_in_record,omitempty"`
+
+	// The name of the attribute used for a dimension key.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of the partition key. Valid values: DIMENSION, MEASURE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type CompositePartitionKeyObservation struct {
+
+	// The level of enforcement for the specification of a dimension key in ingested records. Valid values: REQUIRED, OPTIONAL.
+	EnforcementInRecord *string `json:"enforcementInRecord,omitempty" tf:"enforcement_in_record,omitempty"`
+
+	// The name of the attribute used for a dimension key.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of the partition key. Valid values: DIMENSION, MEASURE.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type CompositePartitionKeyParameters struct {
+
+	// The level of enforcement for the specification of a dimension key in ingested records. Valid values: REQUIRED, OPTIONAL.
+	// +kubebuilder:validation:Optional
+	EnforcementInRecord *string `json:"enforcementInRecord,omitempty" tf:"enforcement_in_record,omitempty"`
+
+	// The name of the attribute used for a dimension key.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of the partition key. Valid values: DIMENSION, MEASURE.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type MagneticStoreRejectedDataLocationInitParameters struct {
 
 	// Configuration of an S3 location to write error reports for records rejected, asynchronously, during magnetic store writes. See S3 Configuration below for more details.
@@ -143,6 +182,25 @@ type S3ConfigurationParameters struct {
 	ObjectKeyPrefix *string `json:"objectKeyPrefix,omitempty" tf:"object_key_prefix,omitempty"`
 }
 
+type SchemaInitParameters struct {
+
+	// A non-empty list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed. See Composite Partition Key below for more details.
+	CompositePartitionKey []CompositePartitionKeyInitParameters `json:"compositePartitionKey,omitempty" tf:"composite_partition_key,omitempty"`
+}
+
+type SchemaObservation struct {
+
+	// A non-empty list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed. See Composite Partition Key below for more details.
+	CompositePartitionKey []CompositePartitionKeyObservation `json:"compositePartitionKey,omitempty" tf:"composite_partition_key,omitempty"`
+}
+
+type SchemaParameters struct {
+
+	// A non-empty list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed. See Composite Partition Key below for more details.
+	// +kubebuilder:validation:Optional
+	CompositePartitionKey []CompositePartitionKeyParameters `json:"compositePartitionKey,omitempty" tf:"composite_partition_key,omitempty"`
+}
+
 type TableInitParameters struct {
 
 	// Contains properties to set on the table when enabling magnetic store writes. See Magnetic Store Write Properties below for more details.
@@ -150,6 +208,9 @@ type TableInitParameters struct {
 
 	// The retention duration for the memory store and magnetic store. See Retention Properties below for more details. If not provided, magnetic_store_retention_period_in_days default to 73000 and memory_store_retention_period_in_hours defaults to 6.
 	RetentionProperties []RetentionPropertiesInitParameters `json:"retentionProperties,omitempty" tf:"retention_properties,omitempty"`
+
+	// The schema of the table. See Schema below for more details.
+	Schema []SchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -172,6 +233,9 @@ type TableObservation struct {
 
 	// The retention duration for the memory store and magnetic store. See Retention Properties below for more details. If not provided, magnetic_store_retention_period_in_days default to 73000 and memory_store_retention_period_in_hours defaults to 6.
 	RetentionProperties []RetentionPropertiesObservation `json:"retentionProperties,omitempty" tf:"retention_properties,omitempty"`
+
+	// The schema of the table. See Schema below for more details.
+	Schema []SchemaObservation `json:"schema,omitempty" tf:"schema,omitempty"`
 
 	// The name of the Timestream table.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
@@ -212,6 +276,10 @@ type TableParameters struct {
 	// The retention duration for the memory store and magnetic store. See Retention Properties below for more details. If not provided, magnetic_store_retention_period_in_days default to 73000 and memory_store_retention_period_in_hours defaults to 6.
 	// +kubebuilder:validation:Optional
 	RetentionProperties []RetentionPropertiesParameters `json:"retentionProperties,omitempty" tf:"retention_properties,omitempty"`
+
+	// The schema of the table. See Schema below for more details.
+	// +kubebuilder:validation:Optional
+	Schema []SchemaParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 
 	// The name of the Timestream table.
 	// +kubebuilder:validation:Required

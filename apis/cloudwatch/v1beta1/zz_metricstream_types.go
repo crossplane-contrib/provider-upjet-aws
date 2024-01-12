@@ -137,7 +137,7 @@ type MetricStreamInitParameters struct {
 	// Friendly name of the metric stream. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Output format for the stream. Possible values are json and opentelemetry0.7. For more information about output formats, see Metric streams output formats.
+	// Output format for the stream. Possible values are json, opentelemetry0.7, and opentelemetry1.0. For more information about output formats, see Metric streams output formats.
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
 	// ARN of the IAM role that this metric stream will use to access Amazon Kinesis Firehose resources. For more information about role permissions, see Trust between CloudWatch and Kinesis Data Firehose.
@@ -153,7 +153,7 @@ type MetricStreamInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics (p99 etc.). See details below.
+	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7 or opentelemetry1.0, you can stream percentile statistics (p99 etc.). See details below.
 	StatisticsConfiguration []StatisticsConfigurationInitParameters `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -189,7 +189,7 @@ type MetricStreamObservation struct {
 	// Friendly name of the metric stream. Conflicts with name_prefix.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Output format for the stream. Possible values are json and opentelemetry0.7. For more information about output formats, see Metric streams output formats.
+	// Output format for the stream. Possible values are json, opentelemetry0.7, and opentelemetry1.0. For more information about output formats, see Metric streams output formats.
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
 	// ARN of the IAM role that this metric stream will use to access Amazon Kinesis Firehose resources. For more information about role permissions, see Trust between CloudWatch and Kinesis Data Firehose.
@@ -198,7 +198,7 @@ type MetricStreamObservation struct {
 	// State of the metric stream. Possible values are running and stopped.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics (p99 etc.). See details below.
+	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7 or opentelemetry1.0, you can stream percentile statistics (p99 etc.). See details below.
 	StatisticsConfiguration []StatisticsConfigurationObservation `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -242,7 +242,7 @@ type MetricStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Output format for the stream. Possible values are json and opentelemetry0.7. For more information about output formats, see Metric streams output formats.
+	// Output format for the stream. Possible values are json, opentelemetry0.7, and opentelemetry1.0. For more information about output formats, see Metric streams output formats.
 	// +kubebuilder:validation:Optional
 	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
 
@@ -265,7 +265,7 @@ type MetricStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7, you can stream percentile statistics (p99 etc.). See details below.
+	// For each entry in this array, you specify one or more metrics and the list of additional statistics to stream for those metrics. The additional statistics that you can stream depend on the stream's output_format. If the OutputFormat is json, you can stream any additional statistic that is supported by CloudWatch, listed in CloudWatch statistics definitions. If the OutputFormat is opentelemetry0.7 or opentelemetry1.0, you can stream percentile statistics (p99 etc.). See details below.
 	// +kubebuilder:validation:Optional
 	StatisticsConfiguration []StatisticsConfigurationParameters `json:"statisticsConfiguration,omitempty" tf:"statistics_configuration,omitempty"`
 

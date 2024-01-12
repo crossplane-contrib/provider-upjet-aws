@@ -106,6 +106,10 @@ type DataLakeSettingsInitParameters struct {
 	// +listType=set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
+	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
+	// +listType=set
+	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
+
 	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
 	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
 }
@@ -136,6 +140,10 @@ type DataLakeSettingsObservation struct {
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
+	// +listType=set
+	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
 
 	// owning account IDs that the caller's account can use to share their user access details (user ARNs).
 	TrustedResourceOwners []*string `json:"trustedResourceOwners,omitempty" tf:"trusted_resource_owners,omitempty"`
@@ -172,6 +180,11 @@ type DataLakeSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
+
+	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

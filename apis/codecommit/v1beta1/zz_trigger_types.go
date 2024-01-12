@@ -31,6 +31,7 @@ type TriggerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
+	// The name of the trigger.
 	Trigger []TriggerTriggerInitParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
@@ -44,6 +45,7 @@ type TriggerObservation struct {
 	// The name for the repository. This needs to be less than 100 characters.
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
+	// The name of the trigger.
 	Trigger []TriggerTriggerObservation `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
@@ -67,13 +69,14 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryNameSelector *v1.Selector `json:"repositoryNameSelector,omitempty" tf:"-"`
 
+	// The name of the trigger.
 	// +kubebuilder:validation:Optional
 	Trigger []TriggerTriggerParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
 type TriggerTriggerInitParameters struct {
 
-	// The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.
+	// The branches that will be included in the trigger configuration. If no branches   are specified, the trigger will apply to all branches.
 	Branches []*string `json:"branches,omitempty" tf:"branches,omitempty"`
 
 	// Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
@@ -101,7 +104,7 @@ type TriggerTriggerInitParameters struct {
 
 type TriggerTriggerObservation struct {
 
-	// The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.
+	// The branches that will be included in the trigger configuration. If no branches   are specified, the trigger will apply to all branches.
 	Branches []*string `json:"branches,omitempty" tf:"branches,omitempty"`
 
 	// Any custom data associated with the trigger that will be included in the information sent to the target of the trigger.
@@ -119,7 +122,7 @@ type TriggerTriggerObservation struct {
 
 type TriggerTriggerParameters struct {
 
-	// The branches that will be included in the trigger configuration. If no branches are specified, the trigger will apply to all branches.
+	// The branches that will be included in the trigger configuration. If no branches   are specified, the trigger will apply to all branches.
 	// +kubebuilder:validation:Optional
 	Branches []*string `json:"branches,omitempty" tf:"branches,omitempty"`
 

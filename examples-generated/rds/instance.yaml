@@ -13,7 +13,9 @@ spec:
     engine: mysql
     engineVersion: "5.7"
     instanceClass: db.t3.micro
-    parameterGroupName: default.mysql5.7
+    parameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     passwordSecretRef:
       key: example-key
       name: example-secret

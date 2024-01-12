@@ -25,7 +25,7 @@ type FunctionInitParameters struct {
 	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
+	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 }
 
@@ -48,7 +48,7 @@ type FunctionObservation struct {
 	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
+	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// Status of the function. Can be UNPUBLISHED, UNASSOCIATED or ASSOCIATED.
@@ -74,7 +74,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
+	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 }

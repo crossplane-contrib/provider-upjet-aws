@@ -36,8 +36,14 @@ type ContainerInitParameters struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	ModelDataSource []ModelDataSourceInitParameters `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
+
 	// The URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the model package to use to create the model.
+	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type ContainerObservation struct {
@@ -59,8 +65,14 @@ type ContainerObservation struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	ModelDataSource []ModelDataSourceObservation `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
+
 	// The URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the model package to use to create the model.
+	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type ContainerParameters struct {
@@ -77,7 +89,7 @@ type ContainerParameters struct {
 
 	// The registry path where the inference code image is stored in Amazon ECR.
 	// +kubebuilder:validation:Optional
-	Image *string `json:"image" tf:"image,omitempty"`
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	// +kubebuilder:validation:Optional
@@ -87,9 +99,17 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	// +kubebuilder:validation:Optional
+	ModelDataSource []ModelDataSourceParameters `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
+
 	// The URL for the S3 location where model artifacts are stored.
 	// +kubebuilder:validation:Optional
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the model package to use to create the model.
+	// +kubebuilder:validation:Optional
+	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type ImageConfigInitParameters struct {
@@ -157,6 +177,64 @@ type InferenceExecutionConfigParameters struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode" tf:"mode,omitempty"`
+}
+
+type ModelDataSourceInitParameters struct {
+
+	// The S3 location of model data to deploy.
+	S3DataSource []S3DataSourceInitParameters `json:"s3DataSource,omitempty" tf:"s3_data_source,omitempty"`
+}
+
+type ModelDataSourceObservation struct {
+
+	// The S3 location of model data to deploy.
+	S3DataSource []S3DataSourceObservation `json:"s3DataSource,omitempty" tf:"s3_data_source,omitempty"`
+}
+
+type ModelDataSourceParameters struct {
+
+	// The S3 location of model data to deploy.
+	// +kubebuilder:validation:Optional
+	S3DataSource []S3DataSourceParameters `json:"s3DataSource" tf:"s3_data_source,omitempty"`
+}
+
+type ModelDataSourceS3DataSourceInitParameters struct {
+
+	// How the model data is prepared. Allowed values are: None and Gzip.
+	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
+
+	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
+	S3DataType *string `json:"s3DataType,omitempty" tf:"s3_data_type,omitempty"`
+
+	// The S3 path of model data to deploy.
+	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+}
+
+type ModelDataSourceS3DataSourceObservation struct {
+
+	// How the model data is prepared. Allowed values are: None and Gzip.
+	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
+
+	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
+	S3DataType *string `json:"s3DataType,omitempty" tf:"s3_data_type,omitempty"`
+
+	// The S3 path of model data to deploy.
+	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+}
+
+type ModelDataSourceS3DataSourceParameters struct {
+
+	// How the model data is prepared. Allowed values are: None and Gzip.
+	// +kubebuilder:validation:Optional
+	CompressionType *string `json:"compressionType" tf:"compression_type,omitempty"`
+
+	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
+	// +kubebuilder:validation:Optional
+	S3DataType *string `json:"s3DataType" tf:"s3_data_type,omitempty"`
+
+	// The S3 path of model data to deploy.
+	// +kubebuilder:validation:Optional
+	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
 }
 
 type ModelInitParameters struct {
@@ -323,8 +401,33 @@ type PrimaryContainerInitParameters struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	ModelDataSource []PrimaryContainerModelDataSourceInitParameters `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
+
 	// The URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the model package to use to create the model.
+	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
+}
+
+type PrimaryContainerModelDataSourceInitParameters struct {
+
+	// The S3 location of model data to deploy.
+	S3DataSource []ModelDataSourceS3DataSourceInitParameters `json:"s3DataSource,omitempty" tf:"s3_data_source,omitempty"`
+}
+
+type PrimaryContainerModelDataSourceObservation struct {
+
+	// The S3 location of model data to deploy.
+	S3DataSource []ModelDataSourceS3DataSourceObservation `json:"s3DataSource,omitempty" tf:"s3_data_source,omitempty"`
+}
+
+type PrimaryContainerModelDataSourceParameters struct {
+
+	// The S3 location of model data to deploy.
+	// +kubebuilder:validation:Optional
+	S3DataSource []ModelDataSourceS3DataSourceParameters `json:"s3DataSource" tf:"s3_data_source,omitempty"`
 }
 
 type PrimaryContainerObservation struct {
@@ -346,8 +449,14 @@ type PrimaryContainerObservation struct {
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	ModelDataSource []PrimaryContainerModelDataSourceObservation `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
+
 	// The URL for the S3 location where model artifacts are stored.
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the model package to use to create the model.
+	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type PrimaryContainerParameters struct {
@@ -364,7 +473,7 @@ type PrimaryContainerParameters struct {
 
 	// The registry path where the inference code image is stored in Amazon ECR.
 	// +kubebuilder:validation:Optional
-	Image *string `json:"image" tf:"image,omitempty"`
+	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	// +kubebuilder:validation:Optional
@@ -374,9 +483,17 @@ type PrimaryContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// The location of model data to deploy. Use this for uncompressed model deployment. For information about how to deploy an uncompressed model, see Deploying uncompressed models in the AWS SageMaker Developer Guide.
+	// +kubebuilder:validation:Optional
+	ModelDataSource []PrimaryContainerModelDataSourceParameters `json:"modelDataSource,omitempty" tf:"model_data_source,omitempty"`
+
 	// The URL for the S3 location where model artifacts are stored.
 	// +kubebuilder:validation:Optional
 	ModelDataURL *string `json:"modelDataUrl,omitempty" tf:"model_data_url,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the model package to use to create the model.
+	// +kubebuilder:validation:Optional
+	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
 }
 
 type RepositoryAuthConfigInitParameters struct {
@@ -396,6 +513,45 @@ type RepositoryAuthConfigParameters struct {
 	// The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an AWS Lambda function, see Create a Lambda function with the console in the AWS Lambda Developer Guide.
 	// +kubebuilder:validation:Optional
 	RepositoryCredentialsProviderArn *string `json:"repositoryCredentialsProviderArn" tf:"repository_credentials_provider_arn,omitempty"`
+}
+
+type S3DataSourceInitParameters struct {
+
+	// How the model data is prepared. Allowed values are: None and Gzip.
+	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
+
+	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
+	S3DataType *string `json:"s3DataType,omitempty" tf:"s3_data_type,omitempty"`
+
+	// The S3 path of model data to deploy.
+	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+}
+
+type S3DataSourceObservation struct {
+
+	// How the model data is prepared. Allowed values are: None and Gzip.
+	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
+
+	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
+	S3DataType *string `json:"s3DataType,omitempty" tf:"s3_data_type,omitempty"`
+
+	// The S3 path of model data to deploy.
+	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
+}
+
+type S3DataSourceParameters struct {
+
+	// How the model data is prepared. Allowed values are: None and Gzip.
+	// +kubebuilder:validation:Optional
+	CompressionType *string `json:"compressionType" tf:"compression_type,omitempty"`
+
+	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
+	// +kubebuilder:validation:Optional
+	S3DataType *string `json:"s3DataType" tf:"s3_data_type,omitempty"`
+
+	// The S3 path of model data to deploy.
+	// +kubebuilder:validation:Optional
+	S3URI *string `json:"s3Uri" tf:"s3_uri,omitempty"`
 }
 
 type VPCConfigInitParameters struct {

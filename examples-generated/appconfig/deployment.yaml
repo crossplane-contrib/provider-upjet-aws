@@ -24,6 +24,9 @@ spec:
     environmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    kmsKeyIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     region: us-west-1
     tags:
       Type: AppConfig Deployment

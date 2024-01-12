@@ -1271,5 +1271,5 @@ func (tr *ProvisionedConcurrencyConfig) LateInitialize(attrs []byte) (bool, erro
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ProvisionedConcurrencyConfig) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

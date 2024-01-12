@@ -66,6 +66,11 @@ func (in *AppInitParameters) DeepCopyInto(out *AppInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomHeaders != nil {
+		in, out := &in.CustomHeaders, &out.CustomHeaders
+		*out = new(string)
+		**out = **in
+	}
 	if in.CustomRule != nil {
 		in, out := &in.CustomRule, &out.CustomRule
 		*out = make([]CustomRuleInitParameters, len(*in))
@@ -235,6 +240,11 @@ func (in *AppObservation) DeepCopyInto(out *AppObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomHeaders != nil {
+		in, out := &in.CustomHeaders, &out.CustomHeaders
+		*out = new(string)
+		**out = **in
+	}
 	if in.CustomRule != nil {
 		in, out := &in.CustomRule, &out.CustomRule
 		*out = make([]CustomRuleObservation, len(*in))
@@ -397,6 +407,11 @@ func (in *AppParameters) DeepCopyInto(out *AppParameters) {
 	}
 	if in.BuildSpec != nil {
 		in, out := &in.BuildSpec, &out.BuildSpec
+		*out = new(string)
+		**out = **in
+	}
+	if in.CustomHeaders != nil {
+		in, out := &in.CustomHeaders, &out.CustomHeaders
 		*out = new(string)
 		**out = **in
 	}

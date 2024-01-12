@@ -46,6 +46,25 @@ type AutoDeploymentParameters struct {
 	RetainStacksOnAccountRemoval *bool `json:"retainStacksOnAccountRemoval,omitempty" tf:"retain_stacks_on_account_removal,omitempty"`
 }
 
+type ManagedExecutionInitParameters struct {
+
+	// When set to true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order. Default is false.
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
+}
+
+type ManagedExecutionObservation struct {
+
+	// When set to true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order. Default is false.
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
+}
+
+type ManagedExecutionParameters struct {
+
+	// When set to true, StackSets performs non-conflicting operations concurrently and queues conflicting operations. After conflicting operations finish, StackSets starts queued operations in request order. Default is false.
+	// +kubebuilder:validation:Optional
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
+}
+
 type OperationPreferencesInitParameters struct {
 
 	// The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
@@ -146,6 +165,9 @@ type StackSetInitParameters struct {
 	// Name of the IAM Role in all target accounts for StackSet operations. Defaults to AWSCloudFormationStackSetExecutionRole when using the SELF_MANAGED permission model. This should not be defined when using the SERVICE_MANAGED permission model.
 	ExecutionRoleName *string `json:"executionRoleName,omitempty" tf:"execution_role_name,omitempty"`
 
+	// Configuration block to allow StackSets to perform non-conflicting operations concurrently and queues conflicting operations.
+	ManagedExecution []ManagedExecutionInitParameters `json:"managedExecution,omitempty" tf:"managed_execution,omitempty"`
+
 	// Preferences for how AWS CloudFormation performs a stack set update.
 	OperationPreferences []OperationPreferencesInitParameters `json:"operationPreferences,omitempty" tf:"operation_preferences,omitempty"`
 
@@ -193,6 +215,9 @@ type StackSetObservation struct {
 
 	// Name of the StackSet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Configuration block to allow StackSets to perform non-conflicting operations concurrently and queues conflicting operations.
+	ManagedExecution []ManagedExecutionObservation `json:"managedExecution,omitempty" tf:"managed_execution,omitempty"`
 
 	// Preferences for how AWS CloudFormation performs a stack set update.
 	OperationPreferences []OperationPreferencesObservation `json:"operationPreferences,omitempty" tf:"operation_preferences,omitempty"`
@@ -258,6 +283,10 @@ type StackSetParameters struct {
 	// Name of the IAM Role in all target accounts for StackSet operations. Defaults to AWSCloudFormationStackSetExecutionRole when using the SELF_MANAGED permission model. This should not be defined when using the SERVICE_MANAGED permission model.
 	// +kubebuilder:validation:Optional
 	ExecutionRoleName *string `json:"executionRoleName,omitempty" tf:"execution_role_name,omitempty"`
+
+	// Configuration block to allow StackSets to perform non-conflicting operations concurrently and queues conflicting operations.
+	// +kubebuilder:validation:Optional
+	ManagedExecution []ManagedExecutionParameters `json:"managedExecution,omitempty" tf:"managed_execution,omitempty"`
 
 	// Preferences for how AWS CloudFormation performs a stack set update.
 	// +kubebuilder:validation:Optional

@@ -182,7 +182,8 @@ spec:
                           type: boolean
                         events:
                           description: The event type or types that trigger a rollback.
-                            Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+                            Supported types are DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM
+                            and DEPLOYMENT_STOP_ON_REQUEST.
                           items:
                             type: string
                           type: array
@@ -757,6 +758,12 @@ spec:
                           type: string
                       type: object
                     type: array
+                  outdatedInstancesStrategy:
+                    description: Configuration block of Indicates what happens when
+                      new Amazon EC2 instances are launched mid-deployment and do
+                      not receive the deployed application revision. Valid values
+                      are UPDATE and IGNORE. Defaults to UPDATE.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -997,7 +1004,8 @@ spec:
                           type: boolean
                         events:
                           description: The event type or types that trigger a rollback.
-                            Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+                            Supported types are DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM
+                            and DEPLOYMENT_STOP_ON_REQUEST.
                           items:
                             type: string
                           type: array
@@ -1572,6 +1580,12 @@ spec:
                           type: string
                       type: object
                     type: array
+                  outdatedInstancesStrategy:
+                    description: Configuration block of Indicates what happens when
+                      new Amazon EC2 instances are launched mid-deployment and do
+                      not receive the deployed application revision. Valid values
+                      are UPDATE and IGNORE. Defaults to UPDATE.
+                    type: string
                   serviceRoleArn:
                     description: The service role ARN that allows deployments.
                     type: string
@@ -1965,7 +1979,8 @@ spec:
                           type: boolean
                         events:
                           description: The event type or types that trigger a rollback.
-                            Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+                            Supported types are DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM
+                            and DEPLOYMENT_STOP_ON_REQUEST.
                           items:
                             type: string
                           type: array
@@ -2233,6 +2248,12 @@ spec:
                           type: string
                       type: object
                     type: array
+                  outdatedInstancesStrategy:
+                    description: Configuration block of Indicates what happens when
+                      new Amazon EC2 instances are launched mid-deployment and do
+                      not receive the deployed application revision. Valid values
+                      are UPDATE and IGNORE. Defaults to UPDATE.
+                    type: string
                   serviceRoleArn:
                     description: The service role ARN that allows deployments.
                     type: string

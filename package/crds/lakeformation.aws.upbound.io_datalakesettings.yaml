@@ -140,6 +140,13 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  readOnlyAdmins:
+                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                      users or roles) with only view access to the resources.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -234,6 +241,13 @@ spec:
                   externalDataFilteringAllowList:
                     description: A list of the account IDs of Amazon Web Services
                       accounts with Amazon EMR clusters that are to perform data filtering.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  readOnlyAdmins:
+                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                      users or roles) with only view access to the resources.
                     items:
                       type: string
                     type: array
@@ -485,6 +499,13 @@ spec:
                     x-kubernetes-list-type: set
                   id:
                     type: string
+                  readOnlyAdmins:
+                    description: –  Set of ARNs of AWS Lake Formation principals (IAM
+                      users or roles) with only view access to the resources.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   trustedResourceOwners:
                     description: owning account IDs that the caller's account can
                       use to share their user access details (user ARNs).

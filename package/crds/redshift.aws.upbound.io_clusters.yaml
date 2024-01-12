@@ -80,8 +80,8 @@ spec:
                   aquaConfigurationStatus:
                     description: The value represents how the cluster is configured
                       to use AQUA (Advanced Query Accelerator) after the cluster is
-                      restored. Possible values are enabled, disabled, and auto. Requires
-                      Cluster reboot.
+                      restored. No longer supported by the AWS API. Always returns
+                      auto.
                     type: string
                   automatedSnapshotRetentionPeriod:
                     description: The number of days that automated snapshots are retained.
@@ -115,13 +115,6 @@ spec:
                     description: The specific revision number of the database in the
                       cluster
                     type: string
-                  clusterSecurityGroups:
-                    description: A list of security groups to be associated with this
-                      cluster.
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   clusterSubnetGroupName:
                     description: The name of a cluster subnet group to be associated
                       with this cluster. If this parameter is not provided the resulting
@@ -440,17 +433,29 @@ spec:
                       and the source cluster are on different tracks. Default value
                       is current.
                     type: string
+                  manageMasterPassword:
+                    description: Whether to use AWS SecretsManager to manage the cluster
+                      admin credentials. Conflicts with master_password. One of master_password
+                      or manage_master_password is required unless snapshot_identifier
+                      is provided.
+                    type: boolean
                   manualSnapshotRetentionPeriod:
                     description: The default number of days to retain a manual snapshot.
                       If the value is -1, the snapshot is retained indefinitely. This
                       setting doesn't change the retention period of existing snapshots.
                       Valid values are between -1 and 3653. Default value is -1.
                     type: number
+                  masterPasswordSecretKmsKeyId:
+                    description: ID of the KMS key used to encrypt the cluster admin
+                      credentials secret.
+                    type: string
                   masterPasswordSecretRef:
-                    description: Password for the master DB user. Note that this may
-                      show up in logs, and it will be stored in the state file. Password
-                      must contain at least 8 chars and contain at least one uppercase
-                      letter, one lowercase letter, and one number.
+                    description: Password for the master DB user. Conflicts with manage_master_password.
+                      One of master_password or manage_master_password is required
+                      unless snapshot_identifier is provided. Note that this may show
+                      up in logs, and it will be stored in the state file. Password
+                      must contain at least 8 characters and contain at least one
+                      uppercase letter, one lowercase letter, and one number.
                     properties:
                       key:
                         description: The key to select.
@@ -509,6 +514,10 @@ spec:
                       cluster snapshot is created before the cluster is deleted. Default
                       is false.
                     type: boolean
+                  snapshotArn:
+                    description: The ARN of the snapshot from which to create the
+                      new cluster. Conflicts with snapshot_identifier.
+                    type: string
                   snapshotClusterIdentifier:
                     description: The name of the cluster the source snapshot was created
                       from.
@@ -536,7 +545,7 @@ spec:
                     type: array
                   snapshotIdentifier:
                     description: The name of the snapshot from which to create the
-                      new cluster.
+                      new cluster.  Conflicts with snapshot_arn.
                     type: string
                   tags:
                     additionalProperties:
@@ -656,8 +665,8 @@ spec:
                   aquaConfigurationStatus:
                     description: The value represents how the cluster is configured
                       to use AQUA (Advanced Query Accelerator) after the cluster is
-                      restored. Possible values are enabled, disabled, and auto. Requires
-                      Cluster reboot.
+                      restored. No longer supported by the AWS API. Always returns
+                      auto.
                     type: string
                   automatedSnapshotRetentionPeriod:
                     description: The number of days that automated snapshots are retained.
@@ -691,13 +700,6 @@ spec:
                     description: The specific revision number of the database in the
                       cluster
                     type: string
-                  clusterSecurityGroups:
-                    description: A list of security groups to be associated with this
-                      cluster.
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   clusterSubnetGroupName:
                     description: The name of a cluster subnet group to be associated
                       with this cluster. If this parameter is not provided the resulting
@@ -1016,12 +1018,22 @@ spec:
                       and the source cluster are on different tracks. Default value
                       is current.
                     type: string
+                  manageMasterPassword:
+                    description: Whether to use AWS SecretsManager to manage the cluster
+                      admin credentials. Conflicts with master_password. One of master_password
+                      or manage_master_password is required unless snapshot_identifier
+                      is provided.
+                    type: boolean
                   manualSnapshotRetentionPeriod:
                     description: The default number of days to retain a manual snapshot.
                       If the value is -1, the snapshot is retained indefinitely. This
                       setting doesn't change the retention period of existing snapshots.
                       Valid values are between -1 and 3653. Default value is -1.
                     type: number
+                  masterPasswordSecretKmsKeyId:
+                    description: ID of the KMS key used to encrypt the cluster admin
+                      credentials secret.
+                    type: string
                   masterUsername:
                     description: Username for the master DB user.
                     type: string
@@ -1061,6 +1073,10 @@ spec:
                       cluster snapshot is created before the cluster is deleted. Default
                       is false.
                     type: boolean
+                  snapshotArn:
+                    description: The ARN of the snapshot from which to create the
+                      new cluster. Conflicts with snapshot_identifier.
+                    type: string
                   snapshotClusterIdentifier:
                     description: The name of the cluster the source snapshot was created
                       from.
@@ -1088,7 +1104,7 @@ spec:
                     type: array
                   snapshotIdentifier:
                     description: The name of the snapshot from which to create the
-                      new cluster.
+                      new cluster.  Conflicts with snapshot_arn.
                     type: string
                   tags:
                     additionalProperties:
@@ -1364,8 +1380,8 @@ spec:
                   aquaConfigurationStatus:
                     description: The value represents how the cluster is configured
                       to use AQUA (Advanced Query Accelerator) after the cluster is
-                      restored. Possible values are enabled, disabled, and auto. Requires
-                      Cluster reboot.
+                      restored. No longer supported by the AWS API. Always returns
+                      auto.
                     type: string
                   arn:
                     description: Amazon Resource Name (ARN) of cluster
@@ -1391,6 +1407,9 @@ spec:
                       Default is false. Available for use on clusters from the RA3
                       instance family.
                     type: boolean
+                  clusterNamespaceArn:
+                    description: The namespace Amazon Resource Name (ARN) of the cluster
+                    type: string
                   clusterNodes:
                     description: The nodes in the cluster. Cluster node blocks are
                       documented below
@@ -1419,13 +1438,6 @@ spec:
                     description: The specific revision number of the database in the
                       cluster
                     type: string
-                  clusterSecurityGroups:
-                    description: A list of security groups to be associated with this
-                      cluster.
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
                   clusterSubnetGroupName:
                     description: The name of a cluster subnet group to be associated
                       with this cluster. If this parameter is not provided the resulting
@@ -1528,12 +1540,25 @@ spec:
                       and the source cluster are on different tracks. Default value
                       is current.
                     type: string
+                  manageMasterPassword:
+                    description: Whether to use AWS SecretsManager to manage the cluster
+                      admin credentials. Conflicts with master_password. One of master_password
+                      or manage_master_password is required unless snapshot_identifier
+                      is provided.
+                    type: boolean
                   manualSnapshotRetentionPeriod:
                     description: The default number of days to retain a manual snapshot.
                       If the value is -1, the snapshot is retained indefinitely. This
                       setting doesn't change the retention period of existing snapshots.
                       Valid values are between -1 and 3653. Default value is -1.
                     type: number
+                  masterPasswordSecretArn:
+                    description: ARN of the cluster admin credentials secret
+                    type: string
+                  masterPasswordSecretKmsKeyId:
+                    description: ID of the KMS key used to encrypt the cluster admin
+                      credentials secret.
+                    type: string
                   masterUsername:
                     description: Username for the master DB user.
                     type: string
@@ -1573,6 +1598,10 @@ spec:
                       cluster snapshot is created before the cluster is deleted. Default
                       is false.
                     type: boolean
+                  snapshotArn:
+                    description: The ARN of the snapshot from which to create the
+                      new cluster. Conflicts with snapshot_identifier.
+                    type: string
                   snapshotClusterIdentifier:
                     description: The name of the cluster the source snapshot was created
                       from.
@@ -1600,7 +1629,7 @@ spec:
                     type: array
                   snapshotIdentifier:
                     description: The name of the snapshot from which to create the
-                      new cluster.
+                      new cluster.  Conflicts with snapshot_arn.
                     type: string
                   tags:
                     additionalProperties:

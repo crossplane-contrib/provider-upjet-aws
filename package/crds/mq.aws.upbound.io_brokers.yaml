@@ -86,7 +86,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ only. Detailed below.
+                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
                     items:
                       properties:
                         id:
@@ -205,7 +205,7 @@ spec:
                     type: string
                   engineVersion:
                     description: Version of the broker engine. See the AmazonMQ Broker
-                      Engine docs for supported versions. For example, 5.15.0.
+                      Engine docs for supported versions. For example, 5.17.6.
                     type: string
                   hostInstanceType:
                     description: Broker's instance type. For example, mq.t3.micro,
@@ -538,6 +538,10 @@ spec:
                           - name
                           - namespace
                           type: object
+                        replicationUser:
+                          description: Whether to set set replication user. Defaults
+                            to false.
+                          type: boolean
                         username:
                           description: Username of the user.
                           type: string
@@ -579,7 +583,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ only. Detailed below.
+                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
                     items:
                       properties:
                         id:
@@ -698,7 +702,7 @@ spec:
                     type: string
                   engineVersion:
                     description: Version of the broker engine. See the AmazonMQ Broker
-                      Engine docs for supported versions. For example, 5.15.0.
+                      Engine docs for supported versions. For example, 5.17.6.
                     type: string
                   hostInstanceType:
                     description: Broker's instance type. For example, mq.t3.micro,
@@ -991,6 +995,10 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        replicationUser:
+                          description: Whether to set set replication user. Defaults
+                            to false.
+                          type: boolean
                         username:
                           description: Username of the user.
                           type: string
@@ -1205,7 +1213,7 @@ spec:
                     type: string
                   configuration:
                     description: Configuration block for broker configuration. Applies
-                      to engine_type of ActiveMQ only. Detailed below.
+                      to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
                     items:
                       properties:
                         id:
@@ -1246,7 +1254,7 @@ spec:
                     type: string
                   engineVersion:
                     description: Version of the broker engine. See the AmazonMQ Broker
-                      Engine docs for supported versions. For example, 5.15.0.
+                      Engine docs for supported versions. For example, 5.17.6.
                     type: string
                   hostInstanceType:
                     description: Broker's instance type. For example, mq.t3.micro,
@@ -1417,6 +1425,10 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        replicationUser:
+                          description: Whether to set set replication user. Defaults
+                            to false.
+                          type: boolean
                         username:
                           description: Username of the user.
                           type: string

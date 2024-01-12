@@ -136,6 +136,67 @@ spec:
                     description: Attribute to use as the hash (partition) key. Must
                       also be defined as an attribute. See below.
                     type: string
+                  importTable:
+                    description: Import Amazon S3 data into a new table. See below.
+                    items:
+                      properties:
+                        inputCompressionType:
+                          description: Type of compression to be used on the input
+                            coming from the imported table. Valid values are GZIP,
+                            ZSTD and NONE.
+                          type: string
+                        inputFormat:
+                          description: The format of the source data. Valid values
+                            are CSV, DYNAMODB_JSON, and ION.
+                          type: string
+                        inputFormatOptions:
+                          description: Describe the format options for the data that
+                            was imported into the target table. There is one value,
+                            csv. See below.
+                          items:
+                            properties:
+                              csv:
+                                description: 'This block contains the processing options
+                                  for the CSV file being imported:'
+                                items:
+                                  properties:
+                                    delimiter:
+                                      description: The delimiter used for separating
+                                        items in the CSV file being imported.
+                                      type: string
+                                    headerList:
+                                      description: List of the headers used to specify
+                                        a common header for all source CSV files being
+                                        imported.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        s3BucketSource:
+                          description: Values for the S3 bucket the source file is
+                            imported from. See below.
+                          items:
+                            properties:
+                              bucket:
+                                description: The S3 bucket that is being imported
+                                  from.
+                                type: string
+                              bucketOwner:
+                                description: The account number of the S3 bucket that
+                                  is being imported from.
+                                type: string
+                              keyPrefix:
+                                description: The key prefix shared by all S3 Objects
+                                  that are being imported.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   localSecondaryIndex:
                     description: Describe an LSI on the table; these can only be allocated
                       at creation so you cannot change this definition after you have
@@ -376,6 +437,67 @@ spec:
                     description: Attribute to use as the hash (partition) key. Must
                       also be defined as an attribute. See below.
                     type: string
+                  importTable:
+                    description: Import Amazon S3 data into a new table. See below.
+                    items:
+                      properties:
+                        inputCompressionType:
+                          description: Type of compression to be used on the input
+                            coming from the imported table. Valid values are GZIP,
+                            ZSTD and NONE.
+                          type: string
+                        inputFormat:
+                          description: The format of the source data. Valid values
+                            are CSV, DYNAMODB_JSON, and ION.
+                          type: string
+                        inputFormatOptions:
+                          description: Describe the format options for the data that
+                            was imported into the target table. There is one value,
+                            csv. See below.
+                          items:
+                            properties:
+                              csv:
+                                description: 'This block contains the processing options
+                                  for the CSV file being imported:'
+                                items:
+                                  properties:
+                                    delimiter:
+                                      description: The delimiter used for separating
+                                        items in the CSV file being imported.
+                                      type: string
+                                    headerList:
+                                      description: List of the headers used to specify
+                                        a common header for all source CSV files being
+                                        imported.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        s3BucketSource:
+                          description: Values for the S3 bucket the source file is
+                            imported from. See below.
+                          items:
+                            properties:
+                              bucket:
+                                description: The S3 bucket that is being imported
+                                  from.
+                                type: string
+                              bucketOwner:
+                                description: The account number of the S3 bucket that
+                                  is being imported from.
+                                type: string
+                              keyPrefix:
+                                description: The key prefix shared by all S3 Objects
+                                  that are being imported.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   localSecondaryIndex:
                     description: Describe an LSI on the table; these can only be allocated
                       at creation so you cannot change this definition after you have
@@ -769,6 +891,67 @@ spec:
                   id:
                     description: Name of the table
                     type: string
+                  importTable:
+                    description: Import Amazon S3 data into a new table. See below.
+                    items:
+                      properties:
+                        inputCompressionType:
+                          description: Type of compression to be used on the input
+                            coming from the imported table. Valid values are GZIP,
+                            ZSTD and NONE.
+                          type: string
+                        inputFormat:
+                          description: The format of the source data. Valid values
+                            are CSV, DYNAMODB_JSON, and ION.
+                          type: string
+                        inputFormatOptions:
+                          description: Describe the format options for the data that
+                            was imported into the target table. There is one value,
+                            csv. See below.
+                          items:
+                            properties:
+                              csv:
+                                description: 'This block contains the processing options
+                                  for the CSV file being imported:'
+                                items:
+                                  properties:
+                                    delimiter:
+                                      description: The delimiter used for separating
+                                        items in the CSV file being imported.
+                                      type: string
+                                    headerList:
+                                      description: List of the headers used to specify
+                                        a common header for all source CSV files being
+                                        imported.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        s3BucketSource:
+                          description: Values for the S3 bucket the source file is
+                            imported from. See below.
+                          items:
+                            properties:
+                              bucket:
+                                description: The S3 bucket that is being imported
+                                  from.
+                                type: string
+                              bucketOwner:
+                                description: The account number of the S3 bucket that
+                                  is being imported from.
+                                type: string
+                              keyPrefix:
+                                description: The key prefix shared by all S3 Objects
+                                  that are being imported.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   localSecondaryIndex:
                     description: Describe an LSI on the table; these can only be allocated
                       at creation so you cannot change this definition after you have

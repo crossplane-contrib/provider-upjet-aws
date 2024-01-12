@@ -78,19 +78,6 @@ type RoleInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type RoleLastUsedInitParameters struct {
-}
-
-type RoleLastUsedObservation struct {
-	LastUsedDate *string `json:"lastUsedDate,omitempty" tf:"last_used_date,omitempty"`
-
-	// The name of the AWS Region in which the role was last used.
-	Region *string `json:"region,omitempty" tf:"region,omitempty"`
-}
-
-type RoleLastUsedParameters struct {
-}
-
 type RoleObservation struct {
 
 	// Amazon Resource Name (ARN) specifying the role.
@@ -126,9 +113,6 @@ type RoleObservation struct {
 
 	// ARN of the policy that is used to set the permissions boundary for the role.
 	PermissionsBoundary *string `json:"permissionsBoundary,omitempty" tf:"permissions_boundary,omitempty"`
-
-	// Contains information about the last time that an IAM role was used. See role_last_used for details.
-	RoleLastUsed []RoleLastUsedObservation `json:"roleLastUsed,omitempty" tf:"role_last_used,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

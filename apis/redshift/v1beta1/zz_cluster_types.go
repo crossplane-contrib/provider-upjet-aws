@@ -25,7 +25,9 @@ type ClusterInitParameters struct {
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values are enabled, disabled, and auto. Requires Cluster reboot.
+	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored.
+	// No longer supported by the AWS API.
+	// Always returns auto.
 	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
 	// The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with create-cluster-snapshot. Default is 1.
@@ -45,10 +47,6 @@ type ClusterInitParameters struct {
 
 	// The specific revision number of the database in the cluster
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
-
-	// A list of security groups to be associated with this cluster.
-	// +listType=set
-	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
@@ -125,8 +123,16 @@ type ClusterInitParameters struct {
 	// The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of  a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks. Default value is current.
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
+	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
+	// Conflicts with master_password.
+	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
+
 	// The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. Valid values are between -1 and 3653. Default value is -1.
 	ManualSnapshotRetentionPeriod *float64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
+
+	// ID of the KMS key used to encrypt the cluster admin credentials secret.
+	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -156,13 +162,16 @@ type ClusterInitParameters struct {
 	// Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If true , a final cluster snapshot is not created. If false , a final cluster snapshot is created before the cluster is deleted. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
+	// The ARN of the snapshot from which to create the new cluster. Conflicts with snapshot_identifier.
+	SnapshotArn *string `json:"snapshotArn,omitempty" tf:"snapshot_arn,omitempty"`
+
 	// The name of the cluster the source snapshot was created from.
 	SnapshotClusterIdentifier *string `json:"snapshotClusterIdentifier,omitempty" tf:"snapshot_cluster_identifier,omitempty"`
 
 	// Configuration of automatic copy of snapshots from one region to another. Documented below.
 	SnapshotCopy []SnapshotCopyInitParameters `json:"snapshotCopy,omitempty" tf:"snapshot_copy,omitempty"`
 
-	// The name of the snapshot from which to create the new cluster.
+	// The name of the snapshot from which to create the new cluster.  Conflicts with snapshot_arn.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Key-value map of resource tags.
@@ -211,7 +220,9 @@ type ClusterObservation struct {
 	// Specifies whether any cluster modifications are applied immediately, or during the next maintenance window. Default is false.
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values are enabled, disabled, and auto. Requires Cluster reboot.
+	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored.
+	// No longer supported by the AWS API.
+	// Always returns auto.
 	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
 	// Amazon Resource Name (ARN) of cluster
@@ -226,6 +237,9 @@ type ClusterObservation struct {
 	// If true, the cluster can be relocated to another availabity zone, either automatically by AWS or when requested. Default is false. Available for use on clusters from the RA3 instance family.
 	AvailabilityZoneRelocationEnabled *bool `json:"availabilityZoneRelocationEnabled,omitempty" tf:"availability_zone_relocation_enabled,omitempty"`
 
+	// The namespace Amazon Resource Name (ARN) of the cluster
+	ClusterNamespaceArn *string `json:"clusterNamespaceArn,omitempty" tf:"cluster_namespace_arn,omitempty"`
+
 	// The nodes in the cluster. Cluster node blocks are documented below
 	ClusterNodes []ClusterNodesObservation `json:"clusterNodes,omitempty" tf:"cluster_nodes,omitempty"`
 
@@ -237,10 +251,6 @@ type ClusterObservation struct {
 
 	// The specific revision number of the database in the cluster
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
-
-	// A list of security groups to be associated with this cluster.
-	// +listType=set
-	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	ClusterSubnetGroupName *string `json:"clusterSubnetGroupName,omitempty" tf:"cluster_subnet_group_name,omitempty"`
@@ -293,8 +303,19 @@ type ClusterObservation struct {
 	// The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the MaintenanceTrack value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of  a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks. Default value is current.
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
+	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
+	// Conflicts with master_password.
+	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
+
 	// The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. Valid values are between -1 and 3653. Default value is -1.
 	ManualSnapshotRetentionPeriod *float64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
+
+	// ARN of the cluster admin credentials secret
+	MasterPasswordSecretArn *string `json:"masterPasswordSecretArn,omitempty" tf:"master_password_secret_arn,omitempty"`
+
+	// ID of the KMS key used to encrypt the cluster admin credentials secret.
+	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
@@ -324,13 +345,16 @@ type ClusterObservation struct {
 	// Determines whether a final snapshot of the cluster is created before Amazon Redshift deletes the cluster. If true , a final cluster snapshot is not created. If false , a final cluster snapshot is created before the cluster is deleted. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
+	// The ARN of the snapshot from which to create the new cluster. Conflicts with snapshot_identifier.
+	SnapshotArn *string `json:"snapshotArn,omitempty" tf:"snapshot_arn,omitempty"`
+
 	// The name of the cluster the source snapshot was created from.
 	SnapshotClusterIdentifier *string `json:"snapshotClusterIdentifier,omitempty" tf:"snapshot_cluster_identifier,omitempty"`
 
 	// Configuration of automatic copy of snapshots from one region to another. Documented below.
 	SnapshotCopy []SnapshotCopyObservation `json:"snapshotCopy,omitempty" tf:"snapshot_copy,omitempty"`
 
-	// The name of the snapshot from which to create the new cluster.
+	// The name of the snapshot from which to create the new cluster.  Conflicts with snapshot_arn.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Key-value map of resource tags.
@@ -356,7 +380,9 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
-	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values are enabled, disabled, and auto. Requires Cluster reboot.
+	// The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored.
+	// No longer supported by the AWS API.
+	// Always returns auto.
 	// +kubebuilder:validation:Optional
 	AquaConfigurationStatus *string `json:"aquaConfigurationStatus,omitempty" tf:"aqua_configuration_status,omitempty"`
 
@@ -383,11 +409,6 @@ type ClusterParameters struct {
 	// The specific revision number of the database in the cluster
 	// +kubebuilder:validation:Optional
 	ClusterRevisionNumber *string `json:"clusterRevisionNumber,omitempty" tf:"cluster_revision_number,omitempty"`
-
-	// A list of security groups to be associated with this cluster.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	ClusterSecurityGroups []*string `json:"clusterSecurityGroups,omitempty" tf:"cluster_security_groups,omitempty"`
 
 	// The name of a cluster subnet group to be associated with this cluster. If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).
 	// +kubebuilder:validation:Optional
@@ -478,13 +499,25 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceTrackName *string `json:"maintenanceTrackName,omitempty" tf:"maintenance_track_name,omitempty"`
 
+	// Whether to use AWS SecretsManager to manage the cluster admin credentials.
+	// Conflicts with master_password.
+	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// +kubebuilder:validation:Optional
+	ManageMasterPassword *bool `json:"manageMasterPassword,omitempty" tf:"manage_master_password,omitempty"`
+
 	// The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. Valid values are between -1 and 3653. Default value is -1.
 	// +kubebuilder:validation:Optional
 	ManualSnapshotRetentionPeriod *float64 `json:"manualSnapshotRetentionPeriod,omitempty" tf:"manual_snapshot_retention_period,omitempty"`
 
+	// ID of the KMS key used to encrypt the cluster admin credentials secret.
+	// +kubebuilder:validation:Optional
+	MasterPasswordSecretKMSKeyID *string `json:"masterPasswordSecretKmsKeyId,omitempty" tf:"master_password_secret_kms_key_id,omitempty"`
+
 	// Password for the master DB user.
-	// Note that this may show up in logs, and it will be stored in the state file. Password must contain at least 8 chars and
-	// contain at least one uppercase letter, one lowercase letter, and one number.
+	// Conflicts with manage_master_password.
+	// One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+	// Note that this may show up in logs, and it will be stored in the state file.
+	// Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
@@ -529,6 +562,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
+	// The ARN of the snapshot from which to create the new cluster. Conflicts with snapshot_identifier.
+	// +kubebuilder:validation:Optional
+	SnapshotArn *string `json:"snapshotArn,omitempty" tf:"snapshot_arn,omitempty"`
+
 	// The name of the cluster the source snapshot was created from.
 	// +kubebuilder:validation:Optional
 	SnapshotClusterIdentifier *string `json:"snapshotClusterIdentifier,omitempty" tf:"snapshot_cluster_identifier,omitempty"`
@@ -537,7 +574,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotCopy []SnapshotCopyParameters `json:"snapshotCopy,omitempty" tf:"snapshot_copy,omitempty"`
 
-	// The name of the snapshot from which to create the new cluster.
+	// The name of the snapshot from which to create the new cluster.  Conflicts with snapshot_arn.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 

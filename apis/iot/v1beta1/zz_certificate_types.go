@@ -38,6 +38,9 @@ type CertificateObservation struct {
 	// The ARN of the created certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The certificate ID of the CA certificate used to sign the certificate.
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
+
 	// The certificate signing request. Review
 	// CreateCertificateFromCsr
 	// for more information on generating a certificate from a certificate signing request (CSR).

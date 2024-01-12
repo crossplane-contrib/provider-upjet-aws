@@ -351,8 +351,10 @@ spec:
                       be created in.
                     type: string
                   replaceSecurityGroupsOnDestroy:
-                    description: Whether to replace the security groups on associated
-                      lambda network interfaces upon destruction. Removing these security
+                    description: AWS no longer supports this operation. This attribute
+                      now has no effect and will be removed in a future major version.
+                      Whether to replace the security groups on associated lambda
+                      network interfaces upon destruction. Removing these security
                       groups from orphaned network interfaces can speed up security
                       group deletion times by avoiding a dependency on AWS's internal
                       cleanup operations. By default, the ENI security groups will
@@ -671,6 +673,10 @@ spec:
                     description: Configuration block. Detailed below.
                     items:
                       properties:
+                        ipv6AllowedForDualStack:
+                          description: Allows outbound IPv6 traffic on VPC functions
+                            that are connected to dual-stack subnets. Default is false.
+                          type: boolean
                         securityGroupIdRefs:
                           description: References to SecurityGroup in ec2 to populate
                             securityGroupIds.
@@ -1143,8 +1149,10 @@ spec:
                       Function Version. Defaults to false.
                     type: boolean
                   replaceSecurityGroupsOnDestroy:
-                    description: Whether to replace the security groups on associated
-                      lambda network interfaces upon destruction. Removing these security
+                    description: AWS no longer supports this operation. This attribute
+                      now has no effect and will be removed in a future major version.
+                      Whether to replace the security groups on associated lambda
+                      network interfaces upon destruction. Removing these security
                       groups from orphaned network interfaces can speed up security
                       group deletion times by avoiding a dependency on AWS's internal
                       cleanup operations. By default, the ENI security groups will
@@ -1463,6 +1471,10 @@ spec:
                     description: Configuration block. Detailed below.
                     items:
                       properties:
+                        ipv6AllowedForDualStack:
+                          description: Allows outbound IPv6 traffic on VPC functions
+                            that are connected to dual-stack subnets. Default is false.
+                          type: boolean
                         securityGroupIdRefs:
                           description: References to SecurityGroup in ec2 to populate
                             securityGroupIds.
@@ -1957,8 +1969,10 @@ spec:
                       used in aws_api_gateway_integration's uri.
                     type: string
                   replaceSecurityGroupsOnDestroy:
-                    description: Whether to replace the security groups on associated
-                      lambda network interfaces upon destruction. Removing these security
+                    description: AWS no longer supports this operation. This attribute
+                      now has no effect and will be removed in a future major version.
+                      Whether to replace the security groups on associated lambda
+                      network interfaces upon destruction. Removing these security
                       groups from orphaned network interfaces can speed up security
                       group deletion times by avoiding a dependency on AWS's internal
                       cleanup operations. By default, the ENI security groups will
@@ -2078,6 +2092,10 @@ spec:
                     description: Configuration block. Detailed below.
                     items:
                       properties:
+                        ipv6AllowedForDualStack:
+                          description: Allows outbound IPv6 traffic on VPC functions
+                            that are connected to dual-stack subnets. Default is false.
+                          type: boolean
                         securityGroupIds:
                           description: List of security group IDs associated with
                             the Lambda function.

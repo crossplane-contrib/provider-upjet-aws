@@ -75,6 +75,11 @@ spec:
                   name:
                     description: Specifies the name of the job definition.
                     type: string
+                  nodeProperties:
+                    description: A valid node properties provided as a single valid
+                      JSON document. This parameter is required if the type parameter
+                      is multinode.
+                    type: string
                   parameters:
                     additionalProperties:
                       type: string
@@ -157,7 +162,8 @@ spec:
                       type: object
                     type: array
                   type:
-                    description: The type of job definition. Must be container.
+                    description: The type of job definition. Must be container or
+                      multinode.
                     type: string
                 required:
                 - region
@@ -181,6 +187,11 @@ spec:
                     type: string
                   name:
                     description: Specifies the name of the job definition.
+                    type: string
+                  nodeProperties:
+                    description: A valid node properties provided as a single valid
+                      JSON document. This parameter is required if the type parameter
+                      is multinode.
                     type: string
                   parameters:
                     additionalProperties:
@@ -260,7 +271,8 @@ spec:
                       type: object
                     type: array
                   type:
-                    description: The type of job definition. Must be container.
+                    description: The type of job definition. Must be container or
+                      multinode.
                     type: string
                 type: object
               managementPolicies:
@@ -450,6 +462,11 @@ spec:
                   name:
                     description: Specifies the name of the job definition.
                     type: string
+                  nodeProperties:
+                    description: A valid node properties provided as a single valid
+                      JSON document. This parameter is required if the type parameter
+                      is multinode.
+                    type: string
                   parameters:
                     additionalProperties:
                       type: string
@@ -539,7 +556,8 @@ spec:
                       type: object
                     type: array
                   type:
-                    description: The type of job definition. Must be container.
+                    description: The type of job definition. Must be container or
+                      multinode.
                     type: string
                 type: object
               conditions:

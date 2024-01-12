@@ -44,6 +44,9 @@ type ClusterInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
+	// –  Copy all DB instance tags to snapshots. Default is false.
+	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
+
 	// A value that indicates whether to enable Performance Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html) about the details.
 	EnablePerformanceInsights *bool `json:"enablePerformanceInsights,omitempty" tf:"enable_performance_insights,omitempty"`
 
@@ -90,6 +93,9 @@ type ClusterInstanceObservation struct {
 
 	// The identifier of the aws_docdb_cluster in which to launch this instance.
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// –  Copy all DB instance tags to snapshots. Default is false.
+	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
 	// The DB subnet group to associate with this DB instance.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -183,6 +189,10 @@ type ClusterInstanceParameters struct {
 	// Selector for a Cluster to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
+
+	// –  Copy all DB instance tags to snapshots. Default is false.
+	// +kubebuilder:validation:Optional
+	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
 	// A value that indicates whether to enable Performance Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html) about the details.
 	// +kubebuilder:validation:Optional

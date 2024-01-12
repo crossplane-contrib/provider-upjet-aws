@@ -329,7 +329,7 @@ type TrailObservation struct {
 	// Region in which the trail was created.
 	HomeRegion *string `json:"homeRegion,omitempty" tf:"home_region,omitempty"`
 
-	// Name of the trail.
+	// ARN of the trail.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether the trail is publishing events from global services such as IAM to the log files. Defaults to true.

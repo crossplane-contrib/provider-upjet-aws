@@ -122,7 +122,7 @@ type ELBInitParameters struct {
 	// instances. Use this for Classic or Default VPC only.
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
-	// A list of subnet IDs to attach to the ELB.
+	// A list of subnet IDs to attach to the ELB. When an update to subnets will remove all current subnets, this will force a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
@@ -201,7 +201,7 @@ type ELBObservation struct {
 	// instances. Only available on ELBs launched in a VPC.
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
 
-	// A list of subnet IDs to attach to the ELB.
+	// A list of subnet IDs to attach to the ELB. When an update to subnets will remove all current subnets, this will force a new resource.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
@@ -291,7 +291,7 @@ type ELBParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
-	// A list of subnet IDs to attach to the ELB.
+	// A list of subnet IDs to attach to the ELB. When an update to subnets will remove all current subnets, this will force a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set

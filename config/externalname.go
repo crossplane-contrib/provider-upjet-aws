@@ -91,8 +91,8 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 
 	// cloudtrail
 	//
-	// Cloudtrails can be imported using the name
-	"aws_cloudtrail": config.NameAsIdentifier,
+	// Cloudtrails can be imported using the name arn:aws:cloudtrail:us-west-1:153891904029:trail/foobar
+	"aws_cloudtrail": config.TemplatedStringAsIdentifier("name", "arn:aws:cloudtrail:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:trail/{{ .external_name }}"),
 	// Event data stores can be imported using their arn
 	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
 
@@ -370,7 +370,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 
 	// ecs
 	//
-	"aws_ecs_cluster":           config.NameAsIdentifier,
+	"aws_ecs_cluster":           config.TemplatedStringAsIdentifier("name", "arn:aws:ecs:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:cluster/{{ .external_name }}"),
 	"aws_ecs_service":           config.NameAsIdentifier,
 	"aws_ecs_capacity_provider": config.TemplatedStringAsIdentifier("name", "arn:aws:ecs:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:capacity-provider/{{ .external_name }}"),
 	// Imported using ARN that has a random substring, revision at the end:
@@ -567,7 +567,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// rds
 	//
 	"aws_rds_cluster":        config.ParameterAsIdentifier("cluster_identifier"),
-	"aws_db_instance":        config.ParameterAsIdentifier("identifier"),
+	"aws_db_instance":        config.IdentifierFromProvider,
 	"aws_db_parameter_group": config.NameAsIdentifier,
 	"aws_db_subnet_group":    config.NameAsIdentifier,
 	// aws_db_instance_role_association can be imported using the DB Instance Identifier and IAM Role ARN separated by a comma
@@ -1767,9 +1767,6 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// AppConfig Extension Associations can be imported using their extension association ID
 	// ID is a provider-generated
 	"aws_appconfig_extension_association": config.IdentifierFromProvider,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	// terraform-plugin-framework
-	"aws_appconfig_environment": config.IdentifierFromProvider,
 
 	// appintegrations
 	//
@@ -2666,6 +2663,9 @@ var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SimpleDB Domains can be imported using the name
 	"aws_simpledb_domain": config.NameAsIdentifier,
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	// terraform-plugin-framework
+	"aws_appconfig_environment": config.IdentifierFromProvider,
 }
 
 // cognitoUserPoolClient

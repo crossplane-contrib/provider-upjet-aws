@@ -92,6 +92,9 @@ type OptionsInitParameters struct {
 	// A file metadata that indicates the last time a file was modified (written to) before the sync PREPARING phase. Value values: NONE, PRESERVE. Default: PRESERVE.
 	Mtime *string `json:"mtime,omitempty" tf:"mtime,omitempty"`
 
+	// Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Valid values: PRESERVE, NONE. Default value: PRESERVE.
+	ObjectTags *string `json:"objectTags,omitempty" tf:"object_tags,omitempty"`
+
 	// Determines whether files at the destination should be overwritten or preserved when copying files. Valid values: ALWAYS, NEVER. Default: ALWAYS.
 	OverwriteMode *string `json:"overwriteMode,omitempty" tf:"overwrite_mode,omitempty"`
 
@@ -104,7 +107,7 @@ type OptionsInitParameters struct {
 	// Whether the DataSync Task should preserve the metadata of block and character devices in the source files system, and recreate the files with that device name and metadata on the destination. The DataSync Task can’t sync the actual contents of such devices, because many of the devices are non-terminal and don’t return an end of file (EOF) marker. Valid values: NONE, PRESERVE. Default: NONE (ignore special devices).
 	PreserveDevices *string `json:"preserveDevices,omitempty" tf:"preserve_devices,omitempty"`
 
-	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL.
+	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.
 	SecurityDescriptorCopyFlags *string `json:"securityDescriptorCopyFlags,omitempty" tf:"security_descriptor_copy_flags,omitempty"`
 
 	// Determines whether tasks should be queued before executing the tasks. Valid values: ENABLED, DISABLED. Default ENABLED.
@@ -137,6 +140,9 @@ type OptionsObservation struct {
 	// A file metadata that indicates the last time a file was modified (written to) before the sync PREPARING phase. Value values: NONE, PRESERVE. Default: PRESERVE.
 	Mtime *string `json:"mtime,omitempty" tf:"mtime,omitempty"`
 
+	// Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Valid values: PRESERVE, NONE. Default value: PRESERVE.
+	ObjectTags *string `json:"objectTags,omitempty" tf:"object_tags,omitempty"`
+
 	// Determines whether files at the destination should be overwritten or preserved when copying files. Valid values: ALWAYS, NEVER. Default: ALWAYS.
 	OverwriteMode *string `json:"overwriteMode,omitempty" tf:"overwrite_mode,omitempty"`
 
@@ -149,7 +155,7 @@ type OptionsObservation struct {
 	// Whether the DataSync Task should preserve the metadata of block and character devices in the source files system, and recreate the files with that device name and metadata on the destination. The DataSync Task can’t sync the actual contents of such devices, because many of the devices are non-terminal and don’t return an end of file (EOF) marker. Valid values: NONE, PRESERVE. Default: NONE (ignore special devices).
 	PreserveDevices *string `json:"preserveDevices,omitempty" tf:"preserve_devices,omitempty"`
 
-	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL.
+	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.
 	SecurityDescriptorCopyFlags *string `json:"securityDescriptorCopyFlags,omitempty" tf:"security_descriptor_copy_flags,omitempty"`
 
 	// Determines whether tasks should be queued before executing the tasks. Valid values: ENABLED, DISABLED. Default ENABLED.
@@ -187,6 +193,10 @@ type OptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Mtime *string `json:"mtime,omitempty" tf:"mtime,omitempty"`
 
+	// Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the NONE value. Valid values: PRESERVE, NONE. Default value: PRESERVE.
+	// +kubebuilder:validation:Optional
+	ObjectTags *string `json:"objectTags,omitempty" tf:"object_tags,omitempty"`
+
 	// Determines whether files at the destination should be overwritten or preserved when copying files. Valid values: ALWAYS, NEVER. Default: ALWAYS.
 	// +kubebuilder:validation:Optional
 	OverwriteMode *string `json:"overwriteMode,omitempty" tf:"overwrite_mode,omitempty"`
@@ -203,7 +213,7 @@ type OptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	PreserveDevices *string `json:"preserveDevices,omitempty" tf:"preserve_devices,omitempty"`
 
-	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL.
+	// Determines which components of the SMB security descriptor are copied from source to destination objects. This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. Valid values: NONE, OWNER_DACL, OWNER_DACL_SACL. Default: OWNER_DACL.
 	// +kubebuilder:validation:Optional
 	SecurityDescriptorCopyFlags *string `json:"securityDescriptorCopyFlags,omitempty" tf:"security_descriptor_copy_flags,omitempty"`
 
@@ -222,6 +232,94 @@ type OptionsParameters struct {
 	// Whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. Valid values: NONE, POINT_IN_TIME_CONSISTENT, ONLY_FILES_TRANSFERRED. Default: POINT_IN_TIME_CONSISTENT.
 	// +kubebuilder:validation:Optional
 	VerifyMode *string `json:"verifyMode,omitempty" tf:"verify_mode,omitempty"`
+}
+
+type ReportOverridesInitParameters struct {
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	DeletedOverride *string `json:"deletedOverride,omitempty" tf:"deleted_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to skip during your transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	SkippedOverride *string `json:"skippedOverride,omitempty" tf:"skipped_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	TransferredOverride *string `json:"transferredOverride,omitempty" tf:"transferred_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to verify at the end of your transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	VerifiedOverride *string `json:"verifiedOverride,omitempty" tf:"verified_override,omitempty"`
+}
+
+type ReportOverridesObservation struct {
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	DeletedOverride *string `json:"deletedOverride,omitempty" tf:"deleted_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to skip during your transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	SkippedOverride *string `json:"skippedOverride,omitempty" tf:"skipped_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	TransferredOverride *string `json:"transferredOverride,omitempty" tf:"transferred_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to verify at the end of your transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	VerifiedOverride *string `json:"verifiedOverride,omitempty" tf:"verified_override,omitempty"`
+}
+
+type ReportOverridesParameters struct {
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to delete in your destination location. This only applies if you configure your task to delete data in the destination that isn't in the source. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	// +kubebuilder:validation:Optional
+	DeletedOverride *string `json:"deletedOverride,omitempty" tf:"deleted_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to skip during your transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	// +kubebuilder:validation:Optional
+	SkippedOverride *string `json:"skippedOverride,omitempty" tf:"skipped_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	// +kubebuilder:validation:Optional
+	TransferredOverride *string `json:"transferredOverride,omitempty" tf:"transferred_override,omitempty"`
+
+	// Specifies the level of reporting for the files, objects, and directories that DataSync attempted to verify at the end of your transfer. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	// +kubebuilder:validation:Optional
+	VerifiedOverride *string `json:"verifiedOverride,omitempty" tf:"verified_override,omitempty"`
+}
+
+type S3DestinationInitParameters struct {
+
+	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
+	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
+
+	// Specifies the ARN of the S3 bucket where DataSync uploads your report.
+	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
+
+	// Specifies a bucket prefix for your report.
+	Subdirectory *string `json:"subdirectory,omitempty" tf:"subdirectory,omitempty"`
+}
+
+type S3DestinationObservation struct {
+
+	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
+	BucketAccessRoleArn *string `json:"bucketAccessRoleArn,omitempty" tf:"bucket_access_role_arn,omitempty"`
+
+	// Specifies the ARN of the S3 bucket where DataSync uploads your report.
+	S3BucketArn *string `json:"s3BucketArn,omitempty" tf:"s3_bucket_arn,omitempty"`
+
+	// Specifies a bucket prefix for your report.
+	Subdirectory *string `json:"subdirectory,omitempty" tf:"subdirectory,omitempty"`
+}
+
+type S3DestinationParameters struct {
+
+	// Specifies the Amazon Resource Name (ARN) of the IAM policy that allows DataSync to upload a task report to your S3 bucket.
+	// +kubebuilder:validation:Optional
+	BucketAccessRoleArn *string `json:"bucketAccessRoleArn" tf:"bucket_access_role_arn,omitempty"`
+
+	// Specifies the ARN of the S3 bucket where DataSync uploads your report.
+	// +kubebuilder:validation:Optional
+	S3BucketArn *string `json:"s3BucketArn" tf:"s3_bucket_arn,omitempty"`
+
+	// Specifies a bucket prefix for your report.
+	// +kubebuilder:validation:Optional
+	Subdirectory *string `json:"subdirectory,omitempty" tf:"subdirectory,omitempty"`
 }
 
 type ScheduleInitParameters struct {
@@ -300,6 +398,9 @@ type TaskInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
+	TaskReportConfig []TaskReportConfigInitParameters `json:"taskReportConfig,omitempty" tf:"task_report_config,omitempty"`
 }
 
 type TaskObservation struct {
@@ -341,6 +442,9 @@ type TaskObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
+	TaskReportConfig []TaskReportConfigObservation `json:"taskReportConfig,omitempty" tf:"task_report_config,omitempty"`
 }
 
 type TaskParameters struct {
@@ -414,6 +518,69 @@ type TaskParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block containing the configuration of a DataSync Task Report. See task_report_config below.
+	// +kubebuilder:validation:Optional
+	TaskReportConfig []TaskReportConfigParameters `json:"taskReportConfig,omitempty" tf:"task_report_config,omitempty"`
+}
+
+type TaskReportConfigInitParameters struct {
+
+	// Specifies the type of task report you'd like. Valid values: SUMMARY_ONLY and STANDARD.
+	OutputType *string `json:"outputType,omitempty" tf:"output_type,omitempty"`
+
+	// Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	ReportLevel *string `json:"reportLevel,omitempty" tf:"report_level,omitempty"`
+
+	// Configuration block containing the configuration of the reporting level for aspects of your task report. See report_overrides below.
+	ReportOverrides []ReportOverridesInitParameters `json:"reportOverrides,omitempty" tf:"report_overrides,omitempty"`
+
+	// Configuration block containing the configuration for the Amazon S3 bucket where DataSync uploads your task report. See s3_destination below.
+	S3Destination []S3DestinationInitParameters `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
+
+	// Specifies whether your task report includes the new version of each object transferred into an S3 bucket. This only applies if you enable versioning on your bucket. Keep in mind that setting this to INCLUDE can increase the duration of your task execution. Valid values: INCLUDE and NONE.
+	S3ObjectVersioning *string `json:"s3ObjectVersioning,omitempty" tf:"s3_object_versioning,omitempty"`
+}
+
+type TaskReportConfigObservation struct {
+
+	// Specifies the type of task report you'd like. Valid values: SUMMARY_ONLY and STANDARD.
+	OutputType *string `json:"outputType,omitempty" tf:"output_type,omitempty"`
+
+	// Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	ReportLevel *string `json:"reportLevel,omitempty" tf:"report_level,omitempty"`
+
+	// Configuration block containing the configuration of the reporting level for aspects of your task report. See report_overrides below.
+	ReportOverrides []ReportOverridesObservation `json:"reportOverrides,omitempty" tf:"report_overrides,omitempty"`
+
+	// Configuration block containing the configuration for the Amazon S3 bucket where DataSync uploads your task report. See s3_destination below.
+	S3Destination []S3DestinationObservation `json:"s3Destination,omitempty" tf:"s3_destination,omitempty"`
+
+	// Specifies whether your task report includes the new version of each object transferred into an S3 bucket. This only applies if you enable versioning on your bucket. Keep in mind that setting this to INCLUDE can increase the duration of your task execution. Valid values: INCLUDE and NONE.
+	S3ObjectVersioning *string `json:"s3ObjectVersioning,omitempty" tf:"s3_object_versioning,omitempty"`
+}
+
+type TaskReportConfigParameters struct {
+
+	// Specifies the type of task report you'd like. Valid values: SUMMARY_ONLY and STANDARD.
+	// +kubebuilder:validation:Optional
+	OutputType *string `json:"outputType,omitempty" tf:"output_type,omitempty"`
+
+	// Specifies whether you want your task report to include only what went wrong with your transfer or a list of what succeeded and didn't. Valid values: ERRORS_ONLY and SUCCESSES_AND_ERRORS.
+	// +kubebuilder:validation:Optional
+	ReportLevel *string `json:"reportLevel,omitempty" tf:"report_level,omitempty"`
+
+	// Configuration block containing the configuration of the reporting level for aspects of your task report. See report_overrides below.
+	// +kubebuilder:validation:Optional
+	ReportOverrides []ReportOverridesParameters `json:"reportOverrides,omitempty" tf:"report_overrides,omitempty"`
+
+	// Configuration block containing the configuration for the Amazon S3 bucket where DataSync uploads your task report. See s3_destination below.
+	// +kubebuilder:validation:Optional
+	S3Destination []S3DestinationParameters `json:"s3Destination" tf:"s3_destination,omitempty"`
+
+	// Specifies whether your task report includes the new version of each object transferred into an S3 bucket. This only applies if you enable versioning on your bucket. Keep in mind that setting this to INCLUDE can increase the duration of your task execution. Valid values: INCLUDE and NONE.
+	// +kubebuilder:validation:Optional
+	S3ObjectVersioning *string `json:"s3ObjectVersioning,omitempty" tf:"s3_object_versioning,omitempty"`
 }
 
 // TaskSpec defines the desired state of Task

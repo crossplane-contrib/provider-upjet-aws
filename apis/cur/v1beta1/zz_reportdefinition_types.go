@@ -23,7 +23,7 @@ type ReportDefinitionInitParameters struct {
 	// +listType=set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
 	// +listType=set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
@@ -67,7 +67,7 @@ type ReportDefinitionObservation struct {
 	// +listType=set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
 	// +listType=set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`
 
@@ -108,7 +108,7 @@ type ReportDefinitionParameters struct {
 	// +listType=set
 	AdditionalArtifacts []*string `json:"additionalArtifacts,omitempty" tf:"additional_artifacts,omitempty"`
 
-	// A list of schema elements. Valid values are: RESOURCES.
+	// A list of schema elements. Valid values are: RESOURCES, SPLIT_COST_ALLOCATION_DATA.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AdditionalSchemaElements []*string `json:"additionalSchemaElements,omitempty" tf:"additional_schema_elements,omitempty"`

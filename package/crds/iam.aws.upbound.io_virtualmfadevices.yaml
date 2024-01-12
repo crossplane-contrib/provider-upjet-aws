@@ -285,6 +285,10 @@ spec:
                     description: The base32 seed defined as specified in RFC3548.
                       The base_32_string_seed is base64-encoded.
                     type: string
+                  enableDate:
+                    description: The date and time when the virtual MFA device was
+                      enabled.
+                    type: string
                   id:
                     type: string
                   path:
@@ -294,7 +298,7 @@ spec:
                     description: A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String
                       where $virtualMFADeviceName is one of the create call arguments.
                       AccountName is the user name if set (otherwise, the account
-                      ID otherwise), and Base32String is the seed in base32 format.
+                      ID), and Base32String is the seed in base32 format.
                     type: string
                   tags:
                     additionalProperties:
@@ -310,6 +314,10 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  userName:
+                    description: The associated IAM User name if the virtual MFA device
+                      is enabled.
+                    type: string
                   virtualMfaDeviceName:
                     description: The name of the virtual MFA device. Use with path
                       to uniquely identify a virtual MFA device.

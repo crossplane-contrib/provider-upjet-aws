@@ -267,6 +267,12 @@ type OnlineStoreConfigInitParameters struct {
 
 	// Security config for at-rest encryption of your OnlineStore. See Security Config Below.
 	SecurityConfig []SecurityConfigInitParameters `json:"securityConfig,omitempty" tf:"security_config,omitempty"`
+
+	// Option for different tiers of low latency storage for real-time data retrieval. Valid values are Standard, or InMemory.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTl Duration Below.
+	TTLDuration []TTLDurationInitParameters `json:"ttlDuration,omitempty" tf:"ttl_duration,omitempty"`
 }
 
 type OnlineStoreConfigObservation struct {
@@ -276,6 +282,12 @@ type OnlineStoreConfigObservation struct {
 
 	// Security config for at-rest encryption of your OnlineStore. See Security Config Below.
 	SecurityConfig []SecurityConfigObservation `json:"securityConfig,omitempty" tf:"security_config,omitempty"`
+
+	// Option for different tiers of low latency storage for real-time data retrieval. Valid values are Standard, or InMemory.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTl Duration Below.
+	TTLDuration []TTLDurationObservation `json:"ttlDuration,omitempty" tf:"ttl_duration,omitempty"`
 }
 
 type OnlineStoreConfigParameters struct {
@@ -287,12 +299,23 @@ type OnlineStoreConfigParameters struct {
 	// Security config for at-rest encryption of your OnlineStore. See Security Config Below.
 	// +kubebuilder:validation:Optional
 	SecurityConfig []SecurityConfigParameters `json:"securityConfig,omitempty" tf:"security_config,omitempty"`
+
+	// Option for different tiers of low latency storage for real-time data retrieval. Valid values are Standard, or InMemory.
+	// +kubebuilder:validation:Optional
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// Time to live duration, where the record is hard deleted after the expiration time is reached; ExpiresAt = EventTime + TtlDuration.. See TTl Duration Below.
+	// +kubebuilder:validation:Optional
+	TTLDuration []TTLDurationParameters `json:"ttlDuration,omitempty" tf:"ttl_duration,omitempty"`
 }
 
 type S3StorageConfigInitParameters struct {
 
 	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The S3 path where offline records are written.
+	ResolvedOutputS3URI *string `json:"resolvedOutputS3Uri,omitempty" tf:"resolved_output_s3_uri,omitempty"`
 
 	// The S3 URI, or location in Amazon S3, of OfflineStore.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
@@ -303,6 +326,9 @@ type S3StorageConfigObservation struct {
 	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
+	// The S3 path where offline records are written.
+	ResolvedOutputS3URI *string `json:"resolvedOutputS3Uri,omitempty" tf:"resolved_output_s3_uri,omitempty"`
+
 	// The S3 URI, or location in Amazon S3, of OfflineStore.
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 }
@@ -312,6 +338,10 @@ type S3StorageConfigParameters struct {
 	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// The S3 path where offline records are written.
+	// +kubebuilder:validation:Optional
+	ResolvedOutputS3URI *string `json:"resolvedOutputS3Uri,omitempty" tf:"resolved_output_s3_uri,omitempty"`
 
 	// The S3 URI, or location in Amazon S3, of OfflineStore.
 	// +kubebuilder:validation:Optional
@@ -335,6 +365,35 @@ type SecurityConfigParameters struct {
 	// The AWS Key Management Service (KMS) key ID of the key used to encrypt any objects written into the OfflineStore S3 location.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type TTLDurationInitParameters struct {
+
+	// TtlDuration time unit. Valid values are Seconds, Minutes, Hours, Days, or Weeks.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// TtlDuration time value.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TTLDurationObservation struct {
+
+	// TtlDuration time unit. Valid values are Seconds, Minutes, Hours, Days, or Weeks.
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// TtlDuration time value.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TTLDurationParameters struct {
+
+	// TtlDuration time unit. Valid values are Seconds, Minutes, Hours, Days, or Weeks.
+	// +kubebuilder:validation:Optional
+	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
+
+	// TtlDuration time value.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // FeatureGroupSpec defines the desired state of FeatureGroup

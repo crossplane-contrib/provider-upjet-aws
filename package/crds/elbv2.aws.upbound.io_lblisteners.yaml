@@ -539,6 +539,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  mutualAuthentication:
+                    description: The mutual authentication configuration information.
+                      Detailed below.
+                    items:
+                      properties:
+                        ignoreClientCertificateExpiry:
+                          description: Whether client certificate expiry is ignored.
+                            Default is false.
+                          type: boolean
+                        mode:
+                          description: Valid values are off, verify and passthrough.
+                          type: string
+                        trustStoreArn:
+                          description: ARN of the elbv2 Trust Store.
+                          type: string
+                      type: object
+                    type: array
                   port:
                     description: Port on which the load balancer is listening. Not
                       valid for Gateway Load Balancers.
@@ -1033,6 +1050,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  mutualAuthentication:
+                    description: The mutual authentication configuration information.
+                      Detailed below.
+                    items:
+                      properties:
+                        ignoreClientCertificateExpiry:
+                          description: Whether client certificate expiry is ignored.
+                            Default is false.
+                          type: boolean
+                        mode:
+                          description: Valid values are off, verify and passthrough.
+                          type: string
+                        trustStoreArn:
+                          description: ARN of the elbv2 Trust Store.
+                          type: string
+                      type: object
+                    type: array
                   port:
                     description: Port on which the load balancer is listening. Not
                       valid for Gateway Load Balancers.
@@ -1452,6 +1486,23 @@ spec:
                   loadBalancerArn:
                     description: ARN of the load balancer.
                     type: string
+                  mutualAuthentication:
+                    description: The mutual authentication configuration information.
+                      Detailed below.
+                    items:
+                      properties:
+                        ignoreClientCertificateExpiry:
+                          description: Whether client certificate expiry is ignored.
+                            Default is false.
+                          type: boolean
+                        mode:
+                          description: Valid values are off, verify and passthrough.
+                          type: string
+                        trustStoreArn:
+                          description: ARN of the elbv2 Trust Store.
+                          type: string
+                      type: object
+                    type: array
                   port:
                     description: Port on which the load balancer is listening. Not
                       valid for Gateway Load Balancers.

@@ -765,34 +765,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  queueConfigsAssociated:
-                    items:
-                      properties:
-                        channel:
-                          description: Specifies the channels agents can handle in
-                            the Contact Control Panel (CCP) for this routing profile.
-                            Valid values are VOICE, CHAT, TASK.
-                          type: string
-                        delay:
-                          description: Specifies the delay, in seconds, that a contact
-                            should be in the queue before they are routed to an available
-                            agent
-                          type: number
-                        priority:
-                          description: Specifies the order in which contacts are to
-                            be handled for the queue.
-                          type: number
-                        queueArn:
-                          description: ARN for the queue.
-                          type: string
-                        queueId:
-                          description: Specifies the identifier for the queue.
-                          type: string
-                        queueName:
-                          description: Name for the queue.
-                          type: string
-                      type: object
-                    type: array
                   routingProfileId:
                     description: The identifier for the Routing Profile.
                     type: string

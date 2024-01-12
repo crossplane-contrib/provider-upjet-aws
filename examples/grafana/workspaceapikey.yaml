@@ -23,11 +23,10 @@ apiVersion: grafana.aws.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires unique name to be specified which must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character"
     meta.upbound.io/example-id: grafana/v1beta1/workspaceapikey
   labels:
     testing.upbound.io/example-name: wstest
-  name: wstest
+  name: wstest-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     accountAccessType: CURRENT_ACCOUNT
@@ -37,7 +36,7 @@ spec:
     region: us-east-1
     roleArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: assume
+        testing.upbound.io/example-name: assume-wa
 
 ---
 
@@ -47,8 +46,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: grafana/v1beta1/workspaceapikey
   labels:
-    testing.upbound.io/example-name: assume
-  name: assume
+    testing.upbound.io/example-name: assume-wa
+  name: assume-wa
 spec:
   forProvider:
     assumeRolePolicy: |-

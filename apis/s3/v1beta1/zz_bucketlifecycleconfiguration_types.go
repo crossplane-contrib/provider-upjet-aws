@@ -256,7 +256,7 @@ type BucketLifecycleConfigurationRuleParameters struct {
 
 type RuleExpirationInitParameters struct {
 
-	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. 2023-08-22.
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
 	// Number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
@@ -268,7 +268,7 @@ type RuleExpirationInitParameters struct {
 
 type RuleExpirationObservation struct {
 
-	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. 2023-08-22.
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
 	// Number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
@@ -280,7 +280,7 @@ type RuleExpirationObservation struct {
 
 type RuleExpirationParameters struct {
 
-	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. 2023-08-22.
 	// +kubebuilder:validation:Optional
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
@@ -422,7 +422,7 @@ type RuleNoncurrentVersionTransitionParameters struct {
 
 type RuleTransitionInitParameters struct {
 
-	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. 2023-08-22.
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
 	// Number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
@@ -434,7 +434,7 @@ type RuleTransitionInitParameters struct {
 
 type RuleTransitionObservation struct {
 
-	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. 2023-08-22.
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 
 	// Number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer. If both days and date are not specified, defaults to 0. Valid values depend on storage_class, see Transition objects using Amazon S3 Lifecycle for more details.
@@ -446,7 +446,7 @@ type RuleTransitionObservation struct {
 
 type RuleTransitionParameters struct {
 
-	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 format and set to midnight UTC e.g. 2023-01-13T00:00:00Z.
+	// Date objects are transitioned to the specified storage class. The date value must be in RFC3339 full-date format e.g. 2023-08-22.
 	// +kubebuilder:validation:Optional
 	Date *string `json:"date,omitempty" tf:"date,omitempty"`
 

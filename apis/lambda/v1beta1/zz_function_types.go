@@ -182,7 +182,7 @@ type FunctionInitParameters struct {
 	// Whether to publish creation/change as new Lambda Function Version. Defaults to false.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
@@ -323,7 +323,7 @@ type FunctionObservation struct {
 	// Qualified ARN (ARN with lambda version number) to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
 	QualifiedInvokeArn *string `json:"qualifiedInvokeArn,omitempty" tf:"qualified_invoke_arn,omitempty"`
 
-	// Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
 	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
@@ -462,7 +462,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
 	// +kubebuilder:validation:Optional
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
@@ -636,6 +636,9 @@ type TracingConfigParameters struct {
 
 type VPCConfigInitParameters struct {
 
+	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets. Default is false.
+	IPv6AllowedForDualStack *bool `json:"ipv6AllowedForDualStack,omitempty" tf:"ipv6_allowed_for_dual_stack,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
@@ -669,6 +672,9 @@ type VPCConfigInitParameters struct {
 
 type VPCConfigObservation struct {
 
+	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets. Default is false.
+	IPv6AllowedForDualStack *bool `json:"ipv6AllowedForDualStack,omitempty" tf:"ipv6_allowed_for_dual_stack,omitempty"`
+
 	// List of security group IDs associated with the Lambda function.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -682,6 +688,10 @@ type VPCConfigObservation struct {
 }
 
 type VPCConfigParameters struct {
+
+	// Allows outbound IPv6 traffic on VPC functions that are connected to dual-stack subnets. Default is false.
+	// +kubebuilder:validation:Optional
+	IPv6AllowedForDualStack *bool `json:"ipv6AllowedForDualStack,omitempty" tf:"ipv6_allowed_for_dual_stack,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional

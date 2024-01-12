@@ -80,9 +80,7 @@ spec:
                             This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
                           type: string
                         customDatatypeConfigured:
-                          description: A custom symbol to denote what combines content
-                            into a single column value. It must be different from
-                            the column delimiter.
+                          description: Enables the custom datatype to be configured.
                           type: boolean
                         customDatatypes:
                           description: A list of supported custom datatypes. Valid
@@ -189,9 +187,7 @@ spec:
                             This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
                           type: string
                         customDatatypeConfigured:
-                          description: A custom symbol to denote what combines content
-                            into a single column value. It must be different from
-                            the column delimiter.
+                          description: Enables the custom datatype to be configured.
                           type: boolean
                         customDatatypes:
                           description: A list of supported custom datatypes. Valid
@@ -445,9 +441,7 @@ spec:
                             This can be one of "ABSENT", "PRESENT", or "UNKNOWN".
                           type: string
                         customDatatypeConfigured:
-                          description: A custom symbol to denote what combines content
-                            into a single column value. It must be different from
-                            the column delimiter.
+                          description: Enables the custom datatype to be configured.
                           type: boolean
                         customDatatypes:
                           description: A list of supported custom datatypes. Valid

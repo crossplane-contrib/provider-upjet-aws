@@ -64,7 +64,7 @@ type AutoRollbackConfigurationInitParameters struct {
 	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM and DEPLOYMENT_STOP_ON_REQUEST.
 	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
@@ -74,7 +74,7 @@ type AutoRollbackConfigurationObservation struct {
 	// Indicates whether the alarm configuration is enabled. This option is useful when you want to temporarily deactivate alarm monitoring for a deployment group without having to add the same alarms again later.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM and DEPLOYMENT_STOP_ON_REQUEST.
 	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 }
@@ -85,7 +85,7 @@ type AutoRollbackConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE and DEPLOYMENT_STOP_ON_ALARM.
+	// The event type or types that trigger a rollback. Supported types are DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM and DEPLOYMENT_STOP_ON_REQUEST.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
@@ -166,6 +166,9 @@ type DeploymentGroupInitParameters struct {
 	// On premise tag filters associated with the group. See the AWS docs for details.
 	OnPremisesInstanceTagFilter []OnPremisesInstanceTagFilterInitParameters `json:"onPremisesInstanceTagFilter,omitempty" tf:"on_premises_instance_tag_filter,omitempty"`
 
+	// Configuration block of Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision. Valid values are UPDATE and IGNORE. Defaults to UPDATE.
+	OutdatedInstancesStrategy *string `json:"outdatedInstancesStrategy,omitempty" tf:"outdated_instances_strategy,omitempty"`
+
 	// The service role ARN that allows deployments.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -237,6 +240,9 @@ type DeploymentGroupObservation struct {
 
 	// On premise tag filters associated with the group. See the AWS docs for details.
 	OnPremisesInstanceTagFilter []OnPremisesInstanceTagFilterObservation `json:"onPremisesInstanceTagFilter,omitempty" tf:"on_premises_instance_tag_filter,omitempty"`
+
+	// Configuration block of Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision. Valid values are UPDATE and IGNORE. Defaults to UPDATE.
+	OutdatedInstancesStrategy *string `json:"outdatedInstancesStrategy,omitempty" tf:"outdated_instances_strategy,omitempty"`
 
 	// The service role ARN that allows deployments.
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
@@ -312,6 +318,10 @@ type DeploymentGroupParameters struct {
 	// On premise tag filters associated with the group. See the AWS docs for details.
 	// +kubebuilder:validation:Optional
 	OnPremisesInstanceTagFilter []OnPremisesInstanceTagFilterParameters `json:"onPremisesInstanceTagFilter,omitempty" tf:"on_premises_instance_tag_filter,omitempty"`
+
+	// Configuration block of Indicates what happens when new Amazon EC2 instances are launched mid-deployment and do not receive the deployed application revision. Valid values are UPDATE and IGNORE. Defaults to UPDATE.
+	// +kubebuilder:validation:Optional
+	OutdatedInstancesStrategy *string `json:"outdatedInstancesStrategy,omitempty" tf:"outdated_instances_strategy,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

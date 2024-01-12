@@ -286,6 +286,17 @@ func (in *DataLakeSettingsInitParameters) DeepCopyInto(out *DataLakeSettingsInit
 			}
 		}
 	}
+	if in.ReadOnlyAdmins != nil {
+		in, out := &in.ReadOnlyAdmins, &out.ReadOnlyAdmins
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.TrustedResourceOwners != nil {
 		in, out := &in.TrustedResourceOwners, &out.TrustedResourceOwners
 		*out = make([]*string, len(*in))
@@ -406,6 +417,17 @@ func (in *DataLakeSettingsObservation) DeepCopyInto(out *DataLakeSettingsObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.ReadOnlyAdmins != nil {
+		in, out := &in.ReadOnlyAdmins, &out.ReadOnlyAdmins
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.TrustedResourceOwners != nil {
 		in, out := &in.TrustedResourceOwners, &out.TrustedResourceOwners
 		*out = make([]*string, len(*in))
@@ -480,6 +502,17 @@ func (in *DataLakeSettingsParameters) DeepCopyInto(out *DataLakeSettingsParamete
 	}
 	if in.ExternalDataFilteringAllowList != nil {
 		in, out := &in.ExternalDataFilteringAllowList, &out.ExternalDataFilteringAllowList
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ReadOnlyAdmins != nil {
+		in, out := &in.ReadOnlyAdmins, &out.ReadOnlyAdmins
 		*out = make([]*string, len(*in))
 		for i := range *in {
 			if (*in)[i] != nil {

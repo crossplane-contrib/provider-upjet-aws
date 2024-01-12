@@ -98,9 +98,8 @@ spec:
                             the timeout of the underlying lambda. Defaults to 30.
                           type: number
                         matcher:
-                          description: 299" or "0-99"). Required for HTTP/HTTPS/GRPC
-                            ALB. Only applies to Application Load Balancers (i.e.,
-                            HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
+                          description: separated individual values (e.g., "200,202")
+                            or a range of values (e.g., "200-299").
                           type: string
                         path:
                           description: (May be required) Destination for the health
@@ -109,14 +108,17 @@ spec:
                           type: string
                         port:
                           description: The port the load balancer uses when performing
-                            health checks on targets. Default is traffic-port.
+                            health checks on targets. Valid values are either traffic-port,
+                            to use the same port as the target group, or a valid port
+                            number between 1 and 65536. Default is traffic-port.
                           type: string
                         protocol:
                           description: Protocol the load balancer uses when performing
-                            health checks on targets. Must be either TCP, HTTP, or
+                            health checks on targets. Must be one of TCP, HTTP, or
                             HTTPS. The TCP protocol is not supported for health checks
                             if the protocol of the target group is HTTP or HTTPS.
-                            Defaults to HTTP.
+                            Default is HTTP. Cannot be specified when the target_type
+                            is lambda.
                           type: string
                         timeout:
                           description: Amount of time, in seconds, during which no
@@ -177,7 +179,8 @@ spec:
                     description: (May be required, Forces new resource) Protocol to
                       use for routing traffic to the targets. Should be one of GENEVE,
                       HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP. Required when target_type
-                      is instance, ip or alb. Does not apply when target_type is lambda.
+                      is instance, ip, or alb. Does not apply when target_type is
+                      lambda.
                     type: string
                   protocolVersion:
                     description: Only applicable when protocol is HTTP or HTTPS. The
@@ -254,10 +257,23 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetHealthState:
+                    description: Target health state block. Only applicable for Network
+                      Load Balancer target groups when protocol is TCP or TLS. See
+                      target_health_state for more information.
+                    items:
+                      properties:
+                        enableUnhealthyConnectionTermination:
+                          description: 'Indicates whether the load balancer terminates
+                            connections to unhealthy targets. Possible values are
+                            true or false. Default: true.'
+                          type: boolean
+                      type: object
+                    type: array
                   targetType:
-                    description: (May be required, Forces new resource) Type of target
-                      that you must specify when registering targets with this target
-                      group. See doc for supported values. The default is instance.
+                    description: Type of target that you must specify when registering
+                      targets with this target group. See doc for supported values.
+                      The default is instance.
                     type: string
                   vpcId:
                     description: Identifier of the VPC in which to create the target
@@ -383,9 +399,8 @@ spec:
                             the timeout of the underlying lambda. Defaults to 30.
                           type: number
                         matcher:
-                          description: 299" or "0-99"). Required for HTTP/HTTPS/GRPC
-                            ALB. Only applies to Application Load Balancers (i.e.,
-                            HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
+                          description: separated individual values (e.g., "200,202")
+                            or a range of values (e.g., "200-299").
                           type: string
                         path:
                           description: (May be required) Destination for the health
@@ -394,14 +409,17 @@ spec:
                           type: string
                         port:
                           description: The port the load balancer uses when performing
-                            health checks on targets. Default is traffic-port.
+                            health checks on targets. Valid values are either traffic-port,
+                            to use the same port as the target group, or a valid port
+                            number between 1 and 65536. Default is traffic-port.
                           type: string
                         protocol:
                           description: Protocol the load balancer uses when performing
-                            health checks on targets. Must be either TCP, HTTP, or
+                            health checks on targets. Must be one of TCP, HTTP, or
                             HTTPS. The TCP protocol is not supported for health checks
                             if the protocol of the target group is HTTP or HTTPS.
-                            Defaults to HTTP.
+                            Default is HTTP. Cannot be specified when the target_type
+                            is lambda.
                           type: string
                         timeout:
                           description: Amount of time, in seconds, during which no
@@ -462,7 +480,8 @@ spec:
                     description: (May be required, Forces new resource) Protocol to
                       use for routing traffic to the targets. Should be one of GENEVE,
                       HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP. Required when target_type
-                      is instance, ip or alb. Does not apply when target_type is lambda.
+                      is instance, ip, or alb. Does not apply when target_type is
+                      lambda.
                     type: string
                   protocolVersion:
                     description: Only applicable when protocol is HTTP or HTTPS. The
@@ -535,10 +554,23 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetHealthState:
+                    description: Target health state block. Only applicable for Network
+                      Load Balancer target groups when protocol is TCP or TLS. See
+                      target_health_state for more information.
+                    items:
+                      properties:
+                        enableUnhealthyConnectionTermination:
+                          description: 'Indicates whether the load balancer terminates
+                            connections to unhealthy targets. Possible values are
+                            true or false. Default: true.'
+                          type: boolean
+                      type: object
+                    type: array
                   targetType:
-                    description: (May be required, Forces new resource) Type of target
-                      that you must specify when registering targets with this target
-                      group. See doc for supported values. The default is instance.
+                    description: Type of target that you must specify when registering
+                      targets with this target group. See doc for supported values.
+                      The default is instance.
                     type: string
                   vpcId:
                     description: Identifier of the VPC in which to create the target
@@ -826,9 +858,8 @@ spec:
                             the timeout of the underlying lambda. Defaults to 30.
                           type: number
                         matcher:
-                          description: 299" or "0-99"). Required for HTTP/HTTPS/GRPC
-                            ALB. Only applies to Application Load Balancers (i.e.,
-                            HTTP/HTTPS/GRPC) not Network Load Balancers (i.e., TCP).
+                          description: separated individual values (e.g., "200,202")
+                            or a range of values (e.g., "200-299").
                           type: string
                         path:
                           description: (May be required) Destination for the health
@@ -837,14 +868,17 @@ spec:
                           type: string
                         port:
                           description: The port the load balancer uses when performing
-                            health checks on targets. Default is traffic-port.
+                            health checks on targets. Valid values are either traffic-port,
+                            to use the same port as the target group, or a valid port
+                            number between 1 and 65536. Default is traffic-port.
                           type: string
                         protocol:
                           description: Protocol the load balancer uses when performing
-                            health checks on targets. Must be either TCP, HTTP, or
+                            health checks on targets. Must be one of TCP, HTTP, or
                             HTTPS. The TCP protocol is not supported for health checks
                             if the protocol of the target group is HTTP or HTTPS.
-                            Defaults to HTTP.
+                            Default is HTTP. Cannot be specified when the target_type
+                            is lambda.
                           type: string
                         timeout:
                           description: Amount of time, in seconds, during which no
@@ -908,7 +942,8 @@ spec:
                     description: (May be required, Forces new resource) Protocol to
                       use for routing traffic to the targets. Should be one of GENEVE,
                       HTTP, HTTPS, TCP, TCP_UDP, TLS, or UDP. Required when target_type
-                      is instance, ip or alb. Does not apply when target_type is lambda.
+                      is instance, ip, or alb. Does not apply when target_type is
+                      lambda.
                     type: string
                   protocolVersion:
                     description: Only applicable when protocol is HTTP or HTTPS. The
@@ -989,10 +1024,23 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetHealthState:
+                    description: Target health state block. Only applicable for Network
+                      Load Balancer target groups when protocol is TCP or TLS. See
+                      target_health_state for more information.
+                    items:
+                      properties:
+                        enableUnhealthyConnectionTermination:
+                          description: 'Indicates whether the load balancer terminates
+                            connections to unhealthy targets. Possible values are
+                            true or false. Default: true.'
+                          type: boolean
+                      type: object
+                    type: array
                   targetType:
-                    description: (May be required, Forces new resource) Type of target
-                      that you must specify when registering targets with this target
-                      group. See doc for supported values. The default is instance.
+                    description: Type of target that you must specify when registering
+                      targets with this target group. See doc for supported values.
+                      The default is instance.
                     type: string
                   vpcId:
                     description: Identifier of the VPC in which to create the target

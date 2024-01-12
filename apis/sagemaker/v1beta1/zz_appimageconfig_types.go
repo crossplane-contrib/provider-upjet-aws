@@ -18,8 +18,9 @@ import (
 )
 
 type AppImageConfigInitParameters struct {
+	JupyterLabImageConfig []JupyterLabImageConfigInitParameters `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	// The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab. See Jupyte rLab Image Config details below.
 	KernelGatewayImageConfig []KernelGatewayImageConfigInitParameters `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
 	// Key-value map of resource tags.
@@ -35,7 +36,9 @@ type AppImageConfigObservation struct {
 	// The name of the App Image Config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	JupyterLabImageConfig []JupyterLabImageConfigObservation `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
+
+	// The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab. See Jupyte rLab Image Config details below.
 	KernelGatewayImageConfig []KernelGatewayImageConfigObservation `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
 	// Key-value map of resource tags.
@@ -49,7 +52,10 @@ type AppImageConfigObservation struct {
 
 type AppImageConfigParameters struct {
 
-	// The configuration for the file system and kernels in a SageMaker image running as a KernelGateway app. See Kernel Gateway Image Config details below.
+	// +kubebuilder:validation:Optional
+	JupyterLabImageConfig []JupyterLabImageConfigParameters `json:"jupyterLabImageConfig,omitempty" tf:"jupyter_lab_image_config,omitempty"`
+
+	// The JupyterLabAppImageConfig. You can only specify one image kernel in the AppImageConfig API. This kernel is shown to users before the image starts. After the image runs, all kernels are visible in JupyterLab. See Jupyte rLab Image Config details below.
 	// +kubebuilder:validation:Optional
 	KernelGatewayImageConfig []KernelGatewayImageConfigParameters `json:"kernelGatewayImageConfig,omitempty" tf:"kernel_gateway_image_config,omitempty"`
 
@@ -62,6 +68,48 @@ type AppImageConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type ContainerConfigInitParameters struct {
+
+	// The arguments for the container when you're running the application.
+	ContainerArguments []*string `json:"containerArguments,omitempty" tf:"container_arguments,omitempty"`
+
+	// The entrypoint used to run the application in the container.
+	ContainerEntrypoint []*string `json:"containerEntrypoint,omitempty" tf:"container_entrypoint,omitempty"`
+
+	// The environment variables to set in the container.
+	// +mapType=granular
+	ContainerEnvironmentVariables map[string]*string `json:"containerEnvironmentVariables,omitempty" tf:"container_environment_variables,omitempty"`
+}
+
+type ContainerConfigObservation struct {
+
+	// The arguments for the container when you're running the application.
+	ContainerArguments []*string `json:"containerArguments,omitempty" tf:"container_arguments,omitempty"`
+
+	// The entrypoint used to run the application in the container.
+	ContainerEntrypoint []*string `json:"containerEntrypoint,omitempty" tf:"container_entrypoint,omitempty"`
+
+	// The environment variables to set in the container.
+	// +mapType=granular
+	ContainerEnvironmentVariables map[string]*string `json:"containerEnvironmentVariables,omitempty" tf:"container_environment_variables,omitempty"`
+}
+
+type ContainerConfigParameters struct {
+
+	// The arguments for the container when you're running the application.
+	// +kubebuilder:validation:Optional
+	ContainerArguments []*string `json:"containerArguments,omitempty" tf:"container_arguments,omitempty"`
+
+	// The entrypoint used to run the application in the container.
+	// +kubebuilder:validation:Optional
+	ContainerEntrypoint []*string `json:"containerEntrypoint,omitempty" tf:"container_entrypoint,omitempty"`
+
+	// The environment variables to set in the container.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	ContainerEnvironmentVariables map[string]*string `json:"containerEnvironmentVariables,omitempty" tf:"container_environment_variables,omitempty"`
 }
 
 type FileSystemConfigInitParameters struct {
@@ -101,6 +149,25 @@ type FileSystemConfigParameters struct {
 	// The path within the image to mount the user's EFS home directory. The directory should be empty. If not specified, defaults to /home/sagemaker-user.
 	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+}
+
+type JupyterLabImageConfigInitParameters struct {
+
+	// The configuration used to run the application image container. See Container Config details below.
+	ContainerConfig []ContainerConfigInitParameters `json:"containerConfig,omitempty" tf:"container_config,omitempty"`
+}
+
+type JupyterLabImageConfigObservation struct {
+
+	// The configuration used to run the application image container. See Container Config details below.
+	ContainerConfig []ContainerConfigObservation `json:"containerConfig,omitempty" tf:"container_config,omitempty"`
+}
+
+type JupyterLabImageConfigParameters struct {
+
+	// The configuration used to run the application image container. See Container Config details below.
+	// +kubebuilder:validation:Optional
+	ContainerConfig []ContainerConfigParameters `json:"containerConfig,omitempty" tf:"container_config,omitempty"`
 }
 
 type KernelGatewayImageConfigInitParameters struct {

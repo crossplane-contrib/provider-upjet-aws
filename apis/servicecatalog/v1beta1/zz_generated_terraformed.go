@@ -585,7 +585,7 @@ func (tr *PrincipalPortfolioAssociation) LateInitialize(attrs []byte) (bool, err
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *PrincipalPortfolioAssociation) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this Product

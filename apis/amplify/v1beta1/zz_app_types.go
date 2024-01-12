@@ -29,6 +29,9 @@ type AppInitParameters struct {
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
 
+	// The custom HTTP headers for an Amplify app.
+	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
+
 	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
 	CustomRule []CustomRuleInitParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
@@ -92,6 +95,9 @@ type AppObservation struct {
 
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
+
+	// The custom HTTP headers for an Amplify app.
+	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
 	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
 	CustomRule []CustomRuleObservation `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
@@ -167,6 +173,10 @@ type AppParameters struct {
 	// The build specification (build spec) for an Amplify app.
 	// +kubebuilder:validation:Optional
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
+
+	// The custom HTTP headers for an Amplify app.
+	// +kubebuilder:validation:Optional
+	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
 	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
 	// +kubebuilder:validation:Optional

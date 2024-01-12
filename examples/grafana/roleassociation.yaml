@@ -1,12 +1,70 @@
 apiVersion: grafana.aws.upbound.io/v1beta1
 kind: RoleAssociation
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/roleassociation
+    upjet.upbound.io/manual-intervention: "It requires a real user ID"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-ra
 spec:
   forProvider:
     region: us-east-1
     role: ADMIN
     userIds:
     - USER_ID_1
-    workspaceIdRef:
-      name: example
+    - USER_ID_2
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ra
+
+---
+
+apiVersion: grafana.aws.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/roleassociation
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: example-ra
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    accountAccessType: CURRENT_ACCOUNT
+    authenticationProviders:
+    - SAML
+    permissionType: SERVICE_MANAGED
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: assume-ra
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/roleassociation
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
+  labels:
+    testing.upbound.io/example-name: assume-ra
+  name: assume-ra
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = "sts:AssumeRole"
+              Effect = "Allow"
+              Sid    = ""
+              Principal = {
+                Service = "grafana.amazonaws.com"
+              }
+            },
+          ]
+        })}
+

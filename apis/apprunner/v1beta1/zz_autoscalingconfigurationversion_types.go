@@ -47,7 +47,11 @@ type AutoScalingConfigurationVersionObservation struct {
 	// The revision of this auto scaling configuration.
 	AutoScalingConfigurationRevision *float64 `json:"autoScalingConfigurationRevision,omitempty" tf:"auto_scaling_configuration_revision,omitempty"`
 
+	HasAssociatedService *bool `json:"hasAssociatedService,omitempty" tf:"has_associated_service,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// Whether the auto scaling configuration has the highest auto_scaling_configuration_revision among all configurations that share the same auto_scaling_configuration_name.
 	Latest *bool `json:"latest,omitempty" tf:"latest,omitempty"`

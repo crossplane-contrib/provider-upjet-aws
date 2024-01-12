@@ -141,9 +141,6 @@ type QueueObservation struct {
 	// +listType=set
 	QuickConnectIds []*string `json:"quickConnectIds,omitempty" tf:"quick_connect_ids,omitempty"`
 
-	// +listType=set
-	QuickConnectIdsAssociated []*string `json:"quickConnectIdsAssociated,omitempty" tf:"quick_connect_ids_associated,omitempty"`
-
 	// Specifies the description of the Queue. Valid values are ENABLED, DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 

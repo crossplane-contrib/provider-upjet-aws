@@ -265,7 +265,17 @@ type ServerInitParameters struct {
 	InvocationRole *string `json:"invocationRole,omitempty" tf:"invocation_role,omitempty"`
 
 	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
+
+	// Reference to a Role in iam to populate loggingRole.
+	// +kubebuilder:validation:Optional
+	LoggingRoleRef *v1.Reference `json:"loggingRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate loggingRole.
+	// +kubebuilder:validation:Optional
+	LoggingRoleSelector *v1.Selector `json:"loggingRoleSelector,omitempty" tf:"-"`
 
 	// The protocol settings that are configured for your server.
 	ProtocolDetails []ProtocolDetailsInitParameters `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
@@ -274,8 +284,13 @@ type ServerInitParameters struct {
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06 and TransferSecurityPolicy-2022-03. Default value is: TransferSecurityPolicy-2018-11.
+	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05. Default value is: TransferSecurityPolicy-2018-11.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
+
+	// A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+	// This is a set of arns of destinations that will receive structured logs from the transfer server
+	// +listType=set
+	StructuredLogDestinations []*string `json:"structuredLogDestinations,omitempty" tf:"structured_log_destinations,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -339,8 +354,13 @@ type ServerObservation struct {
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06 and TransferSecurityPolicy-2022-03. Default value is: TransferSecurityPolicy-2018-11.
+	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05. Default value is: TransferSecurityPolicy-2018-11.
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
+
+	// A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+	// This is a set of arns of destinations that will receive structured logs from the transfer server
+	// +listType=set
+	StructuredLogDestinations []*string `json:"structuredLogDestinations,omitempty" tf:"structured_log_destinations,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -420,8 +440,18 @@ type ServerParameters struct {
 	InvocationRole *string `json:"invocationRole,omitempty" tf:"invocation_role,omitempty"`
 
 	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
+
+	// Reference to a Role in iam to populate loggingRole.
+	// +kubebuilder:validation:Optional
+	LoggingRoleRef *v1.Reference `json:"loggingRoleRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate loggingRole.
+	// +kubebuilder:validation:Optional
+	LoggingRoleSelector *v1.Selector `json:"loggingRoleSelector,omitempty" tf:"-"`
 
 	// Specify a string to display when users connect to a server. This string is displayed after the user authenticates. The SFTP protocol does not support post-authentication display banners.
 	// +kubebuilder:validation:Optional
@@ -445,9 +475,15 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06 and TransferSecurityPolicy-2022-03. Default value is: TransferSecurityPolicy-2018-11.
+	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05. Default value is: TransferSecurityPolicy-2018-11.
 	// +kubebuilder:validation:Optional
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
+
+	// A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
+	// This is a set of arns of destinations that will receive structured logs from the transfer server
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	StructuredLogDestinations []*string `json:"structuredLogDestinations,omitempty" tf:"structured_log_destinations,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

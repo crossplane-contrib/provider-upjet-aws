@@ -251,7 +251,7 @@ spec:
                                 type: object
                               sseAlgorithm:
                                 description: Server-side encryption algorithm to use.
-                                  Valid values are AES256 and aws:kms
+                                  Valid values are AES256, aws:kms, and aws:kms:dsse
                                 type: string
                             type: object
                           type: array
@@ -454,7 +454,7 @@ spec:
                                 type: object
                               sseAlgorithm:
                                 description: Server-side encryption algorithm to use.
-                                  Valid values are AES256 and aws:kms
+                                  Valid values are AES256, aws:kms, and aws:kms:dsse
                                 type: string
                             type: object
                           type: array
@@ -665,7 +665,7 @@ spec:
                                 type: string
                               sseAlgorithm:
                                 description: Server-side encryption algorithm to use.
-                                  Valid values are AES256 and aws:kms
+                                  Valid values are AES256, aws:kms, and aws:kms:dsse
                                 type: string
                             type: object
                           type: array

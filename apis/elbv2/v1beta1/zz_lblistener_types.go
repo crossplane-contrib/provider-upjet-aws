@@ -423,6 +423,9 @@ type LBListenerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
+	// The mutual authentication configuration information. Detailed below.
+	MutualAuthentication []MutualAuthenticationInitParameters `json:"mutualAuthentication,omitempty" tf:"mutual_authentication,omitempty"`
+
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -456,6 +459,9 @@ type LBListenerObservation struct {
 
 	// ARN of the load balancer.
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
+
+	// The mutual authentication configuration information. Detailed below.
+	MutualAuthentication []MutualAuthenticationObservation `json:"mutualAuthentication,omitempty" tf:"mutual_authentication,omitempty"`
 
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -502,6 +508,10 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
+	// The mutual authentication configuration information. Detailed below.
+	// +kubebuilder:validation:Optional
+	MutualAuthentication []MutualAuthenticationParameters `json:"mutualAuthentication,omitempty" tf:"mutual_authentication,omitempty"`
+
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
@@ -523,6 +533,45 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type MutualAuthenticationInitParameters struct {
+
+	// Whether client certificate expiry is ignored. Default is false.
+	IgnoreClientCertificateExpiry *bool `json:"ignoreClientCertificateExpiry,omitempty" tf:"ignore_client_certificate_expiry,omitempty"`
+
+	// Valid values are off, verify and passthrough.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// ARN of the elbv2 Trust Store.
+	TrustStoreArn *string `json:"trustStoreArn,omitempty" tf:"trust_store_arn,omitempty"`
+}
+
+type MutualAuthenticationObservation struct {
+
+	// Whether client certificate expiry is ignored. Default is false.
+	IgnoreClientCertificateExpiry *bool `json:"ignoreClientCertificateExpiry,omitempty" tf:"ignore_client_certificate_expiry,omitempty"`
+
+	// Valid values are off, verify and passthrough.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// ARN of the elbv2 Trust Store.
+	TrustStoreArn *string `json:"trustStoreArn,omitempty" tf:"trust_store_arn,omitempty"`
+}
+
+type MutualAuthenticationParameters struct {
+
+	// Whether client certificate expiry is ignored. Default is false.
+	// +kubebuilder:validation:Optional
+	IgnoreClientCertificateExpiry *bool `json:"ignoreClientCertificateExpiry,omitempty" tf:"ignore_client_certificate_expiry,omitempty"`
+
+	// Valid values are off, verify and passthrough.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+
+	// ARN of the elbv2 Trust Store.
+	// +kubebuilder:validation:Optional
+	TrustStoreArn *string `json:"trustStoreArn,omitempty" tf:"trust_store_arn,omitempty"`
 }
 
 type RedirectInitParameters struct {

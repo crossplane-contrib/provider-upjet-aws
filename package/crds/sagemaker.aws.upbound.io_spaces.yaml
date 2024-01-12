@@ -147,6 +147,10 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  spaceDisplayName:
+                    description: The name of the space that appears in the SageMaker
+                      Studio UI.
+                    type: string
                   spaceName:
                     description: The name of the space.
                     type: string
@@ -188,6 +192,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The Amazon Resource Name (ARN)
                                         of the SageMaker image created on the instance.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -244,6 +251,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The Amazon Resource Name (ARN)
                                         of the SageMaker image created on the instance.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -359,6 +369,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  spaceDisplayName:
+                    description: The name of the space that appears in the SageMaker
+                      Studio UI.
+                    type: string
                   spaceName:
                     description: The name of the space.
                     type: string
@@ -400,6 +414,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The Amazon Resource Name (ARN)
                                         of the SageMaker image created on the instance.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -456,6 +473,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The Amazon Resource Name (ARN)
                                         of the SageMaker image created on the instance.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -664,6 +684,10 @@ spec:
                   id:
                     description: The space's Amazon Resource Name (ARN).
                     type: string
+                  spaceDisplayName:
+                    description: The name of the space that appears in the SageMaker
+                      Studio UI.
+                    type: string
                   spaceName:
                     description: The name of the space.
                     type: string
@@ -705,6 +729,9 @@ spec:
                                     sagemakerImageArn:
                                       description: The Amazon Resource Name (ARN)
                                         of the SageMaker image created on the instance.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
                                       type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
@@ -762,6 +789,9 @@ spec:
                                       description: The Amazon Resource Name (ARN)
                                         of the SageMaker image created on the instance.
                                       type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
                                     sagemakerImageVersionArn:
                                       description: The ARN of the image version created
                                         on the instance.
@@ -793,6 +823,14 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  url:
+                    description: Returns the URL of the space. If the space is created
+                      with Amazon Web Services IAM Identity Center (Successor to Amazon
+                      Web Services Single Sign-On) authentication, users can navigate
+                      to the URL after appending the respective redirect parameter
+                      for the application type to be federated through Amazon Web
+                      Services IAM Identity Center.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

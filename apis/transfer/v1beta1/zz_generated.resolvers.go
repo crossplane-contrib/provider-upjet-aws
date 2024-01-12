@@ -151,6 +151,22 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingRole),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.ForProvider.LoggingRoleRef,
+		Selector:     mg.Spec.ForProvider.LoggingRoleSelector,
+		To: reference.To{
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.LoggingRole")
+	}
+	mg.Spec.ForProvider.LoggingRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.LoggingRoleRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Certificate),
 		Extract:      resource.ExtractParamPath("arn", true),
 		Reference:    mg.Spec.InitProvider.CertificateRef,
@@ -200,6 +216,21 @@ func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mg.Spec.InitProvider.EndpointDetails[i3].VPCIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingRole),
+		Extract:      resource.ExtractParamPath("arn", true),
+		Reference:    mg.Spec.InitProvider.LoggingRoleRef,
+		Selector:     mg.Spec.InitProvider.LoggingRoleSelector,
+		To: reference.To{
+			List:    &v1beta13.RoleList{},
+			Managed: &v1beta13.Role{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LoggingRole")
+	}
+	mg.Spec.InitProvider.LoggingRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LoggingRoleRef = rsp.ResolvedReference
 
 	return nil
 }

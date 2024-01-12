@@ -79,7 +79,7 @@ spec:
                     type: string
                   resourceTypes:
                     description: Type of resources to scan. Valid values are EC2,
-                      ECR, and LAMBDA. At least one item is required.
+                      ECR, LAMBDA and LAMBDA_CODE. At least one item is required.
                     items:
                       type: string
                     type: array
@@ -108,7 +108,7 @@ spec:
                     x-kubernetes-list-type: set
                   resourceTypes:
                     description: Type of resources to scan. Valid values are EC2,
-                      ECR, and LAMBDA. At least one item is required.
+                      ECR, LAMBDA and LAMBDA_CODE. At least one item is required.
                     items:
                       type: string
                     type: array
@@ -299,7 +299,7 @@ spec:
                     type: string
                   resourceTypes:
                     description: Type of resources to scan. Valid values are EC2,
-                      ECR, and LAMBDA. At least one item is required.
+                      ECR, LAMBDA and LAMBDA_CODE. At least one item is required.
                     items:
                       type: string
                     type: array

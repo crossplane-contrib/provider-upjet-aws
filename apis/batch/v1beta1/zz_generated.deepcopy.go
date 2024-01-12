@@ -253,6 +253,11 @@ func (in *JobDefinitionInitParameters) DeepCopyInto(out *JobDefinitionInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.NodeProperties != nil {
+		in, out := &in.NodeProperties, &out.NodeProperties
+		*out = new(string)
+		**out = **in
+	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
 		*out = make(map[string]*string, len(*in))
@@ -387,6 +392,11 @@ func (in *JobDefinitionObservation) DeepCopyInto(out *JobDefinitionObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.NodeProperties != nil {
+		in, out := &in.NodeProperties, &out.NodeProperties
+		*out = new(string)
+		**out = **in
+	}
 	if in.Parameters != nil {
 		in, out := &in.Parameters, &out.Parameters
 		*out = make(map[string]*string, len(*in))
@@ -497,6 +507,11 @@ func (in *JobDefinitionParameters) DeepCopyInto(out *JobDefinitionParameters) {
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
+	if in.NodeProperties != nil {
+		in, out := &in.NodeProperties, &out.NodeProperties
 		*out = new(string)
 		**out = **in
 	}

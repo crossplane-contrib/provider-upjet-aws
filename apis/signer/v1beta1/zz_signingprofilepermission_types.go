@@ -19,7 +19,7 @@ import (
 
 type SigningProfilePermissionInitParameters struct {
 
-	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
+	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, signer:RevokeSignature, or signer:SignPayload.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The AWS principal to be granted a cross-account permission.
@@ -44,7 +44,7 @@ type SigningProfilePermissionInitParameters struct {
 
 type SigningProfilePermissionObservation struct {
 
-	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
+	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, signer:RevokeSignature, or signer:SignPayload.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -67,7 +67,7 @@ type SigningProfilePermissionObservation struct {
 
 type SigningProfilePermissionParameters struct {
 
-	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, or signer:RevokeSignature.
+	// An AWS Signer action permitted as part of cross-account permissions. Valid values: signer:StartSigningJob, signer:GetSigningProfile, signer:RevokeSignature, or signer:SignPayload.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 

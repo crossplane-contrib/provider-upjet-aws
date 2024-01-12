@@ -128,8 +128,11 @@ type DeploymentConfigInitParameters struct {
 	// Automatic rollback configuration for handling endpoint deployment failures and recovery. See Auto Rollback Configuration.
 	AutoRollbackConfiguration []AutoRollbackConfigurationInitParameters `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. See Blue Green Update Config.
+	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
 	BlueGreenUpdatePolicy []BlueGreenUpdatePolicyInitParameters `json:"blueGreenUpdatePolicy,omitempty" tf:"blue_green_update_policy,omitempty"`
+
+	// Specifies a rolling deployment strategy for updating a SageMaker endpoint. See Rolling Update Policy.
+	RollingUpdatePolicy []RollingUpdatePolicyInitParameters `json:"rollingUpdatePolicy,omitempty" tf:"rolling_update_policy,omitempty"`
 }
 
 type DeploymentConfigObservation struct {
@@ -137,8 +140,11 @@ type DeploymentConfigObservation struct {
 	// Automatic rollback configuration for handling endpoint deployment failures and recovery. See Auto Rollback Configuration.
 	AutoRollbackConfiguration []AutoRollbackConfigurationObservation `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. See Blue Green Update Config.
+	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
 	BlueGreenUpdatePolicy []BlueGreenUpdatePolicyObservation `json:"blueGreenUpdatePolicy,omitempty" tf:"blue_green_update_policy,omitempty"`
+
+	// Specifies a rolling deployment strategy for updating a SageMaker endpoint. See Rolling Update Policy.
+	RollingUpdatePolicy []RollingUpdatePolicyObservation `json:"rollingUpdatePolicy,omitempty" tf:"rolling_update_policy,omitempty"`
 }
 
 type DeploymentConfigParameters struct {
@@ -147,9 +153,13 @@ type DeploymentConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoRollbackConfiguration []AutoRollbackConfigurationParameters `json:"autoRollbackConfiguration,omitempty" tf:"auto_rollback_configuration,omitempty"`
 
-	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. See Blue Green Update Config.
+	// Update policy for a blue/green deployment. If this update policy is specified, SageMaker creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips traffic to the new fleet according to the specified traffic routing configuration. Only one update policy should be used in the deployment configuration. If no update policy is specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting by default. See Blue Green Update Config.
 	// +kubebuilder:validation:Optional
-	BlueGreenUpdatePolicy []BlueGreenUpdatePolicyParameters `json:"blueGreenUpdatePolicy" tf:"blue_green_update_policy,omitempty"`
+	BlueGreenUpdatePolicy []BlueGreenUpdatePolicyParameters `json:"blueGreenUpdatePolicy,omitempty" tf:"blue_green_update_policy,omitempty"`
+
+	// Specifies a rolling deployment strategy for updating a SageMaker endpoint. See Rolling Update Policy.
+	// +kubebuilder:validation:Optional
+	RollingUpdatePolicy []RollingUpdatePolicyParameters `json:"rollingUpdatePolicy,omitempty" tf:"rolling_update_policy,omitempty"`
 }
 
 type EndpointInitParameters struct {
@@ -255,6 +265,113 @@ type LinearStepSizeParameters struct {
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
+type MaximumBatchSizeInitParameters struct {
+
+	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Defines the capacity size, either as a number of instances or a capacity percentage.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MaximumBatchSizeObservation struct {
+
+	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Defines the capacity size, either as a number of instances or a capacity percentage.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MaximumBatchSizeParameters struct {
+
+	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+
+	// Defines the capacity size, either as a number of instances or a capacity percentage.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value" tf:"value,omitempty"`
+}
+
+type RollbackMaximumBatchSizeInitParameters struct {
+
+	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Defines the capacity size, either as a number of instances or a capacity percentage.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type RollbackMaximumBatchSizeObservation struct {
+
+	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Defines the capacity size, either as a number of instances or a capacity percentage.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type RollbackMaximumBatchSizeParameters struct {
+
+	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+
+	// Defines the capacity size, either as a number of instances or a capacity percentage.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value" tf:"value,omitempty"`
+}
+
+type RollingUpdatePolicyInitParameters struct {
+
+	// Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant's total instance count. See Maximum Batch Size.
+	MaximumBatchSize []MaximumBatchSizeInitParameters `json:"maximumBatchSize,omitempty" tf:"maximum_batch_size,omitempty"`
+
+	// Maximum execution timeout for the deployment. Note that the timeout value should be larger than the total waiting time specified in termination_wait_in_seconds and wait_interval_in_seconds. Valid values are between 600 and 14400.
+	MaximumExecutionTimeoutInSeconds *float64 `json:"maximumExecutionTimeoutInSeconds,omitempty" tf:"maximum_execution_timeout_in_seconds,omitempty"`
+
+	// Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback. See Rollback Maximum Batch Size.
+	RollbackMaximumBatchSize []RollbackMaximumBatchSizeInitParameters `json:"rollbackMaximumBatchSize,omitempty" tf:"rollback_maximum_batch_size,omitempty"`
+
+	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds,omitempty" tf:"wait_interval_in_seconds,omitempty"`
+}
+
+type RollingUpdatePolicyObservation struct {
+
+	// Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant's total instance count. See Maximum Batch Size.
+	MaximumBatchSize []MaximumBatchSizeObservation `json:"maximumBatchSize,omitempty" tf:"maximum_batch_size,omitempty"`
+
+	// Maximum execution timeout for the deployment. Note that the timeout value should be larger than the total waiting time specified in termination_wait_in_seconds and wait_interval_in_seconds. Valid values are between 600 and 14400.
+	MaximumExecutionTimeoutInSeconds *float64 `json:"maximumExecutionTimeoutInSeconds,omitempty" tf:"maximum_execution_timeout_in_seconds,omitempty"`
+
+	// Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback. See Rollback Maximum Batch Size.
+	RollbackMaximumBatchSize []RollbackMaximumBatchSizeObservation `json:"rollbackMaximumBatchSize,omitempty" tf:"rollback_maximum_batch_size,omitempty"`
+
+	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds,omitempty" tf:"wait_interval_in_seconds,omitempty"`
+}
+
+type RollingUpdatePolicyParameters struct {
+
+	// Batch size for each rolling step to provision capacity and turn on traffic on the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between 5% to 50% of the variant's total instance count. See Maximum Batch Size.
+	// +kubebuilder:validation:Optional
+	MaximumBatchSize []MaximumBatchSizeParameters `json:"maximumBatchSize" tf:"maximum_batch_size,omitempty"`
+
+	// Maximum execution timeout for the deployment. Note that the timeout value should be larger than the total waiting time specified in termination_wait_in_seconds and wait_interval_in_seconds. Valid values are between 600 and 14400.
+	// +kubebuilder:validation:Optional
+	MaximumExecutionTimeoutInSeconds *float64 `json:"maximumExecutionTimeoutInSeconds,omitempty" tf:"maximum_execution_timeout_in_seconds,omitempty"`
+
+	// Batch size for rollback to the old endpoint fleet. Each rolling step to provision capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new endpoint fleet. If this field is absent, the default value will be set to 100% of total capacity which means to bring up the whole capacity of the old fleet at once during rollback. See Rollback Maximum Batch Size.
+	// +kubebuilder:validation:Optional
+	RollbackMaximumBatchSize []RollbackMaximumBatchSizeParameters `json:"rollbackMaximumBatchSize,omitempty" tf:"rollback_maximum_batch_size,omitempty"`
+
+	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
+	// +kubebuilder:validation:Optional
+	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds" tf:"wait_interval_in_seconds,omitempty"`
+}
+
 type TrafficRoutingConfigurationInitParameters struct {
 
 	// Batch size for the first step to turn on traffic on the new endpoint fleet. Value must be less than or equal to 50% of the variant's total instance count. See Canary Size.
@@ -266,7 +383,7 @@ type TrafficRoutingConfigurationInitParameters struct {
 	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The waiting time (in seconds) between incremental steps to turn on traffic on the new endpoint fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds,omitempty" tf:"wait_interval_in_seconds,omitempty"`
 }
 
@@ -281,7 +398,7 @@ type TrafficRoutingConfigurationObservation struct {
 	// Traffic routing strategy type. Valid values are: ALL_AT_ONCE, CANARY, and LINEAR.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The waiting time (in seconds) between incremental steps to turn on traffic on the new endpoint fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds,omitempty" tf:"wait_interval_in_seconds,omitempty"`
 }
 
@@ -299,7 +416,7 @@ type TrafficRoutingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
-	// The waiting time (in seconds) between incremental steps to turn on traffic on the new endpoint fleet. Valid values are between 0 and 3600.
+	// The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet. Valid values are between 0 and 3600.
 	// +kubebuilder:validation:Optional
 	WaitIntervalInSeconds *float64 `json:"waitIntervalInSeconds" tf:"wait_interval_in_seconds,omitempty"`
 }

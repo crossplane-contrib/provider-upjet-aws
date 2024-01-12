@@ -47,6 +47,7 @@ type UserObservation struct {
 	// delete user even if it has non-provider-managed iam access keys, login profile or mfa devices
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
+	// The user's name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Path in which to create the user.

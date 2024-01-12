@@ -9,7 +9,7 @@ metadata:
   name: example-dbinstance-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    name: example
+    dbName: example
     region: us-west-1
     allocatedStorage: 20
     autoMinorVersionUpgrade: true

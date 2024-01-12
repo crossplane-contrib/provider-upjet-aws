@@ -19,7 +19,7 @@ import (
 
 type ConnectionInitParameters struct {
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JBDC.
+	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// –  Description of the connection.
@@ -44,7 +44,7 @@ type ConnectionObservation struct {
 	// –  The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JBDC.
+	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// –  Description of the connection.
@@ -78,7 +78,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionPropertiesSecretRef *v1.SecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JBDC.
+	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
 	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
