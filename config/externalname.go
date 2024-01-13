@@ -2680,22 +2680,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	"aws_fis_experiment_template": config.IdentifierFromProvider,
 }
 
-var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
-	// Cognito User Pool clients can be imported using the user pool id and client id separated by a slash (/)
-	// However, the terraform id is just the client id.
-	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
-	// simpledb
-	//
-	// SimpleDB Domains can be imported using the name
-	"aws_simpledb_domain": config.NameAsIdentifier,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	// terraform-plugin-framework
-	"aws_appconfig_environment": config.IdentifierFromProvider,
-}
+var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{}
 
 // cognitoUserPoolClient
 // Note(mbbush) This resource has some unexpected behaviors that make it impossible to write a completely correct
