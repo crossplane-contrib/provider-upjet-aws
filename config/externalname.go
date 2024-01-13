@@ -30,12 +30,18 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// cognito
 	//
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
-	"aws_cognito_user_pool_client": FormattedIdentifierFromProvider("", "name"),
+	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
 
 	// simpledb
 	//
 	// SimpleDB Domains can be imported using the name
 	"aws_simpledb_domain": config.NameAsIdentifier,
+
+	// appconfig
+	//
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	// terraform-plugin-framework
+	"aws_appconfig_environment": config.IdentifierFromProvider,
 }
 
 // NoForkExternalNameConfigs contains all external name configurations
