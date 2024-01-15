@@ -11,4 +11,4 @@ patches:
     kind: CustomResourceDefinition
 
 transformers:
-  - transformer.yaml
+  - splitter.yaml
