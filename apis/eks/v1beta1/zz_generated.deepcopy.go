@@ -109,21 +109,6 @@ func (in *AddonInitParameters) DeepCopyInto(out *AddonInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.ServiceAccountRoleArn != nil {
-		in, out := &in.ServiceAccountRoleArn, &out.ServiceAccountRoleArn
-		*out = new(string)
-		**out = **in
-	}
-	if in.ServiceAccountRoleArnRef != nil {
-		in, out := &in.ServiceAccountRoleArnRef, &out.ServiceAccountRoleArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ServiceAccountRoleArnSelector != nil {
-		in, out := &in.ServiceAccountRoleArnSelector, &out.ServiceAccountRoleArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

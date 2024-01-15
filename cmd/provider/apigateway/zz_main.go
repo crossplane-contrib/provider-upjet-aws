@@ -87,7 +87,7 @@ func main() {
 		},
 		WebhookServer: webhook.NewServer(
 			webhook.Options{
-			CertDir: *certsDir,
+				CertDir: *certsDir,
 			}),
 		LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
 		LeaseDuration:              func() *time.Duration { d := 60 * time.Second; return &d }(),

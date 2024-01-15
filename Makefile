@@ -92,7 +92,7 @@ XPKG_REG_ORGS ?= xpkg.upbound.io/upbound
 # inferred.
 XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
 XPKG_DIR = $(OUTPUT_DIR)/package
-XPKG_IGNORE = kustomize/*,crds/kustomization.yaml,crds.yaml
+XPKG_IGNORE = kustomization.yaml
 
 export XPKG_REG_ORGS := $(XPKG_REG_ORGS)
 export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)

@@ -302,21 +302,6 @@ func (in *ExperimentTemplateInitParameters) DeepCopyInto(out *ExperimentTemplate
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.RoleArn != nil {
-		in, out := &in.RoleArn, &out.RoleArn
-		*out = new(string)
-		**out = **in
-	}
-	if in.RoleArnRef != nil {
-		in, out := &in.RoleArnRef, &out.RoleArnRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.RoleArnSelector != nil {
-		in, out := &in.RoleArnSelector, &out.RoleArnSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
-	}
 	if in.StopCondition != nil {
 		in, out := &in.StopCondition, &out.StopCondition
 		*out = make([]StopConditionInitParameters, len(*in))
