@@ -8,9 +8,10 @@ body:
       value: |
         # Thank you for helping to improve Official AWS Provider!
 
-        - If you're not currently using the most recent version of the Upbound Official AWS Provider, we recommend upgrading. This could resolve your issue, as any potential issues may have already been addressed in the latest release.
+        - If you're not currently using the most recent version of the Upbound Official AWS Provider, we recommend upgrading. Your issue might have already been addressed in the latest release.
 
   - type: checkboxes
+    id: existing_issue
     attributes:
       label: Is there an existing issue for this?
       description: |
@@ -24,8 +25,8 @@ body:
     id: affected
     attributes:
       label: Affected Resource(s)
-      description: Please fill the affected resource(s) "kind.groupname"
-      placeholder: "* kind.APIgroup=> Bucket.s3"
+      description: Please provide the GVK of the affected resource(s). E.g. "ec2.aws.upbound.io/v1beta1 - Instance"
+      placeholder: "* ec2.aws.upbound.io/v1beta1 - Instance"
     validations:
       required: false
 
@@ -35,7 +36,7 @@ body:
       label: Resource MRs required to reproduce the bug
       description: Please provide the example manifests and configurations you use.
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: repro
@@ -46,18 +47,10 @@ body:
       required: true
 
   - type: textarea
-    id: expected
+    id: behavior
     attributes:
-      label: Expected Behavior
-      description: What behavior do you expect?
-    validations:
-      required: true
-
-  - type: textarea
-    id: actual
-    attributes:
-      label: Actual Behavior
-      description: What actually happened?
+      label: What happened?
+      description: What difference did you observe in the actual behavior compared to what you expected?
     validations:
       required: true
 
@@ -66,7 +59,7 @@ body:
     attributes:
       label: Relevant Error Output Snippet
       description: |
-        If possible, provide a relevant log or screenshot from the error or panic output.
+        If possible, provide a relevant log from the error or panic output.
       render: shell
     validations:
       required: false
@@ -107,6 +100,6 @@ body:
     id: additional_info
     attributes:
       label: Additional Info
-      description: The additional information you want to add, related issue(s), pull requests, reference documents, situations specific to your environment, etc.
+      description: Any additional information you want to add, related issue(s), pull requests, document references, situations specific to your environment, etc.
     validations:
       required: false
