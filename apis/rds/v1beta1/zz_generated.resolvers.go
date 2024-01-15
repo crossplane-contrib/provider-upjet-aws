@@ -371,6 +371,22 @@ func (mg *ClusterInstance) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.ClusterIdentifierRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBParameterGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.DBParameterGroupNameRef,
+		Selector:     mg.Spec.ForProvider.DBParameterGroupNameSelector,
+		To: reference.To{
+			List:    &ParameterGroupList{},
+			Managed: &ParameterGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBParameterGroupName")
+	}
+	mg.Spec.ForProvider.DBParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBParameterGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSubnetGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.DBSubnetGroupNameRef,
@@ -433,6 +449,22 @@ func (mg *ClusterInstance) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.InitProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ClusterIdentifierRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBParameterGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DBParameterGroupNameRef,
+		Selector:     mg.Spec.InitProvider.DBParameterGroupNameSelector,
+		To: reference.To{
+			List:    &ParameterGroupList{},
+			Managed: &ParameterGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBParameterGroupName")
+	}
+	mg.Spec.InitProvider.DBParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBParameterGroupNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSubnetGroupName),

@@ -84,8 +84,8 @@ func Configure(p *config.Provider) {
 			RefFieldName:      "SecurityGroupNameRefs",
 			SelectorFieldName: "SecurityGroupNameSelector",
 		}
-		r.References["parameter_group_name"] = config.Reference{
-			Type: "ParameterGroup",
+		r.References["db_parameter_group_name"] = config.Reference{
+			TerraformName: "aws_db_parameter_group",
 		}
 		r.References["db_subnet_group_name"] = config.Reference{
 			Type: "SubnetGroup",

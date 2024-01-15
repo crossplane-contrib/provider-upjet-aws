@@ -51,7 +51,16 @@ type ClusterInstanceInitParameters struct {
 	CustomIAMInstanceProfile *string `json:"customIamInstanceProfile,omitempty" tf:"custom_iam_instance_profile,omitempty"`
 
 	// Name of the DB parameter group to associate with this instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ParameterGroup
 	DBParameterGroupName *string `json:"dbParameterGroupName,omitempty" tf:"db_parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup in rds to populate dbParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBParameterGroupNameRef *v1.Reference `json:"dbParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in rds to populate dbParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBParameterGroupNameSelector *v1.Selector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	// +crossplane:generate:reference:type=SubnetGroup
@@ -272,8 +281,17 @@ type ClusterInstanceParameters struct {
 	CustomIAMInstanceProfile *string `json:"customIamInstanceProfile,omitempty" tf:"custom_iam_instance_profile,omitempty"`
 
 	// Name of the DB parameter group to associate with this instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	DBParameterGroupName *string `json:"dbParameterGroupName,omitempty" tf:"db_parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup in rds to populate dbParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBParameterGroupNameRef *v1.Reference `json:"dbParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in rds to populate dbParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBParameterGroupNameSelector *v1.Selector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
 	// +crossplane:generate:reference:type=SubnetGroup

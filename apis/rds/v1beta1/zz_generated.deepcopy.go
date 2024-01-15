@@ -1258,6 +1258,16 @@ func (in *ClusterInstanceInitParameters) DeepCopyInto(out *ClusterInstanceInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.DBParameterGroupNameRef != nil {
+		in, out := &in.DBParameterGroupNameRef, &out.DBParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBParameterGroupNameSelector != nil {
+		in, out := &in.DBParameterGroupNameSelector, &out.DBParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DBSubnetGroupName != nil {
 		in, out := &in.DBSubnetGroupName, &out.DBSubnetGroupName
 		*out = new(string)
@@ -1667,6 +1677,16 @@ func (in *ClusterInstanceParameters) DeepCopyInto(out *ClusterInstanceParameters
 		in, out := &in.DBParameterGroupName, &out.DBParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DBParameterGroupNameRef != nil {
+		in, out := &in.DBParameterGroupNameRef, &out.DBParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBParameterGroupNameSelector != nil {
+		in, out := &in.DBParameterGroupNameSelector, &out.DBParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DBSubnetGroupName != nil {
 		in, out := &in.DBSubnetGroupName, &out.DBSubnetGroupName
