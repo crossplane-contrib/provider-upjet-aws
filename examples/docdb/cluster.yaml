@@ -7,6 +7,9 @@ metadata:
     testing.upbound.io/example-name: docdb
   name: my-docdb-cluster
 spec:
+  writeConnectionSecretToRef:
+    name: docdb-cluster-secret
+    namespace: upbound-system
   forProvider:
     region: us-west-2
     engine: "docdb"
