@@ -68,6 +68,7 @@ KIND_VERSION = v0.20.0
 UP_VERSION = v0.20.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.8.0
+KUSTOMIZE_VERSION = v5.3.0
 
 export UP_VERSION := $(UP_VERSION)
 export UP_CHANNEL := $(UP_CHANNEL)
@@ -314,13 +315,13 @@ go.mod.cachedir:
 
 build.init: kustomize-crds
 
-kustomize-crds: output.init
+kustomize-crds: output.init $(KUSTOMIZE)
 	@$(INFO) Kustomizing CRDs...
 	@rm -fr $(OUTPUT_DIR)/package || $(FAIL)
 	@cp -R package $(OUTPUT_DIR) && \
 	cd $(OUTPUT_DIR)/package/crds && \
 	kustomize create --autodetect || $(FAIL)
-	@XDG_CONFIG_HOME=$(PWD)/package kustomize build --enable-alpha-plugins $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml || $(FAIL)
+	@XDG_CONFIG_HOME=$(PWD)/package $(KUSTOMIZE) build --enable-alpha-plugins $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml || $(FAIL)
 	@$(OK) Kustomizing CRDs.
 
 .PHONY: kustomize-crds
