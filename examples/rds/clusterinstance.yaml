@@ -14,6 +14,9 @@ spec:
         testing.upbound.io/example-name: example-ci
     engine: aurora-postgresql
     instanceClass: db.r5.large
+    dbParameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ci
 
 ---
 
@@ -49,3 +52,23 @@ metadata:
 type: Opaque
 stringData:
   password: TestPass0!
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterinstance
+  labels:
+    testing.upbound.io/example-name: example-ci
+  name: example-parametergroup-ci
+spec:
+  forProvider:
+    region: us-west-1
+    family: aurora-postgresql15
+    description: example
+    parameter:
+      - name: application_name
+        value: "example"
+        applyMethod: immediate
