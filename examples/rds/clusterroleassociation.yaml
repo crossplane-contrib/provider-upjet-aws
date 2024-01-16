@@ -1,12 +1,60 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterRoleAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-cra
+spec:
+  forProvider:
+    region: us-west-1
+    dbClusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-cra
+    featureName: s3Import
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-cra
+
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example-cra
+  name: example-cluster-cra
+spec:
+  forProvider:
+    region: us-west-1
+    engine: aurora-postgresql
+    masterUsername: cpadmin
+    masterPasswordSecretRef:
+      name: sample-cluster-password
+      namespace: upbound-system
+      key: password
+    skipFinalSnapshot: true
+  writeConnectionSecretToRef:
+    name: sample-rds-cluster-secret
+    namespace: upbound-system
+
+
+---
+
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
-  name: sample-s3-policy
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource is a dependency of ClusterRoleAssociation, which needs manual intervention."
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example-cra
+  name: sample-policy-cra
 spec:
   forProvider:
-    name: sample-s3-policy
     policy: |
       {
           "Version": "2012-10-17",
@@ -27,9 +75,11 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: sample-db-role
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource is a dependency of ClusterRoleAssociation, which needs manual intervention."
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example-cra
+  name: sample-role-cra
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -52,29 +102,27 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
-  name: sample-role-attach
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource is a dependency of ClusterRoleAssociation, which needs manual intervention."
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  labels:
+    testing.upbound.io/example-name: example-cra
+  name: sample-role-attach-cra
 spec:
   forProvider:
     policyArnRef:
-      name: sample-s3-policy
+      name: sample-policy-cra
     roleRef:
-      name: sample-db-role
+      name: sample-role-cra
 
 ---
 
-apiVersion: rds.aws.upbound.io/v1beta1
-kind: ClusterRoleAssociation
+apiVersion: v1
+kind: Secret
 metadata:
-  name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource has a reference to Cluster, which needs manual intervention."
-spec:
-  forProvider:
-    region: us-west-1
-    dbClusterIdentifierRef:
-      name: example
-    featureName: s3Import
-    roleArnRef:
-      name: sample-db-role
+    meta.upbound.io/example-id: rds/v1beta1/clusterroleassociation
+  name: sample-cluster-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass0!
