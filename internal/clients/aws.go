@@ -6,7 +6,6 @@ package clients
 
 import (
 	"context"
-	"github.com/hashicorp/terraform-provider-aws/xpfwprovider"
 	"os"
 	"reflect"
 	"unsafe"
@@ -17,6 +16,7 @@ import (
 	"github.com/crossplane/upjet/pkg/terraform"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/hashicorp/terraform-provider-aws/xpfwprovider"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
