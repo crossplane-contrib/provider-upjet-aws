@@ -41,7 +41,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
 	// terraform-plugin-framework
-	"aws_appconfig_environment": config.IdentifierFromProvider,
+	"aws_appconfig_environment": appConfigEnvironment(),
 }
 
 // NoForkExternalNameConfigs contains all external name configurations
@@ -2813,6 +2813,19 @@ func vpcSecurityGroupRule() config.ExternalName {
 	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
 		if len(externalName) == 0 {
 			return "sgr-stub", nil
+		}
+		return externalName, nil
+	}
+	return e
+}
+
+func appConfigEnvironment() config.ExternalName {
+	// Terraform does not allow Environment ID to be empty.
+	// Using a stub value to pass validation.
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		if len(externalName) == 0 {
+			return "appconfig-environment-stub", nil
 		}
 		return externalName, nil
 	}

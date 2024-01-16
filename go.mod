@@ -273,7 +273,7 @@ require (
 
 replace golang.org/x/exp => golang.org/x/exp v0.0.0-20231006140011-7918f672742d
 
-replace github.com/crossplane/upjet => github.com/mergenci/upjet v0.0.0-20240116092538-b41dfff13e37
+replace github.com/crossplane/upjet => github.com/mergenci/upjet v0.0.0-20240116202214-93999bad9aa4
 
 replace github.com/hashicorp/terraform-provider-aws => github.com/erhancagirici/upbound-terraform-provider-aws v0.0.0-20240116072846-cdf2d7f9474f
 
