@@ -105,15 +105,15 @@ type RouteInitParameters struct {
 	RouteResponseSelectionExpression *string `json:"routeResponseSelectionExpression,omitempty" tf:"route_response_selection_expression,omitempty"`
 
 	// Target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
-	// +crossplane:generate:reference:type=Integration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Integration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis.IntegrationIDPrefixed()
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Reference to a Integration to populate target.
+	// Reference to a Integration in apigatewayv2 to populate target.
 	// +kubebuilder:validation:Optional
 	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
 
-	// Selector for a Integration to populate target.
+	// Selector for a Integration in apigatewayv2 to populate target.
 	// +kubebuilder:validation:Optional
 	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
 }
@@ -240,16 +240,16 @@ type RouteParameters struct {
 	RouteResponseSelectionExpression *string `json:"routeResponseSelectionExpression,omitempty" tf:"route_response_selection_expression,omitempty"`
 
 	// Target for the route, of the form integrations/IntegrationID, where IntegrationID is the identifier of an aws_apigatewayv2_integration resource.
-	// +crossplane:generate:reference:type=Integration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Integration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis.IntegrationIDPrefixed()
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
-	// Reference to a Integration to populate target.
+	// Reference to a Integration in apigatewayv2 to populate target.
 	// +kubebuilder:validation:Optional
 	TargetRef *v1.Reference `json:"targetRef,omitempty" tf:"-"`
 
-	// Selector for a Integration to populate target.
+	// Selector for a Integration in apigatewayv2 to populate target.
 	// +kubebuilder:validation:Optional
 	TargetSelector *v1.Selector `json:"targetSelector,omitempty" tf:"-"`
 }

@@ -15,6 +15,8 @@ import (
 	v1beta12 "github.com/upbound/provider-aws/apis/iam/v1beta1"
 	v1beta1 "github.com/upbound/provider-aws/apis/lambda/v1beta1"
 	common "github.com/upbound/provider-aws/config/common"
+	apis "github.com/upbound/provider-aws/config/common/apis"
+	lambda "github.com/upbound/provider-aws/config/common/apis/lambda"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -149,7 +151,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthorizerURI),
-		Extract:      v1beta1.LambdaFunctionInvokeARN(),
+		Extract:      lambda.FunctionInvokeARN(),
 		Reference:    mg.Spec.ForProvider.AuthorizerURIRef,
 		Selector:     mg.Spec.ForProvider.AuthorizerURISelector,
 		To: reference.To{
@@ -181,7 +183,7 @@ func (mg *Authorizer) ResolveReferences(ctx context.Context, c client.Reader) er
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AuthorizerURI),
-		Extract:      v1beta1.LambdaFunctionInvokeARN(),
+		Extract:      lambda.FunctionInvokeARN(),
 		Reference:    mg.Spec.InitProvider.AuthorizerURIRef,
 		Selector:     mg.Spec.InitProvider.AuthorizerURISelector,
 		To: reference.To{
@@ -582,7 +584,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Target),
-		Extract:      IntegrationIDPrefixed(),
+		Extract:      apis.IntegrationIDPrefixed(),
 		Reference:    mg.Spec.ForProvider.TargetRef,
 		Selector:     mg.Spec.ForProvider.TargetSelector,
 		To: reference.To{
@@ -630,7 +632,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target),
-		Extract:      IntegrationIDPrefixed(),
+		Extract:      apis.IntegrationIDPrefixed(),
 		Reference:    mg.Spec.InitProvider.TargetRef,
 		Selector:     mg.Spec.InitProvider.TargetSelector,
 		To: reference.To{

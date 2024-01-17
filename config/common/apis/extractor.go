@@ -1,8 +1,8 @@
 /*
-Copyright 2021 Upbound Inc.
+Copyright 2022 Upbound Inc.
 */
 
-package v1beta1
+package apis
 
 import (
 	"github.com/crossplane/crossplane-runtime/pkg/meta"
@@ -17,14 +17,10 @@ import (
 func IntegrationIDPrefixed() reference.ExtractValueFn {
 	return func(mg xpresource.Managed) string {
 		return func(mg metav1.Object) string {
-			integration, ok := mg.(*Integration)
-			if !ok {
+			if meta.GetExternalName(mg) == "" {
 				return ""
 			}
-			if meta.GetExternalName(integration) == "" {
-				return ""
-			}
-			return "integrations/" + meta.GetExternalName(integration)
+			return "integrations/" + meta.GetExternalName(mg)
 		}(mg)
 	}
 }

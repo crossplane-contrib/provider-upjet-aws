@@ -288,7 +288,8 @@ spec:
                       resource.
                     type: string
                   targetRef:
-                    description: Reference to a Integration to populate target.
+                    description: Reference to a Integration in apigatewayv2 to populate
+                      target.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -322,7 +323,8 @@ spec:
                     - name
                     type: object
                   targetSelector:
-                    description: Selector for a Integration to populate target.
+                    description: Selector for a Integration in apigatewayv2 to populate
+                      target.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -592,7 +594,8 @@ spec:
                       resource.
                     type: string
                   targetRef:
-                    description: Reference to a Integration to populate target.
+                    description: Reference to a Integration in apigatewayv2 to populate
+                      target.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -626,7 +629,8 @@ spec:
                     - name
                     type: object
                   targetSelector:
-                    description: Selector for a Integration to populate target.
+                    description: Selector for a Integration in apigatewayv2 to populate
+                      target.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
