@@ -3,12 +3,45 @@ kind: DBInstanceAutomatedBackupsReplication
 metadata:
   annotations:
     meta.upbound.io/example-id: rds/v1beta1/dbinstanceautomatedbackupsreplication
-    upjet.upbound.io/manual-intervention: "This resource has a reference to Instance, which needs manual intervention."
   labels:
-    testing.upbound.io/example-name: default
-  name: default
+    testing.upbound.io/example-name: example
+  name: example-dbiabr
 spec:
   forProvider:
     region: us-east-2
     retentionPeriod: 7
-    sourceDbInstanceArn: arn-for-db-instance
+    sourceDbInstanceArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default-test
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/dbinstanceautomatedbackupsreplication
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: default-test
+  name: default-dbiabr
+spec:
+  forProvider:
+    backupRetentionPeriod: 7
+    allocatedStorage: 10
+    dbName: mydb
+    engine: mysql
+    engineVersion: "5.7"
+    instanceClass: db.t3.micro
+    parameterGroupName: default.mysql5.7
+    autoGeneratePassword: true
+    passwordSecretRef:
+      key: password
+      name: example-dbinstance
+      namespace: upbound-system
+    region: us-west-1
+    skipFinalSnapshot: true
+    username: foo
+  writeConnectionSecretToRef:
+    name: example-dbinstance-out
+    namespace: default
