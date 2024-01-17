@@ -1,12 +1,52 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: ClusterEndpoint
 metadata:
-  name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource has a reference to Cluster, which needs manual intervention."
+    meta.upbound.io/example-id: rds/v1beta1/clusterendpoint
+  labels:
+    testing.upbound.io/example-name: eligible
+  name: eligible
 spec:
   forProvider:
     region: us-west-1
-    clusterIdentifierRef:
-      name: example
     customEndpointType: READER
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: default-ce
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterendpoint
+  labels:
+    testing.upbound.io/example-name: default-ce
+  name: example-ce
+spec:
+  forProvider:
+    region: us-west-1
+    engine: aurora-postgresql
+    masterUsername: cpadmin
+    masterPasswordSecretRef:
+      name: sample-cluster-password
+      namespace: upbound-system
+      key: password
+    skipFinalSnapshot: true
+  writeConnectionSecretToRef:
+    name: sample-rds-cluster-secret
+    namespace: upbound-system
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterendpoint
+  name: sample-cluster-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass0!

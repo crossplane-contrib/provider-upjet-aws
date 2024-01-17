@@ -1,7 +1,11 @@
 apiVersion: rds.aws.upbound.io/v1beta1
 kind: ClusterParameterGroup
 metadata:
-  name: example
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterparametergroup
+  labels:
+    testing.upbound.io/example-name: default
+  name: example-cpg
 spec:
   forProvider:
     region: us-west-1
