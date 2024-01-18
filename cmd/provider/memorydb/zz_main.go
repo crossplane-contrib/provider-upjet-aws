@@ -32,6 +32,7 @@ import (
 	"github.com/upbound/provider-aws/apis"
 	"github.com/upbound/provider-aws/apis/v1alpha1"
 	"github.com/upbound/provider-aws/config"
+	resolverapis "github.com/upbound/provider-aws/internal/apis"
 	"github.com/upbound/provider-aws/internal/clients"
 	"github.com/upbound/provider-aws/internal/controller"
 	"github.com/upbound/provider-aws/internal/features"
@@ -95,6 +96,7 @@ func main() {
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add AWS APIs to scheme")
+	kingpin.FatalIfError(resolverapis.BuildScheme(apis.AddToSchemes), "Cannot register the AWS APIs with the API resolver's runtime scheme")
 
 	// if the native Terraform provider plugin's path is not configured via
 	// the env. variable TERRAFORM_NATIVE_PROVIDER_PATH or
