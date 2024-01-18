@@ -72,14 +72,14 @@ jobs:
         run: echo "cache=$(go env GOCACHE)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
+        uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4
         with:
           path: ${{ steps.go.outputs.cache }}
           key: ${{ runner.os }}-build-uptest-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-uptest-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@e12d46a63a90f2fae62d114769bbf2a179198b5c # v3
+        uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4
         with:
           path: .work/pkg
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
