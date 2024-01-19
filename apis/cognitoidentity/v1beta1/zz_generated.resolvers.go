@@ -10,77 +10,110 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this CognitoIdentityPoolProviderPrincipalTag.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this CognitoIdentityPoolProviderPrincipalTag.
 func (mg *CognitoIdentityPoolProviderPrincipalTag) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitoidentity.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityPoolID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.IdentityPoolIDRef,
-		Selector:     mg.Spec.ForProvider.IdentityPoolIDSelector,
-		To: reference.To{
-			List:    &PoolList{},
-			Managed: &Pool{},
-		},
-	})
+			"v1beta1", "Pool", "PoolList")
+
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.IdentityPoolIDRef,
+			Selector:     mg.Spec.ForProvider.IdentityPoolIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IdentityPoolID")
 	}
 	mg.Spec.ForProvider.IdentityPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IdentityPoolIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityProviderName),
-		Extract:      resource.ExtractParamPath("endpoint", true),
-		Reference:    mg.Spec.ForProvider.IdentityProviderNameRef,
-		Selector:     mg.Spec.ForProvider.IdentityProviderNameSelector,
-		To: reference.To{
-			List:    &v1beta1.UserPoolList{},
-			Managed: &v1beta1.UserPool{},
-		},
-	})
+			"v1beta1", "UserPool", "UserPoolList",
+		)
+		if err !=
+
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityProviderName),
+			Extract:      resource.ExtractParamPath("endpoint", true),
+			Reference:    mg.Spec.ForProvider.IdentityProviderNameRef,
+			Selector:     mg.Spec.ForProvider.IdentityProviderNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IdentityProviderName")
 	}
 	mg.Spec.ForProvider.IdentityProviderName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IdentityProviderNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitoidentity.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityPoolID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.InitProvider.IdentityPoolIDRef,
-		Selector:     mg.Spec.InitProvider.IdentityPoolIDSelector,
-		To: reference.To{
-			List:    &PoolList{},
-			Managed: &Pool{},
-		},
-	})
+			"v1beta1", "Pool", "PoolList")
+
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.IdentityPoolIDRef,
+			Selector:     mg.Spec.InitProvider.IdentityPoolIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IdentityPoolID")
 	}
 	mg.Spec.InitProvider.IdentityPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IdentityPoolIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityProviderName),
-		Extract:      resource.ExtractParamPath("endpoint", true),
-		Reference:    mg.Spec.InitProvider.IdentityProviderNameRef,
-		Selector:     mg.Spec.InitProvider.IdentityProviderNameSelector,
-		To: reference.To{
-			List:    &v1beta1.UserPoolList{},
-			Managed: &v1beta1.UserPool{},
-		},
-	})
+			"v1beta1", "UserPool", "UserPoolList",
+		)
+		if err !=
+
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityProviderName),
+			Extract:      resource.ExtractParamPath("endpoint", true),
+			Reference:    mg.Spec.InitProvider.IdentityProviderNameRef,
+			Selector:     mg.Spec.InitProvider.IdentityProviderNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IdentityProviderName")
 	}
@@ -92,6 +125,9 @@ func (mg *CognitoIdentityPoolProviderPrincipalTag) ResolveReferences(ctx context
 
 // ResolveReferences of this Pool.
 func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -99,16 +135,23 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CognitoIdentityProviders); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientID),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDRef,
-			Selector:     mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDSelector,
-			To: reference.To{
-				List:    &v1beta1.UserPoolClientList{},
-				Managed: &v1beta1.UserPoolClient{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io",
+
+				"v1beta1", "UserPoolClient", "UserPoolClientList",
+			)
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDRef,
+				Selector:     mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientID")
 		}
@@ -116,16 +159,24 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.ForProvider.CognitoIdentityProviders[i3].ClientIDRef = rsp.ResolvedReference
 
 	}
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SAMLProviderArns),
-		Extract:       common.ARNExtractor(),
-		References:    mg.Spec.ForProvider.SAMLProviderArnsRefs,
-		Selector:      mg.Spec.ForProvider.SAMLProviderArnsSelector,
-		To: reference.To{
-			List:    &v1beta11.SAMLProviderList{},
-			Managed: &v1beta11.SAMLProvider{},
-		},
-	})
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+			"v1beta1", "SAMLProvider", "SAMLProviderList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SAMLProviderArns),
+			Extract:       common.ARNExtractor(),
+			References:    mg.Spec.ForProvider.SAMLProviderArnsRefs,
+			Selector:      mg.Spec.ForProvider.SAMLProviderArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SAMLProviderArns")
 	}
@@ -133,16 +184,23 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.SAMLProviderArnsRefs = mrsp.ResolvedReferences
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.CognitoIdentityProviders); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientID),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDRef,
-			Selector:     mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDSelector,
-			To: reference.To{
-				List:    &v1beta1.UserPoolClientList{},
-				Managed: &v1beta1.UserPoolClient{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io",
+
+				"v1beta1", "UserPoolClient", "UserPoolClientList",
+			)
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDRef,
+				Selector:     mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientID")
 		}
@@ -150,16 +208,24 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 		mg.Spec.InitProvider.CognitoIdentityProviders[i3].ClientIDRef = rsp.ResolvedReference
 
 	}
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SAMLProviderArns),
-		Extract:       common.ARNExtractor(),
-		References:    mg.Spec.InitProvider.SAMLProviderArnsRefs,
-		Selector:      mg.Spec.InitProvider.SAMLProviderArnsSelector,
-		To: reference.To{
-			List:    &v1beta11.SAMLProviderList{},
-			Managed: &v1beta11.SAMLProvider{},
-		},
-	})
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+			"v1beta1", "SAMLProvider", "SAMLProviderList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SAMLProviderArns),
+			Extract:       common.ARNExtractor(),
+			References:    mg.Spec.InitProvider.SAMLProviderArnsRefs,
+			Selector:      mg.Spec.InitProvider.SAMLProviderArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SAMLProviderArns")
 	}
@@ -171,21 +237,30 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 // ResolveReferences of this PoolRolesAttachment.
 func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitoidentity.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityPoolID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.IdentityPoolIDRef,
-		Selector:     mg.Spec.ForProvider.IdentityPoolIDSelector,
-		To: reference.To{
-			List:    &PoolList{},
-			Managed: &Pool{},
-		},
-	})
+			"v1beta1", "Pool", "PoolList")
+
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IdentityPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.IdentityPoolIDRef,
+			Selector:     mg.Spec.ForProvider.IdentityPoolIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IdentityPoolID")
 	}
@@ -194,16 +269,23 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RoleMapping); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.RoleMapping[i3].MappingRule); i4++ {
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
-				Reference:    mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef,
-				Selector:     mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnSelector,
-				To: reference.To{
-					List:    &v1beta11.RoleList{},
-					Managed: &v1beta11.Role{},
-				},
-			})
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+					"v1beta1", "Role", "RoleList")
+				if err !=
+					nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.ForProvider.RoleMapping[i3].MappingRule[i4].RoleArn")
 			}
@@ -212,16 +294,23 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 
 		}
 	}
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityPoolID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.InitProvider.IdentityPoolIDRef,
-		Selector:     mg.Spec.InitProvider.IdentityPoolIDSelector,
-		To: reference.To{
-			List:    &PoolList{},
-			Managed: &Pool{},
-		},
-	})
+	{
+		m, l, err = apisresolver.GetManagedResource("cognitoidentity.aws.upbound.io",
+
+			"v1beta1", "Pool", "PoolList")
+
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IdentityPoolID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.IdentityPoolIDRef,
+			Selector:     mg.Spec.InitProvider.IdentityPoolIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IdentityPoolID")
 	}
@@ -230,16 +319,23 @@ func (mg *PoolRolesAttachment) ResolveReferences(ctx context.Context, c client.R
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.RoleMapping); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.RoleMapping[i3].MappingRule); i4++ {
-			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
-				Reference:    mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef,
-				Selector:     mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnSelector,
-				To: reference.To{
-					List:    &v1beta11.RoleList{},
-					Managed: &v1beta11.Role{},
-				},
-			})
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+					"v1beta1", "Role", "RoleList")
+				if err !=
+					nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
 			if err != nil {
 				return errors.Wrap(err, "mg.Spec.InitProvider.RoleMapping[i3].MappingRule[i4].RoleArn")
 			}

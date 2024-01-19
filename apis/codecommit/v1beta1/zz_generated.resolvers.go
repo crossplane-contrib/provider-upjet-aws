@@ -10,43 +10,63 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this ApprovalRuleTemplateAssociation.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this ApprovalRuleTemplateAssociation.
 func (mg *ApprovalRuleTemplateAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApprovalRuleTemplateName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ApprovalRuleTemplateNameRef,
-		Selector:     mg.Spec.ForProvider.ApprovalRuleTemplateNameSelector,
-		To: reference.To{
-			List:    &ApprovalRuleTemplateList{},
-			Managed: &ApprovalRuleTemplate{},
-		},
-	})
+			"v1beta1", "ApprovalRuleTemplate",
+			"ApprovalRuleTemplateList",
+		)
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApprovalRuleTemplateName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ApprovalRuleTemplateNameRef,
+			Selector:     mg.Spec.ForProvider.ApprovalRuleTemplateNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ApprovalRuleTemplateName")
 	}
 	mg.Spec.ForProvider.ApprovalRuleTemplateName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApprovalRuleTemplateNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RepositoryName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.RepositoryNameRef,
-		Selector:     mg.Spec.ForProvider.RepositoryNameSelector,
-		To: reference.To{
-			List:    &RepositoryList{},
-			Managed: &Repository{},
-		},
-	})
+			"v1beta1", "Repository", "RepositoryList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RepositoryName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.RepositoryNameRef,
+			Selector:     mg.Spec.ForProvider.RepositoryNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RepositoryName")
 	}
@@ -58,21 +78,31 @@ func (mg *ApprovalRuleTemplateAssociation) ResolveReferences(ctx context.Context
 
 // ResolveReferences of this Trigger.
 func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RepositoryName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.RepositoryNameRef,
-		Selector:     mg.Spec.ForProvider.RepositoryNameSelector,
-		To: reference.To{
-			List:    &RepositoryList{},
-			Managed: &Repository{},
-		},
-	})
+			"v1beta1", "Repository", "RepositoryList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RepositoryName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.RepositoryNameRef,
+			Selector:     mg.Spec.ForProvider.RepositoryNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RepositoryName")
 	}
@@ -80,16 +110,24 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.RepositoryNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Trigger); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Trigger[i3].DestinationArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.ForProvider.Trigger[i3].DestinationArnRef,
-			Selector:     mg.Spec.ForProvider.Trigger[i3].DestinationArnSelector,
-			To: reference.To{
-				List:    &v1beta1.TopicList{},
-				Managed: &v1beta1.Topic{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
+
+				"v1beta1", "Topic", "TopicList")
+			if err !=
+
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Trigger[i3].DestinationArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.Trigger[i3].DestinationArnRef,
+				Selector:     mg.Spec.ForProvider.Trigger[i3].DestinationArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Trigger[i3].DestinationArn")
 		}
@@ -97,16 +135,24 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 		mg.Spec.ForProvider.Trigger[i3].DestinationArnRef = rsp.ResolvedReference
 
 	}
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.RepositoryNameRef,
-		Selector:     mg.Spec.InitProvider.RepositoryNameSelector,
-		To: reference.To{
-			List:    &RepositoryList{},
-			Managed: &Repository{},
-		},
-	})
+	{
+		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
+
+			"v1beta1", "Repository", "RepositoryList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.RepositoryNameRef,
+			Selector:     mg.Spec.InitProvider.RepositoryNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RepositoryName")
 	}
@@ -114,16 +160,24 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.InitProvider.RepositoryNameRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Trigger); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Trigger[i3].DestinationArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.InitProvider.Trigger[i3].DestinationArnRef,
-			Selector:     mg.Spec.InitProvider.Trigger[i3].DestinationArnSelector,
-			To: reference.To{
-				List:    &v1beta1.TopicList{},
-				Managed: &v1beta1.Topic{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
+
+				"v1beta1", "Topic", "TopicList")
+			if err !=
+
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Trigger[i3].DestinationArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.Trigger[i3].DestinationArnRef,
+				Selector:     mg.Spec.InitProvider.Trigger[i3].DestinationArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Trigger[i3].DestinationArn")
 		}

@@ -8,44 +8,66 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this Revision.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this Revision.
 func (mg *Revision) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dataexchange.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSetID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.DataSetIDRef,
-		Selector:     mg.Spec.ForProvider.DataSetIDSelector,
-		To: reference.To{
-			List:    &DataSetList{},
-			Managed: &DataSet{},
-		},
-	})
+			"v1beta1", "DataSet", "DataSetList",
+		)
+		if err !=
+
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSetID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.DataSetIDRef,
+			Selector:     mg.Spec.ForProvider.DataSetIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DataSetID")
 	}
 	mg.Spec.ForProvider.DataSetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataSetIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dataexchange.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSetID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.InitProvider.DataSetIDRef,
-		Selector:     mg.Spec.InitProvider.DataSetIDSelector,
-		To: reference.To{
-			List:    &DataSetList{},
-			Managed: &DataSet{},
-		},
-	})
+			"v1beta1", "DataSet", "DataSetList",
+		)
+		if err !=
+
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSetID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.DataSetIDRef,
+			Selector:     mg.Spec.InitProvider.DataSetIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DataSetID")
 	}

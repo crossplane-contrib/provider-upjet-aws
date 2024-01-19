@@ -10,43 +10,63 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this AssessmentTarget.
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
-// ResolveReferences of this AssessmentTarget.
 func (mg *AssessmentTarget) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("inspector.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.ForProvider.ResourceGroupArnRef,
-		Selector:     mg.Spec.ForProvider.ResourceGroupArnSelector,
-		To: reference.To{
-			List:    &ResourceGroupList{},
-			Managed: &ResourceGroup{},
-		},
-	})
+			"v1beta1", "ResourceGroup", "ResourceGroupList",
+		)
+
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.ResourceGroupArnRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupArn")
 	}
 	mg.Spec.ForProvider.ResourceGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("inspector.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.InitProvider.ResourceGroupArnRef,
-		Selector:     mg.Spec.InitProvider.ResourceGroupArnSelector,
-		To: reference.To{
-			List:    &ResourceGroupList{},
-			Managed: &ResourceGroup{},
-		},
-	})
+			"v1beta1", "ResourceGroup", "ResourceGroupList",
+		)
+
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.ResourceGroupArnRef,
+			Selector:     mg.Spec.InitProvider.ResourceGroupArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupArn")
 	}
@@ -58,22 +78,33 @@ func (mg *AssessmentTarget) ResolveReferences(ctx context.Context, c client.Read
 
 // ResolveReferences of this AssessmentTemplate.
 func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.EventSubscription); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventSubscription[i3].TopicArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.ForProvider.EventSubscription[i3].TopicArnRef,
-			Selector:     mg.Spec.ForProvider.EventSubscription[i3].TopicArnSelector,
-			To: reference.To{
-				List:    &v1beta1.TopicList{},
-				Managed: &v1beta1.Topic{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
+
+				"v1beta1", "Topic", "TopicList")
+			if err !=
+
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventSubscription[i3].TopicArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.EventSubscription[i3].TopicArnRef,
+				Selector:     mg.Spec.ForProvider.EventSubscription[i3].TopicArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.EventSubscription[i3].TopicArn")
 		}
@@ -81,16 +112,23 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 		mg.Spec.ForProvider.EventSubscription[i3].TopicArnRef = rsp.ResolvedReference
 
 	}
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.ForProvider.TargetArnRef,
-		Selector:     mg.Spec.ForProvider.TargetArnSelector,
-		To: reference.To{
-			List:    &AssessmentTargetList{},
-			Managed: &AssessmentTarget{},
-		},
-	})
+	{
+		m, l, err = apisresolver.GetManagedResource("inspector.aws.upbound.io",
+
+			"v1beta1", "AssessmentTarget", "AssessmentTargetList",
+		)
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.TargetArnRef,
+			Selector:     mg.Spec.ForProvider.TargetArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TargetArn")
 	}
@@ -98,16 +136,24 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.TargetArnRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.EventSubscription); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventSubscription[i3].TopicArn),
-			Extract:      resource.ExtractParamPath("arn", true),
-			Reference:    mg.Spec.InitProvider.EventSubscription[i3].TopicArnRef,
-			Selector:     mg.Spec.InitProvider.EventSubscription[i3].TopicArnSelector,
-			To: reference.To{
-				List:    &v1beta1.TopicList{},
-				Managed: &v1beta1.Topic{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
+
+				"v1beta1", "Topic", "TopicList")
+			if err !=
+
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventSubscription[i3].TopicArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.EventSubscription[i3].TopicArnRef,
+				Selector:     mg.Spec.InitProvider.EventSubscription[i3].TopicArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.EventSubscription[i3].TopicArn")
 		}
@@ -115,16 +161,23 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 		mg.Spec.InitProvider.EventSubscription[i3].TopicArnRef = rsp.ResolvedReference
 
 	}
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.InitProvider.TargetArnRef,
-		Selector:     mg.Spec.InitProvider.TargetArnSelector,
-		To: reference.To{
-			List:    &AssessmentTargetList{},
-			Managed: &AssessmentTarget{},
-		},
-	})
+	{
+		m, l, err = apisresolver.GetManagedResource("inspector.aws.upbound.io",
+
+			"v1beta1", "AssessmentTarget", "AssessmentTargetList",
+		)
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.TargetArnRef,
+			Selector:     mg.Spec.InitProvider.TargetArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TargetArn")
 	}

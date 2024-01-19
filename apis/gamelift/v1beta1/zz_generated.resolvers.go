@@ -10,31 +10,42 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta1 "github.com/upbound/provider-aws/apis/s3/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/sns/v1beta1"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this Build.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this Build.
 func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Bucket),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.StorageLocation[i3].BucketRef,
-			Selector:     mg.Spec.ForProvider.StorageLocation[i3].BucketSelector,
-			To: reference.To{
-				List:    &v1beta1.BucketList{},
-				Managed: &v1beta1.Bucket{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+				"v1beta1", "Bucket", "BucketList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Bucket),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.StorageLocation[i3].BucketRef,
+				Selector:     mg.Spec.ForProvider.StorageLocation[i3].BucketSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageLocation[i3].Bucket")
 		}
@@ -43,16 +54,23 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Key),
-			Extract:      resource.ExtractParamPath("key", false),
-			Reference:    mg.Spec.ForProvider.StorageLocation[i3].KeyRef,
-			Selector:     mg.Spec.ForProvider.StorageLocation[i3].KeySelector,
-			To: reference.To{
-				List:    &v1beta1.ObjectList{},
-				Managed: &v1beta1.Object{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+				"v1beta1", "Object", "ObjectList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Key),
+				Extract:      resource.ExtractParamPath("key", false),
+				Reference:    mg.Spec.ForProvider.StorageLocation[i3].KeyRef,
+				Selector:     mg.Spec.ForProvider.StorageLocation[i3].KeySelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageLocation[i3].Key")
 		}
@@ -61,16 +79,23 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].RoleArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.ForProvider.StorageLocation[i3].RoleArnRef,
-			Selector:     mg.Spec.ForProvider.StorageLocation[i3].RoleArnSelector,
-			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+				"v1beta1", "Role", "RoleList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.StorageLocation[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.StorageLocation[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageLocation[i3].RoleArn")
 		}
@@ -79,16 +104,23 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Bucket),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.StorageLocation[i3].BucketRef,
-			Selector:     mg.Spec.InitProvider.StorageLocation[i3].BucketSelector,
-			To: reference.To{
-				List:    &v1beta1.BucketList{},
-				Managed: &v1beta1.Bucket{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+				"v1beta1", "Bucket", "BucketList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Bucket),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.StorageLocation[i3].BucketRef,
+				Selector:     mg.Spec.InitProvider.StorageLocation[i3].BucketSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].Bucket")
 		}
@@ -97,16 +129,23 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Key),
-			Extract:      resource.ExtractParamPath("key", false),
-			Reference:    mg.Spec.InitProvider.StorageLocation[i3].KeyRef,
-			Selector:     mg.Spec.InitProvider.StorageLocation[i3].KeySelector,
-			To: reference.To{
-				List:    &v1beta1.ObjectList{},
-				Managed: &v1beta1.Object{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+				"v1beta1", "Object", "ObjectList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Key),
+				Extract:      resource.ExtractParamPath("key", false),
+				Reference:    mg.Spec.InitProvider.StorageLocation[i3].KeyRef,
+				Selector:     mg.Spec.InitProvider.StorageLocation[i3].KeySelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].Key")
 		}
@@ -115,16 +154,23 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].RoleArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.InitProvider.StorageLocation[i3].RoleArnRef,
-			Selector:     mg.Spec.InitProvider.StorageLocation[i3].RoleArnSelector,
-			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+				"v1beta1", "Role", "RoleList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.StorageLocation[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.StorageLocation[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].RoleArn")
 		}
@@ -138,69 +184,98 @@ func (mg *Build) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 // ResolveReferences of this Fleet.
 func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("gamelift.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BuildID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.BuildIDRef,
-		Selector:     mg.Spec.ForProvider.BuildIDSelector,
-		To: reference.To{
-			List:    &BuildList{},
-			Managed: &Build{},
-		},
-	})
+			"v1beta1", "Build", "BuildList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BuildID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.BuildIDRef,
+			Selector:     mg.Spec.ForProvider.BuildIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.BuildID")
 	}
 	mg.Spec.ForProvider.BuildID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BuildIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceRoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.InstanceRoleArnRef,
-		Selector:     mg.Spec.ForProvider.InstanceRoleArnSelector,
-		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
-		},
-	})
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.InstanceRoleArnRef,
+			Selector:     mg.Spec.ForProvider.InstanceRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.InstanceRoleArn")
 	}
 	mg.Spec.ForProvider.InstanceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceRoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("gamelift.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BuildID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.BuildIDRef,
-		Selector:     mg.Spec.InitProvider.BuildIDSelector,
-		To: reference.To{
-			List:    &BuildList{},
-			Managed: &Build{},
-		},
-	})
+			"v1beta1", "Build", "BuildList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BuildID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.BuildIDRef,
+			Selector:     mg.Spec.InitProvider.BuildIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.BuildID")
 	}
 	mg.Spec.InitProvider.BuildID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BuildIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceRoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.InitProvider.InstanceRoleArnRef,
-		Selector:     mg.Spec.InitProvider.InstanceRoleArnSelector,
-		To: reference.To{
-			List:    &v1beta11.RoleList{},
-			Managed: &v1beta11.Role{},
-		},
-	})
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.InstanceRoleArnRef,
+			Selector:     mg.Spec.InitProvider.InstanceRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceRoleArn")
 	}
@@ -212,37 +287,54 @@ func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 // ResolveReferences of this GameSessionQueue.
 func (mg *GameSessionQueue) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NotificationTarget),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.NotificationTargetRef,
-		Selector:     mg.Spec.ForProvider.NotificationTargetSelector,
-		To: reference.To{
-			List:    &v1beta12.TopicList{},
-			Managed: &v1beta12.Topic{},
-		},
-	})
+			"v1beta1", "Topic", "TopicList")
+		if err !=
+
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NotificationTarget),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.NotificationTargetRef,
+			Selector:     mg.Spec.ForProvider.NotificationTargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NotificationTarget")
 	}
 	mg.Spec.ForProvider.NotificationTarget = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NotificationTargetRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NotificationTarget),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.InitProvider.NotificationTargetRef,
-		Selector:     mg.Spec.InitProvider.NotificationTargetSelector,
-		To: reference.To{
-			List:    &v1beta12.TopicList{},
-			Managed: &v1beta12.Topic{},
-		},
-	})
+			"v1beta1", "Topic", "TopicList")
+		if err !=
+
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NotificationTarget),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.NotificationTargetRef,
+			Selector:     mg.Spec.InitProvider.NotificationTargetSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.NotificationTarget")
 	}
@@ -254,22 +346,32 @@ func (mg *GameSessionQueue) ResolveReferences(ctx context.Context, c client.Read
 
 // ResolveReferences of this Script.
 func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Bucket),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.StorageLocation[i3].BucketRef,
-			Selector:     mg.Spec.ForProvider.StorageLocation[i3].BucketSelector,
-			To: reference.To{
-				List:    &v1beta1.BucketList{},
-				Managed: &v1beta1.Bucket{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+				"v1beta1", "Bucket", "BucketList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Bucket),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.StorageLocation[i3].BucketRef,
+				Selector:     mg.Spec.ForProvider.StorageLocation[i3].BucketSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageLocation[i3].Bucket")
 		}
@@ -278,16 +380,23 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Key),
-			Extract:      resource.ExtractParamPath("key", false),
-			Reference:    mg.Spec.ForProvider.StorageLocation[i3].KeyRef,
-			Selector:     mg.Spec.ForProvider.StorageLocation[i3].KeySelector,
-			To: reference.To{
-				List:    &v1beta1.ObjectList{},
-				Managed: &v1beta1.Object{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+				"v1beta1", "Object", "ObjectList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].Key),
+				Extract:      resource.ExtractParamPath("key", false),
+				Reference:    mg.Spec.ForProvider.StorageLocation[i3].KeyRef,
+				Selector:     mg.Spec.ForProvider.StorageLocation[i3].KeySelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageLocation[i3].Key")
 		}
@@ -296,16 +405,23 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].RoleArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.ForProvider.StorageLocation[i3].RoleArnRef,
-			Selector:     mg.Spec.ForProvider.StorageLocation[i3].RoleArnSelector,
-			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+				"v1beta1", "Role", "RoleList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageLocation[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.StorageLocation[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.StorageLocation[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.StorageLocation[i3].RoleArn")
 		}
@@ -314,16 +430,23 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Bucket),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.StorageLocation[i3].BucketRef,
-			Selector:     mg.Spec.InitProvider.StorageLocation[i3].BucketSelector,
-			To: reference.To{
-				List:    &v1beta1.BucketList{},
-				Managed: &v1beta1.Bucket{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+				"v1beta1", "Bucket", "BucketList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Bucket),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.StorageLocation[i3].BucketRef,
+				Selector:     mg.Spec.InitProvider.StorageLocation[i3].BucketSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].Bucket")
 		}
@@ -332,16 +455,23 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Key),
-			Extract:      resource.ExtractParamPath("key", false),
-			Reference:    mg.Spec.InitProvider.StorageLocation[i3].KeyRef,
-			Selector:     mg.Spec.InitProvider.StorageLocation[i3].KeySelector,
-			To: reference.To{
-				List:    &v1beta1.ObjectList{},
-				Managed: &v1beta1.Object{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+				"v1beta1", "Object", "ObjectList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].Key),
+				Extract:      resource.ExtractParamPath("key", false),
+				Reference:    mg.Spec.InitProvider.StorageLocation[i3].KeyRef,
+				Selector:     mg.Spec.InitProvider.StorageLocation[i3].KeySelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].Key")
 		}
@@ -350,16 +480,23 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageLocation); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].RoleArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.InitProvider.StorageLocation[i3].RoleArnRef,
-			Selector:     mg.Spec.InitProvider.StorageLocation[i3].RoleArnSelector,
-			To: reference.To{
-				List:    &v1beta11.RoleList{},
-				Managed: &v1beta11.Role{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+				"v1beta1", "Role", "RoleList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageLocation[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.StorageLocation[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.StorageLocation[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.StorageLocation[i3].RoleArn")
 		}

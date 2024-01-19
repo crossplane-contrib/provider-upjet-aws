@@ -10,28 +10,40 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this RateBasedRule.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this RateBasedRule.
 func (mg *RateBasedRule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Predicate); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Predicate[i3].DataID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.ForProvider.Predicate[i3].DataIDRef,
-			Selector:     mg.Spec.ForProvider.Predicate[i3].DataIDSelector,
-			To: reference.To{
-				List:    &IPSetList{},
-				Managed: &IPSet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("wafregional.aws.upbound.io",
+
+				"v1beta1", "IPSet", "IPSetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Predicate[i3].DataID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.Predicate[i3].DataIDRef,
+				Selector:     mg.Spec.ForProvider.Predicate[i3].DataIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Predicate[i3].DataID")
 		}
@@ -40,16 +52,22 @@ func (mg *RateBasedRule) ResolveReferences(ctx context.Context, c client.Reader)
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Predicate); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicate[i3].DataID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.Predicate[i3].DataIDRef,
-			Selector:     mg.Spec.InitProvider.Predicate[i3].DataIDSelector,
-			To: reference.To{
-				List:    &IPSetList{},
-				Managed: &IPSet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("wafregional.aws.upbound.io",
+
+				"v1beta1", "IPSet", "IPSetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicate[i3].DataID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Predicate[i3].DataIDRef,
+				Selector:     mg.Spec.InitProvider.Predicate[i3].DataIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Predicate[i3].DataID")
 		}
@@ -63,22 +81,32 @@ func (mg *RateBasedRule) ResolveReferences(ctx context.Context, c client.Reader)
 
 // ResolveReferences of this RegexMatchSet.
 func (mg *RegexMatchSet) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RegexMatchTuple); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetIDRef,
-			Selector:     mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetIDSelector,
-			To: reference.To{
-				List:    &RegexPatternSetList{},
-				Managed: &RegexPatternSet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("wafregional.aws.upbound.io",
+
+				"v1beta1", "RegexPatternSet", "RegexPatternSetList",
+			)
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetIDRef,
+				Selector:     mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.RegexMatchTuple[i3].RegexPatternSetID")
 		}
@@ -87,16 +115,23 @@ func (mg *RegexMatchSet) ResolveReferences(ctx context.Context, c client.Reader)
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.RegexMatchTuple); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDRef,
-			Selector:     mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDSelector,
-			To: reference.To{
-				List:    &RegexPatternSetList{},
-				Managed: &RegexPatternSet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("wafregional.aws.upbound.io",
+
+				"v1beta1", "RegexPatternSet", "RegexPatternSetList",
+			)
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDRef,
+				Selector:     mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.RegexMatchTuple[i3].RegexPatternSetID")
 		}
@@ -110,22 +145,31 @@ func (mg *RegexMatchSet) ResolveReferences(ctx context.Context, c client.Reader)
 
 // ResolveReferences of this Rule.
 func (mg *Rule) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Predicate); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Predicate[i3].DataID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.ForProvider.Predicate[i3].DataIDRef,
-			Selector:     mg.Spec.ForProvider.Predicate[i3].DataIDSelector,
-			To: reference.To{
-				List:    &IPSetList{},
-				Managed: &IPSet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("wafregional.aws.upbound.io",
+
+				"v1beta1", "IPSet", "IPSetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Predicate[i3].DataID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.Predicate[i3].DataIDRef,
+				Selector:     mg.Spec.ForProvider.Predicate[i3].DataIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Predicate[i3].DataID")
 		}
@@ -134,16 +178,22 @@ func (mg *Rule) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Predicate); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicate[i3].DataID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.Predicate[i3].DataIDRef,
-			Selector:     mg.Spec.InitProvider.Predicate[i3].DataIDSelector,
-			To: reference.To{
-				List:    &IPSetList{},
-				Managed: &IPSet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("wafregional.aws.upbound.io",
+
+				"v1beta1", "IPSet", "IPSetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Predicate[i3].DataID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Predicate[i3].DataIDRef,
+				Selector:     mg.Spec.InitProvider.Predicate[i3].DataIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Predicate[i3].DataID")
 		}
@@ -157,22 +207,33 @@ func (mg *Rule) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 // ResolveReferences of this WebACL.
 func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoggingConfiguration); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingConfiguration[i3].LogDestination),
-			Extract:      resource.ExtractParamPath("arn", false),
-			Reference:    mg.Spec.ForProvider.LoggingConfiguration[i3].LogDestinationRef,
-			Selector:     mg.Spec.ForProvider.LoggingConfiguration[i3].LogDestinationSelector,
-			To: reference.To{
-				List:    &v1beta1.DeliveryStreamList{},
-				Managed: &v1beta1.DeliveryStream{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io",
+
+				"v1beta1", "DeliveryStream", "DeliveryStreamList",
+			)
+
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingConfiguration[i3].LogDestination),
+				Extract:      resource.ExtractParamPath("arn", false),
+				Reference:    mg.Spec.ForProvider.LoggingConfiguration[i3].LogDestinationRef,
+				Selector:     mg.Spec.ForProvider.LoggingConfiguration[i3].LogDestinationSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.LoggingConfiguration[i3].LogDestination")
 		}
@@ -181,16 +242,23 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Rule); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].RuleID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.ForProvider.Rule[i3].RuleIDRef,
-			Selector:     mg.Spec.ForProvider.Rule[i3].RuleIDSelector,
-			To: reference.To{
-				List:    &RuleList{},
-				Managed: &Rule{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("wafregional.aws.upbound.io",
+
+				"v1beta1", "Rule", "RuleList")
+			if err != nil {
+
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Rule[i3].RuleID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.Rule[i3].RuleIDRef,
+				Selector:     mg.Spec.ForProvider.Rule[i3].RuleIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Rule[i3].RuleID")
 		}
@@ -199,16 +267,24 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingConfiguration); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestination),
-			Extract:      resource.ExtractParamPath("arn", false),
-			Reference:    mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestinationRef,
-			Selector:     mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestinationSelector,
-			To: reference.To{
-				List:    &v1beta1.DeliveryStreamList{},
-				Managed: &v1beta1.DeliveryStream{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io",
+
+				"v1beta1", "DeliveryStream", "DeliveryStreamList",
+			)
+
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestination),
+				Extract:      resource.ExtractParamPath("arn", false),
+				Reference:    mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestinationRef,
+				Selector:     mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestinationSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.LoggingConfiguration[i3].LogDestination")
 		}
@@ -217,16 +293,23 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rule); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].RuleID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.Rule[i3].RuleIDRef,
-			Selector:     mg.Spec.InitProvider.Rule[i3].RuleIDSelector,
-			To: reference.To{
-				List:    &RuleList{},
-				Managed: &Rule{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("wafregional.aws.upbound.io",
+
+				"v1beta1", "Rule", "RuleList")
+			if err != nil {
+
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rule[i3].RuleID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Rule[i3].RuleIDRef,
+				Selector:     mg.Spec.InitProvider.Rule[i3].RuleIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Rule[i3].RuleID")
 		}

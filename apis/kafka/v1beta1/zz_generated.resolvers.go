@@ -10,18 +10,19 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta12 "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
-	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	v1beta13 "github.com/upbound/provider-aws/apis/firehose/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
-	v1beta14 "github.com/upbound/provider-aws/apis/s3/v1beta1"
-	v1beta15 "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this Cluster.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this Cluster.
 func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
@@ -29,16 +30,23 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.BrokerNodeGroupInfo); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].ClientSubnets),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].ClientSubnetsRefs,
-			Selector:      mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].ClientSubnetsSelector,
-			To: reference.To{
-				List:    &v1beta1.SubnetList{},
-				Managed: &v1beta1.Subnet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
+
+				"v1beta1", "Subnet", "SubnetList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].ClientSubnets),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].ClientSubnetsRefs,
+				Selector:      mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].ClientSubnetsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].ClientSubnets")
 		}
@@ -47,16 +55,24 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.BrokerNodeGroupInfo); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].SecurityGroups),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].SecurityGroupsRefs,
-			Selector:      mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].SecurityGroupsSelector,
-			To: reference.To{
-				List:    &v1beta1.SecurityGroupList{},
-				Managed: &v1beta1.SecurityGroup{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
+
+				"v1beta1", "SecurityGroup", "SecurityGroupList",
+			)
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].SecurityGroups),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].SecurityGroupsRefs,
+				Selector:      mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].SecurityGroupsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.BrokerNodeGroupInfo[i3].SecurityGroups")
 		}
@@ -65,16 +81,24 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConfigurationInfo); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationInfo[i3].Arn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.ForProvider.ConfigurationInfo[i3].ArnRef,
-			Selector:     mg.Spec.ForProvider.ConfigurationInfo[i3].ArnSelector,
-			To: reference.To{
-				List:    &ConfigurationList{},
-				Managed: &Configuration{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io",
+
+				"v1beta1", "Configuration", "ConfigurationList",
+			)
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConfigurationInfo[i3].Arn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.ConfigurationInfo[i3].ArnRef,
+				Selector:     mg.Spec.ForProvider.ConfigurationInfo[i3].ArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.ConfigurationInfo[i3].Arn")
 		}
@@ -83,16 +107,23 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptionInfo); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnRef,
-			Selector:     mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnSelector,
-			To: reference.To{
-				List:    &v1beta11.KeyList{},
-				Managed: &v1beta11.Key{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
+
+				"v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnRef,
+				Selector:     mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn")
 		}
@@ -103,16 +134,24 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoggingInfo); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs); i5++ {
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup),
-					Extract:      reference.ExternalName(),
-					Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupRef,
-					Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupSelector,
-					To: reference.To{
-						List:    &v1beta12.GroupList{},
-						Managed: &v1beta12.Group{},
-					},
-				})
+				{
+					m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io",
+
+						"v1beta1", "Group", "GroupList",
+					)
+					if err !=
+						nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupRef,
+						Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
 				if err != nil {
 					return errors.Wrap(err, "mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup")
 				}
@@ -125,16 +164,24 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoggingInfo); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose); i5++ {
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream),
-					Extract:      resource.ExtractParamPath("name", false),
-					Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef,
-					Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamSelector,
-					To: reference.To{
-						List:    &v1beta13.DeliveryStreamList{},
-						Managed: &v1beta13.DeliveryStream{},
-					},
-				})
+				{
+					m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io",
+
+						"v1beta1", "DeliveryStream", "DeliveryStreamList",
+					)
+
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream),
+						Extract:      resource.ExtractParamPath("name", false),
+						Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef,
+						Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
 				if err != nil {
 					return errors.Wrap(err, "mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream")
 				}
@@ -147,16 +194,23 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoggingInfo); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3); i5++ {
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket),
-					Extract:      reference.ExternalName(),
-					Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketRef,
-					Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketSelector,
-					To: reference.To{
-						List:    &v1beta14.BucketList{},
-						Managed: &v1beta14.Bucket{},
-					},
-				})
+				{
+					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+						"v1beta1", "Bucket", "BucketList")
+					if err !=
+						nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketRef,
+						Selector:     mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
 				if err != nil {
 					return errors.Wrap(err, "mg.Spec.ForProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket")
 				}
@@ -167,16 +221,23 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.BrokerNodeGroupInfo); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnets),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnetsRefs,
-			Selector:      mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnetsSelector,
-			To: reference.To{
-				List:    &v1beta1.SubnetList{},
-				Managed: &v1beta1.Subnet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
+
+				"v1beta1", "Subnet", "SubnetList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnets),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnetsRefs,
+				Selector:      mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnetsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].ClientSubnets")
 		}
@@ -185,16 +246,24 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.BrokerNodeGroupInfo); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroups),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroupsRefs,
-			Selector:      mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroupsSelector,
-			To: reference.To{
-				List:    &v1beta1.SecurityGroupList{},
-				Managed: &v1beta1.SecurityGroup{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
+
+				"v1beta1", "SecurityGroup", "SecurityGroupList",
+			)
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroups),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroupsRefs,
+				Selector:      mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroupsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.BrokerNodeGroupInfo[i3].SecurityGroups")
 		}
@@ -203,16 +272,24 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ConfigurationInfo); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationInfo[i3].Arn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.InitProvider.ConfigurationInfo[i3].ArnRef,
-			Selector:     mg.Spec.InitProvider.ConfigurationInfo[i3].ArnSelector,
-			To: reference.To{
-				List:    &ConfigurationList{},
-				Managed: &Configuration{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io",
+
+				"v1beta1", "Configuration", "ConfigurationList",
+			)
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConfigurationInfo[i3].Arn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.ConfigurationInfo[i3].ArnRef,
+				Selector:     mg.Spec.InitProvider.ConfigurationInfo[i3].ArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.ConfigurationInfo[i3].Arn")
 		}
@@ -221,16 +298,23 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptionInfo); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn),
-			Extract:      common.ARNExtractor(),
-			Reference:    mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnRef,
-			Selector:     mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnSelector,
-			To: reference.To{
-				List:    &v1beta11.KeyList{},
-				Managed: &v1beta11.Key{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
+
+				"v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnRef,
+				Selector:     mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.EncryptionInfo[i3].EncryptionAtRestKMSKeyArn")
 		}
@@ -241,16 +325,24 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingInfo); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs); i5++ {
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup),
-					Extract:      reference.ExternalName(),
-					Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupRef,
-					Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupSelector,
-					To: reference.To{
-						List:    &v1beta12.GroupList{},
-						Managed: &v1beta12.Group{},
-					},
-				})
+				{
+					m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io",
+
+						"v1beta1", "Group", "GroupList",
+					)
+					if err !=
+						nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupRef,
+						Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroupSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
 				if err != nil {
 					return errors.Wrap(err, "mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].CloudwatchLogs[i5].LogGroup")
 				}
@@ -263,16 +355,24 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingInfo); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose); i5++ {
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream),
-					Extract:      resource.ExtractParamPath("name", false),
-					Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef,
-					Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamSelector,
-					To: reference.To{
-						List:    &v1beta13.DeliveryStreamList{},
-						Managed: &v1beta13.DeliveryStream{},
-					},
-				})
+				{
+					m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io",
+
+						"v1beta1", "DeliveryStream", "DeliveryStreamList",
+					)
+
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream),
+						Extract:      resource.ExtractParamPath("name", false),
+						Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamRef,
+						Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStreamSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
 				if err != nil {
 					return errors.Wrap(err, "mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].Firehose[i5].DeliveryStream")
 				}
@@ -285,16 +385,23 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoggingInfo); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3); i5++ {
-				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket),
-					Extract:      reference.ExternalName(),
-					Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketRef,
-					Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketSelector,
-					To: reference.To{
-						List:    &v1beta14.BucketList{},
-						Managed: &v1beta14.Bucket{},
-					},
-				})
+				{
+					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
+
+						"v1beta1", "Bucket", "BucketList")
+					if err !=
+						nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketRef,
+						Selector:     mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].BucketSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
 				if err != nil {
 					return errors.Wrap(err, "mg.Spec.InitProvider.LoggingInfo[i3].BrokerLogs[i4].S3[i5].Bucket")
 				}
@@ -310,70 +417,101 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 // ResolveReferences of this ScramSecretAssociation.
 func (mg *ScramSecretAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.ForProvider.ClusterArnRef,
-		Selector:     mg.Spec.ForProvider.ClusterArnSelector,
-		To: reference.To{
-			List:    &ClusterList{},
-			Managed: &Cluster{},
-		},
-	})
+			"v1beta1", "Cluster", "ClusterList")
+		if err != nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.ClusterArnRef,
+			Selector:     mg.Spec.ForProvider.ClusterArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterArn")
 	}
 	mg.Spec.ForProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io",
 
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecretArnList),
-		Extract:       reference.ExternalName(),
-		References:    mg.Spec.ForProvider.SecretArnRefs,
-		Selector:      mg.Spec.ForProvider.SecretArnSelector,
-		To: reference.To{
-			List:    &v1beta15.SecretList{},
-			Managed: &v1beta15.Secret{},
-		},
-	})
+			"v1beta1", "Secret", "SecretList",
+		)
+		if err !=
+
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecretArnList),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.SecretArnRefs,
+			Selector:      mg.Spec.ForProvider.SecretArnSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SecretArnList")
 	}
 	mg.Spec.ForProvider.SecretArnList = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SecretArnRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.InitProvider.ClusterArnRef,
-		Selector:     mg.Spec.InitProvider.ClusterArnSelector,
-		To: reference.To{
-			List:    &ClusterList{},
-			Managed: &Cluster{},
-		},
-	})
+			"v1beta1", "Cluster", "ClusterList")
+		if err != nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.ClusterArnRef,
+			Selector:     mg.Spec.InitProvider.ClusterArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterArn")
 	}
 	mg.Spec.InitProvider.ClusterArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ClusterArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io",
 
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecretArnList),
-		Extract:       reference.ExternalName(),
-		References:    mg.Spec.InitProvider.SecretArnRefs,
-		Selector:      mg.Spec.InitProvider.SecretArnSelector,
-		To: reference.To{
-			List:    &v1beta15.SecretList{},
-			Managed: &v1beta15.Secret{},
-		},
-	})
+			"v1beta1", "Secret", "SecretList",
+		)
+		if err !=
+
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecretArnList),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.SecretArnRefs,
+			Selector:      mg.Spec.InitProvider.SecretArnSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SecretArnList")
 	}
@@ -385,22 +523,33 @@ func (mg *ScramSecretAssociation) ResolveReferences(ctx context.Context, c clien
 
 // ResolveReferences of this ServerlessCluster.
 func (mg *ServerlessCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCConfig); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDRefs,
-			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDSelector,
-			To: reference.To{
-				List:    &v1beta1.SecurityGroupList{},
-				Managed: &v1beta1.SecurityGroup{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
+
+				"v1beta1", "SecurityGroup", "SecurityGroupList",
+			)
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDRefs,
+				Selector:      mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIDSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.VPCConfig[i3].SecurityGroupIds")
 		}
@@ -409,16 +558,23 @@ func (mg *ServerlessCluster) ResolveReferences(ctx context.Context, c client.Rea
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCConfig); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SubnetIds),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs,
-			Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIDSelector,
-			To: reference.To{
-				List:    &v1beta1.SubnetList{},
-				Managed: &v1beta1.Subnet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
+
+				"v1beta1", "Subnet", "SubnetList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCConfig[i3].SubnetIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.VPCConfig[i3].SubnetIDRefs,
+				Selector:      mg.Spec.ForProvider.VPCConfig[i3].SubnetIDSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.VPCConfig[i3].SubnetIds")
 		}
@@ -427,16 +583,24 @@ func (mg *ServerlessCluster) ResolveReferences(ctx context.Context, c client.Rea
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCConfig); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIds),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDRefs,
-			Selector:      mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDSelector,
-			To: reference.To{
-				List:    &v1beta1.SecurityGroupList{},
-				Managed: &v1beta1.SecurityGroup{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
+
+				"v1beta1", "SecurityGroup", "SecurityGroupList",
+			)
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDRefs,
+				Selector:      mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIDSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.VPCConfig[i3].SecurityGroupIds")
 		}
@@ -445,16 +609,23 @@ func (mg *ServerlessCluster) ResolveReferences(ctx context.Context, c client.Rea
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCConfig); i3++ {
-		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SubnetIds),
-			Extract:       reference.ExternalName(),
-			References:    mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs,
-			Selector:      mg.Spec.InitProvider.VPCConfig[i3].SubnetIDSelector,
-			To: reference.To{
-				List:    &v1beta1.SubnetList{},
-				Managed: &v1beta1.Subnet{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
+
+				"v1beta1", "Subnet", "SubnetList")
+			if err !=
+				nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCConfig[i3].SubnetIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.VPCConfig[i3].SubnetIDRefs,
+				Selector:      mg.Spec.InitProvider.VPCConfig[i3].SubnetIDSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.VPCConfig[i3].SubnetIds")
 		}

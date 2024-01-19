@@ -10,45 +10,64 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this ContributorInsights.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this ContributorInsights.
 func (mg *ContributorInsights) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.TableNameRef,
-		Selector:     mg.Spec.ForProvider.TableNameSelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
+			"v1beta1", "Table", "TableList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.TableNameRef,
+			Selector:     mg.Spec.ForProvider.TableNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TableName")
 	}
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.TableNameRef,
-		Selector:     mg.Spec.InitProvider.TableNameSelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
+			"v1beta1", "Table", "TableList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.TableNameRef,
+			Selector:     mg.Spec.InitProvider.TableNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TableName")
 	}
@@ -60,69 +79,98 @@ func (mg *ContributorInsights) ResolveReferences(ctx context.Context, c client.R
 
 // ResolveReferences of this KinesisStreamingDestination.
 func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamArn),
-		Extract:      common.TerraformID(),
-		Reference:    mg.Spec.ForProvider.StreamArnRef,
-		Selector:     mg.Spec.ForProvider.StreamArnSelector,
-		To: reference.To{
-			List:    &v1beta1.StreamList{},
-			Managed: &v1beta1.Stream{},
-		},
-	})
+			"v1beta1", "Stream", "StreamList")
+		if err != nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamArn),
+			Extract:      common.TerraformID(),
+			Reference:    mg.Spec.ForProvider.StreamArnRef,
+			Selector:     mg.Spec.ForProvider.StreamArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.StreamArn")
 	}
 	mg.Spec.ForProvider.StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.TableNameRef,
-		Selector:     mg.Spec.ForProvider.TableNameSelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
+			"v1beta1", "Table", "TableList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.TableNameRef,
+			Selector:     mg.Spec.ForProvider.TableNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TableName")
 	}
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamArn),
-		Extract:      common.TerraformID(),
-		Reference:    mg.Spec.InitProvider.StreamArnRef,
-		Selector:     mg.Spec.InitProvider.StreamArnSelector,
-		To: reference.To{
-			List:    &v1beta1.StreamList{},
-			Managed: &v1beta1.Stream{},
-		},
-	})
+			"v1beta1", "Stream", "StreamList")
+		if err != nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamArn),
+			Extract:      common.TerraformID(),
+			Reference:    mg.Spec.InitProvider.StreamArnRef,
+			Selector:     mg.Spec.InitProvider.StreamArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.StreamArn")
 	}
 	mg.Spec.InitProvider.StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.TableNameRef,
-		Selector:     mg.Spec.InitProvider.TableNameSelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
+			"v1beta1", "Table", "TableList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.TableNameRef,
+			Selector:     mg.Spec.InitProvider.TableNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TableName")
 	}
@@ -134,37 +182,54 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 
 // ResolveReferences of this TableItem.
 func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.TableNameRef,
-		Selector:     mg.Spec.ForProvider.TableNameSelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
+			"v1beta1", "Table", "TableList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.TableNameRef,
+			Selector:     mg.Spec.ForProvider.TableNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TableName")
 	}
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.TableNameRef,
-		Selector:     mg.Spec.InitProvider.TableNameSelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
+			"v1beta1", "Table", "TableList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.TableNameRef,
+			Selector:     mg.Spec.InitProvider.TableNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TableName")
 	}
@@ -176,69 +241,98 @@ func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) err
 
 // ResolveReferences of this TableReplica.
 func (mg *TableReplica) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalTableArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.ForProvider.GlobalTableArnRef,
-		Selector:     mg.Spec.ForProvider.GlobalTableArnSelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
+			"v1beta1", "Table", "TableList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalTableArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.GlobalTableArnRef,
+			Selector:     mg.Spec.ForProvider.GlobalTableArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.GlobalTableArn")
 	}
 	mg.Spec.ForProvider.GlobalTableArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GlobalTableArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
-		Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
-		To: reference.To{
-			List:    &v1beta11.KeyList{},
-			Managed: &v1beta11.Key{},
-		},
-	})
+			"v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
+			Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyArn")
 	}
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalTableArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.InitProvider.GlobalTableArnRef,
-		Selector:     mg.Spec.InitProvider.GlobalTableArnSelector,
-		To: reference.To{
-			List:    &TableList{},
-			Managed: &Table{},
-		},
-	})
+			"v1beta1", "Table", "TableList")
+		if err !=
+			nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalTableArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.GlobalTableArnRef,
+			Selector:     mg.Spec.InitProvider.GlobalTableArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.GlobalTableArn")
 	}
 	mg.Spec.InitProvider.GlobalTableArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GlobalTableArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
-		Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
-		To: reference.To{
-			List:    &v1beta11.KeyList{},
-			Managed: &v1beta11.Key{},
-		},
-	})
+			"v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+			Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
 	}

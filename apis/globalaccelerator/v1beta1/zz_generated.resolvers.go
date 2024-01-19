@@ -8,43 +8,61 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this EndpointGroup.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this EndpointGroup.
 func (mg *EndpointGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ListenerArn),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.ListenerArnRef,
-		Selector:     mg.Spec.ForProvider.ListenerArnSelector,
-		To: reference.To{
-			List:    &ListenerList{},
-			Managed: &Listener{},
-		},
-	})
+			"v1beta1", "Listener", "ListenerList",
+		)
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ListenerArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ListenerArnRef,
+			Selector:     mg.Spec.ForProvider.ListenerArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ListenerArn")
 	}
 	mg.Spec.ForProvider.ListenerArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ListenerArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ListenerArn),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.ListenerArnRef,
-		Selector:     mg.Spec.InitProvider.ListenerArnSelector,
-		To: reference.To{
-			List:    &ListenerList{},
-			Managed: &Listener{},
-		},
-	})
+			"v1beta1", "Listener", "ListenerList",
+		)
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ListenerArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.ListenerArnRef,
+			Selector:     mg.Spec.InitProvider.ListenerArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ListenerArn")
 	}
@@ -56,37 +74,52 @@ func (mg *EndpointGroup) ResolveReferences(ctx context.Context, c client.Reader)
 
 // ResolveReferences of this Listener.
 func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AcceleratorArn),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.AcceleratorArnRef,
-		Selector:     mg.Spec.ForProvider.AcceleratorArnSelector,
-		To: reference.To{
-			List:    &AcceleratorList{},
-			Managed: &Accelerator{},
-		},
-	})
+			"v1beta1", "Accelerator", "AcceleratorList",
+		)
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AcceleratorArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.AcceleratorArnRef,
+			Selector:     mg.Spec.ForProvider.AcceleratorArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AcceleratorArn")
 	}
 	mg.Spec.ForProvider.AcceleratorArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AcceleratorArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AcceleratorArn),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.AcceleratorArnRef,
-		Selector:     mg.Spec.InitProvider.AcceleratorArnSelector,
-		To: reference.To{
-			List:    &AcceleratorList{},
-			Managed: &Accelerator{},
-		},
-	})
+			"v1beta1", "Accelerator", "AcceleratorList",
+		)
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AcceleratorArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.AcceleratorArnRef,
+			Selector:     mg.Spec.InitProvider.AcceleratorArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AcceleratorArn")
 	}

@@ -9,78 +9,106 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
-	v1beta12 "github.com/upbound/provider-aws/apis/kms/v1beta1"
+
 	common "github.com/upbound/provider-aws/config/common"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this Destination.
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
-// ResolveReferences of this Destination.
 func (mg *Destination) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.RoleArnRef,
-		Selector:     mg.Spec.ForProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.RoleArnRef,
+			Selector:     mg.Spec.ForProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RoleArn")
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetArn),
-		Extract:      common.TerraformID(),
-		Reference:    mg.Spec.ForProvider.TargetArnRef,
-		Selector:     mg.Spec.ForProvider.TargetArnSelector,
-		To: reference.To{
-			List:    &v1beta11.StreamList{},
-			Managed: &v1beta11.Stream{},
-		},
-	})
+			"v1beta1", "Stream", "StreamList")
+		if err != nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetArn),
+			Extract:      common.TerraformID(),
+			Reference:    mg.Spec.ForProvider.TargetArnRef,
+			Selector:     mg.Spec.ForProvider.TargetArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TargetArn")
 	}
 	mg.Spec.ForProvider.TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.InitProvider.RoleArnRef,
-		Selector:     mg.Spec.InitProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.RoleArnRef,
+			Selector:     mg.Spec.InitProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
 	}
 	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
-		Extract:      common.TerraformID(),
-		Reference:    mg.Spec.InitProvider.TargetArnRef,
-		Selector:     mg.Spec.InitProvider.TargetArnSelector,
-		To: reference.To{
-			List:    &v1beta11.StreamList{},
-			Managed: &v1beta11.Stream{},
-		},
-	})
+			"v1beta1", "Stream", "StreamList")
+		if err != nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetArn),
+			Extract:      common.TerraformID(),
+			Reference:    mg.Spec.InitProvider.TargetArnRef,
+			Selector:     mg.Spec.InitProvider.TargetArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TargetArn")
 	}
@@ -92,37 +120,52 @@ func (mg *Destination) ResolveReferences(ctx context.Context, c client.Reader) e
 
 // ResolveReferences of this Group.
 func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
-		Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
-		To: reference.To{
-			List:    &v1beta12.KeyList{},
-			Managed: &v1beta12.Key{},
-		},
-	})
+			"v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
 	}
 	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
-		Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
-		To: reference.To{
-			List:    &v1beta12.KeyList{},
-			Managed: &v1beta12.Key{},
-		},
-	})
+			"v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
 	}
@@ -134,37 +177,54 @@ func (mg *Group) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 // ResolveReferences of this MetricFilter.
 func (mg *MetricFilter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogGroupName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.LogGroupNameRef,
-		Selector:     mg.Spec.ForProvider.LogGroupNameSelector,
-		To: reference.To{
-			List:    &GroupList{},
-			Managed: &Group{},
-		},
-	})
+			"v1beta1", "Group", "GroupList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.LogGroupNameRef,
+			Selector:     mg.Spec.ForProvider.LogGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogGroupName")
 	}
 	mg.Spec.ForProvider.LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogGroupName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.LogGroupNameRef,
-		Selector:     mg.Spec.InitProvider.LogGroupNameSelector,
-		To: reference.To{
-			List:    &GroupList{},
-			Managed: &Group{},
-		},
-	})
+			"v1beta1", "Group", "GroupList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.LogGroupNameRef,
+			Selector:     mg.Spec.InitProvider.LogGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LogGroupName")
 	}
@@ -176,37 +236,54 @@ func (mg *MetricFilter) ResolveReferences(ctx context.Context, c client.Reader) 
 
 // ResolveReferences of this Stream.
 func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogGroupName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.LogGroupNameRef,
-		Selector:     mg.Spec.ForProvider.LogGroupNameSelector,
-		To: reference.To{
-			List:    &GroupList{},
-			Managed: &Group{},
-		},
-	})
+			"v1beta1", "Group", "GroupList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.LogGroupNameRef,
+			Selector:     mg.Spec.ForProvider.LogGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.LogGroupName")
 	}
 	mg.Spec.ForProvider.LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogGroupName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.LogGroupNameRef,
-		Selector:     mg.Spec.InitProvider.LogGroupNameSelector,
-		To: reference.To{
-			List:    &GroupList{},
-			Managed: &Group{},
-		},
-	})
+			"v1beta1", "Group", "GroupList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.LogGroupNameRef,
+			Selector:     mg.Spec.InitProvider.LogGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.LogGroupName")
 	}
@@ -218,69 +295,96 @@ func (mg *Stream) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 // ResolveReferences of this SubscriptionFilter.
 func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationArn),
-		Extract:      common.TerraformID(),
-		Reference:    mg.Spec.ForProvider.DestinationArnRef,
-		Selector:     mg.Spec.ForProvider.DestinationArnSelector,
-		To: reference.To{
-			List:    &v1beta11.StreamList{},
-			Managed: &v1beta11.Stream{},
-		},
-	})
+			"v1beta1", "Stream", "StreamList")
+		if err != nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DestinationArn),
+			Extract:      common.TerraformID(),
+			Reference:    mg.Spec.ForProvider.DestinationArnRef,
+			Selector:     mg.Spec.ForProvider.DestinationArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DestinationArn")
 	}
 	mg.Spec.ForProvider.DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DestinationArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.RoleArnRef,
-		Selector:     mg.Spec.ForProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.RoleArnRef,
+			Selector:     mg.Spec.ForProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RoleArn")
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationArn),
-		Extract:      common.TerraformID(),
-		Reference:    mg.Spec.InitProvider.DestinationArnRef,
-		Selector:     mg.Spec.InitProvider.DestinationArnSelector,
-		To: reference.To{
-			List:    &v1beta11.StreamList{},
-			Managed: &v1beta11.Stream{},
-		},
-	})
+			"v1beta1", "Stream", "StreamList")
+		if err != nil {
+
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationArn),
+			Extract:      common.TerraformID(),
+			Reference:    mg.Spec.InitProvider.DestinationArnRef,
+			Selector:     mg.Spec.InitProvider.DestinationArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DestinationArn")
 	}
 	mg.Spec.InitProvider.DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DestinationArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.InitProvider.RoleArnRef,
-		Selector:     mg.Spec.InitProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.RoleArnRef,
+			Selector:     mg.Spec.InitProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
 	}

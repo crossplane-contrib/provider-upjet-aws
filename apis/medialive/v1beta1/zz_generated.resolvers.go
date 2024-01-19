@@ -10,29 +10,42 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this Channel.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this Channel.
 func (mg *Channel) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.InputAttachments); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputAttachments[i3].InputID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.ForProvider.InputAttachments[i3].InputIDRef,
-			Selector:     mg.Spec.ForProvider.InputAttachments[i3].InputIDSelector,
-			To: reference.To{
-				List:    &InputList{},
-				Managed: &Input{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("medialive.aws.upbound.io",
+
+				"v1beta1", "Input", "InputList")
+			if err != nil {
+
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InputAttachments[i3].InputID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.InputAttachments[i3].InputIDRef,
+				Selector:     mg.Spec.ForProvider.InputAttachments[i3].InputIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.InputAttachments[i3].InputID")
 		}
@@ -40,16 +53,23 @@ func (mg *Channel) ResolveReferences(ctx context.Context, c client.Reader) error
 		mg.Spec.ForProvider.InputAttachments[i3].InputIDRef = rsp.ResolvedReference
 
 	}
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.RoleArnRef,
-		Selector:     mg.Spec.ForProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.RoleArnRef,
+			Selector:     mg.Spec.ForProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RoleArn")
 	}
@@ -57,16 +77,23 @@ func (mg *Channel) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.InputAttachments); i3++ {
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputAttachments[i3].InputID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.InputAttachments[i3].InputIDRef,
-			Selector:     mg.Spec.InitProvider.InputAttachments[i3].InputIDSelector,
-			To: reference.To{
-				List:    &InputList{},
-				Managed: &Input{},
-			},
-		})
+		{
+			m, l, err = apisresolver.GetManagedResource("medialive.aws.upbound.io",
+
+				"v1beta1", "Input", "InputList")
+			if err != nil {
+
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputAttachments[i3].InputID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.InputAttachments[i3].InputIDRef,
+				Selector:     mg.Spec.InitProvider.InputAttachments[i3].InputIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.InputAttachments[i3].InputID")
 		}
@@ -74,16 +101,23 @@ func (mg *Channel) ResolveReferences(ctx context.Context, c client.Reader) error
 		mg.Spec.InitProvider.InputAttachments[i3].InputIDRef = rsp.ResolvedReference
 
 	}
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.InitProvider.RoleArnRef,
-		Selector:     mg.Spec.InitProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
+
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.RoleArnRef,
+			Selector:     mg.Spec.InitProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
 	}
@@ -95,37 +129,52 @@ func (mg *Channel) ResolveReferences(ctx context.Context, c client.Reader) error
 
 // ResolveReferences of this Input.
 func (mg *Input) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.ForProvider.RoleArnRef,
-		Selector:     mg.Spec.ForProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.RoleArnRef,
+			Selector:     mg.Spec.ForProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.RoleArn")
 	}
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
-		Extract:      common.ARNExtractor(),
-		Reference:    mg.Spec.InitProvider.RoleArnRef,
-		Selector:     mg.Spec.InitProvider.RoleArnSelector,
-		To: reference.To{
-			List:    &v1beta1.RoleList{},
-			Managed: &v1beta1.Role{},
-		},
-	})
+			"v1beta1", "Role", "RoleList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.RoleArnRef,
+			Selector:     mg.Spec.InitProvider.RoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.RoleArn")
 	}

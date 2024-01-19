@@ -10,44 +10,61 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	v1beta11 "github.com/upbound/provider-aws/apis/iam/v1beta1"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this EnvironmentEC2.
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
-// ResolveReferences of this EnvironmentEC2.
 func (mg *EnvironmentEC2) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.ForProvider.SubnetIDRef,
-		Selector:     mg.Spec.ForProvider.SubnetIDSelector,
-		To: reference.To{
-			List:    &v1beta1.SubnetList{},
-			Managed: &v1beta1.Subnet{},
-		},
-	})
+			"v1beta1", "Subnet", "SubnetList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.SubnetIDRef,
+			Selector:     mg.Spec.ForProvider.SubnetIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubnetID")
 	}
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.SubnetIDRef,
-		Selector:     mg.Spec.InitProvider.SubnetIDSelector,
-		To: reference.To{
-			List:    &v1beta1.SubnetList{},
-			Managed: &v1beta1.Subnet{},
-		},
-	})
+			"v1beta1", "Subnet", "SubnetList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.SubnetIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
 	}
@@ -59,37 +76,52 @@ func (mg *EnvironmentEC2) ResolveReferences(ctx context.Context, c client.Reader
 
 // ResolveReferences of this EnvironmentMembership.
 func (mg *EnvironmentMembership) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloud9.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnvironmentID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.ForProvider.EnvironmentIDRef,
-		Selector:     mg.Spec.ForProvider.EnvironmentIDSelector,
-		To: reference.To{
-			List:    &EnvironmentEC2List{},
-			Managed: &EnvironmentEC2{},
-		},
-	})
+			"v1beta1", "EnvironmentEC2", "EnvironmentEC2List",
+		)
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EnvironmentID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.EnvironmentIDRef,
+			Selector:     mg.Spec.ForProvider.EnvironmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.EnvironmentID")
 	}
 	mg.Spec.ForProvider.EnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EnvironmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserArn),
-		Extract:      resource.ExtractParamPath("arn", true),
-		Reference:    mg.Spec.ForProvider.UserArnRef,
-		Selector:     mg.Spec.ForProvider.UserArnSelector,
-		To: reference.To{
-			List:    &v1beta11.UserList{},
-			Managed: &v1beta11.User{},
-		},
-	})
+			"v1beta1", "User", "UserList")
+		if err !=
+			nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.UserArnRef,
+			Selector:     mg.Spec.ForProvider.UserArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.UserArn")
 	}
