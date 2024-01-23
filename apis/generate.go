@@ -33,6 +33,10 @@ Copyright 2021 Upbound Inc.
 // Generate crossplane-runtime methodsets (resource.Claim, etc)
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ./...
 
+// Run upjet's transformer for the generated resolvers to get rid of the cross
+// API-group imports and to prevent import cycles
+//go:generate go run github.com/crossplane/upjet/cmd/resolver -g aws.upbound.io -s
+
 package apis
 
 import (
@@ -41,4 +45,6 @@ import (
 	_ "github.com/crossplane/crossplane-tools/cmd/angryjet" //nolint:typecheck
 
 	_ "github.com/crossplane/upjet/cmd/scraper"
+
+	_ "github.com/crossplane/upjet/cmd/resolver"
 )
