@@ -174,8 +174,6 @@ github.com/crossplane/crossplane-runtime v1.15.0-rc.0.0.20231215091746-d23a82b3a
 github.com/crossplane/crossplane-runtime v1.15.0-rc.0.0.20231215091746-d23a82b3a2f5/go.mod h1:pgt7PaTvvOQz3jILyxbCaeleU9MrAqKaNoPJavhGBgM=
 github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79 h1:HigXs5tEQxWz0fcj8hzbU2UAZgEM7wPe0XRFOsrtF8Y=
 github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79/go.mod h1:+e4OaFlOcmr0JvINHl/yvEYBrZawzTgj6pQumOH1SS0=
-github.com/crossplane/upjet v1.1.0-rc.0.0.20231226094952-fb8acdbaec54 h1:uTK0QsKg3cM0/La5DvJlqlZwK+ueD3joYsVam63Ik9M=
-github.com/crossplane/upjet v1.1.0-rc.0.0.20231226094952-fb8acdbaec54/go.mod h1:t9etxIdYaxgyvFPBToikm5zBHi8RIpX8N4mTH77lQFM=
 github.com/dave/jennifer v1.4.1 h1:XyqG6cn5RQsTj3qlWQTKlRGAyrTcsk1kUmWdZBzRjDw=
 github.com/dave/jennifer v1.4.1/go.mod h1:7jEdnm+qBcxl8PC0zyp7vxcpSRnzXSt9r39tpTVGlwA=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -384,6 +382,8 @@ github.com/mattn/go-isatty v0.0.17 h1:BTarxUcIeDqL27Mc+vyvdWYSL28zpIhv3RoTdsLMPn
 github.com/mattn/go-isatty v0.0.17/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
 github.com/matttproud/golang_protobuf_extensions v1.0.4 h1:mmDVorXM7PCGKw94cs5zkfA9PSy5pEvNWRP0ET0TIVo=
 github.com/matttproud/golang_protobuf_extensions v1.0.4/go.mod h1:BSXmuO+STAnVfrANrmjBb36TMTDstsz7MSK+HVaYKv4=
+github.com/mbbush/upjet v0.0.0-20240123213939-7cbf31737861 h1:vwMPKijPK5/ZzlHTBbZEUewJWtISHFHA3CuHjcOsdfM=
+github.com/mbbush/upjet v0.0.0-20240123213939-7cbf31737861/go.mod h1:t9etxIdYaxgyvFPBToikm5zBHi8RIpX8N4mTH77lQFM=
 github.com/mitchellh/cli v1.1.5/go.mod h1:v8+iFts2sPIKUV1ltktPXMCC8fumSKFItNcD2cLtRR4=
 github.com/mitchellh/copystructure v1.0.0/go.mod h1:SNtv71yrdKgLRyLFxmLdkAbkKEFWgYaq1OVrnRcwhnw=
 github.com/mitchellh/copystructure v1.2.0 h1:vpKXTN4ewci03Vljg/q9QvCGUDttBOGBIa15WveJJGw=
