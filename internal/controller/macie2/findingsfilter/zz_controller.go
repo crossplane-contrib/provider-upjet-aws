@@ -65,10 +65,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	// register webhooks for the kind v1beta1.FindingsFilter
-	if err := ctrl.NewWebhookManagedBy(mgr).
-		For(&v1beta1.FindingsFilter{}).
-		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.FindingsFilter")
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.FindingsFilter{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.FindingsFilter")
+		}
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.FindingsFilter_GroupVersionKind), opts...)

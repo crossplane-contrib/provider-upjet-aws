@@ -30,10 +30,13 @@ func (mg *AttachmentAccepter) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "VPCAttachment", "VPCAttachmentList",
+			"v1beta1", "VPCAttachment",
+
+			"VPCAttachmentList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -52,10 +55,13 @@ func (mg *AttachmentAccepter) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "VPCAttachment", "VPCAttachmentList",
+			"v1beta1", "VPCAttachment",
+
+			"VPCAttachmentList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -74,10 +80,13 @@ func (mg *AttachmentAccepter) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "VPCAttachment", "VPCAttachmentList",
+			"v1beta1", "VPCAttachment",
+
+			"VPCAttachmentList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -96,10 +105,13 @@ func (mg *AttachmentAccepter) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "VPCAttachment", "VPCAttachmentList",
+			"v1beta1", "VPCAttachment",
+
+			"VPCAttachmentList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -131,11 +143,14 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "CoreNetwork", "CoreNetworkList",
-		)
+			"v1beta1", "CoreNetwork",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"CoreNetworkList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -154,10 +169,13 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "VPCAttachment", "VPCAttachmentList",
+			"v1beta1", "VPCAttachment",
+
+			"VPCAttachmentList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -176,10 +194,13 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "VPCAttachment", "VPCAttachmentList",
+			"v1beta1", "VPCAttachment",
+
+			"VPCAttachmentList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -198,11 +219,14 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "CoreNetwork", "CoreNetworkList",
-		)
+			"v1beta1", "CoreNetwork",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"CoreNetworkList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -221,10 +245,13 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "VPCAttachment", "VPCAttachmentList",
+			"v1beta1", "VPCAttachment",
+
+			"VPCAttachmentList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -243,10 +270,13 @@ func (mg *ConnectAttachment) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "VPCAttachment", "VPCAttachmentList",
+			"v1beta1", "VPCAttachment",
+
+			"VPCAttachmentList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -278,12 +308,17 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -302,12 +337,17 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -326,10 +366,13 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -348,12 +391,17 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -372,12 +420,17 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -396,10 +449,13 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -431,10 +487,13 @@ func (mg *CoreNetwork) ResolveReferences(ctx context.Context, c client.Reader) e
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -453,10 +512,13 @@ func (mg *CoreNetwork) ResolveReferences(ctx context.Context, c client.Reader) e
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -488,10 +550,16 @@ func (mg *CustomerGatewayAssociation) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "CustomerGateway", "CustomerGatewayList",
+			"v1beta1",
+			"CustomerGateway",
+
+			"CustomerGatewayList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -510,12 +578,17 @@ func (mg *CustomerGatewayAssociation) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -534,10 +607,13 @@ func (mg *CustomerGatewayAssociation) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -556,12 +632,17 @@ func (mg *CustomerGatewayAssociation) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -593,10 +674,13 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -615,9 +699,12 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Site", "SiteList")
+			"v1beta1", "Site",
 
-		if err != nil {
+			"SiteList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -637,10 +724,13 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -659,9 +749,12 @@ func (mg *Device) ResolveReferences(ctx context.Context, c client.Reader) error 
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Site", "SiteList")
+			"v1beta1", "Site",
 
-		if err != nil {
+			"SiteList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -694,10 +787,13 @@ func (mg *Link) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -716,9 +812,12 @@ func (mg *Link) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Site", "SiteList")
+			"v1beta1", "Site",
 
-		if err != nil {
+			"SiteList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -738,10 +837,13 @@ func (mg *Link) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -760,9 +862,12 @@ func (mg *Link) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Site", "SiteList")
+			"v1beta1", "Site",
 
-		if err != nil {
+			"SiteList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -795,12 +900,17 @@ func (mg *LinkAssociation) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -819,10 +929,13 @@ func (mg *LinkAssociation) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -841,9 +954,12 @@ func (mg *LinkAssociation) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Link", "LinkList")
+			"v1beta1", "Link",
 
-		if err != nil {
+			"LinkList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -876,10 +992,13 @@ func (mg *Site) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -898,10 +1017,13 @@ func (mg *Site) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -933,12 +1055,17 @@ func (mg *TransitGatewayConnectPeerAssociation) ResolveReferences(ctx context.Co
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -957,10 +1084,13 @@ func (mg *TransitGatewayConnectPeerAssociation) ResolveReferences(ctx context.Co
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -979,11 +1109,14 @@ func (mg *TransitGatewayConnectPeerAssociation) ResolveReferences(ctx context.Co
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "TransitGatewayConnectPeer", "TransitGatewayConnectPeerList",
+			"v1beta1",
+			"TransitGatewayConnectPeer",
+
+			"TransitGatewayConnectPeerList",
 		)
 		if err != nil {
-			return errors.
-				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1002,12 +1135,17 @@ func (mg *TransitGatewayConnectPeerAssociation) ResolveReferences(ctx context.Co
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "Device", "DeviceList",
+			"v1beta1", "Device",
+
+			"DeviceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1039,10 +1177,13 @@ func (mg *TransitGatewayRegistration) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "GlobalNetwork", "GlobalNetworkList",
+			"v1beta1", "GlobalNetwork",
+
+			"GlobalNetworkList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1061,7 +1202,10 @@ func (mg *TransitGatewayRegistration) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "TransitGateway", "TransitGatewayList",
+			"v1beta1",
+			"TransitGateway",
+
+			"TransitGatewayList",
 		)
 		if err !=
 			nil {
@@ -1098,11 +1242,14 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "CoreNetwork", "CoreNetworkList",
-		)
+			"v1beta1", "CoreNetwork",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"CoreNetworkList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1121,10 +1268,13 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "Subnet", "SubnetList")
+			"v1beta1",
+			"Subnet", "SubnetList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -1143,10 +1293,13 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPC", "VPCList")
+			"v1beta1",
+			"VPC", "VPCList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1165,11 +1318,14 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("networkmanager.aws.upbound.io",
 
-			"v1beta1", "CoreNetwork", "CoreNetworkList",
-		)
+			"v1beta1", "CoreNetwork",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"CoreNetworkList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1188,10 +1344,13 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "Subnet", "SubnetList")
+			"v1beta1",
+			"Subnet", "SubnetList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -1210,10 +1369,13 @@ func (mg *VPCAttachment) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPC", "VPCList")
+			"v1beta1",
+			"VPC", "VPCList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

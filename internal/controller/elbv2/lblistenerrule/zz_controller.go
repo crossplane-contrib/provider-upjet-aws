@@ -65,10 +65,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	// register webhooks for the kind v1beta1.LBListenerRule
-	if err := ctrl.NewWebhookManagedBy(mgr).
-		For(&v1beta1.LBListenerRule{}).
-		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.LBListenerRule")
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.LBListenerRule{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.LBListenerRule")
+		}
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.LBListenerRule_GroupVersionKind), opts...)

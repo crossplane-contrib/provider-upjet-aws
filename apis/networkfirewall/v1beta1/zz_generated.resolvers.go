@@ -30,12 +30,13 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io",
 
-			"v1beta1", "FirewallPolicy", "FirewallPolicyList",
+			"v1beta1", "FirewallPolicy",
+
+			"FirewallPolicyList",
 		)
+
 		if err != nil {
-			return errors.Wrap(err,
-				"failed to get the reference target managed resource and its list for reference resolution",
-			)
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -56,10 +57,13 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-				"v1beta1", "Subnet", "SubnetList")
+				"v1beta1",
+				"Subnet", "SubnetList",
+			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -80,10 +84,13 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPC", "VPCList")
+			"v1beta1",
+			"VPC", "VPCList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -102,12 +109,13 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io",
 
-			"v1beta1", "FirewallPolicy", "FirewallPolicyList",
+			"v1beta1", "FirewallPolicy",
+
+			"FirewallPolicyList",
 		)
+
 		if err != nil {
-			return errors.Wrap(err,
-				"failed to get the reference target managed resource and its list for reference resolution",
-			)
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -128,10 +136,13 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-				"v1beta1", "Subnet", "SubnetList")
+				"v1beta1",
+				"Subnet", "SubnetList",
+			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -152,10 +163,13 @@ func (mg *Firewall) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPC", "VPCList")
+			"v1beta1",
+			"VPC", "VPCList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -190,10 +204,15 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io",
 
-					"v1beta1", "RuleGroup", "RuleGroupList",
+					"v1beta1", "RuleGroup",
+
+					"RuleGroupList",
 				)
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				if err !=
+
+					nil {
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -217,10 +236,15 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io",
 
-					"v1beta1", "RuleGroup", "RuleGroupList",
+					"v1beta1", "RuleGroup",
+
+					"RuleGroupList",
 				)
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				if err !=
+
+					nil {
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -244,10 +268,15 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io",
 
-					"v1beta1", "RuleGroup", "RuleGroupList",
+					"v1beta1", "RuleGroup",
+
+					"RuleGroupList",
 				)
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				if err !=
+
+					nil {
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -271,10 +300,15 @@ func (mg *FirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io",
 
-					"v1beta1", "RuleGroup", "RuleGroupList",
+					"v1beta1", "RuleGroup",
+
+					"RuleGroupList",
 				)
-				if err != nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				if err !=
+
+					nil {
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -309,7 +343,9 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 	{
 		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io",
 
-			"v1beta1", "Firewall", "FirewallList",
+			"v1beta1", "Firewall",
+
+			"FirewallList",
 		)
 		if err !=
 			nil {
@@ -332,7 +368,9 @@ func (mg *LoggingConfiguration) ResolveReferences(ctx context.Context, c client.
 	{
 		m, l, err = apisresolver.GetManagedResource("networkfirewall.aws.upbound.io",
 
-			"v1beta1", "Firewall", "FirewallList",
+			"v1beta1", "Firewall",
+
+			"FirewallList",
 		)
 		if err !=
 			nil {
@@ -373,10 +411,15 @@ func (mg *RuleGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					{
 						m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-							"v1beta1", "ManagedPrefixList", "ManagedPrefixListList",
+							"v1beta1",
+							"ManagedPrefixList",
+
+							"ManagedPrefixListList",
 						)
-						if err != nil {
-							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						if err !=
+							nil {
+							return errors.
+								Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 						}
 
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -404,10 +447,15 @@ func (mg *RuleGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 					{
 						m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-							"v1beta1", "ManagedPrefixList", "ManagedPrefixListList",
+							"v1beta1",
+							"ManagedPrefixList",
+
+							"ManagedPrefixListList",
 						)
-						if err != nil {
-							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						if err !=
+							nil {
+							return errors.
+								Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 						}
 
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

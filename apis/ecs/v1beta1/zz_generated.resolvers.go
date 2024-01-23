@@ -31,12 +31,14 @@ func (mg *CapacityProvider) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io",
 
-				"v1beta1", "AutoscalingGroup", "AutoscalingGroupList",
+				"v1beta1",
+				"AutoscalingGroup",
+
+				"AutoscalingGroupList",
 			)
+
 			if err != nil {
-				return errors.Wrap(err,
-					"failed to get the reference target managed resource and its list for reference resolution",
-				)
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -58,12 +60,14 @@ func (mg *CapacityProvider) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io",
 
-				"v1beta1", "AutoscalingGroup", "AutoscalingGroupList",
+				"v1beta1",
+				"AutoscalingGroup",
+
+				"AutoscalingGroupList",
 			)
+
 			if err != nil {
-				return errors.Wrap(err,
-					"failed to get the reference target managed resource and its list for reference resolution",
-				)
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -97,11 +101,13 @@ func (mg *ClusterCapacityProviders) ResolveReferences(ctx context.Context, c cli
 	{
 		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io",
 
-			"v1beta1", "Cluster", "ClusterList")
+			"v1beta1",
+			"Cluster", "ClusterList",
+		)
 		if err !=
 			nil {
-
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -120,11 +126,13 @@ func (mg *ClusterCapacityProviders) ResolveReferences(ctx context.Context, c cli
 	{
 		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io",
 
-			"v1beta1", "Cluster", "ClusterList")
+			"v1beta1",
+			"Cluster", "ClusterList",
+		)
 		if err !=
 			nil {
-
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -157,11 +165,13 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io",
 
-			"v1beta1", "Cluster", "ClusterList")
+			"v1beta1",
+			"Cluster", "ClusterList",
+		)
 		if err !=
 			nil {
-
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -180,10 +190,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -204,7 +218,10 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		{
 			m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io",
 
-				"v1beta1", "LBTargetGroup", "LBTargetGroupList",
+				"v1beta1",
+				"LBTargetGroup",
+
+				"LBTargetGroupList",
 			)
 			if err !=
 				nil {
@@ -230,11 +247,15 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-				"v1beta1", "SecurityGroup", "SecurityGroupList",
+				"v1beta1",
+				"SecurityGroup",
+
+				"SecurityGroupList",
 			)
-			if err !=
-				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			if err != nil {
+				return errors.Wrap(
+					err, "failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -256,10 +277,13 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-				"v1beta1", "Subnet", "SubnetList")
+				"v1beta1",
+				"Subnet", "SubnetList",
+			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -280,7 +304,10 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io",
 
-			"v1beta1", "TaskDefinition", "TaskDefinitionList",
+			"v1beta1",
+			"TaskDefinition",
+
+			"TaskDefinitionList",
 		)
 		if err !=
 			nil {
@@ -303,11 +330,13 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io",
 
-			"v1beta1", "Cluster", "ClusterList")
+			"v1beta1",
+			"Cluster", "ClusterList",
+		)
 		if err !=
 			nil {
-
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -326,10 +355,14 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -350,7 +383,10 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		{
 			m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io",
 
-				"v1beta1", "LBTargetGroup", "LBTargetGroupList",
+				"v1beta1",
+				"LBTargetGroup",
+
+				"LBTargetGroupList",
 			)
 			if err !=
 				nil {
@@ -376,11 +412,15 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-				"v1beta1", "SecurityGroup", "SecurityGroupList",
+				"v1beta1",
+				"SecurityGroup",
+
+				"SecurityGroupList",
 			)
-			if err !=
-				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			if err != nil {
+				return errors.Wrap(
+					err, "failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -402,10 +442,13 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-				"v1beta1", "Subnet", "SubnetList")
+				"v1beta1",
+				"Subnet", "SubnetList",
+			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -426,7 +469,10 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io",
 
-			"v1beta1", "TaskDefinition", "TaskDefinitionList",
+			"v1beta1",
+			"TaskDefinition",
+
+			"TaskDefinitionList",
 		)
 		if err !=
 			nil {
@@ -462,10 +508,14 @@ func (mg *TaskDefinition) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -484,10 +534,14 @@ func (mg *TaskDefinition) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

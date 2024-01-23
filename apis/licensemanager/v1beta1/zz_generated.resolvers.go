@@ -35,10 +35,8 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 			"LicenseConfigurationList",
 		)
 		if err != nil {
-			return errors.
-				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LicenseConfigurationArn),
 			Extract:      common.ARNExtractor(),
@@ -55,9 +53,10 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "Instance", "InstanceList")
+			"v1beta1",
+			"Instance", "InstanceList",
+		)
 		if err != nil {
-
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -82,8 +81,7 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 			"LicenseConfigurationList",
 		)
 		if err != nil {
-			return errors.
-				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -102,9 +100,10 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "Instance", "InstanceList")
+			"v1beta1",
+			"Instance", "InstanceList",
+		)
 		if err != nil {
-
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 

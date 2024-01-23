@@ -62,10 +62,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	// register webhooks for the kind v1beta1.NamedQuery
-	if err := ctrl.NewWebhookManagedBy(mgr).
-		For(&v1beta1.NamedQuery{}).
-		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.NamedQuery")
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.NamedQuery{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.NamedQuery")
+		}
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.NamedQuery_GroupVersionKind), opts...)

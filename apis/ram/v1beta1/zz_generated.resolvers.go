@@ -11,11 +11,11 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this PrincipalAssociation.
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
 func (mg *PrincipalAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -29,10 +29,15 @@ func (mg *PrincipalAssociation) ResolveReferences(ctx context.Context, c client.
 	{
 		m, l, err = apisresolver.GetManagedResource("organizations.aws.upbound.io",
 
-			"v1beta1", "Organization", "OrganizationList",
+			"v1beta1",
+			"Organization",
+
+			"OrganizationList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -51,11 +56,15 @@ func (mg *PrincipalAssociation) ResolveReferences(ctx context.Context, c client.
 	{
 		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io",
 
-			"v1beta1", "ResourceShare", "ResourceShareList",
+			"v1beta1",
+			"ResourceShare",
+
+			"ResourceShareList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+			return errors.Wrap(
+				err, "failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -74,10 +83,15 @@ func (mg *PrincipalAssociation) ResolveReferences(ctx context.Context, c client.
 	{
 		m, l, err = apisresolver.GetManagedResource("organizations.aws.upbound.io",
 
-			"v1beta1", "Organization", "OrganizationList",
+			"v1beta1",
+			"Organization",
+
+			"OrganizationList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -96,11 +110,15 @@ func (mg *PrincipalAssociation) ResolveReferences(ctx context.Context, c client.
 	{
 		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io",
 
-			"v1beta1", "ResourceShare", "ResourceShareList",
+			"v1beta1",
+			"ResourceShare",
+
+			"ResourceShareList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+			return errors.Wrap(
+				err, "failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -132,11 +150,15 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 	{
 		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io",
 
-			"v1beta1", "ResourceShare", "ResourceShareList",
+			"v1beta1",
+			"ResourceShare",
+
+			"ResourceShareList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+			return errors.Wrap(
+				err, "failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -155,11 +177,15 @@ func (mg *ResourceAssociation) ResolveReferences(ctx context.Context, c client.R
 	{
 		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io",
 
-			"v1beta1", "ResourceShare", "ResourceShareList",
+			"v1beta1",
+			"ResourceShare",
+
+			"ResourceShareList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+			return errors.Wrap(
+				err, "failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -191,12 +217,14 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 	{
 		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io",
 
-			"v1beta1", "PrincipalAssociation", "PrincipalAssociationList",
+			"v1beta1",
+			"PrincipalAssociation",
+
+			"PrincipalAssociationList",
 		)
+
 		if err != nil {
-			return errors.Wrap(err,
-				"failed to get the reference target managed resource and its list for reference resolution",
-			)
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -215,12 +243,14 @@ func (mg *ResourceShareAccepter) ResolveReferences(ctx context.Context, c client
 	{
 		m, l, err = apisresolver.GetManagedResource("ram.aws.upbound.io",
 
-			"v1beta1", "PrincipalAssociation", "PrincipalAssociationList",
+			"v1beta1",
+			"PrincipalAssociation",
+
+			"PrincipalAssociationList",
 		)
+
 		if err != nil {
-			return errors.Wrap(err,
-				"failed to get the reference target managed resource and its list for reference resolution",
-			)
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

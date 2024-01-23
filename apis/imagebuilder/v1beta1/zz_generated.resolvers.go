@@ -29,10 +29,13 @@ func (mg *Component) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-			"v1beta1", "Key", "KeyList")
+			"v1beta1",
+			"Key", "KeyList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -51,10 +54,13 @@ func (mg *Component) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-			"v1beta1", "Key", "KeyList")
+			"v1beta1",
+			"Key", "KeyList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -88,7 +94,10 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 		{
 			m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-				"v1beta1", "Component", "ComponentList",
+				"v1beta1",
+				"Component",
+
+				"ComponentList",
 			)
 			if err !=
 				nil {
@@ -113,10 +122,13 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-			"v1beta1", "Key", "KeyList")
+			"v1beta1",
+			"Key", "KeyList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -137,10 +149,14 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 		{
 			m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io",
 
-				"v1beta1", "Repository", "RepositoryList")
-
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				"v1beta1",
+				"Repository", "RepositoryList",
+			)
+			if err !=
+				nil {
+				return errors.Wrap(err,
+					"failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -162,7 +178,10 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 		{
 			m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-				"v1beta1", "Component", "ComponentList",
+				"v1beta1",
+				"Component",
+
+				"ComponentList",
 			)
 			if err !=
 				nil {
@@ -187,10 +206,13 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-			"v1beta1", "Key", "KeyList")
+			"v1beta1",
+			"Key", "KeyList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -211,10 +233,14 @@ func (mg *ContainerRecipe) ResolveReferences(ctx context.Context, c client.Reade
 		{
 			m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io",
 
-				"v1beta1", "Repository", "RepositoryList")
-
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				"v1beta1",
+				"Repository", "RepositoryList",
+			)
+			if err !=
+				nil {
+				return errors.Wrap(err,
+					"failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -248,12 +274,17 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "DistributionConfiguration",
+			"v1beta1",
+			"DistributionConfiguration",
 
 			"DistributionConfigurationList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+			nil {
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -272,10 +303,16 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "ImageRecipe", "ImageRecipeList",
+			"v1beta1",
+			"ImageRecipe",
+
+			"ImageRecipeList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -294,12 +331,17 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "InfrastructureConfiguration",
+			"v1beta1",
+			"InfrastructureConfiguration",
 
 			"InfrastructureConfigurationList",
 		)
+
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -318,12 +360,17 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "DistributionConfiguration",
+			"v1beta1",
+			"DistributionConfiguration",
 
 			"DistributionConfigurationList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+			nil {
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -342,10 +389,16 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "ImageRecipe", "ImageRecipeList",
+			"v1beta1",
+			"ImageRecipe",
+
+			"ImageRecipeList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -364,12 +417,17 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "InfrastructureConfiguration",
+			"v1beta1",
+			"InfrastructureConfiguration",
 
 			"InfrastructureConfigurationList",
 		)
+
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -401,10 +459,16 @@ func (mg *ImagePipeline) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "ImageRecipe", "ImageRecipeList",
+			"v1beta1",
+			"ImageRecipe",
+
+			"ImageRecipeList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -423,12 +487,17 @@ func (mg *ImagePipeline) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "InfrastructureConfiguration",
+			"v1beta1",
+			"InfrastructureConfiguration",
 
 			"InfrastructureConfigurationList",
 		)
+
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -447,10 +516,16 @@ func (mg *ImagePipeline) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "ImageRecipe", "ImageRecipeList",
+			"v1beta1",
+			"ImageRecipe",
+
+			"ImageRecipeList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -469,12 +544,17 @@ func (mg *ImagePipeline) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-			"v1beta1", "InfrastructureConfiguration",
+			"v1beta1",
+			"InfrastructureConfiguration",
 
 			"InfrastructureConfigurationList",
 		)
+
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -508,7 +588,10 @@ func (mg *ImageRecipe) ResolveReferences(ctx context.Context, c client.Reader) e
 		{
 			m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-				"v1beta1", "Component", "ComponentList",
+				"v1beta1",
+				"Component",
+
+				"ComponentList",
 			)
 			if err !=
 				nil {
@@ -534,7 +617,10 @@ func (mg *ImageRecipe) ResolveReferences(ctx context.Context, c client.Reader) e
 		{
 			m, l, err = apisresolver.GetManagedResource("imagebuilder.aws.upbound.io",
 
-				"v1beta1", "Component", "ComponentList",
+				"v1beta1",
+				"Component",
+
+				"ComponentList",
 			)
 			if err !=
 				nil {
@@ -573,10 +659,16 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "InstanceProfile", "InstanceProfileList",
+			"v1beta1",
+			"InstanceProfile",
+
+			"InstanceProfileList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -595,11 +687,13 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "KeyPair", "KeyPairList")
+			"v1beta1",
+			"KeyPair", "KeyPairList",
+		)
 		if err !=
 			nil {
-
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -621,10 +715,13 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -646,11 +743,15 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "SecurityGroup", "SecurityGroupList",
+			"v1beta1",
+			"SecurityGroup",
+
+			"SecurityGroupList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+			return errors.Wrap(
+				err, "failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -669,11 +770,13 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-			"v1beta1", "Topic", "TopicList")
+			"v1beta1",
+			"Topic", "TopicList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -692,10 +795,13 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "Subnet", "SubnetList")
+			"v1beta1",
+			"Subnet", "SubnetList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -714,10 +820,16 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "InstanceProfile", "InstanceProfileList",
+			"v1beta1",
+			"InstanceProfile",
+
+			"InstanceProfileList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -736,11 +848,13 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "KeyPair", "KeyPairList")
+			"v1beta1",
+			"KeyPair", "KeyPairList",
+		)
 		if err !=
 			nil {
-
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -762,10 +876,13 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -787,11 +904,15 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "SecurityGroup", "SecurityGroupList",
+			"v1beta1",
+			"SecurityGroup",
+
+			"SecurityGroupList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+			return errors.Wrap(
+				err, "failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -810,11 +931,13 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-			"v1beta1", "Topic", "TopicList")
+			"v1beta1",
+			"Topic", "TopicList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -833,10 +956,13 @@ func (mg *InfrastructureConfiguration) ResolveReferences(ctx context.Context, c 
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "Subnet", "SubnetList")
+			"v1beta1",
+			"Subnet", "SubnetList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

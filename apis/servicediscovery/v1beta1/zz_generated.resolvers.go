@@ -29,10 +29,13 @@ func (mg *PrivateDNSNamespace) ResolveReferences(ctx context.Context, c client.R
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPC", "VPCList")
+			"v1beta1",
+			"VPC", "VPCList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -51,10 +54,13 @@ func (mg *PrivateDNSNamespace) ResolveReferences(ctx context.Context, c client.R
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPC", "VPCList")
+			"v1beta1",
+			"VPC", "VPCList",
+		)
 		if err != nil {
 			return errors.
 				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -93,8 +99,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				"PrivateDNSNamespaceList",
 			)
 			if err != nil {
-				return errors.
-					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -121,8 +126,7 @@ func (mg *Service) ResolveReferences(ctx context.Context, c client.Reader) error
 				"PrivateDNSNamespaceList",
 			)
 			if err != nil {
-				return errors.
-					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

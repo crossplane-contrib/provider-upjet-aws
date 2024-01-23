@@ -30,10 +30,13 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-			"v1beta1", "Bucket", "BucketList")
+			"v1beta1", "Bucket",
+			"BucketList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -52,10 +55,13 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-			"v1beta1", "Bucket", "BucketList")
+			"v1beta1", "Bucket",
+			"BucketList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -87,9 +93,12 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io",
 
-			"v1beta1", "Database", "DatabaseList")
+			"v1beta1",
+			"Database", "DatabaseList",
+		)
 
-		if err != nil {
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -109,11 +118,17 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io",
 
-			"v1beta1", "Workgroup", "WorkgroupList",
+			"v1beta1",
+			"Workgroup",
+			"WorkgroupList",
 		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -132,9 +147,12 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io",
 
-			"v1beta1", "Database", "DatabaseList")
+			"v1beta1",
+			"Database", "DatabaseList",
+		)
 
-		if err != nil {
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -154,11 +172,17 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io",
 
-			"v1beta1", "Workgroup", "WorkgroupList",
+			"v1beta1",
+			"Workgroup",
+			"WorkgroupList",
 		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -194,10 +218,13 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 				{
 					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-						"v1beta1", "Key", "KeyList")
+						"v1beta1",
+						"Key", "KeyList",
+					)
 					if err != nil {
 						return errors.
 							Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -223,10 +250,13 @@ func (mg *Workgroup) ResolveReferences(ctx context.Context, c client.Reader) err
 				{
 					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-						"v1beta1", "Key", "KeyList")
+						"v1beta1",
+						"Key", "KeyList",
+					)
 					if err != nil {
 						return errors.
 							Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

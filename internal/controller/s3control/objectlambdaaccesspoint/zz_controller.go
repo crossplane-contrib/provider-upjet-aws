@@ -62,10 +62,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	// register webhooks for the kind v1beta1.ObjectLambdaAccessPoint
-	if err := ctrl.NewWebhookManagedBy(mgr).
-		For(&v1beta1.ObjectLambdaAccessPoint{}).
-		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ObjectLambdaAccessPoint")
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.ObjectLambdaAccessPoint{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ObjectLambdaAccessPoint")
+		}
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.ObjectLambdaAccessPoint_GroupVersionKind), opts...)

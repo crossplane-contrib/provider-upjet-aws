@@ -28,14 +28,19 @@ func (mg *Revision) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("dataexchange.aws.upbound.io",
 
-			"v1beta1", "DataSet", "DataSetList",
+			"v1beta1",
+			"DataSet",
+
+			"DataSetList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
 
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
+		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataSetID),
 			Extract:      resource.ExtractResourceID(),
@@ -52,12 +57,18 @@ func (mg *Revision) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("dataexchange.aws.upbound.io",
 
-			"v1beta1", "DataSet", "DataSetList",
+			"v1beta1",
+			"DataSet",
+
+			"DataSetList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

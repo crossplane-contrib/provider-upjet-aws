@@ -11,12 +11,12 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/upbound/provider-aws/config/common"
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this BudgetAction.
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
 func (mg *BudgetAction) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -30,9 +30,10 @@ func (mg *BudgetAction) ResolveReferences(ctx context.Context, c client.Reader) 
 	{
 		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io",
 
-			"v1beta1", "Budget", "BudgetList")
+			"v1beta1",
+			"Budget", "BudgetList",
+		)
 		if err != nil {
-
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -55,10 +56,13 @@ func (mg *BudgetAction) ResolveReferences(ctx context.Context, c client.Reader) 
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Policy", "PolicyList")
+					"v1beta1",
+					"Policy", "PolicyList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -80,10 +84,14 @@ func (mg *BudgetAction) ResolveReferences(ctx context.Context, c client.Reader) 
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -102,9 +110,10 @@ func (mg *BudgetAction) ResolveReferences(ctx context.Context, c client.Reader) 
 	{
 		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io",
 
-			"v1beta1", "Budget", "BudgetList")
+			"v1beta1",
+			"Budget", "BudgetList",
+		)
 		if err != nil {
-
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -127,10 +136,13 @@ func (mg *BudgetAction) ResolveReferences(ctx context.Context, c client.Reader) 
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Policy", "PolicyList")
+					"v1beta1",
+					"Policy", "PolicyList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -152,10 +164,14 @@ func (mg *BudgetAction) ResolveReferences(ctx context.Context, c client.Reader) 
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

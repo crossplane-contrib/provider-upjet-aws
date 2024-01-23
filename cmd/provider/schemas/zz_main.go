@@ -53,7 +53,7 @@ func main() {
 		essTLSCertsPath            = app.Flag("ess-tls-cert-dir", "Path of ESS TLS certificates.").Envar("ESS_TLS_CERTS_DIR").String()
 		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 
-		certsDir = app.Flag("certs-dir", "The directory that contains the server key and certificate.").Default("/tls/server").Envar("CERTS_DIR").ExistingFileOrDir()
+		certsDir = app.Flag("certs-dir", "The directory that contains the server key and certificate.").Default("/tls/server").Envar("CERTS_DIR").String()
 	)
 	setupConfig := &clients.SetupConfig{}
 	setupConfig.TerraformVersion = app.Flag("terraform-version", "Terraform version.").Required().Envar("TERRAFORM_VERSION").String()
@@ -127,6 +127,7 @@ func main() {
 		SetupFn:               clients.SelectTerraformSetup(log, setupConfig),
 		PollJitter:            pollJitter,
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
+		StartWebhooks:         *certsDir != "",
 	}
 
 	if *enableManagementPolicies {

@@ -31,10 +31,14 @@ func (mg *LanguageModel) ResolveReferences(ctx context.Context, c client.Reader)
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -56,10 +60,14 @@ func (mg *LanguageModel) ResolveReferences(ctx context.Context, c client.Reader)
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

@@ -27,12 +27,16 @@ func (mg *EndpointGroup) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io",
 
-			"v1beta1", "Listener", "ListenerList",
-		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
+			"v1beta1", "Listener",
 
+			"ListenerList",
+		)
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ListenerArn),
 			Extract:      reference.ExternalName(),
@@ -49,10 +53,15 @@ func (mg *EndpointGroup) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io",
 
-			"v1beta1", "Listener", "ListenerList",
+			"v1beta1", "Listener",
+
+			"ListenerList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -84,10 +93,14 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io",
 
-			"v1beta1", "Accelerator", "AcceleratorList",
+			"v1beta1", "Accelerator",
+
+			"AcceleratorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -106,10 +119,14 @@ func (mg *Listener) ResolveReferences(ctx context.Context, c client.Reader) erro
 	{
 		m, l, err = apisresolver.GetManagedResource("globalaccelerator.aws.upbound.io",
 
-			"v1beta1", "Accelerator", "AcceleratorList",
+			"v1beta1", "Accelerator",
+
+			"AcceleratorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

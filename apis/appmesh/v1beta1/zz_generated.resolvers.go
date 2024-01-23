@@ -11,11 +11,11 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this GatewayRoute.
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
 func (mg *GatewayRoute) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -35,11 +35,15 @@ func (mg *GatewayRoute) ResolveReferences(ctx context.Context, c client.Reader) 
 						{
 							m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-								"v1beta1", "VirtualService", "VirtualServiceList",
-							)
+								"v1beta1",
+								"VirtualService",
 
-							if err != nil {
-								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+								"VirtualServiceList",
+							)
+							if err !=
+								nil {
+								return errors.
+									Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 							}
 
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -64,11 +68,15 @@ func (mg *GatewayRoute) ResolveReferences(ctx context.Context, c client.Reader) 
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "VirtualGateway", "VirtualGatewayList",
-		)
+			"v1beta1",
+			"VirtualGateway",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"VirtualGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -93,11 +101,15 @@ func (mg *GatewayRoute) ResolveReferences(ctx context.Context, c client.Reader) 
 						{
 							m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-								"v1beta1", "VirtualService", "VirtualServiceList",
-							)
+								"v1beta1",
+								"VirtualService",
 
-							if err != nil {
-								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+								"VirtualServiceList",
+							)
+							if err !=
+								nil {
+								return errors.
+									Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 							}
 
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -122,11 +134,15 @@ func (mg *GatewayRoute) ResolveReferences(ctx context.Context, c client.Reader) 
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "VirtualGateway", "VirtualGatewayList",
-		)
+			"v1beta1",
+			"VirtualGateway",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"VirtualGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -158,10 +174,13 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "Mesh", "MeshList")
+			"v1beta1",
+			"Mesh", "MeshList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -185,11 +204,15 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 					{
 						m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-							"v1beta1", "VirtualNode", "VirtualNodeList",
+							"v1beta1",
+							"VirtualNode",
+
+							"VirtualNodeList",
 						)
-						if err !=
-							nil {
-							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						if err != nil {
+							return errors.Wrap(
+								err, "failed to get the reference target managed resource and its list for reference resolution",
+							)
 						}
 
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -217,11 +240,15 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 					{
 						m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-							"v1beta1", "VirtualNode", "VirtualNodeList",
+							"v1beta1",
+							"VirtualNode",
+
+							"VirtualNodeList",
 						)
-						if err !=
-							nil {
-							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						if err != nil {
+							return errors.Wrap(
+								err, "failed to get the reference target managed resource and its list for reference resolution",
+							)
 						}
 
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -245,10 +272,16 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "VirtualRouter", "VirtualRouterList",
+			"v1beta1",
+			"VirtualRouter",
+
+			"VirtualRouterList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -267,10 +300,13 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "Mesh", "MeshList")
+			"v1beta1",
+			"Mesh", "MeshList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -294,11 +330,15 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 					{
 						m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-							"v1beta1", "VirtualNode", "VirtualNodeList",
+							"v1beta1",
+							"VirtualNode",
+
+							"VirtualNodeList",
 						)
-						if err !=
-							nil {
-							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						if err != nil {
+							return errors.Wrap(
+								err, "failed to get the reference target managed resource and its list for reference resolution",
+							)
 						}
 
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -326,11 +366,15 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 					{
 						m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-							"v1beta1", "VirtualNode", "VirtualNodeList",
+							"v1beta1",
+							"VirtualNode",
+
+							"VirtualNodeList",
 						)
-						if err !=
-							nil {
-							return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						if err != nil {
+							return errors.Wrap(
+								err, "failed to get the reference target managed resource and its list for reference resolution",
+							)
 						}
 
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -354,10 +398,16 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "VirtualRouter", "VirtualRouterList",
+			"v1beta1",
+			"VirtualRouter",
+
+			"VirtualRouterList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -395,12 +445,16 @@ func (mg *VirtualGateway) ResolveReferences(ctx context.Context, c client.Reader
 						{
 							m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io",
 
-								"v1beta1", "Certificate", "CertificateList",
+								"v1beta1",
+								"Certificate", "CertificateList",
 							)
 							if err !=
-
 								nil {
-								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+								return errors.Wrap(err,
+
+									"failed to get the reference target managed resource and its list for reference resolution",
+								)
 							}
 
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -430,12 +484,16 @@ func (mg *VirtualGateway) ResolveReferences(ctx context.Context, c client.Reader
 						{
 							m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io",
 
-								"v1beta1", "Certificate", "CertificateList",
+								"v1beta1",
+								"Certificate", "CertificateList",
 							)
 							if err !=
-
 								nil {
-								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+								return errors.Wrap(err,
+
+									"failed to get the reference target managed resource and its list for reference resolution",
+								)
 							}
 
 							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -473,10 +531,13 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "Mesh", "MeshList")
+			"v1beta1",
+			"Mesh", "MeshList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -499,12 +560,13 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 				{
 					m, l, err = apisresolver.GetManagedResource("servicediscovery.aws.upbound.io",
 
-						"v1beta1", "HTTPNamespace", "HTTPNamespaceList",
+						"v1beta1", "HTTPNamespace",
+
+						"HTTPNamespaceList",
 					)
+
 					if err != nil {
-						return errors.Wrap(err,
-							"failed to get the reference target managed resource and its list for reference resolution",
-						)
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -527,10 +589,13 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "Mesh", "MeshList")
+			"v1beta1",
+			"Mesh", "MeshList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -553,12 +618,13 @@ func (mg *VirtualNode) ResolveReferences(ctx context.Context, c client.Reader) e
 				{
 					m, l, err = apisresolver.GetManagedResource("servicediscovery.aws.upbound.io",
 
-						"v1beta1", "HTTPNamespace", "HTTPNamespaceList",
+						"v1beta1", "HTTPNamespace",
+
+						"HTTPNamespaceList",
 					)
+
 					if err != nil {
-						return errors.Wrap(err,
-							"failed to get the reference target managed resource and its list for reference resolution",
-						)
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -594,10 +660,13 @@ func (mg *VirtualRouter) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "Mesh", "MeshList")
+			"v1beta1",
+			"Mesh", "MeshList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -616,10 +685,13 @@ func (mg *VirtualRouter) ResolveReferences(ctx context.Context, c client.Reader)
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "Mesh", "MeshList")
+			"v1beta1",
+			"Mesh", "MeshList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -651,10 +723,13 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "Mesh", "MeshList")
+			"v1beta1",
+			"Mesh", "MeshList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -677,11 +752,15 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 				{
 					m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-						"v1beta1", "VirtualNode", "VirtualNodeList",
+						"v1beta1",
+						"VirtualNode",
+
+						"VirtualNodeList",
 					)
-					if err !=
-						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					if err != nil {
+						return errors.Wrap(
+							err, "failed to get the reference target managed resource and its list for reference resolution",
+						)
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -707,10 +786,16 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 				{
 					m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-						"v1beta1", "VirtualRouter", "VirtualRouterList",
+						"v1beta1",
+						"VirtualRouter",
+
+						"VirtualRouterList",
 					)
-					if err != nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					if err !=
+
+						nil {
+						return errors.
+							Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -733,10 +818,13 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-			"v1beta1", "Mesh", "MeshList")
+			"v1beta1",
+			"Mesh", "MeshList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -759,11 +847,15 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 				{
 					m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-						"v1beta1", "VirtualNode", "VirtualNodeList",
+						"v1beta1",
+						"VirtualNode",
+
+						"VirtualNodeList",
 					)
-					if err !=
-						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					if err != nil {
+						return errors.Wrap(
+							err, "failed to get the reference target managed resource and its list for reference resolution",
+						)
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -789,10 +881,16 @@ func (mg *VirtualService) ResolveReferences(ctx context.Context, c client.Reader
 				{
 					m, l, err = apisresolver.GetManagedResource("appmesh.aws.upbound.io",
 
-						"v1beta1", "VirtualRouter", "VirtualRouterList",
+						"v1beta1",
+						"VirtualRouter",
+
+						"VirtualRouterList",
 					)
-					if err != nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					if err !=
+
+						nil {
+						return errors.
+							Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

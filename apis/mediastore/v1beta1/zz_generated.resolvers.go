@@ -8,12 +8,12 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	errors "github.com/pkg/errors"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this ContainerPolicy.
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
 func (mg *ContainerPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -27,13 +27,17 @@ func (mg *ContainerPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("mediastore.aws.upbound.io",
 
-			"v1beta1", "Container", "ContainerList",
-		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
+			"v1beta1",
+			"Container",
 
+			"ContainerList",
+		)
+		if err != nil {
+			return errors.Wrap(
+				err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
+		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerName),
 			Extract:      reference.ExternalName(),
@@ -50,11 +54,16 @@ func (mg *ContainerPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("mediastore.aws.upbound.io",
 
-			"v1beta1", "Container", "ContainerList",
+			"v1beta1",
+			"Container",
+
+			"ContainerList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+			return errors.Wrap(
+				err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

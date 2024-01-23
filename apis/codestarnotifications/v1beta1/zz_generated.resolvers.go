@@ -29,7 +29,10 @@ func (mg *NotificationRule) ResolveReferences(ctx context.Context, c client.Read
 	{
 		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-			"v1beta1", "Repository", "RepositoryList",
+			"v1beta1",
+			"Repository",
+
+			"RepositoryList",
 		)
 		if err !=
 			nil {
@@ -54,11 +57,13 @@ func (mg *NotificationRule) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -79,7 +84,10 @@ func (mg *NotificationRule) ResolveReferences(ctx context.Context, c client.Read
 	{
 		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-			"v1beta1", "Repository", "RepositoryList",
+			"v1beta1",
+			"Repository",
+
+			"RepositoryList",
 		)
 		if err !=
 			nil {
@@ -104,11 +112,13 @@ func (mg *NotificationRule) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

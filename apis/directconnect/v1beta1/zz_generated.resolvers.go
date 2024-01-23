@@ -29,14 +29,15 @@ func (mg *BGPPeer) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "PrivateVirtualInterface",
+			"v1beta1",
+			"PrivateVirtualInterface",
 
 			"PrivateVirtualInterfaceList",
 		)
-		if err != nil {
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualInterfaceID),
 			Extract:      resource.ExtractResourceID(),
@@ -53,11 +54,13 @@ func (mg *BGPPeer) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "PrivateVirtualInterface",
+			"v1beta1",
+			"PrivateVirtualInterface",
 
 			"PrivateVirtualInterfaceList",
 		)
-		if err != nil {
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -90,10 +93,16 @@ func (mg *ConnectionAssociation) ResolveReferences(ctx context.Context, c client
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -112,9 +121,11 @@ func (mg *ConnectionAssociation) ResolveReferences(ctx context.Context, c client
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Lag", "LagList")
-		if err != nil {
+			"v1beta1",
+			"Lag",
 
+			"LagList")
+		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -134,10 +145,16 @@ func (mg *ConnectionAssociation) ResolveReferences(ctx context.Context, c client
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -156,9 +173,11 @@ func (mg *ConnectionAssociation) ResolveReferences(ctx context.Context, c client
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Lag", "LagList")
-		if err != nil {
+			"v1beta1",
+			"Lag",
 
+			"LagList")
+		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -191,10 +210,14 @@ func (mg *GatewayAssociation) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPNGateway", "VPNGatewayList")
-
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"v1beta1",
+			"VPNGateway", "VPNGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -213,11 +236,17 @@ func (mg *GatewayAssociation) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -236,10 +265,14 @@ func (mg *GatewayAssociation) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPNGateway", "VPNGatewayList")
-
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"v1beta1",
+			"VPNGateway", "VPNGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -258,11 +291,17 @@ func (mg *GatewayAssociation) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -294,10 +333,14 @@ func (mg *GatewayAssociationProposal) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPNGateway", "VPNGatewayList")
-
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"v1beta1",
+			"VPNGateway", "VPNGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -316,11 +359,17 @@ func (mg *GatewayAssociationProposal) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -339,11 +388,17 @@ func (mg *GatewayAssociationProposal) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -362,10 +417,14 @@ func (mg *GatewayAssociationProposal) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPNGateway", "VPNGatewayList")
-
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"v1beta1",
+			"VPNGateway", "VPNGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -384,11 +443,17 @@ func (mg *GatewayAssociationProposal) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -407,11 +472,17 @@ func (mg *GatewayAssociationProposal) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -443,10 +514,16 @@ func (mg *HostedPrivateVirtualInterface) ResolveReferences(ctx context.Context, 
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -465,10 +542,16 @@ func (mg *HostedPrivateVirtualInterface) ResolveReferences(ctx context.Context, 
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -500,10 +583,14 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPNGateway", "VPNGatewayList")
-
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"v1beta1",
+			"VPNGateway", "VPNGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -522,12 +609,15 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "HostedPrivateVirtualInterface",
+			"v1beta1",
+			"HostedPrivateVirtualInterface",
 
 			"HostedPrivateVirtualInterfaceList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -546,10 +636,14 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPNGateway", "VPNGatewayList")
-
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"v1beta1",
+			"VPNGateway", "VPNGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -568,12 +662,15 @@ func (mg *HostedPrivateVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "HostedPrivateVirtualInterface",
+			"v1beta1",
+			"HostedPrivateVirtualInterface",
 
 			"HostedPrivateVirtualInterfaceList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -605,10 +702,16 @@ func (mg *HostedPublicVirtualInterface) ResolveReferences(ctx context.Context, c
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -627,10 +730,16 @@ func (mg *HostedPublicVirtualInterface) ResolveReferences(ctx context.Context, c
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -662,7 +771,8 @@ func (mg *HostedPublicVirtualInterfaceAccepter) ResolveReferences(ctx context.Co
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "HostedPublicVirtualInterface",
+			"v1beta1",
+			"HostedPublicVirtualInterface",
 
 			"HostedPublicVirtualInterfaceList",
 		)
@@ -686,7 +796,8 @@ func (mg *HostedPublicVirtualInterfaceAccepter) ResolveReferences(ctx context.Co
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "HostedPublicVirtualInterface",
+			"v1beta1",
+			"HostedPublicVirtualInterface",
 
 			"HostedPublicVirtualInterfaceList",
 		)
@@ -723,10 +834,16 @@ func (mg *HostedTransitVirtualInterface) ResolveReferences(ctx context.Context, 
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -745,10 +862,16 @@ func (mg *HostedTransitVirtualInterface) ResolveReferences(ctx context.Context, 
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -780,11 +903,17 @@ func (mg *HostedTransitVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -803,12 +932,15 @@ func (mg *HostedTransitVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "HostedTransitVirtualInterface",
+			"v1beta1",
+			"HostedTransitVirtualInterface",
 
 			"HostedTransitVirtualInterfaceList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -827,11 +959,17 @@ func (mg *HostedTransitVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -850,12 +988,15 @@ func (mg *HostedTransitVirtualInterfaceAccepter) ResolveReferences(ctx context.C
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "HostedTransitVirtualInterface",
+			"v1beta1",
+			"HostedTransitVirtualInterface",
 
 			"HostedTransitVirtualInterfaceList",
 		)
 		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -887,10 +1028,16 @@ func (mg *PrivateVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -909,10 +1056,14 @@ func (mg *PrivateVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPNGateway", "VPNGatewayList")
-
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"v1beta1",
+			"VPNGateway", "VPNGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -931,10 +1082,16 @@ func (mg *PrivateVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -953,10 +1110,14 @@ func (mg *PrivateVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "VPNGateway", "VPNGatewayList")
-
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"v1beta1",
+			"VPNGateway", "VPNGatewayList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -988,10 +1149,16 @@ func (mg *PublicVirtualInterface) ResolveReferences(ctx context.Context, c clien
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1010,10 +1177,16 @@ func (mg *PublicVirtualInterface) ResolveReferences(ctx context.Context, c clien
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1045,10 +1218,16 @@ func (mg *TransitVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1067,11 +1246,17 @@ func (mg *TransitVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1090,10 +1275,16 @@ func (mg *TransitVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Connection", "ConnectionList",
+			"v1beta1",
+			"Connection",
+
+			"ConnectionList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1112,11 +1303,17 @@ func (mg *TransitVirtualInterface) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("directconnect.aws.upbound.io",
 
-			"v1beta1", "Gateway", "GatewayList",
+			"v1beta1",
+			"Gateway",
+
+			"GatewayList",
 		)
-		if err !=
-			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err != nil {
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

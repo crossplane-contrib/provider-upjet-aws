@@ -30,10 +30,16 @@ func (mg *VoiceConnectorGroup) ResolveReferences(ctx context.Context, c client.R
 		{
 			m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-				"v1beta1", "VoiceConnector", "VoiceConnectorList",
+				"v1beta1",
+				"VoiceConnector",
+
+				"VoiceConnectorList",
 			)
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			if err !=
+
+				nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -55,10 +61,16 @@ func (mg *VoiceConnectorGroup) ResolveReferences(ctx context.Context, c client.R
 		{
 			m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-				"v1beta1", "VoiceConnector", "VoiceConnectorList",
+				"v1beta1",
+				"VoiceConnector",
+
+				"VoiceConnectorList",
 			)
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			if err !=
+
+				nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -92,10 +104,16 @@ func (mg *VoiceConnectorLogging) ResolveReferences(ctx context.Context, c client
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -114,10 +132,16 @@ func (mg *VoiceConnectorLogging) ResolveReferences(ctx context.Context, c client
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -149,10 +173,16 @@ func (mg *VoiceConnectorOrigination) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -171,10 +201,16 @@ func (mg *VoiceConnectorOrigination) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -206,10 +242,16 @@ func (mg *VoiceConnectorStreaming) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -228,10 +270,16 @@ func (mg *VoiceConnectorStreaming) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -263,10 +311,16 @@ func (mg *VoiceConnectorTermination) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -285,10 +339,16 @@ func (mg *VoiceConnectorTermination) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -320,10 +380,16 @@ func (mg *VoiceConnectorTerminationCredentials) ResolveReferences(ctx context.Co
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -342,10 +408,16 @@ func (mg *VoiceConnectorTerminationCredentials) ResolveReferences(ctx context.Co
 	{
 		m, l, err = apisresolver.GetManagedResource("chime.aws.upbound.io",
 
-			"v1beta1", "VoiceConnector", "VoiceConnectorList",
+			"v1beta1",
+			"VoiceConnector",
+
+			"VoiceConnectorList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

@@ -65,10 +65,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	// register webhooks for the kind v1beta1.DBSnapshotCopy
-	if err := ctrl.NewWebhookManagedBy(mgr).
-		For(&v1beta1.DBSnapshotCopy{}).
-		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.DBSnapshotCopy")
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.DBSnapshotCopy{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.DBSnapshotCopy")
+		}
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.DBSnapshotCopy_GroupVersionKind), opts...)

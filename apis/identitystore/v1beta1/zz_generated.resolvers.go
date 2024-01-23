@@ -28,12 +28,17 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io",
 
-			"v1beta1", "Group", "GroupList")
+			"v1beta1",
+			"Group",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"GroupList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GroupID),
 			Extract:      resource.ExtractParamPath("group_id", true),
@@ -50,8 +55,13 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io",
 
-			"v1beta1", "User", "UserList")
-		if err != nil {
+			"v1beta1",
+			"User",
+
+			"UserList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -71,10 +81,16 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io",
 
-			"v1beta1", "Group", "GroupList")
+			"v1beta1",
+			"Group",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"GroupList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -93,8 +109,13 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io",
 
-			"v1beta1", "User", "UserList")
-		if err != nil {
+			"v1beta1",
+			"User",
+
+			"UserList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 

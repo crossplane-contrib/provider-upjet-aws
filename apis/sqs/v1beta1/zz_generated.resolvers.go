@@ -28,13 +28,14 @@ func (mg *QueuePolicy) ResolveReferences(ctx context.Context, c client.Reader) e
 	{
 		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io",
 
-			"v1beta1", "Queue", "QueueList")
+			"v1beta1",
+			"Queue", "QueueList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.QueueURL),
 			Extract:      common.TerraformID(),
@@ -51,11 +52,13 @@ func (mg *QueuePolicy) ResolveReferences(ctx context.Context, c client.Reader) e
 	{
 		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io",
 
-			"v1beta1", "Queue", "QueueList")
+			"v1beta1",
+			"Queue", "QueueList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -87,11 +90,13 @@ func (mg *QueueRedriveAllowPolicy) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io",
 
-			"v1beta1", "Queue", "QueueList")
+			"v1beta1",
+			"Queue", "QueueList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -110,11 +115,13 @@ func (mg *QueueRedriveAllowPolicy) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io",
 
-			"v1beta1", "Queue", "QueueList")
+			"v1beta1",
+			"Queue", "QueueList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -146,11 +153,13 @@ func (mg *QueueRedrivePolicy) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io",
 
-			"v1beta1", "Queue", "QueueList")
+			"v1beta1",
+			"Queue", "QueueList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -169,11 +178,13 @@ func (mg *QueueRedrivePolicy) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io",
 
-			"v1beta1", "Queue", "QueueList")
+			"v1beta1",
+			"Queue", "QueueList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

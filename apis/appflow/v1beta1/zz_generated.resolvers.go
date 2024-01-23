@@ -33,12 +33,16 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 				{
 					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-						"v1beta1", "BucketPolicy", "BucketPolicyList",
+						"v1beta1", "BucketPolicy",
+						"BucketPolicyList",
 					)
 					if err !=
-
 						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+						return errors.Wrap(err,
+
+							"failed to get the reference target managed resource and its list for reference resolution",
+						)
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -64,12 +68,16 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 				{
 					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-						"v1beta1", "BucketPolicy", "BucketPolicyList",
+						"v1beta1", "BucketPolicy",
+						"BucketPolicyList",
 					)
 					if err !=
-
 						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+						return errors.Wrap(err,
+
+							"failed to get the reference target managed resource and its list for reference resolution",
+						)
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -95,12 +103,16 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 				{
 					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-						"v1beta1", "BucketPolicy", "BucketPolicyList",
+						"v1beta1", "BucketPolicy",
+						"BucketPolicyList",
 					)
 					if err !=
-
 						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+						return errors.Wrap(err,
+
+							"failed to get the reference target managed resource and its list for reference resolution",
+						)
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -126,12 +138,16 @@ func (mg *Flow) ResolveReferences(ctx context.Context, c client.Reader) error {
 				{
 					m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-						"v1beta1", "BucketPolicy", "BucketPolicyList",
+						"v1beta1", "BucketPolicy",
+						"BucketPolicyList",
 					)
 					if err !=
-
 						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+						return errors.Wrap(err,
+
+							"failed to get the reference target managed resource and its list for reference resolution",
+						)
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

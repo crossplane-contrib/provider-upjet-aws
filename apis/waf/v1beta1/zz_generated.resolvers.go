@@ -11,11 +11,11 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this RateBasedRule.
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
 func (mg *RateBasedRule) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -31,11 +31,13 @@ func (mg *RateBasedRule) ResolveReferences(ctx context.Context, c client.Reader)
 		{
 			m, l, err = apisresolver.GetManagedResource("waf.aws.upbound.io",
 
-				"v1beta1", "IPSet", "IPSetList")
+				"v1beta1",
+				"IPSet", "IPSetList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -57,11 +59,13 @@ func (mg *RateBasedRule) ResolveReferences(ctx context.Context, c client.Reader)
 		{
 			m, l, err = apisresolver.GetManagedResource("waf.aws.upbound.io",
 
-				"v1beta1", "IPSet", "IPSetList")
+				"v1beta1",
+				"IPSet", "IPSetList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -97,10 +101,16 @@ func (mg *RegexMatchSet) ResolveReferences(ctx context.Context, c client.Reader)
 		{
 			m, l, err = apisresolver.GetManagedResource("waf.aws.upbound.io",
 
-				"v1beta1", "RegexPatternSet", "RegexPatternSetList",
+				"v1beta1",
+				"RegexPatternSet",
+
+				"RegexPatternSetList",
 			)
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			if err !=
+
+				nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -122,10 +132,16 @@ func (mg *RegexMatchSet) ResolveReferences(ctx context.Context, c client.Reader)
 		{
 			m, l, err = apisresolver.GetManagedResource("waf.aws.upbound.io",
 
-				"v1beta1", "RegexPatternSet", "RegexPatternSetList",
+				"v1beta1",
+				"RegexPatternSet",
+
+				"RegexPatternSetList",
 			)
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			if err !=
+
+				nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -161,11 +177,13 @@ func (mg *Rule) ResolveReferences(ctx context.Context, c client.Reader) error {
 		{
 			m, l, err = apisresolver.GetManagedResource("waf.aws.upbound.io",
 
-				"v1beta1", "IPSet", "IPSetList")
+				"v1beta1",
+				"IPSet", "IPSetList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -187,11 +205,13 @@ func (mg *Rule) ResolveReferences(ctx context.Context, c client.Reader) error {
 		{
 			m, l, err = apisresolver.GetManagedResource("waf.aws.upbound.io",
 
-				"v1beta1", "IPSet", "IPSetList")
+				"v1beta1",
+				"IPSet", "IPSetList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -227,11 +247,15 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 		{
 			m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io",
 
-				"v1beta1", "DeliveryStream", "DeliveryStreamList",
-			)
+				"v1beta1",
+				"DeliveryStream",
 
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				"DeliveryStreamList",
+			)
+			if err !=
+				nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -253,10 +277,14 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 		{
 			m, l, err = apisresolver.GetManagedResource("waf.aws.upbound.io",
 
-				"v1beta1", "Rule", "RuleList")
+				"v1beta1",
+				"Rule", "RuleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -278,11 +306,15 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 		{
 			m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io",
 
-				"v1beta1", "DeliveryStream", "DeliveryStreamList",
-			)
+				"v1beta1",
+				"DeliveryStream",
 
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				"DeliveryStreamList",
+			)
+			if err !=
+				nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -304,10 +336,14 @@ func (mg *WebACL) ResolveReferences(ctx context.Context, c client.Reader) error 
 		{
 			m, l, err = apisresolver.GetManagedResource("waf.aws.upbound.io",
 
-				"v1beta1", "Rule", "RuleList")
+				"v1beta1",
+				"Rule", "RuleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

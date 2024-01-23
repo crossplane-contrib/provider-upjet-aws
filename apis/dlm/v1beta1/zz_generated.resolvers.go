@@ -30,10 +30,14 @@ func (mg *LifecyclePolicy) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -56,10 +60,13 @@ func (mg *LifecyclePolicy) ResolveReferences(ctx context.Context, c client.Reade
 				{
 					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-						"v1beta1", "Key", "KeyList")
+						"v1beta1",
+						"Key", "KeyList",
+					)
 					if err != nil {
 						return errors.
 							Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -82,10 +89,14 @@ func (mg *LifecyclePolicy) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -108,10 +119,13 @@ func (mg *LifecyclePolicy) ResolveReferences(ctx context.Context, c client.Reade
 				{
 					m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io",
 
-						"v1beta1", "Key", "KeyList")
+						"v1beta1",
+						"Key", "KeyList",
+					)
 					if err != nil {
 						return errors.
 							Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

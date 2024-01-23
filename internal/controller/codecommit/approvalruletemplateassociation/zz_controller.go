@@ -63,10 +63,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	// register webhooks for the kind v1beta1.ApprovalRuleTemplateAssociation
-	if err := ctrl.NewWebhookManagedBy(mgr).
-		For(&v1beta1.ApprovalRuleTemplateAssociation{}).
-		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ApprovalRuleTemplateAssociation")
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.ApprovalRuleTemplateAssociation{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ApprovalRuleTemplateAssociation")
+		}
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.ApprovalRuleTemplateAssociation_GroupVersionKind), opts...)

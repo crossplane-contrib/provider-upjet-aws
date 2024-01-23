@@ -11,11 +11,11 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this ResourceSet.
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
 func (mg *ResourceSet) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -31,9 +31,14 @@ func (mg *ResourceSet) ResolveReferences(ctx context.Context, c client.Reader) e
 		{
 			m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io",
 
-				"v1beta1", "MetricAlarm", "MetricAlarmList",
+				"v1beta1",
+				"MetricAlarm",
+
+				"MetricAlarmList",
 			)
-			if err != nil {
+			if err !=
+
+				nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
@@ -56,9 +61,14 @@ func (mg *ResourceSet) ResolveReferences(ctx context.Context, c client.Reader) e
 		{
 			m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io",
 
-				"v1beta1", "MetricAlarm", "MetricAlarmList",
+				"v1beta1",
+				"MetricAlarm",
+
+				"MetricAlarmList",
 			)
-			if err != nil {
+			if err !=
+
+				nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 

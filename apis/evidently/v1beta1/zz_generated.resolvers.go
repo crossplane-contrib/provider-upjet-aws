@@ -28,12 +28,17 @@ func (mg *Feature) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("evidently.aws.upbound.io",
 
-			"v1beta1", "Project", "ProjectList")
+			"v1beta1",
+			"Project",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"ProjectList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Project),
 			Extract:      resource.ExtractParamPath("name", false),

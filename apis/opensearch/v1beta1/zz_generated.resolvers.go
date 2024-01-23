@@ -31,11 +31,17 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 		{
 			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io",
 
-				"v1beta1", "Group", "GroupList",
+				"v1beta1", "Group",
+
+				"GroupList",
 			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+				return errors.Wrap(err,
+
+					"failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -57,11 +63,17 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 		{
 			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io",
 
-				"v1beta1", "Group", "GroupList",
+				"v1beta1", "Group",
+
+				"GroupList",
 			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+				return errors.Wrap(err,
+
+					"failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -95,9 +107,13 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 	{
 		m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io",
 
-			"v1beta1", "Domain", "DomainList")
+			"v1beta1",
+			"Domain",
 
-		if err != nil {
+			"DomainList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -117,9 +133,13 @@ func (mg *DomainPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 	{
 		m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io",
 
-			"v1beta1", "Domain", "DomainList")
+			"v1beta1",
+			"Domain",
 
-		if err != nil {
+			"DomainList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -152,9 +172,13 @@ func (mg *DomainSAMLOptions) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io",
 
-			"v1beta1", "Domain", "DomainList")
+			"v1beta1",
+			"Domain",
 
-		if err != nil {
+			"DomainList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -174,9 +198,13 @@ func (mg *DomainSAMLOptions) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io",
 
-			"v1beta1", "Domain", "DomainList")
+			"v1beta1",
+			"Domain",
 
-		if err != nil {
+			"DomainList")
+
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 

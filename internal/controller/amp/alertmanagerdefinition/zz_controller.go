@@ -62,10 +62,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	// register webhooks for the kind v1beta1.AlertManagerDefinition
-	if err := ctrl.NewWebhookManagedBy(mgr).
-		For(&v1beta1.AlertManagerDefinition{}).
-		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.AlertManagerDefinition")
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.AlertManagerDefinition{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.AlertManagerDefinition")
+		}
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.AlertManagerDefinition_GroupVersionKind), opts...)

@@ -11,11 +11,11 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Vault.
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
 func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -31,11 +31,13 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -57,11 +59,13 @@ func (mg *Vault) ResolveReferences(ctx context.Context, c client.Reader) error {
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -95,11 +99,13 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("glacier.aws.upbound.io",
 
-			"v1beta1", "Vault", "VaultList")
+			"v1beta1",
+			"Vault", "VaultList",
+		)
 		if err !=
 			nil {
-
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -118,11 +124,13 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("glacier.aws.upbound.io",
 
-			"v1beta1", "Vault", "VaultList")
+			"v1beta1",
+			"Vault", "VaultList",
+		)
 		if err !=
 			nil {
-
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

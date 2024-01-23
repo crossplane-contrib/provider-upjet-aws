@@ -29,7 +29,10 @@ func (mg *DomainMailFrom) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("ses.aws.upbound.io",
 
-			"v1beta1", "DomainIdentity", "DomainIdentityList",
+			"v1beta1",
+			"DomainIdentity",
+
+			"DomainIdentityList",
 		)
 		if err !=
 			nil {
@@ -52,7 +55,10 @@ func (mg *DomainMailFrom) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("ses.aws.upbound.io",
 
-			"v1beta1", "DomainIdentity", "DomainIdentityList",
+			"v1beta1",
+			"DomainIdentity",
+
+			"DomainIdentityList",
 		)
 		if err !=
 			nil {
@@ -88,11 +94,15 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 	{
 		m, l, err = apisresolver.GetManagedResource("ses.aws.upbound.io",
 
-			"v1beta1", "ConfigurationSet", "ConfigurationSetList",
-		)
+			"v1beta1",
+			"ConfigurationSet",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"ConfigurationSetList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -113,10 +123,14 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -138,11 +152,15 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io",
 
-				"v1beta1", "DeliveryStream", "DeliveryStreamList",
-			)
+				"v1beta1",
+				"DeliveryStream",
 
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				"DeliveryStreamList",
+			)
+			if err !=
+				nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -164,11 +182,13 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -189,11 +209,15 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 	{
 		m, l, err = apisresolver.GetManagedResource("ses.aws.upbound.io",
 
-			"v1beta1", "ConfigurationSet", "ConfigurationSetList",
-		)
+			"v1beta1",
+			"ConfigurationSet",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"ConfigurationSetList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -214,10 +238,14 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -239,11 +267,15 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io",
 
-				"v1beta1", "DeliveryStream", "DeliveryStreamList",
-			)
+				"v1beta1",
+				"DeliveryStream",
 
-			if err != nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				"DeliveryStreamList",
+			)
+			if err !=
+				nil {
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -265,11 +297,13 @@ func (mg *EventDestination) ResolveReferences(ctx context.Context, c client.Read
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -303,7 +337,10 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("ses.aws.upbound.io",
 
-			"v1beta1", "DomainIdentity", "DomainIdentityList",
+			"v1beta1",
+			"DomainIdentity",
+
+			"DomainIdentityList",
 		)
 		if err !=
 			nil {
@@ -326,11 +363,13 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-			"v1beta1", "Topic", "TopicList")
+			"v1beta1",
+			"Topic", "TopicList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -349,7 +388,10 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("ses.aws.upbound.io",
 
-			"v1beta1", "DomainIdentity", "DomainIdentityList",
+			"v1beta1",
+			"DomainIdentity",
+
+			"DomainIdentityList",
 		)
 		if err !=
 			nil {
@@ -372,11 +414,13 @@ func (mg *IdentityNotificationTopic) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-			"v1beta1", "Topic", "TopicList")
+			"v1beta1",
+			"Topic", "TopicList",
+		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -408,7 +452,10 @@ func (mg *IdentityPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("ses.aws.upbound.io",
 
-			"v1beta1", "DomainIdentity", "DomainIdentityList",
+			"v1beta1",
+			"DomainIdentity",
+
+			"DomainIdentityList",
 		)
 		if err !=
 			nil {
@@ -431,7 +478,10 @@ func (mg *IdentityPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("ses.aws.upbound.io",
 
-			"v1beta1", "DomainIdentity", "DomainIdentityList",
+			"v1beta1",
+			"DomainIdentity",
+
+			"DomainIdentityList",
 		)
 		if err !=
 			nil {

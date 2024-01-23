@@ -11,11 +11,11 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this AssessmentTarget.
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
 func (mg *AssessmentTarget) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -29,11 +29,15 @@ func (mg *AssessmentTarget) ResolveReferences(ctx context.Context, c client.Read
 	{
 		m, l, err = apisresolver.GetManagedResource("inspector.aws.upbound.io",
 
-			"v1beta1", "ResourceGroup", "ResourceGroupList",
-		)
+			"v1beta1",
+			"ResourceGroup",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"ResourceGroupList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -52,11 +56,15 @@ func (mg *AssessmentTarget) ResolveReferences(ctx context.Context, c client.Read
 	{
 		m, l, err = apisresolver.GetManagedResource("inspector.aws.upbound.io",
 
-			"v1beta1", "ResourceGroup", "ResourceGroupList",
-		)
+			"v1beta1",
+			"ResourceGroup",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"ResourceGroupList",
+		)
+		if err !=
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -90,11 +98,13 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -115,7 +125,10 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("inspector.aws.upbound.io",
 
-			"v1beta1", "AssessmentTarget", "AssessmentTargetList",
+			"v1beta1",
+			"AssessmentTarget",
+
+			"AssessmentTargetList",
 		)
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -139,11 +152,13 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -164,7 +179,10 @@ func (mg *AssessmentTemplate) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("inspector.aws.upbound.io",
 
-			"v1beta1", "AssessmentTarget", "AssessmentTargetList",
+			"v1beta1",
+			"AssessmentTarget",
+
+			"AssessmentTargetList",
 		)
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")

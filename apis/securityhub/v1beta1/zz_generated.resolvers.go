@@ -28,12 +28,17 @@ func (mg *InviteAccepter) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("securityhub.aws.upbound.io",
 
-			"v1beta1", "Member", "MemberList")
+			"v1beta1",
+			"Member",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"MemberList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterID),
 			Extract:      resource.ExtractParamPath("master_id", true),
@@ -50,10 +55,16 @@ func (mg *InviteAccepter) ResolveReferences(ctx context.Context, c client.Reader
 	{
 		m, l, err = apisresolver.GetManagedResource("securityhub.aws.upbound.io",
 
-			"v1beta1", "Member", "MemberList")
+			"v1beta1",
+			"Member",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"MemberList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

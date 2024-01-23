@@ -30,12 +30,18 @@ func (mg *LicenseAssociation) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io",
 
-			"v1beta1", "Workspace", "WorkspaceList",
+			"v1beta1",
+			"Workspace",
+
+			"WorkspaceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -54,12 +60,18 @@ func (mg *LicenseAssociation) ResolveReferences(ctx context.Context, c client.Re
 	{
 		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io",
 
-			"v1beta1", "Workspace", "WorkspaceList",
+			"v1beta1",
+			"Workspace",
+
+			"WorkspaceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -91,12 +103,18 @@ func (mg *RoleAssociation) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io",
 
-			"v1beta1", "Workspace", "WorkspaceList",
+			"v1beta1",
+			"Workspace",
+
+			"WorkspaceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -115,12 +133,18 @@ func (mg *RoleAssociation) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io",
 
-			"v1beta1", "Workspace", "WorkspaceList",
+			"v1beta1",
+			"Workspace",
+
+			"WorkspaceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -152,10 +176,14 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -174,10 +202,14 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-			"v1beta1", "Role", "RoleList")
+			"v1beta1",
+			"Role", "RoleList",
+		)
 		if err !=
+
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -209,12 +241,18 @@ func (mg *WorkspaceAPIKey) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io",
 
-			"v1beta1", "Workspace", "WorkspaceList",
+			"v1beta1",
+			"Workspace",
+
+			"WorkspaceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -233,12 +271,18 @@ func (mg *WorkspaceAPIKey) ResolveReferences(ctx context.Context, c client.Reade
 	{
 		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io",
 
-			"v1beta1", "Workspace", "WorkspaceList",
+			"v1beta1",
+			"Workspace",
+
+			"WorkspaceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -270,12 +314,18 @@ func (mg *WorkspaceSAMLConfiguration) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io",
 
-			"v1beta1", "Workspace", "WorkspaceList",
+			"v1beta1",
+			"Workspace",
+
+			"WorkspaceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -294,12 +344,18 @@ func (mg *WorkspaceSAMLConfiguration) ResolveReferences(ctx context.Context, c c
 	{
 		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io",
 
-			"v1beta1", "Workspace", "WorkspaceList",
+			"v1beta1",
+			"Workspace",
+
+			"WorkspaceList",
 		)
 		if err !=
-
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+			return errors.Wrap(err,
+
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

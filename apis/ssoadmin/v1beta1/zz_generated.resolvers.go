@@ -30,10 +30,16 @@ func (mg *AccountAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io",
 
-			"v1beta1", "PermissionSet", "PermissionSetList",
+			"v1beta1",
+			"PermissionSet",
+
+			"PermissionSetList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -52,10 +58,16 @@ func (mg *AccountAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	{
 		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io",
 
-			"v1beta1", "Group", "GroupList")
+			"v1beta1",
+			"Group",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"GroupList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -89,10 +101,13 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences(ctx context.Context
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Policy", "PolicyList")
+				"v1beta1",
+				"Policy", "PolicyList",
+			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -113,10 +128,16 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences(ctx context.Context
 	{
 		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io",
 
-			"v1beta1", "PermissionSet", "PermissionSetList",
+			"v1beta1",
+			"PermissionSet",
+
+			"PermissionSetList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -137,10 +158,13 @@ func (mg *CustomerManagedPolicyAttachment) ResolveReferences(ctx context.Context
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Policy", "PolicyList")
+				"v1beta1",
+				"Policy", "PolicyList",
+			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -174,10 +198,16 @@ func (mg *ManagedPolicyAttachment) ResolveReferences(ctx context.Context, c clie
 	{
 		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io",
 
-			"v1beta1", "PermissionSet", "PermissionSetList",
+			"v1beta1",
+			"PermissionSet",
+
+			"PermissionSetList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -209,10 +239,16 @@ func (mg *PermissionSetInlinePolicy) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io",
 
-			"v1beta1", "PermissionSet", "PermissionSetList",
+			"v1beta1",
+			"PermissionSet",
+
+			"PermissionSetList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -244,10 +280,16 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 	{
 		m, l, err = apisresolver.GetManagedResource("ssoadmin.aws.upbound.io",
 
-			"v1beta1", "PermissionSet", "PermissionSetList",
+			"v1beta1",
+			"PermissionSet",
+
+			"PermissionSetList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -269,10 +311,13 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Policy", "PolicyList")
+					"v1beta1",
+					"Policy", "PolicyList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -296,10 +341,13 @@ func (mg *PermissionsBoundaryAttachment) ResolveReferences(ctx context.Context, 
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Policy", "PolicyList")
+					"v1beta1",
+					"Policy", "PolicyList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

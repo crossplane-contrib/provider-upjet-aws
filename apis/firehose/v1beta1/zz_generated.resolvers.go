@@ -11,12 +11,12 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/upbound/provider-aws/config/common"
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this DeliveryStream.
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
 func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader) error {
@@ -32,12 +32,18 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("elasticsearch.aws.upbound.io",
 
-				"v1beta1", "Domain", "DomainList",
+				"v1beta1",
+				"Domain",
+
+				"DomainList",
 			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+				return errors.Wrap(err,
+
+					"failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -59,10 +65,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -85,10 +95,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -112,10 +125,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -139,10 +156,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -165,10 +186,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-				"v1beta1", "Bucket", "BucketList")
+				"v1beta1", "Bucket",
+				"BucketList",
+			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -192,10 +216,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 				{
 					m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-						"v1beta1", "Role", "RoleList")
+						"v1beta1",
+						"Role", "RoleList",
+					)
 					if err !=
+
 						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						return errors.
+							Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -221,11 +249,16 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 				{
 					m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io",
 
-						"v1beta1", "CatalogTable", "CatalogTableList",
+						"v1beta1",
+						"CatalogTable",
+
+						"CatalogTableList",
 					)
-					if err !=
-						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					if err != nil {
+						return errors.Wrap(
+							err,
+							"failed to get the reference target managed resource and its list for reference resolution",
+						)
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -249,10 +282,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -274,10 +311,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -300,10 +341,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -327,10 +371,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -353,9 +401,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io",
 
-				"v1beta1", "Domain", "DomainList")
+				"v1beta1",
+				"Domain",
 
-			if err != nil {
+				"DomainList")
+
+			if err !=
+				nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
@@ -378,10 +430,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -404,10 +460,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -431,10 +490,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -458,10 +521,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -484,10 +551,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -510,10 +581,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -537,10 +611,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -563,10 +641,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -589,10 +671,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -616,10 +701,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -643,10 +732,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -670,10 +762,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -697,10 +793,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -724,10 +823,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -750,12 +853,18 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("elasticsearch.aws.upbound.io",
 
-				"v1beta1", "Domain", "DomainList",
+				"v1beta1",
+				"Domain",
+
+				"DomainList",
 			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+
+				return errors.Wrap(err,
+
+					"failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -777,10 +886,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -803,10 +916,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -830,10 +946,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -857,10 +977,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -883,10 +1007,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-				"v1beta1", "Bucket", "BucketList")
+				"v1beta1", "Bucket",
+				"BucketList",
+			)
 			if err !=
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -910,10 +1037,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 				{
 					m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-						"v1beta1", "Role", "RoleList")
+						"v1beta1",
+						"Role", "RoleList",
+					)
 					if err !=
+
 						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+						return errors.
+							Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -939,11 +1070,16 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 				{
 					m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io",
 
-						"v1beta1", "CatalogTable", "CatalogTableList",
+						"v1beta1",
+						"CatalogTable",
+
+						"CatalogTableList",
 					)
-					if err !=
-						nil {
-						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					if err != nil {
+						return errors.Wrap(
+							err,
+							"failed to get the reference target managed resource and its list for reference resolution",
+						)
 					}
 
 					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -967,10 +1103,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -992,10 +1132,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1018,10 +1162,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1045,10 +1192,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1071,9 +1222,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io",
 
-				"v1beta1", "Domain", "DomainList")
+				"v1beta1",
+				"Domain",
 
-			if err != nil {
+				"DomainList")
+
+			if err !=
+				nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
@@ -1096,10 +1251,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1122,10 +1281,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1149,10 +1311,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1176,10 +1342,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1202,10 +1372,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1228,10 +1402,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1255,10 +1432,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1281,10 +1462,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-				"v1beta1", "Role", "RoleList")
+				"v1beta1",
+				"Role", "RoleList",
+			)
 			if err !=
+
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1307,10 +1492,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1334,10 +1522,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1361,10 +1553,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1388,10 +1583,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1415,10 +1614,13 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io",
 
-					"v1beta1", "Bucket", "BucketList")
+					"v1beta1", "Bucket",
+					"BucketList",
+				)
 				if err !=
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -1442,10 +1644,14 @@ func (mg *DeliveryStream) ResolveReferences(ctx context.Context, c client.Reader
 			{
 				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io",
 
-					"v1beta1", "Role", "RoleList")
+					"v1beta1",
+					"Role", "RoleList",
+				)
 				if err !=
+
 					nil {
-					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					return errors.
+						Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

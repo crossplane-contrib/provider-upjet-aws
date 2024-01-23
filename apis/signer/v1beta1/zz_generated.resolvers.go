@@ -28,12 +28,17 @@ func (mg *SigningJob) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io",
 
-			"v1beta1", "SigningProfile", "SigningProfileList",
-		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
+			"v1beta1",
+			"SigningProfile",
 
+			"SigningProfileList",
+		)
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ProfileName),
 			Extract:      reference.ExternalName(),
@@ -50,10 +55,16 @@ func (mg *SigningJob) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io",
 
-			"v1beta1", "SigningProfile", "SigningProfileList",
+			"v1beta1",
+			"SigningProfile",
+
+			"SigningProfileList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -85,10 +96,16 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 	{
 		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io",
 
-			"v1beta1", "SigningProfile", "SigningProfileList",
+			"v1beta1",
+			"SigningProfile",
+
+			"SigningProfileList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -107,10 +124,16 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 	{
 		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io",
 
-			"v1beta1", "SigningProfile", "SigningProfileList",
+			"v1beta1",
+			"SigningProfile",
+
+			"SigningProfileList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -129,10 +152,16 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 	{
 		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io",
 
-			"v1beta1", "SigningProfile", "SigningProfileList",
+			"v1beta1",
+			"SigningProfile",
+
+			"SigningProfileList",
 		)
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		if err !=
+
+			nil {
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

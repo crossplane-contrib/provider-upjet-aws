@@ -62,10 +62,13 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	}
 
 	// register webhooks for the kind v1beta1.ActiveReceiptRuleSet
-	if err := ctrl.NewWebhookManagedBy(mgr).
-		For(&v1beta1.ActiveReceiptRuleSet{}).
-		Complete(); err != nil {
-		return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ActiveReceiptRuleSet")
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.ActiveReceiptRuleSet{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.ActiveReceiptRuleSet")
+		}
 	}
 
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.ActiveReceiptRuleSet_GroupVersionKind), opts...)

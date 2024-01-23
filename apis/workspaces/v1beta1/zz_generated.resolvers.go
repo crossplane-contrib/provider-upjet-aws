@@ -30,8 +30,11 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("ds.aws.upbound.io",
 
-			"v1beta1", "Directory", "DirectoryList")
-		if err != nil {
+			"v1beta1", "Directory",
+			"DirectoryList",
+		)
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -51,10 +54,13 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "Subnet", "SubnetList")
+			"v1beta1",
+			"Subnet", "SubnetList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -75,11 +81,15 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-				"v1beta1", "SecurityGroup", "SecurityGroupList",
+				"v1beta1",
+				"SecurityGroup",
+
+				"SecurityGroupList",
 			)
-			if err !=
-				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			if err != nil {
+				return errors.Wrap(
+					err, "failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -100,8 +110,11 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("ds.aws.upbound.io",
 
-			"v1beta1", "Directory", "DirectoryList")
-		if err != nil {
+			"v1beta1", "Directory",
+			"DirectoryList",
+		)
+		if err !=
+			nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
@@ -121,10 +134,13 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-			"v1beta1", "Subnet", "SubnetList")
+			"v1beta1",
+			"Subnet", "SubnetList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
@@ -145,11 +161,15 @@ func (mg *Directory) ResolveReferences(ctx context.Context, c client.Reader) err
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io",
 
-				"v1beta1", "SecurityGroup", "SecurityGroupList",
+				"v1beta1",
+				"SecurityGroup",
+
+				"SecurityGroupList",
 			)
-			if err !=
-				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			if err != nil {
+				return errors.Wrap(
+					err, "failed to get the reference target managed resource and its list for reference resolution",
+				)
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

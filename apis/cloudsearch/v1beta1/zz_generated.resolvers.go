@@ -28,12 +28,17 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.upbound.io",
 
-			"v1beta1", "Domain", "DomainList")
+			"v1beta1",
+			"Domain",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"DomainList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DomainName),
 			Extract:      resource.ExtractResourceID(),
@@ -50,10 +55,16 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences(ctx context.Context, c cl
 	{
 		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.upbound.io",
 
-			"v1beta1", "Domain", "DomainList")
+			"v1beta1",
+			"Domain",
 
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			"DomainList",
+		)
+		if err !=
+			nil {
+			return errors.Wrap(err,
+				"failed to get the reference target managed resource and its list for reference resolution",
+			)
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

@@ -28,12 +28,14 @@ func (mg *SMSChannel) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("pinpoint.aws.upbound.io",
 
-			"v1beta1", "App", "AppList")
+			"v1beta1",
+			"App", "AppList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
 			Extract:      resource.ExtractParamPath("application_id", true),
@@ -50,10 +52,13 @@ func (mg *SMSChannel) ResolveReferences(ctx context.Context, c client.Reader) er
 	{
 		m, l, err = apisresolver.GetManagedResource("pinpoint.aws.upbound.io",
 
-			"v1beta1", "App", "AppList")
+			"v1beta1",
+			"App", "AppList",
+		)
 		if err !=
 			nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			return errors.
+				Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{

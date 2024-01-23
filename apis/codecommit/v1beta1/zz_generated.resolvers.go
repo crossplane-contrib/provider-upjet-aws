@@ -29,13 +29,15 @@ func (mg *ApprovalRuleTemplateAssociation) ResolveReferences(ctx context.Context
 	{
 		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-			"v1beta1", "ApprovalRuleTemplate",
+			"v1beta1",
+			"ApprovalRuleTemplate",
+
 			"ApprovalRuleTemplateList",
 		)
 		if err != nil {
+
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApprovalRuleTemplateName),
 			Extract:      reference.ExternalName(),
@@ -52,7 +54,10 @@ func (mg *ApprovalRuleTemplateAssociation) ResolveReferences(ctx context.Context
 	{
 		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-			"v1beta1", "Repository", "RepositoryList",
+			"v1beta1",
+			"Repository",
+
+			"RepositoryList",
 		)
 		if err !=
 			nil {
@@ -88,7 +93,10 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-			"v1beta1", "Repository", "RepositoryList",
+			"v1beta1",
+			"Repository",
+
+			"RepositoryList",
 		)
 		if err !=
 			nil {
@@ -113,11 +121,13 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -138,7 +148,10 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 	{
 		m, l, err = apisresolver.GetManagedResource("codecommit.aws.upbound.io",
 
-			"v1beta1", "Repository", "RepositoryList",
+			"v1beta1",
+			"Repository",
+
+			"RepositoryList",
 		)
 		if err !=
 			nil {
@@ -163,11 +176,13 @@ func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error
 		{
 			m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io",
 
-				"v1beta1", "Topic", "TopicList")
+				"v1beta1",
+				"Topic", "TopicList",
+			)
 			if err !=
-
 				nil {
-				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				return errors.
+					Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
