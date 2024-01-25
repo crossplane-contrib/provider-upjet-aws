@@ -5,9 +5,13 @@ Copyright 2021 Upbound Inc.
 package autoscaling
 
 import (
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
-
+	"github.com/crossplane/upjet/pkg/config/conversion"
+	"github.com/upbound/provider-aws/apis/autoscaling/v1beta1"
+	"github.com/upbound/provider-aws/apis/autoscaling/v1beta2"
 	"github.com/upbound/provider-aws/config/common"
+	"strconv"
 )
 
 // Configure adds configurations for the autoscaling group.
@@ -27,6 +31,106 @@ func Configure(p *config.Provider) {
 		}
 		delete(r.References, "launch_template.version")
 		r.UseAsync = true
+
+		r.Version = "v1beta2"
+		r.Conversions = append(r.Conversions,
+			conversion.NewCustomConverter("v1beta1", "v1beta2", func(src, target xpresource.Managed) error {
+				srcTyped := src.(*v1beta1.AutoscalingGroup)
+				targetTyped := target.(*v1beta2.AutoscalingGroup)
+				for _, e := range srcTyped.Spec.ForProvider.Tags {
+					tp := v1beta2.TagParameters{
+						Key:   e["key"],
+						Value: e["value"],
+					}
+					if e["propagate_at_launch"] != nil {
+						propagateAtLaunchStr := e["propagate_at_launch"]
+						propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+						if err != nil {
+							return err
+						}
+						tp.PropagateAtLaunch = &propagateAtLaunch
+					}
+					targetTyped.Spec.ForProvider.Tag = append(targetTyped.Spec.ForProvider.Tag, tp)
+				}
+				for _, e := range srcTyped.Spec.InitProvider.Tags {
+					tp := v1beta2.TagInitParameters{
+						Key:   e["key"],
+						Value: e["value"],
+					}
+					if e["propagate_at_launch"] != nil {
+						propagateAtLaunchStr := e["propagate_at_launch"]
+						propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+						if err != nil {
+							return err
+						}
+						tp.PropagateAtLaunch = &propagateAtLaunch
+					}
+					targetTyped.Spec.InitProvider.Tag = append(targetTyped.Spec.InitProvider.Tag, tp)
+				}
+				for _, e := range srcTyped.Status.AtProvider.Tags {
+					tp := v1beta2.TagObservation{
+						Key:   e["key"],
+						Value: e["value"],
+					}
+					if e["propagate_at_launch"] != nil {
+						propagateAtLaunchStr := e["propagate_at_launch"]
+						propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+						if err != nil {
+							return err
+						}
+						tp.PropagateAtLaunch = &propagateAtLaunch
+					}
+					targetTyped.Status.AtProvider.Tag = append(targetTyped.Status.AtProvider.Tag, tp)
+				}
+				return nil
+			}),
+			conversion.NewCustomConverter("v1beta2", "v1beta1", func(src, target xpresource.Managed) error {
+				srcTyped := src.(*v1beta2.AutoscalingGroup)
+				targetTyped := target.(*v1beta1.AutoscalingGroup)
+				for _, e := range srcTyped.Spec.ForProvider.Tag {
+					m := map[string]*string{}
+					if e.Key != nil {
+						m["key"] = e.Key
+					}
+					if e.Value != nil {
+						m["value"] = e.Value
+					}
+					if e.PropagateAtLaunch != nil {
+						propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+						m["propagate_at_launch"] = &propagateAtLaunch
+					}
+					targetTyped.Spec.ForProvider.Tags = append(targetTyped.Spec.ForProvider.Tags, m)
+				}
+				for _, e := range srcTyped.Spec.InitProvider.Tag {
+					m := map[string]*string{}
+					if e.Key != nil {
+						m["key"] = e.Key
+					}
+					if e.Value != nil {
+						m["value"] = e.Value
+					}
+					if e.PropagateAtLaunch != nil {
+						propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+						m["propagate_at_launch"] = &propagateAtLaunch
+					}
+					targetTyped.Spec.InitProvider.Tags = append(targetTyped.Spec.InitProvider.Tags, m)
+				}
+				for _, e := range srcTyped.Status.AtProvider.Tag {
+					m := map[string]*string{}
+					if e.Key != nil {
+						m["key"] = e.Key
+					}
+					if e.Value != nil {
+						m["value"] = e.Value
+					}
+					if e.PropagateAtLaunch != nil {
+						propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+						m["propagate_at_launch"] = &propagateAtLaunch
+					}
+					targetTyped.Status.AtProvider.Tags = append(targetTyped.Status.AtProvider.Tags, m)
+				}
+				return nil
+			}))
 	})
 	p.AddResourceConfigurator("aws_autoscaling_attachment", func(r *config.Resource) {
 		r.References["autoscaling_group_name"] = config.Reference{

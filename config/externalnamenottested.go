@@ -215,6 +215,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// elasticache
 	//
 	// ElastiCache Security Groups can be imported by name
+	// Note: This resource was deleted in v5.31.0
 	"aws_elasticache_security_group": config.NameAsIdentifier,
 	// ElastiCache Global Replication Groups can be imported using the global_replication_group_id,
 	// which is an attribute reported in the state.
@@ -365,6 +366,7 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// redshift
 	//
 	// Redshift security groups can be imported using the name
+	// Note: This resource was deleted in v5.31.0
 	"aws_redshift_security_group": config.NameAsIdentifier,
 
 	// route53domains

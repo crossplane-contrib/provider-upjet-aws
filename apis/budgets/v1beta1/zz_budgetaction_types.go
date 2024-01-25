@@ -61,7 +61,7 @@ type BudgetActionInitParameters struct {
 	ApprovalModel *string `json:"approvalModel,omitempty" tf:"approval_model,omitempty"`
 
 	// The name of a budget.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta1.Budget
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta2.Budget
 	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
 
 	// Reference to a Budget in budgets to populate budgetName.
@@ -156,7 +156,7 @@ type BudgetActionParameters struct {
 	ApprovalModel *string `json:"approvalModel,omitempty" tf:"approval_model,omitempty"`
 
 	// The name of a budget.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta1.Budget
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta2.Budget
 	// +kubebuilder:validation:Optional
 	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
 

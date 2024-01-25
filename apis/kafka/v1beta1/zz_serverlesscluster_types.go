@@ -17,6 +17,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClientAuthenticationInitParameters struct {
+
+	// Details for client authentication using SASL. See below.
+	Sasl []SaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
+}
+
+type ClientAuthenticationObservation struct {
+
+	// Details for client authentication using SASL. See below.
+	Sasl []SaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
+}
+
+type ClientAuthenticationParameters struct {
+
+	// Details for client authentication using SASL. See below.
+	// +kubebuilder:validation:Optional
+	Sasl []SaslParameters `json:"sasl" tf:"sasl,omitempty"`
+}
+
 type IAMInitParameters struct {
 
 	// Whether SASL/IAM authentication is enabled or not.
@@ -36,38 +55,19 @@ type IAMParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
-type ServerlessClusterClientAuthenticationInitParameters struct {
-
-	// Details for client authentication using SASL. See below.
-	Sasl []ServerlessClusterClientAuthenticationSaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
-}
-
-type ServerlessClusterClientAuthenticationObservation struct {
-
-	// Details for client authentication using SASL. See below.
-	Sasl []ServerlessClusterClientAuthenticationSaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
-}
-
-type ServerlessClusterClientAuthenticationParameters struct {
-
-	// Details for client authentication using SASL. See below.
-	// +kubebuilder:validation:Optional
-	Sasl []ServerlessClusterClientAuthenticationSaslParameters `json:"sasl" tf:"sasl,omitempty"`
-}
-
-type ServerlessClusterClientAuthenticationSaslInitParameters struct {
+type SaslInitParameters struct {
 
 	// Details for client authentication using IAM. See below.
 	IAM []IAMInitParameters `json:"iam,omitempty" tf:"iam,omitempty"`
 }
 
-type ServerlessClusterClientAuthenticationSaslObservation struct {
+type SaslObservation struct {
 
 	// Details for client authentication using IAM. See below.
 	IAM []IAMObservation `json:"iam,omitempty" tf:"iam,omitempty"`
 }
 
-type ServerlessClusterClientAuthenticationSaslParameters struct {
+type SaslParameters struct {
 
 	// Details for client authentication using IAM. See below.
 	// +kubebuilder:validation:Optional
@@ -77,7 +77,7 @@ type ServerlessClusterClientAuthenticationSaslParameters struct {
 type ServerlessClusterInitParameters struct {
 
 	// Specifies client authentication information for the serverless cluster. See below.
-	ClientAuthentication []ServerlessClusterClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// The name of the serverless cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -96,7 +96,7 @@ type ServerlessClusterObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies client authentication information for the serverless cluster. See below.
-	ClientAuthentication []ServerlessClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// The name of the serverless cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -122,7 +122,7 @@ type ServerlessClusterParameters struct {
 
 	// Specifies client authentication information for the serverless cluster. See below.
 	// +kubebuilder:validation:Optional
-	ClientAuthentication []ServerlessClusterClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// The name of the serverless cluster.
 	// +kubebuilder:validation:Optional

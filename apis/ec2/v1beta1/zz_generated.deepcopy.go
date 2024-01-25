@@ -30896,6 +30896,11 @@ func (in *RouteTableRouteObservation_2) DeepCopyInto(out *RouteTableRouteObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.InstanceID != nil {
+		in, out := &in.InstanceID, &out.InstanceID
+		*out = new(string)
+		**out = **in
+	}
 	if in.LocalGatewayID != nil {
 		in, out := &in.LocalGatewayID, &out.LocalGatewayID
 		*out = new(string)

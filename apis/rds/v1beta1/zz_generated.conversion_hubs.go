@@ -17,9 +17,6 @@ func (tr *ClusterSnapshot) Hub() {}
 func (tr *EventSubscription) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Instance) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DBInstanceAutomatedBackupsReplication) Hub() {}
 
 // Hub marks this type as a conversion hub.

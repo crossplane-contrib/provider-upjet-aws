@@ -203,9 +203,6 @@ func (tr *PlacementGroup) Hub() {}
 func (tr *Route) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *RouteTable) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *RouteTableAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.

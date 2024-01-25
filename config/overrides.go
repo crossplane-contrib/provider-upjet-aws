@@ -5,6 +5,8 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
+	"github.com/crossplane/upjet/pkg/config/conversion"
+	"gopkg.in/yaml.v3"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -183,6 +185,33 @@ func DocumentationForTags() config.ResourceOption {
 		}
 		if _, ok := r.MetaResource.ArgumentDocs["tags"]; ok {
 			r.MetaResource.ArgumentDocs["tags"] = "- (Optional) Key-value map of resource tags."
+		}
+	}
+}
+
+func injectFieldRenamingConversionFunctions() config.ResourceOption {
+	type fieldRenameConversionData struct {
+		SourceVersion string                       `yaml:"sourceVersion"`
+		TargetVersion string                       `yaml:"targetVersion"`
+		Data          map[string]map[string]string `yaml:"data"`
+	}
+	var data []fieldRenameConversionData
+	if err := yaml.Unmarshal(fieldRename, &data); err != nil {
+		panic(err)
+	}
+	return func(r *config.Resource) {
+		for _, cd := range data {
+			if d, ok := cd.Data[r.Name]; ok {
+				for s, t := range d {
+					r.Version = cd.TargetVersion
+					r.Conversions = append(r.Conversions, conversion.NewFieldRenameConversion(
+						cd.SourceVersion, s, cd.TargetVersion, t),
+					)
+					r.Conversions = append(r.Conversions, conversion.NewFieldRenameConversion(
+						cd.TargetVersion, t, cd.SourceVersion, s),
+					)
+				}
+			}
 		}
 	}
 }

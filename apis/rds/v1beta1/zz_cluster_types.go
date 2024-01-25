@@ -161,10 +161,10 @@ type ClusterInitParameters struct {
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
 	// Nested attribute for point in time restore. More details below.
-	RestoreToPointInTime []ClusterRestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+	RestoreToPointInTime []RestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Port on which the DB accepts connections
-	S3Import []ClusterS3ImportInitParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+	S3Import []S3ImportInitParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.
 	ScalingConfiguration []ScalingConfigurationInitParameters `json:"scalingConfiguration,omitempty" tf:"scaling_configuration,omitempty"`
@@ -205,24 +205,6 @@ type ClusterInitParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=VPCSecurityGroupIDSelector
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
-}
-
-type ClusterMasterUserSecretInitParameters struct {
-}
-
-type ClusterMasterUserSecretObservation struct {
-
-	// Amazon Web Services KMS key identifier that is used to encrypt the secret.
-	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
-
-	// Amazon Resource Name (ARN) of the secret.
-	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
-
-	// Status of the secret. Valid Values: creating | active | rotating | impaired.
-	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`
-}
-
-type ClusterMasterUserSecretParameters struct {
 }
 
 type ClusterObservation struct {
@@ -342,7 +324,7 @@ type ClusterObservation struct {
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
 	// Block that specifies the master user secret. Only available when manage_master_user_password is set to true. Documented below.
-	MasterUserSecret []ClusterMasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
+	MasterUserSecret []MasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
 
 	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
@@ -370,10 +352,10 @@ type ClusterObservation struct {
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
 	// Nested attribute for point in time restore. More details below.
-	RestoreToPointInTime []ClusterRestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+	RestoreToPointInTime []RestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Port on which the DB accepts connections
-	S3Import []ClusterS3ImportObservation `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+	S3Import []S3ImportObservation `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.
 	ScalingConfiguration []ScalingConfigurationObservation `json:"scalingConfiguration,omitempty" tf:"scaling_configuration,omitempty"`
@@ -598,11 +580,11 @@ type ClusterParameters struct {
 
 	// Nested attribute for point in time restore. More details below.
 	// +kubebuilder:validation:Optional
-	RestoreToPointInTime []ClusterRestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+	RestoreToPointInTime []RestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Port on which the DB accepts connections
 	// +kubebuilder:validation:Optional
-	S3Import []ClusterS3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+	S3Import []S3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// Nested attribute with scaling properties. Only valid when engine_mode is set to serverless. More details below.
 	// +kubebuilder:validation:Optional
@@ -654,7 +636,25 @@ type ClusterParameters struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 }
 
-type ClusterRestoreToPointInTimeInitParameters struct {
+type MasterUserSecretInitParameters struct {
+}
+
+type MasterUserSecretObservation struct {
+
+	// Amazon Web Services KMS key identifier that is used to encrypt the secret.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Amazon Resource Name (ARN) of the secret.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+
+	// Status of the secret. Valid Values: creating | active | rotating | impaired.
+	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`
+}
+
+type MasterUserSecretParameters struct {
+}
+
+type RestoreToPointInTimeInitParameters struct {
 
 	// Date and time in UTC format to restore the database cluster to. Conflicts with use_latest_restorable_time.
 	RestoreToTime *string `json:"restoreToTime,omitempty" tf:"restore_to_time,omitempty"`
@@ -679,7 +679,7 @@ type ClusterRestoreToPointInTimeInitParameters struct {
 	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
 }
 
-type ClusterRestoreToPointInTimeObservation struct {
+type RestoreToPointInTimeObservation struct {
 
 	// Date and time in UTC format to restore the database cluster to. Conflicts with use_latest_restorable_time.
 	RestoreToTime *string `json:"restoreToTime,omitempty" tf:"restore_to_time,omitempty"`
@@ -695,7 +695,7 @@ type ClusterRestoreToPointInTimeObservation struct {
 	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
 }
 
-type ClusterRestoreToPointInTimeParameters struct {
+type RestoreToPointInTimeParameters struct {
 
 	// Date and time in UTC format to restore the database cluster to. Conflicts with use_latest_restorable_time.
 	// +kubebuilder:validation:Optional
@@ -724,7 +724,7 @@ type ClusterRestoreToPointInTimeParameters struct {
 	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
 }
 
-type ClusterS3ImportInitParameters struct {
+type S3ImportInitParameters struct {
 
 	// Bucket name where your backup is stored
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
@@ -751,7 +751,7 @@ type ClusterS3ImportInitParameters struct {
 	SourceEngineVersion *string `json:"sourceEngineVersion,omitempty" tf:"source_engine_version,omitempty"`
 }
 
-type ClusterS3ImportObservation struct {
+type S3ImportObservation struct {
 
 	// Bucket name where your backup is stored
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
@@ -769,7 +769,7 @@ type ClusterS3ImportObservation struct {
 	SourceEngineVersion *string `json:"sourceEngineVersion,omitempty" tf:"source_engine_version,omitempty"`
 }
 
-type ClusterS3ImportParameters struct {
+type S3ImportParameters struct {
 
 	// Bucket name where your backup is stored
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket

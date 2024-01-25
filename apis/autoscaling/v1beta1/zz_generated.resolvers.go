@@ -27,6 +27,25 @@ func (mg *Attachment) ResolveReferences( // ResolveReferences of this Attachment
 	var rsp reference.ResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta1", "LBTargetGroup", "LBTargetGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ALBTargetGroupArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.ALBTargetGroupArnRef,
+			Selector:     mg.Spec.ForProvider.ALBTargetGroupArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ALBTargetGroupArn")
+	}
+	mg.Spec.ForProvider.ALBTargetGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ALBTargetGroupArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -83,6 +102,25 @@ func (mg *Attachment) ResolveReferences( // ResolveReferences of this Attachment
 	}
 	mg.Spec.ForProvider.LBTargetGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LBTargetGroupArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta1", "LBTargetGroup", "LBTargetGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ALBTargetGroupArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.ALBTargetGroupArnRef,
+			Selector:     mg.Spec.InitProvider.ALBTargetGroupArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ALBTargetGroupArn")
+	}
+	mg.Spec.InitProvider.ALBTargetGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ALBTargetGroupArnRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
@@ -514,7 +552,7 @@ func (mg *LifecycleHook) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -633,7 +671,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -664,7 +702,7 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "AutoscalingGroup", "AutoscalingGroupList")
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

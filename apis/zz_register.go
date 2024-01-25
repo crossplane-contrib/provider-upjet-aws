@@ -33,10 +33,12 @@ import (
 	v1beta1appsync "github.com/upbound/provider-aws/apis/appsync/v1beta1"
 	v1beta1athena "github.com/upbound/provider-aws/apis/athena/v1beta1"
 	v1beta1autoscaling "github.com/upbound/provider-aws/apis/autoscaling/v1beta1"
+	v1beta2 "github.com/upbound/provider-aws/apis/autoscaling/v1beta2"
 	v1beta1autoscalingplans "github.com/upbound/provider-aws/apis/autoscalingplans/v1beta1"
 	v1beta1backup "github.com/upbound/provider-aws/apis/backup/v1beta1"
 	v1beta1batch "github.com/upbound/provider-aws/apis/batch/v1beta1"
 	v1beta1budgets "github.com/upbound/provider-aws/apis/budgets/v1beta1"
+	v1beta2budgets "github.com/upbound/provider-aws/apis/budgets/v1beta2"
 	v1beta1ce "github.com/upbound/provider-aws/apis/ce/v1beta1"
 	v1beta1chime "github.com/upbound/provider-aws/apis/chime/v1beta1"
 	v1beta1cloud9 "github.com/upbound/provider-aws/apis/cloud9/v1beta1"
@@ -56,6 +58,7 @@ import (
 	v1beta1cognitoidp "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1"
 	v1beta1configservice "github.com/upbound/provider-aws/apis/configservice/v1beta1"
 	v1beta1connect "github.com/upbound/provider-aws/apis/connect/v1beta1"
+	v1beta2connect "github.com/upbound/provider-aws/apis/connect/v1beta2"
 	v1beta1cur "github.com/upbound/provider-aws/apis/cur/v1beta1"
 	v1beta1dataexchange "github.com/upbound/provider-aws/apis/dataexchange/v1beta1"
 	v1beta1datapipeline "github.com/upbound/provider-aws/apis/datapipeline/v1beta1"
@@ -71,12 +74,14 @@ import (
 	v1beta1ds "github.com/upbound/provider-aws/apis/ds/v1beta1"
 	v1beta1dynamodb "github.com/upbound/provider-aws/apis/dynamodb/v1beta1"
 	v1beta1ec2 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
+	v1beta2ec2 "github.com/upbound/provider-aws/apis/ec2/v1beta2"
 	v1beta1ecr "github.com/upbound/provider-aws/apis/ecr/v1beta1"
 	v1beta1ecrpublic "github.com/upbound/provider-aws/apis/ecrpublic/v1beta1"
 	v1beta1ecs "github.com/upbound/provider-aws/apis/ecs/v1beta1"
 	v1beta1efs "github.com/upbound/provider-aws/apis/efs/v1beta1"
 	v1beta1eks "github.com/upbound/provider-aws/apis/eks/v1beta1"
 	v1beta1elasticache "github.com/upbound/provider-aws/apis/elasticache/v1beta1"
+	v1beta2elasticache "github.com/upbound/provider-aws/apis/elasticache/v1beta2"
 	v1beta1elasticbeanstalk "github.com/upbound/provider-aws/apis/elasticbeanstalk/v1beta1"
 	v1beta1elasticsearch "github.com/upbound/provider-aws/apis/elasticsearch/v1beta1"
 	v1beta1elastictranscoder "github.com/upbound/provider-aws/apis/elastictranscoder/v1beta1"
@@ -102,6 +107,7 @@ import (
 	v1beta1iot "github.com/upbound/provider-aws/apis/iot/v1beta1"
 	v1beta1ivs "github.com/upbound/provider-aws/apis/ivs/v1beta1"
 	v1beta1kafka "github.com/upbound/provider-aws/apis/kafka/v1beta1"
+	v1beta2kafka "github.com/upbound/provider-aws/apis/kafka/v1beta2"
 	v1beta1kendra "github.com/upbound/provider-aws/apis/kendra/v1beta1"
 	v1beta1keyspaces "github.com/upbound/provider-aws/apis/keyspaces/v1beta1"
 	v1beta1kinesis "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
@@ -133,6 +139,7 @@ import (
 	v1beta1quicksight "github.com/upbound/provider-aws/apis/quicksight/v1beta1"
 	v1beta1ram "github.com/upbound/provider-aws/apis/ram/v1beta1"
 	v1beta1rds "github.com/upbound/provider-aws/apis/rds/v1beta1"
+	v1beta2rds "github.com/upbound/provider-aws/apis/rds/v1beta2"
 	v1beta1redshift "github.com/upbound/provider-aws/apis/redshift/v1beta1"
 	v1beta1redshiftserverless "github.com/upbound/provider-aws/apis/redshiftserverless/v1beta1"
 	v1beta1resourcegroups "github.com/upbound/provider-aws/apis/resourcegroups/v1beta1"
@@ -198,10 +205,15 @@ func init() {
 		v1beta1appsync.SchemeBuilder.AddToScheme,
 		v1beta1athena.SchemeBuilder.AddToScheme,
 		v1beta1autoscaling.SchemeBuilder.AddToScheme,
+		v1beta1autoscaling.SchemeBuilder.AddToScheme,
+		v1beta1autoscaling.SchemeBuilder.AddToScheme,
+		v1beta2.SchemeBuilder.AddToScheme,
 		v1beta1autoscalingplans.SchemeBuilder.AddToScheme,
 		v1beta1backup.SchemeBuilder.AddToScheme,
 		v1beta1batch.SchemeBuilder.AddToScheme,
 		v1beta1budgets.SchemeBuilder.AddToScheme,
+		v1beta1budgets.SchemeBuilder.AddToScheme,
+		v1beta2budgets.SchemeBuilder.AddToScheme,
 		v1beta1ce.SchemeBuilder.AddToScheme,
 		v1beta1chime.SchemeBuilder.AddToScheme,
 		v1beta1cloud9.SchemeBuilder.AddToScheme,
@@ -221,6 +233,10 @@ func init() {
 		v1beta1cognitoidp.SchemeBuilder.AddToScheme,
 		v1beta1configservice.SchemeBuilder.AddToScheme,
 		v1beta1connect.SchemeBuilder.AddToScheme,
+		v1beta1connect.SchemeBuilder.AddToScheme,
+		v1beta1connect.SchemeBuilder.AddToScheme,
+		v1beta1connect.SchemeBuilder.AddToScheme,
+		v1beta2connect.SchemeBuilder.AddToScheme,
 		v1beta1cur.SchemeBuilder.AddToScheme,
 		v1beta1dataexchange.SchemeBuilder.AddToScheme,
 		v1beta1datapipeline.SchemeBuilder.AddToScheme,
@@ -236,12 +252,16 @@ func init() {
 		v1beta1ds.SchemeBuilder.AddToScheme,
 		v1beta1dynamodb.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,
+		v1beta1ec2.SchemeBuilder.AddToScheme,
+		v1beta2ec2.SchemeBuilder.AddToScheme,
 		v1beta1ecr.SchemeBuilder.AddToScheme,
 		v1beta1ecrpublic.SchemeBuilder.AddToScheme,
 		v1beta1ecs.SchemeBuilder.AddToScheme,
 		v1beta1efs.SchemeBuilder.AddToScheme,
 		v1beta1eks.SchemeBuilder.AddToScheme,
 		v1beta1elasticache.SchemeBuilder.AddToScheme,
+		v1beta1elasticache.SchemeBuilder.AddToScheme,
+		v1beta2elasticache.SchemeBuilder.AddToScheme,
 		v1beta1elasticbeanstalk.SchemeBuilder.AddToScheme,
 		v1beta1elasticsearch.SchemeBuilder.AddToScheme,
 		v1beta1elastictranscoder.SchemeBuilder.AddToScheme,
@@ -267,6 +287,8 @@ func init() {
 		v1beta1iot.SchemeBuilder.AddToScheme,
 		v1beta1ivs.SchemeBuilder.AddToScheme,
 		v1beta1kafka.SchemeBuilder.AddToScheme,
+		v1beta1kafka.SchemeBuilder.AddToScheme,
+		v1beta2kafka.SchemeBuilder.AddToScheme,
 		v1beta1kendra.SchemeBuilder.AddToScheme,
 		v1beta1keyspaces.SchemeBuilder.AddToScheme,
 		v1beta1kinesis.SchemeBuilder.AddToScheme,
@@ -298,6 +320,8 @@ func init() {
 		v1beta1quicksight.SchemeBuilder.AddToScheme,
 		v1beta1ram.SchemeBuilder.AddToScheme,
 		v1beta1rds.SchemeBuilder.AddToScheme,
+		v1beta1rds.SchemeBuilder.AddToScheme,
+		v1beta2rds.SchemeBuilder.AddToScheme,
 		v1beta1redshift.SchemeBuilder.AddToScheme,
 		v1beta1redshiftserverless.SchemeBuilder.AddToScheme,
 		v1beta1resourcegroups.SchemeBuilder.AddToScheme,
