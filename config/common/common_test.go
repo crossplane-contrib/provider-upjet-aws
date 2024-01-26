@@ -53,7 +53,7 @@ func TestPasswordGenerator(t *testing.T) {
 				mg:                 &fake.Managed{},
 			},
 			want: want{
-				err: errors.Wrap(errBoom, errGetPasswordSecret),
+				err: errors.Wrap(errBoom, ErrGetPasswordSecret),
 			},
 		},
 		"SecretAlreadyFull": {

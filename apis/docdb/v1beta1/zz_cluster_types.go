@@ -250,6 +250,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
+	// If true, the password will be auto-generated and stored in the Secret referenced by the masterPasswordSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
+
 	// A list of EC2 Availability Zones that
 	// instances in the DB cluster can be created in.
 	// +kubebuilder:validation:Optional
@@ -319,6 +324,7 @@ type ClusterParameters struct {
 
 	// Password for the master DB user. Note that this may
 	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints.
+	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 

@@ -14,6 +14,7 @@ spec:
     region: us-west-2
     engine: "docdb"
     backupRetentionPeriod: 5
+    autoGeneratePassword: true
     masterPasswordSecretRef:
       key: password
       name: docdb-creds
@@ -24,21 +25,6 @@ spec:
     dbClusterParameterGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: docdb-cluster-test
-
----
-
-apiVersion: v1
-kind: Secret
-metadata:
-  annotations:
-    meta.upbound.io/example-id: docdb/v1beta1/cluster
-  labels:
-    testing.upbound.io/example-name: docdb-creds
-  name: docdb-creds
-  namespace: upbound-system
-type: Opaque
-stringData:
-  password: "Upboundtest!"
 
 ---
 
