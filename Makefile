@@ -4,6 +4,7 @@
 PROVIDER_NAME := aws
 PROJECT_NAME := provider-$(PROVIDER_NAME)
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
+PROJECT_API_GROUP := $(PROVIDER_NAME).upbound.io
 
 export TERRAFORM_VERSION := 1.5.5
 export TERRAFORM_PROVIDER_VERSION := 5.31.0
@@ -227,11 +228,7 @@ family-e2e:
 	@(INSTALL_APIS=""; \
 	for m in $$(tr ',' ' ' <<< $${UPTEST_EXAMPLE_LIST}); do \
 	  	$(INFO) Processing the example manifest "$${m}"; \
-		for api in $$(sed -nE 's/^apiVersion: *(.+)/\1/p' "$${m}" | cut -d. -f1); do \
-		    if [[ $${api} == "v1" ]]; then \
-		        $(INFO) v1 is not a valid provider. Skipping...; \
-		        continue; \
-		    fi; \
+		for api in $$(sed -nE 's/^apiVersion: *([-a-z0-9]+)\.$(PROJECT_API_GROUP)\/(v\w+)/\1/p' "$${m}" ); do \
 			if [[ $${INSTALL_APIS} =~ " $${api} " ]]; then \
 				$(INFO) Resource provider $(PROJECT_NAME)-$${api} is already installed. Skipping...; \
 				continue; \
