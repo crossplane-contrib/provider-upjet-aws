@@ -2,7 +2,7 @@
 Copyright 2023 Upbound Inc.
 */
 
-package rds
+package common
 
 import (
 	"context"
