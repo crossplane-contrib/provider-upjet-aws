@@ -233,10 +233,9 @@ func (m *metaOnlyPrimary) Meta() any {
 	return m.meta
 }
 
-func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
+func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
 	p := *config.TerraformProvider
-	// TODO: use context.WithoutCancel(ctx) after switching to Go >=1.21
-	diag := p.Configure(context.TODO(), &tfsdk.ResourceConfig{ //nolint:contextcheck
+	diag := p.Configure(context.WithoutCancel(ctx), &tfsdk.ResourceConfig{
 		Config: ps.Configuration,
 	})
 	if diag != nil && diag.HasError() {
