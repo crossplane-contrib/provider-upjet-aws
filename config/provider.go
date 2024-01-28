@@ -18,7 +18,6 @@ import (
 	tfjson "github.com/hashicorp/terraform-json"
 	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-aws/xpfwprovider"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
 
@@ -168,10 +167,9 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 	var err error
 	if generationProvider {
 		p, err = getProviderSchema(providerSchema)
-		fwProvider, _, _ = xpfwprovider.GetProvider(ctx)
+		fwProvider, _, _ = xpprovider.GetProvider(ctx)
 	} else {
-		// p, err = xpprovider.GetProviderSchema(ctx)
-		fwProvider, p, err = xpfwprovider.GetProvider(ctx)
+		fwProvider, p, err = xpprovider.GetProvider(ctx)
 	}
 	if err != nil {
 		return nil, nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)

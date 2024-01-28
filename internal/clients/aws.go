@@ -16,7 +16,6 @@ import (
 	"github.com/crossplane/upjet/pkg/terraform"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"github.com/hashicorp/terraform-provider-aws/xpfwprovider"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
@@ -246,7 +245,7 @@ func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *Se
 	ps.Meta = p.Meta()
 	// #nosec G103
 	(*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(ps.Meta).Pointer())).ServicePackages = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(config.AWSClient).Pointer())).ServicePackages
-	fwProvider := xpfwprovider.GetFrameworkProviderWithPrimary(&metaOnlyPrimary{meta: p.Meta()})
+	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: p.Meta()})
 	ps.FrameworkProvider = fwProvider
 	return nil
 }
