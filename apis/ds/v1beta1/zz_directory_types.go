@@ -373,7 +373,6 @@ type DirectoryStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Directory is the Schema for the Directorys API. Provides a directory in AWS Directory Service.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

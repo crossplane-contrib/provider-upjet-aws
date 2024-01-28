@@ -131,7 +131,6 @@ type APIDestinationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // APIDestination is the Schema for the APIDestinations API. Provides an EventBridge event API Destination resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

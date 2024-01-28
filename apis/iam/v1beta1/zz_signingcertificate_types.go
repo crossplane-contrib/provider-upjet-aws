@@ -87,7 +87,6 @@ type SigningCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SigningCertificate is the Schema for the SigningCertificates API. Provides an IAM Signing Certificate
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

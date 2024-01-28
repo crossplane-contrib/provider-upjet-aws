@@ -91,7 +91,6 @@ type ApprovalRuleTemplateAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ApprovalRuleTemplateAssociation is the Schema for the ApprovalRuleTemplateAssociations API. Associates a CodeCommit Approval Rule Template with a Repository.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -190,7 +190,6 @@ type MethodResponseStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // MethodResponse is the Schema for the MethodResponses API. Provides an HTTP Method Response for an API Gateway Resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -182,7 +182,6 @@ type ReplicaKeyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ReplicaKey is the Schema for the ReplicaKeys API. Manages a KMS multi-Region replica key.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

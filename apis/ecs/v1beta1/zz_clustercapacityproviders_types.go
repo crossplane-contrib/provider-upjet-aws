@@ -149,7 +149,6 @@ type ClusterCapacityProvidersStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ClusterCapacityProviders is the Schema for the ClusterCapacityProviderss API. Provides an ECS cluster capacity providers resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

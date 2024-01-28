@@ -148,7 +148,6 @@ type ClusterEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ClusterEndpoint is the Schema for the ClusterEndpoints API. Manages an RDS Aurora Cluster Endpoint
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

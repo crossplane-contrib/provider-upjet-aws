@@ -140,7 +140,6 @@ type ThingTypeStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ThingType is the Schema for the ThingTypes API. Creates and manages an AWS IoT Thing Type.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

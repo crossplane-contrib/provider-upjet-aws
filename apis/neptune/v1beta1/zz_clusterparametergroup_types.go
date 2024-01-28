@@ -148,7 +148,6 @@ type ClusterParameterGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ClusterParameterGroup is the Schema for the ClusterParameterGroups API. Manages a Neptune Cluster Parameter Group
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

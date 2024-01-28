@@ -138,7 +138,6 @@ type ExtensionAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ExtensionAssociation is the Schema for the ExtensionAssociations API. Associates an AppConfig Extension with a Resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

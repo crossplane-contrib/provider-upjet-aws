@@ -69,7 +69,6 @@ type ResourcePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ResourcePolicy is the Schema for the ResourcePolicys API. Provides a resource to manage a CloudWatch log resource policy
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

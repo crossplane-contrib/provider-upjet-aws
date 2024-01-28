@@ -170,7 +170,6 @@ type EventSubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // EventSubscription is the Schema for the EventSubscriptions API. Provides a Redshift event subscription resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

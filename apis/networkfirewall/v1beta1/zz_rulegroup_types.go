@@ -1084,7 +1084,6 @@ type RuleGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RuleGroup is the Schema for the RuleGroups API. Provides an AWS Network Firewall Rule Group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

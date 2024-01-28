@@ -179,7 +179,6 @@ type VolumeAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VolumeAttachment is the Schema for the VolumeAttachments API. Provides an AWS EBS Volume Attachment
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

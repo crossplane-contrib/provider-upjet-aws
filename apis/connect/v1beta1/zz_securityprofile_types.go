@@ -148,7 +148,6 @@ type SecurityProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SecurityProfile is the Schema for the SecurityProfiles API. Provides details about a specific Amazon Connect Security Profile.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

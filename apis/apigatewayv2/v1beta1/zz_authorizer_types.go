@@ -268,7 +268,6 @@ type AuthorizerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Authorizer is the Schema for the Authorizers API. Manages an Amazon API Gateway Version 2 authorizer.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

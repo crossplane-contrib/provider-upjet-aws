@@ -114,7 +114,6 @@ type MultiRegionAccessPointPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // MultiRegionAccessPointPolicy is the Schema for the MultiRegionAccessPointPolicys API. Provides a resource to manage an S3 Multi-Region Access Point access control policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

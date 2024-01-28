@@ -195,7 +195,6 @@ type PublicVirtualInterfaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // PublicVirtualInterface is the Schema for the PublicVirtualInterfaces API. Provides a Direct Connect public virtual interface resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -140,7 +140,6 @@ type ConformancePackStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ConformancePack is the Schema for the ConformancePacks API. Manages a Config Conformance Pack
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

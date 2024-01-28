@@ -120,7 +120,6 @@ type UserLoginProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // UserLoginProfile is the Schema for the UserLoginProfiles API. Manages an IAM User Login Profile
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

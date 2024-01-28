@@ -110,7 +110,6 @@ type CarrierGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // CarrierGateway is the Schema for the CarrierGateways API. Manages an EC2 Carrier Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

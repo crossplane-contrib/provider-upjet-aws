@@ -98,7 +98,6 @@ type ClientCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ClientCertificate is the Schema for the ClientCertificates API. Provides an API Gateway Client Certificate.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -209,7 +209,6 @@ type WorkspaceSAMLConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // WorkspaceSAMLConfiguration is the Schema for the WorkspaceSAMLConfigurations API. Provides an Amazon Managed Grafana workspace SAML configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

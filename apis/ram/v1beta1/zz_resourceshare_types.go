@@ -112,7 +112,6 @@ type ResourceShareStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ResourceShare is the Schema for the ResourceShares API. Manages a Resource Access Manager (RAM) Resource Share.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

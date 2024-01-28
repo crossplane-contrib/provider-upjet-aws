@@ -109,7 +109,6 @@ type TagStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Tag is the Schema for the Tags API. Manages an individual Transfer Family resource tag
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

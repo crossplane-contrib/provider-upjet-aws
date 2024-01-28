@@ -103,7 +103,6 @@ type DomainEntryStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DomainEntry is the Schema for the DomainEntrys API. Provides an Lightsail Domain Entry
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

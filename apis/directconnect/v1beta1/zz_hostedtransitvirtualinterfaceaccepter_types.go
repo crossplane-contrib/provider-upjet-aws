@@ -137,7 +137,6 @@ type HostedTransitVirtualInterfaceAccepterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // HostedTransitVirtualInterfaceAccepter is the Schema for the HostedTransitVirtualInterfaceAccepters API. Provides a resource to manage the accepter's side of a Direct Connect hosted transit virtual interface.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

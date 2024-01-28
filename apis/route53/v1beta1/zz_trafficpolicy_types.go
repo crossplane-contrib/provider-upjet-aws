@@ -95,7 +95,6 @@ type TrafficPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TrafficPolicy is the Schema for the TrafficPolicys API. Manages a Route53 Traffic Policy
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

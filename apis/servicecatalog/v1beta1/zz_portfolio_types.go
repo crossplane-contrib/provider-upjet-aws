@@ -109,7 +109,6 @@ type PortfolioStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Portfolio is the Schema for the Portfolios API. Provides a resource to create a Service Catalog portfolio
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -183,7 +183,6 @@ type MountTargetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // MountTarget is the Schema for the MountTargets API. Provides an Elastic File System (EFS) mount target.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

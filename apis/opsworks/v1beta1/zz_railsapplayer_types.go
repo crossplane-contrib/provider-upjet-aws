@@ -703,7 +703,6 @@ type RailsAppLayerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RailsAppLayer is the Schema for the RailsAppLayers API. Provides an OpsWorks Ruby on Rails application layer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

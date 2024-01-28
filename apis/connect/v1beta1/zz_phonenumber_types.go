@@ -170,7 +170,6 @@ type PhoneNumberStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // PhoneNumber is the Schema for the PhoneNumbers API. Provides details about a specific Amazon Connect Phone Number.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

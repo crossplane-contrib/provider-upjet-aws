@@ -79,7 +79,6 @@ type KeyspaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Keyspace is the Schema for the Keyspaces API. Provides a Keyspaces Keyspace.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

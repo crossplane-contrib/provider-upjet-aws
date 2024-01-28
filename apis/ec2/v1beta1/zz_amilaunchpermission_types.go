@@ -127,7 +127,6 @@ type AMILaunchPermissionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AMILaunchPermission is the Schema for the AMILaunchPermissions API. Adds a launch permission to an Amazon Machine Image (AMI).
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

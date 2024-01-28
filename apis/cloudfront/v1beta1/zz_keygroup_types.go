@@ -117,7 +117,6 @@ type KeyGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // KeyGroup is the Schema for the KeyGroups API. Provides a CloudFront key group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

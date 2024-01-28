@@ -552,7 +552,6 @@ type FirewallPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // FirewallPolicy is the Schema for the FirewallPolicys API. Provides an AWS Network Firewall Policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

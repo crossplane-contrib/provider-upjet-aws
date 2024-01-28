@@ -368,7 +368,6 @@ type WebACLStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // WebACL is the Schema for the WebACLs API. Provides a AWS WAF web access control group (ACL) resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

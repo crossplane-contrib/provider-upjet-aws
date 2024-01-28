@@ -166,7 +166,6 @@ type RouteTableStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RouteTable is the Schema for the RouteTables API. Provides a resource to create a VPC routing table.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

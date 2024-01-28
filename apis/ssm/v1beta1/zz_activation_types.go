@@ -155,7 +155,6 @@ type ActivationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Activation is the Schema for the Activations API. Registers an on-premises server or virtual machine with Amazon EC2 so that it can be managed using Run Command.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

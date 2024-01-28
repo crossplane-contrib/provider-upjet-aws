@@ -69,7 +69,6 @@ type DomainIdentityStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DomainIdentity is the Schema for the DomainIdentitys API. Provides an SES domain identity resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

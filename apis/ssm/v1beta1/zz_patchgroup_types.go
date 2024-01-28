@@ -99,7 +99,6 @@ type PatchGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // PatchGroup is the Schema for the PatchGroups API. Provides an SSM Patch Group resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

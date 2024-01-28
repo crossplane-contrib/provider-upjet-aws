@@ -303,7 +303,6 @@ type AssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Association is the Schema for the Associations API. Associates an SSM Document to an instance or EC2 tag.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -52,7 +52,6 @@ type AccountAliasStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AccountAlias is the Schema for the AccountAliass API. Manages the account alias for the AWS Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

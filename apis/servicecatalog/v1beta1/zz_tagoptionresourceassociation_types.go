@@ -127,7 +127,6 @@ type TagOptionResourceAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TagOptionResourceAssociation is the Schema for the TagOptionResourceAssociations API. Manages a Service Catalog Tag Option Resource Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

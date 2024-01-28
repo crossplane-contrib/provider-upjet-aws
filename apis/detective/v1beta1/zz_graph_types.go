@@ -81,7 +81,6 @@ type GraphStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Graph is the Schema for the Graphs API. Provides a resource to manage an Amazon Detective graph.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

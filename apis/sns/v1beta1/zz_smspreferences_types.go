@@ -138,7 +138,6 @@ type SMSPreferencesStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SMSPreferences is the Schema for the SMSPreferencess API. Provides a way to set SNS SMS preferences.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

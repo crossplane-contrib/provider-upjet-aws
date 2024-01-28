@@ -119,7 +119,6 @@ type AnomalyMonitorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AnomalyMonitor is the Schema for the AnomalyMonitors API. Provides a CE Cost Anomaly Monitor
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

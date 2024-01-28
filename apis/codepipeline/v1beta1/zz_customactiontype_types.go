@@ -338,7 +338,6 @@ type CustomActionTypeStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // CustomActionType is the Schema for the CustomActionTypes API. Provides a CodePipeline CustomActionType.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

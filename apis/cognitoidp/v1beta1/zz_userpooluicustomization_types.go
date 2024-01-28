@@ -146,7 +146,6 @@ type UserPoolUICustomizationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // UserPoolUICustomization is the Schema for the UserPoolUICustomizations API. Provides a Cognito User Pool UI Customization resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -152,7 +152,6 @@ type ResourceDataSyncStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ResourceDataSync is the Schema for the ResourceDataSyncs API. Provides a SSM resource data sync.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

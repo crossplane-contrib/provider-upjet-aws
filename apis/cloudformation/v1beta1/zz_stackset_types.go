@@ -345,7 +345,6 @@ type StackSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // StackSet is the Schema for the StackSets API. Manages a CloudFormation StackSet.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

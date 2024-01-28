@@ -64,7 +64,6 @@ type DomainDKIMStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DomainDKIM is the Schema for the DomainDKIMs API. Provides an SES domain DKIM generation resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

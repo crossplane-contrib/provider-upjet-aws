@@ -216,7 +216,6 @@ type FunctionEventInvokeConfigStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // FunctionEventInvokeConfig is the Schema for the FunctionEventInvokeConfigs API. Manages an asynchronous invocation configuration for a Lambda Function or Alias.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

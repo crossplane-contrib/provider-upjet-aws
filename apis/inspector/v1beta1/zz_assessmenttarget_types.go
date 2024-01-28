@@ -101,7 +101,6 @@ type AssessmentTargetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AssessmentTarget is the Schema for the AssessmentTargets API. Provides an Inspector Classic Assessment Target.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

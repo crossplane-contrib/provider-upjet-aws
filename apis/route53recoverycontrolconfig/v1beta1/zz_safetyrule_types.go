@@ -213,7 +213,6 @@ type SafetyRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SafetyRule is the Schema for the SafetyRules API. Provides an AWS Route 53 Recovery Control Config Safety Rule
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

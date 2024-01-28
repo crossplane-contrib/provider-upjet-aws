@@ -128,7 +128,6 @@ type LBCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // LBCertificate is the Schema for the LBCertificates API. Provides a Lightsail Load Balancer
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -92,7 +92,6 @@ type TransitGatewayRegistrationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TransitGatewayRegistration is the Schema for the TransitGatewayRegistrations API. Registers a transit gateway to a global network.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

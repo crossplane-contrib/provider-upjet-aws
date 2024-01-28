@@ -105,7 +105,6 @@ type VirtualMfaDeviceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VirtualMfaDevice is the Schema for the VirtualMfaDevices API. Provides an IAM Virtual MFA Device
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -97,7 +97,6 @@ type QueuePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // QueuePolicy is the Schema for the QueuePolicys API. Provides a SQS Queue Policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

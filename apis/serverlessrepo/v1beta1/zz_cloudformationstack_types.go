@@ -136,7 +136,6 @@ type CloudFormationStackStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // CloudFormationStack is the Schema for the CloudFormationStacks API. Deploys an Application CloudFormation Stack from the Serverless Application Repository.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

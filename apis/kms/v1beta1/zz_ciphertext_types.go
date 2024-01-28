@@ -106,7 +106,6 @@ type CiphertextStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Ciphertext is the Schema for the Ciphertexts API. Provides ciphertext encrypted using a KMS key
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

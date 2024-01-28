@@ -72,7 +72,6 @@ type GlobalSettingsStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // GlobalSettings is the Schema for the GlobalSettingss API. Provides an AWS Backup Global Settings resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

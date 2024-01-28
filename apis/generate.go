@@ -35,7 +35,7 @@ Copyright 2021 Upbound Inc.
 
 // Run upjet's transformer for the generated resolvers to get rid of the cross
 // API-group imports and to prevent import cycles
-//go:generate go run github.com/crossplane/upjet/cmd/resolver -g aws.upbound.io -s
+//go:generate go run github.com/crossplane/upjet/cmd/resolver -g aws.upbound.io -a github.com/upbound/provider-aws/internal/apis -s
 
 package apis
 

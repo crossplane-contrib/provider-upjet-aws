@@ -121,7 +121,6 @@ type MainRouteTableAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // MainRouteTableAssociation is the Schema for the MainRouteTableAssociations API. Provides a resource for managing the main routing table of a VPC.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -180,7 +180,6 @@ type GatewayAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // GatewayAssociation is the Schema for the GatewayAssociations API. Associates a Direct Connect Gateway with a VGW or transit gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -71,7 +71,6 @@ type ProductSubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ProductSubscription is the Schema for the ProductSubscriptions API. Subscribes to a Security Hub product.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

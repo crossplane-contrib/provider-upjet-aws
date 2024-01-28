@@ -169,7 +169,6 @@ type DefaultVPCStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DefaultVPC is the Schema for the DefaultVPCs API. Manage a default VPC resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

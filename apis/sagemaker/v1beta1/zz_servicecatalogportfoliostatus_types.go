@@ -69,7 +69,6 @@ type ServicecatalogPortfolioStatusStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ServicecatalogPortfolioStatus is the Schema for the ServicecatalogPortfolioStatuss API. Manages status of Service Catalog in SageMaker. Service Catalog is used to create SageMaker projects.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -98,7 +98,6 @@ type RepositoryPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RepositoryPolicy is the Schema for the RepositoryPolicys API. Provides an Elastic Container Registry Repository Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

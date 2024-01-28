@@ -188,7 +188,6 @@ type HostedPublicVirtualInterfaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // HostedPublicVirtualInterface is the Schema for the HostedPublicVirtualInterfaces API. Provides a Direct Connect hosted public virtual interface resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

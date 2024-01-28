@@ -137,7 +137,6 @@ type MetricsDestinationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // MetricsDestination is the Schema for the MetricsDestinations API. Provides a CloudWatch RUM Metrics Destination resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

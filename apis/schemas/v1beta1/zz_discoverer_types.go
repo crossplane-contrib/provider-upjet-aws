@@ -119,7 +119,6 @@ type DiscovererStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Discoverer is the Schema for the Discoverers API. Provides an EventBridge Schema Discoverer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

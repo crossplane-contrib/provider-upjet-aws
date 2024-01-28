@@ -363,7 +363,6 @@ type SelectionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Selection is the Schema for the Selections API. Manages selection conditions for AWS Backup plan resources.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -99,7 +99,6 @@ type RestAPIPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RestAPIPolicy is the Schema for the RestAPIPolicys API. Provides an API Gateway REST API Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

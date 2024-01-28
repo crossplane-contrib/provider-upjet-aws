@@ -218,7 +218,6 @@ type NetworkProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // NetworkProfile is the Schema for the NetworkProfiles API. Provides a Devicefarm network profile
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

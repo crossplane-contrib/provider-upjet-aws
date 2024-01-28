@@ -95,7 +95,6 @@ type ContributorInsightsStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ContributorInsights is the Schema for the ContributorInsightss API. Provides a DynamoDB contributor insights resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -125,7 +125,6 @@ type DiskAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DiskAttachment is the Schema for the DiskAttachments API. Attaches a Lightsail disk to a Lightsail Instance
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

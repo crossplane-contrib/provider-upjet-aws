@@ -653,7 +653,6 @@ type NodeJSAppLayerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // NodeJSAppLayer is the Schema for the NodeJSAppLayers API. Provides an OpsWorks NodeJS application layer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

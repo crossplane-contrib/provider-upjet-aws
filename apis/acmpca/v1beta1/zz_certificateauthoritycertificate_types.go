@@ -94,7 +94,6 @@ type CertificateAuthorityCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // CertificateAuthorityCertificate is the Schema for the CertificateAuthorityCertificates API. Associates a certificate with an AWS Certificate Manager Private Certificate Authority
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -92,7 +92,6 @@ type ConditionalForwarderStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ConditionalForwarder is the Schema for the ConditionalForwarders API. Provides a conditional forwarder for managed Microsoft AD in AWS Directory Service.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

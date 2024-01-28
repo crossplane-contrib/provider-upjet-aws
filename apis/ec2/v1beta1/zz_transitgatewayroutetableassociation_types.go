@@ -131,7 +131,6 @@ type TransitGatewayRouteTableAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TransitGatewayRouteTableAssociation is the Schema for the TransitGatewayRouteTableAssociations API. Manages an EC2 Transit Gateway Route Table association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

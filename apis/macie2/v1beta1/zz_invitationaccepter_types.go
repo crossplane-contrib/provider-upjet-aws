@@ -72,7 +72,6 @@ type InvitationAccepterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // InvitationAccepter is the Schema for the InvitationAccepters API. Provides a resource to manage an Amazon Macie Invitation Accepter.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

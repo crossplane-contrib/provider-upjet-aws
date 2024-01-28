@@ -344,7 +344,6 @@ type NetworkInterfaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // NetworkInterface is the Schema for the NetworkInterfaces API. Provides an Elastic network interface (ENI) resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

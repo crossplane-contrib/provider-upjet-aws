@@ -185,7 +185,6 @@ type NetworkInsightsPathStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // NetworkInsightsPath is the Schema for the NetworkInsightsPaths API. Provides a Network Insights Path resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

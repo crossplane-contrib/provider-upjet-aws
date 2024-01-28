@@ -332,7 +332,6 @@ type MetricStreamStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // MetricStream is the Schema for the MetricStreams API. Provides a CloudWatch Metric Stream resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

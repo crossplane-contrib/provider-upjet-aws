@@ -99,7 +99,6 @@ type SnapshotCreateVolumePermissionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SnapshotCreateVolumePermission is the Schema for the SnapshotCreateVolumePermissions API. Adds create volume permission to an EBS Snapshot
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

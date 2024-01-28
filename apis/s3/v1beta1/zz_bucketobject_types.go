@@ -350,7 +350,6 @@ type BucketObjectStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // BucketObject is the Schema for the BucketObjects API. Provides an S3 object resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

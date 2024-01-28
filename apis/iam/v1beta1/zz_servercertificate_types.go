@@ -126,7 +126,6 @@ type ServerCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ServerCertificate is the Schema for the ServerCertificates API. Provides an IAM Server Certificate
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

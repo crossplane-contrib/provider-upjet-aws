@@ -132,7 +132,6 @@ type WebhookStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Webhook is the Schema for the Webhooks API. Provides an Amplify Webhook resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

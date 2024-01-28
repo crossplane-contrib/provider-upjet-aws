@@ -275,7 +275,6 @@ type EventDataStoreStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // EventDataStore is the Schema for the EventDataStores API. Provides a CloudTrail Event Data Store resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

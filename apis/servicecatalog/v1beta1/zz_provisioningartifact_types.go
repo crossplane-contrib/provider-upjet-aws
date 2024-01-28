@@ -185,7 +185,6 @@ type ProvisioningArtifactStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ProvisioningArtifact is the Schema for the ProvisioningArtifacts API. Manages a Service Catalog Provisioning Artifact
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

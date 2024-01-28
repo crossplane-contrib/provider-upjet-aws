@@ -123,7 +123,6 @@ type OrganizationalUnitStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // OrganizationalUnit is the Schema for the OrganizationalUnits API. Provides a resource to create an organizational unit.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

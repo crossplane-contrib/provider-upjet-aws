@@ -107,7 +107,6 @@ type PolicyAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // PolicyAttachment is the Schema for the PolicyAttachments API. Provides a resource to attach an AWS Organizations policy to an organization account, root, or unit.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

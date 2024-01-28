@@ -157,7 +157,6 @@ type ByteMatchSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ByteMatchSet is the Schema for the ByteMatchSets API. Provides a AWS WAF Regional ByteMatchSet resource for use with ALB.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

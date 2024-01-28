@@ -91,7 +91,6 @@ type GlobalTableStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // GlobalTable is the Schema for the GlobalTables API. Manages DynamoDB Global Tables V1 (version 2017.11.29)
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

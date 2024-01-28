@@ -110,7 +110,6 @@ type BackendServerPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // BackendServerPolicy is the Schema for the BackendServerPolicys API. Attaches a load balancer policy to an ELB backend server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

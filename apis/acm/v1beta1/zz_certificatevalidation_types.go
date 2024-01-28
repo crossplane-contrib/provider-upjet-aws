@@ -100,7 +100,6 @@ type CertificateValidationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // CertificateValidation is the Schema for the CertificateValidations API. Waits for and checks successful validation of an ACM certificate.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

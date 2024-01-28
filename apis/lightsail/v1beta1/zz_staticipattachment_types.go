@@ -120,7 +120,6 @@ type StaticIPAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // StaticIPAttachment is the Schema for the StaticIPAttachments API. Provides an Lightsail Static IP Attachment
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

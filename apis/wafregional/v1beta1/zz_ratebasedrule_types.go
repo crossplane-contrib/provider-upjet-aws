@@ -197,7 +197,6 @@ type RateBasedRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RateBasedRule is the Schema for the RateBasedRules API. Provides a AWS WAF Regional rate based rule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

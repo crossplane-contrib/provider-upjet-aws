@@ -112,7 +112,6 @@ type DataCatalogStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DataCatalog is the Schema for the DataCatalogs API. Provides an Athena data catalog.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

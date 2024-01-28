@@ -91,7 +91,6 @@ type CellStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Cell is the Schema for the Cells API. Provides an AWS Route 53 Recovery Readiness Cell
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

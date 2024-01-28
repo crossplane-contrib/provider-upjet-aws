@@ -98,7 +98,6 @@ type LifecyclePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // LifecyclePolicy is the Schema for the LifecyclePolicys API. Manages an ECR repository lifecycle policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

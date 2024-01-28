@@ -331,7 +331,6 @@ type OntapStorageVirtualMachineStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // OntapStorageVirtualMachine is the Schema for the OntapStorageVirtualMachines API. Manages a FSx Storage Virtual Machine.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

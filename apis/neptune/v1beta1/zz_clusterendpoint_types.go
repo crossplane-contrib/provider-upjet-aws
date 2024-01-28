@@ -146,7 +146,6 @@ type ClusterEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ClusterEndpoint is the Schema for the ClusterEndpoints API. Provides an Neptune Cluster Endpoint Resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -144,7 +144,6 @@ type ResourceServerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ResourceServer is the Schema for the ResourceServers API. Provides a Cognito Resource Server.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

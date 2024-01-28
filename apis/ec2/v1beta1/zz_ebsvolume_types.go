@@ -207,7 +207,6 @@ type EBSVolumeStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // EBSVolume is the Schema for the EBSVolumes API. Provides an elastic block storage resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

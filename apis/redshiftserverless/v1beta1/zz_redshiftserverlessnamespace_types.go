@@ -206,7 +206,6 @@ type RedshiftServerlessNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RedshiftServerlessNamespace is the Schema for the RedshiftServerlessNamespaces API. Provides a Redshift Serverless Namespace resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

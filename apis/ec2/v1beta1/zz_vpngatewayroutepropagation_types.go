@@ -117,7 +117,6 @@ type VPNGatewayRoutePropagationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VPNGatewayRoutePropagation is the Schema for the VPNGatewayRoutePropagations API. Requests automatic route propagation between a VPN gateway and a route table.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

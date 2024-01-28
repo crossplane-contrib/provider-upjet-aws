@@ -117,7 +117,6 @@ type WorkspaceAPIKeyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // WorkspaceAPIKey is the Schema for the WorkspaceAPIKeys API. Creates a Grafana API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

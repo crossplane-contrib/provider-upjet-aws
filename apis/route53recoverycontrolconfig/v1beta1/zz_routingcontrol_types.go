@@ -134,7 +134,6 @@ type RoutingControlStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RoutingControl is the Schema for the RoutingControls API. Provides an AWS Route 53 Recovery Control Config Routing Control
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -145,7 +145,6 @@ type RouteTableAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RouteTableAssociation is the Schema for the RouteTableAssociations API. Provides a resource to create an association between a route table and a subnet or a route table and an internet gateway or virtual private gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

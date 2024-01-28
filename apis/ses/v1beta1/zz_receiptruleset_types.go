@@ -72,7 +72,6 @@ type ReceiptRuleSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ReceiptRuleSet is the Schema for the ReceiptRuleSets API. Provides an SES receipt rule set resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

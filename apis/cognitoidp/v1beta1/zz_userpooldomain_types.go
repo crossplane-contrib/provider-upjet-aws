@@ -144,7 +144,6 @@ type UserPoolDomainStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // UserPoolDomain is the Schema for the UserPoolDomains API. Provides a Cognito User Pool Domain resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -112,7 +112,6 @@ type ObjectLambdaAccessPointPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ObjectLambdaAccessPointPolicy is the Schema for the ObjectLambdaAccessPointPolicys API. Provides a resource to manage an S3 Object Lambda Access Point resource policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

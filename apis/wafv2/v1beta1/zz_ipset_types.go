@@ -134,7 +134,6 @@ type IPSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // IPSet is the Schema for the IPSets API. Provides an AWS WAFv2 IP Set resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

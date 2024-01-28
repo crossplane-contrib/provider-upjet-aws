@@ -93,7 +93,6 @@ type LambdaFunctionAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // LambdaFunctionAssociation is the Schema for the LambdaFunctionAssociations API. Provides details about a specific Connect Lambda Function Association.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

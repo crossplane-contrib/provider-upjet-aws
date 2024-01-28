@@ -120,7 +120,6 @@ type KinesisStreamingDestinationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // KinesisStreamingDestination is the Schema for the KinesisStreamingDestinations API. Enables a Kinesis streaming destination for a DynamoDB table
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

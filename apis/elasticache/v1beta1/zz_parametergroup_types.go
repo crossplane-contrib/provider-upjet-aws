@@ -148,7 +148,6 @@ type ParameterGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ParameterGroup is the Schema for the ParameterGroups API. Provides an ElastiCache parameter group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

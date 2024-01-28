@@ -484,7 +484,6 @@ type MetricAlarmStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // MetricAlarm is the Schema for the MetricAlarms API. Provides a CloudWatch Metric Alarm resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

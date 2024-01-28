@@ -115,7 +115,6 @@ type AlternateContactStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AlternateContact is the Schema for the AlternateContacts API. Manages the specified alternate contact attached to an AWS Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

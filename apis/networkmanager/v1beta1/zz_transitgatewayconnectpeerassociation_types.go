@@ -132,7 +132,6 @@ type TransitGatewayConnectPeerAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TransitGatewayConnectPeerAssociation is the Schema for the TransitGatewayConnectPeerAssociations API. Associates a transit gateway Connect peer with a device, and optionally, with a link.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

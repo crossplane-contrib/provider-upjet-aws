@@ -177,7 +177,6 @@ type EBSSnapshotStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // EBSSnapshot is the Schema for the EBSSnapshots API. Provides an elastic block storage snapshot resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

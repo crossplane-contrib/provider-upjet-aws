@@ -238,7 +238,6 @@ type RestAPIStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RestAPI is the Schema for the RestAPIs API. Manages an API Gateway REST API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

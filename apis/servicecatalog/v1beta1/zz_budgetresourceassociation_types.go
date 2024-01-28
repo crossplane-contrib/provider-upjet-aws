@@ -115,7 +115,6 @@ type BudgetResourceAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // BudgetResourceAssociation is the Schema for the BudgetResourceAssociations API. Manages a Service Catalog Budget Resource Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

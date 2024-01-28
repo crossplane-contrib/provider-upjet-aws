@@ -234,7 +234,6 @@ type FrameworkStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Framework is the Schema for the Frameworks API. Provides an AWS Backup Framework resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

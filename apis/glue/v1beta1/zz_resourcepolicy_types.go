@@ -78,7 +78,6 @@ type ResourcePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ResourcePolicy is the Schema for the ResourcePolicys API. Provides a resource to configure the aws glue resource policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -161,7 +161,6 @@ type ProxyEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ProxyEndpoint is the Schema for the ProxyEndpoints API. Provides an RDS DB proxy endpoint resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

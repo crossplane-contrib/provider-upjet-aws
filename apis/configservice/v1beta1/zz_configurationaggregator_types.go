@@ -196,7 +196,6 @@ type ConfigurationAggregatorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ConfigurationAggregator is the Schema for the ConfigurationAggregators API. Manages an AWS Config Configuration Aggregator.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

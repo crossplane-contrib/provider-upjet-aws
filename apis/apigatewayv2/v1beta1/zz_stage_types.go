@@ -392,7 +392,6 @@ type StageStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Stage is the Schema for the Stages API. Manages an Amazon API Gateway Version 2 stage.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

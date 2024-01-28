@@ -120,7 +120,6 @@ type KeyPairStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // KeyPair is the Schema for the KeyPairs API. Provides an Lightsail Key Pair
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -102,7 +102,6 @@ type HTTPNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // HTTPNamespace is the Schema for the HTTPNamespaces API. Provides a Service Discovery HTTP Namespace resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

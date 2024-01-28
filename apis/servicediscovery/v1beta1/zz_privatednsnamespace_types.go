@@ -130,7 +130,6 @@ type PrivateDNSNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // PrivateDNSNamespace is the Schema for the PrivateDNSNamespaces API. Provides a Service Discovery Private DNS Namespace resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

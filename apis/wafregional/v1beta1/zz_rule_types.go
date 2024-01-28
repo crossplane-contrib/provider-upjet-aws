@@ -168,7 +168,6 @@ type RuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Rule is the Schema for the Rules API. Provides an AWS WAF Regional rule resource for use with ALB.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

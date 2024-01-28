@@ -69,7 +69,6 @@ type AuthenticationProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AuthenticationProfile is the Schema for the AuthenticationProfiles API. Creates a Redshift authentication profile
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

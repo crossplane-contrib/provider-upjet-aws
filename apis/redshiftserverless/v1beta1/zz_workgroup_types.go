@@ -291,7 +291,6 @@ type WorkgroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Workgroup is the Schema for the Workgroups API. Provides a Redshift Serverless Workgroup resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -119,7 +119,6 @@ type RequestValidatorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RequestValidator is the Schema for the RequestValidators API. Manages an API Gateway Request Validator.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

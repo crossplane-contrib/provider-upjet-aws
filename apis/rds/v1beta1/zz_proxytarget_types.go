@@ -155,7 +155,6 @@ type ProxyTargetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ProxyTarget is the Schema for the ProxyTargets API. Provides an RDS DB proxy target resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

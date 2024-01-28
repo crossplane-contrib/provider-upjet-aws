@@ -100,7 +100,6 @@ type VaultPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VaultPolicy is the Schema for the VaultPolicys API. Provides an AWS Backup vault policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

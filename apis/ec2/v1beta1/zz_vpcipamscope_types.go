@@ -128,7 +128,6 @@ type VPCIpamScopeStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VPCIpamScope is the Schema for the VPCIpamScopes API. Creates a scope for AWS IPAM.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

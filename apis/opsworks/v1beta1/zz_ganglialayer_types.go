@@ -673,7 +673,6 @@ type GangliaLayerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // GangliaLayer is the Schema for the GangliaLayers API. Provides an OpsWorks Ganglia layer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

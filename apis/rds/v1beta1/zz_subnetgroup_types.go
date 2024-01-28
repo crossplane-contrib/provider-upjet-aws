@@ -131,7 +131,6 @@ type SubnetGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SubnetGroup is the Schema for the SubnetGroups API. Provides an RDS DB subnet group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

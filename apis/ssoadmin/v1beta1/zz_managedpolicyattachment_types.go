@@ -93,7 +93,6 @@ type ManagedPolicyAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ManagedPolicyAttachment is the Schema for the ManagedPolicyAttachments API. Manages an IAM managed policy for a Single Sign-On (SSO) Permission Set
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

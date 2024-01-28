@@ -215,7 +215,6 @@ type EBSSnapshotCopyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // EBSSnapshotCopy is the Schema for the EBSSnapshotCopys API. Duplicates an existing Amazon snapshot
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

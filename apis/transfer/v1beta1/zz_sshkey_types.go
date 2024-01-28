@@ -126,7 +126,6 @@ type SSHKeyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SSHKey is the Schema for the SSHKeys API. Provides a AWS Transfer SSH Public Key resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

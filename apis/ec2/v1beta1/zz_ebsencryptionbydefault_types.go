@@ -68,7 +68,6 @@ type EBSEncryptionByDefaultStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // EBSEncryptionByDefault is the Schema for the EBSEncryptionByDefaults API. Manages whether default EBS encryption is enabled for your AWS account in the current AWS region.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

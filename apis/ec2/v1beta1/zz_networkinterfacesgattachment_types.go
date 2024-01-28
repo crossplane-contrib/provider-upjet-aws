@@ -115,7 +115,6 @@ type NetworkInterfaceSgAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // NetworkInterfaceSgAttachment is the Schema for the NetworkInterfaceSgAttachments API. Associates a security group with a network interface.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

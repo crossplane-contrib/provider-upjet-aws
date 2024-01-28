@@ -161,7 +161,6 @@ type SQLInjectionMatchSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SQLInjectionMatchSet is the Schema for the SQLInjectionMatchSets API. Provides a AWS WAF Regional SqlInjectionMatchSet resource for use with ALB.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

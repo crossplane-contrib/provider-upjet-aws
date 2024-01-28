@@ -135,7 +135,6 @@ type TransitGatewayRouteStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TransitGatewayRoute is the Schema for the TransitGatewayRoutes API. Manages an EC2 Transit Gateway Route
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -149,7 +149,6 @@ type ServiceQuotaStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ServiceQuota is the Schema for the ServiceQuotas API. Manages an individual Service Quota
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

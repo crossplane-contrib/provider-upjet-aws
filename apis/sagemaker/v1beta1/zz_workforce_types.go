@@ -327,7 +327,6 @@ type WorkforceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Workforce is the Schema for the Workforces API. Provides a SageMaker Workforce resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -71,7 +71,6 @@ type DashboardStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Dashboard is the Schema for the Dashboards API. Provides a CloudWatch Dashboard resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

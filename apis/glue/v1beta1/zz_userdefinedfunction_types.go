@@ -157,7 +157,6 @@ type UserDefinedFunctionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // UserDefinedFunction is the Schema for the UserDefinedFunctions API. Provides a Glue User Defined Function.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

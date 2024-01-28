@@ -117,7 +117,6 @@ type LBTargetGroupAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // LBTargetGroupAttachment is the Schema for the LBTargetGroupAttachments API. Provides the ability to register instances and containers with a LB target group
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -744,7 +744,6 @@ type LBListenerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // LBListener is the Schema for the LBListeners API. Provides a Load Balancer Listener resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

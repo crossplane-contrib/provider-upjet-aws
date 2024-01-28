@@ -260,7 +260,6 @@ type VPCIpamPoolStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VPCIpamPool is the Schema for the VPCIpamPools API. Provides a IP address pool resource for IPAM.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

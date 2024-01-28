@@ -137,7 +137,6 @@ type XSSMatchSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // XSSMatchSet is the Schema for the XSSMatchSets API. Provides an AWS WAF Regional XSS Match Set resource for use with ALB.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

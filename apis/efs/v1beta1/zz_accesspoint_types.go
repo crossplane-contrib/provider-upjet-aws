@@ -243,7 +243,6 @@ type AccessPointStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AccessPoint is the Schema for the AccessPoints API. Provides an Elastic File System (EFS) access point.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -220,7 +220,6 @@ type TopicRuleDestinationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TopicRuleDestination is the Schema for the TopicRuleDestinations API. Creates and manages an AWS IoT topic rule destination
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

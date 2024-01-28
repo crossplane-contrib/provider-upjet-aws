@@ -330,7 +330,6 @@ type NotebookInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // NotebookInstance is the Schema for the NotebookInstances API. Provides a SageMaker Notebook Instance resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

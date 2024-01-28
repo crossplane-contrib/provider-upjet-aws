@@ -130,7 +130,6 @@ type ZoneAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ZoneAssociation is the Schema for the ZoneAssociations API. Manages a Route53 Hosted Zone VPC association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

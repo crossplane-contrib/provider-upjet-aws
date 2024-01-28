@@ -258,7 +258,6 @@ type BucketACLStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // BucketACL is the Schema for the BucketACLs API. Provides an S3 bucket ACL resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

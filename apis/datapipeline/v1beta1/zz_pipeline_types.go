@@ -96,7 +96,6 @@ type PipelineStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Pipeline is the Schema for the Pipelines API. Provides a AWS DataPipeline Pipeline.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

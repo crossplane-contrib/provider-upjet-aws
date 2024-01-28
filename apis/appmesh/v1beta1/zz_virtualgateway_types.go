@@ -1193,7 +1193,6 @@ type VirtualGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VirtualGateway is the Schema for the VirtualGateways API. Provides an AWS App Mesh virtual gateway resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

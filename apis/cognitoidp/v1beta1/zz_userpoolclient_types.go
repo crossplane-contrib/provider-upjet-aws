@@ -477,7 +477,6 @@ type UserPoolClientStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // UserPoolClient is the Schema for the UserPoolClients API. Provides a Cognito User Pool Client resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

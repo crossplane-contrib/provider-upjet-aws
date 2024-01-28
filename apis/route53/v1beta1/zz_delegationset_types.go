@@ -79,7 +79,6 @@ type DelegationSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DelegationSet is the Schema for the DelegationSets API. Provides a Route53 Delegation Set resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

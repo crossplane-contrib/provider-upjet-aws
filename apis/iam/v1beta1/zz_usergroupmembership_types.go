@@ -116,7 +116,6 @@ type UserGroupMembershipStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // UserGroupMembership is the Schema for the UserGroupMemberships API. Provides a resource for adding an IAM User to IAM Groups without conflicting with itself.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -279,7 +279,6 @@ type RouteStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Route is the Schema for the Routes API. Manages an Amazon API Gateway Version 2 route.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -138,7 +138,6 @@ type DestinationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Destination is the Schema for the Destinations API. Provides a CloudWatch Logs destination.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

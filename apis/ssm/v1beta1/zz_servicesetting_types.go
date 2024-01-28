@@ -84,7 +84,6 @@ type ServiceSettingStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ServiceSetting is the Schema for the ServiceSettings API. Defines how a user interacts with or uses a service or a feature of a service.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -140,7 +140,6 @@ type BucketMetricStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // BucketMetric is the Schema for the BucketMetrics API. Provides a S3 bucket metrics configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

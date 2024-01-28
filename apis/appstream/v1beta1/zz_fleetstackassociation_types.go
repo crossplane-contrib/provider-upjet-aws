@@ -93,7 +93,6 @@ type FleetStackAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // FleetStackAssociation is the Schema for the FleetStackAssociations API. Manages an AppStream Fleet Stack association.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

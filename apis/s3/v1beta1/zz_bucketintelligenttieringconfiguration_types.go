@@ -189,7 +189,6 @@ type BucketIntelligentTieringConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // BucketIntelligentTieringConfiguration is the Schema for the BucketIntelligentTieringConfigurations API. Provides an S3 Intelligent-Tiering configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

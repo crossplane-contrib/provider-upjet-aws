@@ -217,7 +217,6 @@ type NotificationRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // NotificationRule is the Schema for the NotificationRules API. Provides a CodeStar Notifications Rule
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

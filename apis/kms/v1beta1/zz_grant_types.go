@@ -228,7 +228,6 @@ type GrantStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Grant is the Schema for the Grants API. Provides a resource-based access control mechanism for KMS Customer Master Keys.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

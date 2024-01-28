@@ -121,7 +121,6 @@ type PlacementGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // PlacementGroup is the Schema for the PlacementGroups API. Provides an EC2 placement group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

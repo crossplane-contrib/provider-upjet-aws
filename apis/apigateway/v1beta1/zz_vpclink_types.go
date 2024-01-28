@@ -131,7 +131,6 @@ type VPCLinkStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VPCLink is the Schema for the VPCLinks API. Provides an API Gateway VPC Link.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

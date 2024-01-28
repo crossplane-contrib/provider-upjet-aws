@@ -81,7 +81,6 @@ type ActionTargetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ActionTarget is the Schema for the ActionTargets API. Creates Security Hub custom action.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

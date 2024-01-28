@@ -110,7 +110,6 @@ type ControlPanelStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ControlPanel is the Schema for the ControlPanels API. Provides an AWS Route 53 Recovery Control Config Control Panel
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

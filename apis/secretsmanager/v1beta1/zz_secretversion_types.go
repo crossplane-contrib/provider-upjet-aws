@@ -116,7 +116,6 @@ type SecretVersionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SecretVersion is the Schema for the SecretVersions API. Provides a resource to manage AWS Secrets Manager secret version including its secret value
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

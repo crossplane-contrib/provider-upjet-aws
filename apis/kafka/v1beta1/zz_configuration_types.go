@@ -107,7 +107,6 @@ type ConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Configuration is the Schema for the Configurations API. provider resource for managing an amazon managed streaming for kafka configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

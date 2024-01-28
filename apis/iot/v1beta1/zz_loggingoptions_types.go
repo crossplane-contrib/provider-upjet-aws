@@ -108,7 +108,6 @@ type LoggingOptionsStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // LoggingOptions is the Schema for the LoggingOptionss API. Provides a resource to manage default logging options.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

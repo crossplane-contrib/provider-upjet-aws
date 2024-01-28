@@ -115,7 +115,6 @@ type VPNGatewayAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VPNGatewayAttachment is the Schema for the VPNGatewayAttachments API. Provides a Virtual Private Gateway attachment resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -109,7 +109,6 @@ type AccountPublicAccessBlockStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AccountPublicAccessBlock is the Schema for the AccountPublicAccessBlocks API. Manages S3 account-level Public Access Block Configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

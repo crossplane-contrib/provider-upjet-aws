@@ -275,7 +275,6 @@ type ClassifierStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Classifier is the Schema for the Classifiers API. Provides an Glue Classifier resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

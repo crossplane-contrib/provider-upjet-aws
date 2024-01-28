@@ -160,7 +160,6 @@ type LoggingConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // LoggingConfiguration is the Schema for the LoggingConfigurations API. Provides an AWS Network Firewall Logging Configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

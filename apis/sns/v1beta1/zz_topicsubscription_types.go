@@ -251,7 +251,6 @@ type TopicSubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TopicSubscription is the Schema for the TopicSubscriptions API. Provides a resource for subscribing to SNS topics.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

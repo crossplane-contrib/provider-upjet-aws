@@ -101,7 +101,6 @@ type VoiceConnectorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VoiceConnector is the Schema for the VoiceConnectors API. Enables you to connect your phone system to the telephone network at a substantial cost savings by using SIP trunking.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

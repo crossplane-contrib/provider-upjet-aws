@@ -131,7 +131,6 @@ type LBCookieStickinessPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // LBCookieStickinessPolicy is the Schema for the LBCookieStickinessPolicys API. Provides a load balancer cookie stickiness policy, which allows an ELB to control the sticky session lifetime of the browser.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

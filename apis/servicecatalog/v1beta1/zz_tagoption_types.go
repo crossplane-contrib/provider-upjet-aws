@@ -91,7 +91,6 @@ type TagOptionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TagOption is the Schema for the TagOptions API. Manages a Service Catalog Tag Option
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

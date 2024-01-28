@@ -94,7 +94,6 @@ type ModelPackageGroupPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ModelPackageGroupPolicy is the Schema for the ModelPackageGroupPolicys API. Provides a SageMaker Model Package Group Policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

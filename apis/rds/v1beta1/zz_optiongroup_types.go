@@ -223,7 +223,6 @@ type OptionGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // OptionGroup is the Schema for the OptionGroups API. Provides an RDS DB option group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

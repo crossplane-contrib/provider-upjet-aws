@@ -215,7 +215,6 @@ type VirtualRouterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VirtualRouter is the Schema for the VirtualRouters API. Provides an AWS App Mesh virtual router resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

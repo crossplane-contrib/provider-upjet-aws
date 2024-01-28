@@ -180,7 +180,6 @@ type EnvironmentEC2Status struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // EnvironmentEC2 is the Schema for the EnvironmentEC2s API. Provides a Cloud9 EC2 Development Environment.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

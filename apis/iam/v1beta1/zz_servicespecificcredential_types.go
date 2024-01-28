@@ -108,7 +108,6 @@ type ServiceSpecificCredentialStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ServiceSpecificCredential is the Schema for the ServiceSpecificCredentials API. Provides an IAM Service Specific Credential.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

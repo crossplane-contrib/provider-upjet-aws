@@ -225,7 +225,6 @@ type SecurityGroupEgressRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SecurityGroupEgressRule is the Schema for the SecurityGroupEgressRules API. Provides a VPC security group egress rule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

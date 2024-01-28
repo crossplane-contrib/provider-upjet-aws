@@ -99,7 +99,6 @@ type ProvisionedConcurrencyConfigStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ProvisionedConcurrencyConfig is the Schema for the ProvisionedConcurrencyConfigs API. Manages a Lambda Provisioned Concurrency Configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

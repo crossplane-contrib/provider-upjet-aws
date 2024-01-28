@@ -343,7 +343,6 @@ type FlowLogStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // FlowLog is the Schema for the FlowLogs API. Provides a VPC/Subnet/ENI Flow Log
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

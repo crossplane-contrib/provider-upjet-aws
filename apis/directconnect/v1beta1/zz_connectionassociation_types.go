@@ -118,7 +118,6 @@ type ConnectionAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ConnectionAssociation is the Schema for the ConnectionAssociations API. Associates a Direct Connect Connection with a LAG.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

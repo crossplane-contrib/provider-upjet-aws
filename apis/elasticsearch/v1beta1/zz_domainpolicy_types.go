@@ -96,7 +96,6 @@ type DomainPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DomainPolicy is the Schema for the DomainPolicys API. Provides an Elasticsearch Domain Policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

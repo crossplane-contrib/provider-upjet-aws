@@ -110,7 +110,6 @@ type ImageVersionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ImageVersion is the Schema for the ImageVersions API. Provides a SageMaker Image Version resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

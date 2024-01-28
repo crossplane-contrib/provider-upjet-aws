@@ -402,7 +402,6 @@ type OntapFileSystemStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // OntapFileSystem is the Schema for the OntapFileSystems API. Manages an Amazon FSx for NetApp ONTAP file system.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

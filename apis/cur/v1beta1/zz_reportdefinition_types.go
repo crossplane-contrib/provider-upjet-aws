@@ -185,7 +185,6 @@ type ReportDefinitionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ReportDefinition is the Schema for the ReportDefinitions API. Provides a Cost and Usage Report Definition.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

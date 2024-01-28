@@ -188,7 +188,6 @@ type HostedTransitVirtualInterfaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // HostedTransitVirtualInterface is the Schema for the HostedTransitVirtualInterfaces API. Provides a Direct Connect hosted transit virtual interface resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

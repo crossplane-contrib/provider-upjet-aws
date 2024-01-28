@@ -78,7 +78,6 @@ type EmailIdentityMailFromAttributesStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // EmailIdentityMailFromAttributes is the Schema for the EmailIdentityMailFromAttributess API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

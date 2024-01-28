@@ -135,7 +135,6 @@ type IPGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // IPGroup is the Schema for the IPGroups API. Provides an IP access control group in AWS WorkSpaces Service.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

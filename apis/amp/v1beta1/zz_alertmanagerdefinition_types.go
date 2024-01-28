@@ -98,7 +98,6 @@ type AlertManagerDefinitionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AlertManagerDefinition is the Schema for the AlertManagerDefinitions API. Manages an Amazon Managed Service for Prometheus (AMP) Alert Manager Definition
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

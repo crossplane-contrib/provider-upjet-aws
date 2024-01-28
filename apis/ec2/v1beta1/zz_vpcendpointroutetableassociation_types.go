@@ -119,7 +119,6 @@ type VPCEndpointRouteTableAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VPCEndpointRouteTableAssociation is the Schema for the VPCEndpointRouteTableAssociations API. Manages a VPC Endpoint Route Table Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

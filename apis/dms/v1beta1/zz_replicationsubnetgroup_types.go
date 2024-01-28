@@ -124,7 +124,6 @@ type ReplicationSubnetGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ReplicationSubnetGroup is the Schema for the ReplicationSubnetGroups API. Provides a DMS (Data Migration Service) subnet group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

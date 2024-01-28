@@ -225,7 +225,6 @@ type ConfigurationProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ConfigurationProfile is the Schema for the ConfigurationProfiles API. Provides an AppConfig Configuration Profile resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -141,7 +141,6 @@ type SigningProfilePermissionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // SigningProfilePermission is the Schema for the SigningProfilePermissions API. Creates a Signer Signing Profile Permission.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

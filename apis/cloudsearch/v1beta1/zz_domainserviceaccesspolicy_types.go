@@ -98,7 +98,6 @@ type DomainServiceAccessPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DomainServiceAccessPolicy is the Schema for the DomainServiceAccessPolicys API. Provides an CloudSearch domain service access policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

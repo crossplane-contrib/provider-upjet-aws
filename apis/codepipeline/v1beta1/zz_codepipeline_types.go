@@ -381,7 +381,6 @@ type CodepipelineStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Codepipeline is the Schema for the Codepipelines API. Provides a CodePipeline
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

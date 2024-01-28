@@ -459,7 +459,6 @@ type AMIStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AMI is the Schema for the AMIs API. Creates and manages a custom Amazon Machine Image (AMI).
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

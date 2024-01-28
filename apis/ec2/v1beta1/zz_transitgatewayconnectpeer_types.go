@@ -159,7 +159,6 @@ type TransitGatewayConnectPeerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TransitGatewayConnectPeer is the Schema for the TransitGatewayConnectPeers API. Manages an EC2 Transit Gateway Connect Peer
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

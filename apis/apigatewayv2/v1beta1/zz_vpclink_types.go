@@ -159,7 +159,6 @@ type VPCLinkStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VPCLink is the Schema for the VPCLinks API. Manages an Amazon API Gateway Version 2 VPC Link.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

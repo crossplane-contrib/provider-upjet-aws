@@ -117,7 +117,6 @@ type NotificationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // Notification is the Schema for the Notifications API. Provides an AutoScaling Group with Notification support
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

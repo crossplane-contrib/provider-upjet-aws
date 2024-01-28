@@ -217,7 +217,6 @@ type TestGridProjectStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // TestGridProject is the Schema for the TestGridProjects API. Provides a Devicefarm test_grid_project
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

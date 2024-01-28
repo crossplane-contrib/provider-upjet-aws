@@ -117,7 +117,6 @@ type VaultLockStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // VaultLock is the Schema for the VaultLocks API. Manages a Glacier Vault Lock.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -123,7 +123,6 @@ type ListenerPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // ListenerPolicy is the Schema for the ListenerPolicys API. Attaches a load balancer policy to an ELB Listener.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -130,7 +130,6 @@ type RegistryScanningConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RegistryScanningConfiguration is the Schema for the RegistryScanningConfigurations API. Provides an Elastic Container Registry Scanning Configuration.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -231,7 +231,6 @@ type DBSnapshotCopyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // DBSnapshotCopy is the Schema for the DBSnapshotCopys API. Manages an RDS database instance snapshot copy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

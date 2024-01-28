@@ -301,7 +301,6 @@ type AMICopyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AMICopy is the Schema for the AMICopys API. Duplicates an existing Amazon Machine Image (AMI)
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

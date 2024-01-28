@@ -133,7 +133,6 @@ type PlaceIndexStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // PlaceIndex is the Schema for the PlaceIndexs API. Provides a Location Service Place Index.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

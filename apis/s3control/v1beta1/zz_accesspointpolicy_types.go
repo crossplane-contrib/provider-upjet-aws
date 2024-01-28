@@ -102,7 +102,6 @@ type AccessPointPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // AccessPointPolicy is the Schema for the AccessPointPolicys API. Provides a resource to manage an S3 Access Point resource policy.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

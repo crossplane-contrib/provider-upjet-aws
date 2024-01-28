@@ -148,7 +148,6 @@ type RouteResponseStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RouteResponse is the Schema for the RouteResponses API. Manages an Amazon API Gateway Version 2 route response.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

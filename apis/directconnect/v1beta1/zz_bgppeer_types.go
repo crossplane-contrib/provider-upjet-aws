@@ -154,7 +154,6 @@ type BGPPeerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // BGPPeer is the Schema for the BGPPeers API. Provides a Direct Connect BGP peer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

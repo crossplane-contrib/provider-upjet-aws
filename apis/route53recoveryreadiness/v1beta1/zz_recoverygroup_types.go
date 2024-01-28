@@ -88,7 +88,6 @@ type RecoveryGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
-// +kubebuilder:storageversion
 
 // RecoveryGroup is the Schema for the RecoveryGroups API. Provides an AWS Route 53 Recovery Readiness Recovery Group
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
