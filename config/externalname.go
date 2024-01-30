@@ -2823,11 +2823,16 @@ func appConfigEnvironment() config.ExternalName {
 	// Terraform does not allow Environment ID to be empty.
 	// Using a stub value to pass validation.
 	e := config.IdentifierFromProvider
-	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
-		if len(externalName) == 0 {
-			return "appconfig-environment-stub", nil
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if _, ok := base["environment_id"]; !ok {
+			if externalName == "" {
+				// must satisfy regular expression pattern: [a-z0-9]{4,7}
+				base["environment_id"] = "tbdeid0"
+			}
+			if identifiers := strings.Split(externalName, ":"); len(identifiers) == 2 {
+				base["environment_id"] = identifiers[0]
+			}
 		}
-		return externalName, nil
 	}
 	return e
 }
