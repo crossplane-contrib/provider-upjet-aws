@@ -1101,37 +1101,5 @@ func (mg *UserPoolUICustomization) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserPoolIDRef = rsp.ResolvedReference
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClientID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.ClientIDRef,
-		Selector:     mg.Spec.InitProvider.ClientIDSelector,
-		To: reference.To{
-			List:    &UserPoolClientList{},
-			Managed: &UserPoolClient{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ClientID")
-	}
-	mg.Spec.InitProvider.ClientID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ClientIDRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserPoolID),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.UserPoolIDRef,
-		Selector:     mg.Spec.InitProvider.UserPoolIDSelector,
-		To: reference.To{
-			List:    &UserPoolList{},
-			Managed: &UserPool{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.UserPoolID")
-	}
-	mg.Spec.InitProvider.UserPoolID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.UserPoolIDRef = rsp.ResolvedReference
-
 	return nil
 }

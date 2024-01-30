@@ -230,6 +230,7 @@ spec:
                         type: object
                     type: object
                 required:
+                - domain
                 - region
                 type: object
               initProvider:
@@ -321,11 +322,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  domain:
-                    description: For custom domains, this is the fully-qualified domain
-                      name, such as auth.example.com. For Amazon Cognito prefix domains,
-                      this is the prefix alone, such as auth.
-                    type: string
                   userPoolId:
                     description: The user pool ID.
                     type: string
@@ -563,11 +559,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.domain is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.domain)
-                || (has(self.initProvider) && has(self.initProvider.domain))'
           status:
             description: UserPoolDomainStatus defines the observed state of UserPoolDomain.
             properties:

@@ -32,9 +32,6 @@ type UserPoolDomainInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
-	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
-	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
-
 	// The user pool ID.
 	// +crossplane:generate:reference:type=UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
@@ -97,8 +94,8 @@ type UserPoolDomainParameters struct {
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
 	// For custom domains, this is the fully-qualified domain name, such as auth.example.com. For Amazon Cognito prefix domains, this is the prefix alone, such as auth.
-	// +kubebuilder:validation:Optional
-	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+	// +kubebuilder:validation:Required
+	Domain *string `json:"domain" tf:"domain,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -154,9 +151,8 @@ type UserPoolDomainStatus struct {
 type UserPoolDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.domain) || (has(self.initProvider) && has(self.initProvider.domain))",message="spec.forProvider.domain is a required parameter"
-	Spec   UserPoolDomainSpec   `json:"spec"`
-	Status UserPoolDomainStatus `json:"status,omitempty"`
+	Spec              UserPoolDomainSpec   `json:"spec"`
+	Status            UserPoolDomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
