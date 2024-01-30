@@ -110,9 +110,9 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// us-west-2_abc123
 	"aws_cognito_user_pool": config.IdentifierFromProvider,
 	// auth.example.org
-	"aws_cognito_user_pool_domain": config.IdentifierFromProvider,
+	"aws_cognito_user_pool_domain": config.TemplatedStringAsIdentifier("", "{{ .parameters.domain }}"),
 	// us-west-2_ZCTarbt5C,12bu4fuk3mlgqa2rtrujgp6egq
-	"aws_cognito_user_pool_ui_customization": config.IdentifierFromProvider,
+	"aws_cognito_user_pool_ui_customization": config.TemplatedStringAsIdentifier("", "{{ .parameters.user_pool_id }},{{ .parameters.client_id }}"),
 	// Cognito User Groups can be imported using the user_pool_id/name attributes concatenated:
 	// us-east-1_vG78M4goG/user-group
 	// Following configuration does not work: FormattedIdentifierUserDefinedNameLast("name", "/", "user_pool_id")
