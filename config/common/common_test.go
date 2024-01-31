@@ -2,7 +2,7 @@
 Copyright 2023 Upbound Inc.
 */
 
-package rds
+package common
 
 import (
 	"context"
@@ -53,7 +53,7 @@ func TestPasswordGenerator(t *testing.T) {
 				mg:                 &fake.Managed{},
 			},
 			want: want{
-				err: errors.Wrap(errBoom, errGetPasswordSecret),
+				err: errors.Wrap(errBoom, ErrGetPasswordSecret),
 			},
 		},
 		"SecretAlreadyFull": {
