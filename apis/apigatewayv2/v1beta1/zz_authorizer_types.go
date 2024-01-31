@@ -53,7 +53,7 @@ type AuthorizerInitParameters struct {
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
 	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/apis/lambda/v1beta1.LambdaFunctionInvokeARN()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis/lambda.FunctionInvokeARN()
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
 	// Reference to a Function in lambda to populate authorizerUri.
@@ -172,7 +172,7 @@ type AuthorizerParameters struct {
 	// For REQUEST authorizers this must be a well-formed Lambda function URI, such as the invoke_arn attribute of the aws_lambda_function resource.
 	// Supported only for REQUEST authorizers. Must be between 1 and 2048 characters in length.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/apis/lambda/v1beta1.LambdaFunctionInvokeARN()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common/apis/lambda.FunctionInvokeARN()
 	// +kubebuilder:validation:Optional
 	AuthorizerURI *string `json:"authorizerUri,omitempty" tf:"authorizer_uri,omitempty"`
 
@@ -267,13 +267,13 @@ type AuthorizerStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
 
 // Authorizer is the Schema for the Authorizers API. Manages an Amazon API Gateway Version 2 authorizer.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Authorizer struct {
 	metav1.TypeMeta   `json:",inline"`

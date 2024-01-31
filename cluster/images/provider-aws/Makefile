@@ -26,7 +26,7 @@ img.build:
 	@$(INFO) Building image $${IMAGE}; \
 	$(MAKE) BUILD_ARGS="--load ${BUILD_ARGS}" IMAGE=$${IMAGE} XPKG_REG_ORGS=$(XPKG_REG_ORGS) img.build.shared; \
 	if [[ "$${LOAD_PACKAGES}" == "true" ]]; then \
-		$(MAKE) batch-process SUBPACKAGES="$(SUBPACKAGES)" BATCH_PLATFORMS=$(PLATFORM) BUILD_ONLY=true STORE_PACKAGES="$$(tr ' ' ',' <<< "$(SUBPACKAGES)")" && \
+		$(MAKE) batch-process SUBPACKAGES="$(SUBPACKAGES)" XPKG_DIR=$(XPKG_DIR) XPKG_IGNORE=$(XPKG_IGNORE) BATCH_PLATFORMS=$(PLATFORM) BUILD_ONLY=true STORE_PACKAGES="$$(tr ' ' ',' <<< "$(SUBPACKAGES)")" && \
 		for s in $(SUBPACKAGES); do \
 			export t=$$(docker load -qi "$(XPKG_OUTPUT_DIR)/$(PLATFORM)/$(PROJECT_NAME)-$${s}-$(VERSION).xpkg") && \
 			docker tag $${t##*:} $(BUILD_REGISTRY)/$(PROJECT_NAME)-$${s}-$(ARCH); \
@@ -77,10 +77,11 @@ batch-process: $(UP)
 		--build-only=$(BUILD_ONLY) \
 		--examples-root $(ROOT_DIR)/examples \
 		--examples-group-override monolith=* --examples-group-override config=providerconfig \
-		--auth-ext $(ROOT_DIR)/package/auth.yaml \
-		--crd-root $(ROOT_DIR)/package/crds \
+		--auth-ext $(XPKG_DIR)/auth.yaml \
+		--crd-root $(XPKG_DIR)/crds \
+		--ignore $(XPKG_IGNORE) \
 		--crd-group-override monolith=* --crd-group-override config=$(PROVIDER_NAME) \
-		--package-metadata-template $(ROOT_DIR)/package/crossplane.yaml.tmpl \
+		--package-metadata-template $(XPKG_DIR)/crossplane.yaml.tmpl \
 		--template-var XpkgRegOrg=$(XPKG_REG_ORGS) --template-var DepConstraint="$(DEP_CONSTRAINT)" --template-var ProviderName=$(PROVIDER_NAME) \
 		--concurrency $(CONCURRENCY) \
 		--push-retry 10 || $(FAIL)

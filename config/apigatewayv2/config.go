@@ -29,8 +29,8 @@ func Configure(p *config.Provider) {
 			Type: "API",
 		}
 		r.References["authorizer_uri"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/lambda/v1beta1.Function",
-			Extractor: "github.com/upbound/provider-aws/apis/lambda/v1beta1.LambdaFunctionInvokeARN()",
+			TerraformName: "aws_lambda_function",
+			Extractor:     "github.com/upbound/provider-aws/config/common/apis/lambda.FunctionInvokeARN()",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_domain_name", func(r *config.Resource) {
@@ -74,8 +74,8 @@ func Configure(p *config.Provider) {
 			Type: "API",
 		}
 		r.References["target"] = config.Reference{
-			Type:      "Integration",
-			Extractor: "github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.IntegrationIDPrefixed()",
+			TerraformName: "aws_apigatewayv2_integration",
+			Extractor:     "github.com/upbound/provider-aws/config/common/apis.IntegrationIDPrefixed()",
 		}
 		r.References["authorizer_id"] = config.Reference{
 			Type: "Authorizer",

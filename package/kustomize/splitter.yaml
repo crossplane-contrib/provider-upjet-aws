@@ -1,0 +1,5 @@
+apiVersion: providers.upbound.io
+kind: SplitTransformer
+metadata:
+  name: splitter
+argsOneLiner: ../crds
