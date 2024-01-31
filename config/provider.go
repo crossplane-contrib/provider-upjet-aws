@@ -185,7 +185,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 	}
 
 	modulePath := "github.com/upbound/provider-aws"
-	pc := config.NewProvider(ctx, []byte(providerSchema), "aws",
+	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
