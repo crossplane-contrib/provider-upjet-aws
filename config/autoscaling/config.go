@@ -51,6 +51,11 @@ func Configure(p *config.Provider) {
 		r.References["autoscaling_group_name"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup",
 		}
+		r.OverrideFieldNames = map[string]string{
+			"TagParameters":     "GroupTagTagParameters",
+			"TagObservation":    "GroupTagTagObservation",
+			"TagInitParameters": "GroupTagTagInitParameters",
+		}
 	})
 }
 

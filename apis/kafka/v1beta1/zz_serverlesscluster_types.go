@@ -17,23 +17,23 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ClientAuthenticationInitParameters struct {
+type ClientAuthenticationSaslInitParameters struct {
 
-	// Details for client authentication using SASL. See below.
-	Sasl []SaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	// Details for client authentication using IAM. See below.
+	IAM []IAMInitParameters `json:"iam,omitempty" tf:"iam,omitempty"`
 }
 
-type ClientAuthenticationObservation struct {
+type ClientAuthenticationSaslObservation struct {
 
-	// Details for client authentication using SASL. See below.
-	Sasl []SaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	// Details for client authentication using IAM. See below.
+	IAM []IAMObservation `json:"iam,omitempty" tf:"iam,omitempty"`
 }
 
-type ClientAuthenticationParameters struct {
+type ClientAuthenticationSaslParameters struct {
 
-	// Details for client authentication using SASL. See below.
+	// Details for client authentication using IAM. See below.
 	// +kubebuilder:validation:Optional
-	Sasl []SaslParameters `json:"sasl" tf:"sasl,omitempty"`
+	IAM []IAMParameters `json:"iam" tf:"iam,omitempty"`
 }
 
 type IAMInitParameters struct {
@@ -55,29 +55,29 @@ type IAMParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
-type SaslInitParameters struct {
+type ServerlessClusterClientAuthenticationInitParameters struct {
 
-	// Details for client authentication using IAM. See below.
-	IAM []IAMInitParameters `json:"iam,omitempty" tf:"iam,omitempty"`
+	// Details for client authentication using SASL. See below.
+	Sasl []ClientAuthenticationSaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 }
 
-type SaslObservation struct {
+type ServerlessClusterClientAuthenticationObservation struct {
 
-	// Details for client authentication using IAM. See below.
-	IAM []IAMObservation `json:"iam,omitempty" tf:"iam,omitempty"`
+	// Details for client authentication using SASL. See below.
+	Sasl []ClientAuthenticationSaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
 }
 
-type SaslParameters struct {
+type ServerlessClusterClientAuthenticationParameters struct {
 
-	// Details for client authentication using IAM. See below.
+	// Details for client authentication using SASL. See below.
 	// +kubebuilder:validation:Optional
-	IAM []IAMParameters `json:"iam" tf:"iam,omitempty"`
+	Sasl []ClientAuthenticationSaslParameters `json:"sasl" tf:"sasl,omitempty"`
 }
 
 type ServerlessClusterInitParameters struct {
 
 	// Specifies client authentication information for the serverless cluster. See below.
-	ClientAuthentication []ClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ServerlessClusterClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// The name of the serverless cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -96,7 +96,7 @@ type ServerlessClusterObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Specifies client authentication information for the serverless cluster. See below.
-	ClientAuthentication []ClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ServerlessClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// The name of the serverless cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -122,7 +122,7 @@ type ServerlessClusterParameters struct {
 
 	// Specifies client authentication information for the serverless cluster. See below.
 	// +kubebuilder:validation:Optional
-	ClientAuthentication []ClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ServerlessClusterClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// The name of the serverless cluster.
 	// +kubebuilder:validation:Optional

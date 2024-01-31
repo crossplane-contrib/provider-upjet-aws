@@ -253,6 +253,7 @@ func init() {
 		v1beta1dynamodb.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,
 		v1beta1ec2.SchemeBuilder.AddToScheme,
+		v1beta1ec2.SchemeBuilder.AddToScheme,
 		v1beta2ec2.SchemeBuilder.AddToScheme,
 		v1beta1ecr.SchemeBuilder.AddToScheme,
 		v1beta1ecrpublic.SchemeBuilder.AddToScheme,

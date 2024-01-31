@@ -193,5 +193,13 @@ func Configure(p *config.Provider) {
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
+		r.OverrideFieldNames = map[string]string{
+			"ClientAuthenticationParameters":     "ServerlessClusterClientAuthenticationParameters",
+			"ClientAuthenticationInitParameters": "ServerlessClusterClientAuthenticationInitParameters",
+			"ClientAuthenticationObservation":    "ServerlessClusterClientAuthenticationObservation",
+			"SaslParameters":                     "ClientAuthenticationSaslParameters",
+			"SaslInitParameters":                 "ClientAuthenticationSaslInitParameters",
+			"SaslObservation":                    "ClientAuthenticationSaslObservation",
+		}
 	})
 }

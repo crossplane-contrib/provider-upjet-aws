@@ -32,7 +32,7 @@ type GroupTagInitParameters struct {
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
 	// Tag to create. The tag block is documented below.
-	Tag []TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []GroupTagTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type GroupTagObservation struct {
@@ -44,7 +44,7 @@ type GroupTagObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Tag to create. The tag block is documented below.
-	Tag []TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []GroupTagTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type GroupTagParameters struct {
@@ -69,10 +69,10 @@ type GroupTagParameters struct {
 
 	// Tag to create. The tag block is documented below.
 	// +kubebuilder:validation:Optional
-	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []GroupTagTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
-type TagInitParameters struct {
+type GroupTagTagInitParameters struct {
 
 	// Tag name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -84,7 +84,7 @@ type TagInitParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type TagObservation struct {
+type GroupTagTagObservation struct {
 
 	// Tag name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -96,7 +96,7 @@ type TagObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type TagParameters struct {
+type GroupTagTagParameters struct {
 
 	// Tag name.
 	// +kubebuilder:validation:Optional

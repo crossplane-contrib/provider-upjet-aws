@@ -46,6 +46,17 @@ func Configure(p *config.Provider) {
 			}
 			return conn, nil
 		}
+		r.OverrideFieldNames = map[string]string{
+			"S3ImportParameters":                 "ClusterS3ImportParameters",
+			"S3ImportInitParameters":             "ClusterS3ImportInitParameters",
+			"S3ImportObservation":                "ClusterS3ImportObservation",
+			"RestoreToPointInTimeParameters":     "ClusterRestoreToPointInTimeParameters",
+			"RestoreToPointInTimeInitParameters": "ClusterRestoreToPointInTimeInitParameters",
+			"RestoreToPointInTimeObservation":    "ClusterRestoreToPointInTimeObservation",
+			"MasterUserSecretParameters":         "ClusterMasterUserSecretParameters",
+			"MasterUserSecretInitParameters":     "ClusterMasterUserSecretInitParameters",
+			"MasterUserSecretObservation":        "ClusterMasterUserSecretObservation",
+		}
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
