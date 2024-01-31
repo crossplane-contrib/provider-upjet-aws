@@ -23,7 +23,6 @@ var (
 	value                 = "value"
 	propagateAtLaunch     = "true"
 	propagateAtLaunchBool = true
-	region                = "us-west-1"
 )
 
 func TestAutoScalingGroupConverterFromv1beta1Tov1beta2(t *testing.T) {
