@@ -324,4 +324,7 @@ kustomize-crds: output.init $(KUSTOMIZE) $(YQ)
 	XDG_CONFIG_HOME=$(PWD)/package $(KUSTOMIZE) build --enable-alpha-plugins $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml || $(FAIL)
 	@$(OK) Kustomizing CRDs.
 
+checkout-to-old-api:
+	CHECKOUT_RELEASE_VERSION=$(CHECKOUT_RELEASE_VERSION) hack/check-duplicate.sh
+
 .PHONY: kustomize-crds
