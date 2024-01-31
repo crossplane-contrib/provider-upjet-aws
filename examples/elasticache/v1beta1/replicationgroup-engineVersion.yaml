@@ -9,12 +9,11 @@ metadata:
   name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
+    engineVersion: "7.1"
     automaticFailoverEnabled: true
     description: example description
     nodeType: cache.m4.large
     numCacheClusters: 2
+    parameterGroupName: default.redis7
     port: 6379
-    preferredCacheClusterAzs:
-      - us-west-1a
-      - us-west-1b
     region: us-west-1
