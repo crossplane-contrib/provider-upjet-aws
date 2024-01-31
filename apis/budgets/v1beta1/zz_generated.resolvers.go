@@ -27,7 +27,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta2", "Budget", "BudgetList")
+		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta1", "Budget", "BudgetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -88,7 +88,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	mg.Spec.ForProvider.ExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ExecutionRoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta2", "Budget", "BudgetList")
+		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta1", "Budget", "BudgetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

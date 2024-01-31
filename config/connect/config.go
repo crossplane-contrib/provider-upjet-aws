@@ -64,33 +64,45 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			conversion.NewCustomConverter("v1beta1", "v1beta2", func(src, target xpresource.Managed) error {
 				srcTyped := src.(*v1beta1.RoutingProfile)
 				targetTyped := target.(*v1beta2.RoutingProfile)
-				for _, e := range srcTyped.Status.AtProvider.QueueConfigsAssociated {
-					qc := v1beta2.QueueConfigsObservation{
-						Channel:   e.Channel,
-						Delay:     e.Delay,
-						Priority:  e.Priority,
-						QueueArn:  e.QueueArn,
-						QueueID:   e.QueueID,
-						QueueName: e.QueueName,
+
+				if srcTyped.Status.AtProvider.QueueConfigsAssociated != nil {
+					var l []v1beta2.QueueConfigsObservation
+					for _, e := range srcTyped.Status.AtProvider.QueueConfigsAssociated {
+						qc := v1beta2.QueueConfigsObservation{
+							Channel:   e.Channel,
+							Delay:     e.Delay,
+							Priority:  e.Priority,
+							QueueArn:  e.QueueArn,
+							QueueID:   e.QueueID,
+							QueueName: e.QueueName,
+						}
+						l = append(l, qc)
 					}
-					targetTyped.Status.AtProvider.QueueConfigs = append(targetTyped.Status.AtProvider.QueueConfigs, qc)
+					targetTyped.Status.AtProvider.QueueConfigs = l
 				}
+
 				return nil
 			}),
 			conversion.NewCustomConverter("v1beta2", "v1beta1", func(src, target xpresource.Managed) error {
 				srcTyped := src.(*v1beta2.RoutingProfile)
 				targetTyped := target.(*v1beta1.RoutingProfile)
-				for _, e := range srcTyped.Status.AtProvider.QueueConfigs {
-					qca := v1beta1.QueueConfigsAssociatedObservation{
-						Channel:   e.Channel,
-						Delay:     e.Delay,
-						Priority:  e.Priority,
-						QueueArn:  e.QueueArn,
-						QueueID:   e.QueueID,
-						QueueName: e.QueueName,
+
+				if srcTyped.Status.AtProvider.QueueConfigs != nil {
+					var l []v1beta1.QueueConfigsAssociatedObservation
+					for _, e := range srcTyped.Status.AtProvider.QueueConfigs {
+						qca := v1beta1.QueueConfigsAssociatedObservation{
+							Channel:   e.Channel,
+							Delay:     e.Delay,
+							Priority:  e.Priority,
+							QueueArn:  e.QueueArn,
+							QueueID:   e.QueueID,
+							QueueName: e.QueueName,
+						}
+						l = append(l, qca)
 					}
-					targetTyped.Status.AtProvider.QueueConfigsAssociated = append(targetTyped.Status.AtProvider.QueueConfigsAssociated, qca)
+					targetTyped.Status.AtProvider.QueueConfigsAssociated = l
 				}
+
 				return nil
 			}))
 	})

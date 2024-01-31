@@ -64,104 +64,136 @@ func Configure(p *config.Provider) {
 func autoScalingGroupConverterFromv1beta1Tov1beta2(src, target xpresource.Managed) error { //nolint:gocyclo
 	srcTyped := src.(*v1beta1.AutoscalingGroup)
 	targetTyped := target.(*v1beta2.AutoscalingGroup)
-	for _, e := range srcTyped.Spec.ForProvider.Tags {
-		tp := v1beta2.TagParameters{
-			Key:   e["key"],
-			Value: e["value"],
-		}
-		if e["propagate_at_launch"] != nil {
-			propagateAtLaunchStr := e["propagate_at_launch"]
-			propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
-			cpPropagateAtLaunch := propagateAtLaunch
-			if err != nil {
-				return err
+
+	if srcTyped.Spec.ForProvider.Tags != nil {
+		var tl []v1beta2.TagParameters
+		for _, e := range srcTyped.Spec.ForProvider.Tags {
+			tp := v1beta2.TagParameters{
+				Key:   e["key"],
+				Value: e["value"],
 			}
-			tp.PropagateAtLaunch = &cpPropagateAtLaunch
-		}
-		targetTyped.Spec.ForProvider.Tag = append(targetTyped.Spec.ForProvider.Tag, tp)
-	}
-	for _, e := range srcTyped.Spec.InitProvider.Tags {
-		tp := v1beta2.TagInitParameters{
-			Key:   e["key"],
-			Value: e["value"],
-		}
-		if e["propagate_at_launch"] != nil {
-			propagateAtLaunchStr := e["propagate_at_launch"]
-			propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
-			cpPropagateAtLaunch := propagateAtLaunch
-			if err != nil {
-				return err
+			if e["propagate_at_launch"] != nil {
+				propagateAtLaunchStr := e["propagate_at_launch"]
+				propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+				cpPropagateAtLaunch := propagateAtLaunch
+				if err != nil {
+					return err
+				}
+				tp.PropagateAtLaunch = &cpPropagateAtLaunch
 			}
-			tp.PropagateAtLaunch = &cpPropagateAtLaunch
+			tl = append(tl, tp)
 		}
-		targetTyped.Spec.InitProvider.Tag = append(targetTyped.Spec.InitProvider.Tag, tp)
+		targetTyped.Spec.ForProvider.Tag = tl
 	}
-	for _, e := range srcTyped.Status.AtProvider.Tags {
-		tp := v1beta2.TagObservation{
-			Key:   e["key"],
-			Value: e["value"],
-		}
-		if e["propagate_at_launch"] != nil {
-			propagateAtLaunchStr := e["propagate_at_launch"]
-			propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
-			cpPropagateAtLaunch := propagateAtLaunch
-			if err != nil {
-				return err
+
+	if srcTyped.Spec.InitProvider.Tags != nil {
+		var tl []v1beta2.TagInitParameters
+		for _, e := range srcTyped.Spec.InitProvider.Tags {
+			tp := v1beta2.TagInitParameters{
+				Key:   e["key"],
+				Value: e["value"],
 			}
-			tp.PropagateAtLaunch = &cpPropagateAtLaunch
+			if e["propagate_at_launch"] != nil {
+				propagateAtLaunchStr := e["propagate_at_launch"]
+				propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+				cpPropagateAtLaunch := propagateAtLaunch
+				if err != nil {
+					return err
+				}
+				tp.PropagateAtLaunch = &cpPropagateAtLaunch
+			}
+			tl = append(tl, tp)
 		}
-		targetTyped.Status.AtProvider.Tag = append(targetTyped.Status.AtProvider.Tag, tp)
+		targetTyped.Spec.InitProvider.Tag = tl
 	}
+
+	if srcTyped.Status.AtProvider.Tags != nil {
+		var tl []v1beta2.TagObservation
+		for _, e := range srcTyped.Status.AtProvider.Tags {
+			tp := v1beta2.TagObservation{
+				Key:   e["key"],
+				Value: e["value"],
+			}
+			if e["propagate_at_launch"] != nil {
+				propagateAtLaunchStr := e["propagate_at_launch"]
+				propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+				cpPropagateAtLaunch := propagateAtLaunch
+				if err != nil {
+					return err
+				}
+				tp.PropagateAtLaunch = &cpPropagateAtLaunch
+			}
+			tl = append(tl, tp)
+		}
+		targetTyped.Status.AtProvider.Tag = tl
+	}
+
 	return nil
 }
 
 func autoScalingGroupConverterFromv1beta2Tov1beta1(src, target xpresource.Managed) error { //nolint:gocyclo
 	srcTyped := src.(*v1beta2.AutoscalingGroup)
 	targetTyped := target.(*v1beta1.AutoscalingGroup)
-	for _, e := range srcTyped.Spec.ForProvider.Tag {
-		m := map[string]*string{}
-		if e.Key != nil {
-			m["key"] = e.Key
+
+	if srcTyped.Spec.ForProvider.Tag != nil {
+		var tl []map[string]*string
+		for _, e := range srcTyped.Spec.ForProvider.Tag {
+			m := map[string]*string{}
+			if e.Key != nil {
+				m["key"] = e.Key
+			}
+			if e.Value != nil {
+				m["value"] = e.Value
+			}
+			if e.PropagateAtLaunch != nil {
+				propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+				cpPropagateAtLaunch := propagateAtLaunch
+				m["propagate_at_launch"] = &cpPropagateAtLaunch
+			}
+			tl = append(tl, m)
 		}
-		if e.Value != nil {
-			m["value"] = e.Value
-		}
-		if e.PropagateAtLaunch != nil {
-			propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
-			cpPropagateAtLaunch := propagateAtLaunch
-			m["propagate_at_launch"] = &cpPropagateAtLaunch
-		}
-		targetTyped.Spec.ForProvider.Tags = append(targetTyped.Spec.ForProvider.Tags, m)
+		targetTyped.Spec.ForProvider.Tags = tl
 	}
-	for _, e := range srcTyped.Spec.InitProvider.Tag {
-		m := map[string]*string{}
-		if e.Key != nil {
-			m["key"] = e.Key
+
+	if srcTyped.Spec.InitProvider.Tag != nil {
+		var tl []map[string]*string
+		for _, e := range srcTyped.Spec.InitProvider.Tag {
+			m := map[string]*string{}
+			if e.Key != nil {
+				m["key"] = e.Key
+			}
+			if e.Value != nil {
+				m["value"] = e.Value
+			}
+			if e.PropagateAtLaunch != nil {
+				propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+				cpPropagateAtLaunch := propagateAtLaunch
+				m["propagate_at_launch"] = &cpPropagateAtLaunch
+			}
+			tl = append(tl, m)
 		}
-		if e.Value != nil {
-			m["value"] = e.Value
-		}
-		if e.PropagateAtLaunch != nil {
-			propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
-			cpPropagateAtLaunch := propagateAtLaunch
-			m["propagate_at_launch"] = &cpPropagateAtLaunch
-		}
-		targetTyped.Spec.InitProvider.Tags = append(targetTyped.Spec.InitProvider.Tags, m)
+		targetTyped.Spec.InitProvider.Tags = tl
 	}
-	for _, e := range srcTyped.Status.AtProvider.Tag {
-		m := map[string]*string{}
-		if e.Key != nil {
-			m["key"] = e.Key
+
+	if srcTyped.Status.AtProvider.Tag != nil {
+		var tl []map[string]*string
+		for _, e := range srcTyped.Status.AtProvider.Tag {
+			m := map[string]*string{}
+			if e.Key != nil {
+				m["key"] = e.Key
+			}
+			if e.Value != nil {
+				m["value"] = e.Value
+			}
+			if e.PropagateAtLaunch != nil {
+				propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+				cpPropagateAtLaunch := propagateAtLaunch
+				m["propagate_at_launch"] = &cpPropagateAtLaunch
+			}
+			tl = append(tl, m)
 		}
-		if e.Value != nil {
-			m["value"] = e.Value
-		}
-		if e.PropagateAtLaunch != nil {
-			propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
-			cpPropagateAtLaunch := propagateAtLaunch
-			m["propagate_at_launch"] = &cpPropagateAtLaunch
-		}
-		targetTyped.Status.AtProvider.Tags = append(targetTyped.Status.AtProvider.Tags, m)
+		targetTyped.Status.AtProvider.Tags = tl
 	}
+
 	return nil
 }

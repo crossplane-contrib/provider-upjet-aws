@@ -28,7 +28,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	p.AddResourceConfigurator("aws_elasticache_replication_group", func(r *config.Resource) {
 		r.References["subnet_group_name"] = config.Reference{
-			Type: "SubnetGroup",
+			Type: "github.com/upbound/provider-aws/apis/elasticache/v1beta1.SubnetGroup",
 		}
 		r.References["kms_key_id"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",

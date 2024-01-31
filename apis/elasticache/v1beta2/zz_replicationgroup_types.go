@@ -195,14 +195,14 @@ type ReplicationGroupInitParameters struct {
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// Name of the cache subnet group to be used for the replication group.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.SubnetGroup
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate subnetGroupName.
+	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameRef *v1.Reference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate subnetGroupName.
+	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameSelector *v1.Selector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -539,15 +539,15 @@ type ReplicationGroupParameters struct {
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
 	// Name of the cache subnet group to be used for the replication group.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate subnetGroupName.
+	// Reference to a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameRef *v1.Reference `json:"subnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate subnetGroupName.
+	// Selector for a SubnetGroup in elasticache to populate subnetGroupName.
 	// +kubebuilder:validation:Optional
 	SubnetGroupNameSelector *v1.Selector `json:"subnetGroupNameSelector,omitempty" tf:"-"`
 

@@ -143,59 +143,6 @@ func TestAutoScalingGroupConverterFromv1beta1Tov1beta2(t *testing.T) {
 				target: &v1beta2.AutoscalingGroup{},
 			},
 		},
-		"Addition": {
-			args: args{
-				src: &v1beta1.AutoscalingGroup{
-					Spec: v1beta1.AutoscalingGroupSpec{
-						ForProvider: v1beta1.AutoscalingGroupParameters{
-							Tags: []map[string]*string{
-								{
-									key:                   &key,
-									value:                 &value,
-									"propagate_at_launch": &propagateAtLaunch,
-								},
-							},
-						},
-					},
-				},
-				target: &v1beta2.AutoscalingGroup{
-					Spec: v1beta2.AutoscalingGroupSpec{
-						ForProvider: v1beta2.AutoscalingGroupParameters{
-							Region: &region,
-							Tag: []v1beta2.TagParameters{
-								{
-									Key:               &key,
-									Value:             &value,
-									PropagateAtLaunch: &propagateAtLaunchBool,
-								},
-							},
-						},
-					},
-				},
-			},
-			want: want{
-				target: &v1beta2.AutoscalingGroup{
-					Spec: v1beta2.AutoscalingGroupSpec{
-						ForProvider: v1beta2.AutoscalingGroupParameters{
-							Region: &region,
-							Tag: []v1beta2.TagParameters{
-								{
-									Key:               &key,
-									Value:             &value,
-									PropagateAtLaunch: &propagateAtLaunchBool,
-								},
-								{
-									Key:               &key,
-									Value:             &value,
-									PropagateAtLaunch: &propagateAtLaunchBool,
-								},
-							},
-						},
-					},
-				},
-				err: nil,
-			},
-		},
 		"MissingKey": {
 			args: args{
 				src: &v1beta1.AutoscalingGroup{
@@ -335,57 +282,6 @@ func TestAutoScalingGroupConverterFromv1beta2Tov1beta1(t *testing.T) {
 						},
 					},
 				},
-			},
-		},
-		"Addition": {
-			args: args{
-				src: &v1beta2.AutoscalingGroup{
-					Spec: v1beta2.AutoscalingGroupSpec{
-						ForProvider: v1beta2.AutoscalingGroupParameters{
-							Tag: []v1beta2.TagParameters{
-								{
-									Key:               &key,
-									Value:             &value,
-									PropagateAtLaunch: &propagateAtLaunchBool,
-								},
-							},
-						},
-					},
-				},
-				target: &v1beta1.AutoscalingGroup{
-					Spec: v1beta1.AutoscalingGroupSpec{
-						ForProvider: v1beta1.AutoscalingGroupParameters{
-							Tags: []map[string]*string{
-								{
-									key:                   &key,
-									value:                 &value,
-									"propagate_at_launch": &propagateAtLaunch,
-								},
-							},
-						},
-					},
-				},
-			},
-			want: want{
-				target: &v1beta1.AutoscalingGroup{
-					Spec: v1beta1.AutoscalingGroupSpec{
-						ForProvider: v1beta1.AutoscalingGroupParameters{
-							Tags: []map[string]*string{
-								{
-									key:                   &key,
-									value:                 &value,
-									"propagate_at_launch": &propagateAtLaunch,
-								},
-								{
-									key:                   &key,
-									value:                 &value,
-									"propagate_at_launch": &propagateAtLaunch,
-								},
-							},
-						},
-					},
-				},
-				err: nil,
 			},
 		},
 		"MissingKey": {

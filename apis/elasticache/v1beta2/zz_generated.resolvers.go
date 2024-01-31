@@ -64,7 +64,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "SubnetGroup", "SubnetGroupList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -121,7 +121,7 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SecurityGroupIDRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "SubnetGroup", "SubnetGroupList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -11,4 +11,7 @@ Copyright 2022 Upbound Inc.
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *Budget) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *BudgetAction) Hub() {}

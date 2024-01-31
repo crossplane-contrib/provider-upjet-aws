@@ -1957,7 +1957,8 @@ spec:
                       replication group.
                     type: string
                   subnetGroupNameRef:
-                    description: Reference to a SubnetGroup to populate subnetGroupName.
+                    description: Reference to a SubnetGroup in elasticache to populate
+                      subnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1991,7 +1992,8 @@ spec:
                     - name
                     type: object
                   subnetGroupNameSelector:
-                    description: Selector for a SubnetGroup to populate subnetGroupName.
+                    description: Selector for a SubnetGroup in elasticache to populate
+                      subnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2413,7 +2415,8 @@ spec:
                       replication group.
                     type: string
                   subnetGroupNameRef:
-                    description: Reference to a SubnetGroup to populate subnetGroupName.
+                    description: Reference to a SubnetGroup in elasticache to populate
+                      subnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2447,7 +2450,8 @@ spec:
                     - name
                     type: object
                   subnetGroupNameSelector:
-                    description: Selector for a SubnetGroup to populate subnetGroupName.
+                    description: Selector for a SubnetGroup in elasticache to populate
+                      subnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

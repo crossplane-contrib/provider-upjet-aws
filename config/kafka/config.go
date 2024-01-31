@@ -46,6 +46,22 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 							if targetTyped.Spec.ForProvider.BrokerNodeGroupInfo[0].StorageInfo != nil {
 								if targetTyped.Spec.ForProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo != nil {
 									targetTyped.Spec.ForProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo[0].VolumeSize = srcTyped.Spec.ForProvider.BrokerNodeGroupInfo[0].EBSVolumeSize
+								} else {
+									targetTyped.Spec.ForProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo = []v1beta2.EBSStorageInfoParameters{
+										{
+											VolumeSize: srcTyped.Spec.ForProvider.BrokerNodeGroupInfo[0].EBSVolumeSize,
+										},
+									}
+								}
+							} else {
+								targetTyped.Spec.ForProvider.BrokerNodeGroupInfo[0].StorageInfo = []v1beta2.StorageInfoParameters{
+									{
+										EBSStorageInfo: []v1beta2.EBSStorageInfoParameters{
+											{
+												VolumeSize: srcTyped.Spec.ForProvider.BrokerNodeGroupInfo[0].EBSVolumeSize,
+											},
+										},
+									},
 								}
 							}
 						} else {
@@ -72,6 +88,22 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 							if targetTyped.Spec.InitProvider.BrokerNodeGroupInfo[0].StorageInfo != nil {
 								if targetTyped.Spec.InitProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo != nil {
 									targetTyped.Spec.InitProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo[0].VolumeSize = srcTyped.Spec.InitProvider.BrokerNodeGroupInfo[0].EBSVolumeSize
+								} else {
+									targetTyped.Spec.InitProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo = []v1beta2.EBSStorageInfoInitParameters{
+										{
+											VolumeSize: srcTyped.Spec.InitProvider.BrokerNodeGroupInfo[0].EBSVolumeSize,
+										},
+									}
+								}
+							} else {
+								targetTyped.Spec.InitProvider.BrokerNodeGroupInfo[0].StorageInfo = []v1beta2.StorageInfoInitParameters{
+									{
+										EBSStorageInfo: []v1beta2.EBSStorageInfoInitParameters{
+											{
+												VolumeSize: srcTyped.Spec.InitProvider.BrokerNodeGroupInfo[0].EBSVolumeSize,
+											},
+										},
+									},
 								}
 							}
 						} else {
@@ -98,6 +130,22 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 							if targetTyped.Status.AtProvider.BrokerNodeGroupInfo[0].StorageInfo != nil {
 								if targetTyped.Status.AtProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo != nil {
 									targetTyped.Status.AtProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo[0].VolumeSize = srcTyped.Status.AtProvider.BrokerNodeGroupInfo[0].EBSVolumeSize
+								} else {
+									targetTyped.Status.AtProvider.BrokerNodeGroupInfo[0].StorageInfo[0].EBSStorageInfo = []v1beta2.EBSStorageInfoObservation{
+										{
+											VolumeSize: srcTyped.Status.AtProvider.BrokerNodeGroupInfo[0].EBSVolumeSize,
+										},
+									}
+								}
+							} else {
+								targetTyped.Status.AtProvider.BrokerNodeGroupInfo[0].StorageInfo = []v1beta2.StorageInfoObservation{
+									{
+										EBSStorageInfo: []v1beta2.EBSStorageInfoObservation{
+											{
+												VolumeSize: srcTyped.Status.AtProvider.BrokerNodeGroupInfo[0].EBSVolumeSize,
+											},
+										},
+									},
 								}
 							}
 						} else {

@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: budgets.aws.upbound.io/v1beta2
+apiVersion: budgets.aws.upbound.io/v1beta1
 kind: Budget
 metadata:
   annotations:
