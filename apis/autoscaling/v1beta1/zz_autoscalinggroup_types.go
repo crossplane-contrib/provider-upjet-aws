@@ -206,7 +206,7 @@ type AutoscalingGroupInitParameters struct {
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
 	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
-	Tag []AutoscalingGroupTagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags []map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -357,7 +357,7 @@ type AutoscalingGroupObservation struct {
 	SuspendedProcesses []*string `json:"suspendedProcesses,omitempty" tf:"suspended_processes,omitempty"`
 
 	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
-	Tag []AutoscalingGroupTagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// Key-value map of resource tags.
 	Tags []map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -553,7 +553,7 @@ type AutoscalingGroupParameters struct {
 
 	// Configuration block(s) containing resource tags. Conflicts with tags. See Tag below for more details.
 	// +kubebuilder:validation:Optional
-	Tag []AutoscalingGroupTagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -1550,7 +1550,7 @@ type PreferencesParameters struct {
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
 }
 
-type AutoscalingGroupTagInitParameters struct {
+type TagInitParameters struct {
 
 	// Key
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -1563,7 +1563,7 @@ type AutoscalingGroupTagInitParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type AutoscalingGroupTagObservation struct {
+type TagObservation struct {
 
 	// Key
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -1576,7 +1576,7 @@ type AutoscalingGroupTagObservation struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type AutoscalingGroupTagParameters struct {
+type TagParameters struct {
 
 	// Key
 	// +kubebuilder:validation:Optional

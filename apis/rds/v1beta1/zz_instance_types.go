@@ -285,10 +285,10 @@ type InstanceInitParameters struct {
 	ReplicateSourceDBSelector *v1.Selector `json:"replicateSourceDbSelector,omitempty" tf:"-"`
 
 	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
-	RestoreToPointInTime []InstanceRestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+	RestoreToPointInTime []RestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
-	S3Import []InstanceS3ImportInitParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+	S3Import []S3ImportInitParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// List of DB Security Groups to
 	// associate. Only used for DB Instances on the .
@@ -506,7 +506,7 @@ type InstanceObservation struct {
 	ManageMasterUserPassword *bool `json:"manageMasterUserPassword,omitempty" tf:"manage_master_user_password,omitempty"`
 
 	// A block that specifies the master user secret. Only available when manage_master_user_password is set to true. Documented below.
-	MasterUserSecret []InstanceMasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
+	MasterUserSecret []MasterUserSecretObservation `json:"masterUserSecret,omitempty" tf:"master_user_secret,omitempty"`
 
 	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN. If not specified, the default KMS key for your Amazon Web Services account is used.
 	MasterUserSecretKMSKeyID *string `json:"masterUserSecretKmsKeyId,omitempty" tf:"master_user_secret_kms_key_id,omitempty"`
@@ -584,10 +584,10 @@ type InstanceObservation struct {
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
-	RestoreToPointInTime []InstanceRestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+	RestoreToPointInTime []RestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
-	S3Import []InstanceS3ImportObservation `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+	S3Import []S3ImportObservation `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// List of DB Security Groups to
 	// associate. Only used for DB Instances on the .
@@ -960,11 +960,11 @@ type InstanceParameters struct {
 
 	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
 	// +kubebuilder:validation:Optional
-	RestoreToPointInTime []InstanceRestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+	RestoreToPointInTime []RestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
 	// +kubebuilder:validation:Optional
-	S3Import []InstanceS3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+	S3Import []S3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
 
 	// List of DB Security Groups to
 	// associate. Only used for DB Instances on the .
@@ -1058,10 +1058,10 @@ type ListenerEndpointObservation struct {
 type ListenerEndpointParameters struct {
 }
 
-type InstanceMasterUserSecretInitParameters struct {
+type MasterUserSecretInitParameters struct {
 }
 
-type InstanceMasterUserSecretObservation struct {
+type MasterUserSecretObservation struct {
 
 	// The Amazon Web Services KMS key identifier that is used to encrypt the secret.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -1073,10 +1073,10 @@ type InstanceMasterUserSecretObservation struct {
 	SecretStatus *string `json:"secretStatus,omitempty" tf:"secret_status,omitempty"`
 }
 
-type InstanceMasterUserSecretParameters struct {
+type MasterUserSecretParameters struct {
 }
 
-type InstanceRestoreToPointInTimeInitParameters struct {
+type RestoreToPointInTimeInitParameters struct {
 
 	// The date and time to restore from. Value must be a time in Universal Coordinated Time (UTC) format and must be before the latest restorable time for the DB instance. Cannot be specified with use_latest_restorable_time.
 	RestoreTime *string `json:"restoreTime,omitempty" tf:"restore_time,omitempty"`
@@ -1094,7 +1094,7 @@ type InstanceRestoreToPointInTimeInitParameters struct {
 	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
 }
 
-type InstanceRestoreToPointInTimeObservation struct {
+type RestoreToPointInTimeObservation struct {
 
 	// The date and time to restore from. Value must be a time in Universal Coordinated Time (UTC) format and must be before the latest restorable time for the DB instance. Cannot be specified with use_latest_restorable_time.
 	RestoreTime *string `json:"restoreTime,omitempty" tf:"restore_time,omitempty"`
@@ -1112,7 +1112,7 @@ type InstanceRestoreToPointInTimeObservation struct {
 	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
 }
 
-type InstanceRestoreToPointInTimeParameters struct {
+type RestoreToPointInTimeParameters struct {
 
 	// The date and time to restore from. Value must be a time in Universal Coordinated Time (UTC) format and must be before the latest restorable time for the DB instance. Cannot be specified with use_latest_restorable_time.
 	// +kubebuilder:validation:Optional
@@ -1135,7 +1135,7 @@ type InstanceRestoreToPointInTimeParameters struct {
 	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
 }
 
-type InstanceS3ImportInitParameters struct {
+type S3ImportInitParameters struct {
 
 	// The bucket name where your backup is stored
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
@@ -1153,7 +1153,7 @@ type InstanceS3ImportInitParameters struct {
 	SourceEngineVersion *string `json:"sourceEngineVersion,omitempty" tf:"source_engine_version,omitempty"`
 }
 
-type InstanceS3ImportObservation struct {
+type S3ImportObservation struct {
 
 	// The bucket name where your backup is stored
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
@@ -1171,7 +1171,7 @@ type InstanceS3ImportObservation struct {
 	SourceEngineVersion *string `json:"sourceEngineVersion,omitempty" tf:"source_engine_version,omitempty"`
 }
 
-type InstanceS3ImportParameters struct {
+type S3ImportParameters struct {
 
 	// The bucket name where your backup is stored
 	// +kubebuilder:validation:Optional

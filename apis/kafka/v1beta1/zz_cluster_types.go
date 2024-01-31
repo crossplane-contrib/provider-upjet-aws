@@ -166,10 +166,10 @@ type BrokerNodeGroupInfoParameters struct {
 	StorageInfo []StorageInfoParameters `json:"storageInfo,omitempty" tf:"storage_info,omitempty"`
 }
 
-type ClusterClientAuthenticationInitParameters struct {
+type ClientAuthenticationInitParameters struct {
 
 	// Configuration block for specifying SASL client authentication. See below.
-	Sasl []ClusterSaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	Sasl []SaslInitParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
 	// Configuration block for specifying TLS client authentication. See below.
 	TLS []TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
@@ -178,10 +178,10 @@ type ClusterClientAuthenticationInitParameters struct {
 	Unauthenticated *bool `json:"unauthenticated,omitempty" tf:"unauthenticated,omitempty"`
 }
 
-type ClusterClientAuthenticationObservation struct {
+type ClientAuthenticationObservation struct {
 
 	// Configuration block for specifying SASL client authentication. See below.
-	Sasl []ClusterSaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	Sasl []SaslObservation `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
 	// Configuration block for specifying TLS client authentication. See below.
 	TLS []TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
@@ -190,11 +190,11 @@ type ClusterClientAuthenticationObservation struct {
 	Unauthenticated *bool `json:"unauthenticated,omitempty" tf:"unauthenticated,omitempty"`
 }
 
-type ClusterClientAuthenticationParameters struct {
+type ClientAuthenticationParameters struct {
 
 	// Configuration block for specifying SASL client authentication. See below.
 	// +kubebuilder:validation:Optional
-	Sasl []ClusterSaslParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
+	Sasl []SaslParameters `json:"sasl,omitempty" tf:"sasl,omitempty"`
 
 	// Configuration block for specifying TLS client authentication. See below.
 	// +kubebuilder:validation:Optional
@@ -258,7 +258,7 @@ type ClusterInitParameters struct {
 	BrokerNodeGroupInfo []BrokerNodeGroupInfoInitParameters `json:"brokerNodeGroupInfo,omitempty" tf:"broker_node_group_info,omitempty"`
 
 	// Configuration block for specifying a client authentication. See below.
-	ClientAuthentication []ClusterClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClientAuthenticationInitParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -322,7 +322,7 @@ type ClusterObservation struct {
 	BrokerNodeGroupInfo []BrokerNodeGroupInfoObservation `json:"brokerNodeGroupInfo,omitempty" tf:"broker_node_group_info,omitempty"`
 
 	// Configuration block for specifying a client authentication. See below.
-	ClientAuthentication []ClusterClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClientAuthenticationObservation `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
@@ -379,7 +379,7 @@ type ClusterParameters struct {
 
 	// Configuration block for specifying a client authentication. See below.
 	// +kubebuilder:validation:Optional
-	ClientAuthentication []ClusterClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
+	ClientAuthentication []ClientAuthenticationParameters `json:"clientAuthentication,omitempty" tf:"client_authentication,omitempty"`
 
 	// Name of the MSK cluster.
 	// +kubebuilder:validation:Optional
@@ -862,7 +862,7 @@ type S3Parameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
-type ClusterSaslInitParameters struct {
+type SaslInitParameters struct {
 
 	// Enables IAM client authentication. Defaults to false.
 	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
@@ -871,7 +871,7 @@ type ClusterSaslInitParameters struct {
 	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
 }
 
-type ClusterSaslObservation struct {
+type SaslObservation struct {
 
 	// Enables IAM client authentication. Defaults to false.
 	IAM *bool `json:"iam,omitempty" tf:"iam,omitempty"`
@@ -880,7 +880,7 @@ type ClusterSaslObservation struct {
 	Scram *bool `json:"scram,omitempty" tf:"scram,omitempty"`
 }
 
-type ClusterSaslParameters struct {
+type SaslParameters struct {
 
 	// Enables IAM client authentication. Defaults to false.
 	// +kubebuilder:validation:Optional
