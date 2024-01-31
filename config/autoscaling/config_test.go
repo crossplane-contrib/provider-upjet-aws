@@ -5,14 +5,17 @@ Copyright 2021 Upbound Inc.
 package autoscaling
 
 import (
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	"github.com/crossplane/crossplane-runtime/pkg/test"
-	"github.com/google/go-cmp/cmp"
-	"github.com/pkg/errors"
-	"github.com/upbound/provider-aws/apis/autoscaling/v1beta1"
-	"github.com/upbound/provider-aws/apis/autoscaling/v1beta2"
 	"strconv"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
+	"github.com/pkg/errors"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/crossplane-runtime/pkg/test"
+
+	"github.com/upbound/provider-aws/apis/autoscaling/v1beta1"
+	"github.com/upbound/provider-aws/apis/autoscaling/v1beta2"
 )
 
 var (

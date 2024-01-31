@@ -4,14 +4,14 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
+
 	"github.com/upbound/provider-aws/apis/kafka/v1beta1"
 	"github.com/upbound/provider-aws/apis/kafka/v1beta2"
-
 	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for the kafka group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_msk_cluster", func(r *config.Resource) {
 		r.References["encryption_info.encryption_at_rest_kms_key_arn"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",

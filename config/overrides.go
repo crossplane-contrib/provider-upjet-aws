@@ -5,14 +5,14 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
-	"github.com/crossplane/upjet/pkg/config/conversion"
-	"gopkg.in/yaml.v3"
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
+	"gopkg.in/yaml.v3"
 
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/types"
 	"github.com/crossplane/upjet/pkg/types/comments"
 	"github.com/crossplane/upjet/pkg/types/name"
@@ -204,11 +204,9 @@ func injectFieldRenamingConversionFunctions() config.ResourceOption {
 			if d, ok := cd.Data[r.Name]; ok {
 				for s, t := range d {
 					r.Version = cd.TargetVersion
-					r.Conversions = append(r.Conversions, conversion.NewFieldRenameConversion(
-						cd.SourceVersion, s, cd.TargetVersion, t),
-					)
-					r.Conversions = append(r.Conversions, conversion.NewFieldRenameConversion(
-						cd.TargetVersion, t, cd.SourceVersion, s),
+					r.Conversions = append(r.Conversions,
+						conversion.NewFieldRenameConversion(cd.SourceVersion, s, cd.TargetVersion, t),
+						conversion.NewFieldRenameConversion(cd.TargetVersion, t, cd.SourceVersion, s),
 					)
 				}
 			}

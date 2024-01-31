@@ -5,16 +5,18 @@ Copyright 2021 Upbound Inc.
 package elasticache
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
 	"github.com/upbound/provider-aws/apis/elasticache/v1beta1"
 	"github.com/upbound/provider-aws/apis/elasticache/v1beta2"
 )
 
 // Configure adds configurations for the elasticache group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_elasticache_cluster", func(r *config.Resource) {
 		r.References["parameter_group_name"] = config.Reference{
 			TerraformName: "aws_elasticache_parameter_group",

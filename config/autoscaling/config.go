@@ -5,13 +5,15 @@ Copyright 2021 Upbound Inc.
 package autoscaling
 
 import (
+	"strconv"
+
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
+
 	"github.com/upbound/provider-aws/apis/autoscaling/v1beta1"
 	"github.com/upbound/provider-aws/apis/autoscaling/v1beta2"
 	"github.com/upbound/provider-aws/config/common"
-	"strconv"
 )
 
 // Configure adds configurations for the autoscaling group.
@@ -59,7 +61,7 @@ func Configure(p *config.Provider) {
 	})
 }
 
-func autoScalingGroupConverterFromv1beta1Tov1beta2(src, target xpresource.Managed) error {
+func autoScalingGroupConverterFromv1beta1Tov1beta2(src, target xpresource.Managed) error { //nolint:gocyclo
 	srcTyped := src.(*v1beta1.AutoscalingGroup)
 	targetTyped := target.(*v1beta2.AutoscalingGroup)
 	for _, e := range srcTyped.Spec.ForProvider.Tags {
@@ -113,7 +115,7 @@ func autoScalingGroupConverterFromv1beta1Tov1beta2(src, target xpresource.Manage
 	return nil
 }
 
-func autoScalingGroupConverterFromv1beta2Tov1beta1(src, target xpresource.Managed) error {
+func autoScalingGroupConverterFromv1beta2Tov1beta1(src, target xpresource.Managed) error { //nolint:gocyclo
 	srcTyped := src.(*v1beta2.AutoscalingGroup)
 	targetTyped := target.(*v1beta1.AutoscalingGroup)
 	for _, e := range srcTyped.Spec.ForProvider.Tag {

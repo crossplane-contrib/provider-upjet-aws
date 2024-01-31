@@ -5,12 +5,15 @@ Copyright 2021 Upbound Inc.
 package budgets
 
 import (
+	"testing"
+
+	"github.com/google/go-cmp/cmp"
+
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/crossplane-runtime/pkg/test"
-	"github.com/google/go-cmp/cmp"
+
 	"github.com/upbound/provider-aws/apis/budgets/v1beta1"
 	"github.com/upbound/provider-aws/apis/budgets/v1beta2"
-	"testing"
 )
 
 var (

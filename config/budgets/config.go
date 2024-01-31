@@ -29,7 +29,7 @@ func Configure(p *config.Provider) {
 	})
 }
 
-func budgetConverterFromv1beta1Tov1beta2(src, target resource.Managed) error {
+func budgetConverterFromv1beta1Tov1beta2(src, target resource.Managed) error { //nolint:gocyclo
 	srcTyped := src.(*v1beta1.Budget)
 	targetTyped := target.(*v1beta2.Budget)
 	for k, v := range srcTyped.Spec.ForProvider.CostFilters {
@@ -59,7 +59,7 @@ func budgetConverterFromv1beta1Tov1beta2(src, target resource.Managed) error {
 	return nil
 }
 
-func budgetConverterFromv1beta2Tov1beta1(src, target resource.Managed) error {
+func budgetConverterFromv1beta2Tov1beta1(src, target resource.Managed) error { //nolint:gocyclo
 	srcTyped := src.(*v1beta2.Budget)
 	targetTyped := target.(*v1beta1.Budget)
 	for _, e := range srcTyped.Spec.ForProvider.CostFilter {
