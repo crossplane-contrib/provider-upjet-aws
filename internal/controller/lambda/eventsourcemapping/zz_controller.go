@@ -40,15 +40,15 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.EventSourceMapping_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
-			tjcontroller.NewNoForkAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_lambda_event_source_mapping"],
-				tjcontroller.WithNoForkAsyncLogger(o.Logger),
-				tjcontroller.WithNoForkAsyncConnectorEventHandler(eventHandler),
-				tjcontroller.WithNoForkAsyncCallbackProvider(ac),
-				tjcontroller.WithNoForkAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta1.EventSourceMapping_GroupVersionKind, mgr, o.PollInterval)),
-				tjcontroller.WithNoForkAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
+			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_lambda_event_source_mapping"],
+				tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
+				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
+				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
+				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta1.EventSourceMapping_GroupVersionKind, mgr, o.PollInterval)),
+				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
-		managed.WithFinalizer(tjcontroller.NewNoForkFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
+		managed.WithFinalizer(tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
 		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
 		managed.WithConnectionPublishers(cps...),

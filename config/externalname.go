@@ -49,10 +49,10 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
 }
 
-// NoForkExternalNameConfigs contains all external name configurations
+// TerraformPluginSDKExternalNameConfigs contains all external name configurations
 // belonging to Terraform Plugin SDKv2 resources to be reconciled
 // under the no-fork architecture for this provider.
-var NoForkExternalNameConfigs = map[string]config.ExternalName{
+var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// ACM
 	// Imported using ARN that has a random substring:
 	// arn:aws:acm:eu-central-1:123456789012:certificate/7e7a28d2-163f-4b8f-b9cd-822f96c08d6a
@@ -3049,7 +3049,7 @@ func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 }
 
 // ResourceConfigurator applies all external name configs listed in
-// the table NoForkExternalNameConfigs,
+// the table TerraformPluginSDKExternalNameConfigs,
 // CLIReconciledExternalNameConfigs, and
 // TerraformPluginFrameworkExternalNameConfigs and sets the version of
 // those resources to v1beta1.
@@ -3060,7 +3060,7 @@ func ResourceConfigurator() config.ResourceOption {
 		// Plugin SDKv2, which takes precedence over CLI architecture.
 		e, configured := TerraformPluginFrameworkExternalNameConfigs[r.Name]
 		if !configured {
-			e, configured = NoForkExternalNameConfigs[r.Name]
+			e, configured = TerraformPluginSDKExternalNameConfigs[r.Name]
 			if !configured {
 				e, configured = CLIReconciledExternalNameConfigs[r.Name]
 			}
