@@ -225,10 +225,17 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 	return cfg, nil
 }
 
-func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
+type metaOnlyPrimary struct {
+	meta any
+}
+
+func (m *metaOnlyPrimary) Meta() any {
+	return m.meta
+}
+
+func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
 	p := *config.TerraformProvider
-	// TODO: use context.WithoutCancel(ctx) after switching to Go >=1.21
-	diag := p.Configure(context.TODO(), &tfsdk.ResourceConfig{ //nolint:contextcheck
+	diag := p.Configure(context.WithoutCancel(ctx), &tfsdk.ResourceConfig{
 		Config: ps.Configuration,
 	})
 	if diag != nil && diag.HasError() {
@@ -237,5 +244,7 @@ func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *Se
 	ps.Meta = p.Meta()
 	// #nosec G103
 	(*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(ps.Meta).Pointer())).ServicePackages = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(config.AWSClient).Pointer())).ServicePackages
+	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: p.Meta()})
+	ps.FrameworkProvider = fwProvider
 	return nil
 }

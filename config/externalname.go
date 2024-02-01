@@ -15,9 +15,38 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
+// TerraformPluginFrameworkExternalNameConfigs contains all external
+// name configurations belonging to Terraform Plugin Framework
+// resources to be reconciled under the no-fork architecture for this
+// provider.
+var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
+	// ec2
+	//
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+
+	// cognito
+	//
+	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
+	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
+
+	// simpledb
+	//
+	// SimpleDB Domains can be imported using the name
+	"aws_simpledb_domain": config.NameAsIdentifier,
+
+	// appconfig
+	//
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	// terraform-plugin-framework
+	"aws_appconfig_environment": appConfigEnvironment(),
+}
+
 // NoForkExternalNameConfigs contains all external name configurations
-// belonging to Terraform resources to be reconciled under the no-fork
-// architecture for this provider.
+// belonging to Terraform Plugin SDKv2 resources to be reconciled
+// under the no-fork architecture for this provider.
 var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// ACM
 	// Imported using ARN that has a random substring:
@@ -2651,22 +2680,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	"aws_fis_experiment_template": config.IdentifierFromProvider,
 }
 
-var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
-	// Cognito User Pool clients can be imported using the user pool id and client id separated by a slash (/)
-	// However, the terraform id is just the client id.
-	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
-	// simpledb
-	//
-	// SimpleDB Domains can be imported using the name
-	"aws_simpledb_domain": config.NameAsIdentifier,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	// terraform-plugin-framework
-	"aws_appconfig_environment": config.IdentifierFromProvider,
-}
+var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{}
 
 // cognitoUserPoolClient
 // Note(mbbush) This resource has some unexpected behaviors that make it impossible to write a completely correct
@@ -2801,6 +2815,24 @@ func vpcSecurityGroupRule() config.ExternalName {
 			return "sgr-stub", nil
 		}
 		return externalName, nil
+	}
+	return e
+}
+
+func appConfigEnvironment() config.ExternalName {
+	// Terraform does not allow Environment ID to be empty.
+	// Using a stub value to pass validation.
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if _, ok := base["environment_id"]; !ok {
+			if externalName == "" {
+				// must satisfy regular expression pattern: [a-z0-9]{4,7}
+				base["environment_id"] = "tbdeid0"
+			}
+			if identifiers := strings.Split(externalName, ":"); len(identifiers) == 2 {
+				base["environment_id"] = identifiers[0]
+			}
+		}
 	}
 	return e
 }
@@ -3011,19 +3043,22 @@ func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 	return e
 }
 
-// ResourceConfigurator applies all external name configs
-// listed in the table NoForkExternalNameConfigs and
-// CLIReconciledExternalNameConfigs and sets the version
-// of those resources to v1beta1. For those resource in
-// NoForkExternalNameConfigs, it also sets
-// config.Resource.UseNoForkClient to `true`.
+// ResourceConfigurator applies all external name configs listed in
+// the table NoForkExternalNameConfigs,
+// CLIReconciledExternalNameConfigs, and
+// TerraformPluginFrameworkExternalNameConfigs and sets the version of
+// those resources to v1beta1.
 func ResourceConfigurator() config.ResourceOption {
 	return func(r *config.Resource) {
-		// if configured both for the no-fork and CLI based architectures,
-		// no-fork configuration prevails
-		e, configured := NoForkExternalNameConfigs[r.Name]
+		// If an external name is configured for multiple architectures,
+		// Terraform Plugin Framework takes precedence over Terraform
+		// Plugin SDKv2, which takes precedence over CLI architecture.
+		e, configured := TerraformPluginFrameworkExternalNameConfigs[r.Name]
 		if !configured {
-			e, configured = CLIReconciledExternalNameConfigs[r.Name]
+			e, configured = NoForkExternalNameConfigs[r.Name]
+			if !configured {
+				e, configured = CLIReconciledExternalNameConfigs[r.Name]
+			}
 		}
 		if !configured {
 			return

@@ -16,6 +16,7 @@ import (
 	"github.com/crossplane/upjet/pkg/registry/reference"
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
 	tfjson "github.com/hashicorp/terraform-json"
+	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
@@ -162,11 +163,13 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 // the CRDs.
 func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, *xpprovider.AWSClient, error) {
 	var p *schema.Provider
+	var fwProvider fwprovider.Provider
 	var err error
 	if generationProvider {
 		p, err = getProviderSchema(providerSchema)
+		fwProvider, _, _ = xpprovider.GetProvider(ctx)
 	} else {
-		p, err = xpprovider.GetProviderSchema(ctx)
+		fwProvider, p, err = xpprovider.GetProvider(ctx)
 	}
 	if err != nil {
 		return nil, nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
@@ -180,7 +183,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		// #nosec G103
 		awsClient = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p.Meta()).Pointer()))
 	}
-	p.SetMeta(nil)
+
 	modulePath := "github.com/upbound/provider-aws"
 	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
@@ -188,11 +191,13 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		config.WithRootGroup("aws.upbound.io"),
 		config.WithIncludeList(CLIReconciledResourceList()),
 		config.WithNoForkIncludeList(NoForkResourceList()),
+		config.WithTerraformPluginFrameworkIncludeList(TerraformPluginFrameworkResourceList()),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
 		config.WithFeaturesPackage("internal/features"),
 		config.WithMainTemplate(hack.MainTemplate),
 		config.WithTerraformProvider(p),
+		config.WithTerraformPluginFrameworkProvider(fwProvider),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
 			KindOverrides(),
@@ -206,6 +211,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 			DocumentationForTags(),
 		),
 	)
+	p.SetMeta(nil)
 	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
 
 	for _, configure := range []func(provider *config.Provider){
@@ -321,6 +327,17 @@ func NoForkResourceList() []string {
 	l := make([]string, len(NoForkExternalNameConfigs))
 	i := 0
 	for name := range NoForkExternalNameConfigs {
+		// Expected format is regex, and we'd like to have exact matches.
+		l[i] = name + "$"
+		i++
+	}
+	return l
+}
+
+func TerraformPluginFrameworkResourceList() []string {
+	l := make([]string, len(TerraformPluginFrameworkExternalNameConfigs))
+	i := 0
+	for name := range TerraformPluginFrameworkExternalNameConfigs {
 		// Expected format is regex, and we'd like to have exact matches.
 		l[i] = name + "$"
 		i++
