@@ -42,6 +42,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
 	// terraform-plugin-framework
 	"aws_appconfig_environment": appConfigEnvironment(),
+
+	// eks
+	//
+	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
+	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
 }
 
 // NoForkExternalNameConfigs contains all external name configurations
@@ -3102,4 +3107,22 @@ func eksOIDCIdentityProvider() config.ExternalName {
 			"oidc.identity_provider_config_name_prefix",
 		},
 	}
+}
+
+func eksPodIdentityAssociation() config.ExternalName {
+	// Terraform does not allow Association ID to be empty.
+	// Using a stub value to pass validation.
+	// Terraform does not use "id" attribute anymore, instead a combination of association_id and cluster_name is used
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if _, ok := base["association_id"]; !ok {
+			if externalName == "" {
+				// must be 19 chars long and match regex ^a-[0-9a-z]*$
+				base["association_id"] = "a-stubassocid123456"
+			} else {
+				base["association_id"] = externalName
+			}
+		}
+	}
+	return e
 }

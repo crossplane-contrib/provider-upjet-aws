@@ -24,3 +24,6 @@ func (tr *IdentityProviderConfig) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NodeGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *PodIdentityAssociation) Hub() {}

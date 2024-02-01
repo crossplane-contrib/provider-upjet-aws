@@ -412,6 +412,7 @@ import (
 	fargateprofile "github.com/upbound/provider-aws/internal/controller/eks/fargateprofile"
 	identityproviderconfig "github.com/upbound/provider-aws/internal/controller/eks/identityproviderconfig"
 	nodegroup "github.com/upbound/provider-aws/internal/controller/eks/nodegroup"
+	podidentityassociation "github.com/upbound/provider-aws/internal/controller/eks/podidentityassociation"
 	clusterelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/cluster"
 	parametergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
@@ -1342,6 +1343,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		fargateprofile.Setup,
 		identityproviderconfig.Setup,
 		nodegroup.Setup,
+		podidentityassociation.Setup,
 		clusterelasticache.Setup,
 		parametergroupelasticache.Setup,
 		replicationgroup.Setup,

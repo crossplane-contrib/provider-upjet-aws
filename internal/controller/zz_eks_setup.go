@@ -15,6 +15,7 @@ import (
 	fargateprofile "github.com/upbound/provider-aws/internal/controller/eks/fargateprofile"
 	identityproviderconfig "github.com/upbound/provider-aws/internal/controller/eks/identityproviderconfig"
 	nodegroup "github.com/upbound/provider-aws/internal/controller/eks/nodegroup"
+	podidentityassociation "github.com/upbound/provider-aws/internal/controller/eks/podidentityassociation"
 )
 
 // Setup_eks creates all controllers with the supplied logger and adds them to
@@ -27,6 +28,7 @@ func Setup_eks(mgr ctrl.Manager, o controller.Options) error {
 		fargateprofile.Setup,
 		identityproviderconfig.Setup,
 		nodegroup.Setup,
+		podidentityassociation.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
