@@ -41,5 +41,5 @@ spec:
     region: us-west-1
     userPoolIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-with-dashes
+        testing.upbound.io/example-name: userpoolclient
 
