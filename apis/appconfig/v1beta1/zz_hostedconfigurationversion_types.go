@@ -149,6 +149,7 @@ type HostedConfigurationVersionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // HostedConfigurationVersion is the Schema for the HostedConfigurationVersions API. Provides an AppConfig Hosted Configuration Version resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

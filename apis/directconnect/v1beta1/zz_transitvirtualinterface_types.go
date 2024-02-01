@@ -240,6 +240,7 @@ type TransitVirtualInterfaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TransitVirtualInterface is the Schema for the TransitVirtualInterfaces API. Provides a Direct Connect transit virtual interface resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

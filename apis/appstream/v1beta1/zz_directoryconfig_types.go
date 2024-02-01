@@ -118,6 +118,7 @@ type DirectoryConfigStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DirectoryConfig is the Schema for the DirectoryConfigs API. Provides an AppStream Directory Config
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

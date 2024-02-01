@@ -190,6 +190,7 @@ type EndpointAccessStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EndpointAccess is the Schema for the EndpointAccesss API. Provides a Redshift Serverless Endpoint Access resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

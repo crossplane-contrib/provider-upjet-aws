@@ -491,15 +491,15 @@ type ClusterParameters struct {
 type ConfigurationInfoInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
-	// +crossplane:generate:reference:type=Configuration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta1.Configuration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Reference to a Configuration to populate arn.
+	// Reference to a Configuration in kafka to populate arn.
 	// +kubebuilder:validation:Optional
 	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
 
-	// Selector for a Configuration to populate arn.
+	// Selector for a Configuration in kafka to populate arn.
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
@@ -519,16 +519,16 @@ type ConfigurationInfoObservation struct {
 type ConfigurationInfoParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK Configuration to use in the cluster.
-	// +crossplane:generate:reference:type=Configuration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta1.Configuration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Reference to a Configuration to populate arn.
+	// Reference to a Configuration in kafka to populate arn.
 	// +kubebuilder:validation:Optional
 	ArnRef *v1.Reference `json:"arnRef,omitempty" tf:"-"`
 
-	// Selector for a Configuration to populate arn.
+	// Selector for a Configuration in kafka to populate arn.
 	// +kubebuilder:validation:Optional
 	ArnSelector *v1.Selector `json:"arnSelector,omitempty" tf:"-"`
 
@@ -1046,6 +1046,7 @@ type ClusterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Cluster is the Schema for the Clusters API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

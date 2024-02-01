@@ -132,6 +132,7 @@ type PermissionSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PermissionSet is the Schema for the PermissionSets API. Manages a Single Sign-On (SSO) Permission Set
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

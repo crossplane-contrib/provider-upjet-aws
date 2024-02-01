@@ -29,7 +29,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "SubnetGroup", "SubnetGroupList")
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -162,7 +162,7 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "SubnetGroup", "SubnetGroupList")
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

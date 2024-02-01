@@ -311,6 +311,7 @@ type WorkteamStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Workteam is the Schema for the Workteams API. Provides a SageMaker Workteam resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

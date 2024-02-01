@@ -147,6 +147,7 @@ type TransitGatewayMulticastDomainAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TransitGatewayMulticastDomainAssociation is the Schema for the TransitGatewayMulticastDomainAssociations API. Manages an EC2 Transit Gateway Multicast Domain Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

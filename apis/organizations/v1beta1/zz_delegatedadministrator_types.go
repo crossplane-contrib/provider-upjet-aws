@@ -118,6 +118,7 @@ type DelegatedAdministratorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DelegatedAdministrator is the Schema for the DelegatedAdministrators API. Provides a resource to manage an AWS Organizations Delegated Administrator.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

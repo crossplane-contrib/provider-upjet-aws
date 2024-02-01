@@ -158,6 +158,7 @@ type BasePathMappingStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BasePathMapping is the Schema for the BasePathMappings API. Connects a custom domain with a deployed API
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

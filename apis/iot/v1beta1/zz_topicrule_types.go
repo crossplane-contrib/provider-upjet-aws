@@ -2579,6 +2579,7 @@ type TopicRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TopicRule is the Schema for the TopicRules API. Creates and manages an AWS IoT topic rule
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

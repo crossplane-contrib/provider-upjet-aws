@@ -2440,7 +2440,7 @@ spec:
         - spec
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
@@ -2592,7 +2592,7 @@ spec:
                       for additional read replica constraints.
                     type: string
                   dbSubnetGroupNameRef:
-                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
+                    description: Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2626,7 +2626,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
+                    description: Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -3530,7 +3530,7 @@ spec:
                       for additional read replica constraints.
                     type: string
                   dbSubnetGroupNameRef:
-                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
+                    description: Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -3564,7 +3564,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
+                    description: Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -5006,6 +5006,6 @@ spec:
         - spec
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}

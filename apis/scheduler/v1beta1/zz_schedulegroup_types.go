@@ -98,6 +98,7 @@ type ScheduleGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ScheduleGroup is the Schema for the ScheduleGroups API. Provides an EventBridge Scheduler Schedule Group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

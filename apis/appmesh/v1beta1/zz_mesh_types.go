@@ -142,6 +142,7 @@ type MeshStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Mesh is the Schema for the Meshs API. Provides an AWS App Mesh service mesh resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

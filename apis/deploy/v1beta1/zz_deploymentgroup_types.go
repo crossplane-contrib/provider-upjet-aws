@@ -963,6 +963,7 @@ type DeploymentGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DeploymentGroup is the Schema for the DeploymentGroups API. Provides a CodeDeploy deployment group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

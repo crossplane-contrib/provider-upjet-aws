@@ -268,6 +268,7 @@ type QuickConnectStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // QuickConnect is the Schema for the QuickConnects API. Provides details about a specific Amazon Quick Connect
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

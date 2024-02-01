@@ -133,6 +133,7 @@ type GatewayResponseStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GatewayResponse is the Schema for the GatewayResponses API. Provides an API Gateway Gateway Response for a REST API Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

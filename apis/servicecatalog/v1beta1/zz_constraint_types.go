@@ -164,6 +164,7 @@ type ConstraintStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Constraint is the Schema for the Constraints API. Manages a Service Catalog Constraint
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

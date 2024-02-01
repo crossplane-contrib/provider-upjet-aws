@@ -143,6 +143,7 @@ type ConfigurationSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ConfigurationSet is the Schema for the ConfigurationSets API. Provides an SES configuration set
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

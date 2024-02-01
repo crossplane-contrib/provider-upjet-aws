@@ -102,6 +102,7 @@ type ResolverConfigStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ResolverConfig is the Schema for the ResolverConfigs API. Provides a Route 53 Resolver config resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

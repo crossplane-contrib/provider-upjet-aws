@@ -133,6 +133,7 @@ type VaultNotificationsStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VaultNotifications is the Schema for the VaultNotificationss API. Provides an AWS Backup vault notifications resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -89,6 +89,7 @@ type PublicKeyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PublicKey is the Schema for the PublicKeys API. Provides a CloudFront Public Key which you add to CloudFront to use with features like field-level encryption.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

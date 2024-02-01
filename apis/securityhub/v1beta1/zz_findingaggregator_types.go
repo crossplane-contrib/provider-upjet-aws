@@ -80,6 +80,7 @@ type FindingAggregatorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // FindingAggregator is the Schema for the FindingAggregators API. Manages a Security Hub finding aggregator
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

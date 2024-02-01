@@ -14,24 +14,24 @@ import (
 func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_msk_cluster", func(r *config.Resource) {
 		r.References["encryption_info.encryption_at_rest_kms_key_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["logging_info.broker_logs.s3.bucket"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
+			TerraformName: "aws_s3_bucket",
 		}
 		r.References["logging_info.broker_logs.cloudwatch_logs.log_group"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group",
+			TerraformName: "aws_cloudwatch_log_group",
 		}
 		r.References["broker_node_group_info.client_subnets"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			TerraformName: "aws_subnet",
 		}
 		r.References["broker_node_group_info.security_groups"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			TerraformName: "aws_security_group",
 		}
 		r.References["configuration_info.arn"] = config.Reference{
-			Type:      "Configuration",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_msk_configuration",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.UseAsync = true
 

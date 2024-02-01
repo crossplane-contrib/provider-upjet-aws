@@ -128,6 +128,7 @@ type RDSDBInstanceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RDSDBInstance is the Schema for the RDSDBInstances API. Provides an OpsWorks RDS DB Instance resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

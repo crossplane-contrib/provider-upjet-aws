@@ -354,6 +354,7 @@ type BucketInventoryStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BucketInventory is the Schema for the BucketInventorys API. Provides a S3 bucket inventory configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

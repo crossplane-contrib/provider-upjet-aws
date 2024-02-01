@@ -464,6 +464,7 @@ type PatchBaselineStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PatchBaseline is the Schema for the PatchBaselines API. Provides an SSM Patch Baseline resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

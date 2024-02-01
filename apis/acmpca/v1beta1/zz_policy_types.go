@@ -97,6 +97,7 @@ type PolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Policy is the Schema for the Policys API. Attaches a resource based policy to an AWS Certificate Manager Private Certificate Authority (ACM PCA)
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

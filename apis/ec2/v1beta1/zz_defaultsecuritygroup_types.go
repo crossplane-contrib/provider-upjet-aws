@@ -347,6 +347,7 @@ type DefaultSecurityGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DefaultSecurityGroup is the Schema for the DefaultSecurityGroups API. Manage a default security group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

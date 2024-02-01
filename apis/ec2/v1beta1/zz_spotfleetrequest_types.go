@@ -1497,6 +1497,7 @@ type SpotFleetRequestStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SpotFleetRequest is the Schema for the SpotFleetRequests API. Provides a Spot Fleet Request resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

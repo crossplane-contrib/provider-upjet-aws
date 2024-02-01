@@ -744,6 +744,7 @@ type CatalogTableStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // CatalogTable is the Schema for the CatalogTables API. Provides a Glue Catalog Table.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -157,6 +157,7 @@ type TableReplicaStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TableReplica is the Schema for the TableReplicas API. Provides a DynamoDB table replica resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

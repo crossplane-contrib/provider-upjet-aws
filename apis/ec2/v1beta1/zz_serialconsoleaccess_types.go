@@ -68,6 +68,7 @@ type SerialConsoleAccessStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SerialConsoleAccess is the Schema for the SerialConsoleAccesss API. Manages whether serial console access is enabled for your AWS account in the current AWS region.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -1123,6 +1123,7 @@ type WorkflowStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Workflow is the Schema for the Workflows API. Provides a AWS Transfer Workflow resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

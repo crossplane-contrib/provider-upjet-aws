@@ -186,6 +186,7 @@ type MaintenanceWindowStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MaintenanceWindow is the Schema for the MaintenanceWindows API. Provides an SSM Maintenance Window resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

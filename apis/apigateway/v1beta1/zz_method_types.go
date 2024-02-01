@@ -246,6 +246,7 @@ type MethodStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Method is the Schema for the Methods API. Provides a HTTP Method for an API Gateway Resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

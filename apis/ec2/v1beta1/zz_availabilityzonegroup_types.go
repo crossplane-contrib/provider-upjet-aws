@@ -69,6 +69,7 @@ type AvailabilityZoneGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AvailabilityZoneGroup is the Schema for the AvailabilityZoneGroups API. Manages an EC2 Availability Zone Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

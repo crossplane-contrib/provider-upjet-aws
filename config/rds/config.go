@@ -92,7 +92,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
 		r.References["db_subnet_group_name"] = config.Reference{
-			Type: "SubnetGroup",
+			TerraformName: "aws_db_subnet_group",
 		}
 		r.References["kms_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",

@@ -109,6 +109,7 @@ type InstanceStateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // InstanceState is the Schema for the InstanceStates API. Provides an EC2 instance state resource. This allows managing an instance power state.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

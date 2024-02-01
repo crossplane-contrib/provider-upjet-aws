@@ -102,6 +102,7 @@ type TrafficMirrorFilterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TrafficMirrorFilter is the Schema for the TrafficMirrorFilters API. Provides an Traffic mirror filter
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

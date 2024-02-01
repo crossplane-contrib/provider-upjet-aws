@@ -74,6 +74,7 @@ type ResourceGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ResourceGroup is the Schema for the ResourceGroups API. Provides an Amazon Inspector Classic Resource Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -67,6 +67,7 @@ type AWSConfigurationRecorderStatusStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AWSConfigurationRecorderStatus is the Schema for the AWSConfigurationRecorderStatuss API. Manages status of an AWS Config Configuration Recorder.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

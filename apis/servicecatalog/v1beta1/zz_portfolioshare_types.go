@@ -151,6 +151,7 @@ type PortfolioShareStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PortfolioShare is the Schema for the PortfolioShares API. Manages a Service Catalog Portfolio Share
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

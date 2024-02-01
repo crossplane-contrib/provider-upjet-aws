@@ -98,6 +98,7 @@ type VPNConnectionRouteStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPNConnectionRoute is the Schema for the VPNConnectionRoutes API. Provides a static route between a VPN connection and a customer gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

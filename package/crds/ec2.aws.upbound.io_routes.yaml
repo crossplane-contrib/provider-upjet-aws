@@ -1923,7 +1923,7 @@ spec:
         - spec
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
@@ -2151,7 +2151,8 @@ spec:
                       local route.
                     type: string
                   gatewayIdRef:
-                    description: Reference to a InternetGateway to populate gatewayId.
+                    description: Reference to a InternetGateway in ec2 to populate
+                      gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2185,7 +2186,8 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: Selector for a InternetGateway to populate gatewayId.
+                    description: Selector for a InternetGateway in ec2 to populate
+                      gatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2230,7 +2232,7 @@ spec:
                     description: Identifier of a VPC NAT gateway.
                     type: string
                   natGatewayIdRef:
-                    description: Reference to a NATGateway to populate natGatewayId.
+                    description: Reference to a NATGateway in ec2 to populate natGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2264,7 +2266,7 @@ spec:
                     - name
                     type: object
                   natGatewayIdSelector:
-                    description: Selector for a NATGateway to populate natGatewayId.
+                    description: Selector for a NATGateway in ec2 to populate natGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2306,7 +2308,8 @@ spec:
                     description: Identifier of an EC2 network interface.
                     type: string
                   networkInterfaceIdRef:
-                    description: Reference to a NetworkInterface to populate networkInterfaceId.
+                    description: Reference to a NetworkInterface in ec2 to populate
+                      networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2340,7 +2343,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: Selector for a NetworkInterface to populate networkInterfaceId.
+                    description: Selector for a NetworkInterface in ec2 to populate
+                      networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2386,7 +2390,7 @@ spec:
                     description: The ID of the routing table.
                     type: string
                   routeTableIdRef:
-                    description: Reference to a RouteTable to populate routeTableId.
+                    description: Reference to a RouteTable in ec2 to populate routeTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2420,7 +2424,7 @@ spec:
                     - name
                     type: object
                   routeTableIdSelector:
-                    description: Selector for a RouteTable to populate routeTableId.
+                    description: Selector for a RouteTable in ec2 to populate routeTableId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2462,7 +2466,8 @@ spec:
                     description: Identifier of an EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
-                    description: Reference to a TransitGateway to populate transitGatewayId.
+                    description: Reference to a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2496,7 +2501,8 @@ spec:
                     - name
                     type: object
                   transitGatewayIdSelector:
-                    description: Selector for a TransitGateway to populate transitGatewayId.
+                    description: Selector for a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2538,7 +2544,7 @@ spec:
                     description: Identifier of a VPC Endpoint.
                     type: string
                   vpcEndpointIdRef:
-                    description: Reference to a VPCEndpoint to populate vpcEndpointId.
+                    description: Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2572,7 +2578,7 @@ spec:
                     - name
                     type: object
                   vpcEndpointIdSelector:
-                    description: Selector for a VPCEndpoint to populate vpcEndpointId.
+                    description: Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2614,7 +2620,8 @@ spec:
                     description: Identifier of a VPC peering connection.
                     type: string
                   vpcPeeringConnectionIdRef:
-                    description: Reference to a VPCPeeringConnection to populate vpcPeeringConnectionId.
+                    description: Reference to a VPCPeeringConnection in ec2 to populate
+                      vpcPeeringConnectionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2648,7 +2655,8 @@ spec:
                     - name
                     type: object
                   vpcPeeringConnectionIdSelector:
-                    description: Selector for a VPCPeeringConnection to populate vpcPeeringConnectionId.
+                    description: Selector for a VPCPeeringConnection in ec2 to populate
+                      vpcPeeringConnectionId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2877,7 +2885,8 @@ spec:
                       local route.
                     type: string
                   gatewayIdRef:
-                    description: Reference to a InternetGateway to populate gatewayId.
+                    description: Reference to a InternetGateway in ec2 to populate
+                      gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2911,7 +2920,8 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: Selector for a InternetGateway to populate gatewayId.
+                    description: Selector for a InternetGateway in ec2 to populate
+                      gatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -2956,7 +2966,7 @@ spec:
                     description: Identifier of a VPC NAT gateway.
                     type: string
                   natGatewayIdRef:
-                    description: Reference to a NATGateway to populate natGatewayId.
+                    description: Reference to a NATGateway in ec2 to populate natGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2990,7 +3000,7 @@ spec:
                     - name
                     type: object
                   natGatewayIdSelector:
-                    description: Selector for a NATGateway to populate natGatewayId.
+                    description: Selector for a NATGateway in ec2 to populate natGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -3032,7 +3042,8 @@ spec:
                     description: Identifier of an EC2 network interface.
                     type: string
                   networkInterfaceIdRef:
-                    description: Reference to a NetworkInterface to populate networkInterfaceId.
+                    description: Reference to a NetworkInterface in ec2 to populate
+                      networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -3066,7 +3077,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: Selector for a NetworkInterface to populate networkInterfaceId.
+                    description: Selector for a NetworkInterface in ec2 to populate
+                      networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -3108,7 +3120,7 @@ spec:
                     description: The ID of the routing table.
                     type: string
                   routeTableIdRef:
-                    description: Reference to a RouteTable to populate routeTableId.
+                    description: Reference to a RouteTable in ec2 to populate routeTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -3142,7 +3154,7 @@ spec:
                     - name
                     type: object
                   routeTableIdSelector:
-                    description: Selector for a RouteTable to populate routeTableId.
+                    description: Selector for a RouteTable in ec2 to populate routeTableId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -3184,7 +3196,8 @@ spec:
                     description: Identifier of an EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
-                    description: Reference to a TransitGateway to populate transitGatewayId.
+                    description: Reference to a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -3218,7 +3231,8 @@ spec:
                     - name
                     type: object
                   transitGatewayIdSelector:
-                    description: Selector for a TransitGateway to populate transitGatewayId.
+                    description: Selector for a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -3260,7 +3274,7 @@ spec:
                     description: Identifier of a VPC Endpoint.
                     type: string
                   vpcEndpointIdRef:
-                    description: Reference to a VPCEndpoint to populate vpcEndpointId.
+                    description: Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -3294,7 +3308,7 @@ spec:
                     - name
                     type: object
                   vpcEndpointIdSelector:
-                    description: Selector for a VPCEndpoint to populate vpcEndpointId.
+                    description: Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -3336,7 +3350,8 @@ spec:
                     description: Identifier of a VPC peering connection.
                     type: string
                   vpcPeeringConnectionIdRef:
-                    description: Reference to a VPCPeeringConnection to populate vpcPeeringConnectionId.
+                    description: Reference to a VPCPeeringConnection in ec2 to populate
+                      vpcPeeringConnectionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -3370,7 +3385,8 @@ spec:
                     - name
                     type: object
                   vpcPeeringConnectionIdSelector:
-                    description: Selector for a VPCPeeringConnection to populate vpcPeeringConnectionId.
+                    description: Selector for a VPCPeeringConnection in ec2 to populate
+                      vpcPeeringConnectionId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -3679,6 +3695,6 @@ spec:
         - spec
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}

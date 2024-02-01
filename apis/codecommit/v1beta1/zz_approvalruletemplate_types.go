@@ -93,6 +93,7 @@ type ApprovalRuleTemplateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ApprovalRuleTemplate is the Schema for the ApprovalRuleTemplates API. Provides a CodeCommit Approval Rule Template Resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

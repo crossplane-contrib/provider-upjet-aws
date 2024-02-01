@@ -229,6 +229,7 @@ type FilterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Filter is the Schema for the Filters API. Provides a resource to manage a GuardDuty filter
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

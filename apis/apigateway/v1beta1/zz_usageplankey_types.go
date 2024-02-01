@@ -135,6 +135,7 @@ type UsagePlanKeyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // UsagePlanKey is the Schema for the UsagePlanKeys API. Provides an API Gateway Usage Plan Key.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

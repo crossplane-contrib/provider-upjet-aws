@@ -202,6 +202,7 @@ type ZoneStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Zone is the Schema for the Zones API. Manages a Route53 Hosted Zone
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

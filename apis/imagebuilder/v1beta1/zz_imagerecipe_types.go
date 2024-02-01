@@ -412,6 +412,7 @@ type ImageRecipeStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ImageRecipe is the Schema for the ImageRecipes API. Manage an Image Builder Image Recipe
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

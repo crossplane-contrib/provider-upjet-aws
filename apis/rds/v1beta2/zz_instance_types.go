@@ -110,14 +110,14 @@ type InstanceInitParameters struct {
 	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
 	// action CreateDBInstanceReadReplica
 	// for additional read replica constraints.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.SubnetGroup
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate dbSubnetGroupName.
+	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate dbSubnetGroupName.
+	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -751,15 +751,15 @@ type InstanceParameters struct {
 	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
 	// action CreateDBInstanceReadReplica
 	// for additional read replica constraints.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate dbSubnetGroupName.
+	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate dbSubnetGroupName.
+	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -1240,6 +1240,7 @@ type InstanceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Instance is the Schema for the Instances API. Provides an RDS instance resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

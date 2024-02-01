@@ -248,6 +248,7 @@ type EndpointGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EndpointGroup is the Schema for the EndpointGroups API. Provides a Global Accelerator endpoint group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -292,6 +292,7 @@ type DetectorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Detector is the Schema for the Detectors API. Provides a resource to manage an Amazon GuardDuty detector
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

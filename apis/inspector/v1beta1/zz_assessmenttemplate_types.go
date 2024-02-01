@@ -200,6 +200,7 @@ type AssessmentTemplateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AssessmentTemplate is the Schema for the AssessmentTemplates API. Provides an Inspector Classic Assessment Template.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

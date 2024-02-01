@@ -104,6 +104,7 @@ type RouteCalculatorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RouteCalculator is the Schema for the RouteCalculators API. Provides a Location Service Route Calculator.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -158,6 +158,7 @@ type IntegrationResponseStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // IntegrationResponse is the Schema for the IntegrationResponses API. Manages an Amazon API Gateway Version 2 integration response.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

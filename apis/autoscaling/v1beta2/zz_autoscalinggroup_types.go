@@ -1843,6 +1843,7 @@ type AutoscalingGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AutoscalingGroup is the Schema for the AutoscalingGroups API. Provides an Auto Scaling Group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

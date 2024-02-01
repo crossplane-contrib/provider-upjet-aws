@@ -73,7 +73,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ConfigurationInfo); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta2", "Configuration", "ConfigurationList")
+			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta1", "Configuration", "ConfigurationList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -232,7 +232,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ConfigurationInfo); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta2", "Configuration", "ConfigurationList")
+			m, l, err = apisresolver.GetManagedResource("kafka.aws.upbound.io", "v1beta1", "Configuration", "ConfigurationList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

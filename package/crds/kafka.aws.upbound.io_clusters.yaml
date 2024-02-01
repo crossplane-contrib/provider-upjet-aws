@@ -2439,7 +2439,7 @@ spec:
         - spec
         type: object
     served: true
-    storage: true
+    storage: false
     subresources:
       status: {}
   - additionalPrinterColumns:
@@ -2833,7 +2833,8 @@ spec:
                             to use in the cluster.
                           type: string
                         arnRef:
-                          description: Reference to a Configuration to populate arn.
+                          description: Reference to a Configuration in kafka to populate
+                            arn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -2868,7 +2869,8 @@ spec:
                           - name
                           type: object
                         arnSelector:
-                          description: Selector for a Configuration to populate arn.
+                          description: Selector for a Configuration in kafka to populate
+                            arn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -3746,7 +3748,8 @@ spec:
                             to use in the cluster.
                           type: string
                         arnRef:
-                          description: Reference to a Configuration to populate arn.
+                          description: Reference to a Configuration in kafka to populate
+                            arn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -3781,7 +3784,8 @@ spec:
                           - name
                           type: object
                         arnSelector:
-                          description: Selector for a Configuration to populate arn.
+                          description: Selector for a Configuration in kafka to populate
+                            arn.
                           properties:
                             matchControllerRef:
                               description: MatchControllerRef ensures an object with
@@ -4968,6 +4972,6 @@ spec:
         - spec
         type: object
     served: true
-    storage: false
+    storage: true
     subresources:
       status: {}

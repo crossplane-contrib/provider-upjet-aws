@@ -128,6 +128,7 @@ type EventIntegrationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EventIntegration is the Schema for the EventIntegrations API. Provides details about a specific Amazon AppIntegrations Event Integration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

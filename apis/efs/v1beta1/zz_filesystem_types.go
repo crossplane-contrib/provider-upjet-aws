@@ -253,6 +253,7 @@ type FileSystemStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // FileSystem is the Schema for the FileSystems API. Provides an Elastic File System (EFS) File System resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

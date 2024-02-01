@@ -57,14 +57,14 @@ type RouteInitParameters struct {
 	EgressOnlyGatewayIDSelector *v1.Selector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC internet gateway or a virtual private gateway. Specify local when updating a previously imported local route.
-	// +crossplane:generate:reference:type=InternetGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.InternetGateway
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
-	// Reference to a InternetGateway to populate gatewayId.
+	// Reference to a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a InternetGateway to populate gatewayId.
+	// Selector for a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
@@ -72,74 +72,74 @@ type RouteInitParameters struct {
 	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id,omitempty"`
 
 	// Identifier of a VPC NAT gateway.
-	// +crossplane:generate:reference:type=NATGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NATGateway
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
 
-	// Reference to a NATGateway to populate natGatewayId.
+	// Reference to a NATGateway in ec2 to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a NATGateway to populate natGatewayId.
+	// Selector for a NATGateway in ec2 to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of an EC2 network interface.
-	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the routing table.
-	// +crossplane:generate:reference:type=RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.RouteTable
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// Reference to a RouteTable to populate routeTableId.
+	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a RouteTable to populate routeTableId.
+	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// Identifier of an EC2 Transit Gateway.
-	// +crossplane:generate:reference:type=TransitGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
-	// Reference to a TransitGateway to populate transitGatewayId.
+	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGateway to populate transitGatewayId.
+	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC Endpoint.
-	// +crossplane:generate:reference:type=VPCEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
-	// Reference to a VPCEndpoint to populate vpcEndpointId.
+	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointIDRef *v1.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPCEndpoint to populate vpcEndpointId.
+	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC peering connection.
-	// +crossplane:generate:reference:type=VPCPeeringConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCPeeringConnection
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 
-	// Reference to a VPCPeeringConnection to populate vpcPeeringConnectionId.
+	// Reference to a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionIDRef *v1.Reference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPCPeeringConnection to populate vpcPeeringConnectionId.
+	// Selector for a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionIDSelector *v1.Selector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
 }
@@ -250,15 +250,15 @@ type RouteParameters struct {
 	EgressOnlyGatewayIDSelector *v1.Selector `json:"egressOnlyGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC internet gateway or a virtual private gateway. Specify local when updating a previously imported local route.
-	// +crossplane:generate:reference:type=InternetGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.InternetGateway
 	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
-	// Reference to a InternetGateway to populate gatewayId.
+	// Reference to a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDRef *v1.Reference `json:"gatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a InternetGateway to populate gatewayId.
+	// Selector for a InternetGateway in ec2 to populate gatewayId.
 	// +kubebuilder:validation:Optional
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
@@ -267,28 +267,28 @@ type RouteParameters struct {
 	LocalGatewayID *string `json:"localGatewayId,omitempty" tf:"local_gateway_id,omitempty"`
 
 	// Identifier of a VPC NAT gateway.
-	// +crossplane:generate:reference:type=NATGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NATGateway
 	// +kubebuilder:validation:Optional
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
 
-	// Reference to a NATGateway to populate natGatewayId.
+	// Reference to a NATGateway in ec2 to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a NATGateway to populate natGatewayId.
+	// Selector for a NATGateway in ec2 to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of an EC2 network interface.
-	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
@@ -298,54 +298,54 @@ type RouteParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the routing table.
-	// +crossplane:generate:reference:type=RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.RouteTable
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// Reference to a RouteTable to populate routeTableId.
+	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a RouteTable to populate routeTableId.
+	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// Identifier of an EC2 Transit Gateway.
-	// +crossplane:generate:reference:type=TransitGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGateway
 	// +kubebuilder:validation:Optional
 	TransitGatewayID *string `json:"transitGatewayId,omitempty" tf:"transit_gateway_id,omitempty"`
 
-	// Reference to a TransitGateway to populate transitGatewayId.
+	// Reference to a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDRef *v1.Reference `json:"transitGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGateway to populate transitGatewayId.
+	// Selector for a TransitGateway in ec2 to populate transitGatewayId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC Endpoint.
-	// +crossplane:generate:reference:type=VPCEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
-	// Reference to a VPCEndpoint to populate vpcEndpointId.
+	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointIDRef *v1.Reference `json:"vpcEndpointIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPCEndpoint to populate vpcEndpointId.
+	// Selector for a VPCEndpoint in ec2 to populate vpcEndpointId.
 	// +kubebuilder:validation:Optional
 	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC peering connection.
-	// +crossplane:generate:reference:type=VPCPeeringConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCPeeringConnection
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 
-	// Reference to a VPCPeeringConnection to populate vpcPeeringConnectionId.
+	// Reference to a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionIDRef *v1.Reference `json:"vpcPeeringConnectionIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPCPeeringConnection to populate vpcPeeringConnectionId.
+	// Selector for a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionIDSelector *v1.Selector `json:"vpcPeeringConnectionIdSelector,omitempty" tf:"-"`
 }
@@ -375,6 +375,7 @@ type RouteStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Route is the Schema for the Routes API. Provides a resource to create a routing entry in a VPC routing table.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

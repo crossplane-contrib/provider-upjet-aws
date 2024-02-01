@@ -142,6 +142,7 @@ type InvocationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Invocation is the Schema for the Invocations API. Invoke AWS Lambda Function
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

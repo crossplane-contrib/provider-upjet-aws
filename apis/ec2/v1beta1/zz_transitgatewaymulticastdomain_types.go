@@ -140,6 +140,7 @@ type TransitGatewayMulticastDomainStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TransitGatewayMulticastDomain is the Schema for the TransitGatewayMulticastDomains API. Manages an EC2 Transit Gateway Multicast Domain
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

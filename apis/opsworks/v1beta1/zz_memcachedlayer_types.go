@@ -653,6 +653,7 @@ type MemcachedLayerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MemcachedLayer is the Schema for the MemcachedLayers API. Provides an OpsWorks memcached layer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

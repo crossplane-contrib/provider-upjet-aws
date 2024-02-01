@@ -97,6 +97,7 @@ type HostedZoneDNSSECStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // HostedZoneDNSSEC is the Schema for the HostedZoneDNSSECs API. Manages Route 53 Hosted Zone DNSSEC
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

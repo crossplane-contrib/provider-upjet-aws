@@ -122,6 +122,7 @@ type AccountAssignmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AccountAssignment is the Schema for the AccountAssignments API. Manages a Single Sign-On (SSO) Account Assignment
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
