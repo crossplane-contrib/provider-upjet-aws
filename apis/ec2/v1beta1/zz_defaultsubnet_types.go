@@ -186,6 +186,7 @@ type DefaultSubnetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DefaultSubnet is the Schema for the DefaultSubnets API. Manage a default subnet resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -200,12 +200,6 @@ func (tr *NetworkInterfaceSgAttachment) Hub() {}
 func (tr *PlacementGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Route) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *RouteTable) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *RouteTableAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.

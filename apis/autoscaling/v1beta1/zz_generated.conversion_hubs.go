@@ -11,12 +11,6 @@ Copyright 2022 Upbound Inc.
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Attachment) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *AutoscalingGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *GroupTag) Hub() {}
 
 // Hub marks this type as a conversion hub.

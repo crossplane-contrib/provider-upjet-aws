@@ -118,6 +118,7 @@ type InstanceProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // InstanceProfile is the Schema for the InstanceProfiles API. Provides an IAM instance profile.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

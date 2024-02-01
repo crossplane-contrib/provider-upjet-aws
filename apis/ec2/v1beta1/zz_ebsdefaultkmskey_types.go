@@ -87,6 +87,7 @@ type EBSDefaultKMSKeyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EBSDefaultKMSKey is the Schema for the EBSDefaultKMSKeys API. Manages the default customer master key (CMK) that your AWS account uses to encrypt EBS volumes.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

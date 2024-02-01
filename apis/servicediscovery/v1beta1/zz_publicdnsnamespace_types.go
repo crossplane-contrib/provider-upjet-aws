@@ -102,6 +102,7 @@ type PublicDNSNamespaceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PublicDNSNamespace is the Schema for the PublicDNSNamespaces API. Provides a Service Discovery Public DNS Namespace resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

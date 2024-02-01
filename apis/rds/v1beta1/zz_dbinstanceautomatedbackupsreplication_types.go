@@ -38,7 +38,7 @@ type DBInstanceAutomatedBackupsReplicationInitParameters struct {
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the source DB instance for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	SourceDBInstanceArn *string `json:"sourceDbInstanceArn,omitempty" tf:"source_db_instance_arn,omitempty"`
 
@@ -98,7 +98,7 @@ type DBInstanceAutomatedBackupsReplicationParameters struct {
 	RetentionPeriod *float64 `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the source DB instance for the replicated automated backups, for example, arn:aws:rds:us-west-2:123456789012:db:mydatabase.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	SourceDBInstanceArn *string `json:"sourceDbInstanceArn,omitempty" tf:"source_db_instance_arn,omitempty"`
@@ -137,6 +137,7 @@ type DBInstanceAutomatedBackupsReplicationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DBInstanceAutomatedBackupsReplication is the Schema for the DBInstanceAutomatedBackupsReplications API. Enables replication of automated backups to a different AWS Region.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

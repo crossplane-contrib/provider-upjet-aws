@@ -87,7 +87,7 @@ type UserInitParameters struct {
 	PhoneConfig []UserPhoneConfigInitParameters `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
 
 	// The identifier of the routing profile for the user.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.RoutingProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta2.RoutingProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("routing_profile_id",true)
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
@@ -200,7 +200,7 @@ type UserParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The identifier of the routing profile for the user.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.RoutingProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta2.RoutingProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("routing_profile_id",true)
 	// +kubebuilder:validation:Optional
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
@@ -298,6 +298,7 @@ type UserStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // User is the Schema for the Users API. Provides details about a specific Amazon Connect User
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

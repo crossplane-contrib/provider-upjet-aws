@@ -20,7 +20,7 @@ import (
 type VPNGatewayRoutePropagationInitParameters struct {
 
 	// The id of the aws_route_table to propagate routes into.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.RouteTable
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
@@ -64,7 +64,7 @@ type VPNGatewayRoutePropagationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The id of the aws_route_table to propagate routes into.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.RouteTable
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
@@ -117,6 +117,7 @@ type VPNGatewayRoutePropagationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPNGatewayRoutePropagation is the Schema for the VPNGatewayRoutePropagations API. Requests automatic route propagation between a VPN gateway and a route table.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

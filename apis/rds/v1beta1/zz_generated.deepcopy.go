@@ -5457,11 +5457,6 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.BackupTarget != nil {
-		in, out := &in.BackupTarget, &out.BackupTarget
-		*out = new(string)
-		**out = **in
-	}
 	if in.BackupWindow != nil {
 		in, out := &in.BackupWindow, &out.BackupWindow
 		*out = new(string)
@@ -5570,16 +5565,6 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Identifier != nil {
-		in, out := &in.Identifier, &out.Identifier
-		*out = new(string)
-		**out = **in
-	}
-	if in.IdentifierPrefix != nil {
-		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
-		*out = new(string)
-		**out = **in
-	}
 	if in.InstanceClass != nil {
 		in, out := &in.InstanceClass, &out.InstanceClass
 		*out = new(string)
@@ -5665,6 +5650,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.NcharCharacterSetName != nil {
 		in, out := &in.NcharCharacterSetName, &out.NcharCharacterSetName
 		*out = new(string)
@@ -5684,16 +5674,6 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
 		**out = **in
-	}
-	if in.ParameterGroupNameRef != nil {
-		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ParameterGroupNameSelector != nil {
-		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.PerformanceInsightsEnabled != nil {
 		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
@@ -5752,6 +5732,17 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = make([]S3ImportInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupNames != nil {
+		in, out := &in.SecurityGroupNames, &out.SecurityGroupNames
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 	if in.SkipFinalSnapshot != nil {
@@ -5915,11 +5906,6 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.BackupTarget != nil {
-		in, out := &in.BackupTarget, &out.BackupTarget
-		*out = new(string)
-		**out = **in
-	}
 	if in.BackupWindow != nil {
 		in, out := &in.BackupWindow, &out.BackupWindow
 		*out = new(string)
@@ -6038,16 +6024,6 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Identifier != nil {
-		in, out := &in.Identifier, &out.Identifier
-		*out = new(string)
-		**out = **in
-	}
-	if in.IdentifierPrefix != nil {
-		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
-		*out = new(string)
-		**out = **in
-	}
 	if in.InstanceClass != nil {
 		in, out := &in.InstanceClass, &out.InstanceClass
 		*out = new(string)
@@ -6120,6 +6096,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	if in.MultiAz != nil {
 		in, out := &in.MultiAz, &out.MultiAz
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
 		**out = **in
 	}
 	if in.NcharCharacterSetName != nil {
@@ -6205,6 +6186,17 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = make([]S3ImportObservation, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupNames != nil {
+		in, out := &in.SecurityGroupNames, &out.SecurityGroupNames
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 	if in.SkipFinalSnapshot != nil {
@@ -6340,11 +6332,6 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.BackupTarget != nil {
-		in, out := &in.BackupTarget, &out.BackupTarget
-		*out = new(string)
-		**out = **in
-	}
 	if in.BackupWindow != nil {
 		in, out := &in.BackupWindow, &out.BackupWindow
 		*out = new(string)
@@ -6453,16 +6440,6 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(bool)
 		**out = **in
 	}
-	if in.Identifier != nil {
-		in, out := &in.Identifier, &out.Identifier
-		*out = new(string)
-		**out = **in
-	}
-	if in.IdentifierPrefix != nil {
-		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
-		*out = new(string)
-		**out = **in
-	}
 	if in.InstanceClass != nil {
 		in, out := &in.InstanceClass, &out.InstanceClass
 		*out = new(string)
@@ -6548,6 +6525,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.NcharCharacterSetName != nil {
 		in, out := &in.NcharCharacterSetName, &out.NcharCharacterSetName
 		*out = new(string)
@@ -6567,16 +6549,6 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
 		**out = **in
-	}
-	if in.ParameterGroupNameRef != nil {
-		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ParameterGroupNameSelector != nil {
-		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
@@ -6645,6 +6617,17 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = make([]S3ImportParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupNames != nil {
+		in, out := &in.SecurityGroupNames, &out.SecurityGroupNames
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
 		}
 	}
 	if in.SkipFinalSnapshot != nil {

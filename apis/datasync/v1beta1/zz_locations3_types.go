@@ -193,6 +193,7 @@ type LocationS3Status struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LocationS3 is the Schema for the LocationS3s API. Manages an AWS DataSync S3 Location
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

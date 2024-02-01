@@ -122,6 +122,7 @@ type RoleAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RoleAssociation is the Schema for the RoleAssociations API. Provides an Amazon Managed Grafana workspace role association resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

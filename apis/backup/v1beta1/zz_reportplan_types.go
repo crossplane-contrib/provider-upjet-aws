@@ -248,6 +248,7 @@ type ReportPlanStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ReportPlan is the Schema for the ReportPlans API. Provides an AWS Backup Report Plan resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -105,6 +105,7 @@ type StreamConsumerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // StreamConsumer is the Schema for the StreamConsumers API. Manages a Kinesis Stream Consumer.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

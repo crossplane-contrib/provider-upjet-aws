@@ -443,6 +443,7 @@ type BudgetActionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BudgetAction is the Schema for the BudgetActions API. Provides a budget action resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

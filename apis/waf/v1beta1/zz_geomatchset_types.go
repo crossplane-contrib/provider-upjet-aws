@@ -117,6 +117,7 @@ type GeoMatchSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GeoMatchSet is the Schema for the GeoMatchSets API. Provides a AWS WAF GeoMatchSet resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

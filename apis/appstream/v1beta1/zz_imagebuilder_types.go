@@ -323,6 +323,7 @@ type ImageBuilderStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ImageBuilder is the Schema for the ImageBuilders API. Provides an AppStream image builder
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

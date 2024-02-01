@@ -118,6 +118,7 @@ type SnapshotScheduleAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SnapshotScheduleAssociation is the Schema for the SnapshotScheduleAssociations API. Provides an Association Redshift Cluster and Snapshot Schedule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

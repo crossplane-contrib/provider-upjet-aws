@@ -290,6 +290,7 @@ type EventDestinationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EventDestination is the Schema for the EventDestinations API. Provides an SES event destination
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

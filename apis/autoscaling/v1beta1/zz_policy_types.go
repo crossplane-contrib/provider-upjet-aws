@@ -1005,7 +1005,7 @@ type PolicyParameters struct {
 	AdjustmentType *string `json:"adjustmentType,omitempty" tf:"adjustment_type,omitempty"`
 
 	// Name of the autoscaling group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
@@ -1367,6 +1367,7 @@ type PolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Policy is the Schema for the Policys API. Provides an AutoScaling Scaling Group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

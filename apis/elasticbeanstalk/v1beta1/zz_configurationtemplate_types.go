@@ -184,6 +184,7 @@ type ConfigurationTemplateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ConfigurationTemplate is the Schema for the ConfigurationTemplates API. Provides an Elastic Beanstalk Configuration Template
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

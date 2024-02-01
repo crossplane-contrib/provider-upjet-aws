@@ -199,6 +199,7 @@ type NATGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // NATGateway is the Schema for the NATGateways API. Provides a resource to create a VPC NAT Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

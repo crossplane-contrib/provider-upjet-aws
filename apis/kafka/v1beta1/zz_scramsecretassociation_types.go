@@ -20,7 +20,7 @@ import (
 type ScramSecretAssociationInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
@@ -64,7 +64,7 @@ type ScramSecretAssociationObservation struct {
 type ScramSecretAssociationParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
@@ -124,6 +124,7 @@ type ScramSecretAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ScramSecretAssociation is the Schema for the ScramSecretAssociations API. Associates SCRAM secrets with a Managed Streaming for Kafka (MSK) cluster.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

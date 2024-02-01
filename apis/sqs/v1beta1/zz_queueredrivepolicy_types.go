@@ -97,6 +97,7 @@ type QueueRedrivePolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // QueueRedrivePolicy is the Schema for the QueueRedrivePolicys API. Provides a SQS Queue Redrive Policy resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

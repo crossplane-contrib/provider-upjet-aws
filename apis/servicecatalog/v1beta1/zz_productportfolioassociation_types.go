@@ -135,6 +135,7 @@ type ProductPortfolioAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ProductPortfolioAssociation is the Schema for the ProductPortfolioAssociations API. Manages a Service Catalog Product Portfolio Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

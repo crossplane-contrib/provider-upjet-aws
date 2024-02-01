@@ -205,6 +205,7 @@ type VPCPeeringConnectionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPCPeeringConnection is the Schema for the VPCPeeringConnections API. Provides a resource to manage a VPC peering connection.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

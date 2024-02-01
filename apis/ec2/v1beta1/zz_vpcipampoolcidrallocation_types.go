@@ -144,6 +144,7 @@ type VPCIpamPoolCidrAllocationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPCIpamPoolCidrAllocation is the Schema for the VPCIpamPoolCidrAllocations API. Allocates (reserves) a CIDR from an IPAM address pool, preventing usage by IPAM.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

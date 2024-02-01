@@ -17,9 +17,6 @@ func (tr *Cluster) Hub() {}
 func (tr *ParameterGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ReplicationGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SubnetGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.

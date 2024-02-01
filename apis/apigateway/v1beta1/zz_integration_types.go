@@ -380,6 +380,7 @@ type IntegrationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Integration is the Schema for the Integrations API. Provides an HTTP Method Integration for an API Gateway Integration.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

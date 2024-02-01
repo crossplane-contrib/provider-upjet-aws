@@ -72,6 +72,7 @@ type ActiveReceiptRuleSetStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ActiveReceiptRuleSet is the Schema for the ActiveReceiptRuleSets API. Provides a resource to designate the active SES receipt rule set
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

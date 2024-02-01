@@ -158,6 +158,7 @@ type QueueStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Queue is the Schema for the Queues API. Provides an AWS Elemental MediaConvert Queue.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

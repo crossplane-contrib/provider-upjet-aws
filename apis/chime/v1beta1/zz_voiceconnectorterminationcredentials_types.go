@@ -122,6 +122,7 @@ type VoiceConnectorTerminationCredentialsStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VoiceConnectorTerminationCredentials is the Schema for the VoiceConnectorTerminationCredentialss API. Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

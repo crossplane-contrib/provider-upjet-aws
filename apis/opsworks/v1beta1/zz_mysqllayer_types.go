@@ -663,6 +663,7 @@ type MySQLLayerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MySQLLayer is the Schema for the MySQLLayers API. Provides an OpsWorks MySQL layer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

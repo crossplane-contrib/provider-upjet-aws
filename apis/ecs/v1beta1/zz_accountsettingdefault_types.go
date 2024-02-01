@@ -81,6 +81,7 @@ type AccountSettingDefaultStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AccountSettingDefault is the Schema for the AccountSettingDefaults API. Provides an ECS Default account setting.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

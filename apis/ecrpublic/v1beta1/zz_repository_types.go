@@ -177,6 +177,7 @@ type RepositoryStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Repository is the Schema for the Repositorys API. Provides a Public Elastic Container Registry Repository.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

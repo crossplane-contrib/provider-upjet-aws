@@ -278,6 +278,7 @@ type DeploymentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Deployment is the Schema for the Deployments API. Provides an AppConfig Deployment resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

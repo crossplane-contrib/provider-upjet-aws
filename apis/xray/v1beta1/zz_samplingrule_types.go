@@ -192,6 +192,7 @@ type SamplingRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SamplingRule is the Schema for the SamplingRules API. Creates and manages an AWS XRay Sampling Rule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -306,6 +306,7 @@ type HealthCheckStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // HealthCheck is the Schema for the HealthChecks API. Provides a Route53 health check.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

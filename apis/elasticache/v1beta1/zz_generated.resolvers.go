@@ -47,7 +47,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.ParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ParameterGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "ReplicationGroup", "ReplicationGroupList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "ReplicationGroup", "ReplicationGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -123,7 +123,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.InitProvider.ParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ParameterGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "ReplicationGroup", "ReplicationGroupList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "ReplicationGroup", "ReplicationGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

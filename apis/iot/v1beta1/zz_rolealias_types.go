@@ -111,6 +111,7 @@ type RoleAliasStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RoleAlias is the Schema for the RoleAliass API. Provides an IoT role alias.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

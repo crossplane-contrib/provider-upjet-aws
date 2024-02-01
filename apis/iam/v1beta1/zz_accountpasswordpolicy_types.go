@@ -146,6 +146,7 @@ type AccountPasswordPolicyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AccountPasswordPolicy is the Schema for the AccountPasswordPolicys API. Manages Password Policy for the AWS Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

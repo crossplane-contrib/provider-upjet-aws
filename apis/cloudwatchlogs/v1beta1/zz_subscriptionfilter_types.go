@@ -158,6 +158,7 @@ type SubscriptionFilterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SubscriptionFilter is the Schema for the SubscriptionFilters API. Provides a CloudWatch Logs subscription filter.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

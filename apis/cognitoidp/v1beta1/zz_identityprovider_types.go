@@ -142,6 +142,7 @@ type IdentityProviderStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // IdentityProvider is the Schema for the IdentityProviders API. Provides a Cognito User Identity Provider resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

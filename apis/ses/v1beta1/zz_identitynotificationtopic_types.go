@@ -135,6 +135,7 @@ type IdentityNotificationTopicStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // IdentityNotificationTopic is the Schema for the IdentityNotificationTopics API. Setting AWS SES Identity Notification Topic
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -19,21 +19,21 @@ import (
 
 type BlueGreenUpdateInitParameters struct {
 
-	// Enables low-downtime updates when true.
+	// Enables [low-downtime updates](#Low-Downtime Updates) when true.
 	// Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BlueGreenUpdateObservation struct {
 
-	// Enables low-downtime updates when true.
+	// Enables [low-downtime updates](#Low-Downtime Updates) when true.
 	// Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type BlueGreenUpdateParameters struct {
 
-	// Enables low-downtime updates when true.
+	// Enables [low-downtime updates](#Low-Downtime Updates) when true.
 	// Default is false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -71,15 +71,12 @@ type InstanceInitParameters struct {
 	// or will use RDS Blue/Green deployments.
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
-	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
-	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
-
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
 
 	// Enables low-downtime updates using RDS Blue/Green deployments.
-	// See blue_green_update below.
+	// See blue_green_update below
 	BlueGreenUpdate []BlueGreenUpdateInitParameters `json:"blueGreenUpdate,omitempty" tf:"blue_green_update,omitempty"`
 
 	// The identifier of the CA certificate for the DB instance.
@@ -109,7 +106,7 @@ type InstanceInitParameters struct {
 	// with read replicas, it should be specified only if the source database
 	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
 	// action CreateDBInstanceReadReplica
-	// for additional read replica constraints.
+	// for additional read replica contraints.
 	// +crossplane:generate:reference:type=SubnetGroup
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
@@ -152,12 +149,6 @@ type InstanceInitParameters struct {
 	// accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// Required if restore_to_point_in_time is specified.
-	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
-
-	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
-	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
-
 	// The instance type of the RDS instance.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
@@ -181,7 +172,7 @@ type InstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// License model information for this DB instance. Valid values for this field are as follows:
+	// License model information for this DB instance.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
 	// The window to perform maintenance in.
@@ -236,6 +227,9 @@ type InstanceInitParameters struct {
 	// Specifies if the RDS instance is multi-AZ
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
 	// Supported in Amazon RDS.
 	NcharCharacterSetName *string `json:"ncharCharacterSetName,omitempty" tf:"nchar_character_set_name,omitempty"`
@@ -246,17 +240,9 @@ type InstanceInitParameters struct {
 	// Name of the DB option group to associate.
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
-	// Name of the DB parameter group to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ParameterGroup
+	// Name of the DB parameter group to
+	// associate.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
-
-	// Reference to a ParameterGroup in rds to populate parameterGroupName.
-	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
-
-	// Selector for a ParameterGroup in rds to populate parameterGroupName.
-	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
@@ -288,7 +274,6 @@ type InstanceInitParameters struct {
 	// PostgreSQL and MySQL Read Replicas
 	// for more information on using Replication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
 
 	// Reference to a Instance in rds to populate replicateSourceDb.
@@ -304,6 +289,11 @@ type InstanceInitParameters struct {
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
 	S3Import []S3ImportInitParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+
+	// List of DB Security Groups to
+	// associate. Only used for DB Instances on the .
+	// +listType=set
+	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// Determines whether a final DB snapshot is
 	// created before the DB instance is deleted. If true is specified, no DBSnapshot
@@ -401,15 +391,12 @@ type InstanceObservation struct {
 	// or will use RDS Blue/Green deployments.
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
-	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
-	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
-
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
 
 	// Enables low-downtime updates using RDS Blue/Green deployments.
-	// See blue_green_update below.
+	// See blue_green_update below
 	BlueGreenUpdate []BlueGreenUpdateObservation `json:"blueGreenUpdate,omitempty" tf:"blue_green_update,omitempty"`
 
 	// The identifier of the CA certificate for the DB instance.
@@ -439,7 +426,7 @@ type InstanceObservation struct {
 	// with read replicas, it should be specified only if the source database
 	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
 	// action CreateDBInstanceReadReplica
-	// for additional read replica constraints.
+	// for additional read replica contraints.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
 	// Specifies whether to remove automated backups immediately after the DB instance is deleted. Default is true.
@@ -483,14 +470,8 @@ type InstanceObservation struct {
 	// accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// RDS DBI resource ID.
+	// The RDS instance ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Required if restore_to_point_in_time is specified.
-	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
-
-	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
-	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
 
 	// The instance type of the RDS instance.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
@@ -508,7 +489,7 @@ type InstanceObservation struct {
 	// The latest time, in UTC RFC3339 format, to which a database can be restored with point-in-time restore.
 	LatestRestorableTime *string `json:"latestRestorableTime,omitempty" tf:"latest_restorable_time,omitempty"`
 
-	// License model information for this DB instance. Valid values for this field are as follows:
+	// License model information for this DB instance.
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
 	// Specifies the listener connection endpoint for SQL Server Always On. See endpoint below.
@@ -549,6 +530,9 @@ type InstanceObservation struct {
 	// Specifies if the RDS instance is multi-AZ
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
 	// Supported in Amazon RDS.
 	NcharCharacterSetName *string `json:"ncharCharacterSetName,omitempty" tf:"nchar_character_set_name,omitempty"`
@@ -559,7 +543,8 @@ type InstanceObservation struct {
 	// Name of the DB option group to associate.
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
-	// Name of the DB parameter group to associate.
+	// Name of the DB parameter group to
+	// associate.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
 	// Specifies whether Performance Insights are enabled. Defaults to false.
@@ -603,6 +588,11 @@ type InstanceObservation struct {
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
 	S3Import []S3ImportObservation `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+
+	// List of DB Security Groups to
+	// associate. Only used for DB Instances on the .
+	// +listType=set
+	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// Determines whether a final DB snapshot is
 	// created before the DB instance is deleted. If true is specified, no DBSnapshot
@@ -703,17 +693,13 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
-	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
-	// +kubebuilder:validation:Optional
-	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
-
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
 	// +kubebuilder:validation:Optional
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
 
 	// Enables low-downtime updates using RDS Blue/Green deployments.
-	// See blue_green_update below.
+	// See blue_green_update below
 	// +kubebuilder:validation:Optional
 	BlueGreenUpdate []BlueGreenUpdateParameters `json:"blueGreenUpdate,omitempty" tf:"blue_green_update,omitempty"`
 
@@ -750,7 +736,7 @@ type InstanceParameters struct {
 	// with read replicas, it should be specified only if the source database
 	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
 	// action CreateDBInstanceReadReplica
-	// for additional read replica constraints.
+	// for additional read replica contraints.
 	// +crossplane:generate:reference:type=SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -803,14 +789,6 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
 
-	// Required if restore_to_point_in_time is specified.
-	// +kubebuilder:validation:Optional
-	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
-
-	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
-	// +kubebuilder:validation:Optional
-	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
-
 	// The instance type of the RDS instance.
 	// +kubebuilder:validation:Optional
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
@@ -837,7 +815,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// License model information for this DB instance. Valid values for this field are as follows:
+	// License model information for this DB instance.
 	// +kubebuilder:validation:Optional
 	LicenseModel *string `json:"licenseModel,omitempty" tf:"license_model,omitempty"`
 
@@ -900,6 +878,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The national character set is used in the NCHAR, NVARCHAR2, and NCLOB data types for Oracle instances. This can't be changed. See Oracle Character Sets
 	// Supported in Amazon RDS.
 	// +kubebuilder:validation:Optional
@@ -913,18 +895,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	OptionGroupName *string `json:"optionGroupName,omitempty" tf:"option_group_name,omitempty"`
 
-	// Name of the DB parameter group to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ParameterGroup
+	// Name of the DB parameter group to
+	// associate.
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
-
-	// Reference to a ParameterGroup in rds to populate parameterGroupName.
-	// +kubebuilder:validation:Optional
-	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
-
-	// Selector for a ParameterGroup in rds to populate parameterGroupName.
-	// +kubebuilder:validation:Optional
-	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may show up in
 	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
@@ -973,7 +947,6 @@ type InstanceParameters struct {
 	// PostgreSQL and MySQL Read Replicas
 	// for more information on using Replication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
 
@@ -992,6 +965,12 @@ type InstanceParameters struct {
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
 	// +kubebuilder:validation:Optional
 	S3Import []S3ImportParameters `json:"s3Import,omitempty" tf:"s3_import,omitempty"`
+
+	// List of DB Security Groups to
+	// associate. Only used for DB Instances on the .
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// Determines whether a final DB snapshot is
 	// created before the DB instance is deleted. If true is specified, no DBSnapshot

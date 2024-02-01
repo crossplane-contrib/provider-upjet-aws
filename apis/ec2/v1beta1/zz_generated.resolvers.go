@@ -2843,6 +2843,25 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GatewayIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.InstanceIDRef,
+			Selector:     mg.Spec.ForProvider.InstanceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.InstanceID")
+	}
+	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -3013,6 +3032,25 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.InitProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GatewayIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.InstanceIDRef,
+			Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "NATGateway", "NATGatewayList")
 		if err != nil {
@@ -5790,7 +5828,7 @@ func (mg *VPCEndpointRouteTableAssociation) ResolveReferences(ctx context.Contex
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "RouteTable", "RouteTableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5828,7 +5866,7 @@ func (mg *VPCEndpointRouteTableAssociation) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.VPCEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPCEndpointIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "RouteTable", "RouteTableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6932,7 +6970,7 @@ func (mg *VPNGatewayRoutePropagation) ResolveReferences(ctx context.Context, c c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "RouteTable", "RouteTableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6970,7 +7008,7 @@ func (mg *VPNGatewayRoutePropagation) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.VPNGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPNGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "RouteTable", "RouteTableList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "RouteTable", "RouteTableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

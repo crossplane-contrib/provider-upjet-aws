@@ -89,6 +89,7 @@ type ModelPackageGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ModelPackageGroup is the Schema for the ModelPackageGroups API. Provides a SageMaker Model Package Group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

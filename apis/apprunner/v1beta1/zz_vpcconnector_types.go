@@ -164,6 +164,7 @@ type VPCConnectorStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPCConnector is the Schema for the VPCConnectors API. Manages an App Runner VPC Connector.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

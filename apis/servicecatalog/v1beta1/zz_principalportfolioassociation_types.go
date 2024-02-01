@@ -137,6 +137,7 @@ type PrincipalPortfolioAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PrincipalPortfolioAssociation is the Schema for the PrincipalPortfolioAssociations API. Manages a Service Catalog Principal Portfolio Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

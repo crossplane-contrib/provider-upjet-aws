@@ -175,6 +175,7 @@ type ProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Profile is the Schema for the Profiles API. Provides a Roles Anywhere Profile resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

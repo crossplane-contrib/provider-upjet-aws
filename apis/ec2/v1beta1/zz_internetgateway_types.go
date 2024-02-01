@@ -110,6 +110,7 @@ type InternetGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // InternetGateway is the Schema for the InternetGateways API. Provides a resource to create a VPC Internet Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

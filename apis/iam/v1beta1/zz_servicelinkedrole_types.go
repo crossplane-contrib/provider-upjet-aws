@@ -116,6 +116,7 @@ type ServiceLinkedRoleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ServiceLinkedRole is the Schema for the ServiceLinkedRoles API. Provides an IAM service-linked role.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

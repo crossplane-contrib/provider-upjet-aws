@@ -210,6 +210,7 @@ type PlatformApplicationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PlatformApplication is the Schema for the PlatformApplications API. Provides an SNS platform application resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

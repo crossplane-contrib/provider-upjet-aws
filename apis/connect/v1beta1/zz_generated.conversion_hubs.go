@@ -20,9 +20,6 @@ func (tr *ContactFlow) Hub() {}
 func (tr *ContactFlowModule) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *HoursOfOperation) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Instance) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -35,13 +32,7 @@ func (tr *LambdaFunctionAssociation) Hub() {}
 func (tr *PhoneNumber) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Queue) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *QuickConnect) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *RoutingProfile) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SecurityProfile) Hub() {}

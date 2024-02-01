@@ -129,6 +129,7 @@ type APIKeyStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // APIKey is the Schema for the APIKeys API. Provides an API Gateway API Key.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

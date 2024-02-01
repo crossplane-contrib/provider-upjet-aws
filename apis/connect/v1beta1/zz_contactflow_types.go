@@ -172,6 +172,7 @@ type ContactFlowStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ContactFlow is the Schema for the ContactFlows API. Provides details about a specific Amazon Connect Contact Flow.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

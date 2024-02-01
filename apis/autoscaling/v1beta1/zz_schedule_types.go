@@ -76,7 +76,7 @@ type ScheduleObservation struct {
 type ScheduleParameters struct {
 
 	// The name of the Auto Scaling group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
@@ -147,6 +147,7 @@ type ScheduleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Schedule is the Schema for the Schedules API. Provides an AutoScaling Schedule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

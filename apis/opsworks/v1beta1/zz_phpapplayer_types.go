@@ -643,6 +643,7 @@ type PHPAppLayerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PHPAppLayer is the Schema for the PHPAppLayers API. Provides an OpsWorks PHP application layer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

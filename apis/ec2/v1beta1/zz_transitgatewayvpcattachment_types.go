@@ -220,6 +220,7 @@ type TransitGatewayVPCAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TransitGatewayVPCAttachment is the Schema for the TransitGatewayVPCAttachments API. Manages an EC2 Transit Gateway VPC Attachment
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

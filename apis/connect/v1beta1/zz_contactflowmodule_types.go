@@ -162,6 +162,7 @@ type ContactFlowModuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ContactFlowModule is the Schema for the ContactFlowModules API. Provides details about a specific Amazon Connect Contact Flow Module.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

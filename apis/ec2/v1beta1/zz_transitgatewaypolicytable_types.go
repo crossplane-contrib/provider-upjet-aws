@@ -112,6 +112,7 @@ type TransitGatewayPolicyTableStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TransitGatewayPolicyTable is the Schema for the TransitGatewayPolicyTables API. Manages an EC2 Transit Gateway Policy Table
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

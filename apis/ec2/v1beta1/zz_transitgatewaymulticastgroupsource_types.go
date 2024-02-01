@@ -129,6 +129,7 @@ type TransitGatewayMulticastGroupSourceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TransitGatewayMulticastGroupSource is the Schema for the TransitGatewayMulticastGroupSources API. Manages an EC2 Transit Gateway Multicast Group Source
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

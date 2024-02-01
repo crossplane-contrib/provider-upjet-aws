@@ -530,6 +530,7 @@ type ContainerRecipeStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ContainerRecipe is the Schema for the ContainerRecipes API. Manage an Image Builder Container Recipe
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

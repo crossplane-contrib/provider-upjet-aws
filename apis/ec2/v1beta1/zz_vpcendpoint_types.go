@@ -279,6 +279,7 @@ type VPCEndpointStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPCEndpoint is the Schema for the VPCEndpoints API. Provides a VPC Endpoint resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

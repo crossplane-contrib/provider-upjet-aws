@@ -285,6 +285,7 @@ type ScheduledActionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ScheduledAction is the Schema for the ScheduledActions API. Provides a Redshift Scheduled Action resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

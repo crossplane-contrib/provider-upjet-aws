@@ -119,6 +119,7 @@ type VaultLockConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VaultLockConfiguration is the Schema for the VaultLockConfigurations API. Provides an AWS Backup vault lock configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

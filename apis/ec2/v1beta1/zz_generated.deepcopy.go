@@ -29574,6 +29574,21 @@ func (in *RouteInitParameters_2) DeepCopyInto(out *RouteInitParameters_2) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.InstanceID != nil {
+		in, out := &in.InstanceID, &out.InstanceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.InstanceIDRef != nil {
+		in, out := &in.InstanceIDRef, &out.InstanceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InstanceIDSelector != nil {
+		in, out := &in.InstanceIDSelector, &out.InstanceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.LocalGatewayID != nil {
 		in, out := &in.LocalGatewayID, &out.LocalGatewayID
 		*out = new(string)
@@ -30058,6 +30073,21 @@ func (in *RouteParameters_2) DeepCopyInto(out *RouteParameters_2) {
 	}
 	if in.GatewayIDSelector != nil {
 		in, out := &in.GatewayIDSelector, &out.GatewayIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InstanceID != nil {
+		in, out := &in.InstanceID, &out.InstanceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.InstanceIDRef != nil {
+		in, out := &in.InstanceIDRef, &out.InstanceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.InstanceIDSelector != nil {
+		in, out := &in.InstanceIDSelector, &out.InstanceIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -30893,6 +30923,11 @@ func (in *RouteTableRouteObservation_2) DeepCopyInto(out *RouteTableRouteObserva
 	}
 	if in.IPv6CidrBlock != nil {
 		in, out := &in.IPv6CidrBlock, &out.IPv6CidrBlock
+		*out = new(string)
+		**out = **in
+	}
+	if in.InstanceID != nil {
+		in, out := &in.InstanceID, &out.InstanceID
 		*out = new(string)
 		**out = **in
 	}

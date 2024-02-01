@@ -69,6 +69,7 @@ type StandardsSubscriptionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // StandardsSubscription is the Schema for the StandardsSubscriptions API. Subscribes to a Security Hub standard.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

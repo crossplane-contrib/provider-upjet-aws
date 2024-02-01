@@ -97,6 +97,7 @@ type RegionSettingsStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RegionSettings is the Schema for the RegionSettingss API. Provides an AWS Backup Region Settings resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

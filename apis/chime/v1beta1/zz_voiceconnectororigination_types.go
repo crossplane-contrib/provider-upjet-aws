@@ -168,6 +168,7 @@ type VoiceConnectorOriginationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VoiceConnectorOrigination is the Schema for the VoiceConnectorOriginations API. Enable origination settings to control inbound calling to your SIP infrastructure.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

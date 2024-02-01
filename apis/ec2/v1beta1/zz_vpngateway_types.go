@@ -127,6 +127,7 @@ type VPNGatewayStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPNGateway is the Schema for the VPNGateways API. Provides a resource to create a VPC VPN Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

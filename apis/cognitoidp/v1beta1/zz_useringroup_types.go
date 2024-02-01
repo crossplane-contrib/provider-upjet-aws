@@ -146,6 +146,7 @@ type UserInGroupStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // UserInGroup is the Schema for the UserInGroups API. Adds the specified user to the specified group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

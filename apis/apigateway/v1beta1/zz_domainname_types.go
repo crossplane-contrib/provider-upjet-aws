@@ -296,6 +296,7 @@ type DomainNameStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // DomainName is the Schema for the DomainNames API. Registers a custom domain name for use with AWS API Gateway.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

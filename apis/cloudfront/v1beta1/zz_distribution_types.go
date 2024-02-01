@@ -1698,6 +1698,7 @@ type DistributionStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Distribution is the Schema for the Distributions API. Provides a CloudFront web distribution resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

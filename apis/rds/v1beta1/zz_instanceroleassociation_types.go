@@ -20,7 +20,7 @@ import (
 type InstanceRoleAssociationInitParameters struct {
 
 	// DB Instance Identifier to associate with the IAM Role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
@@ -67,7 +67,7 @@ type InstanceRoleAssociationObservation struct {
 type InstanceRoleAssociationParameters struct {
 
 	// DB Instance Identifier to associate with the IAM Role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
@@ -129,6 +129,7 @@ type InstanceRoleAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // InstanceRoleAssociation is the Schema for the InstanceRoleAssociations API. Manages an RDS DB Instance association with an IAM Role.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

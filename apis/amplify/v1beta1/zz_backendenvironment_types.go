@@ -99,6 +99,7 @@ type BackendEnvironmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BackendEnvironment is the Schema for the BackendEnvironments API. Provides an Amplify Backend Environment resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

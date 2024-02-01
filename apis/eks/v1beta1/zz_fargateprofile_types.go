@@ -217,6 +217,7 @@ type FargateProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // FargateProfile is the Schema for the FargateProfiles API. Manages an EKS Fargate Profile
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

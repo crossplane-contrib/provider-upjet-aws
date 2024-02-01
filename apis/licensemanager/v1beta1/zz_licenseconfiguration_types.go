@@ -142,6 +142,7 @@ type LicenseConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LicenseConfiguration is the Schema for the LicenseConfigurations API. Provides a License Manager license configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

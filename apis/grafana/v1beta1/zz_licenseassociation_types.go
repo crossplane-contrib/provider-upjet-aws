@@ -104,6 +104,7 @@ type LicenseAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LicenseAssociation is the Schema for the LicenseAssociations API. Provides an Amazon Managed Grafana workspace license association resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

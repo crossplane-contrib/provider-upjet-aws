@@ -46,6 +46,17 @@ func Configure(p *config.Provider) {
 			}
 			return conn, nil
 		}
+		r.OverrideFieldNames = map[string]string{
+			"S3ImportParameters":                 "ClusterS3ImportParameters",
+			"S3ImportInitParameters":             "ClusterS3ImportInitParameters",
+			"S3ImportObservation":                "ClusterS3ImportObservation",
+			"RestoreToPointInTimeParameters":     "ClusterRestoreToPointInTimeParameters",
+			"RestoreToPointInTimeInitParameters": "ClusterRestoreToPointInTimeInitParameters",
+			"RestoreToPointInTimeObservation":    "ClusterRestoreToPointInTimeObservation",
+			"MasterUserSecretParameters":         "ClusterMasterUserSecretParameters",
+			"MasterUserSecretInitParameters":     "ClusterMasterUserSecretInitParameters",
+			"MasterUserSecretObservation":        "ClusterMasterUserSecretObservation",
+		}
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
@@ -81,7 +92,7 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
 		r.References["db_subnet_group_name"] = config.Reference{
-			Type: "SubnetGroup",
+			TerraformName: "aws_db_subnet_group",
 		}
 		r.References["kms_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",

@@ -693,6 +693,7 @@ type JavaAppLayerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // JavaAppLayer is the Schema for the JavaAppLayers API. Provides an OpsWorks Java application layer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

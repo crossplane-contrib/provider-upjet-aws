@@ -274,6 +274,7 @@ type VirtualServiceStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VirtualService is the Schema for the VirtualServices API. Provides an AWS App Mesh virtual service resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

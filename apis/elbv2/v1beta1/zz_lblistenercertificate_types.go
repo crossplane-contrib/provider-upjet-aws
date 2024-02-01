@@ -119,6 +119,7 @@ type LBListenerCertificateStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LBListenerCertificate is the Schema for the LBListenerCertificates API. Provides a Load Balancer Listener Certificate resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

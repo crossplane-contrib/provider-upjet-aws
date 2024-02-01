@@ -9,8 +9,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
+	"gopkg.in/yaml.v3"
 
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/types"
 	"github.com/crossplane/upjet/pkg/types/comments"
 	"github.com/crossplane/upjet/pkg/types/name"
@@ -183,6 +185,31 @@ func DocumentationForTags() config.ResourceOption {
 		}
 		if _, ok := r.MetaResource.ArgumentDocs["tags"]; ok {
 			r.MetaResource.ArgumentDocs["tags"] = "- (Optional) Key-value map of resource tags."
+		}
+	}
+}
+
+func injectFieldRenamingConversionFunctions() config.ResourceOption {
+	type fieldRenameConversionData struct {
+		SourceVersion string                       `yaml:"sourceVersion"`
+		TargetVersion string                       `yaml:"targetVersion"`
+		Data          map[string]map[string]string `yaml:"data"`
+	}
+	var data []fieldRenameConversionData
+	if err := yaml.Unmarshal(fieldRename, &data); err != nil {
+		panic(err)
+	}
+	return func(r *config.Resource) {
+		for _, cd := range data {
+			if d, ok := cd.Data[r.Name]; ok {
+				for s, t := range d {
+					r.Version = cd.TargetVersion
+					r.Conversions = append(r.Conversions,
+						conversion.NewFieldRenameConversion(cd.SourceVersion, s, cd.TargetVersion, t),
+						conversion.NewFieldRenameConversion(cd.TargetVersion, t, cd.SourceVersion, s),
+					)
+				}
+			}
 		}
 	}
 }

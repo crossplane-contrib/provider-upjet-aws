@@ -136,6 +136,7 @@ type GroupTagStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GroupTag is the Schema for the GroupTags API. Manages an individual Autoscaling Group tag
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

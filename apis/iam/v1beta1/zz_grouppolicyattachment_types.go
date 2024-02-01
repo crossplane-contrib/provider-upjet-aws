@@ -111,6 +111,7 @@ type GroupPolicyAttachmentStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GroupPolicyAttachment is the Schema for the GroupPolicyAttachments API. Attaches a Managed IAM Policy to an IAM group
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

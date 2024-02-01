@@ -155,6 +155,7 @@ type APIMappingStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // APIMapping is the Schema for the APIMappings API. Manages an Amazon API Gateway Version 2 API mapping.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

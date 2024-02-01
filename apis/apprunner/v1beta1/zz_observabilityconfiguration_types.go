@@ -126,6 +126,7 @@ type ObservabilityConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ObservabilityConfiguration is the Schema for the ObservabilityConfigurations API. Manages an App Runner Observability Configuration.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -127,6 +127,7 @@ type VPCEndpointSecurityGroupAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPCEndpointSecurityGroupAssociation is the Schema for the VPCEndpointSecurityGroupAssociations API. Provides a resource to create an association between a VPC endpoint and a security group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

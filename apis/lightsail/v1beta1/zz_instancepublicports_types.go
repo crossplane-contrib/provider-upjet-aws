@@ -172,6 +172,7 @@ type InstancePublicPortsStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // InstancePublicPorts is the Schema for the InstancePublicPortss API. Provides an Lightsail Instance
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

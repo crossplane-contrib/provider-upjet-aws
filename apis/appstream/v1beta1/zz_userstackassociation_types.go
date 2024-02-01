@@ -119,6 +119,7 @@ type UserStackAssociationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // UserStackAssociation is the Schema for the UserStackAssociations API. Manages an AppStream User Stack association.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -139,6 +139,7 @@ type APICacheStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // APICache is the Schema for the APICaches API. Provides an AppSync API Cache.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -89,6 +89,7 @@ type ThingGroupMembershipStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ThingGroupMembership is the Schema for the ThingGroupMemberships API. Adds an IoT Thing to an IoT Thing Group.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -984,7 +984,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta1", "RoutingProfile", "RoutingProfileList")
+		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta2", "RoutingProfile", "RoutingProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1022,7 +1022,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta1", "RoutingProfile", "RoutingProfileList")
+		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta2", "RoutingProfile", "RoutingProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

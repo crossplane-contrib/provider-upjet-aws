@@ -1475,6 +1475,7 @@ type UserProfileStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // UserProfile is the Schema for the UserProfiles API. Provides a SageMaker User Profile resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

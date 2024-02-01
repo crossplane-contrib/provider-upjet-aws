@@ -260,28 +260,28 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_route", func(r *config.Resource) {
 		r.References["route_table_id"] = config.Reference{
-			Type: "RouteTable",
+			TerraformName: "aws_route_table",
 		}
 		r.References["gateway_id"] = config.Reference{
-			Type: "InternetGateway",
+			TerraformName: "aws_internet_gateway",
 		}
 		r.References["instance_id"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "aws_instance",
 		}
 		r.References["network_interface_id"] = config.Reference{
-			Type: "NetworkInterface",
+			TerraformName: "aws_network_interface",
 		}
 		r.References["transit_gateway_id"] = config.Reference{
-			Type: "TransitGateway",
+			TerraformName: "aws_ec2_transit_gateway",
 		}
 		r.References["vpc_peering_connection_id"] = config.Reference{
-			Type: "VPCPeeringConnection",
+			TerraformName: "aws_vpc_peering_connection",
 		}
 		r.References["vpc_endpoint_id"] = config.Reference{
-			Type: "VPCEndpoint",
+			TerraformName: "aws_vpc_endpoint",
 		}
 		r.References["nat_gateway_id"] = config.Reference{
-			Type: "NATGateway",
+			TerraformName: "aws_nat_gateway",
 		}
 		r.References["destination_prefix_list_id"] = config.Reference{
 			TerraformName: "aws_ec2_managed_prefix_list",

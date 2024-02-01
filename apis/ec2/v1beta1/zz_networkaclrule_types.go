@@ -189,6 +189,7 @@ type NetworkACLRuleStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // NetworkACLRule is the Schema for the NetworkACLRules API. Provides an network ACL Rule resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

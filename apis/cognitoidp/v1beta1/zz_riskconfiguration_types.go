@@ -568,6 +568,7 @@ type RiskConfigurationStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RiskConfiguration is the Schema for the RiskConfigurations API. Provides a Cognito Risk Configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

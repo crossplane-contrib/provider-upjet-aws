@@ -348,6 +348,7 @@ type ResolverStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Resolver is the Schema for the Resolvers API. Provides an AppSync Resolver.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

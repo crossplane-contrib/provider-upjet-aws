@@ -82,6 +82,7 @@ type ReceiptFilterStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ReceiptFilter is the Schema for the ReceiptFilters API. Provides an SES receipt filter
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

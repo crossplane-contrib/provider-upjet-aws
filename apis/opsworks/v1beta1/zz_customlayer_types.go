@@ -756,6 +756,7 @@ type CustomLayerStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // CustomLayer is the Schema for the CustomLayers API. Provides an OpsWorks custom layer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"

@@ -86,6 +86,7 @@ type SAMLProviderStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SAMLProvider is the Schema for the SAMLProviders API. Provides an IAM SAML provider.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
