@@ -26,5 +26,3 @@
     aws_route:
       spec.forProvider.instanceId: spec.forProvider.networkInterfaceId
       spec.initProvider.instanceId: spec.initProvider.networkInterfaceId
-    aws_route_table:
-      status.atProvider.route.instanceId:  status.atProvider.route.networkInterfaceId

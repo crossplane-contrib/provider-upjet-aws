@@ -32,19 +32,3 @@ func (tr *Route) ConvertFrom(srcRaw conversion.Hub) error {
 	}
 	return nil
 }
-
-// ConvertTo converts this RouteTable to the hub type.
-func (tr *RouteTable) ConvertTo(dstRaw conversion.Hub) error {
-	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
-		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", tr.GetObjectKind().GroupVersionKind().Version, dstRaw.GetObjectKind().GroupVersionKind().Version)
-	}
-	return nil
-}
-
-// ConvertFrom converts from the hub type to the RouteTable type.
-func (tr *RouteTable) ConvertFrom(srcRaw conversion.Hub) error {
-	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
-		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", srcRaw.GetObjectKind().GroupVersionKind().Version, tr.GetObjectKind().GroupVersionKind().Version)
-	}
-	return nil
-}
