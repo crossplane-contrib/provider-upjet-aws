@@ -111,7 +111,7 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
 
-		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config), "could not configure no-fork AWS client")
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config), "could not configure the no-fork AWS client")
 	}
 }
 

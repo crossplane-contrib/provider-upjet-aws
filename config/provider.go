@@ -190,7 +190,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
 		config.WithIncludeList(CLIReconciledResourceList()),
-		config.WithNoForkIncludeList(NoForkResourceList()),
+		config.WithTerraformPluginSDKIncludeList(TerraformPluginSDKResourceList()),
 		config.WithTerraformPluginFrameworkIncludeList(TerraformPluginFrameworkResourceList()),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
@@ -320,13 +320,13 @@ func CLIReconciledResourceList() []string {
 	return l
 }
 
-// NoForkResourceList returns the list of resources that have external
+// TerraformPluginSDKResourceList returns the list of resources that have external
 // name configured in ExternalNameConfigs table and to be reconciled under
 // the no-fork architecture.
-func NoForkResourceList() []string {
-	l := make([]string, len(NoForkExternalNameConfigs))
+func TerraformPluginSDKResourceList() []string {
+	l := make([]string, len(TerraformPluginSDKExternalNameConfigs))
 	i := 0
-	for name := range NoForkExternalNameConfigs {
+	for name := range TerraformPluginSDKExternalNameConfigs {
 		// Expected format is regex, and we'd like to have exact matches.
 		l[i] = name + "$"
 		i++
