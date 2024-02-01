@@ -96,7 +96,7 @@ type RouteInitParameters struct {
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the routing table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
 	// Reference to a RouteTable in ec2 to populate routeTableId.
@@ -298,7 +298,7 @@ type RouteParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the routing table.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
