@@ -11,7 +11,6 @@ import (
 	"unsafe"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/terraform"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -44,30 +43,18 @@ const (
 )
 
 type SetupConfig struct {
-	NativeProviderPath    *string
-	NativeProviderSource  *string
-	NativeProviderVersion *string
-	TerraformVersion      *string
-	DefaultScheduler      terraform.ProviderScheduler
-	TerraformProvider     *schema.Provider
-	AWSClient             *xpprovider.AWSClient
+	TerraformProvider *schema.Provider
+	AWSClient         *xpprovider.AWSClient
 }
 
-func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
+func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
 		var err error
 		if err = c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
 			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced Provider: %s", mg.GetProviderConfigReference().Name)
 		}
-		ps := terraform.Setup{
-			Version: *config.TerraformVersion,
-			Requirement: terraform.ProviderRequirement{
-				Source:  *config.NativeProviderSource,
-				Version: *config.NativeProviderVersion,
-			},
-			Scheduler: config.DefaultScheduler,
-		}
+		ps := terraform.Setup{}
 		awsCfg, err := getAWSConfig(ctx, c, mg)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get aws config")
@@ -94,11 +81,6 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			err = DefaultTerraformSetupBuilder(ctx, pc, &ps, awsCfg, creds)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
-			}
-			// we cannot use the shared scheduler here.
-			// We will force a workspace scheduler if we can configure one.
-			if len(*config.NativeProviderPath) != 0 {
-				ps.Scheduler = terraform.NewWorkspaceProviderScheduler(log, terraform.WithNativeProviderPath(*config.NativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*config.NativeProviderSource))
 			}
 		} else {
 			err = pushDownTerraformSetupBuilder(ctx, c, pc, &ps, awsCfg)
