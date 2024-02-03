@@ -1,28 +1,45 @@
----
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPool
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpoolclient
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: userpoolclient
+  name: userpoolclient
 spec:
   forProvider:
-    name: example
+    name: userpoolclient
     region: us-west-1
 
 ---
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolClient
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cognitoidp/v1beta1/userpoolclient
+  labels:
+    testing.upbound.io/example-name: userpoolclient
+  name: userpoolclient
+spec:
+  forProvider:
+    name: userpoolclient
+    region: us-west-1
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: userpoolclient
 
+---
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
 kind: UserPoolClient
 metadata:
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: userpoolclient
+  name: userpoolclient-with-dashes
 spec:
   forProvider:
-    name: example
+    name: name-that-doesnt-match-id-regex
     region: us-west-1
     userPoolIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: userpoolclient
 
