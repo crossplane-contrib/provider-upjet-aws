@@ -410,6 +410,27 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchserverlessConfiguration); i3++ {
 		{
+			m, l, err = apisresolver.GetManagedResource("opensearchserverless.aws.upbound.io", "v1beta1", "Collection", "CollectionList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].CollectionEndpoint),
+				Extract:      resource.ExtractParamPath("collection_endpoint", true),
+				Reference:    mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].CollectionEndpointRef,
+				Selector:     mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].CollectionEndpointSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].CollectionEndpoint")
+		}
+		mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].CollectionEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.OpensearchserverlessConfiguration[i3].CollectionEndpointRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.OpensearchserverlessConfiguration); i3++ {
+		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -1014,6 +1035,27 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			mg.Spec.InitProvider.OpensearchConfiguration[i3].VPCConfig[i4].RoleArnRef = rsp.ResolvedReference
 
 		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OpensearchserverlessConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("opensearchserverless.aws.upbound.io", "v1beta1", "Collection", "CollectionList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OpensearchserverlessConfiguration[i3].CollectionEndpoint),
+				Extract:      resource.ExtractParamPath("collection_endpoint", true),
+				Reference:    mg.Spec.InitProvider.OpensearchserverlessConfiguration[i3].CollectionEndpointRef,
+				Selector:     mg.Spec.InitProvider.OpensearchserverlessConfiguration[i3].CollectionEndpointSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.OpensearchserverlessConfiguration[i3].CollectionEndpoint")
+		}
+		mg.Spec.InitProvider.OpensearchserverlessConfiguration[i3].CollectionEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OpensearchserverlessConfiguration[i3].CollectionEndpointRef = rsp.ResolvedReference
+
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.OpensearchserverlessConfiguration); i3++ {
 		{

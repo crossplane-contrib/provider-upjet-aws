@@ -656,6 +656,12 @@ import (
 	domainopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domain"
 	domainpolicyopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domainpolicy"
 	domainsamloptionsopensearch "github.com/upbound/provider-aws/internal/controller/opensearch/domainsamloptions"
+	accesspolicy "github.com/upbound/provider-aws/internal/controller/opensearchserverless/accesspolicy"
+	collection "github.com/upbound/provider-aws/internal/controller/opensearchserverless/collection"
+	lifecyclepolicyopensearchserverless "github.com/upbound/provider-aws/internal/controller/opensearchserverless/lifecyclepolicy"
+	securityconfig "github.com/upbound/provider-aws/internal/controller/opensearchserverless/securityconfig"
+	securitypolicy "github.com/upbound/provider-aws/internal/controller/opensearchserverless/securitypolicy"
+	vpcendpointopensearchserverless "github.com/upbound/provider-aws/internal/controller/opensearchserverless/vpcendpoint"
 	applicationopsworks "github.com/upbound/provider-aws/internal/controller/opsworks/application"
 	customlayer "github.com/upbound/provider-aws/internal/controller/opsworks/customlayer"
 	ecsclusterlayer "github.com/upbound/provider-aws/internal/controller/opsworks/ecsclusterlayer"
@@ -1588,6 +1594,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		domainopensearch.Setup,
 		domainpolicyopensearch.Setup,
 		domainsamloptionsopensearch.Setup,
+		accesspolicy.Setup,
+		collection.Setup,
+		lifecyclepolicyopensearchserverless.Setup,
+		securityconfig.Setup,
+		securitypolicy.Setup,
+		vpcendpointopensearchserverless.Setup,
 		applicationopsworks.Setup,
 		customlayer.Setup,
 		ecsclusterlayer.Setup,
