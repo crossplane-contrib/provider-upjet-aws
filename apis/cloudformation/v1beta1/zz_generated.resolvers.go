@@ -117,3 +117,53 @@ func (mg *StackSet) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 	return nil
 }
+
+// ResolveReferences of this StackSetInstance.
+func (mg *StackSetInstance) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudformation.aws.upbound.io", "v1beta1", "StackSet", "StackSetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StackSetName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.StackSetNameRef,
+			Selector:     mg.Spec.ForProvider.StackSetNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StackSetName")
+	}
+	mg.Spec.ForProvider.StackSetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StackSetNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cloudformation.aws.upbound.io", "v1beta1", "StackSet", "StackSetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StackSetName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.StackSetNameRef,
+			Selector:     mg.Spec.InitProvider.StackSetNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StackSetName")
+	}
+	mg.Spec.InitProvider.StackSetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StackSetNameRef = rsp.ResolvedReference
+
+	return nil
+}

@@ -11,6 +11,7 @@ import (
 
 	stack "github.com/upbound/provider-aws/internal/controller/cloudformation/stack"
 	stackset "github.com/upbound/provider-aws/internal/controller/cloudformation/stackset"
+	stacksetinstance "github.com/upbound/provider-aws/internal/controller/cloudformation/stacksetinstance"
 )
 
 // Setup_cloudformation creates all controllers with the supplied logger and adds them to
@@ -19,6 +20,7 @@ func Setup_cloudformation(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		stack.Setup,
 		stackset.Setup,
+		stacksetinstance.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
