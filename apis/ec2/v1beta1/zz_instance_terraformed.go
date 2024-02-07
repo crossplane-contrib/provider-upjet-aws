@@ -25,7 +25,7 @@ func (mg *Instance) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Instance
 func (tr *Instance) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"user_data_base64": "spec.forProvider.userDataBase64SecretRef"}
 }
 
 // GetObservation of this Instance

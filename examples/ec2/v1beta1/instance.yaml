@@ -1,8 +1,7 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: Instance
+kind: VPC
 metadata:
   annotations:
-    uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: ec2/v1beta1/instance
   labels:
     testing.upbound.io/example-name: sample-instance
@@ -10,20 +9,16 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    ami: ami-07b068f843ec78e72
-    instanceType: t2.micro
-    networkInterface:
-    - deviceIndex: 0
-      networkInterfaceIdSelector:
-        matchLabels:
-          testing.upbound.io/example-name: sample-instance
-    creditSpecification:
-    - cpuCredits: unlimited
+    cidrBlock: 172.16.0.0/16
+    enableDnsHostnames: true
+    enableDnsSupport: true
+    tags:
+      Name: DemoVpc
 
 ---
 
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: NetworkInterface
+kind: InternetGateway
 metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/instance
@@ -33,11 +28,11 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    subnetIdSelector:
+    tags:
+      Name: DemoIGW
+    vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sample-instance
-    privateIps:
-      - "172.16.10.100"
 
 ---
 
@@ -47,8 +42,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/instance
   labels:
-    testing.upbound.io/example-name: sample-instance
-  name: sample-instance
+    testing.upbound.io/example-name: sample-instance-private
+  name: sample-instance-private
 spec:
   forProvider:
     region: us-west-1
@@ -61,7 +56,48 @@ spec:
 ---
 
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPC
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance-public
+  name: sample-instance-public
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+    cidrBlock: 172.16.11.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NATGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    allocationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance-public
+    tags:
+      Name: DemoNATGW
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: EIP
 metadata:
   annotations:
     meta.upbound.io/example-id: ec2/v1beta1/instance
@@ -71,6 +107,411 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    cidrBlock: 172.16.0.0/16
+    vpc: true
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance-private
+  name: sample-instance-private
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance-public
+  name: sample-instance-public
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance-public
+  name: sample-instance-public
+spec:
+  forProvider:
+    destinationCidrBlock: 0.0.0.0/0
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+    region: us-west-1
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance-public
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance-private
+  name: sample-instance-private
+spec:
+  forProvider:
+    destinationCidrBlock: 0.0.0.0/0
+    natGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+    region: us-west-1
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance-private
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance-private
+  name: sample-instance-private
+spec:
+  forProvider:
+    region: us-west-1
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance-private
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance-private
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance-public
+  name: sample-instance-public
+spec:
+  forProvider:
+    region: us-west-1
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance-public
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance-public
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: ec2-instance
+  name: ec2-instance
+spec:
+  forProvider:
+    description: ec2-instance
+    name: ec2-instance
+    region: us-west-1
     tags:
-      Name: DemoVpc
+      Name: sg-ec2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupEgressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: ec2-instance-443-outbound
+  name: ec2-instance-443-outbound
+spec:
+  forProvider:
+    cidrIpv4: 0.0.0.0/0
+    fromPort: 443
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ec2-instance
+    toPort: 443
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: ec2-endpoint
+  name: ec2-endpoint
+spec:
+  forProvider:
+    description: ec2-endpoint
+    name: ec2-endpoint
+    region: us-west-1
+    tags:
+      Name: sg-ec2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupIngressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: ec2-endpoint-443-inbound
+  name: ec2-endpoint-443-inbound
+spec:
+  forProvider:
+    cidrIpv4: 172.16.0.0/16
+    fromPort: 443
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ec2-endpoint
+    toPort: 443
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: ec2messages
+  name: ec2messages
+spec:
+  forProvider:
+    region: us-west-1
+    serviceName: com.amazonaws.us-west-1.ec2messages
+    vpcEndpointType: Interface
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: ssmmessages
+  name: ssmmessages
+spec:
+  forProvider:
+    region: us-west-1
+    serviceName: com.amazonaws.us-west-1.ssmmessages
+    vpcEndpointType: Interface
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: ssm
+  name: ssm
+spec:
+  forProvider:
+    region: us-west-1
+    serviceName: com.amazonaws.us-west-1.ssm
+    vpcEndpointType: Interface
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpointSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sg-ec2messages-vpcendpoint
+  name: sg-ec2messages-vpcendpoint
+spec:
+  forProvider:
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ec2-endpoint
+    vpcEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ec2messages
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpointSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sg-ssmmessages-vpcendpoint
+  name: sg-ssmmessages-vpcendpoint
+spec:
+  forProvider:
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ec2-endpoint
+    vpcEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssmmessages
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPCEndpointSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sg-ssm-vpcendpoint
+  name: sg-ssm-vpcendpoint
+spec:
+  forProvider:
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ec2-endpoint
+    vpcEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ssm
+
+---
+
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
+  name: sample-instance
+spec:
+  forProvider:
+    managedPolicyArns:
+      - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: InstanceProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
+  name: sample-instance
+spec:
+  forProvider:
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Instance
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
+  name: sample-instance
+spec:
+  forProvider:
+    region: us-west-1
+    ami: ami-015e832ac6a60f0de
+    instanceType: t2.micro
+    vpcSecurityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ec2-instance
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample-instance-private
+    iamInstanceProfile: sample-instance
+    userDataBase64SecretRef:
+      key: userdata
+      name: instance-user-data
+      namespace: upbound-system
+    creditSpecification:
+    - cpuCredits: unlimited
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/instance
+  labels:
+    testing.upbound.io/example-name: sample-instance
+  name: instance-user-data
+  namespace: upbound-system
+type: Opaque
+stringData:
+  userdata: ICAgICMhL2Jpbi9iYXNoCiAgICBzdWRvIGFwdC1nZXQgdXBkYXRlCg==

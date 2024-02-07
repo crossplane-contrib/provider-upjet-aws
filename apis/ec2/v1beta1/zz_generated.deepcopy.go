@@ -14797,16 +14797,6 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.UserData != nil {
-		in, out := &in.UserData, &out.UserData
-		*out = new(string)
-		**out = **in
-	}
-	if in.UserDataBase64 != nil {
-		in, out := &in.UserDataBase64, &out.UserDataBase64
-		*out = new(string)
-		**out = **in
-	}
 	if in.UserDataReplaceOnChange != nil {
 		in, out := &in.UserDataReplaceOnChange, &out.UserDataReplaceOnChange
 		*out = new(bool)
@@ -15560,11 +15550,6 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.UserDataBase64 != nil {
-		in, out := &in.UserDataBase64, &out.UserDataBase64
-		*out = new(string)
-		**out = **in
-	}
 	if in.UserDataReplaceOnChange != nil {
 		in, out := &in.UserDataReplaceOnChange, &out.UserDataReplaceOnChange
 		*out = new(bool)
@@ -15876,14 +15861,9 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.UserData != nil {
-		in, out := &in.UserData, &out.UserData
-		*out = new(string)
-		**out = **in
-	}
-	if in.UserDataBase64 != nil {
-		in, out := &in.UserDataBase64, &out.UserDataBase64
-		*out = new(string)
+	if in.UserDataBase64SecretRef != nil {
+		in, out := &in.UserDataBase64SecretRef, &out.UserDataBase64SecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.UserDataReplaceOnChange != nil {

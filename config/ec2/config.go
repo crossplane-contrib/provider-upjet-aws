@@ -54,6 +54,8 @@ func Configure(p *config.Provider) {
 			},
 		}
 		config.MoveToStatus(r.TerraformResource, "security_groups")
+		r.TerraformResource.Schema["user_data_base64"].Sensitive = true
+		config.MoveToStatus(r.TerraformResource, "user_data")
 	})
 	p.AddResourceConfigurator("aws_eip", func(r *config.Resource) {
 		r.References["instance"] = config.Reference{

@@ -865,15 +865,7 @@ spec:
                       hardware. The host tenancy is not supported for the import-instance
                       command. Valid values are default, dedicated, and host.
                     type: string
-                  userData:
-                    description: User data to provide when launching the instance.
-                      Do not pass gzip-compressed data via this argument; see user_data_base64
-                      instead. Updates to this field will trigger a stop/start of
-                      the EC2 instance by default. If the user_data_replace_on_change
-                      is set then updates to this field will trigger a destroy and
-                      recreate.
-                    type: string
-                  userDataBase64:
+                  userDataBase64SecretRef:
                     description: Can be used instead of user_data to pass base64-encoded
                       binary data directly. Use this instead of user_data whenever
                       the value is not a valid UTF-8 string. For example, gzip-encoded
@@ -882,7 +874,21 @@ spec:
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
                       recreate.
-                    type: string
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
                       will trigger a destroy and recreate when set to true. Defaults
@@ -1786,24 +1792,6 @@ spec:
                       hardware. The host tenancy is not supported for the import-instance
                       command. Valid values are default, dedicated, and host.
                     type: string
-                  userData:
-                    description: User data to provide when launching the instance.
-                      Do not pass gzip-compressed data via this argument; see user_data_base64
-                      instead. Updates to this field will trigger a stop/start of
-                      the EC2 instance by default. If the user_data_replace_on_change
-                      is set then updates to this field will trigger a destroy and
-                      recreate.
-                    type: string
-                  userDataBase64:
-                    description: Can be used instead of user_data to pass base64-encoded
-                      binary data directly. Use this instead of user_data whenever
-                      the value is not a valid UTF-8 string. For example, gzip-encoded
-                      user data must be base64-encoded and passed via this argument
-                      to avoid corruption. Updates to this field will trigger a stop/start
-                      of the EC2 instance by default. If the user_data_replace_on_change
-                      is set then updates to this field will trigger a destroy and
-                      recreate.
-                    type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
                       will trigger a destroy and recreate when set to true. Defaults
@@ -2633,16 +2621,6 @@ spec:
                       Do not pass gzip-compressed data via this argument; see user_data_base64
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
-                      is set then updates to this field will trigger a destroy and
-                      recreate.
-                    type: string
-                  userDataBase64:
-                    description: Can be used instead of user_data to pass base64-encoded
-                      binary data directly. Use this instead of user_data whenever
-                      the value is not a valid UTF-8 string. For example, gzip-encoded
-                      user data must be base64-encoded and passed via this argument
-                      to avoid corruption. Updates to this field will trigger a stop/start
-                      of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
                       recreate.
                     type: string
