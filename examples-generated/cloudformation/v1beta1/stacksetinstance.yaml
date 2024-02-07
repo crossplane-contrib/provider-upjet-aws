@@ -1,0 +1,15 @@
+apiVersion: cloudformation.aws.upbound.io/v1beta1
+kind: StackSetInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudformation/v1beta1/stacksetinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountId: "123456789012"
+    region: us-west-1
+    stackSetNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -31,6 +31,7 @@ import (
 	"github.com/upbound/provider-aws/config/autoscaling"
 	"github.com/upbound/provider-aws/config/backup"
 	"github.com/upbound/provider-aws/config/budgets"
+	"github.com/upbound/provider-aws/config/cloudformation"
 	"github.com/upbound/provider-aws/config/cloudfront"
 	"github.com/upbound/provider-aws/config/cloudsearch"
 	"github.com/upbound/provider-aws/config/cloudwatch"
@@ -302,6 +303,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		ssoadmin.Configure,
 		identitystore.Configure,
 		iot.Configure,
+		cloudformation.Configure,
 	} {
 		configure(pc)
 	}

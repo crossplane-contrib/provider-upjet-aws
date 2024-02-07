@@ -1712,6 +1712,10 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
+	// Cloudformation Stacks Instances imported using the StackSet name, target
+	// AWS account ID, and target AWS region separated with commas:
+	// example,123456789012,us-east-1
+	"aws_cloudformation_stack_set_instance": config.IdentifierFromProvider,
 
 	// autoscaling
 	//

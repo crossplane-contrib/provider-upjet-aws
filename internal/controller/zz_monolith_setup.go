@@ -141,6 +141,7 @@ import (
 	resourcecloudcontrol "github.com/upbound/provider-aws/internal/controller/cloudcontrol/resource"
 	stackcloudformation "github.com/upbound/provider-aws/internal/controller/cloudformation/stack"
 	stackset "github.com/upbound/provider-aws/internal/controller/cloudformation/stackset"
+	stacksetinstance "github.com/upbound/provider-aws/internal/controller/cloudformation/stacksetinstance"
 	cachepolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/cachepolicy"
 	distribution "github.com/upbound/provider-aws/internal/controller/cloudfront/distribution"
 	fieldlevelencryptionconfig "github.com/upbound/provider-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
@@ -1072,6 +1073,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcecloudcontrol.Setup,
 		stackcloudformation.Setup,
 		stackset.Setup,
+		stacksetinstance.Setup,
 		cachepolicy.Setup,
 		distribution.Setup,
 		fieldlevelencryptionconfig.Setup,
