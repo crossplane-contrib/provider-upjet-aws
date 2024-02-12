@@ -11,6 +11,7 @@ import (
 	"unsafe"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/terraform"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -34,6 +35,7 @@ const (
 	keyRoleArn                   = "role_arn"
 	keySessionName               = "session_name"
 	keyWebIdentityTokenFile      = "web_identity_token_file"
+	keyWebIdentityToken          = "web_identity_token"
 	keySkipCredsValidation       = "skip_credentials_validation"
 	keyS3UsePathStyle            = "s3_use_path_style"
 	keySkipMetadataApiCheck      = "skip_metadata_api_check"
@@ -113,8 +115,21 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, pc *v1b
 			return errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
 		}
 		webIdentityConfig := map[string]any{
-			keyRoleArn:              aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
-			keyWebIdentityTokenFile: os.Getenv(envWebIdentityTokenFile),
+			keyRoleArn: aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
+		}
+		if pc.Spec.Credentials.WebIdentity.TokenConfig != nil {
+			tokenSelector := xpv1.CommonCredentialSelectors{
+				Fs:        pc.Spec.Credentials.WebIdentity.TokenConfig.Fs,
+				SecretRef: pc.Spec.Credentials.WebIdentity.TokenConfig.SecretRef,
+			}
+			creds, err := resource.CommonCredentialExtractor(ctx, pc.Spec.Credentials.WebIdentity.TokenConfig.Source, c, tokenSelector)
+			if err != nil {
+				return errors.Wrap(err, "cannot extract token")
+			}
+			webIdentityConfig[keyWebIdentityToken] = string(creds)
+		} else {
+			// fallback to deprecated behavior with environment variables
+			webIdentityConfig[keyWebIdentityTokenFile] = os.Getenv(envWebIdentityTokenFile)
 		}
 		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
 			webIdentityConfig[keySessionName] = pc.Spec.Credentials.WebIdentity.RoleSessionName

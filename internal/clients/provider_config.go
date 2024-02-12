@@ -25,6 +25,7 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
+	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
@@ -44,6 +45,7 @@ const (
 	authKeySecret = "Secret"
 
 	envWebIdentityTokenFile = "AWS_WEB_IDENTITY_TOKEN_FILE"
+	envWebIdentityRoleARN   = "AWS_ROLE_ARN"
 	errRoleChainConfig      = "failed to load assumed role AWS config"
 	errAWSConfig            = "failed to get AWS config"
 	errAWSConfigIRSA        = "failed to get AWS config using IAM Roles for Service Accounts"
@@ -110,7 +112,7 @@ func GetAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 			return nil, errors.Wrap(err, errAWSConfigIRSA)
 		}
 	case authKeyWebIdentity:
-		cfg, err = UseWebIdentityToken(ctx, region, &pc.Spec)
+		cfg, err = UseWebIdentityToken(ctx, region, &pc.Spec, c)
 		if err != nil {
 			return nil, errors.Wrap(err, errAWSConfigWebIdentity)
 		}
@@ -318,6 +320,26 @@ func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, we
 	return &awsConfig, nil
 }
 
+// GetAssumeRoleWithWebIdentityConfigViaTokenRetriever returns an aws.Config capable of doing
+// AssumeRoleWithWebIdentity using the token obtained from the supplied stscreds.IdentityTokenRetriever.
+func GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx context.Context, cfg *aws.Config, webID v1beta1.AssumeRoleWithWebIdentityOptions, tokenRetriever stscreds.IdentityTokenRetriever) (*aws.Config, error) {
+	stsclient := sts.NewFromConfig(*cfg, stsRegionOrDefault(cfg.Region))
+	awsConfig, err := config.LoadDefaultConfig(
+		ctx,
+		userAgentV2,
+		config.WithRegion(cfg.Region),
+		config.WithCredentialsProvider(aws.NewCredentialsCache(
+			stscreds.NewWebIdentityRoleProvider(
+				stsclient,
+				aws.ToString(webID.RoleARN),
+				tokenRetriever,
+				SetWebIdentityRoleOptions(webID),
+			)),
+		),
+	)
+	return &awsConfig, errors.Wrap(err, "failed to assume role via web identity")
+}
+
 // UseDefault loads the default AWS config with the specified region.
 func UseDefault(ctx context.Context, region string) (*aws.Config, error) {
 	if region == GlobalRegion {
@@ -338,18 +360,74 @@ func UseDefault(ctx context.Context, region string) (*aws.Config, error) {
 	return &cfg, nil
 }
 
+type xpWebIdentityTokenRetriever struct {
+	ctx           context.Context
+	kube          client.Client
+	tokenSource   v1.CredentialsSource
+	tokenSelector v1.CommonCredentialSelectors
+}
+
+func (x *xpWebIdentityTokenRetriever) GetIdentityToken() ([]byte, error) {
+	token, err := resource.CommonCredentialExtractor(x.ctx, x.tokenSource, x.kube, x.tokenSelector)
+	return token, errors.Wrap(err, "could not extract token from tokenSource")
+}
+
 // UseWebIdentityToken calls sts.AssumeRoleWithWebIdentity using
 // the configuration supplied in ProviderConfig's
 // spec.credentials.assumeRoleWithWebIdentity.
-func UseWebIdentityToken(ctx context.Context, region string, pcs *v1beta1.ProviderConfigSpec) (*aws.Config, error) {
+func UseWebIdentityToken(ctx context.Context, region string, pcs *v1beta1.ProviderConfigSpec, kube client.Client) (*aws.Config, error) {
+	if pcs.Credentials.WebIdentity == nil {
+		return nil, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
+	}
+
+	// this is to preserve backward compatibility with
+	// 0.x providers working with >=1.x ProviderConfig API
+	// TODO: when configuring via AWS environment variable support is removed
+	// tokenConfig should be mandatory and this should return an error
+	if pcs.Credentials.WebIdentity.TokenConfig == nil {
+		cfg, err := UseDefault(ctx, region)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to get default AWS config")
+		}
+		return GetAssumeRoleWithWebIdentityConfig(ctx, cfg, *pcs.Credentials.WebIdentity, os.Getenv(envWebIdentityTokenFile))
+	}
+
+	// new behavior with tokenConfig in
+	// spec.credentials.webIdentity.tokenConfig
+	// the new behavior with tokenConfig does not rely on
+	// the AWS environment variables AWS_WEB_IDENTITY_TOKEN_FILE
+	// and AWS_ROLE_ARN.
+	// However, we start by constructing a default AWS config and
+	// AWS SDK enforces that when AWS_WEB_IDENTITY_TOKEN_FILE environment
+	// variable is set AWS_ROLE_ARN must be present.
+	// Otherwise, constructing the default AWS config fails.
+	// Hence, either both env vars must be set
+	// (to support the case where the controller pod has extra AWS IRSA config
+	// which should be automatically injecting AWS_WEB_IDENTITY_TOKEN_FILE
+	// and AWS_ROLE_ARN environment variables already)
+	// or AWS_WEB_IDENTITY_TOKEN_FILE must not exist at all.
+	_, foundTokenEnv := os.LookupEnv(envWebIdentityTokenFile)
+	_, foundRoleArnEnv := os.LookupEnv(envWebIdentityRoleARN)
+	if foundTokenEnv && !foundRoleArnEnv {
+		return nil, errors.Errorf("if you intend to use IRSA together with WebIdentity auth, environment variable %s must be set together with %s. If only WebIdentity auth without any IRSA configuration is intended, %s must be unset",
+			envWebIdentityRoleARN, envWebIdentityTokenFile, envWebIdentityTokenFile)
+	}
+
 	cfg, err := UseDefault(ctx, region)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to get default AWS config")
 	}
-	if pcs.Credentials.WebIdentity == nil {
-		return nil, errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
+	tokenRetriever := &xpWebIdentityTokenRetriever{
+		ctx:         ctx,
+		kube:        kube,
+		tokenSource: pcs.Credentials.WebIdentity.TokenConfig.Source,
+		tokenSelector: v1.CommonCredentialSelectors{
+			Fs:        pcs.Credentials.WebIdentity.TokenConfig.Fs,
+			SecretRef: pcs.Credentials.WebIdentity.TokenConfig.SecretRef,
+		},
 	}
-	return GetAssumeRoleWithWebIdentityConfig(ctx, cfg, *pcs.Credentials.WebIdentity, os.Getenv(envWebIdentityTokenFile))
+
+	return GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx, cfg, *pcs.Credentials.WebIdentity, tokenRetriever)
 }
 
 // UseUpbound calls sts.AssumeRoleWithWebIdentity using the configuration

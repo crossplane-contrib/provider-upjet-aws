@@ -157,6 +157,50 @@ spec:
                             description: RoleSessionName is the session name, if you
                               wish to uniquely identify this session.
                             type: string
+                          tokenConfig:
+                            description: TokenConfig is the Web Identity Token config
+                              to assume the role.
+                            properties:
+                              fs:
+                                description: Fs is a reference to a filesystem location
+                                  that contains credentials that must be used to obtain
+                                  the web identity token.
+                                properties:
+                                  path:
+                                    description: Path is a filesystem path.
+                                    type: string
+                                required:
+                                - path
+                                type: object
+                              secretRef:
+                                description: A SecretRef is a reference to a secret
+                                  key that contains the credentials that must be used
+                                  to obtain the web identity token.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              source:
+                                description: Source is the source of the web identity
+                                  token.
+                                enum:
+                                - Secret
+                                - Filesystem
+                                type: string
+                            required:
+                            - source
+                            type: object
                         type: object
                     type: object
                   webIdentity:
@@ -170,6 +214,50 @@ spec:
                         description: RoleSessionName is the session name, if you wish
                           to uniquely identify this session.
                         type: string
+                      tokenConfig:
+                        description: TokenConfig is the Web Identity Token config
+                          to assume the role.
+                        properties:
+                          fs:
+                            description: Fs is a reference to a filesystem location
+                              that contains credentials that must be used to obtain
+                              the web identity token.
+                            properties:
+                              path:
+                                description: Path is a filesystem path.
+                                type: string
+                            required:
+                            - path
+                            type: object
+                          secretRef:
+                            description: A SecretRef is a reference to a secret key
+                              that contains the credentials that must be used to obtain
+                              the web identity token.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          source:
+                            description: Source is the source of the web identity
+                              token.
+                            enum:
+                            - Secret
+                            - Filesystem
+                            type: string
+                        required:
+                        - source
+                        type: object
                     type: object
                 required:
                 - source
