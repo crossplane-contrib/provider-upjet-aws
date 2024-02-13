@@ -57,7 +57,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// LifecyclePolicy can be imported using the policy name
 	"aws_opensearchserverless_lifecycle_policy": opensearchserverlessLifecyclePolicy(),
 	//  SecurityConfig can be imported using the AWS-assigned security config ID
-	"aws_opensearchserverless_security_config": opensearchserverlessSecurityConfig(),
+	"aws_opensearchserverless_security_config": config.TemplatedStringAsIdentifier("", "{{ .parameters.type }}/{{ .setup.client_metadata.account_id }}/{{ .external_name }}"),
 	// SecurityPolicy can be imported using the policy name
 	"aws_opensearchserverless_security_policy": opensearchserverlessSecurityPolicy(),
 	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
@@ -2917,17 +2917,6 @@ func opensearchserverlessLifecyclePolicy() config.ExternalName {
 				return pName, nil
 			}
 			return "stub-lifecyclepol-9999", fmt.Errorf("name field is empty")
-		}
-		return externalName, nil
-	}
-	return e
-}
-
-func opensearchserverlessSecurityConfig() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
-		if len(externalName) == 0 {
-			return "stub-secconfig-9999", nil
 		}
 		return externalName, nil
 	}

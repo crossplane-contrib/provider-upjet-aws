@@ -9,6 +9,8 @@ import (
 	"reflect"
 	"unsafe"
 
+	"github.com/upbound/provider-aws/config/opensearchserverless"
+
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
@@ -272,6 +274,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		neptune.Configure,
 		networkfirewall.Configure,
 		opensearch.Configure,
+		opensearchserverless.Configure,
 		ram.Configure,
 		rds.Configure,
 		redshift.Configure,

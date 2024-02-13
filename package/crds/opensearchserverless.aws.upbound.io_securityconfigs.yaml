@@ -76,6 +76,24 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  samlOptions:
+                    description: Configuration block for SAML options.
+                    properties:
+                      groupAttribute:
+                        description: Group attribute for this SAML integration.
+                        type: string
+                      metadata:
+                        description: The XML IdP metadata file generated from your
+                          identity provider.
+                        type: string
+                      sessionTimeout:
+                        description: Session timeout, in minutes. Minimum is 5 minutes
+                          and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                        type: number
+                      userAttribute:
+                        description: User attribute for this SAML integration.
+                        type: string
+                    type: object
                   type:
                     description: Type of configuration. Must be saml.
                     type: string
@@ -100,6 +118,24 @@ spec:
                   name:
                     description: Name of the policy.
                     type: string
+                  samlOptions:
+                    description: Configuration block for SAML options.
+                    properties:
+                      groupAttribute:
+                        description: Group attribute for this SAML integration.
+                        type: string
+                      metadata:
+                        description: The XML IdP metadata file generated from your
+                          identity provider.
+                        type: string
+                      sessionTimeout:
+                        description: Session timeout, in minutes. Minimum is 5 minutes
+                          and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                        type: number
+                      userAttribute:
+                        description: User attribute for this SAML integration.
+                        type: string
+                    type: object
                   type:
                     description: Type of configuration. Must be saml.
                     type: string
@@ -269,6 +305,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.samlOptions is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.samlOptions)
+                || (has(self.initProvider) && has(self.initProvider.samlOptions))'
             - message: spec.forProvider.type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
@@ -289,6 +329,24 @@ spec:
                   name:
                     description: Name of the policy.
                     type: string
+                  samlOptions:
+                    description: Configuration block for SAML options.
+                    properties:
+                      groupAttribute:
+                        description: Group attribute for this SAML integration.
+                        type: string
+                      metadata:
+                        description: The XML IdP metadata file generated from your
+                          identity provider.
+                        type: string
+                      sessionTimeout:
+                        description: Session timeout, in minutes. Minimum is 5 minutes
+                          and maximum is 720 minutes (12 hours). Default is 60 minutes.
+                        type: number
+                      userAttribute:
+                        description: User attribute for this SAML integration.
+                        type: string
+                    type: object
                   type:
                     description: Type of configuration. Must be saml.
                     type: string
