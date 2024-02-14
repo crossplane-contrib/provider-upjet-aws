@@ -874,20 +874,10 @@ func (in *SecurityConfigInitParameters) DeepCopyInto(out *SecurityConfigInitPara
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.SAMLOptions != nil {
 		in, out := &in.SAMLOptions, &out.SAMLOptions
 		*out = new(SAMLOptionsInitParameters)
 		(*in).DeepCopyInto(*out)
-	}
-	if in.Type != nil {
-		in, out := &in.Type, &out.Type
-		*out = new(string)
-		**out = **in
 	}
 }
 
@@ -951,11 +941,6 @@ func (in *SecurityConfigObservation) DeepCopyInto(out *SecurityConfigObservation
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.SAMLOptions != nil {
 		in, out := &in.SAMLOptions, &out.SAMLOptions
 		*out = new(SAMLOptionsObservation)
@@ -983,11 +968,6 @@ func (in *SecurityConfigParameters) DeepCopyInto(out *SecurityConfigParameters) 
 	*out = *in
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
-		*out = new(string)
-		**out = **in
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}

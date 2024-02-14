@@ -277,4 +277,4 @@ replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraf
 
 replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terraform-plugin-log v0.0.0-20230928191232-6c653d8ef8fb
 
-replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20240213193512-47cb5c5b4bba
+replace github.com/crossplane/upjet => github.com/erhancagirici/upjet v0.0.0-20240214094359-3050e12249c3

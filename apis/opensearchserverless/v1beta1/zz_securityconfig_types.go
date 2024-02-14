@@ -71,14 +71,8 @@ type SecurityConfigInitParameters struct {
 	// Description of the security configuration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Name of the policy.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// Configuration block for SAML options.
 	SAMLOptions *SAMLOptionsInitParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
-
-	// Type of configuration. Must be saml.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SecurityConfigObservation struct {
@@ -90,9 +84,6 @@ type SecurityConfigObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Name of the policy.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Configuration block for SAML options.
 	SAMLOptions *SAMLOptionsObservation `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
@@ -107,10 +98,6 @@ type SecurityConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Name of the policy.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -121,8 +108,8 @@ type SecurityConfigParameters struct {
 	SAMLOptions *SAMLOptionsParameters `json:"samlOptions,omitempty" tf:"saml_options,omitempty"`
 
 	// Type of configuration. Must be saml.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // SecurityConfigSpec defines the desired state of SecurityConfig
@@ -161,9 +148,7 @@ type SecurityConfigStatus struct {
 type SecurityConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.samlOptions) || (has(self.initProvider) && has(self.initProvider.samlOptions))",message="spec.forProvider.samlOptions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
 	Spec   SecurityConfigSpec   `json:"spec"`
 	Status SecurityConfigStatus `json:"status,omitempty"`
 }

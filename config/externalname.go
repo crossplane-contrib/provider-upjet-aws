@@ -57,7 +57,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// LifecyclePolicy can be imported using the policy name
 	"aws_opensearchserverless_lifecycle_policy": opensearchserverlessLifecyclePolicy(),
 	//  SecurityConfig can be imported using the AWS-assigned security config ID
-	"aws_opensearchserverless_security_config": config.TemplatedStringAsIdentifier("", "{{ .parameters.type }}/{{ .setup.client_metadata.account_id }}/{{ .external_name }}"),
+	"aws_opensearchserverless_security_config": config.TemplatedStringAsIdentifier("name", "{{ .parameters.type }}/{{ .setup.client_metadata.account_id }}/{{ .external_name }}"),
 	// SecurityPolicy can be imported using the policy name
 	"aws_opensearchserverless_security_policy": opensearchserverlessSecurityPolicy(),
 	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308

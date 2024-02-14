@@ -8,6 +8,5 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: example
     region: us-west-1
     type: saml

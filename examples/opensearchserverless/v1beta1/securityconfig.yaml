@@ -8,7 +8,6 @@ metadata:
   name: example-os-sc
 spec:
   forProvider:
-    name: example
     region: us-east-1
     samlOptions:
       metadata: |

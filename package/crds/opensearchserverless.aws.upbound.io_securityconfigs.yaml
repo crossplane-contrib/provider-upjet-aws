@@ -69,9 +69,6 @@ spec:
                   description:
                     description: Description of the security configuration.
                     type: string
-                  name:
-                    description: Name of the policy.
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -99,6 +96,7 @@ spec:
                     type: string
                 required:
                 - region
+                - type
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -114,9 +112,6 @@ spec:
                 properties:
                   description:
                     description: Description of the security configuration.
-                    type: string
-                  name:
-                    description: Name of the policy.
                     type: string
                   samlOptions:
                     description: Configuration block for SAML options.
@@ -136,9 +131,6 @@ spec:
                         description: User attribute for this SAML integration.
                         type: string
                     type: object
-                  type:
-                    description: Type of configuration. Must be saml.
-                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -301,18 +293,10 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.samlOptions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.samlOptions)
                 || (has(self.initProvider) && has(self.initProvider.samlOptions))'
-            - message: spec.forProvider.type is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || (has(self.initProvider) && has(self.initProvider.type))'
           status:
             description: SecurityConfigStatus defines the observed state of SecurityConfig.
             properties:
@@ -325,9 +309,6 @@ spec:
                     description: Description of the security configuration.
                     type: string
                   id:
-                    type: string
-                  name:
-                    description: Name of the policy.
                     type: string
                   samlOptions:
                     description: Configuration block for SAML options.
