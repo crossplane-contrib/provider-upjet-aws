@@ -216,11 +216,12 @@ func Configure(p *config.Provider) {
 				"source_security_group_id",
 			},
 		}
-		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) {
+		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) error {
 			// TODO: Has better be implemented via defaulting.
 			if _, ok := jsonMap["self"]; !ok {
 				params["self"] = false
 			}
+			return nil
 		}
 	})
 
@@ -423,12 +424,13 @@ func Configure(p *config.Provider) {
 		r.References["source_ami_id"] = config.Reference{
 			Type: "AMI",
 		}
-		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) {
+		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) error {
 			params["ebs_block_device"] = []any{}
 			// TODO: Has better be implemented via defaulting.
 			if _, ok := jsonMap["encrypted"]; !ok {
 				params["encrypted"] = false
 			}
+			return nil
 		}
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
 			if diff != nil && diff.Attributes != nil {
