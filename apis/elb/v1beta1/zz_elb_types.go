@@ -122,7 +122,7 @@ type ELBInitParameters struct {
 	// instances. Use this for Classic or Default VPC only.
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
-	// A list of subnet IDs to attach to the ELB.
+	// A list of subnet IDs to attach to the ELB. When an update to subnets will remove all current subnets, this will force a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
@@ -201,7 +201,7 @@ type ELBObservation struct {
 	// instances. Only available on ELBs launched in a VPC.
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
 
-	// A list of subnet IDs to attach to the ELB.
+	// A list of subnet IDs to attach to the ELB. When an update to subnets will remove all current subnets, this will force a new resource.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
@@ -291,7 +291,7 @@ type ELBParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroup *string `json:"sourceSecurityGroup,omitempty" tf:"source_security_group,omitempty"`
 
-	// A list of subnet IDs to attach to the ELB.
+	// A list of subnet IDs to attach to the ELB. When an update to subnets will remove all current subnets, this will force a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -465,13 +465,14 @@ type ELBStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ELB is the Schema for the ELBs API. Provides an Elastic Load Balancer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type ELB struct {
 	metav1.TypeMeta   `json:",inline"`

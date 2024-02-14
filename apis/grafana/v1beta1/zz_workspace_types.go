@@ -104,7 +104,7 @@ type WorkspaceInitParameters struct {
 	// The workspace description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4. Upgrading the workspace version isn't supported, however it's possible to copy content from the old version to the new one using AWS official migration tool.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	// The Grafana workspace name.
@@ -172,7 +172,7 @@ type WorkspaceObservation struct {
 	// The endpoint of the Grafana workspace.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4. Upgrading the workspace version isn't supported, however it's possible to copy content from the old version to the new one using AWS official migration tool.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4.
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -237,7 +237,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4. Upgrading the workspace version isn't supported, however it's possible to copy content from the old version to the new one using AWS official migration tool.
+	// Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4.
 	// +kubebuilder:validation:Optional
 	GrafanaVersion *string `json:"grafanaVersion,omitempty" tf:"grafana_version,omitempty"`
 
@@ -322,13 +322,14 @@ type WorkspaceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Workspace is the Schema for the Workspaces API. Provides an Amazon Managed Grafana workspace resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -22,7 +22,7 @@ type ConfigurationInitParameters_2 struct {
 	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for engine_type RabbitMQ.
 	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
 
-	// Broker configuration in XML format. See official docs for supported parameters and format of the XML.
+	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See official docs for supported parameters and format of the XML.
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// Description of the configuration.
@@ -50,7 +50,7 @@ type ConfigurationObservation_2 struct {
 	// Authentication strategy associated with the configuration. Valid values are simple and ldap. ldap is not supported for engine_type RabbitMQ.
 	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
 
-	// Broker configuration in XML format. See official docs for supported parameters and format of the XML.
+	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See official docs for supported parameters and format of the XML.
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// Description of the configuration.
@@ -86,7 +86,7 @@ type ConfigurationParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationStrategy *string `json:"authenticationStrategy,omitempty" tf:"authentication_strategy,omitempty"`
 
-	// Broker configuration in XML format. See official docs for supported parameters and format of the XML.
+	// Broker configuration in XML format for ActiveMQ or Cuttlefish format for RabbitMQ. See official docs for supported parameters and format of the XML.
 	// +kubebuilder:validation:Optional
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
@@ -141,13 +141,14 @@ type ConfigurationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Configuration is the Schema for the Configurations API. Provides an MQ configuration Resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Configuration struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -71,7 +71,7 @@ spec:
                     description: The name of the bot.
                     type: string
                   botVersion:
-                    description: The name of the bot.
+                    description: The version of the bot.
                     type: string
                   conversationLogs:
                     description: The settings that determine how Amazon Lex uses conversation
@@ -141,7 +141,7 @@ spec:
                     description: The name of the bot.
                     type: string
                   botVersion:
-                    description: The name of the bot.
+                    description: The version of the bot.
                     type: string
                   conversationLogs:
                     description: The settings that determine how Amazon Lex uses conversation
@@ -370,7 +370,7 @@ spec:
                     description: The name of the bot.
                     type: string
                   botVersion:
-                    description: The name of the bot.
+                    description: The version of the bot.
                     type: string
                   checksum:
                     description: Checksum of the bot alias.

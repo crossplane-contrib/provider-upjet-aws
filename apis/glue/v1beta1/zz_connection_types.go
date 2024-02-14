@@ -19,7 +19,7 @@ import (
 
 type ConnectionInitParameters struct {
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JBDC.
+	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// –  Description of the connection.
@@ -44,7 +44,7 @@ type ConnectionObservation struct {
 	// –  The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JBDC.
+	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// –  Description of the connection.
@@ -78,7 +78,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionPropertiesSecretRef *v1.SecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JBDC.
+	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
 	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
@@ -211,13 +211,14 @@ type ConnectionStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Connection is the Schema for the Connections API. Provides an Glue Connection resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Connection struct {
 	metav1.TypeMeta   `json:",inline"`

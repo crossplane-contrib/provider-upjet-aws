@@ -19,6 +19,9 @@ import (
 
 type ClusterInitParameters struct {
 
+	// A value that indicates whether major version upgrades are allowed. Constraints: You must allow major version upgrades when specifying a value for the EngineVersion parameter that is a different major version than the DB cluster's current version.
+	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
+
 	// Specifies whether any cluster modifications
 	// are applied immediately, or during the next maintenance window. Default is
 	// false.
@@ -33,7 +36,16 @@ type ClusterInitParameters struct {
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.ClusterParameterGroup
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
+
+	// Reference to a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameRef *v1.Reference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameSelector *v1.Selector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A DB subnet group to associate with this DB instance.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -45,7 +57,7 @@ type ClusterInitParameters struct {
 	// The following log types are supported: audit, profiler.
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
-	// The name of the database engine to be used for this DB cluster. Defaults to docdb. Valid Values: docdb
+	// The name of the database engine to be used for this DB cluster. Defaults to docdb. Valid values: docdb.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// The database engine version. Updating this argument results in an outage.
@@ -87,11 +99,14 @@ type ClusterInitParameters struct {
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Specifies whether the DB cluster is encrypted. The default is false.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// The storage type to associate with the DB cluster. Valid values: standard, iopt1.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -115,6 +130,9 @@ type ClusterInitParameters struct {
 }
 
 type ClusterObservation struct {
+
+	// A value that indicates whether major version upgrades are allowed. Constraints: You must allow major version upgrades when specifying a value for the EngineVersion parameter that is a different major version than the DB cluster's current version.
+	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
 
 	// Specifies whether any cluster modifications
 	// are applied immediately, or during the next maintenance window. Default is
@@ -155,7 +173,7 @@ type ClusterObservation struct {
 	// The DNS address of the DocumentDB instance
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The name of the database engine to be used for this DB cluster. Defaults to docdb. Valid Values: docdb
+	// The name of the database engine to be used for this DB cluster. Defaults to docdb. Valid values: docdb.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// The database engine version. Updating this argument results in an outage.
@@ -197,11 +215,14 @@ type ClusterObservation struct {
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Specifies whether the DB cluster is encrypted. The default is false.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// The storage type to associate with the DB cluster. Valid values: standard, iopt1.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -219,11 +240,20 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
+	// A value that indicates whether major version upgrades are allowed. Constraints: You must allow major version upgrades when specifying a value for the EngineVersion parameter that is a different major version than the DB cluster's current version.
+	// +kubebuilder:validation:Optional
+	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`
+
 	// Specifies whether any cluster modifications
 	// are applied immediately, or during the next maintenance window. Default is
 	// false.
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
+
+	// If true, the password will be auto-generated and stored in the Secret referenced by the masterPasswordSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
 
 	// A list of EC2 Availability Zones that
 	// instances in the DB cluster can be created in.
@@ -236,8 +266,17 @@ type ClusterParameters struct {
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.ClusterParameterGroup
 	// +kubebuilder:validation:Optional
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
+
+	// Reference to a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameRef *v1.Reference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ClusterParameterGroup in docdb to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameSelector *v1.Selector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A DB subnet group to associate with this DB instance.
 	// +kubebuilder:validation:Optional
@@ -252,7 +291,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
-	// The name of the database engine to be used for this DB cluster. Defaults to docdb. Valid Values: docdb
+	// The name of the database engine to be used for this DB cluster. Defaults to docdb. Valid values: docdb.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -285,6 +324,7 @@ type ClusterParameters struct {
 
 	// Password for the master DB user. Note that this may
 	// show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints.
+	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	MasterPasswordSecretRef *v1.SecretKeySelector `json:"masterPasswordSecretRef,omitempty" tf:"-"`
 
@@ -314,13 +354,17 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a DB cluster snapshot, or the ARN when specifying a DB snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Specifies whether the DB cluster is encrypted. The default is false.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// The storage type to associate with the DB cluster. Valid values: standard, iopt1.
+	// +kubebuilder:validation:Optional
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -369,13 +413,14 @@ type ClusterStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Cluster is the Schema for the Clusters API. Manages a DocumentDB Aurora Cluster
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`

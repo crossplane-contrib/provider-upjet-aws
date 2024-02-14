@@ -44,7 +44,7 @@ type SchemaInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the schema. Valid values: OpenApi3.
+	// The type of the schema. Valid values: OpenApi3 or JSONSchemaDraft4.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -78,7 +78,7 @@ type SchemaObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of the schema. Valid values: OpenApi3.
+	// The type of the schema. Valid values: OpenApi3 or JSONSchemaDraft4.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The version of the schema.
@@ -125,7 +125,7 @@ type SchemaParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of the schema. Valid values: OpenApi3.
+	// The type of the schema. Valid values: OpenApi3 or JSONSchemaDraft4.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -154,13 +154,14 @@ type SchemaStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Schema is the Schema for the Schemas API. Provides an EventBridge Schema resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Schema struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -98,8 +98,8 @@ spec:
                       be created in.
                     type: string
                   runtime:
-                    description: Identifier of the function's runtime. Currently only
-                      cloudfront-js-1.0 is valid.
+                    description: Identifier of the function's runtime. Valid values
+                      are cloudfront-js-1.0 and cloudfront-js-2.0.
                     type: string
                 required:
                 - region
@@ -124,8 +124,8 @@ spec:
                       Function Version. Defaults to true.
                     type: boolean
                   runtime:
-                    description: Identifier of the function's runtime. Currently only
-                      cloudfront-js-1.0 is valid.
+                    description: Identifier of the function's runtime. Valid values
+                      are cloudfront-js-1.0 and cloudfront-js-2.0.
                     type: string
                 type: object
               managementPolicies:
@@ -322,8 +322,8 @@ spec:
                       Function Version. Defaults to true.
                     type: boolean
                   runtime:
-                    description: Identifier of the function's runtime. Currently only
-                      cloudfront-js-1.0 is valid.
+                    description: Identifier of the function's runtime. Valid values
+                      are cloudfront-js-1.0 and cloudfront-js-2.0.
                     type: string
                   status:
                     description: Status of the function. Can be UNPUBLISHED, UNASSOCIATED

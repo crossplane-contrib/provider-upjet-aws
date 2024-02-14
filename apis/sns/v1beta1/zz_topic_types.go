@@ -48,10 +48,13 @@ type TopicInitParameters struct {
 	// Percentage of success to sample
 	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
 
+	// The message archive policy for FIFO topics. More details in the AWS documentation.
+	ArchivePolicy *string `json:"archivePolicy,omitempty" tf:"archive_policy,omitempty"`
+
 	// Enables content-based deduplication for FIFO topics. For more information, see the related documentation
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
 
-	// The SNS delivery policy. More on AWS documentation
+	// The SNS delivery policy. More details in the AWS documentation.
 	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
 
 	// The display name for the topic
@@ -204,13 +207,19 @@ type TopicObservation struct {
 	// Percentage of success to sample
 	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
 
+	// The message archive policy for FIFO topics. More details in the AWS documentation.
+	ArchivePolicy *string `json:"archivePolicy,omitempty" tf:"archive_policy,omitempty"`
+
 	// The ARN of the SNS topic, as a more obvious property (clone of id)
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The oldest timestamp at which a FIFO topic subscriber can start a replay.
+	BeginningArchiveTime *string `json:"beginningArchiveTime,omitempty" tf:"beginning_archive_time,omitempty"`
 
 	// Enables content-based deduplication for FIFO topics. For more information, see the related documentation
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
 
-	// The SNS delivery policy. More on AWS documentation
+	// The SNS delivery policy. More details in the AWS documentation.
 	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
 
 	// The display name for the topic
@@ -316,11 +325,15 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationSuccessFeedbackSampleRate *float64 `json:"applicationSuccessFeedbackSampleRate,omitempty" tf:"application_success_feedback_sample_rate,omitempty"`
 
+	// The message archive policy for FIFO topics. More details in the AWS documentation.
+	// +kubebuilder:validation:Optional
+	ArchivePolicy *string `json:"archivePolicy,omitempty" tf:"archive_policy,omitempty"`
+
 	// Enables content-based deduplication for FIFO topics. For more information, see the related documentation
 	// +kubebuilder:validation:Optional
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
 
-	// The SNS delivery policy. More on AWS documentation
+	// The SNS delivery policy. More details in the AWS documentation.
 	// +kubebuilder:validation:Optional
 	DeliveryPolicy *string `json:"deliveryPolicy,omitempty" tf:"delivery_policy,omitempty"`
 
@@ -511,13 +524,14 @@ type TopicStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Topic is the Schema for the Topics API. Provides an SNS topic resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Topic struct {
 	metav1.TypeMeta   `json:",inline"`

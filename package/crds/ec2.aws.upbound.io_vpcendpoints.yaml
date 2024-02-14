@@ -80,6 +80,15 @@ spec:
                           description: The DNS records created for the endpoint. Valid
                             values are ipv4, dualstack, service-defined, and ipv6.
                           type: string
+                        privateDnsOnlyForInboundResolverEndpoint:
+                          description: Indicates whether to enable private DNS only
+                            for inbound endpoints. This option is available only for
+                            services that support both gateway and interface endpoints.
+                            It routes traffic that originates from the VPC to the
+                            gateway endpoint and traffic that originates from on-premises
+                            to the interface endpoint. Default is false. Can only
+                            be specified if private_dns_enabled is true.
+                          type: boolean
                       type: object
                     type: array
                   ipAddressType:
@@ -95,7 +104,8 @@ spec:
                   privateDnsEnabled:
                     description: Whether or not to associate a private hosted zone
                       with the specified VPC. Applicable for endpoints of type Interface.
-                      Defaults to false.
+                      Most users will want this enabled to allow services within the
+                      VPC to automatically use the endpoint. Defaults to false.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
@@ -296,6 +306,15 @@ spec:
                           description: The DNS records created for the endpoint. Valid
                             values are ipv4, dualstack, service-defined, and ipv6.
                           type: string
+                        privateDnsOnlyForInboundResolverEndpoint:
+                          description: Indicates whether to enable private DNS only
+                            for inbound endpoints. This option is available only for
+                            services that support both gateway and interface endpoints.
+                            It routes traffic that originates from the VPC to the
+                            gateway endpoint and traffic that originates from on-premises
+                            to the interface endpoint. Default is false. Can only
+                            be specified if private_dns_enabled is true.
+                          type: boolean
                       type: object
                     type: array
                   ipAddressType:
@@ -311,7 +330,8 @@ spec:
                   privateDnsEnabled:
                     description: Whether or not to associate a private hosted zone
                       with the specified VPC. Applicable for endpoints of type Interface.
-                      Defaults to false.
+                      Most users will want this enabled to allow services within the
+                      VPC to automatically use the endpoint. Defaults to false.
                     type: boolean
                   serviceName:
                     description: The service name. For AWS services the service name
@@ -681,6 +701,15 @@ spec:
                           description: The DNS records created for the endpoint. Valid
                             values are ipv4, dualstack, service-defined, and ipv6.
                           type: string
+                        privateDnsOnlyForInboundResolverEndpoint:
+                          description: Indicates whether to enable private DNS only
+                            for inbound endpoints. This option is available only for
+                            services that support both gateway and interface endpoints.
+                            It routes traffic that originates from the VPC to the
+                            gateway endpoint and traffic that originates from on-premises
+                            to the interface endpoint. Default is false. Can only
+                            be specified if private_dns_enabled is true.
+                          type: boolean
                       type: object
                     type: array
                   id:
@@ -713,7 +742,8 @@ spec:
                   privateDnsEnabled:
                     description: Whether or not to associate a private hosted zone
                       with the specified VPC. Applicable for endpoints of type Interface.
-                      Defaults to false.
+                      Most users will want this enabled to allow services within the
+                      VPC to automatically use the endpoint. Defaults to false.
                     type: boolean
                   requesterManaged:
                     description: Whether or not the VPC Endpoint is being managed
@@ -747,7 +777,8 @@ spec:
                   subnetIds:
                     description: The ID of one or more subnets in which to create
                       a network interface for the endpoint. Applicable for endpoints
-                      of type GatewayLoadBalancer and Interface.
+                      of type GatewayLoadBalancer and Interface. Interface type endpoints
+                      cannot function without being assigned to a subnet.
                     items:
                       type: string
                     type: array

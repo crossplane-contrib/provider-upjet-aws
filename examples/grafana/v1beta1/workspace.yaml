@@ -1,0 +1,45 @@
+apiVersion: grafana.aws.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    accountAccessType: CURRENT_ACCOUNT
+    authenticationProviders:
+    - SAML
+    permissionType: SERVICE_MANAGED
+    region: us-east-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: assume-w
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: grafana/v1beta1/workspace
+  labels:
+    testing.upbound.io/example-name: assume-w
+  name: assume-w
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      ${jsonencode({
+          Version = "2012-10-17"
+          Statement = [
+            {
+              Action = "sts:AssumeRole"
+              Effect = "Allow"
+              Sid    = ""
+              Principal = {
+                Service = "grafana.amazonaws.com"
+              }
+            },
+          ]
+        })}

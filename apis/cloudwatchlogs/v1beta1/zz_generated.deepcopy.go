@@ -742,6 +742,11 @@ func (in *GroupInitParameters) DeepCopyInto(out *GroupInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.LogGroupClass != nil {
+		in, out := &in.LogGroupClass, &out.LogGroupClass
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetentionInDays != nil {
 		in, out := &in.RetentionInDays, &out.RetentionInDays
 		*out = new(float64)
@@ -830,6 +835,11 @@ func (in *GroupObservation) DeepCopyInto(out *GroupObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogGroupClass != nil {
+		in, out := &in.LogGroupClass, &out.LogGroupClass
+		*out = new(string)
+		**out = **in
+	}
 	if in.RetentionInDays != nil {
 		in, out := &in.RetentionInDays, &out.RetentionInDays
 		*out = new(float64)
@@ -901,6 +911,11 @@ func (in *GroupParameters) DeepCopyInto(out *GroupParameters) {
 		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupClass != nil {
+		in, out := &in.LogGroupClass, &out.LogGroupClass
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

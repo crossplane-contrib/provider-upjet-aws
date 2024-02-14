@@ -1,0 +1,60 @@
+apiVersion: dms.aws.upbound.io/v1beta1
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: test
+  name: test-endpoint
+spec:
+  forProvider:
+    databaseName: test
+    endpointType: source
+    engineName: aurora
+    extraConnectionAttributes: ""
+    kmsKeyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-endpoint
+    passwordSecretRef:
+      key: example-key
+      name: endpoint-secret
+      namespace: upbound-system
+    port: 3306
+    region: us-west-1
+    serverName: test
+    sslMode: none
+    tags:
+      Name: test
+    username: test
+
+
+---
+
+apiVersion: kms.aws.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: example-endpoint
+  name: example-endpoint
+spec:
+  forProvider:
+    deletionWindowInDays: 7
+    description: KMS Key
+    region: us-west-1
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: endpoint-secret
+  name: endpoint-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  example-key: "Upbound!"

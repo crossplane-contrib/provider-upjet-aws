@@ -22,7 +22,7 @@ type BuildInitParameters struct {
 	// Name of the build
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Operating system that the game server binaries are built to run onE.g., WINDOWS_2012, AMAZON_LINUX or AMAZON_LINUX_2.
+	// Operating system that the game server binaries are built to run on. Valid values: WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2, WINDOWS_2016, AMAZON_LINUX_2023.
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
 	// Information indicating where your game build files are stored. See below.
@@ -47,7 +47,7 @@ type BuildObservation struct {
 	// Name of the build
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Operating system that the game server binaries are built to run onE.g., WINDOWS_2012, AMAZON_LINUX or AMAZON_LINUX_2.
+	// Operating system that the game server binaries are built to run on. Valid values: WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2, WINDOWS_2016, AMAZON_LINUX_2023.
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
 	// Information indicating where your game build files are stored. See below.
@@ -71,7 +71,7 @@ type BuildParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Operating system that the game server binaries are built to run onE.g., WINDOWS_2012, AMAZON_LINUX or AMAZON_LINUX_2.
+	// Operating system that the game server binaries are built to run on. Valid values: WINDOWS_2012, AMAZON_LINUX, AMAZON_LINUX_2, WINDOWS_2016, AMAZON_LINUX_2023.
 	// +kubebuilder:validation:Optional
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
@@ -225,13 +225,14 @@ type BuildStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Build is the Schema for the Builds API. Provides a GameLift Build resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Build struct {
 	metav1.TypeMeta   `json:",inline"`

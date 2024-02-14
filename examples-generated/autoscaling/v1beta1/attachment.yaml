@@ -1,0 +1,17 @@
+apiVersion: autoscaling.aws.upbound.io/v1beta1
+kind: Attachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta1/attachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    autoscalingGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    elbSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1

@@ -141,6 +141,7 @@ import (
 	resourcecloudcontrol "github.com/upbound/provider-aws/internal/controller/cloudcontrol/resource"
 	stackcloudformation "github.com/upbound/provider-aws/internal/controller/cloudformation/stack"
 	stackset "github.com/upbound/provider-aws/internal/controller/cloudformation/stackset"
+	stacksetinstance "github.com/upbound/provider-aws/internal/controller/cloudformation/stacksetinstance"
 	cachepolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/cachepolicy"
 	distribution "github.com/upbound/provider-aws/internal/controller/cloudfront/distribution"
 	fieldlevelencryptionconfig "github.com/upbound/provider-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
@@ -412,6 +413,7 @@ import (
 	fargateprofile "github.com/upbound/provider-aws/internal/controller/eks/fargateprofile"
 	identityproviderconfig "github.com/upbound/provider-aws/internal/controller/eks/identityproviderconfig"
 	nodegroup "github.com/upbound/provider-aws/internal/controller/eks/nodegroup"
+	podidentityassociation "github.com/upbound/provider-aws/internal/controller/eks/podidentityassociation"
 	clusterelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/cluster"
 	parametergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
@@ -1071,6 +1073,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcecloudcontrol.Setup,
 		stackcloudformation.Setup,
 		stackset.Setup,
+		stacksetinstance.Setup,
 		cachepolicy.Setup,
 		distribution.Setup,
 		fieldlevelencryptionconfig.Setup,
@@ -1342,6 +1345,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		fargateprofile.Setup,
 		identityproviderconfig.Setup,
 		nodegroup.Setup,
+		podidentityassociation.Setup,
 		clusterelasticache.Setup,
 		parametergroupelasticache.Setup,
 		replicationgroup.Setup,

@@ -125,6 +125,8 @@ type ClusterConfigInitParameters struct {
 	// Instance type of data nodes in the cluster.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
+
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
 	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
 
@@ -160,6 +162,8 @@ type ClusterConfigObservation struct {
 
 	// Instance type of data nodes in the cluster.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
 	WarmCount *float64 `json:"warmCount,omitempty" tf:"warm_count,omitempty"`
@@ -202,6 +206,9 @@ type ClusterConfigParameters struct {
 	// Instance type of data nodes in the cluster.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
 	// +kubebuilder:validation:Optional
@@ -390,8 +397,14 @@ type DomainInitParameters struct {
 	// Configuration block for node-to-node encryption options. Detailed below.
 	NodeToNodeEncryption []NodeToNodeEncryptionInitParameters `json:"nodeToNodeEncryption,omitempty" tf:"node_to_node_encryption,omitempty"`
 
+	// Configuration to add Off Peak update options. (documentation). Detailed below.
+	OffPeakWindowOptions []OffPeakWindowOptionsInitParameters `json:"offPeakWindowOptions,omitempty" tf:"off_peak_window_options,omitempty"`
+
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
 	SnapshotOptions []SnapshotOptionsInitParameters `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
+
+	// Software update options for the domain. Detailed below.
+	SoftwareUpdateOptions []SoftwareUpdateOptionsInitParameters `json:"softwareUpdateOptions,omitempty" tf:"software_update_options,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -451,7 +464,7 @@ type DomainObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Domain-specific endpoint for kibana without https scheme. OpenSearch Dashboards do not use Kibana, so this attribute will be DEPRECATED in a future version.
+	// (Deprecated) Domain-specific endpoint for kibana without https scheme. Use the dashboard_endpoint attribute instead.
 	KibanaEndpoint *string `json:"kibanaEndpoint,omitempty" tf:"kibana_endpoint,omitempty"`
 
 	// Configuration block for publishing slow and application logs to CloudWatch Logs. This block can be declared multiple times, for each log_type, within the same resource. Detailed below.
@@ -460,8 +473,14 @@ type DomainObservation struct {
 	// Configuration block for node-to-node encryption options. Detailed below.
 	NodeToNodeEncryption []NodeToNodeEncryptionObservation `json:"nodeToNodeEncryption,omitempty" tf:"node_to_node_encryption,omitempty"`
 
+	// Configuration to add Off Peak update options. (documentation). Detailed below.
+	OffPeakWindowOptions []OffPeakWindowOptionsObservation `json:"offPeakWindowOptions,omitempty" tf:"off_peak_window_options,omitempty"`
+
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
 	SnapshotOptions []SnapshotOptionsObservation `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
+
+	// Software update options for the domain. Detailed below.
+	SoftwareUpdateOptions []SoftwareUpdateOptionsObservation `json:"softwareUpdateOptions,omitempty" tf:"software_update_options,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -526,6 +545,10 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeToNodeEncryption []NodeToNodeEncryptionParameters `json:"nodeToNodeEncryption,omitempty" tf:"node_to_node_encryption,omitempty"`
 
+	// Configuration to add Off Peak update options. (documentation). Detailed below.
+	// +kubebuilder:validation:Optional
+	OffPeakWindowOptions []OffPeakWindowOptionsParameters `json:"offPeakWindowOptions,omitempty" tf:"off_peak_window_options,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -534,6 +557,10 @@ type DomainParameters struct {
 	// Configuration block for snapshot related options. Detailed below. DEPRECATED. For domains running OpenSearch 5.3 and later, Amazon OpenSearch takes hourly automated snapshots, making this setting irrelevant. For domains running earlier versions, OpenSearch takes daily automated snapshots.
 	// +kubebuilder:validation:Optional
 	SnapshotOptions []SnapshotOptionsParameters `json:"snapshotOptions,omitempty" tf:"snapshot_options,omitempty"`
+
+	// Software update options for the domain. Detailed below.
+	// +kubebuilder:validation:Optional
+	SoftwareUpdateOptions []SoftwareUpdateOptionsParameters `json:"softwareUpdateOptions,omitempty" tf:"software_update_options,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -812,6 +839,51 @@ type NodeToNodeEncryptionParameters struct {
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
+type OffPeakWindowInitParameters struct {
+
+	// 10h window for updates
+	WindowStartTime []WindowStartTimeInitParameters `json:"windowStartTime,omitempty" tf:"window_start_time,omitempty"`
+}
+
+type OffPeakWindowObservation struct {
+
+	// 10h window for updates
+	WindowStartTime []WindowStartTimeObservation `json:"windowStartTime,omitempty" tf:"window_start_time,omitempty"`
+}
+
+type OffPeakWindowOptionsInitParameters struct {
+
+	// Enabled disabled toggle for off-peak update window.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	OffPeakWindow []OffPeakWindowInitParameters `json:"offPeakWindow,omitempty" tf:"off_peak_window,omitempty"`
+}
+
+type OffPeakWindowOptionsObservation struct {
+
+	// Enabled disabled toggle for off-peak update window.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	OffPeakWindow []OffPeakWindowObservation `json:"offPeakWindow,omitempty" tf:"off_peak_window,omitempty"`
+}
+
+type OffPeakWindowOptionsParameters struct {
+
+	// Enabled disabled toggle for off-peak update window.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	OffPeakWindow []OffPeakWindowParameters `json:"offPeakWindow,omitempty" tf:"off_peak_window,omitempty"`
+}
+
+type OffPeakWindowParameters struct {
+
+	// 10h window for updates
+	// +kubebuilder:validation:Optional
+	WindowStartTime []WindowStartTimeParameters `json:"windowStartTime,omitempty" tf:"window_start_time,omitempty"`
+}
+
 type SnapshotOptionsInitParameters struct {
 
 	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
@@ -829,6 +901,25 @@ type SnapshotOptionsParameters struct {
 	// Hour during which the service takes an automated daily snapshot of the indices in the domain.
 	// +kubebuilder:validation:Optional
 	AutomatedSnapshotStartHour *float64 `json:"automatedSnapshotStartHour" tf:"automated_snapshot_start_hour,omitempty"`
+}
+
+type SoftwareUpdateOptionsInitParameters struct {
+
+	// Whether automatic service software updates are enabled for the domain. Defaults to false.
+	AutoSoftwareUpdateEnabled *bool `json:"autoSoftwareUpdateEnabled,omitempty" tf:"auto_software_update_enabled,omitempty"`
+}
+
+type SoftwareUpdateOptionsObservation struct {
+
+	// Whether automatic service software updates are enabled for the domain. Defaults to false.
+	AutoSoftwareUpdateEnabled *bool `json:"autoSoftwareUpdateEnabled,omitempty" tf:"auto_software_update_enabled,omitempty"`
+}
+
+type SoftwareUpdateOptionsParameters struct {
+
+	// Whether automatic service software updates are enabled for the domain. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AutoSoftwareUpdateEnabled *bool `json:"autoSoftwareUpdateEnabled,omitempty" tf:"auto_software_update_enabled,omitempty"`
 }
 
 type VPCOptionsInitParameters struct {
@@ -871,6 +962,35 @@ type VPCOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+}
+
+type WindowStartTimeInitParameters struct {
+
+	// Starting hour of the 10-hour window for updates
+	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+
+	// Starting minute of the 10-hour window for updates
+	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+}
+
+type WindowStartTimeObservation struct {
+
+	// Starting hour of the 10-hour window for updates
+	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+
+	// Starting minute of the 10-hour window for updates
+	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+}
+
+type WindowStartTimeParameters struct {
+
+	// Starting hour of the 10-hour window for updates
+	// +kubebuilder:validation:Optional
+	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+
+	// Starting minute of the 10-hour window for updates
+	// +kubebuilder:validation:Optional
+	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type ZoneAwarenessConfigInitParameters struct {
@@ -916,13 +1036,14 @@ type DomainStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Domain is the Schema for the Domains API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Domain struct {
 	metav1.TypeMeta   `json:",inline"`

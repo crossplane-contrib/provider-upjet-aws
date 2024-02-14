@@ -17,9 +17,31 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DefaultTagsInitParameters struct {
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type DefaultTagsObservation struct {
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type DefaultTagsParameters struct {
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ObjectInitParameters struct {
 
-	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control. Defaults to private.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified.
@@ -40,6 +62,9 @@ type ObjectInitParameters struct {
 
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
@@ -93,6 +118,9 @@ type ObjectInitParameters struct {
 	// Date and time, in RFC3339 format, when this object's object lock will expire.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
+	// Override provider-level configuration options. See Override Provider below for more details.
+	OverrideProvider []OverrideProviderInitParameters `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
+
 	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
@@ -115,7 +143,7 @@ type ObjectInitParameters struct {
 
 type ObjectObservation struct {
 
-	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control. Defaults to private.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified.
@@ -126,6 +154,21 @@ type ObjectObservation struct {
 
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
+
+	// The base64-encoded, 32-bit CRC32 checksum of the object.
+	ChecksumCrc32 *string `json:"checksumCrc32,omitempty" tf:"checksum_crc32,omitempty"`
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object.
+	ChecksumCrc32C *string `json:"checksumCrc32C,omitempty" tf:"checksum_crc32c,omitempty"`
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object.
+	ChecksumSha1 *string `json:"checksumSha1,omitempty" tf:"checksum_sha1,omitempty"`
+
+	// The base64-encoded, 256-bit SHA-256 digest of the object.
+	ChecksumSha256 *string `json:"checksumSha256,omitempty" tf:"checksum_sha256,omitempty"`
 
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
@@ -173,6 +216,9 @@ type ObjectObservation struct {
 	// Date and time, in RFC3339 format, when this object's object lock will expire.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
+	// Override provider-level configuration options. See Override Provider below for more details.
+	OverrideProvider []OverrideProviderObservation `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
+
 	// Server-side encryption of the object in S3. Valid values are "AES256" and "aws:kms".
 	ServerSideEncryption *string `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
@@ -202,7 +248,7 @@ type ObjectObservation struct {
 
 type ObjectParameters struct {
 
-	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control. Defaults to private.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
@@ -227,6 +273,10 @@ type ObjectParameters struct {
 	// Caching behavior along the request/reply chain Read w3c cache_control for further details.
 	// +kubebuilder:validation:Optional
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// +kubebuilder:validation:Optional
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
 	// +kubebuilder:validation:Optional
@@ -294,6 +344,10 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
+	// Override provider-level configuration options. See Override Provider below for more details.
+	// +kubebuilder:validation:Optional
+	OverrideProvider []OverrideProviderParameters `json:"overrideProvider,omitempty" tf:"override_provider,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -325,6 +379,25 @@ type ObjectParameters struct {
 	WebsiteRedirect *string `json:"websiteRedirect,omitempty" tf:"website_redirect,omitempty"`
 }
 
+type OverrideProviderInitParameters struct {
+
+	// Override the provider default_tags configuration block.
+	DefaultTags []DefaultTagsInitParameters `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
+}
+
+type OverrideProviderObservation struct {
+
+	// Override the provider default_tags configuration block.
+	DefaultTags []DefaultTagsObservation `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
+}
+
+type OverrideProviderParameters struct {
+
+	// Override the provider default_tags configuration block.
+	// +kubebuilder:validation:Optional
+	DefaultTags []DefaultTagsParameters `json:"defaultTags,omitempty" tf:"default_tags,omitempty"`
+}
+
 // ObjectSpec defines the desired state of Object
 type ObjectSpec struct {
 	v1.ResourceSpec `json:",inline"`
@@ -349,13 +422,14 @@ type ObjectStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Object is the Schema for the Objects API. Provides an S3 object resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Object struct {
 	metav1.TypeMeta   `json:",inline"`

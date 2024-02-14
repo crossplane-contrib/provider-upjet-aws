@@ -19,7 +19,7 @@ import (
 
 type RegionSettingsInitParameters struct {
 
-	// A map of services along with the management preferences for the Region.
+	// A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +mapType=granular
@@ -37,7 +37,7 @@ type RegionSettingsObservation struct {
 	// The AWS region.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A map of services along with the management preferences for the Region.
+	// A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +mapType=granular
@@ -57,7 +57,7 @@ type RegionSettingsParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A map of services along with the management preferences for the Region.
+	// A map of services along with the management preferences for the Region. For more information, see the AWS Documentation.
 	//
 	// WARNING: All parameters are required to be given: EFS, DynamoDB
 	// +kubebuilder:validation:Optional
@@ -96,13 +96,14 @@ type RegionSettingsStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RegionSettings is the Schema for the RegionSettingss API. Provides an AWS Backup Region Settings resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type RegionSettings struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -19,7 +19,7 @@ import (
 
 type NetworkInsightsPathInitParameters struct {
 
-	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
@@ -41,7 +41,7 @@ type NetworkInsightsPathInitParameters struct {
 	// Protocol to use for analysis. Valid options are tcp or udp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	// ID or ARN of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
@@ -67,8 +67,11 @@ type NetworkInsightsPathObservation struct {
 	// ARN of the Network Insights Path.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// ARN of the destination.
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
 	// IP address of the destination resource.
 	DestinationIP *string `json:"destinationIp,omitempty" tf:"destination_ip,omitempty"`
@@ -82,8 +85,11 @@ type NetworkInsightsPathObservation struct {
 	// Protocol to use for analysis. Valid options are tcp or udp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	// ID or ARN of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+
+	// ARN of the source.
+	SourceArn *string `json:"sourceArn,omitempty" tf:"source_arn,omitempty"`
 
 	// IP address of the source resource.
 	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
@@ -99,7 +105,7 @@ type NetworkInsightsPathObservation struct {
 
 type NetworkInsightsPathParameters struct {
 
-	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	// ID or ARN of the resource which is the destination of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -130,7 +136,7 @@ type NetworkInsightsPathParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// ID of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway.
+	// ID or ARN of the resource which is the source of the path. Can be an Instance, Internet Gateway, Network Interface, Transit Gateway, VPC Endpoint, VPC Peering Connection or VPN Gateway. If the resource is in another account, you must specify an ARN.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -178,13 +184,14 @@ type NetworkInsightsPathStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // NetworkInsightsPath is the Schema for the NetworkInsightsPaths API. Provides a Network Insights Path resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type NetworkInsightsPath struct {
 	metav1.TypeMeta   `json:",inline"`

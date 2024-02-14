@@ -1,0 +1,74 @@
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    clusterIdentifierSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ci
+    engine: aurora-postgresql
+    instanceClass: db.r5.large
+    dbParameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ci
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterinstance
+  labels:
+    testing.upbound.io/example-name: example-ci
+  name: example-ci
+spec:
+  forProvider:
+    region: us-west-1
+    engine: aurora-postgresql
+    masterUsername: cpadmin
+    masterPasswordSecretRef:
+      name: sample-cluster-password
+      namespace: upbound-system
+      key: password
+    skipFinalSnapshot: true
+  writeConnectionSecretToRef:
+    name: sample-rds-cluster-secret
+    namespace: upbound-system
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sample-cluster-password
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass0!
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/clusterinstance
+  labels:
+    testing.upbound.io/example-name: example-ci
+  name: example-parametergroup-ci
+spec:
+  forProvider:
+    region: us-west-1
+    family: aurora-postgresql15
+    description: example
+    parameter:
+      - name: application_name
+        value: "example"
+        applyMethod: immediate

@@ -29,6 +29,9 @@ type AppInitParameters struct {
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
 
+	// The custom HTTP headers for an Amplify app.
+	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
+
 	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
 	CustomRule []CustomRuleInitParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
@@ -92,6 +95,9 @@ type AppObservation struct {
 
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
+
+	// The custom HTTP headers for an Amplify app.
+	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
 	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
 	CustomRule []CustomRuleObservation `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
@@ -167,6 +173,10 @@ type AppParameters struct {
 	// The build specification (build spec) for an Amplify app.
 	// +kubebuilder:validation:Optional
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
+
+	// The custom HTTP headers for an Amplify app.
+	// +kubebuilder:validation:Optional
+	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
 	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
 	// +kubebuilder:validation:Optional
@@ -438,13 +448,14 @@ type AppStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // App is the Schema for the Apps API. Provides an Amplify App resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type App struct {
 	metav1.TypeMeta   `json:",inline"`

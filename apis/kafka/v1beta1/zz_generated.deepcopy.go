@@ -3004,6 +3004,11 @@ func (in *ServerlessClusterObservation) DeepCopyInto(out *ServerlessClusterObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClusterUUID != nil {
+		in, out := &in.ClusterUUID, &out.ClusterUUID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)

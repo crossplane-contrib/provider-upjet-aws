@@ -128,9 +128,39 @@ spec:
                           description: The container hosts value SingleModel/MultiModel.
                             The default value is SingleModel.
                           type: string
+                        modelDataSource:
+                          description: The location of model data to deploy. Use this
+                            for uncompressed model deployment. For information about
+                            how to deploy an uncompressed model, see Deploying uncompressed
+                            models in the AWS SageMaker Developer Guide.
+                          items:
+                            properties:
+                              s3DataSource:
+                                description: The S3 location of model data to deploy.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    s3DataType:
+                                      description: 'The type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         modelDataUrl:
                           description: The URL for the S3 location where model artifacts
                             are stored.
+                          type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
                           type: string
                       type: object
                     type: array
@@ -288,9 +318,39 @@ spec:
                           description: The container hosts value SingleModel/MultiModel.
                             The default value is SingleModel.
                           type: string
+                        modelDataSource:
+                          description: The location of model data to deploy. Use this
+                            for uncompressed model deployment. For information about
+                            how to deploy an uncompressed model, see Deploying uncompressed
+                            models in the AWS SageMaker Developer Guide.
+                          items:
+                            properties:
+                              s3DataSource:
+                                description: The S3 location of model data to deploy.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    s3DataType:
+                                      description: 'The type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         modelDataUrl:
                           description: The URL for the S3 location where model artifacts
                             are stored.
+                          type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
                           type: string
                       type: object
                     type: array
@@ -397,9 +457,39 @@ spec:
                           description: The container hosts value SingleModel/MultiModel.
                             The default value is SingleModel.
                           type: string
+                        modelDataSource:
+                          description: The location of model data to deploy. Use this
+                            for uncompressed model deployment. For information about
+                            how to deploy an uncompressed model, see Deploying uncompressed
+                            models in the AWS SageMaker Developer Guide.
+                          items:
+                            properties:
+                              s3DataSource:
+                                description: The S3 location of model data to deploy.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    s3DataType:
+                                      description: 'The type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         modelDataUrl:
                           description: The URL for the S3 location where model artifacts
                             are stored.
+                          type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
                           type: string
                       type: object
                     type: array
@@ -557,9 +647,39 @@ spec:
                           description: The container hosts value SingleModel/MultiModel.
                             The default value is SingleModel.
                           type: string
+                        modelDataSource:
+                          description: The location of model data to deploy. Use this
+                            for uncompressed model deployment. For information about
+                            how to deploy an uncompressed model, see Deploying uncompressed
+                            models in the AWS SageMaker Developer Guide.
+                          items:
+                            properties:
+                              s3DataSource:
+                                description: The S3 location of model data to deploy.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    s3DataType:
+                                      description: 'The type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         modelDataUrl:
                           description: The URL for the S3 location where model artifacts
                             are stored.
+                          type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
                           type: string
                       type: object
                     type: array
@@ -817,9 +937,39 @@ spec:
                           description: The container hosts value SingleModel/MultiModel.
                             The default value is SingleModel.
                           type: string
+                        modelDataSource:
+                          description: The location of model data to deploy. Use this
+                            for uncompressed model deployment. For information about
+                            how to deploy an uncompressed model, see Deploying uncompressed
+                            models in the AWS SageMaker Developer Guide.
+                          items:
+                            properties:
+                              s3DataSource:
+                                description: The S3 location of model data to deploy.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    s3DataType:
+                                      description: 'The type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         modelDataUrl:
                           description: The URL for the S3 location where model artifacts
                             are stored.
+                          type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
                           type: string
                       type: object
                     type: array
@@ -906,9 +1056,39 @@ spec:
                           description: The container hosts value SingleModel/MultiModel.
                             The default value is SingleModel.
                           type: string
+                        modelDataSource:
+                          description: The location of model data to deploy. Use this
+                            for uncompressed model deployment. For information about
+                            how to deploy an uncompressed model, see Deploying uncompressed
+                            models in the AWS SageMaker Developer Guide.
+                          items:
+                            properties:
+                              s3DataSource:
+                                description: The S3 location of model data to deploy.
+                                items:
+                                  properties:
+                                    compressionType:
+                                      description: 'How the model data is prepared.
+                                        Allowed values are: None and Gzip.'
+                                      type: string
+                                    s3DataType:
+                                      description: 'The type of model data to deploy.
+                                        Allowed values are: S3Object and S3Prefix.'
+                                      type: string
+                                    s3Uri:
+                                      description: The S3 path of model data to deploy.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         modelDataUrl:
                           description: The URL for the S3 location where model artifacts
                             are stored.
+                          type: string
+                        modelPackageName:
+                          description: The Amazon Resource Name (ARN) of the model
+                            package to use to create the model.
                           type: string
                       type: object
                     type: array

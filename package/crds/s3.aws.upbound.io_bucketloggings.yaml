@@ -260,6 +260,29 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetObjectKeyFormat:
+                    description: Amazon S3 key format for log objects. See below.
+                    items:
+                      properties:
+                        partitionedPrefix:
+                          description: Partitioned S3 key for log objects. See below.
+                          items:
+                            properties:
+                              partitionDateSource:
+                                description: 'Specifies the partition date source
+                                  for the partitioned prefix. Valid values: EventTime,
+                                  DeliveryTime.'
+                                type: string
+                            type: object
+                          type: array
+                        simplePrefix:
+                          description: Use the simple format for S3 keys for log objects.
+                            To use, set simple_prefix {}.
+                          items:
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   targetPrefix:
                     description: Prefix for all log object keys.
                     type: string
@@ -465,6 +488,29 @@ spec:
                           description: 'Logging permissions assigned to the grantee
                             for the bucket. Valid values: FULL_CONTROL, READ, WRITE.'
                           type: string
+                      type: object
+                    type: array
+                  targetObjectKeyFormat:
+                    description: Amazon S3 key format for log objects. See below.
+                    items:
+                      properties:
+                        partitionedPrefix:
+                          description: Partitioned S3 key for log objects. See below.
+                          items:
+                            properties:
+                              partitionDateSource:
+                                description: 'Specifies the partition date source
+                                  for the partitioned prefix. Valid values: EventTime,
+                                  DeliveryTime.'
+                                type: string
+                            type: object
+                          type: array
+                        simplePrefix:
+                          description: Use the simple format for S3 keys for log objects.
+                            To use, set simple_prefix {}.
+                          items:
+                            type: object
+                          type: array
                       type: object
                     type: array
                   targetPrefix:
@@ -688,6 +734,29 @@ spec:
                           description: 'Logging permissions assigned to the grantee
                             for the bucket. Valid values: FULL_CONTROL, READ, WRITE.'
                           type: string
+                      type: object
+                    type: array
+                  targetObjectKeyFormat:
+                    description: Amazon S3 key format for log objects. See below.
+                    items:
+                      properties:
+                        partitionedPrefix:
+                          description: Partitioned S3 key for log objects. See below.
+                          items:
+                            properties:
+                              partitionDateSource:
+                                description: 'Specifies the partition date source
+                                  for the partitioned prefix. Valid values: EventTime,
+                                  DeliveryTime.'
+                                type: string
+                            type: object
+                          type: array
+                        simplePrefix:
+                          description: Use the simple format for S3 keys for log objects.
+                            To use, set simple_prefix {}.
+                          items:
+                            type: object
+                          type: array
                       type: object
                     type: array
                   targetPrefix:

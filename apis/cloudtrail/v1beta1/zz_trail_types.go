@@ -329,7 +329,7 @@ type TrailObservation struct {
 	// Region in which the trail was created.
 	HomeRegion *string `json:"homeRegion,omitempty" tf:"home_region,omitempty"`
 
-	// Name of the trail.
+	// ARN of the trail.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether the trail is publishing events from global services such as IAM to the log files. Defaults to true.
@@ -487,13 +487,14 @@ type TrailStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Trail is the Schema for the Trails API. Provides a CloudTrail resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Trail struct {
 	metav1.TypeMeta   `json:",inline"`

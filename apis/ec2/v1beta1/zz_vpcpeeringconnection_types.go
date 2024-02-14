@@ -22,19 +22,9 @@ type AccepterInitParameters struct {
 
 type AccepterObservation struct {
 
-	// Allow a local linked EC2-Classic instance to communicate
-	// with instances in a peer VPC. This enables an outbound communication from the local ClassicLink connection
-	// to the remote VPC.
-	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
-
 	// Allow a local VPC to resolve public DNS hostnames to
 	// private IP addresses when queried from instances in the peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
-
-	// Allow a local VPC to communicate with a linked EC2-Classic
-	// instance in a peer VPC. This enables an outbound communication from the local VPC to the remote ClassicLink
-	// connection.
-	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type AccepterParameters struct {
@@ -45,19 +35,9 @@ type RequesterInitParameters struct {
 
 type RequesterObservation struct {
 
-	// Allow a local linked EC2-Classic instance to communicate
-	// with instances in a peer VPC. This enables an outbound communication from the local ClassicLink connection
-	// to the remote VPC.
-	AllowClassicLinkToRemoteVPC *bool `json:"allowClassicLinkToRemoteVpc,omitempty" tf:"allow_classic_link_to_remote_vpc,omitempty"`
-
 	// Allow a local VPC to resolve public DNS hostnames to
 	// private IP addresses when queried from instances in the peer VPC.
 	AllowRemoteVPCDNSResolution *bool `json:"allowRemoteVpcDnsResolution,omitempty" tf:"allow_remote_vpc_dns_resolution,omitempty"`
-
-	// Allow a local VPC to communicate with a linked EC2-Classic
-	// instance in a peer VPC. This enables an outbound communication from the local VPC to the remote ClassicLink
-	// connection.
-	AllowVPCToRemoteClassicLink *bool `json:"allowVpcToRemoteClassicLink,omitempty" tf:"allow_vpc_to_remote_classic_link,omitempty"`
 }
 
 type RequesterParameters struct {
@@ -224,13 +204,14 @@ type VPCPeeringConnectionStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPCPeeringConnection is the Schema for the VPCPeeringConnections API. Provides a resource to manage a VPC peering connection.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type VPCPeeringConnection struct {
 	metav1.TypeMeta   `json:",inline"`

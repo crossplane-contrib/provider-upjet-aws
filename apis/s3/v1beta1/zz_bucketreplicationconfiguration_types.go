@@ -346,7 +346,16 @@ type DestinationReplicationTimeParameters struct {
 type EncryptionConfigurationInitParameters struct {
 
 	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate replicaKmsKeyId.
+	// +kubebuilder:validation:Optional
+	ReplicaKMSKeyIDRef *v1.Reference `json:"replicaKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate replicaKmsKeyId.
+	// +kubebuilder:validation:Optional
+	ReplicaKMSKeyIDSelector *v1.Selector `json:"replicaKmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionConfigurationObservation struct {
@@ -358,8 +367,17 @@ type EncryptionConfigurationObservation struct {
 type EncryptionConfigurationParameters struct {
 
 	// ID (Key ARN or Alias ARN) of the customer managed AWS KMS key stored in AWS Key Management Service (KMS) for the destination bucket.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
-	ReplicaKMSKeyID *string `json:"replicaKmsKeyId" tf:"replica_kms_key_id,omitempty"`
+	ReplicaKMSKeyID *string `json:"replicaKmsKeyId,omitempty" tf:"replica_kms_key_id,omitempty"`
+
+	// Reference to a Key in kms to populate replicaKmsKeyId.
+	// +kubebuilder:validation:Optional
+	ReplicaKMSKeyIDRef *v1.Reference `json:"replicaKmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate replicaKmsKeyId.
+	// +kubebuilder:validation:Optional
+	ReplicaKMSKeyIDSelector *v1.Selector `json:"replicaKmsKeyIdSelector,omitempty" tf:"-"`
 }
 
 type EventThresholdInitParameters struct {
@@ -670,13 +688,14 @@ type BucketReplicationConfigurationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BucketReplicationConfiguration is the Schema for the BucketReplicationConfigurations API. Provides a S3 bucket replication configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type BucketReplicationConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`

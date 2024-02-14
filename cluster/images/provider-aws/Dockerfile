@@ -1,57 +1,15 @@
-FROM alpine:3.19.0 AS builder
-RUN apk --no-cache add curl
+FROM alpine:3.19.1
+RUN apk --no-cache add ca-certificates bash
 
 ARG TARGETOS
 ARG TARGETARCH
-
-# Setup Terraform environment
-
-## Provider-dependent configuration
-ARG TERRAFORM_VERSION
-ARG TERRAFORM_PROVIDER_VERSION
-ARG TERRAFORM_PROVIDER_DOWNLOAD_NAME
-## End of - Provider-dependent configuration
-
-RUN curl -L -o /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip https://github.com/upbound/terraform/releases/download/v${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
-  && unzip /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip -d /tmp/ \
-  && chmod +x /tmp/terraform \
-  && rm /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
-  && curl -L -o /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_${TARGETOS}_${TARGETARCH}.zip https://releases.hashicorp.com/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}/${TERRAFORM_PROVIDER_VERSION}/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
-  && unzip /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_${TARGETOS}_${TARGETARCH}.zip -d /tmp/native/ \
-  && chmod +x /tmp/native/* \
-  && rm /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_${TARGETOS}_${TARGETARCH}.zip
-# End of - Setup Terraform environment
-
-FROM alpine:3.19.0 as base
-
 ARG CROSSPLANE_PROVIDER_VERSION
-ARG TARGETOS
-ARG TARGETARCH
-ARG TERRAFORM_VERSION
-ARG TERRAFORM_PROVIDER_SOURCE
-ARG TERRAFORM_PROVIDER_VERSION
-ARG TERRAFORM_PROVIDER_DOWNLOAD_NAME
-ARG PLUGIN_DIR=/terraform/provider-mirror/registry.terraform.io/${TERRAFORM_PROVIDER_SOURCE}/${TERRAFORM_PROVIDER_VERSION}/${TARGETOS}_${TARGETARCH}
 
 ENV USER_ID=65532
-ENV TF_CLI_CONFIG_FILE /terraform/.terraformrc
-ENV TF_FORK 0
 # set user agent
 ENV TF_APPEND_USER_AGENT "crossplane-provider-aws/${CROSSPLANE_PROVIDER_VERSION} upbound-provider-aws/${CROSSPLANE_PROVIDER_VERSION}"
 
-# Provider controller needs these environment variable at runtime
-ENV TERRAFORM_VERSION ${TERRAFORM_VERSION}
-ENV TERRAFORM_PROVIDER_SOURCE ${TERRAFORM_PROVIDER_SOURCE}
-ENV TERRAFORM_PROVIDER_VERSION ${TERRAFORM_PROVIDER_VERSION}
-ENV TERRAFORM_NATIVE_PROVIDER_PATH ${PLUGIN_DIR}/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_v${TERRAFORM_PROVIDER_VERSION}_x5
-
-RUN apk --no-cache add ca-certificates bash
-
 USER ${USER_ID}
 EXPOSE 8080
-
-ADD terraformrc.hcl ${TF_CLI_CONFIG_FILE}
-COPY --from=builder /tmp/terraform /usr/local/bin/
-COPY --from=builder /tmp/native/* ${PLUGIN_DIR}/
 
 ENTRYPOINT ["provider"]

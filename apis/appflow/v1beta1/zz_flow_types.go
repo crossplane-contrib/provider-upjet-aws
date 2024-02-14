@@ -1917,7 +1917,7 @@ type SourceConnectorPropertiesS3Parameters struct {
 
 	// Object key for the bucket in which Amazon AppFlow places the destination files.
 	// +kubebuilder:validation:Optional
-	BucketPrefix *string `json:"bucketPrefix,omitempty" tf:"bucket_prefix,omitempty"`
+	BucketPrefix *string `json:"bucketPrefix" tf:"bucket_prefix,omitempty"`
 
 	// When you use Amazon S3 as the source, the configuration format that you provide the flow input data. See S3 Input Format Config for details.
 	// +kubebuilder:validation:Optional
@@ -2462,13 +2462,14 @@ type FlowStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Flow is the Schema for the Flows API. Provides an AppFlow Flow resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Flow struct {
 	metav1.TypeMeta   `json:",inline"`

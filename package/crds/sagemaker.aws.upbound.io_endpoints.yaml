@@ -98,7 +98,12 @@ spec:
                           description: Update policy for a blue/green deployment.
                             If this update policy is specified, SageMaker creates
                             a new fleet during the deployment while maintaining the
-                            old fleet. See Blue Green Update Config.
+                            old fleet. SageMaker flips traffic to the new fleet according
+                            to the specified traffic routing configuration. Only one
+                            update policy should be used in the deployment configuration.
+                            If no update policy is specified, SageMaker uses a blue/green
+                            deployment strategy with all at once traffic shifting
+                            by default. See Blue Green Update Config.
                           items:
                             properties:
                               maximumExecutionTimeoutInSeconds:
@@ -166,13 +171,73 @@ spec:
                                         LINEAR.'
                                       type: string
                                     waitIntervalInSeconds:
-                                      description: The waiting time (in seconds) between
-                                        incremental steps to turn on traffic on the
-                                        new endpoint fleet. Valid values are between
-                                        0 and 3600.
+                                      description: The length of the baking period,
+                                        during which SageMaker monitors alarms for
+                                        each batch on the new fleet. Valid values
+                                        are between 0 and 3600.
                                       type: number
                                   type: object
                                 type: array
+                            type: object
+                          type: array
+                        rollingUpdatePolicy:
+                          description: Specifies a rolling deployment strategy for
+                            updating a SageMaker endpoint. See Rolling Update Policy.
+                          items:
+                            properties:
+                              maximumBatchSize:
+                                description: Batch size for each rolling step to provision
+                                  capacity and turn on traffic on the new endpoint
+                                  fleet, and terminate capacity on the old endpoint
+                                  fleet. Value must be between 5% to 50% of the variant's
+                                  total instance count. See Maximum Batch Size.
+                                items:
+                                  properties:
+                                    type:
+                                      description: 'Traffic routing strategy type.
+                                        Valid values are: ALL_AT_ONCE, CANARY, and
+                                        LINEAR.'
+                                      type: string
+                                    value:
+                                      description: Defines the capacity size, either
+                                        as a number of instances or a capacity percentage.
+                                      type: number
+                                  type: object
+                                type: array
+                              maximumExecutionTimeoutInSeconds:
+                                description: Maximum execution timeout for the deployment.
+                                  Note that the timeout value should be larger than
+                                  the total waiting time specified in termination_wait_in_seconds
+                                  and wait_interval_in_seconds. Valid values are between
+                                  600 and 14400.
+                                type: number
+                              rollbackMaximumBatchSize:
+                                description: Batch size for rollback to the old endpoint
+                                  fleet. Each rolling step to provision capacity and
+                                  turn on traffic on the old endpoint fleet, and terminate
+                                  capacity on the new endpoint fleet. If this field
+                                  is absent, the default value will be set to 100%
+                                  of total capacity which means to bring up the whole
+                                  capacity of the old fleet at once during rollback.
+                                  See Rollback Maximum Batch Size.
+                                items:
+                                  properties:
+                                    type:
+                                      description: 'Traffic routing strategy type.
+                                        Valid values are: ALL_AT_ONCE, CANARY, and
+                                        LINEAR.'
+                                      type: string
+                                    value:
+                                      description: Defines the capacity size, either
+                                        as a number of instances or a capacity percentage.
+                                      type: number
+                                  type: object
+                                type: array
+                              waitIntervalInSeconds:
+                                description: The length of the baking period, during
+                                  which SageMaker monitors alarms for each batch on
+                                  the new fleet. Valid values are between 0 and 3600.
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -311,7 +376,12 @@ spec:
                           description: Update policy for a blue/green deployment.
                             If this update policy is specified, SageMaker creates
                             a new fleet during the deployment while maintaining the
-                            old fleet. See Blue Green Update Config.
+                            old fleet. SageMaker flips traffic to the new fleet according
+                            to the specified traffic routing configuration. Only one
+                            update policy should be used in the deployment configuration.
+                            If no update policy is specified, SageMaker uses a blue/green
+                            deployment strategy with all at once traffic shifting
+                            by default. See Blue Green Update Config.
                           items:
                             properties:
                               maximumExecutionTimeoutInSeconds:
@@ -379,13 +449,73 @@ spec:
                                         LINEAR.'
                                       type: string
                                     waitIntervalInSeconds:
-                                      description: The waiting time (in seconds) between
-                                        incremental steps to turn on traffic on the
-                                        new endpoint fleet. Valid values are between
-                                        0 and 3600.
+                                      description: The length of the baking period,
+                                        during which SageMaker monitors alarms for
+                                        each batch on the new fleet. Valid values
+                                        are between 0 and 3600.
                                       type: number
                                   type: object
                                 type: array
+                            type: object
+                          type: array
+                        rollingUpdatePolicy:
+                          description: Specifies a rolling deployment strategy for
+                            updating a SageMaker endpoint. See Rolling Update Policy.
+                          items:
+                            properties:
+                              maximumBatchSize:
+                                description: Batch size for each rolling step to provision
+                                  capacity and turn on traffic on the new endpoint
+                                  fleet, and terminate capacity on the old endpoint
+                                  fleet. Value must be between 5% to 50% of the variant's
+                                  total instance count. See Maximum Batch Size.
+                                items:
+                                  properties:
+                                    type:
+                                      description: 'Traffic routing strategy type.
+                                        Valid values are: ALL_AT_ONCE, CANARY, and
+                                        LINEAR.'
+                                      type: string
+                                    value:
+                                      description: Defines the capacity size, either
+                                        as a number of instances or a capacity percentage.
+                                      type: number
+                                  type: object
+                                type: array
+                              maximumExecutionTimeoutInSeconds:
+                                description: Maximum execution timeout for the deployment.
+                                  Note that the timeout value should be larger than
+                                  the total waiting time specified in termination_wait_in_seconds
+                                  and wait_interval_in_seconds. Valid values are between
+                                  600 and 14400.
+                                type: number
+                              rollbackMaximumBatchSize:
+                                description: Batch size for rollback to the old endpoint
+                                  fleet. Each rolling step to provision capacity and
+                                  turn on traffic on the old endpoint fleet, and terminate
+                                  capacity on the new endpoint fleet. If this field
+                                  is absent, the default value will be set to 100%
+                                  of total capacity which means to bring up the whole
+                                  capacity of the old fleet at once during rollback.
+                                  See Rollback Maximum Batch Size.
+                                items:
+                                  properties:
+                                    type:
+                                      description: 'Traffic routing strategy type.
+                                        Valid values are: ALL_AT_ONCE, CANARY, and
+                                        LINEAR.'
+                                      type: string
+                                    value:
+                                      description: Defines the capacity size, either
+                                        as a number of instances or a capacity percentage.
+                                      type: number
+                                  type: object
+                                type: array
+                              waitIntervalInSeconds:
+                                description: The length of the baking period, during
+                                  which SageMaker monitors alarms for each batch on
+                                  the new fleet. Valid values are between 0 and 3600.
+                                type: number
                             type: object
                           type: array
                       type: object
@@ -675,7 +805,12 @@ spec:
                           description: Update policy for a blue/green deployment.
                             If this update policy is specified, SageMaker creates
                             a new fleet during the deployment while maintaining the
-                            old fleet. See Blue Green Update Config.
+                            old fleet. SageMaker flips traffic to the new fleet according
+                            to the specified traffic routing configuration. Only one
+                            update policy should be used in the deployment configuration.
+                            If no update policy is specified, SageMaker uses a blue/green
+                            deployment strategy with all at once traffic shifting
+                            by default. See Blue Green Update Config.
                           items:
                             properties:
                               maximumExecutionTimeoutInSeconds:
@@ -743,13 +878,73 @@ spec:
                                         LINEAR.'
                                       type: string
                                     waitIntervalInSeconds:
-                                      description: The waiting time (in seconds) between
-                                        incremental steps to turn on traffic on the
-                                        new endpoint fleet. Valid values are between
-                                        0 and 3600.
+                                      description: The length of the baking period,
+                                        during which SageMaker monitors alarms for
+                                        each batch on the new fleet. Valid values
+                                        are between 0 and 3600.
                                       type: number
                                   type: object
                                 type: array
+                            type: object
+                          type: array
+                        rollingUpdatePolicy:
+                          description: Specifies a rolling deployment strategy for
+                            updating a SageMaker endpoint. See Rolling Update Policy.
+                          items:
+                            properties:
+                              maximumBatchSize:
+                                description: Batch size for each rolling step to provision
+                                  capacity and turn on traffic on the new endpoint
+                                  fleet, and terminate capacity on the old endpoint
+                                  fleet. Value must be between 5% to 50% of the variant's
+                                  total instance count. See Maximum Batch Size.
+                                items:
+                                  properties:
+                                    type:
+                                      description: 'Traffic routing strategy type.
+                                        Valid values are: ALL_AT_ONCE, CANARY, and
+                                        LINEAR.'
+                                      type: string
+                                    value:
+                                      description: Defines the capacity size, either
+                                        as a number of instances or a capacity percentage.
+                                      type: number
+                                  type: object
+                                type: array
+                              maximumExecutionTimeoutInSeconds:
+                                description: Maximum execution timeout for the deployment.
+                                  Note that the timeout value should be larger than
+                                  the total waiting time specified in termination_wait_in_seconds
+                                  and wait_interval_in_seconds. Valid values are between
+                                  600 and 14400.
+                                type: number
+                              rollbackMaximumBatchSize:
+                                description: Batch size for rollback to the old endpoint
+                                  fleet. Each rolling step to provision capacity and
+                                  turn on traffic on the old endpoint fleet, and terminate
+                                  capacity on the new endpoint fleet. If this field
+                                  is absent, the default value will be set to 100%
+                                  of total capacity which means to bring up the whole
+                                  capacity of the old fleet at once during rollback.
+                                  See Rollback Maximum Batch Size.
+                                items:
+                                  properties:
+                                    type:
+                                      description: 'Traffic routing strategy type.
+                                        Valid values are: ALL_AT_ONCE, CANARY, and
+                                        LINEAR.'
+                                      type: string
+                                    value:
+                                      description: Defines the capacity size, either
+                                        as a number of instances or a capacity percentage.
+                                      type: number
+                                  type: object
+                                type: array
+                              waitIntervalInSeconds:
+                                description: The length of the baking period, during
+                                  which SageMaker monitors alarms for each batch on
+                                  the new fleet. Valid values are between 0 and 3600.
+                                type: number
                             type: object
                           type: array
                       type: object

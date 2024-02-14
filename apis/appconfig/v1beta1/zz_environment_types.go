@@ -60,7 +60,7 @@ type EnvironmentObservation struct {
 	// AppConfig environment ID.
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
 
-	// AppConfig environment ID and application ID separated by a colon (:).
+	// (Deprecated) AppConfig environment ID and application ID separated by a colon (:).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Set of Amazon CloudWatch alarms to monitor during the deployment process. Maximum of 5. See Monitor below for more details.
@@ -214,13 +214,14 @@ type EnvironmentStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Environment is the Schema for the Environments API. Provides an AppConfig Environment resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Environment struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -575,6 +575,11 @@ func (in *AssociationInitParameters) DeepCopyInto(out *AssociationInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.SyncCompliance != nil {
+		in, out := &in.SyncCompliance, &out.SyncCompliance
+		*out = new(string)
+		**out = **in
+	}
 	if in.Targets != nil {
 		in, out := &in.Targets, &out.Targets
 		*out = make([]TargetsInitParameters, len(*in))
@@ -722,6 +727,11 @@ func (in *AssociationObservation) DeepCopyInto(out *AssociationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SyncCompliance != nil {
+		in, out := &in.SyncCompliance, &out.SyncCompliance
+		*out = new(string)
+		**out = **in
+	}
 	if in.Targets != nil {
 		in, out := &in.Targets, &out.Targets
 		*out = make([]TargetsObservation, len(*in))
@@ -834,6 +844,11 @@ func (in *AssociationParameters) DeepCopyInto(out *AssociationParameters) {
 	}
 	if in.ScheduleExpression != nil {
 		in, out := &in.ScheduleExpression, &out.ScheduleExpression
+		*out = new(string)
+		**out = **in
+	}
+	if in.SyncCompliance != nil {
+		in, out := &in.SyncCompliance, &out.SyncCompliance
 		*out = new(string)
 		**out = **in
 	}

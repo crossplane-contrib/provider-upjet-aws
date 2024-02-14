@@ -47,7 +47,7 @@ type PrincipalPortfolioAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalArnSelector *v1.Selector `json:"principalArnSelector,omitempty" tf:"-"`
 
-	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
+	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 }
 
@@ -65,7 +65,7 @@ type PrincipalPortfolioAssociationObservation struct {
 	// Principal ARN.
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
-	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
+	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 }
 
@@ -102,7 +102,7 @@ type PrincipalPortfolioAssociationParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalArnSelector *v1.Selector `json:"principalArnSelector,omitempty" tf:"-"`
 
-	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid value is IAM. Default is IAM.
+	// Principal type. Setting this argument empty (e.g., principal_type = "") will result in an error. Valid values are IAM and IAM_PATTERN. Default is IAM.
 	// +kubebuilder:validation:Optional
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
@@ -136,13 +136,14 @@ type PrincipalPortfolioAssociationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PrincipalPortfolioAssociation is the Schema for the PrincipalPortfolioAssociations API. Manages a Service Catalog Principal Portfolio Association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type PrincipalPortfolioAssociation struct {
 	metav1.TypeMeta   `json:",inline"`

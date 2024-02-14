@@ -23,7 +23,7 @@ type RDSDBInstanceInitParameters struct {
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
 	// The db instance to register for this stack. Changing this will force a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
 
@@ -75,7 +75,7 @@ type RDSDBInstanceParameters struct {
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
 	// The db instance to register for this stack. Changing this will force a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
@@ -127,13 +127,14 @@ type RDSDBInstanceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RDSDBInstance is the Schema for the RDSDBInstances API. Provides an OpsWorks RDS DB Instance resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type RDSDBInstance struct {
 	metav1.TypeMeta   `json:",inline"`

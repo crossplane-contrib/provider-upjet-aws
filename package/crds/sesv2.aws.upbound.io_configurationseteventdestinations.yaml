@@ -167,11 +167,12 @@ spec:
                                       description: The default value of the dimension
                                         that is published to Amazon CloudWatch if
                                         you don't provide the value of the dimension
-                                        when you send an email. ( dimension_name -  The
-                                        name of an Amazon CloudWatch dimension associated
-                                        with an email sending metric.
+                                        when you send an email.
                                       type: string
                                     dimensionName:
+                                      description: The name of an Amazon CloudWatch
+                                        dimension associated with an email sending
+                                        metric.
                                       type: string
                                     dimensionValueSource:
                                       description: 'The location where the Amazon
@@ -680,11 +681,12 @@ spec:
                                       description: The default value of the dimension
                                         that is published to Amazon CloudWatch if
                                         you don't provide the value of the dimension
-                                        when you send an email. ( dimension_name -  The
-                                        name of an Amazon CloudWatch dimension associated
-                                        with an email sending metric.
+                                        when you send an email.
                                       type: string
                                     dimensionName:
+                                      description: The name of an Amazon CloudWatch
+                                        dimension associated with an email sending
+                                        metric.
                                       type: string
                                     dimensionValueSource:
                                       description: 'The location where the Amazon
@@ -1275,11 +1277,12 @@ spec:
                                       description: The default value of the dimension
                                         that is published to Amazon CloudWatch if
                                         you don't provide the value of the dimension
-                                        when you send an email. ( dimension_name -  The
-                                        name of an Amazon CloudWatch dimension associated
-                                        with an email sending metric.
+                                        when you send an email.
                                       type: string
                                     dimensionName:
+                                      description: The name of an Amazon CloudWatch
+                                        dimension associated with an email sending
+                                        metric.
                                       type: string
                                     dimensionValueSource:
                                       description: 'The location where the Amazon

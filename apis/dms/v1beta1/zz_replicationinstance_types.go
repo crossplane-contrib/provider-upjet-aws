@@ -52,6 +52,9 @@ type ReplicationInstanceInitParameters struct {
 	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// The type of IP address protocol used by a replication instance. Valid values: IPV4, DUAL.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
@@ -121,6 +124,9 @@ type ReplicationInstanceObservation struct {
 
 	// Specifies if the replication instance is a multi-az deployment. You cannot set the availability_zone parameter if the multi_az parameter is set to true.
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
+
+	// The type of IP address protocol used by a replication instance. Valid values: IPV4, DUAL.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
@@ -199,6 +205,10 @@ type ReplicationInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
+	// The type of IP address protocol used by a replication instance. Valid values: IPV4, DUAL.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
 	// The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
 	// +kubebuilder:validation:Optional
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
@@ -276,13 +286,14 @@ type ReplicationInstanceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ReplicationInstance is the Schema for the ReplicationInstances API. Provides a DMS (Data Migration Service) replication instance resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type ReplicationInstance struct {
 	metav1.TypeMeta   `json:",inline"`

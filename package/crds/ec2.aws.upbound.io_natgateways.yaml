@@ -69,7 +69,7 @@ spec:
                 properties:
                   allocationId:
                     description: The Allocation ID of the Elastic IP address for the
-                      gateway. Required for connectivity_type of public.
+                      NAT Gateway. Required for connectivity_type of public.
                     type: string
                   allocationIdRef:
                     description: Reference to a EIP in ec2 to populate allocationId.
@@ -145,11 +145,11 @@ spec:
                         type: object
                     type: object
                   connectivityType:
-                    description: Connectivity type for the gateway. Valid values are
-                      private and public. Defaults to public.
+                    description: Connectivity type for the NAT Gateway. Valid values
+                      are private and public. Defaults to public.
                     type: string
                   privateIp:
-                    description: The private IPv4 address to assign to the NAT gateway.
+                    description: The private IPv4 address to assign to the NAT Gateway.
                       If you don't provide an address, a private IPv4 address will
                       be automatically assigned.
                     type: string
@@ -157,9 +157,27 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  secondaryAllocationIds:
+                    description: A list of secondary allocation EIP IDs for this NAT
+                      Gateway.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  secondaryPrivateIpAddressCount:
+                    description: '[Private NAT Gateway only] The number of secondary
+                      private IPv4 addresses you want to assign to the NAT Gateway.'
+                    type: number
+                  secondaryPrivateIpAddresses:
+                    description: A list of secondary private IPv4 addresses to assign
+                      to the NAT Gateway.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   subnetId:
                     description: The Subnet ID of the subnet in which to place the
-                      gateway.
+                      NAT Gateway.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet to populate subnetId.
@@ -257,7 +275,7 @@ spec:
                 properties:
                   allocationId:
                     description: The Allocation ID of the Elastic IP address for the
-                      gateway. Required for connectivity_type of public.
+                      NAT Gateway. Required for connectivity_type of public.
                     type: string
                   allocationIdRef:
                     description: Reference to a EIP in ec2 to populate allocationId.
@@ -333,17 +351,35 @@ spec:
                         type: object
                     type: object
                   connectivityType:
-                    description: Connectivity type for the gateway. Valid values are
-                      private and public. Defaults to public.
+                    description: Connectivity type for the NAT Gateway. Valid values
+                      are private and public. Defaults to public.
                     type: string
                   privateIp:
-                    description: The private IPv4 address to assign to the NAT gateway.
+                    description: The private IPv4 address to assign to the NAT Gateway.
                       If you don't provide an address, a private IPv4 address will
                       be automatically assigned.
                     type: string
+                  secondaryAllocationIds:
+                    description: A list of secondary allocation EIP IDs for this NAT
+                      Gateway.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  secondaryPrivateIpAddressCount:
+                    description: '[Private NAT Gateway only] The number of secondary
+                      private IPv4 addresses you want to assign to the NAT Gateway.'
+                    type: number
+                  secondaryPrivateIpAddresses:
+                    description: A list of secondary private IPv4 addresses to assign
+                      to the NAT Gateway.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   subnetId:
                     description: The Subnet ID of the subnet in which to place the
-                      gateway.
+                      NAT Gateway.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet to populate subnetId.
@@ -592,35 +628,53 @@ spec:
                 properties:
                   allocationId:
                     description: The Allocation ID of the Elastic IP address for the
-                      gateway. Required for connectivity_type of public.
+                      NAT Gateway. Required for connectivity_type of public.
                     type: string
                   associationId:
                     description: The association ID of the Elastic IP address that's
-                      associated with the NAT gateway. Only available when connectivity_type
+                      associated with the NAT Gateway. Only available when connectivity_type
                       is public.
                     type: string
                   connectivityType:
-                    description: Connectivity type for the gateway. Valid values are
-                      private and public. Defaults to public.
+                    description: Connectivity type for the NAT Gateway. Valid values
+                      are private and public. Defaults to public.
                     type: string
                   id:
                     description: The ID of the NAT Gateway.
                     type: string
                   networkInterfaceId:
                     description: The ID of the network interface associated with the
-                      NAT gateway.
+                      NAT Gateway.
                     type: string
                   privateIp:
-                    description: The private IPv4 address to assign to the NAT gateway.
+                    description: The private IPv4 address to assign to the NAT Gateway.
                       If you don't provide an address, a private IPv4 address will
                       be automatically assigned.
                     type: string
                   publicIp:
-                    description: The Elastic IP address associated with the NAT gateway.
+                    description: The Elastic IP address associated with the NAT Gateway.
                     type: string
+                  secondaryAllocationIds:
+                    description: A list of secondary allocation EIP IDs for this NAT
+                      Gateway.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  secondaryPrivateIpAddressCount:
+                    description: '[Private NAT Gateway only] The number of secondary
+                      private IPv4 addresses you want to assign to the NAT Gateway.'
+                    type: number
+                  secondaryPrivateIpAddresses:
+                    description: A list of secondary private IPv4 addresses to assign
+                      to the NAT Gateway.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   subnetId:
                     description: The Subnet ID of the subnet in which to place the
-                      gateway.
+                      NAT Gateway.
                     type: string
                   tags:
                     additionalProperties:

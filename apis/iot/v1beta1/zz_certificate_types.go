@@ -38,6 +38,9 @@ type CertificateObservation struct {
 	// The ARN of the created certificate.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The certificate ID of the CA certificate used to sign the certificate.
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
+
 	// The certificate signing request. Review
 	// CreateCertificateFromCsr
 	// for more information on generating a certificate from a certificate signing request (CSR).
@@ -105,13 +108,14 @@ type CertificateStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Certificate is the Schema for the Certificates API. Creates and manages an AWS IoT certificate.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Certificate struct {
 	metav1.TypeMeta   `json:",inline"`

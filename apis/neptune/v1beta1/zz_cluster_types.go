@@ -38,7 +38,7 @@ type ClusterInitParameters struct {
 	// A value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit.
+	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
@@ -138,7 +138,7 @@ type ClusterInitParameters struct {
 	// Determines whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot.
+	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	// +crossplane:generate:reference:type=ClusterSnapshot
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
@@ -204,7 +204,7 @@ type ClusterObservation struct {
 	// A value that indicates whether the DB cluster has deletion protection enabled.The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit.
+	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
 
@@ -269,7 +269,7 @@ type ClusterObservation struct {
 	// Determines whether a final Neptune snapshot is created before the Neptune cluster is deleted. If true is specified, no Neptune snapshot is created. If false is specified, a Neptune snapshot is created before the Neptune cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot.
+	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Specifies whether the Neptune cluster is encrypted. The default is false if not specified.
@@ -315,7 +315,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit.
+	// A list of the log types this DB cluster is configured to export to Cloudwatch Logs. Currently only supports audit and slowquery.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnableCloudwatchLogsExports []*string `json:"enableCloudwatchLogsExports,omitempty" tf:"enable_cloudwatch_logs_exports,omitempty"`
@@ -437,7 +437,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot.
+	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
 	// +crossplane:generate:reference:type=ClusterSnapshot
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
@@ -529,13 +529,14 @@ type ClusterStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Cluster is the Schema for the Clusters API. Provides an Neptune Cluster Resource
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -104,9 +104,9 @@ type ConfigurationSetEventDestinationParameters struct {
 type DimensionConfigurationInitParameters struct {
 
 	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
-	// ( dimension_name -  The name of an Amazon CloudWatch dimension associated with an email sending metric.
 	DefaultDimensionValue *string `json:"defaultDimensionValue,omitempty" tf:"default_dimension_value,omitempty"`
 
+	// The name of an Amazon CloudWatch dimension associated with an email sending metric.
 	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
 
 	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
@@ -116,9 +116,9 @@ type DimensionConfigurationInitParameters struct {
 type DimensionConfigurationObservation struct {
 
 	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
-	// ( dimension_name -  The name of an Amazon CloudWatch dimension associated with an email sending metric.
 	DefaultDimensionValue *string `json:"defaultDimensionValue,omitempty" tf:"default_dimension_value,omitempty"`
 
+	// The name of an Amazon CloudWatch dimension associated with an email sending metric.
 	DimensionName *string `json:"dimensionName,omitempty" tf:"dimension_name,omitempty"`
 
 	// The location where the Amazon SES API v2 finds the value of a dimension to publish to Amazon CloudWatch. Valid values: MESSAGE_TAG, EMAIL_HEADER, LINK_TAG.
@@ -128,10 +128,10 @@ type DimensionConfigurationObservation struct {
 type DimensionConfigurationParameters struct {
 
 	// The default value of the dimension that is published to Amazon CloudWatch if you don't provide the value of the dimension when you send an email.
-	// ( dimension_name -  The name of an Amazon CloudWatch dimension associated with an email sending metric.
 	// +kubebuilder:validation:Optional
 	DefaultDimensionValue *string `json:"defaultDimensionValue" tf:"default_dimension_value,omitempty"`
 
+	// The name of an Amazon CloudWatch dimension associated with an email sending metric.
 	// +kubebuilder:validation:Optional
 	DimensionName *string `json:"dimensionName" tf:"dimension_name,omitempty"`
 
@@ -376,13 +376,14 @@ type ConfigurationSetEventDestinationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ConfigurationSetEventDestination is the Schema for the ConfigurationSetEventDestinations API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type ConfigurationSetEventDestination struct {
 	metav1.TypeMeta   `json:",inline"`

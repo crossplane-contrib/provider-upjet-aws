@@ -50,7 +50,7 @@ type HealthCheckInitParameters struct {
 	// The number of consecutive health checks that an endpoint must pass or fail.
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
-	// The fully qualified domain name of the endpoint to be checked.
+	// The fully qualified domain name of the endpoint to be checked. If a value is set for ip_address, the value set for fqdn will be passed in the Host header.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	// The IP address of the endpoint to be checked.
@@ -123,7 +123,7 @@ type HealthCheckObservation struct {
 	// The number of consecutive health checks that an endpoint must pass or fail.
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
-	// The fully qualified domain name of the endpoint to be checked.
+	// The fully qualified domain name of the endpoint to be checked. If a value is set for ip_address, the value set for fqdn will be passed in the Host header.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	// The id of the health check
@@ -216,7 +216,7 @@ type HealthCheckParameters struct {
 	// +kubebuilder:validation:Optional
 	FailureThreshold *float64 `json:"failureThreshold,omitempty" tf:"failure_threshold,omitempty"`
 
-	// The fully qualified domain name of the endpoint to be checked.
+	// The fully qualified domain name of the endpoint to be checked. If a value is set for ip_address, the value set for fqdn will be passed in the Host header.
 	// +kubebuilder:validation:Optional
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
@@ -305,13 +305,14 @@ type HealthCheckStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // HealthCheck is the Schema for the HealthChecks API. Provides a Route53 health check.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type HealthCheck struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -1,0 +1,140 @@
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: PodIdentityAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example-pia
+  name: example-pia
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pia
+    namespace: example
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pia
+    serviceAccount: default
+
+---
+
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+    uptest.upbound.io/timeout: "2400"
+  labels:
+    testing.upbound.io/example-name: example-pia
+  name: eks-cluster-pia
+spec:
+  forProvider:
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pia
+    vpcConfig:
+      - subnetIdRefs:
+          - name: sample-subnet1
+          - name: sample-subnet2
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example-pia
+  name: example-pia
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "pods.eks.amazonaws.com"
+            },
+            "Action": ["sts:AssumeRole", "sts:TagSession"]
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example-pia
+  name: example-pia
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pia
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example-pia
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: us-west-1
+    mapPublicIpOnLaunch: true
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example-pia
+  name: sample-subnet2
+spec:
+  forProvider:
+    region: us-west-1
+    mapPublicIpOnLaunch: true
+    availabilityZone: us-west-1a
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.11.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/podidentityassociation
+  labels:
+    testing.upbound.io/example-name: example-pia
+  name: sample-vpc
+spec:
+  forProvider:
+    enableDnsHostnames: true
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

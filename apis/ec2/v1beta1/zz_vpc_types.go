@@ -25,15 +25,6 @@ type VPCInitParameters_2 struct {
 	// The IPv4 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv4_netmask_length.
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
-	// A boolean flag to enable/disable ClassicLink
-	// for the VPC. Only valid in regions and accounts that support EC2 Classic.
-	// See the ClassicLink documentation for more information. Defaults false.
-	EnableClassiclink *bool `json:"enableClassiclink,omitempty" tf:"enable_classiclink,omitempty"`
-
-	// A boolean flag to enable/disable ClassicLink DNS Support for the VPC.
-	// Only valid in regions and accounts that support EC2 Classic.
-	EnableClassiclinkDNSSupport *bool `json:"enableClassiclinkDnsSupport,omitempty" tf:"enable_classiclink_dns_support,omitempty"`
-
 	// A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false.
 	EnableDNSHostnames *bool `json:"enableDnsHostnames,omitempty" tf:"enable_dns_hostnames,omitempty"`
 
@@ -102,15 +93,6 @@ type VPCObservation_2 struct {
 	// The ID of the security group created by default on VPC creation
 	DefaultSecurityGroupID *string `json:"defaultSecurityGroupId,omitempty" tf:"default_security_group_id,omitempty"`
 
-	// A boolean flag to enable/disable ClassicLink
-	// for the VPC. Only valid in regions and accounts that support EC2 Classic.
-	// See the ClassicLink documentation for more information. Defaults false.
-	EnableClassiclink *bool `json:"enableClassiclink,omitempty" tf:"enable_classiclink,omitempty"`
-
-	// A boolean flag to enable/disable ClassicLink DNS Support for the VPC.
-	// Only valid in regions and accounts that support EC2 Classic.
-	EnableClassiclinkDNSSupport *bool `json:"enableClassiclinkDnsSupport,omitempty" tf:"enable_classiclink_dns_support,omitempty"`
-
 	// A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false.
 	EnableDNSHostnames *bool `json:"enableDnsHostnames,omitempty" tf:"enable_dns_hostnames,omitempty"`
 
@@ -173,17 +155,6 @@ type VPCParameters_2 struct {
 	// The IPv4 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv4_netmask_length.
 	// +kubebuilder:validation:Optional
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
-
-	// A boolean flag to enable/disable ClassicLink
-	// for the VPC. Only valid in regions and accounts that support EC2 Classic.
-	// See the ClassicLink documentation for more information. Defaults false.
-	// +kubebuilder:validation:Optional
-	EnableClassiclink *bool `json:"enableClassiclink,omitempty" tf:"enable_classiclink,omitempty"`
-
-	// A boolean flag to enable/disable ClassicLink DNS Support for the VPC.
-	// Only valid in regions and accounts that support EC2 Classic.
-	// +kubebuilder:validation:Optional
-	EnableClassiclinkDNSSupport *bool `json:"enableClassiclinkDnsSupport,omitempty" tf:"enable_classiclink_dns_support,omitempty"`
 
 	// A boolean flag to enable/disable DNS hostnames in the VPC. Defaults false.
 	// +kubebuilder:validation:Optional
@@ -270,13 +241,14 @@ type VPCStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPC is the Schema for the VPCs API. Provides a VPC resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type VPC struct {
 	metav1.TypeMeta   `json:",inline"`

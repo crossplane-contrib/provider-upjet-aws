@@ -182,6 +182,20 @@ spec:
                       when using the SELF_MANAGED permission model. This should not
                       be defined when using the SERVICE_MANAGED permission model.
                     type: string
+                  managedExecution:
+                    description: Configuration block to allow StackSets to perform
+                      non-conflicting operations concurrently and queues conflicting
+                      operations.
+                    items:
+                      properties:
+                        active:
+                          description: When set to true, StackSets performs non-conflicting
+                            operations concurrently and queues conflicting operations.
+                            After conflicting operations finish, StackSets starts
+                            queued operations in request order. Default is false.
+                          type: boolean
+                      type: object
+                    type: array
                   operationPreferences:
                     description: Preferences for how AWS CloudFormation performs a
                       stack set update.
@@ -383,6 +397,20 @@ spec:
                       when using the SELF_MANAGED permission model. This should not
                       be defined when using the SERVICE_MANAGED permission model.
                     type: string
+                  managedExecution:
+                    description: Configuration block to allow StackSets to perform
+                      non-conflicting operations concurrently and queues conflicting
+                      operations.
+                    items:
+                      properties:
+                        active:
+                          description: When set to true, StackSets performs non-conflicting
+                            operations concurrently and queues conflicting operations.
+                            After conflicting operations finish, StackSets starts
+                            queued operations in request order. Default is false.
+                          type: boolean
+                      type: object
+                    type: array
                   operationPreferences:
                     description: Preferences for how AWS CloudFormation performs a
                       stack set update.
@@ -664,6 +692,20 @@ spec:
                   id:
                     description: Name of the StackSet.
                     type: string
+                  managedExecution:
+                    description: Configuration block to allow StackSets to perform
+                      non-conflicting operations concurrently and queues conflicting
+                      operations.
+                    items:
+                      properties:
+                        active:
+                          description: When set to true, StackSets performs non-conflicting
+                            operations concurrently and queues conflicting operations.
+                            After conflicting operations finish, StackSets starts
+                            queued operations in request order. Default is false.
+                          type: boolean
+                      type: object
+                    type: array
                   operationPreferences:
                     description: Preferences for how AWS CloudFormation performs a
                       stack set update.

@@ -19,6 +19,9 @@ import (
 
 type TransitGatewayRouteTableAssociationInitParameters struct {
 
+	// Boolean whether the Gateway Attachment should remove any current Route Table association before associating with the specified Route Table. Default value: false. This argument is intended for use with EC2 Transit Gateways shared into the current account, otherwise the transit_gateway_default_route_table_association argument of the aws_ec2_transit_gateway_vpc_attachment resource should be used.
+	ReplaceExistingAssociation *bool `json:"replaceExistingAssociation,omitempty" tf:"replace_existing_association,omitempty"`
+
 	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
@@ -49,6 +52,9 @@ type TransitGatewayRouteTableAssociationObservation struct {
 	// EC2 Transit Gateway Route Table identifier combined with EC2 Transit Gateway Attachment identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Boolean whether the Gateway Attachment should remove any current Route Table association before associating with the specified Route Table. Default value: false. This argument is intended for use with EC2 Transit Gateways shared into the current account, otherwise the transit_gateway_default_route_table_association argument of the aws_ec2_transit_gateway_vpc_attachment resource should be used.
+	ReplaceExistingAssociation *bool `json:"replaceExistingAssociation,omitempty" tf:"replace_existing_association,omitempty"`
+
 	// Identifier of the resource
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -68,6 +74,10 @@ type TransitGatewayRouteTableAssociationParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Boolean whether the Gateway Attachment should remove any current Route Table association before associating with the specified Route Table. Default value: false. This argument is intended for use with EC2 Transit Gateways shared into the current account, otherwise the transit_gateway_default_route_table_association argument of the aws_ec2_transit_gateway_vpc_attachment resource should be used.
+	// +kubebuilder:validation:Optional
+	ReplaceExistingAssociation *bool `json:"replaceExistingAssociation,omitempty" tf:"replace_existing_association,omitempty"`
 
 	// Identifier of EC2 Transit Gateway Attachment.
 	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
@@ -120,13 +130,14 @@ type TransitGatewayRouteTableAssociationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TransitGatewayRouteTableAssociation is the Schema for the TransitGatewayRouteTableAssociations API. Manages an EC2 Transit Gateway Route Table association
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type TransitGatewayRouteTableAssociation struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -109,8 +109,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: Region of the target database. Region is the region
+                      you'd like your resource to be created in.
                     type: string
                   tags:
                     additionalProperties:
@@ -129,6 +129,9 @@ spec:
                           type: string
                         databaseName:
                           description: Name of the catalog database.
+                          type: string
+                        region:
+                          description: Region of the target database.
                           type: string
                       required:
                       - catalogId
@@ -441,6 +444,9 @@ spec:
                           type: string
                         databaseName:
                           description: Name of the catalog database.
+                          type: string
+                        region:
+                          description: Region of the target database.
                           type: string
                       type: object
                     type: array

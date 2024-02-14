@@ -57,6 +57,38 @@ type ContainersObservation struct {
 type ContainersParameters struct {
 }
 
+type EcrConfigurationInitParameters struct {
+
+	// Set of tags for Image Builder to apply to the output container image that that Amazon Inspector scans.
+	// +listType=set
+	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
+
+	// The name of the container repository that Amazon Inspector scans to identify findings for your container images.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+}
+
+type EcrConfigurationObservation struct {
+
+	// Set of tags for Image Builder to apply to the output container image that that Amazon Inspector scans.
+	// +listType=set
+	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
+
+	// The name of the container repository that Amazon Inspector scans to identify findings for your container images.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+}
+
+type EcrConfigurationParameters struct {
+
+	// Set of tags for Image Builder to apply to the output container image that that Amazon Inspector scans.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ContainerTags []*string `json:"containerTags,omitempty" tf:"container_tags,omitempty"`
+
+	// The name of the container repository that Amazon Inspector scans to identify findings for your container images.
+	// +kubebuilder:validation:Optional
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+}
+
 type ImageInitParameters struct {
 
 	// - Amazon Resource Name (ARN) of the container recipe.
@@ -90,6 +122,9 @@ type ImageInitParameters struct {
 	// Selector for a ImageRecipe in imagebuilder to populate imageRecipeArn.
 	// +kubebuilder:validation:Optional
 	ImageRecipeArnSelector *v1.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
+
+	// Configuration block with image scanning configuration. Detailed below.
+	ImageScanningConfiguration []ImageScanningConfigurationInitParameters `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
 
 	// Configuration block with image tests configuration. Detailed below.
 	ImageTestsConfiguration []ImageTestsConfigurationInitParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
@@ -133,6 +168,9 @@ type ImageObservation struct {
 
 	// Amazon Resource Name (ARN) of the image recipe.
 	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
+
+	// Configuration block with image scanning configuration. Detailed below.
+	ImageScanningConfiguration []ImageScanningConfigurationObservation `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
 
 	// Configuration block with image tests configuration. Detailed below.
 	ImageTestsConfiguration []ImageTestsConfigurationObservation `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
@@ -202,6 +240,10 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageRecipeArnSelector *v1.Selector `json:"imageRecipeArnSelector,omitempty" tf:"-"`
 
+	// Configuration block with image scanning configuration. Detailed below.
+	// +kubebuilder:validation:Optional
+	ImageScanningConfiguration []ImageScanningConfigurationParameters `json:"imageScanningConfiguration,omitempty" tf:"image_scanning_configuration,omitempty"`
+
 	// Configuration block with image tests configuration. Detailed below.
 	// +kubebuilder:validation:Optional
 	ImageTestsConfiguration []ImageTestsConfigurationParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
@@ -230,6 +272,35 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type ImageScanningConfigurationInitParameters struct {
+
+	// Configuration block with ECR configuration. Detailed below.
+	EcrConfiguration []EcrConfigurationInitParameters `json:"ecrConfiguration,omitempty" tf:"ecr_configuration,omitempty"`
+
+	// Indicates whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image. Defaults to false.
+	ImageScanningEnabled *bool `json:"imageScanningEnabled,omitempty" tf:"image_scanning_enabled,omitempty"`
+}
+
+type ImageScanningConfigurationObservation struct {
+
+	// Configuration block with ECR configuration. Detailed below.
+	EcrConfiguration []EcrConfigurationObservation `json:"ecrConfiguration,omitempty" tf:"ecr_configuration,omitempty"`
+
+	// Indicates whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image. Defaults to false.
+	ImageScanningEnabled *bool `json:"imageScanningEnabled,omitempty" tf:"image_scanning_enabled,omitempty"`
+}
+
+type ImageScanningConfigurationParameters struct {
+
+	// Configuration block with ECR configuration. Detailed below.
+	// +kubebuilder:validation:Optional
+	EcrConfiguration []EcrConfigurationParameters `json:"ecrConfiguration,omitempty" tf:"ecr_configuration,omitempty"`
+
+	// Indicates whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ImageScanningEnabled *bool `json:"imageScanningEnabled,omitempty" tf:"image_scanning_enabled,omitempty"`
 }
 
 type ImageTestsConfigurationInitParameters struct {
@@ -300,13 +371,14 @@ type ImageStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Image is the Schema for the Images API. Manages an Image Builder Image
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Image struct {
 	metav1.TypeMeta   `json:",inline"`

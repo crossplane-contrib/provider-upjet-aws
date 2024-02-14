@@ -1,0 +1,20 @@
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: ReplicationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/replicationgroup
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    automaticFailoverEnabled: true
+    description: example description
+    nodeType: cache.m4.large
+    numCacheClusters: 2
+    port: 6379
+    preferredCacheClusterAzs:
+      - us-west-1a
+      - us-west-1b
+    region: us-west-1

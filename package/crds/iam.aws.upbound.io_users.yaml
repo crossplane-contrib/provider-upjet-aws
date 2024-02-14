@@ -299,6 +299,7 @@ spec:
                       or mfa devices
                     type: boolean
                   id:
+                    description: The user's name.
                     type: string
                   path:
                     description: Path in which to create the user.

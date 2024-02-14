@@ -132,6 +132,21 @@ spec:
                           description: 'Device Defender indexing mode. Valid values:
                             VIOLATIONS, OFF. Default: OFF.'
                           type: string
+                        filter:
+                          description: Required if named_shadow_indexing_mode is ON.
+                            Enables to add named shadows filtered by filter to fleet
+                            indexing configuration.
+                          items:
+                            properties:
+                              namedShadowNames:
+                                description: List of shadow names that you select
+                                  to index.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         managedField:
                           description: Contains fields that are indexed and whose
                             types are already known by the Fleet Indexing service.
@@ -237,6 +252,21 @@ spec:
                           description: 'Device Defender indexing mode. Valid values:
                             VIOLATIONS, OFF. Default: OFF.'
                           type: string
+                        filter:
+                          description: Required if named_shadow_indexing_mode is ON.
+                            Enables to add named shadows filtered by filter to fleet
+                            indexing configuration.
+                          items:
+                            properties:
+                              namedShadowNames:
+                                description: List of shadow names that you select
+                                  to index.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         managedField:
                           description: Contains fields that are indexed and whose
                             types are already known by the Fleet Indexing service.
@@ -496,6 +526,21 @@ spec:
                           description: 'Device Defender indexing mode. Valid values:
                             VIOLATIONS, OFF. Default: OFF.'
                           type: string
+                        filter:
+                          description: Required if named_shadow_indexing_mode is ON.
+                            Enables to add named shadows filtered by filter to fleet
+                            indexing configuration.
+                          items:
+                            properties:
+                              namedShadowNames:
+                                description: List of shadow names that you select
+                                  to index.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         managedField:
                           description: Contains fields that are indexed and whose
                             types are already known by the Fleet Indexing service.

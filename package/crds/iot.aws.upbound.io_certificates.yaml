@@ -324,6 +324,10 @@ spec:
                   arn:
                     description: The ARN of the created certificate.
                     type: string
+                  caCertificateId:
+                    description: The certificate ID of the CA certificate used to
+                      sign the certificate.
+                    type: string
                   csr:
                     description: The certificate signing request. Review CreateCertificateFromCsr
                       for more information on generating a certificate from a certificate

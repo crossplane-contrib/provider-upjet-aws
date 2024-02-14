@@ -448,7 +448,7 @@ type RiskConfigurationObservation struct {
 	// The compromised credentials risk configuration. See details below.
 	CompromisedCredentialsRiskConfiguration []CompromisedCredentialsRiskConfigurationObservation `json:"compromisedCredentialsRiskConfiguration,omitempty" tf:"compromised_credentials_risk_configuration,omitempty"`
 
-	// The user pool ID. or The user pool ID and Client Id separated by a : if the configuration is client specific.
+	// The user pool ID or the user pool ID and Client Id separated by a : if the configuration is client specific.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The configuration to override the risk decision. See details below.
@@ -567,13 +567,14 @@ type RiskConfigurationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RiskConfiguration is the Schema for the RiskConfigurations API. Provides a Cognito Risk Configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type RiskConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -456,6 +456,14 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventCategories)
                 || (has(self.initProvider) && has(self.initProvider.eventCategories))'
+            - message: spec.forProvider.sourceIds is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceIds)
+                || (has(self.initProvider) && has(self.initProvider.sourceIds))'
+            - message: spec.forProvider.sourceType is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceType)
+                || (has(self.initProvider) && has(self.initProvider.sourceType))'
           status:
             description: EventSubscriptionStatus defines the observed state of EventSubscription.
             properties:

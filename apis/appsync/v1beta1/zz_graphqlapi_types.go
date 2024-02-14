@@ -96,6 +96,9 @@ type GraphQLAPIInitParameters struct {
 	// Amazon Cognito User Pool configuration. Defined below.
 	UserPoolConfig []GraphQLAPIUserPoolConfigInitParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 
+	// Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
+	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
+
 	// Whether tracing with X-ray is enabled. Defaults to false.
 	XrayEnabled *bool `json:"xrayEnabled,omitempty" tf:"xray_enabled,omitempty"`
 }
@@ -182,6 +185,9 @@ type GraphQLAPIObservation struct {
 
 	// Amazon Cognito User Pool configuration. Defined below.
 	UserPoolConfig []GraphQLAPIUserPoolConfigObservation `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
+
+	// Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
+	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
 	// Whether tracing with X-ray is enabled. Defaults to false.
 	XrayEnabled *bool `json:"xrayEnabled,omitempty" tf:"xray_enabled,omitempty"`
@@ -279,6 +285,10 @@ type GraphQLAPIParameters struct {
 	// Amazon Cognito User Pool configuration. Defined below.
 	// +kubebuilder:validation:Optional
 	UserPoolConfig []GraphQLAPIUserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
+
+	// Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
+	// +kubebuilder:validation:Optional
+	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
 	// Whether tracing with X-ray is enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -564,13 +574,14 @@ type GraphQLAPIStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // GraphQLAPI is the Schema for the GraphQLAPIs API. Provides an AppSync GraphQL API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type GraphQLAPI struct {
 	metav1.TypeMeta   `json:",inline"`

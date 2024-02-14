@@ -38,6 +38,25 @@ type SignatureValidityPeriodParameters struct {
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
+type SigningMaterialInitParameters struct {
+
+	// The Amazon Resource Name (ARN) for the signing profile.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+}
+
+type SigningMaterialObservation struct {
+
+	// The Amazon Resource Name (ARN) for the signing profile.
+	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
+}
+
+type SigningMaterialParameters struct {
+
+	// The Amazon Resource Name (ARN) for the signing profile.
+	// +kubebuilder:validation:Optional
+	CertificateArn *string `json:"certificateArn" tf:"certificate_arn,omitempty"`
+}
+
 type SigningProfileInitParameters struct {
 
 	// The ID of the platform that is used by the target signing profile.
@@ -45,6 +64,8 @@ type SigningProfileInitParameters struct {
 
 	// The validity period for a signing job.
 	SignatureValidityPeriod []SignatureValidityPeriodInitParameters `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
+
+	SigningMaterial []SigningMaterialInitParameters `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -69,6 +90,8 @@ type SigningProfileObservation struct {
 
 	// The validity period for a signing job.
 	SignatureValidityPeriod []SignatureValidityPeriodObservation `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
+
+	SigningMaterial []SigningMaterialObservation `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
 
 	// The status of the target signing profile.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -102,6 +125,9 @@ type SigningProfileParameters struct {
 	// The validity period for a signing job.
 	// +kubebuilder:validation:Optional
 	SignatureValidityPeriod []SignatureValidityPeriodParameters `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SigningMaterial []SigningMaterialParameters `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -147,13 +173,14 @@ type SigningProfileStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SigningProfile is the Schema for the SigningProfiles API. Creates a Signer Signing Profile.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type SigningProfile struct {
 	metav1.TypeMeta   `json:",inline"`

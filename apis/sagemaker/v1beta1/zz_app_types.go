@@ -165,6 +165,9 @@ type ResourceSpecInitParameters struct {
 	// The ARN of the SageMaker image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
 
+	// The SageMaker Image Version Alias.
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
+
 	// The ARN of the image version created on the instance.
 	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
 }
@@ -179,6 +182,9 @@ type ResourceSpecObservation struct {
 
 	// The ARN of the SageMaker image that the image version belongs to.
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The SageMaker Image Version Alias.
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
 	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
@@ -197,6 +203,10 @@ type ResourceSpecParameters struct {
 	// The ARN of the SageMaker image that the image version belongs to.
 	// +kubebuilder:validation:Optional
 	SagemakerImageArn *string `json:"sagemakerImageArn,omitempty" tf:"sagemaker_image_arn,omitempty"`
+
+	// The SageMaker Image Version Alias.
+	// +kubebuilder:validation:Optional
+	SagemakerImageVersionAlias *string `json:"sagemakerImageVersionAlias,omitempty" tf:"sagemaker_image_version_alias,omitempty"`
 
 	// The ARN of the image version created on the instance.
 	// +kubebuilder:validation:Optional
@@ -227,13 +237,14 @@ type AppStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // App is the Schema for the Apps API. Provides a SageMaker App resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type App struct {
 	metav1.TypeMeta   `json:",inline"`

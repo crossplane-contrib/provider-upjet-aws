@@ -1,0 +1,23 @@
+apiVersion: scheduler.aws.upbound.io/v1beta1
+kind: Schedule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: scheduler/v1beta1/schedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    flexibleTimeWindow:
+    - mode: "OFF"
+    groupName: default
+    name: my-schedule
+    region: us-west-1
+    scheduleExpression: rate(1 hours)
+    target:
+    - arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example

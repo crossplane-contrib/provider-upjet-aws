@@ -1,0 +1,13 @@
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: OpenIDConnectProvider
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/openidconnectprovider
+  name: example
+spec:
+  forProvider:
+    clientIdList:
+    - some-audience
+    thumbprintList:
+    - 15e29108718111e59b3dad31954647e3c344a231
+    url: https://token.actions.githubusercontent.com

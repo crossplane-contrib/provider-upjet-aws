@@ -24,9 +24,16 @@ type VoiceConnectorInitParameters struct {
 
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
 	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VoiceConnectorObservation struct {
+
+	// ARN (Amazon Resource Name) of the Amazon Chime Voice Connector.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AWS Region in which the Amazon Chime Voice Connector is created. Default value: us-east-1
 	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
@@ -38,6 +45,14 @@ type VoiceConnectorObservation struct {
 
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
 	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type VoiceConnectorParameters struct {
@@ -54,6 +69,11 @@ type VoiceConnectorParameters struct {
 	// When enabled, requires encryption for the Amazon Chime Voice Connector.
 	// +kubebuilder:validation:Optional
 	RequireEncryption *bool `json:"requireEncryption,omitempty" tf:"require_encryption,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // VoiceConnectorSpec defines the desired state of VoiceConnector
@@ -80,13 +100,14 @@ type VoiceConnectorStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VoiceConnector is the Schema for the VoiceConnectors API. Enables you to connect your phone system to the telephone network at a substantial cost savings by using SIP trunking.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type VoiceConnector struct {
 	metav1.TypeMeta   `json:",inline"`

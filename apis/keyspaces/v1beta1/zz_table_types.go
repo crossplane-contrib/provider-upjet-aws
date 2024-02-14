@@ -56,6 +56,25 @@ type CapacitySpecificationParameters struct {
 	WriteCapacityUnits *float64 `json:"writeCapacityUnits,omitempty" tf:"write_capacity_units,omitempty"`
 }
 
+type ClientSideTimestampsInitParameters struct {
+
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ClientSideTimestampsObservation struct {
+
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ClientSideTimestampsParameters struct {
+
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status" tf:"status,omitempty"`
+}
+
 type ClusteringKeyInitParameters struct {
 
 	// The name of the column.
@@ -183,19 +202,19 @@ type PartitionKeyParameters struct {
 
 type PointInTimeRecoveryInitParameters struct {
 
-	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type PointInTimeRecoveryObservation struct {
 
-	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type PointInTimeRecoveryParameters struct {
 
-	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -270,19 +289,19 @@ type StaticColumnParameters struct {
 
 type TTLInitParameters struct {
 
-	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type TTLObservation struct {
 
-	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type TTLParameters struct {
 
-	// Valid values: ENABLED, DISABLED. The default value is DISABLED.
+	// Shows how to enable client-side timestamps settings for the specified table. Valid values: ENABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status" tf:"status,omitempty"`
 }
@@ -291,6 +310,9 @@ type TableInitParameters struct {
 
 	// Specifies the read/write throughput capacity mode for the table.
 	CapacitySpecification []CapacitySpecificationInitParameters `json:"capacitySpecification,omitempty" tf:"capacity_specification,omitempty"`
+
+	// Enables client-side timestamps for the table. By default, the setting is disabled.
+	ClientSideTimestamps []ClientSideTimestampsInitParameters `json:"clientSideTimestamps,omitempty" tf:"client_side_timestamps,omitempty"`
 
 	// A description of the table.
 	Comment []CommentInitParameters `json:"comment,omitempty" tf:"comment,omitempty"`
@@ -338,6 +360,9 @@ type TableObservation struct {
 	// Specifies the read/write throughput capacity mode for the table.
 	CapacitySpecification []CapacitySpecificationObservation `json:"capacitySpecification,omitempty" tf:"capacity_specification,omitempty"`
 
+	// Enables client-side timestamps for the table. By default, the setting is disabled.
+	ClientSideTimestamps []ClientSideTimestampsObservation `json:"clientSideTimestamps,omitempty" tf:"client_side_timestamps,omitempty"`
+
 	// A description of the table.
 	Comment []CommentObservation `json:"comment,omitempty" tf:"comment,omitempty"`
 
@@ -378,6 +403,10 @@ type TableParameters struct {
 	// Specifies the read/write throughput capacity mode for the table.
 	// +kubebuilder:validation:Optional
 	CapacitySpecification []CapacitySpecificationParameters `json:"capacitySpecification,omitempty" tf:"capacity_specification,omitempty"`
+
+	// Enables client-side timestamps for the table. By default, the setting is disabled.
+	// +kubebuilder:validation:Optional
+	ClientSideTimestamps []ClientSideTimestampsParameters `json:"clientSideTimestamps,omitempty" tf:"client_side_timestamps,omitempty"`
 
 	// A description of the table.
 	// +kubebuilder:validation:Optional
@@ -455,13 +484,14 @@ type TableStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Table is the Schema for the Tables API. Provides a Keyspaces Table.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Table struct {
 	metav1.TypeMeta   `json:",inline"`

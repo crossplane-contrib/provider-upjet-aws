@@ -1579,6 +1579,11 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 			}
 		}
 	}
+	if in.ReplicationUser != nil {
+		in, out := &in.ReplicationUser, &out.ReplicationUser
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -1614,6 +1619,11 @@ func (in *UserObservation) DeepCopyInto(out *UserObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.ReplicationUser != nil {
+		in, out := &in.ReplicationUser, &out.ReplicationUser
+		*out = new(bool)
+		**out = **in
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -1652,6 +1662,11 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 		}
 	}
 	out.PasswordSecretRef = in.PasswordSecretRef
+	if in.ReplicationUser != nil {
+		in, out := &in.ReplicationUser, &out.ReplicationUser
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)

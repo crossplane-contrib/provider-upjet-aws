@@ -44,6 +44,9 @@ type ClusterInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
+	// –  Copy all DB instance tags to snapshots. Default is false.
+	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
+
 	// A value that indicates whether to enable Performance Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html) about the details.
 	EnablePerformanceInsights *bool `json:"enablePerformanceInsights,omitempty" tf:"enable_performance_insights,omitempty"`
 
@@ -90,6 +93,9 @@ type ClusterInstanceObservation struct {
 
 	// The identifier of the aws_docdb_cluster in which to launch this instance.
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
+
+	// –  Copy all DB instance tags to snapshots. Default is false.
+	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
 
 	// The DB subnet group to associate with this DB instance.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -184,6 +190,10 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
+	// –  Copy all DB instance tags to snapshots. Default is false.
+	// +kubebuilder:validation:Optional
+	CopyTagsToSnapshot *bool `json:"copyTagsToSnapshot,omitempty" tf:"copy_tags_to_snapshot,omitempty"`
+
 	// A value that indicates whether to enable Performance Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html) about the details.
 	// +kubebuilder:validation:Optional
 	EnablePerformanceInsights *bool `json:"enablePerformanceInsights,omitempty" tf:"enable_performance_insights,omitempty"`
@@ -246,13 +256,14 @@ type ClusterInstanceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ClusterInstance is the Schema for the ClusterInstances API. Provides an DocumentDB Cluster Resource Instance
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`

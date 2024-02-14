@@ -44,7 +44,7 @@ type ConnectAttachmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeLocationSelector *v1.Selector `json:"edgeLocationSelector,omitempty" tf:"-"`
 
-	// Options for creating an attachment.
+	// Options block. See options for more information.
 	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// Key-value map of resource tags.
@@ -91,7 +91,7 @@ type ConnectAttachmentObservation struct {
 	// The ID of the attachment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Options for creating an attachment.
+	// Options block. See options for more information.
 	Options []OptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The ID of the attachment account owner.
@@ -147,7 +147,7 @@ type ConnectAttachmentParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeLocationSelector *v1.Selector `json:"edgeLocationSelector,omitempty" tf:"-"`
 
-	// Options for creating an attachment.
+	// Options block. See options for more information.
 	// +kubebuilder:validation:Optional
 	Options []OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
@@ -177,15 +177,20 @@ type ConnectAttachmentParameters struct {
 }
 
 type OptionsInitParameters struct {
+
+	// The protocol used for the attachment connection. Possible values are GRE and NO_ENCAP.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type OptionsObservation struct {
+
+	// The protocol used for the attachment connection. Possible values are GRE and NO_ENCAP.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type OptionsParameters struct {
 
+	// The protocol used for the attachment connection. Possible values are GRE and NO_ENCAP.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
@@ -214,13 +219,14 @@ type ConnectAttachmentStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ConnectAttachment is the Schema for the ConnectAttachments API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type ConnectAttachment struct {
 	metav1.TypeMeta   `json:",inline"`

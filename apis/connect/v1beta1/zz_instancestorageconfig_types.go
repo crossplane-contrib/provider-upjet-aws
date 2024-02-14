@@ -81,7 +81,7 @@ type InstanceStorageConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceIDSelector *v1.Selector `json:"instanceIdSelector,omitempty" tf:"-"`
 
-	// A valid resource type. Valid Values: CHAT_TRANSCRIPTS | CALL_RECORDINGS | SCHEDULED_REPORTS | MEDIA_STREAMS | CONTACT_TRACE_RECORDS | AGENT_EVENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS.
+	// A valid resource type. Valid Values: AGENT_EVENTS | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | SCHEDULED_REPORTS | SCREEN_RECORDINGS.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Specifies the storage configuration options for the Connect Instance. Documented below.
@@ -99,7 +99,7 @@ type InstanceStorageConfigObservation struct {
 	// Specifies the identifier of the hosting Amazon Connect Instance.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// A valid resource type. Valid Values: CHAT_TRANSCRIPTS | CALL_RECORDINGS | SCHEDULED_REPORTS | MEDIA_STREAMS | CONTACT_TRACE_RECORDS | AGENT_EVENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS.
+	// A valid resource type. Valid Values: AGENT_EVENTS | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | SCHEDULED_REPORTS | SCREEN_RECORDINGS.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Specifies the storage configuration options for the Connect Instance. Documented below.
@@ -127,7 +127,7 @@ type InstanceStorageConfigParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A valid resource type. Valid Values: CHAT_TRANSCRIPTS | CALL_RECORDINGS | SCHEDULED_REPORTS | MEDIA_STREAMS | CONTACT_TRACE_RECORDS | AGENT_EVENTS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS.
+	// A valid resource type. Valid Values: AGENT_EVENTS | ATTACHMENTS | CALL_RECORDINGS | CHAT_TRANSCRIPTS | CONTACT_EVALUATIONS | CONTACT_TRACE_RECORDS | MEDIA_STREAMS | REAL_TIME_CONTACT_ANALYSIS_SEGMENTS | SCHEDULED_REPORTS | SCREEN_RECORDINGS.
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
@@ -444,13 +444,14 @@ type InstanceStorageConfigStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // InstanceStorageConfig is the Schema for the InstanceStorageConfigs API. Provides details about a specific Amazon Connect Instance Storage Config.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type InstanceStorageConfig struct {
 	metav1.TypeMeta   `json:",inline"`

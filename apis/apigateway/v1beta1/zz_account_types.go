@@ -35,8 +35,15 @@ type AccountInitParameters struct {
 
 type AccountObservation struct {
 
+	// The version of the API keys used for the account.
+	APIKeyVersion *string `json:"apiKeyVersion,omitempty" tf:"api_key_version,omitempty"`
+
 	// ARN of an IAM role for CloudWatch (to allow logging & monitoring). See more in AWS Docs. Logging & monitoring can be enabled/disabled and otherwise tuned on the API Gateway Stage level.
 	CloudwatchRoleArn *string `json:"cloudwatchRoleArn,omitempty" tf:"cloudwatch_role_arn,omitempty"`
+
+	// A list of features supported for the account.
+	// +listType=set
+	Features []*string `json:"features,omitempty" tf:"features,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -105,13 +112,14 @@ type AccountStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Account is the Schema for the Accounts API. Provides a settings of an API Gateway Account.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Account struct {
 	metav1.TypeMeta   `json:",inline"`

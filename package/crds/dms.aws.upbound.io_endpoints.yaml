@@ -95,6 +95,12 @@ spec:
                           description: ARN of the IAM Role with permissions to write
                             to the OpenSearch cluster.
                           type: string
+                        useNewMappingType:
+                          description: Enable to migrate documentation using the documentation
+                            type _doc. OpenSearch and an Elasticsearch clusters only
+                            support the _doc documentation type in versions 7.x and
+                            later. The default value is false.
+                          type: boolean
                       type: object
                     type: array
                   endpointType:
@@ -103,10 +109,10 @@ spec:
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis,
-                      mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,
-                      s3, sqlserver, sybase. Please note that some of engine names
-                      are available only for target endpoint type (e.g. redshift).
+                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
+                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
+                      redshift, s3, sqlserver, sybase. Please note that some of engine
+                      names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -425,9 +431,92 @@ spec:
                     - name
                     - namespace
                     type: object
+                  pauseReplicationTasks:
+                    description: Only tasks paused by the resource will be restarted
+                      after the modification completes. Default is false.
+                    type: boolean
                   port:
                     description: Port used by the endpoint database.
                     type: number
+                  postgresSettings:
+                    description: Configuration block for Postgres settings. See below.
+                    items:
+                      properties:
+                        afterConnectScript:
+                          description: For use with change data capture (CDC) only,
+                            this attribute has AWS DMS bypass foreign keys and user
+                            triggers to reduce the time it takes to bulk load data.
+                          type: string
+                        babelfishDatabaseName:
+                          description: The Babelfish for Aurora PostgreSQL database
+                            name for the endpoint.
+                          type: string
+                        captureDdls:
+                          description: To capture DDL events, AWS DMS creates various
+                            artifacts in the PostgreSQL database when the task starts.
+                          type: boolean
+                        databaseMode:
+                          description: Specifies the default behavior of the replication's
+                            handling of PostgreSQL- compatible endpoints that require
+                            some additional configuration, such as Babelfish endpoints.
+                          type: string
+                        ddlArtifactsSchema:
+                          description: Sets the schema in which the operational DDL
+                            database artifacts are created. Default is public.
+                          type: string
+                        executeTimeout:
+                          description: Sets the client statement timeout for the PostgreSQL
+                            instance, in seconds. Default value is 60.
+                          type: number
+                        failTasksOnLobTruncation:
+                          description: When set to true, this value causes a task
+                            to fail if the actual size of a LOB column is greater
+                            than the specified LobMaxSize. Default is false.
+                          type: boolean
+                        heartbeatEnable:
+                          description: The write-ahead log (WAL) heartbeat feature
+                            mimics a dummy transaction. By doing this, it prevents
+                            idle logical replication slots from holding onto old WAL
+                            logs, which can result in storage full situations on the
+                            source.
+                          type: boolean
+                        heartbeatFrequency:
+                          description: Sets the WAL heartbeat frequency (in minutes).
+                            Default value is 5.
+                          type: number
+                        heartbeatSchema:
+                          description: Sets the schema in which the heartbeat artifacts
+                            are created. Default value is public.
+                          type: string
+                        mapBooleanAsBoolean:
+                          description: You can use PostgreSQL endpoint settings to
+                            map a boolean as a boolean from your PostgreSQL source
+                            to a Amazon Redshift target. Default value is false.
+                          type: boolean
+                        mapJsonbAsClob:
+                          description: Optional When true, DMS migrates JSONB values
+                            as CLOB.
+                          type: boolean
+                        mapLongVarcharAs:
+                          description: Optional When true, DMS migrates LONG values
+                            as VARCHAR.
+                          type: string
+                        maxFileSize:
+                          description: Specifies the maximum size (in KB) of any .csv
+                            file used to transfer data to PostgreSQL. Default is 32,768
+                            KB.
+                          type: number
+                        pluginName:
+                          description: 'Specifies the plugin to use to create a replication
+                            slot. Valid values: pglogical, test_decoding.'
+                          type: string
+                        slotName:
+                          description: Sets the name of a previously created logical
+                            replication slot for a CDC load of the PostgreSQL source
+                            instance.
+                          type: string
+                      type: object
+                    type: array
                   redisSettings:
                     items:
                       properties:
@@ -624,14 +713,15 @@ spec:
                           description: JSON document that describes how AWS DMS should
                             interpret the data.
                           type: string
+                        glueCatalogGeneration:
+                          description: Whether to integrate AWS Glue Data Catalog
+                            with an Amazon S3 target. See Using AWS Glue Data Catalog
+                            with an Amazon S3 target for AWS DMS for more information.
+                            Default is false.
+                          type: boolean
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
-                          type: number
-                        ignoreHeadersRow:
-                          description: Deprecated. This setting has no effect. Will
-                            be removed in a future version. This setting has no effect,
-                            is deprecated, and will be removed in a future version
                           type: number
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
@@ -915,6 +1005,12 @@ spec:
                           description: ARN of the IAM Role with permissions to write
                             to the OpenSearch cluster.
                           type: string
+                        useNewMappingType:
+                          description: Enable to migrate documentation using the documentation
+                            type _doc. OpenSearch and an Elasticsearch clusters only
+                            support the _doc documentation type in versions 7.x and
+                            later. The default value is false.
+                          type: boolean
                       type: object
                     type: array
                   endpointType:
@@ -923,10 +1019,10 @@ spec:
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis,
-                      mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,
-                      s3, sqlserver, sybase. Please note that some of engine names
-                      are available only for target endpoint type (e.g. redshift).
+                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
+                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
+                      redshift, s3, sqlserver, sybase. Please note that some of engine
+                      names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -1190,9 +1286,92 @@ spec:
                           type: string
                       type: object
                     type: array
+                  pauseReplicationTasks:
+                    description: Only tasks paused by the resource will be restarted
+                      after the modification completes. Default is false.
+                    type: boolean
                   port:
                     description: Port used by the endpoint database.
                     type: number
+                  postgresSettings:
+                    description: Configuration block for Postgres settings. See below.
+                    items:
+                      properties:
+                        afterConnectScript:
+                          description: For use with change data capture (CDC) only,
+                            this attribute has AWS DMS bypass foreign keys and user
+                            triggers to reduce the time it takes to bulk load data.
+                          type: string
+                        babelfishDatabaseName:
+                          description: The Babelfish for Aurora PostgreSQL database
+                            name for the endpoint.
+                          type: string
+                        captureDdls:
+                          description: To capture DDL events, AWS DMS creates various
+                            artifacts in the PostgreSQL database when the task starts.
+                          type: boolean
+                        databaseMode:
+                          description: Specifies the default behavior of the replication's
+                            handling of PostgreSQL- compatible endpoints that require
+                            some additional configuration, such as Babelfish endpoints.
+                          type: string
+                        ddlArtifactsSchema:
+                          description: Sets the schema in which the operational DDL
+                            database artifacts are created. Default is public.
+                          type: string
+                        executeTimeout:
+                          description: Sets the client statement timeout for the PostgreSQL
+                            instance, in seconds. Default value is 60.
+                          type: number
+                        failTasksOnLobTruncation:
+                          description: When set to true, this value causes a task
+                            to fail if the actual size of a LOB column is greater
+                            than the specified LobMaxSize. Default is false.
+                          type: boolean
+                        heartbeatEnable:
+                          description: The write-ahead log (WAL) heartbeat feature
+                            mimics a dummy transaction. By doing this, it prevents
+                            idle logical replication slots from holding onto old WAL
+                            logs, which can result in storage full situations on the
+                            source.
+                          type: boolean
+                        heartbeatFrequency:
+                          description: Sets the WAL heartbeat frequency (in minutes).
+                            Default value is 5.
+                          type: number
+                        heartbeatSchema:
+                          description: Sets the schema in which the heartbeat artifacts
+                            are created. Default value is public.
+                          type: string
+                        mapBooleanAsBoolean:
+                          description: You can use PostgreSQL endpoint settings to
+                            map a boolean as a boolean from your PostgreSQL source
+                            to a Amazon Redshift target. Default value is false.
+                          type: boolean
+                        mapJsonbAsClob:
+                          description: Optional When true, DMS migrates JSONB values
+                            as CLOB.
+                          type: boolean
+                        mapLongVarcharAs:
+                          description: Optional When true, DMS migrates LONG values
+                            as VARCHAR.
+                          type: string
+                        maxFileSize:
+                          description: Specifies the maximum size (in KB) of any .csv
+                            file used to transfer data to PostgreSQL. Default is 32,768
+                            KB.
+                          type: number
+                        pluginName:
+                          description: 'Specifies the plugin to use to create a replication
+                            slot. Valid values: pglogical, test_decoding.'
+                          type: string
+                        slotName:
+                          description: Sets the name of a previously created logical
+                            replication slot for a CDC load of the PostgreSQL source
+                            instance.
+                          type: string
+                      type: object
+                    type: array
                   redisSettings:
                     items:
                       properties:
@@ -1366,14 +1545,15 @@ spec:
                           description: JSON document that describes how AWS DMS should
                             interpret the data.
                           type: string
+                        glueCatalogGeneration:
+                          description: Whether to integrate AWS Glue Data Catalog
+                            with an Amazon S3 target. See Using AWS Glue Data Catalog
+                            with an Amazon S3 target for AWS DMS for more information.
+                            Default is false.
+                          type: boolean
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
-                          type: number
-                        ignoreHeadersRow:
-                          description: Deprecated. This setting has no effect. Will
-                            be removed in a future version. This setting has no effect,
-                            is deprecated, and will be removed in a future version
                           type: number
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT
@@ -1817,6 +1997,12 @@ spec:
                           description: ARN of the IAM Role with permissions to write
                             to the OpenSearch cluster.
                           type: string
+                        useNewMappingType:
+                          description: Enable to migrate documentation using the documentation
+                            type _doc. OpenSearch and an Elasticsearch clusters only
+                            support the _doc documentation type in versions 7.x and
+                            later. The default value is false.
+                          type: boolean
                       type: object
                     type: array
                   endpointArn:
@@ -1828,10 +2014,10 @@ spec:
                   engineName:
                     description: Type of engine for the endpoint. Valid values are
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
-                      db2, db2-zos, docdb, dynamodb, elasticsearch, kafka, kinesis,
-                      mariadb, mongodb, mysql, opensearch, oracle, postgres, redshift,
-                      s3, sqlserver, sybase. Please note that some of engine names
-                      are available only for target endpoint type (e.g. redshift).
+                      babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
+                      kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
+                      redshift, s3, sqlserver, sybase. Please note that some of engine
+                      names are available only for target endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -2024,9 +2210,92 @@ spec:
                           type: string
                       type: object
                     type: array
+                  pauseReplicationTasks:
+                    description: Only tasks paused by the resource will be restarted
+                      after the modification completes. Default is false.
+                    type: boolean
                   port:
                     description: Port used by the endpoint database.
                     type: number
+                  postgresSettings:
+                    description: Configuration block for Postgres settings. See below.
+                    items:
+                      properties:
+                        afterConnectScript:
+                          description: For use with change data capture (CDC) only,
+                            this attribute has AWS DMS bypass foreign keys and user
+                            triggers to reduce the time it takes to bulk load data.
+                          type: string
+                        babelfishDatabaseName:
+                          description: The Babelfish for Aurora PostgreSQL database
+                            name for the endpoint.
+                          type: string
+                        captureDdls:
+                          description: To capture DDL events, AWS DMS creates various
+                            artifacts in the PostgreSQL database when the task starts.
+                          type: boolean
+                        databaseMode:
+                          description: Specifies the default behavior of the replication's
+                            handling of PostgreSQL- compatible endpoints that require
+                            some additional configuration, such as Babelfish endpoints.
+                          type: string
+                        ddlArtifactsSchema:
+                          description: Sets the schema in which the operational DDL
+                            database artifacts are created. Default is public.
+                          type: string
+                        executeTimeout:
+                          description: Sets the client statement timeout for the PostgreSQL
+                            instance, in seconds. Default value is 60.
+                          type: number
+                        failTasksOnLobTruncation:
+                          description: When set to true, this value causes a task
+                            to fail if the actual size of a LOB column is greater
+                            than the specified LobMaxSize. Default is false.
+                          type: boolean
+                        heartbeatEnable:
+                          description: The write-ahead log (WAL) heartbeat feature
+                            mimics a dummy transaction. By doing this, it prevents
+                            idle logical replication slots from holding onto old WAL
+                            logs, which can result in storage full situations on the
+                            source.
+                          type: boolean
+                        heartbeatFrequency:
+                          description: Sets the WAL heartbeat frequency (in minutes).
+                            Default value is 5.
+                          type: number
+                        heartbeatSchema:
+                          description: Sets the schema in which the heartbeat artifacts
+                            are created. Default value is public.
+                          type: string
+                        mapBooleanAsBoolean:
+                          description: You can use PostgreSQL endpoint settings to
+                            map a boolean as a boolean from your PostgreSQL source
+                            to a Amazon Redshift target. Default value is false.
+                          type: boolean
+                        mapJsonbAsClob:
+                          description: Optional When true, DMS migrates JSONB values
+                            as CLOB.
+                          type: boolean
+                        mapLongVarcharAs:
+                          description: Optional When true, DMS migrates LONG values
+                            as VARCHAR.
+                          type: string
+                        maxFileSize:
+                          description: Specifies the maximum size (in KB) of any .csv
+                            file used to transfer data to PostgreSQL. Default is 32,768
+                            KB.
+                          type: number
+                        pluginName:
+                          description: 'Specifies the plugin to use to create a replication
+                            slot. Valid values: pglogical, test_decoding.'
+                          type: string
+                        slotName:
+                          description: Sets the name of a previously created logical
+                            replication slot for a CDC load of the PostgreSQL source
+                            instance.
+                          type: string
+                      type: object
+                    type: array
                   redisSettings:
                     items:
                       properties:
@@ -2200,14 +2469,15 @@ spec:
                           description: JSON document that describes how AWS DMS should
                             interpret the data.
                           type: string
+                        glueCatalogGeneration:
+                          description: Whether to integrate AWS Glue Data Catalog
+                            with an Amazon S3 target. See Using AWS Glue Data Catalog
+                            with an Amazon S3 target for AWS DMS for more information.
+                            Default is false.
+                          type: boolean
                         ignoreHeaderRows:
                           description: When this value is set to 1, DMS ignores the
                             first row header in a .csv file. Default is 0.
-                          type: number
-                        ignoreHeadersRow:
-                          description: Deprecated. This setting has no effect. Will
-                            be removed in a future version. This setting has no effect,
-                            is deprecated, and will be removed in a future version
                           type: number
                         includeOpForFullLoad:
                           description: Whether to enable a full load to write INSERT

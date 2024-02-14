@@ -16,6 +16,15 @@ func (l *StackList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this StackSetInstanceList.
+func (l *StackSetInstanceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this StackSetList.
 func (l *StackSetList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

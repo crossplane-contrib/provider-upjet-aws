@@ -214,13 +214,6 @@ type LaunchConfigurationInitParameters struct {
 
 	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption.
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
-
-	// The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg. vpc-2730681a)
-	VPCClassicLinkID *string `json:"vpcClassicLinkId,omitempty" tf:"vpc_classic_link_id,omitempty"`
-
-	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
-	// +listType=set
-	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 
 type LaunchConfigurationObservation struct {
@@ -279,13 +272,6 @@ type LaunchConfigurationObservation struct {
 
 	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption.
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
-
-	// The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg. vpc-2730681a)
-	VPCClassicLinkID *string `json:"vpcClassicLinkId,omitempty" tf:"vpc_classic_link_id,omitempty"`
-
-	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
-	// +listType=set
-	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 
 type LaunchConfigurationParameters struct {
@@ -359,15 +345,6 @@ type LaunchConfigurationParameters struct {
 	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption.
 	// +kubebuilder:validation:Optional
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
-
-	// The ID of a ClassicLink-enabled VPC. Only applies to EC2-Classic instances. (eg. vpc-2730681a)
-	// +kubebuilder:validation:Optional
-	VPCClassicLinkID *string `json:"vpcClassicLinkId,omitempty" tf:"vpc_classic_link_id,omitempty"`
-
-	// The IDs of one or more security groups for the specified ClassicLink-enabled VPC (eg. sg-46ae3d11).
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	VPCClassicLinkSecurityGroups []*string `json:"vpcClassicLinkSecurityGroups,omitempty" tf:"vpc_classic_link_security_groups,omitempty"`
 }
 
 type MetadataOptionsInitParameters struct {
@@ -502,13 +479,14 @@ type LaunchConfigurationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LaunchConfiguration is the Schema for the LaunchConfigurations API. Provides a resource to create a new launch configuration, used for autoscaling groups.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type LaunchConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`

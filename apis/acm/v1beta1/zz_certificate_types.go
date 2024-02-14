@@ -52,7 +52,7 @@ type CertificateInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Which method to use for validation.
+	// Which method to use for validation. DNS or EMAIL are valid.
 	ValidationMethod *string `json:"validationMethod,omitempty" tf:"validation_method,omitempty"`
 
 	// Configuration block used to specify information about the initial validation of each domain name. Detailed below.
@@ -133,7 +133,7 @@ type CertificateObservation struct {
 	// List of addresses that received a validation email. Only set if EMAIL validation was used.
 	ValidationEmails []*string `json:"validationEmails,omitempty" tf:"validation_emails,omitempty"`
 
-	// Which method to use for validation.
+	// Which method to use for validation. DNS or EMAIL are valid.
 	ValidationMethod *string `json:"validationMethod,omitempty" tf:"validation_method,omitempty"`
 
 	// Configuration block used to specify information about the initial validation of each domain name. Detailed below.
@@ -193,7 +193,7 @@ type CertificateParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Which method to use for validation.
+	// Which method to use for validation. DNS or EMAIL are valid.
 	// +kubebuilder:validation:Optional
 	ValidationMethod *string `json:"validationMethod,omitempty" tf:"validation_method,omitempty"`
 
@@ -312,13 +312,14 @@ type CertificateStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Certificate is the Schema for the Certificates API. Requests and manages a certificate from Amazon Certificate Manager (ACM).
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Certificate struct {
 	metav1.TypeMeta   `json:",inline"`

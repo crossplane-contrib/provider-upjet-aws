@@ -44,7 +44,7 @@ type ClusterInstanceInitParameters struct {
 	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The neptune engine version.
+	// The neptune engine version. Currently configuring this argumnet has no effect.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The instance class to use.
@@ -125,7 +125,7 @@ type ClusterInstanceObservation struct {
 	// The name of the database engine to be used for the neptune instance. Defaults to neptune. Valid Values: neptune.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The neptune engine version.
+	// The neptune engine version. Currently configuring this argumnet has no effect.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The Instance identifier
@@ -206,7 +206,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
-	// The neptune engine version.
+	// The neptune engine version. Currently configuring this argumnet has no effect.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -296,13 +296,14 @@ type ClusterInstanceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ClusterInstance is the Schema for the ClusterInstances API. Provides an Neptune Cluster Resource Instance
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type ClusterInstance struct {
 	metav1.TypeMeta   `json:",inline"`

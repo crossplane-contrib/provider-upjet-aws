@@ -60,10 +60,11 @@ type ClusterInitParameters struct {
 	// –  Version number of the cache engine to be used.
 	// If not set, defaults to the latest version.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
-	// When engine is redis and the version is 6 or higher, the major and minor version can be set, e.g., 6.2,
+	// When engine is redis and the version is 7 or higher, the major and minor version should be set, e.g., 7.2.
+	// When the version is 6, the major and minor version can be set, e.g., 6.2,
 	// or the minor version can be unspecified which will use the latest version at creation time, e.g., 6.x.
 	// Otherwise, specify the full version desired, e.g., 5.0.6.
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
+	// The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below. Cannot be provided with replication_group_id.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Name of your final cluster snapshot. If omitted, no final snapshot will be made.
@@ -116,7 +117,7 @@ type ClusterInitParameters struct {
 	PreferredOutpostArn *string `json:"preferredOutpostArn,omitempty" tf:"preferred_outpost_arn,omitempty"`
 
 	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.ReplicationGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta2.ReplicationGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
 
@@ -136,16 +137,12 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// –  One or more VPC security groups associated with the cache cluster
+	// –  One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// create the resource.
-	// +listType=set
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
@@ -159,7 +156,7 @@ type ClusterInitParameters struct {
 	// Daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. Example: 05:00-09:00
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
-	// create the resource.
+	// create the resource. Cannot be provided with replication_group_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.SubnetGroup
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
@@ -174,6 +171,9 @@ type ClusterInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
 type ClusterObservation struct {
@@ -210,10 +210,11 @@ type ClusterObservation struct {
 	// –  Version number of the cache engine to be used.
 	// If not set, defaults to the latest version.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
-	// When engine is redis and the version is 6 or higher, the major and minor version can be set, e.g., 6.2,
+	// When engine is redis and the version is 7 or higher, the major and minor version should be set, e.g., 7.2.
+	// When the version is 6, the major and minor version can be set, e.g., 6.2,
 	// or the minor version can be unspecified which will use the latest version at creation time, e.g., 6.x.
 	// Otherwise, specify the full version desired, e.g., 5.0.6.
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
+	// The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below. Cannot be provided with replication_group_id.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Because ElastiCache pulls the latest minor or patch for a version, this attribute returns the running version of the cache engine.
@@ -264,13 +265,9 @@ type ClusterObservation struct {
 	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
 	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
 
-	// –  One or more VPC security groups associated with the cache cluster
+	// –  One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// create the resource.
-	// +listType=set
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	SnapshotArns []*string `json:"snapshotArns,omitempty" tf:"snapshot_arns,omitempty"`
@@ -284,7 +281,7 @@ type ClusterObservation struct {
 	// Daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster. Example: 05:00-09:00
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
-	// create the resource.
+	// create the resource. Cannot be provided with replication_group_id.
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
 
 	// Key-value map of resource tags.
@@ -294,6 +291,9 @@ type ClusterObservation struct {
 	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
 type ClusterParameters struct {
@@ -323,10 +323,11 @@ type ClusterParameters struct {
 	// –  Version number of the cache engine to be used.
 	// If not set, defaults to the latest version.
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
-	// When engine is redis and the version is 6 or higher, the major and minor version can be set, e.g., 6.2,
+	// When engine is redis and the version is 7 or higher, the major and minor version should be set, e.g., 7.2.
+	// When the version is 6, the major and minor version can be set, e.g., 6.2,
 	// or the minor version can be unspecified which will use the latest version at creation time, e.g., 6.x.
 	// Otherwise, specify the full version desired, e.g., 5.0.6.
-	// The actual engine version used is returned in the attribute engine_version_actual, see Attributes Reference below.
+	// The actual engine version used is returned in the attribute engine_version_actual, see Attribute Reference below. Cannot be provided with replication_group_id.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -398,7 +399,7 @@ type ClusterParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// ID of the replication group to which this cluster should belong. If this parameter is specified, the cluster is added to the specified replication group as a read replica; otherwise, the cluster is a standalone primary that is not part of any replication group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.ReplicationGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta2.ReplicationGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ReplicationGroupID *string `json:"replicationGroupId,omitempty" tf:"replication_group_id,omitempty"`
@@ -419,18 +420,13 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// –  One or more VPC security groups associated with the cache cluster
+	// –  One or more VPC security groups associated with the cache cluster. Cannot be provided with replication_group_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
-	// create the resource.
-	// +kubebuilder:validation:Optional
-	// +listType=set
-	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
 	// element string list containing an Amazon Resource Name (ARN) of a Redis RDB snapshot file stored in Amazon S3. The object name cannot contain any commas. Changing snapshot_arns forces a new resource.
 	// +kubebuilder:validation:Optional
@@ -448,7 +444,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotWindow *string `json:"snapshotWindow,omitempty" tf:"snapshot_window,omitempty"`
 
-	// create the resource.
+	// create the resource. Cannot be provided with replication_group_id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	SubnetGroupName *string `json:"subnetGroupName,omitempty" tf:"subnet_group_name,omitempty"`
@@ -465,6 +461,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Enable encryption in-transit. Supported only with Memcached versions 1.6.12 and later, running in a VPC. See the ElastiCache in-transit encryption documentation for more details.
+	// +kubebuilder:validation:Optional
+	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 }
 
 type LogDeliveryConfigurationInitParameters struct {
@@ -540,13 +540,14 @@ type ClusterStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Cluster is the Schema for the Clusters API. Provides an ElastiCache Cluster resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`

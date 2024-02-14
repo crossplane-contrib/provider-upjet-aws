@@ -56,6 +56,9 @@ type TopicSubscriptionInitParameters struct {
 	// JSON String with the redrive policy that will be used in the subscription. Refer to the SNS docs for more details.
 	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
+	// JSON String with the archived message replay policy that will be used in the subscription. Refer to the SNS docs for more details.
+	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
+
 	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -127,6 +130,9 @@ type TopicSubscriptionObservation struct {
 	// JSON String with the redrive policy that will be used in the subscription. Refer to the SNS docs for more details.
 	RedrivePolicy *string `json:"redrivePolicy,omitempty" tf:"redrive_policy,omitempty"`
 
+	// JSON String with the archived message replay policy that will be used in the subscription. Refer to the SNS docs for more details.
+	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
+
 	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
 	SubscriptionRoleArn *string `json:"subscriptionRoleArn,omitempty" tf:"subscription_role_arn,omitempty"`
 
@@ -187,6 +193,10 @@ type TopicSubscriptionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// JSON String with the archived message replay policy that will be used in the subscription. Refer to the SNS docs for more details.
+	// +kubebuilder:validation:Optional
+	ReplayPolicy *string `json:"replayPolicy,omitempty" tf:"replay_policy,omitempty"`
+
 	// ARN of the IAM role to publish to Kinesis Data Firehose delivery stream. Refer to SNS docs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -240,13 +250,14 @@ type TopicSubscriptionStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TopicSubscription is the Schema for the TopicSubscriptions API. Provides a resource for subscribing to SNS topics.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type TopicSubscription struct {
 	metav1.TypeMeta   `json:",inline"`

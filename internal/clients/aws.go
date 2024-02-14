@@ -11,7 +11,6 @@ import (
 	"unsafe"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/crossplane/crossplane-runtime/pkg/logging"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/terraform"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
@@ -44,30 +43,18 @@ const (
 )
 
 type SetupConfig struct {
-	NativeProviderPath    *string
-	NativeProviderSource  *string
-	NativeProviderVersion *string
-	TerraformVersion      *string
-	DefaultScheduler      terraform.ProviderScheduler
-	TerraformProvider     *schema.Provider
-	AWSClient             *xpprovider.AWSClient
+	TerraformProvider *schema.Provider
+	AWSClient         *xpprovider.AWSClient
 }
 
-func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
+func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
 		var err error
 		if err = c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
 			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced Provider: %s", mg.GetProviderConfigReference().Name)
 		}
-		ps := terraform.Setup{
-			Version: *config.TerraformVersion,
-			Requirement: terraform.ProviderRequirement{
-				Source:  *config.NativeProviderSource,
-				Version: *config.NativeProviderVersion,
-			},
-			Scheduler: config.DefaultScheduler,
-		}
+		ps := terraform.Setup{}
 		awsCfg, err := getAWSConfig(ctx, c, mg)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get aws config")
@@ -95,11 +82,6 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
 			}
-			// we cannot use the shared scheduler here.
-			// We will force a workspace scheduler if we can configure one.
-			if len(*config.NativeProviderPath) != 0 {
-				ps.Scheduler = terraform.NewWorkspaceProviderScheduler(log, terraform.WithNativeProviderPath(*config.NativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*config.NativeProviderSource))
-			}
 		} else {
 			err = pushDownTerraformSetupBuilder(ctx, c, pc, &ps, awsCfg)
 			if err != nil {
@@ -111,7 +93,7 @@ func SelectTerraformSetup(log logging.Logger, config *SetupConfig) terraform.Set
 			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
 
-		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config), "could not configure no-fork AWS client")
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config), "could not configure the no-fork AWS client")
 	}
 }
 
@@ -199,7 +181,7 @@ func DefaultTerraformSetupBuilder(_ context.Context, pc *v1beta1.ProviderConfig,
 				for _, service := range pc.Spec.Endpoint.Services {
 					endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
 				}
-				ps.Configuration[keyEndpoints] = endpoints
+				ps.Configuration[keyEndpoints] = []any{endpoints}
 			}
 		}
 	}
@@ -225,10 +207,17 @@ func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 	return cfg, nil
 }
 
-func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
+type metaOnlyPrimary struct {
+	meta any
+}
+
+func (m *metaOnlyPrimary) Meta() any {
+	return m.meta
+}
+
+func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
 	p := *config.TerraformProvider
-	// TODO: use context.WithoutCancel(ctx) after switching to Go >=1.21
-	diag := p.Configure(context.TODO(), &tfsdk.ResourceConfig{ //nolint:contextcheck
+	diag := p.Configure(context.WithoutCancel(ctx), &tfsdk.ResourceConfig{
 		Config: ps.Configuration,
 	})
 	if diag != nil && diag.HasError() {
@@ -237,5 +226,7 @@ func configureNoForkAWSClient(_ context.Context, ps *terraform.Setup, config *Se
 	ps.Meta = p.Meta()
 	// #nosec G103
 	(*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(ps.Meta).Pointer())).ServicePackages = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(config.AWSClient).Pointer())).ServicePackages
+	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: p.Meta()})
+	ps.FrameworkProvider = fwProvider
 	return nil
 }

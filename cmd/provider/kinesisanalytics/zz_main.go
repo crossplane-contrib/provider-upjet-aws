@@ -6,6 +6,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"path/filepath"
 	"time"
@@ -18,7 +19,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
-	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/crossplane/upjet/pkg/controller/conversion"
 	"gopkg.in/alecthomas/kingpin.v2"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -26,14 +27,24 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/cache"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
+	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
 	"github.com/upbound/provider-aws/apis"
 	"github.com/upbound/provider-aws/apis/v1alpha1"
 	"github.com/upbound/provider-aws/config"
+	resolverapis "github.com/upbound/provider-aws/internal/apis"
 	"github.com/upbound/provider-aws/internal/clients"
 	"github.com/upbound/provider-aws/internal/controller"
 	"github.com/upbound/provider-aws/internal/features"
 )
+
+func deprecationAction(flagName string) kingpin.Action {
+	return func(c *kingpin.ParseContext) error {
+		_, err := fmt.Fprintf(os.Stderr, "warning: Command-line flag %q is deprecated and no longer used. It will be removed in a future release. Please remove it from all of your configurations (ControllerConfigs, etc.).\n", flagName)
+		kingpin.FatalIfError(err, "Failed to print the deprecation notice.")
+		return nil
+	}
+}
 
 func main() {
 	var (
@@ -43,19 +54,22 @@ func main() {
 		pollInterval     = app.Flag("poll", "Poll interval controls how often an individual resource should be checked for drift.").Default("10m").Duration()
 		leaderElection   = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
 		maxReconcileRate = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may be checked for drift from the desired state.").Default("100").Int()
-		pluginProcessTTL = app.Flag("provider-ttl", "TTL for the native plugin processes before they are replaced. Changing the default may increase memory consumption.").Default("100").Int()
 
 		namespace                  = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
 		essTLSCertsPath            = app.Flag("ess-tls-cert-dir", "Path of ESS TLS certificates.").Envar("ESS_TLS_CERTS_DIR").String()
 		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
+
+		certsDir = app.Flag("certs-dir", "The directory that contains the server key and certificate.").Default("/tls/server").Envar("CERTS_DIR").String()
+
+		// now deprecated command-line arguments with the Terraform SDK-based upjet architecture
+		_ = app.Flag("provider-ttl", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] TTL for the native plugin processes before they are replaced. Changing the default may increase memory consumption.").Hidden().Action(deprecationAction("provider-ttl")).Int()
+		_ = app.Flag("terraform-version", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform version.").Envar("TERRAFORM_VERSION").Hidden().Action(deprecationAction("terraform-version")).String()
+		_ = app.Flag("terraform-provider-version", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform provider version.").Envar("TERRAFORM_PROVIDER_VERSION").Hidden().Action(deprecationAction("terraform-provider-version")).String()
+		_ = app.Flag("terraform-native-provider-path", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform native provider path for shared execution.").Envar("TERRAFORM_NATIVE_PROVIDER_PATH").Hidden().Action(deprecationAction("terraform-native-provider-path")).String()
+		_ = app.Flag("terraform-provider-source", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform provider source.").Envar("TERRAFORM_PROVIDER_SOURCE").Hidden().Action(deprecationAction("terraform-provider-source")).String()
 	)
 	setupConfig := &clients.SetupConfig{}
-	setupConfig.TerraformVersion = app.Flag("terraform-version", "Terraform version.").Required().Envar("TERRAFORM_VERSION").String()
-	setupConfig.NativeProviderSource = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
-	setupConfig.NativeProviderVersion = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
-	setupConfig.NativeProviderPath = app.Flag("terraform-native-provider-path", "Terraform native provider path for shared execution.").Default("").Envar("TERRAFORM_NATIVE_PROVIDER_PATH").String()
-
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 
 	zl := zap.New(zap.UseDevMode(*debug))
@@ -81,24 +95,17 @@ func main() {
 		Cache: cache.Options{
 			SyncPeriod: syncInterval,
 		},
+		WebhookServer: webhook.NewServer(
+			webhook.Options{
+				CertDir: *certsDir,
+			}),
 		LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
 		LeaseDuration:              func() *time.Duration { d := 60 * time.Second; return &d }(),
 		RenewDeadline:              func() *time.Duration { d := 50 * time.Second; return &d }(),
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add AWS APIs to scheme")
-
-	// if the native Terraform provider plugin's path is not configured via
-	// the env. variable TERRAFORM_NATIVE_PROVIDER_PATH or
-	// the `--terraform-native-provider-path` command-line option,
-	// we do not use the shared gRPC server and default to the regular
-	// Terraform CLI behaviour (of forking a plugin process per invocation).
-	// This removes some complexity for setting up development environments.
-	setupConfig.DefaultScheduler = terraform.NewNoOpProviderScheduler()
-	if len(*setupConfig.NativeProviderPath) != 0 {
-		setupConfig.DefaultScheduler = terraform.NewSharedProviderScheduler(log, *pluginProcessTTL,
-			terraform.WithSharedProviderOptions(terraform.WithNativeProviderPath(*setupConfig.NativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*setupConfig.NativeProviderSource)))
-	}
+	kingpin.FatalIfError(resolverapis.BuildScheme(apis.AddToSchemes), "Cannot register the AWS APIs with the API resolver's runtime scheme")
 
 	ctx := context.Background()
 	provider, awsClient, err := config.GetProvider(ctx, false)
@@ -114,17 +121,16 @@ func main() {
 			Features:                &feature.Flags{},
 		},
 		Provider:              provider,
-		SetupFn:               clients.SelectTerraformSetup(log, setupConfig),
+		SetupFn:               clients.SelectTerraformSetup(setupConfig),
 		PollJitter:            pollJitter,
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
+		StartWebhooks:         *certsDir != "",
 	}
 
 	if *enableManagementPolicies {
 		o.Features.Enable(features.EnableBetaManagementPolicies)
 		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
-
-	o.WorkspaceStore = terraform.NewWorkspaceStore(log, terraform.WithDisableInit(len(*setupConfig.NativeProviderPath) != 0), terraform.WithProcessReportInterval(*pollInterval), terraform.WithFeatures(o.Features))
 
 	if *enableExternalSecretStores {
 		o.SecretStoreConfigGVK = &v1alpha1.StoreConfigGroupVersionKind
@@ -156,6 +162,7 @@ func main() {
 		})), "cannot create default store config")
 	}
 
+	kingpin.FatalIfError(conversion.RegisterConversions(o.Provider), "Cannot initialize the webhook conversion registry")
 	kingpin.FatalIfError(controller.Setup_kinesisanalytics(mgr, o), "Cannot setup AWS controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }

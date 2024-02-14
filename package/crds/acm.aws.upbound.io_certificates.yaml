@@ -138,7 +138,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   validationMethod:
-                    description: Which method to use for validation.
+                    description: Which method to use for validation. DNS or EMAIL
+                      are valid.
                     type: string
                   validationOption:
                     description: Configuration block used to specify information about
@@ -224,7 +225,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   validationMethod:
-                    description: Which method to use for validation.
+                    description: Which method to use for validation. DNS or EMAIL
+                      are valid.
                     type: string
                   validationOption:
                     description: Configuration block used to specify information about
@@ -537,7 +539,8 @@ spec:
                       type: string
                     type: array
                   validationMethod:
-                    description: Which method to use for validation.
+                    description: Which method to use for validation. DNS or EMAIL
+                      are valid.
                     type: string
                   validationOption:
                     description: Configuration block used to specify information about

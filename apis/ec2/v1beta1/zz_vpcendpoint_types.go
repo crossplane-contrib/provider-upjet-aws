@@ -36,12 +36,18 @@ type DNSOptionsInitParameters struct {
 
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
+
+	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 }
 
 type DNSOptionsObservation struct {
 
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
+
+	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 }
 
 type DNSOptionsParameters struct {
@@ -49,6 +55,10 @@ type DNSOptionsParameters struct {
 	// The DNS records created for the endpoint. Valid values are ipv4, dualstack, service-defined, and ipv6.
 	// +kubebuilder:validation:Optional
 	DNSRecordIPType *string `json:"dnsRecordIpType,omitempty" tf:"dns_record_ip_type,omitempty"`
+
+	// Indicates whether to enable private DNS only for inbound endpoints. This option is available only for services that support both gateway and interface endpoints. It routes traffic that originates from the VPC to the gateway endpoint and traffic that originates from on-premises to the interface endpoint. Default is false. Can only be specified if private_dns_enabled is true.
+	// +kubebuilder:validation:Optional
+	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 }
 
 type VPCEndpointInitParameters_2 struct {
@@ -65,7 +75,7 @@ type VPCEndpointInitParameters_2 struct {
 	// A policy to attach to the endpoint that controls access to the service. This is a JSON formatted string. Defaults to full access. All Gateway and some Interface endpoints support policies - see the relevant AWS documentation for more details.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface.
+	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
 	// Defaults to false.
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
@@ -138,7 +148,7 @@ type VPCEndpointObservation_2 struct {
 	// The prefix list ID of the exposed AWS service. Applicable for endpoints of type Gateway.
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 
-	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface.
+	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
 	// Defaults to false.
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
 
@@ -160,7 +170,7 @@ type VPCEndpointObservation_2 struct {
 	// The state of the VPC endpoint.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
-	// The ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer and Interface.
+	// The ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer and Interface. Interface type endpoints cannot function without being assigned to a subnet.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -197,7 +207,7 @@ type VPCEndpointParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface.
+	// Whether or not to associate a private hosted zone with the specified VPC. Applicable for endpoints of type Interface. Most users will want this enabled to allow services within the VPC to automatically use the endpoint.
 	// Defaults to false.
 	// +kubebuilder:validation:Optional
 	PrivateDNSEnabled *bool `json:"privateDnsEnabled,omitempty" tf:"private_dns_enabled,omitempty"`
@@ -268,13 +278,14 @@ type VPCEndpointStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPCEndpoint is the Schema for the VPCEndpoints API. Provides a VPC Endpoint resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type VPCEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`

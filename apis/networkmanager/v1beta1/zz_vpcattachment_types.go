@@ -122,29 +122,38 @@ type VPCAttachmentObservation struct {
 
 type VPCAttachmentOptionsInitParameters struct {
 
-	// Indicates whether appliance mode is supported. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	// Indicates whether appliance mode is supported.
+	// If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
 	// Indicates whether IPv6 is supported.
+	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
 
 type VPCAttachmentOptionsObservation struct {
 
-	// Indicates whether appliance mode is supported. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	// Indicates whether appliance mode is supported.
+	// If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
 	// Indicates whether IPv6 is supported.
+	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
 
 type VPCAttachmentOptionsParameters struct {
 
-	// Indicates whether appliance mode is supported. If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	// Indicates whether appliance mode is supported.
+	// If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow.
+	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	// +kubebuilder:validation:Optional
 	ApplianceModeSupport *bool `json:"applianceModeSupport,omitempty" tf:"appliance_mode_support,omitempty"`
 
 	// Indicates whether IPv6 is supported.
+	// If the VPC attachment is pending acceptance, changing this value will recreate the resource.
 	// +kubebuilder:validation:Optional
 	IPv6Support *bool `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 }
@@ -232,13 +241,14 @@ type VPCAttachmentStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VPCAttachment is the Schema for the VPCAttachments API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type VPCAttachment struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -81,7 +81,7 @@ type ObjectCopyGrantParameters struct {
 
 type ObjectCopyInitParameters struct {
 
-	// Canned ACL to apply. Defaults to private. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Name of the bucket to put the file in.
@@ -91,6 +91,9 @@ type ObjectCopyInitParameters struct {
 
 	// Specifies caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// Specifies presentational information for the object. Read w3c content_disposition for further information.
 	ContentDisposition *string `json:"contentDisposition,omitempty" tf:"content_disposition,omitempty"`
@@ -187,7 +190,7 @@ type ObjectCopyInitParameters struct {
 
 type ObjectCopyObservation struct {
 
-	// Canned ACL to apply. Defaults to private. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Name of the bucket to put the file in.
@@ -197,6 +200,21 @@ type ObjectCopyObservation struct {
 
 	// Specifies caching behavior along the request/reply chain Read w3c cache_control for further details.
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
+
+	// The base64-encoded, 32-bit CRC32 checksum of the object.
+	ChecksumCrc32 *string `json:"checksumCrc32,omitempty" tf:"checksum_crc32,omitempty"`
+
+	// The base64-encoded, 32-bit CRC32C checksum of the object.
+	ChecksumCrc32C *string `json:"checksumCrc32C,omitempty" tf:"checksum_crc32c,omitempty"`
+
+	// The base64-encoded, 160-bit SHA-1 digest of the object.
+	ChecksumSha1 *string `json:"checksumSha1,omitempty" tf:"checksum_sha1,omitempty"`
+
+	// The base64-encoded, 256-bit SHA-256 digest of the object.
+	ChecksumSha256 *string `json:"checksumSha256,omitempty" tf:"checksum_sha256,omitempty"`
 
 	// Specifies presentational information for the object. Read w3c content_disposition for further information.
 	ContentDisposition *string `json:"contentDisposition,omitempty" tf:"content_disposition,omitempty"`
@@ -318,7 +336,7 @@ type ObjectCopyObservation struct {
 
 type ObjectCopyParameters struct {
 
-	// Canned ACL to apply. Defaults to private. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
+	// Canned ACL to apply. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
@@ -332,6 +350,10 @@ type ObjectCopyParameters struct {
 	// Specifies caching behavior along the request/reply chain Read w3c cache_control for further details.
 	// +kubebuilder:validation:Optional
 	CacheControl *string `json:"cacheControl,omitempty" tf:"cache_control,omitempty"`
+
+	// Indicates the algorithm used to create the checksum for the object. If a value is specified and the object is encrypted with KMS, you must have permission to use the kms:Decrypt action. Valid values: CRC32, CRC32C, SHA1, SHA256.
+	// +kubebuilder:validation:Optional
+	ChecksumAlgorithm *string `json:"checksumAlgorithm,omitempty" tf:"checksum_algorithm,omitempty"`
 
 	// Specifies presentational information for the object. Read w3c content_disposition for further information.
 	// +kubebuilder:validation:Optional
@@ -501,13 +523,14 @@ type ObjectCopyStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ObjectCopy is the Schema for the ObjectCopys API. Provides a resource for copying an S3 object.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type ObjectCopy struct {
 	metav1.TypeMeta   `json:",inline"`

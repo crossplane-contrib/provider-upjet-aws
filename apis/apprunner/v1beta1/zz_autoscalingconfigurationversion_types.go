@@ -47,7 +47,11 @@ type AutoScalingConfigurationVersionObservation struct {
 	// The revision of this auto scaling configuration.
 	AutoScalingConfigurationRevision *float64 `json:"autoScalingConfigurationRevision,omitempty" tf:"auto_scaling_configuration_revision,omitempty"`
 
+	HasAssociatedService *bool `json:"hasAssociatedService,omitempty" tf:"has_associated_service,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// Whether the auto scaling configuration has the highest auto_scaling_configuration_revision among all configurations that share the same auto_scaling_configuration_name.
 	Latest *bool `json:"latest,omitempty" tf:"latest,omitempty"`
@@ -126,13 +130,14 @@ type AutoScalingConfigurationVersionStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // AutoScalingConfigurationVersion is the Schema for the AutoScalingConfigurationVersions API. Manages an App Runner AutoScaling Configuration Version.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type AutoScalingConfigurationVersion struct {
 	metav1.TypeMeta   `json:",inline"`

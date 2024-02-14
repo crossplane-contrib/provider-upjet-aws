@@ -1,0 +1,28 @@
+- sourceVersion: "v1beta1"
+  targetVersion: "v1beta2"
+  data:
+    aws_autoscaling_attachment:
+      spec.forProvider.albTargetGroupArn: spec.forProvider.lbTargetGroupArn
+      spec.initProvider.albTargetGroupArn: spec.initProvider.lbTargetGroupArn
+      status.atProvider.albTargetGroupArn: status.atProvider.lbTargetGroupArn
+    aws_connect_hours_of_operation:
+      status.atProvider.hoursOfOperationArn: status.atProvider.arn
+    aws_connect_queue:
+      status.atProvider.quickConnectIdsAssociated: status.atProvider.quickConnectIds
+    aws_db_instance:
+      spec.forProvider.name: spec.forProvider.dbName
+      spec.initProvider.name: spec.initProvider.dbName
+      status.atProvider.name: status.atProvider.dbName
+    aws_elasticache_replication_group:
+      spec.forProvider.numberCacheClusters: spec.forProvider.numCacheClusters
+      spec.forProvider.replicationGroupDescription: spec.forProvider.description
+      spec.forProvider.availabilityZones: spec.forProvider.preferredCacheClusterAzs
+      spec.initProvider.numberCacheClusters: spec.initProvider.numCacheClusters
+      spec.initProvider.replicationGroupDescription: spec.initProvider.description
+      spec.initProvider.availabilityZones: spec.initProvider.preferredCacheClusterAzs
+      status.atProvider.numberCacheClusters: status.atProvider.numCacheClusters
+      status.atProvider.replicationGroupDescription: status.atProvider.description
+      status.atProvider.availabilityZones: status.atProvider.preferredCacheClusterAzs
+    aws_route:
+      spec.forProvider.instanceId: spec.forProvider.networkInterfaceId
+      spec.initProvider.instanceId: spec.initProvider.networkInterfaceId

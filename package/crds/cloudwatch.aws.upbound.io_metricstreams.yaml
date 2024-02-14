@@ -196,8 +196,8 @@ spec:
                     type: string
                   outputFormat:
                     description: Output format for the stream. Possible values are
-                      json and opentelemetry0.7. For more information about output
-                      formats, see Metric streams output formats.
+                      json, opentelemetry0.7, and opentelemetry1.0. For more information
+                      about output formats, see Metric streams output formats.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -289,8 +289,9 @@ spec:
                       depend on the stream's output_format. If the OutputFormat is
                       json, you can stream any additional statistic that is supported
                       by CloudWatch, listed in CloudWatch statistics definitions.
-                      If the OutputFormat is opentelemetry0.7, you can stream percentile
-                      statistics (p99 etc.). See details below.
+                      If the OutputFormat is opentelemetry0.7 or opentelemetry1.0,
+                      you can stream percentile statistics (p99 etc.). See details
+                      below.
                     items:
                       properties:
                         additionalStatistics:
@@ -465,8 +466,8 @@ spec:
                     type: string
                   outputFormat:
                     description: Output format for the stream. Possible values are
-                      json and opentelemetry0.7. For more information about output
-                      formats, see Metric streams output formats.
+                      json, opentelemetry0.7, and opentelemetry1.0. For more information
+                      about output formats, see Metric streams output formats.
                     type: string
                   roleArn:
                     description: ARN of the IAM role that this metric stream will
@@ -554,8 +555,9 @@ spec:
                       depend on the stream's output_format. If the OutputFormat is
                       json, you can stream any additional statistic that is supported
                       by CloudWatch, listed in CloudWatch statistics definitions.
-                      If the OutputFormat is opentelemetry0.7, you can stream percentile
-                      statistics (p99 etc.). See details below.
+                      If the OutputFormat is opentelemetry0.7 or opentelemetry1.0,
+                      you can stream percentile statistics (p99 etc.). See details
+                      below.
                     items:
                       properties:
                         additionalStatistics:
@@ -828,8 +830,8 @@ spec:
                     type: string
                   outputFormat:
                     description: Output format for the stream. Possible values are
-                      json and opentelemetry0.7. For more information about output
-                      formats, see Metric streams output formats.
+                      json, opentelemetry0.7, and opentelemetry1.0. For more information
+                      about output formats, see Metric streams output formats.
                     type: string
                   roleArn:
                     description: ARN of the IAM role that this metric stream will
@@ -848,8 +850,9 @@ spec:
                       depend on the stream's output_format. If the OutputFormat is
                       json, you can stream any additional statistic that is supported
                       by CloudWatch, listed in CloudWatch statistics definitions.
-                      If the OutputFormat is opentelemetry0.7, you can stream percentile
-                      statistics (p99 etc.). See details below.
+                      If the OutputFormat is opentelemetry0.7 or opentelemetry1.0,
+                      you can stream percentile statistics (p99 etc.). See details
+                      below.
                     items:
                       properties:
                         additionalStatistics:

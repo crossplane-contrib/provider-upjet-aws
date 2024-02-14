@@ -89,7 +89,7 @@ type DatasourcesParameters struct {
 
 type DetectorInitParameters struct {
 
-	// Describes which data sources will be enabled for the detector. See Data Sources below for more details.
+	// Describes which data sources will be enabled for the detector. See Data Sources below for more details. Deprecated in favor of aws_guardduty_detector_feature resources.
 	Datasources []DatasourcesInitParameters `json:"datasources,omitempty" tf:"datasources,omitempty"`
 
 	// Enable monitoring and feedback reporting. Setting to false is equivalent to "suspending" GuardDuty. Defaults to true.
@@ -111,7 +111,7 @@ type DetectorObservation struct {
 	// Amazon Resource Name (ARN) of the GuardDuty detector
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Describes which data sources will be enabled for the detector. See Data Sources below for more details.
+	// Describes which data sources will be enabled for the detector. See Data Sources below for more details. Deprecated in favor of aws_guardduty_detector_feature resources.
 	Datasources []DatasourcesObservation `json:"datasources,omitempty" tf:"datasources,omitempty"`
 
 	// Enable monitoring and feedback reporting. Setting to false is equivalent to "suspending" GuardDuty. Defaults to true.
@@ -134,7 +134,7 @@ type DetectorObservation struct {
 
 type DetectorParameters struct {
 
-	// Describes which data sources will be enabled for the detector. See Data Sources below for more details.
+	// Describes which data sources will be enabled for the detector. See Data Sources below for more details. Deprecated in favor of aws_guardduty_detector_feature resources.
 	// +kubebuilder:validation:Optional
 	Datasources []DatasourcesParameters `json:"datasources,omitempty" tf:"datasources,omitempty"`
 
@@ -291,13 +291,14 @@ type DetectorStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
-// Detector is the Schema for the Detectors API. Provides a resource to manage a GuardDuty detector
+// Detector is the Schema for the Detectors API. Provides a resource to manage an Amazon GuardDuty detector
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Detector struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -338,17 +338,6 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 			}
 		}
 	}
-	if in.SecurityGroupNames != nil {
-		in, out := &in.SecurityGroupNames, &out.SecurityGroupNames
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.SnapshotArns != nil {
 		in, out := &in.SnapshotArns, &out.SnapshotArns
 		*out = make([]*string, len(*in))
@@ -405,6 +394,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TransitEncryptionEnabled != nil {
+		in, out := &in.TransitEncryptionEnabled, &out.TransitEncryptionEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -679,17 +673,6 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 			}
 		}
 	}
-	if in.SecurityGroupNames != nil {
-		in, out := &in.SecurityGroupNames, &out.SecurityGroupNames
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.SnapshotArns != nil {
 		in, out := &in.SnapshotArns, &out.SnapshotArns
 		*out = make([]*string, len(*in))
@@ -752,6 +735,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TransitEncryptionEnabled != nil {
+		in, out := &in.TransitEncryptionEnabled, &out.TransitEncryptionEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -924,17 +912,6 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 			}
 		}
 	}
-	if in.SecurityGroupNames != nil {
-		in, out := &in.SecurityGroupNames, &out.SecurityGroupNames
-		*out = make([]*string, len(*in))
-		for i := range *in {
-			if (*in)[i] != nil {
-				in, out := &(*in)[i], &(*out)[i]
-				*out = new(string)
-				**out = **in
-			}
-		}
-	}
 	if in.SnapshotArns != nil {
 		in, out := &in.SnapshotArns, &out.SnapshotArns
 		*out = make([]*string, len(*in))
@@ -991,6 +968,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TransitEncryptionEnabled != nil {
+		in, out := &in.TransitEncryptionEnabled, &out.TransitEncryptionEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 

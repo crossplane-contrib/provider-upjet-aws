@@ -5,14 +5,12 @@ PROVIDER_NAME := aws
 PROJECT_NAME := provider-$(PROVIDER_NAME)
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
-export PROVIDER_NAME
 export TERRAFORM_VERSION := 1.5.5
+export TERRAFORM_PROVIDER_VERSION := 5.31.0
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
-export TERRAFORM_PROVIDER_VERSION := 4.67.0
-export TERRAFORM_PROVIDER_DOWNLOAD_NAME := terraform-provider-aws
-export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX := https://github.com/hashicorp/terraform-provider-aws/releases/download/v$(TERRAFORM_PROVIDER_VERSION)
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
+export PROVIDER_NAME
 
 PLATFORMS ?= linux_amd64 linux_arm64
 
@@ -64,10 +62,12 @@ export SUBPACKAGES := $(SUBPACKAGES)
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.15.0
+KIND_VERSION = v0.21.0
 UP_VERSION = v0.20.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.8.0
+KUSTOMIZE_VERSION = v5.3.0
+YQ_VERSION = v4.40.5
 
 export UP_VERSION := $(UP_VERSION)
 export UP_CHANNEL := $(UP_CHANNEL)
@@ -91,9 +91,13 @@ XPKG_REG_ORGS ?= xpkg.upbound.io/upbound
 # NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
 # inferred.
 XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound
+XPKG_DIR = $(OUTPUT_DIR)/package
+XPKG_IGNORE = kustomization.yaml
 
 export XPKG_REG_ORGS := $(XPKG_REG_ORGS)
 export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)
+export XPKG_DIR := $(XPKG_DIR)
+export XPKG_IGNORE := $(XPKG_IGNORE)
 
 -include build/makelib/xpkg.mk
 
@@ -129,7 +133,7 @@ submodules:
 run: go.build
 	@$(INFO) Running Crossplane locally out-of-cluster . . .
 	@# To see other arguments that can be provided, run the command with --help instead
-	UPBOUND_CONTEXT="local" $(GO_OUT_DIR)/monolith --debug
+	UPBOUND_CONTEXT="local" $(GO_OUT_DIR)/monolith --debug --certs-dir=""
 
 # NOTE(hasheddan): we ensure up is installed prior to running platform-specific
 # build steps in parallel to avoid encountering an installation race condition.
@@ -187,7 +191,7 @@ CROSSPLANE_NAMESPACE = upbound-system
 # - UPTEST_DATASOURCE_PATH (optional), see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
 uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
 	@$(OK) running automated tests
 
 uptest-local:
@@ -307,3 +311,20 @@ go.mod.cachedir:
 	@go env GOMODCACHE
 
 .PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir run crds.clean $(TERRAFORM_PROVIDER_SCHEMA)
+
+build.init: kustomize-crds
+
+kustomize-crds: output.init $(KUSTOMIZE) $(YQ)
+	@$(INFO) Kustomizing CRDs...
+	@rm -fr $(OUTPUT_DIR)/package || $(FAIL)
+	@cp -R package $(OUTPUT_DIR) && \
+	cd $(OUTPUT_DIR)/package/crds && \
+	kustomize create --autodetect || $(FAIL)
+	@export YQ=$(YQ) && \
+	XDG_CONFIG_HOME=$(PWD)/package $(KUSTOMIZE) build --enable-alpha-plugins $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml || $(FAIL)
+	@$(OK) Kustomizing CRDs.
+
+checkout-to-old-api:
+	CHECKOUT_RELEASE_VERSION=$(CHECKOUT_RELEASE_VERSION) hack/check-duplicate.sh
+
+.PHONY: kustomize-crds

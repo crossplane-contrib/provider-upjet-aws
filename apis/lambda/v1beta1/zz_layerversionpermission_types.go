@@ -31,6 +31,9 @@ type LayerVersionPermissionInitParameters struct {
 	// AWS account ID which should be able to use your Lambda Layer. * can be used here, if you want to share your Lambda Layer widely.
 	Principal *string `json:"principal,omitempty" tf:"principal,omitempty"`
 
+	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
 	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
@@ -61,6 +64,9 @@ type LayerVersionPermissionObservation struct {
 	// A unique identifier for the current revision of the policy.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 
+	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
+
 	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
 	StatementID *string `json:"statementId,omitempty" tf:"statement_id,omitempty"`
 
@@ -90,6 +96,10 @@ type LayerVersionPermissionParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Whether to retain the old version of a previously deployed Lambda Layer. Default is false. When this is not set to true, changing any of compatible_architectures, compatible_runtimes, description, filename, layer_name, license_info, s3_bucket, s3_key, s3_object_version, or source_code_hash forces deletion of the existing layer version and creation of a new layer version.
+	// +kubebuilder:validation:Optional
+	SkipDestroy *bool `json:"skipDestroy,omitempty" tf:"skip_destroy,omitempty"`
 
 	// The name of Lambda Layer Permission, for example dev-account - human readable note about what is this permission for.
 	// +kubebuilder:validation:Optional
@@ -124,13 +134,14 @@ type LayerVersionPermissionStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LayerVersionPermission is the Schema for the LayerVersionPermissions API. Provides a Lambda Layer Version Permission resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type LayerVersionPermission struct {
 	metav1.TypeMeta   `json:",inline"`

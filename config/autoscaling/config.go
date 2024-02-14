@@ -5,8 +5,14 @@ Copyright 2021 Upbound Inc.
 package autoscaling
 
 import (
-	"github.com/crossplane/upjet/pkg/config"
+	"strconv"
 
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config/conversion"
+
+	"github.com/upbound/provider-aws/apis/autoscaling/v1beta1"
+	"github.com/upbound/provider-aws/apis/autoscaling/v1beta2"
 	"github.com/upbound/provider-aws/config/common"
 )
 
@@ -27,6 +33,12 @@ func Configure(p *config.Provider) {
 		}
 		delete(r.References, "launch_template.version")
 		r.UseAsync = true
+
+		r.Version = "v1beta2"
+		r.Conversions = append(r.Conversions,
+			conversion.NewCustomConverter("v1beta1", "v1beta2", autoScalingGroupConverterFromv1beta1Tov1beta2),
+			conversion.NewCustomConverter("v1beta2", "v1beta1", autoScalingGroupConverterFromv1beta2Tov1beta1),
+		)
 	})
 	p.AddResourceConfigurator("aws_autoscaling_attachment", func(r *config.Resource) {
 		r.References["autoscaling_group_name"] = config.Reference{
@@ -41,5 +53,147 @@ func Configure(p *config.Provider) {
 		r.References["autoscaling_group_name"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup",
 		}
+		r.OverrideFieldNames = map[string]string{
+			"TagParameters":     "GroupTagTagParameters",
+			"TagObservation":    "GroupTagTagObservation",
+			"TagInitParameters": "GroupTagTagInitParameters",
+		}
 	})
+}
+
+func autoScalingGroupConverterFromv1beta1Tov1beta2(src, target xpresource.Managed) error { //nolint:gocyclo
+	srcTyped := src.(*v1beta1.AutoscalingGroup)
+	targetTyped := target.(*v1beta2.AutoscalingGroup)
+
+	if srcTyped.Spec.ForProvider.Tags != nil {
+		var tl []v1beta2.TagParameters
+		for _, e := range srcTyped.Spec.ForProvider.Tags {
+			tp := v1beta2.TagParameters{
+				Key:   e["key"],
+				Value: e["value"],
+			}
+			if e["propagate_at_launch"] != nil {
+				propagateAtLaunchStr := e["propagate_at_launch"]
+				propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+				cpPropagateAtLaunch := propagateAtLaunch
+				if err != nil {
+					return err
+				}
+				tp.PropagateAtLaunch = &cpPropagateAtLaunch
+			}
+			tl = append(tl, tp)
+		}
+		targetTyped.Spec.ForProvider.Tag = tl
+	}
+
+	if srcTyped.Spec.InitProvider.Tags != nil {
+		var tl []v1beta2.TagInitParameters
+		for _, e := range srcTyped.Spec.InitProvider.Tags {
+			tp := v1beta2.TagInitParameters{
+				Key:   e["key"],
+				Value: e["value"],
+			}
+			if e["propagate_at_launch"] != nil {
+				propagateAtLaunchStr := e["propagate_at_launch"]
+				propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+				cpPropagateAtLaunch := propagateAtLaunch
+				if err != nil {
+					return err
+				}
+				tp.PropagateAtLaunch = &cpPropagateAtLaunch
+			}
+			tl = append(tl, tp)
+		}
+		targetTyped.Spec.InitProvider.Tag = tl
+	}
+
+	if srcTyped.Status.AtProvider.Tags != nil {
+		var tl []v1beta2.TagObservation
+		for _, e := range srcTyped.Status.AtProvider.Tags {
+			tp := v1beta2.TagObservation{
+				Key:   e["key"],
+				Value: e["value"],
+			}
+			if e["propagate_at_launch"] != nil {
+				propagateAtLaunchStr := e["propagate_at_launch"]
+				propagateAtLaunch, err := strconv.ParseBool(*propagateAtLaunchStr)
+				cpPropagateAtLaunch := propagateAtLaunch
+				if err != nil {
+					return err
+				}
+				tp.PropagateAtLaunch = &cpPropagateAtLaunch
+			}
+			tl = append(tl, tp)
+		}
+		targetTyped.Status.AtProvider.Tag = tl
+	}
+
+	return nil
+}
+
+func autoScalingGroupConverterFromv1beta2Tov1beta1(src, target xpresource.Managed) error { //nolint:gocyclo
+	srcTyped := src.(*v1beta2.AutoscalingGroup)
+	targetTyped := target.(*v1beta1.AutoscalingGroup)
+
+	if srcTyped.Spec.ForProvider.Tag != nil {
+		var tl []map[string]*string
+		for _, e := range srcTyped.Spec.ForProvider.Tag {
+			m := map[string]*string{}
+			if e.Key != nil {
+				m["key"] = e.Key
+			}
+			if e.Value != nil {
+				m["value"] = e.Value
+			}
+			if e.PropagateAtLaunch != nil {
+				propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+				cpPropagateAtLaunch := propagateAtLaunch
+				m["propagate_at_launch"] = &cpPropagateAtLaunch
+			}
+			tl = append(tl, m)
+		}
+		targetTyped.Spec.ForProvider.Tags = tl
+	}
+
+	if srcTyped.Spec.InitProvider.Tag != nil {
+		var tl []map[string]*string
+		for _, e := range srcTyped.Spec.InitProvider.Tag {
+			m := map[string]*string{}
+			if e.Key != nil {
+				m["key"] = e.Key
+			}
+			if e.Value != nil {
+				m["value"] = e.Value
+			}
+			if e.PropagateAtLaunch != nil {
+				propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+				cpPropagateAtLaunch := propagateAtLaunch
+				m["propagate_at_launch"] = &cpPropagateAtLaunch
+			}
+			tl = append(tl, m)
+		}
+		targetTyped.Spec.InitProvider.Tags = tl
+	}
+
+	if srcTyped.Status.AtProvider.Tag != nil {
+		var tl []map[string]*string
+		for _, e := range srcTyped.Status.AtProvider.Tag {
+			m := map[string]*string{}
+			if e.Key != nil {
+				m["key"] = e.Key
+			}
+			if e.Value != nil {
+				m["value"] = e.Value
+			}
+			if e.PropagateAtLaunch != nil {
+				propagateAtLaunch := strconv.FormatBool(*e.PropagateAtLaunch)
+				cpPropagateAtLaunch := propagateAtLaunch
+				m["propagate_at_launch"] = &cpPropagateAtLaunch
+			}
+			tl = append(tl, m)
+		}
+		targetTyped.Status.AtProvider.Tags = tl
+	}
+
+	return nil
 }

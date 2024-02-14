@@ -45,9 +45,6 @@ type WorkspaceAPIKeyInitParameters struct {
 type WorkspaceAPIKeyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The key token in JSON format. Use this value as a bearer token to authenticate HTTP requests to the workspace.
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
-
 	// Specifies the name of the API key. Key names must be unique to the workspace.
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
 
@@ -119,13 +116,14 @@ type WorkspaceAPIKeyStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // WorkspaceAPIKey is the Schema for the WorkspaceAPIKeys API. Creates a Grafana API key for the workspace. This key can be used to authenticate requests sent to the workspace's HTTP API.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type WorkspaceAPIKey struct {
 	metav1.TypeMeta   `json:",inline"`

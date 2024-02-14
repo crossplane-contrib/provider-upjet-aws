@@ -136,7 +136,7 @@ type PoolObservation struct {
 	// backend and the Cognito service to communicate about the developer provider.
 	DeveloperProviderName *string `json:"developerProviderName,omitempty" tf:"developer_provider_name,omitempty"`
 
-	// An identity pool ID, e.g. us-west-2_abc123.
+	// An identity pool ID, e.g. us-west-2:1a234567-8901-234b-5cde-f6789g01h2i3.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Cognito Identity Pool name.
@@ -244,13 +244,14 @@ type PoolStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Pool is the Schema for the Pools API. Provides an AWS Cognito Identity Pool.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Pool struct {
 	metav1.TypeMeta   `json:",inline"`

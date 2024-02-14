@@ -175,6 +175,9 @@ spec:
                     description: The build specification (build spec) for an Amplify
                       app.
                     type: string
+                  customHeaders:
+                    description: The custom HTTP headers for an Amplify app.
+                    type: string
                   customRule:
                     description: Custom rewrite and redirect rules for an Amplify
                       app. A custom_rule block is documented below.
@@ -406,6 +409,9 @@ spec:
                   buildSpec:
                     description: The build specification (build spec) for an Amplify
                       app.
+                    type: string
+                  customHeaders:
+                    description: The custom HTTP headers for an Amplify app.
                     type: string
                   customRule:
                     description: Custom rewrite and redirect rules for an Amplify
@@ -774,6 +780,9 @@ spec:
                   buildSpec:
                     description: The build specification (build spec) for an Amplify
                       app.
+                    type: string
+                  customHeaders:
+                    description: The custom HTTP headers for an Amplify app.
                     type: string
                   customRule:
                     description: Custom rewrite and redirect rules for an Amplify

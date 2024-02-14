@@ -255,7 +255,7 @@ spec:
                     description: The ARN assigned by AWS for this group.
                     type: string
                   id:
-                    description: The group's ID.
+                    description: The group's name.
                     type: string
                   path:
                     description: Path in which to create the group.

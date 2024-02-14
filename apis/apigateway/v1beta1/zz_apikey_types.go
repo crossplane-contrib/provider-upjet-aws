@@ -19,6 +19,9 @@ import (
 
 type APIKeyInitParameters struct {
 
+	// An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.
+	CustomerID *string `json:"customerId,omitempty" tf:"customer_id,omitempty"`
+
 	// API key description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -40,6 +43,9 @@ type APIKeyObservation struct {
 
 	// Creation date of the API key
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
+
+	// An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.
+	CustomerID *string `json:"customerId,omitempty" tf:"customer_id,omitempty"`
 
 	// API key description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -66,6 +72,10 @@ type APIKeyObservation struct {
 }
 
 type APIKeyParameters struct {
+
+	// An Amazon Web Services Marketplace customer identifier, when integrating with the Amazon Web Services SaaS Marketplace.
+	// +kubebuilder:validation:Optional
+	CustomerID *string `json:"customerId,omitempty" tf:"customer_id,omitempty"`
 
 	// API key description.
 	// +kubebuilder:validation:Optional
@@ -118,13 +128,14 @@ type APIKeyStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // APIKey is the Schema for the APIKeys API. Provides an API Gateway API Key.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type APIKey struct {
 	metav1.TypeMeta   `json:",inline"`

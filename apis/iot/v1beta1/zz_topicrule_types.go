@@ -1039,6 +1039,35 @@ type HTTPParameters struct {
 	URL *string `json:"url" tf:"url,omitempty"`
 }
 
+type HeaderInitParameters struct {
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type HeaderObservation struct {
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type HeaderParameters struct {
+
+	// The name of the HTTP header.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The value of the HTTP header.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type IotAnalyticsInitParameters struct {
 
 	// The payload that contains a JSON array of records will be sent to Kinesis Firehose via a batch call.
@@ -1127,14 +1156,46 @@ type IotEventsParameters struct {
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
 
+type KafkaHeaderInitParameters struct {
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type KafkaHeaderObservation struct {
+
+	// The name of the HTTP header.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the HTTP header.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type KafkaHeaderParameters struct {
+
+	// The name of the HTTP header.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// The value of the HTTP header.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type KafkaInitParameters struct {
 
 	// Properties of the Apache Kafka producer client. For more info, see the AWS documentation.
 	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
-	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
+	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// The list of Kafka headers that you specify. Nested arguments below.
+	Header []HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
 	// The name of the HTTP header.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -1152,8 +1213,11 @@ type KafkaObservation struct {
 	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
-	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
+	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// The list of Kafka headers that you specify. Nested arguments below.
+	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 
 	// The name of the HTTP header.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -1172,9 +1236,13 @@ type KafkaParameters struct {
 	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties" tf:"client_properties,omitempty"`
 
-	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
+	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
+
+	// The list of Kafka headers that you specify. Nested arguments below.
+	// +kubebuilder:validation:Optional
+	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
 	// The name of the HTTP header.
 	// +kubebuilder:validation:Optional
@@ -1898,8 +1966,11 @@ type TopicRuleKafkaInitParameters struct {
 	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
-	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
+	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// The list of Kafka headers that you specify. Nested arguments below.
+	Header []KafkaHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 
 	// The name of the HTTP header.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -1917,8 +1988,11 @@ type TopicRuleKafkaObservation struct {
 	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
-	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
+	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// The list of Kafka headers that you specify. Nested arguments below.
+	Header []KafkaHeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 
 	// The name of the HTTP header.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -1937,9 +2011,13 @@ type TopicRuleKafkaParameters struct {
 	// +mapType=granular
 	ClientProperties map[string]*string `json:"clientProperties" tf:"client_properties,omitempty"`
 
-	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination .
+	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
+
+	// The list of Kafka headers that you specify. Nested arguments below.
+	// +kubebuilder:validation:Optional
+	Header []KafkaHeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
 	// The name of the HTTP header.
 	// +kubebuilder:validation:Optional
@@ -2500,13 +2578,14 @@ type TopicRuleStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // TopicRule is the Schema for the TopicRules API. Creates and manages an AWS IoT topic rule
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type TopicRule struct {
 	metav1.TypeMeta   `json:",inline"`

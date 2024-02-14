@@ -149,8 +149,7 @@ type EventSourceMappingInitParameters struct {
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
-	// +listType=set
+	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
 	// Scaling configuration of the event source. Only available for SQS queues. Detailed below.
@@ -235,8 +234,7 @@ type EventSourceMappingObservation struct {
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
-	// +listType=set
+	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
 	// Scaling configuration of the event source. Only available for SQS queues. Detailed below.
@@ -343,9 +341,8 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
-	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. A single queue name must be specified.
+	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	// +kubebuilder:validation:Optional
-	// +listType=set
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
@@ -557,13 +554,14 @@ type EventSourceMappingStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EventSourceMapping is the Schema for the EventSourceMappings API. Provides a Lambda event source mapping. This allows Lambda functions to get events from Kinesis, DynamoDB, SQS, Amazon MQ and Managed Streaming for Apache Kafka (MSK).
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type EventSourceMapping struct {
 	metav1.TypeMeta   `json:",inline"`

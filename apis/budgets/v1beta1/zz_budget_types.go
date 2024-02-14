@@ -54,10 +54,6 @@ type BudgetInitParameters struct {
 	// A list of CostFilter name/values pair to apply to budget.
 	CostFilter []CostFilterInitParameters `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
 
-	// Map of CostFilters key/value pairs to apply to the budget.
-	// +mapType=granular
-	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
-
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	CostTypes []CostTypesInitParameters `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
 
@@ -99,10 +95,6 @@ type BudgetObservation struct {
 
 	// A list of CostFilter name/values pair to apply to budget.
 	CostFilter []CostFilterObservation `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
-
-	// Map of CostFilters key/value pairs to apply to the budget.
-	// +mapType=granular
-	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	CostTypes []CostTypesObservation `json:"costTypes,omitempty" tf:"cost_types,omitempty"`
@@ -149,11 +141,6 @@ type BudgetParameters struct {
 	// A list of CostFilter name/values pair to apply to budget.
 	// +kubebuilder:validation:Optional
 	CostFilter []CostFilterParameters `json:"costFilter,omitempty" tf:"cost_filter,omitempty"`
-
-	// Map of CostFilters key/value pairs to apply to the budget.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	CostFilters map[string]*string `json:"costFilters,omitempty" tf:"cost_filters,omitempty"`
 
 	// Object containing CostTypes The types of cost included in a budget, such as tax and subscriptions.
 	// +kubebuilder:validation:Optional
@@ -492,13 +479,14 @@ type BudgetStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Budget is the Schema for the Budgets API. Provides a budgets budget resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Budget struct {
 	metav1.TypeMeta   `json:",inline"`

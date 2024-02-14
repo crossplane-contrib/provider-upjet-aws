@@ -933,9 +933,19 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DBSystemID != nil {
+		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
 	if in.DatabaseName != nil {
 		in, out := &in.DatabaseName, &out.DatabaseName
 		*out = new(string)
+		**out = **in
+	}
+	if in.DeleteAutomatedBackups != nil {
+		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
+		*out = new(bool)
 		**out = **in
 	}
 	if in.DeletionProtection != nil {
@@ -1238,10 +1248,25 @@ func (in *ClusterInstanceInitParameters) DeepCopyInto(out *ClusterInstanceInitPa
 		*out = new(bool)
 		**out = **in
 	}
+	if in.CustomIAMInstanceProfile != nil {
+		in, out := &in.CustomIAMInstanceProfile, &out.CustomIAMInstanceProfile
+		*out = new(string)
+		**out = **in
+	}
 	if in.DBParameterGroupName != nil {
 		in, out := &in.DBParameterGroupName, &out.DBParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DBParameterGroupNameRef != nil {
+		in, out := &in.DBParameterGroupNameRef, &out.DBParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBParameterGroupNameSelector != nil {
+		in, out := &in.DBParameterGroupNameSelector, &out.DBParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DBSubnetGroupName != nil {
 		in, out := &in.DBSubnetGroupName, &out.DBSubnetGroupName
@@ -1434,6 +1459,11 @@ func (in *ClusterInstanceObservation) DeepCopyInto(out *ClusterInstanceObservati
 	if in.CopyTagsToSnapshot != nil {
 		in, out := &in.CopyTagsToSnapshot, &out.CopyTagsToSnapshot
 		*out = new(bool)
+		**out = **in
+	}
+	if in.CustomIAMInstanceProfile != nil {
+		in, out := &in.CustomIAMInstanceProfile, &out.CustomIAMInstanceProfile
+		*out = new(string)
 		**out = **in
 	}
 	if in.DBParameterGroupName != nil {
@@ -1638,10 +1668,25 @@ func (in *ClusterInstanceParameters) DeepCopyInto(out *ClusterInstanceParameters
 		*out = new(bool)
 		**out = **in
 	}
+	if in.CustomIAMInstanceProfile != nil {
+		in, out := &in.CustomIAMInstanceProfile, &out.CustomIAMInstanceProfile
+		*out = new(string)
+		**out = **in
+	}
 	if in.DBParameterGroupName != nil {
 		in, out := &in.DBParameterGroupName, &out.DBParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DBParameterGroupNameRef != nil {
+		in, out := &in.DBParameterGroupNameRef, &out.DBParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBParameterGroupNameSelector != nil {
+		in, out := &in.DBParameterGroupNameSelector, &out.DBParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DBSubnetGroupName != nil {
 		in, out := &in.DBSubnetGroupName, &out.DBSubnetGroupName
@@ -1983,9 +2028,19 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DBSystemID != nil {
+		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
 	if in.DatabaseName != nil {
 		in, out := &in.DatabaseName, &out.DatabaseName
 		*out = new(string)
+		**out = **in
+	}
+	if in.DeleteAutomatedBackups != nil {
+		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
+		*out = new(bool)
 		**out = **in
 	}
 	if in.DeletionProtection != nil {
@@ -2689,9 +2744,19 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DBSystemID != nil {
+		in, out := &in.DBSystemID, &out.DBSystemID
+		*out = new(string)
+		**out = **in
+	}
 	if in.DatabaseName != nil {
 		in, out := &in.DatabaseName, &out.DatabaseName
 		*out = new(string)
+		**out = **in
+	}
+	if in.DeleteAutomatedBackups != nil {
+		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
+		*out = new(bool)
 		**out = **in
 	}
 	if in.DeletionProtection != nil {

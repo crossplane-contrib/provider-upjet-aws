@@ -566,6 +566,9 @@ type ServerlessConfigInitParameters struct {
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+
+	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
+	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ServerlessConfigObservation struct {
@@ -575,6 +578,9 @@ type ServerlessConfigObservation struct {
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+
+	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
+	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ServerlessConfigParameters struct {
@@ -586,6 +592,10 @@ type ServerlessConfigParameters struct {
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	// +kubebuilder:validation:Optional
 	MemorySizeInMb *float64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
+
+	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
+	// +kubebuilder:validation:Optional
+	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ShadowProductionVariantsCoreDumpConfigInitParameters struct {
@@ -753,6 +763,9 @@ type ShadowProductionVariantsServerlessConfigInitParameters struct {
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+
+	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
+	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ShadowProductionVariantsServerlessConfigObservation struct {
@@ -762,6 +775,9 @@ type ShadowProductionVariantsServerlessConfigObservation struct {
 
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	MemorySizeInMb *float64 `json:"memorySizeInMb,omitempty" tf:"memory_size_in_mb,omitempty"`
+
+	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
+	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 type ShadowProductionVariantsServerlessConfigParameters struct {
@@ -773,6 +789,10 @@ type ShadowProductionVariantsServerlessConfigParameters struct {
 	// The memory size of your serverless endpoint. Valid values are in 1 GB increments: 1024 MB, 2048 MB, 3072 MB, 4096 MB, 5120 MB, or 6144 MB.
 	// +kubebuilder:validation:Optional
 	MemorySizeInMb *float64 `json:"memorySizeInMb" tf:"memory_size_in_mb,omitempty"`
+
+	// The amount of provisioned concurrency to allocate for the serverless endpoint. Should be less than or equal to max_concurrency. Valid values are between 1 and 200.
+	// +kubebuilder:validation:Optional
+	ProvisionedConcurrency *float64 `json:"provisionedConcurrency,omitempty" tf:"provisioned_concurrency,omitempty"`
 }
 
 // EndpointConfigurationSpec defines the desired state of EndpointConfiguration
@@ -799,13 +819,14 @@ type EndpointConfigurationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // EndpointConfiguration is the Schema for the EndpointConfigurations API. Provides a SageMaker Endpoint Configuration resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type EndpointConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`

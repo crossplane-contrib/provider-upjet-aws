@@ -67,10 +67,22 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  allowMajorVersionUpgrade:
+                    description: 'A value that indicates whether major version upgrades
+                      are allowed. Constraints: You must allow major version upgrades
+                      when specifying a value for the EngineVersion parameter that
+                      is a different major version than the DB cluster''s current
+                      version.'
+                    type: boolean
                   applyImmediately:
                     description: Specifies whether any cluster modifications are applied
                       immediately, or during the next maintenance window. Default
                       is false.
+                    type: boolean
+                  autoGeneratePassword:
+                    description: If true, the password will be auto-generated and
+                      stored in the Secret referenced by the masterPasswordSecretRef
+                      field.
                     type: boolean
                   availabilityZones:
                     description: A list of EC2 Availability Zones that instances in
@@ -85,6 +97,81 @@ spec:
                   dbClusterParameterGroupName:
                     description: A cluster parameter group to associate with the cluster.
                     type: string
+                  dbClusterParameterGroupNameRef:
+                    description: Reference to a ClusterParameterGroup in docdb to
+                      populate dbClusterParameterGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  dbClusterParameterGroupNameSelector:
+                    description: Selector for a ClusterParameterGroup in docdb to
+                      populate dbClusterParameterGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   dbSubnetGroupName:
                     description: A DB subnet group to associate with this DB instance.
                     type: string
@@ -103,7 +190,7 @@ spec:
                     type: array
                   engine:
                     description: 'The name of the database engine to be used for this
-                      DB cluster. Defaults to docdb. Valid Values: docdb'
+                      DB cluster. Defaults to docdb. Valid values: docdb.'
                     type: string
                   engineVersion:
                     description: The database engine version. Updating this argument
@@ -196,7 +283,10 @@ spec:
                   masterPasswordSecretRef:
                     description: Password for the master DB user. Note that this may
                       show up in logs, and it will be stored in the state file. Please
-                      refer to the DocumentDB Naming Constraints.
+                      refer to the DocumentDB Naming Constraints. Password for the
+                      master DB user. If you set autoGeneratePassword to true, the
+                      Secret referenced here will be created or updated with generated
+                      password if it does not already contain one.
                     properties:
                       key:
                         description: The key to select.
@@ -243,11 +333,18 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The
                       default is false.
                     type: boolean
+                  storageType:
+                    description: 'The storage type to associate with the DB cluster.
+                      Valid values: standard, iopt1.'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -353,6 +450,13 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  allowMajorVersionUpgrade:
+                    description: 'A value that indicates whether major version upgrades
+                      are allowed. Constraints: You must allow major version upgrades
+                      when specifying a value for the EngineVersion parameter that
+                      is a different major version than the DB cluster''s current
+                      version.'
+                    type: boolean
                   applyImmediately:
                     description: Specifies whether any cluster modifications are applied
                       immediately, or during the next maintenance window. Default
@@ -371,6 +475,81 @@ spec:
                   dbClusterParameterGroupName:
                     description: A cluster parameter group to associate with the cluster.
                     type: string
+                  dbClusterParameterGroupNameRef:
+                    description: Reference to a ClusterParameterGroup in docdb to
+                      populate dbClusterParameterGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  dbClusterParameterGroupNameSelector:
+                    description: Selector for a ClusterParameterGroup in docdb to
+                      populate dbClusterParameterGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   dbSubnetGroupName:
                     description: A DB subnet group to associate with this DB instance.
                     type: string
@@ -389,7 +568,7 @@ spec:
                     type: array
                   engine:
                     description: 'The name of the database engine to be used for this
-                      DB cluster. Defaults to docdb. Valid Values: docdb'
+                      DB cluster. Defaults to docdb. Valid values: docdb.'
                     type: string
                   engineVersion:
                     description: The database engine version. Updating this argument
@@ -506,11 +685,18 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The
                       default is false.
                     type: boolean
+                  storageType:
+                    description: 'The storage type to associate with the DB cluster.
+                      Valid values: standard, iopt1.'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -767,6 +953,13 @@ spec:
             properties:
               atProvider:
                 properties:
+                  allowMajorVersionUpgrade:
+                    description: 'A value that indicates whether major version upgrades
+                      are allowed. Constraints: You must allow major version upgrades
+                      when specifying a value for the EngineVersion parameter that
+                      is a different major version than the DB cluster''s current
+                      version.'
+                    type: boolean
                   applyImmediately:
                     description: Specifies whether any cluster modifications are applied
                       immediately, or during the next maintenance window. Default
@@ -819,7 +1012,7 @@ spec:
                     type: string
                   engine:
                     description: 'The name of the database engine to be used for this
-                      DB cluster. Defaults to docdb. Valid Values: docdb'
+                      DB cluster. Defaults to docdb. Valid values: docdb.'
                     type: string
                   engineVersion:
                     description: The database engine version. Updating this argument
@@ -873,11 +1066,18 @@ spec:
                     description: Specifies whether or not to create this cluster from
                       a snapshot. You can use either the name or ARN when specifying
                       a DB cluster snapshot, or the ARN when specifying a DB snapshot.
+                      Automated snapshots should not be used for this attribute, unless
+                      from a different cluster. Automated snapshots are deleted as
+                      part of cluster destruction when the resource is replaced.
                     type: string
                   storageEncrypted:
                     description: Specifies whether the DB cluster is encrypted. The
                       default is false.
                     type: boolean
+                  storageType:
+                    description: 'The storage type to associate with the DB cluster.
+                      Valid values: standard, iopt1.'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

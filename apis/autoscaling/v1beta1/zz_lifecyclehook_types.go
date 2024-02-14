@@ -77,7 +77,7 @@ type LifecycleHookObservation struct {
 type LifecycleHookParameters struct {
 
 	// Name of the Auto Scaling group to which you want to assign the lifecycle hook
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
@@ -153,13 +153,14 @@ type LifecycleHookStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LifecycleHook is the Schema for the LifecycleHooks API. Provides an AutoScaling Lifecycle Hook resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type LifecycleHook struct {
 	metav1.TypeMeta   `json:",inline"`

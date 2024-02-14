@@ -25,7 +25,7 @@ type FunctionInitParameters struct {
 	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
+	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 }
 
@@ -48,7 +48,7 @@ type FunctionObservation struct {
 	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
+	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
 	// Status of the function. Can be UNPUBLISHED, UNASSOCIATED or ASSOCIATED.
@@ -74,7 +74,7 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Identifier of the function's runtime. Currently only cloudfront-js-1.0 is valid.
+	// Identifier of the function's runtime. Valid values are cloudfront-js-1.0 and cloudfront-js-2.0.
 	// +kubebuilder:validation:Optional
 	Runtime *string `json:"runtime,omitempty" tf:"runtime,omitempty"`
 }
@@ -103,13 +103,14 @@ type FunctionStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Function is the Schema for the Functions API. Provides a CloudFront Function resource. With CloudFront Functions in Amazon CloudFront, you can write lightweight functions in JavaScript for high-scale, latency-sensitive CDN customizations.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Function struct {
 	metav1.TypeMeta   `json:",inline"`

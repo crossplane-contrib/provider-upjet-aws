@@ -890,6 +890,11 @@ func (in *DeploymentGroupInitParameters) DeepCopyInto(out *DeploymentGroupInitPa
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.OutdatedInstancesStrategy != nil {
+		in, out := &in.OutdatedInstancesStrategy, &out.OutdatedInstancesStrategy
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceRoleArn != nil {
 		in, out := &in.ServiceRoleArn, &out.ServiceRoleArn
 		*out = new(string)
@@ -1079,6 +1084,11 @@ func (in *DeploymentGroupObservation) DeepCopyInto(out *DeploymentGroupObservati
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.OutdatedInstancesStrategy != nil {
+		in, out := &in.OutdatedInstancesStrategy, &out.OutdatedInstancesStrategy
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServiceRoleArn != nil {
 		in, out := &in.ServiceRoleArn, &out.ServiceRoleArn
 		*out = new(string)
@@ -1231,6 +1241,11 @@ func (in *DeploymentGroupParameters) DeepCopyInto(out *DeploymentGroupParameters
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.OutdatedInstancesStrategy != nil {
+		in, out := &in.OutdatedInstancesStrategy, &out.OutdatedInstancesStrategy
+		*out = new(string)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

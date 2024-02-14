@@ -74,13 +74,58 @@ type AccessLogsParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 }
 
+type ConnectionLogsInitParameters struct {
+
+	// The S3 bucket name to store the logs in.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean to enable / disable connection_logs. Defaults to false, even when bucket is specified.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The S3 bucket prefix. Logs are stored in the root if not configured.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ConnectionLogsObservation struct {
+
+	// The S3 bucket name to store the logs in.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Boolean to enable / disable connection_logs. Defaults to false, even when bucket is specified.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The S3 bucket prefix. Logs are stored in the root if not configured.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ConnectionLogsParameters struct {
+
+	// The S3 bucket name to store the logs in.
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
+
+	// Boolean to enable / disable connection_logs. Defaults to false, even when bucket is specified.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The S3 bucket prefix. Logs are stored in the root if not configured.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
 type LBInitParameters struct {
 
 	// An Access Logs block. Access Logs documented below.
 	AccessLogs []AccessLogsInitParameters `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
 
+	// A Connection Logs block. Connection Logs documented below. Only valid for Load Balancers of type application.
+	ConnectionLogs []ConnectionLogsInitParameters `json:"connectionLogs,omitempty" tf:"connection_logs,omitempty"`
+
 	// The ID of the customer owned ipv4 pool to use for this load balancer.
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
+
+	// Indicates how traffic is distributed among the load balancer Availability Zones. Possible values are any_availability_zone (default), availability_zone_affinity, or partial_availability_zone_affinity. See   Availability Zone DNS affinity for additional details. Only valid for network type load balancers.
+	DNSRecordClientRoutingPolicy *string `json:"dnsRecordClientRoutingPolicy,omitempty" tf:"dns_record_client_routing_policy,omitempty"`
 
 	// Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync. Valid values are monitor, defensive (default), strictest.
 	DesyncMitigationMode *string `json:"desyncMitigationMode,omitempty" tf:"desync_mitigation_mode,omitempty"`
@@ -105,6 +150,9 @@ type LBInitParameters struct {
 
 	// Indicates whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
 	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
+
+	// Indicates whether inbound security group rules are enforced for traffic originating from a PrivateLink. Only valid for Load Balancers of type network. The possible values are on and off.
+	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string `json:"enforceSecurityGroupInboundRulesOnPrivateLinkTraffic,omitempty" tf:"enforce_security_group_inbound_rules_on_private_link_traffic,omitempty"`
 
 	// The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
@@ -133,14 +181,14 @@ type LBInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
-	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.
+	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// A subnet mapping block as documented below.
+	// A subnet mapping block as documented below. For Load Balancers of type network subnet mappings can only be added.
 	SubnetMapping []SubnetMappingInitParameters `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
 
 	// References to Subnet in ec2 to populate subnets.
@@ -151,9 +199,7 @@ type LBInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
-	// A list of subnet IDs to attach to the LB. Subnets
-	// cannot be updated for Load Balancers of type network. Changing this value
-	// for load balancers of type network will force a recreation of the resource.
+	// A list of subnet IDs to attach to the LB. For Load Balancers of type network subnets can only be added (see Availability Zones), deleting a subnet for load balancers of type network will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
@@ -179,11 +225,17 @@ type LBObservation struct {
 	// The ARN suffix for use with CloudWatch Metrics.
 	ArnSuffix *string `json:"arnSuffix,omitempty" tf:"arn_suffix,omitempty"`
 
+	// A Connection Logs block. Connection Logs documented below. Only valid for Load Balancers of type application.
+	ConnectionLogs []ConnectionLogsObservation `json:"connectionLogs,omitempty" tf:"connection_logs,omitempty"`
+
 	// The ID of the customer owned ipv4 pool to use for this load balancer.
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
 
 	// The DNS name of the load balancer.
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
+
+	// Indicates how traffic is distributed among the load balancer Availability Zones. Possible values are any_availability_zone (default), availability_zone_affinity, or partial_availability_zone_affinity. See   Availability Zone DNS affinity for additional details. Only valid for network type load balancers.
+	DNSRecordClientRoutingPolicy *string `json:"dnsRecordClientRoutingPolicy,omitempty" tf:"dns_record_client_routing_policy,omitempty"`
 
 	// Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync. Valid values are monitor, defensive (default), strictest.
 	DesyncMitigationMode *string `json:"desyncMitigationMode,omitempty" tf:"desync_mitigation_mode,omitempty"`
@@ -209,6 +261,9 @@ type LBObservation struct {
 	// Indicates whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
 	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
 
+	// Indicates whether inbound security group rules are enforced for traffic originating from a PrivateLink. Only valid for Load Balancers of type network. The possible values are on and off.
+	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string `json:"enforceSecurityGroupInboundRulesOnPrivateLinkTraffic,omitempty" tf:"enforce_security_group_inbound_rules_on_private_link_traffic,omitempty"`
+
 	// The ARN of the load balancer (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -231,16 +286,14 @@ type LBObservation struct {
 	// Indicates whether the Application Load Balancer should preserve the Host header in the HTTP request and send it to the target without any change. Defaults to false.
 	PreserveHostHeader *bool `json:"preserveHostHeader,omitempty" tf:"preserve_host_header,omitempty"`
 
-	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.
+	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// A subnet mapping block as documented below.
+	// A subnet mapping block as documented below. For Load Balancers of type network subnet mappings can only be added.
 	SubnetMapping []SubnetMappingObservation `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
 
-	// A list of subnet IDs to attach to the LB. Subnets
-	// cannot be updated for Load Balancers of type network. Changing this value
-	// for load balancers of type network will force a recreation of the resource.
+	// A list of subnet IDs to attach to the LB. For Load Balancers of type network subnets can only be added (see Availability Zones), deleting a subnet for load balancers of type network will force a recreation of the resource.
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
@@ -268,9 +321,17 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessLogs []AccessLogsParameters `json:"accessLogs,omitempty" tf:"access_logs,omitempty"`
 
+	// A Connection Logs block. Connection Logs documented below. Only valid for Load Balancers of type application.
+	// +kubebuilder:validation:Optional
+	ConnectionLogs []ConnectionLogsParameters `json:"connectionLogs,omitempty" tf:"connection_logs,omitempty"`
+
 	// The ID of the customer owned ipv4 pool to use for this load balancer.
 	// +kubebuilder:validation:Optional
 	CustomerOwnedIPv4Pool *string `json:"customerOwnedIpv4Pool,omitempty" tf:"customer_owned_ipv4_pool,omitempty"`
+
+	// Indicates how traffic is distributed among the load balancer Availability Zones. Possible values are any_availability_zone (default), availability_zone_affinity, or partial_availability_zone_affinity. See   Availability Zone DNS affinity for additional details. Only valid for network type load balancers.
+	// +kubebuilder:validation:Optional
+	DNSRecordClientRoutingPolicy *string `json:"dnsRecordClientRoutingPolicy,omitempty" tf:"dns_record_client_routing_policy,omitempty"`
 
 	// Determines how the load balancer handles requests that might pose a security risk to an application due to HTTP desync. Valid values are monitor, defensive (default), strictest.
 	// +kubebuilder:validation:Optional
@@ -303,6 +364,10 @@ type LBParameters struct {
 	// Indicates whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
+
+	// Indicates whether inbound security group rules are enforced for traffic originating from a PrivateLink. Only valid for Load Balancers of type network. The possible values are on and off.
+	// +kubebuilder:validation:Optional
+	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string `json:"enforceSecurityGroupInboundRulesOnPrivateLinkTraffic,omitempty" tf:"enforce_security_group_inbound_rules_on_private_link_traffic,omitempty"`
 
 	// The type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
 	// +kubebuilder:validation:Optional
@@ -342,7 +407,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
-	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application.
+	// A list of security group IDs to assign to the LB. Only valid for Load Balancers of type application or network. For load balancers of type network security groups cannot be added if none are currently present, and cannot all be removed once added. If either of these conditions are met, this will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
@@ -350,7 +415,7 @@ type LBParameters struct {
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// A subnet mapping block as documented below.
+	// A subnet mapping block as documented below. For Load Balancers of type network subnet mappings can only be added.
 	// +kubebuilder:validation:Optional
 	SubnetMapping []SubnetMappingParameters `json:"subnetMapping,omitempty" tf:"subnet_mapping,omitempty"`
 
@@ -362,9 +427,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetSelector *v1.Selector `json:"subnetSelector,omitempty" tf:"-"`
 
-	// A list of subnet IDs to attach to the LB. Subnets
-	// cannot be updated for Load Balancers of type network. Changing this value
-	// for load balancers of type network will force a recreation of the resource.
+	// A list of subnet IDs to attach to the LB. For Load Balancers of type network subnets can only be added (see Availability Zones), deleting a subnet for load balancers of type network will force a recreation of the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
@@ -476,13 +539,14 @@ type LBStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // LB is the Schema for the LBs API. Provides a Load Balancer resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type LB struct {
 	metav1.TypeMeta   `json:",inline"`

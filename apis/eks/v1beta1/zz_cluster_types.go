@@ -299,7 +299,7 @@ type OutpostConfigInitParameters struct {
 	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType,omitempty" tf:"control_plane_instance_type,omitempty"`
 
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
-	// The following arguments are supported in the control_plane_placement configuration block:
+	// The control_plane_placement configuration block supports the following arguments:
 	ControlPlanePlacement []ControlPlanePlacementInitParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
@@ -313,7 +313,7 @@ type OutpostConfigObservation struct {
 	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType,omitempty" tf:"control_plane_instance_type,omitempty"`
 
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
-	// The following arguments are supported in the control_plane_placement configuration block:
+	// The control_plane_placement configuration block supports the following arguments:
 	ControlPlanePlacement []ControlPlanePlacementObservation `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
 	// The ARN of the Outpost that you want to use for your local Amazon EKS cluster on Outposts. This argument is a list of arns, but only a single Outpost ARN is supported currently.
@@ -328,7 +328,7 @@ type OutpostConfigParameters struct {
 	ControlPlaneInstanceType *string `json:"controlPlaneInstanceType" tf:"control_plane_instance_type,omitempty"`
 
 	// An object representing the placement configuration for all the control plane instances of your local Amazon EKS cluster on AWS Outpost.
-	// The following arguments are supported in the control_plane_placement configuration block:
+	// The control_plane_placement configuration block supports the following arguments:
 	// +kubebuilder:validation:Optional
 	ControlPlanePlacement []ControlPlanePlacementParameters `json:"controlPlanePlacement,omitempty" tf:"control_plane_placement,omitempty"`
 
@@ -512,13 +512,14 @@ type ClusterStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Cluster is the Schema for the Clusters API. Manages an EKS Cluster
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`

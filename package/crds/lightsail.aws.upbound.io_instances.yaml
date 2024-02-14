@@ -90,17 +90,19 @@ spec:
                       type: object
                     type: array
                   availabilityZone:
-                    description: The Availability Zone in which to create your instance
-                      (see list below)
+                    description: 'The Availability Zone in which to create your instance.
+                      A list of available zones can be obtained using the AWS CLI
+                      command: aws lightsail get-regions --include-availability-zones.'
                     type: string
                   blueprintId:
                     description: 'The ID for a virtual private server image. A list
                       of available blueprint IDs can be obtained using the AWS CLI
-                      command: aws lightsail get-blueprints'
+                      command: aws lightsail get-blueprints.'
                     type: string
                   bundleId:
-                    description: The bundle of specification information (see list
-                      below)
+                    description: 'The bundle of specification information. A list
+                      of available bundle IDs can be obtained using the AWS CLI command:
+                      aws lightsail get-bundles.'
                     type: string
                   ipAddressType:
                     description: 'The IP address type of the Lightsail Instance. Valid
@@ -162,17 +164,19 @@ spec:
                       type: object
                     type: array
                   availabilityZone:
-                    description: The Availability Zone in which to create your instance
-                      (see list below)
+                    description: 'The Availability Zone in which to create your instance.
+                      A list of available zones can be obtained using the AWS CLI
+                      command: aws lightsail get-regions --include-availability-zones.'
                     type: string
                   blueprintId:
                     description: 'The ID for a virtual private server image. A list
                       of available blueprint IDs can be obtained using the AWS CLI
-                      command: aws lightsail get-blueprints'
+                      command: aws lightsail get-blueprints.'
                     type: string
                   bundleId:
-                    description: The bundle of specification information (see list
-                      below)
+                    description: 'The bundle of specification information. A list
+                      of available bundle IDs can be obtained using the AWS CLI command:
+                      aws lightsail get-bundles.'
                     type: string
                   ipAddressType:
                     description: 'The IP address type of the Lightsail Instance. Valid
@@ -397,17 +401,19 @@ spec:
                     description: The ARN of the Lightsail instance (matches id).
                     type: string
                   availabilityZone:
-                    description: The Availability Zone in which to create your instance
-                      (see list below)
+                    description: 'The Availability Zone in which to create your instance.
+                      A list of available zones can be obtained using the AWS CLI
+                      command: aws lightsail get-regions --include-availability-zones.'
                     type: string
                   blueprintId:
                     description: 'The ID for a virtual private server image. A list
                       of available blueprint IDs can be obtained using the AWS CLI
-                      command: aws lightsail get-blueprints'
+                      command: aws lightsail get-blueprints.'
                     type: string
                   bundleId:
-                    description: The bundle of specification information (see list
-                      below)
+                    description: 'The bundle of specification information. A list
+                      of available bundle IDs can be obtained using the AWS CLI command:
+                      aws lightsail get-bundles.'
                     type: string
                   cpuCount:
                     description: The number of vCPUs the instance has.
@@ -421,10 +427,6 @@ spec:
                   ipAddressType:
                     description: 'The IP address type of the Lightsail Instance. Valid
                       Values: dualstack | ipv4.'
-                    type: string
-                  ipv6Address:
-                    description: (Deprecated) The first IPv6 address of the Lightsail
-                      instance. Use ipv6_addresses attribute instead.
                     type: string
                   ipv6Addresses:
                     description: List of IPv6 addresses for the Lightsail instance.

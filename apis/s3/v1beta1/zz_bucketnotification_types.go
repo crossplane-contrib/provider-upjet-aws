@@ -32,7 +32,7 @@ type BucketNotificationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Whether to enable Amazon EventBridge notifications.
+	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
 	// Used to configure notifications to a Lambda Function. See below.
@@ -50,7 +50,7 @@ type BucketNotificationObservation struct {
 	// Name of the bucket for notification configuration.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Whether to enable Amazon EventBridge notifications.
+	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
 	// Unique identifier for each of the notification configurations.
@@ -82,7 +82,7 @@ type BucketNotificationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Whether to enable Amazon EventBridge notifications.
+	// Whether to enable Amazon EventBridge notifications. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Eventbridge *bool `json:"eventbridge,omitempty" tf:"eventbridge,omitempty"`
 
@@ -354,13 +354,14 @@ type BucketNotificationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // BucketNotification is the Schema for the BucketNotifications API. Manages a S3 Bucket Notification Configuration
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type BucketNotification struct {
 	metav1.TypeMeta   `json:",inline"`

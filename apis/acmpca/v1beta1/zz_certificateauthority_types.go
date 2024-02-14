@@ -125,9 +125,6 @@ type CertificateAuthorityObservation struct {
 	// Serial number of the certificate authority. Only available after the certificate authority certificate has been imported.
 	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
 
-	// (Deprecated use the enabled attribute instead) Status of the certificate authority.
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
-
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -467,13 +464,14 @@ type CertificateAuthorityStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // CertificateAuthority is the Schema for the CertificateAuthoritys API. Provides a resource to manage AWS Certificate Manager Private Certificate Authorities
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type CertificateAuthority struct {
 	metav1.TypeMeta   `json:",inline"`

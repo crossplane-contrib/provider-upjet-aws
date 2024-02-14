@@ -392,6 +392,9 @@ type InstanceInitParameters struct {
 	// Shutdown behavior for the instance. Amazon defaults this to stop for EBS-backed instances and terminate for instance-store instances. Cannot be set on instance-store instances. See Shutdown Behavior for more information.
 	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
 
+	// Describes the market (purchasing) option for the instances. See Market Options below for details on attributes.
+	InstanceMarketOptions []InstanceMarketOptionsInitParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
+
 	// Instance type to use for the instance. Required unless launch_template is specified and the Launch Template specifies an instance type. If an instance type is specified in the Launch Template, setting instance_type will override the instance type specified in the Launch Template. Updates to this field will trigger a stop/start of the EC2 instance.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
@@ -481,6 +484,35 @@ type InstanceInitParameters struct {
 	// Map of tags to assign, at instance-creation time, to root and EBS volumes.
 	// +mapType=granular
 	VolumeTags map[string]*string `json:"volumeTags,omitempty" tf:"volume_tags,omitempty"`
+}
+
+type InstanceMarketOptionsInitParameters struct {
+
+	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+
+	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
+	SpotOptions []SpotOptionsInitParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
+type InstanceMarketOptionsObservation struct {
+
+	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+
+	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
+	SpotOptions []SpotOptionsObservation `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
+}
+
+type InstanceMarketOptionsParameters struct {
+
+	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	// +kubebuilder:validation:Optional
+	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
+
+	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
+	// +kubebuilder:validation:Optional
+	SpotOptions []SpotOptionsParameters `json:"spotOptions,omitempty" tf:"spot_options,omitempty"`
 }
 
 type InstanceNetworkInterfaceInitParameters struct {
@@ -624,6 +656,12 @@ type InstanceObservation struct {
 	// Shutdown behavior for the instance. Amazon defaults this to stop for EBS-backed instances and terminate for instance-store instances. Cannot be set on instance-store instances. See Shutdown Behavior for more information.
 	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
 
+	// Indicates whether this is a Spot Instance or a Scheduled Instance.
+	InstanceLifecycle *string `json:"instanceLifecycle,omitempty" tf:"instance_lifecycle,omitempty"`
+
+	// Describes the market (purchasing) option for the instances. See Market Options below for details on attributes.
+	InstanceMarketOptions []InstanceMarketOptionsObservation `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
+
 	// State of the instance. One of: pending, running, shutting-down, terminated, stopping, stopped. See Instance Lifecycle for more information.
 	InstanceState *string `json:"instanceState,omitempty" tf:"instance_state,omitempty"`
 
@@ -691,6 +729,9 @@ type InstanceObservation struct {
 
 	// Controls if traffic is routed to the instance when the destination address does not match the instance. Used for NAT or VPNs. Defaults true.
 	SourceDestCheck *bool `json:"sourceDestCheck,omitempty" tf:"source_dest_check,omitempty"`
+
+	// If the request is a Spot Instance request, the ID of the request.
+	SpotInstanceRequestID *string `json:"spotInstanceRequestId,omitempty" tf:"spot_instance_request_id,omitempty"`
 
 	// VPC Subnet ID to launch in.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -813,6 +854,10 @@ type InstanceParameters struct {
 	// Shutdown behavior for the instance. Amazon defaults this to stop for EBS-backed instances and terminate for instance-store instances. Cannot be set on instance-store instances. See Shutdown Behavior for more information.
 	// +kubebuilder:validation:Optional
 	InstanceInitiatedShutdownBehavior *string `json:"instanceInitiatedShutdownBehavior,omitempty" tf:"instance_initiated_shutdown_behavior,omitempty"`
+
+	// Describes the market (purchasing) option for the instances. See Market Options below for details on attributes.
+	// +kubebuilder:validation:Optional
+	InstanceMarketOptions []InstanceMarketOptionsParameters `json:"instanceMarketOptions,omitempty" tf:"instance_market_options,omitempty"`
 
 	// Instance type to use for the instance. Required unless launch_template is specified and the Launch Template specifies an instance type. If an instance type is specified in the Launch Template, setting instance_type will override the instance type specified in the Launch Template. Updates to this field will trigger a stop/start of the EC2 instance.
 	// +kubebuilder:validation:Optional
@@ -995,6 +1040,9 @@ type MetadataOptionsInitParameters struct {
 	// Whether the metadata service is available. Valid values include enabled or disabled. Defaults to enabled.
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
 
+	// Whether the IPv6 endpoint for the instance metadata service is enabled. Defaults to disabled.
+	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
+
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
@@ -1009,6 +1057,9 @@ type MetadataOptionsObservation struct {
 
 	// Whether the metadata service is available. Valid values include enabled or disabled. Defaults to enabled.
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
+
+	// Whether the IPv6 endpoint for the instance metadata service is enabled. Defaults to disabled.
+	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
@@ -1025,6 +1076,10 @@ type MetadataOptionsParameters struct {
 	// Whether the metadata service is available. Valid values include enabled or disabled. Defaults to enabled.
 	// +kubebuilder:validation:Optional
 	HTTPEndpoint *string `json:"httpEndpoint,omitempty" tf:"http_endpoint,omitempty"`
+
+	// Whether the IPv6 endpoint for the instance metadata service is enabled. Defaults to disabled.
+	// +kubebuilder:validation:Optional
+	HTTPProtocolIPv6 *string `json:"httpProtocolIpv6,omitempty" tf:"http_protocol_ipv6,omitempty"`
 
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	// +kubebuilder:validation:Optional
@@ -1111,7 +1166,7 @@ type RootBlockDeviceInitParameters struct {
 	// Size of the volume in gibibytes (GiB).
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
-	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
+	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to the volume type that the AMI uses.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
@@ -1145,7 +1200,7 @@ type RootBlockDeviceObservation struct {
 	// Size of the volume in gibibytes (GiB).
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
-	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
+	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to the volume type that the AMI uses.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
 }
 
@@ -1189,9 +1244,58 @@ type RootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
 
-	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to gp2.
+	// Type of volume. Valid values include standard, gp2, gp3, io1, io2, sc1, or st1. Defaults to the volume type that the AMI uses.
 	// +kubebuilder:validation:Optional
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type SpotOptionsInitParameters struct {
+
+	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price that you're willing to pay for a Spot Instance.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+}
+
+type SpotOptionsObservation struct {
+
+	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price that you're willing to pay for a Spot Instance.
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
+}
+
+type SpotOptionsParameters struct {
+
+	// The behavior when a Spot Instance is interrupted. Valid values include hibernate, stop, terminate . The default is terminate.
+	// +kubebuilder:validation:Optional
+	InstanceInterruptionBehavior *string `json:"instanceInterruptionBehavior,omitempty" tf:"instance_interruption_behavior,omitempty"`
+
+	// The maximum hourly price that you're willing to pay for a Spot Instance.
+	// +kubebuilder:validation:Optional
+	MaxPrice *string `json:"maxPrice,omitempty" tf:"max_price,omitempty"`
+
+	// The Spot Instance request type. Valid values include one-time, persistent. Persistent Spot Instance requests are only supported when the instance interruption behavior is either hibernate or stop. The default is one-time.
+	// +kubebuilder:validation:Optional
+	SpotInstanceType *string `json:"spotInstanceType,omitempty" tf:"spot_instance_type,omitempty"`
+
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ). Supported only for persistent requests.
+	// +kubebuilder:validation:Optional
+	ValidUntil *string `json:"validUntil,omitempty" tf:"valid_until,omitempty"`
 }
 
 // InstanceSpec defines the desired state of Instance
@@ -1218,13 +1322,14 @@ type InstanceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Instance is the Schema for the Instances API. Provides an EC2 instance resource. This allows instances to be created, updated, and deleted. Instances also support provisioning.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`

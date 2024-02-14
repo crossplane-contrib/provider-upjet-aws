@@ -70,6 +70,16 @@ spec:
                   description:
                     description: Description of the rule
                     type: string
+                  evaluationMode:
+                    description: The modes the Config rule can be evaluated in. See
+                      Evaluation Mode for more details.
+                    items:
+                      properties:
+                        mode:
+                          description: The mode of an evaluation.
+                          type: string
+                      type: object
+                    type: array
                   inputParameters:
                     description: A string in JSON format that is passed to the AWS
                       Config rule Lambda function.
@@ -289,6 +299,16 @@ spec:
                   description:
                     description: Description of the rule
                     type: string
+                  evaluationMode:
+                    description: The modes the Config rule can be evaluated in. See
+                      Evaluation Mode for more details.
+                    items:
+                      properties:
+                        mode:
+                          description: The mode of an evaluation.
+                          type: string
+                      type: object
+                    type: array
                   inputParameters:
                     description: A string in JSON format that is passed to the AWS
                       Config rule Lambda function.
@@ -663,6 +683,16 @@ spec:
                   description:
                     description: Description of the rule
                     type: string
+                  evaluationMode:
+                    description: The modes the Config rule can be evaluated in. See
+                      Evaluation Mode for more details.
+                    items:
+                      properties:
+                        mode:
+                          description: The mode of an evaluation.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     type: string
                   inputParameters:

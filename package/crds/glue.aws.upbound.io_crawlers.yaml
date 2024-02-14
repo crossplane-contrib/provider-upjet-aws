@@ -67,6 +67,8 @@ spec:
               forProvider:
                 properties:
                   catalogTarget:
+                    description: List of nested AWS Glue Data Catalog target arguments.
+                      See Catalog Target below.
                     items:
                       properties:
                         connectionName:
@@ -258,6 +260,8 @@ spec:
                         type: object
                     type: object
                   deltaTarget:
+                    description: List of nested Delta Lake target arguments. See Delta
+                      Target below.
                     items:
                       properties:
                         connectionName:
@@ -306,8 +310,68 @@ spec:
                           type: number
                       type: object
                     type: array
+                  hudiTarget:
+                    description: List of nested Hudi target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  icebergTarget:
+                    description: List of nested Iceberg target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   jdbcTarget:
-                    description: List of nested JBDC target arguments. See JDBC Target
+                    description: List of nested JDBC target arguments. See JDBC Target
                       below.
                     items:
                       properties:
@@ -435,12 +499,12 @@ spec:
                         crawlerLineageSettings:
                           description: 'Specifies whether data lineage is enabled
                             for the crawler. Valid values are: ENABLE and DISABLE.
-                            Default value is Disable.'
+                            Default value is DISABLE.'
                           type: string
                       type: object
                     type: array
                   mongodbTarget:
-                    description: List nested MongoDB target arguments. See MongoDB
+                    description: List of nested MongoDB target arguments. See MongoDB
                       Target below.
                     items:
                       properties:
@@ -635,8 +699,8 @@ spec:
                         type: object
                     type: object
                   s3Target:
-                    description: List nested Amazon S3 target arguments. See S3 Target
-                      below.
+                    description: List of nested Amazon S3 target arguments. See S3
+                      Target below.
                     items:
                       properties:
                         connectionName:
@@ -719,6 +783,8 @@ spec:
                   like an autoscaler.
                 properties:
                   catalogTarget:
+                    description: List of nested AWS Glue Data Catalog target arguments.
+                      See Catalog Target below.
                     items:
                       properties:
                         connectionName:
@@ -910,6 +976,8 @@ spec:
                         type: object
                     type: object
                   deltaTarget:
+                    description: List of nested Delta Lake target arguments. See Delta
+                      Target below.
                     items:
                       properties:
                         connectionName:
@@ -958,8 +1026,68 @@ spec:
                           type: number
                       type: object
                     type: array
+                  hudiTarget:
+                    description: List of nested Hudi target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  icebergTarget:
+                    description: List of nested Iceberg target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   jdbcTarget:
-                    description: List of nested JBDC target arguments. See JDBC Target
+                    description: List of nested JDBC target arguments. See JDBC Target
                       below.
                     items:
                       properties:
@@ -1087,12 +1215,12 @@ spec:
                         crawlerLineageSettings:
                           description: 'Specifies whether data lineage is enabled
                             for the crawler. Valid values are: ENABLE and DISABLE.
-                            Default value is Disable.'
+                            Default value is DISABLE.'
                           type: string
                       type: object
                     type: array
                   mongodbTarget:
-                    description: List nested MongoDB target arguments. See MongoDB
+                    description: List of nested MongoDB target arguments. See MongoDB
                       Target below.
                     items:
                       properties:
@@ -1283,8 +1411,8 @@ spec:
                         type: object
                     type: object
                   s3Target:
-                    description: List nested Amazon S3 target arguments. See S3 Target
-                      below.
+                    description: List of nested Amazon S3 target arguments. See S3
+                      Target below.
                     items:
                       properties:
                         connectionName:
@@ -1521,6 +1649,8 @@ spec:
                     description: The ARN of the crawler
                     type: string
                   catalogTarget:
+                    description: List of nested AWS Glue Data Catalog target arguments.
+                      See Catalog Target below.
                     items:
                       properties:
                         connectionName:
@@ -1559,6 +1689,8 @@ spec:
                     description: Glue database where results are written.
                     type: string
                   deltaTarget:
+                    description: List of nested Delta Lake target arguments. See Delta
+                      Target below.
                     items:
                       properties:
                         connectionName:
@@ -1607,11 +1739,71 @@ spec:
                           type: number
                       type: object
                     type: array
+                  hudiTarget:
+                    description: List of nested Hudi target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  icebergTarget:
+                    description: List of nested Iceberg target arguments. See Iceberg
+                      Target below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: The name of the connection to use to connect
+                            to the JDBC target.
+                          type: string
+                        exclusions:
+                          description: A list of glob patterns used to exclude from
+                            the crawl.
+                          items:
+                            type: string
+                          type: array
+                        maximumTraversalDepth:
+                          description: The maximum depth of Amazon S3 paths that the
+                            crawler can traverse to discover the Hudi metadata folder
+                            in your Amazon S3 path. Used to limit the crawler run
+                            time. Valid values are between 1 and 20.
+                          type: number
+                        paths:
+                          description: One or more Amazon S3 paths that contains Hudi
+                            metadata folders as s3://bucket/prefix.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   id:
                     description: Crawler name
                     type: string
                   jdbcTarget:
-                    description: List of nested JBDC target arguments. See JDBC Target
+                    description: List of nested JDBC target arguments. See JDBC Target
                       below.
                     items:
                       properties:
@@ -1661,12 +1853,12 @@ spec:
                         crawlerLineageSettings:
                           description: 'Specifies whether data lineage is enabled
                             for the crawler. Valid values are: ENABLE and DISABLE.
-                            Default value is Disable.'
+                            Default value is DISABLE.'
                           type: string
                       type: object
                     type: array
                   mongodbTarget:
-                    description: List nested MongoDB target arguments. See MongoDB
+                    description: List of nested MongoDB target arguments. See MongoDB
                       Target below.
                     items:
                       properties:
@@ -1706,8 +1898,8 @@ spec:
                       access other resources.
                     type: string
                   s3Target:
-                    description: List nested Amazon S3 target arguments. See S3 Target
-                      below.
+                    description: List of nested Amazon S3 target arguments. See S3
+                      Target below.
                     items:
                       properties:
                         connectionName:

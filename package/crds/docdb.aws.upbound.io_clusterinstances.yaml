@@ -161,6 +161,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  copyTagsToSnapshot:
+                    description: –  Copy all DB instance tags to snapshots. Default
+                      is false.
+                    type: boolean
                   enablePerformanceInsights:
                     description: A value that indicates whether to enable Performance
                       Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
@@ -310,6 +314,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  copyTagsToSnapshot:
+                    description: –  Copy all DB instance tags to snapshots. Default
+                      is false.
+                    type: boolean
                   enablePerformanceInsights:
                     description: A value that indicates whether to enable Performance
                       Insights for the DB Instance. Default false. See [docs] (https://docs.aws.amazon.com/documentdb/latest/developerguide/performance-insights.html)
@@ -541,6 +549,10 @@ spec:
                     description: The identifier of the aws_docdb_cluster in which
                       to launch this instance.
                     type: string
+                  copyTagsToSnapshot:
+                    description: –  Copy all DB instance tags to snapshots. Default
+                      is false.
+                    type: boolean
                   dbSubnetGroupName:
                     description: The DB subnet group to associate with this DB instance.
                     type: string

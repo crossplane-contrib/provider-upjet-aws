@@ -61,14 +61,19 @@ type InstanceInitParameters struct {
 	// The add on configuration for the instance. Detailed below.
 	AddOn []AddOnInitParameters `json:"addOn,omitempty" tf:"add_on,omitempty"`
 
-	// The Availability Zone in which to create your
-	// instance (see list below)
+	// The Availability Zone in which to create your instance. A
+	// list of available zones can be obtained using the AWS CLI command:
+	// aws lightsail get-regions --include-availability-zones.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The ID for a virtual private server image. A list of available blueprint IDs can be obtained using the AWS CLI command: aws lightsail get-blueprints
+	// The ID for a virtual private server image. A list of available
+	// blueprint IDs can be obtained using the AWS CLI command:
+	// aws lightsail get-blueprints.
 	BlueprintID *string `json:"blueprintId,omitempty" tf:"blueprint_id,omitempty"`
 
-	// The bundle of specification information (see list below)
+	// The bundle of specification information. A list of available
+	// bundle IDs can be obtained using the AWS CLI command:
+	// aws lightsail get-bundles.
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
@@ -94,14 +99,19 @@ type InstanceObservation struct {
 	// The ARN of the Lightsail instance (matches id).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The Availability Zone in which to create your
-	// instance (see list below)
+	// The Availability Zone in which to create your instance. A
+	// list of available zones can be obtained using the AWS CLI command:
+	// aws lightsail get-regions --include-availability-zones.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The ID for a virtual private server image. A list of available blueprint IDs can be obtained using the AWS CLI command: aws lightsail get-blueprints
+	// The ID for a virtual private server image. A list of available
+	// blueprint IDs can be obtained using the AWS CLI command:
+	// aws lightsail get-blueprints.
 	BlueprintID *string `json:"blueprintId,omitempty" tf:"blueprint_id,omitempty"`
 
-	// The bundle of specification information (see list below)
+	// The bundle of specification information. A list of available
+	// bundle IDs can be obtained using the AWS CLI command:
+	// aws lightsail get-bundles.
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// The number of vCPUs the instance has.
@@ -115,9 +125,6 @@ type InstanceObservation struct {
 
 	// The IP address type of the Lightsail Instance. Valid Values: dualstack | ipv4.
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
-
-	// (Deprecated) The first IPv6 address of the Lightsail instance. Use ipv6_addresses attribute instead.
-	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
 	// List of IPv6 addresses for the Lightsail instance.
 	IPv6Addresses []*string `json:"ipv6Addresses,omitempty" tf:"ipv6_addresses,omitempty"`
@@ -159,16 +166,21 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AddOn []AddOnParameters `json:"addOn,omitempty" tf:"add_on,omitempty"`
 
-	// The Availability Zone in which to create your
-	// instance (see list below)
+	// The Availability Zone in which to create your instance. A
+	// list of available zones can be obtained using the AWS CLI command:
+	// aws lightsail get-regions --include-availability-zones.
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The ID for a virtual private server image. A list of available blueprint IDs can be obtained using the AWS CLI command: aws lightsail get-blueprints
+	// The ID for a virtual private server image. A list of available
+	// blueprint IDs can be obtained using the AWS CLI command:
+	// aws lightsail get-blueprints.
 	// +kubebuilder:validation:Optional
 	BlueprintID *string `json:"blueprintId,omitempty" tf:"blueprint_id,omitempty"`
 
-	// The bundle of specification information (see list below)
+	// The bundle of specification information. A list of available
+	// bundle IDs can be obtained using the AWS CLI command:
+	// aws lightsail get-bundles.
 	// +kubebuilder:validation:Optional
 	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
@@ -220,13 +232,14 @@ type InstanceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Instance is the Schema for the Instances API. Provides an Lightsail Instance
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`

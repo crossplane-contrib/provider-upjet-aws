@@ -15,10 +15,44 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-// NoForkExternalNameConfigs contains all external name configurations
-// belonging to Terraform resources to be reconciled under the no-fork
-// architecture for this provider.
-var NoForkExternalNameConfigs = map[string]config.ExternalName{
+// TerraformPluginFrameworkExternalNameConfigs contains all external
+// name configurations belonging to Terraform Plugin Framework
+// resources to be reconciled under the no-fork architecture for this
+// provider.
+var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
+	// ec2
+	//
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
+	// Imported by using the id: sgr-02108b27edd666983
+	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+
+	// cognito
+	//
+	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
+	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
+
+	// simpledb
+	//
+	// SimpleDB Domains can be imported using the name
+	"aws_simpledb_domain": config.NameAsIdentifier,
+
+	// appconfig
+	//
+	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
+	// terraform-plugin-framework
+	"aws_appconfig_environment": appConfigEnvironment(),
+
+	// eks
+	//
+	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
+	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
+}
+
+// TerraformPluginSDKExternalNameConfigs contains all external name configurations
+// belonging to Terraform Plugin SDKv2 resources to be reconciled
+// under the no-fork architecture for this provider.
+var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// ACM
 	// Imported using ARN that has a random substring:
 	// arn:aws:acm:eu-central-1:123456789012:certificate/7e7a28d2-163f-4b8f-b9cd-822f96c08d6a
@@ -91,8 +125,8 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 
 	// cloudtrail
 	//
-	// Cloudtrails can be imported using the name
-	"aws_cloudtrail": config.NameAsIdentifier,
+	// Cloudtrails can be imported using the name arn:aws:cloudtrail:us-west-1:153891904029:trail/foobar
+	"aws_cloudtrail": config.TemplatedStringAsIdentifier("name", "arn:aws:cloudtrail:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:trail/{{ .external_name }}"),
 	// Event data stores can be imported using their arn
 	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
 
@@ -567,7 +601,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// rds
 	//
 	"aws_rds_cluster":        config.ParameterAsIdentifier("cluster_identifier"),
-	"aws_db_instance":        config.ParameterAsIdentifier("identifier"),
+	"aws_db_instance":        config.IdentifierFromProvider,
 	"aws_db_parameter_group": config.NameAsIdentifier,
 	"aws_db_subnet_group":    config.NameAsIdentifier,
 	// aws_db_instance_role_association can be imported using the DB Instance Identifier and IAM Role ARN separated by a comma
@@ -1678,6 +1712,10 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
+	// Cloudformation Stacks Instances imported using the StackSet name, target
+	// AWS account ID, and target AWS region separated with commas:
+	// example,123456789012,us-east-1
+	"aws_cloudformation_stack_set_instance": config.IdentifierFromProvider,
 
 	// autoscaling
 	//
@@ -1767,9 +1805,6 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// AppConfig Extension Associations can be imported using their extension association ID
 	// ID is a provider-generated
 	"aws_appconfig_extension_association": config.IdentifierFromProvider,
-	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
-	// terraform-plugin-framework
-	"aws_appconfig_environment": config.IdentifierFromProvider,
 
 	// appintegrations
 	//
@@ -2654,19 +2689,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	"aws_fis_experiment_template": config.IdentifierFromProvider,
 }
 
-var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
-	// Imported by using the id: sgr-02108b27edd666983
-	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
-	// Cognito User Pool clients can be imported using the user pool id and client id separated by a slash (/)
-	// However, the terraform id is just the client id.
-	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
-	// simpledb
-	//
-	// SimpleDB Domains can be imported using the name
-	"aws_simpledb_domain": config.NameAsIdentifier,
-}
+var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{}
 
 // cognitoUserPoolClient
 // Note(mbbush) This resource has some unexpected behaviors that make it impossible to write a completely correct
@@ -2801,6 +2824,24 @@ func vpcSecurityGroupRule() config.ExternalName {
 			return "sgr-stub", nil
 		}
 		return externalName, nil
+	}
+	return e
+}
+
+func appConfigEnvironment() config.ExternalName {
+	// Terraform does not allow Environment ID to be empty.
+	// Using a stub value to pass validation.
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if _, ok := base["environment_id"]; !ok {
+			if externalName == "" {
+				// must satisfy regular expression pattern: [a-z0-9]{4,7}
+				base["environment_id"] = "tbdeid0"
+			}
+			if identifiers := strings.Split(externalName, ":"); len(identifiers) == 2 {
+				base["environment_id"] = identifiers[0]
+			}
+		}
 	}
 	return e
 }
@@ -3011,19 +3052,22 @@ func TemplatedStringAsIdentifierWithNoName(tmpl string) config.ExternalName {
 	return e
 }
 
-// ResourceConfigurator applies all external name configs
-// listed in the table NoForkExternalNameConfigs and
-// CLIReconciledExternalNameConfigs and sets the version
-// of those resources to v1beta1. For those resource in
-// NoForkExternalNameConfigs, it also sets
-// config.Resource.UseNoForkClient to `true`.
+// ResourceConfigurator applies all external name configs listed in
+// the table TerraformPluginSDKExternalNameConfigs,
+// CLIReconciledExternalNameConfigs, and
+// TerraformPluginFrameworkExternalNameConfigs and sets the version of
+// those resources to v1beta1.
 func ResourceConfigurator() config.ResourceOption {
 	return func(r *config.Resource) {
-		// if configured both for the no-fork and CLI based architectures,
-		// no-fork configuration prevails
-		e, configured := NoForkExternalNameConfigs[r.Name]
+		// If an external name is configured for multiple architectures,
+		// Terraform Plugin Framework takes precedence over Terraform
+		// Plugin SDKv2, which takes precedence over CLI architecture.
+		e, configured := TerraformPluginFrameworkExternalNameConfigs[r.Name]
 		if !configured {
-			e, configured = CLIReconciledExternalNameConfigs[r.Name]
+			e, configured = TerraformPluginSDKExternalNameConfigs[r.Name]
+			if !configured {
+				e, configured = CLIReconciledExternalNameConfigs[r.Name]
+			}
 		}
 		if !configured {
 			return
@@ -3067,4 +3111,22 @@ func eksOIDCIdentityProvider() config.ExternalName {
 			"oidc.identity_provider_config_name_prefix",
 		},
 	}
+}
+
+func eksPodIdentityAssociation() config.ExternalName {
+	// Terraform does not allow Association ID to be empty.
+	// Using a stub value to pass validation.
+	// Terraform does not use "id" attribute anymore, instead a combination of association_id and cluster_name is used
+	e := config.IdentifierFromProvider
+	e.SetIdentifierArgumentFn = func(base map[string]interface{}, externalName string) {
+		if _, ok := base["association_id"]; !ok {
+			if externalName == "" {
+				// must be 19 chars long and match regex ^a-[0-9a-z]*$
+				base["association_id"] = "a-stubassocid123456"
+			} else {
+				base["association_id"] = externalName
+			}
+		}
+	}
+	return e
 }

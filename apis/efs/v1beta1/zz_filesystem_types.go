@@ -93,6 +93,9 @@ type FileSystemObservation struct {
 	// A file system lifecycle policy object (documented below).
 	LifecyclePolicy []LifecyclePolicyObservation `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
 
+	// The value of the file system's Name tag.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The current number of mount targets that the file system has.
 	NumberOfMountTargets *float64 `json:"numberOfMountTargets,omitempty" tf:"number_of_mount_targets,omitempty"`
 
@@ -249,13 +252,14 @@ type FileSystemStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // FileSystem is the Schema for the FileSystems API. Provides an Elastic File System (EFS) File System resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type FileSystem struct {
 	metav1.TypeMeta   `json:",inline"`

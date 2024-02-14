@@ -45,10 +45,14 @@ type AddonInitParameters struct {
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
-	// Define how to resolve parameter value conflicts
-	// when migrating an existing add-on to an Amazon EKS add-on or when applying
-	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
+	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
+
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
+
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
 	// The Amazon Resource Name (ARN) of an
 	// existing IAM role to bind to the add-on's service account. The role must be
@@ -104,10 +108,14 @@ type AddonObservation struct {
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
-	// Define how to resolve parameter value conflicts
-	// when migrating an existing add-on to an Amazon EKS add-on or when applying
-	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
+	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
+
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
+
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
 	// The Amazon Resource Name (ARN) of an
 	// existing IAM role to bind to the add-on's service account. The role must be
@@ -164,11 +172,17 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Define how to resolve parameter value conflicts
-	// when migrating an existing add-on to an Amazon EKS add-on or when applying
-	// version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. For more details check UpdateAddon API Docs.
+	// (Deprecated use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead) Define how to resolve parameter value conflicts when migrating an existing add-on to an Amazon EKS add-on or when applying version updates to the add-on. Valid values are NONE, OVERWRITE and PRESERVE. Note that PRESERVE is only valid on addon update, not for initial addon creation. If you need to set this to PRESERVE, use the resolve_conflicts_on_create and resolve_conflicts_on_update attributes instead. For more details check UpdateAddon API Docs.
 	// +kubebuilder:validation:Optional
 	ResolveConflicts *string `json:"resolveConflicts,omitempty" tf:"resolve_conflicts,omitempty"`
+
+	// How to resolve field value conflicts when migrating a self-managed add-on to an Amazon EKS add-on. Valid values are NONE and OVERWRITE. For more details see the CreateAddon API Docs.
+	// +kubebuilder:validation:Optional
+	ResolveConflictsOnCreate *string `json:"resolveConflictsOnCreate,omitempty" tf:"resolve_conflicts_on_create,omitempty"`
+
+	// How to resolve field value conflicts for an Amazon EKS add-on if you've changed a value from the Amazon EKS default value. Valid values are NONE, OVERWRITE, and PRESERVE. For more details see the UpdateAddon API Docs.
+	// +kubebuilder:validation:Optional
+	ResolveConflictsOnUpdate *string `json:"resolveConflictsOnUpdate,omitempty" tf:"resolve_conflicts_on_update,omitempty"`
 
 	// The Amazon Resource Name (ARN) of an
 	// existing IAM role to bind to the add-on's service account. The role must be
@@ -219,13 +233,14 @@ type AddonStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Addon is the Schema for the Addons API. Manages an EKS add-on
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Addon struct {
 	metav1.TypeMeta   `json:",inline"`

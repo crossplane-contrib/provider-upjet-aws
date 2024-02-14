@@ -20,7 +20,7 @@ import (
 type ScramSecretAssociationInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
@@ -64,7 +64,7 @@ type ScramSecretAssociationObservation struct {
 type ScramSecretAssociationParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
@@ -123,13 +123,14 @@ type ScramSecretAssociationStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // ScramSecretAssociation is the Schema for the ScramSecretAssociations API. Associates SCRAM secrets with a Managed Streaming for Kafka (MSK) cluster.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type ScramSecretAssociation struct {
 	metav1.TypeMeta   `json:",inline"`

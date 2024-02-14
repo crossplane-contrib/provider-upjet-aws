@@ -848,11 +848,6 @@ func (in *WorkspaceAPIKeyObservation) DeepCopyInto(out *WorkspaceAPIKeyObservati
 		*out = new(string)
 		**out = **in
 	}
-	if in.Key != nil {
-		in, out := &in.Key, &out.Key
-		*out = new(string)
-		**out = **in
-	}
 	if in.KeyName != nil {
 		in, out := &in.KeyName, &out.KeyName
 		*out = new(string)

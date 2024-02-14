@@ -456,6 +456,35 @@ type OrderedPlacementStrategyParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type PipelineParameterListInitParameters struct {
+
+	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type PipelineParameterListObservation struct {
+
+	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type PipelineParameterListParameters struct {
+
+	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type PlacementConstraintInitParameters struct {
 
 	// Cluster Query Language expression to apply to the constraint. Does not need to be specified for the distinctInstance type. For more information, see Cluster Query Language in the Amazon EC2 Container Service Developer Guide.
@@ -612,6 +641,25 @@ type RunCommandTargetsParameters struct {
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
+type SagemakerPipelineTargetInitParameters struct {
+
+	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	PipelineParameterList []PipelineParameterListInitParameters `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
+}
+
+type SagemakerPipelineTargetObservation struct {
+
+	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	PipelineParameterList []PipelineParameterListObservation `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
+}
+
+type SagemakerPipelineTargetParameters struct {
+
+	// List of Parameter names and values for SageMaker Model Building Pipeline execution.
+	// +kubebuilder:validation:Optional
+	PipelineParameterList []PipelineParameterListParameters `json:"pipelineParameterList,omitempty" tf:"pipeline_parameter_list,omitempty"`
+}
+
 type SqsTargetInitParameters struct {
 
 	// The FIFO message group ID to use as the target.
@@ -707,6 +755,9 @@ type TargetInitParameters struct {
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	RunCommandTargets []RunCommandTargetsInitParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
 
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	SagemakerPipelineTarget []SagemakerPipelineTargetInitParameters `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
+
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
 	SqsTarget []SqsTargetInitParameters `json:"sqsTarget,omitempty" tf:"sqs_target,omitempty"`
 
@@ -763,6 +814,9 @@ type TargetObservation struct {
 
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command. Documented below. A maximum of 5 are allowed.
 	RunCommandTargets []RunCommandTargetsObservation `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
+
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	SagemakerPipelineTarget []SagemakerPipelineTargetObservation `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
 	SqsTarget []SqsTargetObservation `json:"sqsTarget,omitempty" tf:"sqs_target,omitempty"`
@@ -867,6 +921,10 @@ type TargetParameters struct {
 	// +kubebuilder:validation:Optional
 	RunCommandTargets []RunCommandTargetsParameters `json:"runCommandTargets,omitempty" tf:"run_command_targets,omitempty"`
 
+	// Parameters used when you are using the rule to invoke an Amazon SageMaker Pipeline. Documented below. A maximum of 1 are allowed.
+	// +kubebuilder:validation:Optional
+	SagemakerPipelineTarget []SagemakerPipelineTargetParameters `json:"sagemakerPipelineTarget,omitempty" tf:"sagemaker_pipeline_target,omitempty"`
+
 	// Parameters used when you are using the rule to invoke an Amazon SQS Queue. Documented below. A maximum of 1 are allowed.
 	// +kubebuilder:validation:Optional
 	SqsTarget []SqsTargetParameters `json:"sqsTarget,omitempty" tf:"sqs_target,omitempty"`
@@ -900,13 +958,14 @@ type TargetStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Target is the Schema for the Targets API. Provides an EventBridge Target resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type Target struct {
 	metav1.TypeMeta   `json:",inline"`

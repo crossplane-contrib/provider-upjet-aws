@@ -19,7 +19,7 @@ import (
 
 type IPSetInitParameters struct {
 
-	// Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all address ranges for IP versions IPv4 and IPv6.
+	// Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses. All addresses must be specified using Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
 	// +listType=set
 	Addresses []*string `json:"addresses,omitempty" tf:"addresses,omitempty"`
 
@@ -42,7 +42,7 @@ type IPSetInitParameters struct {
 
 type IPSetObservation struct {
 
-	// Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all address ranges for IP versions IPv4 and IPv6.
+	// Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses. All addresses must be specified using Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
 	// +listType=set
 	Addresses []*string `json:"addresses,omitempty" tf:"addresses,omitempty"`
 
@@ -77,7 +77,7 @@ type IPSetObservation struct {
 
 type IPSetParameters struct {
 
-	// Contains an array of strings that specify one or more IP addresses or blocks of IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all address ranges for IP versions IPv4 and IPv6.
+	// Contains an array of strings that specifies zero or more IP addresses or blocks of IP addresses. All addresses must be specified using Classless Inter-Domain Routing (CIDR) notation. WAF supports all IPv4 and IPv6 CIDR ranges except for /0.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Addresses []*string `json:"addresses,omitempty" tf:"addresses,omitempty"`
@@ -133,13 +133,14 @@ type IPSetStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // IPSet is the Schema for the IPSets API. Provides an AWS WAFv2 IP Set resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type IPSet struct {
 	metav1.TypeMeta   `json:",inline"`

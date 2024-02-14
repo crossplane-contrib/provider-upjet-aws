@@ -159,6 +159,9 @@ type RegionInitParameters struct {
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
+	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
+
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
 	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
@@ -172,6 +175,12 @@ type RegionObservation struct {
 
 	// The name of the associated bucket for the Region.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
+	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
+
+	// The Region configuration block to specify the bucket associated with the Multi-Region Access Point. See Region Configuration below for more details.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type RegionParameters struct {
@@ -181,6 +190,10 @@ type RegionParameters struct {
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// The AWS account ID that owns the Amazon S3 bucket that's associated with this Multi-Region Access Point.
+	// +kubebuilder:validation:Optional
+	BucketAccountID *string `json:"bucketAccountId,omitempty" tf:"bucket_account_id,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucket.
 	// +kubebuilder:validation:Optional
@@ -215,13 +228,14 @@ type MultiRegionAccessPointStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MultiRegionAccessPoint is the Schema for the MultiRegionAccessPoints API. Provides a resource to manage an S3 Multi-Region Access Point associated with specified buckets.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type MultiRegionAccessPoint struct {
 	metav1.TypeMeta   `json:",inline"`

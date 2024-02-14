@@ -38,12 +38,15 @@ type VirtualMfaDeviceObservation struct {
 	// The base32 seed defined as specified in RFC3548. The base_32_string_seed is base64-encoded.
 	Base32StringSeed *string `json:"base32StringSeed,omitempty" tf:"base_32_string_seed,omitempty"`
 
+	// The date and time when the virtual MFA device was enabled.
+	EnableDate *string `json:"enableDate,omitempty" tf:"enable_date,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// –  The path for the virtual MFA device.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set (otherwise, the account ID otherwise), and Base32String is the seed in base32 format.
+	// A QR code PNG image that encodes otpauth://totp/$virtualMFADeviceName@$AccountName?secret=$Base32String where $virtualMFADeviceName is one of the create call arguments. AccountName is the user name if set (otherwise, the account ID), and Base32String is the seed in base32 format.
 	QrCodePng *string `json:"qrCodePng,omitempty" tf:"qr_code_png,omitempty"`
 
 	// Key-value map of resource tags.
@@ -53,6 +56,9 @@ type VirtualMfaDeviceObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// The associated IAM User name if the virtual MFA device is enabled.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
 	// The name of the virtual MFA device. Use with path to uniquely identify a virtual MFA device.
 	VirtualMfaDeviceName *string `json:"virtualMfaDeviceName,omitempty" tf:"virtual_mfa_device_name,omitempty"`
@@ -98,13 +104,14 @@ type VirtualMfaDeviceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // VirtualMfaDevice is the Schema for the VirtualMfaDevices API. Provides an IAM Virtual MFA Device
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,aws}
 type VirtualMfaDevice struct {
 	metav1.TypeMeta   `json:",inline"`
