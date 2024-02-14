@@ -8,7 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    name: example
     policy: |-
       ${jsonencode({
           "Rules" : [

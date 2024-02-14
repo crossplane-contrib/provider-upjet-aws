@@ -70,9 +70,6 @@ spec:
                     description: Description of the policy. Typically used to store
                       information about the permissions defined in the policy.
                     type: string
-                  name:
-                    description: Name of the policy.
-                    type: string
                   policy:
                     description: JSON policy document to use as the content for the
                       new policy
@@ -102,9 +99,6 @@ spec:
                   description:
                     description: Description of the policy. Typically used to store
                       information about the permissions defined in the policy.
-                    type: string
-                  name:
-                    description: Name of the policy.
                     type: string
                   policy:
                     description: JSON policy document to use as the content for the
@@ -275,10 +269,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
@@ -297,9 +287,6 @@ spec:
                       information about the permissions defined in the policy.
                     type: string
                   id:
-                    type: string
-                  name:
-                    description: Name of the policy.
                     type: string
                   policy:
                     description: JSON policy document to use as the content for the

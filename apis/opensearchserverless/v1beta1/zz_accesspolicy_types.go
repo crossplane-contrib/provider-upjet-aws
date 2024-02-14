@@ -22,9 +22,6 @@ type AccessPolicyInitParameters struct {
 	// Description of the policy. Typically used to store information about the permissions defined in the policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Name of the policy.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// JSON policy document to use as the content for the new policy
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -38,9 +35,6 @@ type AccessPolicyObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Name of the policy.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// JSON policy document to use as the content for the new policy
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
@@ -57,10 +51,6 @@ type AccessPolicyParameters struct {
 	// Description of the policy. Typically used to store information about the permissions defined in the policy.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Name of the policy.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// JSON policy document to use as the content for the new policy
 	// +kubebuilder:validation:Optional
@@ -112,7 +102,6 @@ type AccessPolicyStatus struct {
 type AccessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy) || (has(self.initProvider) && has(self.initProvider.policy))",message="spec.forProvider.policy is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || (has(self.initProvider) && has(self.initProvider.type))",message="spec.forProvider.type is a required parameter"
 	Spec   AccessPolicySpec   `json:"spec"`

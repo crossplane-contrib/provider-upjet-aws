@@ -8,8 +8,7 @@ metadata:
   name: example-os-ap
 spec:
   forProvider:
-    name: example-os-ap
     description: read and write permissions
-    policy: "[{\"Principal\":[\"arn:aws:iam::243569053065:user/official-provider-testing\"],\"Rules\":[{\"Permission\":[\"aoss:*\"],\"Resource\":[\"index/example-collection/*\"],\"ResourceType\":\"index\"},{\"Permission\":[\"aoss:*\"],\"Resource\":[\"collection/example-collection\"],\"ResourceType\":\"collection\"}]}]"
+    policy: "[{\"Principal\":[\"arn:aws:iam::153891904029:user/official-provider-testing\"],\"Rules\":[{\"Permission\":[\"aoss:*\"],\"Resource\":[\"index/example-collection/*\"],\"ResourceType\":\"index\"},{\"Permission\":[\"aoss:*\"],\"Resource\":[\"collection/example-collection\"],\"ResourceType\":\"collection\"}]}]"
     region: us-east-1
     type: data

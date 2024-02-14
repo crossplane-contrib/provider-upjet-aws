@@ -9,7 +9,6 @@ metadata:
 spec:
   forProvider:
     description: read and write permissions
-    name: example
     policy: |-
       ${jsonencode([
           {

@@ -48,11 +48,6 @@ func (in *AccessPolicyInitParameters) DeepCopyInto(out *AccessPolicyInitParamete
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)
@@ -120,11 +115,6 @@ func (in *AccessPolicyObservation) DeepCopyInto(out *AccessPolicyObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)
@@ -157,11 +147,6 @@ func (in *AccessPolicyParameters) DeepCopyInto(out *AccessPolicyParameters) {
 	*out = *in
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
-		*out = new(string)
-		**out = **in
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
@@ -555,11 +540,6 @@ func (in *LifecyclePolicyInitParameters) DeepCopyInto(out *LifecyclePolicyInitPa
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)
@@ -627,11 +607,6 @@ func (in *LifecyclePolicyObservation) DeepCopyInto(out *LifecyclePolicyObservati
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)
@@ -664,11 +639,6 @@ func (in *LifecyclePolicyParameters) DeepCopyInto(out *LifecyclePolicyParameters
 	*out = *in
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
-		*out = new(string)
-		**out = **in
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
@@ -1068,11 +1038,6 @@ func (in *SecurityPolicyInitParameters) DeepCopyInto(out *SecurityPolicyInitPara
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)
@@ -1140,11 +1105,6 @@ func (in *SecurityPolicyObservation) DeepCopyInto(out *SecurityPolicyObservation
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
 		*out = new(string)
@@ -1177,11 +1137,6 @@ func (in *SecurityPolicyParameters) DeepCopyInto(out *SecurityPolicyParameters) 
 	*out = *in
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
-		*out = new(string)
-		**out = **in
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}

@@ -24,7 +24,6 @@ metadata:
   name: example-os-co
 spec:
   forProvider:
-    name: example-os-co
     policy: "{\"AWSOwnedKey\":true,\"Rules\":[{\"Resource\":[\"collection/example-collection\"],\"ResourceType\":\"collection\"}]}"
     region: us-east-1
     type: encryption

@@ -51,15 +51,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// opensearchserverless
 	//
 	// AccessPolicy can be imported using the policy name
-	"aws_opensearchserverless_access_policy": opensearchserverlessAccessPolicy(),
+	"aws_opensearchserverless_access_policy": config.NameAsIdentifier,
 	// Collection can be imported using the AWS-assigned collection ID. i.e. ch9rq91uv4yd8rff1f39
 	"aws_opensearchserverless_collection": opensearchserverlessCollection(),
 	// LifecyclePolicy can be imported using the policy name
-	"aws_opensearchserverless_lifecycle_policy": opensearchserverlessLifecyclePolicy(),
+	"aws_opensearchserverless_lifecycle_policy": config.NameAsIdentifier,
 	//  SecurityConfig can be imported using the AWS-assigned security config ID
 	"aws_opensearchserverless_security_config": config.TemplatedStringAsIdentifier("name", "{{ .parameters.type }}/{{ .setup.client_metadata.account_id }}/{{ .external_name }}"),
 	// SecurityPolicy can be imported using the policy name
-	"aws_opensearchserverless_security_policy": opensearchserverlessSecurityPolicy(),
+	"aws_opensearchserverless_security_policy": config.NameAsIdentifier,
 	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
 	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
 }
@@ -2877,48 +2877,6 @@ func route() config.ExternalName {
 			return fmt.Sprintf("%s_%s", rtb.(string), parameters["destination_prefix_list_id"].(string)), nil
 		}
 		return "", errors.New("destination_cidr_block or destination_ipv6_cidr_block or destination_prefix_list_id has to be given")
-	}
-	return e
-}
-
-func opensearchserverlessAccessPolicy() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, terraformProviderConfig map[string]any) (string, error) {
-		if len(externalName) == 0 {
-			if pName, ok := parameters["name"].(string); ok {
-				return pName, nil
-			}
-			return "stub-accpol-9999", fmt.Errorf("name field is empty")
-		}
-		return externalName, nil
-	}
-	return e
-}
-
-func opensearchserverlessSecurityPolicy() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
-		if len(externalName) == 0 {
-			if pName, ok := parameters["name"].(string); ok {
-				return pName, nil
-			}
-			return "stub-secpol-9999", fmt.Errorf("name field is empty")
-		}
-		return externalName, nil
-	}
-	return e
-}
-
-func opensearchserverlessLifecyclePolicy() config.ExternalName {
-	e := config.IdentifierFromProvider
-	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]any, _ map[string]any) (string, error) {
-		if len(externalName) == 0 {
-			if pName, ok := parameters["name"].(string); ok {
-				return pName, nil
-			}
-			return "stub-lifecyclepol-9999", fmt.Errorf("name field is empty")
-		}
-		return externalName, nil
 	}
 	return e
 }

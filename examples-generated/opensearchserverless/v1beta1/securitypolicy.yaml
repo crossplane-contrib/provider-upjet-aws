@@ -9,7 +9,6 @@ metadata:
 spec:
   forProvider:
     description: encryption security policy for example-collection
-    name: example
     policy: |-
       ${jsonencode({
           Rules = [
