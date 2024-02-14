@@ -8,6 +8,24 @@ metadata:
   name: example-os-lp
 spec:
   forProvider:
-    policy: "{\"Rules\":[{\"MinIndexRetention\":\"81d\",\"Resource\":[\"index/autoparts-inventory/*\"],\"ResourceType\":\"index\"},{\"NoMinIndexRetention\":true,\"Resource\":[\"index/sales/orders*\"],\"ResourceType\":\"index\"}]}"
+    policy: |
+      {
+        "Rules": [
+          {
+            "MinIndexRetention": "81d",
+            "Resource": [
+              "index/autoparts-inventory/*"
+            ],
+            "ResourceType": "index"
+          },
+          {
+            "NoMinIndexRetention": true,
+            "Resource": [
+              "index/sales/orders*"
+            ],
+            "ResourceType": "index"
+          }
+        ]
+      }
     region: us-east-1
     type: retention
