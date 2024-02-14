@@ -3,6 +3,7 @@ kind: Object
 metadata:
   annotations:
     meta.upbound.io/example-id: s3/v1beta1/object
+    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: object
   name: example-object
