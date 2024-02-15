@@ -10,8 +10,9 @@ func Configure(p *config.Provider) {
 		// aws_secretsmanager_secret_policy.
 		config.MoveToStatus(r.TerraformResource, "policy")
 		// TODO: we had better do this for all resources...
-		r.TerraformConfigurationInjector = func(_ map[string]any, params map[string]any) {
+		r.TerraformConfigurationInjector = func(_ map[string]any, params map[string]any) error {
 			params["name_prefix"] = ""
+			return nil
 		}
 	})
 }

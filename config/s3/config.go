@@ -42,7 +42,7 @@ func Configure(p *config.Provider) {
 			"logging", "object_lock_configuration", "policy", "replication_configuration", "request_payer",
 			"server_side_encryption_configuration", "versioning", "website", "arn")
 		r.MetaResource.ExternalName = registry.RandRFC1123Subdomain
-		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) {
+		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) error {
 			params["region"] = jsonMap["region"]
 			// TODO: added to prevent extra reconciliations due to
 			// late-initialization or drift. Has better be implemented
@@ -50,6 +50,7 @@ func Configure(p *config.Provider) {
 			if _, ok := jsonMap["forceDestroy"]; !ok {
 				params["force_destroy"] = false
 			}
+			return nil
 		}
 	})
 
@@ -73,11 +74,12 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"etag", "kms_key_id"},
 		}
-		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) {
+		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) error {
 			// TODO: Has better be implemented via defaulting.
 			if _, ok := jsonMap["acl"]; !ok {
 				params["acl"] = "private"
 			}
+			return nil
 		}
 	})
 

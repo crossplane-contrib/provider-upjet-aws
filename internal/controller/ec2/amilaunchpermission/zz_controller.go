@@ -21,6 +21,7 @@ import (
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	"github.com/crossplane/upjet/pkg/controller/handler"
 	"github.com/crossplane/upjet/pkg/metrics"
+	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
@@ -39,15 +40,15 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	ac := tjcontroller.NewAPICallbacks(mgr, xpresource.ManagedKind(v1beta1.AMILaunchPermission_GroupVersionKind), tjcontroller.WithEventHandler(eventHandler), tjcontroller.WithStatusUpdates(false))
 	opts := []managed.ReconcilerOption{
 		managed.WithExternalConnecter(
-			tjcontroller.NewNoForkAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_ami_launch_permission"],
-				tjcontroller.WithNoForkAsyncLogger(o.Logger),
-				tjcontroller.WithNoForkAsyncConnectorEventHandler(eventHandler),
-				tjcontroller.WithNoForkAsyncCallbackProvider(ac),
-				tjcontroller.WithNoForkAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta1.AMILaunchPermission_GroupVersionKind, mgr, o.PollInterval)),
-				tjcontroller.WithNoForkAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
+			tjcontroller.NewTerraformPluginSDKAsyncConnector(mgr.GetClient(), o.OperationTrackerStore, o.SetupFn, o.Provider.Resources["aws_ami_launch_permission"],
+				tjcontroller.WithTerraformPluginSDKAsyncLogger(o.Logger),
+				tjcontroller.WithTerraformPluginSDKAsyncConnectorEventHandler(eventHandler),
+				tjcontroller.WithTerraformPluginSDKAsyncCallbackProvider(ac),
+				tjcontroller.WithTerraformPluginSDKAsyncMetricRecorder(metrics.NewMetricRecorder(v1beta1.AMILaunchPermission_GroupVersionKind, mgr, o.PollInterval)),
+				tjcontroller.WithTerraformPluginSDKAsyncManagementPolicies(o.Features.Enabled(features.EnableBetaManagementPolicies)))),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name))),
-		managed.WithFinalizer(tjcontroller.NewNoForkFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
+		managed.WithFinalizer(tjcontroller.NewOperationTrackerFinalizer(o.OperationTrackerStore, xpresource.NewAPIFinalizer(mgr.GetClient(), managed.FinalizerName))),
 		managed.WithTimeout(3 * time.Minute),
 		managed.WithInitializers(initializers),
 		managed.WithConnectionPublishers(cps...),
@@ -59,6 +60,17 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	if o.Features.Enabled(features.EnableBetaManagementPolicies) {
 		opts = append(opts, managed.WithManagementPolicies())
 	}
+
+	// register webhooks for the kind v1beta1.AMILaunchPermission
+	// if they're enabled.
+	if o.StartWebhooks {
+		if err := ctrl.NewWebhookManagedBy(mgr).
+			For(&v1beta1.AMILaunchPermission{}).
+			Complete(); err != nil {
+			return errors.Wrap(err, "cannot register webhook for the kind v1beta1.AMILaunchPermission")
+		}
+	}
+
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.AMILaunchPermission_GroupVersionKind), opts...)
 
 	return ctrl.NewControllerManagedBy(mgr).
