@@ -36,13 +36,25 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				return diff, nil
 			}
 
+			resData, err := schema.InternalMap(r.TerraformResource.SchemaMap()).Data(state, diff)
+			if err != nil {
+				return nil, errors.New("could not construct resource data")
+			}
+
+			// do not customize diff if replica field has no change
+			if !resData.HasChange("replica") {
+				return diff, nil
+			}
 			currentReplicaSet, ok := r.TerraformResource.Data(state).Get("replica").(*schema.Set)
 			if !ok {
 				return nil, errors.New("could not read \"replica\" from state")
 			}
+
 			nisReplica, ok := config.Get("replica")
 			if !ok {
-				return nil, errors.New("could not read replica block from config")
+				// config is empty for replica, no need for custom diff logic
+				// this is already handled correctly with the built-in diff logic
+				return diff, nil
 			}
 			desiredReplicaList := nisReplica.([]interface{})
 			// this is the hash implementation of *schema.Set, which is unexported
