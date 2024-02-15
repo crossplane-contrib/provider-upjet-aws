@@ -38,6 +38,13 @@ import (
 	"github.com/upbound/provider-aws/internal/features"
 )
 
+const (
+	webhookTLSCertDirEnvVar = "WEBHOOK_TLS_CERT_DIR"
+	tlsServerCertDirEnvVar  = "TLS_SERVER_CERTS_DIR"
+	certsDirEnvVar          = "CERTS_DIR"
+	tlsServerCertDir        = "/tls/server"
+)
+
 func deprecationAction(flagName string) kingpin.Action {
 	return func(c *kingpin.ParseContext) error {
 		_, err := fmt.Fprintf(os.Stderr, "warning: Command-line flag %q is deprecated and no longer used. It will be removed in a future release. Please remove it from all of your configurations (ControllerConfigs, etc.).\n", flagName)
@@ -60,7 +67,13 @@ func main() {
 		essTLSCertsPath            = app.Flag("ess-tls-cert-dir", "Path of ESS TLS certificates.").Envar("ESS_TLS_CERTS_DIR").String()
 		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
 
-		certsDir = app.Flag("certs-dir", "The directory that contains the server key and certificate.").Default("/tls/server").Envar("CERTS_DIR").String()
+		certsDirSet = false
+		// we record whether the command-line option "--certs-dir" was supplied
+		// in the registered PreAction for the flag.
+		certsDir = app.Flag("certs-dir", "The directory that contains the server key and certificate.").Default(tlsServerCertDir).Envar(certsDirEnvVar).PreAction(func(_ *kingpin.ParseContext) error {
+			certsDirSet = true
+			return nil
+		}).String()
 
 		// now deprecated command-line arguments with the Terraform SDK-based upjet architecture
 		_ = app.Flag("provider-ttl", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] TTL for the native plugin processes before they are replaced. Changing the default may increase memory consumption.").Hidden().Action(deprecationAction("provider-ttl")).Int()
@@ -88,6 +101,28 @@ func main() {
 
 	cfg, err := ctrl.GetConfig()
 	kingpin.FatalIfError(err, "Cannot get API server rest config")
+
+	// Get the TLS certs directory from the environment variables set by
+	// Crossplane if they're available.
+	// In older XP versions we used WEBHOOK_TLS_CERT_DIR, in newer versions
+	// we use TLS_SERVER_CERTS_DIR. If an explicit certs dir is not supplied
+	// via the command-line options, then these environment variables are used
+	// instead.
+	if !certsDirSet {
+		// backwards-compatibility concerns
+		xpCertsDir := os.Getenv(certsDirEnvVar)
+		if xpCertsDir == "" {
+			xpCertsDir = os.Getenv(tlsServerCertDirEnvVar)
+		}
+		if xpCertsDir == "" {
+			xpCertsDir = os.Getenv(webhookTLSCertDirEnvVar)
+		}
+		// we probably don't need this condition but just to be on the
+		// safe side, if we are missing any kingpin machinery details...
+		if xpCertsDir != "" {
+			*certsDir = xpCertsDir
+		}
+	}
 
 	mgr, err := ctrl.NewManager(ratelimiter.LimitRESTConfig(cfg, *maxReconcileRate), ctrl.Options{
 		LeaderElection:   *leaderElection,
