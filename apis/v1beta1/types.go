@@ -77,6 +77,30 @@ type AssumeRoleWithWebIdentityOptions struct {
 	// RoleSessionName is the session name, if you wish to uniquely identify this session.
 	// +optional
 	RoleSessionName string `json:"roleSessionName,omitempty"`
+
+	// TokenConfig is the Web Identity Token config to assume the role.
+	// +optional
+	TokenConfig *WebIdentityTokenConfig `json:"tokenConfig,omitempty"`
+}
+
+// WebIdentityTokenConfig is for configuring the token
+// to be used for Web Identity authentication
+//
+// TODO: can be later expanded to use by inlining v1.CommonCredentialSelectors,
+// Env configuration is intentionally left out to not cause ambiguity
+// with the deprecated direct configuration with environment variables.
+type WebIdentityTokenConfig struct {
+	// Source is the source of the web identity token.
+	// +kubebuilder:validation:Enum=Secret;Filesystem
+	Source xpv1.CredentialsSource `json:"source"`
+	// A SecretRef is a reference to a secret key that contains the credentials
+	// that must be used to obtain the web identity token.
+	// +optional
+	SecretRef *xpv1.SecretKeySelector `json:"secretRef,omitempty"`
+	// Fs is a reference to a filesystem location that contains credentials that
+	// must be used to obtain the web identity token.
+	// +optional
+	Fs *xpv1.FsSelector `json:"fs,omitempty"`
 }
 
 // Upbound defines the options for authenticating using Upbound as an identity
