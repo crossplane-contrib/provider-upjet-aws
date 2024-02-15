@@ -4344,6 +4344,16 @@ func (in *OpensearchserverlessConfigurationInitParameters) DeepCopyInto(out *Ope
 		*out = new(string)
 		**out = **in
 	}
+	if in.CollectionEndpointRef != nil {
+		in, out := &in.CollectionEndpointRef, &out.CollectionEndpointRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CollectionEndpointSelector != nil {
+		in, out := &in.CollectionEndpointSelector, &out.CollectionEndpointSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.IndexName != nil {
 		in, out := &in.IndexName, &out.IndexName
 		*out = new(string)
@@ -4509,6 +4519,16 @@ func (in *OpensearchserverlessConfigurationParameters) DeepCopyInto(out *Opensea
 		in, out := &in.CollectionEndpoint, &out.CollectionEndpoint
 		*out = new(string)
 		**out = **in
+	}
+	if in.CollectionEndpointRef != nil {
+		in, out := &in.CollectionEndpointRef, &out.CollectionEndpointRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CollectionEndpointSelector != nil {
+		in, out := &in.CollectionEndpointSelector, &out.CollectionEndpointSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IndexName != nil {
 		in, out := &in.IndexName, &out.IndexName

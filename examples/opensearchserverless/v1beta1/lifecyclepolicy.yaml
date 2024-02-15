@@ -1,0 +1,31 @@
+apiVersion: opensearchserverless.aws.upbound.io/v1beta1
+kind: LifecyclePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/lifecyclepolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-os-lp
+spec:
+  forProvider:
+    policy: |
+      {
+        "Rules": [
+          {
+            "MinIndexRetention": "81d",
+            "Resource": [
+              "index/autoparts-inventory/*"
+            ],
+            "ResourceType": "index"
+          },
+          {
+            "NoMinIndexRetention": true,
+            "Resource": [
+              "index/sales/orders*"
+            ],
+            "ResourceType": "index"
+          }
+        ]
+      }
+    region: us-east-1
+    type: retention

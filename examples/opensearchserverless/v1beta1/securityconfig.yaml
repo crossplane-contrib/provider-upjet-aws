@@ -1,0 +1,35 @@
+apiVersion: opensearchserverless.aws.upbound.io/v1beta1
+kind: SecurityConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/securityconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-os-sc
+spec:
+  forProvider:
+    region: us-east-1
+    samlOptions:
+      metadata: |
+        <?xml version="1.0"?>
+        <md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" validUntil="2034-02-11T09:05:03Z" cacheDuration="PT1708074303S" entityID="example-entity">
+          <md:IDPSSODescriptor WantAuthnRequestsSigned="false" protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+            <md:KeyDescriptor use="signing">
+              <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                  <ds:X509Certificate>MIIDezCCAmOgAwIBAgIUWxbJ2eoILVDDj7tucPTVl6fxqhIwDQYJKoZIhvcNAQELBQAwNzELMAkGA1UEBhMCVFIxKDAmBgNVBAMMH3Byb3ZpZGVyLWF3cy51cGJvdW5kLXN5c3RlbS5zdmMwHhcNMjQwMjA5MDkwNDQyWhcNMjUwMjA4MDkwNDQyWjA3MQswCQYDVQQGEwJUUjEoMCYGA1UEAwwfcHJvdmlkZXItYXdzLnVwYm91bmQtc3lzdGVtLnN2YzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANxLbvqITbFJM2vf1XqSJTffymx9oejUe2AAhP7BCLw4Lc46X8c9xvHiU+HQlaIZaRdzffUdiv2OBeDe4ojVrcQDlzaUCdRJTTi8l2PScla4JGFBCIg727fdbhf4tMchXzpPtxJY2JhJPkkB0G1Q/ly/AjXIeTkqnngOL6x+9zYFFDfBhPMSNZoBtuKPPM4rTWQL+k4+r7cDVAY5Mr9DhjhEJM4ZP0GbOmSEaQmDSGe3mFxiMaAnE1laf1Pb1MbfPCJ5fhbs20oTQeznnWr8Jxam5245LN/joilzVs/lePWM8I1+tY4+W1gkfGqhSEJpUDhYPobtcoHoqu/cl1o1YXkCAwEAAaN/MH0wHQYDVR0OBBYEFG3W1JJviPwnGNl1Uwu8NsLsHSp6MB8GA1UdIwQYMBaAFG3W1JJviPwnGNl1Uwu8NsLsHSp6MA8GA1UdEwEB/wQFMAMBAf8wKgYDVR0RBCMwIYIfcHJvdmlkZXItYXdzLnVwYm91bmQtc3lzdGVtLnN2YzANBgkqhkiG9w0BAQsFAAOCAQEAGph/2wqfF3FVh0Esf3Mr1zWRbVL14QmWkd9uzXjePKnQNgH8EdftD1XUk66XthpPMfbuWZJ8wpZwETEkoSPHkm88uHQVpjUq2X/fP7KGx3x7Q3a6sZriBjrM4nEoaL6PaKrJIBOv07ul5V88XE0GYQsXzDw1h38yWJ54sMbx6THTPELn7LMPPIwSMJ2t2KmJTPYbtnmG+Ii7VqVQLha+z0eLpaM7vBsNXGrrZTzVRPIt6JnardzDWdbZoJ0gBVof3XL0cI1jef2XhakN1+JtYPTaXkV4Lwa5i7zS9pIKnzwGPXHFOEftvFcc+Yqluj1+RdYJUsIiiKSHIp6bA80qfA==</ds:X509Certificate>
+                </ds:X509Data>
+              </ds:KeyInfo>
+            </md:KeyDescriptor>
+            <md:KeyDescriptor use="encryption">
+              <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                  <ds:X509Certificate>MIIDezCCAmOgAwIBAgIUWxbJ2eoILVDDj7tucPTVl6fxqhIwDQYJKoZIhvcNAQELBQAwNzELMAkGA1UEBhMCVFIxKDAmBgNVBAMMH3Byb3ZpZGVyLWF3cy51cGJvdW5kLXN5c3RlbS5zdmMwHhcNMjQwMjA5MDkwNDQyWhcNMjUwMjA4MDkwNDQyWjA3MQswCQYDVQQGEwJUUjEoMCYGA1UEAwwfcHJvdmlkZXItYXdzLnVwYm91bmQtc3lzdGVtLnN2YzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBANxLbvqITbFJM2vf1XqSJTffymx9oejUe2AAhP7BCLw4Lc46X8c9xvHiU+HQlaIZaRdzffUdiv2OBeDe4ojVrcQDlzaUCdRJTTi8l2PScla4JGFBCIg727fdbhf4tMchXzpPtxJY2JhJPkkB0G1Q/ly/AjXIeTkqnngOL6x+9zYFFDfBhPMSNZoBtuKPPM4rTWQL+k4+r7cDVAY5Mr9DhjhEJM4ZP0GbOmSEaQmDSGe3mFxiMaAnE1laf1Pb1MbfPCJ5fhbs20oTQeznnWr8Jxam5245LN/joilzVs/lePWM8I1+tY4+W1gkfGqhSEJpUDhYPobtcoHoqu/cl1o1YXkCAwEAAaN/MH0wHQYDVR0OBBYEFG3W1JJviPwnGNl1Uwu8NsLsHSp6MB8GA1UdIwQYMBaAFG3W1JJviPwnGNl1Uwu8NsLsHSp6MA8GA1UdEwEB/wQFMAMBAf8wKgYDVR0RBCMwIYIfcHJvdmlkZXItYXdzLnVwYm91bmQtc3lzdGVtLnN2YzANBgkqhkiG9w0BAQsFAAOCAQEAGph/2wqfF3FVh0Esf3Mr1zWRbVL14QmWkd9uzXjePKnQNgH8EdftD1XUk66XthpPMfbuWZJ8wpZwETEkoSPHkm88uHQVpjUq2X/fP7KGx3x7Q3a6sZriBjrM4nEoaL6PaKrJIBOv07ul5V88XE0GYQsXzDw1h38yWJ54sMbx6THTPELn7LMPPIwSMJ2t2KmJTPYbtnmG+Ii7VqVQLha+z0eLpaM7vBsNXGrrZTzVRPIt6JnardzDWdbZoJ0gBVof3XL0cI1jef2XhakN1+JtYPTaXkV4Lwa5i7zS9pIKnzwGPXHFOEftvFcc+Yqluj1+RdYJUsIiiKSHIp6bA80qfA==</ds:X509Certificate>
+                </ds:X509Data>
+              </ds:KeyInfo>
+            </md:KeyDescriptor>
+            <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+            <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://example.com"/>
+          </md:IDPSSODescriptor>
+        </md:EntityDescriptor>
+    type: saml

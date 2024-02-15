@@ -84,6 +84,7 @@ import (
 	"github.com/upbound/provider-aws/config/networkfirewall"
 	"github.com/upbound/provider-aws/config/networkmanager"
 	"github.com/upbound/provider-aws/config/opensearch"
+	"github.com/upbound/provider-aws/config/opensearchserverless"
 	"github.com/upbound/provider-aws/config/opsworks"
 	"github.com/upbound/provider-aws/config/organization"
 	"github.com/upbound/provider-aws/config/qldb"
@@ -272,6 +273,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		neptune.Configure,
 		networkfirewall.Configure,
 		opensearch.Configure,
+		opensearchserverless.Configure,
 		ram.Configure,
 		rds.Configure,
 		redshift.Configure,

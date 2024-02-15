@@ -47,6 +47,21 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	//
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
+
+	// opensearchserverless
+	//
+	// AccessPolicy can be imported using the policy name
+	"aws_opensearchserverless_access_policy": config.NameAsIdentifier,
+	// Collection can be imported using the AWS-assigned collection ID. i.e. ch9rq91uv4yd8rff1f39
+	"aws_opensearchserverless_collection": opensearchserverlessCollection(),
+	// LifecyclePolicy can be imported using the policy name
+	"aws_opensearchserverless_lifecycle_policy": config.NameAsIdentifier,
+	//  SecurityConfig can be imported using the AWS-assigned security config ID
+	"aws_opensearchserverless_security_config": config.TemplatedStringAsIdentifier("name", "{{ .parameters.type }}/{{ .setup.client_metadata.account_id }}/{{ .external_name }}"),
+	// SecurityPolicy can be imported using the policy name
+	"aws_opensearchserverless_security_policy": config.NameAsIdentifier,
+	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
+	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
 }
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations
@@ -2862,6 +2877,30 @@ func route() config.ExternalName {
 			return fmt.Sprintf("%s_%s", rtb.(string), parameters["destination_prefix_list_id"].(string)), nil
 		}
 		return "", errors.New("destination_cidr_block or destination_ipv6_cidr_block or destination_prefix_list_id has to be given")
+	}
+	return e
+}
+
+func opensearchserverlessVpcEndpoint() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		// must match regex vpce-[0-9a-z]
+		if len(externalName) == 0 {
+			return "vpce-stubvpcendpoint999999", nil
+		}
+		return externalName, nil
+	}
+	return e
+}
+
+func opensearchserverlessCollection() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		// [a-z0-9]{3,40}
+		if len(externalName) == 0 {
+			return "stubcollection9999", nil
+		}
+		return externalName, nil
 	}
 	return e
 }

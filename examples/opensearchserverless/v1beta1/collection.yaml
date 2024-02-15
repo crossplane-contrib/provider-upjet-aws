@@ -1,0 +1,40 @@
+apiVersion: opensearchserverless.aws.upbound.io/v1beta1
+kind: Collection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/collection
+    crossplane.io/external-name: e6k5887xvta2dt4ekk58
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-os-co
+spec:
+  forProvider:
+    name: example-collection
+    region: us-east-1
+
+---
+
+apiVersion: opensearchserverless.aws.upbound.io/v1beta1
+kind: SecurityPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: opensearchserverless/v1beta1/collection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-os-co
+spec:
+  forProvider:
+    policy: |
+      {
+        "AWSOwnedKey": true,
+        "Rules": [
+          {
+            "Resource": [
+              "collection/example-collection"
+            ],
+            "ResourceType": "collection"
+          }
+        ]
+      }
+    region: us-east-1
+    type: encryption

@@ -2037,7 +2037,17 @@ type OpensearchserverlessConfigurationInitParameters struct {
 	CloudwatchLoggingOptions []OpensearchserverlessConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearchserverless/v1beta1.Collection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("collection_endpoint",true)
 	CollectionEndpoint *string `json:"collectionEndpoint,omitempty" tf:"collection_endpoint,omitempty"`
+
+	// Reference to a Collection in opensearchserverless to populate collectionEndpoint.
+	// +kubebuilder:validation:Optional
+	CollectionEndpointRef *v1.Reference `json:"collectionEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a Collection in opensearchserverless to populate collectionEndpoint.
+	// +kubebuilder:validation:Optional
+	CollectionEndpointSelector *v1.Selector `json:"collectionEndpointSelector,omitempty" tf:"-"`
 
 	// The Elasticsearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
@@ -2122,8 +2132,18 @@ type OpensearchserverlessConfigurationParameters struct {
 	CloudwatchLoggingOptions []OpensearchserverlessConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearchserverless/v1beta1.Collection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("collection_endpoint",true)
 	// +kubebuilder:validation:Optional
-	CollectionEndpoint *string `json:"collectionEndpoint" tf:"collection_endpoint,omitempty"`
+	CollectionEndpoint *string `json:"collectionEndpoint,omitempty" tf:"collection_endpoint,omitempty"`
+
+	// Reference to a Collection in opensearchserverless to populate collectionEndpoint.
+	// +kubebuilder:validation:Optional
+	CollectionEndpointRef *v1.Reference `json:"collectionEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a Collection in opensearchserverless to populate collectionEndpoint.
+	// +kubebuilder:validation:Optional
+	CollectionEndpointSelector *v1.Selector `json:"collectionEndpointSelector,omitempty" tf:"-"`
 
 	// The Elasticsearch index name.
 	// +kubebuilder:validation:Optional
