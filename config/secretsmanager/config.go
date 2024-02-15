@@ -35,7 +35,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				return diff, nil
 			}
 
-			resData, err := schema.InternalMap(r.TerraformResource.SchemaMap()).Data(state, diff)
+			resData, err := schema.InternalMap(r.TerraformResource.Schema).Data(state, diff)
 			if err != nil {
 				return nil, errors.New("could not construct resource data")
 			}
