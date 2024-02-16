@@ -76,6 +76,9 @@ func Configure(p *config.Provider) { // nolint:gocyclo
 					}
 				}
 			}
+			if diff.Attributes != nil {
+				delete(diff.Attributes, "firewall_status.#")
+			}
 			return diff, nil
 		}
 	})
