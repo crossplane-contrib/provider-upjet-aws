@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.13.0
+    controller-gen.kubebuilder.io/version: v0.14.0
   name: amis.ec2.aws.upbound.io
 spec:
   group: ec2.aws.upbound.io
@@ -38,14 +38,19 @@ spec:
           Amazon Machine Image (AMI).
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
             type: string
           metadata:
             type: object
@@ -54,13 +59,14 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: 'DeletionPolicy specifies what will happen to the underlying
-                  external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicies field in a future release. Currently,
-                  both could be set independently and non-default values would be
-                  honored if the feature flag is enabled. See the design doc for more
-                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
                 enum:
                 - Orphan
                 - Delete
@@ -84,15 +90,15 @@ spec:
                     description: Longer, human-readable description for the AMI.
                     type: string
                   ebsBlockDevice:
-                    description: Nested block describing an EBS block device that
-                      should be attached to created instances. The structure of this
-                      block is described below.
+                    description: |-
+                      Nested block describing an EBS block device that should be
+                      attached to created instances. The structure of this block is described below.
                     items:
                       properties:
                         deleteOnTermination:
-                          description: Boolean controlling whether the EBS volumes
-                            created to support each created instance will be deleted
-                            once that instance is terminated.
+                          description: |-
+                            Boolean controlling whether the EBS volumes created to
+                            support each created instance will be deleted once that instance is terminated.
                           type: boolean
                         deviceName:
                           description: Path at which the device is exposed to created
@@ -103,17 +109,18 @@ spec:
                             volumes will be encrypted. Can't be used with snapshot_id.
                           type: boolean
                         iops:
-                          description: Number of I/O operations per second the created
-                            volumes will support.
+                          description: |-
+                            Number of I/O operations per second the
+                            created volumes will support.
                           type: number
                         outpostArn:
                           description: ARN of the Outpost on which the snapshot is
                             stored.
                           type: string
                         snapshotId:
-                          description: ID of an EBS snapshot that will be used to
-                            initialize the created EBS volumes. If set, the volume_size
-                            attribute must be at least as large as the referenced
+                          description: |-
+                            ID of an EBS snapshot that will be used to initialize the created
+                            EBS volumes. If set, the volume_size attribute must be at least as large as the referenced
                             snapshot.
                           type: string
                         snapshotIdRef:
@@ -127,22 +134,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -155,9 +161,9 @@ spec:
                           description: Selector for a EBSSnapshot to populate snapshotId.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -170,22 +176,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -197,9 +202,10 @@ spec:
                             MiB/s. Only valid for volume_type of gp3.
                           type: number
                         volumeSize:
-                          description: Size of created volumes in GiB. If snapshot_id
-                            is set and volume_size is omitted then the volume will
-                            have the same size as the selected snapshot.
+                          description: |-
+                            Size of created volumes in GiB.
+                            If snapshot_id is set and volume_size is omitted then the volume will have the same size
+                            as the selected snapshot.
                           type: number
                         volumeType:
                           description: 'Type of EBS volume to create. Can be standard,
@@ -212,9 +218,9 @@ spec:
                       Defaults to false.
                     type: boolean
                   ephemeralBlockDevice:
-                    description: Nested block describing an ephemeral block device
-                      that should be attached to created instances. The structure
-                      of this block is described below.
+                    description: |-
+                      Nested block describing an ephemeral block device that
+                      should be attached to created instances. The structure of this block is described below.
                     items:
                       properties:
                         deviceName:
@@ -222,16 +228,16 @@ spec:
                             instances.
                           type: string
                         virtualName:
-                          description: Name for the ephemeral device, of the form
-                            "ephemeralN" where N is a volume number starting from
-                            zero.
+                          description: |-
+                            Name for the ephemeral device, of the form "ephemeralN" where
+                            N is a volume number starting from zero.
                           type: string
                       type: object
                     type: array
                   imageLocation:
-                    description: Path to an S3 object containing an image manifest,
-                      e.g., created by the ec2-upload-bundle command in the EC2 command
-                      line tools.
+                    description: |-
+                      Path to an S3 object containing an image manifest, e.g., created
+                      by the ec2-upload-bundle command in the EC2 command line tools.
                     type: string
                   imdsSupport:
                     description: If EC2 instances started from this image should require
@@ -240,15 +246,17 @@ spec:
                       metadata options for new instances.
                     type: string
                   kernelId:
-                    description: ID of the kernel image (AKI) that will be used as
-                      the paravirtual kernel in created instances.
+                    description: |-
+                      ID of the kernel image (AKI) that will be used as the paravirtual
+                      kernel in created instances.
                     type: string
                   name:
                     description: Region-unique name for the AMI.
                     type: string
                   ramdiskId:
-                    description: ID of an initrd image (ARI) that will be used when
-                      booting the created instances.
+                    description: |-
+                      ID of an initrd image (ARI) that will be used when booting the
+                      created instances.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -259,9 +267,9 @@ spec:
                       or /dev/xvda).
                     type: string
                   sriovNetSupport:
-                    description: When set to "simple" (the default), enables enhanced
-                      networking for created instances. No other value is supported
-                      at this time.
+                    description: |-
+                      When set to "simple" (the default), enables enhanced networking
+                      for created instances. No other value is supported at this time.
                     type: string
                   tags:
                     additionalProperties:
@@ -275,25 +283,26 @@ spec:
                       Amazon Elastic Compute Cloud User Guide.
                     type: string
                   virtualizationType:
-                    description: Keyword to choose what virtualization mode created
-                      instances will use. Can be either "paravirtual" (the default)
-                      or "hvm". The choice of virtualization type changes the set
-                      of further arguments that are required, as described below.
+                    description: |-
+                      Keyword to choose what virtualization mode created instances
+                      will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type
+                      changes the set of further arguments that are required, as described below.
                     type: string
                 required:
                 - region
                 type: object
               initProvider:
-                description: THIS IS A BETA FIELD. It will be honored unless the Management
-                  Policies feature flag is disabled. InitProvider holds the same fields
-                  as ForProvider, with the exception of Identifier and other resource
-                  reference fields. The fields that are in InitProvider are merged
-                  into ForProvider when the resource is created. The same fields are
-                  also added to the terraform ignore_changes hook, to avoid updating
-                  them after creation. This is useful for fields that are required
-                  on creation, but we do not desire to update them after creation,
-                  for example because of an external controller is managing them,
-                  like an autoscaler.
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
                 properties:
                   architecture:
                     description: Machine architecture for created instances. Defaults
@@ -312,15 +321,15 @@ spec:
                     description: Longer, human-readable description for the AMI.
                     type: string
                   ebsBlockDevice:
-                    description: Nested block describing an EBS block device that
-                      should be attached to created instances. The structure of this
-                      block is described below.
+                    description: |-
+                      Nested block describing an EBS block device that should be
+                      attached to created instances. The structure of this block is described below.
                     items:
                       properties:
                         deleteOnTermination:
-                          description: Boolean controlling whether the EBS volumes
-                            created to support each created instance will be deleted
-                            once that instance is terminated.
+                          description: |-
+                            Boolean controlling whether the EBS volumes created to
+                            support each created instance will be deleted once that instance is terminated.
                           type: boolean
                         deviceName:
                           description: Path at which the device is exposed to created
@@ -331,17 +340,18 @@ spec:
                             volumes will be encrypted. Can't be used with snapshot_id.
                           type: boolean
                         iops:
-                          description: Number of I/O operations per second the created
-                            volumes will support.
+                          description: |-
+                            Number of I/O operations per second the
+                            created volumes will support.
                           type: number
                         outpostArn:
                           description: ARN of the Outpost on which the snapshot is
                             stored.
                           type: string
                         snapshotId:
-                          description: ID of an EBS snapshot that will be used to
-                            initialize the created EBS volumes. If set, the volume_size
-                            attribute must be at least as large as the referenced
+                          description: |-
+                            ID of an EBS snapshot that will be used to initialize the created
+                            EBS volumes. If set, the volume_size attribute must be at least as large as the referenced
                             snapshot.
                           type: string
                         snapshotIdRef:
@@ -355,22 +365,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -383,9 +392,9 @@ spec:
                           description: Selector for a EBSSnapshot to populate snapshotId.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -398,22 +407,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -425,9 +433,10 @@ spec:
                             MiB/s. Only valid for volume_type of gp3.
                           type: number
                         volumeSize:
-                          description: Size of created volumes in GiB. If snapshot_id
-                            is set and volume_size is omitted then the volume will
-                            have the same size as the selected snapshot.
+                          description: |-
+                            Size of created volumes in GiB.
+                            If snapshot_id is set and volume_size is omitted then the volume will have the same size
+                            as the selected snapshot.
                           type: number
                         volumeType:
                           description: 'Type of EBS volume to create. Can be standard,
@@ -440,9 +449,9 @@ spec:
                       Defaults to false.
                     type: boolean
                   ephemeralBlockDevice:
-                    description: Nested block describing an ephemeral block device
-                      that should be attached to created instances. The structure
-                      of this block is described below.
+                    description: |-
+                      Nested block describing an ephemeral block device that
+                      should be attached to created instances. The structure of this block is described below.
                     items:
                       properties:
                         deviceName:
@@ -450,16 +459,16 @@ spec:
                             instances.
                           type: string
                         virtualName:
-                          description: Name for the ephemeral device, of the form
-                            "ephemeralN" where N is a volume number starting from
-                            zero.
+                          description: |-
+                            Name for the ephemeral device, of the form "ephemeralN" where
+                            N is a volume number starting from zero.
                           type: string
                       type: object
                     type: array
                   imageLocation:
-                    description: Path to an S3 object containing an image manifest,
-                      e.g., created by the ec2-upload-bundle command in the EC2 command
-                      line tools.
+                    description: |-
+                      Path to an S3 object containing an image manifest, e.g., created
+                      by the ec2-upload-bundle command in the EC2 command line tools.
                     type: string
                   imdsSupport:
                     description: If EC2 instances started from this image should require
@@ -468,24 +477,26 @@ spec:
                       metadata options for new instances.
                     type: string
                   kernelId:
-                    description: ID of the kernel image (AKI) that will be used as
-                      the paravirtual kernel in created instances.
+                    description: |-
+                      ID of the kernel image (AKI) that will be used as the paravirtual
+                      kernel in created instances.
                     type: string
                   name:
                     description: Region-unique name for the AMI.
                     type: string
                   ramdiskId:
-                    description: ID of an initrd image (ARI) that will be used when
-                      booting the created instances.
+                    description: |-
+                      ID of an initrd image (ARI) that will be used when booting the
+                      created instances.
                     type: string
                   rootDeviceName:
                     description: Name of the root device (for example, /dev/sda1,
                       or /dev/xvda).
                     type: string
                   sriovNetSupport:
-                    description: When set to "simple" (the default), enables enhanced
-                      networking for created instances. No other value is supported
-                      at this time.
+                    description: |-
+                      When set to "simple" (the default), enables enhanced networking
+                      for created instances. No other value is supported at this time.
                     type: string
                   tags:
                     additionalProperties:
@@ -499,28 +510,30 @@ spec:
                       Amazon Elastic Compute Cloud User Guide.
                     type: string
                   virtualizationType:
-                    description: Keyword to choose what virtualization mode created
-                      instances will use. Can be either "paravirtual" (the default)
-                      or "hvm". The choice of virtualization type changes the set
-                      of further arguments that are required, as described below.
+                    description: |-
+                      Keyword to choose what virtualization mode created instances
+                      will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type
+                      changes the set of further arguments that are required, as described below.
                     type: string
                 type: object
               managementPolicies:
                 default:
                 - '*'
-                description: 'THIS IS A BETA FIELD. It is on by default but can be
-                  opted out through a Crossplane feature flag. ManagementPolicies
-                  specify the array of actions Crossplane is allowed to take on the
-                  managed and external resources. This field is planned to replace
-                  the DeletionPolicy field in a future release. Currently, both could
-                  be set independently and non-default values would be honored if
-                  the feature flag is enabled. If both are custom, the DeletionPolicy
-                  field will be ignored. See the design doc for more information:
-                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
-                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
                 items:
-                  description: A ManagementAction represents an action that the Crossplane
-                    controllers can take on an external resource.
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
                   enum:
                   - Observe
                   - Create
@@ -533,9 +546,10 @@ spec:
               providerConfigRef:
                 default:
                   name: default
-                description: ProviderConfigReference specifies how the provider that
-                  will be used to create, observe, update, and delete this managed
-                  resource should be configured.
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -545,21 +559,21 @@ spec:
                     properties:
                       resolution:
                         default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
                         enum:
                         - Required
                         - Optional
                         type: string
                       resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
                         enum:
                         - Always
                         - IfNotPresent
@@ -569,17 +583,19 @@ spec:
                 - name
                 type: object
               publishConnectionDetailsTo:
-                description: PublishConnectionDetailsTo specifies the connection secret
-                  config which contains a name, metadata and a reference to secret
-                  store config to which any connection details for this managed resource
-                  should be written. Connection details frequently include the endpoint,
-                  username, and password required to connect to the managed resource.
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
                 properties:
                   configRef:
                     default:
                       name: default
-                    description: SecretStoreConfigRef specifies which secret store
-                      config should be used for this ConnectionSecret.
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -589,21 +605,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -618,21 +634,22 @@ spec:
                       annotations:
                         additionalProperties:
                           type: string
-                        description: Annotations are the annotations to be added to
-                          connection secret. - For Kubernetes secrets, this will be
-                          used as "metadata.annotations". - It is up to Secret Store
-                          implementation for others store types.
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       labels:
                         additionalProperties:
                           type: string
-                        description: Labels are the labels/tags to be added to connection
-                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
-                          - It is up to Secret Store implementation for others store
-                          types.
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       type:
-                        description: Type is the SecretType for the connection secret.
+                        description: |-
+                          Type is the SecretType for the connection secret.
                           - Only valid for Kubernetes Secret Stores.
                         type: string
                     type: object
@@ -643,14 +660,15 @@ spec:
                 - name
                 type: object
               writeConnectionSecretToRef:
-                description: WriteConnectionSecretToReference specifies the namespace
-                  and name of a Secret to which any connection details for this managed
-                  resource should be written. Connection details frequently include
-                  the endpoint, username, and password required to connect to the
-                  managed resource. This field is planned to be replaced in a future
-                  release in favor of PublishConnectionDetailsTo. Currently, both
-                  could be set independently and connection details would be published
-                  to both without affecting each other.
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
                 properties:
                   name:
                     description: Name of the secret.
@@ -695,15 +713,15 @@ spec:
                     description: Longer, human-readable description for the AMI.
                     type: string
                   ebsBlockDevice:
-                    description: Nested block describing an EBS block device that
-                      should be attached to created instances. The structure of this
-                      block is described below.
+                    description: |-
+                      Nested block describing an EBS block device that should be
+                      attached to created instances. The structure of this block is described below.
                     items:
                       properties:
                         deleteOnTermination:
-                          description: Boolean controlling whether the EBS volumes
-                            created to support each created instance will be deleted
-                            once that instance is terminated.
+                          description: |-
+                            Boolean controlling whether the EBS volumes created to
+                            support each created instance will be deleted once that instance is terminated.
                           type: boolean
                         deviceName:
                           description: Path at which the device is exposed to created
@@ -714,17 +732,18 @@ spec:
                             volumes will be encrypted. Can't be used with snapshot_id.
                           type: boolean
                         iops:
-                          description: Number of I/O operations per second the created
-                            volumes will support.
+                          description: |-
+                            Number of I/O operations per second the
+                            created volumes will support.
                           type: number
                         outpostArn:
                           description: ARN of the Outpost on which the snapshot is
                             stored.
                           type: string
                         snapshotId:
-                          description: ID of an EBS snapshot that will be used to
-                            initialize the created EBS volumes. If set, the volume_size
-                            attribute must be at least as large as the referenced
+                          description: |-
+                            ID of an EBS snapshot that will be used to initialize the created
+                            EBS volumes. If set, the volume_size attribute must be at least as large as the referenced
                             snapshot.
                           type: string
                         throughput:
@@ -732,9 +751,10 @@ spec:
                             MiB/s. Only valid for volume_type of gp3.
                           type: number
                         volumeSize:
-                          description: Size of created volumes in GiB. If snapshot_id
-                            is set and volume_size is omitted then the volume will
-                            have the same size as the selected snapshot.
+                          description: |-
+                            Size of created volumes in GiB.
+                            If snapshot_id is set and volume_size is omitted then the volume will have the same size
+                            as the selected snapshot.
                           type: number
                         volumeType:
                           description: 'Type of EBS volume to create. Can be standard,
@@ -747,9 +767,9 @@ spec:
                       Defaults to false.
                     type: boolean
                   ephemeralBlockDevice:
-                    description: Nested block describing an ephemeral block device
-                      that should be attached to created instances. The structure
-                      of this block is described below.
+                    description: |-
+                      Nested block describing an ephemeral block device that
+                      should be attached to created instances. The structure of this block is described below.
                     items:
                       properties:
                         deviceName:
@@ -757,9 +777,9 @@ spec:
                             instances.
                           type: string
                         virtualName:
-                          description: Name for the ephemeral device, of the form
-                            "ephemeralN" where N is a volume number starting from
-                            zero.
+                          description: |-
+                            Name for the ephemeral device, of the form "ephemeralN" where
+                            N is a volume number starting from zero.
                           type: string
                       type: object
                     type: array
@@ -770,9 +790,9 @@ spec:
                     description: ID of the created AMI.
                     type: string
                   imageLocation:
-                    description: Path to an S3 object containing an image manifest,
-                      e.g., created by the ec2-upload-bundle command in the EC2 command
-                      line tools.
+                    description: |-
+                      Path to an S3 object containing an image manifest, e.g., created
+                      by the ec2-upload-bundle command in the EC2 command line tools.
                     type: string
                   imageOwnerAlias:
                     description: AWS account alias (for example, amazon, self) or
@@ -788,8 +808,9 @@ spec:
                       metadata options for new instances.
                     type: string
                   kernelId:
-                    description: ID of the kernel image (AKI) that will be used as
-                      the paravirtual kernel in created instances.
+                    description: |-
+                      ID of the kernel image (AKI) that will be used as the paravirtual
+                      kernel in created instances.
                     type: string
                   manageEbsSnapshots:
                     type: boolean
@@ -811,8 +832,9 @@ spec:
                     description: Whether the image has public launch permissions.
                     type: boolean
                   ramdiskId:
-                    description: ID of an initrd image (ARI) that will be used when
-                      booting the created instances.
+                    description: |-
+                      ID of an initrd image (ARI) that will be used when booting the
+                      created instances.
                     type: string
                   rootDeviceName:
                     description: Name of the root device (for example, /dev/sda1,
@@ -822,9 +844,9 @@ spec:
                     description: Snapshot ID for the root volume (for EBS-backed AMIs)
                     type: string
                   sriovNetSupport:
-                    description: When set to "simple" (the default), enables enhanced
-                      networking for created instances. No other value is supported
-                      at this time.
+                    description: |-
+                      When set to "simple" (the default), enables enhanced networking
+                      for created instances. No other value is supported at this time.
                     type: string
                   tags:
                     additionalProperties:
@@ -849,10 +871,10 @@ spec:
                       code that is associated with the AMI.
                     type: string
                   virtualizationType:
-                    description: Keyword to choose what virtualization mode created
-                      instances will use. Can be either "paravirtual" (the default)
-                      or "hvm". The choice of virtualization type changes the set
-                      of further arguments that are required, as described below.
+                    description: |-
+                      Keyword to choose what virtualization mode created instances
+                      will use. Can be either "paravirtual" (the default) or "hvm". The choice of virtualization type
+                      changes the set of further arguments that are required, as described below.
                     type: string
                 type: object
               conditions:
@@ -861,13 +883,15 @@ spec:
                   description: A Condition that may apply to a resource.
                   properties:
                     lastTransitionTime:
-                      description: LastTransitionTime is the last time this condition
-                        transitioned from one status to another.
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
                       format: date-time
                       type: string
                     message:
-                      description: A Message containing details about this condition's
-                        last transition from one status to another, if any.
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
                       type: string
                     reason:
                       description: A Reason for this condition's last transition from
@@ -878,8 +902,9 @@ spec:
                         False, or Unknown?
                       type: string
                     type:
-                      description: Type of this condition. At most one of each condition
-                        type may apply to a resource at any point in time.
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
                       type: string
                   required:
                   - lastTransitionTime

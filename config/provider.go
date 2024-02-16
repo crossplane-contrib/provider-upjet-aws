@@ -187,7 +187,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		config.WithShortName("aws"),
 		config.WithRootGroup("aws.upbound.io"),
 		config.WithIncludeList(CLIReconciledResourceList()),
-		config.WithNoForkIncludeList(NoForkResourceList()),
+		config.WithTerraformPluginSDKIncludeList(NoForkResourceList()),
 		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
 		config.WithSkipList(skipList),
 		config.WithFeaturesPackage("internal/features"),

@@ -4,11 +4,14 @@ metadata:
   annotations:
     uptest.upbound.io/timeout: "3600"
     meta.upbound.io/example-id: networkfirewall/v1beta1/firewall
+    uptest.upbound.io/update-parameter: '{"tags":{"update-test-tag":"val"}}'
   labels:
     testing.upbound.io/example-name: example
   name: firewallname
 spec:
   forProvider:
+    firewallPolicyChangeProtection: true
+    subnetChangeProtection: true
     firewallPolicyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example

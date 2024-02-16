@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.13.0
+    controller-gen.kubebuilder.io/version: v0.14.0
   name: scalingplans.autoscalingplans.aws.upbound.io
 spec:
   group: autoscalingplans.aws.upbound.io
@@ -38,14 +38,19 @@ spec:
           AWS Auto Scaling scaling plan.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
             type: string
           metadata:
             type: object
@@ -54,13 +59,14 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: 'DeletionPolicy specifies what will happen to the underlying
-                  external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicies field in a future release. Currently,
-                  both could be set independently and non-default values would be
-                  honored if the feature flag is enabled. See the design doc for more
-                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
                 enum:
                 - Orphan
                 - Delete
@@ -106,11 +112,9 @@ spec:
                     items:
                       properties:
                         customizedLoadMetricSpecification:
-                          description: Customized load metric to use for predictive
-                            scaling. You must specify either customized_load_metric_specification
-                            or predefined_load_metric_specification when configuring
-                            predictive scaling. More details can be found in the AWS
-                            Auto Scaling API Reference.
+                          description: |-
+                            Customized load metric to use for predictive scaling. You must specify either customized_load_metric_specification or predefined_load_metric_specification when configuring predictive scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               dimensions:
@@ -147,11 +151,9 @@ spec:
                           description: Minimum capacity of the resource.
                           type: number
                         predefinedLoadMetricSpecification:
-                          description: Predefined load metric to use for predictive
-                            scaling. You must specify either predefined_load_metric_specification
-                            or customized_load_metric_specification when configuring
-                            predictive scaling. More details can be found in the AWS
-                            Auto Scaling API Reference.
+                          description: |-
+                            Predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               predefinedLoadMetricType:
@@ -165,10 +167,9 @@ spec:
                             type: object
                           type: array
                         predictiveScalingMaxCapacityBehavior:
-                          description: 'Defines the behavior that should be applied
-                            if the forecast capacity approaches or exceeds the maximum
-                            capacity specified for the resource. Valid values: SetForecastCapacityToMaxCapacity,
-                            SetMaxCapacityAboveForecastCapacity, SetMaxCapacityToForecastCapacity.'
+                          description: |-
+                            Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity specified for the resource.
+                            Valid values: SetForecastCapacityToMaxCapacity, SetMaxCapacityAboveForecastCapacity, SetMaxCapacityToForecastCapacity.
                           type: string
                         predictiveScalingMaxCapacityBuffer:
                           description: Size of the capacity buffer to use when the
@@ -205,18 +206,15 @@ spec:
                             autoscaling, dynamodb, ecs, ec2, rds.'
                           type: string
                         targetTrackingConfiguration:
-                          description: Structure that defines new target tracking
-                            configurations. Each of these structures includes a specific
-                            scaling metric and a target value for the metric, along
-                            with various parameters to use with dynamic scaling. More
-                            details can be found in the AWS Auto Scaling API Reference.
+                          description: |-
+                            Structure that defines new target tracking configurations. Each of these structures includes a specific scaling metric and a target value for the metric, along with various parameters to use with dynamic scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               customizedScalingMetricSpecification:
-                                description: Customized metric. You can specify either
-                                  customized_scaling_metric_specification or predefined_scaling_metric_specification.
-                                  More details can be found in the AWS Auto Scaling
-                                  API Reference.
+                                description: |-
+                                  Customized metric. You can specify either customized_scaling_metric_specification or predefined_scaling_metric_specification.
+                                  More details can be found in the AWS Auto Scaling API Reference.
                                 items:
                                   properties:
                                     dimensions:
@@ -246,16 +244,14 @@ spec:
                                   Defaults to false.
                                 type: boolean
                               estimatedInstanceWarmup:
-                                description: Estimated time, in seconds, until a newly
-                                  launched instance can contribute to the CloudWatch
-                                  metrics. This value is used only if the resource
-                                  is an Auto Scaling group.
+                                description: |-
+                                  Estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.
+                                  This value is used only if the resource is an Auto Scaling group.
                                 type: number
                               predefinedScalingMetricSpecification:
-                                description: Predefined metric. You can specify either
-                                  predefined_scaling_metric_specification or customized_scaling_metric_specification.
-                                  More details can be found in the AWS Auto Scaling
-                                  API Reference.
+                                description: |-
+                                  Predefined metric. You can specify either predefined_scaling_metric_specification or customized_scaling_metric_specification.
+                                  More details can be found in the AWS Auto Scaling API Reference.
                                 items:
                                   properties:
                                     predefinedScalingMetricType:
@@ -274,16 +270,14 @@ spec:
                                   type: object
                                 type: array
                               scaleInCooldown:
-                                description: Amount of time, in seconds, after a scale
-                                  in activity completes before another scale in activity
-                                  can start. This value is not used if the scalable
-                                  resource is an Auto Scaling group.
+                                description: |-
+                                  Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
+                                  This value is not used if the scalable resource is an Auto Scaling group.
                                 type: number
                               scaleOutCooldown:
-                                description: Amount of time, in seconds, after a scale-out
-                                  activity completes before another scale-out activity
-                                  can start. This value is not used if the scalable
-                                  resource is an Auto Scaling group.
+                                description: |-
+                                  Amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start.
+                                  This value is not used if the scalable resource is an Auto Scaling group.
                                 type: number
                               targetValue:
                                 description: Target value for the metric.
@@ -296,16 +290,17 @@ spec:
                 - region
                 type: object
               initProvider:
-                description: THIS IS A BETA FIELD. It will be honored unless the Management
-                  Policies feature flag is disabled. InitProvider holds the same fields
-                  as ForProvider, with the exception of Identifier and other resource
-                  reference fields. The fields that are in InitProvider are merged
-                  into ForProvider when the resource is created. The same fields are
-                  also added to the terraform ignore_changes hook, to avoid updating
-                  them after creation. This is useful for fields that are required
-                  on creation, but we do not desire to update them after creation,
-                  for example because of an external controller is managing them,
-                  like an autoscaler.
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
                 properties:
                   applicationSource:
                     description: CloudFormation stack or set of tags. You can create
@@ -342,11 +337,9 @@ spec:
                     items:
                       properties:
                         customizedLoadMetricSpecification:
-                          description: Customized load metric to use for predictive
-                            scaling. You must specify either customized_load_metric_specification
-                            or predefined_load_metric_specification when configuring
-                            predictive scaling. More details can be found in the AWS
-                            Auto Scaling API Reference.
+                          description: |-
+                            Customized load metric to use for predictive scaling. You must specify either customized_load_metric_specification or predefined_load_metric_specification when configuring predictive scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               dimensions:
@@ -383,11 +376,9 @@ spec:
                           description: Minimum capacity of the resource.
                           type: number
                         predefinedLoadMetricSpecification:
-                          description: Predefined load metric to use for predictive
-                            scaling. You must specify either predefined_load_metric_specification
-                            or customized_load_metric_specification when configuring
-                            predictive scaling. More details can be found in the AWS
-                            Auto Scaling API Reference.
+                          description: |-
+                            Predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               predefinedLoadMetricType:
@@ -401,10 +392,9 @@ spec:
                             type: object
                           type: array
                         predictiveScalingMaxCapacityBehavior:
-                          description: 'Defines the behavior that should be applied
-                            if the forecast capacity approaches or exceeds the maximum
-                            capacity specified for the resource. Valid values: SetForecastCapacityToMaxCapacity,
-                            SetMaxCapacityAboveForecastCapacity, SetMaxCapacityToForecastCapacity.'
+                          description: |-
+                            Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity specified for the resource.
+                            Valid values: SetForecastCapacityToMaxCapacity, SetMaxCapacityAboveForecastCapacity, SetMaxCapacityToForecastCapacity.
                           type: string
                         predictiveScalingMaxCapacityBuffer:
                           description: Size of the capacity buffer to use when the
@@ -441,18 +431,15 @@ spec:
                             autoscaling, dynamodb, ecs, ec2, rds.'
                           type: string
                         targetTrackingConfiguration:
-                          description: Structure that defines new target tracking
-                            configurations. Each of these structures includes a specific
-                            scaling metric and a target value for the metric, along
-                            with various parameters to use with dynamic scaling. More
-                            details can be found in the AWS Auto Scaling API Reference.
+                          description: |-
+                            Structure that defines new target tracking configurations. Each of these structures includes a specific scaling metric and a target value for the metric, along with various parameters to use with dynamic scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               customizedScalingMetricSpecification:
-                                description: Customized metric. You can specify either
-                                  customized_scaling_metric_specification or predefined_scaling_metric_specification.
-                                  More details can be found in the AWS Auto Scaling
-                                  API Reference.
+                                description: |-
+                                  Customized metric. You can specify either customized_scaling_metric_specification or predefined_scaling_metric_specification.
+                                  More details can be found in the AWS Auto Scaling API Reference.
                                 items:
                                   properties:
                                     dimensions:
@@ -482,16 +469,14 @@ spec:
                                   Defaults to false.
                                 type: boolean
                               estimatedInstanceWarmup:
-                                description: Estimated time, in seconds, until a newly
-                                  launched instance can contribute to the CloudWatch
-                                  metrics. This value is used only if the resource
-                                  is an Auto Scaling group.
+                                description: |-
+                                  Estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.
+                                  This value is used only if the resource is an Auto Scaling group.
                                 type: number
                               predefinedScalingMetricSpecification:
-                                description: Predefined metric. You can specify either
-                                  predefined_scaling_metric_specification or customized_scaling_metric_specification.
-                                  More details can be found in the AWS Auto Scaling
-                                  API Reference.
+                                description: |-
+                                  Predefined metric. You can specify either predefined_scaling_metric_specification or customized_scaling_metric_specification.
+                                  More details can be found in the AWS Auto Scaling API Reference.
                                 items:
                                   properties:
                                     predefinedScalingMetricType:
@@ -510,16 +495,14 @@ spec:
                                   type: object
                                 type: array
                               scaleInCooldown:
-                                description: Amount of time, in seconds, after a scale
-                                  in activity completes before another scale in activity
-                                  can start. This value is not used if the scalable
-                                  resource is an Auto Scaling group.
+                                description: |-
+                                  Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
+                                  This value is not used if the scalable resource is an Auto Scaling group.
                                 type: number
                               scaleOutCooldown:
-                                description: Amount of time, in seconds, after a scale-out
-                                  activity completes before another scale-out activity
-                                  can start. This value is not used if the scalable
-                                  resource is an Auto Scaling group.
+                                description: |-
+                                  Amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start.
+                                  This value is not used if the scalable resource is an Auto Scaling group.
                                 type: number
                               targetValue:
                                 description: Target value for the metric.
@@ -532,19 +515,21 @@ spec:
               managementPolicies:
                 default:
                 - '*'
-                description: 'THIS IS A BETA FIELD. It is on by default but can be
-                  opted out through a Crossplane feature flag. ManagementPolicies
-                  specify the array of actions Crossplane is allowed to take on the
-                  managed and external resources. This field is planned to replace
-                  the DeletionPolicy field in a future release. Currently, both could
-                  be set independently and non-default values would be honored if
-                  the feature flag is enabled. If both are custom, the DeletionPolicy
-                  field will be ignored. See the design doc for more information:
-                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
-                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
                 items:
-                  description: A ManagementAction represents an action that the Crossplane
-                    controllers can take on an external resource.
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
                   enum:
                   - Observe
                   - Create
@@ -557,9 +542,10 @@ spec:
               providerConfigRef:
                 default:
                   name: default
-                description: ProviderConfigReference specifies how the provider that
-                  will be used to create, observe, update, and delete this managed
-                  resource should be configured.
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -569,21 +555,21 @@ spec:
                     properties:
                       resolution:
                         default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
                         enum:
                         - Required
                         - Optional
                         type: string
                       resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
                         enum:
                         - Always
                         - IfNotPresent
@@ -593,17 +579,19 @@ spec:
                 - name
                 type: object
               publishConnectionDetailsTo:
-                description: PublishConnectionDetailsTo specifies the connection secret
-                  config which contains a name, metadata and a reference to secret
-                  store config to which any connection details for this managed resource
-                  should be written. Connection details frequently include the endpoint,
-                  username, and password required to connect to the managed resource.
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
                 properties:
                   configRef:
                     default:
                       name: default
-                    description: SecretStoreConfigRef specifies which secret store
-                      config should be used for this ConnectionSecret.
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -613,21 +601,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -642,21 +630,22 @@ spec:
                       annotations:
                         additionalProperties:
                           type: string
-                        description: Annotations are the annotations to be added to
-                          connection secret. - For Kubernetes secrets, this will be
-                          used as "metadata.annotations". - It is up to Secret Store
-                          implementation for others store types.
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       labels:
                         additionalProperties:
                           type: string
-                        description: Labels are the labels/tags to be added to connection
-                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
-                          - It is up to Secret Store implementation for others store
-                          types.
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       type:
-                        description: Type is the SecretType for the connection secret.
+                        description: |-
+                          Type is the SecretType for the connection secret.
                           - Only valid for Kubernetes Secret Stores.
                         type: string
                     type: object
@@ -667,14 +656,15 @@ spec:
                 - name
                 type: object
               writeConnectionSecretToRef:
-                description: WriteConnectionSecretToReference specifies the namespace
-                  and name of a Secret to which any connection details for this managed
-                  resource should be written. Connection details frequently include
-                  the endpoint, username, and password required to connect to the
-                  managed resource. This field is planned to be replaced in a future
-                  release in favor of PublishConnectionDetailsTo. Currently, both
-                  could be set independently and connection details would be published
-                  to both without affecting each other.
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
                 properties:
                   name:
                     description: Name of the secret.
@@ -745,11 +735,9 @@ spec:
                     items:
                       properties:
                         customizedLoadMetricSpecification:
-                          description: Customized load metric to use for predictive
-                            scaling. You must specify either customized_load_metric_specification
-                            or predefined_load_metric_specification when configuring
-                            predictive scaling. More details can be found in the AWS
-                            Auto Scaling API Reference.
+                          description: |-
+                            Customized load metric to use for predictive scaling. You must specify either customized_load_metric_specification or predefined_load_metric_specification when configuring predictive scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               dimensions:
@@ -786,11 +774,9 @@ spec:
                           description: Minimum capacity of the resource.
                           type: number
                         predefinedLoadMetricSpecification:
-                          description: Predefined load metric to use for predictive
-                            scaling. You must specify either predefined_load_metric_specification
-                            or customized_load_metric_specification when configuring
-                            predictive scaling. More details can be found in the AWS
-                            Auto Scaling API Reference.
+                          description: |-
+                            Predefined load metric to use for predictive scaling. You must specify either predefined_load_metric_specification or customized_load_metric_specification when configuring predictive scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               predefinedLoadMetricType:
@@ -804,10 +790,9 @@ spec:
                             type: object
                           type: array
                         predictiveScalingMaxCapacityBehavior:
-                          description: 'Defines the behavior that should be applied
-                            if the forecast capacity approaches or exceeds the maximum
-                            capacity specified for the resource. Valid values: SetForecastCapacityToMaxCapacity,
-                            SetMaxCapacityAboveForecastCapacity, SetMaxCapacityToForecastCapacity.'
+                          description: |-
+                            Defines the behavior that should be applied if the forecast capacity approaches or exceeds the maximum capacity specified for the resource.
+                            Valid values: SetForecastCapacityToMaxCapacity, SetMaxCapacityAboveForecastCapacity, SetMaxCapacityToForecastCapacity.
                           type: string
                         predictiveScalingMaxCapacityBuffer:
                           description: Size of the capacity buffer to use when the
@@ -844,18 +829,15 @@ spec:
                             autoscaling, dynamodb, ecs, ec2, rds.'
                           type: string
                         targetTrackingConfiguration:
-                          description: Structure that defines new target tracking
-                            configurations. Each of these structures includes a specific
-                            scaling metric and a target value for the metric, along
-                            with various parameters to use with dynamic scaling. More
-                            details can be found in the AWS Auto Scaling API Reference.
+                          description: |-
+                            Structure that defines new target tracking configurations. Each of these structures includes a specific scaling metric and a target value for the metric, along with various parameters to use with dynamic scaling.
+                            More details can be found in the AWS Auto Scaling API Reference.
                           items:
                             properties:
                               customizedScalingMetricSpecification:
-                                description: Customized metric. You can specify either
-                                  customized_scaling_metric_specification or predefined_scaling_metric_specification.
-                                  More details can be found in the AWS Auto Scaling
-                                  API Reference.
+                                description: |-
+                                  Customized metric. You can specify either customized_scaling_metric_specification or predefined_scaling_metric_specification.
+                                  More details can be found in the AWS Auto Scaling API Reference.
                                 items:
                                   properties:
                                     dimensions:
@@ -885,16 +867,14 @@ spec:
                                   Defaults to false.
                                 type: boolean
                               estimatedInstanceWarmup:
-                                description: Estimated time, in seconds, until a newly
-                                  launched instance can contribute to the CloudWatch
-                                  metrics. This value is used only if the resource
-                                  is an Auto Scaling group.
+                                description: |-
+                                  Estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics.
+                                  This value is used only if the resource is an Auto Scaling group.
                                 type: number
                               predefinedScalingMetricSpecification:
-                                description: Predefined metric. You can specify either
-                                  predefined_scaling_metric_specification or customized_scaling_metric_specification.
-                                  More details can be found in the AWS Auto Scaling
-                                  API Reference.
+                                description: |-
+                                  Predefined metric. You can specify either predefined_scaling_metric_specification or customized_scaling_metric_specification.
+                                  More details can be found in the AWS Auto Scaling API Reference.
                                 items:
                                   properties:
                                     predefinedScalingMetricType:
@@ -913,16 +893,14 @@ spec:
                                   type: object
                                 type: array
                               scaleInCooldown:
-                                description: Amount of time, in seconds, after a scale
-                                  in activity completes before another scale in activity
-                                  can start. This value is not used if the scalable
-                                  resource is an Auto Scaling group.
+                                description: |-
+                                  Amount of time, in seconds, after a scale in activity completes before another scale in activity can start.
+                                  This value is not used if the scalable resource is an Auto Scaling group.
                                 type: number
                               scaleOutCooldown:
-                                description: Amount of time, in seconds, after a scale-out
-                                  activity completes before another scale-out activity
-                                  can start. This value is not used if the scalable
-                                  resource is an Auto Scaling group.
+                                description: |-
+                                  Amount of time, in seconds, after a scale-out activity completes before another scale-out activity can start.
+                                  This value is not used if the scalable resource is an Auto Scaling group.
                                 type: number
                               targetValue:
                                 description: Target value for the metric.
@@ -942,13 +920,15 @@ spec:
                   description: A Condition that may apply to a resource.
                   properties:
                     lastTransitionTime:
-                      description: LastTransitionTime is the last time this condition
-                        transitioned from one status to another.
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
                       format: date-time
                       type: string
                     message:
-                      description: A Message containing details about this condition's
-                        last transition from one status to another, if any.
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
                       type: string
                     reason:
                       description: A Reason for this condition's last transition from
@@ -959,8 +939,9 @@ spec:
                         False, or Unknown?
                       type: string
                     type:
-                      description: Type of this condition. At most one of each condition
-                        type may apply to a resource at any point in time.
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
                       type: string
                   required:
                   - lastTransitionTime
