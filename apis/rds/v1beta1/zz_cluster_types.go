@@ -330,6 +330,13 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AllocatedStorage *float64 `json:"allocatedStorage,omitempty" tf:"allocated_storage,omitempty"`
 
+	// Password for the master DB user. Note that this may show up in
+	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// If true, the password will be auto-generated and stored in the Secret referenced by the passwordSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
+
 	// Enable to allow major engine version upgrades when changing engine versions. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AllowMajorVersionUpgrade *bool `json:"allowMajorVersionUpgrade,omitempty" tf:"allow_major_version_upgrade,omitempty"`

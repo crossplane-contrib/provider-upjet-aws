@@ -56,6 +56,20 @@ func TestPasswordGenerator(t *testing.T) {
 				err: errors.Wrap(errBoom, errGetPasswordSecret),
 			},
 		},
+		"CannotGetClusterSecret": {
+			reason: "An error should be returned if the referenced secret cannot be retrieved.",
+			args: args{
+				kube: &test.MockClient{
+					MockGet: test.NewMockGetFn(errBoom),
+				},
+				secretRefFieldPath: "",
+				toggleFieldPath:    "",
+				mg:                 &fake.Managed{},
+			},
+			want: want{
+				err: errors.Wrap(errBoom, errGetPasswordSecret),
+			},
+		},
 		"SecretAlreadyFull": {
 			reason: "Should be no-op if the Secret already has password.",
 			args: args{
@@ -85,10 +99,52 @@ func TestPasswordGenerator(t *testing.T) {
 				},
 			},
 		},
+		"ClusterSecretAlreadyFull": {
+			reason: "Should be no-op if the Secret already has password.",
+			args: args{
+				kube: &test.MockClient{
+					MockGet: func(ctx context.Context, key client.ObjectKey, obj client.Object) error {
+						s, ok := obj.(*corev1.Secret)
+						if !ok {
+							return errors.New("needs to be secret")
+						}
+						s.Data = map[string][]byte{
+							"password": []byte("foo"),
+						}
+						return nil
+					},
+				},
+				secretRefFieldPath: "parameterizable.parameters.masterPasswordSecretRef",
+				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"masterPasswordSecretRef": map[string]any{
+								"name":      "foo",
+								"namespace": "bar",
+								"key":       "password",
+							},
+						},
+					},
+				},
+			},
+		},
 		"NoSecretReference": {
 			reason: "Should be no-op if the secret reference is not given.",
 			args: args{
 				secretRefFieldPath: "parameterizable.parameters.passwordSecretRef",
+				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"another": "field",
+						},
+					},
+				},
+			},
+		},
+		"NoClusterSecretReference": {
+			reason: "Should be no-op if the secret reference is not given.",
+			args: args{
+				secretRefFieldPath: "parameterizable.parameters.masterPasswordSecretRef",
 				mg: &ujfake.Terraformed{
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
@@ -119,6 +175,27 @@ func TestPasswordGenerator(t *testing.T) {
 				},
 			},
 		},
+		"ClusterToggleNotSet": {
+			reason: "Should be no-op if the toggle is not set at all.",
+			args: args{
+				kube: &test.MockClient{
+					MockGet: test.NewMockGetFn(nil),
+				},
+				secretRefFieldPath: "parameterizable.parameters.masterPasswordSecretRef",
+				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
+				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"masterPasswordSecretRef": map[string]any{
+								"name":      "foo",
+								"namespace": "bar",
+								"key":       "password",
+							},
+						},
+					},
+				},
+			},
+		},
 		"ToggleFalse": {
 			reason: "Should be no-op if the toggle is set to false.",
 			args: args{
@@ -131,6 +208,28 @@ func TestPasswordGenerator(t *testing.T) {
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"passwordSecretRef": map[string]any{
+								"name":      "foo",
+								"namespace": "bar",
+								"key":       "password",
+							},
+							"autoGeneratePassword": false,
+						},
+					},
+				},
+			},
+		},
+		"ClusterToggleFalse": {
+			reason: "Should be no-op if the toggle is set to false.",
+			args: args{
+				kube: &test.MockClient{
+					MockGet: test.NewMockGetFn(nil),
+				},
+				secretRefFieldPath: "parameterizable.parameters.masterPasswordSecretRef",
+				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
+				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"masterPasswordSecretRef": map[string]any{
 								"name":      "foo",
 								"namespace": "bar",
 								"key":       "password",
@@ -183,6 +282,48 @@ func TestPasswordGenerator(t *testing.T) {
 				},
 			},
 		},
+		"ClusterSecretGenerateAndApply": {
+			reason: "Should apply if we generate, set the content of an already existing secret.",
+			args: args{
+				kube: &test.MockClient{
+					MockGet: func(ctx context.Context, key client.ObjectKey, obj client.Object) error {
+						s, ok := obj.(*corev1.Secret)
+						if !ok {
+							return errors.New("needs to be secret")
+						}
+						s.CreationTimestamp = metav1.Time{Time: time.Now()}
+						return nil
+					},
+					MockPatch: func(ctx context.Context, obj client.Object, patch client.Patch, opts ...client.PatchOption) error {
+						s, ok := obj.(*corev1.Secret)
+						if !ok {
+							return errors.New("needs to be secret")
+						}
+						if len(s.Data["password"]) == 0 {
+							return errors.New("password is not set")
+						}
+						if len(s.OwnerReferences) != 0 {
+							return errors.New("owner references should not be set if secret already exists")
+						}
+						return nil
+					},
+				},
+				secretRefFieldPath: "parameterizable.parameters.masterPasswordSecretRef",
+				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
+				mg: &ujfake.Terraformed{
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"masterPasswordSecretRef": map[string]any{
+								"name":      "foo",
+								"namespace": "bar",
+								"key":       "password",
+							},
+							"autoGeneratePassword": true,
+						},
+					},
+				},
+			},
+		},
 		"GenerateAndCreate": {
 			reason: "Should create if we generate, set the content and there is no secret in place.",
 			args: args{
@@ -214,6 +355,47 @@ func TestPasswordGenerator(t *testing.T) {
 					Parameterizable: ujfake.Parameterizable{
 						Parameters: map[string]any{
 							"passwordSecretRef": map[string]any{
+								"name":      "foo",
+								"namespace": "bar",
+								"key":       "password",
+							},
+							"autoGeneratePassword": true,
+						},
+					},
+				},
+			},
+		},
+		"ClusterSecretGenerateAndCreate": {
+			reason: "Should create if we generate, set the content and there is no secret in place.",
+			args: args{
+				kube: &test.MockClient{
+					MockGet: test.NewMockGetFn(kerrors.NewNotFound(schema.GroupResource{}, "")),
+					MockCreate: func(ctx context.Context, obj client.Object, opts ...client.CreateOption) error {
+						s, ok := obj.(*corev1.Secret)
+						if !ok {
+							return errors.New("needs to be secret")
+						}
+						if len(s.Data["password"]) == 0 {
+							return errors.New("password is not set")
+						}
+						if len(s.OwnerReferences) == 1 &&
+							s.OwnerReferences[0].Name == "foo-mgd" {
+							return nil
+						}
+						return errors.New("owner references should be set if secret is created")
+					},
+				},
+				secretRefFieldPath: "parameterizable.parameters.masterPasswordSecretRef",
+				toggleFieldPath:    "parameterizable.parameters.autoGeneratePassword",
+				mg: &ujfake.Terraformed{
+					Managed: fake.Managed{
+						ObjectMeta: metav1.ObjectMeta{
+							Name: "foo-mgd",
+						},
+					},
+					Parameterizable: ujfake.Parameterizable{
+						Parameters: map[string]any{
+							"masterPasswordSecretRef": map[string]any{
 								"name":      "foo",
 								"namespace": "bar",
 								"key":       "password",

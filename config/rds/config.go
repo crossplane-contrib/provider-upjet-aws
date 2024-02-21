@@ -59,8 +59,34 @@ func Configure(p *config.Provider) {
 			if a, ok := attr["port"]; ok {
 				conn["port"] = []byte(fmt.Sprintf("%v", a))
 			}
+			if a, ok := attr["password"].(string); ok {
+				conn["password"] = []byte(a)
+			}
 			return conn, nil
 		}
+		desc, _ := comments.New("If true, the password will be auto-generated and"+
+			" stored in the Secret referenced by the masterPasswordSecretRef field.",
+			comments.WithTFTag("-"))
+		r.TerraformResource.Schema["auto_generate_password"] = &schema.Schema{
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: desc.String(),
+		}
+		r.InitializerFns = append(r.InitializerFns,
+			PasswordGenerator(
+				"spec.forProvider.masterPasswordSecretRef",
+				"spec.forProvider.autoGeneratePassword",
+			))
+		r.TerraformResource.Schema["password"] = &schema.Schema{
+			Type:        schema.TypeString,
+			Optional:    true,
+			Sensitive:   true,
+			Description: "Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.",
+		}
+		r.TerraformResource.Schema["password"].Description = "Password for the " +
+			"master DB user. If you set autoGeneratePassword to true, the Secret" +
+			" referenced here will be created or updated with generated password" +
+			" if it does not already contain one."
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {

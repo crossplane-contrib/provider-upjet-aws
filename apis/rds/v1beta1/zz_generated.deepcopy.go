@@ -2424,6 +2424,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.AutoGeneratePassword != nil {
+		in, out := &in.AutoGeneratePassword, &out.AutoGeneratePassword
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AllowMajorVersionUpgrade != nil {
 		in, out := &in.AllowMajorVersionUpgrade, &out.AllowMajorVersionUpgrade
 		*out = new(bool)

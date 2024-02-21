@@ -9,6 +9,7 @@ spec:
     region: us-west-1
     engine: aurora-postgresql
     masterUsername: cpadmin
+    autoGeneratePassword: true
     masterPasswordSecretRef:
       name: sample-cluster-password
       namespace: upbound-system
@@ -17,12 +18,3 @@ spec:
   writeConnectionSecretToRef:
     name: sample-rds-cluster-secret
     namespace: upbound-system
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: sample-cluster-password
-  namespace: upbound-system
-type: Opaque
-stringData:
-  password: TestPass0!
