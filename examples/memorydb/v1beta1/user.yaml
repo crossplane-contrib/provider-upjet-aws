@@ -1,0 +1,30 @@
+apiVersion: memorydb.aws.upbound.io/v1beta1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: borrelli-test-user
+spec:
+  forProvider:
+    accessString: "on ~* &* +@all"
+    authenticationMode:
+    - passwordsSecretRef:
+      - key: password
+        name: example-secret
+        namespace: upbound-system
+      type: password
+    region: us-west-1
+  writeConnectionSecretToRef:
+    name: user-conn
+    namespace: default
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestPass0!  
