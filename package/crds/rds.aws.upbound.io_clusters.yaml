@@ -92,6 +92,7 @@ spec:
                       be set if manage_master_user_password is set to true. If true,
                       the password will be auto-generated and stored in the Secret
                       referenced by the masterPasswordSecretRef field.
+                    type: boolean
                   availabilityZones:
                     description: |-
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
