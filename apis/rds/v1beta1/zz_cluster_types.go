@@ -423,6 +423,13 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
+	// Password for the master DB user. Note that this may show up in
+	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// If true, the password will be auto-generated and stored in the Secret referenced by the passwordSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
+
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
 	// We recommend specifying 3 AZs or using the  if necessary.
 	// A maximum of 3 AZs can be configured.
