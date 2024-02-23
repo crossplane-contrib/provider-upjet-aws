@@ -5,7 +5,7 @@ metadata:
     meta.upbound.io/example-id: memorydb/v1beta1/user
   labels:
     testing.upbound.io/example-name: example
-  name: borrelli-test-user
+  name: example
 spec:
   forProvider:
     accessString: "on ~* &* +@all"
