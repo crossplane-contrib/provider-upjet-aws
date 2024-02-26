@@ -41,6 +41,9 @@ type ProviderConfigSpec struct {
 	// Useful for AWS API implementations that do not have the IAM, STS API, or metadata API
 	// +optional
 	SkipReqAccountId bool `json:"skip_requesting_account_id,omitempty"`
+	// Ignore tags with provdied prefixes
+	// +optional
+	IgnoreTagsPrefixes []string `json:"ignore_tags_prefixes,omitempty"`
 }
 
 // AssumeRoleOptions define the options for assuming an IAM Role

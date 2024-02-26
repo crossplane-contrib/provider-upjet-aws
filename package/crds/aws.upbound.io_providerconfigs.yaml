@@ -400,6 +400,11 @@ spec:
                 required:
                 - url
                 type: object
+              ignore_tags_prefixes:
+                description: Ignore tags with provdied prefixes
+                items:
+                  type: string
+                type: array
               s3_use_path_style:
                 description: Whether to enable the request to use path-style addressing,
                   i.e., https://s3.amazonaws.com/BUCKET/KEY.

@@ -42,6 +42,8 @@ const (
 	keySkipRegionValidation      = "skip_region_validation"
 	keySkipReqAccountId          = "skip_requesting_account_id"
 	keyEndpoints                 = "endpoints"
+	keyIgnoreTags                = "ignore_tags"
+	keyIgnoreTagsPrefixes        = "key_prefixes"
 )
 
 type SetupConfig struct {
@@ -108,6 +110,11 @@ func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, pc *v1b
 	ps.Configuration = map[string]any{
 		keyRegion: cfg.Region,
 	}
+
+	ignoreTags := map[string]any{
+		keyIgnoreTagsPrefixes: pc.Spec.IgnoreTagsPrefixes,
+	}
+	ps.Configuration[keyIgnoreTags] = []any{ignoreTags}
 
 	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
 	case authKeyWebIdentity:
@@ -186,6 +193,11 @@ func DefaultTerraformSetupBuilder(_ context.Context, pc *v1beta1.ProviderConfig,
 		keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
 		keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
 	}
+
+	ignoreTags := map[string]any{
+		keyIgnoreTagsPrefixes: pc.Spec.IgnoreTagsPrefixes,
+	}
+	ps.Configuration[keyIgnoreTags] = []any{ignoreTags}
 
 	if pc.Spec.Endpoint != nil {
 		if pc.Spec.Endpoint.URL.Static != nil {
