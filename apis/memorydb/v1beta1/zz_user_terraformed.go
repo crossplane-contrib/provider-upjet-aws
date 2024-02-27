@@ -25,7 +25,7 @@ func (mg *User) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this User
 func (tr *User) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"authentication_mode[*].passwords[*]": "spec.forProvider.authenticationMode[*].passwords[*]SecretRef"}
+	return map[string]string{"authentication_mode[*].passwords[*]": "spec.forProvider.authenticationMode[*].passwordsSecretRef[*]"}
 }
 
 // GetObservation of this User

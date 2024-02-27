@@ -14,7 +14,10 @@ spec:
       - key: password
         name: example-secret
         namespace: upbound-system
-      type: password
+      - key: password
+        name: memorydb-user-secret-2
+        namespace: upbound-system
+      type: password  
     region: us-west-1
   writeConnectionSecretToRef:
     name: user-conn
@@ -27,4 +30,13 @@ metadata:
   namespace: upbound-system
 type: Opaque
 stringData:
-  password: TestPass0!  
+  password: TestCr0ssplanePassw0rd!  # Passwords must be a minimum of 16 characters
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: memorydb-user-secret-2
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: TestCr0ssplanePassw0rd!  # Passwords must be a minimum of 16 characters
