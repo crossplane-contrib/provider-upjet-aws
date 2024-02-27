@@ -116,6 +116,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewall
   labels:
     testing.upbound.io/example-name: example
   name: sample-vpc
@@ -131,6 +133,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewall
   labels:
     testing.upbound.io/example-name: example
   name: sample-subnet1
@@ -148,7 +152,7 @@ apiVersion: networkfirewall.aws.upbound.io/v1beta1
 kind: LoggingConfiguration
 metadata:
   annotations:
-    meta.upbound.io/example-id: networkfirewall/v1beta1/loggingconfiguration
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewall
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -171,9 +175,11 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
-  name: uptest-networkfirewall-logging
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta1/firewall
   labels:
     testing.upbound.io/example-name: s3-networkfirewall
+  name: uptest-networkfirewall-logging
 spec:
   deletionPolicy: Orphan
   forProvider:
