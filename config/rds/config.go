@@ -44,9 +44,6 @@ func Configure(p *config.Provider) {
 			if a, ok := attr["port"]; ok {
 				conn["port"] = []byte(fmt.Sprintf("%v", a))
 			}
-			if a, ok := attr["password"].(string); ok {
-				conn["password"] = []byte(a)
-			}
 			return conn, nil
 		}
 		r.OverrideFieldNames = map[string]string{
@@ -73,16 +70,6 @@ func Configure(p *config.Provider) {
 				"spec.forProvider.masterPasswordSecretRef",
 				"spec.forProvider.autoGeneratePassword",
 			))
-		r.TerraformResource.Schema["password"] = &schema.Schema{
-			Type:        schema.TypeString,
-			Optional:    true,
-			Sensitive:   true,
-			Description: "Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.",
-		}
-		r.TerraformResource.Schema["password"].Description = "Password for the " +
-			"master DB user. If you set autoGeneratePassword to true, the Secret" +
-			" referenced here will be created or updated with generated password" +
-			" if it does not already contain one."
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
