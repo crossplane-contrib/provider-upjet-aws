@@ -13,6 +13,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: IntegrationResponse
 metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: integration
   name: mydemointegrationresponse
@@ -42,6 +44,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Integration
 metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: integration
   name: mydemointegration
@@ -62,6 +66,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Method
 metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: integration
   name: mydemomethod
@@ -80,6 +86,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: MethodResponse
 metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: integration
   name: response-200
