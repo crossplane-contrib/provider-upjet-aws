@@ -423,6 +423,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
+	// If true, the password will be auto-generated and stored in the Secret referenced by the masterPasswordSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
+
 	// List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
 	// We recommend specifying 3 AZs or using the  if necessary.
 	// A maximum of 3 AZs can be configured.
@@ -574,6 +579,10 @@ type ClusterParameters struct {
 	// Network type of the cluster. Valid values: IPV4, DUAL.
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
+
+	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
+	// +kubebuilder:validation:Optional
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Port on which the DB accepts connections
 	// +kubebuilder:validation:Optional

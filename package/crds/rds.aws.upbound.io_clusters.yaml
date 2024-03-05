@@ -86,6 +86,11 @@ spec:
                       immediately, or during the next maintenance window. Default
                       is false. See Amazon RDS Documentation for more information.
                     type: boolean
+                  autoGeneratePassword:
+                    description: If true, the password will be auto-generated and
+                      stored in the Secret referenced by the masterPasswordSecretRef
+                      field.
+                    type: boolean
                   availabilityZones:
                     description: |-
                       List of EC2 Availability Zones for the DB cluster storage where DB cluster instances can be created.
@@ -481,6 +486,25 @@ spec:
                     description: 'Network type of the cluster. Valid values: IPV4,
                       DUAL.'
                     type: string
+                  passwordSecretRef:
+                    description: Password for the master DB user. If you set autoGeneratePassword
+                      to true, the Secret referenced here will be created or updated
+                      with generated password if it does not already contain one.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   port:
                     description: Port on which the DB accepts connections
                     type: number

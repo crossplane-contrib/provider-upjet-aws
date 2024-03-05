@@ -2677,6 +2677,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutoGeneratePassword != nil {
+		in, out := &in.AutoGeneratePassword, &out.AutoGeneratePassword
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AvailabilityZones != nil {
 		in, out := &in.AvailabilityZones, &out.AvailabilityZones
 		*out = make([]*string, len(*in))
@@ -2868,6 +2873,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
+		**out = **in
+	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.Port != nil {
