@@ -47,6 +47,7 @@ GO_REQUIRED_VERSION ?= 1.21
 # GOLANGCILINT_VERSION is inherited from build submodule by default.
 # Uncomment below if you need to override the version.
 GOLANGCILINT_VERSION ?= 1.55.2
+GO_LINT_ARGS ?= -v --build-tags all --timeout 60m
 
 # SUBPACKAGES ?= $(shell find cmd/provider -type d -maxdepth 1 -mindepth 1 | cut -d/ -f3)
 SUBPACKAGES ?= monolith
@@ -325,7 +326,13 @@ kustomize-crds: output.init $(KUSTOMIZE) $(YQ)
 	XDG_CONFIG_HOME=$(PWD)/package $(KUSTOMIZE) build --enable-alpha-plugins $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml || $(FAIL)
 	@$(OK) Kustomizing CRDs.
 
+.PHONY: kustomize-crds
+
 checkout-to-old-api:
 	CHECKOUT_RELEASE_VERSION=$(CHECKOUT_RELEASE_VERSION) hack/check-duplicate.sh
 
-.PHONY: kustomize-crds
+lint.init: build-lint-cache
+
+build-lint-cache: $(GOLANGCILINT)
+	./scripts/tag.sh && \
+	$(GOLANGCILINT) run -v --build-tags ec2,configregistry,configprovider,linter_run -v --concurrency 1
