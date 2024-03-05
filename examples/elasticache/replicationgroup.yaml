@@ -11,6 +11,7 @@ spec:
   forProvider:
     automaticFailoverEnabled: true
     description: example description
+    maintenanceWindow: sun:05:00-sun:09:00
     nodeType: cache.m4.large
     numberCacheClusters: 2
     parameterGroupName: default.redis7
