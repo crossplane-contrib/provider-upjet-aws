@@ -2875,11 +2875,6 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.PasswordSecretRef != nil {
-		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
-		*out = new(v1.SecretKeySelector)
-		**out = **in
-	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)

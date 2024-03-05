@@ -580,10 +580,6 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
-	// +kubebuilder:validation:Optional
-	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
-
 	// Port on which the DB accepts connections
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
