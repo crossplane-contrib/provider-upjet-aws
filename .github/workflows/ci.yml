@@ -10,10 +10,65 @@ on:
 
 jobs:
   ci:
-    uses: upbound/uptest/.github/workflows/provider-ci.yml@main
+    uses: ulucinar/uptest/.github/workflows/provider-ci.yml@tagger
     with:
-      go-version: 1.21
+      go-version: "1.21"
       golangci-skip: true # we will run the linter via "make lint"
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
       UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
+
+  detect-noop:
+    runs-on: ubuntu-22.04
+    outputs:
+      noop: ${{ steps.noop.outputs.should_skip }}
+    steps:
+      - name: Detect No-op Changes
+        id: noop
+        uses: fkirc/skip-duplicate-actions@12aca0a884f6137d619d6a8a09fcc3406ced5281 # v5.3.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          paths_ignore: '["**.md", "**.png", "**.jpg"]'
+          do_not_skip: '["workflow_dispatch", "schedule", "push"]'
+
+  lint:
+    runs-on: ubuntu-22.04
+    needs: detect-noop
+    if: needs.detect-noop.outputs.noop != 'true'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+        with:
+          submodules: true
+
+      - name: Setup Go
+        uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # v3
+        with:
+          go-version: "1.21"
+
+      - name: Find the Go Build Cache
+        id: go_cache
+        run: |
+          echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT && \
+          echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
+
+      - name: Cache the Go Build Cache
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        with:
+          path: ${{ steps.go_cache.outputs.cache }}
+          key: ${{ runner.os }}-build-lint-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-build-lint-
+
+      - name: Cache Go Dependencies
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        with:
+          path: ${{ steps.go_cache.outputs.mod_cache }}
+          key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-pkg-
+
+      - name: Vendor Dependencies
+        run: make vendor vendor.check
+
+      - name: Lint
+        run: make lint

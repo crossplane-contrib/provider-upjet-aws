@@ -2,6 +2,9 @@
 
 set -aeuo pipefail
 
+curl -fsSL  "https://github.com/ulucinar/uptest/releases/download/tagger/buildtagger" -o /tmp/buildtagger
+chmod +x /tmp/buildtagger
+
 TAGGER="/tmp/buildtagger"
 REPO_ROOT="."
 
