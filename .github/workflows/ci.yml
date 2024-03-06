@@ -52,7 +52,10 @@ jobs:
         run: |
           echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT && \
           echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT && \
-          echo "analysis_cache=$HOME/.cache/golangci-lint" >> $GITHUB_OUTPUT
+          echo "analysis_cache=$HOME/.cache/golangci-lint" >> $GITHUB_OUTPUT && \
+          echo "analysis_cache_key=$(make go.lint.analysiskey)" >> $GITHUB_OUTPUT && \
+          echo "analysis_cache_key_int=$(make go.lint.analysiskey-interval)" >> $GITHUB_OUTPUT
+          
 
       - name: Cache the Go Build Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
@@ -72,8 +75,9 @@ jobs:
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
           path: ${{ steps.go_cache.outputs.analysis_cache }}
-          key: ${{ runner.os }}-analysis-lint-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-analysis-lint-
+          key: ${{ steps.go_cache.outputs.analysis_cache_key }}
+          restore-keys: |
+            ${{ steps.go_cache.outputs.analysis_cache_key_int }}
 
       - name: Vendor Dependencies
         run: make vendor vendor.check

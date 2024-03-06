@@ -312,7 +312,13 @@ go.cachedir:
 go.mod.cachedir:
 	@go env GOMODCACHE
 
-.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir run crds.clean $(TERRAFORM_PROVIDER_SCHEMA)
+go.lint.analysiskey-interval:
+	@echo golangci-lint.cache-$$(( $$(date +%s) / 604800 ))-
+
+go.lint.analysiskey:
+	@echo $$(make go.lint.analysiskey-interval)$$(sha1sum go.mod | cut -d' ' -f1)
+
+.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir go.lint.analysiskey-interval go.lint.analysiskey run crds.clean $(TERRAFORM_PROVIDER_SCHEMA)
 
 build.init: kustomize-crds
 
