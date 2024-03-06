@@ -51,7 +51,8 @@ jobs:
         id: go_cache
         run: |
           echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT && \
-          echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
+          echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT && \
+          echo "analysis_cache=$HOME/.cache/golangci-lint" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
@@ -67,8 +68,19 @@ jobs:
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
 
+      - name: Cache Linter Analysis
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        with:
+          path: ${{ steps.go_cache.outputs.analysis_cache }}
+          key: ${{ runner.os }}-analysis-lint-${{ hashFiles('**/go.sum') }}
+          restore-keys: ${{ runner.os }}-analysis-lint-
+
       - name: Vendor Dependencies
         run: make vendor vendor.check
 
       - name: Lint
-        run: make lint
+        env:
+          GOLANGCI_LINT_CACHE: ${{ steps.go_cache.outputs.analysis_cache }}
+        run: |
+          echo ${GOLANGCI_LINT_CACHE} && \
+          make lint
