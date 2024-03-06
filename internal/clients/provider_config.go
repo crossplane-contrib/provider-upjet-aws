@@ -42,7 +42,7 @@ const (
 	authKeyWebIdentity = "WebIdentity"
 	authKeyUpbound     = "Upbound"
 	// authKeySAML        = "SAML"
-	authKeySecret = "Secret"
+	// authKeySecret = "Secret"
 
 	envWebIdentityTokenFile = "AWS_WEB_IDENTITY_TOKEN_FILE"
 	envWebIdentityRoleARN   = "AWS_ROLE_ARN"
@@ -85,25 +85,13 @@ func getRegion(obj runtime.Object) (string, error) {
 	return r, err
 }
 
-// GetAWSConfig to produce a config that can be used to authenticate to AWS.
-func GetAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*aws.Config, error) { // nolint:gocyclo
-	if mg.GetProviderConfigReference() == nil {
-		return nil, errors.New("no providerConfigRef provided")
-	}
+// GetAWSConfigViaProviderConfig produces an AWS config from the specified
+// v1beta1.ProviderConfig that can be used to authenticate to AWS
+func GetAWSConfigViaProviderConfig(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig) (*aws.Config, error) { // nolint:gocyclo
 	region, err := getRegion(mg)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot get region")
 	}
-	pc := &v1beta1.ProviderConfig{}
-	if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
-		return nil, errors.Wrap(err, "cannot get referenced Provider")
-	}
-
-	t := resource.NewProviderConfigUsageTracker(c, &v1beta1.ProviderConfigUsage{})
-	if err := t.Track(ctx, mg); err != nil {
-		return nil, errors.Wrap(err, "cannot track ProviderConfig usage")
-	}
-
 	var cfg *aws.Config
 	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
 	case authKeyIRSA:
@@ -137,6 +125,26 @@ func GetAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*a
 		return nil, errors.Wrap(err, "cannot get credentials")
 	}
 	return SetResolver(pc, cfg), nil
+}
+
+// GetAWSConfigWithProviderUsage obtains the provider config referenced by the
+// specified managed resource and produces a config that can be used to
+// authenticate to AWS and tracks the ProviderConfigUsage. Useful for obtaining
+// AWS config for non-upjet based MR controllers.
+func GetAWSConfigWithProviderUsage(ctx context.Context, c client.Client, mg resource.Managed) (*aws.Config, error) { // nolint:gocyclo
+	if mg.GetProviderConfigReference() == nil {
+		return nil, errors.New("no providerConfigRef provided")
+	}
+	pc := &v1beta1.ProviderConfig{}
+	if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
+		return nil, errors.Wrap(err, "cannot get referenced Provider")
+	}
+
+	t := resource.NewProviderConfigUsageTracker(c, &v1beta1.ProviderConfigUsage{})
+	if err := t.Track(ctx, mg); err != nil {
+		return nil, errors.Wrap(err, "cannot track ProviderConfig usage")
+	}
+	return GetAWSConfigViaProviderConfig(ctx, c, mg, pc)
 }
 
 type awsEndpointResolverAdaptorWithOptions func(service, region string, options interface{}) (aws.Endpoint, error)
@@ -300,24 +308,7 @@ func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cf
 // GetAssumeRoleWithWebIdentityConfig returns an aws.Config capable of doing
 // AssumeRoleWithWebIdentity.
 func GetAssumeRoleWithWebIdentityConfig(ctx context.Context, cfg *aws.Config, webID v1beta1.AssumeRoleWithWebIdentityOptions, tokenFile string) (*aws.Config, error) {
-	stsclient := sts.NewFromConfig(*cfg, stsRegionOrDefault(cfg.Region)) //nolint:contextcheck
-	awsConfig, err := config.LoadDefaultConfig(
-		ctx,
-		userAgentV2,
-		config.WithRegion(cfg.Region),
-		config.WithCredentialsProvider(aws.NewCredentialsCache(
-			stscreds.NewWebIdentityRoleProvider(
-				stsclient,
-				aws.ToString(webID.RoleARN),
-				stscreds.IdentityTokenFile(filepath.Clean(tokenFile)),
-				SetWebIdentityRoleOptions(webID),
-			)),
-		),
-	)
-	if err != nil {
-		return nil, errors.Wrap(err, "failed to load assumed role with web identity AWS config")
-	}
-	return &awsConfig, nil
+	return GetAssumeRoleWithWebIdentityConfigViaTokenRetriever(ctx, cfg, webID, stscreds.IdentityTokenFile(filepath.Clean(tokenFile)))
 }
 
 // GetAssumeRoleWithWebIdentityConfigViaTokenRetriever returns an aws.Config capable of doing
