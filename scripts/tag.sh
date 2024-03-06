@@ -22,11 +22,11 @@ REPO_ROOT="."
 # config/common/apis/lambda/extractor.go -> config || lambda || all
 "${TAGGER}" --parent-dir "${REPO_ROOT}"/config/common/apis/lambda/extractor.go --tag-format "config || lambda || all" --mode file
 # config/config_registry.go -> configregistry || register || config || all
-"${TAGGER}" --parent-dir "${REPO_ROOT}"/config/config_registry.go --tag-format "configregistry || register || config || all" --mode file
+"${TAGGER}" --parent-dir "${REPO_ROOT}"/config/registry.go --tag-format "configregistry || register || config || all" --mode file
+# config/provider.go -> configprovider || register || config || all
+"${TAGGER}" --parent-dir "${REPO_ROOT}"/config/provider.go --tag-format "(configprovider || register || config || all) && !linter_run" --mode file
 # config/overrides.go -> configprovider || register || config || all
 "${TAGGER}" --parent-dir "${REPO_ROOT}"/config/overrides.go --tag-format "configprovider || register || config || all" --mode file
-# config/provider.go -> configprovider || register || config || all
-"${TAGGER}" --parent-dir "${REPO_ROOT}"/config/provider.go --tag-format "configprovider || register || config || all" --mode file
 # internal/controller/eks/clusterauth/controller.go -> eks || all
 "${TAGGER}" --parent-dir "${REPO_ROOT}"/internal/controller/eks/clusterauth/controller.go --tag-format "eks || all" --mode file
 # internal/controller/eks/clusterauth/eks.go -> eks || all
