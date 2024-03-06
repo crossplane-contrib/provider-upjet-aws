@@ -10,7 +10,7 @@ on:
 
 jobs:
   ci:
-    uses: ulucinar/uptest/.github/workflows/provider-ci.yml@tagger
+    uses: upbound/uptest/.github/workflows/provider-ci.yml@main
     with:
       go-version: "1.21"
       golangci-skip: true # we will run the linter via "make lint"
@@ -73,6 +73,7 @@ jobs:
 
       - name: Cache Linter Analysis
         uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        id: cache-analysis
         with:
           path: ${{ steps.go_cache.outputs.analysis_cache }}
           key: ${{ steps.go_cache.outputs.analysis_cache_key }}
@@ -85,6 +86,5 @@ jobs:
       - name: Lint
         env:
           GOLANGCI_LINT_CACHE: ${{ steps.go_cache.outputs.analysis_cache }}
-        run: |
-          echo ${GOLANGCI_LINT_CACHE} && \
-          make lint
+          SKIP_LINTER_ANALSIS: ${{ steps.cache-analysis.outputs.cache-hit }}
+        run: make lint

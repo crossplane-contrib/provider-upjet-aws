@@ -313,10 +313,11 @@ go.mod.cachedir:
 	@go env GOMODCACHE
 
 go.lint.analysiskey-interval:
-	@echo golangci-lint.cache-$$(( $$(date +%s) / 604800 ))-
+	@# cache is invalidated at least every 7 days
+	@echo -n golangci-lint.cache-$$(( $$(date +%s) / (7 * 86400) ))-
 
 go.lint.analysiskey:
-	@echo $$(make go.lint.analysiskey-interval)$$(sha1sum go.mod | cut -d' ' -f1)
+	@echo $$(make go.lint.analysiskey-interval)$$(sha1sum go.sum | cut -d' ' -f1)
 
 .PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir go.lint.analysiskey-interval go.lint.analysiskey run crds.clean $(TERRAFORM_PROVIDER_SCHEMA)
 
@@ -340,5 +341,8 @@ checkout-to-old-api:
 lint.init: build-lint-cache
 
 build-lint-cache: $(GOLANGCILINT)
-	./scripts/tag.sh && \
-	$(GOLANGCILINT) run -v --build-tags ec2,configregistry,configprovider,linter_run -v --concurrency 1
+	@$(INFO) Running golangci-lint with the analysis cache building phase.
+	@(./scripts/tag.sh && \
+	(([[ "${SKIP_LINTER_ANALSIS}" == "true" ]] && echo "Skipping analysis cache build phase because it's already been populated") && \
+	[[ "${SKIP_LINTER_ANALSIS}" == "true" ]] || $(GOLANGCILINT) run -v --build-tags ec2,configregistry,configprovider,linter_run -v --concurrency 1)) || $(FAIL)
+	@$(OK) Running golangci-lint with the analysis cache building phase.
