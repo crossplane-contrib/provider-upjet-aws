@@ -47,7 +47,14 @@ GO_REQUIRED_VERSION ?= 1.21
 # GOLANGCILINT_VERSION is inherited from build submodule by default.
 # Uncomment below if you need to override the version.
 GOLANGCILINT_VERSION ?= 1.55.2
-GO_LINT_ARGS ?= -v --build-tags all --timeout 60m
+
+# if running in a CI job, we will use build constraints and use the buildtagger
+# to generate the build tags.
+ifeq ($(RUN_BUILDTAGGER),true)
+GO_LINT_ARGS ?= -v --build-tags all
+BUILDTAGGER_VERSION ?= v0.12.0-rc.0.28.gdc5d6f3
+BUILDTAGGER_DOWNLOAD_URL ?= https://s3.us-west-2.amazonaws.com/upbound.official-providers-ci.releases/main/$(BUILDTAGGER_VERSION)/bin/$(SAFEHOST_PLATFORM)/buildtagger
+endif
 
 # SUBPACKAGES ?= $(shell find cmd/provider -type d -maxdepth 1 -mindepth 1 | cut -d/ -f3)
 SUBPACKAGES ?= monolith
@@ -338,11 +345,13 @@ kustomize-crds: output.init $(KUSTOMIZE) $(YQ)
 checkout-to-old-api:
 	CHECKOUT_RELEASE_VERSION=$(CHECKOUT_RELEASE_VERSION) hack/check-duplicate.sh
 
+ifeq ($(RUN_BUILDTAGGER),true)
 lint.init: build-lint-cache
 
 build-lint-cache: $(GOLANGCILINT)
 	@$(INFO) Running golangci-lint with the analysis cache building phase.
-	@(./scripts/tag.sh && \
-	(([[ "${SKIP_LINTER_ANALSIS}" == "true" ]] && echo "Skipping analysis cache build phase because it's already been populated") && \
-	[[ "${SKIP_LINTER_ANALSIS}" == "true" ]] || $(GOLANGCILINT) run -v --build-tags account,configregistry,configprovider,linter_run -v --concurrency 1)) || $(FAIL)
+	@(BUILDTAGGER_DOWNLOAD_URL=$(BUILDTAGGER_DOWNLOAD_URL) ./scripts/tag.sh && \
+	(([[ "${SKIP_LINTER_ANALYSIS}" == "true" ]] && $(OK) "Skipping analysis cache build phase because it's already been populated") && \
+	[[ "${SKIP_LINTER_ANALYSIS}" == "true" ]] || $(GOLANGCILINT) run -v --build-tags account,configregistry,configprovider,linter_run -v --concurrency 1 --disable-all --exclude '.*')) || $(FAIL)
 	@$(OK) Running golangci-lint with the analysis cache building phase.
+endif

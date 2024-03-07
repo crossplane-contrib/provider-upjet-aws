@@ -86,5 +86,6 @@ jobs:
       - name: Lint
         env:
           GOLANGCI_LINT_CACHE: ${{ steps.go_cache.outputs.analysis_cache }}
-          SKIP_LINTER_ANALSIS: ${{ steps.cache-analysis.outputs.cache-hit }}
+          SKIP_LINTER_ANALYSIS: ${{ steps.cache-analysis.outputs.cache-hit }}
+          RUN_BUILDTAGGER: true
         run: make lint
