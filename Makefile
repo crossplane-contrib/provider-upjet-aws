@@ -344,5 +344,5 @@ build-lint-cache: $(GOLANGCILINT)
 	@$(INFO) Running golangci-lint with the analysis cache building phase.
 	@(./scripts/tag.sh && \
 	(([[ "${SKIP_LINTER_ANALSIS}" == "true" ]] && echo "Skipping analysis cache build phase because it's already been populated") && \
-	[[ "${SKIP_LINTER_ANALSIS}" == "true" ]] || $(GOLANGCILINT) run -v --build-tags ec2,configregistry,configprovider,linter_run -v --concurrency 1)) || $(FAIL)
+	[[ "${SKIP_LINTER_ANALSIS}" == "true" ]] || $(GOLANGCILINT) run -v --build-tags account,configregistry,configprovider,linter_run -v --concurrency 1)) || $(FAIL)
 	@$(OK) Running golangci-lint with the analysis cache building phase.
