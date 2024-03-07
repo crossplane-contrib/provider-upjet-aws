@@ -1,6 +1,8 @@
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
   labels:
     testing.upbound.io/example-name: integration
   name: mydemoapi
@@ -13,6 +15,10 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: IntegrationResponse
 metadata:
+  annotations:
+    # Disabling import step because of the unstable ID
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
   labels:
     testing.upbound.io/example-name: integration
   name: mydemointegrationresponse
@@ -42,6 +48,9 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Integration
 metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
   labels:
     testing.upbound.io/example-name: integration
   name: mydemointegration
@@ -62,6 +71,9 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Method
 metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
   labels:
     testing.upbound.io/example-name: integration
   name: mydemomethod
@@ -80,6 +92,9 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: MethodResponse
 metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
   labels:
     testing.upbound.io/example-name: integration
   name: response-200
@@ -100,6 +115,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Resource
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
   labels:
     testing.upbound.io/example-name: integration
   name: mydemoresource
@@ -117,6 +134,8 @@ spec:
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Model
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta1/integrationresponse
   labels:
     testing.upbound.io/example-name: integration
   name: mydemomodel
