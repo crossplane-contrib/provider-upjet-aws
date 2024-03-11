@@ -352,6 +352,9 @@ lint.done: delete-build-tags
 
 build-lint-cache: $(GOLANGCILINT)
 	@$(INFO) Running golangci-lint with the analysis cache building phase.
+	@# we run the initial analysis cache build phase using the relatively
+	@# smaller API group "account", to keep the memory requirements at a
+	@# minimum.
 	@(BUILDTAGGER_DOWNLOAD_URL=$(BUILDTAGGER_DOWNLOAD_URL) ./scripts/tag.sh && \
 	(([[ "${SKIP_LINTER_ANALYSIS}" == "true" ]] && $(OK) "Skipping analysis cache build phase because it's already been populated") && \
 	[[ "${SKIP_LINTER_ANALYSIS}" == "true" ]] || $(GOLANGCILINT) run -v --build-tags account,configregistry,configprovider,linter_run -v --concurrency 1 --disable-all --exclude '.*')) || $(FAIL)
