@@ -57,6 +57,23 @@ func Configure(p *config.Provider) {
 			"MasterUserSecretInitParameters":     "ClusterMasterUserSecretInitParameters",
 			"MasterUserSecretObservation":        "ClusterMasterUserSecretObservation",
 		}
+		desc, _ := comments.New("If true, the password will be auto-generated and"+
+			" stored in the Secret referenced by the masterPasswordSecretRef field.",
+			comments.WithTFTag("-"))
+		r.TerraformResource.Schema["auto_generate_password"] = &schema.Schema{
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: desc.String(),
+		}
+		r.InitializerFns = append(r.InitializerFns,
+			common.PasswordGenerator(
+				"spec.forProvider.masterPasswordSecretRef",
+				"spec.forProvider.autoGeneratePassword",
+			))
+		r.TerraformResource.Schema["master_password"].Description = "Password for the " +
+			"master DB user. If you set autoGeneratePassword to true, the Secret" +
+			" referenced here will be created or updated with generated password" +
+			" if it does not already contain one."
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
