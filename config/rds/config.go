@@ -70,6 +70,10 @@ func Configure(p *config.Provider) {
 				"spec.forProvider.masterPasswordSecretRef",
 				"spec.forProvider.autoGeneratePassword",
 			))
+		r.TerraformResource.Schema["master_password"].Description = "Password for the " +
+			"master DB user. If you set autoGeneratePassword to true, the Secret" +
+			" referenced here will be created or updated with generated password" +
+			" if it does not already contain one."
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
