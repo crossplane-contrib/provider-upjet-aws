@@ -8,6 +8,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 )
 
+// test change in config
 // Configure adds configurations for the acm group.
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_acm_certificate_validation", func(r *config.Resource) {
