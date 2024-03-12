@@ -52,7 +52,7 @@ RUN_BUILDTAGGER ?= true
 # if RUN_BUILDTAGGER is set to "true", we will use build constraints
 # and use the buildtagger tool to generate the build tags.
 ifeq ($(RUN_BUILDTAGGER),true)
-GO_LINT_ARGS ?= -v --build-tags all
+GO_LINT_ARGS ?= -v --build-tags all --concurrency 3
 BUILDTAGGER_VERSION ?= v0.12.0-rc.0.28.gdc5d6f3
 BUILDTAGGER_DOWNLOAD_URL ?= https://s3.us-west-2.amazonaws.com/upbound.official-providers-ci.releases/main/$(BUILDTAGGER_VERSION)/bin/$(SAFEHOST_PLATFORM)/buildtagger
 endif
