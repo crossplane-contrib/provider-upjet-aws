@@ -14,6 +14,7 @@ jobs:
     with:
       go-version: "1.21"
       golangci-skip: true # we will run the linter via "make lint"
+      cleanup-disk: true
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
       UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
