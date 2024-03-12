@@ -48,6 +48,15 @@ GO_REQUIRED_VERSION ?= 1.21
 # Uncomment below if you need to override the version.
 GOLANGCILINT_VERSION ?= 1.55.2
 
+RUN_BUILDTAGGER ?= true
+# if RUN_BUILDTAGGER is set to "true", we will use build constraints
+# and use the buildtagger tool to generate the build tags.
+ifeq ($(RUN_BUILDTAGGER),true)
+GO_LINT_ARGS ?= -v --build-tags all
+BUILDTAGGER_VERSION ?= v0.12.0-rc.0.28.gdc5d6f3
+BUILDTAGGER_DOWNLOAD_URL ?= https://s3.us-west-2.amazonaws.com/upbound.official-providers-ci.releases/main/$(BUILDTAGGER_VERSION)/bin/$(SAFEHOST_PLATFORM)/buildtagger
+endif
+
 # SUBPACKAGES ?= $(shell find cmd/provider -type d -maxdepth 1 -mindepth 1 | cut -d/ -f3)
 SUBPACKAGES ?= monolith
 GO_STATIC_PACKAGES ?= $(GO_PROJECT)/cmd/generator ${SUBPACKAGES:%=$(GO_PROJECT)/cmd/provider/%}
@@ -311,7 +320,14 @@ go.cachedir:
 go.mod.cachedir:
 	@go env GOMODCACHE
 
-.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir run crds.clean $(TERRAFORM_PROVIDER_SCHEMA)
+go.lint.analysiskey-interval:
+	@# cache is invalidated at least every 7 days
+	@echo -n golangci-lint.cache-$$(( $$(date +%s) / (7 * 86400) ))-
+
+go.lint.analysiskey:
+	@echo $$(make go.lint.analysiskey-interval)$$(sha1sum go.sum | cut -d' ' -f1)
+
+.PHONY: cobertura reviewable submodules fallthrough go.mod.cachedir go.cachedir go.lint.analysiskey-interval go.lint.analysiskey run crds.clean $(TERRAFORM_PROVIDER_SCHEMA)
 
 build.init: kustomize-crds
 
@@ -325,7 +341,27 @@ kustomize-crds: output.init $(KUSTOMIZE) $(YQ)
 	XDG_CONFIG_HOME=$(PWD)/package $(KUSTOMIZE) build --enable-alpha-plugins $(OUTPUT_DIR)/package/kustomize -o $(OUTPUT_DIR)/package/crds.yaml || $(FAIL)
 	@$(OK) Kustomizing CRDs.
 
+.PHONY: kustomize-crds
+
 checkout-to-old-api:
 	CHECKOUT_RELEASE_VERSION=$(CHECKOUT_RELEASE_VERSION) hack/check-duplicate.sh
 
-.PHONY: kustomize-crds
+ifeq ($(RUN_BUILDTAGGER),true)
+lint.init: build-lint-cache
+lint.done: delete-build-tags
+
+build-lint-cache: $(GOLANGCILINT)
+	@$(INFO) Running golangci-lint with the analysis cache building phase.
+	@# we run the initial analysis cache build phase using the relatively
+	@# smaller API group "account", to keep the memory requirements at a
+	@# minimum.
+	@(BUILDTAGGER_DOWNLOAD_URL=$(BUILDTAGGER_DOWNLOAD_URL) ./scripts/tag.sh && \
+	(([[ "${SKIP_LINTER_ANALYSIS}" == "true" ]] && $(OK) "Skipping analysis cache build phase because it's already been populated") && \
+	[[ "${SKIP_LINTER_ANALYSIS}" == "true" ]] || $(GOLANGCILINT) run -v --build-tags account,configregistry,configprovider,linter_run -v --concurrency 3 --disable-all --exclude '.*')) || $(FAIL)
+	@$(OK) Running golangci-lint with the analysis cache building phase.
+
+delete-build-tags:
+	@$(INFO) Untagging source files.
+	@EXTRA_BUILDTAGGER_ARGS="--delete" RESTORE_DEEPCOPY_TAGS="true" ./scripts/tag.sh || $(FAIL)
+	@$(OK) Untagging source files.
+endif
