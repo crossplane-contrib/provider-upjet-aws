@@ -39,6 +39,7 @@ jobs:
       branch_name: ${{ github.event.inputs.branch_name }}
       version: ${{ github.event.inputs.version }}
       go-version: 1.21
+      cleanup-disk: true
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR_RC }}
       UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW_RC }}
