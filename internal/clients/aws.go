@@ -28,7 +28,6 @@ const (
 
 type SetupConfig struct {
 	TerraformProvider *schema.Provider
-	AWSClient         *xpprovider.AWSClient
 }
 
 func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
@@ -134,11 +133,10 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	}
 
 	// only used for retrieving the ServicePackages from the singleton provider instance
-	// sharedMeta := config.AWSClient.ServicePackages
-	// #nosec G103
+	p := config.TerraformProvider.Meta()
 	tfAwsConnsClient, diags := tfAwsConnsCfg.GetClient(ctx, &xpprovider.AWSClient{
-		ServicePackages: config.AWSClient.ServicePackages,
-		// ServicePackages: (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(sharedMeta).Pointer())).ServicePackages,
+		// #nosec G103
+		ServicePackages: (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p).Pointer())).ServicePackages,
 	})
 	if diags.HasError() {
 		return errors.Errorf("cannot construct TF AWS Client from TF AWS Config, %v", diags)
