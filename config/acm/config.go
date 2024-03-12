@@ -9,6 +9,7 @@ import (
 )
 
 // Configure adds configurations for the acm group.
+// test change
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_acm_certificate_validation", func(r *config.Resource) {
 		r.References = map[string]config.Reference{
