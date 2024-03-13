@@ -69,15 +69,15 @@ type TopicSubscriptionInitParameters struct {
 	SubscriptionRoleArnSelector *v1.Selector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the SNS topic to subscribe to.
-	// +crossplane:generate:reference:type=Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
-	// Reference to a Topic to populate topicArn.
+	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
 	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
-	// Selector for a Topic to populate topicArn.
+	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
 	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
@@ -208,16 +208,16 @@ type TopicSubscriptionParameters struct {
 	SubscriptionRoleArnSelector *v1.Selector `json:"subscriptionRoleArnSelector,omitempty" tf:"-"`
 
 	// ARN of the SNS topic to subscribe to.
-	// +crossplane:generate:reference:type=Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
-	// Reference to a Topic to populate topicArn.
+	// Reference to a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
 	TopicArnRef *v1.Reference `json:"topicArnRef,omitempty" tf:"-"`
 
-	// Selector for a Topic to populate topicArn.
+	// Selector for a Topic in sns to populate topicArn.
 	// +kubebuilder:validation:Optional
 	TopicArnSelector *v1.Selector `json:"topicArnSelector,omitempty" tf:"-"`
 }
