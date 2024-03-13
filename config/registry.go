@@ -8,6 +8,7 @@ import (
 	"context"
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
+
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/registry/reference"
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"

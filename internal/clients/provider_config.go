@@ -42,7 +42,6 @@ const (
 	authKeyWebIdentity = "WebIdentity"
 	authKeyUpbound     = "Upbound"
 	// authKeySAML        = "SAML"
-	// authKeySecret = "Secret"
 
 	envWebIdentityTokenFile = "AWS_WEB_IDENTITY_TOKEN_FILE"
 	envWebIdentityRoleARN   = "AWS_ROLE_ARN"
@@ -85,10 +84,12 @@ func getRegion(obj runtime.Object) (string, error) {
 	return r, err
 }
 
-// GetAWSConfigViaProviderConfig produces an AWS config from the specified
-// v1beta1.ProviderConfig that can be used to authenticate to AWS
-func GetAWSConfigViaProviderConfig(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig) (*aws.Config, error) { // nolint:gocyclo
-	region, err := getRegion(mg)
+// GetAWSConfigWithoutTracking produces an AWS config from the specified
+// v1beta1.ProviderConfig that can be used to authenticate to AWS.
+// ProviderConfigUsage is not tracked when this function is called.
+// The caller is responsible for tracking the usage if needed.
+func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ProviderConfig) (*aws.Config, error) { // nolint:gocyclo
+	region, err := getRegion(obj)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot get region")
 	}
@@ -127,11 +128,11 @@ func GetAWSConfigViaProviderConfig(ctx context.Context, c client.Client, mg reso
 	return SetResolver(pc, cfg), nil
 }
 
-// GetAWSConfigWithProviderUsage obtains the provider config referenced by the
+// GetAWSConfigWithTracking obtains the provider config referenced by the
 // specified managed resource and produces a config that can be used to
 // authenticate to AWS and tracks the ProviderConfigUsage. Useful for obtaining
 // AWS config for non-upjet based MR controllers.
-func GetAWSConfigWithProviderUsage(ctx context.Context, c client.Client, mg resource.Managed) (*aws.Config, error) { // nolint:gocyclo
+func GetAWSConfigWithTracking(ctx context.Context, c client.Client, mg resource.Managed) (*aws.Config, error) {
 	if mg.GetProviderConfigReference() == nil {
 		return nil, errors.New("no providerConfigRef provided")
 	}
@@ -144,7 +145,7 @@ func GetAWSConfigWithProviderUsage(ctx context.Context, c client.Client, mg reso
 	if err := t.Track(ctx, mg); err != nil {
 		return nil, errors.Wrap(err, "cannot track ProviderConfig usage")
 	}
-	return GetAWSConfigViaProviderConfig(ctx, c, mg, pc)
+	return GetAWSConfigWithoutTracking(ctx, c, mg, pc)
 }
 
 type awsEndpointResolverAdaptorWithOptions func(service, region string, options interface{}) (aws.Endpoint, error)

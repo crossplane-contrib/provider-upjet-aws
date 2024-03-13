@@ -16,6 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -23,7 +24,7 @@ import (
 )
 
 const (
-	keyAccountId = "account_id"
+	keyAccountID = "account_id"
 )
 
 type SetupConfig struct {
@@ -34,15 +35,15 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
 		if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
-			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced Provider: %s", mg.GetProviderConfigReference().Name)
+			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced ProviderConfig: %q", mg.GetProviderConfigReference().Name)
 		}
 		t := resource.NewProviderConfigUsageTracker(c, &v1beta1.ProviderConfigUsage{})
 		if err := t.Track(ctx, mg); err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "cannot track ProviderConfig usage")
+			return terraform.Setup{}, errors.Wrapf(err, "cannot track ProviderConfig usage for %q", mg.GetProviderConfigReference().Name)
 		}
 
 		ps := terraform.Setup{}
-		awsCfg, err := GetAWSConfigWithDefaultRegion(ctx, c, mg, pc)
+		awsCfg, err := getAWSConfigWithDefaultRegion(ctx, c, mg, pc)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get aws config")
 		} else if awsCfg == nil {
@@ -61,12 +62,12 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 			}
 		}
 		ps.ClientMetadata = map[string]string{
-			keyAccountId: account,
+			keyAccountID: account,
 		}
 		if config.TerraformProvider == nil {
 			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
-		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg, creds, pc), "could not configure the no-fork AWS client")
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg.Region, creds, pc), "could not configure the no-fork AWS client")
 	}
 }
 
@@ -80,12 +81,18 @@ func getAccountId(ctx context.Context, cfg *aws.Config, creds aws.Credentials) (
 	return *identity.Account, nil
 }
 
-func GetAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, mg resource.Managed, pc *v1beta1.ProviderConfig) (*aws.Config, error) {
-	cfg, err := GetAWSConfigViaProviderConfig(ctx, c, mg, pc)
+// getAWSConfigWithDefaultRegion is a utility function that wraps the
+// GetAWSConfigWithoutTracking and fills empty region in the returned for
+// "iam.aws.upbound.io" group with a default "us-east-1" region. Although
+// this does not have an effect on the resource, as IAM group resources
+// has no concept of region, this is done to conform with the TF AWS config
+// which requires non-empty region
+func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ProviderConfig) (*aws.Config, error) {
+	cfg, err := GetAWSConfigWithoutTracking(ctx, c, obj, pc)
 	if err != nil {
-		return nil, errors.Wrap(err, "cannot get AWS config")
+		return nil, err
 	}
-	if cfg.Region == "" && mg.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
+	if cfg.Region == "" && obj.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
 		cfg.Region = "us-east-1"
 	}
 	return cfg, nil
@@ -102,22 +109,21 @@ func (m *metaOnlyPrimary) Meta() any {
 // configureNoForkAWSClient populates the supplied *terraform.Setup with
 // Terraform Plugin SDK style AWS client (Meta) and Terraform Plugin Framework
 // style FrameworkProvider
-func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig, awsCfg *aws.Config, creds aws.Credentials, pc *v1beta1.ProviderConfig) error { //nolint:gocyclo
+func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig, region string, creds aws.Credentials, pc *v1beta1.ProviderConfig) error { //nolint:gocyclo
 	tfAwsConnsCfg := xpprovider.AWSConfig{
-		AccessKey:                     creds.AccessKeyID,
-		EC2MetadataServiceEnableState: imds.ClientDefaultEnableState,
-		Endpoints:                     map[string]string{},
-		Region:                        awsCfg.Region,
-		S3UsePathStyle:                pc.Spec.S3UsePathStyle,
-		SecretKey:                     creds.SecretAccessKey,
-		SkipCredsValidation:           true, // disabled to prevent extra AWS STS call
-		SkipRegionValidation:          pc.Spec.SkipRegionValidation,
-		SkipRequestingAccountId:       true, // disabled to prevent extra AWS STS call
-		Token:                         creds.SessionToken,
+		AccessKey:               creds.AccessKeyID,
+		Endpoints:               map[string]string{},
+		Region:                  region,
+		S3UsePathStyle:          pc.Spec.S3UsePathStyle,
+		SecretKey:               creds.SecretAccessKey,
+		SkipCredsValidation:     true, // disabled to prevent extra AWS STS call
+		SkipRegionValidation:    pc.Spec.SkipRegionValidation,
+		SkipRequestingAccountId: true, // disabled to prevent extra AWS STS call
+		Token:                   creds.SessionToken,
 	}
 
 	if pc.Spec.SkipMetadataApiCheck {
-		tfAwsConnsCfg.EC2MetadataServiceEnableState = imds.ClientEnabled
+		tfAwsConnsCfg.EC2MetadataServiceEnableState = imds.ClientDisabled
 	}
 
 	if pc.Spec.Endpoint != nil {
@@ -147,7 +153,7 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	// the resulting TF AWS Client has empty account ID.
 	// Fill with previously calculated account ID.
 	// No need for nil check on ps.ClientMetadata per golang spec.
-	tfAwsConnsClient.AccountID = ps.ClientMetadata[keyAccountId]
+	tfAwsConnsClient.AccountID = ps.ClientMetadata[keyAccountID]
 	ps.Meta = tfAwsConnsClient
 	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: tfAwsConnsClient})
 	ps.FrameworkProvider = fwProvider
