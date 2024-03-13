@@ -22,14 +22,14 @@ type AccessKeyInitParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// IAM user to associate with this access key.
-	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
-	// Reference to a User to populate user.
+	// Reference to a User in iam to populate user.
 	// +kubebuilder:validation:Optional
 	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
 
-	// Selector for a User to populate user.
+	// Selector for a User in iam to populate user.
 	// +kubebuilder:validation:Optional
 	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 }
@@ -72,15 +72,15 @@ type AccessKeyParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// IAM user to associate with this access key.
-	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
-	// Reference to a User to populate user.
+	// Reference to a User in iam to populate user.
 	// +kubebuilder:validation:Optional
 	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
 
-	// Selector for a User to populate user.
+	// Selector for a User in iam to populate user.
 	// +kubebuilder:validation:Optional
 	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 }

@@ -75,7 +75,7 @@ spec:
               forProvider:
                 properties:
                   groupRefs:
-                    description: References to Group to populate groups.
+                    description: References to Group in iam to populate groups.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -112,7 +112,7 @@ spec:
                       type: object
                     type: array
                   groupSelector:
-                    description: Selector for a list of Group to populate groups.
+                    description: Selector for a list of Group in iam to populate groups.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -161,7 +161,7 @@ spec:
                     description: The name of the IAM User to add to groups
                     type: string
                   userRef:
-                    description: Reference to a User to populate user.
+                    description: Reference to a User in iam to populate user.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -195,7 +195,7 @@ spec:
                     - name
                     type: object
                   userSelector:
-                    description: Selector for a User to populate user.
+                    description: Selector for a User in iam to populate user.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -249,7 +249,7 @@ spec:
                   autoscaler.
                 properties:
                   groupRefs:
-                    description: References to Group to populate groups.
+                    description: References to Group in iam to populate groups.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -286,7 +286,7 @@ spec:
                       type: object
                     type: array
                   groupSelector:
-                    description: Selector for a list of Group to populate groups.
+                    description: Selector for a list of Group in iam to populate groups.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -335,7 +335,7 @@ spec:
                     description: The name of the IAM User to add to groups
                     type: string
                   userRef:
-                    description: Reference to a User to populate user.
+                    description: Reference to a User in iam to populate user.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -369,7 +369,7 @@ spec:
                     - name
                     type: object
                   userSelector:
-                    description: Selector for a User to populate user.
+                    description: Selector for a User in iam to populate user.
                     properties:
                       matchControllerRef:
                         description: |-
