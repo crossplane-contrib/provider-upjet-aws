@@ -1,6 +1,7 @@
 run:
   timeout: 60m
   show-stats: true
+  concurrency: 3
 
 output:
   # colored-line-number|line-number|json|tab|checkstyle|code-climate, default is "colored-line-number"
