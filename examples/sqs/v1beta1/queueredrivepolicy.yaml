@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: sqs.aws.upbound.io/v1beta1
 kind: QueueRedrivePolicy
 metadata:
@@ -53,5 +57,3 @@ spec:
   forProvider:
     name: examplequeue
     region: us-east-1
-
-

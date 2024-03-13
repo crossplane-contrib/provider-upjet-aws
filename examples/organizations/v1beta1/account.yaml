@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 # There are issues with deletions of this resource: https://repost.aws/questions/QUnzu7Z5CSRI-YYiNtI5AC5Q/can-not-remove-account-from-organization 
 apiVersion: organizations.aws.upbound.io/v1beta1
 kind: Account

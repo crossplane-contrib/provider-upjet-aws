@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: inspector.aws.upbound.io/v1beta1
 kind: AssessmentTarget
 metadata:
@@ -10,5 +14,3 @@ spec:
   forProvider:
     name: example
     region: us-west-1
-
-
