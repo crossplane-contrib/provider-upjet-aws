@@ -1,0 +1,273 @@
+# This tests the Connector resource without requiring an actual kafka cluster,
+# which is very slow to create. Creating the connector times out waiting for
+# it to report a "Running" status in aws, but the status is not exposed in
+# the terraform provider, so the subsequent crossplane observe call succeeds.
+# As a result, the test actually passes, and validates that crossplane can
+# Create, Import and Delete this resource.
+apiVersion: kafkaconnect.aws.upbound.io/v1beta1
+kind: Connector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: connector-nokafka
+spec:
+  forProvider:
+    capacity:
+      - autoscaling:
+          - maxWorkerCount: 2
+            mcuCount: 1
+            minWorkerCount: 1
+            scaleInPolicy:
+              - cpuUtilizationPercentage: 20
+            scaleOutPolicy:
+              - cpuUtilizationPercentage: 80
+    connectorConfiguration:
+      connector.class: org.apache.kafka.connect.file.FileStreamSinkConnector
+      tasks.max: "1"
+      topics: example
+    kafkaCluster:
+      - apacheKafkaCluster:
+          - bootstrapServers: "localhost:9092"
+            vpc:
+              - securityGroupSelector:
+                  matchLabels:
+                    testing.upbound.io/example-name: connector-nokafka
+                subnetSelector:
+                  matchLabels:
+                    testing.upbound.io/example-name: connector-nokafka
+    kafkaClusterClientAuthentication:
+      - authenticationType: NONE
+    kafkaClusterEncryptionInTransit:
+      - encryptionType: PLAINTEXT
+    kafkaconnectVersion: 2.7.1
+    logDelivery:
+      - workerLogDelivery:
+          - firehose:
+              - enabled: false
+            cloudwatchLogs:
+              - enabled: true
+                logGroupSelector:
+                  matchLabels:
+                    testing.upbound.io/example-name: connector-nokafka
+    name: connector-nokafka
+    plugin:
+      - customPlugin:
+          - arnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: connector-nokafka
+            revision: 1
+    region: us-east-2
+    serviceExecutionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector-nokafka
+
+---
+apiVersion: kafkaconnect.aws.upbound.io/v1beta1
+kind: CustomPlugin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: example
+spec:
+  forProvider:
+    contentType: ZIP
+    location:
+      - s3:
+          - bucketArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: connector-nokafka
+            fileKeySelector:
+              matchLabels:
+                testing.upbound.io/example-name: connector-nokafka
+    name: empty-example
+    region: us-east-2
+
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: connector-nokafka
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "kafkaconnect.amazonaws.com",
+                "firehose.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+    managedPolicyArns:
+      - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-east-2
+    forceDestroy: true
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/customplugin
+    uptest.upbound.io/disable-import: "true"
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector-nokafka
+    # An actual zip file with no data in it
+    contentBase64: >
+      UEsDBAoAAAAAAPpkXlcAAAAAAAAAAAAAAAAFABwAZW1wdHlVVAkAA4gGQGWIBkBldXgLAAEE6AMAAAToAwAAUEsBAh4DCgAAAAAA+mReVwAAAAAAAAAAAAAAAAUAGAAAAAAAAAAAALSBAAAAAGVtcHR5VVQFAAOIBkBldXgLAAEE6AMAAAToAwAAUEsFBgAAAAABAAEASwAAAD8AAAAAAA==
+    contentType: application/zip
+    key: empty.zip
+    region: us-east-2
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector-nokafka
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: subnet-az1
+spec:
+  forProvider:
+    availabilityZone: us-east-2a
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector-nokafka
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: subnet-az2
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector-nokafka
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: vpc
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    region: us-east-2
+
+---
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: test
+spec:
+  deletionPolicy: Orphan
+  forProvider:
+    region: us-east-2
+    retentionInDays: 1
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: ingress
+spec:
+  forProvider:
+    region: us-east-2
+    cidrBlocks:
+      - "0.0.0.0/0"
+    fromPort: 0
+    toPort: 0
+    protocol: "all"
+    securityGroupIdRef:
+      name: sg
+    type: ingress
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  labels:
+    testing.upbound.io/example-name: connector-nokafka
+  name: egress
+spec:
+  forProvider:
+    region: us-east-2
+    cidrBlocks:
+      - "0.0.0.0/0"
+    fromPort: 0
+    toPort: 0
+    protocol: "all"
+    securityGroupIdRef:
+      name: sg
+    type: egress
