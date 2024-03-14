@@ -14,5 +14,6 @@ repository maintainers in their own `OWNERS.md` file.
 
 * Alper Ulucinar <alper@upbound.com> ([ulucinar](https://github.com/ulucinar))
 * Sergen Yalcin <sergen@upbound.com> ([sergenyalcin](https://github.com/sergenyalcin))
+* Matt Bush <mbbush@gmail.com> ([mbbush](https://github.com/mbbush))
 
 See [CODEOWNERS](./CODEOWNERS) for automatic PR assignment.
