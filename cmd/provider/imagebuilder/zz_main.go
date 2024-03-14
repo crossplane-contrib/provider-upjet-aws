@@ -7,6 +7,8 @@ package main
 import (
 	"context"
 	"fmt"
+	"io"
+	"log"
 	"os"
 	"path/filepath"
 	"time"
@@ -84,9 +86,11 @@ func main() {
 	)
 	setupConfig := &clients.SetupConfig{}
 	kingpin.MustParse(app.Parse(os.Args[1:]))
+	log.Default().SetOutput(io.Discard)
+	ctrl.SetLogger(zap.New(zap.WriteTo(io.Discard)))
 
 	zl := zap.New(zap.UseDevMode(*debug))
-	log := logging.NewLogrLogger(zl.WithName("provider-aws"))
+	logr := logging.NewLogrLogger(zl.WithName("provider-aws"))
 	if *debug {
 		// The controller-runtime runs with a no-op logger by default. It is
 		// *very* verbose even at info level, so we only provide it a real
@@ -96,7 +100,7 @@ func main() {
 
 	// currently, we configure the jitter to be the 5% of the poll interval
 	pollJitter := time.Duration(float64(*pollInterval) * 0.05)
-	log.Debug("Starting", "sync-interval", syncInterval.String(),
+	logr.Debug("Starting", "sync-interval", syncInterval.String(),
 		"poll-interval", pollInterval.String(), "poll-jitter", pollJitter, "max-reconcile-rate", *maxReconcileRate)
 
 	cfg, err := ctrl.GetConfig()
@@ -148,7 +152,7 @@ func main() {
 	setupConfig.TerraformProvider = provider.TerraformProvider
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
-			Logger:                  log,
+			Logger:                  logr,
 			GlobalRateLimiter:       ratelimiter.NewGlobal(*maxReconcileRate),
 			PollInterval:            *pollInterval,
 			MaxConcurrentReconciles: *maxReconcileRate,
@@ -157,22 +161,22 @@ func main() {
 		Provider:              provider,
 		SetupFn:               clients.SelectTerraformSetup(setupConfig),
 		PollJitter:            pollJitter,
-		OperationTrackerStore: tjcontroller.NewOperationStore(log),
+		OperationTrackerStore: tjcontroller.NewOperationStore(logr),
 		StartWebhooks:         *certsDir != "",
 	}
 
 	if *enableManagementPolicies {
 		o.Features.Enable(features.EnableBetaManagementPolicies)
-		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
+		logr.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
 
 	if *enableExternalSecretStores {
 		o.SecretStoreConfigGVK = &v1alpha1.StoreConfigGroupVersionKind
-		log.Info("Alpha feature enabled", "flag", features.EnableAlphaExternalSecretStores)
+		logr.Info("Alpha feature enabled", "flag", features.EnableAlphaExternalSecretStores)
 
 		o.ESSOptions = &tjcontroller.ESSOptions{}
 		if *essTLSCertsPath != "" {
-			log.Info("ESS TLS certificates path is set. Loading mTLS configuration.")
+			logr.Info("ESS TLS certificates path is set. Loading mTLS configuration.")
 			tCfg, err := certificates.LoadMTLSConfig(filepath.Join(*essTLSCertsPath, "ca.crt"), filepath.Join(*essTLSCertsPath, "tls.crt"), filepath.Join(*essTLSCertsPath, "tls.key"), false)
 			kingpin.FatalIfError(err, "Cannot load ESS TLS config.")
 
