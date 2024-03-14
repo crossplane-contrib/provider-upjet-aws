@@ -143,10 +143,9 @@ func main() {
 	kingpin.FatalIfError(resolverapis.BuildScheme(apis.AddToSchemes), "Cannot register the AWS APIs with the API resolver's runtime scheme")
 
 	ctx := context.Background()
-	provider, awsClient, err := config.GetProvider(ctx, false)
+	provider, err := config.GetProvider(ctx, false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
 	setupConfig.TerraformProvider = provider.TerraformProvider
-	setupConfig.AWSClient = awsClient
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  log,

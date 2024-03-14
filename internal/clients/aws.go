@@ -6,18 +6,17 @@ package clients
 
 import (
 	"context"
-	"os"
 	"reflect"
 	"unsafe"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/terraform"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -25,39 +24,26 @@ import (
 )
 
 const (
-	// Terraform provider configuration keys for AWS credentials.
-	keyRegion                    = "region"
-	keyAccountId                 = "account_id"
-	keySessionToken              = "token"
-	keyAccessKeyID               = "access_key"
-	keySecretAccessKey           = "secret_key"
-	keyAssumeRoleWithWebIdentity = "assume_role_with_web_identity"
-	keyRoleArn                   = "role_arn"
-	keySessionName               = "session_name"
-	keyWebIdentityTokenFile      = "web_identity_token_file"
-	keyWebIdentityToken          = "web_identity_token"
-	keySkipCredsValidation       = "skip_credentials_validation"
-	keyS3UsePathStyle            = "s3_use_path_style"
-	keySkipMetadataApiCheck      = "skip_metadata_api_check"
-	keySkipRegionValidation      = "skip_region_validation"
-	keySkipReqAccountId          = "skip_requesting_account_id"
-	keyEndpoints                 = "endpoints"
+	keyAccountID = "account_id"
 )
 
 type SetupConfig struct {
 	TerraformProvider *schema.Provider
-	AWSClient         *xpprovider.AWSClient
 }
 
 func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
-		var err error
-		if err = c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
-			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced Provider: %s", mg.GetProviderConfigReference().Name)
+		if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
+			return terraform.Setup{}, errors.Wrapf(err, "cannot get referenced ProviderConfig: %q", mg.GetProviderConfigReference().Name)
 		}
+		t := resource.NewProviderConfigUsageTracker(c, &v1beta1.ProviderConfigUsage{})
+		if err := t.Track(ctx, mg); err != nil {
+			return terraform.Setup{}, errors.Wrapf(err, "cannot track ProviderConfig usage for %q", mg.GetProviderConfigReference().Name)
+		}
+
 		ps := terraform.Setup{}
-		awsCfg, err := getAWSConfig(ctx, c, mg)
+		awsCfg, err := getAWSConfigWithDefaultRegion(ctx, c, mg, pc)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "cannot get aws config")
 		} else if awsCfg == nil {
@@ -67,6 +53,7 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
+
 		account := "000000000"
 		if !pc.Spec.SkipCredsValidation {
 			account, err = getAccountId(ctx, awsCfg, creds)
@@ -74,135 +61,18 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 				return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
 			}
 		}
-
 		ps.ClientMetadata = map[string]string{
-			keyAccountId: account,
+			keyAccountID: account,
 		}
-
-		if len(pc.Spec.AssumeRoleChain) > 0 || pc.Spec.Endpoint != nil {
-			err = DefaultTerraformSetupBuilder(ctx, pc, &ps, awsCfg, creds)
-			if err != nil {
-				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
-			}
-		} else {
-			err = pushDownTerraformSetupBuilder(ctx, c, pc, &ps, awsCfg)
-			if err != nil {
-				return terraform.Setup{}, errors.Wrap(err, "cannot build terraform configuration")
-			}
-		}
-
 		if config.TerraformProvider == nil {
 			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
-
-		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config), "could not configure the no-fork AWS client")
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg.Region, creds, pc), "could not configure the no-fork AWS client")
 	}
 }
 
-func pushDownTerraformSetupBuilder(ctx context.Context, c client.Client, pc *v1beta1.ProviderConfig, ps *terraform.Setup, cfg *aws.Config) error { //nolint:gocyclo
-	if len(pc.Spec.AssumeRoleChain) > 0 || pc.Spec.Endpoint != nil {
-		return errors.New("shared scheduler cannot be used because the length of assume role chain array " +
-			"is more than 0 or endpoint configuration is not nil")
-	}
-
-	ps.Configuration = map[string]any{
-		keyRegion: cfg.Region,
-	}
-
-	switch s := pc.Spec.Credentials.Source; s { //nolint:exhaustive
-	case authKeyWebIdentity:
-		if pc.Spec.Credentials.WebIdentity == nil {
-			return errors.New(`spec.credentials.webIdentity of ProviderConfig cannot be nil when the credential source is "WebIdentity"`)
-		}
-		webIdentityConfig := map[string]any{
-			keyRoleArn: aws.ToString(pc.Spec.Credentials.WebIdentity.RoleARN),
-		}
-		if pc.Spec.Credentials.WebIdentity.TokenConfig != nil {
-			tokenSelector := xpv1.CommonCredentialSelectors{
-				Fs:        pc.Spec.Credentials.WebIdentity.TokenConfig.Fs,
-				SecretRef: pc.Spec.Credentials.WebIdentity.TokenConfig.SecretRef,
-			}
-			creds, err := resource.CommonCredentialExtractor(ctx, pc.Spec.Credentials.WebIdentity.TokenConfig.Source, c, tokenSelector)
-			if err != nil {
-				return errors.Wrap(err, "cannot extract token")
-			}
-			webIdentityConfig[keyWebIdentityToken] = string(creds)
-		} else {
-			// fallback to deprecated behavior with environment variables
-			webIdentityConfig[keyWebIdentityTokenFile] = os.Getenv(envWebIdentityTokenFile)
-		}
-		if pc.Spec.Credentials.WebIdentity.RoleSessionName != "" {
-			webIdentityConfig[keySessionName] = pc.Spec.Credentials.WebIdentity.RoleSessionName
-		}
-		ps.Configuration[keyAssumeRoleWithWebIdentity] = []any{
-			webIdentityConfig,
-		}
-	case authKeyUpbound:
-		if pc.Spec.Credentials.Upbound == nil || pc.Spec.Credentials.Upbound.WebIdentity == nil {
-			return errors.New(`spec.credentials.upbound.webIdentity of ProviderConfig cannot be nil when the credential source is "Upbound"`)
-		}
-		webIdentityConfig := map[string]any{
-			keyRoleArn:              aws.ToString(pc.Spec.Credentials.Upbound.WebIdentity.RoleARN),
-			keyWebIdentityTokenFile: upboundProviderIdentityTokenFile,
-		}
-		if pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName != "" {
-			webIdentityConfig[keySessionName] = pc.Spec.Credentials.Upbound.WebIdentity.RoleSessionName
-		}
-		ps.Configuration[keyAssumeRoleWithWebIdentity] = []any{
-			webIdentityConfig,
-		}
-	case authKeySecret:
-		data, err := resource.CommonCredentialExtractor(ctx, s, c, pc.Spec.Credentials.CommonCredentialSelectors)
-		if err != nil {
-			return errors.Wrap(err, "cannot get credentials")
-		}
-		cfg, err = UseProviderSecret(ctx, data, DefaultSection, cfg.Region)
-		if err != nil {
-			return errors.Wrap(err, errAWSConfig)
-		}
-		creds, err := cfg.Credentials.Retrieve(ctx)
-		if err != nil {
-			return errors.Wrap(err, "failed to retrieve aws credentials from aws config")
-		}
-		ps.Configuration = map[string]any{
-			keyRegion:          cfg.Region,
-			keyAccessKeyID:     creds.AccessKeyID,
-			keySecretAccessKey: creds.SecretAccessKey,
-			keySessionToken:    creds.SessionToken,
-		}
-	}
-	return nil
-}
-
-func DefaultTerraformSetupBuilder(_ context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup, cfg *aws.Config, creds aws.Credentials) error {
-	ps.Configuration = map[string]any{
-		keyRegion:               cfg.Region,
-		keyAccessKeyID:          creds.AccessKeyID,
-		keySecretAccessKey:      creds.SecretAccessKey,
-		keySessionToken:         creds.SessionToken,
-		keySkipCredsValidation:  pc.Spec.SkipCredsValidation,
-		keyS3UsePathStyle:       pc.Spec.S3UsePathStyle,
-		keySkipRegionValidation: pc.Spec.SkipRegionValidation,
-		keySkipMetadataApiCheck: pc.Spec.SkipMetadataApiCheck,
-		keySkipReqAccountId:     pc.Spec.SkipReqAccountId,
-	}
-
-	if pc.Spec.Endpoint != nil {
-		if pc.Spec.Endpoint.URL.Static != nil {
-			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
-				return errors.New("endpoint.url.static cannot be empty")
-			} else {
-				endpoints := make(map[string]string)
-				for _, service := range pc.Spec.Endpoint.Services {
-					endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
-				}
-				ps.Configuration[keyEndpoints] = []any{endpoints}
-			}
-		}
-	}
-	return nil
-}
-
+// getAccountId retrieves the account ID associated with the given credentials.
+// Results are cached.
 func getAccountId(ctx context.Context, cfg *aws.Config, creds aws.Credentials) (string, error) {
 	identity, err := GlobalCallerIdentityCache.GetCallerIdentity(ctx, *cfg, creds)
 	if err != nil {
@@ -211,12 +81,18 @@ func getAccountId(ctx context.Context, cfg *aws.Config, creds aws.Credentials) (
 	return *identity.Account, nil
 }
 
-func getAWSConfig(ctx context.Context, c client.Client, mg resource.Managed) (*aws.Config, error) {
-	cfg, err := GetAWSConfig(ctx, c, mg)
+// getAWSConfigWithDefaultRegion is a utility function that wraps the
+// GetAWSConfigWithoutTracking and fills empty region in the returned for
+// "iam.aws.upbound.io" group with a default "us-east-1" region. Although
+// this does not have an effect on the resource, as IAM group resources
+// has no concept of region, this is done to conform with the TF AWS config
+// which requires non-empty region
+func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj runtime.Object, pc *v1beta1.ProviderConfig) (*aws.Config, error) {
+	cfg, err := GetAWSConfigWithoutTracking(ctx, c, obj, pc)
 	if err != nil {
-		return nil, errors.Wrap(err, "cannot get AWS config")
+		return nil, err
 	}
-	if cfg.Region == "" && mg.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
+	if cfg.Region == "" && obj.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
 		cfg.Region = "us-east-1"
 	}
 	return cfg, nil
@@ -230,18 +106,56 @@ func (m *metaOnlyPrimary) Meta() any {
 	return m.meta
 }
 
-func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig) error { //nolint:gocyclo
-	p := *config.TerraformProvider
-	diag := p.Configure(context.WithoutCancel(ctx), &tfsdk.ResourceConfig{
-		Config: ps.Configuration,
-	})
-	if diag != nil && diag.HasError() {
-		return errors.Errorf("failed to configure the provider: %v", diag)
+// configureNoForkAWSClient populates the supplied *terraform.Setup with
+// Terraform Plugin SDK style AWS client (Meta) and Terraform Plugin Framework
+// style FrameworkProvider
+func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *SetupConfig, region string, creds aws.Credentials, pc *v1beta1.ProviderConfig) error { //nolint:gocyclo
+	tfAwsConnsCfg := xpprovider.AWSConfig{
+		AccessKey:               creds.AccessKeyID,
+		Endpoints:               map[string]string{},
+		Region:                  region,
+		S3UsePathStyle:          pc.Spec.S3UsePathStyle,
+		SecretKey:               creds.SecretAccessKey,
+		SkipCredsValidation:     true, // disabled to prevent extra AWS STS call
+		SkipRegionValidation:    pc.Spec.SkipRegionValidation,
+		SkipRequestingAccountId: true, // disabled to prevent extra AWS STS call
+		Token:                   creds.SessionToken,
 	}
-	ps.Meta = p.Meta()
-	// #nosec G103
-	(*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(ps.Meta).Pointer())).ServicePackages = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(config.AWSClient).Pointer())).ServicePackages
-	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: p.Meta()})
+
+	if pc.Spec.SkipMetadataApiCheck {
+		tfAwsConnsCfg.EC2MetadataServiceEnableState = imds.ClientDisabled
+	}
+
+	if pc.Spec.Endpoint != nil {
+		if pc.Spec.Endpoint.URL.Static != nil {
+			if len(pc.Spec.Endpoint.Services) > 0 && *pc.Spec.Endpoint.URL.Static == "" {
+				return errors.New("endpoint.url.static cannot be empty")
+			} else {
+				for _, service := range pc.Spec.Endpoint.Services {
+					tfAwsConnsCfg.Endpoints[service] = aws.ToString(pc.Spec.Endpoint.URL.Static)
+				}
+			}
+		}
+	}
+
+	// only used for retrieving the ServicePackages from the singleton provider instance
+	p := config.TerraformProvider.Meta()
+	tfAwsConnsClient, diags := tfAwsConnsCfg.GetClient(ctx, &xpprovider.AWSClient{
+		// #nosec G103
+		ServicePackages: (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p).Pointer())).ServicePackages,
+	})
+	if diags.HasError() {
+		return errors.Errorf("cannot construct TF AWS Client from TF AWS Config, %v", diags)
+	}
+	// accountID is already calculated/retrieved from Caller ID cache while
+	// obtaining AWS config. The terraform config is explicitly constructed
+	// to skip requesting account ID to prevent the extra STS call. Therefore,
+	// the resulting TF AWS Client has empty account ID.
+	// Fill with previously calculated account ID.
+	// No need for nil check on ps.ClientMetadata per golang spec.
+	tfAwsConnsClient.AccountID = ps.ClientMetadata[keyAccountID]
+	ps.Meta = tfAwsConnsClient
+	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: tfAwsConnsClient})
 	ps.FrameworkProvider = fwProvider
 	return nil
 }

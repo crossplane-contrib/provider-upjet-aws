@@ -75,7 +75,7 @@ type connector struct {
 }
 
 func (c *connector) Connect(ctx context.Context, mg resource.Managed) (managed.ExternalClient, error) {
-	cfg, err := clients.GetAWSConfig(ctx, c.kube, mg)
+	cfg, err := clients.GetAWSConfigWithTracking(ctx, c.kube, mg)
 	if err != nil {
 		return nil, err
 	}

@@ -8,8 +8,6 @@ import (
 	"context"
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
-	"reflect"
-	"unsafe"
 
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/registry/reference"
@@ -80,7 +78,7 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 // configuration is being read for the code generation pipelines.
 // In that case, we will only use the JSON schema for generating
 // the CRDs.
-func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, *xpprovider.AWSClient, error) {
+func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, error) {
 	var p *schema.Provider
 	var fwProvider fwprovider.Provider
 	var err error
@@ -91,16 +89,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		fwProvider, p, err = xpprovider.GetProvider(ctx)
 	}
 	if err != nil {
-		return nil, nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
-	}
-	// we set schema.Provider's meta to nil because p.Configure modifies
-	// a singleton pointer. This further assumes that the
-	// schema.Provider.Configure calls do not modify the global state
-	// represented by the config.Provider.TerraformProvider.
-	var awsClient *xpprovider.AWSClient
-	if !generationProvider {
-		// #nosec G103
-		awsClient = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p.Meta()).Pointer()))
+		return nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
 	}
 
 	modulePath := "github.com/upbound/provider-aws"
@@ -131,7 +120,6 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 			injectFieldRenamingConversionFunctions(),
 		),
 	)
-	p.SetMeta(nil)
 	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
 
 	for _, configure := range ProviderConfiguration {
@@ -139,7 +127,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 	}
 
 	pc.ConfigureResources()
-	return pc, awsClient, nil
+	return pc, nil
 }
 
 // CLIReconciledResourceList returns the list of resources that have external
