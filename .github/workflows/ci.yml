@@ -10,9 +10,9 @@ on:
 
 jobs:
   ci:
-    uses: upbound/uptest/.github/workflows/provider-ci.yml@main
+    uses: upbound/uptest/.github/workflows/provider-ci.yml@standard-runners
     with:
-      go-version: 1.21
+      go-version: "1.21"
       cleanup-disk: true
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR }}
