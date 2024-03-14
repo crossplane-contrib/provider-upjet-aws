@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: elb.aws.upbound.io/v1beta1
 kind: LBSSLNegotiationPolicy
 metadata:
@@ -53,4 +57,3 @@ spec:
       lbProtocol: https
       sslCertificateId: arn:aws:acm:us-west-1:153891904029:certificate/3761707c-a179-4137-b133-a2bffd9fd1c7
     region: us-west-1
-

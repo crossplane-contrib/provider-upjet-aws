@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 # Excerpt from https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/acmpca_certificate_authority
 # Creating this resource will leave the certificate authority in a PENDING_CERTIFICATE status, which means it cannot yet issue certificates. To complete this setup, you must fully sign the certificate authority CSR available in the certificate_signing_request attribute and import the signed certificate outside of Terraform. Terraform can support another resource to manage that workflow automatically in the future.
 

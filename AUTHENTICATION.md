@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 ## Authentication mechanisms supported by provider-aws
 
 `provider-aws` needs to authenticate itself to the AWS API. Like other

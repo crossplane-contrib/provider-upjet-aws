@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: EgressOnlyInternetGateway
 metadata:
@@ -26,4 +30,3 @@ spec:
     assignGeneratedIpv6CidrBlock: true
     cidrBlock: 10.1.0.0/16
     region: us-west-1
-

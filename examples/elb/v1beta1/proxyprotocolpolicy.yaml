@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: elb.aws.upbound.io/v1beta1
 kind: ProxyProtocolPolicy
 metadata:
@@ -40,4 +44,3 @@ spec:
       lbPort: 587
       lbProtocol: tcp
     region: us-west-1
-

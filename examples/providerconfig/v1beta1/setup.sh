@@ -3,6 +3,10 @@
 # This is a helper script that uses the AWS CLI configuration to construct an
 # AWS ProviderConfig.
 
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 cd "$(dirname "$0")"
 
 set -e -o pipefail

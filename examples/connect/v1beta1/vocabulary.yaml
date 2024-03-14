@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: connect.aws.upbound.io/v1beta1
 kind: Vocabulary
 metadata:
@@ -37,4 +41,3 @@ spec:
     instanceAlias: friendly-name-connect-${Rand.RFC1123Subdomain}
     outboundCallsEnabled: true
     region: us-east-1
-

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: glue.aws.upbound.io/v1beta1
 kind: SecurityConfiguration
 metadata:
@@ -31,4 +35,3 @@ spec:
     region: us-west-1
     description: Created with Crossplane
     deletionWindowInDays: 7
-

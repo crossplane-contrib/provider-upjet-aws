@@ -1,8 +1,19 @@
+<!--
+SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Official AWS Provider
 
 <div align="center">
 
-![CI](https://github.com/upbound/provider-aws/workflows/CI/badge.svg) [![GitHub release](https://img.shields.io/github/release/upbound/provider-aws/all.svg?style=flat-square)](https://github.com/upbound/provider-aws/releases) [![Go Report Card](https://goreportcard.com/badge/github.com/upbound/provider-aws)](https://goreportcard.com/report/github.com/upbound/provider-aws) [![Slack](https://slack.crossplane.io/badge.svg)](https://crossplane.slack.com/archives/C01TRKD4623) [![Twitter Follow](https://img.shields.io/twitter/follow/upbound_io.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=upbound_io&user_id=788180534543339520)
+![CI](https://github.com/crossplane-contrib/provider-upjet-aws/workflows/CI/badge.svg)
+[![GitHub release](https://img.shields.io/github/release/crossplane-contrib/provider-upjet-aws/all.svg)](https://github.com/crossplane-contrib/provider-upjet-aws/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/crossplane-contrib/provider-upjet-aws)](https://goreportcard.com/report/github.com/crossplane-contrib/provider-upjet-aws)
+[![Contributors](https://img.shields.io/github/contributors/crossplane-contrib/provider-upjet-aws)](https://github.com/crossplane-contrib/provider-upjet-aws/graphs/contributors)
+[![Slack](https://img.shields.io/badge/Slack-4A154B?logo=slack)](https://crossplane.slack.com/archives/C05E0UE46S2)
+[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/crossplane_io)](https://twitter.com/crossplane_io)
 
 </div>
 
@@ -58,15 +69,12 @@ Follow the guide [here](https://github.com/crossplane/upjet/blob/v0.10.0/docs/ad
 ## Report a Bug
 
 For filing bugs, suggesting improvements, or requesting new features, please
-open an [issue](https://github.com/upbound/provider-aws/issues).
+open an [issue](https://github.com/crossplane-contrib/provider-upjet-aws/issues).
 
 ## Contact
 
-Please open a Github issue for all requests. If you need to reach out to Upbound,
-you can do so via the following channels:
-* Slack: [#upbound](https://crossplane.slack.com/archives/C01TRKD4623) channel in [Crossplane Slack](https://slack.crossplane.io)
-* Twitter: [@upbound_io](https://twitter.com/upbound_io)
-* Email: [support@upbound.io](mailto:support@upbound.io)
+[#upbound-provider-aws](https://crossplane.slack.com/archives/C05E0UE46S2) channel in
+[Crossplane Slack](https://slack.crossplane.io)
 
 ## Licensing
 

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: DataCatalog
 metadata:
@@ -13,4 +17,3 @@ spec:
     tags:
       Name: example-athena-data-catalog
     type: LAMBDA
-

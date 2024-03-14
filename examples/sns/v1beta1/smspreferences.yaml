@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: SMSPreferences
 metadata:
@@ -10,4 +14,3 @@ spec:
   forProvider:
     defaultSmsType: Promotional
     region: us-west-1
-

@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -aeuo pipefail
 
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 # Note(mbbush): AWS IoT uses the IAM role assigned to the TopicRuleDestination during deletion
 # of the TopicRuleDestination to remove the ENIs and other resources it created in the VPC.
 # Deletion of the TopicRuleDestination takes several minutes, and if the role is deleted before

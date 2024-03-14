@@ -1,6 +1,6 @@
 name: Bug Report
 description: Help us diagnose and fix bugs in Official AWS Provider
-labels: bug,needs:triage
+labels: bug
 title: "[Bug]: "
 body:
   - type: markdown

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 # note(aru): This example manifest was not initially working due to invalid
 # instance class,engine version combination. I don't know whether this was
 # already the case when the example manifest was first introduced, or

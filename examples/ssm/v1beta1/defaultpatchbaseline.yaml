@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: ssm.aws.upbound.io/v1beta1
 kind: DefaultPatchBaseline
 metadata:
@@ -29,4 +33,3 @@ spec:
     - KB123456
     name: example
     region: us-west-1
-
