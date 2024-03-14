@@ -9,7 +9,7 @@ kind: Connector
 metadata:
   annotations:
     meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
-    uptest.upbound.io/timeout: "3600"
+    uptest.upbound.io/timeout: "2100"
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: connector-nokafka

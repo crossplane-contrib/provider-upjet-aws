@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/crossplane/upjet/pkg/config"
+
 	"github.com/upbound/provider-aws/config/common"
 )
 
