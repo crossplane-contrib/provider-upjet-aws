@@ -423,21 +423,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_location_map resources can be imported using the map name
 	"aws_location_map": config.ParameterAsIdentifier("map_name"),
 
-	// mskconnect
-	//
-	// MSK Connect Connector can be imported using the connector's arn
-	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:connector/example/264edee4-17a3-412e-bd76-6681cfc93805-3
-	// TODO: Normalize external_name while testing resource
-	"aws_mskconnect_connector": config.IdentifierFromProvider,
-	// MSK Connect Custom Plugin can be imported using the plugin's arn
-	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:custom-plugin/debezium-example/abcdefgh-1234-5678-9abc-defghijklmno-4
-	// TODO: Normalize external_name while testing resource
-	"aws_mskconnect_custom_plugin": config.IdentifierFromProvider,
-	// MSK Connect Worker Configuration can be imported using the plugin's arn
-	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:worker-configuration/example/8848493b-7fcc-478c-a646-4a52634e3378-4
-	// TODO: Normalize external_name while testing resource
-	"aws_mskconnect_worker_configuration": config.IdentifierFromProvider,
-
 	// inspector
 	//
 	// Inspector Assessment Targets can be imported via their Amazon Resource Name (ARN)
