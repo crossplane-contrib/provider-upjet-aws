@@ -230,7 +230,6 @@ metadata:
     testing.upbound.io/example-name: connector-nokafka
   name: test
 spec:
-  deletionPolicy: Orphan
   forProvider:
     region: us-east-2
     retentionInDays: 1

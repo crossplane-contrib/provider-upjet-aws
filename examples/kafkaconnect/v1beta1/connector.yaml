@@ -178,7 +178,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Object
 metadata:
   annotations:
-    meta.upbound.io/example-id: kafkaconnect/v1beta1/customplugin
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
     uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: connector
@@ -272,7 +272,6 @@ metadata:
     testing.upbound.io/example-name: connector
   name: test
 spec:
-  deletionPolicy: Orphan
   forProvider:
     region: us-east-2
     retentionInDays: 1
@@ -281,6 +280,7 @@ apiVersion: kafka.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
   annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
     uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: connector
@@ -330,6 +330,8 @@ spec:
 apiVersion: kafka.aws.upbound.io/v1beta1
 kind: Configuration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
   labels:
     testing.upbound.io/example-name: connector
   name: example
@@ -347,6 +349,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
   labels:
     testing.upbound.io/example-name: connector
   name: ingress
@@ -365,6 +369,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
   labels:
     testing.upbound.io/example-name: connector
   name: egress
