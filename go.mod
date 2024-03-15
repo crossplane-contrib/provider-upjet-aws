@@ -17,7 +17,7 @@ require (
 	github.com/aws/smithy-go v1.19.0
 	github.com/crossplane/crossplane-runtime v1.16.0-rc.1.0.20240213134610-7fcb8c5cad6f
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
-	github.com/crossplane/upjet v1.3.0-rc.0.0.20240314111422-84abd051e678
+	github.com/crossplane/upjet v1.3.0-rc.0.0.20240314162745-2ef7077f6d16
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/terraform-json v0.18.0
