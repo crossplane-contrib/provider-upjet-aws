@@ -85,8 +85,6 @@ spec:
     attribute:
       - name: a
         type: S
-      - name: b
-        type: S
     hashKey: a
 
 ---
@@ -106,7 +104,5 @@ spec:
     writeCapacity: 20
     attribute:
       - name: a
-        type: S
-      - name: b
         type: S
     hashKey: a

@@ -25,10 +25,10 @@ spec:
           compression.type: none
           key.serializer: org.apache.kafka.common.serialization.StringSerializer
           sasl.mechanism: SCRAM-SHA-512
-          sasl.scram.password: ${get_secret("arn:aws:secretsmanager:us-east-2:012345678901:secret:AmazonMSK_fake-secret",
-            "SecretString", "password", "arn:aws:iam::012345678901:role/topicrule-kafka")}
-          sasl.scram.username: ${get_secret("arn:aws:secretsmanager:us-east-2:012345678901:secret:AmazonMSK_fake-secret",
-            "SecretString", "username", "arn:aws:iam::012345678901:role/topicrule-kafka")}
+          sasl.scram.password: ${get_secret("arn:aws:secretsmanager:us-east-2:${data.aws_account_id}:secret:AmazonMSK_fake-secret",
+            "SecretString", "password", "arn:aws:iam::${data.aws_account_id}:role/topicrule-kafka")}
+          sasl.scram.username: ${get_secret("arn:aws:secretsmanager:us-east-2:${data.aws_account_id}:secret:AmazonMSK_fake-secret",
+            "SecretString", "username", "arn:aws:iam::${data.aws_account_id}:role/topicrule-kafka")}
           security.protocol: SASL_SSL
           value.serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
         key: ${topic(6)}
@@ -45,10 +45,10 @@ spec:
             compression.type: none
             key.serializer: org.apache.kafka.common.serialization.StringSerializer
             sasl.mechanism: SCRAM-SHA-512
-            sasl.scram.password: ${get_secret("arn:aws:secretsmanager:us-east-2:012345678901:secret:AmazonMSK_fake-secret",
-              "SecretString", "password", "arn:aws:iam::012345678901:role/topicrule-kafka")}
-            sasl.scram.username: ${get_secret("arn:aws:secretsmanager:us-east-2:012345678901:secret:AmazonMSK_fake-secret",
-              "SecretString", "username", "arn:aws:iam::012345678901:role/topicrule-kafka")}
+            sasl.scram.password: ${get_secret("arn:aws:secretsmanager:us-east-2:${data.aws_account_id}:secret:AmazonMSK_fake-secret",
+              "SecretString", "password", "arn:aws:iam::${data.aws_account_id}:role/topicrule-kafka")}
+            sasl.scram.username: ${get_secret("arn:aws:secretsmanager:us-east-2:${data.aws_account_id}:secret:AmazonMSK_fake-secret",
+              "SecretString", "username", "arn:aws:iam::${data.aws_account_id}:role/topicrule-kafka")}
             security.protocol: SASL_SSL
             value.serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
           key: ${topic(6)}
