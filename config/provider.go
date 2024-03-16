@@ -56,7 +56,7 @@ import (
 	"github.com/upbound/provider-aws/config/kendra"
 	"github.com/upbound/provider-aws/config/kinesis"
 	"github.com/upbound/provider-aws/config/kinesisanalytics"
-	kinesisanalytics2 "github.com/upbound/provider-aws/config/kinesisanalyticsv2"
+	"github.com/upbound/provider-aws/config/kinesisanalyticsv2"
 	"github.com/upbound/provider-aws/config/kms"
 	"github.com/upbound/provider-aws/config/lakeformation"
 	"github.com/upbound/provider-aws/config/lambda"
@@ -135,7 +135,7 @@ func init() {
 	ProviderConfiguration.AddConfig(kafka.Configure)
 	ProviderConfiguration.AddConfig(kinesis.Configure)
 	ProviderConfiguration.AddConfig(kinesisanalytics.Configure)
-	ProviderConfiguration.AddConfig(kinesisanalytics2.Configure)
+	ProviderConfiguration.AddConfig(kinesisanalyticsv2.Configure)
 	ProviderConfiguration.AddConfig(kms.Configure)
 	ProviderConfiguration.AddConfig(lakeformation.Configure)
 	ProviderConfiguration.AddConfig(lambda.Configure)
