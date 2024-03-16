@@ -136,7 +136,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Object
 metadata:
   annotations:
-    meta.upbound.io/example-id: kafkaconnect/v1beta1/customplugin
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
     uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: connector-nokafka
@@ -238,6 +238,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: ingress
@@ -256,6 +258,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
   labels:
     testing.upbound.io/example-name: connector-nokafka
   name: egress
