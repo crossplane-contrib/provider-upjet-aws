@@ -73,7 +73,6 @@ metadata:
     testing.upbound.io/example-name: user
 spec:
   forProvider:
-    name: user-policy-${Rand.RFC1123Subdomain}
     policy: |
       {
         "Version": "2012-10-17",
