@@ -1,0 +1,90 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: TopicRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: topicrule_sqs
+  labels:
+    testing.upbound.io/example-name: topicrule-sqs
+  name: topicrule-sqs
+spec:
+  forProvider:
+    description: Example rule
+    enabled: true
+    region: us-east-2
+    sql: SELECT * FROM 'topic/test'
+    sqlVersion: "2016-03-23"
+    sqs:
+      - queueUrlSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-sqs
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-sqs
+        useBase64: false
+    errorAction:
+      - sqs:
+          - queueUrlSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-sqs
+                testing.upbound.io/action-type: error
+            roleArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-sqs
+            useBase64: false
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-sqs
+  name: topicrule-sqs
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "iot.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-sqs
+    testing.upbound.io/action-type: primary
+  name: topicrule-sqs-action
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-sqs
+    testing.upbound.io/action-type: error
+  name: topicrule-sqs-error
+spec:
+  forProvider:
+    region: us-east-2

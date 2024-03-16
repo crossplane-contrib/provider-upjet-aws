@@ -1,0 +1,244 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: TopicRule
+metadata:
+  annotations:
+    # TODO (mbbush) add an annotation for an update test to change acks to 2 once we're on terraform provider 5.x (which has a bugfix to make updates not fail)
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: topicrule_kafka
+  labels:
+    testing.upbound.io/example-name: topicrule-kafka
+  name: topicrule-kafka
+spec:
+  forProvider:
+    description: Example rule
+    enabled: true
+    region: us-east-2
+    sql: SELECT * FROM 'topic/test'
+    sqlVersion: "2016-03-23"
+    kafka:
+      - destinationArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-kafka
+        clientProperties:
+          acks: "1"
+          bootstrap.servers: b-1.fakekafkacluster.abc123.c2.kafka.us-east-2.amazonaws.com:9096,b-2.fakekafkacluster.abc123.c2.kafka.us-east-2.amazonaws.com:9096,b-3.fakekafkacluster.abc123.c2.kafka.us-east-2.amazonaws.com:9096
+          compression.type: none
+          key.serializer: org.apache.kafka.common.serialization.StringSerializer
+          sasl.mechanism: SCRAM-SHA-512
+          sasl.scram.password: ${get_secret("arn:aws:secretsmanager:us-east-2:012345678901:secret:AmazonMSK_fake-secret",
+            "SecretString", "password", "arn:aws:iam::012345678901:role/topicrule-kafka")}
+          sasl.scram.username: ${get_secret("arn:aws:secretsmanager:us-east-2:012345678901:secret:AmazonMSK_fake-secret",
+            "SecretString", "username", "arn:aws:iam::012345678901:role/topicrule-kafka")}
+          security.protocol: SASL_SSL
+          value.serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
+        key: ${topic(6)}
+        topic: ${topic(2)}
+
+    errorAction:
+      - kafka:
+        - destinationArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: topicrule-kafka
+          clientProperties:
+            acks: "1"
+            bootstrap.servers: b-1.fakekafkacluster.abc123.c2.kafka.us-east-2.amazonaws.com:9096,b-2.fakekafkacluster.abc123.c2.kafka.us-east-2.amazonaws.com:9096,b-3.fakekafkacluster.abc123.c2.kafka.us-east-2.amazonaws.com:9096
+            compression.type: none
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            sasl.mechanism: SCRAM-SHA-512
+            sasl.scram.password: ${get_secret("arn:aws:secretsmanager:us-east-2:012345678901:secret:AmazonMSK_fake-secret",
+              "SecretString", "password", "arn:aws:iam::012345678901:role/topicrule-kafka")}
+            sasl.scram.username: ${get_secret("arn:aws:secretsmanager:us-east-2:012345678901:secret:AmazonMSK_fake-secret",
+              "SecretString", "username", "arn:aws:iam::012345678901:role/topicrule-kafka")}
+            security.protocol: SASL_SSL
+            value.serializer: org.apache.kafka.common.serialization.ByteBufferSerializer
+          key: ${topic(6)}
+          topic: ${topic(2)}
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-topicrule-kafka.sh
+  labels:
+    testing.upbound.io/example-name: topicrule-kafka
+  name: topicrule-kafka
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "iot.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: TopicRuleDestination
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-kafka
+  name: topicrule-kafka
+spec:
+  forProvider:
+    region: us-east-2
+    vpcConfiguration:
+      - roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-kafka
+        securityGroupSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-kafka
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-kafka
+        vpcIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-kafka
+
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-kafka
+  name: topicrule-kafka
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "iot.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+    inlinePolicy:
+      - name: manage-vpc-networking
+        policy: |
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "ec2:CreateNetworkInterface",
+                        "ec2:DescribeNetworkInterfaces",
+                        "ec2:DescribeVpcs",
+                        "ec2:DeleteNetworkInterface",
+                        "ec2:DescribeSubnets",
+                        "ec2:DescribeVpcAttribute",
+                        "ec2:DescribeSecurityGroups"
+                    ],
+                    "Resource": "*"
+                },
+                {
+                    "Effect": "Allow",
+                    "Action": "ec2:CreateNetworkInterfacePermission",
+                    "Resource": "*",
+                    "Condition": {
+                        "StringEquals": {
+                            "ec2:ResourceTag/VPCDestinationENI": "true"
+                        }
+                    }
+                },
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "ec2:CreateTags"
+                    ],
+                    "Resource": "*",
+                    "Condition": {
+                        "StringEquals": {
+                            "ec2:CreateAction": "CreateNetworkInterface",
+                            "aws:RequestTag/VPCDestinationENI": "true"
+                        }
+                    }
+                }
+            ]
+          }
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-kafka
+  name: topicrule-kafka
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-kafka
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-kafka
+  name: topicrule-kafka-az1
+spec:
+  forProvider:
+    availabilityZone: us-east-2a
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-kafka
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-kafka
+  name: topicrule-kafka-az2
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-kafka
+
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-kafka
+  name: topicrule-kafka-vpc
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    region: us-east-2

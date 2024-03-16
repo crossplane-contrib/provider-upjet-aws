@@ -1,0 +1,140 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: TopicRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: topicrule_firehose
+  labels:
+    testing.upbound.io/example-name: topicrule-firehose
+  name: topicrule-firehose
+spec:
+  forProvider:
+    description: Example rule
+    enabled: true
+    region: us-east-2
+    sql: SELECT * FROM 'topic/test'
+    sqlVersion: "2016-03-23"
+    firehose:
+      - deliveryStreamNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-firehose
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-firehose
+    errorAction:
+      - firehose:
+          - deliveryStreamNameSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-firehose
+                testing.upbound.io/action-type: error
+            roleArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-firehose
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-firehose
+  name: topicrule-firehose
+spec:
+  forProvider:
+    managedPolicyArns:
+      - arn:aws:iam::aws:policy/AmazonS3FullAccess
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "firehose.amazonaws.com",
+                "iot.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: firehose.aws.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-firehose
+    testing.upbound.io/action-type: primary
+  name: topicrule-firehose-action
+spec:
+  forProvider:
+    region: us-east-2
+    name: topicrule-action
+    destination: extended_s3
+    extendedS3Configuration:
+      - bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-firehose
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-firehose
+
+---
+apiVersion: firehose.aws.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-firehose
+    testing.upbound.io/action-type: error
+  name: topicrule-firehose-error
+spec:
+  forProvider:
+    region: us-east-2
+    name: topicrule-error
+    destination: extended_s3
+    extendedS3Configuration:
+      - bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-firehose
+            testing.upbound.io/action-type: error
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-firehose
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}-primary
+  labels:
+    testing.upbound.io/example-name: topicrule-firehose
+    testing.upbound.io/action-type: primary
+  name: topicrule-firehose-action
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}-error
+  labels:
+    testing.upbound.io/example-name: topicrule-firehose
+    testing.upbound.io/action-type: error
+  name: topicrule-firehose-error
+spec:
+  forProvider:
+    region: us-east-2

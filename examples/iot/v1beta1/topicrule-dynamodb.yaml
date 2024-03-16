@@ -1,0 +1,112 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: TopicRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: topicrule_dynamodb
+  labels:
+    testing.upbound.io/example-name: topicrule-dynamodb
+  name: topicrule-dynamodb
+spec:
+  forProvider:
+    description: Example rule
+    enabled: true
+    region: us-east-2
+    sql: SELECT * FROM 'topic/test'
+    sqlVersion: "2016-03-23"
+    dynamodb:
+      - roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-dynamodb
+        tableNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-dynamodb
+            testing.upbound.io/action-type: primary
+        hashKeyField: a
+        hashKeyType: STRING
+        hashKeyValue: ${topic(1)}
+        operation: DELETE
+
+    errorAction:
+      - dynamodb:
+        - roleArnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: topicrule-dynamodb
+          tableNameSelector:
+            matchLabels:
+              testing.upbound.io/example-name: topicrule-dynamodb
+              testing.upbound.io/action-type: error
+          hashKeyField: a
+          hashKeyType: STRING
+          hashKeyValue: ${topic(1)}
+          operation: DELETE
+
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-dynamodb
+  name: topicrule-dynamodb
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "iot.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-dynamodb
+    testing.upbound.io/action-type: primary
+  name: topicrule-dynamodb-action
+spec:
+  forProvider:
+    region: us-east-2
+    readCapacity: 20
+    writeCapacity: 20
+    attribute:
+      - name: a
+        type: S
+      - name: b
+        type: S
+    hashKey: a
+
+---
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-dynamodb
+    testing.upbound.io/action-type: error
+  name: topicrule-dynamodb-error
+spec:
+  forProvider:
+    region: us-east-2
+    readCapacity: 20
+    writeCapacity: 20
+    attribute:
+      - name: a
+        type: S
+      - name: b
+        type: S
+    hashKey: a

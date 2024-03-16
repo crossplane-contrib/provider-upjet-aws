@@ -8,7 +8,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: iot/v1beta1/topicruledestination
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: iot-topic-rule-destination
   name: iot-topic-rule-destination-example
 spec:
   forProvider:

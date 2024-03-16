@@ -1,0 +1,140 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: TopicRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: topicrule_timestream
+  labels:
+    testing.upbound.io/example-name: topicrule-timestream
+  name: topicrule-timestream
+spec:
+  forProvider:
+    description: Example rule
+    enabled: true
+    region: us-east-2
+    sql: SELECT * FROM 'topic/test'
+    sqlVersion: "2016-03-23"
+    timestream:
+      - databaseNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-timestream
+            testing.upbound.io/action-type: primary
+        tableNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-timestream
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-timestream
+        dimension:
+          - name: d
+            value: ${topic(1)}
+    errorAction:
+      - timestream:
+          - databaseNameSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-timestream
+                testing.upbound.io/action-type: error
+            tableNameSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-timestream
+                testing.upbound.io/action-type: error
+            roleArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-timestream
+            dimension:
+              - name: d
+                value: ${topic(1)}
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-timestream
+  name: topicrule-timestream
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "iot.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-timestream
+    testing.upbound.io/action-type: primary
+  name: topicrule-timestream-action
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-timestream
+    testing.upbound.io/action-type: error
+  name: topicrule-timestream-error
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-timestream
+    testing.upbound.io/action-type: primary
+  name: topicrule-timestream-action
+spec:
+  forProvider:
+    region: us-east-2
+    tableName: primary
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-timestream
+        testing.upbound.io/action-type: primary
+
+---
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-timestream
+    testing.upbound.io/action-type: error
+  name: topicrule-timestream-error
+spec:
+  forProvider:
+    region: us-east-2
+    tableName: error
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-timestream
+        testing.upbound.io/action-type: error
