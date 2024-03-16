@@ -44,13 +44,15 @@ func Configure(p *config.Provider) {
 		}
 		// References only work to string fields.
 		delete(r.References, "plugin.custom_plugin.revision")
-		r.UseAsync = true
+		// AWS seems to have a creation timeout slightly above 20 minutes. Because the terraform provider doesn't expose
+		// the `State` of the connector, (Creating, Running, Deleting, Error), our first observation after creation is
+		// complete is always a success. Keeping our timeout greater than AWS's timeout prevents crossplane from
+		// declaring the resource ready while it's still being created by aws.
 		r.OperationTimeouts.Create = 30 * time.Minute
 		r.MetaResource.Description += ` Changes to any parameter besides "scaling" will be rejected. Instead you must create a new resource.`
 	})
 	p.AddResourceConfigurator("aws_mskconnect_custom_plugin", func(r *config.Resource) {
 		r.MetaResource.Description += ` This resource can be Created, Observed and Deleted, but not Updated. AWS does not currently provide update APIs.`
-		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_mskconnect_worker_configuration", func(r *config.Resource) {
 		r.MetaResource.Description += ` This resource is create-only, and requires a unique "name" parameter. AWS does not currently provide update or delete APIs.`
