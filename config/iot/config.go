@@ -37,8 +37,6 @@ func Configure(p *config.Provider) {
 		}
 		newReferences["cloudwatch_logs.log_group_name"] = config.Reference{
 			TerraformName: "aws_cloudwatch_log_group",
-			Extractor:     common.PathARNExtractor,
-			// TODO: validate that this is the right extractor
 		}
 		newReferences["cloudwatch_metric.role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",
@@ -50,8 +48,6 @@ func Configure(p *config.Provider) {
 		}
 		newReferences["dynamodb.table_name"] = config.Reference{
 			TerraformName: "aws_dynamodb_table",
-			Extractor:     common.PathARNExtractor,
-			// TODO: validate that this is the right extractor
 		}
 		newReferences["dynamodbv2.role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",
@@ -59,8 +55,6 @@ func Configure(p *config.Provider) {
 		}
 		newReferences["dynamodbv2.put_item.table_name"] = config.Reference{
 			TerraformName: "aws_dynamodb_table",
-			Extractor:     common.PathARNExtractor,
-			// TODO: validate that this is the right extractor
 		}
 		newReferences["elasticsearch.role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",
@@ -68,8 +62,6 @@ func Configure(p *config.Provider) {
 		}
 		newReferences["firehose.delivery_stream_name"] = config.Reference{
 			TerraformName: "aws_kinesis_firehose_delivery_stream",
-			Extractor:     common.PathARNExtractor,
-			// TODO: validate that this is the right extractor
 		}
 		newReferences["firehose.role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",
@@ -89,8 +81,6 @@ func Configure(p *config.Provider) {
 		}
 		newReferences["kinesis.stream_name"] = config.Reference{
 			TerraformName: "aws_kinesis_stream",
-			Extractor:     common.PathARNExtractor,
-			// TODO: validate that this is the right extractor
 		}
 		newReferences["kinesis.role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",
@@ -106,8 +96,6 @@ func Configure(p *config.Provider) {
 		}
 		newReferences["s3.bucket_name"] = config.Reference{
 			TerraformName: "aws_s3_bucket",
-			Extractor:     common.PathARNExtractor,
-			// TODO: does this work?
 		}
 		newReferences["s3.role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",
@@ -134,18 +122,13 @@ func Configure(p *config.Provider) {
 		}
 		newReferences["step_functions.state_machine_name"] = config.Reference{
 			TerraformName: "aws_sfn_state_machine",
-			Extractor:     common.PathARNExtractor,
-			// TODO: or external name?
 		}
 		newReferences["timestream.database_name"] = config.Reference{
 			TerraformName: "aws_timestreamwrite_database",
-			// Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
-			// Extractor:     common.PathARNExtractor,
 		}
 		newReferences["timestream.table_name"] = config.Reference{
 			TerraformName: "aws_timestreamwrite_table",
 			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("table_name",false)`,
-			// Extractor:     common.PathARNExtractor,
 		}
 		newReferences["timestream.role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",
