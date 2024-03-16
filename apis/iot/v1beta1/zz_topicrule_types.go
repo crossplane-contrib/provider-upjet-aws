@@ -19,7 +19,17 @@ type CloudwatchAlarmInitParameters struct {
 	AlarmName *string `json:"alarmName,omitempty" tf:"alarm_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The reason for the alarm change.
 	StateReason *string `json:"stateReason,omitempty" tf:"state_reason,omitempty"`
@@ -50,8 +60,18 @@ type CloudwatchAlarmParameters struct {
 	AlarmName *string `json:"alarmName" tf:"alarm_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The reason for the alarm change.
 	// +kubebuilder:validation:Optional
@@ -65,10 +85,29 @@ type CloudwatchAlarmParameters struct {
 type CloudwatchLogsInitParameters struct {
 
 	// The CloudWatch log group name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
+
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsObservation struct {
@@ -83,12 +122,31 @@ type CloudwatchLogsObservation struct {
 type CloudwatchLogsParameters struct {
 
 	// The CloudWatch log group name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
-	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchMetricInitParameters struct {
@@ -109,7 +167,17 @@ type CloudwatchMetricInitParameters struct {
 	MetricValue *string `json:"metricValue,omitempty" tf:"metric_value,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchMetricObservation struct {
@@ -156,8 +224,18 @@ type CloudwatchMetricParameters struct {
 	MetricValue *string `json:"metricValue" tf:"metric_value,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type DimensionInitParameters struct {
@@ -216,10 +294,29 @@ type DynamodbInitParameters struct {
 	RangeKeyValue *string `json:"rangeKeyValue,omitempty" tf:"range_key_value,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type DynamodbObservation struct {
@@ -290,12 +387,31 @@ type DynamodbParameters struct {
 	RangeKeyValue *string `json:"rangeKeyValue,omitempty" tf:"range_key_value,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	// +kubebuilder:validation:Optional
-	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type Dynamodbv2InitParameters struct {
@@ -304,7 +420,17 @@ type Dynamodbv2InitParameters struct {
 	PutItem []PutItemInitParameters `json:"putItem,omitempty" tf:"put_item,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type Dynamodbv2Observation struct {
@@ -323,14 +449,33 @@ type Dynamodbv2Parameters struct {
 	PutItem []PutItemParameters `json:"putItem,omitempty" tf:"put_item,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type Dynamodbv2PutItemInitParameters struct {
 
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type Dynamodbv2PutItemObservation struct {
@@ -342,8 +487,17 @@ type Dynamodbv2PutItemObservation struct {
 type Dynamodbv2PutItemParameters struct {
 
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	// +kubebuilder:validation:Optional
-	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type ElasticsearchInitParameters struct {
@@ -358,7 +512,17 @@ type ElasticsearchInitParameters struct {
 	Index *string `json:"index,omitempty" tf:"index,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The type of document you are storing.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -397,8 +561,18 @@ type ElasticsearchParameters struct {
 	Index *string `json:"index" tf:"index,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The type of document you are storing.
 	// +kubebuilder:validation:Optional
@@ -411,7 +585,17 @@ type ErrorActionCloudwatchAlarmInitParameters struct {
 	AlarmName *string `json:"alarmName,omitempty" tf:"alarm_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The reason for the alarm change.
 	StateReason *string `json:"stateReason,omitempty" tf:"state_reason,omitempty"`
@@ -442,8 +626,18 @@ type ErrorActionCloudwatchAlarmParameters struct {
 	AlarmName *string `json:"alarmName" tf:"alarm_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The reason for the alarm change.
 	// +kubebuilder:validation:Optional
@@ -457,10 +651,29 @@ type ErrorActionCloudwatchAlarmParameters struct {
 type ErrorActionCloudwatchLogsInitParameters struct {
 
 	// The CloudWatch log group name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
+
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ErrorActionCloudwatchLogsObservation struct {
@@ -475,12 +688,31 @@ type ErrorActionCloudwatchLogsObservation struct {
 type ErrorActionCloudwatchLogsParameters struct {
 
 	// The CloudWatch log group name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
-	LogGroupName *string `json:"logGroupName" tf:"log_group_name,omitempty"`
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameRef *v1.Reference `json:"logGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupName.
+	// +kubebuilder:validation:Optional
+	LogGroupNameSelector *v1.Selector `json:"logGroupNameSelector,omitempty" tf:"-"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ErrorActionCloudwatchMetricInitParameters struct {
@@ -501,7 +733,17 @@ type ErrorActionCloudwatchMetricInitParameters struct {
 	MetricValue *string `json:"metricValue,omitempty" tf:"metric_value,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ErrorActionCloudwatchMetricObservation struct {
@@ -548,8 +790,18 @@ type ErrorActionCloudwatchMetricParameters struct {
 	MetricValue *string `json:"metricValue" tf:"metric_value,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ErrorActionDynamodbInitParameters struct {
@@ -579,10 +831,29 @@ type ErrorActionDynamodbInitParameters struct {
 	RangeKeyValue *string `json:"rangeKeyValue,omitempty" tf:"range_key_value,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type ErrorActionDynamodbObservation struct {
@@ -653,12 +924,31 @@ type ErrorActionDynamodbParameters struct {
 	RangeKeyValue *string `json:"rangeKeyValue,omitempty" tf:"range_key_value,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	// +kubebuilder:validation:Optional
-	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type ErrorActionDynamodbv2InitParameters struct {
@@ -667,7 +957,17 @@ type ErrorActionDynamodbv2InitParameters struct {
 	PutItem []Dynamodbv2PutItemInitParameters `json:"putItem,omitempty" tf:"put_item,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ErrorActionDynamodbv2Observation struct {
@@ -686,8 +986,18 @@ type ErrorActionDynamodbv2Parameters struct {
 	PutItem []Dynamodbv2PutItemParameters `json:"putItem,omitempty" tf:"put_item,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type ErrorActionElasticsearchInitParameters struct {
@@ -702,7 +1012,17 @@ type ErrorActionElasticsearchInitParameters struct {
 	Index *string `json:"index,omitempty" tf:"index,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The type of document you are storing.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -741,8 +1061,18 @@ type ErrorActionElasticsearchParameters struct {
 	Index *string `json:"index" tf:"index,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The type of document you are storing.
 	// +kubebuilder:validation:Optional
@@ -895,10 +1225,29 @@ type FirehoseInitParameters struct {
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The delivery stream name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
 	DeliveryStreamName *string `json:"deliveryStreamName,omitempty" tf:"delivery_stream_name,omitempty"`
 
+	// Reference to a DeliveryStream in firehose to populate deliveryStreamName.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamNameRef *v1.Reference `json:"deliveryStreamNameRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate deliveryStreamName.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamNameSelector *v1.Selector `json:"deliveryStreamNameSelector,omitempty" tf:"-"`
+
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A character separator that is used to separate records written to the Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 	Separator *string `json:"separator,omitempty" tf:"separator,omitempty"`
@@ -926,12 +1275,31 @@ type FirehoseParameters struct {
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The delivery stream name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
 	// +kubebuilder:validation:Optional
-	DeliveryStreamName *string `json:"deliveryStreamName" tf:"delivery_stream_name,omitempty"`
+	DeliveryStreamName *string `json:"deliveryStreamName,omitempty" tf:"delivery_stream_name,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate deliveryStreamName.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamNameRef *v1.Reference `json:"deliveryStreamNameRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate deliveryStreamName.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamNameSelector *v1.Selector `json:"deliveryStreamNameSelector,omitempty" tf:"-"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A character separator that is used to separate records written to the Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 	// +kubebuilder:validation:Optional
@@ -1073,7 +1441,17 @@ type IotAnalyticsInitParameters struct {
 	ChannelName *string `json:"channelName,omitempty" tf:"channel_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type IotAnalyticsObservation struct {
@@ -1099,8 +1477,18 @@ type IotAnalyticsParameters struct {
 	ChannelName *string `json:"channelName" tf:"channel_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type IotEventsInitParameters struct {
@@ -1115,7 +1503,17 @@ type IotEventsInitParameters struct {
 	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type IotEventsObservation struct {
@@ -1148,8 +1546,18 @@ type IotEventsParameters struct {
 	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type KafkaHeaderInitParameters struct {
@@ -1188,7 +1596,17 @@ type KafkaInitParameters struct {
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.TopicRuleDestination
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// Reference to a TopicRuleDestination in iot to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+
+	// Selector for a TopicRuleDestination in iot to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// The list of Kafka headers that you specify. Nested arguments below.
 	Header []HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
@@ -1233,8 +1651,18 @@ type KafkaParameters struct {
 	ClientProperties map[string]*string `json:"clientProperties" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.TopicRuleDestination
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// Reference to a TopicRuleDestination in iot to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+
+	// Selector for a TopicRuleDestination in iot to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// The list of Kafka headers that you specify. Nested arguments below.
 	// +kubebuilder:validation:Optional
@@ -1259,10 +1687,29 @@ type KinesisInitParameters struct {
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The name of the Amazon Kinesis stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
+
+	// Reference to a Stream in kinesis to populate streamName.
+	// +kubebuilder:validation:Optional
+	StreamNameRef *v1.Reference `json:"streamNameRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate streamName.
+	// +kubebuilder:validation:Optional
+	StreamNameSelector *v1.Selector `json:"streamNameSelector,omitempty" tf:"-"`
 }
 
 type KinesisObservation struct {
@@ -1284,18 +1731,47 @@ type KinesisParameters struct {
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the Amazon Kinesis stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
 	// +kubebuilder:validation:Optional
-	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
+	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
+
+	// Reference to a Stream in kinesis to populate streamName.
+	// +kubebuilder:validation:Optional
+	StreamNameRef *v1.Reference `json:"streamNameRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate streamName.
+	// +kubebuilder:validation:Optional
+	StreamNameSelector *v1.Selector `json:"streamNameSelector,omitempty" tf:"-"`
 }
 
 type LambdaInitParameters struct {
 
 	// The ARN of the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type LambdaObservation struct {
@@ -1307,14 +1783,33 @@ type LambdaObservation struct {
 type LambdaParameters struct {
 
 	// The ARN of the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type PutItemInitParameters struct {
 
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type PutItemObservation struct {
@@ -1326,8 +1821,17 @@ type PutItemObservation struct {
 type PutItemParameters struct {
 
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	// +kubebuilder:validation:Optional
-	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in dynamodb to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type RepublishInitParameters struct {
@@ -1336,7 +1840,17 @@ type RepublishInitParameters struct {
 	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The Kafka topic for messages to be sent to the Kafka broker.
 	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
@@ -1361,8 +1875,18 @@ type RepublishParameters struct {
 	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The Kafka topic for messages to be sent to the Kafka broker.
 	// +kubebuilder:validation:Optional
@@ -1372,7 +1896,16 @@ type RepublishParameters struct {
 type S3InitParameters struct {
 
 	// The Amazon S3 bucket name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 canned ACL that controls access to the object identified by the object key. Valid values.
 	CannedACL *string `json:"cannedAcl,omitempty" tf:"canned_acl,omitempty"`
@@ -1381,7 +1914,17 @@ type S3InitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type S3Observation struct {
@@ -1402,8 +1945,17 @@ type S3Observation struct {
 type S3Parameters struct {
 
 	// The Amazon S3 bucket name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
-	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 canned ACL that controls access to the object identified by the object key. Valid values.
 	// +kubebuilder:validation:Optional
@@ -1414,8 +1966,18 @@ type S3Parameters struct {
 	Key *string `json:"key" tf:"key,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type SnsInitParameters struct {
@@ -1425,7 +1987,7 @@ type SnsInitParameters struct {
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -1438,7 +2000,7 @@ type SnsInitParameters struct {
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate targetArn.
@@ -1470,7 +2032,7 @@ type SnsParameters struct {
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -1484,7 +2046,7 @@ type SnsParameters struct {
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
@@ -1500,10 +2062,29 @@ type SnsParameters struct {
 type SqsInitParameters struct {
 
 	// The URL of the Amazon SQS queue.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
 	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
 
+	// Reference to a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLRef *v1.Reference `json:"queueUrlRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLSelector *v1.Selector `json:"queueUrlSelector,omitempty" tf:"-"`
+
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Specifies whether to use Base64 encoding.
 	UseBase64 *bool `json:"useBase64,omitempty" tf:"use_base64,omitempty"`
@@ -1524,12 +2105,31 @@ type SqsObservation struct {
 type SqsParameters struct {
 
 	// The URL of the Amazon SQS queue.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
 	// +kubebuilder:validation:Optional
-	QueueURL *string `json:"queueUrl" tf:"queue_url,omitempty"`
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// Reference to a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLRef *v1.Reference `json:"queueUrlRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLSelector *v1.Selector `json:"queueUrlSelector,omitempty" tf:"-"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Specifies whether to use Base64 encoding.
 	// +kubebuilder:validation:Optional
@@ -1542,10 +2142,29 @@ type StepFunctionsInitParameters struct {
 	ExecutionNamePrefix *string `json:"executionNamePrefix,omitempty" tf:"execution_name_prefix,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The name of the Step Functions state machine whose execution will be started.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sfn/v1beta1.StateMachine
 	StateMachineName *string `json:"stateMachineName,omitempty" tf:"state_machine_name,omitempty"`
+
+	// Reference to a StateMachine in sfn to populate stateMachineName.
+	// +kubebuilder:validation:Optional
+	StateMachineNameRef *v1.Reference `json:"stateMachineNameRef,omitempty" tf:"-"`
+
+	// Selector for a StateMachine in sfn to populate stateMachineName.
+	// +kubebuilder:validation:Optional
+	StateMachineNameSelector *v1.Selector `json:"stateMachineNameSelector,omitempty" tf:"-"`
 }
 
 type StepFunctionsObservation struct {
@@ -1567,12 +2186,31 @@ type StepFunctionsParameters struct {
 	ExecutionNamePrefix *string `json:"executionNamePrefix,omitempty" tf:"execution_name_prefix,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the Step Functions state machine whose execution will be started.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sfn/v1beta1.StateMachine
 	// +kubebuilder:validation:Optional
-	StateMachineName *string `json:"stateMachineName" tf:"state_machine_name,omitempty"`
+	StateMachineName *string `json:"stateMachineName,omitempty" tf:"state_machine_name,omitempty"`
+
+	// Reference to a StateMachine in sfn to populate stateMachineName.
+	// +kubebuilder:validation:Optional
+	StateMachineNameRef *v1.Reference `json:"stateMachineNameRef,omitempty" tf:"-"`
+
+	// Selector for a StateMachine in sfn to populate stateMachineName.
+	// +kubebuilder:validation:Optional
+	StateMachineNameSelector *v1.Selector `json:"stateMachineNameSelector,omitempty" tf:"-"`
 }
 
 type TimestampInitParameters struct {
@@ -1636,16 +2274,45 @@ type TimestreamDimensionParameters struct {
 type TimestreamInitParameters struct {
 
 	// The name of an Amazon Timestream database.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Database
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a Database in timestreamwrite to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a Database in timestreamwrite to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Configuration blocks with metadata attributes of the time series that are written in each measure record. Nested arguments below.
 	Dimension []DimensionInitParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("table_name",false)
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in timestreamwrite to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in timestreamwrite to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Configuration block specifying an application-defined value to replace the default value assigned to the Timestream record's timestamp in the time column. Nested arguments below.
 	Timestamp []TimestampInitParameters `json:"timestamp,omitempty" tf:"timestamp,omitempty"`
@@ -1672,20 +2339,49 @@ type TimestreamObservation struct {
 type TimestreamParameters struct {
 
 	// The name of an Amazon Timestream database.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Database
 	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a Database in timestreamwrite to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a Database in timestreamwrite to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Configuration blocks with metadata attributes of the time series that are written in each measure record. Nested arguments below.
 	// +kubebuilder:validation:Optional
 	Dimension []DimensionParameters `json:"dimension" tf:"dimension,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("table_name",false)
 	// +kubebuilder:validation:Optional
-	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in timestreamwrite to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in timestreamwrite to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Configuration block specifying an application-defined value to replace the default value assigned to the Timestream record's timestamp in the time column. Nested arguments below.
 	// +kubebuilder:validation:Optional
@@ -1727,10 +2423,29 @@ type TopicRuleFirehoseInitParameters struct {
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The delivery stream name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
 	DeliveryStreamName *string `json:"deliveryStreamName,omitempty" tf:"delivery_stream_name,omitempty"`
 
+	// Reference to a DeliveryStream in firehose to populate deliveryStreamName.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamNameRef *v1.Reference `json:"deliveryStreamNameRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate deliveryStreamName.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamNameSelector *v1.Selector `json:"deliveryStreamNameSelector,omitempty" tf:"-"`
+
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A character separator that is used to separate records written to the Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 	Separator *string `json:"separator,omitempty" tf:"separator,omitempty"`
@@ -1758,12 +2473,31 @@ type TopicRuleFirehoseParameters struct {
 	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The delivery stream name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
 	// +kubebuilder:validation:Optional
-	DeliveryStreamName *string `json:"deliveryStreamName" tf:"delivery_stream_name,omitempty"`
+	DeliveryStreamName *string `json:"deliveryStreamName,omitempty" tf:"delivery_stream_name,omitempty"`
+
+	// Reference to a DeliveryStream in firehose to populate deliveryStreamName.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamNameRef *v1.Reference `json:"deliveryStreamNameRef,omitempty" tf:"-"`
+
+	// Selector for a DeliveryStream in firehose to populate deliveryStreamName.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamNameSelector *v1.Selector `json:"deliveryStreamNameSelector,omitempty" tf:"-"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// A character separator that is used to separate records written to the Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
 	// +kubebuilder:validation:Optional
@@ -1877,7 +2611,17 @@ type TopicRuleIotAnalyticsInitParameters struct {
 	ChannelName *string `json:"channelName,omitempty" tf:"channel_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleIotAnalyticsObservation struct {
@@ -1903,8 +2647,18 @@ type TopicRuleIotAnalyticsParameters struct {
 	ChannelName *string `json:"channelName" tf:"channel_name,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleIotEventsInitParameters struct {
@@ -1919,7 +2673,17 @@ type TopicRuleIotEventsInitParameters struct {
 	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleIotEventsObservation struct {
@@ -1952,8 +2716,18 @@ type TopicRuleIotEventsParameters struct {
 	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleKafkaInitParameters struct {
@@ -1963,7 +2737,17 @@ type TopicRuleKafkaInitParameters struct {
 	ClientProperties map[string]*string `json:"clientProperties,omitempty" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.TopicRuleDestination
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// Reference to a TopicRuleDestination in iot to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+
+	// Selector for a TopicRuleDestination in iot to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// The list of Kafka headers that you specify. Nested arguments below.
 	Header []KafkaHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
@@ -2008,8 +2792,18 @@ type TopicRuleKafkaParameters struct {
 	ClientProperties map[string]*string `json:"clientProperties" tf:"client_properties,omitempty"`
 
 	// The ARN of Kafka action's VPC aws_iot_topic_rule_destination.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iot/v1beta1.TopicRuleDestination
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
+	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
+
+	// Reference to a TopicRuleDestination in iot to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnRef *v1.Reference `json:"destinationArnRef,omitempty" tf:"-"`
+
+	// Selector for a TopicRuleDestination in iot to populate destinationArn.
+	// +kubebuilder:validation:Optional
+	DestinationArnSelector *v1.Selector `json:"destinationArnSelector,omitempty" tf:"-"`
 
 	// The list of Kafka headers that you specify. Nested arguments below.
 	// +kubebuilder:validation:Optional
@@ -2034,10 +2828,29 @@ type TopicRuleKinesisInitParameters struct {
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The name of the Amazon Kinesis stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
+
+	// Reference to a Stream in kinesis to populate streamName.
+	// +kubebuilder:validation:Optional
+	StreamNameRef *v1.Reference `json:"streamNameRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate streamName.
+	// +kubebuilder:validation:Optional
+	StreamNameSelector *v1.Selector `json:"streamNameSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleKinesisObservation struct {
@@ -2059,18 +2872,47 @@ type TopicRuleKinesisParameters struct {
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the Amazon Kinesis stream.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
 	// +kubebuilder:validation:Optional
-	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
+	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
+
+	// Reference to a Stream in kinesis to populate streamName.
+	// +kubebuilder:validation:Optional
+	StreamNameRef *v1.Reference `json:"streamNameRef,omitempty" tf:"-"`
+
+	// Selector for a Stream in kinesis to populate streamName.
+	// +kubebuilder:validation:Optional
+	StreamNameSelector *v1.Selector `json:"streamNameSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleLambdaInitParameters struct {
 
 	// The ARN of the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleLambdaObservation struct {
@@ -2082,8 +2924,18 @@ type TopicRuleLambdaObservation struct {
 type TopicRuleLambdaParameters struct {
 
 	// The ARN of the Lambda function.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	FunctionArn *string `json:"functionArn" tf:"function_arn,omitempty"`
+	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
+
+	// Reference to a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnRef *v1.Reference `json:"functionArnRef,omitempty" tf:"-"`
+
+	// Selector for a Function in lambda to populate functionArn.
+	// +kubebuilder:validation:Optional
+	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleObservation struct {
@@ -2252,7 +3104,17 @@ type TopicRuleRepublishInitParameters struct {
 	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The Kafka topic for messages to be sent to the Kafka broker.
 	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
@@ -2277,8 +3139,18 @@ type TopicRuleRepublishParameters struct {
 	Qos *float64 `json:"qos,omitempty" tf:"qos,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The Kafka topic for messages to be sent to the Kafka broker.
 	// +kubebuilder:validation:Optional
@@ -2288,7 +3160,16 @@ type TopicRuleRepublishParameters struct {
 type TopicRuleS3InitParameters struct {
 
 	// The Amazon S3 bucket name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 canned ACL that controls access to the object identified by the object key. Valid values.
 	CannedACL *string `json:"cannedAcl,omitempty" tf:"canned_acl,omitempty"`
@@ -2297,7 +3178,17 @@ type TopicRuleS3InitParameters struct {
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleS3Observation struct {
@@ -2318,8 +3209,17 @@ type TopicRuleS3Observation struct {
 type TopicRuleS3Parameters struct {
 
 	// The Amazon S3 bucket name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
-	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameRef *v1.Reference `json:"bucketNameRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketName.
+	// +kubebuilder:validation:Optional
+	BucketNameSelector *v1.Selector `json:"bucketNameSelector,omitempty" tf:"-"`
 
 	// The Amazon S3 canned ACL that controls access to the object identified by the object key. Valid values.
 	// +kubebuilder:validation:Optional
@@ -2330,8 +3230,18 @@ type TopicRuleS3Parameters struct {
 	Key *string `json:"key" tf:"key,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleSnsInitParameters struct {
@@ -2341,7 +3251,7 @@ type TopicRuleSnsInitParameters struct {
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate roleArn.
@@ -2354,7 +3264,7 @@ type TopicRuleSnsInitParameters struct {
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
 	// Reference to a Topic in sns to populate targetArn.
@@ -2386,7 +3296,7 @@ type TopicRuleSnsParameters struct {
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -2400,7 +3310,7 @@ type TopicRuleSnsParameters struct {
 
 	// The ARN of the SNS topic.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	TargetArn *string `json:"targetArn,omitempty" tf:"target_arn,omitempty"`
 
@@ -2416,10 +3326,29 @@ type TopicRuleSnsParameters struct {
 type TopicRuleSqsInitParameters struct {
 
 	// The URL of the Amazon SQS queue.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
 	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
 
+	// Reference to a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLRef *v1.Reference `json:"queueUrlRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLSelector *v1.Selector `json:"queueUrlSelector,omitempty" tf:"-"`
+
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Specifies whether to use Base64 encoding.
 	UseBase64 *bool `json:"useBase64,omitempty" tf:"use_base64,omitempty"`
@@ -2440,12 +3369,31 @@ type TopicRuleSqsObservation struct {
 type TopicRuleSqsParameters struct {
 
 	// The URL of the Amazon SQS queue.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue
 	// +kubebuilder:validation:Optional
-	QueueURL *string `json:"queueUrl" tf:"queue_url,omitempty"`
+	QueueURL *string `json:"queueUrl,omitempty" tf:"queue_url,omitempty"`
+
+	// Reference to a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLRef *v1.Reference `json:"queueUrlRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in sqs to populate queueUrl.
+	// +kubebuilder:validation:Optional
+	QueueURLSelector *v1.Selector `json:"queueUrlSelector,omitempty" tf:"-"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// Specifies whether to use Base64 encoding.
 	// +kubebuilder:validation:Optional
@@ -2458,10 +3406,29 @@ type TopicRuleStepFunctionsInitParameters struct {
 	ExecutionNamePrefix *string `json:"executionNamePrefix,omitempty" tf:"execution_name_prefix,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The name of the Step Functions state machine whose execution will be started.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sfn/v1beta1.StateMachine
 	StateMachineName *string `json:"stateMachineName,omitempty" tf:"state_machine_name,omitempty"`
+
+	// Reference to a StateMachine in sfn to populate stateMachineName.
+	// +kubebuilder:validation:Optional
+	StateMachineNameRef *v1.Reference `json:"stateMachineNameRef,omitempty" tf:"-"`
+
+	// Selector for a StateMachine in sfn to populate stateMachineName.
+	// +kubebuilder:validation:Optional
+	StateMachineNameSelector *v1.Selector `json:"stateMachineNameSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleStepFunctionsObservation struct {
@@ -2483,27 +3450,75 @@ type TopicRuleStepFunctionsParameters struct {
 	ExecutionNamePrefix *string `json:"executionNamePrefix,omitempty" tf:"execution_name_prefix,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the Step Functions state machine whose execution will be started.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sfn/v1beta1.StateMachine
 	// +kubebuilder:validation:Optional
-	StateMachineName *string `json:"stateMachineName" tf:"state_machine_name,omitempty"`
+	StateMachineName *string `json:"stateMachineName,omitempty" tf:"state_machine_name,omitempty"`
+
+	// Reference to a StateMachine in sfn to populate stateMachineName.
+	// +kubebuilder:validation:Optional
+	StateMachineNameRef *v1.Reference `json:"stateMachineNameRef,omitempty" tf:"-"`
+
+	// Selector for a StateMachine in sfn to populate stateMachineName.
+	// +kubebuilder:validation:Optional
+	StateMachineNameSelector *v1.Selector `json:"stateMachineNameSelector,omitempty" tf:"-"`
 }
 
 type TopicRuleTimestreamInitParameters struct {
 
 	// The name of an Amazon Timestream database.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Database
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a Database in timestreamwrite to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a Database in timestreamwrite to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Configuration blocks with metadata attributes of the time series that are written in each measure record. Nested arguments below.
 	Dimension []TimestreamDimensionInitParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("table_name",false)
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in timestreamwrite to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in timestreamwrite to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Configuration block specifying an application-defined value to replace the default value assigned to the Timestream record's timestamp in the time column. Nested arguments below.
 	Timestamp []TimestreamTimestampInitParameters `json:"timestamp,omitempty" tf:"timestamp,omitempty"`
@@ -2530,20 +3545,49 @@ type TopicRuleTimestreamObservation struct {
 type TopicRuleTimestreamParameters struct {
 
 	// The name of an Amazon Timestream database.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Database
 	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a Database in timestreamwrite to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a Database in timestreamwrite to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Configuration blocks with metadata attributes of the time series that are written in each measure record. Nested arguments below.
 	// +kubebuilder:validation:Optional
 	Dimension []TimestreamDimensionParameters `json:"dimension" tf:"dimension,omitempty"`
 
 	// The IAM role ARN that allows access to the CloudWatch alarm.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
-	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The name of the DynamoDB table.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("table_name",false)
 	// +kubebuilder:validation:Optional
-	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in timestreamwrite to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in timestreamwrite to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 
 	// Configuration block specifying an application-defined value to replace the default value assigned to the Timestream record's timestamp in the time column. Nested arguments below.
 	// +kubebuilder:validation:Optional

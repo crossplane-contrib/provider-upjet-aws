@@ -403,6 +403,659 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchAlarm); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchAlarm[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.CloudwatchAlarm[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchAlarm[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchAlarm[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.CloudwatchAlarm[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CloudwatchAlarm[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLogs); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLogs[i3].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CloudwatchLogs[i3].LogGroupNameRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchLogs[i3].LogGroupNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchLogs[i3].LogGroupName")
+		}
+		mg.Spec.ForProvider.CloudwatchLogs[i3].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CloudwatchLogs[i3].LogGroupNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLogs); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchLogs[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.CloudwatchLogs[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchLogs[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchLogs[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.CloudwatchLogs[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CloudwatchLogs[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchMetric); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CloudwatchMetric[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.CloudwatchMetric[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.CloudwatchMetric[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CloudwatchMetric[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.CloudwatchMetric[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.CloudwatchMetric[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Dynamodb); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Dynamodb[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Dynamodb[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Dynamodb[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Dynamodb[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.Dynamodb[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Dynamodb[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Dynamodb); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Dynamodb[i3].TableName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.Dynamodb[i3].TableNameRef,
+				Selector:     mg.Spec.ForProvider.Dynamodb[i3].TableNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Dynamodb[i3].TableName")
+		}
+		mg.Spec.ForProvider.Dynamodb[i3].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Dynamodb[i3].TableNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Dynamodbv2); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Dynamodbv2[i3].PutItem); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Dynamodbv2[i3].PutItem[i4].TableName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.Dynamodbv2[i3].PutItem[i4].TableNameRef,
+					Selector:     mg.Spec.ForProvider.Dynamodbv2[i3].PutItem[i4].TableNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Dynamodbv2[i3].PutItem[i4].TableName")
+			}
+			mg.Spec.ForProvider.Dynamodbv2[i3].PutItem[i4].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Dynamodbv2[i3].PutItem[i4].TableNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Dynamodbv2); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Dynamodbv2[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Dynamodbv2[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Dynamodbv2[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Dynamodbv2[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.Dynamodbv2[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Dynamodbv2[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Elasticsearch); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Elasticsearch[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Elasticsearch[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Elasticsearch[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Elasticsearch[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.Elasticsearch[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Elasticsearch[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].CloudwatchAlarm); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupNameRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupName")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].CloudwatchMetric); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Dynamodb); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Dynamodb); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].TableName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].TableNameRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].TableNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].TableName")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Dynamodb[i4].TableNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableNameRef,
+						Selector:     mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableNameSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableName")
+				}
+				mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Elasticsearch); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Elasticsearch[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Elasticsearch[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Elasticsearch[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Elasticsearch[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Elasticsearch[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Elasticsearch[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Firehose); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamNameRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamName")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Firehose); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Firehose[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].IotAnalytics); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].IotAnalytics[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].IotAnalytics[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].IotAnalytics[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].IotAnalytics[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].IotAnalytics[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].IotAnalytics[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].IotEvents); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].IotEvents[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].IotEvents[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].IotEvents[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].IotEvents[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].IotEvents[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].IotEvents[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Kafka); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iot.aws.upbound.io", "v1beta1", "TopicRuleDestination", "TopicRuleDestinationList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Kafka[i4].DestinationArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Kafka[i4].DestinationArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Kafka[i4].DestinationArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Kafka[i4].DestinationArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Kafka[i4].DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Kafka[i4].DestinationArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Kinesis); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Kinesis); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].StreamName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].StreamNameRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].StreamNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].StreamName")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].StreamName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Kinesis[i4].StreamNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Lambda); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Lambda[i4].FunctionArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Lambda[i4].FunctionArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Lambda[i4].FunctionArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Lambda[i4].FunctionArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Lambda[i4].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Lambda[i4].FunctionArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Republish); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Republish[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Republish[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Republish[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Republish[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Republish[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Republish[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].S3); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].S3[i4].BucketName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].S3[i4].BucketNameRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].S3[i4].BucketNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].S3[i4].BucketName")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].S3[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].S3[i4].BucketNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].S3); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].S3[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].S3[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].S3[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].S3[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].S3[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].S3[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Sns); i4++ {
 			{
@@ -412,7 +1065,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Sns[i4].RoleArn),
-					Extract:      resource.ExtractParamPath("arn", true),
+					Extract:      common.ARNExtractor(),
 					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Sns[i4].RoleArnRef,
 					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Sns[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -435,7 +1088,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Sns[i4].TargetArn),
-					Extract:      resource.ExtractParamPath("arn", true),
+					Extract:      common.ARNExtractor(),
 					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Sns[i4].TargetArnRef,
 					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Sns[i4].TargetArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -449,6 +1102,398 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Sqs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].QueueURL),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].QueueURLRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].QueueURLSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].QueueURL")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].QueueURLRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Sqs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Sqs[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].StepFunctions); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].StepFunctions); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("sfn.aws.upbound.io", "v1beta1", "StateMachine", "StateMachineList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].StateMachineName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].StateMachineNameRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].StateMachineNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].StateMachineName")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].StateMachineName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].StepFunctions[i4].StateMachineNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Timestream); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("timestreamwrite.aws.upbound.io", "v1beta1", "Database", "DatabaseList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].DatabaseName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].DatabaseNameRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].DatabaseNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].DatabaseName")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].DatabaseNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Timestream); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ErrorAction[i3].Timestream); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("timestreamwrite.aws.upbound.io", "v1beta1", "Table", "TableList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].TableName),
+					Extract:      resource.ExtractParamPath("table_name", false),
+					Reference:    mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].TableNameRef,
+					Selector:     mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].TableNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].TableName")
+			}
+			mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.ErrorAction[i3].Timestream[i4].TableNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Firehose); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Firehose[i3].DeliveryStreamName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.Firehose[i3].DeliveryStreamNameRef,
+				Selector:     mg.Spec.ForProvider.Firehose[i3].DeliveryStreamNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Firehose[i3].DeliveryStreamName")
+		}
+		mg.Spec.ForProvider.Firehose[i3].DeliveryStreamName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Firehose[i3].DeliveryStreamNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Firehose); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Firehose[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Firehose[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Firehose[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Firehose[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.Firehose[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Firehose[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.IotAnalytics); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotAnalytics[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.IotAnalytics[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.IotAnalytics[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.IotAnalytics[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.IotAnalytics[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.IotAnalytics[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.IotEvents); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IotEvents[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.IotEvents[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.IotEvents[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.IotEvents[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.IotEvents[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.IotEvents[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Kafka); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iot.aws.upbound.io", "v1beta1", "TopicRuleDestination", "TopicRuleDestinationList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Kafka[i3].DestinationArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Kafka[i3].DestinationArnRef,
+				Selector:     mg.Spec.ForProvider.Kafka[i3].DestinationArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Kafka[i3].DestinationArn")
+		}
+		mg.Spec.ForProvider.Kafka[i3].DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Kafka[i3].DestinationArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Kinesis); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Kinesis[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Kinesis[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Kinesis[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Kinesis[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.Kinesis[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Kinesis[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Kinesis); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Kinesis[i3].StreamName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.Kinesis[i3].StreamNameRef,
+				Selector:     mg.Spec.ForProvider.Kinesis[i3].StreamNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Kinesis[i3].StreamName")
+		}
+		mg.Spec.ForProvider.Kinesis[i3].StreamName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Kinesis[i3].StreamNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Lambda); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Lambda[i3].FunctionArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Lambda[i3].FunctionArnRef,
+				Selector:     mg.Spec.ForProvider.Lambda[i3].FunctionArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Lambda[i3].FunctionArn")
+		}
+		mg.Spec.ForProvider.Lambda[i3].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Lambda[i3].FunctionArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Republish); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Republish[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Republish[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Republish[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Republish[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.Republish[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Republish[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3[i3].BucketName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.S3[i3].BucketNameRef,
+				Selector:     mg.Spec.ForProvider.S3[i3].BucketNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3[i3].BucketName")
+		}
+		mg.Spec.ForProvider.S3[i3].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3[i3].BucketNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.S3); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.S3[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.S3[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.S3[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Sns); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
@@ -457,7 +1502,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Sns[i3].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.Sns[i3].RoleArnRef,
 				Selector:     mg.Spec.ForProvider.Sns[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -478,7 +1523,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Sns[i3].TargetArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.ForProvider.Sns[i3].TargetArnRef,
 				Selector:     mg.Spec.ForProvider.Sns[i3].TargetArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -491,6 +1536,806 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 		mg.Spec.ForProvider.Sns[i3].TargetArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Sqs); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Sqs[i3].QueueURL),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.Sqs[i3].QueueURLRef,
+				Selector:     mg.Spec.ForProvider.Sqs[i3].QueueURLSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Sqs[i3].QueueURL")
+		}
+		mg.Spec.ForProvider.Sqs[i3].QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Sqs[i3].QueueURLRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Sqs); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Sqs[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Sqs[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Sqs[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Sqs[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.Sqs[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Sqs[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.StepFunctions); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StepFunctions[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.StepFunctions[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.StepFunctions[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.StepFunctions[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.StepFunctions[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StepFunctions[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.StepFunctions); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("sfn.aws.upbound.io", "v1beta1", "StateMachine", "StateMachineList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StepFunctions[i3].StateMachineName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.StepFunctions[i3].StateMachineNameRef,
+				Selector:     mg.Spec.ForProvider.StepFunctions[i3].StateMachineNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.StepFunctions[i3].StateMachineName")
+		}
+		mg.Spec.ForProvider.StepFunctions[i3].StateMachineName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.StepFunctions[i3].StateMachineNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Timestream); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("timestreamwrite.aws.upbound.io", "v1beta1", "Database", "DatabaseList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Timestream[i3].DatabaseName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.Timestream[i3].DatabaseNameRef,
+				Selector:     mg.Spec.ForProvider.Timestream[i3].DatabaseNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Timestream[i3].DatabaseName")
+		}
+		mg.Spec.ForProvider.Timestream[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Timestream[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Timestream); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Timestream[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.Timestream[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.Timestream[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Timestream[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.Timestream[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Timestream[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Timestream); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("timestreamwrite.aws.upbound.io", "v1beta1", "Table", "TableList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Timestream[i3].TableName),
+				Extract:      resource.ExtractParamPath("table_name", false),
+				Reference:    mg.Spec.ForProvider.Timestream[i3].TableNameRef,
+				Selector:     mg.Spec.ForProvider.Timestream[i3].TableNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Timestream[i3].TableName")
+		}
+		mg.Spec.ForProvider.Timestream[i3].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Timestream[i3].TableNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CloudwatchAlarm); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchAlarm[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.CloudwatchAlarm[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.CloudwatchAlarm[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchAlarm[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.CloudwatchAlarm[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CloudwatchAlarm[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CloudwatchLogs); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLogs[i3].LogGroupName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.CloudwatchLogs[i3].LogGroupNameRef,
+				Selector:     mg.Spec.InitProvider.CloudwatchLogs[i3].LogGroupNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchLogs[i3].LogGroupName")
+		}
+		mg.Spec.InitProvider.CloudwatchLogs[i3].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CloudwatchLogs[i3].LogGroupNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CloudwatchLogs); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchLogs[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.CloudwatchLogs[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.CloudwatchLogs[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchLogs[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.CloudwatchLogs[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CloudwatchLogs[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CloudwatchMetric); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudwatchMetric[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.CloudwatchMetric[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.CloudwatchMetric[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CloudwatchMetric[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.CloudwatchMetric[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CloudwatchMetric[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Dynamodb); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Dynamodb[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Dynamodb[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Dynamodb[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Dynamodb[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Dynamodb[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Dynamodb[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Dynamodb); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Dynamodb[i3].TableName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Dynamodb[i3].TableNameRef,
+				Selector:     mg.Spec.InitProvider.Dynamodb[i3].TableNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Dynamodb[i3].TableName")
+		}
+		mg.Spec.InitProvider.Dynamodb[i3].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Dynamodb[i3].TableNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Dynamodbv2); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Dynamodbv2[i3].PutItem); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Dynamodbv2[i3].PutItem[i4].TableName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.Dynamodbv2[i3].PutItem[i4].TableNameRef,
+					Selector:     mg.Spec.InitProvider.Dynamodbv2[i3].PutItem[i4].TableNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Dynamodbv2[i3].PutItem[i4].TableName")
+			}
+			mg.Spec.InitProvider.Dynamodbv2[i3].PutItem[i4].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Dynamodbv2[i3].PutItem[i4].TableNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Dynamodbv2); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Dynamodbv2[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Dynamodbv2[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Dynamodbv2[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Dynamodbv2[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Dynamodbv2[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Dynamodbv2[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Elasticsearch); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Elasticsearch[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Elasticsearch[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Elasticsearch[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Elasticsearch[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Elasticsearch[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Elasticsearch[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].CloudwatchAlarm); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].CloudwatchAlarm[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupNameRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupName")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].LogGroupNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].CloudwatchLogs[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].CloudwatchMetric); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].CloudwatchMetric[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Dynamodb); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Dynamodb); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].TableName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].TableNameRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].TableNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].TableName")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Dynamodb[i4].TableNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableName),
+						Extract:      reference.ExternalName(),
+						Reference:    mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableNameRef,
+						Selector:     mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableNameSelector,
+						To:           reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableName")
+				}
+				mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].PutItem[i5].TableNameRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Dynamodbv2[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Elasticsearch); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Elasticsearch[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Elasticsearch[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Elasticsearch[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Elasticsearch[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Elasticsearch[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Elasticsearch[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Firehose); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamNameRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamName")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].DeliveryStreamNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Firehose); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Firehose[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].IotAnalytics); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].IotAnalytics[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].IotAnalytics[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].IotAnalytics[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].IotAnalytics[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].IotAnalytics[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].IotAnalytics[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].IotEvents); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].IotEvents[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].IotEvents[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].IotEvents[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].IotEvents[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].IotEvents[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].IotEvents[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Kafka); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iot.aws.upbound.io", "v1beta1", "TopicRuleDestination", "TopicRuleDestinationList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Kafka[i4].DestinationArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Kafka[i4].DestinationArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Kafka[i4].DestinationArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Kafka[i4].DestinationArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Kafka[i4].DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Kafka[i4].DestinationArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Kinesis); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Kinesis); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].StreamName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].StreamNameRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].StreamNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].StreamName")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].StreamName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Kinesis[i4].StreamNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Lambda); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Lambda[i4].FunctionArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Lambda[i4].FunctionArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Lambda[i4].FunctionArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Lambda[i4].FunctionArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Lambda[i4].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Lambda[i4].FunctionArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Republish); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Republish[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Republish[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Republish[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Republish[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Republish[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Republish[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].S3); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].S3[i4].BucketName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].S3[i4].BucketNameRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].S3[i4].BucketNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].S3[i4].BucketName")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].S3[i4].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].S3[i4].BucketNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].S3); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].S3[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].S3[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].S3[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].S3[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].S3[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].S3[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Sns); i4++ {
 			{
@@ -500,7 +2345,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Sns[i4].RoleArn),
-					Extract:      resource.ExtractParamPath("arn", true),
+					Extract:      common.ARNExtractor(),
 					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Sns[i4].RoleArnRef,
 					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Sns[i4].RoleArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -523,7 +2368,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Sns[i4].TargetArn),
-					Extract:      resource.ExtractParamPath("arn", true),
+					Extract:      common.ARNExtractor(),
 					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Sns[i4].TargetArnRef,
 					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Sns[i4].TargetArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -537,6 +2382,398 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Sqs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].QueueURL),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].QueueURLRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].QueueURLSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].QueueURL")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].QueueURLRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Sqs); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Sqs[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].StepFunctions); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].StepFunctions); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("sfn.aws.upbound.io", "v1beta1", "StateMachine", "StateMachineList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].StateMachineName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].StateMachineNameRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].StateMachineNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].StateMachineName")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].StateMachineName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].StepFunctions[i4].StateMachineNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Timestream); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("timestreamwrite.aws.upbound.io", "v1beta1", "Database", "DatabaseList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].DatabaseName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].DatabaseNameRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].DatabaseNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].DatabaseName")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].DatabaseNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Timestream); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].RoleArn),
+					Extract:      common.ARNExtractor(),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ErrorAction); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ErrorAction[i3].Timestream); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("timestreamwrite.aws.upbound.io", "v1beta1", "Table", "TableList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].TableName),
+					Extract:      resource.ExtractParamPath("table_name", false),
+					Reference:    mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].TableNameRef,
+					Selector:     mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].TableNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].TableName")
+			}
+			mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ErrorAction[i3].Timestream[i4].TableNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Firehose); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Firehose[i3].DeliveryStreamName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Firehose[i3].DeliveryStreamNameRef,
+				Selector:     mg.Spec.InitProvider.Firehose[i3].DeliveryStreamNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Firehose[i3].DeliveryStreamName")
+		}
+		mg.Spec.InitProvider.Firehose[i3].DeliveryStreamName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Firehose[i3].DeliveryStreamNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Firehose); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Firehose[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Firehose[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Firehose[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Firehose[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Firehose[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Firehose[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.IotAnalytics); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotAnalytics[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.IotAnalytics[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.IotAnalytics[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.IotAnalytics[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.IotAnalytics[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IotAnalytics[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.IotEvents); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotEvents[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.IotEvents[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.IotEvents[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.IotEvents[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.IotEvents[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IotEvents[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Kafka); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iot.aws.upbound.io", "v1beta1", "TopicRuleDestination", "TopicRuleDestinationList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Kafka[i3].DestinationArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Kafka[i3].DestinationArnRef,
+				Selector:     mg.Spec.InitProvider.Kafka[i3].DestinationArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Kafka[i3].DestinationArn")
+		}
+		mg.Spec.InitProvider.Kafka[i3].DestinationArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Kafka[i3].DestinationArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Kinesis); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Kinesis[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Kinesis[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Kinesis[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Kinesis[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Kinesis[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Kinesis[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Kinesis); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Kinesis[i3].StreamName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Kinesis[i3].StreamNameRef,
+				Selector:     mg.Spec.InitProvider.Kinesis[i3].StreamNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Kinesis[i3].StreamName")
+		}
+		mg.Spec.InitProvider.Kinesis[i3].StreamName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Kinesis[i3].StreamNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Lambda); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Lambda[i3].FunctionArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Lambda[i3].FunctionArnRef,
+				Selector:     mg.Spec.InitProvider.Lambda[i3].FunctionArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Lambda[i3].FunctionArn")
+		}
+		mg.Spec.InitProvider.Lambda[i3].FunctionArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Lambda[i3].FunctionArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Republish); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Republish[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Republish[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Republish[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Republish[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Republish[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Republish[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.S3); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3[i3].BucketName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.S3[i3].BucketNameRef,
+				Selector:     mg.Spec.InitProvider.S3[i3].BucketNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.S3[i3].BucketName")
+		}
+		mg.Spec.InitProvider.S3[i3].BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.S3[i3].BucketNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.S3); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.S3[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.S3[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.S3[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.S3[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.S3[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Sns); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
@@ -545,7 +2782,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Sns[i3].RoleArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.InitProvider.Sns[i3].RoleArnRef,
 				Selector:     mg.Spec.InitProvider.Sns[i3].RoleArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -566,7 +2803,7 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Sns[i3].TargetArn),
-				Extract:      resource.ExtractParamPath("arn", true),
+				Extract:      common.ARNExtractor(),
 				Reference:    mg.Spec.InitProvider.Sns[i3].TargetArnRef,
 				Selector:     mg.Spec.InitProvider.Sns[i3].TargetArnSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -577,6 +2814,153 @@ func (mg *TopicRule) ResolveReferences(ctx context.Context, c client.Reader) err
 		}
 		mg.Spec.InitProvider.Sns[i3].TargetArn = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Sns[i3].TargetArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Sqs); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("sqs.aws.upbound.io", "v1beta1", "Queue", "QueueList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Sqs[i3].QueueURL),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Sqs[i3].QueueURLRef,
+				Selector:     mg.Spec.InitProvider.Sqs[i3].QueueURLSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Sqs[i3].QueueURL")
+		}
+		mg.Spec.InitProvider.Sqs[i3].QueueURL = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Sqs[i3].QueueURLRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Sqs); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Sqs[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Sqs[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Sqs[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Sqs[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Sqs[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Sqs[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StepFunctions); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StepFunctions[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.StepFunctions[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.StepFunctions[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StepFunctions[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.StepFunctions[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StepFunctions[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StepFunctions); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("sfn.aws.upbound.io", "v1beta1", "StateMachine", "StateMachineList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StepFunctions[i3].StateMachineName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.StepFunctions[i3].StateMachineNameRef,
+				Selector:     mg.Spec.InitProvider.StepFunctions[i3].StateMachineNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StepFunctions[i3].StateMachineName")
+		}
+		mg.Spec.InitProvider.StepFunctions[i3].StateMachineName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StepFunctions[i3].StateMachineNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Timestream); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("timestreamwrite.aws.upbound.io", "v1beta1", "Database", "DatabaseList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Timestream[i3].DatabaseName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Timestream[i3].DatabaseNameRef,
+				Selector:     mg.Spec.InitProvider.Timestream[i3].DatabaseNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Timestream[i3].DatabaseName")
+		}
+		mg.Spec.InitProvider.Timestream[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Timestream[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Timestream); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Timestream[i3].RoleArn),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.Timestream[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.Timestream[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Timestream[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.Timestream[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Timestream[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Timestream); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("timestreamwrite.aws.upbound.io", "v1beta1", "Table", "TableList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Timestream[i3].TableName),
+				Extract:      resource.ExtractParamPath("table_name", false),
+				Reference:    mg.Spec.InitProvider.Timestream[i3].TableNameRef,
+				Selector:     mg.Spec.InitProvider.Timestream[i3].TableNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Timestream[i3].TableName")
+		}
+		mg.Spec.InitProvider.Timestream[i3].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Timestream[i3].TableNameRef = rsp.ResolvedReference
 
 	}
 

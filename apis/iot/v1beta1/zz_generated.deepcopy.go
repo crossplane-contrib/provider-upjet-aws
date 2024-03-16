@@ -318,6 +318,16 @@ func (in *CloudwatchAlarmInitParameters) DeepCopyInto(out *CloudwatchAlarmInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StateReason != nil {
 		in, out := &in.StateReason, &out.StateReason
 		*out = new(string)
@@ -388,6 +398,16 @@ func (in *CloudwatchAlarmParameters) DeepCopyInto(out *CloudwatchAlarmParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StateReason != nil {
 		in, out := &in.StateReason, &out.StateReason
 		*out = new(string)
@@ -418,10 +438,30 @@ func (in *CloudwatchLogsInitParameters) DeepCopyInto(out *CloudwatchLogsInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -468,10 +508,30 @@ func (in *CloudwatchLogsParameters) DeepCopyInto(out *CloudwatchLogsParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -517,6 +577,16 @@ func (in *CloudwatchMetricInitParameters) DeepCopyInto(out *CloudwatchMetricInit
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -607,6 +677,16 @@ func (in *CloudwatchMetricParameters) DeepCopyInto(out *CloudwatchMetricParamete
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -818,10 +898,30 @@ func (in *DynamodbInitParameters) DeepCopyInto(out *DynamodbInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -948,10 +1048,30 @@ func (in *DynamodbParameters) DeepCopyInto(out *DynamodbParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -979,6 +1099,16 @@ func (in *Dynamodbv2InitParameters) DeepCopyInto(out *Dynamodbv2InitParameters) 
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1034,6 +1164,16 @@ func (in *Dynamodbv2Parameters) DeepCopyInto(out *Dynamodbv2Parameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new Dynamodbv2Parameters.
@@ -1053,6 +1193,16 @@ func (in *Dynamodbv2PutItemInitParameters) DeepCopyInto(out *Dynamodbv2PutItemIn
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1094,6 +1244,16 @@ func (in *Dynamodbv2PutItemParameters) DeepCopyInto(out *Dynamodbv2PutItemParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new Dynamodbv2PutItemParameters.
@@ -1128,6 +1288,16 @@ func (in *ElasticsearchInitParameters) DeepCopyInto(out *ElasticsearchInitParame
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -1209,6 +1379,16 @@ func (in *ElasticsearchParameters) DeepCopyInto(out *ElasticsearchParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -1238,6 +1418,16 @@ func (in *ErrorActionCloudwatchAlarmInitParameters) DeepCopyInto(out *ErrorActio
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StateReason != nil {
 		in, out := &in.StateReason, &out.StateReason
@@ -1309,6 +1499,16 @@ func (in *ErrorActionCloudwatchAlarmParameters) DeepCopyInto(out *ErrorActionClo
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StateReason != nil {
 		in, out := &in.StateReason, &out.StateReason
 		*out = new(string)
@@ -1339,10 +1539,30 @@ func (in *ErrorActionCloudwatchLogsInitParameters) DeepCopyInto(out *ErrorAction
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1389,10 +1609,30 @@ func (in *ErrorActionCloudwatchLogsParameters) DeepCopyInto(out *ErrorActionClou
 		*out = new(string)
 		**out = **in
 	}
+	if in.LogGroupNameRef != nil {
+		in, out := &in.LogGroupNameRef, &out.LogGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogGroupNameSelector != nil {
+		in, out := &in.LogGroupNameSelector, &out.LogGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1438,6 +1678,16 @@ func (in *ErrorActionCloudwatchMetricInitParameters) DeepCopyInto(out *ErrorActi
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1529,6 +1779,16 @@ func (in *ErrorActionCloudwatchMetricParameters) DeepCopyInto(out *ErrorActionCl
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ErrorActionCloudwatchMetricParameters.
@@ -1589,10 +1849,30 @@ func (in *ErrorActionDynamodbInitParameters) DeepCopyInto(out *ErrorActionDynamo
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1719,10 +1999,30 @@ func (in *ErrorActionDynamodbParameters) DeepCopyInto(out *ErrorActionDynamodbPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1750,6 +2050,16 @@ func (in *ErrorActionDynamodbv2InitParameters) DeepCopyInto(out *ErrorActionDyna
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1805,6 +2115,16 @@ func (in *ErrorActionDynamodbv2Parameters) DeepCopyInto(out *ErrorActionDynamodb
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ErrorActionDynamodbv2Parameters.
@@ -1839,6 +2159,16 @@ func (in *ErrorActionElasticsearchInitParameters) DeepCopyInto(out *ErrorActionE
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -1919,6 +2249,16 @@ func (in *ErrorActionElasticsearchParameters) DeepCopyInto(out *ErrorActionElast
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -2472,10 +2812,30 @@ func (in *FirehoseInitParameters) DeepCopyInto(out *FirehoseInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeliveryStreamNameRef != nil {
+		in, out := &in.DeliveryStreamNameRef, &out.DeliveryStreamNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DeliveryStreamNameSelector != nil {
+		in, out := &in.DeliveryStreamNameSelector, &out.DeliveryStreamNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Separator != nil {
 		in, out := &in.Separator, &out.Separator
@@ -2542,10 +2902,30 @@ func (in *FirehoseParameters) DeepCopyInto(out *FirehoseParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeliveryStreamNameRef != nil {
+		in, out := &in.DeliveryStreamNameRef, &out.DeliveryStreamNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DeliveryStreamNameSelector != nil {
+		in, out := &in.DeliveryStreamNameSelector, &out.DeliveryStreamNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Separator != nil {
 		in, out := &in.Separator, &out.Separator
@@ -3094,6 +3474,16 @@ func (in *IotAnalyticsInitParameters) DeepCopyInto(out *IotAnalyticsInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new IotAnalyticsInitParameters.
@@ -3154,6 +3544,16 @@ func (in *IotAnalyticsParameters) DeepCopyInto(out *IotAnalyticsParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new IotAnalyticsParameters.
@@ -3188,6 +3588,16 @@ func (in *IotEventsInitParameters) DeepCopyInto(out *IotEventsInitParameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -3258,6 +3668,16 @@ func (in *IotEventsParameters) DeepCopyInto(out *IotEventsParameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -3369,6 +3789,16 @@ func (in *KafkaInitParameters) DeepCopyInto(out *KafkaInitParameters) {
 		in, out := &in.DestinationArn, &out.DestinationArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.DestinationArnRef != nil {
+		in, out := &in.DestinationArnRef, &out.DestinationArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationArnSelector != nil {
+		in, out := &in.DestinationArnSelector, &out.DestinationArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Header != nil {
 		in, out := &in.Header, &out.Header
@@ -3486,6 +3916,16 @@ func (in *KafkaParameters) DeepCopyInto(out *KafkaParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DestinationArnRef != nil {
+		in, out := &in.DestinationArnRef, &out.DestinationArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationArnSelector != nil {
+		in, out := &in.DestinationArnSelector, &out.DestinationArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Header != nil {
 		in, out := &in.Header, &out.Header
 		*out = make([]HeaderParameters, len(*in))
@@ -3533,10 +3973,30 @@ func (in *KinesisInitParameters) DeepCopyInto(out *KinesisInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StreamName != nil {
 		in, out := &in.StreamName, &out.StreamName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StreamNameRef != nil {
+		in, out := &in.StreamNameRef, &out.StreamNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StreamNameSelector != nil {
+		in, out := &in.StreamNameSelector, &out.StreamNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -3593,10 +4053,30 @@ func (in *KinesisParameters) DeepCopyInto(out *KinesisParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StreamName != nil {
 		in, out := &in.StreamName, &out.StreamName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StreamNameRef != nil {
+		in, out := &in.StreamNameRef, &out.StreamNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StreamNameSelector != nil {
+		in, out := &in.StreamNameSelector, &out.StreamNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -3617,6 +4097,16 @@ func (in *LambdaInitParameters) DeepCopyInto(out *LambdaInitParameters) {
 		in, out := &in.FunctionArn, &out.FunctionArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.FunctionArnRef != nil {
+		in, out := &in.FunctionArnRef, &out.FunctionArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FunctionArnSelector != nil {
+		in, out := &in.FunctionArnSelector, &out.FunctionArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -3657,6 +4147,16 @@ func (in *LambdaParameters) DeepCopyInto(out *LambdaParameters) {
 		in, out := &in.FunctionArn, &out.FunctionArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.FunctionArnRef != nil {
+		in, out := &in.FunctionArnRef, &out.FunctionArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FunctionArnSelector != nil {
+		in, out := &in.FunctionArnSelector, &out.FunctionArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -4917,6 +5417,16 @@ func (in *PutItemInitParameters) DeepCopyInto(out *PutItemInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PutItemInitParameters.
@@ -4957,6 +5467,16 @@ func (in *PutItemParameters) DeepCopyInto(out *PutItemParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PutItemParameters.
@@ -4981,6 +5501,16 @@ func (in *RepublishInitParameters) DeepCopyInto(out *RepublishInitParameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Topic != nil {
 		in, out := &in.Topic, &out.Topic
@@ -5041,6 +5571,16 @@ func (in *RepublishParameters) DeepCopyInto(out *RepublishParameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Topic != nil {
 		in, out := &in.Topic, &out.Topic
@@ -5341,6 +5881,16 @@ func (in *S3InitParameters) DeepCopyInto(out *S3InitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketNameRef != nil {
+		in, out := &in.BucketNameRef, &out.BucketNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketNameSelector != nil {
+		in, out := &in.BucketNameSelector, &out.BucketNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CannedACL != nil {
 		in, out := &in.CannedACL, &out.CannedACL
 		*out = new(string)
@@ -5355,6 +5905,16 @@ func (in *S3InitParameters) DeepCopyInto(out *S3InitParameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5411,6 +5971,16 @@ func (in *S3Parameters) DeepCopyInto(out *S3Parameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketNameRef != nil {
+		in, out := &in.BucketNameRef, &out.BucketNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketNameSelector != nil {
+		in, out := &in.BucketNameSelector, &out.BucketNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CannedACL != nil {
 		in, out := &in.CannedACL, &out.CannedACL
 		*out = new(string)
@@ -5425,6 +5995,16 @@ func (in *S3Parameters) DeepCopyInto(out *S3Parameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5576,10 +6156,30 @@ func (in *SqsInitParameters) DeepCopyInto(out *SqsInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.QueueURLRef != nil {
+		in, out := &in.QueueURLRef, &out.QueueURLRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.QueueURLSelector != nil {
+		in, out := &in.QueueURLSelector, &out.QueueURLSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.UseBase64 != nil {
 		in, out := &in.UseBase64, &out.UseBase64
@@ -5636,10 +6236,30 @@ func (in *SqsParameters) DeepCopyInto(out *SqsParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.QueueURLRef != nil {
+		in, out := &in.QueueURLRef, &out.QueueURLRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.QueueURLSelector != nil {
+		in, out := &in.QueueURLSelector, &out.QueueURLSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.UseBase64 != nil {
 		in, out := &in.UseBase64, &out.UseBase64
@@ -5671,10 +6291,30 @@ func (in *StepFunctionsInitParameters) DeepCopyInto(out *StepFunctionsInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StateMachineName != nil {
 		in, out := &in.StateMachineName, &out.StateMachineName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StateMachineNameRef != nil {
+		in, out := &in.StateMachineNameRef, &out.StateMachineNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StateMachineNameSelector != nil {
+		in, out := &in.StateMachineNameSelector, &out.StateMachineNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5731,10 +6371,30 @@ func (in *StepFunctionsParameters) DeepCopyInto(out *StepFunctionsParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StateMachineName != nil {
 		in, out := &in.StateMachineName, &out.StateMachineName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StateMachineNameRef != nil {
+		in, out := &in.StateMachineNameRef, &out.StateMachineNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StateMachineNameSelector != nil {
+		in, out := &in.StateMachineNameSelector, &out.StateMachineNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -7614,6 +8274,16 @@ func (in *TimestreamInitParameters) DeepCopyInto(out *TimestreamInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Dimension != nil {
 		in, out := &in.Dimension, &out.Dimension
 		*out = make([]DimensionInitParameters, len(*in))
@@ -7626,10 +8296,30 @@ func (in *TimestreamInitParameters) DeepCopyInto(out *TimestreamInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Timestamp != nil {
 		in, out := &in.Timestamp, &out.Timestamp
@@ -7702,6 +8392,16 @@ func (in *TimestreamParameters) DeepCopyInto(out *TimestreamParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Dimension != nil {
 		in, out := &in.Dimension, &out.Dimension
 		*out = make([]DimensionParameters, len(*in))
@@ -7714,10 +8414,30 @@ func (in *TimestreamParameters) DeepCopyInto(out *TimestreamParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Timestamp != nil {
 		in, out := &in.Timestamp, &out.Timestamp
@@ -8043,10 +8763,30 @@ func (in *TopicRuleFirehoseInitParameters) DeepCopyInto(out *TopicRuleFirehoseIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeliveryStreamNameRef != nil {
+		in, out := &in.DeliveryStreamNameRef, &out.DeliveryStreamNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DeliveryStreamNameSelector != nil {
+		in, out := &in.DeliveryStreamNameSelector, &out.DeliveryStreamNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Separator != nil {
 		in, out := &in.Separator, &out.Separator
@@ -8113,10 +8853,30 @@ func (in *TopicRuleFirehoseParameters) DeepCopyInto(out *TopicRuleFirehoseParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeliveryStreamNameRef != nil {
+		in, out := &in.DeliveryStreamNameRef, &out.DeliveryStreamNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DeliveryStreamNameSelector != nil {
+		in, out := &in.DeliveryStreamNameSelector, &out.DeliveryStreamNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Separator != nil {
 		in, out := &in.Separator, &out.Separator
@@ -8440,6 +9200,16 @@ func (in *TopicRuleIotAnalyticsInitParameters) DeepCopyInto(out *TopicRuleIotAna
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TopicRuleIotAnalyticsInitParameters.
@@ -8500,6 +9270,16 @@ func (in *TopicRuleIotAnalyticsParameters) DeepCopyInto(out *TopicRuleIotAnalyti
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TopicRuleIotAnalyticsParameters.
@@ -8534,6 +9314,16 @@ func (in *TopicRuleIotEventsInitParameters) DeepCopyInto(out *TopicRuleIotEvents
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8605,6 +9395,16 @@ func (in *TopicRuleIotEventsParameters) DeepCopyInto(out *TopicRuleIotEventsPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new TopicRuleIotEventsParameters.
@@ -8640,6 +9440,16 @@ func (in *TopicRuleKafkaInitParameters) DeepCopyInto(out *TopicRuleKafkaInitPara
 		in, out := &in.DestinationArn, &out.DestinationArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.DestinationArnRef != nil {
+		in, out := &in.DestinationArnRef, &out.DestinationArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationArnSelector != nil {
+		in, out := &in.DestinationArnSelector, &out.DestinationArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Header != nil {
 		in, out := &in.Header, &out.Header
@@ -8757,6 +9567,16 @@ func (in *TopicRuleKafkaParameters) DeepCopyInto(out *TopicRuleKafkaParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DestinationArnRef != nil {
+		in, out := &in.DestinationArnRef, &out.DestinationArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationArnSelector != nil {
+		in, out := &in.DestinationArnSelector, &out.DestinationArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Header != nil {
 		in, out := &in.Header, &out.Header
 		*out = make([]KafkaHeaderParameters, len(*in))
@@ -8804,10 +9624,30 @@ func (in *TopicRuleKinesisInitParameters) DeepCopyInto(out *TopicRuleKinesisInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StreamName != nil {
 		in, out := &in.StreamName, &out.StreamName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StreamNameRef != nil {
+		in, out := &in.StreamNameRef, &out.StreamNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StreamNameSelector != nil {
+		in, out := &in.StreamNameSelector, &out.StreamNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8864,10 +9704,30 @@ func (in *TopicRuleKinesisParameters) DeepCopyInto(out *TopicRuleKinesisParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StreamName != nil {
 		in, out := &in.StreamName, &out.StreamName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StreamNameRef != nil {
+		in, out := &in.StreamNameRef, &out.StreamNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StreamNameSelector != nil {
+		in, out := &in.StreamNameSelector, &out.StreamNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8888,6 +9748,16 @@ func (in *TopicRuleLambdaInitParameters) DeepCopyInto(out *TopicRuleLambdaInitPa
 		in, out := &in.FunctionArn, &out.FunctionArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.FunctionArnRef != nil {
+		in, out := &in.FunctionArnRef, &out.FunctionArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FunctionArnSelector != nil {
+		in, out := &in.FunctionArnSelector, &out.FunctionArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8928,6 +9798,16 @@ func (in *TopicRuleLambdaParameters) DeepCopyInto(out *TopicRuleLambdaParameters
 		in, out := &in.FunctionArn, &out.FunctionArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.FunctionArnRef != nil {
+		in, out := &in.FunctionArnRef, &out.FunctionArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FunctionArnSelector != nil {
+		in, out := &in.FunctionArnSelector, &out.FunctionArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -9399,6 +10279,16 @@ func (in *TopicRuleRepublishInitParameters) DeepCopyInto(out *TopicRuleRepublish
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Topic != nil {
 		in, out := &in.Topic, &out.Topic
 		*out = new(string)
@@ -9459,6 +10349,16 @@ func (in *TopicRuleRepublishParameters) DeepCopyInto(out *TopicRuleRepublishPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Topic != nil {
 		in, out := &in.Topic, &out.Topic
 		*out = new(string)
@@ -9484,6 +10384,16 @@ func (in *TopicRuleS3InitParameters) DeepCopyInto(out *TopicRuleS3InitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketNameRef != nil {
+		in, out := &in.BucketNameRef, &out.BucketNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketNameSelector != nil {
+		in, out := &in.BucketNameSelector, &out.BucketNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CannedACL != nil {
 		in, out := &in.CannedACL, &out.CannedACL
 		*out = new(string)
@@ -9498,6 +10408,16 @@ func (in *TopicRuleS3InitParameters) DeepCopyInto(out *TopicRuleS3InitParameters
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -9554,6 +10474,16 @@ func (in *TopicRuleS3Parameters) DeepCopyInto(out *TopicRuleS3Parameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BucketNameRef != nil {
+		in, out := &in.BucketNameRef, &out.BucketNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BucketNameSelector != nil {
+		in, out := &in.BucketNameSelector, &out.BucketNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CannedACL != nil {
 		in, out := &in.CannedACL, &out.CannedACL
 		*out = new(string)
@@ -9568,6 +10498,16 @@ func (in *TopicRuleS3Parameters) DeepCopyInto(out *TopicRuleS3Parameters) {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -9737,10 +10677,30 @@ func (in *TopicRuleSqsInitParameters) DeepCopyInto(out *TopicRuleSqsInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.QueueURLRef != nil {
+		in, out := &in.QueueURLRef, &out.QueueURLRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.QueueURLSelector != nil {
+		in, out := &in.QueueURLSelector, &out.QueueURLSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.UseBase64 != nil {
 		in, out := &in.UseBase64, &out.UseBase64
@@ -9797,10 +10757,30 @@ func (in *TopicRuleSqsParameters) DeepCopyInto(out *TopicRuleSqsParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.QueueURLRef != nil {
+		in, out := &in.QueueURLRef, &out.QueueURLRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.QueueURLSelector != nil {
+		in, out := &in.QueueURLSelector, &out.QueueURLSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.UseBase64 != nil {
 		in, out := &in.UseBase64, &out.UseBase64
@@ -9849,10 +10829,30 @@ func (in *TopicRuleStepFunctionsInitParameters) DeepCopyInto(out *TopicRuleStepF
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StateMachineName != nil {
 		in, out := &in.StateMachineName, &out.StateMachineName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StateMachineNameRef != nil {
+		in, out := &in.StateMachineNameRef, &out.StateMachineNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StateMachineNameSelector != nil {
+		in, out := &in.StateMachineNameSelector, &out.StateMachineNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -9909,10 +10909,30 @@ func (in *TopicRuleStepFunctionsParameters) DeepCopyInto(out *TopicRuleStepFunct
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StateMachineName != nil {
 		in, out := &in.StateMachineName, &out.StateMachineName
 		*out = new(string)
 		**out = **in
+	}
+	if in.StateMachineNameRef != nil {
+		in, out := &in.StateMachineNameRef, &out.StateMachineNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StateMachineNameSelector != nil {
+		in, out := &in.StateMachineNameSelector, &out.StateMachineNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -9934,6 +10954,16 @@ func (in *TopicRuleTimestreamInitParameters) DeepCopyInto(out *TopicRuleTimestre
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Dimension != nil {
 		in, out := &in.Dimension, &out.Dimension
 		*out = make([]TimestreamDimensionInitParameters, len(*in))
@@ -9946,10 +10976,30 @@ func (in *TopicRuleTimestreamInitParameters) DeepCopyInto(out *TopicRuleTimestre
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Timestamp != nil {
 		in, out := &in.Timestamp, &out.Timestamp
@@ -10022,6 +11072,16 @@ func (in *TopicRuleTimestreamParameters) DeepCopyInto(out *TopicRuleTimestreamPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.DatabaseNameRef != nil {
+		in, out := &in.DatabaseNameRef, &out.DatabaseNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DatabaseNameSelector != nil {
+		in, out := &in.DatabaseNameSelector, &out.DatabaseNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Dimension != nil {
 		in, out := &in.Dimension, &out.Dimension
 		*out = make([]TimestreamDimensionParameters, len(*in))
@@ -10034,10 +11094,30 @@ func (in *TopicRuleTimestreamParameters) DeepCopyInto(out *TopicRuleTimestreamPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleArnRef != nil {
+		in, out := &in.RoleArnRef, &out.RoleArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RoleArnSelector != nil {
+		in, out := &in.RoleArnSelector, &out.RoleArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
 		**out = **in
+	}
+	if in.TableNameRef != nil {
+		in, out := &in.TableNameRef, &out.TableNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TableNameSelector != nil {
+		in, out := &in.TableNameSelector, &out.TableNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Timestamp != nil {
 		in, out := &in.Timestamp, &out.Timestamp
