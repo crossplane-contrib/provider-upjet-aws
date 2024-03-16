@@ -3,20 +3,6 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: kinesisanalyticsv2.aws.upbound.io/v1beta1
-kind: ApplicationSnapshot
-metadata:
-  name: example-application
-  annotations:
-    meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
-spec:
-  forProvider:
-    region: us-east-2
-    applicationNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-application
----
-
-apiVersion: kinesisanalyticsv2.aws.upbound.io/v1beta1
 kind: Application
 metadata:
   name: example-application
