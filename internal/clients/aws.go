@@ -25,6 +25,7 @@ import (
 
 const (
 	keyAccountID = "account_id"
+	keyRegion    = "region"
 )
 
 type SetupConfig struct {
@@ -63,6 +64,10 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 		ps.ClientMetadata = map[string]string{
 			keyAccountID: account,
+		}
+		// several external name configs depend on the setup.Configuration for templating region
+		ps.Configuration = map[string]any{
+			keyRegion: awsCfg.Region,
 		}
 		if config.TerraformProvider == nil {
 			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
