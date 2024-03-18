@@ -5,21 +5,6 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
-	"context"
-	"reflect"
-	"unsafe"
-
-	// Note(ezgidemirel): we are importing this to embed provider schema document
-	_ "embed"
-
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/registry/reference"
-	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
-	tfjson "github.com/hashicorp/terraform-json"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/hashicorp/terraform-provider-aws/xpprovider"
-	"github.com/pkg/errors"
-
 	"github.com/upbound/provider-aws/config/acm"
 	"github.com/upbound/provider-aws/config/acmpca"
 	"github.com/upbound/provider-aws/config/apigateway"
@@ -103,227 +88,93 @@ import (
 	"github.com/upbound/provider-aws/config/sqs"
 	"github.com/upbound/provider-aws/config/ssoadmin"
 	"github.com/upbound/provider-aws/config/transfer"
-	"github.com/upbound/provider-aws/hack"
+
+	// Note(ezgidemirel): we are importing this to embed provider schema document
+	_ "embed"
 )
 
-var (
-	//go:embed schema.json
-	providerSchema string
-
-	//go:embed provider-metadata.yaml
-	providerMetadata []byte
-)
-
-var skipList = []string{
-	"aws_waf_rule_group$",              // Too big CRD schema
-	"aws_wafregional_rule_group$",      // Too big CRD schema
-	"aws_mwaa_environment$",            // See https://github.com/crossplane-contrib/terrajet/issues/100
-	"aws_ecs_tag$",                     // tags are already managed by ecs resources.
-	"aws_alb$",                         // identical with aws_lb
-	"aws_alb_target_group_attachment$", // identical with aws_lb_target_group_attachment
-	"aws_iam_policy_attachment$",       // identical with aws_iam_*_policy_attachment resources.
-	"aws_iam_group_policy$",            // identical with aws_iam_*_policy_attachment resources.
-	"aws_iam_user_policy$",             // identical with aws_iam_*_policy_attachment resources.
-	"aws_alb$",                         // identical with aws_lb.
-	"aws_alb_listener$",                // identical with aws_lb_listener.
-	"aws_alb_target_group$",            // identical with aws_lb_target_group.
-	"aws_alb_target_group_attachment$", // identical with aws_lb_target_group_attachment.
-	"aws_iot_authorizer$",              // failure with unknown reason.
-	"aws_location_map$",                // failure with unknown reason.
-	"aws_appflow_connector_profile$",   // failure with unknown reason.
-	"aws_rds_reserved_instance",        // Expense of testing
-}
-
-// workaround for the TF AWS v4.67.0-based no-fork release: We would like to
-// keep the types in the generated CRDs intact
-// (prevent number->int type replacements).
-func getProviderSchema(s string) (*schema.Provider, error) {
-	ps := tfjson.ProviderSchemas{}
-	if err := ps.UnmarshalJSON([]byte(s)); err != nil {
-		panic(err)
-	}
-	if len(ps.Schemas) != 1 {
-		return nil, errors.Errorf("there should exactly be 1 provider schema but there are %d", len(ps.Schemas))
-	}
-	var rs map[string]*tfjson.Schema
-	for _, v := range ps.Schemas {
-		rs = v.ResourceSchemas
-		break
-	}
-	return &schema.Provider{
-		ResourcesMap: conversiontfjson.GetV2ResourceMap(rs),
-	}, nil
-}
-
-// GetProvider returns the provider configuration.
-// The `generationProvider` argument specifies whether the provider
-// configuration is being read for the code generation pipelines.
-// In that case, we will only use the JSON schema for generating
-// the CRDs.
-func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, *xpprovider.AWSClient, error) {
-	var p *schema.Provider
-	var err error
-	if generationProvider {
-		p, err = getProviderSchema(providerSchema)
-	} else {
-		p, err = xpprovider.GetProviderSchema(ctx)
-	}
-	if err != nil {
-		return nil, nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
-	}
-	// we set schema.Provider's meta to nil because p.Configure modifies
-	// a singleton pointer. This further assumes that the
-	// schema.Provider.Configure calls do not modify the global state
-	// represented by the config.Provider.TerraformProvider.
-	var awsClient *xpprovider.AWSClient
-	if !generationProvider {
-		// #nosec G103
-		awsClient = (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p.Meta()).Pointer()))
-	}
-	p.SetMeta(nil)
-	modulePath := "github.com/upbound/provider-aws"
-	pc := config.NewProvider([]byte(providerSchema), "aws",
-		modulePath, providerMetadata,
-		config.WithShortName("aws"),
-		config.WithRootGroup("aws.upbound.io"),
-		config.WithIncludeList(CLIReconciledResourceList()),
-		config.WithTerraformPluginSDKIncludeList(NoForkResourceList()),
-		config.WithReferenceInjectors([]config.ReferenceInjector{reference.NewInjector(modulePath)}),
-		config.WithSkipList(skipList),
-		config.WithFeaturesPackage("internal/features"),
-		config.WithMainTemplate(hack.MainTemplate),
-		config.WithTerraformProvider(p),
-		config.WithDefaultResourceOptions(
-			GroupKindOverrides(),
-			KindOverrides(),
-			RegionAddition(),
-			TagsAllRemoval(),
-			IdentifierAssignedByAWS(),
-			KnownReferencers(),
-			AddExternalTagsField(),
-			ResourceConfigurator(),
-			NamePrefixRemoval(),
-			DocumentationForTags(),
-		),
-	)
-	pc.BasePackages.ControllerMap["internal/controller/eks/clusterauth"] = "eks"
-
-	for _, configure := range []func(provider *config.Provider){
-		acm.Configure,
-		acmpca.Configure,
-		apigateway.Configure,
-		apigatewayv2.Configure,
-		apprunner.Configure,
-		appstream.Configure,
-		athena.Configure,
-		autoscaling.Configure,
-		backup.Configure,
-		cloudfront.Configure,
-		cloudsearch.Configure,
-		cloudwatch.Configure,
-		cloudwatchlogs.Configure,
-		cognitoidentity.Configure,
-		cognitoidp.Configure,
-		connect.Configure,
-		cur.Configure,
-		datasync.Configure,
-		dax.Configure,
-		devicefarm.Configure,
-		dms.Configure,
-		docdb.Configure,
-		dynamodb.Configure,
-		ebs.Configure,
-		ec2.Configure,
-		ecr.Configure,
-		ecrpublic.Configure,
-		ecs.Configure,
-		efs.Configure,
-		eks.Configure,
-		elasticache.Configure,
-		elb.Configure,
-		elbv2.Configure,
-		firehose.Configure,
-		gamelift.Configure,
-		globalaccelerator.Configure,
-		glue.Configure,
-		grafana.Configure,
-		iam.Configure,
-		kafka.Configure,
-		kinesis.Configure,
-		kinesisanalytics.Configure,
-		kinesisanalytics2.Configure,
-		kms.Configure,
-		lakeformation.Configure,
-		lambda.Configure,
-		licensemanager.Configure,
-		memorydb.Configure,
-		mq.Configure,
-		neptune.Configure,
-		networkfirewall.Configure,
-		opensearch.Configure,
-		ram.Configure,
-		rds.Configure,
-		redshift.Configure,
-		rolesanywhere.Configure,
-		route53.Configure,
-		route53resolver.Configure,
-		route53recoverycontrolconfig.Configure,
-		s3.Configure,
-		secretsmanager.Configure,
-		servicecatalog.Configure,
-		organization.Configure,
-		cloudwatchevents.Configure,
-		budgets.Configure,
-		servicediscovery.Configure,
-		sfn.Configure,
-		sns.Configure,
-		sqs.Configure,
-		transfer.Configure,
-		directconnect.Configure,
-		ds.Configure,
-		qldb.Configure,
-		fsx.Configure,
-		networkmanager.Configure,
-		opsworks.Configure,
-		sagemaker.Configure,
-		redshiftserverless.Configure,
-		kendra.Configure,
-		medialive.Configure,
-		ssoadmin.Configure,
-		identitystore.Configure,
-		iot.Configure,
-	} {
-		configure(pc)
-	}
-
-	pc.ConfigureResources()
-	return pc, awsClient, nil
-}
-
-// CLIReconciledResourceList returns the list of resources that have external
-// name configured in ExternalNameConfigs table and to be reconciled under
-// the TF CLI based architecture.
-func CLIReconciledResourceList() []string {
-	l := make([]string, len(CLIReconciledExternalNameConfigs))
-	i := 0
-	for name := range CLIReconciledExternalNameConfigs {
-		// Expected format is regex, and we'd like to have exact matches.
-		l[i] = name + "$"
-		i++
-	}
-	return l
-}
-
-// NoForkResourceList returns the list of resources that have external
-// name configured in ExternalNameConfigs table and to be reconciled under
-// the no-fork architecture.
-func NoForkResourceList() []string {
-	l := make([]string, len(NoForkExternalNameConfigs))
-	i := 0
-	for name := range NoForkExternalNameConfigs {
-		// Expected format is regex, and we'd like to have exact matches.
-		l[i] = name + "$"
-		i++
-	}
-	return l
+func init() {
+	ProviderConfiguration.AddConfig(acm.Configure)
+	ProviderConfiguration.AddConfig(acmpca.Configure)
+	ProviderConfiguration.AddConfig(apigateway.Configure)
+	ProviderConfiguration.AddConfig(apigatewayv2.Configure)
+	ProviderConfiguration.AddConfig(apprunner.Configure)
+	ProviderConfiguration.AddConfig(appstream.Configure)
+	ProviderConfiguration.AddConfig(athena.Configure)
+	ProviderConfiguration.AddConfig(autoscaling.Configure)
+	ProviderConfiguration.AddConfig(backup.Configure)
+	ProviderConfiguration.AddConfig(cloudfront.Configure)
+	ProviderConfiguration.AddConfig(cloudsearch.Configure)
+	ProviderConfiguration.AddConfig(cloudwatch.Configure)
+	ProviderConfiguration.AddConfig(cloudwatchlogs.Configure)
+	ProviderConfiguration.AddConfig(cognitoidentity.Configure)
+	ProviderConfiguration.AddConfig(cognitoidp.Configure)
+	ProviderConfiguration.AddConfig(connect.Configure)
+	ProviderConfiguration.AddConfig(cur.Configure)
+	ProviderConfiguration.AddConfig(datasync.Configure)
+	ProviderConfiguration.AddConfig(dax.Configure)
+	ProviderConfiguration.AddConfig(devicefarm.Configure)
+	ProviderConfiguration.AddConfig(dms.Configure)
+	ProviderConfiguration.AddConfig(docdb.Configure)
+	ProviderConfiguration.AddConfig(dynamodb.Configure)
+	ProviderConfiguration.AddConfig(ebs.Configure)
+	ProviderConfiguration.AddConfig(ec2.Configure)
+	ProviderConfiguration.AddConfig(ecr.Configure)
+	ProviderConfiguration.AddConfig(ecrpublic.Configure)
+	ProviderConfiguration.AddConfig(ecs.Configure)
+	ProviderConfiguration.AddConfig(efs.Configure)
+	ProviderConfiguration.AddConfig(eks.Configure)
+	ProviderConfiguration.AddConfig(elasticache.Configure)
+	ProviderConfiguration.AddConfig(elb.Configure)
+	ProviderConfiguration.AddConfig(elbv2.Configure)
+	ProviderConfiguration.AddConfig(firehose.Configure)
+	ProviderConfiguration.AddConfig(gamelift.Configure)
+	ProviderConfiguration.AddConfig(globalaccelerator.Configure)
+	ProviderConfiguration.AddConfig(glue.Configure)
+	ProviderConfiguration.AddConfig(grafana.Configure)
+	ProviderConfiguration.AddConfig(iam.Configure)
+	ProviderConfiguration.AddConfig(kafka.Configure)
+	ProviderConfiguration.AddConfig(kinesis.Configure)
+	ProviderConfiguration.AddConfig(kinesisanalytics.Configure)
+	ProviderConfiguration.AddConfig(kinesisanalytics2.Configure)
+	ProviderConfiguration.AddConfig(kms.Configure)
+	ProviderConfiguration.AddConfig(lakeformation.Configure)
+	ProviderConfiguration.AddConfig(lambda.Configure)
+	ProviderConfiguration.AddConfig(licensemanager.Configure)
+	ProviderConfiguration.AddConfig(memorydb.Configure)
+	ProviderConfiguration.AddConfig(mq.Configure)
+	ProviderConfiguration.AddConfig(neptune.Configure)
+	ProviderConfiguration.AddConfig(networkfirewall.Configure)
+	ProviderConfiguration.AddConfig(opensearch.Configure)
+	ProviderConfiguration.AddConfig(ram.Configure)
+	ProviderConfiguration.AddConfig(rds.Configure)
+	ProviderConfiguration.AddConfig(redshift.Configure)
+	ProviderConfiguration.AddConfig(rolesanywhere.Configure)
+	ProviderConfiguration.AddConfig(route53.Configure)
+	ProviderConfiguration.AddConfig(route53resolver.Configure)
+	ProviderConfiguration.AddConfig(route53recoverycontrolconfig.Configure)
+	ProviderConfiguration.AddConfig(s3.Configure)
+	ProviderConfiguration.AddConfig(secretsmanager.Configure)
+	ProviderConfiguration.AddConfig(servicecatalog.Configure)
+	ProviderConfiguration.AddConfig(organization.Configure)
+	ProviderConfiguration.AddConfig(cloudwatchevents.Configure)
+	ProviderConfiguration.AddConfig(budgets.Configure)
+	ProviderConfiguration.AddConfig(servicediscovery.Configure)
+	ProviderConfiguration.AddConfig(sfn.Configure)
+	ProviderConfiguration.AddConfig(sns.Configure)
+	ProviderConfiguration.AddConfig(sqs.Configure)
+	ProviderConfiguration.AddConfig(transfer.Configure)
+	ProviderConfiguration.AddConfig(directconnect.Configure)
+	ProviderConfiguration.AddConfig(ds.Configure)
+	ProviderConfiguration.AddConfig(qldb.Configure)
+	ProviderConfiguration.AddConfig(fsx.Configure)
+	ProviderConfiguration.AddConfig(networkmanager.Configure)
+	ProviderConfiguration.AddConfig(opsworks.Configure)
+	ProviderConfiguration.AddConfig(sagemaker.Configure)
+	ProviderConfiguration.AddConfig(redshiftserverless.Configure)
+	ProviderConfiguration.AddConfig(kendra.Configure)
+	ProviderConfiguration.AddConfig(medialive.Configure)
+	ProviderConfiguration.AddConfig(ssoadmin.Configure)
+	ProviderConfiguration.AddConfig(identitystore.Configure)
+	ProviderConfiguration.AddConfig(iot.Configure)
 }
