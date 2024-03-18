@@ -25,6 +25,7 @@ import (
 
 const (
 	keyAccountID = "account_id"
+	keyPartition = "partition"
 	keyRegion    = "region"
 )
 
@@ -64,6 +65,7 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 		ps.ClientMetadata = map[string]string{
 			keyAccountID: account,
+			keyPartition: pc.Spec.Partition,
 		}
 		// several external name configs depend on the setup.Configuration for templating region
 		ps.Configuration = map[string]any{
