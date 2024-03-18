@@ -160,7 +160,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Uses the ID of workspace, workspace_id parameter.
 	"aws_prometheus_alert_manager_definition": config.IdentifierFromProvider,
 	//
-	"aws_prometheus_rule_group_namespace": config.TemplatedStringAsIdentifier("name", "arn:aws:aps:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:rulegroupsnamespace/{{ .parameters.workspace_id }}/{{ .external_name }}"),
+	"aws_prometheus_rule_group_namespace": config.TemplatedStringAsIdentifier("name", fullArnTemplate("aps", "rulegroupsnamespace/{{ .parameters.workspace_id }}/{{ .external_name }}")),
 	// ID is a random UUID.
 	"aws_prometheus_workspace": config.IdentifierFromProvider,
 
@@ -285,7 +285,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// appflow
 	//
 	// arn:aws:appflow:us-west-2:123456789012:flow/example-flow
-	"aws_appflow_flow": config.TemplatedStringAsIdentifier("name", "arn:aws:appflow:{{ .setup.configuration.region }}:{{ .client_metadata.account_id }}:flow/{{ .external_name }}"),
+	"aws_appflow_flow": config.TemplatedStringAsIdentifier("name", fullArnTemplate("appflow", "flow/{{ .external_name }}")),
 
 	// appintegrations
 	//
@@ -425,7 +425,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// arn:aws:batch:us-east-1:123456789012:job-definition/sample:1
 	"aws_batch_job_definition": config.IdentifierFromProvider,
 	// Batch Scheduling Policy can be imported using the arn: arn:aws:batch:us-east-1:123456789012:scheduling-policy/sample
-	"aws_batch_scheduling_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:scheduling-policy/{{ .external_name }}"),
+	"aws_batch_scheduling_policy": config.TemplatedStringAsIdentifier("name", fullArnTemplate("batch", "scheduling-policy/{{ .external_name }}")),
 
 	// budgets
 	//
@@ -472,7 +472,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// config.NameAsIdentifier did not work, the identifier for the resource turned out to be an ARN
 	// arn:aws:cloudformation:us-west-1:123456789123:stack/networking-stack/1e691240-6f2c-11ed-8f91-06094dc221f3
-	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName("arn:aws:cloudformation:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stack/{{ .parameters.name }}/{{ .external_name }}"),
+	"aws_cloudformation_stack": TemplatedStringAsIdentifierWithNoName(fullArnTemplate("cloudformation", "stack/{{ .parameters.name }}/{{ .external_name }}")),
 	// CloudFormation StackSets can be imported using the name
 	"aws_cloudformation_stack_set": config.NameAsIdentifier,
 	// Cloudformation Stacks Instances imported using the StackSet name, target
@@ -520,7 +520,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// cloudtrail
 	//
 	// Cloudtrails can be imported using the name arn:aws:cloudtrail:us-west-1:153891904029:trail/foobar
-	"aws_cloudtrail": config.TemplatedStringAsIdentifier("name", "arn:aws:cloudtrail:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:trail/{{ .external_name }}"),
+	"aws_cloudtrail": config.TemplatedStringAsIdentifier("name", fullArnTemplate("cloudtrail", "trail/{{ .external_name }}")),
 	// Event data stores can be imported using their arn
 	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
 
@@ -602,7 +602,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// CodeDeploy CustomActionType can be imported using the id
 	"aws_codepipeline_custom_action_type": config.IdentifierFromProvider,
 	// CodePipeline Webhooks can be imported by their ARN: arn:aws:codepipeline:us-west-2:123456789012:webhook:example
-	"aws_codepipeline_webhook": config.TemplatedStringAsIdentifier("name", "arn:aws:codepipeline:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:webhook:{{ .external_name }}"),
+	"aws_codepipeline_webhook": config.TemplatedStringAsIdentifier("name", fullArnTemplate("codepipeline", "webhook:{{ .external_name }}")),
 
 	// codestarconnections
 	//
@@ -1115,7 +1115,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// ECS Account Setting defaults can be imported using the name
 	"aws_ecs_account_setting_default": config.IdentifierFromProvider,
 	//
-	"aws_ecs_capacity_provider": config.TemplatedStringAsIdentifier("name", "arn:aws:ecs:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:capacity-provider/{{ .external_name }}"),
+	"aws_ecs_capacity_provider": config.TemplatedStringAsIdentifier("name", fullArnTemplate("ecs", "capacity-provider/{{ .external_name }}")),
 	//
 	"aws_ecs_cluster": config.TemplatedStringAsIdentifier("name", "arn:aws:ecs:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:cluster/{{ .external_name }}"),
 	// ECS cluster capacity providers can be imported using the cluster_name attribute
@@ -1262,7 +1262,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_evidently_project": config.IdentifierFromProvider,
 	// CloudWatch Evidently Segment can be imported using the arn
 	// Example: arn:aws:evidently:us-west-2:123456789012:segment/example
-	"aws_evidently_segment": config.TemplatedStringAsIdentifier("name", "arn:aws:evidently:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:segment/{{ .external_name }}"),
+	"aws_evidently_segment": config.TemplatedStringAsIdentifier("name", fullArnTemplate("evidently", "segment/{{ .external_name }}")),
 
 	// firehose
 	//
@@ -1333,7 +1333,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_glue_job": config.NameAsIdentifier,
 	// Imported using ARN: arn:aws:glue:us-west-2:123456789012:registry/example
-	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", "arn:aws:glue:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:registry/{{ .external_name }}"),
+	"aws_glue_registry": config.TemplatedStringAsIdentifier("registry_name", fullArnTemplate("glue", "registry/{{ .external_name }}")),
 	// Imported using the account ID: 12356789012
 	"aws_glue_resource_policy": config.IdentifierFromProvider,
 	// Glue Registries can be imported using arn
@@ -1402,7 +1402,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// test-role/arn:aws:iam::xxxxxxxxxxxx:policy/test-policy
 	"aws_iam_role_policy_attachment": config.IdentifierFromProvider,
 	// IAM SAML Providers can be imported using the arn
-	"aws_iam_saml_provider": config.TemplatedStringAsIdentifier("name", "arn:aws:iam::{{ .setup.client_metadata.account_id }}:saml-provider/{{ .external_name }}"),
+	"aws_iam_saml_provider": config.TemplatedStringAsIdentifier("name", regionlessArnTemplate("iam", "saml-provider/{{ .external_name }}")),
 	// IAM Server Certificates can be imported using the name
 	"aws_iam_server_certificate": config.NameAsIdentifier,
 	// IAM service-linked roles can be imported using role ARN that contains the
@@ -1521,7 +1521,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_iot_topic_rule": config.NameAsIdentifier,
 	// IoT topic rule destinations can be imported using the arn
 	// arn:aws:iot:us-west-2:123456789012:ruledestination/vpc/2ce781c8-68a6-4c52-9c62-63fe489ecc60
-	"aws_iot_topic_rule_destination": TemplatedStringAsProviderDefinedIdentifier("arn:aws:iot:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:ruledestination/vpc/{{ .external_name }}"),
+	"aws_iot_topic_rule_destination": TemplatedStringAsProviderDefinedIdentifier(fullArnTemplate("iot", "ruledestination/vpc/{{ .external_name }}")),
 
 	// ivs
 	//
@@ -1586,18 +1586,18 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// kinesis
 	//
 	// Even though the documentation says the ID is name, it uses ARN..
-	"aws_kinesis_stream": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesis:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stream/{{ .external_name }}"),
+	"aws_kinesis_stream": config.TemplatedStringAsIdentifier("name", fullArnTemplate("kinesis", "stream/{{ .external_name }}")),
 	// Kinesis Stream Consumers can be imported using the Amazon Resource Name (ARN)
 	// that has a random substring.
 	"aws_kinesis_stream_consumer": config.IdentifierFromProvider,
 
 	// kinesisanalytics
 	//
-	"aws_kinesis_analytics_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
+	"aws_kinesis_analytics_application": config.TemplatedStringAsIdentifier("name", fullArnTemplate("kinesisanalytics", "application/{{ .external_name }}")),
 
 	// kinesisanalyticsv2
 	//
-	"aws_kinesisanalyticsv2_application": config.TemplatedStringAsIdentifier("name", "arn:aws:kinesisanalytics:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:application/{{ .external_name }}"),
+	"aws_kinesisanalyticsv2_application": config.TemplatedStringAsIdentifier("name", fullArnTemplate("kinesisanalytics", "application/{{ .external_name }}")),
 	// aws_kinesisanalyticsv2_application can be imported by using application_name together with snapshot_name
 	// e.g. example-application/example-snapshot
 	"aws_kinesisanalyticsv2_application_snapshot": FormattedIdentifierUserDefinedNameLast("snapshot_name", "/", "application_name"),
@@ -1638,7 +1638,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// lambda
 	//
 	// Lambda Function Aliases are identified by their ARN, like arn:aws:lambda:eu-west-1:123456789012:function:lambda-function:alias
-	"aws_lambda_alias": config.TemplatedStringAsIdentifier("name", "arn:aws:lambda:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:function:{{ .parameters.function_name }}:{{ .external_name }}"),
+	"aws_lambda_alias": config.TemplatedStringAsIdentifier("name", fullArnTemplate("lambda", "function:{{ .parameters.function_name }}:{{ .external_name }}")),
 	// Code Signing Configs can be imported using their ARN that has a random
 	// substring in the end.
 	// arn:aws:lambda:us-west-2:123456789012:code-signing-config:csc-0f6c334abcdea4d8b
@@ -1833,13 +1833,13 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_networkfirewall_firewall": config.IdentifierFromProvider,
 	// Network Firewall Policies can be imported using their ARN
 	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall-policy/example
-	"aws_networkfirewall_firewall_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:network-firewall:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:firewall-policy/{{ .external_name }}"),
+	"aws_networkfirewall_firewall_policy": config.TemplatedStringAsIdentifier("name", fullArnTemplate("network-firewall", "firewall-policy/{{ .external_name }}")),
 	// Network Firewall Logging Configurations can be imported using the firewall_arn
 	// Example: arn:aws:network-firewall:us-west-1:123456789012:firewall/example
 	"aws_networkfirewall_logging_configuration": config.IdentifierFromProvider,
 	// Network Firewall Rule Groups can be imported using their ARN
 	// Example: arn:aws:network-firewall:us-west-1:123456789012:stateful-rulegroup/example
-	"aws_networkfirewall_rule_group": config.TemplatedStringAsIdentifier("", "arn:aws:network-firewall:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:{{ .parameters.type | ToLower }}-rulegroup/{{ .external_name }}"),
+	"aws_networkfirewall_rule_group": config.TemplatedStringAsIdentifier("", fullArnTemplate("network-firewall", "{{ .parameters.type | ToLower }}-rulegroup/{{ .external_name }}")),
 
 	// networkmanager
 	//
@@ -2348,7 +2348,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// arn:aws:securityhub:eu-west-1:312940875350:action/custom/a
 	// TODO: following configuration assumes the `a` in the above ARN
 	// is the security hub custom action identifier
-	"aws_securityhub_action_target": config.TemplatedStringAsIdentifier("identifier", "arn:aws:securityhub:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:action/custom/{{ .external_name }}"),
+	"aws_securityhub_action_target": config.TemplatedStringAsIdentifier("identifier", fullArnTemplate("securityhub", "action/custom/{{ .external_name }}")),
 	// imported using the arn that has a random substring:
 	// arn:aws:securityhub:eu-west-1:123456789098:finding-aggregator/abcd1234-abcd-1234-1234-abcdef123456
 	"aws_securityhub_finding_aggregator": config.IdentifierFromProvider,
@@ -2515,9 +2515,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// sfn
 	//
-	"aws_sfn_activity": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:activity/{{ .external_name }}"),
+	"aws_sfn_activity": config.TemplatedStringAsIdentifier("name", fullArnTemplate("states", "activity/{{ .external_name }}")),
 	//
-	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", "arn:aws:states:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:stateMachine:{{ .external_name }}"),
+	"aws_sfn_state_machine": config.TemplatedStringAsIdentifier("name", fullArnTemplate("states", "stateMachine:{{ .external_name }}")),
 
 	// signer
 	//
@@ -2533,12 +2533,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SNS platform applications can be imported using the ARN:
 	// arn:aws:sns:us-west-2:0123456789012:app/GCM/gcm_application
-	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:app/GCM/{{ .external_name }}"),
+	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", fullArnTemplate("sns", "app/GCM/{{ .external_name }}")),
 	// no import documentation is provided
 	// TODO: we will need to check if normalization is possible
 	"aws_sns_sms_preferences": config.IdentifierFromProvider,
 	// SNS Topics can be imported using the topic arn
-	"aws_sns_topic": config.TemplatedStringAsIdentifier("name", "arn:aws:sns:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:{{ .external_name }}"),
+	"aws_sns_topic": config.TemplatedStringAsIdentifier("name", fullArnTemplate("sns", "{{ .external_name }}")),
 	// SNS Topic Policy can be imported using the topic ARN:
 	// arn:aws:sns:us-west-2:0123456789012:my-topic
 	"aws_sns_topic_policy": FormattedIdentifierFromProvider("", "arn"),
@@ -3244,4 +3244,44 @@ func apiGatewayAccount() config.ExternalName {
 		return externalName, nil
 	}
 	return e
+}
+
+// fullArnTemplate builds a templated string for constructing a terraform id component which is an ARN, which includes
+// the aws partition, service, region, account id, and resource. This is by far the most common form of ARN.
+// e.g. arn:aws:ec2:ap-south-1:123456789012:instance/i-1234567890ab
+func fullArnTemplate(service string, resource string) string {
+	return genericArnTemplate(service, resource, false, false)
+
+}
+
+// globalArnTemplate builds a templated string for constructing a terraform id component which is an ARN of a resource
+// which is global to the entire AWS partition, including only the partition, service, and resource.
+// e.g. arn:aws:s3:::name-of-my-bucket
+func globalArnTemplate(service string, resource string) string {
+	return genericArnTemplate(service, resource, true, true)
+}
+
+// regionlessArnTemplate builds a templated string for constructing a terraform id component which is an ARN of a
+// resource which is regionless, but specific to your account id. It includes the partition, service, account id, and
+// resource.
+// e.g. arn:aws:iam::123456789012:role/example
+func regionlessArnTemplate(service string, resource string) string {
+	return genericArnTemplate(service, resource, false, true)
+}
+
+// genericArnTemplate builds a templated string for constructing a terraform id component which is an ARN of any format.
+// It always includes the aws partition, service, and resource. Unless you specify to elide them, it will also include
+// templates which resolve to the region (from the spec.forProvider) and the account id (calculated from the provider
+// config).
+func genericArnTemplate(service string, resource string, elideAccountId bool, elideRegion bool) string {
+	region := "{{ .setup.configuration.region }}"
+	if elideRegion {
+		region = ""
+	}
+	accountId := "{{ .setup.client_metadata.account_id }}"
+	if elideAccountId {
+		accountId = ""
+	}
+	partition := "{{ .setup.configuration.partition }}"
+	return fmt.Sprintf("arn:%s:%s:%s:%s:%s", partition, service, region, accountId, resource)
 }
