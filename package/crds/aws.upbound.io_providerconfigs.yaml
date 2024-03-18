@@ -400,12 +400,6 @@ spec:
                 required:
                 - url
                 type: object
-              partition:
-                default: aws
-                description: |-
-                  Partition defines the aws partition id to use when constructing ARNs. Most AWS regions use the commercial
-                  partition, simply named aws.
-                type: string
               s3_use_path_style:
                 description: Whether to enable the request to use path-style addressing,
                   i.e., https://s3.amazonaws.com/BUCKET/KEY.
