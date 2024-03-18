@@ -65,8 +65,13 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 		ps.ClientMetadata = map[string]string{
 			keyAccountID: account,
-			keyPartition: pc.Spec.Partition,
+			keyPartition: "aws",
 		}
+
+		if pc.Spec.Endpoint != nil && pc.Spec.Endpoint.PartitionID != nil {
+			ps.ClientMetadata[keyPartition] = *pc.Spec.Endpoint.PartitionID
+		}
+
 		// several external name configs depend on the setup.Configuration for templating region
 		ps.Configuration = map[string]any{
 			keyRegion: awsCfg.Region,
