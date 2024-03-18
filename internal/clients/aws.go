@@ -33,6 +33,15 @@ type SetupConfig struct {
 	TerraformProvider *schema.Provider
 }
 
+// iamRegions holds the region used for signing IAM credentials for each AWS partition.
+var iamRegions = map[string]string{
+	"aws":      "us-east-1",
+	"aws-gov":  "us-gov-west-1",
+	"aws-cn":   "cn-northeast-1",
+	"aws-iso":  "us-iso-east-1",
+	"aws-iosb": "us-isob-east-1",
+}
+
 func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
@@ -105,9 +114,20 @@ func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj run
 		return nil, err
 	}
 	if cfg.Region == "" && obj.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
-		cfg.Region = "us-east-1"
+		cfg.Region = getIAMRegion(pc)
 	}
 	return cfg, nil
+}
+
+func getIAMRegion(pc *v1beta1.ProviderConfig) string {
+	defaultRegion := "us-east-1"
+	if pc == nil || pc.Spec.Endpoint == nil || pc.Spec.Endpoint.PartitionID == nil {
+		return defaultRegion
+	}
+	if region, ok := iamRegions[*pc.Spec.Endpoint.PartitionID]; ok {
+		return region
+	}
+	return defaultRegion
 }
 
 type metaOnlyPrimary struct {
