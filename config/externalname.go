@@ -3254,13 +3254,6 @@ func fullArnTemplate(service string, resource string) string {
 
 }
 
-// globalArnTemplate builds a templated string for constructing a terraform id component which is an ARN of a resource
-// which is global to the entire AWS partition, including only the partition, service, and resource.
-// e.g. arn:aws:s3:::name-of-my-bucket
-func globalArnTemplate(service string, resource string) string {
-	return genericArnTemplate(service, resource, true, true)
-}
-
 // regionlessArnTemplate builds a templated string for constructing a terraform id component which is an ARN of a
 // resource which is regionless, but specific to your account id. It includes the partition, service, account id, and
 // resource.
