@@ -88,11 +88,6 @@ func (in *PlatformApplicationInitParameters) DeepCopyInto(out *PlatformApplicati
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
-	if in.Platform != nil {
-		in, out := &in.Platform, &out.Platform
-		*out = new(string)
-		**out = **in
-	}
 	if in.SuccessFeedbackRoleArn != nil {
 		in, out := &in.SuccessFeedbackRoleArn, &out.SuccessFeedbackRoleArn
 		*out = new(string)

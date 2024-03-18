@@ -306,6 +306,7 @@ spec:
                       delivered messages.
                     type: string
                 required:
+                - platform
                 - region
                 type: object
               initProvider:
@@ -426,10 +427,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  platform:
-                    description: The platform that the app is registered with. See
-                      Platform for supported platforms.
-                    type: string
                   successFeedbackRoleArn:
                     description: The IAM role ARN permitted to receive success feedback
                       for this application and give SNS write access to use CloudWatch
@@ -682,10 +679,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.platform is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.platform)
-                || (has(self.initProvider) && has(self.initProvider.platform))'
             - message: spec.forProvider.platformCredentialSecretRef is a required
                 parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies

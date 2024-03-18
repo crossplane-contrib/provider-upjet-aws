@@ -1834,7 +1834,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// SNS platform applications can be imported using the ARN:
 	// arn:aws:sns:us-west-2:0123456789012:app/GCM/gcm_application
-	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", fullArnTemplate("sns", "app/GCM/{{ .external_name }}")),
+	"aws_sns_platform_application": config.TemplatedStringAsIdentifier("name", fullArnTemplate("sns", "app/{{ .parameters.platform }}/{{ .external_name }}")),
 	// no import documentation is provided
 	// TODO: we will need to check if normalization is possible
 	"aws_sns_sms_preferences": config.IdentifierFromProvider,
