@@ -30,6 +30,7 @@ import (
 const (
 	keyAccountID        = "account_id"
 	keyRegion           = "region"
+	keyPartition        = "partition"
 	localstackAccountID = "000000000"
 )
 

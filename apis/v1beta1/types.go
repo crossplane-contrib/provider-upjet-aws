@@ -21,6 +21,10 @@ type ProviderConfigSpec struct {
 	// of AWS calls made by the provider.
 	// +optional
 	Endpoint *EndpointConfig `json:"endpoint,omitempty"`
+	// Partition defines the aws partition id to use when constructing ARNs. Most AWS regions use the commercial
+	// partition, simply named aws.
+	// +kubebuilder:default=aws
+	Partition string `json:"partition,omitempty"`
 	// Whether to skip credentials validation via the STS API.
 	// This can be useful for testing and for AWS API implementations that do not have STS available.
 	// +optional
