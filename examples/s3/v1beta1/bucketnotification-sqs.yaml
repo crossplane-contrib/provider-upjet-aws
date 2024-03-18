@@ -16,11 +16,11 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket-notification
-    topic:
+    queue:
     - events:
       - "s3:ObjectCreated:*"
       filterSuffix: ".log"
-      topicArnSelector:
+      queueArnSelector:
         matchLabels:
           testing.upbound.io/example-name: bucket-notification
 
@@ -37,22 +37,10 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
----
-apiVersion: sns.aws.upbound.io/v1beta1
-kind: Topic
-metadata:
-  name: bucket-notification
-  annotations:
-    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
-  labels:
-    testing.upbound.io/example-name: bucket-notification
-spec:
-  forProvider:
-    region: us-west-1
 
 ---
-apiVersion: sns.aws.upbound.io/v1beta1
-kind: TopicPolicy
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
 metadata:
   name: bucket-notification
   annotations:
@@ -62,7 +50,21 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    arnSelector:
+    name: bucket-notification
+
+---
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: QueuePolicy
+metadata:
+  name: bucket-notification
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
+  labels:
+    testing.upbound.io/example-name: bucket-notification
+spec:
+  forProvider:
+    region: us-west-1
+    queueUrlSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket-notification
     policy: |
@@ -75,8 +77,8 @@ spec:
             "Principal": {
               "Service": "s3.amazonaws.com"
             },
-            "Action": "sns:Publish",
-            "Resource": "arn:aws:sns:us-west-1:*:bucket-notification"
+            "Action": "sqs:SendMessage",
+            "Resource": "arn:aws:sqs:us-west-1:*:bucket-notification"
           }
         ]
       }
