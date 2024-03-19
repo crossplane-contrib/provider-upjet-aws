@@ -52,7 +52,10 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		} else if awsCfg == nil {
 			return terraform.Setup{}, errors.Wrap(err, "obtained aws config cannot be nil")
 		}
-		creds, err := awsCfg.Credentials.Retrieve(ctx)
+
+		// only IRSA auth credentials are cached, other auth methods will skip
+		// cache and call downstream Credentials.Retrieve() of given awsCfg
+		creds, err := GlobalAWSCredentialsProviderCache.RetrieveCredentials(ctx, pc, awsCfg)
 		if err != nil {
 			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
 		}
