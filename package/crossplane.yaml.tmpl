@@ -13,6 +13,13 @@ metadata:
       Upbound's official Crossplane provider to manage Amazon Web Services (AWS)
       {{ .Service }} services in Kubernetes.
     meta.crossplane.io/readme: |
+      {{ if eq .Service "monolith" }}
+      ⚠️ **Deprecation Notice:** The monolithic package is deprecated in favor of the AWS family's
+      resource packages and will no longer be maintained after 12 June 2024. Please consider
+      switching to the [family provider packages](https://docs.upbound.io/providers/provider-families/)
+      as we will no longer be publishing new versions of the monolithic package.
+      \
+      {{ end }}
       Provider AWS is a Crossplane provider for [Amazon Web Services
       (AWS)](https://aws.amazon.com/) developed and supported by Upbound.
       Available resources and their fields can be found in the [Upbound
