@@ -526,7 +526,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArn),
-					Extract:      resource.ExtractParamPath("arn", true),
+					Extract:      common.ARNExtractor(),
 					Reference:    mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArnRef,
 					Selector:     mg.Spec.ForProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1154,7 +1154,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArn),
-					Extract:      resource.ExtractParamPath("arn", true),
+					Extract:      common.ARNExtractor(),
 					Reference:    mg.Spec.InitProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArnRef,
 					Selector:     mg.Spec.InitProvider.RedshiftConfiguration[i3].S3BackupConfiguration[i4].BucketArnSelector,
 					To:           reference.To{List: l, Managed: m},

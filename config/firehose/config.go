@@ -17,27 +17,29 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["splunk_configuration"].Elem.(*schema.Resource).Schema["hec_token"].Sensitive = true
 
 		r.References["extended_s3_configuration.role_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["extended_s3_configuration.bucket_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_s3_bucket",
+			Extractor:     common.PathARNExtractor,
 		}
 
 		r.References["s3_configuration.role_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["s3_configuration.bucket_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_s3_bucket",
+			Extractor:     common.PathARNExtractor,
 		}
 
 		r.References["redshift_configuration.s3_backup_configuration.bucket_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			TerraformName: "aws_s3_bucket",
+			Extractor:     common.PathARNExtractor,
 		}
+
+		config.MoveToStatus(r.TerraformResource, "arn")
 
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{

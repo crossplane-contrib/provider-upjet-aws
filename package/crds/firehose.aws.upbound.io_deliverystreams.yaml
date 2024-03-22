@@ -73,9 +73,6 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  arn:
-                    description: The Amazon Resource Name (ARN) specifying the Stream
-                    type: string
                   destination:
                     description: –  This is the destination to where the data is delivered.
                       The only options are s3 (Deprecated, use extended_s3 instead),
@@ -4158,9 +4155,6 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  arn:
-                    description: The Amazon Resource Name (ARN) specifying the Stream
-                    type: string
                   destination:
                     description: –  This is the destination to where the data is delivered.
                       The only options are s3 (Deprecated, use extended_s3 instead),
