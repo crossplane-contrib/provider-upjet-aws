@@ -151,10 +151,6 @@ func Configure(p *config.Provider) {
 		// aws_vpc_endpoint_security_group_association
 		config.MoveToStatus(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
 		delete(r.References, "vpc_endpoint_type")
-		// Would conflict with aws_vpc_endpoint_policy, although that's not yet implemented in this provider.
-		// By skipping late initialization we still allow users to set it, but don't enforce the observed state if
-		// it is omitted.
-		r.LateInitializer.IgnoredFields = append(r.LateInitializer.IgnoredFields, "policy")
 	})
 
 	p.AddResourceConfigurator("aws_subnet", func(r *config.Resource) {
