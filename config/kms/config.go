@@ -33,12 +33,6 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("aws_kms_key", func(r *config.Resource) {
-		// If the key policy is unset on the Key resource, don't late initialize it, to avoid conflicts with the policy
-		// managed by a KeyPolicy resource.
-		r.LateInitializer.IgnoredFields = append(r.LateInitializer.IgnoredFields, "policy")
-	})
-
 	p.AddResourceConfigurator("aws_kms_replica_key", func(r *config.Resource) {
 		r.References["primary_key_arn"] = config.Reference{
 			Type:      "Key",
