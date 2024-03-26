@@ -27,10 +27,10 @@ type ConfigRuleInitParameters struct {
 	// The maximum frequency with which AWS Config runs evaluations for a rule.
 	MaximumExecutionFrequency *string `json:"maximumExecutionFrequency,omitempty" tf:"maximum_execution_frequency,omitempty"`
 
-	// Scope defines which resources can trigger an evaluation for the rule. See Source Below.
+	// Scope defines which resources can trigger an evaluation for the rule. See Scope Below.
 	Scope []ScopeInitParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources. See Scope Below.
+	// Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources. See Source Below.
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
@@ -60,10 +60,10 @@ type ConfigRuleObservation struct {
 	// The ID of the config rule
 	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 
-	// Scope defines which resources can trigger an evaluation for the rule. See Source Below.
+	// Scope defines which resources can trigger an evaluation for the rule. See Scope Below.
 	Scope []ScopeObservation `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources. See Scope Below.
+	// Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources. See Source Below.
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 
 	// Key-value map of resource tags.
@@ -98,11 +98,11 @@ type ConfigRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Scope defines which resources can trigger an evaluation for the rule. See Source Below.
+	// Scope defines which resources can trigger an evaluation for the rule. See Scope Below.
 	// +kubebuilder:validation:Optional
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources. See Scope Below.
+	// Source specifies the rule owner, the rule identifier, and the notifications that cause the function to evaluate your AWS resources. See Source Below.
 	// +kubebuilder:validation:Optional
 	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 

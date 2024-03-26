@@ -167,15 +167,23 @@ spec:
                         type: object
                     type: object
                   lifecyclePolicy:
-                    description: A file system lifecycle policy object (documented
-                      below).
+                    description: A file system lifecycle policy object. See lifecycle_policy
+                      block below for details.
                     items:
                       properties:
+                        transitionToArchive:
+                          description: 'Indicates how long it takes to transition
+                            files to the archive storage class. Requires transition_to_ia,
+                            Elastic Throughput and General Purpose performance mode.
+                            Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS,
+                            AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS,
+                            AFTER_270_DAYS, or AFTER_365_DAYS.'
+                          type: string
                         transitionToIa:
                           description: 'Indicates how long it takes to transition
                             files to the IA storage class. Valid values: AFTER_1_DAY,
                             AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS,
-                            or AFTER_90_DAYS.'
+                            AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.'
                           type: string
                         transitionToPrimaryStorageClass:
                           description: 'Describes the policy used to transition a
@@ -188,6 +196,17 @@ spec:
                     description: 'The file system performance mode. Can be either
                       "generalPurpose" or "maxIO" (Default: "generalPurpose").'
                     type: string
+                  protection:
+                    description: A file system protection object. See protection block
+                      below for details.
+                    items:
+                      properties:
+                        replicationOverwrite:
+                          description: 'Indicates whether replication overwrite protection
+                            is enabled. Valid values: ENABLED or DISABLED.'
+                          type: string
+                      type: object
+                    type: array
                   provisionedThroughputInMibps:
                     description: The throughput, measured in MiB/s, that you want
                       to provision for the file system. Only applicable with throughput_mode
@@ -318,15 +337,23 @@ spec:
                         type: object
                     type: object
                   lifecyclePolicy:
-                    description: A file system lifecycle policy object (documented
-                      below).
+                    description: A file system lifecycle policy object. See lifecycle_policy
+                      block below for details.
                     items:
                       properties:
+                        transitionToArchive:
+                          description: 'Indicates how long it takes to transition
+                            files to the archive storage class. Requires transition_to_ia,
+                            Elastic Throughput and General Purpose performance mode.
+                            Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS,
+                            AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS,
+                            AFTER_270_DAYS, or AFTER_365_DAYS.'
+                          type: string
                         transitionToIa:
                           description: 'Indicates how long it takes to transition
                             files to the IA storage class. Valid values: AFTER_1_DAY,
                             AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS,
-                            or AFTER_90_DAYS.'
+                            AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.'
                           type: string
                         transitionToPrimaryStorageClass:
                           description: 'Describes the policy used to transition a
@@ -339,6 +366,17 @@ spec:
                     description: 'The file system performance mode. Can be either
                       "generalPurpose" or "maxIO" (Default: "generalPurpose").'
                     type: string
+                  protection:
+                    description: A file system protection object. See protection block
+                      below for details.
+                    items:
+                      properties:
+                        replicationOverwrite:
+                          description: 'Indicates whether replication overwrite protection
+                            is enabled. Valid values: ENABLED or DISABLED.'
+                          type: string
+                      type: object
+                    type: array
                   provisionedThroughputInMibps:
                     description: The throughput, measured in MiB/s, that you want
                       to provision for the file system. Only applicable with throughput_mode
@@ -561,15 +599,23 @@ spec:
                       kms_key_id, encrypted needs to be set to true.
                     type: string
                   lifecyclePolicy:
-                    description: A file system lifecycle policy object (documented
-                      below).
+                    description: A file system lifecycle policy object. See lifecycle_policy
+                      block below for details.
                     items:
                       properties:
+                        transitionToArchive:
+                          description: 'Indicates how long it takes to transition
+                            files to the archive storage class. Requires transition_to_ia,
+                            Elastic Throughput and General Purpose performance mode.
+                            Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS,
+                            AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS,
+                            AFTER_270_DAYS, or AFTER_365_DAYS.'
+                          type: string
                         transitionToIa:
                           description: 'Indicates how long it takes to transition
                             files to the IA storage class. Valid values: AFTER_1_DAY,
                             AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS,
-                            or AFTER_90_DAYS.'
+                            AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.'
                           type: string
                         transitionToPrimaryStorageClass:
                           description: 'Describes the policy used to transition a
@@ -594,6 +640,17 @@ spec:
                     description: 'The file system performance mode. Can be either
                       "generalPurpose" or "maxIO" (Default: "generalPurpose").'
                     type: string
+                  protection:
+                    description: A file system protection object. See protection block
+                      below for details.
+                    items:
+                      properties:
+                        replicationOverwrite:
+                          description: 'Indicates whether replication overwrite protection
+                            is enabled. Valid values: ENABLED or DISABLED.'
+                          type: string
+                      type: object
+                    type: array
                   provisionedThroughputInMibps:
                     description: The throughput, measured in MiB/s, that you want
                       to provision for the file system. Only applicable with throughput_mode

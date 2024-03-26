@@ -28,6 +28,9 @@ type AutoScalingGroupProviderInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupArnSelector *v1.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
 
+	// - Enables or disables a graceful shutdown of instances without disturbing workloads. Valid values are ENABLED and DISABLED. The default value is ENABLED when a capacity provider is created.
+	ManagedDraining *string `json:"managedDraining,omitempty" tf:"managed_draining,omitempty"`
+
 	// - Configuration block defining the parameters of the auto scaling. Detailed below.
 	ManagedScaling []ManagedScalingInitParameters `json:"managedScaling,omitempty" tf:"managed_scaling,omitempty"`
 
@@ -39,6 +42,9 @@ type AutoScalingGroupProviderObservation struct {
 
 	// - ARN of the associated auto scaling group.
 	AutoScalingGroupArn *string `json:"autoScalingGroupArn,omitempty" tf:"auto_scaling_group_arn,omitempty"`
+
+	// - Enables or disables a graceful shutdown of instances without disturbing workloads. Valid values are ENABLED and DISABLED. The default value is ENABLED when a capacity provider is created.
+	ManagedDraining *string `json:"managedDraining,omitempty" tf:"managed_draining,omitempty"`
 
 	// - Configuration block defining the parameters of the auto scaling. Detailed below.
 	ManagedScaling []ManagedScalingObservation `json:"managedScaling,omitempty" tf:"managed_scaling,omitempty"`
@@ -62,6 +68,10 @@ type AutoScalingGroupProviderParameters struct {
 	// Selector for a AutoscalingGroup in autoscaling to populate autoScalingGroupArn.
 	// +kubebuilder:validation:Optional
 	AutoScalingGroupArnSelector *v1.Selector `json:"autoScalingGroupArnSelector,omitempty" tf:"-"`
+
+	// - Enables or disables a graceful shutdown of instances without disturbing workloads. Valid values are ENABLED and DISABLED. The default value is ENABLED when a capacity provider is created.
+	// +kubebuilder:validation:Optional
+	ManagedDraining *string `json:"managedDraining,omitempty" tf:"managed_draining,omitempty"`
 
 	// - Configuration block defining the parameters of the auto scaling. Detailed below.
 	// +kubebuilder:validation:Optional

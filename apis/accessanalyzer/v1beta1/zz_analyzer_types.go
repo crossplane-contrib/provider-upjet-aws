@@ -15,11 +15,14 @@ import (
 
 type AnalyzerInitParameters struct {
 
+	// A block that specifies the configuration of the analyzer. Documented below
+	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Type of Analyzer. Valid values are ACCOUNT or ORGANIZATION. Defaults to ACCOUNT.
+	// Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -27,6 +30,9 @@ type AnalyzerObservation struct {
 
 	// ARN of the Analyzer.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// A block that specifies the configuration of the analyzer. Documented below
+	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Analyzer name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -39,11 +45,15 @@ type AnalyzerObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Type of Analyzer. Valid values are ACCOUNT or ORGANIZATION. Defaults to ACCOUNT.
+	// Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AnalyzerParameters struct {
+
+	// A block that specifies the configuration of the analyzer. Documented below
+	// +kubebuilder:validation:Optional
+	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -55,9 +65,47 @@ type AnalyzerParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Type of Analyzer. Valid values are ACCOUNT or ORGANIZATION. Defaults to ACCOUNT.
+	// Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults to ACCOUNT.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ConfigurationInitParameters struct {
+
+	// A block that specifies the configuration of an unused access analyzer for an AWS organization or account. Documented below
+	UnusedAccess []UnusedAccessInitParameters `json:"unusedAccess,omitempty" tf:"unused_access,omitempty"`
+}
+
+type ConfigurationObservation struct {
+
+	// A block that specifies the configuration of an unused access analyzer for an AWS organization or account. Documented below
+	UnusedAccess []UnusedAccessObservation `json:"unusedAccess,omitempty" tf:"unused_access,omitempty"`
+}
+
+type ConfigurationParameters struct {
+
+	// A block that specifies the configuration of an unused access analyzer for an AWS organization or account. Documented below
+	// +kubebuilder:validation:Optional
+	UnusedAccess []UnusedAccessParameters `json:"unusedAccess,omitempty" tf:"unused_access,omitempty"`
+}
+
+type UnusedAccessInitParameters struct {
+
+	// The specified access age in days for which to generate findings for unused access.
+	UnusedAccessAge *float64 `json:"unusedAccessAge,omitempty" tf:"unused_access_age,omitempty"`
+}
+
+type UnusedAccessObservation struct {
+
+	// The specified access age in days for which to generate findings for unused access.
+	UnusedAccessAge *float64 `json:"unusedAccessAge,omitempty" tf:"unused_access_age,omitempty"`
+}
+
+type UnusedAccessParameters struct {
+
+	// The specified access age in days for which to generate findings for unused access.
+	// +kubebuilder:validation:Optional
+	UnusedAccessAge *float64 `json:"unusedAccessAge,omitempty" tf:"unused_access_age,omitempty"`
 }
 
 // AnalyzerSpec defines the desired state of Analyzer

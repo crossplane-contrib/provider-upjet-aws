@@ -295,6 +295,10 @@ spec:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
                     type: string
+                  trackLatest:
+                    description: Whether should track latest task definition or the
+                      one created with the resource. Default is false.
+                    type: boolean
                   volume:
                     description: Configuration block for volumes that containers in
                       your task may use. Detailed below.
@@ -679,6 +683,10 @@ spec:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
                     type: string
+                  trackLatest:
+                    description: Whether should track latest task definition or the
+                      one created with the resource. Default is false.
+                    type: boolean
                   volume:
                     description: Configuration block for volumes that containers in
                       your task may use. Detailed below.
@@ -1178,6 +1186,10 @@ spec:
                     description: ARN of IAM role that allows your Amazon ECS container
                       task to make calls to other AWS services.
                     type: string
+                  trackLatest:
+                    description: Whether should track latest task definition or the
+                      one created with the resource. Default is false.
+                    type: boolean
                   volume:
                     description: Configuration block for volumes that containers in
                       your task may use. Detailed below.

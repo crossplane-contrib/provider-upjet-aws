@@ -338,7 +338,7 @@ spec:
                   engine:
                     description: |-
                       Name of the database engine to be used for the RDS cluster instance.
-                      Valid Values: aurora-mysql, aurora-postgresql.
+                      Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
                     type: string
                   engineVersion:
                     description: Database engine version.
@@ -835,7 +835,7 @@ spec:
                   engine:
                     description: |-
                       Name of the database engine to be used for the RDS cluster instance.
-                      Valid Values: aurora-mysql, aurora-postgresql.
+                      Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
                     type: string
                   engineVersion:
                     description: Database engine version.
@@ -1279,7 +1279,7 @@ spec:
                   engine:
                     description: |-
                       Name of the database engine to be used for the RDS cluster instance.
-                      Valid Values: aurora-mysql, aurora-postgresql.
+                      Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
                     type: string
                   engineVersion:
                     description: Database engine version.

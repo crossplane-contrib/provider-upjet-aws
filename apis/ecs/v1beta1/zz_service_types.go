@@ -171,6 +171,25 @@ type DeploymentControllerParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type IssuerCertAuthorityInitParameters struct {
+
+	// The ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
+	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn,omitempty" tf:"aws_pca_authority_arn,omitempty"`
+}
+
+type IssuerCertAuthorityObservation struct {
+
+	// The ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
+	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn,omitempty" tf:"aws_pca_authority_arn,omitempty"`
+}
+
+type IssuerCertAuthorityParameters struct {
+
+	// The ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
+	// +kubebuilder:validation:Optional
+	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn,omitempty" tf:"aws_pca_authority_arn,omitempty"`
+}
+
 type LoadBalancerInitParameters struct {
 
 	// Name of the container to associate with the load balancer (as it appears in a container definition).
@@ -527,6 +546,12 @@ type ServiceConnectConfigurationServiceInitParameters struct {
 
 	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
 	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
+
+	// The configuration for enabling Transport Layer Security (TLS)
+	TLS []TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
+
+	// Configuration timeouts for Service Connect
+	Timeout []TimeoutInitParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ServiceConnectConfigurationServiceObservation struct {
@@ -542,6 +567,12 @@ type ServiceConnectConfigurationServiceObservation struct {
 
 	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
 	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
+
+	// The configuration for enabling Transport Layer Security (TLS)
+	TLS []TLSObservation `json:"tls,omitempty" tf:"tls,omitempty"`
+
+	// Configuration timeouts for Service Connect
+	Timeout []TimeoutObservation `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ServiceConnectConfigurationServiceParameters struct {
@@ -561,6 +592,14 @@ type ServiceConnectConfigurationServiceParameters struct {
 	// The name of one of the portMappings from all the containers in the task definition of this Amazon ECS service.
 	// +kubebuilder:validation:Optional
 	PortName *string `json:"portName" tf:"port_name,omitempty"`
+
+	// The configuration for enabling Transport Layer Security (TLS)
+	// +kubebuilder:validation:Optional
+	TLS []TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
+
+	// Configuration timeouts for Service Connect
+	// +kubebuilder:validation:Optional
+	Timeout []TimeoutParameters `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type ServiceInitParameters struct {
@@ -568,7 +607,7 @@ type ServiceInitParameters struct {
 	// Information about the CloudWatch alarms. See below.
 	Alarms []AlarmsInitParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
-	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below.
+	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
 	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
 	// Name of an ECS cluster.
@@ -623,7 +662,7 @@ type ServiceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
-	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
+	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts with capacity_provider_strategy.
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
 
 	// Configuration block for load balancers. See below.
@@ -669,7 +708,7 @@ type ServiceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TaskDefinitionSelector *v1.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
 
-	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with plantimestamp(). See example above.
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
@@ -682,7 +721,7 @@ type ServiceObservation struct {
 	// Information about the CloudWatch alarms. See below.
 	Alarms []AlarmsObservation `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
-	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below.
+	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
 	CapacityProviderStrategy []CapacityProviderStrategyObservation `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
 	// Name of an ECS cluster.
@@ -721,7 +760,7 @@ type ServiceObservation struct {
 	// ARN that identifies the service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
+	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts with capacity_provider_strategy.
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
 
 	// Configuration block for load balancers. See below.
@@ -762,7 +801,7 @@ type ServiceObservation struct {
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 
-	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with plantimestamp(). See example above.
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
@@ -776,7 +815,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Alarms []AlarmsParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
-	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below.
+	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
 	// +kubebuilder:validation:Optional
 	CapacityProviderStrategy []CapacityProviderStrategyParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
@@ -843,7 +882,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleSelector *v1.Selector `json:"iamRoleSelector,omitempty" tf:"-"`
 
-	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
+	// Launch type on which to run your service. The valid values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts with capacity_provider_strategy.
 	// +kubebuilder:validation:Optional
 	LaunchType *string `json:"launchType,omitempty" tf:"launch_type,omitempty"`
 
@@ -906,7 +945,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	TaskDefinitionSelector *v1.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
 
-	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with timestamp(). See example above.
+	// Map of arbitrary keys and values that, when changed, will trigger an in-place update (redeployment). Useful with plantimestamp(). See example above.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
@@ -963,6 +1002,74 @@ type ServiceRegistriesParameters struct {
 	// ARN of the Service Registry. The currently supported service registry is Amazon Route 53 Auto Naming Service(aws_service_discovery_service). For more information, see Service
 	// +kubebuilder:validation:Optional
 	RegistryArn *string `json:"registryArn" tf:"registry_arn,omitempty"`
+}
+
+type TLSInitParameters struct {
+
+	// The details of the certificate authority which will issue the certificate.
+	IssuerCertAuthority []IssuerCertAuthorityInitParameters `json:"issuerCertAuthority,omitempty" tf:"issuer_cert_authority,omitempty"`
+
+	// The KMS key used to encrypt the private key in Secrets Manager.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// The ARN of the IAM Role that's associated with the Service Connect TLS.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type TLSObservation struct {
+
+	// The details of the certificate authority which will issue the certificate.
+	IssuerCertAuthority []IssuerCertAuthorityObservation `json:"issuerCertAuthority,omitempty" tf:"issuer_cert_authority,omitempty"`
+
+	// The KMS key used to encrypt the private key in Secrets Manager.
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// The ARN of the IAM Role that's associated with the Service Connect TLS.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type TLSParameters struct {
+
+	// The details of the certificate authority which will issue the certificate.
+	// +kubebuilder:validation:Optional
+	IssuerCertAuthority []IssuerCertAuthorityParameters `json:"issuerCertAuthority" tf:"issuer_cert_authority,omitempty"`
+
+	// The KMS key used to encrypt the private key in Secrets Manager.
+	// +kubebuilder:validation:Optional
+	KMSKey *string `json:"kmsKey,omitempty" tf:"kms_key,omitempty"`
+
+	// The ARN of the IAM Role that's associated with the Service Connect TLS.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type TimeoutInitParameters struct {
+
+	// The amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
+	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
+
+	// The amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
+	PerRequestTimeoutSeconds *float64 `json:"perRequestTimeoutSeconds,omitempty" tf:"per_request_timeout_seconds,omitempty"`
+}
+
+type TimeoutObservation struct {
+
+	// The amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
+	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
+
+	// The amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
+	PerRequestTimeoutSeconds *float64 `json:"perRequestTimeoutSeconds,omitempty" tf:"per_request_timeout_seconds,omitempty"`
+}
+
+type TimeoutParameters struct {
+
+	// The amount of time in seconds a connection will stay active while idle. A value of 0 can be set to disable idleTimeout.
+	// +kubebuilder:validation:Optional
+	IdleTimeoutSeconds *float64 `json:"idleTimeoutSeconds,omitempty" tf:"idle_timeout_seconds,omitempty"`
+
+	// The amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
+	// +kubebuilder:validation:Optional
+	PerRequestTimeoutSeconds *float64 `json:"perRequestTimeoutSeconds,omitempty" tf:"per_request_timeout_seconds,omitempty"`
 }
 
 // ServiceSpec defines the desired state of Service

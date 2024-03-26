@@ -263,8 +263,9 @@ spec:
                       cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
-                    description: The fields to include in the flow log record, in
-                      the order in which they should appear.
+                    description: 'The fields to include in the flow log record. Accepted
+                      format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
+                      $${dstport}".'
                     type: string
                   logGroupName:
                     description: 'Deprecated: Use log_destination instead. The name
@@ -658,8 +659,9 @@ spec:
                       cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
-                    description: The fields to include in the flow log record, in
-                      the order in which they should appear.
+                    description: 'The fields to include in the flow log record. Accepted
+                      format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
+                      $${dstport}".'
                     type: string
                   logGroupName:
                     description: 'Deprecated: Use log_destination instead. The name
@@ -1062,8 +1064,9 @@ spec:
                       cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.'
                     type: string
                   logFormat:
-                    description: The fields to include in the flow log record, in
-                      the order in which they should appear.
+                    description: 'The fields to include in the flow log record. Accepted
+                      format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport}
+                      $${dstport}".'
                     type: string
                   logGroupName:
                     description: 'Deprecated: Use log_destination instead. The name

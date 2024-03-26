@@ -584,12 +584,33 @@ func (mg *BucketMetric) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BucketRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Filter); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta1", "AccessPoint", "AccessPointList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Filter[i3].AccessPoint),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.Filter[i3].AccessPointRef,
+				Selector:     mg.Spec.ForProvider.Filter[i3].AccessPointSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Filter[i3].AccessPoint")
+		}
+		mg.Spec.ForProvider.Filter[i3].AccessPoint = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Filter[i3].AccessPointRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Bucket),
 			Extract:      resource.ExtractResourceID(),
@@ -603,6 +624,28 @@ func (mg *BucketMetric) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.InitProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BucketRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Filter); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta1", "AccessPoint", "AccessPointList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Filter[i3].AccessPoint),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.Filter[i3].AccessPointRef,
+				Selector:     mg.Spec.InitProvider.Filter[i3].AccessPointSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Filter[i3].AccessPoint")
+		}
+		mg.Spec.InitProvider.Filter[i3].AccessPoint = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Filter[i3].AccessPointRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }

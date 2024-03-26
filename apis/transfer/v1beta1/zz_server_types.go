@@ -280,7 +280,7 @@ type ServerInitParameters struct {
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05. Default value is: TransferSecurityPolicy-2018-11.
+	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
 	// A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
@@ -350,7 +350,7 @@ type ServerObservation struct {
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05. Default value is: TransferSecurityPolicy-2018-11.
+	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 
 	// A set of ARNs of destinations that will receive structured logs from the transfer server such as CloudWatch Log Group ARNs. If provided this enables the transfer server to emit structured logs to the specified locations.
@@ -471,7 +471,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Specifies the name of the security policy that is attached to the server. Possible values are TransferSecurityPolicy-2018-11, TransferSecurityPolicy-2020-06, TransferSecurityPolicy-FIPS-2020-06, TransferSecurityPolicy-FIPS-2023-05, TransferSecurityPolicy-2022-03 and TransferSecurityPolicy-2023-05. Default value is: TransferSecurityPolicy-2018-11.
+	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
 	// +kubebuilder:validation:Optional
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
 

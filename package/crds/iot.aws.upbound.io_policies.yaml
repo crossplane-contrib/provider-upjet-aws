@@ -80,6 +80,12 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 required:
                 - region
                 type: object
@@ -100,6 +106,12 @@ spec:
                     description: The policy document. This is a JSON formatted string.
                       Use the IoT Developer Guide for more information on IoT Policies.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -290,6 +302,19 @@ spec:
                     description: The policy document. This is a JSON formatted string.
                       Use the IoT Developer Guide for more information on IoT Policies.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
+                    type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

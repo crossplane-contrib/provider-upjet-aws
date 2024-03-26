@@ -88,22 +88,23 @@ spec:
                       the domain. Valid values are IAM and SSO.
                     type: string
                   defaultSpaceSettings:
-                    description: The default space settings. See Default Space Settings
-                      below.
+                    description: The default space settings. See default_space_settings
+                      Block below.
                     items:
                       properties:
                         executionRole:
                           description: The execution role for the space.
                           type: string
                         jupyterServerAppSettings:
-                          description: The Jupyter server's app settings. See Jupyter
-                            Server App Settings below.
+                          description: The Jupyter server's app settings. See jupyter_server_app_settings
+                            Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -114,7 +115,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -150,14 +152,14 @@ spec:
                             type: object
                           type: array
                         kernelGatewayAppSettings:
-                          description: The kernel gateway app settings. See Kernel
-                            Gateway App Settings below.
+                          description: The kernel gateway app settings. See kernel_gateway_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -175,7 +177,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -220,33 +223,32 @@ spec:
                       type: object
                     type: array
                   defaultUserSettings:
-                    description: The default user settings. See Default User Settings
-                      below.
+                    description: The default user settings. See default_user_settings
+                      Block below.
                     items:
                       properties:
                         canvasAppSettings:
-                          description: The Canvas app settings. See Canvas App Settings
-                            below.
+                          description: The Canvas app settings. See canvas_app_settings
+                            Block below.
                           items:
                             properties:
                               directDeploySettings:
                                 description: The model deployment settings for the
-                                  SageMaker Canvas application. See Direct Deploy
-                                  Settings below.
+                                  SageMaker Canvas application. See direct_deploy_settings
+                                  Block below.
                                 items:
                                   properties:
                                     status:
-                                      description: Describes whether model deployment
-                                        permissions are enabled or disabled in the
-                                        Canvas application. Valid values are ENABLED
-                                        and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
-                                  data source with OAuth. See Identity Provider OAuth
-                                  Settings below.
+                                  data source with OAuth. See identity_provider_oauth_settings
+                                  Block below.
                                 items:
                                   properties:
                                     dataSourceName:
@@ -263,30 +265,28 @@ spec:
                                         URL.
                                       type: string
                                     status:
-                                      description: Describes whether OAuth for a data
-                                        source is enabled or disabled in the Canvas
-                                        application. Valid values are ENABLED and
-                                        DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               kendraSettings:
                                 description: The settings for document querying. See
-                                  Kendra Settings below.
+                                  kendra_settings Block below.
                                 items:
                                   properties:
                                     status:
-                                      description: Describes whether the document
-                                        querying feature is enabled or disabled in
-                                        the Canvas application. Valid values are ENABLED
-                                        and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
-                                  Canvas application. See Model Register Settings
-                                  below.
+                                  Canvas application. See model_register_settings
+                                  Block below.
                                 items:
                                   properties:
                                     crossAccountModelRegisterRoleArn:
@@ -298,17 +298,16 @@ spec:
                                         is set up.
                                       type: string
                                     status:
-                                      description: Describes whether the integration
-                                        to the model registry is enabled or disabled
-                                        in the Canvas application. Valid values are
-                                        ENABLED and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               timeSeriesForecastingSettings:
                                 description: Time series forecast settings for the
-                                  Canvas app. See Time Series Forecasting Settings
-                                  below.
+                                  Canvas app. See time_series_forecasting_settings
+                                  Block below.
                                 items:
                                   properties:
                                     amazonForecastRoleArn:
@@ -334,7 +333,8 @@ spec:
                                 type: array
                               workspaceSettings:
                                 description: The workspace settings for the SageMaker
-                                  Canvas application. See Workspace Settings below.
+                                  Canvas application. See workspace_settings Block
+                                  below.
                                 items:
                                   properties:
                                     s3ArtifactPath:
@@ -356,14 +356,15 @@ spec:
                             type: object
                           type: array
                         codeEditorAppSettings:
-                          description: The Code Editor application settings. See Code
-                            Editor App Settings below.
+                          description: The Code Editor application settings. See code_editor_app_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -401,13 +402,14 @@ spec:
                         customFileSystemConfig:
                           description: The settings for assigning a custom file system
                             to a user profile. Permitted users can access this file
-                            system in Amazon SageMaker Studio. See Custom File System
-                            Config below.
+                            system in Amazon SageMaker Studio. See custom_file_system_config
+                            Block below.
                           items:
                             properties:
                               efsFileSystemConfig:
                                 description: The default EBS storage settings for
-                                  a private space. See EFS File System Config below.
+                                  a private space. See efs_file_system_config Block
+                                  below.
                                 items:
                                   properties:
                                     fileSystemId:
@@ -426,8 +428,8 @@ spec:
                           type: array
                         customPosixUserConfig:
                           description: Details about the POSIX identity that is used
-                            for file system operations. See Custom Posix User Config
-                            below.
+                            for file system operations. See custom_posix_user_config
+                            Block below.
                           items:
                             properties:
                               gid:
@@ -525,13 +527,14 @@ spec:
                           type: object
                         jupyterLabAppSettings:
                           description: The settings for the JupyterLab application.
-                            See Jupyter Lab App Settings below.
+                            See jupyter_lab_app_settings Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -542,7 +545,7 @@ spec:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -560,7 +563,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -596,14 +600,15 @@ spec:
                             type: object
                           type: array
                         jupyterServerAppSettings:
-                          description: The Jupyter server's app settings. See Jupyter
-                            Server App Settings below.
+                          description: The Jupyter server's app settings. See jupyter_server_app_settings
+                            Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -614,7 +619,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -650,14 +656,14 @@ spec:
                             type: object
                           type: array
                         kernelGatewayAppSettings:
-                          description: The kernel gateway app settings. See Kernel
-                            Gateway App Settings below.
+                          description: The kernel gateway app settings. See kernel_gateway_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -827,7 +833,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -863,14 +870,14 @@ spec:
                             type: object
                           type: array
                         rSessionAppSettings:
-                          description: The RSession app settings. See RSession App
-                            Settings below.
+                          description: The RSession app settings. See r_session_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -888,7 +895,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -918,8 +926,8 @@ spec:
                           type: array
                         rStudioServerProAppSettings:
                           description: A collection of settings that configure user
-                            interaction with the RStudioServerPro app. See RStudioServerProAppSettings
-                            below.
+                            interaction with the RStudioServerPro app. See r_studio_server_pro_app_settings
+                            Block below.
                           items:
                             properties:
                               accessStatus:
@@ -944,8 +952,8 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         sharingSettings:
-                          description: The sharing settings. See Sharing Settings
-                            below.
+                          description: The sharing settings. See sharing_settings
+                            Block below.
                           items:
                             properties:
                               notebookOutputOption:
@@ -954,10 +962,10 @@ spec:
                                   Disabled. Valid values are Allowed and Disabled.
                                 type: string
                               s3KmsKeyId:
-                                description: When notebook_output_option is Allowed,
-                                  the AWS Key Management Service (KMS) encryption
-                                  key ID used to encrypt the notebook cell output
-                                  in the Amazon S3 bucket.
+                                description: The Amazon Web Services Key Management
+                                  Service (KMS) encryption key ID that is used to
+                                  encrypt artifacts generated by Canvas in the Amazon
+                                  S3 bucket.
                                 type: string
                               s3OutputPath:
                                 description: When notebook_output_option is Allowed,
@@ -968,13 +976,13 @@ spec:
                           type: array
                         spaceStorageSettings:
                           description: The storage settings for a private space. See
-                            Space Storage Settings below.
+                            space_storage_settings Block below.
                           items:
                             properties:
                               defaultEbsStorageSettings:
                                 description: The default EBS storage settings for
-                                  a private space. See Default EBS Storage Settings
-                                  below.
+                                  a private space. See default_ebs_storage_settings
+                                  Block below.
                                 items:
                                   properties:
                                     defaultEbsVolumeSizeInGb:
@@ -996,14 +1004,15 @@ spec:
                             Valid values are ENABLED and DISABLED.
                           type: string
                         tensorBoardAppSettings:
-                          description: The TensorBoard app settings. See TensorBoard
-                            App Settings below.
+                          description: The TensorBoard app settings. See tensor_board_app_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -1037,7 +1046,7 @@ spec:
                     description: The domain name.
                     type: string
                   domainSettings:
-                    description: The domain settings. See Domain Settings below.
+                    description: The domain settings. See domain_settings Block below.
                     items:
                       properties:
                         executionRoleIdentityConfig:
@@ -1047,14 +1056,15 @@ spec:
                           type: string
                         rStudioServerProDomainSettings:
                           description: A collection of settings that configure the
-                            RStudioServerPro Domain-level app. see RStudioServerProDomainSettings
-                            below.
+                            RStudioServerPro Domain-level app. see r_studio_server_pro_domain_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -1189,8 +1199,8 @@ spec:
                   retentionPolicy:
                     description: The retention policy for this domain, which specifies
                       whether resources will be retained after the Domain is deleted.
-                      By default, all resources are retained. See Retention Policy
-                      below.
+                      By default, all resources are retained. See retention_policy
+                      Block below.
                     items:
                       properties:
                         homeEfsFileSystem:
@@ -1399,22 +1409,23 @@ spec:
                       the domain. Valid values are IAM and SSO.
                     type: string
                   defaultSpaceSettings:
-                    description: The default space settings. See Default Space Settings
-                      below.
+                    description: The default space settings. See default_space_settings
+                      Block below.
                     items:
                       properties:
                         executionRole:
                           description: The execution role for the space.
                           type: string
                         jupyterServerAppSettings:
-                          description: The Jupyter server's app settings. See Jupyter
-                            Server App Settings below.
+                          description: The Jupyter server's app settings. See jupyter_server_app_settings
+                            Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -1425,7 +1436,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -1461,14 +1473,14 @@ spec:
                             type: object
                           type: array
                         kernelGatewayAppSettings:
-                          description: The kernel gateway app settings. See Kernel
-                            Gateway App Settings below.
+                          description: The kernel gateway app settings. See kernel_gateway_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -1486,7 +1498,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -1531,33 +1544,32 @@ spec:
                       type: object
                     type: array
                   defaultUserSettings:
-                    description: The default user settings. See Default User Settings
-                      below.
+                    description: The default user settings. See default_user_settings
+                      Block below.
                     items:
                       properties:
                         canvasAppSettings:
-                          description: The Canvas app settings. See Canvas App Settings
-                            below.
+                          description: The Canvas app settings. See canvas_app_settings
+                            Block below.
                           items:
                             properties:
                               directDeploySettings:
                                 description: The model deployment settings for the
-                                  SageMaker Canvas application. See Direct Deploy
-                                  Settings below.
+                                  SageMaker Canvas application. See direct_deploy_settings
+                                  Block below.
                                 items:
                                   properties:
                                     status:
-                                      description: Describes whether model deployment
-                                        permissions are enabled or disabled in the
-                                        Canvas application. Valid values are ENABLED
-                                        and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
-                                  data source with OAuth. See Identity Provider OAuth
-                                  Settings below.
+                                  data source with OAuth. See identity_provider_oauth_settings
+                                  Block below.
                                 items:
                                   properties:
                                     dataSourceName:
@@ -1574,30 +1586,28 @@ spec:
                                         URL.
                                       type: string
                                     status:
-                                      description: Describes whether OAuth for a data
-                                        source is enabled or disabled in the Canvas
-                                        application. Valid values are ENABLED and
-                                        DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               kendraSettings:
                                 description: The settings for document querying. See
-                                  Kendra Settings below.
+                                  kendra_settings Block below.
                                 items:
                                   properties:
                                     status:
-                                      description: Describes whether the document
-                                        querying feature is enabled or disabled in
-                                        the Canvas application. Valid values are ENABLED
-                                        and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
-                                  Canvas application. See Model Register Settings
-                                  below.
+                                  Canvas application. See model_register_settings
+                                  Block below.
                                 items:
                                   properties:
                                     crossAccountModelRegisterRoleArn:
@@ -1609,17 +1619,16 @@ spec:
                                         is set up.
                                       type: string
                                     status:
-                                      description: Describes whether the integration
-                                        to the model registry is enabled or disabled
-                                        in the Canvas application. Valid values are
-                                        ENABLED and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               timeSeriesForecastingSettings:
                                 description: Time series forecast settings for the
-                                  Canvas app. See Time Series Forecasting Settings
-                                  below.
+                                  Canvas app. See time_series_forecasting_settings
+                                  Block below.
                                 items:
                                   properties:
                                     amazonForecastRoleArn:
@@ -1645,7 +1654,8 @@ spec:
                                 type: array
                               workspaceSettings:
                                 description: The workspace settings for the SageMaker
-                                  Canvas application. See Workspace Settings below.
+                                  Canvas application. See workspace_settings Block
+                                  below.
                                 items:
                                   properties:
                                     s3ArtifactPath:
@@ -1667,14 +1677,15 @@ spec:
                             type: object
                           type: array
                         codeEditorAppSettings:
-                          description: The Code Editor application settings. See Code
-                            Editor App Settings below.
+                          description: The Code Editor application settings. See code_editor_app_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -1712,13 +1723,14 @@ spec:
                         customFileSystemConfig:
                           description: The settings for assigning a custom file system
                             to a user profile. Permitted users can access this file
-                            system in Amazon SageMaker Studio. See Custom File System
-                            Config below.
+                            system in Amazon SageMaker Studio. See custom_file_system_config
+                            Block below.
                           items:
                             properties:
                               efsFileSystemConfig:
                                 description: The default EBS storage settings for
-                                  a private space. See EFS File System Config below.
+                                  a private space. See efs_file_system_config Block
+                                  below.
                                 items:
                                   properties:
                                     fileSystemId:
@@ -1737,8 +1749,8 @@ spec:
                           type: array
                         customPosixUserConfig:
                           description: Details about the POSIX identity that is used
-                            for file system operations. See Custom Posix User Config
-                            below.
+                            for file system operations. See custom_posix_user_config
+                            Block below.
                           items:
                             properties:
                               gid:
@@ -1836,13 +1848,14 @@ spec:
                           type: object
                         jupyterLabAppSettings:
                           description: The settings for the JupyterLab application.
-                            See Jupyter Lab App Settings below.
+                            See jupyter_lab_app_settings Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -1853,7 +1866,7 @@ spec:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -1871,7 +1884,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -1907,14 +1921,15 @@ spec:
                             type: object
                           type: array
                         jupyterServerAppSettings:
-                          description: The Jupyter server's app settings. See Jupyter
-                            Server App Settings below.
+                          description: The Jupyter server's app settings. See jupyter_server_app_settings
+                            Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -1925,7 +1940,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -1961,14 +1977,14 @@ spec:
                             type: object
                           type: array
                         kernelGatewayAppSettings:
-                          description: The kernel gateway app settings. See Kernel
-                            Gateway App Settings below.
+                          description: The kernel gateway app settings. See kernel_gateway_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -2138,7 +2154,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -2174,14 +2191,14 @@ spec:
                             type: object
                           type: array
                         rSessionAppSettings:
-                          description: The RSession app settings. See RSession App
-                            Settings below.
+                          description: The RSession app settings. See r_session_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -2199,7 +2216,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -2229,8 +2247,8 @@ spec:
                           type: array
                         rStudioServerProAppSettings:
                           description: A collection of settings that configure user
-                            interaction with the RStudioServerPro app. See RStudioServerProAppSettings
-                            below.
+                            interaction with the RStudioServerPro app. See r_studio_server_pro_app_settings
+                            Block below.
                           items:
                             properties:
                               accessStatus:
@@ -2255,8 +2273,8 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         sharingSettings:
-                          description: The sharing settings. See Sharing Settings
-                            below.
+                          description: The sharing settings. See sharing_settings
+                            Block below.
                           items:
                             properties:
                               notebookOutputOption:
@@ -2265,10 +2283,10 @@ spec:
                                   Disabled. Valid values are Allowed and Disabled.
                                 type: string
                               s3KmsKeyId:
-                                description: When notebook_output_option is Allowed,
-                                  the AWS Key Management Service (KMS) encryption
-                                  key ID used to encrypt the notebook cell output
-                                  in the Amazon S3 bucket.
+                                description: The Amazon Web Services Key Management
+                                  Service (KMS) encryption key ID that is used to
+                                  encrypt artifacts generated by Canvas in the Amazon
+                                  S3 bucket.
                                 type: string
                               s3OutputPath:
                                 description: When notebook_output_option is Allowed,
@@ -2279,13 +2297,13 @@ spec:
                           type: array
                         spaceStorageSettings:
                           description: The storage settings for a private space. See
-                            Space Storage Settings below.
+                            space_storage_settings Block below.
                           items:
                             properties:
                               defaultEbsStorageSettings:
                                 description: The default EBS storage settings for
-                                  a private space. See Default EBS Storage Settings
-                                  below.
+                                  a private space. See default_ebs_storage_settings
+                                  Block below.
                                 items:
                                   properties:
                                     defaultEbsVolumeSizeInGb:
@@ -2307,14 +2325,15 @@ spec:
                             Valid values are ENABLED and DISABLED.
                           type: string
                         tensorBoardAppSettings:
-                          description: The TensorBoard app settings. See TensorBoard
-                            App Settings below.
+                          description: The TensorBoard app settings. See tensor_board_app_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -2348,7 +2367,7 @@ spec:
                     description: The domain name.
                     type: string
                   domainSettings:
-                    description: The domain settings. See Domain Settings below.
+                    description: The domain settings. See domain_settings Block below.
                     items:
                       properties:
                         executionRoleIdentityConfig:
@@ -2358,14 +2377,15 @@ spec:
                           type: string
                         rStudioServerProDomainSettings:
                           description: A collection of settings that configure the
-                            RStudioServerPro Domain-level app. see RStudioServerProDomainSettings
-                            below.
+                            RStudioServerPro Domain-level app. see r_studio_server_pro_domain_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -2496,8 +2516,8 @@ spec:
                   retentionPolicy:
                     description: The retention policy for this domain, which specifies
                       whether resources will be retained after the Domain is deleted.
-                      By default, all resources are retained. See Retention Policy
-                      below.
+                      By default, all resources are retained. See retention_policy
+                      Block below.
                     items:
                       properties:
                         homeEfsFileSystem:
@@ -2880,22 +2900,23 @@ spec:
                       the domain. Valid values are IAM and SSO.
                     type: string
                   defaultSpaceSettings:
-                    description: The default space settings. See Default Space Settings
-                      below.
+                    description: The default space settings. See default_space_settings
+                      Block below.
                     items:
                       properties:
                         executionRole:
                           description: The execution role for the space.
                           type: string
                         jupyterServerAppSettings:
-                          description: The Jupyter server's app settings. See Jupyter
-                            Server App Settings below.
+                          description: The Jupyter server's app settings. See jupyter_server_app_settings
+                            Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -2906,7 +2927,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -2942,14 +2964,14 @@ spec:
                             type: object
                           type: array
                         kernelGatewayAppSettings:
-                          description: The kernel gateway app settings. See Kernel
-                            Gateway App Settings below.
+                          description: The kernel gateway app settings. See kernel_gateway_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -2967,7 +2989,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -3012,33 +3035,32 @@ spec:
                       type: object
                     type: array
                   defaultUserSettings:
-                    description: The default user settings. See Default User Settings
-                      below.
+                    description: The default user settings. See default_user_settings
+                      Block below.
                     items:
                       properties:
                         canvasAppSettings:
-                          description: The Canvas app settings. See Canvas App Settings
-                            below.
+                          description: The Canvas app settings. See canvas_app_settings
+                            Block below.
                           items:
                             properties:
                               directDeploySettings:
                                 description: The model deployment settings for the
-                                  SageMaker Canvas application. See Direct Deploy
-                                  Settings below.
+                                  SageMaker Canvas application. See direct_deploy_settings
+                                  Block below.
                                 items:
                                   properties:
                                     status:
-                                      description: Describes whether model deployment
-                                        permissions are enabled or disabled in the
-                                        Canvas application. Valid values are ENABLED
-                                        and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
-                                  data source with OAuth. See Identity Provider OAuth
-                                  Settings below.
+                                  data source with OAuth. See identity_provider_oauth_settings
+                                  Block below.
                                 items:
                                   properties:
                                     dataSourceName:
@@ -3055,30 +3077,28 @@ spec:
                                         URL.
                                       type: string
                                     status:
-                                      description: Describes whether OAuth for a data
-                                        source is enabled or disabled in the Canvas
-                                        application. Valid values are ENABLED and
-                                        DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               kendraSettings:
                                 description: The settings for document querying. See
-                                  Kendra Settings below.
+                                  kendra_settings Block below.
                                 items:
                                   properties:
                                     status:
-                                      description: Describes whether the document
-                                        querying feature is enabled or disabled in
-                                        the Canvas application. Valid values are ENABLED
-                                        and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               modelRegisterSettings:
                                 description: The model registry settings for the SageMaker
-                                  Canvas application. See Model Register Settings
-                                  below.
+                                  Canvas application. See model_register_settings
+                                  Block below.
                                 items:
                                   properties:
                                     crossAccountModelRegisterRoleArn:
@@ -3090,17 +3110,16 @@ spec:
                                         is set up.
                                       type: string
                                     status:
-                                      description: Describes whether the integration
-                                        to the model registry is enabled or disabled
-                                        in the Canvas application. Valid values are
-                                        ENABLED and DISABLED.
+                                      description: Describes whether time series forecasting
+                                        is enabled or disabled in the Canvas app.
+                                        Valid values are ENABLED and DISABLED.
                                       type: string
                                   type: object
                                 type: array
                               timeSeriesForecastingSettings:
                                 description: Time series forecast settings for the
-                                  Canvas app. See Time Series Forecasting Settings
-                                  below.
+                                  Canvas app. See time_series_forecasting_settings
+                                  Block below.
                                 items:
                                   properties:
                                     amazonForecastRoleArn:
@@ -3126,7 +3145,8 @@ spec:
                                 type: array
                               workspaceSettings:
                                 description: The workspace settings for the SageMaker
-                                  Canvas application. See Workspace Settings below.
+                                  Canvas application. See workspace_settings Block
+                                  below.
                                 items:
                                   properties:
                                     s3ArtifactPath:
@@ -3148,14 +3168,15 @@ spec:
                             type: object
                           type: array
                         codeEditorAppSettings:
-                          description: The Code Editor application settings. See Code
-                            Editor App Settings below.
+                          description: The Code Editor application settings. See code_editor_app_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -3193,13 +3214,14 @@ spec:
                         customFileSystemConfig:
                           description: The settings for assigning a custom file system
                             to a user profile. Permitted users can access this file
-                            system in Amazon SageMaker Studio. See Custom File System
-                            Config below.
+                            system in Amazon SageMaker Studio. See custom_file_system_config
+                            Block below.
                           items:
                             properties:
                               efsFileSystemConfig:
                                 description: The default EBS storage settings for
-                                  a private space. See EFS File System Config below.
+                                  a private space. See efs_file_system_config Block
+                                  below.
                                 items:
                                   properties:
                                     fileSystemId:
@@ -3218,8 +3240,8 @@ spec:
                           type: array
                         customPosixUserConfig:
                           description: Details about the POSIX identity that is used
-                            for file system operations. See Custom Posix User Config
-                            below.
+                            for file system operations. See custom_posix_user_config
+                            Block below.
                           items:
                             properties:
                               gid:
@@ -3243,13 +3265,14 @@ spec:
                           type: string
                         jupyterLabAppSettings:
                           description: The settings for the JupyterLab application.
-                            See Jupyter Lab App Settings below.
+                            See jupyter_lab_app_settings Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -3260,7 +3283,7 @@ spec:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -3278,7 +3301,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -3314,14 +3338,15 @@ spec:
                             type: object
                           type: array
                         jupyterServerAppSettings:
-                          description: The Jupyter server's app settings. See Jupyter
-                            Server App Settings below.
+                          description: The Jupyter server's app settings. See jupyter_server_app_settings
+                            Block below.
                           items:
                             properties:
                               codeRepository:
                                 description: A list of Git repositories that SageMaker
                                   automatically displays to users for cloning in the
-                                  JupyterServer application. see Code Repository below.
+                                  JupyterServer application. see code_repository Block
+                                  below.
                                 items:
                                   properties:
                                     repositoryUrl:
@@ -3332,7 +3357,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -3368,14 +3394,14 @@ spec:
                             type: object
                           type: array
                         kernelGatewayAppSettings:
-                          description: The kernel gateway app settings. See Kernel
-                            Gateway App Settings below.
+                          description: The kernel gateway app settings. See kernel_gateway_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -3393,7 +3419,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -3429,14 +3456,14 @@ spec:
                             type: object
                           type: array
                         rSessionAppSettings:
-                          description: The RSession app settings. See RSession App
-                            Settings below.
+                          description: The RSession app settings. See r_session_app_settings
+                            Block below.
                           items:
                             properties:
                               customImage:
                                 description: A list of custom SageMaker images that
                                   are configured to run as a KernelGateway app. see
-                                  Custom Image below.
+                                  custom_image Block below.
                                 items:
                                   properties:
                                     appImageConfigName:
@@ -3454,7 +3481,8 @@ spec:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -3484,8 +3512,8 @@ spec:
                           type: array
                         rStudioServerProAppSettings:
                           description: A collection of settings that configure user
-                            interaction with the RStudioServerPro app. See RStudioServerProAppSettings
-                            below.
+                            interaction with the RStudioServerPro app. See r_studio_server_pro_app_settings
+                            Block below.
                           items:
                             properties:
                               accessStatus:
@@ -3510,8 +3538,8 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         sharingSettings:
-                          description: The sharing settings. See Sharing Settings
-                            below.
+                          description: The sharing settings. See sharing_settings
+                            Block below.
                           items:
                             properties:
                               notebookOutputOption:
@@ -3520,10 +3548,10 @@ spec:
                                   Disabled. Valid values are Allowed and Disabled.
                                 type: string
                               s3KmsKeyId:
-                                description: When notebook_output_option is Allowed,
-                                  the AWS Key Management Service (KMS) encryption
-                                  key ID used to encrypt the notebook cell output
-                                  in the Amazon S3 bucket.
+                                description: The Amazon Web Services Key Management
+                                  Service (KMS) encryption key ID that is used to
+                                  encrypt artifacts generated by Canvas in the Amazon
+                                  S3 bucket.
                                 type: string
                               s3OutputPath:
                                 description: When notebook_output_option is Allowed,
@@ -3534,13 +3562,13 @@ spec:
                           type: array
                         spaceStorageSettings:
                           description: The storage settings for a private space. See
-                            Space Storage Settings below.
+                            space_storage_settings Block below.
                           items:
                             properties:
                               defaultEbsStorageSettings:
                                 description: The default EBS storage settings for
-                                  a private space. See Default EBS Storage Settings
-                                  below.
+                                  a private space. See default_ebs_storage_settings
+                                  Block below.
                                 items:
                                   properties:
                                     defaultEbsVolumeSizeInGb:
@@ -3562,14 +3590,15 @@ spec:
                             Valid values are ENABLED and DISABLED.
                           type: string
                         tensorBoardAppSettings:
-                          description: The TensorBoard app settings. See TensorBoard
-                            App Settings below.
+                          description: The TensorBoard app settings. See tensor_board_app_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -3603,7 +3632,7 @@ spec:
                     description: The domain name.
                     type: string
                   domainSettings:
-                    description: The domain settings. See Domain Settings below.
+                    description: The domain settings. See domain_settings Block below.
                     items:
                       properties:
                         executionRoleIdentityConfig:
@@ -3613,14 +3642,15 @@ spec:
                           type: string
                         rStudioServerProDomainSettings:
                           description: A collection of settings that configure the
-                            RStudioServerPro Domain-level app. see RStudioServerProDomainSettings
-                            below.
+                            RStudioServerPro Domain-level app. see r_studio_server_pro_domain_settings
+                            Block below.
                           items:
                             properties:
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
-                                  on the instance. see Default Resource Spec below.
+                                  on the instance. see default_resource_spec Block
+                                  below.
                                 items:
                                   properties:
                                     instanceType:
@@ -3684,8 +3714,8 @@ spec:
                   retentionPolicy:
                     description: The retention policy for this domain, which specifies
                       whether resources will be retained after the Domain is deleted.
-                      By default, all resources are retained. See Retention Policy
-                      below.
+                      By default, all resources are retained. See retention_policy
+                      Block below.
                     items:
                       properties:
                         homeEfsFileSystem:

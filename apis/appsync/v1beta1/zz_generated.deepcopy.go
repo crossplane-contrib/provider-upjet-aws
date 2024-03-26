@@ -2008,6 +2008,11 @@ func (in *GraphQLAPIInitParameters) DeepCopyInto(out *GraphQLAPIInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.IntrospectionConfig != nil {
+		in, out := &in.IntrospectionConfig, &out.IntrospectionConfig
+		*out = new(string)
+		**out = **in
+	}
 	if in.LambdaAuthorizerConfig != nil {
 		in, out := &in.LambdaAuthorizerConfig, &out.LambdaAuthorizerConfig
 		*out = make([]GraphQLAPILambdaAuthorizerConfigInitParameters, len(*in))
@@ -2033,6 +2038,16 @@ func (in *GraphQLAPIInitParameters) DeepCopyInto(out *GraphQLAPIInitParameters) 
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.QueryDepthLimit != nil {
+		in, out := &in.QueryDepthLimit, &out.QueryDepthLimit
+		*out = new(float64)
+		**out = **in
+	}
+	if in.ResolverCountLimit != nil {
+		in, out := &in.ResolverCountLimit, &out.ResolverCountLimit
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Schema != nil {
 		in, out := &in.Schema, &out.Schema
@@ -2231,6 +2246,11 @@ func (in *GraphQLAPIObservation) DeepCopyInto(out *GraphQLAPIObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IntrospectionConfig != nil {
+		in, out := &in.IntrospectionConfig, &out.IntrospectionConfig
+		*out = new(string)
+		**out = **in
+	}
 	if in.LambdaAuthorizerConfig != nil {
 		in, out := &in.LambdaAuthorizerConfig, &out.LambdaAuthorizerConfig
 		*out = make([]GraphQLAPILambdaAuthorizerConfigObservation, len(*in))
@@ -2256,6 +2276,16 @@ func (in *GraphQLAPIObservation) DeepCopyInto(out *GraphQLAPIObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.QueryDepthLimit != nil {
+		in, out := &in.QueryDepthLimit, &out.QueryDepthLimit
+		*out = new(float64)
+		**out = **in
+	}
+	if in.ResolverCountLimit != nil {
+		in, out := &in.ResolverCountLimit, &out.ResolverCountLimit
+		*out = new(float64)
+		**out = **in
 	}
 	if in.Schema != nil {
 		in, out := &in.Schema, &out.Schema
@@ -2459,6 +2489,11 @@ func (in *GraphQLAPIParameters) DeepCopyInto(out *GraphQLAPIParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IntrospectionConfig != nil {
+		in, out := &in.IntrospectionConfig, &out.IntrospectionConfig
+		*out = new(string)
+		**out = **in
+	}
 	if in.LambdaAuthorizerConfig != nil {
 		in, out := &in.LambdaAuthorizerConfig, &out.LambdaAuthorizerConfig
 		*out = make([]GraphQLAPILambdaAuthorizerConfigParameters, len(*in))
@@ -2485,9 +2520,19 @@ func (in *GraphQLAPIParameters) DeepCopyInto(out *GraphQLAPIParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.QueryDepthLimit != nil {
+		in, out := &in.QueryDepthLimit, &out.QueryDepthLimit
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.ResolverCountLimit != nil {
+		in, out := &in.ResolverCountLimit, &out.ResolverCountLimit
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Schema != nil {

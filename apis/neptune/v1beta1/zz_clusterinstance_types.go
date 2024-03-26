@@ -86,6 +86,9 @@ type ClusterInstanceInitParameters struct {
 	// Bool to control if instance is publicly accessible. Default is false.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Determines whether a final DB snapshot is created before the DB instance is deleted.
+	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -155,8 +158,14 @@ type ClusterInstanceObservation struct {
 	// Bool to control if instance is publicly accessible. Default is false.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
 
+	// Determines whether a final DB snapshot is created before the DB instance is deleted.
+	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
+
 	// Specifies whether the neptune cluster is encrypted.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// Storage type associated with the cluster standard/iopt1.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -261,6 +270,10 @@ type ClusterInstanceParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Determines whether a final DB snapshot is created before the DB instance is deleted.
+	// +kubebuilder:validation:Optional
+	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

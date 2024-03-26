@@ -101,7 +101,7 @@ type EventSourceMappingInitParameters struct {
 	// If the function returns an error, split the batch in two and retry. Only available for stream sources (DynamoDB and Kinesis). Defaults to false.
 	BisectBatchOnFunctionError *bool `json:"bisectBatchOnFunctionError,omitempty" tf:"bisect_batch_on_function_error,omitempty"`
 
-	// An Amazon SQS queue or Amazon SNS topic destination for failed records. Only available for stream sources (DynamoDB and Kinesis). Detailed below.
+	// An Amazon SQS queue, Amazon SNS topic or Amazon S3 bucket (only available for Kafka sources) destination for failed records. Only available for stream sources (DynamoDB and Kinesis) and Kafka sources (Amazon MSK and Self-managed Apache Kafka). Detailed below.
 	DestinationConfig []DestinationConfigInitParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
 	// Configuration settings for a DocumentDB event source. Detailed below.
@@ -185,7 +185,7 @@ type EventSourceMappingObservation struct {
 	// If the function returns an error, split the batch in two and retry. Only available for stream sources (DynamoDB and Kinesis). Defaults to false.
 	BisectBatchOnFunctionError *bool `json:"bisectBatchOnFunctionError,omitempty" tf:"bisect_batch_on_function_error,omitempty"`
 
-	// An Amazon SQS queue or Amazon SNS topic destination for failed records. Only available for stream sources (DynamoDB and Kinesis). Detailed below.
+	// An Amazon SQS queue, Amazon SNS topic or Amazon S3 bucket (only available for Kafka sources) destination for failed records. Only available for stream sources (DynamoDB and Kinesis) and Kafka sources (Amazon MSK and Self-managed Apache Kafka). Detailed below.
 	DestinationConfig []DestinationConfigObservation `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
 	// Configuration settings for a DocumentDB event source. Detailed below.
@@ -282,7 +282,7 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	BisectBatchOnFunctionError *bool `json:"bisectBatchOnFunctionError,omitempty" tf:"bisect_batch_on_function_error,omitempty"`
 
-	// An Amazon SQS queue or Amazon SNS topic destination for failed records. Only available for stream sources (DynamoDB and Kinesis). Detailed below.
+	// An Amazon SQS queue, Amazon SNS topic or Amazon S3 bucket (only available for Kafka sources) destination for failed records. Only available for stream sources (DynamoDB and Kinesis) and Kafka sources (Amazon MSK and Self-managed Apache Kafka). Detailed below.
 	// +kubebuilder:validation:Optional
 	DestinationConfig []DestinationConfigParameters `json:"destinationConfig,omitempty" tf:"destination_config,omitempty"`
 
@@ -499,7 +499,7 @@ type SelfManagedKafkaEventSourceConfigParameters struct {
 
 type SourceAccessConfigurationInitParameters struct {
 
-	// The type of this configuration.  For Self Managed Kafka you will need to supply blocks for type VPC_SUBNET and VPC_SECURITY_GROUP.
+	// The type of authentication protocol, VPC components, or virtual host for your event source. For valid values, refer to the AWS documentation.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The URI for this configuration.  For type VPC_SUBNET the value should be subnet:subnet_id where subnet_id is the value you would find in an aws_subnet resource's id attribute.  For type VPC_SECURITY_GROUP the value should be security_group:security_group_id where security_group_id is the value you would find in an aws_security_group resource's id attribute.
@@ -508,7 +508,7 @@ type SourceAccessConfigurationInitParameters struct {
 
 type SourceAccessConfigurationObservation struct {
 
-	// The type of this configuration.  For Self Managed Kafka you will need to supply blocks for type VPC_SUBNET and VPC_SECURITY_GROUP.
+	// The type of authentication protocol, VPC components, or virtual host for your event source. For valid values, refer to the AWS documentation.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The URI for this configuration.  For type VPC_SUBNET the value should be subnet:subnet_id where subnet_id is the value you would find in an aws_subnet resource's id attribute.  For type VPC_SECURITY_GROUP the value should be security_group:security_group_id where security_group_id is the value you would find in an aws_security_group resource's id attribute.
@@ -517,7 +517,7 @@ type SourceAccessConfigurationObservation struct {
 
 type SourceAccessConfigurationParameters struct {
 
-	// The type of this configuration.  For Self Managed Kafka you will need to supply blocks for type VPC_SUBNET and VPC_SECURITY_GROUP.
+	// The type of authentication protocol, VPC components, or virtual host for your event source. For valid values, refer to the AWS documentation.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 

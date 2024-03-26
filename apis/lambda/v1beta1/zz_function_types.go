@@ -169,6 +169,9 @@ type FunctionInitParameters struct {
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
+	// Configuration block used to specify advanced logging settings. Detailed below.
+	LoggingConfig []LoggingConfigInitParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
+
 	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
 	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
 
@@ -303,6 +306,9 @@ type FunctionObservation struct {
 
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
+
+	// Configuration block used to specify advanced logging settings. Detailed below.
+	LoggingConfig []LoggingConfigObservation `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
 	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
 	MemorySize *float64 `json:"memorySize,omitempty" tf:"memory_size,omitempty"`
@@ -440,6 +446,10 @@ type FunctionParameters struct {
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
 	// +kubebuilder:validation:Optional
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
+
+	// Configuration block used to specify advanced logging settings. Detailed below.
+	// +kubebuilder:validation:Optional
+	LoggingConfig []LoggingConfigParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
 	// Amount of memory in MB your Lambda Function can use at runtime. Defaults to 128. See Limits
 	// +kubebuilder:validation:Optional
@@ -587,6 +597,55 @@ type ImageConfigParameters struct {
 	// Working directory.
 	// +kubebuilder:validation:Optional
 	WorkingDirectory *string `json:"workingDirectory,omitempty" tf:"working_directory,omitempty"`
+}
+
+type LoggingConfigInitParameters struct {
+
+	// for JSON structured logs, choose the detail level of the logs your application sends to CloudWatch when using supported logging libraries.
+	ApplicationLogLevel *string `json:"applicationLogLevel,omitempty" tf:"application_log_level,omitempty"`
+
+	// select between Text and structured JSON format for your function's logs.
+	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
+
+	// the CloudWatch log group your function sends logs to.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// for JSON structured logs, choose the detail level of the Lambda platform event logs sent to CloudWatch, such as ERROR, DEBUG, or INFO.
+	SystemLogLevel *string `json:"systemLogLevel,omitempty" tf:"system_log_level,omitempty"`
+}
+
+type LoggingConfigObservation struct {
+
+	// for JSON structured logs, choose the detail level of the logs your application sends to CloudWatch when using supported logging libraries.
+	ApplicationLogLevel *string `json:"applicationLogLevel,omitempty" tf:"application_log_level,omitempty"`
+
+	// select between Text and structured JSON format for your function's logs.
+	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
+
+	// the CloudWatch log group your function sends logs to.
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// for JSON structured logs, choose the detail level of the Lambda platform event logs sent to CloudWatch, such as ERROR, DEBUG, or INFO.
+	SystemLogLevel *string `json:"systemLogLevel,omitempty" tf:"system_log_level,omitempty"`
+}
+
+type LoggingConfigParameters struct {
+
+	// for JSON structured logs, choose the detail level of the logs your application sends to CloudWatch when using supported logging libraries.
+	// +kubebuilder:validation:Optional
+	ApplicationLogLevel *string `json:"applicationLogLevel,omitempty" tf:"application_log_level,omitempty"`
+
+	// select between Text and structured JSON format for your function's logs.
+	// +kubebuilder:validation:Optional
+	LogFormat *string `json:"logFormat" tf:"log_format,omitempty"`
+
+	// the CloudWatch log group your function sends logs to.
+	// +kubebuilder:validation:Optional
+	LogGroup *string `json:"logGroup,omitempty" tf:"log_group,omitempty"`
+
+	// for JSON structured logs, choose the detail level of the Lambda platform event logs sent to CloudWatch, such as ERROR, DEBUG, or INFO.
+	// +kubebuilder:validation:Optional
+	SystemLogLevel *string `json:"systemLogLevel,omitempty" tf:"system_log_level,omitempty"`
 }
 
 type SnapStartInitParameters struct {

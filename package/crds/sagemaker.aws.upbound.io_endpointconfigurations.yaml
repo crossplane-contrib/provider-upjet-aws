@@ -413,6 +413,21 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        routingConfig:
+                          description: Sets how the endpoint routes incoming traffic.
+                            See routing_config below.
+                          items:
+                            properties:
+                              routingStrategy:
+                                description: Sets how the endpoint routes incoming
+                                  traffic. Valid values are LEAST_OUTSTANDING_REQUESTS
+                                  and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests
+                                  to the specific instances that have more capacity
+                                  to process them. RANDOM routes each request to a
+                                  randomly chosen instance.
+                                type: string
+                            type: object
+                          type: array
                         serverlessConfig:
                           description: Specifies configuration for how an endpoint
                             performs asynchronous inference.
@@ -454,7 +469,7 @@ spec:
                     description: Array of ProductionVariant objects. There is one
                       for each model that you want to host at this endpoint in shadow
                       mode with production traffic replicated from the model specified
-                      on ProductionVariants.If you use this field, you can only specify
+                      on ProductionVariants. If you use this field, you can only specify
                       one variant for ProductionVariants and one variant for ShadowProductionVariants.
                       Fields are documented below.
                     items:
@@ -515,6 +530,21 @@ spec:
                         modelName:
                           description: The name of the model to use.
                           type: string
+                        routingConfig:
+                          description: Sets how the endpoint routes incoming traffic.
+                            See routing_config below.
+                          items:
+                            properties:
+                              routingStrategy:
+                                description: Sets how the endpoint routes incoming
+                                  traffic. Valid values are LEAST_OUTSTANDING_REQUESTS
+                                  and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests
+                                  to the specific instances that have more capacity
+                                  to process them. RANDOM routes each request to a
+                                  randomly chosen instance.
+                                type: string
+                            type: object
+                          type: array
                         serverlessConfig:
                           description: Specifies configuration for how an endpoint
                             performs asynchronous inference.
@@ -910,6 +940,21 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        routingConfig:
+                          description: Sets how the endpoint routes incoming traffic.
+                            See routing_config below.
+                          items:
+                            properties:
+                              routingStrategy:
+                                description: Sets how the endpoint routes incoming
+                                  traffic. Valid values are LEAST_OUTSTANDING_REQUESTS
+                                  and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests
+                                  to the specific instances that have more capacity
+                                  to process them. RANDOM routes each request to a
+                                  randomly chosen instance.
+                                type: string
+                            type: object
+                          type: array
                         serverlessConfig:
                           description: Specifies configuration for how an endpoint
                             performs asynchronous inference.
@@ -947,7 +992,7 @@ spec:
                     description: Array of ProductionVariant objects. There is one
                       for each model that you want to host at this endpoint in shadow
                       mode with production traffic replicated from the model specified
-                      on ProductionVariants.If you use this field, you can only specify
+                      on ProductionVariants. If you use this field, you can only specify
                       one variant for ProductionVariants and one variant for ShadowProductionVariants.
                       Fields are documented below.
                     items:
@@ -1008,6 +1053,21 @@ spec:
                         modelName:
                           description: The name of the model to use.
                           type: string
+                        routingConfig:
+                          description: Sets how the endpoint routes incoming traffic.
+                            See routing_config below.
+                          items:
+                            properties:
+                              routingStrategy:
+                                description: Sets how the endpoint routes incoming
+                                  traffic. Valid values are LEAST_OUTSTANDING_REQUESTS
+                                  and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests
+                                  to the specific instances that have more capacity
+                                  to process them. RANDOM routes each request to a
+                                  randomly chosen instance.
+                                type: string
+                            type: object
+                          type: array
                         serverlessConfig:
                           description: Specifies configuration for how an endpoint
                             performs asynchronous inference.
@@ -1422,6 +1482,21 @@ spec:
                         modelName:
                           description: The name of the model to use.
                           type: string
+                        routingConfig:
+                          description: Sets how the endpoint routes incoming traffic.
+                            See routing_config below.
+                          items:
+                            properties:
+                              routingStrategy:
+                                description: Sets how the endpoint routes incoming
+                                  traffic. Valid values are LEAST_OUTSTANDING_REQUESTS
+                                  and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests
+                                  to the specific instances that have more capacity
+                                  to process them. RANDOM routes each request to a
+                                  randomly chosen instance.
+                                type: string
+                            type: object
+                          type: array
                         serverlessConfig:
                           description: Specifies configuration for how an endpoint
                             performs asynchronous inference.
@@ -1459,7 +1534,7 @@ spec:
                     description: Array of ProductionVariant objects. There is one
                       for each model that you want to host at this endpoint in shadow
                       mode with production traffic replicated from the model specified
-                      on ProductionVariants.If you use this field, you can only specify
+                      on ProductionVariants. If you use this field, you can only specify
                       one variant for ProductionVariants and one variant for ShadowProductionVariants.
                       Fields are documented below.
                     items:
@@ -1520,6 +1595,21 @@ spec:
                         modelName:
                           description: The name of the model to use.
                           type: string
+                        routingConfig:
+                          description: Sets how the endpoint routes incoming traffic.
+                            See routing_config below.
+                          items:
+                            properties:
+                              routingStrategy:
+                                description: Sets how the endpoint routes incoming
+                                  traffic. Valid values are LEAST_OUTSTANDING_REQUESTS
+                                  and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests
+                                  to the specific instances that have more capacity
+                                  to process them. RANDOM routes each request to a
+                                  randomly chosen instance.
+                                type: string
+                            type: object
+                          type: array
                         serverlessConfig:
                           description: Specifies configuration for how an endpoint
                             performs asynchronous inference.

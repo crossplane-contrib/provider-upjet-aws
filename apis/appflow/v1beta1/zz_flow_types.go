@@ -17,12 +17,18 @@ type AggregationConfigInitParameters struct {
 
 	// Whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. Valid values are None and SingleFile.
 	AggregationType *string `json:"aggregationType,omitempty" tf:"aggregation_type,omitempty"`
+
+	// The desired file size, in MB, for each output file that Amazon AppFlow writes to the flow destination. Integer value.
+	TargetFileSize *float64 `json:"targetFileSize,omitempty" tf:"target_file_size,omitempty"`
 }
 
 type AggregationConfigObservation struct {
 
 	// Whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. Valid values are None and SingleFile.
 	AggregationType *string `json:"aggregationType,omitempty" tf:"aggregation_type,omitempty"`
+
+	// The desired file size, in MB, for each output file that Amazon AppFlow writes to the flow destination. Integer value.
+	TargetFileSize *float64 `json:"targetFileSize,omitempty" tf:"target_file_size,omitempty"`
 }
 
 type AggregationConfigParameters struct {
@@ -30,6 +36,10 @@ type AggregationConfigParameters struct {
 	// Whether Amazon AppFlow aggregates the flow records into a single file, or leave them unaggregated. Valid values are None and SingleFile.
 	// +kubebuilder:validation:Optional
 	AggregationType *string `json:"aggregationType,omitempty" tf:"aggregation_type,omitempty"`
+
+	// The desired file size, in MB, for each output file that Amazon AppFlow writes to the flow destination. Integer value.
+	// +kubebuilder:validation:Optional
+	TargetFileSize *float64 `json:"targetFileSize,omitempty" tf:"target_file_size,omitempty"`
 }
 
 type AmplitudeInitParameters struct {
@@ -676,6 +686,9 @@ type FlowObservation struct {
 
 	// A Destination Flow Config that controls how Amazon AppFlow places data in the destination connector.
 	DestinationFlowConfig []DestinationFlowConfigObservation `json:"destinationFlowConfig,omitempty" tf:"destination_flow_config,omitempty"`
+
+	// The current status of the flow.
+	FlowStatus *string `json:"flowStatus,omitempty" tf:"flow_status,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -2135,7 +2148,7 @@ type TaskParameters struct {
 
 	// Source fields to which a particular task is applied.
 	// +kubebuilder:validation:Optional
-	SourceFields []*string `json:"sourceFields" tf:"source_fields,omitempty"`
+	SourceFields []*string `json:"sourceFields,omitempty" tf:"source_fields,omitempty"`
 
 	// Map used to store task-related information. The execution service looks for particular information based on the TaskType. Valid keys are VALUE, VALUES, DATA_TYPE, UPPER_BOUND, LOWER_BOUND, SOURCE_DATA_TYPE, DESTINATION_DATA_TYPE, VALIDATION_ACTION, MASK_VALUE, MASK_LENGTH, TRUNCATE_LENGTH, MATH_OPERATION_FIELDS_ORDER, CONCAT_FORMAT, SUBFIELD_CATEGORY_MAP, and EXCLUDE_SOURCE_FIELDS_LIST.
 	// +kubebuilder:validation:Optional

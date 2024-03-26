@@ -133,6 +133,9 @@ type ClusterInitParameters struct {
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
 
+	// Specifies if the Redshift cluster is multi-AZ.
+	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
+
 	// The node type to be provisioned for the cluster.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
@@ -315,6 +318,9 @@ type ClusterObservation struct {
 
 	// Username for the master DB user.
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
+
+	// Specifies if the Redshift cluster is multi-AZ.
+	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
 	// The node type to be provisioned for the cluster.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -520,6 +526,10 @@ type ClusterParameters struct {
 	// Username for the master DB user.
 	// +kubebuilder:validation:Optional
 	MasterUsername *string `json:"masterUsername,omitempty" tf:"master_username,omitempty"`
+
+	// Specifies if the Redshift cluster is multi-AZ.
+	// +kubebuilder:validation:Optional
+	MultiAz *bool `json:"multiAz,omitempty" tf:"multi_az,omitempty"`
 
 	// The node type to be provisioned for the cluster.
 	// +kubebuilder:validation:Optional

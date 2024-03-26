@@ -111,6 +111,8 @@ spec:
                             into a single column value. It must be different from
                             the column delimiter.
                           type: string
+                        serde:
+                          type: string
                       type: object
                     type: array
                   grokClassifier:
@@ -218,6 +220,8 @@ spec:
                           description: A custom symbol to denote what combines content
                             into a single column value. It must be different from
                             the column delimiter.
+                          type: string
+                        serde:
                           type: string
                       type: object
                     type: array
@@ -479,6 +483,8 @@ spec:
                           description: A custom symbol to denote what combines content
                             into a single column value. It must be different from
                             the column delimiter.
+                          type: string
+                        serde:
                           type: string
                       type: object
                     type: array

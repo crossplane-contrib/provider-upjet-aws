@@ -27,6 +27,13 @@ type EndpointInitParameters struct {
 	// The friendly name of the Route 53 Resolver endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// +listType=set
+	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// The Route 53 Resolver endpoint IP address type. Valid values: IPV4, IPV6, DUALSTACK.
+	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
+
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRefs []v1.Reference `json:"securityGroupIdRefs,omitempty" tf:"-"`
@@ -70,6 +77,13 @@ type EndpointObservation struct {
 	// The friendly name of the Route 53 Resolver endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// +listType=set
+	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// The Route 53 Resolver endpoint IP address type. Valid values: IPV4, IPV6, DUALSTACK.
+	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
+
 	// The ID of one or more security groups that you want to use to control access to this VPC.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -100,10 +114,19 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// The Route 53 Resolver endpoint IP address type. Valid values: IPV4, IPV6, DUALSTACK.
+	// +kubebuilder:validation:Optional
+	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional

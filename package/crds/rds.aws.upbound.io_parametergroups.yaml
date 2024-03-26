@@ -80,10 +80,11 @@ spec:
                     description: The family of the DB parameter group.
                     type: string
                   parameter:
-                    description: A list of DB parameters to apply. Note that parameters
-                      may differ from a family to an other. Full list of all parameters
-                      can be discovered via aws rds describe-db-parameters after initial
-                      creation of the group.
+                    description: The DB parameters to apply. See parameter Block below
+                      for more details. Note that parameters may differ from a family
+                      to an other. Full list of all parameters can be discovered via
+                      aws rds describe-db-parameters after initial creation of the
+                      group.
                     items:
                       properties:
                         applyMethod:
@@ -93,7 +94,7 @@ spec:
                             specify "pending-reboot" here.
                           type: string
                         name:
-                          description: The name of the DB parameter group.
+                          description: The name of the DB parameter.
                           type: string
                         value:
                           description: The value of the DB parameter.
@@ -133,10 +134,11 @@ spec:
                     description: The family of the DB parameter group.
                     type: string
                   parameter:
-                    description: A list of DB parameters to apply. Note that parameters
-                      may differ from a family to an other. Full list of all parameters
-                      can be discovered via aws rds describe-db-parameters after initial
-                      creation of the group.
+                    description: The DB parameters to apply. See parameter Block below
+                      for more details. Note that parameters may differ from a family
+                      to an other. Full list of all parameters can be discovered via
+                      aws rds describe-db-parameters after initial creation of the
+                      group.
                     items:
                       properties:
                         applyMethod:
@@ -146,7 +148,7 @@ spec:
                             specify "pending-reboot" here.
                           type: string
                         name:
-                          description: The name of the DB parameter group.
+                          description: The name of the DB parameter.
                           type: string
                         value:
                           description: The value of the DB parameter.
@@ -350,10 +352,11 @@ spec:
                     description: The db parameter group name.
                     type: string
                   parameter:
-                    description: A list of DB parameters to apply. Note that parameters
-                      may differ from a family to an other. Full list of all parameters
-                      can be discovered via aws rds describe-db-parameters after initial
-                      creation of the group.
+                    description: The DB parameters to apply. See parameter Block below
+                      for more details. Note that parameters may differ from a family
+                      to an other. Full list of all parameters can be discovered via
+                      aws rds describe-db-parameters after initial creation of the
+                      group.
                     items:
                       properties:
                         applyMethod:
@@ -363,7 +366,7 @@ spec:
                             specify "pending-reboot" here.
                           type: string
                         name:
-                          description: The name of the DB parameter group.
+                          description: The name of the DB parameter.
                           type: string
                         value:
                           description: The value of the DB parameter.

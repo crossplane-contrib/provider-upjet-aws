@@ -794,7 +794,8 @@ spec:
                   secretsManagerAccessRoleArn:
                     description: ARN of the IAM role that specifies AWS DMS as the
                       trusted entity and has the required permissions to access the
-                      value in SecretsManagerSecret.
+                      value in the Secrets Manager secret referred to by secrets_manager_arn.
+                      The role must allow the iam:PassRole action.
                     type: string
                   secretsManagerAccessRoleArnRef:
                     description: Reference to a Role in iam to populate secretsManagerAccessRoleArn.
@@ -871,10 +872,8 @@ spec:
                         type: object
                     type: object
                   secretsManagerArn:
-                    description: Full ARN, partial ARN, or friendly name of the SecretsManagerSecret
-                      that contains the endpoint connection details. Supported only
-                      when engine_name is aurora, aurora-postgresql, mariadb, mongodb,
-                      mysql, oracle, postgres, redshift, or sqlserver.
+                    description: text values for username, password , server_name,
+                      and port. You can't specify both.
                     type: string
                   serverName:
                     description: Host name of the server.
@@ -1629,7 +1628,8 @@ spec:
                   secretsManagerAccessRoleArn:
                     description: ARN of the IAM role that specifies AWS DMS as the
                       trusted entity and has the required permissions to access the
-                      value in SecretsManagerSecret.
+                      value in the Secrets Manager secret referred to by secrets_manager_arn.
+                      The role must allow the iam:PassRole action.
                     type: string
                   secretsManagerAccessRoleArnRef:
                     description: Reference to a Role in iam to populate secretsManagerAccessRoleArn.
@@ -1706,10 +1706,8 @@ spec:
                         type: object
                     type: object
                   secretsManagerArn:
-                    description: Full ARN, partial ARN, or friendly name of the SecretsManagerSecret
-                      that contains the endpoint connection details. Supported only
-                      when engine_name is aurora, aurora-postgresql, mariadb, mongodb,
-                      mysql, oracle, postgres, redshift, or sqlserver.
+                    description: text values for username, password , server_name,
+                      and port. You can't specify both.
                     type: string
                   serverName:
                     description: Host name of the server.
@@ -2561,13 +2559,12 @@ spec:
                   secretsManagerAccessRoleArn:
                     description: ARN of the IAM role that specifies AWS DMS as the
                       trusted entity and has the required permissions to access the
-                      value in SecretsManagerSecret.
+                      value in the Secrets Manager secret referred to by secrets_manager_arn.
+                      The role must allow the iam:PassRole action.
                     type: string
                   secretsManagerArn:
-                    description: Full ARN, partial ARN, or friendly name of the SecretsManagerSecret
-                      that contains the endpoint connection details. Supported only
-                      when engine_name is aurora, aurora-postgresql, mariadb, mongodb,
-                      mysql, oracle, postgres, redshift, or sqlserver.
+                    description: text values for username, password , server_name,
+                      and port. You can't specify both.
                     type: string
                   serverName:
                     description: Host name of the server.

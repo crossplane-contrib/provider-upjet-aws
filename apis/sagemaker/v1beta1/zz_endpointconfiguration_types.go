@@ -285,7 +285,7 @@ type EndpointConfigurationInitParameters struct {
 	// An list of ProductionVariant objects, one for each model that you want to host at this endpoint. Fields are documented below.
 	ProductionVariants []ProductionVariantsInitParameters `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
 
-	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
+	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants. If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
 	ShadowProductionVariants []ShadowProductionVariantsInitParameters `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
 
 	// Key-value map of resource tags.
@@ -312,7 +312,7 @@ type EndpointConfigurationObservation struct {
 	// An list of ProductionVariant objects, one for each model that you want to host at this endpoint. Fields are documented below.
 	ProductionVariants []ProductionVariantsObservation `json:"productionVariants,omitempty" tf:"production_variants,omitempty"`
 
-	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
+	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants. If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
 	ShadowProductionVariants []ShadowProductionVariantsObservation `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
 
 	// Key-value map of resource tags.
@@ -356,7 +356,7 @@ type EndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants.If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
+	// Array of ProductionVariant objects. There is one for each model that you want to host at this endpoint in shadow mode with production traffic replicated from the model specified on ProductionVariants. If you use this field, you can only specify one variant for ProductionVariants and one variant for ShadowProductionVariants. Fields are documented below.
 	// +kubebuilder:validation:Optional
 	ShadowProductionVariants []ShadowProductionVariantsParameters `json:"shadowProductionVariants,omitempty" tf:"shadow_production_variants,omitempty"`
 
@@ -446,6 +446,9 @@ type ProductionVariantsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ModelNameSelector *v1.Selector `json:"modelNameSelector,omitempty" tf:"-"`
 
+	// Sets how the endpoint routes incoming traffic. See routing_config below.
+	RoutingConfig []RoutingConfigInitParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
+
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	ServerlessConfig []ServerlessConfigInitParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
 
@@ -484,6 +487,9 @@ type ProductionVariantsObservation struct {
 
 	// The name of the model to use.
 	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
+
+	// Sets how the endpoint routes incoming traffic. See routing_config below.
+	RoutingConfig []RoutingConfigObservation `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
 
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	ServerlessConfig []ServerlessConfigObservation `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
@@ -542,6 +548,10 @@ type ProductionVariantsParameters struct {
 	// +kubebuilder:validation:Optional
 	ModelNameSelector *v1.Selector `json:"modelNameSelector,omitempty" tf:"-"`
 
+	// Sets how the endpoint routes incoming traffic. See routing_config below.
+	// +kubebuilder:validation:Optional
+	RoutingConfig []RoutingConfigParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
+
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	// +kubebuilder:validation:Optional
 	ServerlessConfig []ServerlessConfigParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
@@ -553,6 +563,25 @@ type ProductionVariantsParameters struct {
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
 	// +kubebuilder:validation:Optional
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+}
+
+type RoutingConfigInitParameters struct {
+
+	// Sets how the endpoint routes incoming traffic. Valid values are LEAST_OUTSTANDING_REQUESTS and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests to the specific instances that have more capacity to process them. RANDOM routes each request to a randomly chosen instance.
+	RoutingStrategy *string `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
+}
+
+type RoutingConfigObservation struct {
+
+	// Sets how the endpoint routes incoming traffic. Valid values are LEAST_OUTSTANDING_REQUESTS and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests to the specific instances that have more capacity to process them. RANDOM routes each request to a randomly chosen instance.
+	RoutingStrategy *string `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
+}
+
+type RoutingConfigParameters struct {
+
+	// Sets how the endpoint routes incoming traffic. Valid values are LEAST_OUTSTANDING_REQUESTS and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests to the specific instances that have more capacity to process them. RANDOM routes each request to a randomly chosen instance.
+	// +kubebuilder:validation:Optional
+	RoutingStrategy *string `json:"routingStrategy" tf:"routing_strategy,omitempty"`
 }
 
 type ServerlessConfigInitParameters struct {
@@ -652,6 +681,9 @@ type ShadowProductionVariantsInitParameters struct {
 	// The name of the model to use.
 	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
 
+	// Sets how the endpoint routes incoming traffic. See routing_config below.
+	RoutingConfig []ShadowProductionVariantsRoutingConfigInitParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
+
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	ServerlessConfig []ShadowProductionVariantsServerlessConfigInitParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
 
@@ -690,6 +722,9 @@ type ShadowProductionVariantsObservation struct {
 
 	// The name of the model to use.
 	ModelName *string `json:"modelName,omitempty" tf:"model_name,omitempty"`
+
+	// Sets how the endpoint routes incoming traffic. See routing_config below.
+	RoutingConfig []ShadowProductionVariantsRoutingConfigObservation `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
 
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	ServerlessConfig []ShadowProductionVariantsServerlessConfigObservation `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
@@ -739,6 +774,10 @@ type ShadowProductionVariantsParameters struct {
 	// +kubebuilder:validation:Optional
 	ModelName *string `json:"modelName" tf:"model_name,omitempty"`
 
+	// Sets how the endpoint routes incoming traffic. See routing_config below.
+	// +kubebuilder:validation:Optional
+	RoutingConfig []ShadowProductionVariantsRoutingConfigParameters `json:"routingConfig,omitempty" tf:"routing_config,omitempty"`
+
 	// Specifies configuration for how an endpoint performs asynchronous inference.
 	// +kubebuilder:validation:Optional
 	ServerlessConfig []ShadowProductionVariantsServerlessConfigParameters `json:"serverlessConfig,omitempty" tf:"serverless_config,omitempty"`
@@ -750,6 +789,25 @@ type ShadowProductionVariantsParameters struct {
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
 	// +kubebuilder:validation:Optional
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+}
+
+type ShadowProductionVariantsRoutingConfigInitParameters struct {
+
+	// Sets how the endpoint routes incoming traffic. Valid values are LEAST_OUTSTANDING_REQUESTS and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests to the specific instances that have more capacity to process them. RANDOM routes each request to a randomly chosen instance.
+	RoutingStrategy *string `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
+}
+
+type ShadowProductionVariantsRoutingConfigObservation struct {
+
+	// Sets how the endpoint routes incoming traffic. Valid values are LEAST_OUTSTANDING_REQUESTS and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests to the specific instances that have more capacity to process them. RANDOM routes each request to a randomly chosen instance.
+	RoutingStrategy *string `json:"routingStrategy,omitempty" tf:"routing_strategy,omitempty"`
+}
+
+type ShadowProductionVariantsRoutingConfigParameters struct {
+
+	// Sets how the endpoint routes incoming traffic. Valid values are LEAST_OUTSTANDING_REQUESTS and RANDOM. LEAST_OUTSTANDING_REQUESTS routes requests to the specific instances that have more capacity to process them. RANDOM routes each request to a randomly chosen instance.
+	// +kubebuilder:validation:Optional
+	RoutingStrategy *string `json:"routingStrategy" tf:"routing_strategy,omitempty"`
 }
 
 type ShadowProductionVariantsServerlessConfigInitParameters struct {

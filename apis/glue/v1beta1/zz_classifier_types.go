@@ -95,6 +95,8 @@ type CsvClassifierInitParameters struct {
 
 	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
 	QuoteSymbol *string `json:"quoteSymbol,omitempty" tf:"quote_symbol,omitempty"`
+
+	Serde *string `json:"serde,omitempty" tf:"serde,omitempty"`
 }
 
 type CsvClassifierObservation struct {
@@ -122,6 +124,8 @@ type CsvClassifierObservation struct {
 
 	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
 	QuoteSymbol *string `json:"quoteSymbol,omitempty" tf:"quote_symbol,omitempty"`
+
+	Serde *string `json:"serde,omitempty" tf:"serde,omitempty"`
 }
 
 type CsvClassifierParameters struct {
@@ -157,6 +161,9 @@ type CsvClassifierParameters struct {
 	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
 	// +kubebuilder:validation:Optional
 	QuoteSymbol *string `json:"quoteSymbol,omitempty" tf:"quote_symbol,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Serde *string `json:"serde,omitempty" tf:"serde,omitempty"`
 }
 
 type GrokClassifierInitParameters struct {

@@ -18,6 +18,9 @@ type ConfigurationRecorderInitParameters struct {
 	// Recording group - see below.
 	RecordingGroup []RecordingGroupInitParameters `json:"recordingGroup,omitempty" tf:"recording_group,omitempty"`
 
+	// Recording mode - see below.
+	RecordingMode []RecordingModeInitParameters `json:"recordingMode,omitempty" tf:"recording_mode,omitempty"`
+
 	// Amazon Resource Name (ARN) of the IAM role. Used to make read or write requests to the delivery channel and to describe the AWS resources associated with the account. See AWS Docs for more details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -40,6 +43,9 @@ type ConfigurationRecorderObservation struct {
 	// Recording group - see below.
 	RecordingGroup []RecordingGroupObservation `json:"recordingGroup,omitempty" tf:"recording_group,omitempty"`
 
+	// Recording mode - see below.
+	RecordingMode []RecordingModeObservation `json:"recordingMode,omitempty" tf:"recording_mode,omitempty"`
+
 	// Amazon Resource Name (ARN) of the IAM role. Used to make read or write requests to the delivery channel and to describe the AWS resources associated with the account. See AWS Docs for more details.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
@@ -49,6 +55,10 @@ type ConfigurationRecorderParameters struct {
 	// Recording group - see below.
 	// +kubebuilder:validation:Optional
 	RecordingGroup []RecordingGroupParameters `json:"recordingGroup,omitempty" tf:"recording_group,omitempty"`
+
+	// Recording mode - see below.
+	// +kubebuilder:validation:Optional
+	RecordingMode []RecordingModeParameters `json:"recordingMode,omitempty" tf:"recording_mode,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -152,6 +162,77 @@ type RecordingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+}
+
+type RecordingModeInitParameters struct {
+
+	// Default reecording frequency. CONTINUOUS or DAILY.
+	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
+
+	// Recording mode overrides. Detailed below.
+	RecordingModeOverride []RecordingModeOverrideInitParameters `json:"recordingModeOverride,omitempty" tf:"recording_mode_override,omitempty"`
+}
+
+type RecordingModeObservation struct {
+
+	// Default reecording frequency. CONTINUOUS or DAILY.
+	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
+
+	// Recording mode overrides. Detailed below.
+	RecordingModeOverride []RecordingModeOverrideObservation `json:"recordingModeOverride,omitempty" tf:"recording_mode_override,omitempty"`
+}
+
+type RecordingModeOverrideInitParameters struct {
+
+	// A description you provide of the override.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Default reecording frequency. CONTINUOUS or DAILY.
+	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
+
+	// A list that specifies the types of AWS resources for which AWS Config excludes records configuration changes. See relevant part of AWS Docs for available types.
+	// +listType=set
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+}
+
+type RecordingModeOverrideObservation struct {
+
+	// A description you provide of the override.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Default reecording frequency. CONTINUOUS or DAILY.
+	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
+
+	// A list that specifies the types of AWS resources for which AWS Config excludes records configuration changes. See relevant part of AWS Docs for available types.
+	// +listType=set
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
+}
+
+type RecordingModeOverrideParameters struct {
+
+	// A description you provide of the override.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Default reecording frequency. CONTINUOUS or DAILY.
+	// +kubebuilder:validation:Optional
+	RecordingFrequency *string `json:"recordingFrequency" tf:"recording_frequency,omitempty"`
+
+	// A list that specifies the types of AWS resources for which AWS Config excludes records configuration changes. See relevant part of AWS Docs for available types.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ResourceTypes []*string `json:"resourceTypes" tf:"resource_types,omitempty"`
+}
+
+type RecordingModeParameters struct {
+
+	// Default reecording frequency. CONTINUOUS or DAILY.
+	// +kubebuilder:validation:Optional
+	RecordingFrequency *string `json:"recordingFrequency,omitempty" tf:"recording_frequency,omitempty"`
+
+	// Recording mode overrides. Detailed below.
+	// +kubebuilder:validation:Optional
+	RecordingModeOverride []RecordingModeOverrideParameters `json:"recordingModeOverride,omitempty" tf:"recording_mode_override,omitempty"`
 }
 
 type RecordingStrategyInitParameters struct {

@@ -74,17 +74,14 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: Name of the account setting to set. Valid values
-                      are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat,
-                      awsvpcTrunking and containerInsights.
+                    description: Name of the account setting to set.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   value:
-                    description: State of the setting. Valid values are enabled and
-                      disabled.
+                    description: State of the setting.
                     type: string
                 required:
                 - region
@@ -103,13 +100,10 @@ spec:
                   autoscaler.
                 properties:
                   name:
-                    description: Name of the account setting to set. Valid values
-                      are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat,
-                      awsvpcTrunking and containerInsights.
+                    description: Name of the account setting to set.
                     type: string
                   value:
-                    description: State of the setting. Valid values are enabled and
-                      disabled.
+                    description: State of the setting.
                     type: string
                 type: object
               managementPolicies:
@@ -298,15 +292,12 @@ spec:
                     description: ARN that identifies the account setting.
                     type: string
                   name:
-                    description: Name of the account setting to set. Valid values
-                      are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat,
-                      awsvpcTrunking and containerInsights.
+                    description: Name of the account setting to set.
                     type: string
                   principalArn:
                     type: string
                   value:
-                    description: State of the setting. Valid values are enabled and
-                      disabled.
+                    description: State of the setting.
                     type: string
                 type: object
               conditions:

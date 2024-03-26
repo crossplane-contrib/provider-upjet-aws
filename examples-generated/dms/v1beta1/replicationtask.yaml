@@ -8,7 +8,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    cdcStartTime: 1484346880
+    cdcStartTime: "1993-05-21T05:50:00Z"
     migrationType: full-load
     region: us-west-1
     replicationInstanceArnSelector:

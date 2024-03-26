@@ -85,7 +85,7 @@ type NodeGroupInitParameters struct {
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Configuration block with Launch Template settings. See launch_template below for details.
+	// Configuration block with Launch Template settings. See launch_template below for details. Conflicts with remote_access.
 	LaunchTemplate []LaunchTemplateInitParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
@@ -104,7 +104,7 @@ type NodeGroupInitParameters struct {
 	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
-	// Configuration block with remote access settings. See remote_access below for details.
+	// Configuration block with remote access settings. See remote_access below for details. Conflicts with launch_template.
 	RemoteAccess []RemoteAccessInitParameters `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
 
 	// Configuration block with scaling settings. See scaling_config below for details.
@@ -160,7 +160,7 @@ type NodeGroupObservation struct {
 	// Type of capacity associated with the EKS Node Group. Valid values: ON_DEMAND, SPOT.
 	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
 
-	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// –  Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Disk size in GiB for worker nodes. Defaults to 50 for Windows, 20 all other node groups.
@@ -179,7 +179,7 @@ type NodeGroupObservation struct {
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Configuration block with Launch Template settings. See launch_template below for details.
+	// Configuration block with Launch Template settings. See launch_template below for details. Conflicts with remote_access.
 	LaunchTemplate []LaunchTemplateObservation `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
 	// –  Amazon Resource Name (ARN) of the IAM Role that provides permissions for the EKS Node Group.
@@ -188,7 +188,7 @@ type NodeGroupObservation struct {
 	// –  AMI version of the EKS Node Group. Defaults to latest version for Kubernetes version.
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
-	// Configuration block with remote access settings. See remote_access below for details.
+	// Configuration block with remote access settings. See remote_access below for details. Conflicts with launch_template.
 	RemoteAccess []RemoteAccessObservation `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
 
 	// List of objects containing information about underlying resources.
@@ -232,7 +232,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityType *string `json:"capacityType,omitempty" tf:"capacity_type,omitempty"`
 
-	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// –  Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=Cluster
 	// +crossplane:generate:reference:extractor=ExternalNameIfClusterActive()
 	// +kubebuilder:validation:Optional
@@ -263,7 +263,7 @@ type NodeGroupParameters struct {
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Configuration block with Launch Template settings. See launch_template below for details.
+	// Configuration block with Launch Template settings. See launch_template below for details. Conflicts with remote_access.
 	// +kubebuilder:validation:Optional
 	LaunchTemplate []LaunchTemplateParameters `json:"launchTemplate,omitempty" tf:"launch_template,omitempty"`
 
@@ -290,7 +290,7 @@ type NodeGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ReleaseVersion *string `json:"releaseVersion,omitempty" tf:"release_version,omitempty"`
 
-	// Configuration block with remote access settings. See remote_access below for details.
+	// Configuration block with remote access settings. See remote_access below for details. Conflicts with launch_template.
 	// +kubebuilder:validation:Optional
 	RemoteAccess []RemoteAccessParameters `json:"remoteAccess,omitempty" tf:"remote_access,omitempty"`
 

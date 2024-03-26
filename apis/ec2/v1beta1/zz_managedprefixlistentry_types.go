@@ -31,7 +31,7 @@ type ManagedPrefixListEntryInitParameters struct {
 	// Description of this entry. Please note that due to API limitations, updating only the description of an entry will require recreating the entry.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// CIDR block of this entry.
+	// The ID of the prefix list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
@@ -56,7 +56,7 @@ type ManagedPrefixListEntryObservation struct {
 	// ID of the managed prefix list entry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// CIDR block of this entry.
+	// The ID of the prefix list.
 	PrefixListID *string `json:"prefixListId,omitempty" tf:"prefix_list_id,omitempty"`
 }
 
@@ -80,7 +80,7 @@ type ManagedPrefixListEntryParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// CIDR block of this entry.
+	// The ID of the prefix list.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

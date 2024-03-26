@@ -106,7 +106,7 @@ type FleetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins.
+	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 60 seconds.
 	IdleDisconnectTimeoutInSeconds *float64 `json:"idleDisconnectTimeoutInSeconds,omitempty" tf:"idle_disconnect_timeout_in_seconds,omitempty"`
 
 	// ARN of the public, private, or shared image to use.
@@ -170,7 +170,7 @@ type FleetObservation struct {
 	// Unique identifier (ID) of the appstream fleet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins.
+	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 60 seconds.
 	IdleDisconnectTimeoutInSeconds *float64 `json:"idleDisconnectTimeoutInSeconds,omitempty" tf:"idle_disconnect_timeout_in_seconds,omitempty"`
 
 	// ARN of the public, private, or shared image to use.
@@ -249,7 +249,7 @@ type FleetParameters struct {
 	// +kubebuilder:validation:Optional
 	IAMRoleArnSelector *v1.Selector `json:"iamRoleArnSelector,omitempty" tf:"-"`
 
-	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins.
+	// Amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect_timeout_in_seconds time interval begins. Defaults to 60 seconds.
 	// +kubebuilder:validation:Optional
 	IdleDisconnectTimeoutInSeconds *float64 `json:"idleDisconnectTimeoutInSeconds,omitempty" tf:"idle_disconnect_timeout_in_seconds,omitempty"`
 
