@@ -15,10 +15,10 @@ import (
 
 type AccountSettingDefaultInitParameters struct {
 
-	// Name of the account setting to set. Valid values are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking and containerInsights.
+	// Name of the account setting to set.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// State of the setting. Valid values are enabled and disabled.
+	// State of the setting.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -27,18 +27,18 @@ type AccountSettingDefaultObservation struct {
 	// ARN that identifies the account setting.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name of the account setting to set. Valid values are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking and containerInsights.
+	// Name of the account setting to set.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	PrincipalArn *string `json:"principalArn,omitempty" tf:"principal_arn,omitempty"`
 
-	// State of the setting. Valid values are enabled and disabled.
+	// State of the setting.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type AccountSettingDefaultParameters struct {
 
-	// Name of the account setting to set. Valid values are serviceLongArnFormat, taskLongArnFormat, containerInstanceLongArnFormat, awsvpcTrunking and containerInsights.
+	// Name of the account setting to set.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -47,7 +47,7 @@ type AccountSettingDefaultParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// State of the setting. Valid values are enabled and disabled.
+	// State of the setting.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }

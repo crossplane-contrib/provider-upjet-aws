@@ -617,7 +617,7 @@ spec:
                     type: string
                   functionUrl:
                     description: The HTTP URL endpoint for the function in the format
-                      https://<url_id>.lambda-url.<region>.on.aws.
+                      https://<url_id>.lambda-url.<region>.on.aws/.
                     type: string
                   id:
                     type: string

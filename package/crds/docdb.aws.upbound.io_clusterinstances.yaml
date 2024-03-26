@@ -88,7 +88,8 @@ spec:
                       created in. See docs about the details.
                     type: string
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: The identifier of the certificate authority (CA)
+                      certificate for the DB instance.
                     type: string
                   clusterIdentifier:
                     description: The identifier of the aws_docdb_cluster in which
@@ -244,7 +245,8 @@ spec:
                       created in. See docs about the details.
                     type: string
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: The identifier of the certificate authority (CA)
+                      certificate for the DB instance.
                     type: string
                   clusterIdentifier:
                     description: The identifier of the aws_docdb_cluster in which
@@ -561,7 +563,8 @@ spec:
                       created in. See docs about the details.
                     type: string
                   caCertIdentifier:
-                    description: The identifier of the CA certificate for the DB instance.
+                    description: The identifier of the certificate authority (CA)
+                      certificate for the DB instance.
                     type: string
                   clusterIdentifier:
                     description: The identifier of the aws_docdb_cluster in which

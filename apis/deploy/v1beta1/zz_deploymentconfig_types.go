@@ -27,6 +27,9 @@ type DeploymentConfigInitParameters struct {
 
 type DeploymentConfigObservation struct {
 
+	// The ARN of the deployment config.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// The compute platform can be Server, Lambda, or ECS. Default is Server.
 	ComputePlatform *string `json:"computePlatform,omitempty" tf:"compute_platform,omitempty"`
 

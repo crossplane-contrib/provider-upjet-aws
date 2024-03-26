@@ -285,6 +285,14 @@ spec:
                           description: Map of tags to assign to the device.
                           type: object
                           x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: Map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
+                          type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
@@ -743,6 +751,14 @@ spec:
                           additionalProperties:
                             type: string
                           description: Map of tags to assign to the device.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: Map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
                           type: object
                           x-kubernetes-map-type: granular
                         throughput:
@@ -1207,6 +1223,14 @@ spec:
                           description: Map of tags to assign to the device.
                           type: object
                           x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: Map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
+                          type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
@@ -1661,6 +1685,14 @@ spec:
                           additionalProperties:
                             type: string
                           description: Map of tags to assign to the device.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: Map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
                           type: object
                           x-kubernetes-map-type: granular
                         throughput:
@@ -2211,6 +2243,14 @@ spec:
                           description: Map of tags to assign to the device.
                           type: object
                           x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: Map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
+                          type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           description: Throughput to provision for a volume in mebibytes
                             per second (MiB/s). This is only valid for volume_type
@@ -2294,7 +2334,7 @@ spec:
                       to the EC2 documentation, notably iam:PassRole.
                     type: string
                   id:
-                    description: ID of the launch template. Conflicts with name.
+                    description: ID of the instance.
                     type: string
                   instanceInitiatedShutdownBehavior:
                     description: Shutdown behavior for the instance. Amazon defaults
@@ -2564,6 +2604,14 @@ spec:
                           additionalProperties:
                             type: string
                           description: Map of tags to assign to the device.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: Map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
                           type: object
                           x-kubernetes-map-type: granular
                         throughput:

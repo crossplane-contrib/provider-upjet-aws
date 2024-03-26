@@ -74,8 +74,8 @@ spec:
               forProvider:
                 properties:
                   httpMethod:
-                    description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
-                      ANY)
+                    description: The HTTP verb of the method resource (GET, POST,
+                      PUT, DELETE, HEAD, OPTIONS, ANY).
                     type: string
                   httpMethodRef:
                     description: Reference to a Method in apigateway to populate httpMethod.
@@ -156,7 +156,7 @@ spec:
                       be created in.
                     type: string
                   resourceId:
-                    description: API resource ID
+                    description: The Resource identifier for the method resource.
                     type: string
                   resourceIdRef:
                     description: Reference to a Resource in apigateway to populate
@@ -237,21 +237,26 @@ spec:
                   responseModels:
                     additionalProperties:
                       type: string
-                    description: Map of the API models used for the response's content
-                      type
+                    description: A map specifying the model resources used for the
+                      response's content type. Response models are represented as
+                      a key/value map, with a content type as the key and a Model
+                      name as the value.
                     type: object
                     x-kubernetes-map-type: granular
                   responseParameters:
                     additionalProperties:
                       type: boolean
-                    description: |-
-                      Map of response parameters that can be sent to the caller.
-                      For example: response_parameters = { "method.response.header.X-Some-Header" = true }
-                      would define that the header X-Some-Header can be provided on the response.
+                    description: A map specifying required or optional response parameters
+                      that API Gateway can send back to the caller. A key defines
+                      a method response header name and the associated value is a
+                      boolean flag indicating whether the method response parameter
+                      is required. The method response header names must match the
+                      pattern of method.response.header.{name}, where name is a valid
+                      and unique header name.
                     type: object
                     x-kubernetes-map-type: granular
                   restApiId:
-                    description: ID of the associated REST API
+                    description: The string identifier of the associated REST API.
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -330,7 +335,7 @@ spec:
                         type: object
                     type: object
                   statusCode:
-                    description: HTTP status code
+                    description: The method response's status code.
                     type: string
                 required:
                 - region
@@ -349,8 +354,8 @@ spec:
                   autoscaler.
                 properties:
                   httpMethod:
-                    description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
-                      ANY)
+                    description: The HTTP verb of the method resource (GET, POST,
+                      PUT, DELETE, HEAD, OPTIONS, ANY).
                     type: string
                   httpMethodRef:
                     description: Reference to a Method in apigateway to populate httpMethod.
@@ -427,7 +432,7 @@ spec:
                         type: object
                     type: object
                   resourceId:
-                    description: API resource ID
+                    description: The Resource identifier for the method resource.
                     type: string
                   resourceIdRef:
                     description: Reference to a Resource in apigateway to populate
@@ -508,21 +513,26 @@ spec:
                   responseModels:
                     additionalProperties:
                       type: string
-                    description: Map of the API models used for the response's content
-                      type
+                    description: A map specifying the model resources used for the
+                      response's content type. Response models are represented as
+                      a key/value map, with a content type as the key and a Model
+                      name as the value.
                     type: object
                     x-kubernetes-map-type: granular
                   responseParameters:
                     additionalProperties:
                       type: boolean
-                    description: |-
-                      Map of response parameters that can be sent to the caller.
-                      For example: response_parameters = { "method.response.header.X-Some-Header" = true }
-                      would define that the header X-Some-Header can be provided on the response.
+                    description: A map specifying required or optional response parameters
+                      that API Gateway can send back to the caller. A key defines
+                      a method response header name and the associated value is a
+                      boolean flag indicating whether the method response parameter
+                      is required. The method response header names must match the
+                      pattern of method.response.header.{name}, where name is a valid
+                      and unique header name.
                     type: object
                     x-kubernetes-map-type: granular
                   restApiId:
-                    description: ID of the associated REST API
+                    description: The string identifier of the associated REST API.
                     type: string
                   restApiIdRef:
                     description: Reference to a RestAPI in apigateway to populate
@@ -601,7 +611,7 @@ spec:
                         type: object
                     type: object
                   statusCode:
-                    description: HTTP status code
+                    description: The method response's status code.
                     type: string
                 type: object
               managementPolicies:
@@ -782,35 +792,40 @@ spec:
               atProvider:
                 properties:
                   httpMethod:
-                    description: HTTP Method (GET, POST, PUT, DELETE, HEAD, OPTIONS,
-                      ANY)
+                    description: The HTTP verb of the method resource (GET, POST,
+                      PUT, DELETE, HEAD, OPTIONS, ANY).
                     type: string
                   id:
                     type: string
                   resourceId:
-                    description: API resource ID
+                    description: The Resource identifier for the method resource.
                     type: string
                   responseModels:
                     additionalProperties:
                       type: string
-                    description: Map of the API models used for the response's content
-                      type
+                    description: A map specifying the model resources used for the
+                      response's content type. Response models are represented as
+                      a key/value map, with a content type as the key and a Model
+                      name as the value.
                     type: object
                     x-kubernetes-map-type: granular
                   responseParameters:
                     additionalProperties:
                       type: boolean
-                    description: |-
-                      Map of response parameters that can be sent to the caller.
-                      For example: response_parameters = { "method.response.header.X-Some-Header" = true }
-                      would define that the header X-Some-Header can be provided on the response.
+                    description: A map specifying required or optional response parameters
+                      that API Gateway can send back to the caller. A key defines
+                      a method response header name and the associated value is a
+                      boolean flag indicating whether the method response parameter
+                      is required. The method response header names must match the
+                      pattern of method.response.header.{name}, where name is a valid
+                      and unique header name.
                     type: object
                     x-kubernetes-map-type: granular
                   restApiId:
-                    description: ID of the associated REST API
+                    description: The string identifier of the associated REST API.
                     type: string
                   statusCode:
-                    description: HTTP status code
+                    description: The method response's status code.
                     type: string
                 type: object
               conditions:

@@ -589,6 +589,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StorageType != nil {
+		in, out := &in.StorageType, &out.StorageType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -770,6 +775,11 @@ func (in *ClusterInstanceInitParameters) DeepCopyInto(out *ClusterInstanceInitPa
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SkipFinalSnapshot != nil {
+		in, out := &in.SkipFinalSnapshot, &out.SkipFinalSnapshot
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -933,9 +943,19 @@ func (in *ClusterInstanceObservation) DeepCopyInto(out *ClusterInstanceObservati
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SkipFinalSnapshot != nil {
+		in, out := &in.SkipFinalSnapshot, &out.SkipFinalSnapshot
+		*out = new(bool)
+		**out = **in
+	}
 	if in.StorageEncrypted != nil {
 		in, out := &in.StorageEncrypted, &out.StorageEncrypted
 		*out = new(bool)
+		**out = **in
+	}
+	if in.StorageType != nil {
+		in, out := &in.StorageType, &out.StorageType
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1093,6 +1113,11 @@ func (in *ClusterInstanceParameters) DeepCopyInto(out *ClusterInstanceParameters
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SkipFinalSnapshot != nil {
+		in, out := &in.SkipFinalSnapshot, &out.SkipFinalSnapshot
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1377,6 +1402,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	if in.StorageEncrypted != nil {
 		in, out := &in.StorageEncrypted, &out.StorageEncrypted
 		*out = new(bool)
+		**out = **in
+	}
+	if in.StorageType != nil {
+		in, out := &in.StorageType, &out.StorageType
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -1916,6 +1946,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.StorageEncrypted != nil {
 		in, out := &in.StorageEncrypted, &out.StorageEncrypted
 		*out = new(bool)
+		**out = **in
+	}
+	if in.StorageType != nil {
+		in, out := &in.StorageType, &out.StorageType
+		*out = new(string)
 		**out = **in
 	}
 	if in.Tags != nil {

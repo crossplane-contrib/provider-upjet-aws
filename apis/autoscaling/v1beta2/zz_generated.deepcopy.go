@@ -3497,6 +3497,11 @@ func (in *PreferencesInitParameters) DeepCopyInto(out *PreferencesInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.MaxHealthyPercentage != nil {
+		in, out := &in.MaxHealthyPercentage, &out.MaxHealthyPercentage
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MinHealthyPercentage != nil {
 		in, out := &in.MinHealthyPercentage, &out.MinHealthyPercentage
 		*out = new(float64)
@@ -3558,6 +3563,11 @@ func (in *PreferencesObservation) DeepCopyInto(out *PreferencesObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MaxHealthyPercentage != nil {
+		in, out := &in.MaxHealthyPercentage, &out.MaxHealthyPercentage
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MinHealthyPercentage != nil {
 		in, out := &in.MinHealthyPercentage, &out.MinHealthyPercentage
 		*out = new(float64)
@@ -3617,6 +3627,11 @@ func (in *PreferencesParameters) DeepCopyInto(out *PreferencesParameters) {
 	if in.InstanceWarmup != nil {
 		in, out := &in.InstanceWarmup, &out.InstanceWarmup
 		*out = new(string)
+		**out = **in
+	}
+	if in.MaxHealthyPercentage != nil {
+		in, out := &in.MaxHealthyPercentage, &out.MaxHealthyPercentage
+		*out = new(float64)
 		**out = **in
 	}
 	if in.MinHealthyPercentage != nil {

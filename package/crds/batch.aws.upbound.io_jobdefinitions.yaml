@@ -76,8 +76,215 @@ spec:
                   containerProperties:
                     description: |-
                       A valid container properties
-                      provided as a single valid JSON document. This parameter is required if the type parameter is container.
+                      provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
                     type: string
+                  eksProperties:
+                    description: A valid eks properties. This parameter is only valid
+                      if the type parameter is container.
+                    items:
+                      properties:
+                        podProperties:
+                          description: The properties for the Kubernetes pod resources
+                            of a job. See pod_properties below.
+                          items:
+                            properties:
+                              containers:
+                                description: The properties of the container that's
+                                  used on the Amazon EKS pod. See containers below.
+                                items:
+                                  properties:
+                                    args:
+                                      description: An array of arguments to the entrypoint.
+                                        If this isn't specified, the CMD of the container
+                                        image is used. This corresponds to the args
+                                        member in the Entrypoint portion of the Pod
+                                        in Kubernetes. Environment variable references
+                                        are expanded using the container's environment.
+                                      items:
+                                        type: string
+                                      type: array
+                                    command:
+                                      description: The entrypoint for the container.
+                                        This isn't run within a shell. If this isn't
+                                        specified, the ENTRYPOINT of the container
+                                        image is used. Environment variable references
+                                        are expanded using the container's environment.
+                                      items:
+                                        type: string
+                                      type: array
+                                    env:
+                                      description: The environment variables to pass
+                                        to a container. See EKS Environment below.
+                                      items:
+                                        properties:
+                                          name:
+                                            description: Specifies the name of the
+                                              job definition.
+                                            type: string
+                                          value:
+                                            description: The value of the environment
+                                              variable.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    image:
+                                      description: The Docker image used to start
+                                        the container.
+                                      type: string
+                                    imagePullPolicy:
+                                      description: The image pull policy for the container.
+                                        Supported values are Always, IfNotPresent,
+                                        and Never.
+                                      type: string
+                                    name:
+                                      description: The name of the container. If the
+                                        name isn't specified, the default name "Default"
+                                        is used. Each container in a pod must have
+                                        a unique name.
+                                      type: string
+                                    resources:
+                                      description: The type and amount of resources
+                                        to assign to a container. The supported resources
+                                        include memory, cpu, and nvidia.com/gpu.
+                                      items:
+                                        properties:
+                                          limits:
+                                            additionalProperties:
+                                              type: string
+                                            type: object
+                                            x-kubernetes-map-type: granular
+                                          requests:
+                                            additionalProperties:
+                                              type: string
+                                            type: object
+                                            x-kubernetes-map-type: granular
+                                        type: object
+                                      type: array
+                                    securityContext:
+                                      description: The security context for a job.
+                                      items:
+                                        properties:
+                                          privileged:
+                                            type: boolean
+                                          readOnlyRootFileSystem:
+                                            type: boolean
+                                          runAsGroup:
+                                            type: number
+                                          runAsNonRoot:
+                                            type: boolean
+                                          runAsUser:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    volumeMounts:
+                                      description: The volume mounts for the container.
+                                      items:
+                                        properties:
+                                          mountPath:
+                                            description: The path of the file or directory
+                                              on the host to mount into containers
+                                              on the pod.
+                                            type: string
+                                          name:
+                                            description: Specifies the name of the
+                                              job definition.
+                                            type: string
+                                          readOnly:
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              dnsPolicy:
+                                description: The DNS policy for the pod. The default
+                                  value is ClusterFirst. If the host_network argument
+                                  is not specified, the default is ClusterFirstWithHostNet.
+                                  ClusterFirst indicates that any DNS query that does
+                                  not match the configured cluster domain suffix is
+                                  forwarded to the upstream nameserver inherited from
+                                  the node. For more information, see Pod's DNS policy
+                                  in the Kubernetes documentation.
+                                type: string
+                              hostNetwork:
+                                description: Indicates if the pod uses the hosts'
+                                  network IP address. The default value is true. Setting
+                                  this to false enables the Kubernetes pod networking
+                                  model. Most AWS Batch workloads are egress-only
+                                  and don't require the overhead of IP allocation
+                                  for each pod for incoming connections.
+                                type: boolean
+                              metadata:
+                                description: Metadata about the Kubernetes pod.
+                                items:
+                                  properties:
+                                    labels:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                type: array
+                              serviceAccountName:
+                                description: The name of the service account that's
+                                  used to run the pod.
+                                type: string
+                              volumes:
+                                description: Specifies the volumes for a job definition
+                                  that uses Amazon EKS resources. AWS Batch supports
+                                  emptyDir, hostPath, and secret volume types.
+                                items:
+                                  properties:
+                                    emptyDir:
+                                      items:
+                                        properties:
+                                          medium:
+                                            description: The medium to store the volume.
+                                              The default value is an empty string,
+                                              which uses the storage of the node.
+                                            type: string
+                                          sizeLimit:
+                                            description: The maximum size of the volume.
+                                              By default, there's no maximum size
+                                              defined.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    hostPath:
+                                      description: The path of the file or directory
+                                        on the host to mount into containers on the
+                                        pod.
+                                      items:
+                                        properties:
+                                          path:
+                                            description: The path of the file or directory
+                                              on the host to mount into containers
+                                              on the pod.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    name:
+                                      description: Specifies the name of the job definition.
+                                      type: string
+                                    secret:
+                                      items:
+                                        properties:
+                                          optional:
+                                            description: Specifies whether the secret
+                                              or the secret's keys must be defined.
+                                            type: boolean
+                                          secretName:
+                                            description: The name of the secret. The
+                                              name must be allowed as a DNS subdomain
+                                              name.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
                     description: Specifies the name of the job definition.
                     type: string
@@ -148,6 +355,12 @@ spec:
                           type: array
                       type: object
                     type: array
+                  schedulingPriority:
+                    description: The scheduling priority of the job definition. This
+                      only affects jobs in job queues with a fair share policy. Jobs
+                      with a higher scheduling priority are scheduled before jobs
+                      with a lower scheduling priority. Allowed values 0 through 9999.
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -190,8 +403,215 @@ spec:
                   containerProperties:
                     description: |-
                       A valid container properties
-                      provided as a single valid JSON document. This parameter is required if the type parameter is container.
+                      provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
                     type: string
+                  eksProperties:
+                    description: A valid eks properties. This parameter is only valid
+                      if the type parameter is container.
+                    items:
+                      properties:
+                        podProperties:
+                          description: The properties for the Kubernetes pod resources
+                            of a job. See pod_properties below.
+                          items:
+                            properties:
+                              containers:
+                                description: The properties of the container that's
+                                  used on the Amazon EKS pod. See containers below.
+                                items:
+                                  properties:
+                                    args:
+                                      description: An array of arguments to the entrypoint.
+                                        If this isn't specified, the CMD of the container
+                                        image is used. This corresponds to the args
+                                        member in the Entrypoint portion of the Pod
+                                        in Kubernetes. Environment variable references
+                                        are expanded using the container's environment.
+                                      items:
+                                        type: string
+                                      type: array
+                                    command:
+                                      description: The entrypoint for the container.
+                                        This isn't run within a shell. If this isn't
+                                        specified, the ENTRYPOINT of the container
+                                        image is used. Environment variable references
+                                        are expanded using the container's environment.
+                                      items:
+                                        type: string
+                                      type: array
+                                    env:
+                                      description: The environment variables to pass
+                                        to a container. See EKS Environment below.
+                                      items:
+                                        properties:
+                                          name:
+                                            description: Specifies the name of the
+                                              job definition.
+                                            type: string
+                                          value:
+                                            description: The value of the environment
+                                              variable.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    image:
+                                      description: The Docker image used to start
+                                        the container.
+                                      type: string
+                                    imagePullPolicy:
+                                      description: The image pull policy for the container.
+                                        Supported values are Always, IfNotPresent,
+                                        and Never.
+                                      type: string
+                                    name:
+                                      description: The name of the container. If the
+                                        name isn't specified, the default name "Default"
+                                        is used. Each container in a pod must have
+                                        a unique name.
+                                      type: string
+                                    resources:
+                                      description: The type and amount of resources
+                                        to assign to a container. The supported resources
+                                        include memory, cpu, and nvidia.com/gpu.
+                                      items:
+                                        properties:
+                                          limits:
+                                            additionalProperties:
+                                              type: string
+                                            type: object
+                                            x-kubernetes-map-type: granular
+                                          requests:
+                                            additionalProperties:
+                                              type: string
+                                            type: object
+                                            x-kubernetes-map-type: granular
+                                        type: object
+                                      type: array
+                                    securityContext:
+                                      description: The security context for a job.
+                                      items:
+                                        properties:
+                                          privileged:
+                                            type: boolean
+                                          readOnlyRootFileSystem:
+                                            type: boolean
+                                          runAsGroup:
+                                            type: number
+                                          runAsNonRoot:
+                                            type: boolean
+                                          runAsUser:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    volumeMounts:
+                                      description: The volume mounts for the container.
+                                      items:
+                                        properties:
+                                          mountPath:
+                                            description: The path of the file or directory
+                                              on the host to mount into containers
+                                              on the pod.
+                                            type: string
+                                          name:
+                                            description: Specifies the name of the
+                                              job definition.
+                                            type: string
+                                          readOnly:
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              dnsPolicy:
+                                description: The DNS policy for the pod. The default
+                                  value is ClusterFirst. If the host_network argument
+                                  is not specified, the default is ClusterFirstWithHostNet.
+                                  ClusterFirst indicates that any DNS query that does
+                                  not match the configured cluster domain suffix is
+                                  forwarded to the upstream nameserver inherited from
+                                  the node. For more information, see Pod's DNS policy
+                                  in the Kubernetes documentation.
+                                type: string
+                              hostNetwork:
+                                description: Indicates if the pod uses the hosts'
+                                  network IP address. The default value is true. Setting
+                                  this to false enables the Kubernetes pod networking
+                                  model. Most AWS Batch workloads are egress-only
+                                  and don't require the overhead of IP allocation
+                                  for each pod for incoming connections.
+                                type: boolean
+                              metadata:
+                                description: Metadata about the Kubernetes pod.
+                                items:
+                                  properties:
+                                    labels:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                type: array
+                              serviceAccountName:
+                                description: The name of the service account that's
+                                  used to run the pod.
+                                type: string
+                              volumes:
+                                description: Specifies the volumes for a job definition
+                                  that uses Amazon EKS resources. AWS Batch supports
+                                  emptyDir, hostPath, and secret volume types.
+                                items:
+                                  properties:
+                                    emptyDir:
+                                      items:
+                                        properties:
+                                          medium:
+                                            description: The medium to store the volume.
+                                              The default value is an empty string,
+                                              which uses the storage of the node.
+                                            type: string
+                                          sizeLimit:
+                                            description: The maximum size of the volume.
+                                              By default, there's no maximum size
+                                              defined.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    hostPath:
+                                      description: The path of the file or directory
+                                        on the host to mount into containers on the
+                                        pod.
+                                      items:
+                                        properties:
+                                          path:
+                                            description: The path of the file or directory
+                                              on the host to mount into containers
+                                              on the pod.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    name:
+                                      description: Specifies the name of the job definition.
+                                      type: string
+                                    secret:
+                                      items:
+                                        properties:
+                                          optional:
+                                            description: Specifies whether the secret
+                                              or the secret's keys must be defined.
+                                            type: boolean
+                                          secretName:
+                                            description: The name of the secret. The
+                                              name must be allowed as a DNS subdomain
+                                              name.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
                     description: Specifies the name of the job definition.
                     type: string
@@ -258,6 +678,12 @@ spec:
                           type: array
                       type: object
                     type: array
+                  schedulingPriority:
+                    description: The scheduling priority of the job definition. This
+                      only affects jobs in job queues with a fair share policy. Jobs
+                      with a higher scheduling priority are scheduled before jobs
+                      with a lower scheduling priority. Allowed values 0 through 9999.
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -464,13 +890,224 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The Amazon Resource Name of the job definition.
+                    description: The Amazon Resource Name of the job definition, includes
+                      revision (:#).
+                    type: string
+                  arnPrefix:
+                    description: The ARN without the revision number.
                     type: string
                   containerProperties:
                     description: |-
                       A valid container properties
-                      provided as a single valid JSON document. This parameter is required if the type parameter is container.
+                      provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
                     type: string
+                  eksProperties:
+                    description: A valid eks properties. This parameter is only valid
+                      if the type parameter is container.
+                    items:
+                      properties:
+                        podProperties:
+                          description: The properties for the Kubernetes pod resources
+                            of a job. See pod_properties below.
+                          items:
+                            properties:
+                              containers:
+                                description: The properties of the container that's
+                                  used on the Amazon EKS pod. See containers below.
+                                items:
+                                  properties:
+                                    args:
+                                      description: An array of arguments to the entrypoint.
+                                        If this isn't specified, the CMD of the container
+                                        image is used. This corresponds to the args
+                                        member in the Entrypoint portion of the Pod
+                                        in Kubernetes. Environment variable references
+                                        are expanded using the container's environment.
+                                      items:
+                                        type: string
+                                      type: array
+                                    command:
+                                      description: The entrypoint for the container.
+                                        This isn't run within a shell. If this isn't
+                                        specified, the ENTRYPOINT of the container
+                                        image is used. Environment variable references
+                                        are expanded using the container's environment.
+                                      items:
+                                        type: string
+                                      type: array
+                                    env:
+                                      description: The environment variables to pass
+                                        to a container. See EKS Environment below.
+                                      items:
+                                        properties:
+                                          name:
+                                            description: Specifies the name of the
+                                              job definition.
+                                            type: string
+                                          value:
+                                            description: The value of the environment
+                                              variable.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    image:
+                                      description: The Docker image used to start
+                                        the container.
+                                      type: string
+                                    imagePullPolicy:
+                                      description: The image pull policy for the container.
+                                        Supported values are Always, IfNotPresent,
+                                        and Never.
+                                      type: string
+                                    name:
+                                      description: The name of the container. If the
+                                        name isn't specified, the default name "Default"
+                                        is used. Each container in a pod must have
+                                        a unique name.
+                                      type: string
+                                    resources:
+                                      description: The type and amount of resources
+                                        to assign to a container. The supported resources
+                                        include memory, cpu, and nvidia.com/gpu.
+                                      items:
+                                        properties:
+                                          limits:
+                                            additionalProperties:
+                                              type: string
+                                            type: object
+                                            x-kubernetes-map-type: granular
+                                          requests:
+                                            additionalProperties:
+                                              type: string
+                                            type: object
+                                            x-kubernetes-map-type: granular
+                                        type: object
+                                      type: array
+                                    securityContext:
+                                      description: The security context for a job.
+                                      items:
+                                        properties:
+                                          privileged:
+                                            type: boolean
+                                          readOnlyRootFileSystem:
+                                            type: boolean
+                                          runAsGroup:
+                                            type: number
+                                          runAsNonRoot:
+                                            type: boolean
+                                          runAsUser:
+                                            type: number
+                                        type: object
+                                      type: array
+                                    volumeMounts:
+                                      description: The volume mounts for the container.
+                                      items:
+                                        properties:
+                                          mountPath:
+                                            description: The path of the file or directory
+                                              on the host to mount into containers
+                                              on the pod.
+                                            type: string
+                                          name:
+                                            description: Specifies the name of the
+                                              job definition.
+                                            type: string
+                                          readOnly:
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              dnsPolicy:
+                                description: The DNS policy for the pod. The default
+                                  value is ClusterFirst. If the host_network argument
+                                  is not specified, the default is ClusterFirstWithHostNet.
+                                  ClusterFirst indicates that any DNS query that does
+                                  not match the configured cluster domain suffix is
+                                  forwarded to the upstream nameserver inherited from
+                                  the node. For more information, see Pod's DNS policy
+                                  in the Kubernetes documentation.
+                                type: string
+                              hostNetwork:
+                                description: Indicates if the pod uses the hosts'
+                                  network IP address. The default value is true. Setting
+                                  this to false enables the Kubernetes pod networking
+                                  model. Most AWS Batch workloads are egress-only
+                                  and don't require the overhead of IP allocation
+                                  for each pod for incoming connections.
+                                type: boolean
+                              metadata:
+                                description: Metadata about the Kubernetes pod.
+                                items:
+                                  properties:
+                                    labels:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                type: array
+                              serviceAccountName:
+                                description: The name of the service account that's
+                                  used to run the pod.
+                                type: string
+                              volumes:
+                                description: Specifies the volumes for a job definition
+                                  that uses Amazon EKS resources. AWS Batch supports
+                                  emptyDir, hostPath, and secret volume types.
+                                items:
+                                  properties:
+                                    emptyDir:
+                                      items:
+                                        properties:
+                                          medium:
+                                            description: The medium to store the volume.
+                                              The default value is an empty string,
+                                              which uses the storage of the node.
+                                            type: string
+                                          sizeLimit:
+                                            description: The maximum size of the volume.
+                                              By default, there's no maximum size
+                                              defined.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    hostPath:
+                                      description: The path of the file or directory
+                                        on the host to mount into containers on the
+                                        pod.
+                                      items:
+                                        properties:
+                                          path:
+                                            description: The path of the file or directory
+                                              on the host to mount into containers
+                                              on the pod.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    name:
+                                      description: Specifies the name of the job definition.
+                                      type: string
+                                    secret:
+                                      items:
+                                        properties:
+                                          optional:
+                                            description: Specifies whether the secret
+                                              or the secret's keys must be defined.
+                                            type: boolean
+                                          secretName:
+                                            description: The name of the secret. The
+                                              name must be allowed as a DNS subdomain
+                                              name.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     type: string
                   name:
@@ -541,6 +1178,12 @@ spec:
                     type: array
                   revision:
                     description: The revision of the job definition.
+                    type: number
+                  schedulingPriority:
+                    description: The scheduling priority of the job definition. This
+                      only affects jobs in job queues with a fair share policy. Jobs
+                      with a higher scheduling priority are scheduled before jobs
+                      with a lower scheduling priority. Allowed values 0 through 9999.
                     type: number
                   tags:
                     additionalProperties:

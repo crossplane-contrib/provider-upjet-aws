@@ -149,6 +149,7 @@ type CatalogTableParameters struct {
 	// +kubebuilder:validation:Optional
 	PartitionKeys []PartitionKeysParameters `json:"partitionKeys,omitempty" tf:"partition_keys,omitempty"`
 
+	// Region of the target table.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -698,6 +699,9 @@ type TargetTableObservation struct {
 
 	// Name of the target table.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Region of the target table.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type TargetTableParameters struct {
@@ -713,6 +717,10 @@ type TargetTableParameters struct {
 	// Name of the target table.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Region of the target table.
+	// +kubebuilder:validation:Optional
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 // CatalogTableSpec defines the desired state of CatalogTable

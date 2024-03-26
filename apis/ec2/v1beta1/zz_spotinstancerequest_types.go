@@ -121,6 +121,10 @@ type SpotInstanceRequestEBSBlockDeviceInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
@@ -146,6 +150,10 @@ type SpotInstanceRequestEBSBlockDeviceObservation struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
@@ -183,6 +191,11 @@ type SpotInstanceRequestEBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
@@ -938,6 +951,10 @@ type SpotInstanceRequestRootBlockDeviceInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	VolumeSize *float64 `json:"volumeSize,omitempty" tf:"volume_size,omitempty"`
@@ -960,6 +977,10 @@ type SpotInstanceRequestRootBlockDeviceObservation struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
@@ -990,6 +1011,11 @@ type SpotInstanceRequestRootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`

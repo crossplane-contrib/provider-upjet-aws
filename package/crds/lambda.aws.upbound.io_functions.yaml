@@ -339,6 +339,31 @@ spec:
                     items:
                       type: string
                     type: array
+                  loggingConfig:
+                    description: Configuration block used to specify advanced logging
+                      settings. Detailed below.
+                    items:
+                      properties:
+                        applicationLogLevel:
+                          description: for JSON structured logs, choose the detail
+                            level of the logs your application sends to CloudWatch
+                            when using supported logging libraries.
+                          type: string
+                        logFormat:
+                          description: select between Text and structured JSON format
+                            for your function's logs.
+                          type: string
+                        logGroup:
+                          description: the CloudWatch log group your function sends
+                            logs to.
+                          type: string
+                        systemLogLevel:
+                          description: for JSON structured logs, choose the detail
+                            level of the Lambda platform event logs sent to CloudWatch,
+                            such as ERROR, DEBUG, or INFO.
+                          type: string
+                      type: object
+                    type: array
                   memorySize:
                     description: Amount of memory in MB your Lambda Function can use
                       at runtime. Defaults to 128. See Limits
@@ -1137,6 +1162,31 @@ spec:
                       to attach to your Lambda Function. See Lambda Layers
                     items:
                       type: string
+                    type: array
+                  loggingConfig:
+                    description: Configuration block used to specify advanced logging
+                      settings. Detailed below.
+                    items:
+                      properties:
+                        applicationLogLevel:
+                          description: for JSON structured logs, choose the detail
+                            level of the logs your application sends to CloudWatch
+                            when using supported logging libraries.
+                          type: string
+                        logFormat:
+                          description: select between Text and structured JSON format
+                            for your function's logs.
+                          type: string
+                        logGroup:
+                          description: the CloudWatch log group your function sends
+                            logs to.
+                          type: string
+                        systemLogLevel:
+                          description: for JSON structured logs, choose the detail
+                            level of the Lambda platform event logs sent to CloudWatch,
+                            such as ERROR, DEBUG, or INFO.
+                          type: string
+                      type: object
                     type: array
                   memorySize:
                     description: Amount of memory in MB your Lambda Function can use
@@ -1952,6 +2002,31 @@ spec:
                       to attach to your Lambda Function. See Lambda Layers
                     items:
                       type: string
+                    type: array
+                  loggingConfig:
+                    description: Configuration block used to specify advanced logging
+                      settings. Detailed below.
+                    items:
+                      properties:
+                        applicationLogLevel:
+                          description: for JSON structured logs, choose the detail
+                            level of the logs your application sends to CloudWatch
+                            when using supported logging libraries.
+                          type: string
+                        logFormat:
+                          description: select between Text and structured JSON format
+                            for your function's logs.
+                          type: string
+                        logGroup:
+                          description: the CloudWatch log group your function sends
+                            logs to.
+                          type: string
+                        systemLogLevel:
+                          description: for JSON structured logs, choose the detail
+                            level of the Lambda platform event logs sent to CloudWatch,
+                            such as ERROR, DEBUG, or INFO.
+                          type: string
+                      type: object
                     type: array
                   memorySize:
                     description: Amount of memory in MB your Lambda Function can use

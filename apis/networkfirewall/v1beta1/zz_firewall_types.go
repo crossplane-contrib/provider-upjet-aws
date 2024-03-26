@@ -59,7 +59,7 @@ type EncryptionConfigurationParameters struct {
 
 type FirewallInitParameters struct {
 
-	// A boolean flag indicating whether it is possible to delete the firewall. Defaults to false.
+	// A flag indicating whether the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. Defaults to false.
 	DeleteProtection *bool `json:"deleteProtection,omitempty" tf:"delete_protection,omitempty"`
 
 	// A friendly description of the firewall.
@@ -81,13 +81,13 @@ type FirewallInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallPolicyArnSelector *v1.Selector `json:"firewallPolicyArnSelector,omitempty" tf:"-"`
 
-	// (Option) A boolean flag indicating whether it is possible to change the associated firewall policy. Defaults to false.
+	// A flag indicating whether the firewall is protected against a change to the firewall policy association. Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use. Defaults to false.
 	FirewallPolicyChangeProtection *bool `json:"firewallPolicyChangeProtection,omitempty" tf:"firewall_policy_change_protection,omitempty"`
 
 	// A friendly name of the firewall.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A boolean flag indicating whether it is possible to change the associated subnet(s). Defaults to false.
+	// A flag indicating whether the firewall is protected against changes to the subnet associations. Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use. Defaults to false.
 	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
 
 	// Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
@@ -115,7 +115,7 @@ type FirewallObservation struct {
 	// The Amazon Resource Name (ARN) that identifies the firewall.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A boolean flag indicating whether it is possible to delete the firewall. Defaults to false.
+	// A flag indicating whether the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. Defaults to false.
 	DeleteProtection *bool `json:"deleteProtection,omitempty" tf:"delete_protection,omitempty"`
 
 	// A friendly description of the firewall.
@@ -127,7 +127,7 @@ type FirewallObservation struct {
 	// The Amazon Resource Name (ARN) of the VPC Firewall policy.
 	FirewallPolicyArn *string `json:"firewallPolicyArn,omitempty" tf:"firewall_policy_arn,omitempty"`
 
-	// (Option) A boolean flag indicating whether it is possible to change the associated firewall policy. Defaults to false.
+	// A flag indicating whether the firewall is protected against a change to the firewall policy association. Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use. Defaults to false.
 	FirewallPolicyChangeProtection *bool `json:"firewallPolicyChangeProtection,omitempty" tf:"firewall_policy_change_protection,omitempty"`
 
 	// Nested list of information about the current status of the firewall.
@@ -139,7 +139,7 @@ type FirewallObservation struct {
 	// A friendly name of the firewall.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A boolean flag indicating whether it is possible to change the associated subnet(s). Defaults to false.
+	// A flag indicating whether the firewall is protected against changes to the subnet associations. Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use. Defaults to false.
 	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
 
 	// Set of configuration blocks describing the public subnets. Each subnet must belong to a different Availability Zone in the VPC. AWS Network Firewall creates a firewall endpoint in each subnet. See Subnet Mapping below for details.
@@ -162,7 +162,7 @@ type FirewallObservation struct {
 
 type FirewallParameters struct {
 
-	// A boolean flag indicating whether it is possible to delete the firewall. Defaults to false.
+	// A flag indicating whether the firewall is protected against deletion. Use this setting to protect against accidentally deleting a firewall that is in use. Defaults to false.
 	// +kubebuilder:validation:Optional
 	DeleteProtection *bool `json:"deleteProtection,omitempty" tf:"delete_protection,omitempty"`
 
@@ -188,7 +188,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Optional
 	FirewallPolicyArnSelector *v1.Selector `json:"firewallPolicyArnSelector,omitempty" tf:"-"`
 
-	// (Option) A boolean flag indicating whether it is possible to change the associated firewall policy. Defaults to false.
+	// A flag indicating whether the firewall is protected against a change to the firewall policy association. Use this setting to protect against accidentally modifying the firewall policy for a firewall that is in use. Defaults to false.
 	// +kubebuilder:validation:Optional
 	FirewallPolicyChangeProtection *bool `json:"firewallPolicyChangeProtection,omitempty" tf:"firewall_policy_change_protection,omitempty"`
 
@@ -201,7 +201,7 @@ type FirewallParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// A boolean flag indicating whether it is possible to change the associated subnet(s). Defaults to false.
+	// A flag indicating whether the firewall is protected against changes to the subnet associations. Use this setting to protect against accidentally modifying the subnet associations for a firewall that is in use. Defaults to false.
 	// +kubebuilder:validation:Optional
 	SubnetChangeProtection *bool `json:"subnetChangeProtection,omitempty" tf:"subnet_change_protection,omitempty"`
 

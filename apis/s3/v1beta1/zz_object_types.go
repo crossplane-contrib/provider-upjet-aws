@@ -142,6 +142,9 @@ type ObjectObservation struct {
 	// Canned ACL to apply. Valid values are private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, and bucket-owner-full-control.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// ARN of the object.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Name of the bucket to put the file in. Alternatively, an S3 access point ARN can be specified.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -190,7 +193,6 @@ type ObjectObservation struct {
 	// Whether to allow the object to be deleted by removing any legal hold on any object version. Default is false. This value should be set to true only if the bucket has S3 object lock enabled.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// key of the resource supplied above
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ARN of the KMS Key to use for object encryption. If the S3 Bucket has server-side encryption enabled, that value will automatically be used. If referencing the aws_kms_key resource, use the arn attribute. If referencing the aws_kms_alias data source or resource, use the target_key_arn attribute.

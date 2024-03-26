@@ -71,7 +71,7 @@ type ClusterInstanceInitParameters struct {
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the database engine to be used for the RDS cluster instance.
-	// Valid Values: aurora-mysql, aurora-postgresql.
+	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Database engine version.
@@ -170,7 +170,7 @@ type ClusterInstanceObservation struct {
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// Name of the database engine to be used for the RDS cluster instance.
-	// Valid Values: aurora-mysql, aurora-postgresql.
+	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Database engine version.
@@ -303,7 +303,7 @@ type ClusterInstanceParameters struct {
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the database engine to be used for the RDS cluster instance.
-	// Valid Values: aurora-mysql, aurora-postgresql.
+	// Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 

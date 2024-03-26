@@ -1624,7 +1624,7 @@ type ViewerCertificateInitParameters struct {
 	// Minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. Can only be set if cloudfront_default_certificate = false. See all possible values in this table under "Security policy." Some examples include: TLSv1.2_2019 and TLSv1.2_2021. Default: TLSv1. NOTE: If you are using a custom certificate (specified with acm_certificate_arn or iam_certificate_id), and have specified sni-only in ssl_support_method, TLSv1 or later must be specified. If you have specified vip in ssl_support_method, only SSLv3 or TLSv1 can be specified. If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 	MinimumProtocolVersion *string `json:"minimumProtocolVersion,omitempty" tf:"minimum_protocol_version,omitempty"`
 
-	// How you want CloudFront to serve HTTPS requests. One of vip or sni-only. Required if you specify acm_certificate_arn or iam_certificate_id. NOTE: vip causes CloudFront to use a dedicated IP address and may incur extra charges.
+	// How you want CloudFront to serve HTTPS requests. One of vip, sni-only, or static-ip. Required if you specify acm_certificate_arn or iam_certificate_id. NOTE: vip causes CloudFront to use a dedicated IP address and may incur extra charges.
 	SSLSupportMethod *string `json:"sslSupportMethod,omitempty" tf:"ssl_support_method,omitempty"`
 }
 
@@ -1642,7 +1642,7 @@ type ViewerCertificateObservation struct {
 	// Minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. Can only be set if cloudfront_default_certificate = false. See all possible values in this table under "Security policy." Some examples include: TLSv1.2_2019 and TLSv1.2_2021. Default: TLSv1. NOTE: If you are using a custom certificate (specified with acm_certificate_arn or iam_certificate_id), and have specified sni-only in ssl_support_method, TLSv1 or later must be specified. If you have specified vip in ssl_support_method, only SSLv3 or TLSv1 can be specified. If you have specified cloudfront_default_certificate, TLSv1 must be specified.
 	MinimumProtocolVersion *string `json:"minimumProtocolVersion,omitempty" tf:"minimum_protocol_version,omitempty"`
 
-	// How you want CloudFront to serve HTTPS requests. One of vip or sni-only. Required if you specify acm_certificate_arn or iam_certificate_id. NOTE: vip causes CloudFront to use a dedicated IP address and may incur extra charges.
+	// How you want CloudFront to serve HTTPS requests. One of vip, sni-only, or static-ip. Required if you specify acm_certificate_arn or iam_certificate_id. NOTE: vip causes CloudFront to use a dedicated IP address and may incur extra charges.
 	SSLSupportMethod *string `json:"sslSupportMethod,omitempty" tf:"ssl_support_method,omitempty"`
 }
 
@@ -1664,7 +1664,7 @@ type ViewerCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	MinimumProtocolVersion *string `json:"minimumProtocolVersion,omitempty" tf:"minimum_protocol_version,omitempty"`
 
-	// How you want CloudFront to serve HTTPS requests. One of vip or sni-only. Required if you specify acm_certificate_arn or iam_certificate_id. NOTE: vip causes CloudFront to use a dedicated IP address and may incur extra charges.
+	// How you want CloudFront to serve HTTPS requests. One of vip, sni-only, or static-ip. Required if you specify acm_certificate_arn or iam_certificate_id. NOTE: vip causes CloudFront to use a dedicated IP address and may incur extra charges.
 	// +kubebuilder:validation:Optional
 	SSLSupportMethod *string `json:"sslSupportMethod,omitempty" tf:"ssl_support_method,omitempty"`
 }

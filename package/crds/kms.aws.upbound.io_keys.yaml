@@ -130,6 +130,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  xksKeyId:
+                    description: Identifies the external key that serves as key material
+                      for the KMS key in an external key store.
+                    type: string
                 required:
                 - region
                 type: object
@@ -199,6 +203,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  xksKeyId:
+                    description: Identifies the external key that serves as key material
+                      for the KMS key in an external key store.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -441,6 +449,10 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  xksKeyId:
+                    description: Identifies the external key that serves as key material
+                      for the KMS key in an external key store.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -20,6 +20,10 @@ spec:
     tags:
       Tag1: Value1
       Tag2: Value2
+    timeouts:
+    - create: 40m
+      delete: 1h
+      update: 50m
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

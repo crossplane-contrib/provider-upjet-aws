@@ -15,7 +15,7 @@ import (
 
 type FargateProfileInitParameters struct {
 
-	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// –  Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -68,7 +68,7 @@ type FargateProfileObservation struct {
 	// Amazon Resource Name (ARN) of the EKS Fargate Profile.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// –  Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// EKS Cluster name and EKS Fargate Profile name separated by a colon (:).
@@ -98,7 +98,7 @@ type FargateProfileObservation struct {
 
 type FargateProfileParameters struct {
 
-	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// –  Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`

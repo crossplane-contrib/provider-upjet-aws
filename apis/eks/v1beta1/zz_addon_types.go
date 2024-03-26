@@ -23,7 +23,7 @@ type AddonInitParameters struct {
 	// match one of the versions returned by describe-addon-versions.
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
-	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// –  Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -86,7 +86,7 @@ type AddonObservation struct {
 	// Amazon Resource Name (ARN) of the EKS add-on.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// –  Name of the EKS Cluster.
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
@@ -142,7 +142,7 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
-	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+	// –  Name of the EKS Cluster.
 	// +crossplane:generate:reference:type=Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`

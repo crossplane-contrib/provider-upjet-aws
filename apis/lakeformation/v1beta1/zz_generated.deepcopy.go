@@ -1493,6 +1493,11 @@ func (in *ResourceInitParameters) DeepCopyInto(out *ResourceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.HybridAccessEnabled != nil {
+		in, out := &in.HybridAccessEnabled, &out.HybridAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
@@ -1507,6 +1512,16 @@ func (in *ResourceInitParameters) DeepCopyInto(out *ResourceInitParameters) {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.UseServiceLinkedRole != nil {
+		in, out := &in.UseServiceLinkedRole, &out.UseServiceLinkedRole
+		*out = new(bool)
+		**out = **in
+	}
+	if in.WithFederation != nil {
+		in, out := &in.WithFederation, &out.WithFederation
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -1560,6 +1575,11 @@ func (in *ResourceObservation) DeepCopyInto(out *ResourceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.HybridAccessEnabled != nil {
+		in, out := &in.HybridAccessEnabled, &out.HybridAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -1573,6 +1593,16 @@ func (in *ResourceObservation) DeepCopyInto(out *ResourceObservation) {
 	if in.RoleArn != nil {
 		in, out := &in.RoleArn, &out.RoleArn
 		*out = new(string)
+		**out = **in
+	}
+	if in.UseServiceLinkedRole != nil {
+		in, out := &in.UseServiceLinkedRole, &out.UseServiceLinkedRole
+		*out = new(bool)
+		**out = **in
+	}
+	if in.WithFederation != nil {
+		in, out := &in.WithFederation, &out.WithFederation
+		*out = new(bool)
 		**out = **in
 	}
 }
@@ -1595,6 +1625,11 @@ func (in *ResourceParameters) DeepCopyInto(out *ResourceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.HybridAccessEnabled != nil {
+		in, out := &in.HybridAccessEnabled, &out.HybridAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
@@ -1614,6 +1649,16 @@ func (in *ResourceParameters) DeepCopyInto(out *ResourceParameters) {
 		in, out := &in.RoleArnSelector, &out.RoleArnSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.UseServiceLinkedRole != nil {
+		in, out := &in.UseServiceLinkedRole, &out.UseServiceLinkedRole
+		*out = new(bool)
+		**out = **in
+	}
+	if in.WithFederation != nil {
+		in, out := &in.WithFederation, &out.WithFederation
+		*out = new(bool)
+		**out = **in
 	}
 }
 

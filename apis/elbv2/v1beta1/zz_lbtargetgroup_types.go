@@ -147,8 +147,11 @@ type LBTargetGroupInitParameters struct {
 	// Whether the request and response headers exchanged between the load balancer and the Lambda function include arrays of values or strings. Only applies when target_type is lambda. Default is false.
 	LambdaMultiValueHeadersEnabled *bool `json:"lambdaMultiValueHeadersEnabled,omitempty" tf:"lambda_multi_value_headers_enabled,omitempty"`
 
-	// Determines how the load balancer selects targets when routing requests. Only applicable for Application Load Balancer Target Groups. The value is round_robin or least_outstanding_requests. The default is round_robin.
+	// Determines how the load balancer selects targets when routing requests. Only applicable for Application Load Balancer Target Groups. The value is round_robin, least_outstanding_requests, or weighted_random. The default is round_robin.
 	LoadBalancingAlgorithmType *string `json:"loadBalancingAlgorithmType,omitempty" tf:"load_balancing_algorithm_type,omitempty"`
+
+	// Determines whether to enable target anomaly mitigation.  Target anomaly mitigation is only supported by the weighted_random load balancing algorithm type.  See doc for more information.  The value is "on" or "off". The default is "off".
+	LoadBalancingAnomalyMitigation *string `json:"loadBalancingAnomalyMitigation,omitempty" tf:"load_balancing_anomaly_mitigation,omitempty"`
 
 	// Indicates whether cross zone load balancing is enabled. The value is "true", "false" or "use_load_balancer_configuration". The default is "use_load_balancer_configuration".
 	LoadBalancingCrossZoneEnabled *string `json:"loadBalancingCrossZoneEnabled,omitempty" tf:"load_balancing_cross_zone_enabled,omitempty"`
@@ -234,8 +237,15 @@ type LBTargetGroupObservation struct {
 	// Whether the request and response headers exchanged between the load balancer and the Lambda function include arrays of values or strings. Only applies when target_type is lambda. Default is false.
 	LambdaMultiValueHeadersEnabled *bool `json:"lambdaMultiValueHeadersEnabled,omitempty" tf:"lambda_multi_value_headers_enabled,omitempty"`
 
-	// Determines how the load balancer selects targets when routing requests. Only applicable for Application Load Balancer Target Groups. The value is round_robin or least_outstanding_requests. The default is round_robin.
+	// ARNs of the Load Balancers associated with the Target Group.
+	// +listType=set
+	LoadBalancerArns []*string `json:"loadBalancerArns,omitempty" tf:"load_balancer_arns,omitempty"`
+
+	// Determines how the load balancer selects targets when routing requests. Only applicable for Application Load Balancer Target Groups. The value is round_robin, least_outstanding_requests, or weighted_random. The default is round_robin.
 	LoadBalancingAlgorithmType *string `json:"loadBalancingAlgorithmType,omitempty" tf:"load_balancing_algorithm_type,omitempty"`
+
+	// Determines whether to enable target anomaly mitigation.  Target anomaly mitigation is only supported by the weighted_random load balancing algorithm type.  See doc for more information.  The value is "on" or "off". The default is "off".
+	LoadBalancingAnomalyMitigation *string `json:"loadBalancingAnomalyMitigation,omitempty" tf:"load_balancing_anomaly_mitigation,omitempty"`
 
 	// Indicates whether cross zone load balancing is enabled. The value is "true", "false" or "use_load_balancer_configuration". The default is "use_load_balancer_configuration".
 	LoadBalancingCrossZoneEnabled *string `json:"loadBalancingCrossZoneEnabled,omitempty" tf:"load_balancing_cross_zone_enabled,omitempty"`
@@ -312,9 +322,13 @@ type LBTargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	LambdaMultiValueHeadersEnabled *bool `json:"lambdaMultiValueHeadersEnabled,omitempty" tf:"lambda_multi_value_headers_enabled,omitempty"`
 
-	// Determines how the load balancer selects targets when routing requests. Only applicable for Application Load Balancer Target Groups. The value is round_robin or least_outstanding_requests. The default is round_robin.
+	// Determines how the load balancer selects targets when routing requests. Only applicable for Application Load Balancer Target Groups. The value is round_robin, least_outstanding_requests, or weighted_random. The default is round_robin.
 	// +kubebuilder:validation:Optional
 	LoadBalancingAlgorithmType *string `json:"loadBalancingAlgorithmType,omitempty" tf:"load_balancing_algorithm_type,omitempty"`
+
+	// Determines whether to enable target anomaly mitigation.  Target anomaly mitigation is only supported by the weighted_random load balancing algorithm type.  See doc for more information.  The value is "on" or "off". The default is "off".
+	// +kubebuilder:validation:Optional
+	LoadBalancingAnomalyMitigation *string `json:"loadBalancingAnomalyMitigation,omitempty" tf:"load_balancing_anomaly_mitigation,omitempty"`
 
 	// Indicates whether cross zone load balancing is enabled. The value is "true", "false" or "use_load_balancer_configuration". The default is "use_load_balancer_configuration".
 	// +kubebuilder:validation:Optional

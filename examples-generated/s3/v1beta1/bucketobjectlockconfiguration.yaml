@@ -30,5 +30,23 @@ metadata:
   name: example
 spec:
   forProvider:
-    objectLockEnabled: true
     region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketVersioning
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketobjectlockconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    versioningConfiguration:
+    - status: Enabled

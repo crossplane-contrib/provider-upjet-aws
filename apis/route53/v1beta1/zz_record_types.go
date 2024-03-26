@@ -81,6 +81,27 @@ type CidrRoutingPolicyParameters struct {
 	LocationName *string `json:"locationName" tf:"location_name,omitempty"`
 }
 
+type CoordinatesInitParameters struct {
+	Latitude *string `json:"latitude,omitempty" tf:"latitude,omitempty"`
+
+	Longitude *string `json:"longitude,omitempty" tf:"longitude,omitempty"`
+}
+
+type CoordinatesObservation struct {
+	Latitude *string `json:"latitude,omitempty" tf:"latitude,omitempty"`
+
+	Longitude *string `json:"longitude,omitempty" tf:"longitude,omitempty"`
+}
+
+type CoordinatesParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Latitude *string `json:"latitude" tf:"latitude,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Longitude *string `json:"longitude" tf:"longitude,omitempty"`
+}
+
 type FailoverRoutingPolicyInitParameters struct {
 
 	// The record type. Valid values are A, AAAA, CAA, CNAME, DS, MX, NAPTR, NS, PTR, SOA, SPF, SRV and TXT.
@@ -139,6 +160,55 @@ type GeolocationRoutingPolicyParameters struct {
 	Subdivision *string `json:"subdivision,omitempty" tf:"subdivision,omitempty"`
 }
 
+type GeoproximityRoutingPolicyInitParameters struct {
+
+	// A AWS region where the resource is present.
+	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
+
+	// Route more traffic or less traffic to the resource by specifying a value ranges between -90 to 90. See https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html for bias details.
+	Bias *float64 `json:"bias,omitempty" tf:"bias,omitempty"`
+
+	// Specify latitude and longitude for routing traffic to non-AWS resources.
+	Coordinates []CoordinatesInitParameters `json:"coordinates,omitempty" tf:"coordinates,omitempty"`
+
+	// A AWS local zone group where the resource is present. See https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html for local zone group list.
+	LocalZoneGroup *string `json:"localZoneGroup,omitempty" tf:"local_zone_group,omitempty"`
+}
+
+type GeoproximityRoutingPolicyObservation struct {
+
+	// A AWS region where the resource is present.
+	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
+
+	// Route more traffic or less traffic to the resource by specifying a value ranges between -90 to 90. See https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html for bias details.
+	Bias *float64 `json:"bias,omitempty" tf:"bias,omitempty"`
+
+	// Specify latitude and longitude for routing traffic to non-AWS resources.
+	Coordinates []CoordinatesObservation `json:"coordinates,omitempty" tf:"coordinates,omitempty"`
+
+	// A AWS local zone group where the resource is present. See https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html for local zone group list.
+	LocalZoneGroup *string `json:"localZoneGroup,omitempty" tf:"local_zone_group,omitempty"`
+}
+
+type GeoproximityRoutingPolicyParameters struct {
+
+	// A AWS region where the resource is present.
+	// +kubebuilder:validation:Optional
+	AwsRegion *string `json:"awsRegion,omitempty" tf:"aws_region,omitempty"`
+
+	// Route more traffic or less traffic to the resource by specifying a value ranges between -90 to 90. See https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html for bias details.
+	// +kubebuilder:validation:Optional
+	Bias *float64 `json:"bias,omitempty" tf:"bias,omitempty"`
+
+	// Specify latitude and longitude for routing traffic to non-AWS resources.
+	// +kubebuilder:validation:Optional
+	Coordinates []CoordinatesParameters `json:"coordinates,omitempty" tf:"coordinates,omitempty"`
+
+	// A AWS local zone group where the resource is present. See https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html for local zone group list.
+	// +kubebuilder:validation:Optional
+	LocalZoneGroup *string `json:"localZoneGroup,omitempty" tf:"local_zone_group,omitempty"`
+}
+
 type LatencyRoutingPolicyInitParameters struct {
 }
 
@@ -173,6 +243,9 @@ type RecordInitParameters struct {
 	// A block indicating a routing policy based on the geolocation of the requestor. Conflicts with any other routing policy. Documented below.
 	GeolocationRoutingPolicy []GeolocationRoutingPolicyInitParameters `json:"geolocationRoutingPolicy,omitempty" tf:"geolocation_routing_policy,omitempty"`
 
+	// A block indicating a routing policy based on the geoproximity of the requestor. Conflicts with any other routing policy. Documented below.
+	GeoproximityRoutingPolicy []GeoproximityRoutingPolicyInitParameters `json:"geoproximityRoutingPolicy,omitempty" tf:"geoproximity_routing_policy,omitempty"`
+
 	// The health check the record should be associated with.
 	// +crossplane:generate:reference:type=HealthCheck
 	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
@@ -198,7 +271,7 @@ type RecordInitParameters struct {
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
-	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
+	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
 	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
 
 	// The TTL of the record.
@@ -244,6 +317,9 @@ type RecordObservation struct {
 	// A block indicating a routing policy based on the geolocation of the requestor. Conflicts with any other routing policy. Documented below.
 	GeolocationRoutingPolicy []GeolocationRoutingPolicyObservation `json:"geolocationRoutingPolicy,omitempty" tf:"geolocation_routing_policy,omitempty"`
 
+	// A block indicating a routing policy based on the geoproximity of the requestor. Conflicts with any other routing policy. Documented below.
+	GeoproximityRoutingPolicy []GeoproximityRoutingPolicyObservation `json:"geoproximityRoutingPolicy,omitempty" tf:"geoproximity_routing_policy,omitempty"`
+
 	// The health check the record should be associated with.
 	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
 
@@ -262,7 +338,7 @@ type RecordObservation struct {
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
-	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
+	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
 	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
 
 	// The TTL of the record.
@@ -301,6 +377,10 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	GeolocationRoutingPolicy []GeolocationRoutingPolicyParameters `json:"geolocationRoutingPolicy,omitempty" tf:"geolocation_routing_policy,omitempty"`
 
+	// A block indicating a routing policy based on the geoproximity of the requestor. Conflicts with any other routing policy. Documented below.
+	// +kubebuilder:validation:Optional
+	GeoproximityRoutingPolicy []GeoproximityRoutingPolicyParameters `json:"geoproximityRoutingPolicy,omitempty" tf:"geoproximity_routing_policy,omitempty"`
+
 	// The health check the record should be associated with.
 	// +crossplane:generate:reference:type=HealthCheck
 	// +kubebuilder:validation:Optional
@@ -337,7 +417,7 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
+	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
 	// +kubebuilder:validation:Optional
 	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
 

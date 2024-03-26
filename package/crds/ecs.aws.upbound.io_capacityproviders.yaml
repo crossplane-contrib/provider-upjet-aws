@@ -157,6 +157,12 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        managedDraining:
+                          description: '- Enables or disables a graceful shutdown
+                            of instances without disturbing workloads. Valid values
+                            are ENABLED and DISABLED. The default value is ENABLED
+                            when a capacity provider is created.'
+                          type: string
                         managedScaling:
                           description: '- Configuration block defining the parameters
                             of the auto scaling. Detailed below.'
@@ -304,6 +310,12 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        managedDraining:
+                          description: '- Enables or disables a graceful shutdown
+                            of instances without disturbing workloads. Valid values
+                            are ENABLED and DISABLED. The default value is ENABLED
+                            when a capacity provider is created.'
+                          type: string
                         managedScaling:
                           description: '- Configuration block defining the parameters
                             of the auto scaling. Detailed below.'
@@ -535,6 +547,12 @@ spec:
                       properties:
                         autoScalingGroupArn:
                           description: '- ARN of the associated auto scaling group.'
+                          type: string
+                        managedDraining:
+                          description: '- Enables or disables a graceful shutdown
+                            of instances without disturbing workloads. Valid values
+                            are ENABLED and DISABLED. The default value is ENABLED
+                            when a capacity provider is created.'
                           type: string
                         managedScaling:
                           description: '- Configuration block defining the parameters
