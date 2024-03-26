@@ -74,9 +74,14 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  adminPasswordSecretKmsKeyId:
+                    description: ID of the KMS key used to encrypt the namespace's
+                      admin credentials secret.
+                    type: string
                   adminUserPasswordSecretRef:
-                    description: The password of the administrator for the first database
-                      created in the namespace.
+                    description: |-
+                      The password of the administrator for the first database created in the namespace.
+                      Conflicts with manage_admin_password.
                     properties:
                       key:
                         description: The key to select.
@@ -360,6 +365,11 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  manageAdminPassword:
+                    description: |-
+                      Whether to use AWS SecretManager to manage namespace's admin credentials.
+                      Conflicts with admin_user_password.
+                    type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -386,6 +396,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  adminPasswordSecretKmsKeyId:
+                    description: ID of the KMS key used to encrypt the namespace's
+                      admin credentials secret.
+                    type: string
                   dbName:
                     description: The name of the first database created in the namespace.
                     type: string
@@ -636,6 +650,11 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  manageAdminPassword:
+                    description: |-
+                      Whether to use AWS SecretManager to manage namespace's admin credentials.
+                      Conflicts with admin_user_password.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -816,6 +835,14 @@ spec:
             properties:
               atProvider:
                 properties:
+                  adminPasswordSecretArn:
+                    description: Amazon Resource Name (ARN) of the Redshift Serverless
+                      Namespace.
+                    type: string
+                  adminPasswordSecretKmsKeyId:
+                    description: ID of the KMS key used to encrypt the namespace's
+                      admin credentials secret.
+                    type: string
                   arn:
                     description: Amazon Resource Name (ARN) of the Redshift Serverless
                       Namespace.
@@ -848,6 +875,11 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  manageAdminPassword:
+                    description: |-
+                      Whether to use AWS SecretManager to manage namespace's admin credentials.
+                      Conflicts with admin_user_password.
+                    type: boolean
                   namespaceId:
                     description: The Redshift Namespace ID.
                     type: string

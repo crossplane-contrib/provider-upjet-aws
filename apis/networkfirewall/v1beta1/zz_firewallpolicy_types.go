@@ -110,6 +110,9 @@ type FirewallPolicyFirewallPolicyInitParameters struct {
 
 	// Set of configuration blocks containing references to the stateless rule groups that are used in the policy. See Stateless Rule Group Reference below for details.
 	StatelessRuleGroupReference []StatelessRuleGroupReferenceInitParameters `json:"statelessRuleGroupReference,omitempty" tf:"stateless_rule_group_reference,omitempty"`
+
+	// The (ARN) of the TLS Inspection policy to attach to the FW Policy.  This must be added at creation of the resource per AWS documentation. "You can only add a TLS inspection configuration to a new policy, not to an existing policy."  This cannot be removed from a FW Policy.
+	TLSInspectionConfigurationArn *string `json:"tlsInspectionConfigurationArn,omitempty" tf:"tls_inspection_configuration_arn,omitempty"`
 }
 
 type FirewallPolicyFirewallPolicyObservation struct {
@@ -142,6 +145,9 @@ type FirewallPolicyFirewallPolicyObservation struct {
 
 	// Set of configuration blocks containing references to the stateless rule groups that are used in the policy. See Stateless Rule Group Reference below for details.
 	StatelessRuleGroupReference []StatelessRuleGroupReferenceObservation `json:"statelessRuleGroupReference,omitempty" tf:"stateless_rule_group_reference,omitempty"`
+
+	// The (ARN) of the TLS Inspection policy to attach to the FW Policy.  This must be added at creation of the resource per AWS documentation. "You can only add a TLS inspection configuration to a new policy, not to an existing policy."  This cannot be removed from a FW Policy.
+	TLSInspectionConfigurationArn *string `json:"tlsInspectionConfigurationArn,omitempty" tf:"tls_inspection_configuration_arn,omitempty"`
 }
 
 type FirewallPolicyFirewallPolicyParameters struct {
@@ -182,6 +188,10 @@ type FirewallPolicyFirewallPolicyParameters struct {
 	// Set of configuration blocks containing references to the stateless rule groups that are used in the policy. See Stateless Rule Group Reference below for details.
 	// +kubebuilder:validation:Optional
 	StatelessRuleGroupReference []StatelessRuleGroupReferenceParameters `json:"statelessRuleGroupReference,omitempty" tf:"stateless_rule_group_reference,omitempty"`
+
+	// The (ARN) of the TLS Inspection policy to attach to the FW Policy.  This must be added at creation of the resource per AWS documentation. "You can only add a TLS inspection configuration to a new policy, not to an existing policy."  This cannot be removed from a FW Policy.
+	// +kubebuilder:validation:Optional
+	TLSInspectionConfigurationArn *string `json:"tlsInspectionConfigurationArn,omitempty" tf:"tls_inspection_configuration_arn,omitempty"`
 }
 
 type FirewallPolicyInitParameters struct {

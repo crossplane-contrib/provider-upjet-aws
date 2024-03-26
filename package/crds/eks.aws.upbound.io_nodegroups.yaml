@@ -82,9 +82,7 @@ spec:
                       Valid values: ON_DEMAND, SPOT.'
                     type: string
                   clusterName:
-                    description: 100 characters in length. Must begin with an alphanumeric
-                      character, and must only contain alphanumeric characters, dashes
-                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    description: –  Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster to populate clusterName.
@@ -185,7 +183,7 @@ spec:
                     x-kubernetes-map-type: granular
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
-                      See launch_template below for details.
+                      See launch_template below for details. Conflicts with remote_access.
                     items:
                       properties:
                         id:
@@ -294,7 +292,7 @@ spec:
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
-                      See remote_access below for details.
+                      See remote_access below for details. Conflicts with launch_template.
                     items:
                       properties:
                         ec2SshKey:
@@ -669,7 +667,7 @@ spec:
                     x-kubernetes-map-type: granular
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
-                      See launch_template below for details.
+                      See launch_template below for details. Conflicts with remote_access.
                     items:
                       properties:
                         id:
@@ -774,7 +772,7 @@ spec:
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
-                      See remote_access below for details.
+                      See remote_access below for details. Conflicts with launch_template.
                     items:
                       properties:
                         ec2SshKey:
@@ -1290,9 +1288,7 @@ spec:
                       Valid values: ON_DEMAND, SPOT.'
                     type: string
                   clusterName:
-                    description: 100 characters in length. Must begin with an alphanumeric
-                      character, and must only contain alphanumeric characters, dashes
-                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    description: –  Name of the EKS Cluster.
                     type: string
                   diskSize:
                     description: Disk size in GiB for worker nodes. Defaults to 50
@@ -1323,7 +1319,7 @@ spec:
                     x-kubernetes-map-type: granular
                   launchTemplate:
                     description: Configuration block with Launch Template settings.
-                      See launch_template below for details.
+                      See launch_template below for details. Conflicts with remote_access.
                     items:
                       properties:
                         id:
@@ -1354,7 +1350,7 @@ spec:
                     type: string
                   remoteAccess:
                     description: Configuration block with remote access settings.
-                      See remote_access below for details.
+                      See remote_access below for details. Conflicts with launch_template.
                     items:
                       properties:
                         ec2SshKey:

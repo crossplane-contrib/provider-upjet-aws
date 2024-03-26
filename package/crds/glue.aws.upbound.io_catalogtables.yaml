@@ -226,8 +226,9 @@ spec:
                       type: object
                     type: array
                   region:
-                    description: Region is the region you'd like your resource to
-                      be created in.
+                    description: |-
+                      Region of the target table.
+                      Region is the region you'd like your resource to be created in.
                     type: string
                   retention:
                     description: Retention time for this table.
@@ -418,6 +419,9 @@ spec:
                           type: string
                         name:
                           description: Name of the target table.
+                          type: string
+                        region:
+                          description: Region of the target table.
                           type: string
                       required:
                       - catalogId
@@ -1155,6 +1159,9 @@ spec:
                           type: string
                         name:
                           description: Name of the target table.
+                          type: string
+                        region:
+                          description: Region of the target table.
                           type: string
                       type: object
                     type: array

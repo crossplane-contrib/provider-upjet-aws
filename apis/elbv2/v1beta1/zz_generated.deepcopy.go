@@ -4691,6 +4691,11 @@ func (in *LBTargetGroupInitParameters) DeepCopyInto(out *LBTargetGroupInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoadBalancingAnomalyMitigation != nil {
+		in, out := &in.LoadBalancingAnomalyMitigation, &out.LoadBalancingAnomalyMitigation
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingCrossZoneEnabled != nil {
 		in, out := &in.LoadBalancingCrossZoneEnabled, &out.LoadBalancingCrossZoneEnabled
 		*out = new(string)
@@ -4877,8 +4882,24 @@ func (in *LBTargetGroupObservation) DeepCopyInto(out *LBTargetGroupObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LoadBalancerArns != nil {
+		in, out := &in.LoadBalancerArns, &out.LoadBalancerArns
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.LoadBalancingAlgorithmType != nil {
 		in, out := &in.LoadBalancingAlgorithmType, &out.LoadBalancingAlgorithmType
+		*out = new(string)
+		**out = **in
+	}
+	if in.LoadBalancingAnomalyMitigation != nil {
+		in, out := &in.LoadBalancingAnomalyMitigation, &out.LoadBalancingAnomalyMitigation
 		*out = new(string)
 		**out = **in
 	}
@@ -5029,6 +5050,11 @@ func (in *LBTargetGroupParameters) DeepCopyInto(out *LBTargetGroupParameters) {
 	}
 	if in.LoadBalancingAlgorithmType != nil {
 		in, out := &in.LoadBalancingAlgorithmType, &out.LoadBalancingAlgorithmType
+		*out = new(string)
+		**out = **in
+	}
+	if in.LoadBalancingAnomalyMitigation != nil {
+		in, out := &in.LoadBalancingAnomalyMitigation, &out.LoadBalancingAnomalyMitigation
 		*out = new(string)
 		**out = **in
 	}

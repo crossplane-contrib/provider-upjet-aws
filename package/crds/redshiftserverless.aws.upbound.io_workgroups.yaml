@@ -103,9 +103,18 @@ spec:
                       Serverless to route traffic through your VPC instead of over
                       the internet.
                     type: boolean
+                  maxCapacity:
+                    description: The maximum data-warehouse capacity Amazon Redshift
+                      Serverless uses to serve queries, specified in Redshift Processing
+                      Units (RPUs).
+                    type: number
                   namespaceName:
                     description: The name of the namespace.
                     type: string
+                  port:
+                    description: The port number on which the cluster accepts incoming
+                      connections.
+                    type: number
                   publiclyAccessible:
                     description: A value that specifies whether the workgroup can
                       be accessed from a public network.
@@ -339,9 +348,18 @@ spec:
                       Serverless to route traffic through your VPC instead of over
                       the internet.
                     type: boolean
+                  maxCapacity:
+                    description: The maximum data-warehouse capacity Amazon Redshift
+                      Serverless uses to serve queries, specified in Redshift Processing
+                      Units (RPUs).
+                    type: number
                   namespaceName:
                     description: The name of the namespace.
                     type: string
+                  port:
+                    description: The port number on which the cluster accepts incoming
+                      connections.
+                    type: number
                   publiclyAccessible:
                     description: A value that specifies whether the workgroup can
                       be accessed from a public network.
@@ -740,8 +758,8 @@ spec:
                           description: The DNS address of the VPC endpoint.
                           type: string
                         port:
-                          description: The port that Amazon Redshift Serverless listens
-                            on.
+                          description: The port number on which the cluster accepts
+                            incoming connections.
                           type: number
                         vpcEndpoint:
                           description: The VPC endpoint or the Redshift Serverless
@@ -789,9 +807,18 @@ spec:
                   id:
                     description: The Redshift Workgroup Name.
                     type: string
+                  maxCapacity:
+                    description: The maximum data-warehouse capacity Amazon Redshift
+                      Serverless uses to serve queries, specified in Redshift Processing
+                      Units (RPUs).
+                    type: number
                   namespaceName:
                     description: The name of the namespace.
                     type: string
+                  port:
+                    description: The port number on which the cluster accepts incoming
+                      connections.
+                    type: number
                   publiclyAccessible:
                     description: A value that specifies whether the workgroup can
                       be accessed from a public network.

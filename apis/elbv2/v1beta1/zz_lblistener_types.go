@@ -232,16 +232,25 @@ type DefaultActionInitParameters struct {
 	// Information for creating an action that returns a custom HTTP response. Required if type is fixed-response.
 	FixedResponse []FixedResponseInitParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. If you specify both forward block and target_group_arn attribute, you can specify only one target group using forward and it must be the same target group specified in target_group_arn. Detailed below.
+	// Configuration block for creating an action that distributes requests among one or more target groups.
+	// Specify only if type is forward.
+	// Cannot be specified with target_group_arn.
+	// Detailed below.
 	Forward []ForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 
-	// Order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. Valid values are between 1 and 50000.
+	// Order for the action.
+	// The action with the lowest value for order is performed first.
+	// Valid values are between 1 and 50000.
+	// Defaults to the position in the list of actions.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
 	Redirect []RedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
-	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead.
+	// ARN of the Target Group to which to route traffic.
+	// Specify only if type is forward and you want to route to a single target group.
+	// To route to one or more target groups, use a forward block instead.
+	// Cannot be specified with forward.
 	// +crossplane:generate:reference:type=LBTargetGroup
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
@@ -268,16 +277,25 @@ type DefaultActionObservation struct {
 	// Information for creating an action that returns a custom HTTP response. Required if type is fixed-response.
 	FixedResponse []FixedResponseObservation `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. If you specify both forward block and target_group_arn attribute, you can specify only one target group using forward and it must be the same target group specified in target_group_arn. Detailed below.
+	// Configuration block for creating an action that distributes requests among one or more target groups.
+	// Specify only if type is forward.
+	// Cannot be specified with target_group_arn.
+	// Detailed below.
 	Forward []ForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
 
-	// Order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. Valid values are between 1 and 50000.
+	// Order for the action.
+	// The action with the lowest value for order is performed first.
+	// Valid values are between 1 and 50000.
+	// Defaults to the position in the list of actions.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
 	Redirect []RedirectObservation `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
-	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead.
+	// ARN of the Target Group to which to route traffic.
+	// Specify only if type is forward and you want to route to a single target group.
+	// To route to one or more target groups, use a forward block instead.
+	// Cannot be specified with forward.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
 	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
@@ -298,11 +316,17 @@ type DefaultActionParameters struct {
 	// +kubebuilder:validation:Optional
 	FixedResponse []FixedResponseParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. If you specify both forward block and target_group_arn attribute, you can specify only one target group using forward and it must be the same target group specified in target_group_arn. Detailed below.
+	// Configuration block for creating an action that distributes requests among one or more target groups.
+	// Specify only if type is forward.
+	// Cannot be specified with target_group_arn.
+	// Detailed below.
 	// +kubebuilder:validation:Optional
 	Forward []ForwardParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 
-	// Order for the action. This value is required for rules with multiple actions. The action with the lowest value for order is performed first. Valid values are between 1 and 50000.
+	// Order for the action.
+	// The action with the lowest value for order is performed first.
+	// Valid values are between 1 and 50000.
+	// Defaults to the position in the list of actions.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -310,7 +334,10 @@ type DefaultActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Redirect []RedirectParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
-	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead.
+	// ARN of the Target Group to which to route traffic.
+	// Specify only if type is forward and you want to route to a single target group.
+	// To route to one or more target groups, use a forward block instead.
+	// Cannot be specified with forward.
 	// +crossplane:generate:reference:type=LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`

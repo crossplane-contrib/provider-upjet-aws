@@ -15,10 +15,10 @@ import (
 
 type ReplicationTaskInitParameters struct {
 
-	// Indicates when you want a change data capture (CDC) operation to start. The value can be in date, checkpoint, or LSN/SCN format depending on the source engine. For more information, see Determining a CDC native start point.
+	// Indicates when you want a change data capture (CDC) operation to start. The value can be a RFC3339 formatted date, a checkpoint, or a LSN/SCN format depending on the source engine. For more information see Determining a CDC native start point.
 	CdcStartPosition *string `json:"cdcStartPosition,omitempty" tf:"cdc_start_position,omitempty"`
 
-	// The Unix timestamp integer for the start of the Change Data Capture (CDC) operation.
+	// RFC3339 formatted date string or UNIX timestamp for the start of the Change Data Capture (CDC) operation.
 	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
 
 	// The migration type. Can be one of full-load | cdc | full-load-and-cdc.
@@ -79,10 +79,10 @@ type ReplicationTaskInitParameters struct {
 
 type ReplicationTaskObservation struct {
 
-	// Indicates when you want a change data capture (CDC) operation to start. The value can be in date, checkpoint, or LSN/SCN format depending on the source engine. For more information, see Determining a CDC native start point.
+	// Indicates when you want a change data capture (CDC) operation to start. The value can be a RFC3339 formatted date, a checkpoint, or a LSN/SCN format depending on the source engine. For more information see Determining a CDC native start point.
 	CdcStartPosition *string `json:"cdcStartPosition,omitempty" tf:"cdc_start_position,omitempty"`
 
-	// The Unix timestamp integer for the start of the Change Data Capture (CDC) operation.
+	// RFC3339 formatted date string or UNIX timestamp for the start of the Change Data Capture (CDC) operation.
 	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -125,11 +125,11 @@ type ReplicationTaskObservation struct {
 
 type ReplicationTaskParameters struct {
 
-	// Indicates when you want a change data capture (CDC) operation to start. The value can be in date, checkpoint, or LSN/SCN format depending on the source engine. For more information, see Determining a CDC native start point.
+	// Indicates when you want a change data capture (CDC) operation to start. The value can be a RFC3339 formatted date, a checkpoint, or a LSN/SCN format depending on the source engine. For more information see Determining a CDC native start point.
 	// +kubebuilder:validation:Optional
 	CdcStartPosition *string `json:"cdcStartPosition,omitempty" tf:"cdc_start_position,omitempty"`
 
-	// The Unix timestamp integer for the start of the Change Data Capture (CDC) operation.
+	// RFC3339 formatted date string or UNIX timestamp for the start of the Change Data Capture (CDC) operation.
 	// +kubebuilder:validation:Optional
 	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
 

@@ -14251,6 +14251,22 @@ func (in *InstanceEBSBlockDeviceInitParameters) DeepCopyInto(out *InstanceEBSBlo
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -14313,6 +14329,22 @@ func (in *InstanceEBSBlockDeviceObservation) DeepCopyInto(out *InstanceEBSBlockD
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -14404,6 +14436,22 @@ func (in *InstanceEBSBlockDeviceParameters) DeepCopyInto(out *InstanceEBSBlockDe
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -29205,6 +29253,22 @@ func (in *RootBlockDeviceInitParameters) DeepCopyInto(out *RootBlockDeviceInitPa
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -29262,6 +29326,22 @@ func (in *RootBlockDeviceObservation) DeepCopyInto(out *RootBlockDeviceObservati
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -29343,6 +29423,22 @@ func (in *RootBlockDeviceParameters) DeepCopyInto(out *RootBlockDeviceParameters
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -34914,6 +35010,22 @@ func (in *SpotInstanceRequestEBSBlockDeviceInitParameters) DeepCopyInto(out *Spo
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -34976,6 +35088,22 @@ func (in *SpotInstanceRequestEBSBlockDeviceObservation) DeepCopyInto(out *SpotIn
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -35057,6 +35185,22 @@ func (in *SpotInstanceRequestEBSBlockDeviceParameters) DeepCopyInto(out *SpotIns
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -36959,6 +37103,22 @@ func (in *SpotInstanceRequestRootBlockDeviceInitParameters) DeepCopyInto(out *Sp
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -37030,6 +37190,22 @@ func (in *SpotInstanceRequestRootBlockDeviceObservation) DeepCopyInto(out *SpotI
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -37087,6 +37263,22 @@ func (in *SpotInstanceRequestRootBlockDeviceParameters) DeepCopyInto(out *SpotIn
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string

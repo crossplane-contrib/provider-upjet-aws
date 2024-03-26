@@ -359,6 +359,10 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  skipFinalSnapshot:
+                    description: Determines whether a final DB snapshot is created
+                      before the DB instance is deleted.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -663,6 +667,10 @@ spec:
                     description: Bool to control if instance is publicly accessible.
                       Default is false.
                     type: boolean
+                  skipFinalSnapshot:
+                    description: Determines whether a final DB snapshot is created
+                      before the DB instance is deleted.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -928,9 +936,16 @@ spec:
                     description: Bool to control if instance is publicly accessible.
                       Default is false.
                     type: boolean
+                  skipFinalSnapshot:
+                    description: Determines whether a final DB snapshot is created
+                      before the DB instance is deleted.
+                    type: boolean
                   storageEncrypted:
                     description: Specifies whether the neptune cluster is encrypted.
                     type: boolean
+                  storageType:
+                    description: Storage type associated with the cluster standard/iopt1.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

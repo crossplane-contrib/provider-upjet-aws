@@ -150,6 +150,38 @@ spec:
                           type: string
                       type: object
                     type: array
+                  geoproximityRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      geoproximity of the requestor. Conflicts with any other routing
+                      policy. Documented below.
+                    items:
+                      properties:
+                        awsRegion:
+                          description: A AWS region where the resource is present.
+                          type: string
+                        bias:
+                          description: Route more traffic or less traffic to the resource
+                            by specifying a value ranges between -90 to 90. See https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html
+                            for bias details.
+                          type: number
+                        coordinates:
+                          description: Specify latitude and longitude for routing
+                            traffic to non-AWS resources.
+                          items:
+                            properties:
+                              latitude:
+                                type: string
+                              longitude:
+                                type: string
+                            type: object
+                          type: array
+                        localZoneGroup:
+                          description: A AWS local zone group where the resource is
+                            present. See https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html
+                            for local zone group list.
+                          type: string
+                      type: object
+                    type: array
                   healthCheckId:
                     description: The health check the record should be associated
                       with.
@@ -263,8 +295,9 @@ spec:
                   setIdentifier:
                     description: Unique identifier to differentiate records with routing
                       policies from one another. Required if using cidr_routing_policy,
-                      failover_routing_policy, geolocation_routing_policy, latency_routing_policy,
-                      multivalue_answer_routing_policy, or weighted_routing_policy.
+                      failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy,
+                      latency_routing_policy, multivalue_answer_routing_policy, or
+                      weighted_routing_policy.
                     type: string
                   ttl:
                     description: The TTL of the record.
@@ -454,6 +487,38 @@ spec:
                           type: string
                       type: object
                     type: array
+                  geoproximityRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      geoproximity of the requestor. Conflicts with any other routing
+                      policy. Documented below.
+                    items:
+                      properties:
+                        awsRegion:
+                          description: A AWS region where the resource is present.
+                          type: string
+                        bias:
+                          description: Route more traffic or less traffic to the resource
+                            by specifying a value ranges between -90 to 90. See https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html
+                            for bias details.
+                          type: number
+                        coordinates:
+                          description: Specify latitude and longitude for routing
+                            traffic to non-AWS resources.
+                          items:
+                            properties:
+                              latitude:
+                                type: string
+                              longitude:
+                                type: string
+                            type: object
+                          type: array
+                        localZoneGroup:
+                          description: A AWS local zone group where the resource is
+                            present. See https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html
+                            for local zone group list.
+                          type: string
+                      type: object
+                    type: array
                   healthCheckId:
                     description: The health check the record should be associated
                       with.
@@ -555,8 +620,9 @@ spec:
                   setIdentifier:
                     description: Unique identifier to differentiate records with routing
                       policies from one another. Required if using cidr_routing_policy,
-                      failover_routing_policy, geolocation_routing_policy, latency_routing_policy,
-                      multivalue_answer_routing_policy, or weighted_routing_policy.
+                      failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy,
+                      latency_routing_policy, multivalue_answer_routing_policy, or
+                      weighted_routing_policy.
                     type: string
                   ttl:
                     description: The TTL of the record.
@@ -915,6 +981,38 @@ spec:
                           type: string
                       type: object
                     type: array
+                  geoproximityRoutingPolicy:
+                    description: A block indicating a routing policy based on the
+                      geoproximity of the requestor. Conflicts with any other routing
+                      policy. Documented below.
+                    items:
+                      properties:
+                        awsRegion:
+                          description: A AWS region where the resource is present.
+                          type: string
+                        bias:
+                          description: Route more traffic or less traffic to the resource
+                            by specifying a value ranges between -90 to 90. See https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html
+                            for bias details.
+                          type: number
+                        coordinates:
+                          description: Specify latitude and longitude for routing
+                            traffic to non-AWS resources.
+                          items:
+                            properties:
+                              latitude:
+                                type: string
+                              longitude:
+                                type: string
+                            type: object
+                          type: array
+                        localZoneGroup:
+                          description: A AWS local zone group where the resource is
+                            present. See https://docs.aws.amazon.com/local-zones/latest/ug/available-local-zones.html
+                            for local zone group list.
+                          type: string
+                      type: object
+                    type: array
                   healthCheckId:
                     description: The health check the record should be associated
                       with.
@@ -949,8 +1047,9 @@ spec:
                   setIdentifier:
                     description: Unique identifier to differentiate records with routing
                       policies from one another. Required if using cidr_routing_policy,
-                      failover_routing_policy, geolocation_routing_policy, latency_routing_policy,
-                      multivalue_answer_routing_policy, or weighted_routing_policy.
+                      failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy,
+                      latency_routing_policy, multivalue_answer_routing_policy, or
+                      weighted_routing_policy.
                     type: string
                   ttl:
                     description: The TTL of the record.

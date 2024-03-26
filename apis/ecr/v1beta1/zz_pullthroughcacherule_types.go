@@ -15,6 +15,9 @@ import (
 
 type PullThroughCacheRuleInitParameters struct {
 
+	// ARN of the Secret which will be used to authenticate against the registry.
+	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
+
 	// The repository name prefix to use when caching images from the source registry.
 	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix,omitempty" tf:"ecr_repository_prefix,omitempty"`
 
@@ -23,6 +26,9 @@ type PullThroughCacheRuleInitParameters struct {
 }
 
 type PullThroughCacheRuleObservation struct {
+
+	// ARN of the Secret which will be used to authenticate against the registry.
+	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
 
 	// The repository name prefix to use when caching images from the source registry.
 	EcrRepositoryPrefix *string `json:"ecrRepositoryPrefix,omitempty" tf:"ecr_repository_prefix,omitempty"`
@@ -37,6 +43,10 @@ type PullThroughCacheRuleObservation struct {
 }
 
 type PullThroughCacheRuleParameters struct {
+
+	// ARN of the Secret which will be used to authenticate against the registry.
+	// +kubebuilder:validation:Optional
+	CredentialArn *string `json:"credentialArn,omitempty" tf:"credential_arn,omitempty"`
 
 	// The repository name prefix to use when caching images from the source registry.
 	// +kubebuilder:validation:Optional

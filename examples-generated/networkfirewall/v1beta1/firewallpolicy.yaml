@@ -18,6 +18,7 @@ spec:
         resourceArnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
+      tlsInspectionConfigurationArn: arn:aws:network-firewall:REGION:ACCT:tls-configuration/example
     region: us-west-1
     tags:
       Tag1: Value1

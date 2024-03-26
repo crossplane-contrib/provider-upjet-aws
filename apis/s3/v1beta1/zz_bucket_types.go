@@ -17,6 +17,8 @@ type AccessControlTranslationInitParameters struct {
 }
 
 type AccessControlTranslationObservation struct {
+
+	// Specifies the replica ownership. For default and valid values, see PUT bucket replication in the Amazon S3 API Reference. The only valid value is Destination.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
@@ -212,7 +214,7 @@ type DestinationInitParameters struct {
 
 type DestinationObservation struct {
 
-	// Specifies the overrides to use for object owners on replication. Must be used in conjunction with account_id owner override configuration.
+	// Specifies the overrides to use for object owners on replication (documented below). Must be used in conjunction with account_id owner override configuration.
 	AccessControlTranslation []AccessControlTranslationObservation `json:"accessControlTranslation,omitempty" tf:"access_control_translation,omitempty"`
 
 	// Account ID to use for overriding the object owner on replication. Must be used in conjunction with access_control_translation override configuration.
@@ -355,7 +357,7 @@ type MetricsObservation struct {
 	// Threshold within which objects are to be replicated. The only valid value is 15.
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// Status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
+	// Status of RTC. Either Enabled or Disabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -427,7 +429,7 @@ type ReplicationTimeObservation struct {
 	// Threshold within which objects are to be replicated. The only valid value is 15.
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
-	// Status of the rule. Either Enabled or Disabled. The rule is ignored if status is not Enabled.
+	// Status of RTC. Either Enabled or Disabled.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 

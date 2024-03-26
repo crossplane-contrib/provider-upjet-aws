@@ -382,6 +382,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MultiAz != nil {
+		in, out := &in.MultiAz, &out.MultiAz
+		*out = new(bool)
+		**out = **in
+	}
 	if in.NodeType != nil {
 		in, out := &in.NodeType, &out.NodeType
 		*out = new(string)
@@ -760,6 +765,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MultiAz != nil {
+		in, out := &in.MultiAz, &out.MultiAz
+		*out = new(bool)
+		**out = **in
+	}
 	if in.NodeType != nil {
 		in, out := &in.NodeType, &out.NodeType
 		*out = new(string)
@@ -1053,6 +1063,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)
+		**out = **in
+	}
+	if in.MultiAz != nil {
+		in, out := &in.MultiAz, &out.MultiAz
+		*out = new(bool)
 		**out = **in
 	}
 	if in.NodeType != nil {

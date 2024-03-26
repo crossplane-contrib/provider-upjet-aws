@@ -35,7 +35,7 @@ type EventSubscriptionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
-	// Ids of sources to listen to.
+	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
@@ -64,7 +64,7 @@ type EventSubscriptionObservation struct {
 	// SNS topic arn to send events on.
 	SnsTopicArn *string `json:"snsTopicArn,omitempty" tf:"sns_topic_arn,omitempty"`
 
-	// Ids of sources to listen to.
+	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
 
@@ -110,7 +110,7 @@ type EventSubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
-	// Ids of sources to listen to.
+	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
@@ -162,7 +162,6 @@ type EventSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventCategories) || (has(self.initProvider) && has(self.initProvider.eventCategories))",message="spec.forProvider.eventCategories is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceIds) || (has(self.initProvider) && has(self.initProvider.sourceIds))",message="spec.forProvider.sourceIds is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceType) || (has(self.initProvider) && has(self.initProvider.sourceType))",message="spec.forProvider.sourceType is a required parameter"
 	Spec   EventSubscriptionSpec   `json:"spec"`
 	Status EventSubscriptionStatus `json:"status,omitempty"`

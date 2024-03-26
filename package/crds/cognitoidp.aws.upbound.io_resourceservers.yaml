@@ -96,6 +96,7 @@ spec:
                       type: object
                     type: array
                   userPoolId:
+                    description: User pool the client belongs to.
                     type: string
                   userPoolIdRef:
                     description: Reference to a UserPool to populate userPoolId.
@@ -206,6 +207,7 @@ spec:
                       type: object
                     type: array
                   userPoolId:
+                    description: User pool the client belongs to.
                     type: string
                   userPoolIdRef:
                     description: Reference to a UserPool to populate userPoolId.
@@ -490,6 +492,7 @@ spec:
                       type: string
                     type: array
                   userPoolId:
+                    description: User pool the client belongs to.
                     type: string
                 type: object
               conditions:

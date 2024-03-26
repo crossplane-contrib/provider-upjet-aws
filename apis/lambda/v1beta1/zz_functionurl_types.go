@@ -135,7 +135,7 @@ type FunctionURLObservation struct {
 	// The name (or ARN) of the Lambda function.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
-	// The HTTP URL endpoint for the function in the format https://<url_id>.lambda-url.<region>.on.aws.
+	// The HTTP URL endpoint for the function in the format https://<url_id>.lambda-url.<region>.on.aws/.
 	FunctionURL *string `json:"functionUrl,omitempty" tf:"function_url,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

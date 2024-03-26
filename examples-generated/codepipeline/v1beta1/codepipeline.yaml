@@ -128,17 +128,20 @@ spec:
 ---
 
 apiVersion: s3.aws.upbound.io/v1beta1
-kind: BucketACL
+kind: BucketPublicAccessBlock
 metadata:
   annotations:
     meta.upbound.io/example-id: codepipeline/v1beta1/codepipeline
   labels:
-    testing.upbound.io/example-name: codepipeline_bucket_acl
-  name: codepipeline-bucket-acl
+    testing.upbound.io/example-name: codepipeline_bucket_pab
+  name: codepipeline-bucket-pab
 spec:
   forProvider:
-    acl: private
+    blockPublicAcls: true
+    blockPublicPolicy: true
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: codepipeline_bucket
+    ignorePublicAcls: true
     region: us-west-1
+    restrictPublicBuckets: true

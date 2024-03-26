@@ -50,7 +50,7 @@ type EndpointObservation struct {
 	// The DNS address of the VPC endpoint.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
-	// The port that Amazon Redshift Serverless listens on.
+	// The port number on which the cluster accepts incoming connections.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The VPC endpoint or the Redshift Serverless workgroup. See VPC Endpoint below.
@@ -110,8 +110,14 @@ type WorkgroupInitParameters struct {
 	// The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
 	EnhancedVPCRouting *bool `json:"enhancedVpcRouting,omitempty" tf:"enhanced_vpc_routing,omitempty"`
 
+	// The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries, specified in Redshift Processing Units (RPUs).
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
 	// The name of the namespace.
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The port number on which the cluster accepts incoming connections.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// A value that specifies whether the workgroup can be accessed from a public network.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
@@ -171,8 +177,14 @@ type WorkgroupObservation struct {
 	// The Redshift Workgroup Name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries, specified in Redshift Processing Units (RPUs).
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
 	// The name of the namespace.
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The port number on which the cluster accepts incoming connections.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// A value that specifies whether the workgroup can be accessed from a public network.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
@@ -211,9 +223,17 @@ type WorkgroupParameters struct {
 	// +kubebuilder:validation:Optional
 	EnhancedVPCRouting *bool `json:"enhancedVpcRouting,omitempty" tf:"enhanced_vpc_routing,omitempty"`
 
+	// The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries, specified in Redshift Processing Units (RPUs).
+	// +kubebuilder:validation:Optional
+	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+
 	// The name of the namespace.
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The port number on which the cluster accepts incoming connections.
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// A value that specifies whether the workgroup can be accessed from a public network.
 	// +kubebuilder:validation:Optional

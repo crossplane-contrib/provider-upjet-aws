@@ -15,69 +15,69 @@ import (
 
 type CanvasAppSettingsInitParameters struct {
 
-	// The model deployment settings for the SageMaker Canvas application. See Direct Deploy Settings below.
+	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
 	DirectDeploySettings []DirectDeploySettingsInitParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
-	// The settings for connecting to an external data source with OAuth. See Identity Provider OAuth Settings below.
+	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsInitParameters `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
 
-	// The settings for document querying. See Kendra Settings below.
+	// The settings for document querying. See kendra_settings Block below.
 	KendraSettings []KendraSettingsInitParameters `json:"kendraSettings,omitempty" tf:"kendra_settings,omitempty"`
 
-	// The model registry settings for the SageMaker Canvas application. See Model Register Settings below.
+	// The model registry settings for the SageMaker Canvas application. See model_register_settings Block below.
 	ModelRegisterSettings []ModelRegisterSettingsInitParameters `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
 
-	// Time series forecast settings for the Canvas app. See Time Series Forecasting Settings below.
+	// Time series forecast settings for the Canvas app. See time_series_forecasting_settings Block below.
 	TimeSeriesForecastingSettings []TimeSeriesForecastingSettingsInitParameters `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 
-	// The workspace settings for the SageMaker Canvas application. See Workspace Settings below.
+	// The workspace settings for the SageMaker Canvas application. See workspace_settings Block below.
 	WorkspaceSettings []WorkspaceSettingsInitParameters `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
 }
 
 type CanvasAppSettingsObservation struct {
 
-	// The model deployment settings for the SageMaker Canvas application. See Direct Deploy Settings below.
+	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
 	DirectDeploySettings []DirectDeploySettingsObservation `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
-	// The settings for connecting to an external data source with OAuth. See Identity Provider OAuth Settings below.
+	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsObservation `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
 
-	// The settings for document querying. See Kendra Settings below.
+	// The settings for document querying. See kendra_settings Block below.
 	KendraSettings []KendraSettingsObservation `json:"kendraSettings,omitempty" tf:"kendra_settings,omitempty"`
 
-	// The model registry settings for the SageMaker Canvas application. See Model Register Settings below.
+	// The model registry settings for the SageMaker Canvas application. See model_register_settings Block below.
 	ModelRegisterSettings []ModelRegisterSettingsObservation `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
 
-	// Time series forecast settings for the Canvas app. See Time Series Forecasting Settings below.
+	// Time series forecast settings for the Canvas app. See time_series_forecasting_settings Block below.
 	TimeSeriesForecastingSettings []TimeSeriesForecastingSettingsObservation `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 
-	// The workspace settings for the SageMaker Canvas application. See Workspace Settings below.
+	// The workspace settings for the SageMaker Canvas application. See workspace_settings Block below.
 	WorkspaceSettings []WorkspaceSettingsObservation `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
 }
 
 type CanvasAppSettingsParameters struct {
 
-	// The model deployment settings for the SageMaker Canvas application. See Direct Deploy Settings below.
+	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
 	// +kubebuilder:validation:Optional
 	DirectDeploySettings []DirectDeploySettingsParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
-	// The settings for connecting to an external data source with OAuth. See Identity Provider OAuth Settings below.
+	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	// +kubebuilder:validation:Optional
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsParameters `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
 
-	// The settings for document querying. See Kendra Settings below.
+	// The settings for document querying. See kendra_settings Block below.
 	// +kubebuilder:validation:Optional
 	KendraSettings []KendraSettingsParameters `json:"kendraSettings,omitempty" tf:"kendra_settings,omitempty"`
 
-	// The model registry settings for the SageMaker Canvas application. See Model Register Settings below.
+	// The model registry settings for the SageMaker Canvas application. See model_register_settings Block below.
 	// +kubebuilder:validation:Optional
 	ModelRegisterSettings []ModelRegisterSettingsParameters `json:"modelRegisterSettings,omitempty" tf:"model_register_settings,omitempty"`
 
-	// Time series forecast settings for the Canvas app. See Time Series Forecasting Settings below.
+	// Time series forecast settings for the Canvas app. See time_series_forecasting_settings Block below.
 	// +kubebuilder:validation:Optional
 	TimeSeriesForecastingSettings []TimeSeriesForecastingSettingsParameters `json:"timeSeriesForecastingSettings,omitempty" tf:"time_series_forecasting_settings,omitempty"`
 
-	// The workspace settings for the SageMaker Canvas application. See Workspace Settings below.
+	// The workspace settings for the SageMaker Canvas application. See workspace_settings Block below.
 	// +kubebuilder:validation:Optional
 	WorkspaceSettings []WorkspaceSettingsParameters `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
 }
@@ -143,7 +143,7 @@ type CodeEditorAppSettingsDefaultResourceSpecParameters struct {
 
 type CodeEditorAppSettingsInitParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []CodeEditorAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -153,7 +153,7 @@ type CodeEditorAppSettingsInitParameters struct {
 
 type CodeEditorAppSettingsObservation struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []CodeEditorAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -163,7 +163,7 @@ type CodeEditorAppSettingsObservation struct {
 
 type CodeEditorAppSettingsParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []CodeEditorAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -175,19 +175,19 @@ type CodeEditorAppSettingsParameters struct {
 
 type CustomFileSystemConfigInitParameters struct {
 
-	// The default EBS storage settings for a private space. See EFS File System Config below.
+	// The default EBS storage settings for a private space. See efs_file_system_config Block below.
 	EFSFileSystemConfig []EFSFileSystemConfigInitParameters `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
 }
 
 type CustomFileSystemConfigObservation struct {
 
-	// The default EBS storage settings for a private space. See EFS File System Config below.
+	// The default EBS storage settings for a private space. See efs_file_system_config Block below.
 	EFSFileSystemConfig []EFSFileSystemConfigObservation `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
 }
 
 type CustomFileSystemConfigParameters struct {
 
-	// The default EBS storage settings for a private space. See EFS File System Config below.
+	// The default EBS storage settings for a private space. See efs_file_system_config Block below.
 	// +kubebuilder:validation:Optional
 	EFSFileSystemConfig []EFSFileSystemConfigParameters `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
 }
@@ -353,10 +353,10 @@ type DefaultSpaceSettingsInitParameters struct {
 	// The execution role for the space.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// The Jupyter server's app settings. See Jupyter Server App Settings below.
+	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	JupyterServerAppSettings []JupyterServerAppSettingsInitParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
 
-	// The kernel gateway app settings. See Kernel Gateway App Settings below.
+	// The kernel gateway app settings. See kernel_gateway_app_settings Block below.
 	KernelGatewayAppSettings []KernelGatewayAppSettingsInitParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
@@ -369,10 +369,10 @@ type DefaultSpaceSettingsObservation struct {
 	// The execution role for the space.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// The Jupyter server's app settings. See Jupyter Server App Settings below.
+	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	JupyterServerAppSettings []JupyterServerAppSettingsObservation `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
 
-	// The kernel gateway app settings. See Kernel Gateway App Settings below.
+	// The kernel gateway app settings. See kernel_gateway_app_settings Block below.
 	KernelGatewayAppSettings []KernelGatewayAppSettingsObservation `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
@@ -386,11 +386,11 @@ type DefaultSpaceSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
 
-	// The Jupyter server's app settings. See Jupyter Server App Settings below.
+	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	JupyterServerAppSettings []JupyterServerAppSettingsParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
 
-	// The kernel gateway app settings. See Kernel Gateway App Settings below.
+	// The kernel gateway app settings. See kernel_gateway_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	KernelGatewayAppSettings []KernelGatewayAppSettingsParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
@@ -402,16 +402,16 @@ type DefaultSpaceSettingsParameters struct {
 
 type DefaultUserSettingsInitParameters struct {
 
-	// The Canvas app settings. See Canvas App Settings below.
+	// The Canvas app settings. See canvas_app_settings Block below.
 	CanvasAppSettings []CanvasAppSettingsInitParameters `json:"canvasAppSettings,omitempty" tf:"canvas_app_settings,omitempty"`
 
-	// The Code Editor application settings. See Code Editor App Settings below.
+	// The Code Editor application settings. See code_editor_app_settings Block below.
 	CodeEditorAppSettings []CodeEditorAppSettingsInitParameters `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See Custom File System Config below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
 	CustomFileSystemConfig []CustomFileSystemConfigInitParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
-	// Details about the POSIX identity that is used for file system operations. See Custom Posix User Config below.
+	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
 	CustomPosixUserConfig []CustomPosixUserConfigInitParameters `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
 
 	// The default experience that the user is directed to when accessing the domain. The supported values are: studio::: Indicates that Studio is the default experience. This value can only be passed if StudioWebPortal is set to ENABLED. app:JupyterServer:: Indicates that Studio Classic is the default experience.
@@ -430,35 +430,35 @@ type DefaultUserSettingsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleSelector *v1.Selector `json:"executionRoleSelector,omitempty" tf:"-"`
 
-	// The settings for the JupyterLab application. See Jupyter Lab App Settings below.
+	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
 	JupyterLabAppSettings []JupyterLabAppSettingsInitParameters `json:"jupyterLabAppSettings,omitempty" tf:"jupyter_lab_app_settings,omitempty"`
 
-	// The Jupyter server's app settings. See Jupyter Server App Settings below.
+	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	JupyterServerAppSettings []DefaultUserSettingsJupyterServerAppSettingsInitParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
 
-	// The kernel gateway app settings. See Kernel Gateway App Settings below.
+	// The kernel gateway app settings. See kernel_gateway_app_settings Block below.
 	KernelGatewayAppSettings []DefaultUserSettingsKernelGatewayAppSettingsInitParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
-	// The RSession app settings. See RSession App Settings below.
+	// The RSession app settings. See r_session_app_settings Block below.
 	RSessionAppSettings []RSessionAppSettingsInitParameters `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
 
-	// A collection of settings that configure user interaction with the RStudioServerPro app. See RStudioServerProAppSettings below.
+	// A collection of settings that configure user interaction with the RStudioServerPro app. See r_studio_server_pro_app_settings Block below.
 	RStudioServerProAppSettings []RStudioServerProAppSettingsInitParameters `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
 
 	// A list of security group IDs that will be attached to the user.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// The sharing settings. See Sharing Settings below.
+	// The sharing settings. See sharing_settings Block below.
 	SharingSettings []SharingSettingsInitParameters `json:"sharingSettings,omitempty" tf:"sharing_settings,omitempty"`
 
-	// The storage settings for a private space. See Space Storage Settings below.
+	// The storage settings for a private space. See space_storage_settings Block below.
 	SpaceStorageSettings []SpaceStorageSettingsInitParameters `json:"spaceStorageSettings,omitempty" tf:"space_storage_settings,omitempty"`
 
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
 
-	// The TensorBoard app settings. See TensorBoard App Settings below.
+	// The TensorBoard app settings. See tensor_board_app_settings Block below.
 	TensorBoardAppSettings []TensorBoardAppSettingsInitParameters `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
 }
 
@@ -483,10 +483,10 @@ type DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryParameters struct 
 
 type DefaultUserSettingsJupyterServerAppSettingsInitParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []JupyterServerAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -496,10 +496,10 @@ type DefaultUserSettingsJupyterServerAppSettingsInitParameters struct {
 
 type DefaultUserSettingsJupyterServerAppSettingsObservation struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []JupyterServerAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -509,11 +509,11 @@ type DefaultUserSettingsJupyterServerAppSettingsObservation struct {
 
 type DefaultUserSettingsJupyterServerAppSettingsParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []DefaultUserSettingsJupyterServerAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []JupyterServerAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -584,10 +584,10 @@ type DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters st
 
 type DefaultUserSettingsKernelGatewayAppSettingsInitParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []KernelGatewayAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -597,10 +597,10 @@ type DefaultUserSettingsKernelGatewayAppSettingsInitParameters struct {
 
 type DefaultUserSettingsKernelGatewayAppSettingsObservation struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []KernelGatewayAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -610,11 +610,11 @@ type DefaultUserSettingsKernelGatewayAppSettingsObservation struct {
 
 type DefaultUserSettingsKernelGatewayAppSettingsParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []KernelGatewayAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []DefaultUserSettingsKernelGatewayAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -626,16 +626,16 @@ type DefaultUserSettingsKernelGatewayAppSettingsParameters struct {
 
 type DefaultUserSettingsObservation struct {
 
-	// The Canvas app settings. See Canvas App Settings below.
+	// The Canvas app settings. See canvas_app_settings Block below.
 	CanvasAppSettings []CanvasAppSettingsObservation `json:"canvasAppSettings,omitempty" tf:"canvas_app_settings,omitempty"`
 
-	// The Code Editor application settings. See Code Editor App Settings below.
+	// The Code Editor application settings. See code_editor_app_settings Block below.
 	CodeEditorAppSettings []CodeEditorAppSettingsObservation `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See Custom File System Config below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
 	CustomFileSystemConfig []CustomFileSystemConfigObservation `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
-	// Details about the POSIX identity that is used for file system operations. See Custom Posix User Config below.
+	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
 	CustomPosixUserConfig []CustomPosixUserConfigObservation `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
 
 	// The default experience that the user is directed to when accessing the domain. The supported values are: studio::: Indicates that Studio is the default experience. This value can only be passed if StudioWebPortal is set to ENABLED. app:JupyterServer:: Indicates that Studio Classic is the default experience.
@@ -644,53 +644,53 @@ type DefaultUserSettingsObservation struct {
 	// The execution role ARN for the user.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
-	// The settings for the JupyterLab application. See Jupyter Lab App Settings below.
+	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
 	JupyterLabAppSettings []JupyterLabAppSettingsObservation `json:"jupyterLabAppSettings,omitempty" tf:"jupyter_lab_app_settings,omitempty"`
 
-	// The Jupyter server's app settings. See Jupyter Server App Settings below.
+	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	JupyterServerAppSettings []DefaultUserSettingsJupyterServerAppSettingsObservation `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
 
-	// The kernel gateway app settings. See Kernel Gateway App Settings below.
+	// The kernel gateway app settings. See kernel_gateway_app_settings Block below.
 	KernelGatewayAppSettings []DefaultUserSettingsKernelGatewayAppSettingsObservation `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
-	// The RSession app settings. See RSession App Settings below.
+	// The RSession app settings. See r_session_app_settings Block below.
 	RSessionAppSettings []RSessionAppSettingsObservation `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
 
-	// A collection of settings that configure user interaction with the RStudioServerPro app. See RStudioServerProAppSettings below.
+	// A collection of settings that configure user interaction with the RStudioServerPro app. See r_studio_server_pro_app_settings Block below.
 	RStudioServerProAppSettings []RStudioServerProAppSettingsObservation `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
 
 	// A list of security group IDs that will be attached to the user.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// The sharing settings. See Sharing Settings below.
+	// The sharing settings. See sharing_settings Block below.
 	SharingSettings []SharingSettingsObservation `json:"sharingSettings,omitempty" tf:"sharing_settings,omitempty"`
 
-	// The storage settings for a private space. See Space Storage Settings below.
+	// The storage settings for a private space. See space_storage_settings Block below.
 	SpaceStorageSettings []SpaceStorageSettingsObservation `json:"spaceStorageSettings,omitempty" tf:"space_storage_settings,omitempty"`
 
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
 
-	// The TensorBoard app settings. See TensorBoard App Settings below.
+	// The TensorBoard app settings. See tensor_board_app_settings Block below.
 	TensorBoardAppSettings []TensorBoardAppSettingsObservation `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
 }
 
 type DefaultUserSettingsParameters struct {
 
-	// The Canvas app settings. See Canvas App Settings below.
+	// The Canvas app settings. See canvas_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	CanvasAppSettings []CanvasAppSettingsParameters `json:"canvasAppSettings,omitempty" tf:"canvas_app_settings,omitempty"`
 
-	// The Code Editor application settings. See Code Editor App Settings below.
+	// The Code Editor application settings. See code_editor_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	CodeEditorAppSettings []CodeEditorAppSettingsParameters `json:"codeEditorAppSettings,omitempty" tf:"code_editor_app_settings,omitempty"`
 
-	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See Custom File System Config below.
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
 	// +kubebuilder:validation:Optional
 	CustomFileSystemConfig []CustomFileSystemConfigParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
 
-	// Details about the POSIX identity that is used for file system operations. See Custom Posix User Config below.
+	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
 	// +kubebuilder:validation:Optional
 	CustomPosixUserConfig []CustomPosixUserConfigParameters `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
 
@@ -712,23 +712,23 @@ type DefaultUserSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleSelector *v1.Selector `json:"executionRoleSelector,omitempty" tf:"-"`
 
-	// The settings for the JupyterLab application. See Jupyter Lab App Settings below.
+	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	JupyterLabAppSettings []JupyterLabAppSettingsParameters `json:"jupyterLabAppSettings,omitempty" tf:"jupyter_lab_app_settings,omitempty"`
 
-	// The Jupyter server's app settings. See Jupyter Server App Settings below.
+	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	JupyterServerAppSettings []DefaultUserSettingsJupyterServerAppSettingsParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
 
-	// The kernel gateway app settings. See Kernel Gateway App Settings below.
+	// The kernel gateway app settings. See kernel_gateway_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	KernelGatewayAppSettings []DefaultUserSettingsKernelGatewayAppSettingsParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
-	// The RSession app settings. See RSession App Settings below.
+	// The RSession app settings. See r_session_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	RSessionAppSettings []RSessionAppSettingsParameters `json:"rSessionAppSettings,omitempty" tf:"r_session_app_settings,omitempty"`
 
-	// A collection of settings that configure user interaction with the RStudioServerPro app. See RStudioServerProAppSettings below.
+	// A collection of settings that configure user interaction with the RStudioServerPro app. See r_studio_server_pro_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	RStudioServerProAppSettings []RStudioServerProAppSettingsParameters `json:"rStudioServerProAppSettings,omitempty" tf:"r_studio_server_pro_app_settings,omitempty"`
 
@@ -737,11 +737,11 @@ type DefaultUserSettingsParameters struct {
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// The sharing settings. See Sharing Settings below.
+	// The sharing settings. See sharing_settings Block below.
 	// +kubebuilder:validation:Optional
 	SharingSettings []SharingSettingsParameters `json:"sharingSettings,omitempty" tf:"sharing_settings,omitempty"`
 
-	// The storage settings for a private space. See Space Storage Settings below.
+	// The storage settings for a private space. See space_storage_settings Block below.
 	// +kubebuilder:validation:Optional
 	SpaceStorageSettings []SpaceStorageSettingsParameters `json:"spaceStorageSettings,omitempty" tf:"space_storage_settings,omitempty"`
 
@@ -749,26 +749,26 @@ type DefaultUserSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
 
-	// The TensorBoard app settings. See TensorBoard App Settings below.
+	// The TensorBoard app settings. See tensor_board_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	TensorBoardAppSettings []TensorBoardAppSettingsParameters `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
 }
 
 type DirectDeploySettingsInitParameters struct {
 
-	// Describes whether model deployment permissions are enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type DirectDeploySettingsObservation struct {
 
-	// Describes whether model deployment permissions are enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type DirectDeploySettingsParameters struct {
 
-	// Describes whether model deployment permissions are enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -784,16 +784,16 @@ type DomainInitParameters struct {
 	// The mode of authentication that members use to access the domain. Valid values are IAM and SSO.
 	AuthMode *string `json:"authMode,omitempty" tf:"auth_mode,omitempty"`
 
-	// The default space settings. See Default Space Settings below.
+	// The default space settings. See default_space_settings Block below.
 	DefaultSpaceSettings []DefaultSpaceSettingsInitParameters `json:"defaultSpaceSettings,omitempty" tf:"default_space_settings,omitempty"`
 
-	// The default user settings. See Default User Settings below.
+	// The default user settings. See default_user_settings Block below.
 	DefaultUserSettings []DefaultUserSettingsInitParameters `json:"defaultUserSettings,omitempty" tf:"default_user_settings,omitempty"`
 
 	// The domain name.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The domain settings. See Domain Settings below.
+	// The domain settings. See domain_settings Block below.
 	DomainSettings []DomainSettingsInitParameters `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
 	// The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the domain.
@@ -808,7 +808,7 @@ type DomainInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See Retention Policy below.
+	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See retention_policy Block below.
 	RetentionPolicy []RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
@@ -857,16 +857,16 @@ type DomainObservation struct {
 	// The mode of authentication that members use to access the domain. Valid values are IAM and SSO.
 	AuthMode *string `json:"authMode,omitempty" tf:"auth_mode,omitempty"`
 
-	// The default space settings. See Default Space Settings below.
+	// The default space settings. See default_space_settings Block below.
 	DefaultSpaceSettings []DefaultSpaceSettingsObservation `json:"defaultSpaceSettings,omitempty" tf:"default_space_settings,omitempty"`
 
-	// The default user settings. See Default User Settings below.
+	// The default user settings. See default_user_settings Block below.
 	DefaultUserSettings []DefaultUserSettingsObservation `json:"defaultUserSettings,omitempty" tf:"default_user_settings,omitempty"`
 
 	// The domain name.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The domain settings. See Domain Settings below.
+	// The domain settings. See domain_settings Block below.
 	DomainSettings []DomainSettingsObservation `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
 	// The ID of the Amazon Elastic File System (EFS) managed by this Domain.
@@ -878,7 +878,7 @@ type DomainObservation struct {
 	// The AWS KMS customer managed CMK used to encrypt the EFS volume attached to the domain.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See Retention Policy below.
+	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See retention_policy Block below.
 	RetentionPolicy []RetentionPolicyObservation `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.
@@ -923,11 +923,11 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthMode *string `json:"authMode,omitempty" tf:"auth_mode,omitempty"`
 
-	// The default space settings. See Default Space Settings below.
+	// The default space settings. See default_space_settings Block below.
 	// +kubebuilder:validation:Optional
 	DefaultSpaceSettings []DefaultSpaceSettingsParameters `json:"defaultSpaceSettings,omitempty" tf:"default_space_settings,omitempty"`
 
-	// The default user settings. See Default User Settings below.
+	// The default user settings. See default_user_settings Block below.
 	// +kubebuilder:validation:Optional
 	DefaultUserSettings []DefaultUserSettingsParameters `json:"defaultUserSettings,omitempty" tf:"default_user_settings,omitempty"`
 
@@ -935,7 +935,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The domain settings. See Domain Settings below.
+	// The domain settings. See domain_settings Block below.
 	// +kubebuilder:validation:Optional
 	DomainSettings []DomainSettingsParameters `json:"domainSettings,omitempty" tf:"domain_settings,omitempty"`
 
@@ -957,7 +957,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See Retention Policy below.
+	// The retention policy for this domain, which specifies whether resources will be retained after the Domain is deleted. By default, all resources are retained. See retention_policy Block below.
 	// +kubebuilder:validation:Optional
 	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
@@ -1001,7 +1001,7 @@ type DomainSettingsInitParameters struct {
 	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
-	// A collection of settings that configure the RStudioServerPro Domain-level app. see RStudioServerProDomainSettings below.
+	// A collection of settings that configure the RStudioServerPro Domain-level app. see r_studio_server_pro_domain_settings Block below.
 	RStudioServerProDomainSettings []RStudioServerProDomainSettingsInitParameters `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
@@ -1014,7 +1014,7 @@ type DomainSettingsObservation struct {
 	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
-	// A collection of settings that configure the RStudioServerPro Domain-level app. see RStudioServerProDomainSettings below.
+	// A collection of settings that configure the RStudioServerPro Domain-level app. see r_studio_server_pro_domain_settings Block below.
 	RStudioServerProDomainSettings []RStudioServerProDomainSettingsObservation `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
 
 	// The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.
@@ -1028,7 +1028,7 @@ type DomainSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
-	// A collection of settings that configure the RStudioServerPro Domain-level app. see RStudioServerProDomainSettings below.
+	// A collection of settings that configure the RStudioServerPro Domain-level app. see r_studio_server_pro_domain_settings Block below.
 	// +kubebuilder:validation:Optional
 	RStudioServerProDomainSettings []RStudioServerProDomainSettingsParameters `json:"rStudioServerProDomainSettings,omitempty" tf:"r_studio_server_pro_domain_settings,omitempty"`
 
@@ -1075,7 +1075,7 @@ type IdentityProviderOauthSettingsInitParameters struct {
 	// The ARN of an Amazon Web Services Secrets Manager secret that stores the credentials from your identity provider, such as the client ID and secret, authorization URL, and token URL.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
-	// Describes whether OAuth for a data source is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -1087,7 +1087,7 @@ type IdentityProviderOauthSettingsObservation struct {
 	// The ARN of an Amazon Web Services Secrets Manager secret that stores the credentials from your identity provider, such as the client ID and secret, authorization URL, and token URL.
 	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 
-	// Describes whether OAuth for a data source is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -1101,7 +1101,7 @@ type IdentityProviderOauthSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretArn *string `json:"secretArn" tf:"secret_arn,omitempty"`
 
-	// Describes whether OAuth for a data source is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -1225,13 +1225,13 @@ type JupyterLabAppSettingsDefaultResourceSpecParameters struct {
 
 type JupyterLabAppSettingsInitParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []JupyterLabAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []JupyterLabAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []JupyterLabAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -1241,13 +1241,13 @@ type JupyterLabAppSettingsInitParameters struct {
 
 type JupyterLabAppSettingsObservation struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []JupyterLabAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []JupyterLabAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []JupyterLabAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -1257,15 +1257,15 @@ type JupyterLabAppSettingsObservation struct {
 
 type JupyterLabAppSettingsParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []JupyterLabAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []JupyterLabAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []JupyterLabAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -1355,10 +1355,10 @@ type JupyterServerAppSettingsDefaultResourceSpecParameters struct {
 
 type JupyterServerAppSettingsInitParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []JupyterServerAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []DefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -1368,10 +1368,10 @@ type JupyterServerAppSettingsInitParameters struct {
 
 type JupyterServerAppSettingsObservation struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	CodeRepository []JupyterServerAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []DefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -1381,11 +1381,11 @@ type JupyterServerAppSettingsObservation struct {
 
 type JupyterServerAppSettingsParameters struct {
 
-	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
+	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see code_repository Block below.
 	// +kubebuilder:validation:Optional
 	CodeRepository []JupyterServerAppSettingsCodeRepositoryParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []DefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -1397,19 +1397,19 @@ type JupyterServerAppSettingsParameters struct {
 
 type KendraSettingsInitParameters struct {
 
-	// Describes whether the document querying feature is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type KendraSettingsObservation struct {
 
-	// Describes whether the document querying feature is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type KendraSettingsParameters struct {
 
-	// Describes whether the document querying feature is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -1552,10 +1552,10 @@ type KernelGatewayAppSettingsDefaultResourceSpecParameters struct {
 
 type KernelGatewayAppSettingsInitParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []CustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []KernelGatewayAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -1565,10 +1565,10 @@ type KernelGatewayAppSettingsInitParameters struct {
 
 type KernelGatewayAppSettingsObservation struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []CustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []KernelGatewayAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
@@ -1578,11 +1578,11 @@ type KernelGatewayAppSettingsObservation struct {
 
 type KernelGatewayAppSettingsParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []CustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []KernelGatewayAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -1597,7 +1597,7 @@ type ModelRegisterSettingsInitParameters struct {
 	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
 	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
 
-	// Describes whether the integration to the model registry is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -1606,7 +1606,7 @@ type ModelRegisterSettingsObservation struct {
 	// The Amazon Resource Name (ARN) of the SageMaker model registry account. Required only to register model versions created by a different SageMaker Canvas AWS account than the AWS account in which SageMaker model registry is set up.
 	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
 
-	// Describes whether the integration to the model registry is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -1616,7 +1616,7 @@ type ModelRegisterSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	CrossAccountModelRegisterRoleArn *string `json:"crossAccountModelRegisterRoleArn,omitempty" tf:"cross_account_model_register_role_arn,omitempty"`
 
-	// Describes whether the integration to the model registry is enabled or disabled in the Canvas application. Valid values are ENABLED and DISABLED.
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
@@ -1721,29 +1721,29 @@ type RSessionAppSettingsDefaultResourceSpecParameters struct {
 
 type RSessionAppSettingsInitParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []RSessionAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []RSessionAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type RSessionAppSettingsObservation struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	CustomImage []RSessionAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []RSessionAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type RSessionAppSettingsParameters struct {
 
-	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see Custom Image below.
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
 	// +kubebuilder:validation:Optional
 	CustomImage []RSessionAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []RSessionAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
@@ -1838,7 +1838,7 @@ type RStudioServerProDomainSettingsDefaultResourceSpecParameters struct {
 
 type RStudioServerProDomainSettingsInitParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []RStudioServerProDomainSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The ARN of the execution role for the RStudioServerPro Domain-level app.
@@ -1853,7 +1853,7 @@ type RStudioServerProDomainSettingsInitParameters struct {
 
 type RStudioServerProDomainSettingsObservation struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []RStudioServerProDomainSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
 	// The ARN of the execution role for the RStudioServerPro Domain-level app.
@@ -1868,7 +1868,7 @@ type RStudioServerProDomainSettingsObservation struct {
 
 type RStudioServerProDomainSettingsParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []RStudioServerProDomainSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -1909,7 +1909,7 @@ type SharingSettingsInitParameters struct {
 	// Whether to include the notebook cell output when sharing the notebook. The default is Disabled. Valid values are Allowed and Disabled.
 	NotebookOutputOption *string `json:"notebookOutputOption,omitempty" tf:"notebook_output_option,omitempty"`
 
-	// When notebook_output_option is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
+	// The Amazon Web Services Key Management Service (KMS) encryption key ID that is used to encrypt artifacts generated by Canvas in the Amazon S3 bucket.
 	S3KMSKeyID *string `json:"s3KmsKeyId,omitempty" tf:"s3_kms_key_id,omitempty"`
 
 	// When notebook_output_option is Allowed, the Amazon S3 bucket used to save the notebook cell output.
@@ -1921,7 +1921,7 @@ type SharingSettingsObservation struct {
 	// Whether to include the notebook cell output when sharing the notebook. The default is Disabled. Valid values are Allowed and Disabled.
 	NotebookOutputOption *string `json:"notebookOutputOption,omitempty" tf:"notebook_output_option,omitempty"`
 
-	// When notebook_output_option is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
+	// The Amazon Web Services Key Management Service (KMS) encryption key ID that is used to encrypt artifacts generated by Canvas in the Amazon S3 bucket.
 	S3KMSKeyID *string `json:"s3KmsKeyId,omitempty" tf:"s3_kms_key_id,omitempty"`
 
 	// When notebook_output_option is Allowed, the Amazon S3 bucket used to save the notebook cell output.
@@ -1934,7 +1934,7 @@ type SharingSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	NotebookOutputOption *string `json:"notebookOutputOption,omitempty" tf:"notebook_output_option,omitempty"`
 
-	// When notebook_output_option is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
+	// The Amazon Web Services Key Management Service (KMS) encryption key ID that is used to encrypt artifacts generated by Canvas in the Amazon S3 bucket.
 	// +kubebuilder:validation:Optional
 	S3KMSKeyID *string `json:"s3KmsKeyId,omitempty" tf:"s3_kms_key_id,omitempty"`
 
@@ -1945,19 +1945,19 @@ type SharingSettingsParameters struct {
 
 type SpaceStorageSettingsInitParameters struct {
 
-	// The default EBS storage settings for a private space. See Default EBS Storage Settings below.
+	// The default EBS storage settings for a private space. See default_ebs_storage_settings Block below.
 	DefaultEBSStorageSettings []DefaultEBSStorageSettingsInitParameters `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
 }
 
 type SpaceStorageSettingsObservation struct {
 
-	// The default EBS storage settings for a private space. See Default EBS Storage Settings below.
+	// The default EBS storage settings for a private space. See default_ebs_storage_settings Block below.
 	DefaultEBSStorageSettings []DefaultEBSStorageSettingsObservation `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
 }
 
 type SpaceStorageSettingsParameters struct {
 
-	// The default EBS storage settings for a private space. See Default EBS Storage Settings below.
+	// The default EBS storage settings for a private space. See default_ebs_storage_settings Block below.
 	// +kubebuilder:validation:Optional
 	DefaultEBSStorageSettings []DefaultEBSStorageSettingsParameters `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
 }
@@ -2023,19 +2023,19 @@ type TensorBoardAppSettingsDefaultResourceSpecParameters struct {
 
 type TensorBoardAppSettingsInitParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []TensorBoardAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type TensorBoardAppSettingsObservation struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []TensorBoardAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type TensorBoardAppSettingsParameters struct {
 
-	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
+	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec []TensorBoardAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }

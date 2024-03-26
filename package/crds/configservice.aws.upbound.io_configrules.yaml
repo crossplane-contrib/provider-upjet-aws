@@ -100,7 +100,7 @@ spec:
                     type: string
                   scope:
                     description: Scope defines which resources can trigger an evaluation
-                      for the rule. See Source Below.
+                      for the rule. See Scope Below.
                     items:
                       properties:
                         complianceResourceId:
@@ -133,7 +133,7 @@ spec:
                   source:
                     description: Source specifies the rule owner, the rule identifier,
                       and the notifications that cause the function to evaluate your
-                      AWS resources. See Scope Below.
+                      AWS resources. See Source Below.
                     items:
                       properties:
                         customPolicyDetails:
@@ -324,7 +324,7 @@ spec:
                     type: string
                   scope:
                     description: Scope defines which resources can trigger an evaluation
-                      for the rule. See Source Below.
+                      for the rule. See Scope Below.
                     items:
                       properties:
                         complianceResourceId:
@@ -357,7 +357,7 @@ spec:
                   source:
                     description: Source specifies the rule owner, the rule identifier,
                       and the notifications that cause the function to evaluate your
-                      AWS resources. See Scope Below.
+                      AWS resources. See Source Below.
                     items:
                       properties:
                         customPolicyDetails:
@@ -718,7 +718,7 @@ spec:
                     type: string
                   scope:
                     description: Scope defines which resources can trigger an evaluation
-                      for the rule. See Source Below.
+                      for the rule. See Scope Below.
                     items:
                       properties:
                         complianceResourceId:
@@ -751,7 +751,7 @@ spec:
                   source:
                     description: Source specifies the rule owner, the rule identifier,
                       and the notifications that cause the function to evaluate your
-                      AWS resources. See Scope Below.
+                      AWS resources. See Source Below.
                     items:
                       properties:
                         customPolicyDetails:

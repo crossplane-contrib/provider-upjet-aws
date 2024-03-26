@@ -74,8 +74,9 @@ spec:
               forProvider:
                 properties:
                   deleteProtection:
-                    description: A boolean flag indicating whether it is possible
-                      to delete the firewall. Defaults to false.
+                    description: A flag indicating whether the firewall is protected
+                      against deletion. Use this setting to protect against accidentally
+                      deleting a firewall that is in use. Defaults to false.
                     type: boolean
                   description:
                     description: A friendly description of the firewall.
@@ -180,9 +181,10 @@ spec:
                         type: object
                     type: object
                   firewallPolicyChangeProtection:
-                    description: (Option) A boolean flag indicating whether it is
-                      possible to change the associated firewall policy. Defaults
-                      to false.
+                    description: A flag indicating whether the firewall is protected
+                      against a change to the firewall policy association. Use this
+                      setting to protect against accidentally modifying the firewall
+                      policy for a firewall that is in use. Defaults to false.
                     type: boolean
                   name:
                     description: A friendly name of the firewall.
@@ -192,8 +194,10 @@ spec:
                       be created in.
                     type: string
                   subnetChangeProtection:
-                    description: A boolean flag indicating whether it is possible
-                      to change the associated subnet(s). Defaults to false.
+                    description: A flag indicating whether the firewall is protected
+                      against changes to the subnet associations. Use this setting
+                      to protect against accidentally modifying the subnet associations
+                      for a firewall that is in use. Defaults to false.
                     type: boolean
                   subnetMapping:
                     description: Set of configuration blocks describing the public
@@ -386,8 +390,9 @@ spec:
                   autoscaler.
                 properties:
                   deleteProtection:
-                    description: A boolean flag indicating whether it is possible
-                      to delete the firewall. Defaults to false.
+                    description: A flag indicating whether the firewall is protected
+                      against deletion. Use this setting to protect against accidentally
+                      deleting a firewall that is in use. Defaults to false.
                     type: boolean
                   description:
                     description: A friendly description of the firewall.
@@ -492,16 +497,19 @@ spec:
                         type: object
                     type: object
                   firewallPolicyChangeProtection:
-                    description: (Option) A boolean flag indicating whether it is
-                      possible to change the associated firewall policy. Defaults
-                      to false.
+                    description: A flag indicating whether the firewall is protected
+                      against a change to the firewall policy association. Use this
+                      setting to protect against accidentally modifying the firewall
+                      policy for a firewall that is in use. Defaults to false.
                     type: boolean
                   name:
                     description: A friendly name of the firewall.
                     type: string
                   subnetChangeProtection:
-                    description: A boolean flag indicating whether it is possible
-                      to change the associated subnet(s). Defaults to false.
+                    description: A flag indicating whether the firewall is protected
+                      against changes to the subnet associations. Use this setting
+                      to protect against accidentally modifying the subnet associations
+                      for a firewall that is in use. Defaults to false.
                     type: boolean
                   subnetMapping:
                     description: Set of configuration blocks describing the public
@@ -864,8 +872,9 @@ spec:
                       firewall.
                     type: string
                   deleteProtection:
-                    description: A boolean flag indicating whether it is possible
-                      to delete the firewall. Defaults to false.
+                    description: A flag indicating whether the firewall is protected
+                      against deletion. Use this setting to protect against accidentally
+                      deleting a firewall that is in use. Defaults to false.
                     type: boolean
                   description:
                     description: A friendly description of the firewall.
@@ -894,9 +903,10 @@ spec:
                       policy.
                     type: string
                   firewallPolicyChangeProtection:
-                    description: (Option) A boolean flag indicating whether it is
-                      possible to change the associated firewall policy. Defaults
-                      to false.
+                    description: A flag indicating whether the firewall is protected
+                      against a change to the firewall policy association. Use this
+                      setting to protect against accidentally modifying the firewall
+                      policy for a firewall that is in use. Defaults to false.
                     type: boolean
                   firewallStatus:
                     description: Nested list of information about the current status
@@ -942,8 +952,10 @@ spec:
                     description: A friendly name of the firewall.
                     type: string
                   subnetChangeProtection:
-                    description: A boolean flag indicating whether it is possible
-                      to change the associated subnet(s). Defaults to false.
+                    description: A flag indicating whether the firewall is protected
+                      against changes to the subnet associations. Use this setting
+                      to protect against accidentally modifying the subnet associations
+                      for a firewall that is in use. Defaults to false.
                     type: boolean
                   subnetMapping:
                     description: Set of configuration blocks describing the public

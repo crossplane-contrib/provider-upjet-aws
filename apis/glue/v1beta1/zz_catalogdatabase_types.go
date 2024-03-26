@@ -21,6 +21,9 @@ type CatalogDatabaseInitParameters struct {
 	// Description of the database.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database below.
+	FederatedDatabase []FederatedDatabaseInitParameters `json:"federatedDatabase,omitempty" tf:"federated_database,omitempty"`
+
 	// Location of the database (for example, an HDFS path).
 	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
@@ -49,6 +52,9 @@ type CatalogDatabaseObservation struct {
 
 	// Description of the database.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database below.
+	FederatedDatabase []FederatedDatabaseObservation `json:"federatedDatabase,omitempty" tf:"federated_database,omitempty"`
 
 	// Catalog ID and name of the database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -85,6 +91,10 @@ type CatalogDatabaseParameters struct {
 	// Description of the database.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Configuration block that references an entity outside the AWS Glue Data Catalog. See federated_database below.
+	// +kubebuilder:validation:Optional
+	FederatedDatabase []FederatedDatabaseParameters `json:"federatedDatabase,omitempty" tf:"federated_database,omitempty"`
 
 	// Location of the database (for example, an HDFS path).
 	// +kubebuilder:validation:Optional
@@ -141,6 +151,35 @@ type CreateTableDefaultPermissionParameters struct {
 	// The principal who is granted permissions.. See principal below.
 	// +kubebuilder:validation:Optional
 	Principal []PrincipalParameters `json:"principal,omitempty" tf:"principal,omitempty"`
+}
+
+type FederatedDatabaseInitParameters struct {
+
+	// Name of the connection to the external metastore.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// Unique identifier for the federated database.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type FederatedDatabaseObservation struct {
+
+	// Name of the connection to the external metastore.
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// Unique identifier for the federated database.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+}
+
+type FederatedDatabaseParameters struct {
+
+	// Name of the connection to the external metastore.
+	// +kubebuilder:validation:Optional
+	ConnectionName *string `json:"connectionName,omitempty" tf:"connection_name,omitempty"`
+
+	// Unique identifier for the federated database.
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
 }
 
 type PrincipalInitParameters struct {

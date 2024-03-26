@@ -18,6 +18,9 @@ type DestinationInitParameters struct {
 	// The availability zone in which the replica should be created. If specified, the replica will be created with One Zone storage. If omitted, regional storage will be used.
 	AvailabilityZoneName *string `json:"availabilityZoneName,omitempty" tf:"availability_zone_name,omitempty"`
 
+	// The ID of the destination file system for the replication. If no ID is provided, then EFS creates a new file system with the default settings.
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
 	// The Key ID, ARN, alias, or alias ARN of the KMS key that should be used to encrypt the replica file system. If omitted, the default KMS key for EFS /aws/elasticfilesystem will be used.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
@@ -27,7 +30,7 @@ type DestinationObservation struct {
 	// The availability zone in which the replica should be created. If specified, the replica will be created with One Zone storage. If omitted, regional storage will be used.
 	AvailabilityZoneName *string `json:"availabilityZoneName,omitempty" tf:"availability_zone_name,omitempty"`
 
-	// The fs ID of the replica.
+	// The ID of the destination file system for the replication. If no ID is provided, then EFS creates a new file system with the default settings.
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// The Key ID, ARN, alias, or alias ARN of the KMS key that should be used to encrypt the replica file system. If omitted, the default KMS key for EFS /aws/elasticfilesystem will be used.
@@ -45,6 +48,10 @@ type DestinationParameters struct {
 	// The availability zone in which the replica should be created. If specified, the replica will be created with One Zone storage. If omitted, regional storage will be used.
 	// +kubebuilder:validation:Optional
 	AvailabilityZoneName *string `json:"availabilityZoneName,omitempty" tf:"availability_zone_name,omitempty"`
+
+	// The ID of the destination file system for the replication. If no ID is provided, then EFS creates a new file system with the default settings.
+	// +kubebuilder:validation:Optional
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// The Key ID, ARN, alias, or alias ARN of the KMS key that should be used to encrypt the replica file system. If omitted, the default KMS key for EFS /aws/elasticfilesystem will be used.
 	// +kubebuilder:validation:Optional

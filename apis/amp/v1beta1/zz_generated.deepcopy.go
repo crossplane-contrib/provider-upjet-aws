@@ -491,6 +491,21 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.LoggingConfiguration != nil {
 		in, out := &in.LoggingConfiguration, &out.LoggingConfiguration
 		*out = make([]LoggingConfigurationInitParameters, len(*in))
@@ -576,6 +591,11 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoggingConfiguration != nil {
 		in, out := &in.LoggingConfiguration, &out.LoggingConfiguration
 		*out = make([]LoggingConfigurationObservation, len(*in))
@@ -639,6 +659,21 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 		in, out := &in.Alias, &out.Alias
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LoggingConfiguration != nil {
 		in, out := &in.LoggingConfiguration, &out.LoggingConfiguration

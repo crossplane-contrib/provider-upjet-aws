@@ -427,6 +427,13 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        tlsInspectionConfigurationArn:
+                          description: The (ARN) of the TLS Inspection policy to attach
+                            to the FW Policy.  This must be added at creation of the
+                            resource per AWS documentation. "You can only add a TLS
+                            inspection configuration to a new policy, not to an existing
+                            policy."  This cannot be removed from a FW Policy.
+                          type: string
                       type: object
                     type: array
                   region:
@@ -809,6 +816,13 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        tlsInspectionConfigurationArn:
+                          description: The (ARN) of the TLS Inspection policy to attach
+                            to the FW Policy.  This must be added at creation of the
+                            resource per AWS documentation. "You can only add a TLS
+                            inspection configuration to a new policy, not to an existing
+                            policy."  This cannot be removed from a FW Policy.
+                          type: string
                       type: object
                     type: array
                   tags:
@@ -1201,6 +1215,13 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        tlsInspectionConfigurationArn:
+                          description: The (ARN) of the TLS Inspection policy to attach
+                            to the FW Policy.  This must be added at creation of the
+                            resource per AWS documentation. "You can only add a TLS
+                            inspection configuration to a new policy, not to an existing
+                            policy."  This cannot be removed from a FW Policy.
+                          type: string
                       type: object
                     type: array
                   id:
