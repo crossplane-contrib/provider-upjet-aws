@@ -33,10 +33,11 @@ const (
 
 type SetupConfig struct {
 	TerraformProvider *schema.Provider
-	logger            logging.Logger
+	Logger            logging.Logger
 }
 
 func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
+	credsCache := NewAWSCredentialsProviderCache(WithCacheLogger(config.Logger))
 	return func(ctx context.Context, c client.Client, mg resource.Managed) (terraform.Setup, error) {
 		pc := &v1beta1.ProviderConfig{}
 		if err := c.Get(ctx, types.NamespacedName{Name: mg.GetProviderConfigReference().Name}, pc); err != nil {
@@ -55,9 +56,17 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 			return terraform.Setup{}, errors.Wrap(err, "obtained aws config cannot be nil")
 		}
 
-		creds, err := retrieveCredentials(ctx, pc, awsCfg, config.logger)
+		var creds aws.Credentials
+		if awsCredCache, ok := awsCfg.Credentials.(*aws.CredentialsCache); ok {
+			// only IRSA auth credentials are cached, other auth methods will skip
+			// the cache and call the downstream CredentialsCache.Retrieve()
+			creds, err = credsCache.RetrieveCredentials(ctx, pc, awsCfg.Region, awsCredCache)
+		} else {
+			config.Logger.Debug("Configured aws.CredentialProvider is not an aws.CredentialCache, skipping the provider credential cache...")
+			creds, err = awsCfg.Credentials.Retrieve(ctx)
+		}
 		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials from aws config")
+			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials")
 		}
 
 		account := "000000000"
@@ -79,21 +88,6 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg.Region, creds, pc), "could not configure the no-fork AWS client")
 	}
-}
-
-// retrieveCredentials asserts that the configured aws.CredentialsProvider
-// is a *aws.CredentialCache and retrieves the credentials via the
-// credential cache. If not, it retrieves the credentials via the
-// aws.CredentialProvider directly.
-func retrieveCredentials(ctx context.Context, pc *v1beta1.ProviderConfig, awsConfig *aws.Config, logr logging.Logger) (aws.Credentials, error) {
-	awsCredCache, ok := awsConfig.Credentials.(*aws.CredentialsCache)
-	if !ok {
-		logr.Debug("CredentialProvider is not an aws.CredentialCache, skipping the credential cache...")
-		return awsConfig.Credentials.Retrieve(ctx)
-	}
-	// only IRSA auth credentials are cached, other auth methods will skip
-	// the cache and call the downstream CredentialsCache.Retrieve()
-	return GlobalAWSCredentialsProviderCache.RetrieveCredentials(ctx, pc, awsConfig.Region, awsCredCache)
 }
 
 // getAccountId retrieves the account ID associated with the given credentials.

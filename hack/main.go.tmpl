@@ -84,7 +84,6 @@ func main() {
 		_ = app.Flag("terraform-native-provider-path", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform native provider path for shared execution.").Envar("TERRAFORM_NATIVE_PROVIDER_PATH").Hidden().Action(deprecationAction("terraform-native-provider-path")).String()
 		_ = app.Flag("terraform-provider-source", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform provider source.").Envar("TERRAFORM_PROVIDER_SOURCE").Hidden().Action(deprecationAction("terraform-provider-source")).String()
 	)
-	setupConfig := &clients.SetupConfig{}
 	kingpin.MustParse(app.Parse(os.Args[1:]))
 	log.Default().SetOutput(io.Discard)
 	ctrl.SetLogger(zap.New(zap.WriteTo(io.Discard)))
@@ -154,7 +153,10 @@ func main() {
 	ctx := context.Background()
 	provider, err := config.GetProvider(ctx, false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
-	setupConfig.TerraformProvider = provider.TerraformProvider
+	setupConfig := &clients.SetupConfig{
+		Logger:            logr,
+		TerraformProvider: provider.TerraformProvider,
+	}
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  logr,

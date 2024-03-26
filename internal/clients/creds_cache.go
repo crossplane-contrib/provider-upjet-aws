@@ -22,10 +22,6 @@ import (
 	"github.com/upbound/provider-aws/apis/v1beta1"
 )
 
-// GlobalAWSCredentialsProviderCache is a global AWS CredentialsProvider cache
-// to be used by all controllers.
-var GlobalAWSCredentialsProviderCache = NewAWSCredentialsProviderCache()
-
 // AWSCredentialsProviderCacheOption lets you configure
 // a *GlobalAWSCredentialsProviderCache.
 type AWSCredentialsProviderCacheOption func(cache *AWSCredentialsProviderCache)
