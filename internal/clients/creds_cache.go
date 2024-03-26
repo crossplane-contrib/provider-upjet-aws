@@ -36,7 +36,7 @@ func WithCacheMaxSize(n int) AWSCredentialsProviderCacheOption {
 
 // WithCacheStore lets you bootstrap AWS CredentialsProvider Cache with
 // your own cache.
-func WithCacheStore(cache map[string]*awsCredentialsProviderCacheEntry) AWSCredentialsProviderCacheOption {
+func WithCacheStore(cache map[string]awsCredentialsProviderCacheEntry) AWSCredentialsProviderCacheOption {
 	return func(c *AWSCredentialsProviderCache) {
 		c.cache = cache
 	}
@@ -53,7 +53,7 @@ func WithCacheLogger(l logging.Logger) AWSCredentialsProviderCacheOption {
 // *AWSCredentialsProviderCache with the default GetAWSConfig method.
 func NewAWSCredentialsProviderCache(opts ...AWSCredentialsProviderCacheOption) *AWSCredentialsProviderCache {
 	c := &AWSCredentialsProviderCache{
-		cache:   map[string]*awsCredentialsProviderCacheEntry{},
+		cache:   map[string]awsCredentialsProviderCacheEntry{},
 		maxSize: 100,
 		mu:      &sync.RWMutex{},
 		logger:  logging.NewNopLogger(),
@@ -79,7 +79,7 @@ type AWSCredentialsProviderCache struct {
 	// provider configuration. Key content includes the ProviderConfig's UUID
 	// and ResourceVersion and additional fields depending on the auth method
 	// (currently only IRSA temporary credential caching is supported).
-	cache map[string]*awsCredentialsProviderCacheEntry
+	cache map[string]awsCredentialsProviderCacheEntry
 
 	// maxSize is the maximum number of elements this cache can ever have.
 	maxSize int
@@ -129,20 +129,20 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	cacheKey := strings.Join(cacheKeyParams, ":")
 	c.logger.Debug("Checking cache entry", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
 	c.mu.RLock()
-	cacheEntry := c.cache[cacheKey]
-	lastAccess := cacheEntry.AccessedAt
+	cacheEntry, ok := c.cache[cacheKey]
 	c.mu.RUnlock()
 
 	// TODO: consider implementing a TTL even though the cached entry is valid
 	// cache hit
-	if cacheEntry != nil {
+	if ok {
 		c.logger.Debug("Cache hit", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
 		// since this is a hot-path in the execution, do not always update
 		// the last access times, it is fine to evict the LRU entry on a less
 		// granular precision.
-		if time.Since(lastAccess) > 10*time.Minute {
+		if time.Since(cacheEntry.AccessedAt) > 10*time.Minute {
 			c.mu.Lock()
 			cacheEntry.AccessedAt = time.Now()
+			c.cache[cacheKey] = cacheEntry
 			c.mu.Unlock()
 		}
 		return cacheEntry.awsCredCache.Retrieve(ctx)
@@ -152,7 +152,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	c.logger.Debug("Cache miss", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
 	c.mu.Lock()
 	c.makeRoom()
-	c.cache[cacheKey] = &awsCredentialsProviderCacheEntry{
+	c.cache[cacheKey] = awsCredentialsProviderCacheEntry{
 		awsCredCache: awsCredCache,
 		AccessedAt:   time.Now(),
 	}
