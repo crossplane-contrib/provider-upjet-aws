@@ -125,7 +125,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	if err != nil {
 		return aws.Credentials{}, errors.Wrap(err, "cannot calculate the hash for the credentials file")
 	}
-	cacheKeyParams = append(cacheKeyParams, authKeyIRSA, tokenHash, os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"), os.Getenv("AWS_ROLE_ARN"))
+	cacheKeyParams = append(cacheKeyParams, tokenHash, os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"), os.Getenv("AWS_ROLE_ARN"))
 	cacheKey := strings.Join(cacheKeyParams, ":")
 	c.logger.Debug("Checking cache entry", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
 	c.mu.RLock()
