@@ -68,6 +68,7 @@ const (
 var userAgentV2 = config.WithAPIOptions([]func(*middleware.Stack) error{
 	awsmiddleware.AddUserAgentKeyValue("upbound-provider-aws", version.Version),
 	awsmiddleware.AddUserAgentKeyValue("crossplane-provider-aws", version.Version),
+	withExternalAPICallCounter,
 })
 
 func getRegion(obj runtime.Object) (string, error) {
