@@ -625,6 +625,7 @@ import (
 	parametergroupmemorydb "github.com/upbound/provider-aws/internal/controller/memorydb/parametergroup"
 	snapshot "github.com/upbound/provider-aws/internal/controller/memorydb/snapshot"
 	subnetgroupmemorydb "github.com/upbound/provider-aws/internal/controller/memorydb/subnetgroup"
+	usermemorydb "github.com/upbound/provider-aws/internal/controller/memorydb/user"
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configurationmq "github.com/upbound/provider-aws/internal/controller/mq/configuration"
 	clusterneptune "github.com/upbound/provider-aws/internal/controller/neptune/cluster"
@@ -1563,6 +1564,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		parametergroupmemorydb.Setup,
 		snapshot.Setup,
 		subnetgroupmemorydb.Setup,
+		usermemorydb.Setup,
 		broker.Setup,
 		configurationmq.Setup,
 		clusterneptune.Setup,

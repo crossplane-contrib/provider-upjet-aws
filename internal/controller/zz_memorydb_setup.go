@@ -14,6 +14,7 @@ import (
 	parametergroup "github.com/upbound/provider-aws/internal/controller/memorydb/parametergroup"
 	snapshot "github.com/upbound/provider-aws/internal/controller/memorydb/snapshot"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/memorydb/subnetgroup"
+	user "github.com/upbound/provider-aws/internal/controller/memorydb/user"
 )
 
 // Setup_memorydb creates all controllers with the supplied logger and adds them to
@@ -25,6 +26,7 @@ func Setup_memorydb(mgr ctrl.Manager, o controller.Options) error {
 		parametergroup.Setup,
 		snapshot.Setup,
 		subnetgroup.Setup,
+		user.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

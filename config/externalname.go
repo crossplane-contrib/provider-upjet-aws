@@ -2229,6 +2229,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_memorydb_acl": config.NameAsIdentifier,
 	// Use the name to import a snapshot
 	"aws_memorydb_snapshot": config.NameAsIdentifier,
+	// Use the user_name to import a user
+	"aws_memorydb_user": config.ParameterAsIdentifier("user_name"),
 
 	// imagebuilder
 	//

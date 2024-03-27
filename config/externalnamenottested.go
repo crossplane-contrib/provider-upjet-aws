@@ -328,11 +328,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_macie2_organization_admin_account can be imported using the id
 	"aws_macie2_organization_admin_account": config.IdentifierFromProvider,
 
-	// memorydb
-	//
-	// Use the user_name to import a user
-	"aws_memorydb_user": config.ParameterAsIdentifier("user_name"),
-
 	// pinpoint
 	//
 	// Pinpoint ADM Channel can be imported using the application-id
