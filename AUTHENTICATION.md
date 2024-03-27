@@ -159,29 +159,68 @@ in the `ServiceAccount`'s annotation). Please refer to [[5]] for detailed
 configuration instructions.
 
 ### Web Identity
-The Web Identity authentication method is similar to the IRSA method but with
-the Web Identity method, the IAM Role to be assumed can be specified in the
-`ProviderConfig`. Similar to IRSA, an OIDC provider must exist for the EKS
-cluster in order to use the Web Identity method. When the Web Identity method is
-selected, `provider-aws` calls `sts.AssumeRoleWithWebIdentity` [[6]] using the
-web identity token file provisioned by the EKS kubelet. An example
-`ProviderConfig` is as follows:
+It’s now possible to specify the WebIdentity tokens to be used in `ProviderConfig`s
+for WebIdentity authentication. Before `v1.1.0`, it was only possible to do so via
+the environment variables.
+
+`ProviderConfig` API specification is expanded with `spec.credentials.webIdentity.tokenConfig`
+which allows consumers to configure the token to be used for WebIdentity authentication.
+Consumers can reference a secret or filesystem location for the token to be used for
+`WebIdentity` authentication.
+
+- Each `ProviderConfig` using WebIdentity authentication can now use different tokens
+per `ProviderConfig` object, allowing multiple WebIdentity configurations in a single cluster.
+
+- ℹ️ The change is backward compatible for consumers relying on the old behavior where they
+set both of the `AWS_WEB_IDENTITY_TOKEN_FILE` and `AWS_ROLE_ARN` [[6]] environment variables. When
+`spec.credentials.webIdentity.tokenConfig` is not specified, the old behavior is assumed.
+
+- ⚠️ Deprecation Notice: Configuring the WebIdentity authentication using the
+`AWS_WEB_IDENTITY_TOKEN_FILE` and `AWS_ROLE_ARN` environment variables is now deprecated
+in favor of the new `spec.credentials.webIdentity.tokenConfig` API.
+
+An example WebIdentity token configuration where the token is read from a Kubernetes secret
+is as follows:
 
 ```yaml
 apiVersion: aws.upbound.io/v1beta1
 kind: ProviderConfig
 metadata:
-  name: web-identity
+  name: webidentity-example
 spec:
   credentials:
     source: WebIdentity
     webIdentity:
-      roleARN: arn:aws:iam::111122223333:role/iam-role-name
+      roleARN: arn:aws:iam::123456789012:role/providerexamplerole
+      tokenConfig:
+        source: Secret
+        secretRef:
+          key: token
+          name: example-web-identity-token-secret
+          namespace: upbound-system
 ```
 
-As it can be seen in the above example, the target IAM Role to assume with the
-AWS STS `AssumeRoleWithWebIdentity` call must be specified in
-`spec.credentials.webIdentity.roleARN` of the `ProviderConfig` resource.
+Another example using a filesystem location is as follows:
+```yaml
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: webidentity-example
+spec:
+  credentials:
+    source: WebIdentity
+    webIdentity:
+      roleARN: arn:aws:iam::123456789012:role/providerexamplerole
+      tokenConfig:
+        source: Filesystem
+        fs:
+          path: /path/to/token/file
+```
+
+Please note that the `Filesystem` source option needs the token to be mounted as a file
+in the filesystem of the provider pod, e.g,. via a `DeploymentRuntimeConfig`.
+
+The difference is that the new API effectively allows specifying the token per `ProviderConfig`.
 
 ### IAM Role chaining configuration
 With all of the authentication mechanisms discussed above, `provider-aws` allows
