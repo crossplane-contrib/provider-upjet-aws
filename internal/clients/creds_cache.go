@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 	"strings"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -36,7 +37,7 @@ func WithCacheMaxSize(n int) AWSCredentialsProviderCacheOption {
 
 // WithCacheStore lets you bootstrap AWS CredentialsProvider Cache with
 // your own cache.
-func WithCacheStore(cache map[string]awsCredentialsProviderCacheEntry) AWSCredentialsProviderCacheOption {
+func WithCacheStore(cache map[string]*awsCredentialsProviderCacheEntry) AWSCredentialsProviderCacheOption {
 	return func(c *AWSCredentialsProviderCache) {
 		c.cache = cache
 	}
@@ -53,7 +54,7 @@ func WithCacheLogger(l logging.Logger) AWSCredentialsProviderCacheOption {
 // *AWSCredentialsProviderCache with the default GetAWSConfig method.
 func NewAWSCredentialsProviderCache(opts ...AWSCredentialsProviderCacheOption) *AWSCredentialsProviderCache {
 	c := &AWSCredentialsProviderCache{
-		cache:   map[string]awsCredentialsProviderCacheEntry{},
+		cache:   map[string]*awsCredentialsProviderCacheEntry{},
 		maxSize: 100,
 		mu:      &sync.RWMutex{},
 		logger:  logging.NewNopLogger(),
@@ -79,7 +80,7 @@ type AWSCredentialsProviderCache struct {
 	// provider configuration. Key content includes the ProviderConfig's UUID
 	// and ResourceVersion and additional fields depending on the auth method
 	// (currently only IRSA temporary credential caching is supported).
-	cache map[string]awsCredentialsProviderCacheEntry
+	cache map[string]*awsCredentialsProviderCacheEntry
 
 	// maxSize is the maximum number of elements this cache can ever have.
 	maxSize int
@@ -93,7 +94,7 @@ type AWSCredentialsProviderCache struct {
 
 type awsCredentialsProviderCacheEntry struct {
 	awsCredCache *aws.CredentialsCache
-	AccessedAt   time.Time
+	AccessedAt   atomic.Value
 }
 
 func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ProviderConfig, region string, awsCredCache *aws.CredentialsCache) (aws.Credentials, error) {
@@ -139,25 +140,28 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 		// since this is a hot-path in the execution, do not always update
 		// the last access times, it is fine to evict the LRU entry on a less
 		// granular precision.
-		if time.Since(cacheEntry.AccessedAt) > 10*time.Minute {
-			c.mu.Lock()
-			cacheEntry.AccessedAt = time.Now()
-			c.cache[cacheKey] = cacheEntry
-			c.mu.Unlock()
+		if time.Since(cacheEntry.AccessedAt.Load().(time.Time)) > 10*time.Minute {
+			cacheEntry.AccessedAt.Store(time.Now())
 		}
 		return cacheEntry.awsCredCache.Retrieve(ctx)
 	}
 
-	// cache miss
-	c.logger.Debug("Cache miss", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String())
 	c.mu.Lock()
-	c.makeRoom()
-	c.cache[cacheKey] = awsCredentialsProviderCacheEntry{
-		awsCredCache: awsCredCache,
-		AccessedAt:   time.Now(),
+	// we need to recheck the cache because it might have already been
+	// populated.
+	cacheEntry, ok = c.cache[cacheKey]
+	if !ok {
+		// cache miss
+		c.logger.Debug("Cache miss", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String(), "cacheSize", len(c.cache))
+		c.makeRoom()
+		cacheEntry = &awsCredentialsProviderCacheEntry{
+			awsCredCache: awsCredCache,
+		}
+		cacheEntry.AccessedAt.Store(time.Now())
+		c.cache[cacheKey] = cacheEntry
 	}
 	c.mu.Unlock()
-	return awsCredCache.Retrieve(ctx)
+	return cacheEntry.awsCredCache.Retrieve(ctx)
 }
 
 // makeRoom ensures that there is at most maxSize-1 elements in the cache map
@@ -174,7 +178,7 @@ func (c *AWSCredentialsProviderCache) makeRoom() {
 			dustiest = key
 			continue
 		}
-		if val.AccessedAt.Before(c.cache[dustiest].AccessedAt) {
+		if val.AccessedAt.Load().(time.Time).Before(c.cache[dustiest].AccessedAt.Load().(time.Time)) {
 			dustiest = key
 		}
 	}
