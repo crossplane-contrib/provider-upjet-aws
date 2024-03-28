@@ -27,9 +27,9 @@ func Configure(p *config.Provider) {
 			}
 			return conn, nil
 		}
-		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"name_prefix"},
-		}
+		// If the key policy is unset on the Queue resource, don't late initialize it, to avoid conflicts with the policy
+		// managed by a QueuePolicy resource.
+		r.LateInitializer.IgnoredFields = append(r.LateInitializer.IgnoredFields, "name_prefix", "policy")
 	})
 
 	p.AddResourceConfigurator("aws_sqs_queue_redrive_policy", func(r *config.Resource) {

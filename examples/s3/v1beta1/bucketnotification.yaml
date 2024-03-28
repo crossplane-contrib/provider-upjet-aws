@@ -7,17 +7,128 @@ kind: BucketNotification
 metadata:
   name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "Requires a TopicPolicy for the referenced Topic and TopicPolicy is not covered yet."
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
+  labels:
+    testing.upbound.io/example-name: bucket-notification
 spec:
   forProvider:
-    region: us-west-1
     bucketSelector:
       matchLabels:
-        testing.upbound.io/example-name: s3
+        testing.upbound.io/example-name: bucket-notification
+    queue:
+      - events:
+          - "s3:ObjectCreated:*"
+        filterSuffix: ".log"
+        queueArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: bucket-notification
+    region: us-west-1
     topic:
     - events:
-      - "s3:ObjectCreated:*"
+      - "s3:ObjectRemoved:*"
       filterSuffix: ".log"
       topicArnSelector:
         matchLabels:
-          testing.upbound.io/example-name: s3
+          testing.upbound.io/example-name: bucket-notification
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  name: bucket-notification
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+  labels:
+    testing.upbound.io/example-name: bucket-notification
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  name: bucket-notification
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
+  labels:
+    testing.upbound.io/example-name: bucket-notification
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: TopicPolicy
+metadata:
+  name: bucket-notification
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
+  labels:
+    testing.upbound.io/example-name: bucket-notification
+spec:
+  forProvider:
+    region: us-west-1
+    arnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bucket-notification
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "example",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "s3.amazonaws.com"
+            },
+            "Action": "sns:Publish",
+            "Resource": "arn:aws:sns:us-west-1:*:bucket-notification"
+          }
+        ]
+      }
+
+---
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  name: bucket-notification
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
+  labels:
+    testing.upbound.io/example-name: bucket-notification
+spec:
+  forProvider:
+    region: us-west-1
+    name: bucket-notification
+
+---
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: QueuePolicy
+metadata:
+  name: bucket-notification
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketnotification
+  labels:
+    testing.upbound.io/example-name: bucket-notification
+spec:
+  forProvider:
+    region: us-west-1
+    queueUrlSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bucket-notification
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Sid": "example",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "s3.amazonaws.com"
+            },
+            "Action": "sqs:SendMessage",
+            "Resource": "arn:aws:sqs:us-west-1:*:bucket-notification"
+          }
+        ]
+      }

@@ -16,27 +16,27 @@ import (
 type RolePolicyAttachmentInitParameters struct {
 
 	// The ARN of the policy you want to apply
-	// +crossplane:generate:reference:type=Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
-	// Reference to a Policy to populate policyArn.
+	// Reference to a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
 	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
 
-	// Selector for a Policy to populate policyArn.
+	// Selector for a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// The name of the IAM role to which the policy should be applied
-	// +crossplane:generate:reference:type=Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
-	// Reference to a Role to populate role.
+	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
 	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
 
-	// Selector for a Role to populate role.
+	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 }
@@ -54,29 +54,29 @@ type RolePolicyAttachmentObservation struct {
 type RolePolicyAttachmentParameters struct {
 
 	// The ARN of the policy you want to apply
-	// +crossplane:generate:reference:type=Policy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
-	// Reference to a Policy to populate policyArn.
+	// Reference to a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
 	PolicyArnRef *v1.Reference `json:"policyArnRef,omitempty" tf:"-"`
 
-	// Selector for a Policy to populate policyArn.
+	// Selector for a Policy in iam to populate policyArn.
 	// +kubebuilder:validation:Optional
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// The name of the IAM role to which the policy should be applied
-	// +crossplane:generate:reference:type=Role
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
-	// Reference to a Role to populate role.
+	// Reference to a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
 	RoleRef *v1.Reference `json:"roleRef,omitempty" tf:"-"`
 
-	// Selector for a Role to populate role.
+	// Selector for a Role in iam to populate role.
 	// +kubebuilder:validation:Optional
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 }

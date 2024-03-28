@@ -280,7 +280,7 @@ spec:
                     description: ARN of the SNS topic to subscribe to.
                     type: string
                   topicArnRef:
-                    description: Reference to a Topic to populate topicArn.
+                    description: Reference to a Topic in sns to populate topicArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -314,7 +314,7 @@ spec:
                     - name
                     type: object
                   topicArnSelector:
-                    description: Selector for a Topic to populate topicArn.
+                    description: Selector for a Topic in sns to populate topicArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -572,7 +572,7 @@ spec:
                     description: ARN of the SNS topic to subscribe to.
                     type: string
                   topicArnRef:
-                    description: Reference to a Topic to populate topicArn.
+                    description: Reference to a Topic in sns to populate topicArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -606,7 +606,7 @@ spec:
                     - name
                     type: object
                   topicArnSelector:
-                    description: Selector for a Topic to populate topicArn.
+                    description: Selector for a Topic in sns to populate topicArn.
                     properties:
                       matchControllerRef:
                         description: |-

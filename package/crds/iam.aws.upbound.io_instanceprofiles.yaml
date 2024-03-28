@@ -86,7 +86,7 @@ spec:
                     description: Name of the role to add to the profile.
                     type: string
                   roleRef:
-                    description: Reference to a Role to populate role.
+                    description: Reference to a Role in iam to populate role.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -120,7 +120,7 @@ spec:
                     - name
                     type: object
                   roleSelector:
-                    description: Selector for a Role to populate role.
+                    description: Selector for a Role in iam to populate role.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -192,7 +192,7 @@ spec:
                     description: Name of the role to add to the profile.
                     type: string
                   roleRef:
-                    description: Reference to a Role to populate role.
+                    description: Reference to a Role in iam to populate role.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -226,7 +226,7 @@ spec:
                     - name
                     type: object
                   roleSelector:
-                    description: Selector for a Role to populate role.
+                    description: Selector for a Role in iam to populate role.
                     properties:
                       matchControllerRef:
                         description: |-
