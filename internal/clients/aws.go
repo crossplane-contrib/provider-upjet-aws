@@ -6,12 +6,14 @@ package clients
 
 import (
 	"context"
-	"reflect"
-	"unsafe"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
+	awsrequest "github.com/aws/aws-sdk-go/aws/request"
+	"github.com/aws/smithy-go/middleware"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/upjet/pkg/metrics"
 	"github.com/crossplane/upjet/pkg/terraform"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
@@ -111,6 +113,48 @@ func (m *metaOnlyPrimary) Meta() any {
 	return m.meta
 }
 
+// withExternalAPICallCounter configures an AWS SDK v2 stack (client)
+// with an API call counter. AWS SDK v2 offers configuring
+// "middlewares" to customize a request. Middlewares can be plugged
+// into different steps of the stack. Middlewares can save and access
+// metadata in the stack, such as ServiceID (EC2, IAM, etc.) and
+// OperationName (DescribeVPCs, etc.). For documentation, see:
+// https://aws.github.io/aws-sdk-go-v2/docs/middleware/
+func withExternalAPICallCounter(stack *middleware.Stack) error {
+	externalAPICallCounterMiddleware := middleware.DeserializeMiddlewareFunc("externalAPICallCounter",
+		func(ctx context.Context, input middleware.DeserializeInput, next middleware.DeserializeHandler) (middleware.DeserializeOutput, middleware.Metadata, error) {
+			serviceID := awsmiddleware.GetServiceID(ctx)
+			operationName := awsmiddleware.GetOperationName(ctx)
+
+			// next.HandleDeserialize() calls the next middleware function
+			// in the stack, which in turn calls the next. Finally, the
+			// request is performed. Each middleware function receives the
+			// output from the middleware function it invoked, processes it,
+			// and returns its result to the middleware function that
+			// invoked itself.
+			output, metadata, err := next.HandleDeserialize(ctx, input)
+			if err == nil {
+				metrics.ExternalAPICalls.WithLabelValues(serviceID, operationName).Inc()
+			}
+			return output, metadata, err
+		},
+	)
+
+	// We register the call counter to the end of the deserialization
+	// step, so that we're right next to Transport handler
+	// (http.RoundTripper) in the stack (see
+	// https://aws.github.io/aws-sdk-go-v2/docs/middleware/). In this
+	// case, it's easy to distinguish API errors from connection
+	// errors, because only connection errors cause a non-nil error
+	// returned by next.HandleDeserialize() (see middleware
+	// implementation above). If we were to register the call counter
+	// to any other position (such as earlier stack steps (finalize,
+	// build, etc.) or even the beginning of deserialization step), we
+	// would have to implement a logic to distinguish between API
+	// errors and connection errors.
+	return stack.Deserialize.Add(externalAPICallCounterMiddleware, middleware.After)
+}
+
 // configureNoForkAWSClient populates the supplied *terraform.Setup with
 // Terraform Plugin SDK style AWS client (Meta) and Terraform Plugin Framework
 // style FrameworkProvider
@@ -146,8 +190,7 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	// only used for retrieving the ServicePackages from the singleton provider instance
 	p := config.TerraformProvider.Meta()
 	tfAwsConnsClient, diags := tfAwsConnsCfg.GetClient(ctx, &xpprovider.AWSClient{
-		// #nosec G103
-		ServicePackages: (*xpprovider.AWSClient)(unsafe.Pointer(reflect.ValueOf(p).Pointer())).ServicePackages,
+		ServicePackages: p.(*xpprovider.AWSClient).ServicePackages,
 	})
 	if diags.HasError() {
 		return errors.Errorf("cannot construct TF AWS Client from TF AWS Config, %v", diags)
@@ -162,5 +205,24 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	ps.Meta = tfAwsConnsClient
 	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: tfAwsConnsClient})
 	ps.FrameworkProvider = fwProvider
+
+	// Register AWS SDK v1 call counter. Unlike AWS SDK v2, v1 doesn't
+	// store service ID (EC2, IAM, etc.) and operation name
+	// (DescribeVPCs, etc.) in request context. Therefore, it's not
+	// possible to implement this session handler's functionality with
+	// an http.RoundTripper. To learn how SDK v1 session handler phases
+	// map to SDK v2 middleware stack steps, see:
+	// https://aws.github.io/aws-sdk-go-v2/docs/migrating/#handler-phases
+	tfAwsConnsClient.Session.Handlers.Send.PushBack(func(r *awsrequest.Request) {
+		// In case of API errors (or no errors), r.Error is nil.
+		// In case of connection errors, r.Error is non-nil.
+		if r.Error == nil {
+			metrics.ExternalAPICalls.WithLabelValues(r.ClientInfo.ServiceID, r.Operation.Name).Inc()
+		}
+	})
+
+	// Register AWS SDK v2 call counter
+	tfAwsConnsClient.AppendAPIOptions(withExternalAPICallCounter)
+
 	return nil
 }
