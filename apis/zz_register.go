@@ -103,6 +103,7 @@ import (
 	v1beta1ivs "github.com/upbound/provider-aws/apis/ivs/v1beta1"
 	v1beta1kafka "github.com/upbound/provider-aws/apis/kafka/v1beta1"
 	v1beta2kafka "github.com/upbound/provider-aws/apis/kafka/v1beta2"
+	v1beta1kafkaconnect "github.com/upbound/provider-aws/apis/kafkaconnect/v1beta1"
 	v1beta1kendra "github.com/upbound/provider-aws/apis/kendra/v1beta1"
 	v1beta1keyspaces "github.com/upbound/provider-aws/apis/keyspaces/v1beta1"
 	v1beta1kinesis "github.com/upbound/provider-aws/apis/kinesis/v1beta1"
@@ -283,6 +284,7 @@ func init() {
 		v1beta1kafka.SchemeBuilder.AddToScheme,
 		v1beta1kafka.SchemeBuilder.AddToScheme,
 		v1beta2kafka.SchemeBuilder.AddToScheme,
+		v1beta1kafkaconnect.SchemeBuilder.AddToScheme,
 		v1beta1kendra.SchemeBuilder.AddToScheme,
 		v1beta1keyspaces.SchemeBuilder.AddToScheme,
 		v1beta1kinesis.SchemeBuilder.AddToScheme,

@@ -1,0 +1,15 @@
+apiVersion: kafkaconnect.aws.upbound.io/v1beta1
+kind: WorkerConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/workerconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    propertiesFileContent: |
+      key.converter=org.apache.kafka.connect.storage.StringConverter
+      value.converter=org.apache.kafka.connect.storage.StringConverter
+    region: us-west-1

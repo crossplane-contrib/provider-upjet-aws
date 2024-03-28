@@ -53,6 +53,7 @@ import (
 	"github.com/upbound/provider-aws/config/identitystore"
 	"github.com/upbound/provider-aws/config/iot"
 	"github.com/upbound/provider-aws/config/kafka"
+	"github.com/upbound/provider-aws/config/kafkaconnect"
 	"github.com/upbound/provider-aws/config/kendra"
 	"github.com/upbound/provider-aws/config/kinesis"
 	"github.com/upbound/provider-aws/config/kinesisanalytics"
@@ -133,6 +134,7 @@ func init() {
 	ProviderConfiguration.AddConfig(grafana.Configure)
 	ProviderConfiguration.AddConfig(iam.Configure)
 	ProviderConfiguration.AddConfig(kafka.Configure)
+	ProviderConfiguration.AddConfig(kafkaconnect.Configure)
 	ProviderConfiguration.AddConfig(kinesis.Configure)
 	ProviderConfiguration.AddConfig(kinesisanalytics.Configure)
 	ProviderConfiguration.AddConfig(kinesisanalytics2.Configure)

@@ -1,0 +1,55 @@
+apiVersion: kafkaconnect.aws.upbound.io/v1beta1
+kind: CustomPlugin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/customplugin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    contentType: ZIP
+    location:
+    - s3:
+      - bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        fileKeySelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    name: debezium-example
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/customplugin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/customplugin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    key: debezium.zip
+    region: us-west-1
+    source: debezium.zip

@@ -1,0 +1,49 @@
+apiVersion: kafkaconnect.aws.upbound.io/v1beta1
+kind: Connector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity:
+    - autoscaling:
+      - maxWorkerCount: 2
+        mcuCount: 1
+        minWorkerCount: 1
+        scaleInPolicy:
+        - cpuUtilizationPercentage: 20
+        scaleOutPolicy:
+        - cpuUtilizationPercentage: 80
+    connectorConfiguration:
+      connector.class: com.github.jcustenborder.kafka.connect.simulator.SimulatorSinkConnector
+      tasks.max: "1"
+      topics: example
+    kafkaCluster:
+    - apacheKafkaCluster:
+      - bootstrapServers: ${aws_msk_cluster.example.bootstrap_brokers_tls}
+        vpc:
+        - securityGroupRefs:
+          - name: example
+          subnetRefs:
+          - name: example1
+          - name: example2
+          - name: example3
+    kafkaClusterClientAuthentication:
+    - authenticationType: NONE
+    kafkaClusterEncryptionInTransit:
+    - encryptionType: TLS
+    kafkaconnectVersion: 2.7.1
+    name: example
+    plugin:
+    - customPlugin:
+      - arnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        revision: ${aws_mskconnect_custom_plugin.example.latest_revision}
+    region: us-west-1
+    serviceExecutionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

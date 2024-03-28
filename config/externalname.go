@@ -1168,6 +1168,18 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Example: arn:aws:kafka:us-west-2:123456789012:cluster/example/279c0212-d057-4dba-9aa9-1c4e5a25bfc7-3
 	"aws_msk_serverless_cluster": config.IdentifierFromProvider,
 
+	// mskconnect
+	//
+	// MSK Connect Connector can be imported using the connector's arn
+	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:connector/example/264edee4-17a3-412e-bd76-6681cfc93805-3
+	"aws_mskconnect_connector": TemplatedStringAsProviderDefinedIdentifier("arn:aws:kafkaconnect:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:connector/{{ .parameters.name }}/{{ .external_name }}"),
+	// MSK Connect Custom Plugin can be imported using the plugin's arn
+	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:custom-plugin/debezium-example/abcdefgh-1234-5678-9abc-defghijklmno-4
+	"aws_mskconnect_custom_plugin": TemplatedStringAsProviderDefinedIdentifier("arn:aws:kafkaconnect:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:custom-plugin/{{ .parameters.name }}/{{ .external_name }}"),
+	// MSK Connect Worker Configuration can be imported using the worker configuration's arn
+	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:worker-configuration/example/8848493b-7fcc-478c-a646-4a52634e3378-4
+	"aws_mskconnect_worker_configuration": TemplatedStringAsProviderDefinedIdentifier("arn:aws:kafkaconnect:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:worker-configuration/{{ .parameters.name }}/{{ .external_name }}"),
+
 	// ram
 	//
 	// RAM Principal Associations can be imported using their Resource Share ARN and the principal separated by a comma:
