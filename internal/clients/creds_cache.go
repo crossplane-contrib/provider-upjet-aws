@@ -23,6 +23,10 @@ import (
 	"github.com/upbound/provider-aws/apis/v1beta1"
 )
 
+const (
+	errGetAccountID = "cannot retrieve the AWS account ID"
+)
+
 // AWSCredentialsProviderCacheOption lets you configure
 // a *GlobalAWSCredentialsProviderCache.
 type AWSCredentialsProviderCacheOption func(cache *AWSCredentialsProviderCache)
@@ -94,14 +98,72 @@ type AWSCredentialsProviderCache struct {
 
 type awsCredentialsProviderCacheEntry struct {
 	awsCredCache *aws.CredentialsCache
-	AccessedAt   atomic.Value
+	accessedAt   atomic.Value
+	accountID    atomic.Value
 }
 
-func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ProviderConfig, region string, awsCredCache *aws.CredentialsCache) (aws.Credentials, error) {
-	// Only IRSA authentication method credentials are cached currently
-	if pc.Spec.Credentials.Source != authKeyIRSA {
-		// skip cache for other/unimplemented credential types
-		return awsCredCache.Retrieve(ctx)
+// AccountIDFn is a function for retrieving the account ID.
+type AccountIDFn func(ctx context.Context) (string, error)
+
+func accountIDFromCacheEntry(e *awsCredentialsProviderCacheEntry) AccountIDFn {
+	return func(context.Context) (string, error) {
+		// return the cached account ID
+		return e.accountID.Load().(string), nil
+	}
+}
+
+// Credentials holds the aws.Credentials and the associated AWS account ID for
+// these credentials. It's possible that the account ID is not resolved and
+// only the aws.Credentials are available in a successful result.
+type Credentials struct {
+	creds     aws.Credentials
+	accountID string
+}
+
+// newCredentials returns the Credentials whose credentials are retrieved
+// using the given aws.CredentialsProvider and whose account ID is set using
+// the given AccountIDFn.
+func newCredentials(ctx context.Context, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn) (Credentials, error) {
+	var result Credentials
+	// try to retrieve the credentials if a retriever has been supplied
+	if credsProvider != nil {
+		var err error
+		if result.creds, err = credsProvider.Retrieve(ctx); err != nil {
+			return Credentials{}, errors.Wrap(err, "cannot retrieve the AWS credentials")
+		}
+	}
+	// try to get the account ID
+	if accountIDFn != nil {
+		var err error
+		if result.accountID, err = accountIDFn(ctx); err != nil {
+			return Credentials{}, errors.Wrap(err, errGetAccountID)
+		}
+	}
+	return result, nil
+}
+
+// RetrieveCredentials returns a Credentials either from the credential cache.
+// If the authentication scheme is IRSA and the supplied
+// aws.CredentialsProvider implementation is an aws.CredentialsCache, then the
+// retrieved credentials and the account ID are cached for future requests.
+// Otherwise, this function returns the AWS credentials by calling
+// the downstream aws.CredentialsProvider.Retrieve, and for now, does *not*
+// call the given AccountIDFn because in that case, a separate identity cache
+// should be used to retrieve the caller identity.
+func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, pc *v1beta1.ProviderConfig, region string, credsProvider aws.CredentialsProvider, accountIDFn AccountIDFn) (Credentials, error) {
+	// Only IRSA credentials are cached currently and
+	// only aws.CredentialsCache is supported as the underlying
+	// credential provider.
+	awsCredsCache, ok := credsProvider.(*aws.CredentialsCache)
+	if !ok {
+		c.logger.Debug("Configured aws.CredentialsProvider is not an aws.CredentialsCache, cannot utilize the provider credential cache...")
+	}
+	if pc.Spec.Credentials.Source != authKeyIRSA || !ok {
+		// if this cache manager is not going to be employed, do not call
+		// the given accountIDFn because there's a separate identity cache
+		// implementation.
+		// TODO: Replace the identity cache with this cache.
+		return newCredentials(ctx, credsProvider, nil)
 	}
 	// cache key calculation tries to capture any parameter that
 	// could cause changes in the resulting AWS credentials,
@@ -124,7 +186,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	}
 	tokenHash, err := hashTokenFile(os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"))
 	if err != nil {
-		return aws.Credentials{}, errors.Wrap(err, "cannot calculate the hash for the credentials file")
+		return Credentials{}, errors.Wrap(err, "cannot calculate the hash for the credentials file")
 	}
 	cacheKeyParams = append(cacheKeyParams, tokenHash, os.Getenv("AWS_WEB_IDENTITY_TOKEN_FILE"), os.Getenv("AWS_ROLE_ARN"))
 	cacheKey := strings.Join(cacheKeyParams, ":")
@@ -140,13 +202,14 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 		// since this is a hot-path in the execution, do not always update
 		// the last access times, it is fine to evict the LRU entry on a less
 		// granular precision.
-		if time.Since(cacheEntry.AccessedAt.Load().(time.Time)) > 10*time.Minute {
-			cacheEntry.AccessedAt.Store(time.Now())
+		if time.Since(cacheEntry.accessedAt.Load().(time.Time)) > 10*time.Minute {
+			cacheEntry.accessedAt.Store(time.Now())
 		}
-		return cacheEntry.awsCredCache.Retrieve(ctx)
+		return newCredentials(ctx, cacheEntry.awsCredCache, accountIDFromCacheEntry(cacheEntry))
 	}
 
 	c.mu.Lock()
+	defer c.mu.Unlock()
 	// we need to recheck the cache because it might have already been
 	// populated.
 	cacheEntry, ok = c.cache[cacheKey]
@@ -155,13 +218,17 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 		c.logger.Debug("Cache miss", "cacheKey", cacheKey, "pc", pc.GroupVersionKind().String(), "cacheSize", len(c.cache))
 		c.makeRoom()
 		cacheEntry = &awsCredentialsProviderCacheEntry{
-			awsCredCache: awsCredCache,
+			awsCredCache: awsCredsCache,
 		}
-		cacheEntry.AccessedAt.Store(time.Now())
+		id, err := accountIDFn(ctx)
+		if err != nil {
+			return Credentials{}, errors.Wrap(err, errGetAccountID)
+		}
+		cacheEntry.accountID.Store(id)
+		cacheEntry.accessedAt.Store(time.Now())
 		c.cache[cacheKey] = cacheEntry
 	}
-	c.mu.Unlock()
-	return cacheEntry.awsCredCache.Retrieve(ctx)
+	return newCredentials(ctx, cacheEntry.awsCredCache, accountIDFromCacheEntry(cacheEntry))
 }
 
 // makeRoom ensures that there is at most maxSize-1 elements in the cache map
@@ -178,7 +245,7 @@ func (c *AWSCredentialsProviderCache) makeRoom() {
 			dustiest = key
 			continue
 		}
-		if val.AccessedAt.Load().(time.Time).Before(c.cache[dustiest].AccessedAt.Load().(time.Time)) {
+		if val.accessedAt.Load().(time.Time).Before(c.cache[dustiest].accessedAt.Load().(time.Time)) {
 			dustiest = key
 		}
 	}
@@ -195,7 +262,9 @@ func hashTokenFile(filename string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer file.Close() //nolint:errcheck
+	defer func() {
+		_ = file.Close()
+	}()
 
 	hash := sha256.New()
 	if _, err = io.Copy(hash, file); err != nil {

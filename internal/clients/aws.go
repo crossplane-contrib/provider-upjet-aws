@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
+	"github.com/aws/aws-sdk-go-v2/service/sts"
 	awsrequest "github.com/aws/aws-sdk-go/aws/request"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
@@ -27,8 +28,9 @@ import (
 )
 
 const (
-	keyAccountID = "account_id"
-	keyRegion    = "region"
+	keyAccountID        = "account_id"
+	keyRegion           = "region"
+	localstackAccountID = "000000000"
 )
 
 type SetupConfig struct {
@@ -56,28 +58,41 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 			return terraform.Setup{}, errors.Wrap(err, "obtained aws config cannot be nil")
 		}
 
-		var creds aws.Credentials
-		if awsCredCache, ok := awsCfg.Credentials.(*aws.CredentialsCache); ok {
-			// only IRSA auth credentials are cached, other auth methods will skip
-			// the cache and call the downstream CredentialsCache.Retrieve()
-			creds, err = credsCache.RetrieveCredentials(ctx, pc, awsCfg.Region, awsCredCache)
-		} else {
-			config.Logger.Debug("Configured aws.CredentialProvider is not an aws.CredentialCache, skipping the provider credential cache...")
-			creds, err = awsCfg.Credentials.Retrieve(ctx)
-		}
+		// only IRSA auth credentials are currently cached, other auth methods
+		// will skip the cache and call the downstream
+		// CredentialsProvider.Retrieve().
+		credCache, err := credsCache.RetrieveCredentials(ctx, pc, awsCfg.Region, awsCfg.Credentials, func(ctx context.Context) (string, error) {
+			if pc.Spec.SkipCredsValidation {
+				// then we do not try to resolve the account ID and instead,
+				// return a constant value as before.
+				return localstackAccountID, nil
+			}
+			o, err := sts.NewFromConfig(*awsCfg).GetCallerIdentity(ctx, &sts.GetCallerIdentityInput{})
+			if err != nil {
+				return "", errors.Wrap(err, errGetCallerIdentityFailed)
+			}
+			return *o.Account, nil
+		})
 		if err != nil {
-			return terraform.Setup{}, errors.Wrap(err, "failed to retrieve aws credentials")
+			return terraform.Setup{}, errors.Wrap(err, "cache manager failure")
 		}
 
-		account := "000000000"
-		if !pc.Spec.SkipCredsValidation {
-			account, err = getAccountId(ctx, awsCfg, creds)
+		// if we are to retrieve the AWS account ID and if we have not already
+		// retrieved it via the credential cache, then we will utilize the
+		// identity cache.
+		// TODO: Replace the identity cache with the credential cache.
+		if !pc.Spec.SkipCredsValidation && credCache.accountID == "" {
+			credCache.accountID, err = getAccountId(ctx, awsCfg, credCache.creds)
 			if err != nil {
 				return terraform.Setup{}, errors.Wrap(err, "cannot get account id")
 			}
 		}
+		// just in case the localstack implementation relies on this...
+		if credCache.accountID == "" {
+			credCache.accountID = localstackAccountID
+		}
 		ps.ClientMetadata = map[string]string{
-			keyAccountID: account,
+			keyAccountID: credCache.accountID,
 		}
 		// several external name configs depend on the setup.Configuration for templating region
 		ps.Configuration = map[string]any{
@@ -86,7 +101,7 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		if config.TerraformProvider == nil {
 			return terraform.Setup{}, errors.New("terraform provider cannot be nil")
 		}
-		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg.Region, creds, pc), "could not configure the no-fork AWS client")
+		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg.Region, credCache.creds, pc), "could not configure the no-fork AWS client")
 	}
 }
 
