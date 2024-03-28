@@ -11,6 +11,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -82,7 +83,7 @@ func NewAWSCredentialsProviderCache(opts ...AWSCredentialsProviderCacheOption) *
 type AWSCredentialsProviderCache struct {
 	// cache holds the AWS Config with a unique cache key per
 	// provider configuration. Key content includes the ProviderConfig's UUID
-	// and ResourceVersion and additional fields depending on the auth method
+	// and Generation and additional fields depending on the auth method
 	// (currently only IRSA temporary credential caching is supported).
 	cache map[string]*awsCredentialsProviderCacheEntry
 
@@ -170,7 +171,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	// to ensure unique keys.
 	//
 	// Parameters that are directly available in the provider config will
-	// generate unique cache keys through UUID and ResourceVersion of
+	// generate unique cache keys through UUID and Generation of
 	// the ProviderConfig's k8s object, as they change when the provider
 	// config is modified.
 	//
@@ -180,7 +181,7 @@ func (c *AWSCredentialsProviderCache) RetrieveCredentials(ctx context.Context, p
 	// should be included in the cache key.
 	cacheKeyParams := []string{
 		string(pc.UID),
-		pc.ResourceVersion,
+		strconv.FormatInt(pc.Generation, 10),
 		region,
 		string(pc.Spec.Credentials.Source),
 	}
