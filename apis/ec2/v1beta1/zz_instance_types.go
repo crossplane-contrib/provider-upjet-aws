@@ -497,7 +497,7 @@ type InstanceInitParameters struct {
 
 type InstanceMarketOptionsInitParameters struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
@@ -506,7 +506,7 @@ type InstanceMarketOptionsInitParameters struct {
 
 type InstanceMarketOptionsObservation struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
@@ -515,7 +515,7 @@ type InstanceMarketOptionsObservation struct {
 
 type InstanceMarketOptionsParameters struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
 	// +kubebuilder:validation:Optional
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 

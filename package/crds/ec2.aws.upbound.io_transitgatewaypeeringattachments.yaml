@@ -628,6 +628,8 @@ spec:
                   peerTransitGatewayId:
                     description: Identifier of EC2 Transit Gateway to peer with.
                     type: string
+                  state:
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

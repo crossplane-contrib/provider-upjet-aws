@@ -66,6 +66,8 @@ type TransitGatewayPeeringAttachmentObservation struct {
 	// Identifier of EC2 Transit Gateway to peer with.
 	PeerTransitGatewayID *string `json:"peerTransitGatewayId,omitempty" tf:"peer_transit_gateway_id,omitempty"`
 
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

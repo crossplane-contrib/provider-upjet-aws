@@ -15,29 +15,29 @@ import (
 
 type AccessEndpointInitParameters struct {
 
-	// Type of interface endpoint.
+	// Type of interface endpoint. For valid values, refer to the AWS documentation.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Identifier (ID) of the VPC in which the interface endpoint is used.
+	// Identifier (ID) of the interface VPC endpoint.
 	VpceID *string `json:"vpceId,omitempty" tf:"vpce_id,omitempty"`
 }
 
 type AccessEndpointObservation struct {
 
-	// Type of interface endpoint.
+	// Type of interface endpoint. For valid values, refer to the AWS documentation.
 	EndpointType *string `json:"endpointType,omitempty" tf:"endpoint_type,omitempty"`
 
-	// Identifier (ID) of the VPC in which the interface endpoint is used.
+	// Identifier (ID) of the interface VPC endpoint.
 	VpceID *string `json:"vpceId,omitempty" tf:"vpce_id,omitempty"`
 }
 
 type AccessEndpointParameters struct {
 
-	// Type of interface endpoint.
+	// Type of interface endpoint. For valid values, refer to the AWS documentation.
 	// +kubebuilder:validation:Optional
 	EndpointType *string `json:"endpointType" tf:"endpoint_type,omitempty"`
 
-	// Identifier (ID) of the VPC in which the interface endpoint is used.
+	// Identifier (ID) of the interface VPC endpoint.
 	// +kubebuilder:validation:Optional
 	VpceID *string `json:"vpceId,omitempty" tf:"vpce_id,omitempty"`
 }
@@ -159,7 +159,7 @@ type ImageBuilderObservation struct {
 	// Instance type to use when launching the image builder.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
-	// State of the image builder. Can be: PENDING, UPDATING_AGENT, RUNNING, STOPPING, STOPPED, REBOOTING, SNAPSHOTTING, DELETING, FAILED, UPDATING, PENDING_QUALIFICATION
+	// State of the image builder. For valid values, refer to the AWS documentation.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Key-value map of resource tags.

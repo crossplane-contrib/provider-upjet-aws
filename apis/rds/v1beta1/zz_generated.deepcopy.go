@@ -973,6 +973,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableLocalWriteForwarding != nil {
+		in, out := &in.EnableLocalWriteForwarding, &out.EnableLocalWriteForwarding
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnabledCloudwatchLogsExports != nil {
 		in, out := &in.EnabledCloudwatchLogsExports, &out.EnabledCloudwatchLogsExports
 		*out = make([]*string, len(*in))
@@ -2078,6 +2083,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableLocalWriteForwarding != nil {
+		in, out := &in.EnableLocalWriteForwarding, &out.EnableLocalWriteForwarding
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnabledCloudwatchLogsExports != nil {
 		in, out := &in.EnabledCloudwatchLogsExports, &out.EnabledCloudwatchLogsExports
 		*out = make([]*string, len(*in))
@@ -2806,6 +2816,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.EnableHTTPEndpoint != nil {
 		in, out := &in.EnableHTTPEndpoint, &out.EnableHTTPEndpoint
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableLocalWriteForwarding != nil {
+		in, out := &in.EnableLocalWriteForwarding, &out.EnableLocalWriteForwarding
 		*out = new(bool)
 		**out = **in
 	}
