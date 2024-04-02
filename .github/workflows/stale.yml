@@ -1,0 +1,59 @@
+name: Stale Issues and PRs
+on:
+  schedule:
+  # Process new stale issues once a day. Folks can use /fresh for a fast un-stale
+  # per the commands workflow. Run at 4:15 mostly as a somewhat unique time to
+  # help correlate any issues with this workflow.
+  - cron: '15 4 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/stale@28ca1036281a5e5922ead5184a1bbf96e5fc984e # v9
+      with:
+        # This action uses ~2 operations per stale issue per run to determine
+        # whether it's still stale. It also uses 2-3 operations to mark an issue
+        # stale or not. During steady state (no issues to mark stale, check, or
+        # close) we seem to use less than 10 operations with ~350 issues and PRs
+        # open.
+        #
+        # Our hourly rate-limit budget for all workflows that use GITHUB_TOKEN
+        # is 1,000 requests per the below docs.
+        # https://docs.github.com/en/rest/overview/resources-in-the-rest-api#requests-from-github-actions
+        operations-per-run: 100
+        # For issues: post a "warning" message after 90 days, then close if another 14 days pass without a response.
+        days-before-issue-stale: 90
+        days-before-issue-close: 14
+        stale-issue-label: stale
+        exempt-issue-labels: exempt-from-stale
+        stale-issue-message: >
+          This provider repo does not have enough maintainers to address every
+          issue. Since there has been no activity in the last 90 days it is now marked
+          as `stale`. It will be closed in 14 days if no further activity occurs.
+          Leaving a comment **starting with** `/fresh` will mark this issue as not
+          stale.
+        close-issue-message: >
+          This issue is being closed since there has been no activity for 14 days
+          since marking it as `stale`. If you still need help, feel free to
+          comment or reopen the issue!
+        # For PRs: post a "warning" message after 90 days, then close if another 14 days pass without a response.
+        days-before-pr-stale: 90
+        days-before-pr-close: 14
+        stale-pr-label: stale
+        exempt-pr-labels: exempt-from-stale
+        stale-pr-message: > 
+          This provider repo does not have enough maintainers to address every
+          pull request. Since there has been no activity in the last 90 days it is
+          now marked as `stale`. It will be closed in 14 days if no further activity
+          occurs. Leaving a comment **starting with** `/fresh` will mark this issue
+          as not stale.
+        close-pr-message: >
+          This pull request is being closed since there has been no activity for 14 days
+          since marking it as `stale`. If you're still working on this, feel free
+          to reopen the PR or create a new one!
