@@ -1,0 +1,60 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: pod-identity
+spec:
+  credentials:
+    source: WebIdentity
+    webIdentity:
+      roleARN: arn:aws:iam::123456789012:role/pod-identity-role
+      tokenConfig:
+        fs:
+          path: /var/run/secrets/pods.eks.amazonaws.com/serviceaccount/eks-pod-identity-token
+        source: Filesystem
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: OpenIDConnectProvider
+metadata:
+  name: pod-identity
+spec:
+  forProvider:
+    clientIdList:
+    - sts.amazonaws.com
+    - pods.eks.amazonaws.com
+    thumbprintList:
+    - 9e99a48a9960b14926bb7f3b02e22da2b0ab7280
+    url: oidc.eks.<REGION>.amazonaws.com/id/<UNIQUE_ID>
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: pod-identity-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Federated": "arn:aws:iam::<AWS-ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<UNIQUE_ID>"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity"
+          },
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "pods.eks.amazonaws.com"
+            },
+            "Action": [
+              "sts:AssumeRole",
+              "sts:TagSession"
+            ]
+          }
+        ]
+      }
