@@ -2,6 +2,26 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
+
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: ClusterAuth
+metadata:
+  name: auth
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/cluster
+    uptest.upbound.io/post-assert-hook: testhooks/check-clusterauth.sh
+spec:
+  forProvider:
+    region: us-west-1
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-clusterauth
+  writeConnectionSecretToRef:
+    name: sample-eks-cluster-conn
+    namespace: upbound-system
+
+---
+
 apiVersion: eks.aws.upbound.io/v1beta1
 kind: Cluster
 metadata:
@@ -10,7 +30,7 @@ metadata:
     uptest.upbound.io/timeout: "2400"
   name: sample-eks-cluster
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: example-clusterauth
 spec:
   forProvider:
     region: us-west-1
