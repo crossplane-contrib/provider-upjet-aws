@@ -281,3 +281,10 @@ replace golang.org/x/exp => golang.org/x/exp v0.0.0-20231006140011-7918f672742d
 replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20240328111213-f2f0fdd63866
 
 replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terraform-plugin-log v0.0.0-20230928191232-6c653d8ef8fb
+
+// pin versions for https://github.com/crossplane-contrib/provider-upjet-aws/issues/1248
+replace (
+	github.com/aws/aws-sdk-go-v2 v1.24.1 => github.com/aws/aws-sdk-go-v2 v1.24.0
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.10 => github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.9
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.10 => github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.9
+)
