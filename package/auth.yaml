@@ -52,4 +52,5 @@ sources:
 
     Copy the ARN from the **Summary** section of the role into the input.
   showFields:
-  - spec.credentials.upbound
+  - spec.credentials.upbound.webIdentity.roleARN
+  - spec.credentials.upbound.webIdentity.roleSessionName
