@@ -161,9 +161,6 @@ type DataFormatConversionConfigurationParameters struct {
 
 type DeliveryStreamInitParameters struct {
 
-	// The Amazon Resource Name (ARN) specifying the Stream
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
-
 	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch and opensearchserverless.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
@@ -270,10 +267,6 @@ type DeliveryStreamObservation struct {
 }
 
 type DeliveryStreamParameters struct {
-
-	// The Amazon Resource Name (ARN) specifying the Stream
-	// +kubebuilder:validation:Optional
-	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// –  This is the destination to where the data is delivered. The only options are s3 (Deprecated, use extended_s3 instead), extended_s3, redshift, elasticsearch, splunk, http_endpoint, opensearch and opensearchserverless.
 	// +kubebuilder:validation:Optional
@@ -3188,7 +3181,7 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 
 	// The ARN of the S3 bucket
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
 	// Reference to a Bucket in s3 to populate bucketArn.
@@ -3270,7 +3263,7 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 
 	// The ARN of the S3 bucket
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
