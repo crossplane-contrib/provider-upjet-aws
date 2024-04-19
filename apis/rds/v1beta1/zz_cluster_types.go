@@ -47,10 +47,28 @@ type ClusterInitParameters struct {
 	DBClusterInstanceClass *string `json:"dbClusterInstanceClass,omitempty" tf:"db_cluster_instance_class,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterParameterGroup
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
+	// Reference to a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameRef *v1.Reference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameSelector *v1.Selector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
+
 	// Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ParameterGroup
 	DBInstanceParameterGroupName *string `json:"dbInstanceParameterGroupName,omitempty" tf:"db_instance_parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup in rds to populate dbInstanceParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBInstanceParameterGroupNameRef *v1.Reference `json:"dbInstanceParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in rds to populate dbInstanceParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBInstanceParameterGroupNameSelector *v1.Selector `json:"dbInstanceParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// DB subnet group to associate with this DB cluster.
 	// NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
@@ -453,12 +471,30 @@ type ClusterParameters struct {
 	DBClusterInstanceClass *string `json:"dbClusterInstanceClass,omitempty" tf:"db_cluster_instance_class,omitempty"`
 
 	// A cluster parameter group to associate with the cluster.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ClusterParameterGroup
 	// +kubebuilder:validation:Optional
 	DBClusterParameterGroupName *string `json:"dbClusterParameterGroupName,omitempty" tf:"db_cluster_parameter_group_name,omitempty"`
 
+	// Reference to a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameRef *v1.Reference `json:"dbClusterParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ClusterParameterGroup in rds to populate dbClusterParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBClusterParameterGroupNameSelector *v1.Selector `json:"dbClusterParameterGroupNameSelector,omitempty" tf:"-"`
+
 	// Instance parameter group to associate with all instances of the DB cluster. The db_instance_parameter_group_name parameter is only valid in combination with the allow_major_version_upgrade parameter.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	DBInstanceParameterGroupName *string `json:"dbInstanceParameterGroupName,omitempty" tf:"db_instance_parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup in rds to populate dbInstanceParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBInstanceParameterGroupNameRef *v1.Reference `json:"dbInstanceParameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in rds to populate dbInstanceParameterGroupName.
+	// +kubebuilder:validation:Optional
+	DBInstanceParameterGroupNameSelector *v1.Selector `json:"dbInstanceParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// DB subnet group to associate with this DB cluster.
 	// NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.

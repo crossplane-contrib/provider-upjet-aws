@@ -19,6 +19,52 @@ spec:
       namespace: upbound-system
       key: password
     skipFinalSnapshot: true
+    dbClusterParameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ci-cluster
+    dbInstanceParameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ci-cluster-instance
   writeConnectionSecretToRef:
     name: sample-rds-cluster-secret
     namespace: upbound-system
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ClusterParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example-ci-cluster
+  name: example-ci-cluster
+spec:
+  forProvider:
+    region: us-west-1
+    description: RDS custom cluster parameter group
+    family: aurora-postgresql15
+    parameter:
+      - name: application_name
+        value: "example-rds-cluster"
+        applyMethod: immediate
+
+---
+
+apiVersion: rds.aws.upbound.io/v1beta1
+kind: ParameterGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rds/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example-ci-cluster-instance
+  name: example-parametergroup-ci-cluster-instance
+spec:
+  forProvider:
+    region: us-west-1
+    family: aurora-postgresql15
+    description: example
+    parameter:
+      - name: application_name
+        value: "example-cluster-instance"
+        applyMethod: immediate

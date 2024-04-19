@@ -913,10 +913,30 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DBClusterParameterGroupNameRef != nil {
+		in, out := &in.DBClusterParameterGroupNameRef, &out.DBClusterParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBClusterParameterGroupNameSelector != nil {
+		in, out := &in.DBClusterParameterGroupNameSelector, &out.DBClusterParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DBInstanceParameterGroupName != nil {
 		in, out := &in.DBInstanceParameterGroupName, &out.DBInstanceParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DBInstanceParameterGroupNameRef != nil {
+		in, out := &in.DBInstanceParameterGroupNameRef, &out.DBInstanceParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBInstanceParameterGroupNameSelector != nil {
+		in, out := &in.DBInstanceParameterGroupNameSelector, &out.DBInstanceParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DBSubnetGroupName != nil {
 		in, out := &in.DBSubnetGroupName, &out.DBSubnetGroupName
@@ -2729,10 +2749,30 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DBClusterParameterGroupNameRef != nil {
+		in, out := &in.DBClusterParameterGroupNameRef, &out.DBClusterParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBClusterParameterGroupNameSelector != nil {
+		in, out := &in.DBClusterParameterGroupNameSelector, &out.DBClusterParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DBInstanceParameterGroupName != nil {
 		in, out := &in.DBInstanceParameterGroupName, &out.DBInstanceParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.DBInstanceParameterGroupNameRef != nil {
+		in, out := &in.DBInstanceParameterGroupNameRef, &out.DBInstanceParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DBInstanceParameterGroupNameSelector != nil {
+		in, out := &in.DBInstanceParameterGroupNameSelector, &out.DBInstanceParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DBSubnetGroupName != nil {
 		in, out := &in.DBSubnetGroupName, &out.DBSubnetGroupName

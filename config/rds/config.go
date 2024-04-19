@@ -29,6 +29,12 @@ func Configure(p *config.Provider) {
 		r.References["db_subnet_group_name"] = config.Reference{
 			Type: "SubnetGroup",
 		}
+		r.References["db_cluster_parameter_group_name"] = config.Reference{
+			TerraformName: "aws_rds_cluster_parameter_group",
+		}
+		r.References["db_instance_parameter_group_name"] = config.Reference{
+			TerraformName: "aws_db_parameter_group",
+		}
 		r.UseAsync = true
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
 			conn := map[string][]byte{}
