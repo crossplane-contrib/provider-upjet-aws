@@ -6,7 +6,6 @@ package eks
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
-
 	"github.com/upbound/provider-aws/config/common"
 )
 
@@ -99,5 +98,33 @@ func Configure(p *config.Provider) {
 			},
 		}
 		r.UseAsync = true
+	})
+	p.AddResourceConfigurator("aws_eks_access_policy_association", func(r *config.Resource) {
+		r.References = config.References{
+			"cluster_name": {
+				TerraformName: "aws_eks_cluster",
+			},
+			// Principal Arn can refer to either the ARN of an IAM user or an IAM role, with a strong best-practice
+			// recommendation to always use roles. However, the eks Access Policy resource won't do anything unless
+			// the principal arn matches a principal with an eks Access Entry defined on the same cluster. By retrieving
+			// the principal arn from the Access Entry, we provide an easy means of ordered creation.
+			"principal_arn": {
+				TerraformName: "aws_eks_access_entry",
+				Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_arn",false)`,
+			},
+		}
+	})
+	p.AddResourceConfigurator("aws_eks_access_entry", func(r *config.Resource) {
+		r.References = config.References{
+			"cluster_name": {
+				TerraformName: "aws_eks_cluster",
+			},
+			"principal_arn": {
+				TerraformName:     "aws_iam_role",
+				Extractor:         common.PathARNExtractor,
+				RefFieldName:      "PrincipalArnFromRoleRef",
+				SelectorFieldName: "PrincipalArnFromRoleSelector",
+			},
+		}
 	})
 }
