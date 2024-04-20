@@ -764,6 +764,11 @@ func (in *JobDefinitionInitParameters) DeepCopyInto(out *JobDefinitionInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeregisterOnNewRevision != nil {
+		in, out := &in.DeregisterOnNewRevision, &out.DeregisterOnNewRevision
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EksProperties != nil {
 		in, out := &in.EksProperties, &out.EksProperties
 		*out = make([]EksPropertiesInitParameters, len(*in))
@@ -915,6 +920,11 @@ func (in *JobDefinitionObservation) DeepCopyInto(out *JobDefinitionObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DeregisterOnNewRevision != nil {
+		in, out := &in.DeregisterOnNewRevision, &out.DeregisterOnNewRevision
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EksProperties != nil {
 		in, out := &in.EksProperties, &out.EksProperties
 		*out = make([]EksPropertiesObservation, len(*in))
@@ -1048,6 +1058,11 @@ func (in *JobDefinitionParameters) DeepCopyInto(out *JobDefinitionParameters) {
 	if in.ContainerProperties != nil {
 		in, out := &in.ContainerProperties, &out.ContainerProperties
 		*out = new(string)
+		**out = **in
+	}
+	if in.DeregisterOnNewRevision != nil {
+		in, out := &in.DeregisterOnNewRevision, &out.DeregisterOnNewRevision
+		*out = new(bool)
 		**out = **in
 	}
 	if in.EksProperties != nil {

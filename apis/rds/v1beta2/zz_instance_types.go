@@ -81,10 +81,11 @@ type InstanceInitParameters struct {
 	// The identifier of the CA certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// The character set name to use for DB
-	// encoding in Oracle and Microsoft SQL instances (collation). This can't be changed. See Oracle Character Sets
-	// Supported in Amazon RDS
-	// or Server-Level Collation for Microsoft SQL Server for more information.
+	// The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
+	// This can't be changed.
+	// See Oracle Character Sets Supported in Amazon RDS or
+	// Server-Level Collation for Microsoft SQL Server for more information.
+	// Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
 	CharacterSetName *string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty"`
 
 	// –  Copy all Instance tags to snapshots. Default is false.
@@ -424,10 +425,11 @@ type InstanceObservation struct {
 	// The identifier of the CA certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// The character set name to use for DB
-	// encoding in Oracle and Microsoft SQL instances (collation). This can't be changed. See Oracle Character Sets
-	// Supported in Amazon RDS
-	// or Server-Level Collation for Microsoft SQL Server for more information.
+	// The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
+	// This can't be changed.
+	// See Oracle Character Sets Supported in Amazon RDS or
+	// Server-Level Collation for Microsoft SQL Server for more information.
+	// Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
 	CharacterSetName *string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty"`
 
 	// –  Copy all Instance tags to snapshots. Default is false.
@@ -743,10 +745,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// The character set name to use for DB
-	// encoding in Oracle and Microsoft SQL instances (collation). This can't be changed. See Oracle Character Sets
-	// Supported in Amazon RDS
-	// or Server-Level Collation for Microsoft SQL Server for more information.
+	// The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
+	// This can't be changed.
+	// See Oracle Character Sets Supported in Amazon RDS or
+	// Server-Level Collation for Microsoft SQL Server for more information.
+	// Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
 	// +kubebuilder:validation:Optional
 	CharacterSetName *string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty"`
 

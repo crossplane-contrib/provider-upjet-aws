@@ -211,6 +211,25 @@ type ProtocolDetailsParameters struct {
 	TLSSessionResumptionMode *string `json:"tlsSessionResumptionMode,omitempty" tf:"tls_session_resumption_mode,omitempty"`
 }
 
+type S3StorageOptionsInitParameters struct {
+
+	// Specifies whether or not performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
+	DirectoryListingOptimization *string `json:"directoryListingOptimization,omitempty" tf:"directory_listing_optimization,omitempty"`
+}
+
+type S3StorageOptionsObservation struct {
+
+	// Specifies whether or not performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
+	DirectoryListingOptimization *string `json:"directoryListingOptimization,omitempty" tf:"directory_listing_optimization,omitempty"`
+}
+
+type S3StorageOptionsParameters struct {
+
+	// Specifies whether or not performance for your Amazon S3 directories is optimized. Valid values are DISABLED, ENABLED.
+	// +kubebuilder:validation:Optional
+	DirectoryListingOptimization *string `json:"directoryListingOptimization,omitempty" tf:"directory_listing_optimization,omitempty"`
+}
+
 type ServerInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. This is required when protocols is set to FTPS
@@ -242,7 +261,7 @@ type ServerInitParameters struct {
 	// The domain of the storage system that is used for file transfers. Valid values are: S3 and EFS. The default value is S3.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. Fields documented below.
+	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. See endpoint_details block below for details.
 	EndpointDetails []EndpointDetailsInitParameters `json:"endpointDetails,omitempty" tf:"endpoint_details,omitempty"`
 
 	// The type of endpoint that you want your SFTP server connect to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server isn't accessible over the public internet. If you want to connect your SFTP server via public internet, set PUBLIC.  Defaults to PUBLIC.
@@ -273,12 +292,15 @@ type ServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LoggingRoleSelector *v1.Selector `json:"loggingRoleSelector,omitempty" tf:"-"`
 
-	// The protocol settings that are configured for your server.
+	// The protocol settings that are configured for your server. See protocol_details block below for details.
 	ProtocolDetails []ProtocolDetailsInitParameters `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 
 	// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP . The available protocols are:
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options block below for details.
+	S3StorageOptions []S3StorageOptionsInitParameters `json:"s3StorageOptions,omitempty" tf:"s3_storage_options,omitempty"`
 
 	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
@@ -295,7 +317,7 @@ type ServerInitParameters struct {
 	// - URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Specifies the workflow details. See Workflow Details below.
+	// Specifies the workflow details. See workflow_details block below for details.
 	WorkflowDetails []WorkflowDetailsInitParameters `json:"workflowDetails,omitempty" tf:"workflow_details,omitempty"`
 }
 
@@ -316,7 +338,7 @@ type ServerObservation struct {
 	// The endpoint of the Transfer Server (e.g., s-12345678.server.transfer.REGION.amazonaws.com)
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. Fields documented below.
+	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. See endpoint_details block below for details.
 	EndpointDetails []EndpointDetailsObservation `json:"endpointDetails,omitempty" tf:"endpoint_details,omitempty"`
 
 	// The type of endpoint that you want your SFTP server connect to. If you connect to a VPC (or VPC_ENDPOINT), your SFTP server isn't accessible over the public internet. If you want to connect your SFTP server via public internet, set PUBLIC.  Defaults to PUBLIC.
@@ -343,12 +365,15 @@ type ServerObservation struct {
 	// Amazon Resource Name (ARN) of an IAM role that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
 	LoggingRole *string `json:"loggingRole,omitempty" tf:"logging_role,omitempty"`
 
-	// The protocol settings that are configured for your server.
+	// The protocol settings that are configured for your server. See protocol_details block below for details.
 	ProtocolDetails []ProtocolDetailsObservation `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 
 	// Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server's endpoint. This defaults to SFTP . The available protocols are:
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options block below for details.
+	S3StorageOptions []S3StorageOptionsObservation `json:"s3StorageOptions,omitempty" tf:"s3_storage_options,omitempty"`
 
 	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
 	SecurityPolicyName *string `json:"securityPolicyName,omitempty" tf:"security_policy_name,omitempty"`
@@ -369,7 +394,7 @@ type ServerObservation struct {
 	// - URL of the service endpoint used to authenticate users with an identity_provider_type of API_GATEWAY.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Specifies the workflow details. See Workflow Details below.
+	// Specifies the workflow details. See workflow_details block below for details.
 	WorkflowDetails []WorkflowDetailsObservation `json:"workflowDetails,omitempty" tf:"workflow_details,omitempty"`
 }
 
@@ -407,7 +432,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. Fields documented below.
+	// The virtual private cloud (VPC) endpoint settings that you want to configure for your SFTP server. See endpoint_details block below for details.
 	// +kubebuilder:validation:Optional
 	EndpointDetails []EndpointDetailsParameters `json:"endpointDetails,omitempty" tf:"endpoint_details,omitempty"`
 
@@ -457,7 +482,7 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	PreAuthenticationLoginBannerSecretRef *v1.SecretKeySelector `json:"preAuthenticationLoginBannerSecretRef,omitempty" tf:"-"`
 
-	// The protocol settings that are configured for your server.
+	// The protocol settings that are configured for your server. See protocol_details block below for details.
 	// +kubebuilder:validation:Optional
 	ProtocolDetails []ProtocolDetailsParameters `json:"protocolDetails,omitempty" tf:"protocol_details,omitempty"`
 
@@ -470,6 +495,10 @@ type ServerParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Specifies whether or not performance for your Amazon S3 directories is optimized. This is disabled by default. See s3_storage_options block below for details.
+	// +kubebuilder:validation:Optional
+	S3StorageOptions []S3StorageOptionsParameters `json:"s3StorageOptions,omitempty" tf:"s3_storage_options,omitempty"`
 
 	// Specifies the name of the security policy that is attached to the server. Default value is: TransferSecurityPolicy-2018-11. The available values are:
 	// +kubebuilder:validation:Optional
@@ -490,36 +519,36 @@ type ServerParameters struct {
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Specifies the workflow details. See Workflow Details below.
+	// Specifies the workflow details. See workflow_details block below for details.
 	// +kubebuilder:validation:Optional
 	WorkflowDetails []WorkflowDetailsParameters `json:"workflowDetails,omitempty" tf:"workflow_details,omitempty"`
 }
 
 type WorkflowDetailsInitParameters struct {
 
-	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below.
+	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below. See on_partial_upload block below for details.
 	OnPartialUpload []OnPartialUploadInitParameters `json:"onPartialUpload,omitempty" tf:"on_partial_upload,omitempty"`
 
-	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See Workflow Detail below.
+	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload block below for details.
 	OnUpload []OnUploadInitParameters `json:"onUpload,omitempty" tf:"on_upload,omitempty"`
 }
 
 type WorkflowDetailsObservation struct {
 
-	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below.
+	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below. See on_partial_upload block below for details.
 	OnPartialUpload []OnPartialUploadObservation `json:"onPartialUpload,omitempty" tf:"on_partial_upload,omitempty"`
 
-	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See Workflow Detail below.
+	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload block below for details.
 	OnUpload []OnUploadObservation `json:"onUpload,omitempty" tf:"on_upload,omitempty"`
 }
 
 type WorkflowDetailsParameters struct {
 
-	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below.
+	// A trigger that starts a workflow if a file is only partially uploaded. See Workflow Detail below. See on_partial_upload block below for details.
 	// +kubebuilder:validation:Optional
 	OnPartialUpload []OnPartialUploadParameters `json:"onPartialUpload,omitempty" tf:"on_partial_upload,omitempty"`
 
-	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See Workflow Detail below.
+	// A trigger that starts a workflow: the workflow begins to execute after a file is uploaded. See on_upload block below for details.
 	// +kubebuilder:validation:Optional
 	OnUpload []OnUploadParameters `json:"onUpload,omitempty" tf:"on_upload,omitempty"`
 }

@@ -178,8 +178,7 @@ spec:
                     description: The IPv4 CIDR on the AWS side of the VPN connection.
                     type: string
                   remoteIpv6NetworkCidr:
-                    description: The IPv6 CIDR on the customer gateway (on-premises)
-                      side of the VPN connection.
+                    description: The IPv6 CIDR on the AWS side of the VPN connection.
                     type: string
                   staticRoutesOnly:
                     description: Whether the VPN connection uses static routes exclusively.
@@ -878,8 +877,7 @@ spec:
                     description: The IPv4 CIDR on the AWS side of the VPN connection.
                     type: string
                   remoteIpv6NetworkCidr:
-                    description: The IPv6 CIDR on the customer gateway (on-premises)
-                      side of the VPN connection.
+                    description: The IPv6 CIDR on the AWS side of the VPN connection.
                     type: string
                   staticRoutesOnly:
                     description: Whether the VPN connection uses static routes exclusively.
@@ -1631,8 +1629,7 @@ spec:
                     description: The IPv4 CIDR on the AWS side of the VPN connection.
                     type: string
                   remoteIpv6NetworkCidr:
-                    description: The IPv6 CIDR on the customer gateway (on-premises)
-                      side of the VPN connection.
+                    description: The IPv6 CIDR on the AWS side of the VPN connection.
                     type: string
                   routes:
                     description: The static routes associated with the VPN connection.

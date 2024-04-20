@@ -18,11 +18,10 @@ type PolicyInitParameters struct {
 	// Description of the IAM policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Path in which to create the policy.
-	// See IAM Identifiers for more information.
+	// Path in which to create the policy. See IAM Identifiers for more information.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The policy document. This is a JSON formatted string
+	// Policy document. This is a JSON formatted string
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -32,23 +31,25 @@ type PolicyInitParameters struct {
 
 type PolicyObservation struct {
 
-	// The ARN assigned by AWS to this policy.
+	// ARN assigned by AWS to this policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Number of entities (users, groups, and roles) that the policy is attached to.
+	AttachmentCount *float64 `json:"attachmentCount,omitempty" tf:"attachment_count,omitempty"`
 
 	// Description of the IAM policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ARN assigned by AWS to this policy.
+	// ARN assigned by AWS to this policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Path in which to create the policy.
-	// See IAM Identifiers for more information.
+	// Path in which to create the policy. See IAM Identifiers for more information.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The policy document. This is a JSON formatted string
+	// Policy document. This is a JSON formatted string
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
-	// The policy's ID.
+	// Policy's ID.
 	PolicyID *string `json:"policyId,omitempty" tf:"policy_id,omitempty"`
 
 	// Key-value map of resource tags.
@@ -66,12 +67,11 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Path in which to create the policy.
-	// See IAM Identifiers for more information.
+	// Path in which to create the policy. See IAM Identifiers for more information.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// The policy document. This is a JSON formatted string
+	// Policy document. This is a JSON formatted string
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

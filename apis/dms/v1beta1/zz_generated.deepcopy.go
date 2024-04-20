@@ -3418,6 +3418,11 @@ func (in *ReplicationTaskInitParameters) DeepCopyInto(out *ReplicationTaskInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceIdentifier != nil {
+		in, out := &in.ResourceIdentifier, &out.ResourceIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourceEndpointArn != nil {
 		in, out := &in.SourceEndpointArn, &out.SourceEndpointArn
 		*out = new(string)
@@ -3556,6 +3561,11 @@ func (in *ReplicationTaskObservation) DeepCopyInto(out *ReplicationTaskObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceIdentifier != nil {
+		in, out := &in.ResourceIdentifier, &out.ResourceIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.SourceEndpointArn != nil {
 		in, out := &in.SourceEndpointArn, &out.SourceEndpointArn
 		*out = new(string)
@@ -3665,6 +3675,11 @@ func (in *ReplicationTaskParameters) DeepCopyInto(out *ReplicationTaskParameters
 	}
 	if in.ReplicationTaskSettings != nil {
 		in, out := &in.ReplicationTaskSettings, &out.ReplicationTaskSettings
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceIdentifier != nil {
+		in, out := &in.ResourceIdentifier, &out.ResourceIdentifier
 		*out = new(string)
 		**out = **in
 	}

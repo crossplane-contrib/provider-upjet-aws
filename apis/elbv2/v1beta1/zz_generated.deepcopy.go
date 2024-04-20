@@ -2853,6 +2853,11 @@ func (in *LBInitParameters) DeepCopyInto(out *LBInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ClientKeepAlive != nil {
+		in, out := &in.ClientKeepAlive, &out.ClientKeepAlive
+		*out = new(float64)
+		**out = **in
+	}
 	if in.ConnectionLogs != nil {
 		in, out := &in.ConnectionLogs, &out.ConnectionLogs
 		*out = make([]ConnectionLogsInitParameters, len(*in))
@@ -3982,6 +3987,11 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientKeepAlive != nil {
+		in, out := &in.ClientKeepAlive, &out.ClientKeepAlive
+		*out = new(float64)
+		**out = **in
+	}
 	if in.ConnectionLogs != nil {
 		in, out := &in.ConnectionLogs, &out.ConnectionLogs
 		*out = make([]ConnectionLogsObservation, len(*in))
@@ -4181,6 +4191,11 @@ func (in *LBParameters) DeepCopyInto(out *LBParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ClientKeepAlive != nil {
+		in, out := &in.ClientKeepAlive, &out.ClientKeepAlive
+		*out = new(float64)
+		**out = **in
 	}
 	if in.ConnectionLogs != nil {
 		in, out := &in.ConnectionLogs, &out.ConnectionLogs

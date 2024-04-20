@@ -46,6 +46,9 @@ type VPCIpamInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// specifies the IPAM tier. Valid options include free and advanced. Default is advanced.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type VPCIpamObservation struct {
@@ -88,6 +91,9 @@ type VPCIpamObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// specifies the IPAM tier. Valid options include free and advanced. Default is advanced.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type VPCIpamParameters struct {
@@ -113,6 +119,10 @@ type VPCIpamParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// specifies the IPAM tier. Valid options include free and advanced. Default is advanced.
+	// +kubebuilder:validation:Optional
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 // VPCIpamSpec defines the desired state of VPCIpam

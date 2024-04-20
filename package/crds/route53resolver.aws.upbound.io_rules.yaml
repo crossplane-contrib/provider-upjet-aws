@@ -188,9 +188,12 @@ spec:
                           type: string
                         port:
                           description: The port at ip that you want to forward DNS
-                            queries to. Default value is 53
+                            queries to. Default value is 53.
                           type: number
                         protocol:
+                          description: The protocol for the resolver endpoint. Valid
+                            values can be found in the AWS documentation. Default
+                            value is Do53.
                           type: string
                       type: object
                     type: array
@@ -321,9 +324,12 @@ spec:
                           type: string
                         port:
                           description: The port at ip that you want to forward DNS
-                            queries to. Default value is 53
+                            queries to. Default value is 53.
                           type: number
                         protocol:
+                          description: The protocol for the resolver endpoint. Valid
+                            values can be found in the AWS documentation. Default
+                            value is Do53.
                           type: string
                       type: object
                     type: array
@@ -567,9 +573,12 @@ spec:
                           type: string
                         port:
                           description: The port at ip that you want to forward DNS
-                            queries to. Default value is 53
+                            queries to. Default value is 53.
                           type: number
                         protocol:
+                          description: The protocol for the resolver endpoint. Valid
+                            values can be found in the AWS documentation. Default
+                            value is Do53.
                           type: string
                       type: object
                     type: array

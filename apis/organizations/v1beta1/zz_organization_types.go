@@ -106,6 +106,9 @@ type OrganizationObservation struct {
 	// Identifier of the master account
 	MasterAccountID *string `json:"masterAccountId,omitempty" tf:"master_account_id,omitempty"`
 
+	// Name of the master account
+	MasterAccountName *string `json:"masterAccountName,omitempty" tf:"master_account_name,omitempty"`
+
 	// List of organization accounts excluding the master account. For a list including the master account, see the accounts attribute. All elements have these attributes:
 	NonMasterAccounts []NonMasterAccountsObservation `json:"nonMasterAccounts,omitempty" tf:"non_master_accounts,omitempty"`
 

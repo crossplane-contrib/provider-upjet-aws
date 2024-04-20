@@ -77,7 +77,7 @@ type VPCObservation_2 struct {
 	// The IPv4 CIDR block for the VPC. CIDR can be explicitly set or it can be derived from IPAM using ipv4_netmask_length.
 	CidrBlock *string `json:"cidrBlock,omitempty" tf:"cidr_block,omitempty"`
 
-	// The ID of the VPC
+	// DHCP options id of the desired VPC.
 	DHCPOptionsID *string `json:"dhcpOptionsId,omitempty" tf:"dhcp_options_id,omitempty"`
 
 	// The ID of the network ACL created by default on VPC creation

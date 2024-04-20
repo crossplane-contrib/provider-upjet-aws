@@ -71,6 +71,7 @@ type AccountObservation struct {
 	// Parent Organizational Unit ID or Root ID for the account. Defaults to the Organization default Root ID. A configuration must be present for this argument to perform drift detection.
 	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
 
+	// The status of the account in the organization.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.

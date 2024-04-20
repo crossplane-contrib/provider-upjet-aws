@@ -83,7 +83,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The ARN of the encryption key. If no key is specified,
-                      the default `aws/codecommit“ Amazon Web Services managed key
+                      the default `aws/codecommit`` Amazon Web Services managed key
                       is used.
                     type: string
                   kmsKeyIdRef:
@@ -196,7 +196,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The ARN of the encryption key. If no key is specified,
-                      the default `aws/codecommit“ Amazon Web Services managed key
+                      the default `aws/codecommit`` Amazon Web Services managed key
                       is used.
                     type: string
                   kmsKeyIdRef:
@@ -473,7 +473,7 @@ spec:
                     type: string
                   kmsKeyId:
                     description: The ARN of the encryption key. If no key is specified,
-                      the default `aws/codecommit“ Amazon Web Services managed key
+                      the default `aws/codecommit`` Amazon Web Services managed key
                       is used.
                     type: string
                   repositoryId:

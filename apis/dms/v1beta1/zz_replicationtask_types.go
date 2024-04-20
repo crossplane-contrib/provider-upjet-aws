@@ -40,6 +40,9 @@ type ReplicationTaskInitParameters struct {
 	// An escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
 	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
 
+	// A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.
+	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
+
 	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
@@ -98,6 +101,9 @@ type ReplicationTaskObservation struct {
 
 	// An escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
 	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
+
+	// A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.
+	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
@@ -159,6 +165,10 @@ type ReplicationTaskParameters struct {
 	// An escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
 	// +kubebuilder:validation:Optional
 	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
+
+	// A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.
+	// +kubebuilder:validation:Optional
+	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint

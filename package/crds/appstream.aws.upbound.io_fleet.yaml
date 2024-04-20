@@ -81,6 +81,10 @@ spec:
                         desiredInstances:
                           description: Desired number of streaming instances.
                           type: number
+                        desiredSessions:
+                          description: Desired number of user sessions for a multi-session
+                            fleet. This is not allowed for single-session fleets.
+                          type: number
                       type: object
                     type: array
                   description:
@@ -208,6 +212,10 @@ spec:
                   instanceType:
                     description: Instance type to use when launching fleet instances.
                     type: string
+                  maxSessionsPerInstance:
+                    description: The maximum number of user sessions on an instance.
+                      This only applies to multi-session fleets.
+                    type: number
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.
@@ -354,6 +362,10 @@ spec:
                         desiredInstances:
                           description: Desired number of streaming instances.
                           type: number
+                        desiredSessions:
+                          description: Desired number of user sessions for a multi-session
+                            fleet. This is not allowed for single-session fleets.
+                          type: number
                       type: object
                     type: array
                   description:
@@ -481,6 +493,10 @@ spec:
                   instanceType:
                     description: Instance type to use when launching fleet instances.
                     type: string
+                  maxSessionsPerInstance:
+                    description: The maximum number of user sessions on an instance.
+                      This only applies to multi-session fleets.
+                    type: number
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.
@@ -800,6 +816,10 @@ spec:
                         desiredInstances:
                           description: Desired number of streaming instances.
                           type: number
+                        desiredSessions:
+                          description: Desired number of user sessions for a multi-session
+                            fleet. This is not allowed for single-session fleets.
+                          type: number
                         inUse:
                           description: Number of instances in use for streaming.
                           type: number
@@ -867,6 +887,10 @@ spec:
                   instanceType:
                     description: Instance type to use when launching fleet instances.
                     type: string
+                  maxSessionsPerInstance:
+                    description: The maximum number of user sessions on an instance.
+                      This only applies to multi-session fleets.
+                    type: number
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.

@@ -81,7 +81,8 @@ spec:
                     type: string
                   originAccessControlOriginType:
                     description: The type of origin that this Origin Access Control
-                      is for. Valid values are s3, and mediastore.
+                      is for. Valid values are lambda, mediapackagev2, mediastore,
+                      and s3.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -120,7 +121,8 @@ spec:
                     type: string
                   originAccessControlOriginType:
                     description: The type of origin that this Origin Access Control
-                      is for. Valid values are s3, and mediastore.
+                      is for. Valid values are lambda, mediapackagev2, mediastore,
+                      and s3.
                     type: string
                   signingBehavior:
                     description: 'Specifies which requests CloudFront signs. Specify
@@ -336,7 +338,8 @@ spec:
                     type: string
                   originAccessControlOriginType:
                     description: The type of origin that this Origin Access Control
-                      is for. Valid values are s3, and mediastore.
+                      is for. Valid values are lambda, mediapackagev2, mediastore,
+                      and s3.
                     type: string
                   signingBehavior:
                     description: 'Specifies which requests CloudFront signs. Specify
