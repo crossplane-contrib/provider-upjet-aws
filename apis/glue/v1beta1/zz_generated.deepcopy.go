@@ -3840,6 +3840,11 @@ func (in *EncryptionAtRestInitParameters) DeepCopyInto(out *EncryptionAtRestInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.CatalogEncryptionServiceRole != nil {
+		in, out := &in.CatalogEncryptionServiceRole, &out.CatalogEncryptionServiceRole
+		*out = new(string)
+		**out = **in
+	}
 	if in.SseAwsKMSKeyID != nil {
 		in, out := &in.SseAwsKMSKeyID, &out.SseAwsKMSKeyID
 		*out = new(string)
@@ -3875,6 +3880,11 @@ func (in *EncryptionAtRestObservation) DeepCopyInto(out *EncryptionAtRestObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.CatalogEncryptionServiceRole != nil {
+		in, out := &in.CatalogEncryptionServiceRole, &out.CatalogEncryptionServiceRole
+		*out = new(string)
+		**out = **in
+	}
 	if in.SseAwsKMSKeyID != nil {
 		in, out := &in.SseAwsKMSKeyID, &out.SseAwsKMSKeyID
 		*out = new(string)
@@ -3897,6 +3907,11 @@ func (in *EncryptionAtRestParameters) DeepCopyInto(out *EncryptionAtRestParamete
 	*out = *in
 	if in.CatalogEncryptionMode != nil {
 		in, out := &in.CatalogEncryptionMode, &out.CatalogEncryptionMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.CatalogEncryptionServiceRole != nil {
+		in, out := &in.CatalogEncryptionServiceRole, &out.CatalogEncryptionServiceRole
 		*out = new(string)
 		**out = **in
 	}

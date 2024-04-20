@@ -95,6 +95,14 @@ spec:
                   comment:
                     description: Comment.
                     type: string
+                  keyValueStoreAssociations:
+                    description: List of aws_cloudfront_key_value_store ARNs to be
+                      associated to the function. AWS limits associations to on key
+                      value store per function.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   publish:
                     description: Whether to publish creation/change as Live CloudFront
                       Function Version. Defaults to true.
@@ -126,6 +134,14 @@ spec:
                   comment:
                     description: Comment.
                     type: string
+                  keyValueStoreAssociations:
+                    description: List of aws_cloudfront_key_value_store ARNs to be
+                      associated to the function. AWS limits associations to on key
+                      value store per function.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   publish:
                     description: Whether to publish creation/change as Live CloudFront
                       Function Version. Defaults to true.
@@ -328,6 +344,14 @@ spec:
                     type: string
                   id:
                     type: string
+                  keyValueStoreAssociations:
+                    description: List of aws_cloudfront_key_value_store ARNs to be
+                      associated to the function. AWS limits associations to on key
+                      value store per function.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   liveStageEtag:
                     description: ETag hash of any LIVE stage of the function.
                     type: string

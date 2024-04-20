@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Cluster is the Schema for the Clusters API. Manages an RDS Aurora
-          Cluster
+          Cluster or a RDS Multi-AZ DB Cluster
         properties:
           apiVersion:
             description: |-

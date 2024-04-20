@@ -111,6 +111,9 @@ type EIPObservation struct {
 	// Contains the private IP address (if in VPC).
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
 
+	// The DNS pointer (PTR) record for the IP address.
+	PtrRecord *string `json:"ptrRecord,omitempty" tf:"ptr_record,omitempty"`
+
 	// Public DNS associated with the Elastic IP address.
 	PublicDNS *string `json:"publicDns,omitempty" tf:"public_dns,omitempty"`
 

@@ -33,10 +33,10 @@ metadata:
   name: example
 spec:
   forProvider:
-    permanentDeletionTimeInDays: 7
-    private_certificate_configuration:
-    - key_algorithm: RSA_4096
-      signing_algorithm: SHA512WITHRSA
+    certificateAuthorityConfiguration:
+    - keyAlgorithm: RSA_4096
+      signingAlgorithm: SHA512WITHRSA
       subject:
-      - common_name: example.com
+      - commonName: example.com
+    permanentDeletionTimeInDays: 7
     region: us-west-1

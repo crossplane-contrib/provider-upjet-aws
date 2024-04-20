@@ -341,7 +341,10 @@ spec:
                       Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
                     type: string
                   engineVersion:
-                    description: Database engine version.
+                    description: Database engine version. Please note that to upgrade
+                      the engine_version of the instance, it must be done on the aws_rds_cluster
+                      engine_version. Trying to upgrade in aws_cluster_instance will
+                      not update the engine_version.
                     type: string
                   instanceClass:
                     description: Instance class to use. For details on CPU and memory,
@@ -838,7 +841,10 @@ spec:
                       Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
                     type: string
                   engineVersion:
-                    description: Database engine version.
+                    description: Database engine version. Please note that to upgrade
+                      the engine_version of the instance, it must be done on the aws_rds_cluster
+                      engine_version. Trying to upgrade in aws_cluster_instance will
+                      not update the engine_version.
                     type: string
                   instanceClass:
                     description: Instance class to use. For details on CPU and memory,
@@ -1282,7 +1288,10 @@ spec:
                       Valid Values: aurora-mysql, aurora-postgresql, mysql, postgres.(Note that mysql and postgres are Multi-AZ RDS clusters).
                     type: string
                   engineVersion:
-                    description: Database engine version.
+                    description: Database engine version. Please note that to upgrade
+                      the engine_version of the instance, it must be done on the aws_rds_cluster
+                      engine_version. Trying to upgrade in aws_cluster_instance will
+                      not update the engine_version.
                     type: string
                   engineVersionActual:
                     description: Database engine version

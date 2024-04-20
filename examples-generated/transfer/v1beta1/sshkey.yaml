@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    body: '... SSH key ...'
+    body: ${trimspace(tls_private_key.example.public_key_openssh)}
     region: us-west-1
     serverIdSelector:
       matchLabels:

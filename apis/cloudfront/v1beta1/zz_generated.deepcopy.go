@@ -4170,6 +4170,17 @@ func (in *FunctionInitParameters) DeepCopyInto(out *FunctionInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyValueStoreAssociations != nil {
+		in, out := &in.KeyValueStoreAssociations, &out.KeyValueStoreAssociations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Publish != nil {
 		in, out := &in.Publish, &out.Publish
 		*out = new(bool)
@@ -4247,6 +4258,17 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KeyValueStoreAssociations != nil {
+		in, out := &in.KeyValueStoreAssociations, &out.KeyValueStoreAssociations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.LiveStageEtag != nil {
 		in, out := &in.LiveStageEtag, &out.LiveStageEtag
 		*out = new(string)
@@ -4287,6 +4309,17 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 		in, out := &in.Comment, &out.Comment
 		*out = new(string)
 		**out = **in
+	}
+	if in.KeyValueStoreAssociations != nil {
+		in, out := &in.KeyValueStoreAssociations, &out.KeyValueStoreAssociations
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Publish != nil {
 		in, out := &in.Publish, &out.Publish

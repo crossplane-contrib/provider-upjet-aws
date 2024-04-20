@@ -237,8 +237,8 @@ spec:
                     type: string
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
-                      that you want to configure for your SFTP server. Fields documented
-                      below.
+                      that you want to configure for your SFTP server. See endpoint_details
+                      block below for details.
                     items:
                       properties:
                         addressAllocationIds:
@@ -529,7 +529,7 @@ spec:
                     type: object
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server.
+                      server. See protocol_details block below for details.
                     items:
                       properties:
                         as2Transports:
@@ -572,6 +572,19 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  s3StorageOptions:
+                    description: Specifies whether or not performance for your Amazon
+                      S3 directories is optimized. This is disabled by default. See
+                      s3_storage_options block below for details.
+                    items:
+                      properties:
+                        directoryListingOptimization:
+                          description: Specifies whether or not performance for your
+                            Amazon S3 directories is optimized. Valid values are DISABLED,
+                            ENABLED.
+                          type: string
+                      type: object
+                    type: array
                   securityPolicyName:
                     description: 'Specifies the name of the security policy that is
                       attached to the server. Default value is: TransferSecurityPolicy-2018-11.
@@ -596,13 +609,14 @@ spec:
                       users with an identity_provider_type of API_GATEWAY.'
                     type: string
                   workflowDetails:
-                    description: Specifies the workflow details. See Workflow Details
-                      below.
+                    description: Specifies the workflow details. See workflow_details
+                      block below for details.
                     items:
                       properties:
                         onPartialUpload:
                           description: A trigger that starts a workflow if a file
                             is only partially uploaded. See Workflow Detail below.
+                            See on_partial_upload block below for details.
                           items:
                             properties:
                               executionRole:
@@ -618,8 +632,8 @@ spec:
                           type: array
                         onUpload:
                           description: 'A trigger that starts a workflow: the workflow
-                            begins to execute after a file is uploaded. See Workflow
-                            Detail below.'
+                            begins to execute after a file is uploaded. See on_upload
+                            block below for details.'
                           items:
                             properties:
                               executionRole:
@@ -815,8 +829,8 @@ spec:
                     type: string
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
-                      that you want to configure for your SFTP server. Fields documented
-                      below.
+                      that you want to configure for your SFTP server. See endpoint_details
+                      block below for details.
                     items:
                       properties:
                         addressAllocationIds:
@@ -1049,7 +1063,7 @@ spec:
                     type: object
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server.
+                      server. See protocol_details block below for details.
                     items:
                       properties:
                         as2Transports:
@@ -1088,6 +1102,19 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  s3StorageOptions:
+                    description: Specifies whether or not performance for your Amazon
+                      S3 directories is optimized. This is disabled by default. See
+                      s3_storage_options block below for details.
+                    items:
+                      properties:
+                        directoryListingOptimization:
+                          description: Specifies whether or not performance for your
+                            Amazon S3 directories is optimized. Valid values are DISABLED,
+                            ENABLED.
+                          type: string
+                      type: object
+                    type: array
                   securityPolicyName:
                     description: 'Specifies the name of the security policy that is
                       attached to the server. Default value is: TransferSecurityPolicy-2018-11.
@@ -1112,13 +1139,14 @@ spec:
                       users with an identity_provider_type of API_GATEWAY.'
                     type: string
                   workflowDetails:
-                    description: Specifies the workflow details. See Workflow Details
-                      below.
+                    description: Specifies the workflow details. See workflow_details
+                      block below for details.
                     items:
                       properties:
                         onPartialUpload:
                           description: A trigger that starts a workflow if a file
                             is only partially uploaded. See Workflow Detail below.
+                            See on_partial_upload block below for details.
                           items:
                             properties:
                               executionRole:
@@ -1134,8 +1162,8 @@ spec:
                           type: array
                         onUpload:
                           description: 'A trigger that starts a workflow: the workflow
-                            begins to execute after a file is uploaded. See Workflow
-                            Detail below.'
+                            begins to execute after a file is uploaded. See on_upload
+                            block below for details.'
                           items:
                             properties:
                               executionRole:
@@ -1346,8 +1374,8 @@ spec:
                     type: string
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
-                      that you want to configure for your SFTP server. Fields documented
-                      below.
+                      that you want to configure for your SFTP server. See endpoint_details
+                      block below for details.
                     items:
                       properties:
                         addressAllocationIds:
@@ -1441,7 +1469,7 @@ spec:
                     type: string
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server.
+                      server. See protocol_details block below for details.
                     items:
                       properties:
                         as2Transports:
@@ -1480,6 +1508,19 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  s3StorageOptions:
+                    description: Specifies whether or not performance for your Amazon
+                      S3 directories is optimized. This is disabled by default. See
+                      s3_storage_options block below for details.
+                    items:
+                      properties:
+                        directoryListingOptimization:
+                          description: Specifies whether or not performance for your
+                            Amazon S3 directories is optimized. Valid values are DISABLED,
+                            ENABLED.
+                          type: string
+                      type: object
+                    type: array
                   securityPolicyName:
                     description: 'Specifies the name of the security policy that is
                       attached to the server. Default value is: TransferSecurityPolicy-2018-11.
@@ -1512,13 +1553,14 @@ spec:
                       users with an identity_provider_type of API_GATEWAY.'
                     type: string
                   workflowDetails:
-                    description: Specifies the workflow details. See Workflow Details
-                      below.
+                    description: Specifies the workflow details. See workflow_details
+                      block below for details.
                     items:
                       properties:
                         onPartialUpload:
                           description: A trigger that starts a workflow if a file
                             is only partially uploaded. See Workflow Detail below.
+                            See on_partial_upload block below for details.
                           items:
                             properties:
                               executionRole:
@@ -1534,8 +1576,8 @@ spec:
                           type: array
                         onUpload:
                           description: 'A trigger that starts a workflow: the workflow
-                            begins to execute after a file is uploaded. See Workflow
-                            Detail below.'
+                            begins to execute after a file is uploaded. See on_upload
+                            block below for details.'
                           items:
                             properties:
                               executionRole:

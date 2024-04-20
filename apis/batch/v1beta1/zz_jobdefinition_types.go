@@ -263,6 +263,9 @@ type JobDefinitionInitParameters struct {
 	// provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
 	ContainerProperties *string `json:"containerProperties,omitempty" tf:"container_properties,omitempty"`
 
+	// When updating a job definition a new revision is created. This parameter determines if the previous version is deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
+	DeregisterOnNewRevision *bool `json:"deregisterOnNewRevision,omitempty" tf:"deregister_on_new_revision,omitempty"`
+
 	// A valid eks properties. This parameter is only valid if the type parameter is container.
 	EksProperties []EksPropertiesInitParameters `json:"eksProperties,omitempty" tf:"eks_properties,omitempty"`
 
@@ -313,6 +316,9 @@ type JobDefinitionObservation struct {
 	// A valid container properties
 	// provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
 	ContainerProperties *string `json:"containerProperties,omitempty" tf:"container_properties,omitempty"`
+
+	// When updating a job definition a new revision is created. This parameter determines if the previous version is deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
+	DeregisterOnNewRevision *bool `json:"deregisterOnNewRevision,omitempty" tf:"deregister_on_new_revision,omitempty"`
 
 	// A valid eks properties. This parameter is only valid if the type parameter is container.
 	EksProperties []EksPropertiesObservation `json:"eksProperties,omitempty" tf:"eks_properties,omitempty"`
@@ -368,6 +374,10 @@ type JobDefinitionParameters struct {
 	// provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
 	// +kubebuilder:validation:Optional
 	ContainerProperties *string `json:"containerProperties,omitempty" tf:"container_properties,omitempty"`
+
+	// When updating a job definition a new revision is created. This parameter determines if the previous version is deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
+	// +kubebuilder:validation:Optional
+	DeregisterOnNewRevision *bool `json:"deregisterOnNewRevision,omitempty" tf:"deregister_on_new_revision,omitempty"`
 
 	// A valid eks properties. This parameter is only valid if the type parameter is container.
 	// +kubebuilder:validation:Optional

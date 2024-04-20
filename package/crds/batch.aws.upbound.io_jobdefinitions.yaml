@@ -78,6 +78,11 @@ spec:
                       A valid container properties
                       provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
                     type: string
+                  deregisterOnNewRevision:
+                    description: When updating a job definition a new revision is
+                      created. This parameter determines if the previous version is
+                      deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
+                    type: boolean
                   eksProperties:
                     description: A valid eks properties. This parameter is only valid
                       if the type parameter is container.
@@ -405,6 +410,11 @@ spec:
                       A valid container properties
                       provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
                     type: string
+                  deregisterOnNewRevision:
+                    description: When updating a job definition a new revision is
+                      created. This parameter determines if the previous version is
+                      deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
+                    type: boolean
                   eksProperties:
                     description: A valid eks properties. This parameter is only valid
                       if the type parameter is container.
@@ -901,6 +911,11 @@ spec:
                       A valid container properties
                       provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
                     type: string
+                  deregisterOnNewRevision:
+                    description: When updating a job definition a new revision is
+                      created. This parameter determines if the previous version is
+                      deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
+                    type: boolean
                   eksProperties:
                     description: A valid eks properties. This parameter is only valid
                       if the type parameter is container.

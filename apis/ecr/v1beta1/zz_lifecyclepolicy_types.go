@@ -15,7 +15,7 @@ import (
 
 type LifecyclePolicyInitParameters struct {
 
-	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs.
+	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the policy argument.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Name of the repository to apply the policy.
@@ -34,7 +34,7 @@ type LifecyclePolicyInitParameters struct {
 type LifecyclePolicyObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs.
+	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the policy argument.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The registry ID where the repository was created.
@@ -46,7 +46,7 @@ type LifecyclePolicyObservation struct {
 
 type LifecyclePolicyParameters struct {
 
-	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs.
+	// The policy document. This is a JSON formatted string. See more details about Policy Parameters in the official AWS docs. Consider using the aws_ecr_lifecycle_policy_document data_source to generate/manage the JSON document used for the policy argument.
 	// +kubebuilder:validation:Optional
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 

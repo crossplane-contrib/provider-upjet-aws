@@ -27,7 +27,7 @@ type AmisObservation struct {
 	// Identifier of the AMI.
 	Image *string `json:"image,omitempty" tf:"image,omitempty"`
 
-	// Name of the AMI.
+	// The name of the Workflow parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Region of the AMI.
@@ -106,6 +106,9 @@ type ImageInitParameters struct {
 	// Whether additional information about the image being created is collected. Defaults to true.
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
 
+	// Amazon Resource Name (ARN) of the service-linked role to be used by Image Builder to execute workflows.
+	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
 	// Amazon Resource Name (ARN) of the image recipe.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.ImageRecipe
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
@@ -141,6 +144,9 @@ type ImageInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block with the workflow configuration. Detailed below.
+	Workflow []WorkflowInitParameters `json:"workflow,omitempty" tf:"workflow,omitempty"`
 }
 
 type ImageObservation struct {
@@ -159,6 +165,9 @@ type ImageObservation struct {
 
 	// Whether additional information about the image being created is collected. Defaults to true.
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
+
+	// Amazon Resource Name (ARN) of the service-linked role to be used by Image Builder to execute workflows.
+	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -196,6 +205,9 @@ type ImageObservation struct {
 
 	// Version of the image.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Configuration block with the workflow configuration. Detailed below.
+	Workflow []WorkflowObservation `json:"workflow,omitempty" tf:"workflow,omitempty"`
 }
 
 type ImageParameters struct {
@@ -221,6 +233,10 @@ type ImageParameters struct {
 	// Whether additional information about the image being created is collected. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
+
+	// Amazon Resource Name (ARN) of the service-linked role to be used by Image Builder to execute workflows.
+	// +kubebuilder:validation:Optional
+	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
 
 	// Amazon Resource Name (ARN) of the image recipe.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.ImageRecipe
@@ -268,6 +284,10 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block with the workflow configuration. Detailed below.
+	// +kubebuilder:validation:Optional
+	Workflow []WorkflowParameters `json:"workflow,omitempty" tf:"workflow,omitempty"`
 }
 
 type ImageScanningConfigurationInitParameters struct {
@@ -341,6 +361,84 @@ type OutputResourcesObservation struct {
 }
 
 type OutputResourcesParameters struct {
+}
+
+type WorkflowInitParameters struct {
+
+	// The action to take if the workflow fails. Must be one of CONTINUE or ABORT.
+	OnFailure *string `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// The parallel group in which to run a test Workflow.
+	ParallelGroup *string `json:"parallelGroup,omitempty" tf:"parallel_group,omitempty"`
+
+	// Configuration block for the workflow parameters. Detailed below.
+	Parameter []WorkflowParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Image Builder Workflow.
+	WorkflowArn *string `json:"workflowArn,omitempty" tf:"workflow_arn,omitempty"`
+}
+
+type WorkflowObservation struct {
+
+	// The action to take if the workflow fails. Must be one of CONTINUE or ABORT.
+	OnFailure *string `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// The parallel group in which to run a test Workflow.
+	ParallelGroup *string `json:"parallelGroup,omitempty" tf:"parallel_group,omitempty"`
+
+	// Configuration block for the workflow parameters. Detailed below.
+	Parameter []WorkflowParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Image Builder Workflow.
+	WorkflowArn *string `json:"workflowArn,omitempty" tf:"workflow_arn,omitempty"`
+}
+
+type WorkflowParameterInitParameters struct {
+
+	// The name of the Workflow parameter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the Workflow parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type WorkflowParameterObservation struct {
+
+	// The name of the Workflow parameter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the Workflow parameter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type WorkflowParameterParameters struct {
+
+	// The name of the Workflow parameter.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The value of the Workflow parameter.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type WorkflowParameters struct {
+
+	// The action to take if the workflow fails. Must be one of CONTINUE or ABORT.
+	// +kubebuilder:validation:Optional
+	OnFailure *string `json:"onFailure,omitempty" tf:"on_failure,omitempty"`
+
+	// The parallel group in which to run a test Workflow.
+	// +kubebuilder:validation:Optional
+	ParallelGroup *string `json:"parallelGroup,omitempty" tf:"parallel_group,omitempty"`
+
+	// Configuration block for the workflow parameters. Detailed below.
+	// +kubebuilder:validation:Optional
+	Parameter []WorkflowParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Amazon Resource Name (ARN) of the Image Builder Workflow.
+	// +kubebuilder:validation:Optional
+	WorkflowArn *string `json:"workflowArn" tf:"workflow_arn,omitempty"`
 }
 
 // ImageSpec defines the desired state of Image
