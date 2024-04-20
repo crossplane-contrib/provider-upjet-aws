@@ -1117,10 +1117,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// eks
 	//
-	// my_cluster:my_eks_addon
+	// import EKS access entry using the cluster_name and principal_arn separated by a colon (:).
+	"aws_eks_access_entry": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_name }}:{{ .parameters.principal_arn }}"),
+	// import EKS access entry using the cluster_name principal_arn and policy_arn separated by a (#) which the tf provider docs incorrectly describe as a colon.
+	"aws_eks_access_policy_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.cluster_name }}#{{ .parameters.principal_arn }}#{{ .parameters.policy_arn }}"),
 	// "aws_eks_addon": config.TemplatedStringAsIdentifier("addon_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
+	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierFromProvider(":", "cluster_name", "addon_name"),
-	//
+	// import EKS cluster using the name.
 	"aws_eks_cluster": config.NameAsIdentifier,
 	// my_cluster:my_fargate_profile
 	"aws_eks_fargate_profile": FormattedIdentifierUserDefinedNameLast("fargate_profile_name", ":", "cluster_name"),
