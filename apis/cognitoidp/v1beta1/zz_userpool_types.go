@@ -398,10 +398,13 @@ type LambdaConfigInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PreSignUpSelector *v1.Selector `json:"preSignUpSelector,omitempty" tf:"-"`
 
-	// Allow to customize identity token claims before token generation.
+	// Allow to customize identity token claims before token generation. Set this parameter for legacy purposes; for new instances of pre token generation triggers, set the lambda_arn of pre_token_generation_config.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	PreTokenGeneration *string `json:"preTokenGeneration,omitempty" tf:"pre_token_generation,omitempty"`
+
+	// Allow to customize access tokens. See pre_token_configuration_type
+	PreTokenGenerationConfig []PreTokenGenerationConfigInitParameters `json:"preTokenGenerationConfig,omitempty" tf:"pre_token_generation_config,omitempty"`
 
 	// Reference to a Function in lambda to populate preTokenGeneration.
 	// +kubebuilder:validation:Optional
@@ -470,8 +473,11 @@ type LambdaConfigObservation struct {
 	// Pre-registration AWS Lambda trigger.
 	PreSignUp *string `json:"preSignUp,omitempty" tf:"pre_sign_up,omitempty"`
 
-	// Allow to customize identity token claims before token generation.
+	// Allow to customize identity token claims before token generation. Set this parameter for legacy purposes; for new instances of pre token generation triggers, set the lambda_arn of pre_token_generation_config.
 	PreTokenGeneration *string `json:"preTokenGeneration,omitempty" tf:"pre_token_generation,omitempty"`
+
+	// Allow to customize access tokens. See pre_token_configuration_type
+	PreTokenGenerationConfig []PreTokenGenerationConfigObservation `json:"preTokenGenerationConfig,omitempty" tf:"pre_token_generation_config,omitempty"`
 
 	// User migration Lambda config type.
 	UserMigration *string `json:"userMigration,omitempty" tf:"user_migration,omitempty"`
@@ -602,11 +608,15 @@ type LambdaConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	PreSignUpSelector *v1.Selector `json:"preSignUpSelector,omitempty" tf:"-"`
 
-	// Allow to customize identity token claims before token generation.
+	// Allow to customize identity token claims before token generation. Set this parameter for legacy purposes; for new instances of pre token generation triggers, set the lambda_arn of pre_token_generation_config.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PreTokenGeneration *string `json:"preTokenGeneration,omitempty" tf:"pre_token_generation,omitempty"`
+
+	// Allow to customize access tokens. See pre_token_configuration_type
+	// +kubebuilder:validation:Optional
+	PreTokenGenerationConfig []PreTokenGenerationConfigParameters `json:"preTokenGenerationConfig,omitempty" tf:"pre_token_generation_config,omitempty"`
 
 	// Reference to a Function in lambda to populate preTokenGeneration.
 	// +kubebuilder:validation:Optional
@@ -741,6 +751,35 @@ type PasswordPolicyParameters struct {
 	// In the password policy you have set, refers to the number of days a temporary password is valid. If the user does not sign-in during this time, their password will need to be reset by an administrator.
 	// +kubebuilder:validation:Optional
 	TemporaryPasswordValidityDays *float64 `json:"temporaryPasswordValidityDays,omitempty" tf:"temporary_password_validity_days,omitempty"`
+}
+
+type PreTokenGenerationConfigInitParameters struct {
+
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0.
+	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
+}
+
+type PreTokenGenerationConfigObservation struct {
+
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	LambdaArn *string `json:"lambdaArn,omitempty" tf:"lambda_arn,omitempty"`
+
+	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0.
+	LambdaVersion *string `json:"lambdaVersion,omitempty" tf:"lambda_version,omitempty"`
+}
+
+type PreTokenGenerationConfigParameters struct {
+
+	// The Lambda Amazon Resource Name of the Lambda function that Amazon Cognito triggers to send SMS notifications to users.
+	// +kubebuilder:validation:Optional
+	LambdaArn *string `json:"lambdaArn" tf:"lambda_arn,omitempty"`
+
+	// The Lambda version represents the signature of the "version" attribute in the "event" information Amazon Cognito passes to your pre Token Generation Lambda function. The supported values are V1_0, V2_0.
+	// +kubebuilder:validation:Optional
+	LambdaVersion *string `json:"lambdaVersion" tf:"lambda_version,omitempty"`
 }
 
 type RecoveryMechanismInitParameters struct {

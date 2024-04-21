@@ -85,11 +85,14 @@ type ClusterInitParameters struct {
 	// The name of the IAM role to be used when making API calls to the Directory Service.
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
 
-	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the Aurora Userguide documentation for more information.
+	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the User Guide for Aurora for more information.
 	EnableGlobalWriteForwarding *bool `json:"enableGlobalWriteForwarding,omitempty" tf:"enable_global_write_forwarding,omitempty"`
 
 	// Enable HTTP endpoint (data API). Only valid when engine_mode is set to serverless.
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
+
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
 	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	// +listType=set
@@ -296,11 +299,14 @@ type ClusterObservation struct {
 	// The name of the IAM role to be used when making API calls to the Directory Service.
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
 
-	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the Aurora Userguide documentation for more information.
+	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the User Guide for Aurora for more information.
 	EnableGlobalWriteForwarding *bool `json:"enableGlobalWriteForwarding,omitempty" tf:"enable_global_write_forwarding,omitempty"`
 
 	// Enable HTTP endpoint (data API). Only valid when engine_mode is set to serverless.
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
+
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
 	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	// +listType=set
@@ -512,13 +518,17 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
 
-	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the Aurora Userguide documentation for more information.
+	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the User Guide for Aurora for more information.
 	// +kubebuilder:validation:Optional
 	EnableGlobalWriteForwarding *bool `json:"enableGlobalWriteForwarding,omitempty" tf:"enable_global_write_forwarding,omitempty"`
 
 	// Enable HTTP endpoint (data API). Only valid when engine_mode is set to serverless.
 	// +kubebuilder:validation:Optional
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
+
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	// +kubebuilder:validation:Optional
+	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
 	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	// +kubebuilder:validation:Optional

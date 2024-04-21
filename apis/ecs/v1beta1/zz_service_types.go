@@ -187,7 +187,7 @@ type IssuerCertAuthorityParameters struct {
 
 	// The ARN of the aws_acmpca_certificate_authority used to create the TLS Certificates.
 	// +kubebuilder:validation:Optional
-	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn,omitempty" tf:"aws_pca_authority_arn,omitempty"`
+	AwsPcaAuthorityArn *string `json:"awsPcaAuthorityArn" tf:"aws_pca_authority_arn,omitempty"`
 }
 
 type LoadBalancerInitParameters struct {
