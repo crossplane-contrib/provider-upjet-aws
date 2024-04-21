@@ -66,6 +66,10 @@ Use `monolith` instead of `ec2` to build and publish the monolithic provider.
 
 Follow the guide [here](https://github.com/crossplane/upjet/blob/v0.10.0/docs/add-new-resource-short.md).
 
+When creating new manifests in the `examples/` directory, please using the `us-west-1` region, as its inconsistent number
+of availability zones can produce different results when run on different AWS accounts. Any other region available to
+all accounts by default is fine.
+
 ## Report a Bug
 
 For filing bugs, suggesting improvements, or requesting new features, please
