@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     accountId: "${data.aws_account_id}"
-    region: us-west-1
+    region: us-east-2
     stackSetNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -35,7 +35,7 @@ spec:
         testing.upbound.io/example-name: AWSCloudFormationStackSetAdministrationRole
     parameters:
       VPCCidr: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2
     templateBody: |
       {
         "Parameters" : {

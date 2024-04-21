@@ -14,4 +14,4 @@ spec:
   forProvider:
     definitions:
     - rate(12 hours)
-    region: us-west-1
+    region: us-east-2

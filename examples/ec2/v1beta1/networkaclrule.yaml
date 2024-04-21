@@ -15,7 +15,7 @@ spec:
     fromPort: 22
     networkAclId: ${aws_network_acl.bar.id}
     protocol: tcp
-    region: us-west-1
+    region: us-east-2
     ruleAction: allow
     ruleNumber: 200
     toPort: 22

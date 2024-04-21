@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: production
     patchGroup: patch-group-name
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -33,4 +33,4 @@ spec:
     approvedPatches:
     - KB123456
     name: patch-baseline
-    region: us-west-1
+    region: us-east-2

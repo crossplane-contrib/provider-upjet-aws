@@ -22,7 +22,7 @@ spec:
         resourceArnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     tags:
       Tag1: Value1
       Tag2: Value2
@@ -39,7 +39,7 @@ spec:
   forProvider:
     capacity: 100
     name: example
-    region: us-west-1
+    region: us-east-2
     ruleGroup:
     - rulesSource:
       - statelessRulesAndCustomActions:

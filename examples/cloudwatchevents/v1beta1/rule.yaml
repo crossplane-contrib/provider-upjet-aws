@@ -17,7 +17,7 @@ spec:
           "AWS Console Sign In via CloudTrail"
         ]
       }
-    region: us-west-1
+    region: us-east-2
     eventBusNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rule-bus
@@ -32,4 +32,4 @@ metadata:
   name: rule-bus
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

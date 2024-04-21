@@ -23,7 +23,7 @@ spec:
               "Effect": "Deny",
               "Action": "glacier:DeleteArchive",
               "Resource": [
-                  "arn:aws:glacier:us-west-1:153891904029:vaults/example"
+                  "arn:aws:glacier:us-east-2:153891904029:vaults/example"
               ],
               "Condition": {
                   "NumericLessThan" : {
@@ -33,7 +33,7 @@ spec:
             }
         ]
       }
-    region: us-west-1
+    region: us-east-2
     vaultNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -50,4 +50,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

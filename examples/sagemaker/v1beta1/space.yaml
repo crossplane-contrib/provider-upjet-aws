@@ -16,7 +16,7 @@ spec:
     domainIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-sage
-    region: us-west-1
+    region: us-east-2
     spaceName: example
 
 ---
@@ -42,7 +42,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: example-sage-role
     domainName: example
-    region: us-west-1
+    region: us-east-2
     subnetIdRefs:
     - name: sample-subnet1-sage
     vpcIdSelector:
@@ -87,8 +87,8 @@ metadata:
     testing.upbound.io/example-name: sample-subnet1-sage
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc-sage
     cidrBlock: 172.16.10.0/24
@@ -103,7 +103,7 @@ metadata:
     testing.upbound.io/example-name: sample-vpc-sage
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpcSage

@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     disabled: false
-    region: us-west-1
+    region: us-east-2
     route:
     - host: 127.0.0.1
       port: 8081
@@ -39,5 +39,5 @@ metadata:
   name: default
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     requireEncryption: true

@@ -14,5 +14,5 @@ spec:
   forProvider:
     bucketName: becket_name
     endpointType: target
-    region: us-west-1
+    region: us-east-2
     serviceAccessRoleArn: arn:aws:iam::153891904029:role/dms_full_access_role

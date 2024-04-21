@@ -18,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     cooldown: 300
-    region: us-west-1
+    region: us-east-2
     scalingAdjustment: 4
 
 ---
@@ -34,9 +34,9 @@ metadata:
   name: upbound-example-test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     availabilityZones:
-    - us-west-1a
+    - us-east-2a
     waitForCapacityTimeout: "0"
     maxSize: 5
     minSize: 2
@@ -66,4 +66,4 @@ spec:
   forProvider:
     imageId: ${data.aws_ami.ubuntu.id}
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2

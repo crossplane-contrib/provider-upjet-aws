@@ -12,7 +12,7 @@ spec:
   forProvider:
     identifier: https://example.com
     name: example
-    region: us-west-1
+    region: us-east-2
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: pool
@@ -28,4 +28,4 @@ metadata:
 spec:
   forProvider:
     name: pool
-    region: us-west-1
+    region: us-east-2

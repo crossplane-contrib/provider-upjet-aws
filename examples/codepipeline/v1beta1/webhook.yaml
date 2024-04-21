@@ -21,7 +21,7 @@ spec:
     filter:
     - jsonPath: $.ref
       matchEquals: refs/heads/{Branch}
-    region: us-west-1
+    region: us-east-2
     targetAction: Source
     targetPipelineSelector:
       matchLabels:
@@ -51,7 +51,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: codepipeline_bucket
       type: S3
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: codepipeline_role
@@ -134,4 +134,4 @@ metadata:
   name: codepipeline-bucket
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

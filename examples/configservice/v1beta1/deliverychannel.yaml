@@ -12,7 +12,7 @@ metadata:
   name: test-channel
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     s3BucketNameSelector:
       matchLabels:
         testing.upbound.io/example-name: b
@@ -30,7 +30,7 @@ metadata:
   name: test-recorder
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: r
@@ -76,7 +76,7 @@ metadata:
 spec:
   forProvider:
     forceDestroy: true
-    region: us-west-1
+    region: us-east-2
 
 ---
 

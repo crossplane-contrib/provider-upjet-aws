@@ -13,7 +13,7 @@ metadata:
   name: demo
 spec:
   forProvider:
-    region: us-east-1 # Not available in us-west-1
+    region: us-east-1 # Not available in us-east-2
 ---
 apiVersion: amp.aws.upbound.io/v1beta1
 kind: RuleGroupNamespace

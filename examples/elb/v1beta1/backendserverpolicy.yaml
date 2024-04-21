@@ -19,7 +19,7 @@ spec:
         testing.upbound.io/example-name: wu-tang
     policyNames:
     - wu-tang-root-ca-backend-auth-policy
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -35,14 +35,14 @@ metadata:
 spec:
   forProvider:
     availabilityZones:
-    - us-west-1a
+    - us-east-2a
     listener:
     - instancePort: 443
       instanceProtocol: http
       lbPort: 443
       lbProtocol: https
-      sslCertificateId: arn:aws:acm:us-west-1:153891904029:certificate/3761707c-a179-4137-b133-a2bffd9fd1c7
-    region: us-west-1
+      sslCertificateId: arn:aws:acm:us-east-2:153891904029:certificate/3761707c-a179-4137-b133-a2bffd9fd1c7
+    region: us-east-2
     tags:
       Name: wu-tang
 
@@ -88,7 +88,7 @@ spec:
         -----END CERTIFICATE-----
     policyName: wu-tang-ca-pubkey-policy
     policyTypeName: PublicKeyPolicyType
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -112,4 +112,4 @@ spec:
           testing.upbound.io/example-name:  wu-tang-ca-pubkey-policy
     policyName: wu-tang-root-ca-backend-auth-policy
     policyTypeName: BackendServerAuthenticationPolicyType
-    region: us-west-1
+    region: us-east-2

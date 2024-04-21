@@ -15,14 +15,14 @@ spec:
   forProvider:
     name: example
     component:
-    - componentArn: arn:aws:imagebuilder:us-west-1:153891904029:component/test-component/1.0.0/1
+    - componentArn: arn:aws:imagebuilder:us-east-2:153891904029:component/test-component/1.0.0/1
     containerType: DOCKER
     dockerfileTemplateData: |
       FROM {{{ imagebuilder:parentImage }}}
       {{{ imagebuilder:environments }}}
       {{{ imagebuilder:components }}}
-    parentImage: arn:aws:imagebuilder:us-west-1:aws:image/amazon-linux-x86-latest/x.x.x
-    region: us-west-1
+    parentImage: arn:aws:imagebuilder:us-east-2:aws:image/amazon-linux-x86-latest/x.x.x
+    region: us-east-2
     targetRepository:
     - repositoryNameSelector:
         matchLabels:
@@ -40,7 +40,7 @@ metadata:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     imageScanningConfiguration:
       - scanOnPush: true
     imageTagMutability: "IMMUTABLE"

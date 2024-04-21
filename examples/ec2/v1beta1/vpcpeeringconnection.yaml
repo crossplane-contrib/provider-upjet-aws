@@ -16,7 +16,7 @@ spec:
     peerVpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: bar
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: foo

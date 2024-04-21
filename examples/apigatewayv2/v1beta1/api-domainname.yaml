@@ -10,7 +10,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-domainname
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     name: test-http-api
     protocolType: HTTP
 ---
@@ -25,7 +25,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-domainname
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     domainNameConfiguration:
       - certificateArnSelector:
           matchLabels:
@@ -43,7 +43,7 @@ metadata:
     upjet.upbound.io/manual-intervention: "The domain given as spec.forProvider.domainName needs to be created beforehand."
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     domainName: example-email.upbound-providers.io
     tags:
       Environment: test
@@ -65,7 +65,7 @@ spec:
     domainNameSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-domainname
-    region: us-west-1
+    region: us-east-2
     stageSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-domainname
@@ -78,7 +78,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-domainname
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-domainname

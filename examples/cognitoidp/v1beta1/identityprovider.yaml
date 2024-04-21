@@ -19,7 +19,7 @@ spec:
       client_secret: your client_secret
     providerName: Google
     providerType: Google
-    region: us-west-1
+    region: us-east-2
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -37,4 +37,4 @@ spec:
     autoVerifiedAttributes:
     - email
     name: example-pool
-    region: us-west-1
+    region: us-east-2

@@ -18,7 +18,7 @@ spec:
     domainNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     stageNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -41,4 +41,4 @@ spec:
       name: example-secret
       namespace: upbound-system
     domainName: example.com
-    region: us-west-1
+    region: us-east-2

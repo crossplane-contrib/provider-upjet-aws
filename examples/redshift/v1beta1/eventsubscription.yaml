@@ -17,7 +17,7 @@ spec:
     - management
     - monitoring
     - security
-    region: us-west-1
+    region: us-east-2
     severity: INFO
     snsTopicArnSelector:
       matchLabels:
@@ -48,7 +48,7 @@ spec:
       namespace: upbound-system
     masterUsername: exampleuser
     nodeType: ra3.xlplus
-    region: us-west-1
+    region: us-east-2
     skipFinalSnapshot: true
 
 ---
@@ -79,4 +79,4 @@ metadata:
   name: default
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

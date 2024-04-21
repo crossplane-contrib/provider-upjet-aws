@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     dbName: example
-    region: us-west-1
+    region: us-east-2
     allocatedStorage: 20
     autoMinorVersionUpgrade: true
     backupRetentionPeriod: 14
@@ -51,6 +51,6 @@ metadata:
   name: sample-key-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Created with Crossplane
     deletionWindowInDays: 7

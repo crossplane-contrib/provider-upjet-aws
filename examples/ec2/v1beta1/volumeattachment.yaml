@@ -12,5 +12,5 @@ spec:
   forProvider:
     deviceName: /dev/sdh
     instanceId: ${aws_instance.web.id}
-    region: us-west-1
+    region: us-east-2
     volumeId: ${aws_ebs_volume.example.id}

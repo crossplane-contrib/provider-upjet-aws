@@ -22,7 +22,7 @@ spec:
       instanceType: t3.micro
       placementTenancy: dedicated
       spotPrice: "2.793"
-    region: us-west-1
+    region: us-east-2
     spotPrice: "0.03"
     targetCapacity: 6
 

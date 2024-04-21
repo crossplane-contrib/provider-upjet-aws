@@ -10,7 +10,7 @@ metadata:
     meta.upbound.io/example-id: dynamodb/v1beta1/table
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     attribute:
     - name: UserId
       type: S

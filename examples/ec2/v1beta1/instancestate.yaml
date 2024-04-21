@@ -16,7 +16,7 @@ spec:
     instanceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test
-    region: us-west-1
+    region: us-east-2
     state: stopped
 
 ---
@@ -33,6 +33,6 @@ spec:
   forProvider:
     ami: ${data.aws_ami.ubuntu.id}
     instanceType: t3.micro
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: HelloWorld

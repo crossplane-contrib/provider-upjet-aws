@@ -11,6 +11,6 @@ metadata:
 spec:
   forProvider:
     dhcpOptionsId: ${aws_vpc_dhcp_options.foo.id}
-    region: us-west-1
+    region: us-east-2
     vpcIdRef:
       name: example

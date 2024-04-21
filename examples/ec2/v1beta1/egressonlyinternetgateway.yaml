@@ -10,7 +10,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: main
     vpcIdSelector:
@@ -29,4 +29,4 @@ spec:
   forProvider:
     assignGeneratedIpv6CidrBlock: true
     cidrBlock: 10.1.0.0/16
-    region: us-west-1
+    region: us-east-2

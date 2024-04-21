@@ -11,4 +11,4 @@ spec:
     domainNameServers:
     - 8.8.8.8
     - 8.8.4.4
-    region: us-west-1
+    region: us-east-2

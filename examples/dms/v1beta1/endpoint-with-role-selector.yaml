@@ -26,7 +26,7 @@ spec:
       name: dms-example-secret
       namespace: upbound-system
     port: 5432
-    region: us-west-1
+    region: us-east-2
     sslMode: none
     serverName: test
     username: test
@@ -87,6 +87,6 @@ metadata:
   name: dms-example-key
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: dms-example-key
     deletionWindowInDays: 7

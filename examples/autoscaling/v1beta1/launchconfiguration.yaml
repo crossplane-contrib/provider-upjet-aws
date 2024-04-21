@@ -14,4 +14,4 @@ spec:
   forProvider:
     imageId: ami-0454207e5367abf01
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2

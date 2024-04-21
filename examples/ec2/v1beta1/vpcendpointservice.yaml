@@ -13,4 +13,4 @@ spec:
     acceptanceRequired: false
     networkLoadBalancerArns:
     - ${aws_lb.example.arn}
-    region: us-west-1
+    region: us-east-2

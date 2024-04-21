@@ -24,7 +24,7 @@ spec:
       name: endpoint-secret
       namespace: upbound-system
     port: 3306
-    region: us-west-1
+    region: us-east-2
     serverName: test
     sslMode: none
     tags:
@@ -46,7 +46,7 @@ spec:
   forProvider:
     deletionWindowInDays: 7
     description: KMS Key
-    region: us-west-1
+    region: us-east-2
 
 ---
 

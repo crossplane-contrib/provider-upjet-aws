@@ -16,7 +16,7 @@ spec:
     connectionPropertiesSecretRef:
       name: example-secret
       namespace: upbound-system
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: v1
 kind: Secret

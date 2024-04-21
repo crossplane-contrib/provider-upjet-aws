@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     alias: "Thermostat-dynamodb-access-role-alias"
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: role

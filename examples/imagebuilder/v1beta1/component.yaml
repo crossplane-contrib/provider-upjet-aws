@@ -29,5 +29,5 @@ spec:
         })}
     name: component
     platform: Linux
-    region: us-west-1
+    region: us-east-2
     version: 1.0.0

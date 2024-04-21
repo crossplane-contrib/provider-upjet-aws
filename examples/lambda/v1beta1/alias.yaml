@@ -17,7 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test_lambda_alias
     functionVersion: "1"
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
@@ -29,7 +29,7 @@ metadata:
   name: test-lambda-alias
 spec: 
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Object
@@ -47,7 +47,7 @@ spec:
     key: lambda-alias-test.zip
     contentBase64: |
       UEsDBBQAAAAIAKtNjFYSV7EydQAAAKAAAAASABwAbGFtYmRhX2Z1bmN0aW9uLnB5VVQJAAOibzZkEHQ2ZHV4CwABBPUBAAAEFAAAAD1NQQrCQBC79xXjaSyUPqDg3T+IlNGdVWF2FmZHEUr/3rpWQy5JSBI4glC6BBrvpEHY9vxi9Q6uWZ3f3g4NrEhcCt0YDoBHFskwzSt32MdsifxbOmF8WPFRKTGeO9hMob/X1jFjf5rCVMUHuM0jDL+nms3NAlBLAQIeAxQAAAAIAKtNjFYSV7EydQAAAKAAAAASABgAAAAAAAEAAACkgQAAAABsYW1iZGFfZnVuY3Rpb24ucHlVVAUAA6JvNmR1eAsAAQT1AQAABBQAAABQSwUGAAAAAAEAAQBYAAAAwQAAAAAA
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: lambda.aws.upbound.io/v1beta1
 kind: Function
@@ -67,7 +67,7 @@ spec:
     roleSelector:
       matchLabels: 
         testing.upbound.io/example-name: test_lambda_alias
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role

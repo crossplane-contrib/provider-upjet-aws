@@ -20,4 +20,4 @@ spec:
       fields @timestamp, @message
       | sort @timestamp desc
       | limit 25
-    region: us-west-1
+    region: us-east-2

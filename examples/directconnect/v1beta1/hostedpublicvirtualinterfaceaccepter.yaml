@@ -17,7 +17,7 @@ spec:
     virtualInterfaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: creator
-    region: us-west-1
+    region: us-east-2
     tags:
       Side: Accepter
 
@@ -42,7 +42,7 @@ spec:
     customerAddress: 175.45.176.1/30
     name: vif-foo
     ownerAccountId: "${data.aws_peer_account_id}"
-    region: us-west-1
+    region: us-east-2
     routeFilterPrefixes:
     - 210.52.109.0/24
     - 175.45.176.0/22
@@ -63,4 +63,4 @@ spec:
     bandwidth: 1Gbps
     location: PNP51
     name: example
-    region: us-west-1
+    region: us-east-2

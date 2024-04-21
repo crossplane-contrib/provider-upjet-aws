@@ -18,7 +18,7 @@ spec:
     growthFactor: 10
     growthType: LINEAR
     name: example-deployment-strategy-tf
-    region: us-west-1
+    region: us-east-2
     replicateTo: NONE
     tags:
       Type: AppConfig Deployment Strategy

@@ -14,7 +14,7 @@ spec:
   forProvider:
     description: Example regex pattern set
     name: example
-    region: us-west-1
+    region: us-east-2
     regularExpression:
     - regexString: one
     - regexString: two

@@ -23,14 +23,14 @@ spec:
                   "Condition": {
                       "IpAddress": {"aws:SourceIp": "127.0.0.1/32"}
                   },
-                  "Resource": "arn:aws:es:us-west-1:domain/example/*"
+                  "Resource": "arn:aws:es:us-east-2:domain/example/*"
               }
           ]
       }
     domainNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -51,4 +51,4 @@ spec:
     - ebsEnabled: true
       volumeSize: 30
     elasticsearchVersion: "5.3"
-    region: us-west-1
+    region: us-east-2

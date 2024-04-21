@@ -15,4 +15,4 @@ spec:
     accountId: "123456789012"
     email: example@example.com
     invite: true
-    region: us-west-1
+    region: us-east-2

@@ -20,7 +20,7 @@ spec:
       namespace: YourNamespace
       value: "1"
     pattern: ""
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -34,4 +34,4 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: balmorhea
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: route53recoverycontrolconfig.aws.upbound.io/v1beta1
 kind: Cluster
@@ -29,4 +29,4 @@ metadata:
 spec:
   forProvider:
     name: georgefitzgerald
-    region: us-west-1
+    region: us-east-2

@@ -12,7 +12,7 @@ metadata:
   name: policytable
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: Example Policy Table
     transitGatewayIdSelector:
@@ -31,5 +31,5 @@ metadata:
   name: policytable
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     multicastSupport: enable

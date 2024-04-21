@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example-cs
     dbClusterSnapshotIdentifier: resourcetestsnapshot1234
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -30,7 +30,7 @@ metadata:
   name: example-cs
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     engine: aurora-postgresql
     masterUsername: cpadmin
     masterPasswordSecretRef:

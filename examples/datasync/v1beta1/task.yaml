@@ -15,7 +15,7 @@ spec:
     s3BucketArnSelector:
       matchLabels:
         testing.upbound.io/example-name: datasync-s3-source
-    region: us-west-1
+    region: us-east-2
     s3Config:
       - bucketAccessRoleArnSelector:
           matchLabels:
@@ -37,7 +37,7 @@ spec:
     s3BucketArnSelector:
       matchLabels:
         testing.upbound.io/example-name: datasync-s3-destination
-    region: us-west-1
+    region: us-east-2
     s3Config:
       - bucketAccessRoleArnSelector:
           matchLabels:
@@ -57,7 +57,7 @@ metadata:
 spec:
   forProvider:
     name: datasync-task-example
-    region: us-west-1
+    region: us-east-2
     cloudwatchLogGroupArnSelector:
       matchLabels:
         testing.upbound.io/example-name: datasync-cloudwatchloggroup
@@ -87,7 +87,7 @@ metadata:
   name: datasync-cloudwatchloggroup
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -101,7 +101,7 @@ metadata:
   name: upbound-datasync-s3-source
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     forceDestroy: true
     objectLockEnabled: true
 ---
@@ -116,7 +116,7 @@ metadata:
   name: upbound-datasync-s3-destination
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     forceDestroy: true
     objectLockEnabled: true
 

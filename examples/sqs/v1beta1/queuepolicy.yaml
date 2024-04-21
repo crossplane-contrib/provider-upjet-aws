@@ -12,7 +12,7 @@ metadata:
     testing.upbound.io/example-name: queue-policy
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     queueUrlSelector:
       matchLabels:
         testing.upbound.io/example-name: queue-policy
@@ -27,7 +27,7 @@ spec:
               "Service": "s3.amazonaws.com"
             },
             "Action": "sqs:SendMessage",
-            "Resource": "arn:aws:sqs:us-west-1:*:queue-policy"
+            "Resource": "arn:aws:sqs:us-east-2:*:queue-policy"
           }
         ]
       }
@@ -43,5 +43,5 @@ metadata:
     testing.upbound.io/example-name: queue-policy
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     name: queue-policy

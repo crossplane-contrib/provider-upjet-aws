@@ -15,7 +15,7 @@ spec:
     iamRoleSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     schedule: cron(00 23 * * ? *)
     targetAction:
     - pauseCluster:
@@ -118,7 +118,7 @@ spec:
       namespace: upbound-system
     masterUsername: exampleuser
     nodeType: ra3.xlplus
-    region: us-west-1
+    region: us-east-2
     skipFinalSnapshot: true
 
 ---

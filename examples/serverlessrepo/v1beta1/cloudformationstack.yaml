@@ -18,6 +18,6 @@ spec:
     - CAPABILITY_RESOURCE_POLICY
     name: postgres-rotator
     parameters:
-      endpoint: secretsmanager.us-west-1.amazonaws.com
+      endpoint: secretsmanager.us-east-2.amazonaws.com
       functionName: func-postgres-rotator
-    region: us-west-1
+    region: us-east-2

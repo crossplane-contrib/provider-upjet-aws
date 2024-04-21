@@ -14,7 +14,7 @@ spec:
     internal: false
     loadBalancerType: application
     name: test-lb-tf
-    region: us-west-1
+    region: us-east-2
     securityGroupSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
@@ -32,7 +32,7 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -45,7 +45,7 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: testing
     vpcIdSelector:
@@ -60,8 +60,8 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1a
+    region: us-east-2
+    availabilityZone: us-east-2a
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
@@ -75,8 +75,8 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
@@ -90,7 +90,7 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Allow TLS inbound traffic
     name: allow_tls
     tags:

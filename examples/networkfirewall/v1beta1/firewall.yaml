@@ -19,7 +19,7 @@ spec:
     firewallPolicyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     name: firewallname
     subnetMapping:
     - subnetIdSelector:
@@ -55,7 +55,7 @@ spec:
             resourceArnSelector:
               matchLabels:
                 testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     tags:
       Tag1: Value1
       Tag2: Value2
@@ -75,7 +75,7 @@ spec:
   forProvider:
     capacity: 100
     name: rulegroup
-    region: us-west-1
+    region: us-east-2
     ruleGroup:
       - rulesSource:
           - statelessRulesAndCustomActions:
@@ -127,7 +127,7 @@ metadata:
   name: sample-vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -144,8 +144,8 @@ metadata:
   name: sample-subnet1
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
@@ -172,7 +172,7 @@ spec:
           prefix: /example
         logDestinationType: S3
         logType: FLOW
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -187,7 +187,7 @@ metadata:
 spec:
   deletionPolicy: Orphan
   forProvider:
-    region: us-west-1
+    region: us-east-2
     objectLockEnabled: true
     tags:
       Name: uptest-networkfirewall-logging

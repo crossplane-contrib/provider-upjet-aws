@@ -18,7 +18,7 @@ spec:
     elbSelector:
       matchLabels:
         testing.upbound.io/example-name: bar
-    region: us-west-1
+    region: us-east-2
 
 ---
 apiVersion: autoscaling.aws.upbound.io/v1beta2
@@ -31,9 +31,9 @@ metadata:
   name: attachment-example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     availabilityZones:
-      - us-west-1b
+      - us-east-2b
     maxSize: 1
     minSize: 1
     launchConfigurationSelector:
@@ -57,7 +57,7 @@ spec:
   forProvider:
     imageId: ami-0454207e5367abf01
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2
 
 ---
 apiVersion: elb.aws.upbound.io/v1beta1
@@ -71,10 +71,10 @@ metadata:
 spec:
   forProvider:
     availabilityZones:
-      - us-west-1a
+      - us-east-2a
     listener:
       - instancePort: 8000
         instanceProtocol: http
         lbPort: 80
         lbProtocol: http
-    region: us-west-1
+    region: us-east-2

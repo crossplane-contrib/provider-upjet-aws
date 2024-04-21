@@ -11,4 +11,4 @@ metadata:
 spec:
   forProvider:
     name: mycompany.test
-    region: us-west-1
+    region: us-east-2

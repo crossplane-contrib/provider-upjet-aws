@@ -22,7 +22,7 @@ spec:
         queueArnSelector:
           matchLabels:
             testing.upbound.io/example-name: bucket-notification
-    region: us-west-1
+    region: us-east-2
     topic:
     - events:
       - "s3:ObjectRemoved:*"
@@ -43,7 +43,7 @@ metadata:
     testing.upbound.io/example-name: bucket-notification
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: sns.aws.upbound.io/v1beta1
 kind: Topic
@@ -55,7 +55,7 @@ metadata:
     testing.upbound.io/example-name: bucket-notification
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 apiVersion: sns.aws.upbound.io/v1beta1
@@ -68,7 +68,7 @@ metadata:
     testing.upbound.io/example-name: bucket-notification
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     arnSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket-notification
@@ -83,7 +83,7 @@ spec:
               "Service": "s3.amazonaws.com"
             },
             "Action": "sns:Publish",
-            "Resource": "arn:aws:sns:us-west-1:*:bucket-notification"
+            "Resource": "arn:aws:sns:us-east-2:*:bucket-notification"
           }
         ]
       }
@@ -99,7 +99,7 @@ metadata:
     testing.upbound.io/example-name: bucket-notification
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     name: bucket-notification
 
 ---
@@ -113,7 +113,7 @@ metadata:
     testing.upbound.io/example-name: bucket-notification
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     queueUrlSelector:
       matchLabels:
         testing.upbound.io/example-name: bucket-notification
@@ -128,7 +128,7 @@ spec:
               "Service": "s3.amazonaws.com"
             },
             "Action": "sqs:SendMessage",
-            "Resource": "arn:aws:sqs:us-west-1:*:bucket-notification"
+            "Resource": "arn:aws:sqs:us-east-2:*:bucket-notification"
           }
         ]
       }

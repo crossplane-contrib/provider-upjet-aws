@@ -14,6 +14,6 @@ spec:
   forProvider:
     accountIds:
     - "153891904029"
-    region: us-west-1
+    region: us-east-2
     resourceTypes:
     - EC2

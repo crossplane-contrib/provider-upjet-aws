@@ -12,6 +12,6 @@ metadata:
   name: test-setting
 spec:
   forProvider:
-    settingId: "arn:aws:ssm:us-west-1:${data.aws_account_id}:servicesetting/ssm/parameter-store/high-throughput-enabled"
-    region: us-west-1
+    settingId: "arn:aws:ssm:us-east-2:${data.aws_account_id}:servicesetting/ssm/parameter-store/high-throughput-enabled"
+    region: us-east-2
     settingValue: "true"

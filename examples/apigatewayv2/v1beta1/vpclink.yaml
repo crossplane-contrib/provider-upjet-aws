@@ -11,7 +11,7 @@ metadata:
 spec:
   forProvider:
     name: example
-    region: us-west-1
+    region: us-east-2
     securityGroupIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-vpclink
@@ -29,7 +29,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-vpclink
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Allow TLS inbound traffic
     name: allow_tls
     tags:
@@ -46,8 +46,8 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-vpclink
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
@@ -60,7 +60,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-vpclink
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc

@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: default-cas
     mode: async
-    region: us-west-1
+    region: us-east-2
     resourceArnSelector:
       matchLabels:
         testing.upbound.io/example-name: default-cas
@@ -33,7 +33,7 @@ metadata:
   name: example-cas
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     engine: aurora-postgresql
     masterUsername: cpadmin
     masterPasswordSecretRef:
@@ -58,7 +58,7 @@ metadata:
 spec:
   forProvider:
     description: AWS KMS Key to encrypt Database Activity Stream
-    region: us-west-1
+    region: us-east-2
 
 ---
 

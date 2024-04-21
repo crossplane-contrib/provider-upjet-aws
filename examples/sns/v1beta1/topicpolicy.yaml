@@ -32,14 +32,14 @@ spec:
               "sns:Subscribe"
             ],
             "Effect": "Allow",
-            "Resource": "arn:aws:sns:us-west-1:153891904029:test",
+            "Resource": "arn:aws:sns:us-east-2:153891904029:test",
             "Principal": {
               "AWS": "*"
             }
           }
         ]
       }
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -53,4 +53,4 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

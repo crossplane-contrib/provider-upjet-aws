@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     autodefinedReverseFlag: DISABLE
-    region: us-west-1
+    region: us-east-2
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -33,4 +33,4 @@ spec:
     cidrBlock: 10.0.0.0/16
     enableDnsHostnames: true
     enableDnsSupport: true
-    region: us-west-1
+    region: us-east-2

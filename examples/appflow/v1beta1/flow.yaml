@@ -23,7 +23,7 @@ spec:
           s3OutputFormatConfig:
           - prefixConfig:
             - prefixType: PATH
-    region: us-west-1
+    region: us-east-2
     sourceFlowConfig:
     - connectorType: S3
       sourceConnectorProperties:
@@ -53,7 +53,7 @@ metadata:
   name: example-destination-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
@@ -66,7 +66,7 @@ metadata:
   name: example-source-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketPolicy
@@ -107,7 +107,7 @@ spec:
               }
           ]
       }
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketPolicy
@@ -145,7 +145,7 @@ spec:
               }
           ]
       }
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Object
@@ -163,4 +163,4 @@ spec:
         testing.upbound.io/example-name: example_source
     key: object_key
     contentBase64: dGhpcyBpcyBhIHRleHQg
-    region: us-west-1
+    region: us-east-2

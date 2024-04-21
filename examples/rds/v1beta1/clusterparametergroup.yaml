@@ -12,7 +12,7 @@ metadata:
   name: example-cpg
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: RDS default cluster parameter group
     family: aurora5.6
     parameter:

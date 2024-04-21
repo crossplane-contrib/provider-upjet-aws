@@ -14,5 +14,5 @@ spec:
   forProvider:
     onCreate: ${base64encode("echo foo")}
     onStart: ${base64encode("echo bar")}
-    region: us-west-1
+    region: us-east-2
   

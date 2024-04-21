@@ -12,7 +12,7 @@ spec:
     - entry: /test.pdf
       target: /bucket3/test-path/tftestuser.pdf
     homeDirectoryType: LOGICAL
-    region: us-west-1
+    region: us-east-2
     roleRef:
       name: example
     serverIdRef:

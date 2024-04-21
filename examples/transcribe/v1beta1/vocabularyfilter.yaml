@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     languageCode: en-US
-    region: us-west-1
+    region: us-east-2
     tags:
       tag1: value1
       tag2: value3

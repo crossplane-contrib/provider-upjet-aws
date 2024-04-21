@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     policyType: TargetTrackingScaling
-    region: us-west-1
+    region: us-east-2
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: dynamodb_table_read_target
@@ -42,7 +42,7 @@ spec:
   forProvider:
     maxCapacity: 100
     minCapacity: 5
-    region: us-west-1
+    region: us-east-2
     resourceId: table/table
     scalableDimension: dynamodb:table:ReadCapacityUnits
     serviceNamespace: dynamodb
@@ -55,7 +55,7 @@ metadata:
   name: table
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     attribute:
     - name: UserId
       type: S

@@ -11,7 +11,7 @@ spec:
     iamRoleArnRef:
       name: dax-cluster-example
     nodeType: dax.r4.large
-    region: us-west-1
+    region: us-east-2
     replicationFactor: 1
 ---
 apiVersion: iam.aws.upbound.io/v1beta1

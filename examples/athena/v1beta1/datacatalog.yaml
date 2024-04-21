@@ -13,7 +13,7 @@ spec:
     description: Example Athena data catalog
     parameters:
       function: arn:aws:lambda:${data.aws_region}:${data.aws_account_id}:function:upbound-example-function
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: example-athena-data-catalog
     type: LAMBDA

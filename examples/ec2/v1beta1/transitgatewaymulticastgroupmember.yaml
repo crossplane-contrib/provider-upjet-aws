@@ -15,6 +15,6 @@ spec:
     groupIpAddress: 224.0.0.1
     networkInterfaceIdRef:
       name: sample-ni
-    region: us-west-1
+    region: us-east-2
     transitGatewayMulticastDomainIdRef:
       name: domain

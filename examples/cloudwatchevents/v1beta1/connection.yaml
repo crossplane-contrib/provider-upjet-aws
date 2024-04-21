@@ -17,7 +17,7 @@ spec:
               namespace: upbound-system
     authorizationType: API_KEY
     description: A connection description
-    region: us-west-1
+    region: us-east-2
 
 ---
 

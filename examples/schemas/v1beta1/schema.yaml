@@ -34,7 +34,7 @@ spec:
           }
         })}
     name: "my_schema"
-    region: us-west-1
+    region: us-east-2
     registryNameSelector:
       matchLabels:
         testing.upbound.io/example-name: registry
@@ -52,4 +52,4 @@ metadata:
   name: registry
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

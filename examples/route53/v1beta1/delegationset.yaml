@@ -11,7 +11,7 @@ metadata:
 spec:
   forProvider:
     referenceName: DynDNS
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -27,7 +27,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: main
     name: mycompany1.test
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -43,4 +43,4 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: main
     name: mycompany2.test
-    region: us-west-1
+    region: us-east-2

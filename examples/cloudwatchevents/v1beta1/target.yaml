@@ -11,7 +11,7 @@ metadata:
 spec:
   forProvider:
     arn: "arn:aws:sns:${data.aws_region}:${data.aws_account_id}:topic"
-    region: us-west-1
+    region: us-east-2
     ruleSelector:
       matchLabels:
         testing.upbound.io/example-name: login-rule
@@ -39,7 +39,7 @@ spec:
           "AWS Console Sign In via CloudTrail"
         ]
       }
-    region: us-west-1
+    region: us-east-2
     eventBusNameSelector:
       matchLabels:
         testing.upbound.io/example-name: target-bus
@@ -68,7 +68,7 @@ spec:
               "Resource": "arn:aws:sns:*:*:topic"
           }]
       }
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -82,4 +82,4 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource is necessary to create the root resource."
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

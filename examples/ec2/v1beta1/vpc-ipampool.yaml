@@ -10,7 +10,7 @@ metadata:
   name: sample-vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     ipv4IpamPoolIdSelector:
       matchLabels: 
         testing.upbound.io/example-name: ipampool
@@ -32,7 +32,7 @@ spec:
     ipamPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: ipampool
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCIpamPool
@@ -48,8 +48,8 @@ spec:
     ipamScopeIdSelector: 
       matchLabels:
         testing.upbound.io/example-name: ipampool
-    locale: us-west-1 
-    region: us-west-1
+    locale: us-east-2 
+    region: us-east-2
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCIpamScope
@@ -65,7 +65,7 @@ spec:
     ipamIdSelector: 
       matchLabels:
         testing.upbound.io/example-name: ipampool
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCIpam
@@ -79,7 +79,7 @@ spec:
   forProvider:
     description: My IPAM
     operatingRegions:
-    - regionName: us-west-1 
-    region: us-west-1
+    - regionName: us-east-2 
+    region: us-east-2
     tags:
       Test: Main

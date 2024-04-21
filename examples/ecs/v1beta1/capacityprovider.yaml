@@ -23,7 +23,7 @@ spec:
         status: ENABLED
         targetCapacity: 10
       managedTerminationProtection: DISABLED
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -38,9 +38,9 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     availabilityZones:
-    - us-west-1b
+    - us-east-2b
     maxSize: 1
     minSize: 1
     launchConfigurationSelector:
@@ -66,4 +66,4 @@ spec:
   forProvider:
     imageId: ${data.aws_ami.ubuntu.id}
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2

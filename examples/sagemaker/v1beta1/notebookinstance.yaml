@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     instanceType: ml.t2.medium
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example

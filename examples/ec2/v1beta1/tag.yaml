@@ -11,6 +11,6 @@ metadata:
 spec:
   forProvider:
     key: karpenter.sh/discovery
-    region: us-west-1
+    region: us-east-2
     resourceId: <resourceid-arn>
     value: sample-eks-cluster

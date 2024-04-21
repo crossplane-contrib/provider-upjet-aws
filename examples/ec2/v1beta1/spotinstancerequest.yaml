@@ -10,4 +10,4 @@ spec:
   forProvider:
     ami: ami-0d9858aa3c6322f73
     instanceType: c4.xlarge
-    region: us-west-1
+    region: us-east-2

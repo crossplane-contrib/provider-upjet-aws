@@ -23,7 +23,7 @@ spec:
       - timestamp
       - c-ip
     name: example-${Rand.RFC1123Subdomain}
-    region: us-west-1
+    region: us-east-2
     samplingRate: 75
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
@@ -56,7 +56,7 @@ metadata:
     testing.upbound.io/example-name: realtimelogconfig
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     retentionPeriod: 48
     shardCount: 1
     shardLevelMetrics:

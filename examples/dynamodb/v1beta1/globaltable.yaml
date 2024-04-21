@@ -10,9 +10,9 @@ metadata:
     meta.upbound.io/example-id: dynamodb/v1beta1/globaltable
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     replica:
-    - regionName: us-west-1
+    - regionName: us-east-2
 
 ---
 
@@ -29,7 +29,7 @@ spec:
         type: S
     hashKey: myAttribute
     readCapacity: 1
-    region: us-west-1
+    region: us-east-2
     streamEnabled: true
     streamViewType: NEW_AND_OLD_IMAGES
     writeCapacity: 1

@@ -15,4 +15,4 @@ spec:
     assetType: S3_SNAPSHOT
     description: example
     name: example
-    region: us-west-1
+    region: us-east-2

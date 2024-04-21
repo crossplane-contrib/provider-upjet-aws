@@ -13,12 +13,12 @@ metadata:
   name: foo
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     s3Destination:
     - bucketNameSelector:
         matchLabels:
           testing.upbound.io/example-name: hoge
-      region: us-west-1
+      region: us-east-2
 
 ---
 
@@ -33,7 +33,7 @@ metadata:
   name: hoge
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -79,4 +79,4 @@ spec:
               }
           ]
       }
-    region: us-west-1
+    region: us-east-2

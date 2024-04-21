@@ -13,4 +13,4 @@ metadata:
 spec:
   forProvider:
     defaultSmsType: Promotional
-    region: us-west-1
+    region: us-east-2

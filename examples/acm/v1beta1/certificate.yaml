@@ -16,7 +16,7 @@ metadata:
     testing.upbound.io/example-name: certificate
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     domainName: example-dns.upbound-providers.io
     tags:
       Environment: test
@@ -32,7 +32,7 @@ metadata:
     upjet.upbound.io/manual-intervention: "It requires a real domain to be bought"
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     certificateArnSelector:
       matchLabels:
         testing.upbound.io/example-name: certificate

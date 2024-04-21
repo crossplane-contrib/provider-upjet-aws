@@ -8,7 +8,7 @@ metadata:
   name: route
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     destinationCidrBlock: 0.0.0.0/0
     gatewayIdRef:
       name: routegw
@@ -25,7 +25,7 @@ metadata:
     testing.upbound.io/example-name: table
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: example
     vpcIdRef:
@@ -39,7 +39,7 @@ metadata:
   name: routegw
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: main
     vpcIdRef:
@@ -55,7 +55,7 @@ metadata:
     testing.upbound.io/example-name: route-vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc

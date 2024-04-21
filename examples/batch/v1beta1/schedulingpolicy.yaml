@@ -20,6 +20,6 @@ spec:
         weightFactor: 0.1
       - shareIdentifier: A2
         weightFactor: 0.2
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: Example Batch Scheduling Policy

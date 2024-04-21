@@ -13,7 +13,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: upbound-example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -25,5 +25,5 @@ metadata:
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     forceDestroy: true

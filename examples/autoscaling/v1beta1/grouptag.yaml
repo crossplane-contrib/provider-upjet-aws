@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     autoscalingGroupName: example
-    region: us-west-1
+    region: us-east-2
     tag:
     - key: k8s.io/cluster-autoscaler/node-template/label/eks.amazonaws.com/capacityType
       propagateAtLaunch: false
@@ -33,9 +33,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     availabilityZones:
-    - us-west-1b
+    - us-east-2b
     maxSize: 1
     minSize: 1
     launchConfigurationSelector:
@@ -61,4 +61,4 @@ spec:
   forProvider:
     imageId: ami-0a1a70369f0fce06a
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2

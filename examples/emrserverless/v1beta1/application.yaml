@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     name: example
-    region: us-west-1
+    region: us-east-2
     releaseLabel: emr-6.6.0
     type: hive
     maximumCapacity:

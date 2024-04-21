@@ -19,6 +19,6 @@ spec:
     numCacheClusters: 2
     port: 6379
     preferredCacheClusterAzs:
-      - us-west-1a
-      - us-west-1b
-    region: us-west-1
+      - us-east-2a
+      - us-east-2b
+    region: us-east-2

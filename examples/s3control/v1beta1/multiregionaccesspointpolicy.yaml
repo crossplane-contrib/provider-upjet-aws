@@ -30,7 +30,7 @@ spec:
                 }
               ]
             })}
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
@@ -43,7 +43,7 @@ metadata:
   name: foo-bucket
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3control.aws.upbound.io/v1beta1
 kind: MultiRegionAccessPoint
@@ -61,4 +61,4 @@ spec:
       - bucketSelector:
           matchLabels:
             testing.upbound.io/example-name: foo_bucket
-    region: us-west-1
+    region: us-east-2

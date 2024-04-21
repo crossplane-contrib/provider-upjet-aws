@@ -15,12 +15,12 @@ spec:
         "States": {
           "HelloWorld": {
             "Type": "Task",
-            "Resource": "arn:aws:lambda:us-west-1:609897127049:function:example",
+            "Resource": "arn:aws:lambda:us-east-2:609897127049:function:example",
             "End": true
           }
         }
       }
-    region: us-west-1
+    region: us-east-2
     roleArnRef:
       name: example
 ---

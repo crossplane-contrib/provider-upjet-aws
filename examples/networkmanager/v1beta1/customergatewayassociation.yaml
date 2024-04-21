@@ -21,7 +21,7 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: CustomerGateway
@@ -35,7 +35,7 @@ spec:
   forProvider:
     bgpAsn: "65000"
     ipAddress: 172.83.124.10
-    region: us-west-1
+    region: us-east-2
     type: ipsec.1
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
@@ -48,7 +48,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: networkmanager.aws.upbound.io/v1beta1
 kind: Device
@@ -63,7 +63,7 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     siteIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -79,7 +79,7 @@ metadata:
 spec:
   forProvider:
     description: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: networkmanager.aws.upbound.io/v1beta1
 kind: Site
@@ -94,7 +94,7 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: networkmanager.aws.upbound.io/v1beta1
 kind: TransitGatewayRegistration
@@ -109,7 +109,7 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     transitGatewayArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -127,7 +127,7 @@ spec:
     customerGatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     staticRoutesOnly: true
     transitGatewayIdSelector:
       matchLabels:

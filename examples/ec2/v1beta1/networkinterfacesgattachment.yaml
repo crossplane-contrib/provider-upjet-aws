@@ -13,7 +13,7 @@ spec:
     networkInterfaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: instance
-    region: us-west-1
+    region: us-east-2
     securityGroupIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sg
@@ -30,7 +30,7 @@ spec:
   forProvider:
     ami: ami-0d9858aa3c6322f73
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2
     tags:
       type: upbound-test-instance
 
@@ -44,6 +44,6 @@ metadata:
   name: sg
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       type: upbound-test-security-group

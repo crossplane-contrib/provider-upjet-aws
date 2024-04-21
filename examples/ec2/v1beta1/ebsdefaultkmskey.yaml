@@ -15,7 +15,7 @@ spec:
     keyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
@@ -27,6 +27,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Created with Crossplane
     deletionWindowInDays: 7

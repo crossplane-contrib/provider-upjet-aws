@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
@@ -29,4 +29,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

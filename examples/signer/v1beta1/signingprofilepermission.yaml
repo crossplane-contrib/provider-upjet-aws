@@ -16,4 +16,4 @@ spec:
     action: signer:StartSigningJob
     principal: "153891904029"
     profileName: test
-    region: us-west-1
+    region: us-east-2

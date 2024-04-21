@@ -10,8 +10,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: us-west-1c
-    region: us-west-1
+    availabilityZone: us-east-2c
+    region: us-east-2
     size: 1
     tags:
       Name: HelloWorld

@@ -18,7 +18,7 @@ spec:
     apiCachingBehavior: FULL_REQUEST_CACHING
     type: LARGE
     ttl: 900
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: appsync.aws.upbound.io/v1beta1
 kind: GraphQLAPI
@@ -32,4 +32,4 @@ spec:
   forProvider:
     authenticationType: API_KEY
     name: example
-    region: us-west-1
+    region: us-east-2

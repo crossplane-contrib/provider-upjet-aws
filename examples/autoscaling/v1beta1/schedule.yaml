@@ -20,7 +20,7 @@ spec:
     endTime: "2023-12-12T06:00:00Z"
     maxSize: 1
     minSize: 0
-    region: us-west-1
+    region: us-east-2
     startTime: "2023-12-11T18:00:00Z"
 
 ---
@@ -36,9 +36,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     availabilityZones:
-    - us-west-1b
+    - us-east-2b
     maxSize: 1
     minSize: 1
     launchConfigurationSelector:
@@ -64,4 +64,4 @@ spec:
   forProvider:
     imageId: ami-0a1a70369f0fce06a
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2

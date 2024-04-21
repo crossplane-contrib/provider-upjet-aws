@@ -17,7 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test_role
     name: test_ssm_activation
-    region: us-west-1
+    region: us-east-2
     registrationLimit: 5
 
 ---
@@ -83,7 +83,7 @@ spec:
               "ssm:DeleteDocument"
             ],
             "Resource" : [
-              "arn:aws:ssm:us-west-1:153891904029:document/*"
+              "arn:aws:ssm:us-east-2:153891904029:document/*"
             ]
           }
         ]

@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     name: xss_match_set
-    region: us-west-1
+    region: us-east-2
     xssMatchTuple:
     - fieldToMatch:
       - type: URI

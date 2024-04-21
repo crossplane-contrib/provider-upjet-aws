@@ -15,4 +15,4 @@ spec:
     description: List of my organizations apps
     name: My App Portfolio
     providerName: Brett
-    region: us-west-1
+    region: us-east-2

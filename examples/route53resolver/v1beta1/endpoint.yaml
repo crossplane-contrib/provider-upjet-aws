@@ -19,7 +19,7 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: sample-subnet2
     name: foo
-    region: us-west-1
+    region: us-east-2
     securityGroupIdRefs:
     - name: sg1
     tags:
@@ -35,7 +35,7 @@ metadata:
   name: sample-vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -50,7 +50,7 @@ metadata:
   name: sample-subnet1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sample-vpc
@@ -66,7 +66,7 @@ metadata:
   name: sample-subnet2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sample-vpc
@@ -82,7 +82,7 @@ metadata:
   name: sg1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Allow TLS inbound traffic
     name: allow_tls
     tags:

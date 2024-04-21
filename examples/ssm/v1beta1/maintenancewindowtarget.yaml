@@ -14,7 +14,7 @@ spec:
   forProvider:
     description: This is a maintenance window target
     name: maintenance-window-target
-    region: us-west-1
+    region: us-east-2
     resourceType: INSTANCE
     targets:
     - key: tag:Name
@@ -39,5 +39,5 @@ spec:
     cutoff: 1
     duration: 3
     name: maintenance-window-webapp
-    region: us-west-1
+    region: us-east-2
     schedule: cron(0 16 ? * TUE *)

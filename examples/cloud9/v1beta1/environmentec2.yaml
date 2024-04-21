@@ -14,4 +14,4 @@ spec:
   forProvider:
     instanceType: t2.micro
     name: example-env
-    region: us-west-1
+    region: us-east-2

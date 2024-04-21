@@ -16,7 +16,7 @@ spec:
     eventTypeIds:
     - codecommit-repository-comments-on-commits
     name: example-code-repo-commits
-    region: us-west-1
+    region: us-east-2
     resourceSelector:
       matchLabels:
         testing.upbound.io/example-name: code
@@ -31,4 +31,4 @@ metadata:
   name: code
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

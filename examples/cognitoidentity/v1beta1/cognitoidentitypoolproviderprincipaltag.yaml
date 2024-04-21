@@ -18,7 +18,7 @@ spec:
         testing.upbound.io/example-name: example
     principalTags:
       test: value
-    region: us-west-1
+    region: us-east-2
     useDefaults: false
 
 ---
@@ -41,7 +41,7 @@ spec:
       providerName: ${aws_cognito_user_pool.example.endpoint}
       serverSideTokenCheck: false
     identityPoolName: identity pool
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -56,7 +56,7 @@ spec:
     autoVerifiedAttributes:
     - email
     name: user pool
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -69,7 +69,7 @@ metadata:
 spec:
   forProvider:
     name: client
-    region: us-west-1
+    region: us-east-2
     supportedIdentityProviders:
      - "COGNITO"
     userPoolIdSelector:

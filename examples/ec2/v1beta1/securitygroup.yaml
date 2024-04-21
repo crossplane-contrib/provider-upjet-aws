@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Allow TLS inbound traffic
     name: allow_tls
     tags:
@@ -32,7 +32,7 @@ metadata:
   name: sample-vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc

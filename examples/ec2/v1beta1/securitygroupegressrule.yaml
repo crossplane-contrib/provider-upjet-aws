@@ -12,7 +12,7 @@ metadata:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -27,7 +27,7 @@ metadata:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -45,7 +45,7 @@ spec:
     cidrIpv4: 10.0.0.0/8
     fromPort: 80
     ipProtocol: tcp
-    region: us-west-1
+    region: us-east-2
     securityGroupIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

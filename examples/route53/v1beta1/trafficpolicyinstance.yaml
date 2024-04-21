@@ -14,7 +14,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: mycompany.test
-    region: us-west-1
+    region: us-east-2
     trafficPolicyIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -45,7 +45,7 @@ spec:
         "StartEndpoint": "endpoint-start-NkPh"
       }
     name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -58,4 +58,4 @@ metadata:
 spec:
   forProvider:
     name: mycompany.test
-    region: us-west-1
+    region: us-east-2

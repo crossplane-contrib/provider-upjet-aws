@@ -15,7 +15,7 @@ spec:
     dataSetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: dataexchange.aws.upbound.io/v1beta1
 kind: DataSet
@@ -30,4 +30,4 @@ spec:
     assetType: S3_SNAPSHOT
     description: example
     name: example
-    region: us-west-1
+    region: us-east-2

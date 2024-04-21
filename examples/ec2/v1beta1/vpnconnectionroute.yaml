@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     destinationCidrBlock: 192.168.10.0/24
-    region: us-west-1
+    region: us-east-2
     vpnConnectionIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
@@ -32,7 +32,7 @@ spec:
   forProvider:
     bgpAsn: "65000"
     ipAddress: 172.0.0.1
-    region: us-west-1
+    region: us-east-2
     type: ipsec.1
 
 ---
@@ -48,7 +48,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -65,7 +65,7 @@ spec:
     customerGatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: customer_gateway
-    region: us-west-1
+    region: us-east-2
     staticRoutesOnly: true
     type: "ipsec.1"
     vpnGatewayIdSelector:
@@ -84,7 +84,7 @@ metadata:
   name: vpn-gateway
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpc

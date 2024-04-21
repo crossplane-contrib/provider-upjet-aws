@@ -15,4 +15,4 @@ spec:
     minimumHealthyHosts:
     - type: HOST_COUNT
       value: 2
-    region: us-west-1
+    region: us-east-2

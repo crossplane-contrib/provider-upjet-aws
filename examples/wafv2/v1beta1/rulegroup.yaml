@@ -14,7 +14,7 @@ spec:
   forProvider:
     capacity: 2
     name: example-rule
-    region: us-west-1
+    region: us-east-2
     rule:
     - action:
       - allow:

@@ -16,5 +16,5 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: s3
     key: new_object_key
-    region: us-west-1
+    region: us-east-2
     contentBase64: dGhpcyBpcyBhIHRleHQg

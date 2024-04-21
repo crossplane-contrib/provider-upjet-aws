@@ -13,4 +13,4 @@ metadata:
 spec:
   forProvider:
     name: georgefitzgerald
-    region: us-west-1
+    region: us-east-2

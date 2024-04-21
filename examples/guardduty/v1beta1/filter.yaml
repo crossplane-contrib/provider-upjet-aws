@@ -19,7 +19,7 @@ spec:
     findingCriteria:
       - criterion:
           - equals:
-              - us-west-1
+              - us-east-2
             field: region
           - field: service.additionalInfo.threatListName
             notEquals:
@@ -31,7 +31,7 @@ spec:
           - field: severity
             greaterThanOrEqual: "4"
     rank: 1
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -49,4 +49,4 @@ spec:
       - s3Logs:
           - enable: true
     enable: true
-    region: us-west-1
+    region: us-east-2

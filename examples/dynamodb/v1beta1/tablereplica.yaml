@@ -34,6 +34,6 @@ spec:
         type: S
     hashKey: myAttribute
     billingMode: PAY_PER_REQUEST
-    region: us-west-1
+    region: us-east-2
     streamEnabled: true
     streamViewType: NEW_AND_OLD_IMAGES

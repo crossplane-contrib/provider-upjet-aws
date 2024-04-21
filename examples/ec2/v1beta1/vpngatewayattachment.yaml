@@ -12,7 +12,7 @@ metadata:
   name: vpn-attachment
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: network
@@ -33,7 +33,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -47,6 +47,6 @@ metadata:
   name: vpn
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: example-vpn-gateway

@@ -43,7 +43,7 @@ spec:
       key: password
       name: example-dbinstance
       namespace: upbound-system
-    region: us-west-1
+    region: us-east-2
     skipFinalSnapshot: true
     username: foo
   writeConnectionSecretToRef:

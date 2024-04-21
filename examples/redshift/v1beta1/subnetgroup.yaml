@@ -12,7 +12,7 @@ metadata:
   name: foo
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdRefs:
     - name: foo
     - name: bar
@@ -31,9 +31,9 @@ metadata:
   name: bar
 spec:
   forProvider:
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2b
     cidrBlock: 10.1.2.0/24
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: tf-dbsubnet-test-2
     vpcIdSelector:
@@ -52,9 +52,9 @@ metadata:
   name: foo
 spec:
   forProvider:
-    availabilityZone: us-west-1a
+    availabilityZone: us-east-2a
     cidrBlock: 10.1.1.0/24
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: tf-dbsubnet-test-1
     vpcIdSelector:
@@ -74,4 +74,4 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
-    region: us-west-1
+    region: us-east-2

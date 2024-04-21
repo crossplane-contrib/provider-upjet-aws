@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: test
     permissions: read-only
-    region: us-west-1
+    region: us-east-2
     userArnSelector:
       matchLabels:
         testing.upbound.io/example-name: test
@@ -33,7 +33,7 @@ spec:
   forProvider:
     instanceType: t2.micro
     name: some-env
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: User

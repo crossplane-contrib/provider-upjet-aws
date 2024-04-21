@@ -26,7 +26,7 @@ spec:
           }
         ]
       }
-    region: us-west-1
+    region: us-east-2
     resourceArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -42,7 +42,7 @@ metadata:
 spec:
   forProvider:
     namespaceName: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: redshiftserverless.aws.upbound.io/v1beta1
 kind: RedshiftServerlessNamespace
@@ -54,7 +54,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: redshiftserverless.aws.upbound.io/v1beta1
 kind: Workgroup
@@ -67,4 +67,4 @@ metadata:
 spec:
   forProvider:
     namespaceName: example
-    region: us-west-1
+    region: us-east-2

@@ -15,7 +15,7 @@ spec:
     identityPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: main
-    region: us-west-1
+    region: us-east-2
     roleMapping:
     - ambiguousRoleResolution: AuthenticatedRole
       identityProvider: graph.facebook.com
@@ -42,7 +42,7 @@ spec:
   forProvider:
     allowUnauthenticatedIdentities: false
     identityPoolName: identity pool
-    region: us-west-1
+    region: us-east-2
     supportedLoginProviders:
       graph.facebook.com: "7346241598935555"
 

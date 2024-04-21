@@ -23,7 +23,7 @@ spec:
       protocol: "-1"
       self: true
       toPort: 0
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: mainvpc
@@ -41,4 +41,4 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
-    region: us-west-1
+    region: us-east-2

@@ -12,8 +12,8 @@ metadata:
   name: example-copy
 spec:
   forProvider:
-    region: us-west-1
-    sourceRegion: us-west-1
+    region: us-east-2
+    sourceRegion: us-east-2
     sourceSnapshotIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example_snapshot
@@ -30,7 +30,7 @@ metadata:
   name: example-snapshot
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: HelloWorld_snap
     volumeIdSelector:
@@ -47,8 +47,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: us-west-1a
-    region: us-west-1
+    availabilityZone: us-east-2a
+    region: us-east-2
     size: 40
     tags:
       Name: HelloWorld

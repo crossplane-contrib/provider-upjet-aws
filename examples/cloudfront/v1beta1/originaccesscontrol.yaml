@@ -15,6 +15,6 @@ spec:
     description: Example Policy
     name: example
     originAccessControlOriginType: s3
-    region: us-west-1
+    region: us-east-2
     signingBehavior: always
     signingProtocol: sigv4

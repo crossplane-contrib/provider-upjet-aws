@@ -14,7 +14,7 @@ spec:
   forProvider:
     description: This is my API for demonstration purposes
     name: MyDemoAPI
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: IntegrationResponse
@@ -31,7 +31,7 @@ spec:
     httpMethodSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
-    region: us-west-1
+    region: us-east-2
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
@@ -63,7 +63,7 @@ spec:
     httpMethodSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
-    region: us-west-1
+    region: us-east-2
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
@@ -85,7 +85,7 @@ spec:
   forProvider:
     authorization: NONE
     httpMethod: GET
-    region: us-west-1
+    region: us-east-2
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
@@ -107,7 +107,7 @@ spec:
     httpMethodSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
-    region: us-west-1
+    region: us-east-2
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
@@ -130,7 +130,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: integration
     pathPart: mydemoresource
-    region: us-west-1
+    region: us-east-2
     restApiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: integration
@@ -148,7 +148,7 @@ spec:
     contentType: application/json
     description: a JSON schema
     name: user
-    region: us-west-1
+    region: us-east-2
     restApiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: integration

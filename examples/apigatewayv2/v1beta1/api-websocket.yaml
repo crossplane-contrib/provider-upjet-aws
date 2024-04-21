@@ -12,7 +12,7 @@ spec:
   forProvider:
     name: example-websocket-api
     protocolType: WEBSOCKET
-    region: us-west-1
+    region: us-east-2
     routeSelectionExpression: $request.body.action
 ---
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
@@ -28,7 +28,7 @@ spec:
         upjet.upbound.io/test-group: apigatewayv2-websocket
     contentType: application/json
     name: example
-    region: us-west-1
+    region: us-east-2
     schema: |
       {
         "$schema": "http://json-schema.org/draft-04/schema#",
@@ -53,7 +53,7 @@ spec:
     integrationType: HTTP
     integrationMethod: POST
     integrationUri: "https://api.example.com"
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: IntegrationResponse
@@ -72,7 +72,7 @@ spec:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-websocket
     integrationResponseKey: "/400/"
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Route
@@ -87,7 +87,7 @@ spec:
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-websocket
-    region: us-west-1
+    region: us-east-2
     routeKey: "POST /login"
     targetSelector:
       matchLabels:
@@ -106,7 +106,7 @@ spec:
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-websocket
-    region: us-west-1
+    region: us-east-2
     routeIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-websocket

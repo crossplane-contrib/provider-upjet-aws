@@ -10,7 +10,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdRef:
       name: sample-subnet1
     transitGatewayAttachmentIdRef:

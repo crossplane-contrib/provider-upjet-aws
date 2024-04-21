@@ -8,7 +8,7 @@ metadata:
   name: example-origin-request-policy
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     comment: example comment
     cookiesConfig:
     - cookieBehavior: whitelist

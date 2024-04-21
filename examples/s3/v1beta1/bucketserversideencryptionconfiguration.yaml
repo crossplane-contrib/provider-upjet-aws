@@ -15,7 +15,7 @@ spec:
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: mybucket
-    region: us-west-1
+    region: us-east-2
     rule:
     - applyServerSideEncryptionByDefault:
       - kmsMasterKeyIdSelector:
@@ -37,7 +37,7 @@ spec:
   forProvider:
     deletionWindowInDays: 10
     description: This key is used to encrypt bucket objects
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -51,4 +51,4 @@ metadata:
   name: mybucket-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

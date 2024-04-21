@@ -10,7 +10,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-http
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     name: test-http-api
     protocolType: HTTP
 ---
@@ -25,7 +25,7 @@ spec:
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-http
-    region: us-west-1
+    region: us-east-2
     routeKey: "POST /login"
     targetSelector:
       matchLabels:
@@ -45,7 +45,7 @@ spec:
     integrationType: HTTP_PROXY
     integrationMethod: POST
     integrationUri: "https://api.example.com"
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Deployment
@@ -59,7 +59,7 @@ spec:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-http
     description: Example deployment
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Authorizer
@@ -72,7 +72,7 @@ spec:
     apiIdSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-http
-    region: us-west-1
+    region: us-east-2
     name: example-authorizer
     authorizerType: JWT
     identitySources:
@@ -89,7 +89,7 @@ metadata:
     upjet.upbound.io/test-group: apigatewayv2-http
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     name: example-stage
     apiIdSelector:
       matchLabels:

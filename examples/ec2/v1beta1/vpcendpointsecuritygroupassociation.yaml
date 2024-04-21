@@ -10,7 +10,7 @@ metadata:
   name: sg-ec2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     securityGroupIdSelector:
       matchLabels:
         testing.upbound.io/example-name: securitygroup1
@@ -28,8 +28,8 @@ metadata:
   name: ec2
 spec:
   forProvider:
-    region: us-west-1
-    serviceName: com.amazonaws.us-west-1.ec2
+    region: us-east-2
+    serviceName: com.amazonaws.us-east-2.ec2
     vpcEndpointType: Interface
     vpcIdSelector:
       matchLabels:
@@ -45,7 +45,7 @@ metadata:
   name: vpc1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 10.0.0.0/16
 
 ---
@@ -58,7 +58,7 @@ metadata:
   name: securitygroup1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Allow TLS inbound traffic
     name: test
     tags:

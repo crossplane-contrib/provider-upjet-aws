@@ -24,7 +24,7 @@ spec:
       point: ON_DEPLOYMENT_COMPLETE
     description: test description
     name: test
-    region: us-west-1
+    region: us-east-2
     tags:
       Type: AppConfig Extension
 
@@ -70,4 +70,4 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

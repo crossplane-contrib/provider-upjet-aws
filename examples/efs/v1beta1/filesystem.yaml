@@ -10,7 +10,7 @@ metadata:
     testing.upbound.io/example-name: efs
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     creationToken: my-product
     tags:
       Name: MyProduct

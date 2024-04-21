@@ -19,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     providerName: MegaCorp
-    region: us-west-1
+    region: us-east-2
     siteIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -37,7 +37,7 @@ spec:
     globalNetworkIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: networkmanager.aws.upbound.io/v1beta1
 kind: GlobalNetwork
@@ -49,4 +49,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

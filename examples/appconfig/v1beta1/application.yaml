@@ -14,6 +14,6 @@ spec:
   forProvider:
     description: Example AppConfig Application
     name: example-application-tf
-    region: us-west-1
+    region: us-east-2
     tags:
       Type: AppConfig Application

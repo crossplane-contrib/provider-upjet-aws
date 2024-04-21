@@ -14,6 +14,6 @@ metadata:
 spec:
   forProvider:
     key: testkey
-    region: us-west-1
-    resourceArn: "arn:aws:dynamodb:us-west-1:153891904029:table/Test-table"
+    region: us-east-2
+    resourceArn: "arn:aws:dynamodb:us-east-2:153891904029:table/Test-table"
     value: testvalue

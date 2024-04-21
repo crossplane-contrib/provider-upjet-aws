@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: destination
     protocol: tcp
-    region: us-west-1
+    region: us-east-2
     sourceSelector:
       matchLabels:
         testing.upbound.io/example-name: source
@@ -33,7 +33,7 @@ spec:
   forProvider:
     privateIps:
     - 10.0.0.50
-    region: us-west-1
+    region: us-east-2
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: public_a
@@ -49,7 +49,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/24
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: Main
     vpcIdSelector:
@@ -68,7 +68,7 @@ spec:
   forProvider:
     privateIps:
     - 10.0.1.50
-    region: us-west-1
+    region: us-east-2
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: public_b
@@ -84,7 +84,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.1.0/24
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: Main
     vpcIdSelector:
@@ -102,4 +102,4 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2

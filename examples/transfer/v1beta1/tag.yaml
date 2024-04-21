@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     key: aws:transfer:route53HostedZoneId
-    region: us-west-1
+    region: us-east-2
     resourceArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -32,4 +32,4 @@ metadata:
 spec:
   forProvider:
     identityProviderType: SERVICE_MANAGED
-    region: us-west-1
+    region: us-east-2

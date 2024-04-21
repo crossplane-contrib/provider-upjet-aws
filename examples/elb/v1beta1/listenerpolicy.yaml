@@ -19,7 +19,7 @@ spec:
     loadBalancerPort: 443
     policyNames:
     - wu-tang-ssl
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -35,14 +35,14 @@ metadata:
 spec:
   forProvider:
     availabilityZones:
-    - us-west-1a
+    - us-east-2a
     listener:
     - instancePort: 443
       instanceProtocol: http
       lbPort: 443
       lbProtocol: https
-      sslCertificateId: arn:aws:acm:us-west-1:153891904029:certificate/3761707c-a179-4137-b133-a2bffd9fd1c7
-    region: us-west-1
+      sslCertificateId: arn:aws:acm:us-east-2:153891904029:certificate/3761707c-a179-4137-b133-a2bffd9fd1c7
+    region: us-east-2
     tags:
       Name: wu-tang
 
@@ -63,4 +63,4 @@ spec:
         testing.upbound.io/example-name: wu-tang
     policyName: wu-tang-ssl
     policyTypeName: SSLNegotiationPolicyType
-    region: us-west-1
+    region: us-east-2

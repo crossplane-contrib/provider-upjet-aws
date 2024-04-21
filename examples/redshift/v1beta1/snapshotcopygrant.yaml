@@ -12,7 +12,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     snapshotCopyGrantName: my-grant
     kmsKeyIdRef:
       name: sample-key
@@ -31,4 +31,4 @@ spec:
   forProvider:
     deletionWindowInDays: 7
     description: KMS Key
-    region: us-west-1
+    region: us-east-2

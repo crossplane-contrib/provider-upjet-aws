@@ -12,7 +12,7 @@ metadata:
   name: vpn-gw
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: main
     vpcIdSelector:
@@ -31,7 +31,7 @@ metadata:
     testing.upbound.io/example-name: main
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc

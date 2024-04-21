@@ -10,12 +10,12 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource has a secret reference."
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     auth:
       - authScheme: SECRETS
         description: example
         iamAuth: DISABLED
-        secretArn: arn:aws:secretsmanager:us-west-1:123456789012:secret:example
+        secretArn: arn:aws:secretsmanager:us-east-2:123456789012:secret:example
     debugLogging: false
     engineFamily: POSTGRESQL
     idleClientTimeout: 1800

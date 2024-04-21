@@ -19,7 +19,7 @@ spec:
       snsTopicSelector:
         matchLabels:
           testing.upbound.io/example-name: aws_sns_topic
-    region: us-west-1
+    region: us-east-2
     tags:
       Test: MyArchive
 
@@ -35,4 +35,4 @@ metadata:
   name: aws-sns-topic
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

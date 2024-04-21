@@ -21,7 +21,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     principal: acm.amazonaws.com
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -40,4 +40,4 @@ spec:
       signingAlgorithm: SHA512WITHRSA
       subject:
       - commonName: example.com
-    region: us-west-1
+    region: us-east-2

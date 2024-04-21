@@ -14,7 +14,7 @@ spec:
     targetType: ip
     port: 80
     protocol: HTTP
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
@@ -28,7 +28,7 @@ metadata:
 spec:
   forProvider:
     port: 80
-    region: us-west-1
+    region: us-east-2
     targetGroupArnSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2

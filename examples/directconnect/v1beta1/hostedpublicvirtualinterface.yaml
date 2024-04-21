@@ -21,7 +21,7 @@ spec:
         testing.upbound.io/example-name: example
     customerAddress: 175.45.176.1/30
     name: vif-foo
-    region: us-west-1
+    region: us-east-2
     routeFilterPrefixes:
     - 210.52.109.0/24
     - 175.45.176.0/22
@@ -42,4 +42,4 @@ spec:
     bandwidth: 1Gbps
     location: PNP51
     name: example
-    region: us-west-1
+    region: us-east-2
