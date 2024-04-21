@@ -41929,6 +41929,11 @@ func (in *TransitGatewayPeeringAttachmentObservation) DeepCopyInto(out *TransitG
 		*out = new(string)
 		**out = **in
 	}
+	if in.State != nil {
+		in, out := &in.State, &out.State
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

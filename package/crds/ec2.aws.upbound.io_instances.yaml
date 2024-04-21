@@ -384,7 +384,8 @@ spec:
                       properties:
                         marketType:
                           description: Type of market for the instance. Valid value
-                            is spot. Defaults to spot.
+                            is spot. Defaults to spot. Required if spot_options is
+                            specified.
                           type: string
                         spotOptions:
                           description: Block to configure the options for Spot Instances.
@@ -1322,7 +1323,8 @@ spec:
                       properties:
                         marketType:
                           description: Type of market for the instance. Valid value
-                            is spot. Defaults to spot.
+                            is spot. Defaults to spot. Required if spot_options is
+                            specified.
                           type: string
                         spotOptions:
                           description: Block to configure the options for Spot Instances.
@@ -2353,7 +2355,8 @@ spec:
                       properties:
                         marketType:
                           description: Type of market for the instance. Valid value
-                            is spot. Defaults to spot.
+                            is spot. Defaults to spot. Required if spot_options is
+                            specified.
                           type: string
                         spotOptions:
                           description: Block to configure the options for Spot Instances.
