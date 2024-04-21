@@ -6,7 +6,7 @@ apiVersion: kms.aws.upbound.io/v1beta1
 kind: ExternalKey
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+    meta.upbound.io/example-id: kms/v1beta1/replicaexternalkey
   labels:
     testing.upbound.io/example-name: sample-externalkey-replicated
   name: sample-externalkey-replicated
@@ -14,11 +14,11 @@ spec:
   forProvider:
     enabled: true
     region: us-east-2
-    description: Created with Crossplane
+    description: Key created with known key material to test crossplane provider-upjet-aws.
     multiRegion: true
     deletionWindowInDays: 7
     keyMaterialBase64SecretRef:
-      key: key-metarial
+      key: key-material
       name: example-externalkey
       namespace: upbound-system
 
@@ -27,18 +27,32 @@ spec:
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: ReplicaExternalKey
 metadata:
-  name: example
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource has a secret reference."
+    meta.upbound.io/example-id: kms/v1beta1/replicaexternalkey
+    uptest.upbound.io/update-parameter: '{"enabled":true}'
+  name: example
 spec:
   forProvider:
     region: us-west-2
-    description: "Multi-Region replica key"
+    description: Key created with known key material to test crossplane provider-upjet-aws.
     deletionWindowInDays: 7
+    enabled: false
     keyMaterialBase64SecretRef:
-      key: key-metarial
+      key: key-material
       name: example-externalkey
       namespace: upbound-system
     primaryKeyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: sample-externalkey-replicated
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1beta1/replicaexternalkey
+  name: example-externalkey
+  namespace: upbound-system
+# Terraform expects the key-material to be base64 encoded, so we have to double-encode it.
+stringData:
+  key-material: sQkjpYK542ZW9/VrOEPtQnJgXdYuIYftrYVH7uioeKA=
