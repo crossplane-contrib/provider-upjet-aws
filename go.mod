@@ -284,7 +284,7 @@ replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terrafo
 
 // pin versions for https://github.com/crossplane-contrib/provider-upjet-aws/issues/1248
 replace (
-	github.com/aws/aws-sdk-go-v2 v1.24.1 => github.com/aws/aws-sdk-go-v2 v1.24.0
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.10 => github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.9
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.10 => github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.9
+	github.com/aws/aws-sdk-go-v2 v1.24.1 => github.com/aws/aws-sdk-go-v2 v1.24.1
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.10 => github.com/aws/aws-sdk-go-v2/internal/configsources v1.2.10
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.10 => github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.5.10
 )
