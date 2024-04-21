@@ -75,13 +75,13 @@ spec:
                 properties:
                   cdcStartPosition:
                     description: Indicates when you want a change data capture (CDC)
-                      operation to start. The value can be in date, checkpoint, or
-                      LSN/SCN format depending on the source engine. For more information,
-                      see Determining a CDC native start point.
+                      operation to start. The value can be a RFC3339 formatted date,
+                      a checkpoint, or a LSN/SCN format depending on the source engine.
+                      For more information see Determining a CDC native start point.
                     type: string
                   cdcStartTime:
-                    description: The Unix timestamp integer for the start of the Change
-                      Data Capture (CDC) operation.
+                    description: RFC3339 formatted date string or UNIX timestamp for
+                      the start of the Change Data Capture (CDC) operation.
                     type: string
                   migrationType:
                     description: The migration type. Can be one of full-load | cdc
@@ -175,6 +175,11 @@ spec:
                     description: An escaped JSON string that contains the task settings.
                       For a complete list of task settings, see Task Settings for
                       AWS Database Migration Service Tasks.
+                    type: string
+                  resourceIdentifier:
+                    description: A friendly name for the resource identifier at the
+                      end of the EndpointArn response parameter that is returned in
+                      the created Endpoint object.
                     type: string
                   sourceEndpointArn:
                     description: The Amazon Resource Name (ARN) string that uniquely
@@ -365,13 +370,13 @@ spec:
                 properties:
                   cdcStartPosition:
                     description: Indicates when you want a change data capture (CDC)
-                      operation to start. The value can be in date, checkpoint, or
-                      LSN/SCN format depending on the source engine. For more information,
-                      see Determining a CDC native start point.
+                      operation to start. The value can be a RFC3339 formatted date,
+                      a checkpoint, or a LSN/SCN format depending on the source engine.
+                      For more information see Determining a CDC native start point.
                     type: string
                   cdcStartTime:
-                    description: The Unix timestamp integer for the start of the Change
-                      Data Capture (CDC) operation.
+                    description: RFC3339 formatted date string or UNIX timestamp for
+                      the start of the Change Data Capture (CDC) operation.
                     type: string
                   migrationType:
                     description: The migration type. Can be one of full-load | cdc
@@ -461,6 +466,11 @@ spec:
                     description: An escaped JSON string that contains the task settings.
                       For a complete list of task settings, see Task Settings for
                       AWS Database Migration Service Tasks.
+                    type: string
+                  resourceIdentifier:
+                    description: A friendly name for the resource identifier at the
+                      end of the EndpointArn response parameter that is returned in
+                      the created Endpoint object.
                     type: string
                   sourceEndpointArn:
                     description: The Amazon Resource Name (ARN) string that uniquely
@@ -817,13 +827,13 @@ spec:
                 properties:
                   cdcStartPosition:
                     description: Indicates when you want a change data capture (CDC)
-                      operation to start. The value can be in date, checkpoint, or
-                      LSN/SCN format depending on the source engine. For more information,
-                      see Determining a CDC native start point.
+                      operation to start. The value can be a RFC3339 formatted date,
+                      a checkpoint, or a LSN/SCN format depending on the source engine.
+                      For more information see Determining a CDC native start point.
                     type: string
                   cdcStartTime:
-                    description: The Unix timestamp integer for the start of the Change
-                      Data Capture (CDC) operation.
+                    description: RFC3339 formatted date string or UNIX timestamp for
+                      the start of the Change Data Capture (CDC) operation.
                     type: string
                   id:
                     type: string
@@ -843,6 +853,11 @@ spec:
                     description: An escaped JSON string that contains the task settings.
                       For a complete list of task settings, see Task Settings for
                       AWS Database Migration Service Tasks.
+                    type: string
+                  resourceIdentifier:
+                    description: A friendly name for the resource identifier at the
+                      end of the EndpointArn response parameter that is returned in
+                      the created Endpoint object.
                     type: string
                   sourceEndpointArn:
                     description: The Amazon Resource Name (ARN) string that uniquely

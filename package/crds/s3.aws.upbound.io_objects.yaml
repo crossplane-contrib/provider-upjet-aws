@@ -854,6 +854,9 @@ spec:
                       public-read-write, aws-exec-read, authenticated-read, bucket-owner-read,
                       and bucket-owner-full-control.
                     type: string
+                  arn:
+                    description: ARN of the object.
+                    type: string
                   bucket:
                     description: Name of the bucket to put the file in. Alternatively,
                       an S3 access point ARN can be specified.
@@ -931,7 +934,6 @@ spec:
                       lock enabled.
                     type: boolean
                   id:
-                    description: key of the resource supplied above
                     type: string
                   key:
                     description: Name of the object once it is in the bucket.

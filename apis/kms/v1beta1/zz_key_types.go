@@ -55,6 +55,9 @@ type KeyInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }
 
 type KeyObservation struct {
@@ -111,6 +114,9 @@ type KeyObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }
 
 type KeyParameters struct {
@@ -171,6 +177,10 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	// +kubebuilder:validation:Optional
+	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }
 
 // KeySpec defines the desired state of Key

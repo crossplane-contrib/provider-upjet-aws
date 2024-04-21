@@ -15,58 +15,58 @@ import (
 
 type AttachmentsSourceInitParameters struct {
 
-	// The key describing the location of an attachment to a document. Valid key types include: SourceUrl and S3FileUrl
+	// The key of a key-value pair that identifies the location of an attachment to the document. Valid values: SourceUrl, S3FileUrl, AttachmentReference.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The name of the document attachment file
+	// The name of the document attachment file.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value describing the location of an attachment to a document
+	// The value of a key-value pair that identifies the location of an attachment to the document. The argument format is a list of a single string that depends on the type of key you specify - see the API Reference for details.
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type AttachmentsSourceObservation struct {
 
-	// The key describing the location of an attachment to a document. Valid key types include: SourceUrl and S3FileUrl
+	// The key of a key-value pair that identifies the location of an attachment to the document. Valid values: SourceUrl, S3FileUrl, AttachmentReference.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// The name of the document attachment file
+	// The name of the document attachment file.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value describing the location of an attachment to a document
+	// The value of a key-value pair that identifies the location of an attachment to the document. The argument format is a list of a single string that depends on the type of key you specify - see the API Reference for details.
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type AttachmentsSourceParameters struct {
 
-	// The key describing the location of an attachment to a document. Valid key types include: SourceUrl and S3FileUrl
+	// The key of a key-value pair that identifies the location of an attachment to the document. Valid values: SourceUrl, S3FileUrl, AttachmentReference.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// The name of the document attachment file
+	// The name of the document attachment file.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value describing the location of an attachment to a document
+	// The value of a key-value pair that identifies the location of an attachment to the document. The argument format is a list of a single string that depends on the type of key you specify - see the API Reference for details.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type DocumentInitParameters struct {
 
-	// One or more configuration blocks describing attachments sources to a version of a document. Defined below.
+	// One or more configuration blocks describing attachments sources to a version of a document. See attachments_source block below for details.
 	AttachmentsSource []AttachmentsSourceInitParameters `json:"attachmentsSource,omitempty" tf:"attachments_source,omitempty"`
 
-	// The JSON or YAML content of the document.
+	// The content for the SSM document in JSON or YAML format. The content of the document must not exceed 64KB. This quota also includes the content specified for input parameters at runtime. We recommend storing the contents for your new document in an external JSON or YAML file and referencing the file in a command.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The format of the document. Valid document types include: JSON and YAML
+	// The format of the document. Valid values: JSON, TEXT, YAML.
 	DocumentFormat *string `json:"documentFormat,omitempty" tf:"document_format,omitempty"`
 
-	// The type of the document. Valid document types include: Automation, Command, Package, Policy, and Session
+	// The type of the document. For a list of valid values, see the API Reference.
 	DocumentType *string `json:"documentType,omitempty" tf:"document_type,omitempty"`
 
-	// Additional Permissions to attach to the document. See Permissions below for details.
+	// Additional permissions to attach to the document. See Permissions below for details.
 	// +mapType=granular
 	Permissions map[string]*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
@@ -74,20 +74,22 @@ type DocumentInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS resource and property types reference.
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
-	// A field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document and cannot be changed for an existing document version.
+	// The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
 	VersionName *string `json:"versionName,omitempty" tf:"version_name,omitempty"`
 }
 
 type DocumentObservation struct {
+
+	// The Amazon Resource Name (ARN) of the document.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// One or more configuration blocks describing attachments sources to a version of a document. Defined below.
+	// One or more configuration blocks describing attachments sources to a version of a document. See attachments_source block below for details.
 	AttachmentsSource []AttachmentsSourceObservation `json:"attachmentsSource,omitempty" tf:"attachments_source,omitempty"`
 
-	// The JSON or YAML content of the document.
+	// The content for the SSM document in JSON or YAML format. The content of the document must not exceed 64KB. This quota also includes the content specified for input parameters at runtime. We recommend storing the contents for your new document in an external JSON or YAML file and referencing the file in a command.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The date the document was created.
@@ -99,43 +101,44 @@ type DocumentObservation struct {
 	// The description of the document.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The format of the document. Valid document types include: JSON and YAML
+	// The format of the document. Valid values: JSON, TEXT, YAML.
 	DocumentFormat *string `json:"documentFormat,omitempty" tf:"document_format,omitempty"`
 
-	// The type of the document. Valid document types include: Automation, Command, Package, Policy, and Session
+	// The type of the document. For a list of valid values, see the API Reference.
 	DocumentType *string `json:"documentType,omitempty" tf:"document_type,omitempty"`
 
 	// The document version.
 	DocumentVersion *string `json:"documentVersion,omitempty" tf:"document_version,omitempty"`
 
-	// The sha1 or sha256 of the document content
+	// The Sha256 or Sha1 hash created by the system when the document was created.
 	Hash *string `json:"hash,omitempty" tf:"hash,omitempty"`
 
-	// "Sha1" "Sha256". The hashing algorithm used when hashing the content.
+	// The hash type of the document. Valid values: Sha256, Sha1.
 	HashType *string `json:"hashType,omitempty" tf:"hash_type,omitempty"`
 
+	// The name of the document.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The latest version of the document.
 	LatestVersion *string `json:"latestVersion,omitempty" tf:"latest_version,omitempty"`
 
-	// The AWS user account of the person who created the document.
+	// The Amazon Web Services user that created the document.
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
-	// The parameters that are available to this document.
+	// One or more configuration blocks describing the parameters for the document. See parameter block below for details.
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
-	// Additional Permissions to attach to the document. See Permissions below for details.
+	// Additional permissions to attach to the document. See Permissions below for details.
 	// +mapType=granular
 	Permissions map[string]*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
-	// A list of OS platforms compatible with this SSM document, either "Windows" or "Linux".
+	// The list of operating system (OS) platforms compatible with this SSM document. Valid values: Windows, Linux, MacOS.
 	PlatformTypes []*string `json:"platformTypes,omitempty" tf:"platform_types,omitempty"`
 
 	// The schema version of the document.
 	SchemaVersion *string `json:"schemaVersion,omitempty" tf:"schema_version,omitempty"`
 
-	// "Creating", "Active" or "Deleting". The current status of the document.
+	// The status of the SSM document. Valid values: Creating, Active, Updating, Deleting, Failed.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Key-value map of resource tags.
@@ -146,32 +149,32 @@ type DocumentObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS resource and property types reference.
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
-	// A field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document and cannot be changed for an existing document version.
+	// The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
 	VersionName *string `json:"versionName,omitempty" tf:"version_name,omitempty"`
 }
 
 type DocumentParameters struct {
 
-	// One or more configuration blocks describing attachments sources to a version of a document. Defined below.
+	// One or more configuration blocks describing attachments sources to a version of a document. See attachments_source block below for details.
 	// +kubebuilder:validation:Optional
 	AttachmentsSource []AttachmentsSourceParameters `json:"attachmentsSource,omitempty" tf:"attachments_source,omitempty"`
 
-	// The JSON or YAML content of the document.
+	// The content for the SSM document in JSON or YAML format. The content of the document must not exceed 64KB. This quota also includes the content specified for input parameters at runtime. We recommend storing the contents for your new document in an external JSON or YAML file and referencing the file in a command.
 	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
-	// The format of the document. Valid document types include: JSON and YAML
+	// The format of the document. Valid values: JSON, TEXT, YAML.
 	// +kubebuilder:validation:Optional
 	DocumentFormat *string `json:"documentFormat,omitempty" tf:"document_format,omitempty"`
 
-	// The type of the document. Valid document types include: Automation, Command, Package, Policy, and Session
+	// The type of the document. For a list of valid values, see the API Reference.
 	// +kubebuilder:validation:Optional
 	DocumentType *string `json:"documentType,omitempty" tf:"document_type,omitempty"`
 
-	// Additional Permissions to attach to the document. See Permissions below for details.
+	// Additional permissions to attach to the document. See Permissions below for details.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Permissions map[string]*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
@@ -186,11 +189,11 @@ type DocumentParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS Resource Types Reference (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS resource and property types reference.
 	// +kubebuilder:validation:Optional
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 
-	// A field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document and cannot be changed for an existing document version.
+	// The version of the artifact associated with the document. For example, 12.6. This value is unique across all versions of a document, and can't be changed.
 	// +kubebuilder:validation:Optional
 	VersionName *string `json:"versionName,omitempty" tf:"version_name,omitempty"`
 }
@@ -199,15 +202,17 @@ type ParameterInitParameters struct {
 }
 
 type ParameterObservation struct {
+
+	// If specified, the default values for the parameters. Parameters without a default value are required. Parameters with a default value are optional.
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 
-	// The description of the document.
+	// A description of what the parameter does, how to use it, the default value, and whether or not the parameter is optional.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the document.
+	// The name of the parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The permission type for the document. The permission type can be Share.
+	// The type of parameter. Valid values: String, StringList.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

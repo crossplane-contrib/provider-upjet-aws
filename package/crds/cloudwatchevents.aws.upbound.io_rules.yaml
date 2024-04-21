@@ -163,6 +163,10 @@ spec:
                       but it is adjustable up to 4096 characters by submitting a service
                       quota increase request. See Amazon EventBridge quotas for details.'
                     type: string
+                  forceDestroy:
+                    description: Used to delete managed rules created by AWS. Defaults
+                      to false.
+                    type: boolean
                   isEnabled:
                     description: |-
                       Whether the rule should be enabled.
@@ -379,6 +383,10 @@ spec:
                       but it is adjustable up to 4096 characters by submitting a service
                       quota increase request. See Amazon EventBridge quotas for details.'
                     type: string
+                  forceDestroy:
+                    description: Used to delete managed rules created by AWS. Defaults
+                      to false.
+                    type: boolean
                   isEnabled:
                     description: |-
                       Whether the rule should be enabled.
@@ -677,6 +685,10 @@ spec:
                       but it is adjustable up to 4096 characters by submitting a service
                       quota increase request. See Amazon EventBridge quotas for details.'
                     type: string
+                  forceDestroy:
+                    description: Used to delete managed rules created by AWS. Defaults
+                      to false.
+                    type: boolean
                   id:
                     description: The name of the rule.
                     type: string

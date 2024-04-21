@@ -44,15 +44,15 @@ type VPCPeeringConnectionInitParameters_2 struct {
 	// Accept the peering (both VPCs need to be in the same AWS account and region).
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
 
-	// The AWS account ID of the owner of the peer VPC.
-	// Defaults to the account ID the AWS provider is currently connected to.
+	// The AWS account ID of the target peer VPC.
+	// Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
 	PeerOwnerID *string `json:"peerOwnerId,omitempty" tf:"peer_owner_id,omitempty"`
 
 	// The region of the accepter VPC of the VPC Peering Connection. auto_accept must be false,
 	// and use the aws_vpc_peering_connection_accepter to manage the accepter side.
 	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
 
-	// The ID of the VPC with which you are creating the VPC Peering Connection.
+	// The ID of the target VPC with which you are creating the VPC Peering Connection.
 	// +crossplane:generate:reference:type=VPC
 	PeerVPCID *string `json:"peerVpcId,omitempty" tf:"peer_vpc_id,omitempty"`
 
@@ -96,15 +96,15 @@ type VPCPeeringConnectionObservation_2 struct {
 	// The ID of the VPC Peering Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The AWS account ID of the owner of the peer VPC.
-	// Defaults to the account ID the AWS provider is currently connected to.
+	// The AWS account ID of the target peer VPC.
+	// Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
 	PeerOwnerID *string `json:"peerOwnerId,omitempty" tf:"peer_owner_id,omitempty"`
 
 	// The region of the accepter VPC of the VPC Peering Connection. auto_accept must be false,
 	// and use the aws_vpc_peering_connection_accepter to manage the accepter side.
 	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
 
-	// The ID of the VPC with which you are creating the VPC Peering Connection.
+	// The ID of the target VPC with which you are creating the VPC Peering Connection.
 	PeerVPCID *string `json:"peerVpcId,omitempty" tf:"peer_vpc_id,omitempty"`
 
 	// A optional configuration block that allows for VPC Peering Connection options to be set for the VPC that requests
@@ -129,8 +129,8 @@ type VPCPeeringConnectionParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	AutoAccept *bool `json:"autoAccept,omitempty" tf:"auto_accept,omitempty"`
 
-	// The AWS account ID of the owner of the peer VPC.
-	// Defaults to the account ID the AWS provider is currently connected to.
+	// The AWS account ID of the target peer VPC.
+	// Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
 	// +kubebuilder:validation:Optional
 	PeerOwnerID *string `json:"peerOwnerId,omitempty" tf:"peer_owner_id,omitempty"`
 
@@ -139,7 +139,7 @@ type VPCPeeringConnectionParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	PeerRegion *string `json:"peerRegion,omitempty" tf:"peer_region,omitempty"`
 
-	// The ID of the VPC with which you are creating the VPC Peering Connection.
+	// The ID of the target VPC with which you are creating the VPC Peering Connection.
 	// +crossplane:generate:reference:type=VPC
 	// +kubebuilder:validation:Optional
 	PeerVPCID *string `json:"peerVpcId,omitempty" tf:"peer_vpc_id,omitempty"`

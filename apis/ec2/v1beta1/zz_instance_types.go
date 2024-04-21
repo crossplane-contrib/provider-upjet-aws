@@ -181,6 +181,10 @@ type InstanceEBSBlockDeviceInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
@@ -214,6 +218,10 @@ type InstanceEBSBlockDeviceObservation struct {
 	// Map of tags to assign to the device.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
@@ -267,6 +275,11 @@ type InstanceEBSBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional
@@ -484,7 +497,7 @@ type InstanceInitParameters struct {
 
 type InstanceMarketOptionsInitParameters struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
@@ -493,7 +506,7 @@ type InstanceMarketOptionsInitParameters struct {
 
 type InstanceMarketOptionsObservation struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
@@ -502,7 +515,7 @@ type InstanceMarketOptionsObservation struct {
 
 type InstanceMarketOptionsParameters struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot.
+	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
 	// +kubebuilder:validation:Optional
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
@@ -640,7 +653,7 @@ type InstanceObservation struct {
 	// IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. Ensure your credentials have the correct permission to assign the instance profile according to the EC2 documentation, notably iam:PassRole.
 	IAMInstanceProfile *string `json:"iamInstanceProfile,omitempty" tf:"iam_instance_profile,omitempty"`
 
-	// ID of the launch template. Conflicts with name.
+	// ID of the instance.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet.
@@ -1156,6 +1169,10 @@ type RootBlockDeviceInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
@@ -1186,6 +1203,10 @@ type RootBlockDeviceObservation struct {
 	// Map of tags to assign to the device.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
@@ -1231,6 +1252,11 @@ type RootBlockDeviceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Throughput to provision for a volume in mebibytes per second (MiB/s). This is only valid for volume_type of gp3.
 	// +kubebuilder:validation:Optional

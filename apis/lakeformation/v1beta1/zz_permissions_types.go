@@ -13,6 +13,55 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataCellsFilterInitParameters struct {
+
+	// The name of the database.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The name of the data cells filter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Data Catalog.
+	TableCatalogID *string `json:"tableCatalogId,omitempty" tf:"table_catalog_id,omitempty"`
+
+	// The name of the table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+}
+
+type DataCellsFilterObservation struct {
+
+	// The name of the database.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The name of the data cells filter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Data Catalog.
+	TableCatalogID *string `json:"tableCatalogId,omitempty" tf:"table_catalog_id,omitempty"`
+
+	// The name of the table.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+}
+
+type DataCellsFilterParameters struct {
+
+	// The name of the database.
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+
+	// The name of the data cells filter.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The ID of the Data Catalog.
+	// +kubebuilder:validation:Optional
+	TableCatalogID *string `json:"tableCatalogId" tf:"table_catalog_id,omitempty"`
+
+	// The name of the table.
+	// +kubebuilder:validation:Optional
+	TableName *string `json:"tableName" tf:"table_name,omitempty"`
+}
+
 type DataLocationInitParameters struct {
 
 	// –  Amazon Resource Name (ARN) that uniquely identifies the data location resource.
@@ -230,6 +279,9 @@ type PermissionsInitParameters struct {
 	// Whether the permissions are to be granted for the Data Catalog. Defaults to false.
 	CatalogResource *bool `json:"catalogResource,omitempty" tf:"catalog_resource,omitempty"`
 
+	// Configuration block for a data cells filter resource. Detailed below.
+	DataCellsFilter []DataCellsFilterInitParameters `json:"dataCellsFilter,omitempty" tf:"data_cells_filter,omitempty"`
+
 	// Configuration block for a data location resource. Detailed below.
 	DataLocation []DataLocationInitParameters `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
 
@@ -265,6 +317,9 @@ type PermissionsObservation struct {
 
 	// Whether the permissions are to be granted for the Data Catalog. Defaults to false.
 	CatalogResource *bool `json:"catalogResource,omitempty" tf:"catalog_resource,omitempty"`
+
+	// Configuration block for a data cells filter resource. Detailed below.
+	DataCellsFilter []DataCellsFilterObservation `json:"dataCellsFilter,omitempty" tf:"data_cells_filter,omitempty"`
 
 	// Configuration block for a data location resource. Detailed below.
 	DataLocation []DataLocationObservation `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
@@ -305,6 +360,10 @@ type PermissionsParameters struct {
 	// Whether the permissions are to be granted for the Data Catalog. Defaults to false.
 	// +kubebuilder:validation:Optional
 	CatalogResource *bool `json:"catalogResource,omitempty" tf:"catalog_resource,omitempty"`
+
+	// Configuration block for a data cells filter resource. Detailed below.
+	// +kubebuilder:validation:Optional
+	DataCellsFilter []DataCellsFilterParameters `json:"dataCellsFilter,omitempty" tf:"data_cells_filter,omitempty"`
 
 	// Configuration block for a data location resource. Detailed below.
 	// +kubebuilder:validation:Optional

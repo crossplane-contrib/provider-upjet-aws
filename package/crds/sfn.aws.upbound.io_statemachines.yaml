@@ -587,7 +587,7 @@ spec:
                       use for this state machine.
                     type: string
                   stateMachineVersionArn:
-                    description: The ARN of the state machine.
+                    description: The ARN of the state machine version.
                     type: string
                   status:
                     description: The current status of the state machine. Either ACTIVE

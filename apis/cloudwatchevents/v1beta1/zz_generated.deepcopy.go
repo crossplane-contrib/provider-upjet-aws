@@ -4153,6 +4153,11 @@ func (in *RuleInitParameters) DeepCopyInto(out *RuleInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.IsEnabled != nil {
 		in, out := &in.IsEnabled, &out.IsEnabled
 		*out = new(bool)
@@ -4266,6 +4271,11 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -4361,6 +4371,11 @@ func (in *RuleParameters) DeepCopyInto(out *RuleParameters) {
 	if in.EventPattern != nil {
 		in, out := &in.EventPattern, &out.EventPattern
 		*out = new(string)
+		**out = **in
+	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.IsEnabled != nil {

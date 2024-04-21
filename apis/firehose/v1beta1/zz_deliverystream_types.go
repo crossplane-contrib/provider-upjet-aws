@@ -18,7 +18,7 @@ type AuthenticationConfigurationInitParameters struct {
 	// The type of connectivity used to access the Amazon MSK cluster. Valid values: PUBLIC, PRIVATE.
 	Connectivity *string `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the role used to access the Amazon MSK cluster.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -27,7 +27,7 @@ type AuthenticationConfigurationObservation struct {
 	// The type of connectivity used to access the Amazon MSK cluster. Valid values: PUBLIC, PRIVATE.
 	Connectivity *string `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the role used to access the Amazon MSK cluster.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type AuthenticationConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Connectivity *string `json:"connectivity" tf:"connectivity,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the role used to access the Amazon MSK cluster.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -83,7 +83,7 @@ type CloudwatchLoggingOptionsParameters struct {
 
 type CommonAttributesInitParameters struct {
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// The name of the HTTP endpoint common attribute.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the HTTP endpoint common attribute.
@@ -92,7 +92,7 @@ type CommonAttributesInitParameters struct {
 
 type CommonAttributesObservation struct {
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// The name of the HTTP endpoint common attribute.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the HTTP endpoint common attribute.
@@ -101,7 +101,7 @@ type CommonAttributesObservation struct {
 
 type CommonAttributesParameters struct {
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// The name of the HTTP endpoint common attribute.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -115,13 +115,13 @@ type DataFormatConversionConfigurationInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Nested argument that specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. More details below.
+	// Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
 	InputFormatConfiguration []InputFormatConfigurationInitParameters `json:"inputFormatConfiguration,omitempty" tf:"input_format_configuration,omitempty"`
 
-	// Nested argument that specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. More details below.
+	// Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
 	OutputFormatConfiguration []OutputFormatConfigurationInitParameters `json:"outputFormatConfiguration,omitempty" tf:"output_format_configuration,omitempty"`
 
-	// Nested argument that specifies the AWS Glue Data Catalog table that contains the column information. More details below.
+	// Specifies the AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
 	SchemaConfiguration []SchemaConfigurationInitParameters `json:"schemaConfiguration,omitempty" tf:"schema_configuration,omitempty"`
 }
 
@@ -130,13 +130,13 @@ type DataFormatConversionConfigurationObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Nested argument that specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. More details below.
+	// Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
 	InputFormatConfiguration []InputFormatConfigurationObservation `json:"inputFormatConfiguration,omitempty" tf:"input_format_configuration,omitempty"`
 
-	// Nested argument that specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. More details below.
+	// Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
 	OutputFormatConfiguration []OutputFormatConfigurationObservation `json:"outputFormatConfiguration,omitempty" tf:"output_format_configuration,omitempty"`
 
-	// Nested argument that specifies the AWS Glue Data Catalog table that contains the column information. More details below.
+	// Specifies the AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
 	SchemaConfiguration []SchemaConfigurationObservation `json:"schemaConfiguration,omitempty" tf:"schema_configuration,omitempty"`
 }
 
@@ -146,15 +146,15 @@ type DataFormatConversionConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Nested argument that specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. More details below.
+	// Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. See input_format_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	InputFormatConfiguration []InputFormatConfigurationParameters `json:"inputFormatConfiguration" tf:"input_format_configuration,omitempty"`
 
-	// Nested argument that specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. More details below.
+	// Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. See output_format_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	OutputFormatConfiguration []OutputFormatConfigurationParameters `json:"outputFormatConfiguration" tf:"output_format_configuration,omitempty"`
 
-	// Nested argument that specifies the AWS Glue Data Catalog table that contains the column information. More details below.
+	// Specifies the AWS Glue Data Catalog table that contains the column information. See schema_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	SchemaConfiguration []SchemaConfigurationParameters `json:"schemaConfiguration" tf:"schema_configuration,omitempty"`
 }
@@ -166,38 +166,37 @@ type DeliveryStreamInitParameters struct {
 
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
 
-	// Configuration options when destination is elasticsearch. More details are given below.
+	// Configuration options when destination is elasticsearch. See elasticsearch_configuration block below for details.
 	ElasticsearchConfiguration []ElasticsearchConfigurationInitParameters `json:"elasticsearchConfiguration,omitempty" tf:"elasticsearch_configuration,omitempty"`
 
-	// Enhanced configuration options for the s3 destination. More details are given below.
+	// Enhanced configuration options for the s3 destination. See extended_s3_configuration block below for details.
 	ExtendedS3Configuration []ExtendedS3ConfigurationInitParameters `json:"extendedS3Configuration,omitempty" tf:"extended_s3_configuration,omitempty"`
 
-	// Configuration options when destination is http_endpoint. Requires the user to also specify an s3_configuration block.  More details are given below.
+	// Configuration options when destination is http_endpoint. Requires the user to also specify an s3_configuration block.  See http_endpoint_configuration block below for details.
 	HTTPEndpointConfiguration []HTTPEndpointConfigurationInitParameters `json:"httpEndpointConfiguration,omitempty" tf:"http_endpoint_configuration,omitempty"`
 
-	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. More details are given below.
+	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	KinesisSourceConfiguration []KinesisSourceConfigurationInitParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
-	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. More details are given below.
+	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
 	MskSourceConfiguration []MskSourceConfigurationInitParameters `json:"mskSourceConfiguration,omitempty" tf:"msk_source_configuration,omitempty"`
 
 	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration options when destination is opensearch. More details are given below.
+	// Configuration options when destination is opensearch. See opensearch_configuration block below for details.
 	OpensearchConfiguration []OpensearchConfigurationInitParameters `json:"opensearchConfiguration,omitempty" tf:"opensearch_configuration,omitempty"`
 
-	// Configuration options when destination is opensearchserverless. More details are given below.
+	// Configuration options when destination is opensearchserverless. See opensearchserverless_configuration block below for details.
 	OpensearchserverlessConfiguration []OpensearchserverlessConfigurationInitParameters `json:"opensearchserverlessConfiguration,omitempty" tf:"opensearchserverless_configuration,omitempty"`
 
-	// Configuration options when destination is redshift. Requires the user to also specify an s3_configuration block. More details are given below.
+	// Configuration options when destination is redshift. Requires the user to also specify an s3_configuration block. See redshift_configuration block below for details.
 	RedshiftConfiguration []RedshiftConfigurationInitParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
-	// Encrypt at rest options.
-	// Server-side encryption should not be enabled when a kinesis stream is configured as the source of the firehose delivery stream.
+	// Encrypt at rest options. See server_side_encryption block below for details.
 	ServerSideEncryption []ServerSideEncryptionInitParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Configuration options when destination is splunk. More details are given below.
+	// Configuration options when destination is splunk. See splunk_configuration block below for details.
 	SplunkConfiguration []SplunkConfigurationInitParameters `json:"splunkConfiguration,omitempty" tf:"splunk_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -218,40 +217,39 @@ type DeliveryStreamObservation struct {
 
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
 
-	// Configuration options when destination is elasticsearch. More details are given below.
+	// Configuration options when destination is elasticsearch. See elasticsearch_configuration block below for details.
 	ElasticsearchConfiguration []ElasticsearchConfigurationObservation `json:"elasticsearchConfiguration,omitempty" tf:"elasticsearch_configuration,omitempty"`
 
-	// Enhanced configuration options for the s3 destination. More details are given below.
+	// Enhanced configuration options for the s3 destination. See extended_s3_configuration block below for details.
 	ExtendedS3Configuration []ExtendedS3ConfigurationObservation `json:"extendedS3Configuration,omitempty" tf:"extended_s3_configuration,omitempty"`
 
-	// Configuration options when destination is http_endpoint. Requires the user to also specify an s3_configuration block.  More details are given below.
+	// Configuration options when destination is http_endpoint. Requires the user to also specify an s3_configuration block.  See http_endpoint_configuration block below for details.
 	HTTPEndpointConfiguration []HTTPEndpointConfigurationObservation `json:"httpEndpointConfiguration,omitempty" tf:"http_endpoint_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. More details are given below.
+	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	KinesisSourceConfiguration []KinesisSourceConfigurationObservation `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
-	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. More details are given below.
+	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
 	MskSourceConfiguration []MskSourceConfigurationObservation `json:"mskSourceConfiguration,omitempty" tf:"msk_source_configuration,omitempty"`
 
 	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration options when destination is opensearch. More details are given below.
+	// Configuration options when destination is opensearch. See opensearch_configuration block below for details.
 	OpensearchConfiguration []OpensearchConfigurationObservation `json:"opensearchConfiguration,omitempty" tf:"opensearch_configuration,omitempty"`
 
-	// Configuration options when destination is opensearchserverless. More details are given below.
+	// Configuration options when destination is opensearchserverless. See opensearchserverless_configuration block below for details.
 	OpensearchserverlessConfiguration []OpensearchserverlessConfigurationObservation `json:"opensearchserverlessConfiguration,omitempty" tf:"opensearchserverless_configuration,omitempty"`
 
-	// Configuration options when destination is redshift. Requires the user to also specify an s3_configuration block. More details are given below.
+	// Configuration options when destination is redshift. Requires the user to also specify an s3_configuration block. See redshift_configuration block below for details.
 	RedshiftConfiguration []RedshiftConfigurationObservation `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
-	// Encrypt at rest options.
-	// Server-side encryption should not be enabled when a kinesis stream is configured as the source of the firehose delivery stream.
+	// Encrypt at rest options. See server_side_encryption block below for details.
 	ServerSideEncryption []ServerSideEncryptionObservation `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Configuration options when destination is splunk. More details are given below.
+	// Configuration options when destination is splunk. See splunk_configuration block below for details.
 	SplunkConfiguration []SplunkConfigurationObservation `json:"splunkConfiguration,omitempty" tf:"splunk_configuration,omitempty"`
 
 	// Key-value map of resource tags.
@@ -275,23 +273,23 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationID *string `json:"destinationId,omitempty" tf:"destination_id,omitempty"`
 
-	// Configuration options when destination is elasticsearch. More details are given below.
+	// Configuration options when destination is elasticsearch. See elasticsearch_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ElasticsearchConfiguration []ElasticsearchConfigurationParameters `json:"elasticsearchConfiguration,omitempty" tf:"elasticsearch_configuration,omitempty"`
 
-	// Enhanced configuration options for the s3 destination. More details are given below.
+	// Enhanced configuration options for the s3 destination. See extended_s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ExtendedS3Configuration []ExtendedS3ConfigurationParameters `json:"extendedS3Configuration,omitempty" tf:"extended_s3_configuration,omitempty"`
 
-	// Configuration options when destination is http_endpoint. Requires the user to also specify an s3_configuration block.  More details are given below.
+	// Configuration options when destination is http_endpoint. Requires the user to also specify an s3_configuration block.  See http_endpoint_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	HTTPEndpointConfiguration []HTTPEndpointConfigurationParameters `json:"httpEndpointConfiguration,omitempty" tf:"http_endpoint_configuration,omitempty"`
 
-	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. More details are given below.
+	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	KinesisSourceConfiguration []KinesisSourceConfigurationParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
-	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. More details are given below.
+	// The configuration for the Amazon MSK cluster to be used as the source for a delivery stream. See msk_source_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	MskSourceConfiguration []MskSourceConfigurationParameters `json:"mskSourceConfiguration,omitempty" tf:"msk_source_configuration,omitempty"`
 
@@ -299,15 +297,15 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Configuration options when destination is opensearch. More details are given below.
+	// Configuration options when destination is opensearch. See opensearch_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	OpensearchConfiguration []OpensearchConfigurationParameters `json:"opensearchConfiguration,omitempty" tf:"opensearch_configuration,omitempty"`
 
-	// Configuration options when destination is opensearchserverless. More details are given below.
+	// Configuration options when destination is opensearchserverless. See opensearchserverless_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	OpensearchserverlessConfiguration []OpensearchserverlessConfigurationParameters `json:"opensearchserverlessConfiguration,omitempty" tf:"opensearchserverless_configuration,omitempty"`
 
-	// Configuration options when destination is redshift. Requires the user to also specify an s3_configuration block. More details are given below.
+	// Configuration options when destination is redshift. Requires the user to also specify an s3_configuration block. See redshift_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	RedshiftConfiguration []RedshiftConfigurationParameters `json:"redshiftConfiguration,omitempty" tf:"redshift_configuration,omitempty"`
 
@@ -317,12 +315,11 @@ type DeliveryStreamParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Encrypt at rest options.
-	// Server-side encryption should not be enabled when a kinesis stream is configured as the source of the firehose delivery stream.
+	// Encrypt at rest options. See server_side_encryption block below for details.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption []ServerSideEncryptionParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
-	// Configuration options when destination is splunk. More details are given below.
+	// Configuration options when destination is splunk. See splunk_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	SplunkConfiguration []SplunkConfigurationParameters `json:"splunkConfiguration,omitempty" tf:"splunk_configuration,omitempty"`
 
@@ -338,31 +335,50 @@ type DeliveryStreamParameters struct {
 
 type DeserializerInitParameters struct {
 
-	// Nested argument that specifies the native Hive / HCatalog JsonSerDe. More details below.
+	// Specifies the native Hive / HCatalog JsonSerDe. More details below. See hive_json_ser_de block below for details.
 	HiveJSONSerDe []HiveJSONSerDeInitParameters `json:"hiveJsonSerDe,omitempty" tf:"hive_json_ser_de,omitempty"`
 
-	// Nested argument that specifies the OpenX SerDe. More details below.
+	// Specifies the OpenX SerDe. See open_x_json_ser_de block below for details.
 	OpenXJSONSerDe []OpenXJSONSerDeInitParameters `json:"openXJsonSerDe,omitempty" tf:"open_x_json_ser_de,omitempty"`
 }
 
 type DeserializerObservation struct {
 
-	// Nested argument that specifies the native Hive / HCatalog JsonSerDe. More details below.
+	// Specifies the native Hive / HCatalog JsonSerDe. More details below. See hive_json_ser_de block below for details.
 	HiveJSONSerDe []HiveJSONSerDeObservation `json:"hiveJsonSerDe,omitempty" tf:"hive_json_ser_de,omitempty"`
 
-	// Nested argument that specifies the OpenX SerDe. More details below.
+	// Specifies the OpenX SerDe. See open_x_json_ser_de block below for details.
 	OpenXJSONSerDe []OpenXJSONSerDeObservation `json:"openXJsonSerDe,omitempty" tf:"open_x_json_ser_de,omitempty"`
 }
 
 type DeserializerParameters struct {
 
-	// Nested argument that specifies the native Hive / HCatalog JsonSerDe. More details below.
+	// Specifies the native Hive / HCatalog JsonSerDe. More details below. See hive_json_ser_de block below for details.
 	// +kubebuilder:validation:Optional
 	HiveJSONSerDe []HiveJSONSerDeParameters `json:"hiveJsonSerDe,omitempty" tf:"hive_json_ser_de,omitempty"`
 
-	// Nested argument that specifies the OpenX SerDe. More details below.
+	// Specifies the OpenX SerDe. See open_x_json_ser_de block below for details.
 	// +kubebuilder:validation:Optional
 	OpenXJSONSerDe []OpenXJSONSerDeParameters `json:"openXJsonSerDe,omitempty" tf:"open_x_json_ser_de,omitempty"`
+}
+
+type DocumentIDOptionsInitParameters struct {
+
+	// The method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
+	DefaultDocumentIDFormat *string `json:"defaultDocumentIdFormat,omitempty" tf:"default_document_id_format,omitempty"`
+}
+
+type DocumentIDOptionsObservation struct {
+
+	// The method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
+	DefaultDocumentIDFormat *string `json:"defaultDocumentIdFormat,omitempty" tf:"default_document_id_format,omitempty"`
+}
+
+type DocumentIDOptionsParameters struct {
+
+	// The method for setting up document ID. Valid values: FIREHOSE_DEFAULT, NO_DOCUMENT_ID.
+	// +kubebuilder:validation:Optional
+	DefaultDocumentIDFormat *string `json:"defaultDocumentIdFormat" tf:"default_document_id_format,omitempty"`
 }
 
 type DynamicPartitioningConfigurationInitParameters struct {
@@ -370,7 +386,7 @@ type DynamicPartitioningConfigurationInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 }
 
@@ -379,7 +395,7 @@ type DynamicPartitioningConfigurationObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 }
 
@@ -389,20 +405,20 @@ type DynamicPartitioningConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 }
 
 type ElasticsearchConfigurationInitParameters struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []CloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
@@ -427,13 +443,13 @@ type ElasticsearchConfigurationInitParameters struct {
 	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []ProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Amazon Elasticsearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -446,28 +462,28 @@ type ElasticsearchConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []S3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// The Elasticsearch type name with maximum length of 100 characters.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
 	VPCConfig []VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ElasticsearchConfigurationObservation struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []CloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
@@ -482,31 +498,31 @@ type ElasticsearchConfigurationObservation struct {
 	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []ProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Amazon Elasticsearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []S3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// The Elasticsearch type name with maximum length of 100 characters.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
 	VPCConfig []VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type ElasticsearchConfigurationParameters struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
@@ -514,7 +530,7 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []CloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -544,15 +560,15 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []ProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Amazon Elasticsearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -566,11 +582,11 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []S3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
@@ -578,7 +594,7 @@ type ElasticsearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. See vpc_config block below for details.
 	// +kubebuilder:validation:Optional
 	VPCConfig []VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
@@ -637,26 +653,32 @@ type ExtendedS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []ExtendedS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. More details given below.
+	// The time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
+	CustomTimeZone *string `json:"customTimeZone,omitempty" tf:"custom_time_zone,omitempty"`
+
+	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. See data_format_conversion_configuration block below for details.
 	DataFormatConversionConfiguration []DataFormatConversionConfigurationInitParameters `json:"dataFormatConversionConfiguration,omitempty" tf:"data_format_conversion_configuration,omitempty"`
 
-	// The configuration for dynamic partitioning. See Dynamic Partitioning Configuration below for more details. Required when using dynamic partitioning.
+	// The configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
 	DynamicPartitioningConfiguration []DynamicPartitioningConfigurationInitParameters `json:"dynamicPartitioningConfiguration,omitempty" tf:"dynamic_partitioning_configuration,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
+
+	// The file extension to override the default file extension (for example, .json).
+	FileExtension *string `json:"fileExtension,omitempty" tf:"file_extension,omitempty"`
 
 	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
 	// be used.
@@ -665,10 +687,10 @@ type ExtendedS3ConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []ExtendedS3ConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -693,26 +715,32 @@ type ExtendedS3ConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []ExtendedS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. More details given below.
+	// The time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
+	CustomTimeZone *string `json:"customTimeZone,omitempty" tf:"custom_time_zone,omitempty"`
+
+	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. See data_format_conversion_configuration block below for details.
 	DataFormatConversionConfiguration []DataFormatConversionConfigurationObservation `json:"dataFormatConversionConfiguration,omitempty" tf:"data_format_conversion_configuration,omitempty"`
 
-	// The configuration for dynamic partitioning. See Dynamic Partitioning Configuration below for more details. Required when using dynamic partitioning.
+	// The configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
 	DynamicPartitioningConfiguration []DynamicPartitioningConfigurationObservation `json:"dynamicPartitioningConfiguration,omitempty" tf:"dynamic_partitioning_configuration,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
+
+	// The file extension to override the default file extension (for example, .json).
+	FileExtension *string `json:"fileExtension,omitempty" tf:"file_extension,omitempty"`
 
 	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
 	// be used.
@@ -721,10 +749,10 @@ type ExtendedS3ConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []ExtendedS3ConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
@@ -750,15 +778,15 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []ExtendedS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -766,17 +794,25 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
 
-	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. More details given below.
+	// The time zone you prefer. Valid values are UTC or a non-3-letter IANA time zones (for example, America/Los_Angeles). Default value is UTC.
+	// +kubebuilder:validation:Optional
+	CustomTimeZone *string `json:"customTimeZone,omitempty" tf:"custom_time_zone,omitempty"`
+
+	// Nested argument for the serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. See data_format_conversion_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	DataFormatConversionConfiguration []DataFormatConversionConfigurationParameters `json:"dataFormatConversionConfiguration,omitempty" tf:"data_format_conversion_configuration,omitempty"`
 
-	// The configuration for dynamic partitioning. See Dynamic Partitioning Configuration below for more details. Required when using dynamic partitioning.
+	// The configuration for dynamic partitioning. Required when using dynamic partitioning. See dynamic_partitioning_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	DynamicPartitioningConfiguration []DynamicPartitioningConfigurationParameters `json:"dynamicPartitioningConfiguration,omitempty" tf:"dynamic_partitioning_configuration,omitempty"`
 
 	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
 	// +kubebuilder:validation:Optional
 	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
+
+	// The file extension to override the default file extension (for example, .json).
+	// +kubebuilder:validation:Optional
+	FileExtension *string `json:"fileExtension,omitempty" tf:"file_extension,omitempty"`
 
 	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
 	// be used.
@@ -787,11 +823,11 @@ type ExtendedS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []ExtendedS3ConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -819,7 +855,7 @@ type ExtendedS3ConfigurationProcessingConfigurationInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []ProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -828,7 +864,7 @@ type ExtendedS3ConfigurationProcessingConfigurationObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []ProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -838,14 +874,14 @@ type ExtendedS3ConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []ProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type HTTPEndpointConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
-	// Whether to enable encryption at rest. Default is false.
+	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
@@ -857,7 +893,7 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsInitParameters struct {
 
 type HTTPEndpointConfigurationCloudwatchLoggingOptionsObservation struct {
 
-	// Whether to enable encryption at rest. Default is false.
+	// Enables or disables the logging. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The CloudWatch group name for logging. This value is required if enabled is true.
@@ -869,7 +905,7 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsObservation struct {
 
 type HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters struct {
 
-	// Whether to enable encryption at rest. Default is false.
+	// Enables or disables the logging. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -884,28 +920,28 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters struct {
 
 type HTTPEndpointConfigurationInitParameters struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []HTTPEndpointConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// The HTTP endpoint name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []HTTPEndpointConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The request configuration.  More details are given below.
+	// The request configuration.  See request_configuration block below for details.
 	RequestConfiguration []RequestConfigurationInitParameters `json:"requestConfiguration,omitempty" tf:"request_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// Total amount of seconds Firehose spends on retries. This duration starts after the initial attempt fails, It does not include the time periods during which Firehose waits for acknowledgment from the specified destination after each attempt. Valid values between 0 and 7200. Default is 300.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs. The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -918,10 +954,10 @@ type HTTPEndpointConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []HTTPEndpointConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
@@ -930,34 +966,34 @@ type HTTPEndpointConfigurationInitParameters struct {
 
 type HTTPEndpointConfigurationObservation struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []HTTPEndpointConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// The HTTP endpoint name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []HTTPEndpointConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The request configuration.  More details are given below.
+	// The request configuration.  See request_configuration block below for details.
 	RequestConfiguration []RequestConfigurationObservation `json:"requestConfiguration,omitempty" tf:"request_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// Total amount of seconds Firehose spends on retries. This duration starts after the initial attempt fails, It does not include the time periods during which Firehose waits for acknowledgment from the specified destination after each attempt. Valid values between 0 and 7200. Default is 300.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs. The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []HTTPEndpointConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
@@ -970,35 +1006,35 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessKeySecretRef *v1.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
-	// A name to identify the stream. This is unique to the AWS account and region the Stream is created in. When using for WAF logging, name must be prefixed with aws-waf-logs-. See AWS Documentation for more details.
+	// The HTTP endpoint name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []HTTPEndpointConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The request configuration.  More details are given below.
+	// The request configuration.  See request_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	RequestConfiguration []RequestConfigurationParameters `json:"requestConfiguration,omitempty" tf:"request_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// Total amount of seconds Firehose spends on retries. This duration starts after the initial attempt fails, It does not include the time periods during which Firehose waits for acknowledgment from the specified destination after each attempt. Valid values between 0 and 7200. Default is 300.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs. The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1012,11 +1048,11 @@ type HTTPEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDataOnly and AllData.  Default value is FailedDataOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []HTTPEndpointConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
@@ -1030,7 +1066,7 @@ type HTTPEndpointConfigurationProcessingConfigurationInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []HTTPEndpointConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -1039,7 +1075,7 @@ type HTTPEndpointConfigurationProcessingConfigurationObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []HTTPEndpointConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -1049,14 +1085,14 @@ type HTTPEndpointConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []HTTPEndpointConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type HTTPEndpointConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -1065,7 +1101,7 @@ type HTTPEndpointConfigurationProcessingConfigurationProcessorsInitParameters st
 
 type HTTPEndpointConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -1074,7 +1110,7 @@ type HTTPEndpointConfigurationProcessingConfigurationProcessorsObservation struc
 
 type HTTPEndpointConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []ProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -1137,13 +1173,13 @@ type HTTPEndpointConfigurationS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -1159,7 +1195,7 @@ type HTTPEndpointConfigurationS3ConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1178,13 +1214,13 @@ type HTTPEndpointConfigurationS3ConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -1200,7 +1236,7 @@ type HTTPEndpointConfigurationS3ConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -1220,15 +1256,15 @@ type HTTPEndpointConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []HTTPEndpointConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -1249,7 +1285,7 @@ type HTTPEndpointConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1285,19 +1321,19 @@ type HiveJSONSerDeParameters struct {
 
 type InputFormatConfigurationInitParameters struct {
 
-	// Nested argument that specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. More details below.
+	// Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
 	Deserializer []DeserializerInitParameters `json:"deserializer,omitempty" tf:"deserializer,omitempty"`
 }
 
 type InputFormatConfigurationObservation struct {
 
-	// Nested argument that specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. More details below.
+	// Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
 	Deserializer []DeserializerObservation `json:"deserializer,omitempty" tf:"deserializer,omitempty"`
 }
 
 type InputFormatConfigurationParameters struct {
 
-	// Nested argument that specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. More details below.
+	// Specifies which deserializer to use. You can choose either the Apache Hive JSON SerDe or the OpenX JSON SerDe. See deserializer block below for details.
 	// +kubebuilder:validation:Optional
 	Deserializer []DeserializerParameters `json:"deserializer" tf:"deserializer,omitempty"`
 }
@@ -1333,7 +1369,7 @@ type KinesisSourceConfigurationParameters struct {
 
 type MskSourceConfigurationInitParameters struct {
 
-	// The authentication configuration of the Amazon MSK cluster. More details are given below.
+	// The authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
 	AuthenticationConfiguration []AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
 	// The ARN of the Amazon MSK cluster.
@@ -1345,7 +1381,7 @@ type MskSourceConfigurationInitParameters struct {
 
 type MskSourceConfigurationObservation struct {
 
-	// The authentication configuration of the Amazon MSK cluster. More details are given below.
+	// The authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
 	AuthenticationConfiguration []AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
 	// The ARN of the Amazon MSK cluster.
@@ -1357,7 +1393,7 @@ type MskSourceConfigurationObservation struct {
 
 type MskSourceConfigurationParameters struct {
 
-	// The authentication configuration of the Amazon MSK cluster. More details are given below.
+	// The authentication configuration of the Amazon MSK cluster. See authentication_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	AuthenticationConfiguration []AuthenticationConfigurationParameters `json:"authenticationConfiguration" tf:"authentication_configuration,omitempty"`
 
@@ -1453,17 +1489,20 @@ type OpensearchConfigurationCloudwatchLoggingOptionsParameters struct {
 
 type OpensearchConfigurationInitParameters struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []OpensearchConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
+
+	// The method for setting up document ID. See [document_id_options block] below for details.
+	DocumentIDOptions []DocumentIDOptionsInitParameters `json:"documentIdOptions,omitempty" tf:"document_id_options,omitempty"`
 
 	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta1.Domain
@@ -1478,19 +1517,19 @@ type OpensearchConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainArnSelector *v1.Selector `json:"domainArnSelector,omitempty" tf:"-"`
 
-	// The Elasticsearch index name.
+	// The OpenSearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// The OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration []OpensearchConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Amazon OpenSearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1503,67 +1542,70 @@ type OpensearchConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []OpensearchConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters.
+	// The Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
 	VPCConfig []OpensearchConfigurationVPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type OpensearchConfigurationObservation struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []OpensearchConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The endpoint to use when communicating with the cluster. Conflicts with domain_arn.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
+	// The method for setting up document ID. See [document_id_options block] below for details.
+	DocumentIDOptions []DocumentIDOptionsObservation `json:"documentIdOptions,omitempty" tf:"document_id_options,omitempty"`
+
 	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	DomainArn *string `json:"domainArn,omitempty" tf:"domain_arn,omitempty"`
 
-	// The Elasticsearch index name.
+	// The OpenSearch index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// The OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration []OpensearchConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Amazon OpenSearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []OpensearchConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters.
+	// The Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
 	VPCConfig []OpensearchConfigurationVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type OpensearchConfigurationParameters struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
@@ -1571,7 +1613,7 @@ type OpensearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []OpensearchConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -1579,6 +1621,10 @@ type OpensearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
+	// The method for setting up document ID. See [document_id_options block] below for details.
+	// +kubebuilder:validation:Optional
+	DocumentIDOptions []DocumentIDOptionsParameters `json:"documentIdOptions,omitempty" tf:"document_id_options,omitempty"`
+
 	// The ARN of the Amazon ES domain.  The pattern needs to be arn:.*.  Conflicts with cluster_endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
@@ -1593,23 +1639,23 @@ type OpensearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainArnSelector *v1.Selector `json:"domainArnSelector,omitempty" tf:"-"`
 
-	// The Elasticsearch index name.
+	// The OpenSearch index name.
 	// +kubebuilder:validation:Optional
 	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
-	// The Elasticsearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
+	// The OpenSearch index rotation period.  Index rotation appends a timestamp to the IndexName to facilitate expiration of old data.  Valid values are NoRotation, OneHour, OneDay, OneWeek, and OneMonth.  The default value is OneDay.
 	// +kubebuilder:validation:Optional
 	IndexRotationPeriod *string `json:"indexRotationPeriod,omitempty" tf:"index_rotation_period,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration. See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []OpensearchConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Amazon OpenSearch, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon ES Configuration API and for indexing documents.  The IAM role must have permission for DescribeDomain, DescribeDomains, and DescribeDomainConfig.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1623,19 +1669,19 @@ type OpensearchConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []OpensearchConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The Elasticsearch type name with maximum length of 100 characters.
+	// The Elasticsearch type name with maximum length of 100 characters. Types are deprecated in OpenSearch_1.1. TypeName must be empty.
 	// +kubebuilder:validation:Optional
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to OpenSearch associated with the VPC. See vpc_config block below for details.
 	// +kubebuilder:validation:Optional
 	VPCConfig []OpensearchConfigurationVPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
@@ -1645,7 +1691,7 @@ type OpensearchConfigurationProcessingConfigurationInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []OpensearchConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -1654,7 +1700,7 @@ type OpensearchConfigurationProcessingConfigurationObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []OpensearchConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -1664,14 +1710,14 @@ type OpensearchConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []OpensearchConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -1680,7 +1726,7 @@ type OpensearchConfigurationProcessingConfigurationProcessorsInitParameters stru
 
 type OpensearchConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -1689,7 +1735,7 @@ type OpensearchConfigurationProcessingConfigurationProcessorsObservation struct 
 
 type OpensearchConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -1781,13 +1827,13 @@ type OpensearchConfigurationS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -1803,7 +1849,7 @@ type OpensearchConfigurationS3ConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1822,13 +1868,13 @@ type OpensearchConfigurationS3ConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -1844,7 +1890,7 @@ type OpensearchConfigurationS3ConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -1864,15 +1910,15 @@ type OpensearchConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []OpensearchConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -1893,7 +1939,7 @@ type OpensearchConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -1910,7 +1956,7 @@ type OpensearchConfigurationS3ConfigurationParameters struct {
 
 type OpensearchConfigurationVPCConfigInitParameters struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -1934,7 +1980,7 @@ type OpensearchConfigurationVPCConfigInitParameters struct {
 
 type OpensearchConfigurationVPCConfigObservation struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
@@ -1950,7 +1996,7 @@ type OpensearchConfigurationVPCConfigObservation struct {
 
 type OpensearchConfigurationVPCConfigParameters struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -2016,13 +2062,13 @@ type OpensearchserverlessConfigurationCloudwatchLoggingOptionsParameters struct 
 
 type OpensearchserverlessConfigurationInitParameters struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []OpensearchserverlessConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
@@ -2038,16 +2084,16 @@ type OpensearchserverlessConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CollectionEndpointSelector *v1.Selector `json:"collectionEndpointSelector,omitempty" tf:"-"`
 
-	// The Elasticsearch index name.
+	// The Serverless offering for Amazon OpenSearch Service index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []OpensearchserverlessConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time, in seconds between 0 to 7200, during which Kinesis Data Firehose retries delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2060,55 +2106,55 @@ type OpensearchserverlessConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []OpensearchserverlessConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
 	VPCConfig []OpensearchserverlessConfigurationVPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type OpensearchserverlessConfigurationObservation struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
 	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []OpensearchserverlessConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.
 	CollectionEndpoint *string `json:"collectionEndpoint,omitempty" tf:"collection_endpoint,omitempty"`
 
-	// The Elasticsearch index name.
+	// The Serverless offering for Amazon OpenSearch Service index name.
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []OpensearchserverlessConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time, in seconds between 0 to 7200, during which Kinesis Data Firehose retries delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []OpensearchserverlessConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
 	VPCConfig []OpensearchserverlessConfigurationVPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
 type OpensearchserverlessConfigurationParameters struct {
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 300s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
@@ -2116,7 +2162,7 @@ type OpensearchserverlessConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []OpensearchserverlessConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -2134,19 +2180,19 @@ type OpensearchserverlessConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CollectionEndpointSelector *v1.Selector `json:"collectionEndpointSelector,omitempty" tf:"-"`
 
-	// The Elasticsearch index name.
+	// The Serverless offering for Amazon OpenSearch Service index name.
 	// +kubebuilder:validation:Optional
 	IndexName *string `json:"indexName" tf:"index_name,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []OpensearchserverlessConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time, in seconds between 0 to 7200, during which Kinesis Data Firehose retries delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.  The pattern needs to be arn:.*.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -2160,15 +2206,15 @@ type OpensearchserverlessConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedDocumentsOnly and AllDocuments.  Default value is FailedDocumentsOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []OpensearchserverlessConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
-	// The VPC configuration for the delivery stream to connect to Elastic Search associated with the VPC. More details are given below
+	// The VPC configuration for the delivery stream to connect to OpenSearch Serverless associated with the VPC. See vpc_config block below for details.
 	// +kubebuilder:validation:Optional
 	VPCConfig []OpensearchserverlessConfigurationVPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
@@ -2178,7 +2224,7 @@ type OpensearchserverlessConfigurationProcessingConfigurationInitParameters stru
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []OpensearchserverlessConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -2187,7 +2233,7 @@ type OpensearchserverlessConfigurationProcessingConfigurationObservation struct 
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []OpensearchserverlessConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -2197,14 +2243,14 @@ type OpensearchserverlessConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -2213,7 +2259,7 @@ type OpensearchserverlessConfigurationProcessingConfigurationProcessorsInitParam
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -2222,7 +2268,7 @@ type OpensearchserverlessConfigurationProcessingConfigurationProcessorsObservati
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -2314,13 +2360,13 @@ type OpensearchserverlessConfigurationS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -2336,7 +2382,7 @@ type OpensearchserverlessConfigurationS3ConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2355,13 +2401,13 @@ type OpensearchserverlessConfigurationS3ConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -2377,7 +2423,7 @@ type OpensearchserverlessConfigurationS3ConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -2397,15 +2443,15 @@ type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []OpensearchserverlessConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -2426,7 +2472,7 @@ type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -2443,7 +2489,7 @@ type OpensearchserverlessConfigurationS3ConfigurationParameters struct {
 
 type OpensearchserverlessConfigurationVPCConfigInitParameters struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
@@ -2457,7 +2503,7 @@ type OpensearchserverlessConfigurationVPCConfigInitParameters struct {
 
 type OpensearchserverlessConfigurationVPCConfigObservation struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
@@ -2473,7 +2519,7 @@ type OpensearchserverlessConfigurationVPCConfigObservation struct {
 
 type OpensearchserverlessConfigurationVPCConfigParameters struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 
@@ -2599,19 +2645,19 @@ type OrcSerDeParameters struct {
 
 type OutputFormatConfigurationInitParameters struct {
 
-	// Nested argument that specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. More details below.
+	// Specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
 	Serializer []SerializerInitParameters `json:"serializer,omitempty" tf:"serializer,omitempty"`
 }
 
 type OutputFormatConfigurationObservation struct {
 
-	// Nested argument that specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. More details below.
+	// Specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
 	Serializer []SerializerObservation `json:"serializer,omitempty" tf:"serializer,omitempty"`
 }
 
 type OutputFormatConfigurationParameters struct {
 
-	// Nested argument that specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. More details below.
+	// Specifies which serializer to use. You can choose either the ORC SerDe or the Parquet SerDe. See serializer block below for details.
 	// +kubebuilder:validation:Optional
 	Serializer []SerializerParameters `json:"serializer" tf:"serializer,omitempty"`
 }
@@ -2719,7 +2765,7 @@ type ProcessingConfigurationInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []ProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -2728,7 +2774,7 @@ type ProcessingConfigurationObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []ProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -2738,14 +2784,14 @@ type ProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []ProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type ProcessingConfigurationProcessorsInitParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -2754,7 +2800,7 @@ type ProcessingConfigurationProcessorsInitParameters struct {
 
 type ProcessingConfigurationProcessorsObservation struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -2763,7 +2809,7 @@ type ProcessingConfigurationProcessorsObservation struct {
 
 type ProcessingConfigurationProcessorsParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []ProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -2803,7 +2849,7 @@ type ProcessingConfigurationProcessorsParametersParameters struct {
 
 type ProcessorsInitParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -2812,7 +2858,7 @@ type ProcessorsInitParameters struct {
 
 type ProcessorsObservation struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -2821,7 +2867,7 @@ type ProcessorsObservation struct {
 
 type ProcessorsParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -2900,7 +2946,7 @@ type RedshiftConfigurationCloudwatchLoggingOptionsParameters struct {
 
 type RedshiftConfigurationInitParameters struct {
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []RedshiftConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The jdbcurl of the redshift cluster.
@@ -2915,13 +2961,13 @@ type RedshiftConfigurationInitParameters struct {
 	// The name of the table in the redshift cluster that the s3 bucket will copy to.
 	DataTableName *string `json:"dataTableName,omitempty" tf:"data_table_name,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []RedshiftConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The arn of the role the stream assumes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -2940,7 +2986,7 @@ type RedshiftConfigurationInitParameters struct {
 	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration below for details.
 	S3Configuration []RedshiftConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.
@@ -2949,7 +2995,7 @@ type RedshiftConfigurationInitParameters struct {
 
 type RedshiftConfigurationObservation struct {
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []RedshiftConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The jdbcurl of the redshift cluster.
@@ -2964,13 +3010,13 @@ type RedshiftConfigurationObservation struct {
 	// The name of the table in the redshift cluster that the s3 bucket will copy to.
 	DataTableName *string `json:"dataTableName,omitempty" tf:"data_table_name,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []RedshiftConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
 	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The arn of the role the stream assumes.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
@@ -2979,7 +3025,7 @@ type RedshiftConfigurationObservation struct {
 	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration below for details.
 	S3Configuration []RedshiftConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
 	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.
@@ -2988,7 +3034,7 @@ type RedshiftConfigurationObservation struct {
 
 type RedshiftConfigurationParameters struct {
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []RedshiftConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -3012,7 +3058,7 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []RedshiftConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -3020,7 +3066,7 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The arn of the role the stream assumes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3042,7 +3088,7 @@ type RedshiftConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []RedshiftConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 
@@ -3056,7 +3102,7 @@ type RedshiftConfigurationProcessingConfigurationInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []RedshiftConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -3065,7 +3111,7 @@ type RedshiftConfigurationProcessingConfigurationObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []RedshiftConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -3075,14 +3121,14 @@ type RedshiftConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []RedshiftConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -3091,7 +3137,7 @@ type RedshiftConfigurationProcessingConfigurationProcessorsInitParameters struct
 
 type RedshiftConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -3100,7 +3146,7 @@ type RedshiftConfigurationProcessingConfigurationProcessorsObservation struct {
 
 type RedshiftConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -3192,13 +3238,13 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -3214,7 +3260,7 @@ type RedshiftConfigurationS3BackupConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -3233,13 +3279,13 @@ type RedshiftConfigurationS3BackupConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -3255,7 +3301,7 @@ type RedshiftConfigurationS3BackupConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -3275,15 +3321,15 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []RedshiftConfigurationS3BackupConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -3304,7 +3350,7 @@ type RedshiftConfigurationS3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3373,13 +3419,13 @@ type RedshiftConfigurationS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -3395,7 +3441,7 @@ type RedshiftConfigurationS3ConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -3414,13 +3460,13 @@ type RedshiftConfigurationS3ConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -3436,7 +3482,7 @@ type RedshiftConfigurationS3ConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -3456,15 +3502,15 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []RedshiftConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -3485,7 +3531,7 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3502,7 +3548,7 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 
 type RequestConfigurationInitParameters struct {
 
-	// Describes the metadata sent to the HTTP endpoint destination. More details are given below
+	// Describes the metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
 	CommonAttributes []CommonAttributesInitParameters `json:"commonAttributes,omitempty" tf:"common_attributes,omitempty"`
 
 	// Kinesis Data Firehose uses the content encoding to compress the body of a request before sending the request to the destination. Valid values are NONE and GZIP.  Default value is NONE.
@@ -3511,7 +3557,7 @@ type RequestConfigurationInitParameters struct {
 
 type RequestConfigurationObservation struct {
 
-	// Describes the metadata sent to the HTTP endpoint destination. More details are given below
+	// Describes the metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
 	CommonAttributes []CommonAttributesObservation `json:"commonAttributes,omitempty" tf:"common_attributes,omitempty"`
 
 	// Kinesis Data Firehose uses the content encoding to compress the body of a request before sending the request to the destination. Valid values are NONE and GZIP.  Default value is NONE.
@@ -3520,7 +3566,7 @@ type RequestConfigurationObservation struct {
 
 type RequestConfigurationParameters struct {
 
-	// Describes the metadata sent to the HTTP endpoint destination. More details are given below
+	// Describes the metadata sent to the HTTP endpoint destination. See common_attributes block below for details.
 	// +kubebuilder:validation:Optional
 	CommonAttributes []CommonAttributesParameters `json:"commonAttributes,omitempty" tf:"common_attributes,omitempty"`
 
@@ -3573,13 +3619,13 @@ type S3BackupConfigurationInitParameters struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []S3BackupConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -3595,7 +3641,7 @@ type S3BackupConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -3604,13 +3650,13 @@ type S3BackupConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []S3BackupConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -3626,7 +3672,7 @@ type S3BackupConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -3636,15 +3682,15 @@ type S3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArn *string `json:"bucketArn" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []S3BackupConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -3665,7 +3711,7 @@ type S3BackupConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
 }
@@ -3724,13 +3770,13 @@ type S3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []S3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -3746,7 +3792,7 @@ type S3ConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -3765,13 +3811,13 @@ type S3ConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []S3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -3787,7 +3833,7 @@ type S3ConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -3807,15 +3853,15 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []S3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -3836,7 +3882,7 @@ type S3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3859,7 +3905,7 @@ type SchemaConfigurationInitParameters struct {
 	// Specifies the name of the AWS Glue database that contains the schema for the output data.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -3899,7 +3945,7 @@ type SchemaConfigurationObservation struct {
 	// If you don't specify an AWS Region, the default is the current region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
@@ -3923,7 +3969,7 @@ type SchemaConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -3957,29 +4003,29 @@ type SchemaConfigurationParameters struct {
 
 type SerializerInitParameters struct {
 
-	// Nested argument that specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. More details below.
+	// Specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
 	OrcSerDe []OrcSerDeInitParameters `json:"orcSerDe,omitempty" tf:"orc_ser_de,omitempty"`
 
-	// Nested argument that specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
+	// Specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
 	ParquetSerDe []ParquetSerDeInitParameters `json:"parquetSerDe,omitempty" tf:"parquet_ser_de,omitempty"`
 }
 
 type SerializerObservation struct {
 
-	// Nested argument that specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. More details below.
+	// Specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
 	OrcSerDe []OrcSerDeObservation `json:"orcSerDe,omitempty" tf:"orc_ser_de,omitempty"`
 
-	// Nested argument that specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
+	// Specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
 	ParquetSerDe []ParquetSerDeObservation `json:"parquetSerDe,omitempty" tf:"parquet_ser_de,omitempty"`
 }
 
 type SerializerParameters struct {
 
-	// Nested argument that specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. More details below.
+	// Specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
 	// +kubebuilder:validation:Optional
 	OrcSerDe []OrcSerDeParameters `json:"orcSerDe,omitempty" tf:"orc_ser_de,omitempty"`
 
-	// Nested argument that specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
+	// Specifies converting data to the Parquet format before storing it in Amazon S3. For more information, see Apache Parquet. More details below.
 	// +kubebuilder:validation:Optional
 	ParquetSerDe []ParquetSerDeParameters `json:"parquetSerDe,omitempty" tf:"parquet_ser_de,omitempty"`
 }
@@ -4064,7 +4110,13 @@ type SplunkConfigurationCloudwatchLoggingOptionsParameters struct {
 
 type SplunkConfigurationInitParameters struct {
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []SplunkConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
@@ -4076,22 +4128,28 @@ type SplunkConfigurationInitParameters struct {
 	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []SplunkConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type SplunkConfigurationObservation struct {
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []SplunkConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The amount of time, in seconds between 180 and 600, that Kinesis Firehose waits to receive an acknowledgment from Splunk after it sends it data.
@@ -4103,22 +4161,30 @@ type SplunkConfigurationObservation struct {
 	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []SplunkConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 }
 
 type SplunkConfigurationParameters struct {
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	// +kubebuilder:validation:Optional
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	// +kubebuilder:validation:Optional
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []SplunkConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -4138,19 +4204,19 @@ type SplunkConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	HecTokenSecretRef v1.SecretKeySelector `json:"hecTokenSecretRef" tf:"-"`
 
-	// The data processing configuration.  More details are given below.
+	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
-	// The length of time during which Firehose retries delivery after a failure, starting from the initial request and including the first attempt. The default value is 3600 seconds (60 minutes). Firehose does not retry if the value of DurationInSeconds is 0 (zero) or if the first delivery attempt takes longer than the current value.
+	// After an initial failure to deliver to Splunk, the total amount of time, in seconds between 0 to 7200, during which Firehose re-attempts delivery (including the first attempt).  After this time has elapsed, the failed documents are written to Amazon S3.  The default value is 300s.  There will be no retry if the value is 0.
 	// +kubebuilder:validation:Optional
 	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
 
-	// The Amazon S3 backup mode.  Valid values are Disabled and Enabled.  Default value is Disabled.
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
 	// +kubebuilder:validation:Optional
 	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
 
-	// The S3 Configuration. See s3_configuration for more details.
+	// The S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []SplunkConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
 }
@@ -4160,7 +4226,7 @@ type SplunkConfigurationProcessingConfigurationInitParameters struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []SplunkConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -4169,7 +4235,7 @@ type SplunkConfigurationProcessingConfigurationObservation struct {
 	// Whether to enable encryption at rest. Default is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	Processors []SplunkConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
@@ -4179,14 +4245,14 @@ type SplunkConfigurationProcessingConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Array of data processors. More details are given below
+	// Specifies the data processors as multiple blocks. See processors block below for details.
 	// +kubebuilder:validation:Optional
 	Processors []SplunkConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -4195,7 +4261,7 @@ type SplunkConfigurationProcessingConfigurationProcessorsInitParameters struct {
 
 type SplunkConfigurationProcessingConfigurationProcessorsObservation struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
@@ -4204,7 +4270,7 @@ type SplunkConfigurationProcessingConfigurationProcessorsObservation struct {
 
 type SplunkConfigurationProcessingConfigurationProcessorsParameters struct {
 
-	// Array of processor parameters. More details are given below
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	// +kubebuilder:validation:Optional
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -4296,13 +4362,13 @@ type SplunkConfigurationS3ConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -4318,7 +4384,7 @@ type SplunkConfigurationS3ConfigurationInitParameters struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -4337,13 +4403,13 @@ type SplunkConfigurationS3ConfigurationObservation struct {
 	// The ARN of the S3 bucket
 	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
@@ -4359,7 +4425,7 @@ type SplunkConfigurationS3ConfigurationObservation struct {
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
@@ -4379,15 +4445,15 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
 
-	// Buffer incoming data for the specified period of time, in seconds between 60 to 900, before delivering it to the destination.  The default value is 300s.
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
 	// +kubebuilder:validation:Optional
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
-	// Buffer incoming data to the specified size, in MBs between 1 to 100, before delivering it to the destination.  The default value is 5MB.
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
 	// +kubebuilder:validation:Optional
 	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
-	// The CloudWatch Logging Options for the delivery stream. More details are given below
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions []SplunkConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -4408,7 +4474,7 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
@@ -4425,7 +4491,7 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 
 type VPCConfigInitParameters struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -4449,7 +4515,7 @@ type VPCConfigInitParameters struct {
 
 type VPCConfigObservation struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// A list of security group IDs to associate with Kinesis Firehose.
@@ -4465,7 +4531,7 @@ type VPCConfigObservation struct {
 
 type VPCConfigParameters struct {
 
-	// The ARN of the role that provides access to the source Kinesis stream.
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional

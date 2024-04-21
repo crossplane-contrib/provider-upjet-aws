@@ -14,41 +14,49 @@ import (
 )
 
 type SignatureValidityPeriodInitParameters struct {
+
+	// The time unit for signature validity. Valid values: DAYS, MONTHS, YEARS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// The numerical value of the time unit for signature validity.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SignatureValidityPeriodObservation struct {
+
+	// The time unit for signature validity. Valid values: DAYS, MONTHS, YEARS.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// The numerical value of the time unit for signature validity.
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type SignatureValidityPeriodParameters struct {
 
+	// The time unit for signature validity. Valid values: DAYS, MONTHS, YEARS.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// The numerical value of the time unit for signature validity.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value" tf:"value,omitempty"`
 }
 
 type SigningMaterialInitParameters struct {
 
-	// The Amazon Resource Name (ARN) for the signing profile.
+	// The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 }
 
 type SigningMaterialObservation struct {
 
-	// The Amazon Resource Name (ARN) for the signing profile.
+	// The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 }
 
 type SigningMaterialParameters struct {
 
-	// The Amazon Resource Name (ARN) for the signing profile.
+	// The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn" tf:"certificate_arn,omitempty"`
 }
@@ -58,9 +66,10 @@ type SigningProfileInitParameters struct {
 	// The ID of the platform that is used by the target signing profile.
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
-	// The validity period for a signing job.
+	// The validity period for a signing job. See signature_validity_period Block below for details.
 	SignatureValidityPeriod []SignatureValidityPeriodInitParameters `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
 
+	// The AWS Certificate Manager certificate that will be used to sign code with the new signing profile. See signing_material Block below for details.
 	SigningMaterial []SigningMaterialInitParameters `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
 
 	// Key-value map of resource tags.
@@ -81,12 +90,13 @@ type SigningProfileObservation struct {
 	// The ID of the platform that is used by the target signing profile.
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
-	// Revocation information for a signing profile.
+	// Revocation information for a signing profile. See revocation_record Block below for details.
 	RevocationRecord []SigningProfileRevocationRecordObservation `json:"revocationRecord,omitempty" tf:"revocation_record,omitempty"`
 
-	// The validity period for a signing job.
+	// The validity period for a signing job. See signature_validity_period Block below for details.
 	SignatureValidityPeriod []SignatureValidityPeriodObservation `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
 
+	// The AWS Certificate Manager certificate that will be used to sign code with the new signing profile. See signing_material Block below for details.
 	SigningMaterial []SigningMaterialObservation `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
 
 	// The status of the target signing profile.
@@ -118,10 +128,11 @@ type SigningProfileParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The validity period for a signing job.
+	// The validity period for a signing job. See signature_validity_period Block below for details.
 	// +kubebuilder:validation:Optional
 	SignatureValidityPeriod []SignatureValidityPeriodParameters `json:"signatureValidityPeriod,omitempty" tf:"signature_validity_period,omitempty"`
 
+	// The AWS Certificate Manager certificate that will be used to sign code with the new signing profile. See signing_material Block below for details.
 	// +kubebuilder:validation:Optional
 	SigningMaterial []SigningMaterialParameters `json:"signingMaterial,omitempty" tf:"signing_material,omitempty"`
 
@@ -135,10 +146,14 @@ type SigningProfileRevocationRecordInitParameters struct {
 }
 
 type SigningProfileRevocationRecordObservation struct {
+
+	// The time when revocation becomes effective.
 	RevocationEffectiveFrom *string `json:"revocationEffectiveFrom,omitempty" tf:"revocation_effective_from,omitempty"`
 
+	// The time when the signing profile was revoked.
 	RevokedAt *string `json:"revokedAt,omitempty" tf:"revoked_at,omitempty"`
 
+	// The identity of the revoker.
 	RevokedBy *string `json:"revokedBy,omitempty" tf:"revoked_by,omitempty"`
 }
 

@@ -177,7 +177,7 @@ type VPNConnectionInitParameters_2 struct {
 	// The IPv4 CIDR on the AWS side of the VPN connection.
 	RemoteIPv4NetworkCidr *string `json:"remoteIpv4NetworkCidr,omitempty" tf:"remote_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// The IPv6 CIDR on the AWS side of the VPN connection.
 	RemoteIPv6NetworkCidr *string `json:"remoteIpv6NetworkCidr,omitempty" tf:"remote_ipv6_network_cidr,omitempty"`
 
 	// Whether the VPN connection uses static routes exclusively. Static routes must be used for devices that don't support BGP.
@@ -392,7 +392,7 @@ type VPNConnectionObservation_2 struct {
 	// The IPv4 CIDR on the AWS side of the VPN connection.
 	RemoteIPv4NetworkCidr *string `json:"remoteIpv4NetworkCidr,omitempty" tf:"remote_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// The IPv6 CIDR on the AWS side of the VPN connection.
 	RemoteIPv6NetworkCidr *string `json:"remoteIpv6NetworkCidr,omitempty" tf:"remote_ipv6_network_cidr,omitempty"`
 
 	// The static routes associated with the VPN connection. Detailed below.
@@ -630,7 +630,7 @@ type VPNConnectionParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	RemoteIPv4NetworkCidr *string `json:"remoteIpv4NetworkCidr,omitempty" tf:"remote_ipv4_network_cidr,omitempty"`
 
-	// The IPv6 CIDR on the customer gateway (on-premises) side of the VPN connection.
+	// The IPv6 CIDR on the AWS side of the VPN connection.
 	// +kubebuilder:validation:Optional
 	RemoteIPv6NetworkCidr *string `json:"remoteIpv6NetworkCidr,omitempty" tf:"remote_ipv6_network_cidr,omitempty"`
 

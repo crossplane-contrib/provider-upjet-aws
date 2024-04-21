@@ -72,6 +72,9 @@ type AutoTuneOptionsInitParameters struct {
 
 	// Whether to roll back to default Auto-Tune settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK or NO_ROLLBACK.
 	RollbackOnDisable *string `json:"rollbackOnDisable,omitempty" tf:"rollback_on_disable,omitempty"`
+
+	// Whether to schedule Auto-Tune optimizations that require blue/green deployments during the domain's configured daily off-peak window. Defaults to false.
+	UseOffPeakWindow *bool `json:"useOffPeakWindow,omitempty" tf:"use_off_peak_window,omitempty"`
 }
 
 type AutoTuneOptionsObservation struct {
@@ -84,6 +87,9 @@ type AutoTuneOptionsObservation struct {
 
 	// Whether to roll back to default Auto-Tune settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK or NO_ROLLBACK.
 	RollbackOnDisable *string `json:"rollbackOnDisable,omitempty" tf:"rollback_on_disable,omitempty"`
+
+	// Whether to schedule Auto-Tune optimizations that require blue/green deployments during the domain's configured daily off-peak window. Defaults to false.
+	UseOffPeakWindow *bool `json:"useOffPeakWindow,omitempty" tf:"use_off_peak_window,omitempty"`
 }
 
 type AutoTuneOptionsParameters struct {
@@ -99,6 +105,10 @@ type AutoTuneOptionsParameters struct {
 	// Whether to roll back to default Auto-Tune settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK or NO_ROLLBACK.
 	// +kubebuilder:validation:Optional
 	RollbackOnDisable *string `json:"rollbackOnDisable,omitempty" tf:"rollback_on_disable,omitempty"`
+
+	// Whether to schedule Auto-Tune optimizations that require blue/green deployments during the domain's configured daily off-peak window. Defaults to false.
+	// +kubebuilder:validation:Optional
+	UseOffPeakWindow *bool `json:"useOffPeakWindow,omitempty" tf:"use_off_peak_window,omitempty"`
 }
 
 type ClusterConfigInitParameters struct {
@@ -121,6 +131,7 @@ type ClusterConfigInitParameters struct {
 	// Instance type of data nodes in the cluster.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// Whether a multi-AZ domain is turned on with a standby AZ. For more information, see Configuring a multi-AZ domain in Amazon OpenSearch Service.
 	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
@@ -159,6 +170,7 @@ type ClusterConfigObservation struct {
 	// Instance type of data nodes in the cluster.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// Whether a multi-AZ domain is turned on with a standby AZ. For more information, see Configuring a multi-AZ domain in Amazon OpenSearch Service.
 	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
 
 	// Number of warm nodes in the cluster. Valid values are between 2 and 150. warm_count can be only and must be set when warm_enabled is set to true.
@@ -203,6 +215,7 @@ type ClusterConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// Whether a multi-AZ domain is turned on with a standby AZ. For more information, see Configuring a multi-AZ domain in Amazon OpenSearch Service.
 	// +kubebuilder:validation:Optional
 	MultiAzWithStandbyEnabled *bool `json:"multiAzWithStandbyEnabled,omitempty" tf:"multi_az_with_standby_enabled,omitempty"`
 
@@ -309,7 +322,7 @@ type DomainEndpointOptionsInitParameters struct {
 	// Whether or not to require HTTPS. Defaults to true.
 	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
 
-	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
+	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. For valid values, refer to the AWS documentation.
 	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }
 
@@ -327,7 +340,7 @@ type DomainEndpointOptionsObservation struct {
 	// Whether or not to require HTTPS. Defaults to true.
 	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
 
-	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
+	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. For valid values, refer to the AWS documentation.
 	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }
 
@@ -349,7 +362,7 @@ type DomainEndpointOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	EnforceHTTPS *bool `json:"enforceHttps,omitempty" tf:"enforce_https,omitempty"`
 
-	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07 and Policy-Min-TLS-1-2-2019-07.
+	// Name of the TLS security policy that needs to be applied to the HTTPS endpoint. For valid values, refer to the AWS documentation.
 	// +kubebuilder:validation:Optional
 	TLSSecurityPolicy *string `json:"tlsSecurityPolicy,omitempty" tf:"tls_security_policy,omitempty"`
 }

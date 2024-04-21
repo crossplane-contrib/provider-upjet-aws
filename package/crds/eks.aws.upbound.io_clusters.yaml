@@ -72,6 +72,21 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  accessConfig:
+                    description: Configuration block for the access config associated
+                      with your cluster, see Amazon EKS Access Entries.
+                    items:
+                      properties:
+                        authenticationMode:
+                          description: The authentication mode for the cluster. Valid
+                            values are CONFIG_MAP, API or API_AND_CONFIG_MAP
+                          type: string
+                        bootstrapClusterCreatorAdminPermissions:
+                          description: Whether or not to bootstrap the access config
+                            values to the cluster. Default is true.
+                          type: boolean
+                      type: object
+                    type: array
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -500,6 +515,21 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  accessConfig:
+                    description: Configuration block for the access config associated
+                      with your cluster, see Amazon EKS Access Entries.
+                    items:
+                      properties:
+                        authenticationMode:
+                          description: The authentication mode for the cluster. Valid
+                            values are CONFIG_MAP, API or API_AND_CONFIG_MAP
+                          type: string
+                        bootstrapClusterCreatorAdminPermissions:
+                          description: Whether or not to bootstrap the access config
+                            values to the cluster. Default is true.
+                          type: boolean
+                      type: object
+                    type: array
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -1086,6 +1116,21 @@ spec:
             properties:
               atProvider:
                 properties:
+                  accessConfig:
+                    description: Configuration block for the access config associated
+                      with your cluster, see Amazon EKS Access Entries.
+                    items:
+                      properties:
+                        authenticationMode:
+                          description: The authentication mode for the cluster. Valid
+                            values are CONFIG_MAP, API or API_AND_CONFIG_MAP
+                          type: string
+                        bootstrapClusterCreatorAdminPermissions:
+                          description: Whether or not to bootstrap the access config
+                            values to the cluster. Default is true.
+                          type: boolean
+                      type: object
+                    type: array
                   arn:
                     description: ARN of the cluster.
                     type: string

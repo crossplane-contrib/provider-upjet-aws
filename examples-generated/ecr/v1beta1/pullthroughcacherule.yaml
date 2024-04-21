@@ -8,6 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    credentialArn: arn:aws:secretsmanager:us-east-1:123456789:secret:ecr-pullthroughcache/ecrpublic
     ecrRepositoryPrefix: ecr-public
     region: us-west-1
     upstreamRegistryUrl: public.ecr.aws

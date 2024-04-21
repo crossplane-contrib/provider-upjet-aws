@@ -30,6 +30,22 @@ type BrokerInitParameters struct {
 	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	Configuration []ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
+	// Defines whether this broker is a part of a data replication pair. Valid values are CRDR and NONE.
+	DataReplicationMode *string `json:"dataReplicationMode,omitempty" tf:"data_replication_mode,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when data_replication_mode is CRDR.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mq/v1beta1.Broker
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	DataReplicationPrimaryBrokerArn *string `json:"dataReplicationPrimaryBrokerArn,omitempty" tf:"data_replication_primary_broker_arn,omitempty"`
+
+	// Reference to a Broker in mq to populate dataReplicationPrimaryBrokerArn.
+	// +kubebuilder:validation:Optional
+	DataReplicationPrimaryBrokerArnRef *v1.Reference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Broker in mq to populate dataReplicationPrimaryBrokerArn.
+	// +kubebuilder:validation:Optional
+	DataReplicationPrimaryBrokerArnSelector *v1.Selector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
+
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
 	DeploymentMode *string `json:"deploymentMode,omitempty" tf:"deployment_mode,omitempty"`
 
@@ -118,6 +134,12 @@ type BrokerObservation struct {
 	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	Configuration []ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
+	// Defines whether this broker is a part of a data replication pair. Valid values are CRDR and NONE.
+	DataReplicationMode *string `json:"dataReplicationMode,omitempty" tf:"data_replication_mode,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when data_replication_mode is CRDR.
+	DataReplicationPrimaryBrokerArn *string `json:"dataReplicationPrimaryBrokerArn,omitempty" tf:"data_replication_primary_broker_arn,omitempty"`
+
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
 	DeploymentMode *string `json:"deploymentMode,omitempty" tf:"deployment_mode,omitempty"`
 
@@ -147,6 +169,9 @@ type BrokerObservation struct {
 
 	// Configuration block for the maintenance window start time. Detailed below.
 	MaintenanceWindowStartTime []MaintenanceWindowStartTimeObservation `json:"maintenanceWindowStartTime,omitempty" tf:"maintenance_window_start_time,omitempty"`
+
+	// The data replication mode that will be applied after reboot.
+	PendingDataReplicationMode *string `json:"pendingDataReplicationMode,omitempty" tf:"pending_data_replication_mode,omitempty"`
 
 	// Whether to enable connections from applications outside of the VPC that hosts the broker's subnets.
 	PubliclyAccessible *bool `json:"publiclyAccessible,omitempty" tf:"publicly_accessible,omitempty"`
@@ -195,6 +220,24 @@ type BrokerParameters struct {
 	// Configuration block for broker configuration. Applies to engine_type of ActiveMQ and RabbitMQ only. Detailed below.
 	// +kubebuilder:validation:Optional
 	Configuration []ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// Defines whether this broker is a part of a data replication pair. Valid values are CRDR and NONE.
+	// +kubebuilder:validation:Optional
+	DataReplicationMode *string `json:"dataReplicationMode,omitempty" tf:"data_replication_mode,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when data_replication_mode is CRDR.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mq/v1beta1.Broker
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	DataReplicationPrimaryBrokerArn *string `json:"dataReplicationPrimaryBrokerArn,omitempty" tf:"data_replication_primary_broker_arn,omitempty"`
+
+	// Reference to a Broker in mq to populate dataReplicationPrimaryBrokerArn.
+	// +kubebuilder:validation:Optional
+	DataReplicationPrimaryBrokerArnRef *v1.Reference `json:"dataReplicationPrimaryBrokerArnRef,omitempty" tf:"-"`
+
+	// Selector for a Broker in mq to populate dataReplicationPrimaryBrokerArn.
+	// +kubebuilder:validation:Optional
+	DataReplicationPrimaryBrokerArnSelector *v1.Selector `json:"dataReplicationPrimaryBrokerArnSelector,omitempty" tf:"-"`
 
 	// Deployment mode of the broker. Valid values are SINGLE_INSTANCE, ACTIVE_STANDBY_MULTI_AZ, and CLUSTER_MULTI_AZ. Default is SINGLE_INSTANCE.
 	// +kubebuilder:validation:Optional

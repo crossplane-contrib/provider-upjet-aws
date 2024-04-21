@@ -50,10 +50,29 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("mq.aws.upbound.io", "v1beta1", "Broker", "BrokerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataReplicationPrimaryBrokerArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.DataReplicationPrimaryBrokerArnRef,
+			Selector:     mg.Spec.ForProvider.DataReplicationPrimaryBrokerArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DataReplicationPrimaryBrokerArn")
+	}
+	mg.Spec.ForProvider.DataReplicationPrimaryBrokerArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataReplicationPrimaryBrokerArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),
@@ -109,10 +128,29 @@ func (mg *Broker) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	{
+		m, l, err = apisresolver.GetManagedResource("mq.aws.upbound.io", "v1beta1", "Broker", "BrokerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataReplicationPrimaryBrokerArn),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.DataReplicationPrimaryBrokerArnRef,
+			Selector:     mg.Spec.InitProvider.DataReplicationPrimaryBrokerArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DataReplicationPrimaryBrokerArn")
+	}
+	mg.Spec.InitProvider.DataReplicationPrimaryBrokerArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DataReplicationPrimaryBrokerArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
+
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
 			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroups),
 			Extract:       reference.ExternalName(),

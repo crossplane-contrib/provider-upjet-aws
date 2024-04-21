@@ -70,6 +70,26 @@ func (in *BrokerInitParameters) DeepCopyInto(out *BrokerInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DataReplicationMode != nil {
+		in, out := &in.DataReplicationMode, &out.DataReplicationMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataReplicationPrimaryBrokerArn != nil {
+		in, out := &in.DataReplicationPrimaryBrokerArn, &out.DataReplicationPrimaryBrokerArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataReplicationPrimaryBrokerArnRef != nil {
+		in, out := &in.DataReplicationPrimaryBrokerArnRef, &out.DataReplicationPrimaryBrokerArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataReplicationPrimaryBrokerArnSelector != nil {
+		in, out := &in.DataReplicationPrimaryBrokerArnSelector, &out.DataReplicationPrimaryBrokerArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DeploymentMode != nil {
 		in, out := &in.DeploymentMode, &out.DeploymentMode
 		*out = new(string)
@@ -276,6 +296,16 @@ func (in *BrokerObservation) DeepCopyInto(out *BrokerObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DataReplicationMode != nil {
+		in, out := &in.DataReplicationMode, &out.DataReplicationMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataReplicationPrimaryBrokerArn != nil {
+		in, out := &in.DataReplicationPrimaryBrokerArn, &out.DataReplicationPrimaryBrokerArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.DeploymentMode != nil {
 		in, out := &in.DeploymentMode, &out.DeploymentMode
 		*out = new(string)
@@ -335,6 +365,11 @@ func (in *BrokerObservation) DeepCopyInto(out *BrokerObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PendingDataReplicationMode != nil {
+		in, out := &in.PendingDataReplicationMode, &out.PendingDataReplicationMode
+		*out = new(string)
+		**out = **in
 	}
 	if in.PubliclyAccessible != nil {
 		in, out := &in.PubliclyAccessible, &out.PubliclyAccessible
@@ -448,6 +483,26 @@ func (in *BrokerParameters) DeepCopyInto(out *BrokerParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.DataReplicationMode != nil {
+		in, out := &in.DataReplicationMode, &out.DataReplicationMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataReplicationPrimaryBrokerArn != nil {
+		in, out := &in.DataReplicationPrimaryBrokerArn, &out.DataReplicationPrimaryBrokerArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DataReplicationPrimaryBrokerArnRef != nil {
+		in, out := &in.DataReplicationPrimaryBrokerArnRef, &out.DataReplicationPrimaryBrokerArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DataReplicationPrimaryBrokerArnSelector != nil {
+		in, out := &in.DataReplicationPrimaryBrokerArnSelector, &out.DataReplicationPrimaryBrokerArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DeploymentMode != nil {
 		in, out := &in.DeploymentMode, &out.DeploymentMode

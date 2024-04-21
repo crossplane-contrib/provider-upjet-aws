@@ -34,6 +34,9 @@ type RuleInitParameters struct {
 	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details. Note: The event pattern size is 2048 by default but it is adjustable up to 4096 characters by submitting a service quota increase request. See Amazon EventBridge quotas for details.
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
+	// Used to delete managed rules created by AWS. Defaults to false.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// Whether the rule should be enabled.
 	// Defaults to true.
 	// Conflicts with state.
@@ -82,6 +85,9 @@ type RuleObservation struct {
 
 	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details. Note: The event pattern size is 2048 by default but it is adjustable up to 4096 characters by submitting a service quota increase request. See Amazon EventBridge quotas for details.
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
+
+	// Used to delete managed rules created by AWS. Defaults to false.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// The name of the rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -137,6 +143,10 @@ type RuleParameters struct {
 	// The event pattern described a JSON object. At least one of schedule_expression or event_pattern is required. See full documentation of Events and Event Patterns in EventBridge for details. Note: The event pattern size is 2048 by default but it is adjustable up to 4096 characters by submitting a service quota increase request. See Amazon EventBridge quotas for details.
 	// +kubebuilder:validation:Optional
 	EventPattern *string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
+
+	// Used to delete managed rules created by AWS. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Whether the rule should be enabled.
 	// Defaults to true.

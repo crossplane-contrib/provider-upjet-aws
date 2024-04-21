@@ -612,12 +612,17 @@ spec:
                                   properties:
                                     accessControlTranslation:
                                       description: Specifies the overrides to use
-                                        for object owners on replication. Must be
-                                        used in conjunction with account_id owner
-                                        override configuration.
+                                        for object owners on replication (documented
+                                        below). Must be used in conjunction with account_id
+                                        owner override configuration.
                                       items:
                                         properties:
                                           owner:
+                                            description: Specifies the replica ownership.
+                                              For default and valid values, see PUT
+                                              bucket replication in the Amazon S3
+                                              API Reference. The only valid value
+                                              is Destination.
                                             type: string
                                         type: object
                                       type: array
@@ -643,9 +648,8 @@ spec:
                                               value is 15.
                                             type: number
                                           status:
-                                            description: Status of the rule. Either
-                                              Enabled or Disabled. The rule is ignored
-                                              if status is not Enabled.
+                                            description: Status of RTC. Either Enabled
+                                              or Disabled.
                                             type: string
                                         type: object
                                       type: array
@@ -665,9 +669,8 @@ spec:
                                               value is 15.
                                             type: number
                                           status:
-                                            description: Status of the rule. Either
-                                              Enabled or Disabled. The rule is ignored
-                                              if status is not Enabled.
+                                            description: Status of RTC. Either Enabled
+                                              or Disabled.
                                             type: string
                                         type: object
                                       type: array

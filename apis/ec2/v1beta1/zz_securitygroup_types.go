@@ -33,7 +33,7 @@ type SecurityGroupEgressObservation struct {
 	// List of Prefix List IDs.
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
-	// Protocol. If you select a protocol of -1 (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0.  The supported values are defined in the IpProtocol argument on the IpPermission API reference.12.
+	// Protocol. If you select a protocol of -1 (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0. The supported values are defined in the IpProtocol argument on the IpPermission API reference.12.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.
@@ -70,7 +70,7 @@ type SecurityGroupIngressObservation struct {
 	// List of Prefix List IDs.
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
 
-	// Protocol. If you select a protocol of -1 (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0.  The supported values are defined in the IpProtocol argument on the IpPermission API reference.12.
+	// Protocol. If you select a protocol of -1 (semantically equivalent to all, which is not a valid value here), you must specify a from_port and to_port equal to 0. The supported values are defined in the IpProtocol argument on the IpPermission API reference.12.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// List of security groups. A group name can be used relative to the default VPC. Otherwise, group ID.

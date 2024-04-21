@@ -15,10 +15,10 @@ import (
 
 type ReplicationTaskInitParameters struct {
 
-	// Indicates when you want a change data capture (CDC) operation to start. The value can be in date, checkpoint, or LSN/SCN format depending on the source engine. For more information, see Determining a CDC native start point.
+	// Indicates when you want a change data capture (CDC) operation to start. The value can be a RFC3339 formatted date, a checkpoint, or a LSN/SCN format depending on the source engine. For more information see Determining a CDC native start point.
 	CdcStartPosition *string `json:"cdcStartPosition,omitempty" tf:"cdc_start_position,omitempty"`
 
-	// The Unix timestamp integer for the start of the Change Data Capture (CDC) operation.
+	// RFC3339 formatted date string or UNIX timestamp for the start of the Change Data Capture (CDC) operation.
 	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
 
 	// The migration type. Can be one of full-load | cdc | full-load-and-cdc.
@@ -39,6 +39,9 @@ type ReplicationTaskInitParameters struct {
 
 	// An escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
 	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
+
+	// A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.
+	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
@@ -79,10 +82,10 @@ type ReplicationTaskInitParameters struct {
 
 type ReplicationTaskObservation struct {
 
-	// Indicates when you want a change data capture (CDC) operation to start. The value can be in date, checkpoint, or LSN/SCN format depending on the source engine. For more information, see Determining a CDC native start point.
+	// Indicates when you want a change data capture (CDC) operation to start. The value can be a RFC3339 formatted date, a checkpoint, or a LSN/SCN format depending on the source engine. For more information see Determining a CDC native start point.
 	CdcStartPosition *string `json:"cdcStartPosition,omitempty" tf:"cdc_start_position,omitempty"`
 
-	// The Unix timestamp integer for the start of the Change Data Capture (CDC) operation.
+	// RFC3339 formatted date string or UNIX timestamp for the start of the Change Data Capture (CDC) operation.
 	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -98,6 +101,9 @@ type ReplicationTaskObservation struct {
 
 	// An escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
 	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
+
+	// A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.
+	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
@@ -125,11 +131,11 @@ type ReplicationTaskObservation struct {
 
 type ReplicationTaskParameters struct {
 
-	// Indicates when you want a change data capture (CDC) operation to start. The value can be in date, checkpoint, or LSN/SCN format depending on the source engine. For more information, see Determining a CDC native start point.
+	// Indicates when you want a change data capture (CDC) operation to start. The value can be a RFC3339 formatted date, a checkpoint, or a LSN/SCN format depending on the source engine. For more information see Determining a CDC native start point.
 	// +kubebuilder:validation:Optional
 	CdcStartPosition *string `json:"cdcStartPosition,omitempty" tf:"cdc_start_position,omitempty"`
 
-	// The Unix timestamp integer for the start of the Change Data Capture (CDC) operation.
+	// RFC3339 formatted date string or UNIX timestamp for the start of the Change Data Capture (CDC) operation.
 	// +kubebuilder:validation:Optional
 	CdcStartTime *string `json:"cdcStartTime,omitempty" tf:"cdc_start_time,omitempty"`
 
@@ -159,6 +165,10 @@ type ReplicationTaskParameters struct {
 	// An escaped JSON string that contains the task settings. For a complete list of task settings, see Task Settings for AWS Database Migration Service Tasks.
 	// +kubebuilder:validation:Optional
 	ReplicationTaskSettings *string `json:"replicationTaskSettings,omitempty" tf:"replication_task_settings,omitempty"`
+
+	// A friendly name for the resource identifier at the end of the EndpointArn response parameter that is returned in the created Endpoint object.
+	// +kubebuilder:validation:Optional
+	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the source endpoint.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint

@@ -149,6 +149,9 @@ type ClusterInitParameters struct {
 	// Specifies whether the Neptune cluster is encrypted. The default is false if not specified.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
+	// Storage type associated with the cluster standard/iopt1. Default: standard
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -270,6 +273,9 @@ type ClusterObservation struct {
 
 	// Specifies whether the Neptune cluster is encrypted. The default is false if not specified.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// Storage type associated with the cluster standard/iopt1. Default: standard
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -449,6 +455,10 @@ type ClusterParameters struct {
 	// Specifies whether the Neptune cluster is encrypted. The default is false if not specified.
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
+
+	// Storage type associated with the cluster standard/iopt1. Default: standard
+	// +kubebuilder:validation:Optional
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

@@ -40,11 +40,14 @@ type FileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// A file system lifecycle policy object (documented below).
+	// A file system lifecycle policy object. See lifecycle_policy block below for details.
 	LifecyclePolicy []LifecyclePolicyInitParameters `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
 
 	// The file system performance mode. Can be either "generalPurpose" or "maxIO" (Default: "generalPurpose").
 	PerformanceMode *string `json:"performanceMode,omitempty" tf:"performance_mode,omitempty"`
+
+	// A file system protection object. See protection block below for details.
+	Protection []ProtectionInitParameters `json:"protection,omitempty" tf:"protection,omitempty"`
 
 	// The throughput, measured in MiB/s, that you want to provision for the file system. Only applicable with throughput_mode set to provisioned.
 	ProvisionedThroughputInMibps *float64 `json:"provisionedThroughputInMibps,omitempty" tf:"provisioned_throughput_in_mibps,omitempty"`
@@ -86,7 +89,7 @@ type FileSystemObservation struct {
 	// The ARN for the KMS encryption key. When specifying kms_key_id, encrypted needs to be set to true.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// A file system lifecycle policy object (documented below).
+	// A file system lifecycle policy object. See lifecycle_policy block below for details.
 	LifecyclePolicy []LifecyclePolicyObservation `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
 
 	// The value of the file system's Name tag.
@@ -100,6 +103,9 @@ type FileSystemObservation struct {
 
 	// The file system performance mode. Can be either "generalPurpose" or "maxIO" (Default: "generalPurpose").
 	PerformanceMode *string `json:"performanceMode,omitempty" tf:"performance_mode,omitempty"`
+
+	// A file system protection object. See protection block below for details.
+	Protection []ProtectionObservation `json:"protection,omitempty" tf:"protection,omitempty"`
 
 	// The throughput, measured in MiB/s, that you want to provision for the file system. Only applicable with throughput_mode set to provisioned.
 	ProvisionedThroughputInMibps *float64 `json:"provisionedThroughputInMibps,omitempty" tf:"provisioned_throughput_in_mibps,omitempty"`
@@ -150,13 +156,17 @@ type FileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// A file system lifecycle policy object (documented below).
+	// A file system lifecycle policy object. See lifecycle_policy block below for details.
 	// +kubebuilder:validation:Optional
 	LifecyclePolicy []LifecyclePolicyParameters `json:"lifecyclePolicy,omitempty" tf:"lifecycle_policy,omitempty"`
 
 	// The file system performance mode. Can be either "generalPurpose" or "maxIO" (Default: "generalPurpose").
 	// +kubebuilder:validation:Optional
 	PerformanceMode *string `json:"performanceMode,omitempty" tf:"performance_mode,omitempty"`
+
+	// A file system protection object. See protection block below for details.
+	// +kubebuilder:validation:Optional
+	Protection []ProtectionParameters `json:"protection,omitempty" tf:"protection,omitempty"`
 
 	// The throughput, measured in MiB/s, that you want to provision for the file system. Only applicable with throughput_mode set to provisioned.
 	// +kubebuilder:validation:Optional
@@ -179,7 +189,10 @@ type FileSystemParameters struct {
 
 type LifecyclePolicyInitParameters struct {
 
-	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS.
+	// Indicates how long it takes to transition files to the archive storage class. Requires transition_to_ia, Elastic Throughput and General Purpose performance mode. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.
+	TransitionToArchive *string `json:"transitionToArchive,omitempty" tf:"transition_to_archive,omitempty"`
+
+	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.
 	TransitionToIa *string `json:"transitionToIa,omitempty" tf:"transition_to_ia,omitempty"`
 
 	// Describes the policy used to transition a file from infequent access storage to primary storage. Valid values: AFTER_1_ACCESS.
@@ -188,7 +201,10 @@ type LifecyclePolicyInitParameters struct {
 
 type LifecyclePolicyObservation struct {
 
-	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS.
+	// Indicates how long it takes to transition files to the archive storage class. Requires transition_to_ia, Elastic Throughput and General Purpose performance mode. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.
+	TransitionToArchive *string `json:"transitionToArchive,omitempty" tf:"transition_to_archive,omitempty"`
+
+	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.
 	TransitionToIa *string `json:"transitionToIa,omitempty" tf:"transition_to_ia,omitempty"`
 
 	// Describes the policy used to transition a file from infequent access storage to primary storage. Valid values: AFTER_1_ACCESS.
@@ -197,13 +213,36 @@ type LifecyclePolicyObservation struct {
 
 type LifecyclePolicyParameters struct {
 
-	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, or AFTER_90_DAYS.
+	// Indicates how long it takes to transition files to the archive storage class. Requires transition_to_ia, Elastic Throughput and General Purpose performance mode. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.
+	// +kubebuilder:validation:Optional
+	TransitionToArchive *string `json:"transitionToArchive,omitempty" tf:"transition_to_archive,omitempty"`
+
+	// Indicates how long it takes to transition files to the IA storage class. Valid values: AFTER_1_DAY, AFTER_7_DAYS, AFTER_14_DAYS, AFTER_30_DAYS, AFTER_60_DAYS, AFTER_90_DAYS, AFTER_180_DAYS, AFTER_270_DAYS, or AFTER_365_DAYS.
 	// +kubebuilder:validation:Optional
 	TransitionToIa *string `json:"transitionToIa,omitempty" tf:"transition_to_ia,omitempty"`
 
 	// Describes the policy used to transition a file from infequent access storage to primary storage. Valid values: AFTER_1_ACCESS.
 	// +kubebuilder:validation:Optional
 	TransitionToPrimaryStorageClass *string `json:"transitionToPrimaryStorageClass,omitempty" tf:"transition_to_primary_storage_class,omitempty"`
+}
+
+type ProtectionInitParameters struct {
+
+	// Indicates whether replication overwrite protection is enabled. Valid values: ENABLED or DISABLED.
+	ReplicationOverwrite *string `json:"replicationOverwrite,omitempty" tf:"replication_overwrite,omitempty"`
+}
+
+type ProtectionObservation struct {
+
+	// Indicates whether replication overwrite protection is enabled. Valid values: ENABLED or DISABLED.
+	ReplicationOverwrite *string `json:"replicationOverwrite,omitempty" tf:"replication_overwrite,omitempty"`
+}
+
+type ProtectionParameters struct {
+
+	// Indicates whether replication overwrite protection is enabled. Valid values: ENABLED or DISABLED.
+	// +kubebuilder:validation:Optional
+	ReplicationOverwrite *string `json:"replicationOverwrite,omitempty" tf:"replication_overwrite,omitempty"`
 }
 
 type SizeInBytesInitParameters struct {

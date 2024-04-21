@@ -15,7 +15,7 @@ import (
 
 type StudioLifecycleConfigInitParameters struct {
 
-	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer and KernelGateway.
+	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer, JupyterLab, CodeEditor and KernelGateway.
 	StudioLifecycleConfigAppType *string `json:"studioLifecycleConfigAppType,omitempty" tf:"studio_lifecycle_config_app_type,omitempty"`
 
 	// The content of your Studio Lifecycle Configuration script. This content must be base64 encoded.
@@ -34,7 +34,7 @@ type StudioLifecycleConfigObservation struct {
 	// The name of the Studio Lifecycle Config.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer and KernelGateway.
+	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer, JupyterLab, CodeEditor and KernelGateway.
 	StudioLifecycleConfigAppType *string `json:"studioLifecycleConfigAppType,omitempty" tf:"studio_lifecycle_config_app_type,omitempty"`
 
 	// The content of your Studio Lifecycle Configuration script. This content must be base64 encoded.
@@ -56,7 +56,7 @@ type StudioLifecycleConfigParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer and KernelGateway.
+	// The App type that the Lifecycle Configuration is attached to. Valid values are JupyterServer, JupyterLab, CodeEditor and KernelGateway.
 	// +kubebuilder:validation:Optional
 	StudioLifecycleConfigAppType *string `json:"studioLifecycleConfigAppType,omitempty" tf:"studio_lifecycle_config_app_type,omitempty"`
 

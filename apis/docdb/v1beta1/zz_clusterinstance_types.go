@@ -25,7 +25,7 @@ type ClusterInstanceInitParameters struct {
 	// The EC2 Availability Zone that the DB instance is created in. See docs about the details.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The identifier of the CA certificate for the DB instance.
+	// The identifier of the certificate authority (CA) certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
 	// The identifier of the aws_docdb_cluster in which to launch this instance.
@@ -84,7 +84,7 @@ type ClusterInstanceObservation struct {
 	// The EC2 Availability Zone that the DB instance is created in. See docs about the details.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The identifier of the CA certificate for the DB instance.
+	// The identifier of the certificate authority (CA) certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
 	// The identifier of the aws_docdb_cluster in which to launch this instance.
@@ -169,7 +169,7 @@ type ClusterInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The identifier of the CA certificate for the DB instance.
+	// The identifier of the certificate authority (CA) certificate for the DB instance.
 	// +kubebuilder:validation:Optional
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 

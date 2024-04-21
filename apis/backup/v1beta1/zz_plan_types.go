@@ -81,6 +81,9 @@ type LifecycleInitParameters struct {
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+
+	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type LifecycleObservation struct {
@@ -90,6 +93,9 @@ type LifecycleObservation struct {
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+
+	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type LifecycleParameters struct {
@@ -101,6 +107,10 @@ type LifecycleParameters struct {
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	// +kubebuilder:validation:Optional
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+
+	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	// +kubebuilder:validation:Optional
+	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type PlanInitParameters struct {
@@ -220,6 +230,9 @@ type RuleLifecycleInitParameters struct {
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+
+	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type RuleLifecycleObservation struct {
@@ -229,6 +242,9 @@ type RuleLifecycleObservation struct {
 
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+
+	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type RuleLifecycleParameters struct {
@@ -240,6 +256,10 @@ type RuleLifecycleParameters struct {
 	// Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold_storage_after.
 	// +kubebuilder:validation:Optional
 	DeleteAfter *float64 `json:"deleteAfter,omitempty" tf:"delete_after,omitempty"`
+
+	// This setting will instruct your backup plan to transition supported resources to archive (cold) storage tier in accordance with your lifecycle settings.
+	// +kubebuilder:validation:Optional
+	OptInToArchiveForSupportedResources *bool `json:"optInToArchiveForSupportedResources,omitempty" tf:"opt_in_to_archive_for_supported_resources,omitempty"`
 }
 
 type RuleObservation struct {

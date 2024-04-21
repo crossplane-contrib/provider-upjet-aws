@@ -6474,6 +6474,11 @@ func (in *DefaultVPCDHCPOptionsObservation) DeepCopyInto(out *DefaultVPCDHCPOpti
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPv6AddressPreferredLeaseTime != nil {
+		in, out := &in.IPv6AddressPreferredLeaseTime, &out.IPv6AddressPreferredLeaseTime
+		*out = new(string)
+		**out = **in
+	}
 	if in.NetbiosNameServers != nil {
 		in, out := &in.NetbiosNameServers, &out.NetbiosNameServers
 		*out = new(string)
@@ -10262,6 +10267,11 @@ func (in *EIPObservation) DeepCopyInto(out *EIPObservation) {
 	}
 	if in.PrivateIP != nil {
 		in, out := &in.PrivateIP, &out.PrivateIP
+		*out = new(string)
+		**out = **in
+	}
+	if in.PtrRecord != nil {
+		in, out := &in.PtrRecord, &out.PtrRecord
 		*out = new(string)
 		**out = **in
 	}
@@ -14251,6 +14261,22 @@ func (in *InstanceEBSBlockDeviceInitParameters) DeepCopyInto(out *InstanceEBSBlo
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -14313,6 +14339,22 @@ func (in *InstanceEBSBlockDeviceObservation) DeepCopyInto(out *InstanceEBSBlockD
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -14404,6 +14446,22 @@ func (in *InstanceEBSBlockDeviceParameters) DeepCopyInto(out *InstanceEBSBlockDe
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -29205,6 +29263,22 @@ func (in *RootBlockDeviceInitParameters) DeepCopyInto(out *RootBlockDeviceInitPa
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -29262,6 +29336,22 @@ func (in *RootBlockDeviceObservation) DeepCopyInto(out *RootBlockDeviceObservati
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -29343,6 +29433,22 @@ func (in *RootBlockDeviceParameters) DeepCopyInto(out *RootBlockDeviceParameters
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -34914,6 +35020,22 @@ func (in *SpotInstanceRequestEBSBlockDeviceInitParameters) DeepCopyInto(out *Spo
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -34976,6 +35098,22 @@ func (in *SpotInstanceRequestEBSBlockDeviceObservation) DeepCopyInto(out *SpotIn
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -35057,6 +35195,22 @@ func (in *SpotInstanceRequestEBSBlockDeviceParameters) DeepCopyInto(out *SpotIns
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -36959,6 +37113,22 @@ func (in *SpotInstanceRequestRootBlockDeviceInitParameters) DeepCopyInto(out *Sp
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -37030,6 +37200,22 @@ func (in *SpotInstanceRequestRootBlockDeviceObservation) DeepCopyInto(out *SpotI
 			(*out)[key] = outVal
 		}
 	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Throughput != nil {
 		in, out := &in.Throughput, &out.Throughput
 		*out = new(float64)
@@ -37087,6 +37273,22 @@ func (in *SpotInstanceRequestRootBlockDeviceParameters) DeepCopyInto(out *SpotIn
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
+	if in.TagsAll != nil {
+		in, out := &in.TagsAll, &out.TagsAll
 		*out = make(map[string]*string, len(*in))
 		for key, val := range *in {
 			var outVal *string
@@ -41737,6 +41939,11 @@ func (in *TransitGatewayPeeringAttachmentObservation) DeepCopyInto(out *TransitG
 		*out = new(string)
 		**out = **in
 	}
+	if in.State != nil {
+		in, out := &in.State, &out.State
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -44917,6 +45124,11 @@ func (in *VPCDHCPOptionsInitParameters) DeepCopyInto(out *VPCDHCPOptionsInitPara
 			}
 		}
 	}
+	if in.IPv6AddressPreferredLeaseTime != nil {
+		in, out := &in.IPv6AddressPreferredLeaseTime, &out.IPv6AddressPreferredLeaseTime
+		*out = new(string)
+		**out = **in
+	}
 	if in.NetbiosNameServers != nil {
 		in, out := &in.NetbiosNameServers, &out.NetbiosNameServers
 		*out = make([]*string, len(*in))
@@ -45033,6 +45245,11 @@ func (in *VPCDHCPOptionsObservation) DeepCopyInto(out *VPCDHCPOptionsObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPv6AddressPreferredLeaseTime != nil {
+		in, out := &in.IPv6AddressPreferredLeaseTime, &out.IPv6AddressPreferredLeaseTime
+		*out = new(string)
+		**out = **in
+	}
 	if in.NetbiosNameServers != nil {
 		in, out := &in.NetbiosNameServers, &out.NetbiosNameServers
 		*out = make([]*string, len(*in))
@@ -45127,6 +45344,11 @@ func (in *VPCDHCPOptionsParameters) DeepCopyInto(out *VPCDHCPOptionsParameters) 
 				**out = **in
 			}
 		}
+	}
+	if in.IPv6AddressPreferredLeaseTime != nil {
+		in, out := &in.IPv6AddressPreferredLeaseTime, &out.IPv6AddressPreferredLeaseTime
+		*out = new(string)
+		**out = **in
 	}
 	if in.NetbiosNameServers != nil {
 		in, out := &in.NetbiosNameServers, &out.NetbiosNameServers
@@ -47712,6 +47934,11 @@ func (in *VPCIpamInitParameters) DeepCopyInto(out *VPCIpamInitParameters) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Tier != nil {
+		in, out := &in.Tier, &out.Tier
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VPCIpamInitParameters.
@@ -47843,6 +48070,11 @@ func (in *VPCIpamObservation) DeepCopyInto(out *VPCIpamObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.Tier != nil {
+		in, out := &in.Tier, &out.Tier
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VPCIpamObservation.
@@ -47895,6 +48127,11 @@ func (in *VPCIpamParameters) DeepCopyInto(out *VPCIpamParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.Tier != nil {
+		in, out := &in.Tier, &out.Tier
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -48506,6 +48743,11 @@ func (in *VPCIpamPoolInitParameters) DeepCopyInto(out *VPCIpamPoolInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.Cascade != nil {
+		in, out := &in.Cascade, &out.Cascade
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -48670,6 +48912,11 @@ func (in *VPCIpamPoolObservation) DeepCopyInto(out *VPCIpamPoolObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Cascade != nil {
+		in, out := &in.Cascade, &out.Cascade
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -48811,6 +49058,11 @@ func (in *VPCIpamPoolParameters) DeepCopyInto(out *VPCIpamPoolParameters) {
 	if in.AwsService != nil {
 		in, out := &in.AwsService, &out.AwsService
 		*out = new(string)
+		**out = **in
+	}
+	if in.Cascade != nil {
+		in, out := &in.Cascade, &out.Cascade
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Description != nil {

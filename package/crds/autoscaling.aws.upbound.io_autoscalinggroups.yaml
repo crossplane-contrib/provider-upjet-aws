@@ -3721,9 +3721,12 @@ spec:
                     items:
                       properties:
                         maxHealthyPercentage:
-                          description: Specifies the upper limit on the number of
-                            instances that are in the InService or Pending state with
-                            a healthy status during an instance replacement activity.
+                          description: Amount of capacity in the Auto Scaling group
+                            that can be in service and healthy, or pending, to support
+                            your workload when an instance refresh is in place, as
+                            a percentage of the desired capacity of the Auto Scaling
+                            group. Values must be between 100 and 200, defaults to
+                            100.
                           type: number
                         minHealthyPercentage:
                           description: Amount of capacity in the Auto Scaling group
@@ -3745,6 +3748,19 @@ spec:
                           description: Override default parameters for Instance Refresh.
                           items:
                             properties:
+                              alarmSpecification:
+                                description: Alarm Specification for Instance Refresh.
+                                items:
+                                  properties:
+                                    alarms:
+                                      description: List of Cloudwatch alarms. If any
+                                        of these alarms goes into ALARM state, Instance
+                                        Refresh is failed.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               autoRollback:
                                 description: Automatically rollback if instance refresh
                                   fails. Defaults to false. This option may only be
@@ -3769,6 +3785,14 @@ spec:
                                   behavior is to use the Auto Scaling Group's health
                                   check grace period.
                                 type: string
+                              maxHealthyPercentage:
+                                description: Amount of capacity in the Auto Scaling
+                                  group that can be in service and healthy, or pending,
+                                  to support your workload when an instance refresh
+                                  is in place, as a percentage of the desired capacity
+                                  of the Auto Scaling group. Values must be between
+                                  100 and 200, defaults to 100.
+                                type: number
                               minHealthyPercentage:
                                 description: Amount of capacity in the Auto Scaling
                                   group that must remain healthy during an instance
@@ -5043,9 +5067,12 @@ spec:
                     items:
                       properties:
                         maxHealthyPercentage:
-                          description: Specifies the upper limit on the number of
-                            instances that are in the InService or Pending state with
-                            a healthy status during an instance replacement activity.
+                          description: Amount of capacity in the Auto Scaling group
+                            that can be in service and healthy, or pending, to support
+                            your workload when an instance refresh is in place, as
+                            a percentage of the desired capacity of the Auto Scaling
+                            group. Values must be between 100 and 200, defaults to
+                            100.
                           type: number
                         minHealthyPercentage:
                           description: Amount of capacity in the Auto Scaling group
@@ -5067,6 +5094,19 @@ spec:
                           description: Override default parameters for Instance Refresh.
                           items:
                             properties:
+                              alarmSpecification:
+                                description: Alarm Specification for Instance Refresh.
+                                items:
+                                  properties:
+                                    alarms:
+                                      description: List of Cloudwatch alarms. If any
+                                        of these alarms goes into ALARM state, Instance
+                                        Refresh is failed.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               autoRollback:
                                 description: Automatically rollback if instance refresh
                                   fails. Defaults to false. This option may only be
@@ -5091,6 +5131,14 @@ spec:
                                   behavior is to use the Auto Scaling Group's health
                                   check grace period.
                                 type: string
+                              maxHealthyPercentage:
+                                description: Amount of capacity in the Auto Scaling
+                                  group that can be in service and healthy, or pending,
+                                  to support your workload when an instance refresh
+                                  is in place, as a percentage of the desired capacity
+                                  of the Auto Scaling group. Values must be between
+                                  100 and 200, defaults to 100.
+                                type: number
                               minHealthyPercentage:
                                 description: Amount of capacity in the Auto Scaling
                                   group that must remain healthy during an instance
@@ -6533,9 +6581,12 @@ spec:
                     items:
                       properties:
                         maxHealthyPercentage:
-                          description: Specifies the upper limit on the number of
-                            instances that are in the InService or Pending state with
-                            a healthy status during an instance replacement activity.
+                          description: Amount of capacity in the Auto Scaling group
+                            that can be in service and healthy, or pending, to support
+                            your workload when an instance refresh is in place, as
+                            a percentage of the desired capacity of the Auto Scaling
+                            group. Values must be between 100 and 200, defaults to
+                            100.
                           type: number
                         minHealthyPercentage:
                           description: Amount of capacity in the Auto Scaling group
@@ -6557,6 +6608,19 @@ spec:
                           description: Override default parameters for Instance Refresh.
                           items:
                             properties:
+                              alarmSpecification:
+                                description: Alarm Specification for Instance Refresh.
+                                items:
+                                  properties:
+                                    alarms:
+                                      description: List of Cloudwatch alarms. If any
+                                        of these alarms goes into ALARM state, Instance
+                                        Refresh is failed.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
                               autoRollback:
                                 description: Automatically rollback if instance refresh
                                   fails. Defaults to false. This option may only be
@@ -6581,6 +6645,14 @@ spec:
                                   behavior is to use the Auto Scaling Group's health
                                   check grace period.
                                 type: string
+                              maxHealthyPercentage:
+                                description: Amount of capacity in the Auto Scaling
+                                  group that can be in service and healthy, or pending,
+                                  to support your workload when an instance refresh
+                                  is in place, as a percentage of the desired capacity
+                                  of the Auto Scaling group. Values must be between
+                                  100 and 200, defaults to 100.
+                                type: number
                               minHealthyPercentage:
                                 description: Amount of capacity in the Auto Scaling
                                   group that must remain healthy during an instance

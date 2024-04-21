@@ -83,9 +83,7 @@ spec:
                       match one of the versions returned by describe-addon-versions.
                     type: string
                   clusterName:
-                    description: 100 characters in length. Must begin with an alphanumeric
-                      character, and must only contain alphanumeric characters, dashes
-                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    description: –  Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster to populate clusterName.
@@ -313,9 +311,7 @@ spec:
                       match one of the versions returned by describe-addon-versions.
                     type: string
                   clusterName:
-                    description: 100 characters in length. Must begin with an alphanumeric
-                      character, and must only contain alphanumeric characters, dashes
-                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    description: –  Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster to populate clusterName.
@@ -704,9 +700,7 @@ spec:
                     description: Amazon Resource Name (ARN) of the EKS add-on.
                     type: string
                   clusterName:
-                    description: 100 characters in length. Must begin with an alphanumeric
-                      character, and must only contain alphanumeric characters, dashes
-                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    description: –  Name of the EKS Cluster.
                     type: string
                   configurationValues:
                     description: custom configuration values for addons with single

@@ -35,6 +35,8 @@ type DefaultVPCDHCPOptionsObservation struct {
 	// The ID of the DHCP Options Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	IPv6AddressPreferredLeaseTime *string `json:"ipv6AddressPreferredLeaseTime,omitempty" tf:"ipv6_address_preferred_lease_time,omitempty"`
+
 	// List of NETBIOS name servers.
 	NetbiosNameServers *string `json:"netbiosNameServers,omitempty" tf:"netbios_name_servers,omitempty"`
 

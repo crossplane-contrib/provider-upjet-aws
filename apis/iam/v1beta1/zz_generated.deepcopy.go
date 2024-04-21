@@ -2059,6 +2059,11 @@ func (in *PolicyObservation) DeepCopyInto(out *PolicyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AttachmentCount != nil {
+		in, out := &in.AttachmentCount, &out.AttachmentCount
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)

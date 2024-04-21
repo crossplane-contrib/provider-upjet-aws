@@ -156,7 +156,7 @@ spec:
                       require recreating the entry.
                     type: string
                   prefixListId:
-                    description: CIDR block of this entry.
+                    description: The ID of the prefix list.
                     type: string
                   prefixListIdRef:
                     description: Reference to a ManagedPrefixList in ec2 to populate
@@ -337,7 +337,7 @@ spec:
                       require recreating the entry.
                     type: string
                   prefixListId:
-                    description: CIDR block of this entry.
+                    description: The ID of the prefix list.
                     type: string
                   prefixListIdRef:
                     description: Reference to a ManagedPrefixList in ec2 to populate
@@ -601,7 +601,7 @@ spec:
                     description: ID of the managed prefix list entry.
                     type: string
                   prefixListId:
-                    description: CIDR block of this entry.
+                    description: The ID of the prefix list.
                     type: string
                 type: object
               conditions:
