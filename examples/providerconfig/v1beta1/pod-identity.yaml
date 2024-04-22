@@ -23,7 +23,6 @@ metadata:
 spec:
   forProvider:
     clientIdList:
-    - sts.amazonaws.com
     - pods.eks.amazonaws.com
     thumbprintList:
     - 9e99a48a9960b14926bb7f3b02e22da2b0ab7280
@@ -33,19 +32,14 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   name: pod-identity-role
+  labels:
+    testing.upbound.io/example-name: pod-identity
 spec:
   forProvider:
     assumeRolePolicy: |
       {
         "Version": "2012-10-17",
         "Statement": [
-          {
-            "Effect": "Allow",
-            "Principal": {
-              "Federated": "arn:aws:iam::<AWS-ACCOUNT-ID>:oidc-provider/oidc.eks.<REGION>.amazonaws.com/id/<UNIQUE_ID>"
-            },
-            "Action": "sts:AssumeRoleWithWebIdentity"
-          },
           {
             "Effect": "Allow",
             "Principal": {
