@@ -596,8 +596,8 @@ github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWE
 github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
 github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0 h1:jWpvCLoY8Z/e3VKvlsiIGKtc+UG6U5vzxaoagmhXfyg=
 github.com/matttproud/golang_protobuf_extensions/v2 v2.0.0/go.mod h1:QUyp042oQthUoa9bqDv0ER0wrtXnBruoNd7aNjkbP+k=
-github.com/mbbush/terraform-provider-aws v0.0.0-20240419234332-0ec53cbccd61 h1:A5UX0w5PpT5IrxblNQ+z/S0811FoDI8OnZXeMBiaOaY=
-github.com/mbbush/terraform-provider-aws v0.0.0-20240419234332-0ec53cbccd61/go.mod h1:VNcpSYvh4eYoT0qmtnaBoUwjlx4NOEzspt4FFNGX8Ac=
+github.com/mbbush/terraform-provider-aws v0.0.0-20240422224835-5d704d4752cd h1:ESfFGrzgFTABwwH6ItzlL1kdog3DnZTqQIjPGep3soc=
+github.com/mbbush/terraform-provider-aws v0.0.0-20240422224835-5d704d4752cd/go.mod h1:VNcpSYvh4eYoT0qmtnaBoUwjlx4NOEzspt4FFNGX8Ac=
 github.com/mitchellh/copystructure v1.2.0 h1:vpKXTN4ewci03Vljg/q9QvCGUDttBOGBIa15WveJJGw=
 github.com/mitchellh/copystructure v1.2.0/go.mod h1:qLl+cE2AmVv+CoeAwDPye/v+N2HKCj9FbZEVFJRxO9s=
 github.com/mitchellh/go-homedir v1.1.0 h1:lukF9ziXFxDFPkA1vsr5zpc1XuPDn/wFntq5mG+4E0Y=

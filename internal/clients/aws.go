@@ -240,7 +240,7 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	// an http.RoundTripper. To learn how SDK v1 session handler phases
 	// map to SDK v2 middleware stack steps, see:
 	// https://aws.github.io/aws-sdk-go-v2/docs/migrating/#handler-phases
-	tfAwsConnsClient.Session.Handlers.Send.PushBack(func(r *awsrequest.Request) {
+	tfAwsConnsClient.Session().Handlers.Send.PushBack(func(r *awsrequest.Request) {
 		// In case of API errors (or no errors), r.Error is nil.
 		// In case of connection errors, r.Error is non-nil.
 		if r.Error == nil {

@@ -344,6 +344,6 @@ require (
 
 replace golang.org/x/exp => golang.org/x/exp v0.0.0-20231006140011-7918f672742d
 
-replace github.com/hashicorp/terraform-provider-aws => github.com/mbbush/terraform-provider-aws v0.0.0-20240419234332-0ec53cbccd61
+replace github.com/hashicorp/terraform-provider-aws => github.com/mbbush/terraform-provider-aws v0.0.0-20240422224835-5d704d4752cd
 
 replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terraform-plugin-log v0.0.0-20230928191232-6c653d8ef8fb
