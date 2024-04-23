@@ -10,7 +10,7 @@ on:
 
 jobs:
   e2e:
-    uses: upbound/uptest/.github/workflows/pr-comment-trigger.yml@standard-runners
+    uses: upbound/official-providers-ci/.github/workflows/pr-comment-trigger.yml@standard-runners
     with:
       go-version: 1.21
       cleanup-disk: true

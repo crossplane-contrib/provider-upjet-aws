@@ -8,4 +8,4 @@ on: issue_comment
 
 jobs:
   comment-commands:
-    uses: upbound/uptest/.github/workflows/provider-commands.yml@standard-runners
+    uses: upbound/official-providers-ci/.github/workflows/provider-commands.yml@standard-runners
