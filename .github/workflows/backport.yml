@@ -16,4 +16,4 @@ on:
 
 jobs:
   backport:
-    uses: upbound/uptest/.github/workflows/provider-backport.yml@standard-runners
+    uses: upbound/official-providers-ci/.github/workflows/provider-backport.yml@standard-runners
