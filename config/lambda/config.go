@@ -64,6 +64,10 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"source_code_hash"},
 		}
+		r.MetaResource.ArgumentDocs["source_code_hash"] = "Used to trigger updates. Must be set to " +
+			"a base64 encoded SHA256 hash of the package file specified with either filename or s3_key. " +
+			"If you have specified this field manually, it should be the actual (computed) hash of the " +
+			"underlying lambda function specified in the filename, image_uri, s3_bucket fields."
 	})
 
 	p.AddResourceConfigurator("aws_lambda_function_event_invoke_config", func(r *config.Resource) {

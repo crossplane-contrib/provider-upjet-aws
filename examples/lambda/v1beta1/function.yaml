@@ -13,7 +13,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    s3Bucket: upbound-provider-test-data
+    s3Bucket: official-provider-test-data
     s3Key: hello-python.zip
     handler: index.py
     packageType: Zip
