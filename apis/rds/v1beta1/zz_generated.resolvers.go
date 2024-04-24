@@ -29,6 +29,44 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ClusterParameterGroup", "ClusterParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBClusterParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.DBClusterParameterGroupNameRef,
+			Selector:     mg.Spec.ForProvider.DBClusterParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBClusterParameterGroupName")
+	}
+	mg.Spec.ForProvider.DBClusterParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBClusterParameterGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ParameterGroup", "ParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.DBInstanceParameterGroupNameRef,
+			Selector:     mg.Spec.ForProvider.DBInstanceParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBInstanceParameterGroupName")
+	}
+	mg.Spec.ForProvider.DBInstanceParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBInstanceParameterGroupNameRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -146,6 +184,44 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ClusterParameterGroup", "ClusterParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBClusterParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.DBClusterParameterGroupNameRef,
+			Selector:     mg.Spec.InitProvider.DBClusterParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBClusterParameterGroupName")
+	}
+	mg.Spec.InitProvider.DBClusterParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBClusterParameterGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ParameterGroup", "ParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBInstanceParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.DBInstanceParameterGroupNameRef,
+			Selector:     mg.Spec.InitProvider.DBInstanceParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBInstanceParameterGroupName")
+	}
+	mg.Spec.InitProvider.DBInstanceParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBInstanceParameterGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
 		if err != nil {
