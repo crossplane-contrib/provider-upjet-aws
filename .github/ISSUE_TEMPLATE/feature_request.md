@@ -1,7 +1,7 @@
 ---
 name: Feature Request
 about: Help us make Official AWS Provider more useful
-labels: enhancement
+labels: enhancement,needs:triage
 title: 
 ---
 <!--
