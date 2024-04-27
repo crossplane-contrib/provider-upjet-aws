@@ -27,6 +27,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
 
+	// bedrock
+	//
+	// Bedrock model invocation logging configuration
+	"aws_bedrock_model_invocation_logging_configuration": config.NameAsIdentifier,
+
 	// cognito
 	//
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
