@@ -126,6 +126,7 @@ import (
 	vaultpolicy "github.com/upbound/provider-aws/internal/controller/backup/vaultpolicy"
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
+	modelinvocationloggingconfiguration "github.com/upbound/provider-aws/internal/controller/bedrock/modelinvocationloggingconfiguration"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
 	anomalymonitor "github.com/upbound/provider-aws/internal/controller/ce/anomalymonitor"
@@ -1068,6 +1069,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vaultpolicy.Setup,
 		jobdefinition.Setup,
 		schedulingpolicy.Setup,
+		modelinvocationloggingconfiguration.Setup,
 		budget.Setup,
 		budgetaction.Setup,
 		anomalymonitor.Setup,

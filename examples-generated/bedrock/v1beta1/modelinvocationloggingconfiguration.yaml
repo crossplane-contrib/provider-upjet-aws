@@ -1,0 +1,70 @@
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: ModelInvocationLoggingConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/modelinvocationloggingconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: bedrock/v1beta1/modelinvocationloggingconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/modelinvocationloggingconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "bedrock.amazonaws.com"
+            },
+            "Action": [
+              "s3:*"
+            ],
+            "Resource": [
+              "${aws_s3_bucket.example.arn}/*"
+            ],
+            "Condition": {
+              "StringEquals": {
+                "aws:SourceAccount": "${data.aws_caller_identity.current.account_id}"
+              },
+              "ArnLike": {
+                "aws:SourceArn": "arn:aws:bedrock:us-east-1:${data.aws_caller_identity.current.account_id}:*"
+              }
+            }
+          }
+        ]
+      }
+    region: us-west-1
