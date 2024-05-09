@@ -25,6 +25,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
@@ -77,6 +78,35 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 					mg.Spec.ForProvider.ApplicationConfiguration[i3].ApplicationCodeConfiguration[i4].CodeContent[i5].S3ContentLocation[i6].FileKey = reference.ToPtrValue(rsp.ResolvedValue)
 					mg.Spec.ForProvider.ApplicationConfiguration[i3].ApplicationCodeConfiguration[i4].CodeContent[i5].S3ContentLocation[i6].FileKeyRef = rsp.ResolvedReference
 
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration); i6++ {
+					for i7 := 0; i7 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor); i7++ {
+						{
+							m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+							if err != nil {
+								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+							}
+							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+								CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArn),
+								Extract:      common.ARNExtractor(),
+								Reference:    mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArnRef,
+								Selector:     mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArnSelector,
+								To:           reference.To{List: l, Managed: m},
+							})
+						}
+						if err != nil {
+							return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArn")
+						}
+						mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+						mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArnRef = rsp.ResolvedReference
+
+					}
 				}
 			}
 		}
@@ -173,7 +203,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						}
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArn),
-							Extract:      resource.ExtractParamPath("arn", true),
+							Extract:      common.ARNExtractor(),
 							Reference:    mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArnRef,
 							Selector:     mg.Spec.ForProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -187,6 +217,52 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 
 				}
 			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDRefs,
+					Selector:      mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDRefs,
+					Selector:      mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds")
+			}
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDRefs = mrsp.ResolvedReferences
+
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLoggingOptions); i3++ {
@@ -286,6 +362,35 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ApplicationConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration); i6++ {
+					for i7 := 0; i7 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor); i7++ {
+						{
+							m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
+							if err != nil {
+								return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+							}
+							rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+								CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArn),
+								Extract:      common.ARNExtractor(),
+								Reference:    mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArnRef,
+								Selector:     mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArnSelector,
+								To:           reference.To{List: l, Managed: m},
+							})
+						}
+						if err != nil {
+							return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArn")
+						}
+						mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
+						mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].InputProcessingConfiguration[i6].InputLambdaProcessor[i7].ResourceArnRef = rsp.ResolvedReference
+
+					}
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input); i5++ {
 				for i6 := 0; i6 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].Input[i5].KinesisStreamsInput); i6++ {
 					{
 						m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
@@ -375,7 +480,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 						}
 						rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 							CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArn),
-							Extract:      resource.ExtractParamPath("arn", true),
+							Extract:      common.ARNExtractor(),
 							Reference:    mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArnRef,
 							Selector:     mg.Spec.InitProvider.ApplicationConfiguration[i3].SQLApplicationConfiguration[i4].ReferenceDataSource[i5].S3ReferenceDataSource[i6].BucketArnSelector,
 							To:           reference.To{List: l, Managed: m},
@@ -389,6 +494,52 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 
 				}
 			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDRefs,
+					Selector:      mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDRefs,
+					Selector:      mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds")
+			}
+			mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIDRefs = mrsp.ResolvedReferences
+
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.CloudwatchLoggingOptions); i3++ {
