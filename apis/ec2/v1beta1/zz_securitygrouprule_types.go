@@ -45,14 +45,14 @@ type SecurityGroupRuleInitParameters_2 struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Security group to apply this rule to.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup to populate securityGroupId.
+	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate securityGroupId.
+	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
@@ -60,14 +60,14 @@ type SecurityGroupRuleInitParameters_2 struct {
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	// Security group id to allow access to/from, depending on the type. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or self.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup to populate sourceSecurityGroupId.
+	// Reference to a SecurityGroup in ec2 to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDRef *v1.Reference `json:"sourceSecurityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate sourceSecurityGroupId.
+	// Selector for a SecurityGroup in ec2 to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 
@@ -165,15 +165,15 @@ type SecurityGroupRuleParameters_2 struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Security group to apply this rule to.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup to populate securityGroupId.
+	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDRef *v1.Reference `json:"securityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate securityGroupId.
+	// Selector for a SecurityGroup in ec2 to populate securityGroupId.
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
@@ -182,15 +182,15 @@ type SecurityGroupRuleParameters_2 struct {
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	// Security group id to allow access to/from, depending on the type. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or self.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup to populate sourceSecurityGroupId.
+	// Reference to a SecurityGroup in ec2 to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDRef *v1.Reference `json:"sourceSecurityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate sourceSecurityGroupId.
+	// Selector for a SecurityGroup in ec2 to populate sourceSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupIDSelector *v1.Selector `json:"sourceSecurityGroupIdSelector,omitempty" tf:"-"`
 

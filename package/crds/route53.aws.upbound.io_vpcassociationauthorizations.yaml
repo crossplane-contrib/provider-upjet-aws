@@ -166,7 +166,7 @@ spec:
                       authorize associating a VPC with.
                     type: string
                   zoneIdRef:
-                    description: Reference to a Zone to populate zoneId.
+                    description: Reference to a Zone in route53 to populate zoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -200,7 +200,7 @@ spec:
                     - name
                     type: object
                   zoneIdSelector:
-                    description: Selector for a Zone to populate zoneId.
+                    description: Selector for a Zone in route53 to populate zoneId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -342,7 +342,7 @@ spec:
                       authorize associating a VPC with.
                     type: string
                   zoneIdRef:
-                    description: Reference to a Zone to populate zoneId.
+                    description: Reference to a Zone in route53 to populate zoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -376,7 +376,7 @@ spec:
                     - name
                     type: object
                   zoneIdSelector:
-                    description: Selector for a Zone to populate zoneId.
+                    description: Selector for a Zone in route53 to populate zoneId.
                     properties:
                       matchControllerRef:
                         description: |-

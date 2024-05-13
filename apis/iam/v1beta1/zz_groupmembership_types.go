@@ -16,30 +16,30 @@ import (
 type GroupMembershipInitParameters struct {
 
 	// –  The IAM Group name to attach the list of users to
-	// +crossplane:generate:reference:type=Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Group
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
-	// Reference to a Group to populate group.
+	// Reference to a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
 	GroupRef *v1.Reference `json:"groupRef,omitempty" tf:"-"`
 
-	// Selector for a Group to populate group.
+	// Selector for a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
 	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
 
 	// The name to identify the Group Membership
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// References to User to populate users.
+	// References to User in iam to populate users.
 	// +kubebuilder:validation:Optional
 	UserRefs []v1.Reference `json:"userRefs,omitempty" tf:"-"`
 
-	// Selector for a list of User to populate users.
+	// Selector for a list of User in iam to populate users.
 	// +kubebuilder:validation:Optional
 	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 
 	// A list of IAM User names to associate with the Group
-	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserRefs
 	// +crossplane:generate:reference:selectorFieldName=UserSelector
 	// +listType=set
@@ -64,15 +64,15 @@ type GroupMembershipObservation struct {
 type GroupMembershipParameters struct {
 
 	// –  The IAM Group name to attach the list of users to
-	// +crossplane:generate:reference:type=Group
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
-	// Reference to a Group to populate group.
+	// Reference to a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
 	GroupRef *v1.Reference `json:"groupRef,omitempty" tf:"-"`
 
-	// Selector for a Group to populate group.
+	// Selector for a Group in iam to populate group.
 	// +kubebuilder:validation:Optional
 	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
 
@@ -80,16 +80,16 @@ type GroupMembershipParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// References to User to populate users.
+	// References to User in iam to populate users.
 	// +kubebuilder:validation:Optional
 	UserRefs []v1.Reference `json:"userRefs,omitempty" tf:"-"`
 
-	// Selector for a list of User to populate users.
+	// Selector for a list of User in iam to populate users.
 	// +kubebuilder:validation:Optional
 	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 
 	// A list of IAM User names to associate with the Group
-	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserRefs
 	// +crossplane:generate:reference:selectorFieldName=UserSelector
 	// +kubebuilder:validation:Optional

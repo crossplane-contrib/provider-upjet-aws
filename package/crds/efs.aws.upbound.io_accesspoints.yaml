@@ -78,7 +78,7 @@ spec:
                       is intended.
                     type: string
                   fileSystemIdRef:
-                    description: Reference to a FileSystem to populate fileSystemId.
+                    description: Reference to a FileSystem in efs to populate fileSystemId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   fileSystemIdSelector:
-                    description: Selector for a FileSystem to populate fileSystemId.
+                    description: Selector for a FileSystem in efs to populate fileSystemId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -236,7 +236,7 @@ spec:
                       is intended.
                     type: string
                   fileSystemIdRef:
-                    description: Reference to a FileSystem to populate fileSystemId.
+                    description: Reference to a FileSystem in efs to populate fileSystemId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -270,7 +270,7 @@ spec:
                     - name
                     type: object
                   fileSystemIdSelector:
-                    description: Selector for a FileSystem to populate fileSystemId.
+                    description: Selector for a FileSystem in efs to populate fileSystemId.
                     properties:
                       matchControllerRef:
                         description: |-

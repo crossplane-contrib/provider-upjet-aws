@@ -86,7 +86,7 @@ spec:
                       you are updating
                     type: string
                   functionNameRef:
-                    description: Reference to a Function to populate functionName.
+                    description: Reference to a Function in lambda to populate functionName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -120,7 +120,7 @@ spec:
                     - name
                     type: object
                   functionNameSelector:
-                    description: Selector for a Function to populate functionName.
+                    description: Selector for a Function in lambda to populate functionName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -180,7 +180,7 @@ spec:
                       ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
                     type: string
                   qualifierRef:
-                    description: Reference to a Alias to populate qualifier.
+                    description: Reference to a Alias in lambda to populate qualifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -214,7 +214,7 @@ spec:
                     - name
                     type: object
                   qualifierSelector:
-                    description: Selector for a Alias to populate qualifier.
+                    description: Selector for a Alias in lambda to populate qualifier.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -305,7 +305,7 @@ spec:
                       you are updating
                     type: string
                   functionNameRef:
-                    description: Reference to a Function to populate functionName.
+                    description: Reference to a Function in lambda to populate functionName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -339,7 +339,7 @@ spec:
                     - name
                     type: object
                   functionNameSelector:
-                    description: Selector for a Function to populate functionName.
+                    description: Selector for a Function in lambda to populate functionName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -399,7 +399,7 @@ spec:
                       ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
                     type: string
                   qualifierRef:
-                    description: Reference to a Alias to populate qualifier.
+                    description: Reference to a Alias in lambda to populate qualifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -433,7 +433,7 @@ spec:
                     - name
                     type: object
                   qualifierSelector:
-                    description: Selector for a Alias to populate qualifier.
+                    description: Selector for a Alias in lambda to populate qualifier.
                     properties:
                       matchControllerRef:
                         description: |-

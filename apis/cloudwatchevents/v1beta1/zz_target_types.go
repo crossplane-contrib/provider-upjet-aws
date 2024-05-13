@@ -691,14 +691,14 @@ type TargetInitParameters struct {
 
 	// The name or ARN of the event bus to associate with the rule.
 	// If you omit this, the default event bus is used.
-	// +crossplane:generate:reference:type=Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
-	// Reference to a Bus to populate eventBusName.
+	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
 
-	// Selector for a Bus to populate eventBusName.
+	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
@@ -841,15 +841,15 @@ type TargetParameters struct {
 
 	// The name or ARN of the event bus to associate with the rule.
 	// If you omit this, the default event bus is used.
-	// +crossplane:generate:reference:type=Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
-	// Reference to a Bus to populate eventBusName.
+	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
 
-	// Selector for a Bus to populate eventBusName.
+	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 

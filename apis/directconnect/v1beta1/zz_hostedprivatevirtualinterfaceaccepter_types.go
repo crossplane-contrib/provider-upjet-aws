@@ -36,14 +36,14 @@ type HostedPrivateVirtualInterfaceAccepterInitParameters struct {
 	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Direct Connect virtual interface to accept.
-	// +crossplane:generate:reference:type=HostedPrivateVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.HostedPrivateVirtualInterface
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 
-	// Reference to a HostedPrivateVirtualInterface to populate virtualInterfaceId.
+	// Reference to a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a HostedPrivateVirtualInterface to populate virtualInterfaceId.
+	// Selector for a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }
@@ -105,15 +105,15 @@ type HostedPrivateVirtualInterfaceAccepterParameters struct {
 	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Direct Connect virtual interface to accept.
-	// +crossplane:generate:reference:type=HostedPrivateVirtualInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.HostedPrivateVirtualInterface
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceID *string `json:"virtualInterfaceId,omitempty" tf:"virtual_interface_id,omitempty"`
 
-	// Reference to a HostedPrivateVirtualInterface to populate virtualInterfaceId.
+	// Reference to a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceIDRef *v1.Reference `json:"virtualInterfaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a HostedPrivateVirtualInterface to populate virtualInterfaceId.
+	// Selector for a HostedPrivateVirtualInterface in directconnect to populate virtualInterfaceId.
 	// +kubebuilder:validation:Optional
 	VirtualInterfaceIDSelector *v1.Selector `json:"virtualInterfaceIdSelector,omitempty" tf:"-"`
 }

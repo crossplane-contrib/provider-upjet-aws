@@ -52,14 +52,14 @@ type WorkspaceSAMLConfigurationInitParameters struct {
 	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
 	// The workspace id.
-	// +crossplane:generate:reference:type=Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/grafana/v1beta1.Workspace
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
-	// Reference to a Workspace to populate workspaceId.
+	// Reference to a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Workspace to populate workspaceId.
+	// Selector for a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
@@ -167,15 +167,15 @@ type WorkspaceSAMLConfigurationParameters struct {
 	RoleAssertion *string `json:"roleAssertion,omitempty" tf:"role_assertion,omitempty"`
 
 	// The workspace id.
-	// +crossplane:generate:reference:type=Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/grafana/v1beta1.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
-	// Reference to a Workspace to populate workspaceId.
+	// Reference to a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Workspace to populate workspaceId.
+	// Selector for a Workspace in grafana to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }

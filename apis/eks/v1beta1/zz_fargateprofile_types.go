@@ -16,14 +16,14 @@ import (
 type FargateProfileInitParameters struct {
 
 	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// Reference to a Cluster to populate clusterName.
+	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterName.
+	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
@@ -99,15 +99,15 @@ type FargateProfileObservation struct {
 type FargateProfileParameters struct {
 
 	// 100 characters in length. Must begin with an alphanumeric character, and must only contain alphanumeric characters, dashes and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// Reference to a Cluster to populate clusterName.
+	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterName.
+	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 

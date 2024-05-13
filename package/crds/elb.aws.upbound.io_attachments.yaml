@@ -77,7 +77,7 @@ spec:
                     description: The name of the ELB.
                     type: string
                   elbRef:
-                    description: Reference to a ELB to populate elb.
+                    description: Reference to a ELB in elb to populate elb.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   elbSelector:
-                    description: Selector for a ELB to populate elb.
+                    description: Selector for a ELB in elb to populate elb.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -251,7 +251,7 @@ spec:
                     description: The name of the ELB.
                     type: string
                   elbRef:
-                    description: Reference to a ELB to populate elb.
+                    description: Reference to a ELB in elb to populate elb.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -285,7 +285,7 @@ spec:
                     - name
                     type: object
                   elbSelector:
-                    description: Selector for a ELB to populate elb.
+                    description: Selector for a ELB in elb to populate elb.
                     properties:
                       matchControllerRef:
                         description: |-

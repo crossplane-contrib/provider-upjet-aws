@@ -26,18 +26,18 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cloudwatch_event_permission", func(r *config.Resource) {
 		r.References["event_bus_name"] = config.Reference{
-			Type: "Bus",
+			TerraformName: "aws_cloudwatch_event_bus",
 		}
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_cloudwatch_event_rule", func(r *config.Resource) {
 		r.References["event_bus_name"] = config.Reference{
-			Type: "Bus",
+			TerraformName: "aws_cloudwatch_event_bus",
 		}
 	})
 	p.AddResourceConfigurator("aws_cloudwatch_event_target", func(r *config.Resource) {
 		r.References["event_bus_name"] = config.Reference{
-			Type: "Bus",
+			TerraformName: "aws_cloudwatch_event_bus",
 		}
 		delete(r.References, "arn")
 	})

@@ -88,24 +88,24 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_iam_group_membership", func(r *config.Resource) {
 		r.References["users"] = config.Reference{
-			Type:              "User",
+			TerraformName:     "aws_iam_user",
 			RefFieldName:      "UserRefs",
 			SelectorFieldName: "UserSelector",
 		}
 		r.References["group"] = config.Reference{
-			Type: "Group",
+			TerraformName: "aws_iam_group",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_iam_service_specific_credential", func(r *config.Resource) {
 		r.References["user_name"] = config.Reference{
-			Type: "User",
+			TerraformName: "aws_iam_user",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_iam_user_login_profile", func(r *config.Resource) {
 		r.References["user"] = config.Reference{
-			Type: "User",
+			TerraformName: "aws_iam_user",
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"password_reset_required", "password_length", "pgp_key"},
@@ -114,7 +114,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_iam_user_ssh_key", func(r *config.Resource) {
 		r.References["username"] = config.Reference{
-			Type: "User",
+			TerraformName: "aws_iam_user",
 		}
 	})
 

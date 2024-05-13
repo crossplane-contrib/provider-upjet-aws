@@ -35,15 +35,15 @@ type ReplicaExternalKeyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
-	// +crossplane:generate:reference:type=ExternalKey
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.ExternalKey
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
 
-	// Reference to a ExternalKey to populate primaryKeyArn.
+	// Reference to a ExternalKey in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArnRef *v1.Reference `json:"primaryKeyArnRef,omitempty" tf:"-"`
 
-	// Selector for a ExternalKey to populate primaryKeyArn.
+	// Selector for a ExternalKey in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArnSelector *v1.Selector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
 
@@ -139,16 +139,16 @@ type ReplicaExternalKeyParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The ARN of the multi-Region primary key to replicate. The primary key must be in a different AWS Region of the same AWS Partition. You can create only one replica of a given primary key in each AWS Region.
-	// +crossplane:generate:reference:type=ExternalKey
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.ExternalKey
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArn *string `json:"primaryKeyArn,omitempty" tf:"primary_key_arn,omitempty"`
 
-	// Reference to a ExternalKey to populate primaryKeyArn.
+	// Reference to a ExternalKey in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArnRef *v1.Reference `json:"primaryKeyArnRef,omitempty" tf:"-"`
 
-	// Selector for a ExternalKey to populate primaryKeyArn.
+	// Selector for a ExternalKey in kms to populate primaryKeyArn.
 	// +kubebuilder:validation:Optional
 	PrimaryKeyArnSelector *v1.Selector `json:"primaryKeyArnSelector,omitempty" tf:"-"`
 

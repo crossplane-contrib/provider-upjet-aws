@@ -28,7 +28,7 @@ func (mg *CapacityProvider) ResolveReferences( // ResolveReferences of this Capa
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.AutoScalingGroupProvider); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "AutoscalingGroup", "AutoscalingGroupList")
+			m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -49,7 +49,7 @@ func (mg *CapacityProvider) ResolveReferences( // ResolveReferences of this Capa
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.AutoScalingGroupProvider); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta1", "AutoscalingGroup", "AutoscalingGroupList")
+			m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta2", "AutoscalingGroup", "AutoscalingGroupList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

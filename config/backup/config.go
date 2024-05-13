@@ -14,33 +14,33 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_backup_vault", func(r *config.Resource) {
 		r.References["kms_key_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_backup_selection", func(r *config.Resource) {
 		r.References["iam_role_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["plan_id"] = config.Reference{
-			Type: "Plan",
+			TerraformName: "aws_backup_plan",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_backup_vault_notifications", func(r *config.Resource) {
 		r.References["sns_topic_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/sns/v1beta1.Topic",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_sns_topic",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["backup_vault_name"] = config.Reference{
-			Type: "Vault",
+			TerraformName: "aws_backup_vault",
 		}
 	})
 	p.AddResourceConfigurator("aws_backup_vault_lock_configuration", func(r *config.Resource) {
 		r.References["backup_vault_name"] = config.Reference{
-			Type: "Vault",
+			TerraformName: "aws_backup_vault",
 		}
 	})
 

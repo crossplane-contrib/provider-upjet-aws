@@ -84,7 +84,7 @@ spec:
                     description: Globally unique key ID for the customer master key.
                     type: string
                   keyIdRef:
-                    description: Reference to a Key to populate keyId.
+                    description: Reference to a Key in kms to populate keyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,7 +118,7 @@ spec:
                     - name
                     type: object
                   keyIdSelector:
-                    description: Selector for a Key to populate keyId.
+                    description: Selector for a Key in kms to populate keyId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -206,7 +206,7 @@ spec:
                     description: Globally unique key ID for the customer master key.
                     type: string
                   keyIdRef:
-                    description: Reference to a Key to populate keyId.
+                    description: Reference to a Key in kms to populate keyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -240,7 +240,7 @@ spec:
                     - name
                     type: object
                   keyIdSelector:
-                    description: Selector for a Key to populate keyId.
+                    description: Selector for a Key in kms to populate keyId.
                     properties:
                       matchControllerRef:
                         description: |-

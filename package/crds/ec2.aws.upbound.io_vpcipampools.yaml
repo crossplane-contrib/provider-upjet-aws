@@ -120,7 +120,7 @@ spec:
                       the IPAM pool.
                     type: string
                   ipamScopeIdRef:
-                    description: Reference to a VPCIpamScope to populate ipamScopeId.
+                    description: Reference to a VPCIpamScope in ec2 to populate ipamScopeId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -154,7 +154,7 @@ spec:
                     - name
                     type: object
                   ipamScopeIdSelector:
-                    description: Selector for a VPCIpamScope to populate ipamScopeId.
+                    description: Selector for a VPCIpamScope in ec2 to populate ipamScopeId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -364,7 +364,7 @@ spec:
                       the IPAM pool.
                     type: string
                   ipamScopeIdRef:
-                    description: Reference to a VPCIpamScope to populate ipamScopeId.
+                    description: Reference to a VPCIpamScope in ec2 to populate ipamScopeId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -398,7 +398,7 @@ spec:
                     - name
                     type: object
                   ipamScopeIdSelector:
-                    description: Selector for a VPCIpamScope to populate ipamScopeId.
+                    description: Selector for a VPCIpamScope in ec2 to populate ipamScopeId.
                     properties:
                       matchControllerRef:
                         description: |-

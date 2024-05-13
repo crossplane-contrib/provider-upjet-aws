@@ -16,26 +16,26 @@ import (
 type TagOptionResourceAssociationInitParameters struct {
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// Reference to a Product to populate resourceId.
+	// Reference to a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Product to populate resourceId.
+	// Selector for a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Tag Option identifier.
-	// +crossplane:generate:reference:type=TagOption
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.TagOption
 	TagOptionID *string `json:"tagOptionId,omitempty" tf:"tag_option_id,omitempty"`
 
-	// Reference to a TagOption to populate tagOptionId.
+	// Reference to a TagOption in servicecatalog to populate tagOptionId.
 	// +kubebuilder:validation:Optional
 	TagOptionIDRef *v1.Reference `json:"tagOptionIdRef,omitempty" tf:"-"`
 
-	// Selector for a TagOption to populate tagOptionId.
+	// Selector for a TagOption in servicecatalog to populate tagOptionId.
 	// +kubebuilder:validation:Optional
 	TagOptionIDSelector *v1.Selector `json:"tagOptionIdSelector,omitempty" tf:"-"`
 }
@@ -72,28 +72,28 @@ type TagOptionResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// Reference to a Product to populate resourceId.
+	// Reference to a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Product to populate resourceId.
+	// Selector for a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Tag Option identifier.
-	// +crossplane:generate:reference:type=TagOption
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.TagOption
 	// +kubebuilder:validation:Optional
 	TagOptionID *string `json:"tagOptionId,omitempty" tf:"tag_option_id,omitempty"`
 
-	// Reference to a TagOption to populate tagOptionId.
+	// Reference to a TagOption in servicecatalog to populate tagOptionId.
 	// +kubebuilder:validation:Optional
 	TagOptionIDRef *v1.Reference `json:"tagOptionIdRef,omitempty" tf:"-"`
 
-	// Selector for a TagOption to populate tagOptionId.
+	// Selector for a TagOption in servicecatalog to populate tagOptionId.
 	// +kubebuilder:validation:Optional
 	TagOptionIDSelector *v1.Selector `json:"tagOptionIdSelector,omitempty" tf:"-"`
 }

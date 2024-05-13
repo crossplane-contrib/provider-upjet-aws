@@ -159,7 +159,7 @@ spec:
                       be created in.
                     type: string
                   securityGroupRefs:
-                    description: References to SecurityGroup to populate securityGroups.
+                    description: References to SecurityGroup in ec2 to populate securityGroups.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -196,7 +196,7 @@ spec:
                       type: object
                     type: array
                   securityGroupSelector:
-                    description: Selector for a list of SecurityGroup to populate
+                    description: Selector for a list of SecurityGroup in ec2 to populate
                       securityGroups.
                     properties:
                       matchControllerRef:
@@ -250,7 +250,7 @@ spec:
                     description: Subnet ID to create the ENI in.
                     type: string
                   subnetIdRef:
-                    description: Reference to a Subnet to populate subnetId.
+                    description: Reference to a Subnet in ec2 to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -284,7 +284,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: Selector for a Subnet to populate subnetId.
+                    description: Selector for a Subnet in ec2 to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -427,7 +427,7 @@ spec:
                       as a primary private IP will be assiged to an ENI by default.
                     type: number
                   securityGroupRefs:
-                    description: References to SecurityGroup to populate securityGroups.
+                    description: References to SecurityGroup in ec2 to populate securityGroups.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -464,7 +464,7 @@ spec:
                       type: object
                     type: array
                   securityGroupSelector:
-                    description: Selector for a list of SecurityGroup to populate
+                    description: Selector for a list of SecurityGroup in ec2 to populate
                       securityGroups.
                     properties:
                       matchControllerRef:
@@ -518,7 +518,7 @@ spec:
                     description: Subnet ID to create the ENI in.
                     type: string
                   subnetIdRef:
-                    description: Reference to a Subnet to populate subnetId.
+                    description: Reference to a Subnet in ec2 to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -552,7 +552,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: Selector for a Subnet to populate subnetId.
+                    description: Selector for a Subnet in ec2 to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -126,7 +126,7 @@ spec:
                       key in each AWS Region.
                     type: string
                   primaryKeyArnRef:
-                    description: Reference to a ExternalKey to populate primaryKeyArn.
+                    description: Reference to a ExternalKey in kms to populate primaryKeyArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -160,7 +160,7 @@ spec:
                     - name
                     type: object
                   primaryKeyArnSelector:
-                    description: Selector for a ExternalKey to populate primaryKeyArn.
+                    description: Selector for a ExternalKey in kms to populate primaryKeyArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -264,7 +264,7 @@ spec:
                       key in each AWS Region.
                     type: string
                   primaryKeyArnRef:
-                    description: Reference to a ExternalKey to populate primaryKeyArn.
+                    description: Reference to a ExternalKey in kms to populate primaryKeyArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -298,7 +298,7 @@ spec:
                     - name
                     type: object
                   primaryKeyArnSelector:
-                    description: Selector for a ExternalKey to populate primaryKeyArn.
+                    description: Selector for a ExternalKey in kms to populate primaryKeyArn.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -20,14 +20,14 @@ type TransitGatewayVPCAttachmentAccepterInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the EC2 Transit Gateway Attachment to manage.
-	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// Reference to a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
@@ -96,15 +96,15 @@ type TransitGatewayVPCAttachmentAccepterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the EC2 Transit Gateway Attachment to manage.
-	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// Reference to a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 

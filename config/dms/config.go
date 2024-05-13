@@ -16,16 +16,16 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_dms_endpoint", func(r *config.Resource) {
 		r.References = config.References{
 			"secrets_manager_access_role_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_iam_role",
+				Extractor:     common.PathARNExtractor,
 			},
 			"service_access_role": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_iam_role",
+				Extractor:     common.PathARNExtractor,
 			},
 			"kms_key_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_kms_key",
+				Extractor:     common.PathARNExtractor,
 			},
 		}
 		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {

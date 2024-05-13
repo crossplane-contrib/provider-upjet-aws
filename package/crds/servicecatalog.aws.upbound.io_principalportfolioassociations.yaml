@@ -82,7 +82,8 @@ spec:
                     description: Portfolio identifier.
                     type: string
                   portfolioIdRef:
-                    description: Reference to a Portfolio to populate portfolioId.
+                    description: Reference to a Portfolio in servicecatalog to populate
+                      portfolioId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +117,8 @@ spec:
                     - name
                     type: object
                   portfolioIdSelector:
-                    description: Selector for a Portfolio to populate portfolioId.
+                    description: Selector for a Portfolio in servicecatalog to populate
+                      portfolioId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -265,7 +267,8 @@ spec:
                     description: Portfolio identifier.
                     type: string
                   portfolioIdRef:
-                    description: Reference to a Portfolio to populate portfolioId.
+                    description: Reference to a Portfolio in servicecatalog to populate
+                      portfolioId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -299,7 +302,8 @@ spec:
                     - name
                     type: object
                   portfolioIdSelector:
-                    description: Selector for a Portfolio to populate portfolioId.
+                    description: Selector for a Portfolio in servicecatalog to populate
+                      portfolioId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -126,7 +126,7 @@ spec:
                     description: The workspace id.
                     type: string
                   workspaceIdRef:
-                    description: Reference to a Workspace to populate workspaceId.
+                    description: Reference to a Workspace in grafana to populate workspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -160,7 +160,7 @@ spec:
                     - name
                     type: object
                   workspaceIdSelector:
-                    description: Selector for a Workspace to populate workspaceId.
+                    description: Selector for a Workspace in grafana to populate workspaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -263,7 +263,7 @@ spec:
                     description: The workspace id.
                     type: string
                   workspaceIdRef:
-                    description: Reference to a Workspace to populate workspaceId.
+                    description: Reference to a Workspace in grafana to populate workspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -297,7 +297,7 @@ spec:
                     - name
                     type: object
                   workspaceIdSelector:
-                    description: Selector for a Workspace to populate workspaceId.
+                    description: Selector for a Workspace in grafana to populate workspaceId.
                     properties:
                       matchControllerRef:
                         description: |-

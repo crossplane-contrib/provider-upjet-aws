@@ -72,14 +72,14 @@ type ClusterInitParameters struct {
 
 	// DB subnet group to associate with this DB cluster.
 	// NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.SubnetGroup
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate dbSubnetGroupName.
+	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate dbSubnetGroupName.
+	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -498,15 +498,15 @@ type ClusterParameters struct {
 
 	// DB subnet group to associate with this DB cluster.
 	// NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate dbSubnetGroupName.
+	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate dbSubnetGroupName.
+	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -702,14 +702,14 @@ type ClusterRestoreToPointInTimeInitParameters struct {
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
 	// Identifier of the source database cluster from which to restore. When restoring from a cluster in another AWS account, the identifier is the ARN of that cluster.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Cluster
 	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
 
-	// Reference to a Cluster to populate sourceClusterIdentifier.
+	// Reference to a Cluster in rds to populate sourceClusterIdentifier.
 	// +kubebuilder:validation:Optional
 	SourceClusterIdentifierRef *v1.Reference `json:"sourceClusterIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate sourceClusterIdentifier.
+	// Selector for a Cluster in rds to populate sourceClusterIdentifier.
 	// +kubebuilder:validation:Optional
 	SourceClusterIdentifierSelector *v1.Selector `json:"sourceClusterIdentifierSelector,omitempty" tf:"-"`
 
@@ -745,15 +745,15 @@ type ClusterRestoreToPointInTimeParameters struct {
 	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
 
 	// Identifier of the source database cluster from which to restore. When restoring from a cluster in another AWS account, the identifier is the ARN of that cluster.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
 
-	// Reference to a Cluster to populate sourceClusterIdentifier.
+	// Reference to a Cluster in rds to populate sourceClusterIdentifier.
 	// +kubebuilder:validation:Optional
 	SourceClusterIdentifierRef *v1.Reference `json:"sourceClusterIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate sourceClusterIdentifier.
+	// Selector for a Cluster in rds to populate sourceClusterIdentifier.
 	// +kubebuilder:validation:Optional
 	SourceClusterIdentifierSelector *v1.Selector `json:"sourceClusterIdentifierSelector,omitempty" tf:"-"`
 

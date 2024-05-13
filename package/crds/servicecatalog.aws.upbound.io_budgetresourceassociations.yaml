@@ -159,7 +159,8 @@ spec:
                     description: Resource identifier.
                     type: string
                   resourceIdRef:
-                    description: Reference to a Product to populate resourceId.
+                    description: Reference to a Product in servicecatalog to populate
+                      resourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -193,7 +194,8 @@ spec:
                     - name
                     type: object
                   resourceIdSelector:
-                    description: Selector for a Product to populate resourceId.
+                    description: Selector for a Product in servicecatalog to populate
+                      resourceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -329,7 +331,8 @@ spec:
                     description: Resource identifier.
                     type: string
                   resourceIdRef:
-                    description: Reference to a Product to populate resourceId.
+                    description: Reference to a Product in servicecatalog to populate
+                      resourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -363,7 +366,8 @@ spec:
                     - name
                     type: object
                   resourceIdSelector:
-                    description: Selector for a Product to populate resourceId.
+                    description: Selector for a Product in servicecatalog to populate
+                      resourceId.
                     properties:
                       matchControllerRef:
                         description: |-

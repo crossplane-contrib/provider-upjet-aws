@@ -19,26 +19,26 @@ type TransitGatewayRouteTableAssociationInitParameters struct {
 	ReplaceExistingAssociation *bool `json:"replaceExistingAssociation,omitempty" tf:"replace_existing_association,omitempty"`
 
 	// Identifier of EC2 Transit Gateway Attachment.
-	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// Reference to a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
-	// +crossplane:generate:reference:type=TransitGatewayRouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayRouteTable
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 
-	// Reference to a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
+	// Reference to a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
+	// Selector for a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }
@@ -76,28 +76,28 @@ type TransitGatewayRouteTableAssociationParameters struct {
 	ReplaceExistingAssociation *bool `json:"replaceExistingAssociation,omitempty" tf:"replace_existing_association,omitempty"`
 
 	// Identifier of EC2 Transit Gateway Attachment.
-	// +crossplane:generate:reference:type=TransitGatewayVPCAttachment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayVPCAttachment
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentID *string `json:"transitGatewayAttachmentId,omitempty" tf:"transit_gateway_attachment_id,omitempty"`
 
-	// Reference to a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// Reference to a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDRef *v1.Reference `json:"transitGatewayAttachmentIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGatewayVPCAttachment to populate transitGatewayAttachmentId.
+	// Selector for a TransitGatewayVPCAttachment in ec2 to populate transitGatewayAttachmentId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayAttachmentIDSelector *v1.Selector `json:"transitGatewayAttachmentIdSelector,omitempty" tf:"-"`
 
 	// Identifier of EC2 Transit Gateway Route Table.
-	// +crossplane:generate:reference:type=TransitGatewayRouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TransitGatewayRouteTable
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableID *string `json:"transitGatewayRouteTableId,omitempty" tf:"transit_gateway_route_table_id,omitempty"`
 
-	// Reference to a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
+	// Reference to a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDRef *v1.Reference `json:"transitGatewayRouteTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a TransitGatewayRouteTable to populate transitGatewayRouteTableId.
+	// Selector for a TransitGatewayRouteTable in ec2 to populate transitGatewayRouteTableId.
 	// +kubebuilder:validation:Optional
 	TransitGatewayRouteTableIDSelector *v1.Selector `json:"transitGatewayRouteTableIdSelector,omitempty" tf:"-"`
 }

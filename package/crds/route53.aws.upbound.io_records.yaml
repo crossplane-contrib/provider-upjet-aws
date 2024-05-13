@@ -155,7 +155,8 @@ spec:
                       with.
                     type: string
                   healthCheckIdRef:
-                    description: Reference to a HealthCheck to populate healthCheckId.
+                    description: Reference to a HealthCheck in route53 to populate
+                      healthCheckId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -189,7 +190,8 @@ spec:
                     - name
                     type: object
                   healthCheckIdSelector:
-                    description: Selector for a HealthCheck to populate healthCheckId.
+                    description: Selector for a HealthCheck in route53 to populate
+                      healthCheckId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -288,7 +290,7 @@ spec:
                     description: The ID of the hosted zone to contain this record.
                     type: string
                   zoneIdRef:
-                    description: Reference to a Zone to populate zoneId.
+                    description: Reference to a Zone in route53 to populate zoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -322,7 +324,7 @@ spec:
                     - name
                     type: object
                   zoneIdSelector:
-                    description: Selector for a Zone to populate zoneId.
+                    description: Selector for a Zone in route53 to populate zoneId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -459,7 +461,8 @@ spec:
                       with.
                     type: string
                   healthCheckIdRef:
-                    description: Reference to a HealthCheck to populate healthCheckId.
+                    description: Reference to a HealthCheck in route53 to populate
+                      healthCheckId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -493,7 +496,8 @@ spec:
                     - name
                     type: object
                   healthCheckIdSelector:
-                    description: Selector for a HealthCheck to populate healthCheckId.
+                    description: Selector for a HealthCheck in route53 to populate
+                      healthCheckId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -580,7 +584,7 @@ spec:
                     description: The ID of the hosted zone to contain this record.
                     type: string
                   zoneIdRef:
-                    description: Reference to a Zone to populate zoneId.
+                    description: Reference to a Zone in route53 to populate zoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -614,7 +618,7 @@ spec:
                     - name
                     type: object
                   zoneIdSelector:
-                    description: Selector for a Zone to populate zoneId.
+                    description: Selector for a Zone in route53 to populate zoneId.
                     properties:
                       matchControllerRef:
                         description: |-

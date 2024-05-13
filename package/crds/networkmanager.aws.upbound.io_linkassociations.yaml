@@ -77,7 +77,8 @@ spec:
                     description: The ID of the device.
                     type: string
                   deviceIdRef:
-                    description: Reference to a Device to populate deviceId.
+                    description: Reference to a Device in networkmanager to populate
+                      deviceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +112,8 @@ spec:
                     - name
                     type: object
                   deviceIdSelector:
-                    description: Selector for a Device to populate deviceId.
+                    description: Selector for a Device in networkmanager to populate
+                      deviceId.
                     properties:
                       matchControllerRef:
                         description: |-

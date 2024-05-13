@@ -78,7 +78,7 @@ spec:
                       for.
                     type: string
                   backupVaultNameRef:
-                    description: Reference to a Vault to populate backupVaultName.
+                    description: Reference to a Vault in backup to populate backupVaultName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   backupVaultNameSelector:
-                    description: Selector for a Vault to populate backupVaultName.
+                    description: Selector for a Vault in backup to populate backupVaultName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -189,7 +189,7 @@ spec:
                       for.
                     type: string
                   backupVaultNameRef:
-                    description: Reference to a Vault to populate backupVaultName.
+                    description: Reference to a Vault in backup to populate backupVaultName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -223,7 +223,7 @@ spec:
                     - name
                     type: object
                   backupVaultNameSelector:
-                    description: Selector for a Vault to populate backupVaultName.
+                    description: Selector for a Vault in backup to populate backupVaultName.
                     properties:
                       matchControllerRef:
                         description: |-

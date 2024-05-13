@@ -16,14 +16,14 @@ import (
 type IntegrationResponseInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Reference to a API to populate apiId.
+	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiId.
+	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -31,14 +31,14 @@ type IntegrationResponseInitParameters struct {
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_integration.
-	// +crossplane:generate:reference:type=Integration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Integration
 	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
 
-	// Reference to a Integration to populate integrationId.
+	// Reference to a Integration in apigatewayv2 to populate integrationId.
 	// +kubebuilder:validation:Optional
 	IntegrationIDRef *v1.Reference `json:"integrationIdRef,omitempty" tf:"-"`
 
-	// Selector for a Integration to populate integrationId.
+	// Selector for a Integration in apigatewayv2 to populate integrationId.
 	// +kubebuilder:validation:Optional
 	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 
@@ -81,15 +81,15 @@ type IntegrationResponseObservation struct {
 type IntegrationResponseParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Reference to a API to populate apiId.
+	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiId.
+	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -98,15 +98,15 @@ type IntegrationResponseParameters struct {
 	ContentHandlingStrategy *string `json:"contentHandlingStrategy,omitempty" tf:"content_handling_strategy,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_integration.
-	// +crossplane:generate:reference:type=Integration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Integration
 	// +kubebuilder:validation:Optional
 	IntegrationID *string `json:"integrationId,omitempty" tf:"integration_id,omitempty"`
 
-	// Reference to a Integration to populate integrationId.
+	// Reference to a Integration in apigatewayv2 to populate integrationId.
 	// +kubebuilder:validation:Optional
 	IntegrationIDRef *v1.Reference `json:"integrationIdRef,omitempty" tf:"-"`
 
-	// Selector for a Integration to populate integrationId.
+	// Selector for a Integration in apigatewayv2 to populate integrationId.
 	// +kubebuilder:validation:Optional
 	IntegrationIDSelector *v1.Selector `json:"integrationIdSelector,omitempty" tf:"-"`
 

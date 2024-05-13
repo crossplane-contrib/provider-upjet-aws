@@ -221,7 +221,7 @@ spec:
                       of resources.
                     type: string
                   planIdRef:
-                    description: Reference to a Plan to populate planId.
+                    description: Reference to a Plan in backup to populate planId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -255,7 +255,7 @@ spec:
                     - name
                     type: object
                   planIdSelector:
-                    description: Selector for a Plan to populate planId.
+                    description: Selector for a Plan in backup to populate planId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -488,7 +488,7 @@ spec:
                       of resources.
                     type: string
                   planIdRef:
-                    description: Reference to a Plan to populate planId.
+                    description: Reference to a Plan in backup to populate planId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -522,7 +522,7 @@ spec:
                     - name
                     type: object
                   planIdSelector:
-                    description: Selector for a Plan to populate planId.
+                    description: Selector for a Plan in backup to populate planId.
                     properties:
                       matchControllerRef:
                         description: |-

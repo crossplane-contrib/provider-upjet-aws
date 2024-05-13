@@ -251,8 +251,8 @@ spec:
                                       description: ARN of the target group.
                                       type: string
                                     arnRef:
-                                      description: Reference to a LBTargetGroup to
-                                        populate arn.
+                                      description: Reference to a LBTargetGroup in
+                                        elbv2 to populate arn.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -286,8 +286,8 @@ spec:
                                       - name
                                       type: object
                                     arnSelector:
-                                      description: Selector for a LBTargetGroup to
-                                        populate arn.
+                                      description: Selector for a LBTargetGroup in
+                                        elbv2 to populate arn.
                                       properties:
                                         matchControllerRef:
                                           description: |-
@@ -380,7 +380,8 @@ spec:
                             groups, use a forward block instead.
                           type: string
                         targetGroupArnRef:
-                          description: Reference to a LBTargetGroup to populate targetGroupArn.
+                          description: Reference to a LBTargetGroup in elbv2 to populate
+                            targetGroupArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -414,7 +415,8 @@ spec:
                           - name
                           type: object
                         targetGroupArnSelector:
-                          description: Selector for a LBTargetGroup to populate targetGroupArn.
+                          description: Selector for a LBTargetGroup in elbv2 to populate
+                            targetGroupArn.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -463,7 +465,7 @@ spec:
                     description: ARN of the load balancer.
                     type: string
                   loadBalancerArnRef:
-                    description: Reference to a LB to populate loadBalancerArn.
+                    description: Reference to a LB in elbv2 to populate loadBalancerArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -497,7 +499,7 @@ spec:
                     - name
                     type: object
                   loadBalancerArnSelector:
-                    description: Selector for a LB to populate loadBalancerArn.
+                    description: Selector for a LB in elbv2 to populate loadBalancerArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -754,8 +756,8 @@ spec:
                                       description: ARN of the target group.
                                       type: string
                                     arnRef:
-                                      description: Reference to a LBTargetGroup to
-                                        populate arn.
+                                      description: Reference to a LBTargetGroup in
+                                        elbv2 to populate arn.
                                       properties:
                                         name:
                                           description: Name of the referenced object.
@@ -789,8 +791,8 @@ spec:
                                       - name
                                       type: object
                                     arnSelector:
-                                      description: Selector for a LBTargetGroup to
-                                        populate arn.
+                                      description: Selector for a LBTargetGroup in
+                                        elbv2 to populate arn.
                                       properties:
                                         matchControllerRef:
                                           description: |-
@@ -883,7 +885,8 @@ spec:
                             groups, use a forward block instead.
                           type: string
                         targetGroupArnRef:
-                          description: Reference to a LBTargetGroup to populate targetGroupArn.
+                          description: Reference to a LBTargetGroup in elbv2 to populate
+                            targetGroupArn.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -917,7 +920,8 @@ spec:
                           - name
                           type: object
                         targetGroupArnSelector:
-                          description: Selector for a LBTargetGroup to populate targetGroupArn.
+                          description: Selector for a LBTargetGroup in elbv2 to populate
+                            targetGroupArn.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -966,7 +970,7 @@ spec:
                     description: ARN of the load balancer.
                     type: string
                   loadBalancerArnRef:
-                    description: Reference to a LB to populate loadBalancerArn.
+                    description: Reference to a LB in elbv2 to populate loadBalancerArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1000,7 +1004,7 @@ spec:
                     - name
                     type: object
                   loadBalancerArnSelector:
-                    description: Selector for a LB to populate loadBalancerArn.
+                    description: Selector for a LB in elbv2 to populate loadBalancerArn.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -79,7 +79,7 @@ spec:
                       in a traffic policy.
                     type: string
                   hostedZoneIdRef:
-                    description: Reference to a Zone to populate hostedZoneId.
+                    description: Reference to a Zone in route53 to populate hostedZoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +113,7 @@ spec:
                     - name
                     type: object
                   hostedZoneIdSelector:
-                    description: Selector for a Zone to populate hostedZoneId.
+                    description: Selector for a Zone in route53 to populate hostedZoneId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -166,7 +166,8 @@ spec:
                       create resource record sets in the specified hosted zone.
                     type: string
                   trafficPolicyIdRef:
-                    description: Reference to a TrafficPolicy to populate trafficPolicyId.
+                    description: Reference to a TrafficPolicy in route53 to populate
+                      trafficPolicyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -200,7 +201,8 @@ spec:
                     - name
                     type: object
                   trafficPolicyIdSelector:
-                    description: Selector for a TrafficPolicy to populate trafficPolicyId.
+                    description: Selector for a TrafficPolicy in route53 to populate
+                      trafficPolicyId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -269,7 +271,7 @@ spec:
                       in a traffic policy.
                     type: string
                   hostedZoneIdRef:
-                    description: Reference to a Zone to populate hostedZoneId.
+                    description: Reference to a Zone in route53 to populate hostedZoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -303,7 +305,7 @@ spec:
                     - name
                     type: object
                   hostedZoneIdSelector:
-                    description: Selector for a Zone to populate hostedZoneId.
+                    description: Selector for a Zone in route53 to populate hostedZoneId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -352,7 +354,8 @@ spec:
                       create resource record sets in the specified hosted zone.
                     type: string
                   trafficPolicyIdRef:
-                    description: Reference to a TrafficPolicy to populate trafficPolicyId.
+                    description: Reference to a TrafficPolicy in route53 to populate
+                      trafficPolicyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -386,7 +389,8 @@ spec:
                     - name
                     type: object
                   trafficPolicyIdSelector:
-                    description: Selector for a TrafficPolicy to populate trafficPolicyId.
+                    description: Selector for a TrafficPolicy in route53 to populate
+                      trafficPolicyId.
                     properties:
                       matchControllerRef:
                         description: |-

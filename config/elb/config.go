@@ -10,10 +10,10 @@ import "github.com/crossplane/upjet/pkg/config"
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_elb", func(r *config.Resource) {
 		r.References["instances"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance",
+			TerraformName: "aws_instance",
 		}
 		r.References["subnets"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			TerraformName: "aws_subnet",
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"access_logs"},
@@ -22,10 +22,10 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_elb_attachment", func(r *config.Resource) {
 		r.References["elb"] = config.Reference{
-			Type: "ELB",
+			TerraformName: "aws_elb",
 		}
 		r.References["instance"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance",
+			TerraformName: "aws_instance",
 		}
 	})
 }

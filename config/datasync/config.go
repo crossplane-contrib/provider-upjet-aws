@@ -14,14 +14,14 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_datasync_task", func(r *config.Resource) {
 		r.References["destination_location_arn"] = config.Reference{
-			Type: "LocationS3",
+			TerraformName: "aws_datasync_location_s3",
 		}
 		r.References["source_location_arn"] = config.Reference{
-			Type: "LocationS3",
+			TerraformName: "aws_datasync_location_s3",
 		}
 		r.References["cloudwatch_log_group_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_cloudwatch_log_group",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 }

@@ -13,7 +13,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_globalaccelerator_endpoint_group", func(r *config.Resource) {
 		r.References = config.References{
 			"listener_arn": {
-				Type: "Listener",
+				TerraformName: "aws_globalaccelerator_listener",
 			},
 		}
 	})
@@ -21,7 +21,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_globalaccelerator_listener", func(r *config.Resource) {
 		r.References = config.References{
 			"accelerator_arn": {
-				Type: "Accelerator",
+				TerraformName: "aws_globalaccelerator_accelerator",
 			},
 		}
 	})

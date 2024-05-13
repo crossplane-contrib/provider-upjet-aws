@@ -77,7 +77,7 @@ spec:
                     description: Identifier of the Route 53 Hosted Zone.
                     type: string
                   hostedZoneIdRef:
-                    description: Reference to a Zone to populate hostedZoneId.
+                    description: Reference to a Zone in route53 to populate hostedZoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   hostedZoneIdSelector:
-                    description: Selector for a Zone to populate hostedZoneId.
+                    description: Selector for a Zone in route53 to populate hostedZoneId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -178,7 +178,7 @@ spec:
                     description: Identifier of the Route 53 Hosted Zone.
                     type: string
                   hostedZoneIdRef:
-                    description: Reference to a Zone to populate hostedZoneId.
+                    description: Reference to a Zone in route53 to populate hostedZoneId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -212,7 +212,7 @@ spec:
                     - name
                     type: object
                   hostedZoneIdSelector:
-                    description: Selector for a Zone to populate hostedZoneId.
+                    description: Selector for a Zone in route53 to populate hostedZoneId.
                     properties:
                       matchControllerRef:
                         description: |-

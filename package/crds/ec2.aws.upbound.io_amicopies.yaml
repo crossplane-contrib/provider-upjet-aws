@@ -186,7 +186,7 @@ spec:
                       given by source_ami_region.
                     type: string
                   sourceAmiIdRef:
-                    description: Reference to a AMI to populate sourceAmiId.
+                    description: Reference to a AMI in ec2 to populate sourceAmiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -220,7 +220,7 @@ spec:
                     - name
                     type: object
                   sourceAmiIdSelector:
-                    description: Selector for a AMI to populate sourceAmiId.
+                    description: Selector for a AMI in ec2 to populate sourceAmiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -395,7 +395,7 @@ spec:
                       given by source_ami_region.
                     type: string
                   sourceAmiIdRef:
-                    description: Reference to a AMI to populate sourceAmiId.
+                    description: Reference to a AMI in ec2 to populate sourceAmiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -429,7 +429,7 @@ spec:
                     - name
                     type: object
                   sourceAmiIdSelector:
-                    description: Selector for a AMI to populate sourceAmiId.
+                    description: Selector for a AMI in ec2 to populate sourceAmiId.
                     properties:
                       matchControllerRef:
                         description: |-

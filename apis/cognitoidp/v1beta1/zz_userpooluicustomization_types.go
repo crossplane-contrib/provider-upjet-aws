@@ -19,14 +19,14 @@ type UserPoolUICustomizationInitParameters struct {
 	CSS *string `json:"css,omitempty" tf:"css,omitempty"`
 
 	// The client ID for the client app. Defaults to ALL. If ALL is specified, the css and/or image_file settings will be used for every client that has no UI customization set previously.
-	// +crossplane:generate:reference:type=UserPoolClient
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// Reference to a UserPoolClient to populate clientId.
+	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
 	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
-	// Selector for a UserPoolClient to populate clientId.
+	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
 	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
@@ -34,14 +34,14 @@ type UserPoolUICustomizationInitParameters struct {
 	ImageFile *string `json:"imageFile,omitempty" tf:"image_file,omitempty"`
 
 	// The user pool ID for the user pool.
-	// +crossplane:generate:reference:type=UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
-	// Reference to a UserPool to populate userPoolId.
+	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
-	// Selector for a UserPool to populate userPoolId.
+	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
@@ -82,15 +82,15 @@ type UserPoolUICustomizationParameters struct {
 	CSS *string `json:"css,omitempty" tf:"css,omitempty"`
 
 	// The client ID for the client app. Defaults to ALL. If ALL is specified, the css and/or image_file settings will be used for every client that has no UI customization set previously.
-	// +crossplane:generate:reference:type=UserPoolClient
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// Reference to a UserPoolClient to populate clientId.
+	// Reference to a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
 	ClientIDRef *v1.Reference `json:"clientIdRef,omitempty" tf:"-"`
 
-	// Selector for a UserPoolClient to populate clientId.
+	// Selector for a UserPoolClient in cognitoidp to populate clientId.
 	// +kubebuilder:validation:Optional
 	ClientIDSelector *v1.Selector `json:"clientIdSelector,omitempty" tf:"-"`
 
@@ -104,15 +104,15 @@ type UserPoolUICustomizationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The user pool ID for the user pool.
-	// +crossplane:generate:reference:type=UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
-	// Reference to a UserPool to populate userPoolId.
+	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
-	// Selector for a UserPool to populate userPoolId.
+	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }

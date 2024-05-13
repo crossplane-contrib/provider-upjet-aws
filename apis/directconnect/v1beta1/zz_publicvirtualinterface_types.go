@@ -28,14 +28,14 @@ type PublicVirtualInterfaceInitParameters struct {
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
-	// +crossplane:generate:reference:type=Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Connection
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// Reference to a Connection to populate connectionId.
+	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
 	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
-	// Selector for a Connection to populate connectionId.
+	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
@@ -126,15 +126,15 @@ type PublicVirtualInterfaceParameters struct {
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
-	// +crossplane:generate:reference:type=Connection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Connection
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// Reference to a Connection to populate connectionId.
+	// Reference to a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
 	ConnectionIDRef *v1.Reference `json:"connectionIdRef,omitempty" tf:"-"`
 
-	// Selector for a Connection to populate connectionId.
+	// Selector for a Connection in directconnect to populate connectionId.
 	// +kubebuilder:validation:Optional
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 

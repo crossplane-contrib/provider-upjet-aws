@@ -28,14 +28,14 @@ type EIPInitParameters struct {
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// EC2 instance ID.
-	// +crossplane:generate:reference:type=Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 
-	// Reference to a Instance to populate instance.
+	// Reference to a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
 
-	// Selector for a Instance to populate instance.
+	// Selector for a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
 
@@ -43,14 +43,14 @@ type EIPInitParameters struct {
 	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
 
 	// Network interface ID to associate with.
-	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	NetworkInterface *string `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
-	// Reference to a NetworkInterface to populate networkInterface.
+	// Reference to a NetworkInterface in ec2 to populate networkInterface.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceRef *v1.Reference `json:"networkInterfaceRef,omitempty" tf:"-"`
 
-	// Selector for a NetworkInterface to populate networkInterface.
+	// Selector for a NetworkInterface in ec2 to populate networkInterface.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceSelector *v1.Selector `json:"networkInterfaceSelector,omitempty" tf:"-"`
 
@@ -153,15 +153,15 @@ type EIPParameters struct {
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// EC2 instance ID.
-	// +crossplane:generate:reference:type=Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
 	// +kubebuilder:validation:Optional
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 
-	// Reference to a Instance to populate instance.
+	// Reference to a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceRef *v1.Reference `json:"instanceRef,omitempty" tf:"-"`
 
-	// Selector for a Instance to populate instance.
+	// Selector for a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
 
@@ -170,15 +170,15 @@ type EIPParameters struct {
 	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
 
 	// Network interface ID to associate with.
-	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +kubebuilder:validation:Optional
 	NetworkInterface *string `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
-	// Reference to a NetworkInterface to populate networkInterface.
+	// Reference to a NetworkInterface in ec2 to populate networkInterface.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceRef *v1.Reference `json:"networkInterfaceRef,omitempty" tf:"-"`
 
-	// Selector for a NetworkInterface to populate networkInterface.
+	// Selector for a NetworkInterface in ec2 to populate networkInterface.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceSelector *v1.Selector `json:"networkInterfaceSelector,omitempty" tf:"-"`
 

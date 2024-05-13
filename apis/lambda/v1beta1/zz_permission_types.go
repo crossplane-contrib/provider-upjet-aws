@@ -22,14 +22,14 @@ type PermissionInitParameters struct {
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
 	// Name of the Lambda function whose resource policy you are updating
-	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
-	// Reference to a Function to populate functionName.
+	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
-	// Selector for a Function to populate functionName.
+	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
@@ -43,14 +43,14 @@ type PermissionInitParameters struct {
 	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
 
 	// Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
-	// +crossplane:generate:reference:type=Alias
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Alias
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
-	// Reference to a Alias to populate qualifier.
+	// Reference to a Alias in lambda to populate qualifier.
 	// +kubebuilder:validation:Optional
 	QualifierRef *v1.Reference `json:"qualifierRef,omitempty" tf:"-"`
 
-	// Selector for a Alias to populate qualifier.
+	// Selector for a Alias in lambda to populate qualifier.
 	// +kubebuilder:validation:Optional
 	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 
@@ -124,15 +124,15 @@ type PermissionParameters struct {
 	EventSourceToken *string `json:"eventSourceToken,omitempty" tf:"event_source_token,omitempty"`
 
 	// Name of the Lambda function whose resource policy you are updating
-	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
-	// Reference to a Function to populate functionName.
+	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
-	// Selector for a Function to populate functionName.
+	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
@@ -149,15 +149,15 @@ type PermissionParameters struct {
 	PrincipalOrgID *string `json:"principalOrgId,omitempty" tf:"principal_org_id,omitempty"`
 
 	// Query parameter to specify function version or alias name. The permission will then apply to the specific qualified ARN e.g., arn:aws:lambda:aws-region:acct-id:function:function-name:2
-	// +crossplane:generate:reference:type=Alias
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Alias
 	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
-	// Reference to a Alias to populate qualifier.
+	// Reference to a Alias in lambda to populate qualifier.
 	// +kubebuilder:validation:Optional
 	QualifierRef *v1.Reference `json:"qualifierRef,omitempty" tf:"-"`
 
-	// Selector for a Alias to populate qualifier.
+	// Selector for a Alias in lambda to populate qualifier.
 	// +kubebuilder:validation:Optional
 	QualifierSelector *v1.Selector `json:"qualifierSelector,omitempty" tf:"-"`
 

@@ -14,15 +14,15 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_dx_public_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
-			Type: "Connection",
+			TerraformName: "aws_dx_connection",
 		}
 	})
 	p.AddResourceConfigurator("aws_dx_private_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
-			Type: "Connection",
+			TerraformName: "aws_dx_connection",
 		}
 		r.References["vpn_gateway_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNGateway",
+			TerraformName: "aws_vpn_gateway",
 		}
 		r.UseAsync = true
 	})
@@ -35,37 +35,37 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_dx_hosted_transit_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
-			Type: "Connection",
+			TerraformName: "aws_dx_connection",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_dx_hosted_public_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
-			Type: "Connection",
+			TerraformName: "aws_dx_connection",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_dx_hosted_private_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
-			Type: "Connection",
+			TerraformName: "aws_dx_connection",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_dx_hosted_private_virtual_interface_accepter", func(r *config.Resource) {
 		r.References["virtual_interface_id"] = config.Reference{
-			Type: "HostedPrivateVirtualInterface",
+			TerraformName: "aws_dx_hosted_private_virtual_interface",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_dx_hosted_public_virtual_interface_accepter", func(r *config.Resource) {
 		r.References["virtual_interface_id"] = config.Reference{
-			Type: "HostedPublicVirtualInterface",
+			TerraformName: "aws_dx_hosted_public_virtual_interface",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_dx_hosted_transit_virtual_interface_accepter", func(r *config.Resource) {
 		r.References["virtual_interface_id"] = config.Reference{
-			Type: "HostedTransitVirtualInterface",
+			TerraformName: "aws_dx_hosted_transit_virtual_interface",
 		}
 	})
 
@@ -78,11 +78,11 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_dx_macsec_key_association", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/directconnect/v1beta1.Connection",
+			TerraformName: "aws_dx_connection",
 		}
 		r.References["secret_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_secretsmanager_secret",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 

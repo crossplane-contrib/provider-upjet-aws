@@ -14,7 +14,7 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_mq_broker", func(r *config.Resource) {
 		r.References["security_groups"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupRefs",
 			SelectorFieldName: "SecurityGroupSelector",
 		}

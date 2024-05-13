@@ -67,14 +67,14 @@ type LinkInitParameters struct {
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
 	// The ID of the site.
-	// +crossplane:generate:reference:type=Site
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Site
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
-	// Reference to a Site to populate siteId.
+	// Reference to a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
 	SiteIDRef *v1.Reference `json:"siteIdRef,omitempty" tf:"-"`
 
-	// Selector for a Site to populate siteId.
+	// Selector for a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
 	SiteIDSelector *v1.Selector `json:"siteIdSelector,omitempty" tf:"-"`
 
@@ -154,15 +154,15 @@ type LinkParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the site.
-	// +crossplane:generate:reference:type=Site
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Site
 	// +kubebuilder:validation:Optional
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
-	// Reference to a Site to populate siteId.
+	// Reference to a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
 	SiteIDRef *v1.Reference `json:"siteIdRef,omitempty" tf:"-"`
 
-	// Selector for a Site to populate siteId.
+	// Selector for a Site in networkmanager to populate siteId.
 	// +kubebuilder:validation:Optional
 	SiteIDSelector *v1.Selector `json:"siteIdSelector,omitempty" tf:"-"`
 

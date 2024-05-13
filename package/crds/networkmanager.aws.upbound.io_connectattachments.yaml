@@ -77,7 +77,8 @@ spec:
                       the attachment.
                     type: string
                   coreNetworkIdRef:
-                    description: Reference to a CoreNetwork to populate coreNetworkId.
+                    description: Reference to a CoreNetwork in networkmanager to populate
+                      coreNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +112,8 @@ spec:
                     - name
                     type: object
                   coreNetworkIdSelector:
-                    description: Selector for a CoreNetwork to populate coreNetworkId.
+                    description: Selector for a CoreNetwork in networkmanager to populate
+                      coreNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -349,7 +351,8 @@ spec:
                       the attachment.
                     type: string
                   coreNetworkIdRef:
-                    description: Reference to a CoreNetwork to populate coreNetworkId.
+                    description: Reference to a CoreNetwork in networkmanager to populate
+                      coreNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -383,7 +386,8 @@ spec:
                     - name
                     type: object
                   coreNetworkIdSelector:
-                    description: Selector for a CoreNetwork to populate coreNetworkId.
+                    description: Selector for a CoreNetwork in networkmanager to populate
+                      coreNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-

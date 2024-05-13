@@ -94,7 +94,7 @@ spec:
                     description: EC2 instance ID.
                     type: string
                   instanceRef:
-                    description: Reference to a Instance to populate instance.
+                    description: Reference to a Instance in ec2 to populate instance.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -128,7 +128,7 @@ spec:
                     - name
                     type: object
                   instanceSelector:
-                    description: Selector for a Instance to populate instance.
+                    description: Selector for a Instance in ec2 to populate instance.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -175,7 +175,8 @@ spec:
                     description: Network interface ID to associate with.
                     type: string
                   networkInterfaceRef:
-                    description: Reference to a NetworkInterface to populate networkInterface.
+                    description: Reference to a NetworkInterface in ec2 to populate
+                      networkInterface.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -209,7 +210,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceSelector:
-                    description: Selector for a NetworkInterface to populate networkInterface.
+                    description: Selector for a NetworkInterface in ec2 to populate
+                      networkInterface.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -306,7 +308,7 @@ spec:
                     description: EC2 instance ID.
                     type: string
                   instanceRef:
-                    description: Reference to a Instance to populate instance.
+                    description: Reference to a Instance in ec2 to populate instance.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -340,7 +342,7 @@ spec:
                     - name
                     type: object
                   instanceSelector:
-                    description: Selector for a Instance to populate instance.
+                    description: Selector for a Instance in ec2 to populate instance.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -387,7 +389,8 @@ spec:
                     description: Network interface ID to associate with.
                     type: string
                   networkInterfaceRef:
-                    description: Reference to a NetworkInterface to populate networkInterface.
+                    description: Reference to a NetworkInterface in ec2 to populate
+                      networkInterface.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -421,7 +424,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceSelector:
-                    description: Selector for a NetworkInterface to populate networkInterface.
+                    description: Selector for a NetworkInterface in ec2 to populate
+                      networkInterface.
                     properties:
                       matchControllerRef:
                         description: |-

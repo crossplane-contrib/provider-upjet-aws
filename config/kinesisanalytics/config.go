@@ -18,8 +18,8 @@ func Configure(p *config.Provider) {
 			Extractor:     common.PathTerraformIDExtractor,
 		}
 		r.References["inputs.kinesis_stream.role_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 }

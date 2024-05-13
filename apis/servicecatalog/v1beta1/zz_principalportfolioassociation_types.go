@@ -19,14 +19,14 @@ type PrincipalPortfolioAssociationInitParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
-	// Reference to a Portfolio to populate portfolioId.
+	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
 	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
 
-	// Selector for a Portfolio to populate portfolioId.
+	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
@@ -72,15 +72,15 @@ type PrincipalPortfolioAssociationParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
 	// +kubebuilder:validation:Optional
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
-	// Reference to a Portfolio to populate portfolioId.
+	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
 	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
 
-	// Selector for a Portfolio to populate portfolioId.
+	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 

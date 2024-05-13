@@ -59,14 +59,14 @@ type ClusterInstanceInitParameters struct {
 	DBParameterGroupNameSelector *v1.Selector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.SubnetGroup
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate dbSubnetGroupName.
+	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate dbSubnetGroupName.
+	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -290,15 +290,15 @@ type ClusterInstanceParameters struct {
 	DBParameterGroupNameSelector *v1.Selector `json:"dbParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// DB subnet group to associate with this DB instance. NOTE: This must match the db_subnet_group_name of the attached aws_rds_cluster.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate dbSubnetGroupName.
+	// Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameRef *v1.Reference `json:"dbSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate dbSubnetGroupName.
+	// Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 

@@ -111,56 +111,56 @@ func KnownReferencers() config.ResourceOption { //nolint:gocyclo
 			switch {
 			case strings.HasSuffix(k, "role_arn"):
 				r.References[k] = config.Reference{
-					Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-					Extractor: common.PathARNExtractor,
+					TerraformName: "aws_iam_role",
+					Extractor:     common.PathARNExtractor,
 				}
 			case strings.HasSuffix(k, "security_group_ids"):
 				r.References[k] = config.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+					TerraformName:     "aws_security_group",
 					RefFieldName:      name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Refs",
 					SelectorFieldName: name.NewFromSnake(strings.TrimSuffix(k, "s")).Camel + "Selector",
 				}
 			case r.ShortGroup == "glue" && k == "database_name":
 				r.References["database_name"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase",
+					TerraformName: "aws_glue_catalog_database",
 				}
 			}
 			switch k {
 			case "vpc_id":
 				r.References["vpc_id"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC",
+					TerraformName: "aws_vpc",
 				}
 			case "subnet_ids":
 				r.References["subnet_ids"] = config.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+					TerraformName:     "aws_subnet",
 					RefFieldName:      "SubnetIDRefs",
 					SelectorFieldName: "SubnetIDSelector",
 				}
 			case "subnet_id":
 				r.References["subnet_id"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+					TerraformName: "aws_subnet",
 				}
 			case "iam_roles":
 				r.References["iam_roles"] = config.Reference{
-					Type:              "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
+					TerraformName:     "aws_iam_role",
 					RefFieldName:      "IAMRoleRefs",
 					SelectorFieldName: "IAMRoleSelector",
 				}
 			case "security_group_id":
 				r.References["security_group_id"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+					TerraformName: "aws_security_group",
 				}
 			case "kms_key_id":
 				r.References["kms_key_id"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+					TerraformName: "aws_kms_key",
 				}
 			case "kms_key_arn":
 				r.References["kms_key_arn"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+					TerraformName: "aws_kms_key",
 				}
 			case "kms_key":
 				r.References["kms_key"] = config.Reference{
-					Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+					TerraformName: "aws_kms_key",
 				}
 			}
 		}

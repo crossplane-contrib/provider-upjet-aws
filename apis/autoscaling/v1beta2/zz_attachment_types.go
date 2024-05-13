@@ -16,14 +16,14 @@ import (
 type AttachmentInitParameters struct {
 
 	// Name of ASG to associate with the ELB.
-	// +crossplane:generate:reference:type=AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
-	// Reference to a AutoscalingGroup to populate autoscalingGroupName.
+	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameRef *v1.Reference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a AutoscalingGroup to populate autoscalingGroupName.
+	// Selector for a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
@@ -71,15 +71,15 @@ type AttachmentObservation struct {
 type AttachmentParameters struct {
 
 	// Name of ASG to associate with the ELB.
-	// +crossplane:generate:reference:type=AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
-	// Reference to a AutoscalingGroup to populate autoscalingGroupName.
+	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameRef *v1.Reference `json:"autoscalingGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a AutoscalingGroup to populate autoscalingGroupName.
+	// Selector for a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 

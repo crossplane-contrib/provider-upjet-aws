@@ -15,7 +15,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_opensearch_domain_policy", func(r *config.Resource) {
 		r.References["domain_name"] = config.Reference{
-			Type: "Domain",
+			TerraformName: "aws_opensearch_domain",
 		}
 		r.UseAsync = true
 	})

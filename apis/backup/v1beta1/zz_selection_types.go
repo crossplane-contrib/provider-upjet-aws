@@ -74,14 +74,14 @@ type SelectionInitParameters struct {
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
-	// +crossplane:generate:reference:type=Plan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Plan
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
-	// Reference to a Plan to populate planId.
+	// Reference to a Plan in backup to populate planId.
 	// +kubebuilder:validation:Optional
 	PlanIDRef *v1.Reference `json:"planIdRef,omitempty" tf:"-"`
 
-	// Selector for a Plan to populate planId.
+	// Selector for a Plan in backup to populate planId.
 	// +kubebuilder:validation:Optional
 	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
 
@@ -152,15 +152,15 @@ type SelectionParameters struct {
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
-	// +crossplane:generate:reference:type=Plan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Plan
 	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
-	// Reference to a Plan to populate planId.
+	// Reference to a Plan in backup to populate planId.
 	// +kubebuilder:validation:Optional
 	PlanIDRef *v1.Reference `json:"planIdRef,omitempty" tf:"-"`
 
-	// Selector for a Plan to populate planId.
+	// Selector for a Plan in backup to populate planId.
 	// +kubebuilder:validation:Optional
 	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
 

@@ -96,25 +96,25 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_s3_bucket_analytics_configuration", func(r *config.Resource) {
 		r.References["storage_class_analysis.data_export.destination.s3_bucket_destination.bucket_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			TerraformName: "aws_s3_bucket",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_replication_configuration", func(r *config.Resource) {
 		r.References["rule.destination.bucket"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			TerraformName: "aws_s3_bucket",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 		r.References["rule.destination.encryption_configuration.replica_kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			TerraformName: "aws_kms_key",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_s3_bucket_inventory", func(r *config.Resource) {
 		r.References["destination.bucket.bucket_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
-			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
+			TerraformName: "aws_s3_bucket",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)`,
 		}
 	})
 }

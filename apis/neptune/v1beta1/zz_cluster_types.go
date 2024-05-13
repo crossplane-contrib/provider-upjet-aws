@@ -81,14 +81,14 @@ type ClusterInitParameters struct {
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// A cluster parameter group to associate with the cluster.
-	// +crossplane:generate:reference:type=ClusterParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterParameterGroup
 	NeptuneClusterParameterGroupName *string `json:"neptuneClusterParameterGroupName,omitempty" tf:"neptune_cluster_parameter_group_name,omitempty"`
 
-	// Reference to a ClusterParameterGroup to populate neptuneClusterParameterGroupName.
+	// Reference to a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameRef *v1.Reference `json:"neptuneClusterParameterGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a ClusterParameterGroup to populate neptuneClusterParameterGroupName.
+	// Selector for a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
@@ -96,14 +96,14 @@ type ClusterInitParameters struct {
 	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
 
 	// A Neptune subnet group to associate with this Neptune instance.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.SubnetGroup
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate neptuneSubnetGroupName.
+	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate neptuneSubnetGroupName.
+	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -117,14 +117,14 @@ type ClusterInitParameters struct {
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
 	// ARN of a source Neptune cluster or Neptune instance if this Neptune cluster is to be created as a Read Replica.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.Cluster
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
-	// Reference to a Cluster to populate replicationSourceIdentifier.
+	// Reference to a Cluster in neptune to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifierRef *v1.Reference `json:"replicationSourceIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate replicationSourceIdentifier.
+	// Selector for a Cluster in neptune to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifierSelector *v1.Selector `json:"replicationSourceIdentifierSelector,omitempty" tf:"-"`
 
@@ -135,14 +135,14 @@ type ClusterInitParameters struct {
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
 	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
-	// +crossplane:generate:reference:type=ClusterSnapshot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterSnapshot
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
-	// Reference to a ClusterSnapshot to populate snapshotIdentifier.
+	// Reference to a ClusterSnapshot in neptune to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifierRef *v1.Reference `json:"snapshotIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a ClusterSnapshot to populate snapshotIdentifier.
+	// Selector for a ClusterSnapshot in neptune to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifierSelector *v1.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
 
@@ -366,15 +366,15 @@ type ClusterParameters struct {
 	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// A cluster parameter group to associate with the cluster.
-	// +crossplane:generate:reference:type=ClusterParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterParameterGroup
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupName *string `json:"neptuneClusterParameterGroupName,omitempty" tf:"neptune_cluster_parameter_group_name,omitempty"`
 
-	// Reference to a ClusterParameterGroup to populate neptuneClusterParameterGroupName.
+	// Reference to a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameRef *v1.Reference `json:"neptuneClusterParameterGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a ClusterParameterGroup to populate neptuneClusterParameterGroupName.
+	// Selector for a ClusterParameterGroup in neptune to populate neptuneClusterParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneClusterParameterGroupNameSelector *v1.Selector `json:"neptuneClusterParameterGroupNameSelector,omitempty" tf:"-"`
 
@@ -383,15 +383,15 @@ type ClusterParameters struct {
 	NeptuneInstanceParameterGroupName *string `json:"neptuneInstanceParameterGroupName,omitempty" tf:"neptune_instance_parameter_group_name,omitempty"`
 
 	// A Neptune subnet group to associate with this Neptune instance.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate neptuneSubnetGroupName.
+	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate neptuneSubnetGroupName.
+	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -413,15 +413,15 @@ type ClusterParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// ARN of a source Neptune cluster or Neptune instance if this Neptune cluster is to be created as a Read Replica.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifier *string `json:"replicationSourceIdentifier,omitempty" tf:"replication_source_identifier,omitempty"`
 
-	// Reference to a Cluster to populate replicationSourceIdentifier.
+	// Reference to a Cluster in neptune to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifierRef *v1.Reference `json:"replicationSourceIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate replicationSourceIdentifier.
+	// Selector for a Cluster in neptune to populate replicationSourceIdentifier.
 	// +kubebuilder:validation:Optional
 	ReplicationSourceIdentifierSelector *v1.Selector `json:"replicationSourceIdentifierSelector,omitempty" tf:"-"`
 
@@ -434,15 +434,15 @@ type ClusterParameters struct {
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
 	// Specifies whether or not to create this cluster from a snapshot. You can use either the name or ARN when specifying a Neptune cluster snapshot, or the ARN when specifying a Neptune snapshot. Automated snapshots should not be used for this attribute, unless from a different cluster. Automated snapshots are deleted as part of cluster destruction when the resource is replaced.
-	// +crossplane:generate:reference:type=ClusterSnapshot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterSnapshot
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
-	// Reference to a ClusterSnapshot to populate snapshotIdentifier.
+	// Reference to a ClusterSnapshot in neptune to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifierRef *v1.Reference `json:"snapshotIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a ClusterSnapshot to populate snapshotIdentifier.
+	// Selector for a ClusterSnapshot in neptune to populate snapshotIdentifier.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifierSelector *v1.Selector `json:"snapshotIdentifierSelector,omitempty" tf:"-"`
 

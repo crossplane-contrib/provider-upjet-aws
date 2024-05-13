@@ -25,14 +25,14 @@ type TableItemInitParameters struct {
 	RangeKey *string `json:"rangeKey,omitempty" tf:"range_key,omitempty"`
 
 	// Name of the table to contain the item.
-	// +crossplane:generate:reference:type=Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// Reference to a Table to populate tableName.
+	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
-	// Selector for a Table to populate tableName.
+	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
@@ -74,15 +74,15 @@ type TableItemParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Name of the table to contain the item.
-	// +crossplane:generate:reference:type=Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// Reference to a Table to populate tableName.
+	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
-	// Selector for a Table to populate tableName.
+	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }

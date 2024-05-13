@@ -55,14 +55,14 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_docdb_cluster_instance", func(r *config.Resource) {
 		r.References["cluster_identifier"] = config.Reference{
-			Type: "Cluster",
+			TerraformName: "aws_docdb_cluster",
 		}
 		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_docdb_subnet_group", func(r *config.Resource) {
 		r.References["subnet_ids"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			TerraformName: "aws_subnet",
 		}
 	})
 }

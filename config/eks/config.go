@@ -15,16 +15,16 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_eks_cluster", func(r *config.Resource) {
 		r.References = config.References{
 			"role_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_iam_role",
+				Extractor:     common.PathARNExtractor,
 			},
 			"vpc_config.subnet_ids": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+				TerraformName:     "aws_subnet",
 				RefFieldName:      "SubnetIDRefs",
 				SelectorFieldName: "SubnetIDSelector",
 			},
 			"vpc_config.security_group_ids": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+				TerraformName:     "aws_security_group",
 				RefFieldName:      "SecurityGroupIDRefs",
 				SelectorFieldName: "SecurityGroupIDSelector",
 			},
@@ -44,20 +44,20 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_eks_node_group", func(r *config.Resource) {
 		r.References["cluster_name"] = config.Reference{
-			Type:      "Cluster",
-			Extractor: "ExternalNameIfClusterActive()",
+			TerraformName: "aws_eks_cluster",
+			Extractor:     "ExternalNameIfClusterActive()",
 		}
 		r.References["node_role_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["remote_access.source_security_group_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SourceSecurityGroupIDRefs",
 			SelectorFieldName: "SourceSecurityGroupIDSelector",
 		}
 		r.References["subnet_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			TerraformName:     "aws_subnet",
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
@@ -75,7 +75,7 @@ func Configure(p *config.Provider) {
 		// OmittedFields in config.ExternalName works only for the top-level fields.
 		r.References = config.References{
 			"cluster_name": {
-				Type: "Cluster",
+				TerraformName: "aws_eks_cluster",
 			},
 		}
 		r.UseAsync = true
@@ -84,14 +84,14 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_eks_fargate_profile", func(r *config.Resource) {
 		r.References = config.References{
 			"cluster_name": {
-				Type: "Cluster",
+				TerraformName: "aws_eks_cluster",
 			},
 			"pod_execution_role_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_iam_role",
+				Extractor:     common.PathARNExtractor,
 			},
 			"subnet_ids": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+				TerraformName:     "aws_subnet",
 				RefFieldName:      "SubnetIDRefs",
 				SelectorFieldName: "SubnetIDSelector",
 			},
@@ -101,11 +101,11 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_eks_addon", func(r *config.Resource) {
 		r.References = config.References{
 			"cluster_name": {
-				Type: "Cluster",
+				TerraformName: "aws_eks_cluster",
 			},
 			"service_account_role_arn": {
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_iam_role",
+				Extractor:     common.PathARNExtractor,
 			},
 		}
 		r.UseAsync = true

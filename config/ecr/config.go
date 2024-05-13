@@ -15,8 +15,8 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecr_repository", func(r *config.Resource) {
 		r.References = map[string]config.Reference{
 			"encryption_configuration.kms_key": {
-				Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_kms_key",
+				Extractor:     common.PathARNExtractor,
 			},
 		}
 		// Deletion takes a while.

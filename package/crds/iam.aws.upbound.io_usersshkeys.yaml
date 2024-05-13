@@ -93,7 +93,7 @@ spec:
                       key with.
                     type: string
                   usernameRef:
-                    description: Reference to a User to populate username.
+                    description: Reference to a User in iam to populate username.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -127,7 +127,7 @@ spec:
                     - name
                     type: object
                   usernameSelector:
-                    description: Selector for a User to populate username.
+                    description: Selector for a User in iam to populate username.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -200,7 +200,7 @@ spec:
                       key with.
                     type: string
                   usernameRef:
-                    description: Reference to a User to populate username.
+                    description: Reference to a User in iam to populate username.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -234,7 +234,7 @@ spec:
                     - name
                     type: object
                   usernameSelector:
-                    description: Selector for a User to populate username.
+                    description: Selector for a User in iam to populate username.
                     properties:
                       matchControllerRef:
                         description: |-

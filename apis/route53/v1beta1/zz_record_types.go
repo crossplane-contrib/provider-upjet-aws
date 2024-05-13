@@ -174,14 +174,14 @@ type RecordInitParameters struct {
 	GeolocationRoutingPolicy []GeolocationRoutingPolicyInitParameters `json:"geolocationRoutingPolicy,omitempty" tf:"geolocation_routing_policy,omitempty"`
 
 	// The health check the record should be associated with.
-	// +crossplane:generate:reference:type=HealthCheck
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.HealthCheck
 	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
 
-	// Reference to a HealthCheck to populate healthCheckId.
+	// Reference to a HealthCheck in route53 to populate healthCheckId.
 	// +kubebuilder:validation:Optional
 	HealthCheckIDRef *v1.Reference `json:"healthCheckIdRef,omitempty" tf:"-"`
 
-	// Selector for a HealthCheck to populate healthCheckId.
+	// Selector for a HealthCheck in route53 to populate healthCheckId.
 	// +kubebuilder:validation:Optional
 	HealthCheckIDSelector *v1.Selector `json:"healthCheckIdSelector,omitempty" tf:"-"`
 
@@ -211,14 +211,14 @@ type RecordInitParameters struct {
 	WeightedRoutingPolicy []WeightedRoutingPolicyInitParameters `json:"weightedRoutingPolicy,omitempty" tf:"weighted_routing_policy,omitempty"`
 
 	// The ID of the hosted zone to contain this record.
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
-	// Reference to a Zone to populate zoneId.
+	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate zoneId.
+	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
@@ -302,15 +302,15 @@ type RecordParameters struct {
 	GeolocationRoutingPolicy []GeolocationRoutingPolicyParameters `json:"geolocationRoutingPolicy,omitempty" tf:"geolocation_routing_policy,omitempty"`
 
 	// The health check the record should be associated with.
-	// +crossplane:generate:reference:type=HealthCheck
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.HealthCheck
 	// +kubebuilder:validation:Optional
 	HealthCheckID *string `json:"healthCheckId,omitempty" tf:"health_check_id,omitempty"`
 
-	// Reference to a HealthCheck to populate healthCheckId.
+	// Reference to a HealthCheck in route53 to populate healthCheckId.
 	// +kubebuilder:validation:Optional
 	HealthCheckIDRef *v1.Reference `json:"healthCheckIdRef,omitempty" tf:"-"`
 
-	// Selector for a HealthCheck to populate healthCheckId.
+	// Selector for a HealthCheck in route53 to populate healthCheckId.
 	// +kubebuilder:validation:Optional
 	HealthCheckIDSelector *v1.Selector `json:"healthCheckIdSelector,omitempty" tf:"-"`
 
@@ -354,15 +354,15 @@ type RecordParameters struct {
 	WeightedRoutingPolicy []WeightedRoutingPolicyParameters `json:"weightedRoutingPolicy,omitempty" tf:"weighted_routing_policy,omitempty"`
 
 	// The ID of the hosted zone to contain this record.
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
-	// Reference to a Zone to populate zoneId.
+	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate zoneId.
+	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }

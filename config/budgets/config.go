@@ -12,7 +12,7 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_budgets_budget_action", func(r *config.Resource) {
 		r.References["definition.iam_action_definition.aws_iam_role.example.name"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
+			TerraformName: "aws_iam_role",
 		}
 	})
 }

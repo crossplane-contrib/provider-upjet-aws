@@ -88,7 +88,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
-                    description: Reference to a TransitGateway to populate transitGatewayId.
+                    description: Reference to a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -122,7 +123,8 @@ spec:
                     - name
                     type: object
                   transitGatewayIdSelector:
-                    description: Selector for a TransitGateway to populate transitGatewayId.
+                    description: Selector for a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -187,7 +189,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway.
                     type: string
                   transitGatewayIdRef:
-                    description: Reference to a TransitGateway to populate transitGatewayId.
+                    description: Reference to a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -221,7 +224,8 @@ spec:
                     - name
                     type: object
                   transitGatewayIdSelector:
-                    description: Selector for a TransitGateway to populate transitGatewayId.
+                    description: Selector for a TransitGateway in ec2 to populate
+                      transitGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-

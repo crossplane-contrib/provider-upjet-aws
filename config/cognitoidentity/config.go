@@ -14,11 +14,11 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cognito_identity_pool", func(r *config.Resource) {
 		r.References["saml_provider_arns"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.SAMLProvider",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_saml_provider",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["cognito_identity_providers.client_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient",
+			TerraformName: "aws_cognito_user_pool_client",
 		}
 	})
 }

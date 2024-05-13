@@ -122,7 +122,7 @@ spec:
                     description: Name of an ECS cluster.
                     type: string
                   clusterRef:
-                    description: Reference to a Cluster to populate cluster.
+                    description: Reference to a Cluster in ecs to populate cluster.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -156,7 +156,7 @@ spec:
                     - name
                     type: object
                   clusterSelector:
-                    description: Selector for a Cluster to populate cluster.
+                    description: Selector for a Cluster in ecs to populate cluster.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -823,7 +823,8 @@ spec:
                       a revision is not specified, the latest ACTIVE revision is used.
                     type: string
                   taskDefinitionRef:
-                    description: Reference to a TaskDefinition to populate taskDefinition.
+                    description: Reference to a TaskDefinition in ecs to populate
+                      taskDefinition.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -857,7 +858,8 @@ spec:
                     - name
                     type: object
                   taskDefinitionSelector:
-                    description: Selector for a TaskDefinition to populate taskDefinition.
+                    description: Selector for a TaskDefinition in ecs to populate
+                      taskDefinition.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -973,7 +975,7 @@ spec:
                     description: Name of an ECS cluster.
                     type: string
                   clusterRef:
-                    description: Reference to a Cluster to populate cluster.
+                    description: Reference to a Cluster in ecs to populate cluster.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1007,7 +1009,7 @@ spec:
                     - name
                     type: object
                   clusterSelector:
-                    description: Selector for a Cluster to populate cluster.
+                    description: Selector for a Cluster in ecs to populate cluster.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1670,7 +1672,8 @@ spec:
                       a revision is not specified, the latest ACTIVE revision is used.
                     type: string
                   taskDefinitionRef:
-                    description: Reference to a TaskDefinition to populate taskDefinition.
+                    description: Reference to a TaskDefinition in ecs to populate
+                      taskDefinition.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1704,7 +1707,8 @@ spec:
                     - name
                     type: object
                   taskDefinitionSelector:
-                    description: Selector for a TaskDefinition to populate taskDefinition.
+                    description: Selector for a TaskDefinition in ecs to populate
+                      taskDefinition.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -78,7 +78,7 @@ spec:
                       with the endpoint.
                     type: string
                   clusterIdentifierRef:
-                    description: Reference to a Cluster to populate clusterIdentifier.
+                    description: Reference to a Cluster in neptune to populate clusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   clusterIdentifierSelector:
-                    description: Selector for a Cluster to populate clusterIdentifier.
+                    description: Selector for a Cluster in neptune to populate clusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -202,7 +202,7 @@ spec:
                       with the endpoint.
                     type: string
                   clusterIdentifierRef:
-                    description: Reference to a Cluster to populate clusterIdentifier.
+                    description: Reference to a Cluster in neptune to populate clusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -236,7 +236,7 @@ spec:
                     - name
                     type: object
                   clusterIdentifierSelector:
-                    description: Selector for a Cluster to populate clusterIdentifier.
+                    description: Selector for a Cluster in neptune to populate clusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: |-

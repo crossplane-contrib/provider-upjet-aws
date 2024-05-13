@@ -133,7 +133,7 @@ spec:
                     description: The name (or ARN) of the Lambda function.
                     type: string
                   functionNameRef:
-                    description: Reference to a Function to populate functionName.
+                    description: Reference to a Function in lambda to populate functionName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -167,7 +167,7 @@ spec:
                     - name
                     type: object
                   functionNameSelector:
-                    description: Selector for a Function to populate functionName.
+                    description: Selector for a Function in lambda to populate functionName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -294,7 +294,7 @@ spec:
                     description: The name (or ARN) of the Lambda function.
                     type: string
                   functionNameRef:
-                    description: Reference to a Function to populate functionName.
+                    description: Reference to a Function in lambda to populate functionName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -328,7 +328,7 @@ spec:
                     - name
                     type: object
                   functionNameSelector:
-                    description: Selector for a Function to populate functionName.
+                    description: Selector for a Function in lambda to populate functionName.
                     properties:
                       matchControllerRef:
                         description: |-

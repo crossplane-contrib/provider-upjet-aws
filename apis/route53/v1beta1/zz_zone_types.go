@@ -68,14 +68,14 @@ type ZoneInitParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The ID of the reusable delegation set whose NS records you want to assign to the hosted zone. Conflicts with vpc as delegation sets can only be used for public zones.
-	// +crossplane:generate:reference:type=DelegationSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.DelegationSet
 	DelegationSetID *string `json:"delegationSetId,omitempty" tf:"delegation_set_id,omitempty"`
 
-	// Reference to a DelegationSet to populate delegationSetId.
+	// Reference to a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
 	DelegationSetIDRef *v1.Reference `json:"delegationSetIdRef,omitempty" tf:"-"`
 
-	// Selector for a DelegationSet to populate delegationSetId.
+	// Selector for a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
 	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
 
@@ -139,15 +139,15 @@ type ZoneParameters struct {
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
 	// The ID of the reusable delegation set whose NS records you want to assign to the hosted zone. Conflicts with vpc as delegation sets can only be used for public zones.
-	// +crossplane:generate:reference:type=DelegationSet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.DelegationSet
 	// +kubebuilder:validation:Optional
 	DelegationSetID *string `json:"delegationSetId,omitempty" tf:"delegation_set_id,omitempty"`
 
-	// Reference to a DelegationSet to populate delegationSetId.
+	// Reference to a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
 	DelegationSetIDRef *v1.Reference `json:"delegationSetIdRef,omitempty" tf:"-"`
 
-	// Selector for a DelegationSet to populate delegationSetId.
+	// Selector for a DelegationSet in route53 to populate delegationSetId.
 	// +kubebuilder:validation:Optional
 	DelegationSetIDSelector *v1.Selector `json:"delegationSetIdSelector,omitempty" tf:"-"`
 

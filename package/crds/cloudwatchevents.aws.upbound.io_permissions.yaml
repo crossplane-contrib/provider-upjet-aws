@@ -177,7 +177,8 @@ spec:
                       If you omit this, the permissions are set on the default event bus.
                     type: string
                   eventBusNameRef:
-                    description: Reference to a Bus to populate eventBusName.
+                    description: Reference to a Bus in cloudwatchevents to populate
+                      eventBusName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -211,7 +212,8 @@ spec:
                     - name
                     type: object
                   eventBusNameSelector:
-                    description: Selector for a Bus to populate eventBusName.
+                    description: Selector for a Bus in cloudwatchevents to populate
+                      eventBusName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -383,7 +385,8 @@ spec:
                       If you omit this, the permissions are set on the default event bus.
                     type: string
                   eventBusNameRef:
-                    description: Reference to a Bus to populate eventBusName.
+                    description: Reference to a Bus in cloudwatchevents to populate
+                      eventBusName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -417,7 +420,8 @@ spec:
                     - name
                     type: object
                   eventBusNameSelector:
-                    description: Selector for a Bus to populate eventBusName.
+                    description: Selector for a Bus in cloudwatchevents to populate
+                      eventBusName.
                     properties:
                       matchControllerRef:
                         description: |-

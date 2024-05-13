@@ -1024,7 +1024,8 @@ spec:
                     description: Name of ASG to associate with the ELB.
                     type: string
                   autoscalingGroupNameRef:
-                    description: Reference to a AutoscalingGroup to populate autoscalingGroupName.
+                    description: Reference to a AutoscalingGroup in autoscaling to
+                      populate autoscalingGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1058,7 +1059,8 @@ spec:
                     - name
                     type: object
                   autoscalingGroupNameSelector:
-                    description: Selector for a AutoscalingGroup to populate autoscalingGroupName.
+                    description: Selector for a AutoscalingGroup in autoscaling to
+                      populate autoscalingGroupName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1277,7 +1279,8 @@ spec:
                     description: Name of ASG to associate with the ELB.
                     type: string
                   autoscalingGroupNameRef:
-                    description: Reference to a AutoscalingGroup to populate autoscalingGroupName.
+                    description: Reference to a AutoscalingGroup in autoscaling to
+                      populate autoscalingGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1311,7 +1314,8 @@ spec:
                     - name
                     type: object
                   autoscalingGroupNameSelector:
-                    description: Selector for a AutoscalingGroup to populate autoscalingGroupName.
+                    description: Selector for a AutoscalingGroup in autoscaling to
+                      populate autoscalingGroupName.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -91,14 +91,14 @@ type AMICopyInitParameters struct {
 
 	// Id of the AMI to copy. This id must be valid in the region
 	// given by source_ami_region.
-	// +crossplane:generate:reference:type=AMI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.AMI
 	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
 
-	// Reference to a AMI to populate sourceAmiId.
+	// Reference to a AMI in ec2 to populate sourceAmiId.
 	// +kubebuilder:validation:Optional
 	SourceAMIIDRef *v1.Reference `json:"sourceAmiIdRef,omitempty" tf:"-"`
 
-	// Selector for a AMI to populate sourceAmiId.
+	// Selector for a AMI in ec2 to populate sourceAmiId.
 	// +kubebuilder:validation:Optional
 	SourceAMIIDSelector *v1.Selector `json:"sourceAmiIdSelector,omitempty" tf:"-"`
 
@@ -249,15 +249,15 @@ type AMICopyParameters struct {
 
 	// Id of the AMI to copy. This id must be valid in the region
 	// given by source_ami_region.
-	// +crossplane:generate:reference:type=AMI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.AMI
 	// +kubebuilder:validation:Optional
 	SourceAMIID *string `json:"sourceAmiId,omitempty" tf:"source_ami_id,omitempty"`
 
-	// Reference to a AMI to populate sourceAmiId.
+	// Reference to a AMI in ec2 to populate sourceAmiId.
 	// +kubebuilder:validation:Optional
 	SourceAMIIDRef *v1.Reference `json:"sourceAmiIdRef,omitempty" tf:"-"`
 
-	// Selector for a AMI to populate sourceAmiId.
+	// Selector for a AMI in ec2 to populate sourceAmiId.
 	// +kubebuilder:validation:Optional
 	SourceAMIIDSelector *v1.Selector `json:"sourceAmiIdSelector,omitempty" tf:"-"`
 

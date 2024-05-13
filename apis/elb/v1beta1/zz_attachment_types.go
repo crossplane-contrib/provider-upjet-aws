@@ -16,14 +16,14 @@ import (
 type AttachmentInitParameters struct {
 
 	// The name of the ELB.
-	// +crossplane:generate:reference:type=ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
-	// Reference to a ELB to populate elb.
+	// Reference to a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
 	ELBRef *v1.Reference `json:"elbRef,omitempty" tf:"-"`
 
-	// Selector for a ELB to populate elb.
+	// Selector for a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
@@ -54,15 +54,15 @@ type AttachmentObservation struct {
 type AttachmentParameters struct {
 
 	// The name of the ELB.
-	// +crossplane:generate:reference:type=ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
 	// +kubebuilder:validation:Optional
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
-	// Reference to a ELB to populate elb.
+	// Reference to a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
 	ELBRef *v1.Reference `json:"elbRef,omitempty" tf:"-"`
 
-	// Selector for a ELB to populate elb.
+	// Selector for a ELB in elb to populate elb.
 	// +kubebuilder:validation:Optional
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 

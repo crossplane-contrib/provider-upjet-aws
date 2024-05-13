@@ -82,8 +82,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway Attachment.
                     type: string
                   transitGatewayAttachmentIdRef:
-                    description: Reference to a TransitGatewayVPCAttachment to populate
-                      transitGatewayAttachmentId.
+                    description: Reference to a TransitGatewayVPCAttachment in ec2
+                      to populate transitGatewayAttachmentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -117,8 +117,8 @@ spec:
                     - name
                     type: object
                   transitGatewayAttachmentIdSelector:
-                    description: Selector for a TransitGatewayVPCAttachment to populate
-                      transitGatewayAttachmentId.
+                    description: Selector for a TransitGatewayVPCAttachment in ec2
+                      to populate transitGatewayAttachmentId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -161,8 +161,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                   transitGatewayRouteTableIdRef:
-                    description: Reference to a TransitGatewayRouteTable to populate
-                      transitGatewayRouteTableId.
+                    description: Reference to a TransitGatewayRouteTable in ec2 to
+                      populate transitGatewayRouteTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -196,8 +196,8 @@ spec:
                     - name
                     type: object
                   transitGatewayRouteTableIdSelector:
-                    description: Selector for a TransitGatewayRouteTable to populate
-                      transitGatewayRouteTableId.
+                    description: Selector for a TransitGatewayRouteTable in ec2 to
+                      populate transitGatewayRouteTableId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -256,8 +256,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway Attachment.
                     type: string
                   transitGatewayAttachmentIdRef:
-                    description: Reference to a TransitGatewayVPCAttachment to populate
-                      transitGatewayAttachmentId.
+                    description: Reference to a TransitGatewayVPCAttachment in ec2
+                      to populate transitGatewayAttachmentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -291,8 +291,8 @@ spec:
                     - name
                     type: object
                   transitGatewayAttachmentIdSelector:
-                    description: Selector for a TransitGatewayVPCAttachment to populate
-                      transitGatewayAttachmentId.
+                    description: Selector for a TransitGatewayVPCAttachment in ec2
+                      to populate transitGatewayAttachmentId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -335,8 +335,8 @@ spec:
                     description: Identifier of EC2 Transit Gateway Route Table.
                     type: string
                   transitGatewayRouteTableIdRef:
-                    description: Reference to a TransitGatewayRouteTable to populate
-                      transitGatewayRouteTableId.
+                    description: Reference to a TransitGatewayRouteTable in ec2 to
+                      populate transitGatewayRouteTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -370,8 +370,8 @@ spec:
                     - name
                     type: object
                   transitGatewayRouteTableIdSelector:
-                    description: Selector for a TransitGatewayRouteTable to populate
-                      transitGatewayRouteTableId.
+                    description: Selector for a TransitGatewayRouteTable in ec2 to
+                      populate transitGatewayRouteTableId.
                     properties:
                       matchControllerRef:
                         description: |-

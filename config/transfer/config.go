@@ -14,11 +14,11 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_transfer_user", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type: "Server",
+			TerraformName: "aws_transfer_server",
 		}
 		r.References["role"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 }

@@ -524,7 +524,7 @@ spec:
                           description: ID of the network interface to attach.
                           type: string
                         networkInterfaceIdRef:
-                          description: Reference to a NetworkInterface to populate
+                          description: Reference to a NetworkInterface in ec2 to populate
                             networkInterfaceId.
                           properties:
                             name:
@@ -559,7 +559,7 @@ spec:
                           - name
                           type: object
                         networkInterfaceIdSelector:
-                          description: Selector for a NetworkInterface to populate
+                          description: Selector for a NetworkInterface in ec2 to populate
                             networkInterfaceId.
                           properties:
                             matchControllerRef:
@@ -781,7 +781,7 @@ spec:
                     description: VPC Subnet ID to launch in.
                     type: string
                   subnetIdRef:
-                    description: Reference to a Subnet to populate subnetId.
+                    description: Reference to a Subnet in ec2 to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -815,7 +815,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: Selector for a Subnet to populate subnetId.
+                    description: Selector for a Subnet in ec2 to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -897,7 +897,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcSecurityGroupIdRefs:
-                    description: References to SecurityGroup to populate vpcSecurityGroupIds.
+                    description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -934,7 +934,7 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: Selector for a list of SecurityGroup to populate
+                    description: Selector for a list of SecurityGroup in ec2 to populate
                       vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:
@@ -1446,7 +1446,7 @@ spec:
                           description: ID of the network interface to attach.
                           type: string
                         networkInterfaceIdRef:
-                          description: Reference to a NetworkInterface to populate
+                          description: Reference to a NetworkInterface in ec2 to populate
                             networkInterfaceId.
                           properties:
                             name:
@@ -1481,7 +1481,7 @@ spec:
                           - name
                           type: object
                         networkInterfaceIdSelector:
-                          description: Selector for a NetworkInterface to populate
+                          description: Selector for a NetworkInterface in ec2 to populate
                             networkInterfaceId.
                           properties:
                             matchControllerRef:
@@ -1699,7 +1699,7 @@ spec:
                     description: VPC Subnet ID to launch in.
                     type: string
                   subnetIdRef:
-                    description: Reference to a Subnet to populate subnetId.
+                    description: Reference to a Subnet in ec2 to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1733,7 +1733,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: Selector for a Subnet to populate subnetId.
+                    description: Selector for a Subnet in ec2 to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1815,7 +1815,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   vpcSecurityGroupIdRefs:
-                    description: References to SecurityGroup to populate vpcSecurityGroupIds.
+                    description: References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -1852,7 +1852,7 @@ spec:
                       type: object
                     type: array
                   vpcSecurityGroupIdSelector:
-                    description: Selector for a list of SecurityGroup to populate
+                    description: Selector for a list of SecurityGroup in ec2 to populate
                       vpcSecurityGroupIds.
                     properties:
                       matchControllerRef:

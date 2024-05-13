@@ -29,7 +29,7 @@ func Configure(p *config.Provider) {
 		}
 
 		r.References["vpc_zone_identifier"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			TerraformName: "aws_subnet",
 		}
 		delete(r.References, "launch_template.version")
 		r.UseAsync = true
@@ -42,16 +42,16 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_autoscaling_attachment", func(r *config.Resource) {
 		r.References["autoscaling_group_name"] = config.Reference{
-			Type: "AutoscalingGroup",
+			TerraformName: "aws_autoscaling_group",
 		}
 		r.References["alb_target_group_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_lb_target_group",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 	p.AddResourceConfigurator("aws_autoscaling_group_tag", func(r *config.Resource) {
 		r.References["autoscaling_group_name"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup",
+			TerraformName: "aws_autoscaling_group",
 		}
 		r.OverrideFieldNames = map[string]string{
 			"TagParameters":     "GroupTagTagParameters",

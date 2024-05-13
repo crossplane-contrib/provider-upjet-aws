@@ -78,7 +78,7 @@ spec:
                       snapshot.
                     type: string
                   dbClusterIdentifierRef:
-                    description: Reference to a Cluster to populate dbClusterIdentifier.
+                    description: Reference to a Cluster in neptune to populate dbClusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   dbClusterIdentifierSelector:
-                    description: Selector for a Cluster to populate dbClusterIdentifier.
+                    description: Selector for a Cluster in neptune to populate dbClusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -176,7 +176,7 @@ spec:
                       snapshot.
                     type: string
                   dbClusterIdentifierRef:
-                    description: Reference to a Cluster to populate dbClusterIdentifier.
+                    description: Reference to a Cluster in neptune to populate dbClusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -210,7 +210,7 @@ spec:
                     - name
                     type: object
                   dbClusterIdentifierSelector:
-                    description: Selector for a Cluster to populate dbClusterIdentifier.
+                    description: Selector for a Cluster in neptune to populate dbClusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: |-

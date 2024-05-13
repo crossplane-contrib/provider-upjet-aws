@@ -94,8 +94,8 @@ spec:
                       accept.
                     type: string
                   virtualInterfaceIdRef:
-                    description: Reference to a HostedPrivateVirtualInterface to populate
-                      virtualInterfaceId.
+                    description: Reference to a HostedPrivateVirtualInterface in directconnect
+                      to populate virtualInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -129,8 +129,8 @@ spec:
                     - name
                     type: object
                   virtualInterfaceIdSelector:
-                    description: Selector for a HostedPrivateVirtualInterface to populate
-                      virtualInterfaceId.
+                    description: Selector for a HostedPrivateVirtualInterface in directconnect
+                      to populate virtualInterfaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -278,8 +278,8 @@ spec:
                       accept.
                     type: string
                   virtualInterfaceIdRef:
-                    description: Reference to a HostedPrivateVirtualInterface to populate
-                      virtualInterfaceId.
+                    description: Reference to a HostedPrivateVirtualInterface in directconnect
+                      to populate virtualInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -313,8 +313,8 @@ spec:
                     - name
                     type: object
                   virtualInterfaceIdSelector:
-                    description: Selector for a HostedPrivateVirtualInterface to populate
-                      virtualInterfaceId.
+                    description: Selector for a HostedPrivateVirtualInterface in directconnect
+                      to populate virtualInterfaceId.
                     properties:
                       matchControllerRef:
                         description: |-

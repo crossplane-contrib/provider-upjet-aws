@@ -33,10 +33,10 @@ func Configure(p *config.Provider) {
 
 		r.References = config.References{
 			"execute_command_configuration.kms_key_id": config.Reference{
-				Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+				TerraformName: "aws_kms_key",
 			},
 			"log_configuration.s3_bucket_name": config.Reference{
-				Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
+				TerraformName: "aws_s3_bucket",
 			},
 		}
 
@@ -61,25 +61,25 @@ func Configure(p *config.Provider) {
 		}
 		r.References = config.References{
 			"cluster": config.Reference{
-				Type: "Cluster",
+				TerraformName: "aws_ecs_cluster",
 			},
 			"task_definition": config.Reference{
-				Type: "TaskDefinition",
+				TerraformName: "aws_ecs_task_definition",
 			},
 			"iam_role": config.Reference{
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_iam_role",
+				Extractor:     common.PathARNExtractor,
 			},
 			"load_balancer.target_group_arn": config.Reference{
-				Type: "github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup",
+				TerraformName: "aws_lb_target_group",
 			},
 			"network_configuration.subnets": config.Reference{
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+				TerraformName:     "aws_subnet",
 				RefFieldName:      "SubnetRefs",
 				SelectorFieldName: "SubnetSelector",
 			},
 			"network_configuration.security_groups": config.Reference{
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+				TerraformName:     "aws_security_group",
 				RefFieldName:      "SecurityGroupRefs",
 				SelectorFieldName: "SecurityGroupSelector",
 			},
@@ -91,8 +91,8 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecs_capacity_provider", func(r *config.Resource) {
 		r.References = config.References{
 			"auto_scaling_group_provider.auto_scaling_group_arn": config.Reference{
-				Type:      "github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_autoscaling_group",
+				Extractor:     common.PathARNExtractor,
 			},
 		}
 	})
@@ -100,8 +100,8 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecs_task_definition", func(r *config.Resource) {
 		r.References = config.References{
 			"execution_role_arn": config.Reference{
-				Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-				Extractor: common.PathARNExtractor,
+				TerraformName: "aws_iam_role",
+				Extractor:     common.PathARNExtractor,
 			},
 		}
 	})

@@ -77,7 +77,8 @@ spec:
                     description: The Amazon Resource Name (ARN) of your accelerator.
                     type: string
                   acceleratorArnRef:
-                    description: Reference to a Accelerator to populate acceleratorArn.
+                    description: Reference to a Accelerator in globalaccelerator to
+                      populate acceleratorArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +112,8 @@ spec:
                     - name
                     type: object
                   acceleratorArnSelector:
-                    description: Selector for a Accelerator to populate acceleratorArn.
+                    description: Selector for a Accelerator in globalaccelerator to
+                      populate acceleratorArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -200,7 +202,8 @@ spec:
                     description: The Amazon Resource Name (ARN) of your accelerator.
                     type: string
                   acceleratorArnRef:
-                    description: Reference to a Accelerator to populate acceleratorArn.
+                    description: Reference to a Accelerator in globalaccelerator to
+                      populate acceleratorArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -234,7 +237,8 @@ spec:
                     - name
                     type: object
                   acceleratorArnSelector:
-                    description: Selector for a Accelerator to populate acceleratorArn.
+                    description: Selector for a Accelerator in globalaccelerator to
+                      populate acceleratorArn.
                     properties:
                       matchControllerRef:
                         description: |-

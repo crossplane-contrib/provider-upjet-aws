@@ -158,7 +158,8 @@ spec:
                       Location.
                     type: string
                   destinationLocationArnRef:
-                    description: Reference to a LocationS3 to populate destinationLocationArn.
+                    description: Reference to a LocationS3 in datasync to populate
+                      destinationLocationArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -192,7 +193,8 @@ spec:
                     - name
                     type: object
                   destinationLocationArnSelector:
-                    description: Selector for a LocationS3 to populate destinationLocationArn.
+                    description: Selector for a LocationS3 in datasync to populate
+                      destinationLocationArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -390,7 +392,8 @@ spec:
                     description: Amazon Resource Name (ARN) of source DataSync Location.
                     type: string
                   sourceLocationArnRef:
-                    description: Reference to a LocationS3 to populate sourceLocationArn.
+                    description: Reference to a LocationS3 in datasync to populate
+                      sourceLocationArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -424,7 +427,8 @@ spec:
                     - name
                     type: object
                   sourceLocationArnSelector:
-                    description: Selector for a LocationS3 to populate sourceLocationArn.
+                    description: Selector for a LocationS3 in datasync to populate
+                      sourceLocationArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -649,7 +653,8 @@ spec:
                       Location.
                     type: string
                   destinationLocationArnRef:
-                    description: Reference to a LocationS3 to populate destinationLocationArn.
+                    description: Reference to a LocationS3 in datasync to populate
+                      destinationLocationArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -683,7 +688,8 @@ spec:
                     - name
                     type: object
                   destinationLocationArnSelector:
-                    description: Selector for a LocationS3 to populate destinationLocationArn.
+                    description: Selector for a LocationS3 in datasync to populate
+                      destinationLocationArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -877,7 +883,8 @@ spec:
                     description: Amazon Resource Name (ARN) of source DataSync Location.
                     type: string
                   sourceLocationArnRef:
-                    description: Reference to a LocationS3 to populate sourceLocationArn.
+                    description: Reference to a LocationS3 in datasync to populate
+                      sourceLocationArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -911,7 +918,8 @@ spec:
                     - name
                     type: object
                   sourceLocationArnSelector:
-                    description: Selector for a LocationS3 to populate sourceLocationArn.
+                    description: Selector for a LocationS3 in datasync to populate
+                      sourceLocationArn.
                     properties:
                       matchControllerRef:
                         description: |-

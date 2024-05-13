@@ -115,14 +115,14 @@ type UserInitParameters struct {
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// The Server ID of the Transfer Server (e.g., s-12345678)
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/transfer/v1beta1.Server
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a Server to populate serverId.
+	// Reference to a Server in transfer to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server to populate serverId.
+	// Selector for a Server in transfer to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
@@ -210,15 +210,15 @@ type UserParameters struct {
 	RoleSelector *v1.Selector `json:"roleSelector,omitempty" tf:"-"`
 
 	// The Server ID of the Transfer Server (e.g., s-12345678)
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/transfer/v1beta1.Server
 	// +kubebuilder:validation:Optional
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
-	// Reference to a Server to populate serverId.
+	// Reference to a Server in transfer to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server to populate serverId.
+	// Selector for a Server in transfer to populate serverId.
 	// +kubebuilder:validation:Optional
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 

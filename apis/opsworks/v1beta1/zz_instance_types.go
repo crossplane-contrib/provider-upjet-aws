@@ -168,14 +168,14 @@ type InstanceInitParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// List of the layers the instance will belong to.
-	// +crossplane:generate:reference:type=CustomLayer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.CustomLayer
 	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
 
-	// References to CustomLayer to populate layerIds.
+	// References to CustomLayer in opsworks to populate layerIds.
 	// +kubebuilder:validation:Optional
 	LayerIdsRefs []v1.Reference `json:"layerIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of CustomLayer to populate layerIds.
+	// Selector for a list of CustomLayer in opsworks to populate layerIds.
 	// +kubebuilder:validation:Optional
 	LayerIdsSelector *v1.Selector `json:"layerIdsSelector,omitempty" tf:"-"`
 
@@ -459,15 +459,15 @@ type InstanceParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// List of the layers the instance will belong to.
-	// +crossplane:generate:reference:type=CustomLayer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.CustomLayer
 	// +kubebuilder:validation:Optional
 	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
 
-	// References to CustomLayer to populate layerIds.
+	// References to CustomLayer in opsworks to populate layerIds.
 	// +kubebuilder:validation:Optional
 	LayerIdsRefs []v1.Reference `json:"layerIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of CustomLayer to populate layerIds.
+	// Selector for a list of CustomLayer in opsworks to populate layerIds.
 	// +kubebuilder:validation:Optional
 	LayerIdsSelector *v1.Selector `json:"layerIdsSelector,omitempty" tf:"-"`
 

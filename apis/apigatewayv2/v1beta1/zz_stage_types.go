@@ -185,14 +185,14 @@ type RouteSettingsParameters struct {
 type StageInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Reference to a API to populate apiId.
+	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiId.
+	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -211,14 +211,14 @@ type StageInitParameters struct {
 	DefaultRouteSettings []DefaultRouteSettingsInitParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
 
 	// Deployment identifier of the stage. Use the aws_apigatewayv2_deployment resource to configure a deployment.
-	// +crossplane:generate:reference:type=Deployment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Deployment
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 
-	// Reference to a Deployment to populate deploymentId.
+	// Reference to a Deployment in apigatewayv2 to populate deploymentId.
 	// +kubebuilder:validation:Optional
 	DeploymentIDRef *v1.Reference `json:"deploymentIdRef,omitempty" tf:"-"`
 
-	// Selector for a Deployment to populate deploymentId.
+	// Selector for a Deployment in apigatewayv2 to populate deploymentId.
 	// +kubebuilder:validation:Optional
 	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
 
@@ -296,15 +296,15 @@ type StageObservation struct {
 type StageParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Reference to a API to populate apiId.
+	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiId.
+	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -327,15 +327,15 @@ type StageParameters struct {
 	DefaultRouteSettings []DefaultRouteSettingsParameters `json:"defaultRouteSettings,omitempty" tf:"default_route_settings,omitempty"`
 
 	// Deployment identifier of the stage. Use the aws_apigatewayv2_deployment resource to configure a deployment.
-	// +crossplane:generate:reference:type=Deployment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Deployment
 	// +kubebuilder:validation:Optional
 	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
 
-	// Reference to a Deployment to populate deploymentId.
+	// Reference to a Deployment in apigatewayv2 to populate deploymentId.
 	// +kubebuilder:validation:Optional
 	DeploymentIDRef *v1.Reference `json:"deploymentIdRef,omitempty" tf:"-"`
 
-	// Selector for a Deployment to populate deploymentId.
+	// Selector for a Deployment in apigatewayv2 to populate deploymentId.
 	// +kubebuilder:validation:Optional
 	DeploymentIDSelector *v1.Selector `json:"deploymentIdSelector,omitempty" tf:"-"`
 

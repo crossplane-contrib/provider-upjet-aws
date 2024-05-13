@@ -93,7 +93,8 @@ spec:
                       on which to create the virtual interface.
                     type: string
                   connectionIdRef:
-                    description: Reference to a Connection to populate connectionId.
+                    description: Reference to a Connection in directconnect to populate
+                      connectionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -127,7 +128,8 @@ spec:
                     - name
                     type: object
                   connectionIdSelector:
-                    description: Selector for a Connection to populate connectionId.
+                    description: Selector for a Connection in directconnect to populate
+                      connectionId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -225,7 +227,8 @@ spec:
                       on which to create the virtual interface.
                     type: string
                   connectionIdRef:
-                    description: Reference to a Connection to populate connectionId.
+                    description: Reference to a Connection in directconnect to populate
+                      connectionId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -259,7 +262,8 @@ spec:
                     - name
                     type: object
                   connectionIdSelector:
-                    description: Selector for a Connection to populate connectionId.
+                    description: Selector for a Connection in directconnect to populate
+                      connectionId.
                     properties:
                       matchControllerRef:
                         description: |-

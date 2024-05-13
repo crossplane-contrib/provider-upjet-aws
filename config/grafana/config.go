@@ -14,21 +14,21 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_grafana_workspace", func(r *config.Resource) {
 		r.References["role_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_grafana_role_association", func(r *config.Resource) {
 		r.References["workspace_id"] = config.Reference{
-			Type: "Workspace",
+			TerraformName: "aws_grafana_workspace",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_grafana_workspace_saml_configuration", func(r *config.Resource) {
 		r.References["workspace_id"] = config.Reference{
-			Type: "Workspace",
+			TerraformName: "aws_grafana_workspace",
 		}
 	})
 

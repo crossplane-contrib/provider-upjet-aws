@@ -82,7 +82,8 @@ spec:
                       delegation sets can only be used for public zones.
                     type: string
                   delegationSetIdRef:
-                    description: Reference to a DelegationSet to populate delegationSetId.
+                    description: Reference to a DelegationSet in route53 to populate
+                      delegationSetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +117,8 @@ spec:
                     - name
                     type: object
                   delegationSetIdSelector:
-                    description: Selector for a DelegationSet to populate delegationSetId.
+                    description: Selector for a DelegationSet in route53 to populate
+                      delegationSetId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -285,7 +287,8 @@ spec:
                       delegation sets can only be used for public zones.
                     type: string
                   delegationSetIdRef:
-                    description: Reference to a DelegationSet to populate delegationSetId.
+                    description: Reference to a DelegationSet in route53 to populate
+                      delegationSetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -319,7 +322,8 @@ spec:
                     - name
                     type: object
                   delegationSetIdSelector:
-                    description: Selector for a DelegationSet to populate delegationSetId.
+                    description: Selector for a DelegationSet in route53 to populate
+                      delegationSetId.
                     properties:
                       matchControllerRef:
                         description: |-
