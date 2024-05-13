@@ -84,7 +84,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
 		r.References["restore_to_point_in_time.source_db_instance_identifier"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "aws_db_instance",
 		}
 		r.References["s3_import.bucket_name"] = config.Reference{
 			Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",

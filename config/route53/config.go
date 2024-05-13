@@ -23,20 +23,6 @@ func Configure(p *config.Provider) {
 			Type: "Zone",
 		}
 	})
-	p.AddResourceConfigurator("aws_route53_key_signing_key", func(r *config.Resource) {
-		r.References["hosted_zone_id"] = config.Reference{
-			Type: "Zone",
-		}
-		r.References["key_management_service_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-			Extractor: "github.com/upbound/provider-aws/apis/kms/v1beta1.KMSKeyARN()",
-		}
-	})
-	p.AddResourceConfigurator("aws_route53_query_log", func(r *config.Resource) {
-		r.References["hosted_zone_id"] = config.Reference{
-			Type: "Zone",
-		}
-	})
 	p.AddResourceConfigurator("aws_route53_record", func(r *config.Resource) {
 		r.References["zone_id"] = config.Reference{
 			Type: "Zone",

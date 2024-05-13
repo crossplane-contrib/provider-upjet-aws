@@ -22,11 +22,6 @@ func Configure(p *config.Provider) {
 			Type: "Device",
 		}
 	})
-	p.AddResourceConfigurator("aws_networkmanager_site_to_site_vpn_attachment", func(r *config.Resource) {
-		r.References["core_network_id"] = config.Reference{
-			Type: "CoreNetwork",
-		}
-	})
 	p.AddResourceConfigurator("aws_networkmanager_vpc_attachment", func(r *config.Resource) {
 		r.References["subnet_arns"] = config.Reference{
 			Type:      "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",

@@ -91,7 +91,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_ecs_capacity_provider", func(r *config.Resource) {
 		r.References = config.References{
 			"auto_scaling_group_provider.auto_scaling_group_arn": config.Reference{
-				Type:      "github.com/upbound/provider-aws/apis/autoscaling/v1beta1.AutoscalingGroup",
+				Type:      "github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup",
 				Extractor: common.PathARNExtractor,
 			},
 		}
