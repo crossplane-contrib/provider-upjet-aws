@@ -75,7 +75,7 @@ spec:
                   brokerId:
                     type: string
                   brokerIdRef:
-                    description: Reference to a Broker to populate brokerId.
+                    description: Reference to a Broker in mq to populate brokerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,7 +109,7 @@ spec:
                     - name
                     type: object
                   brokerIdSelector:
-                    description: Selector for a Broker to populate brokerId.
+                    description: Selector for a Broker in mq to populate brokerId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -199,7 +199,7 @@ spec:
                   brokerId:
                     type: string
                   brokerIdRef:
-                    description: Reference to a Broker to populate brokerId.
+                    description: Reference to a Broker in mq to populate brokerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -233,7 +233,7 @@ spec:
                     - name
                     type: object
                   brokerIdSelector:
-                    description: Selector for a Broker to populate brokerId.
+                    description: Selector for a Broker in mq to populate brokerId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -53,7 +53,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_mq_user", func(r *config.Resource) {
 		r.References["broker_id"] = config.Reference{
-			Type: "Broker",
+			TerraformName: "aws_mq_broker",
 		}
 		r.Version = "v1alpha1"
 	})

@@ -15,14 +15,14 @@ import (
 
 type UserInitParameters struct {
 
-	// +crossplane:generate:reference:type=Broker
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mq/v1beta1.Broker
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
 
-	// Reference to a Broker to populate brokerId.
+	// Reference to a Broker in mq to populate brokerId.
 	// +kubebuilder:validation:Optional
 	BrokerIDRef *v1.Reference `json:"brokerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Broker to populate brokerId.
+	// Selector for a Broker in mq to populate brokerId.
 	// +kubebuilder:validation:Optional
 	BrokerIDSelector *v1.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
 
@@ -51,15 +51,15 @@ type UserObservation struct {
 
 type UserParameters struct {
 
-	// +crossplane:generate:reference:type=Broker
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mq/v1beta1.Broker
 	// +kubebuilder:validation:Optional
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
 
-	// Reference to a Broker to populate brokerId.
+	// Reference to a Broker in mq to populate brokerId.
 	// +kubebuilder:validation:Optional
 	BrokerIDRef *v1.Reference `json:"brokerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Broker to populate brokerId.
+	// Selector for a Broker in mq to populate brokerId.
 	// +kubebuilder:validation:Optional
 	BrokerIDSelector *v1.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
 
