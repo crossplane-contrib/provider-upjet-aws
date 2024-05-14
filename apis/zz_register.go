@@ -123,6 +123,7 @@ import (
 	v1beta1mediapackage "github.com/upbound/provider-aws/apis/mediapackage/v1beta1"
 	v1beta1mediastore "github.com/upbound/provider-aws/apis/mediastore/v1beta1"
 	v1beta1memorydb "github.com/upbound/provider-aws/apis/memorydb/v1beta1"
+	v1alpha1 "github.com/upbound/provider-aws/apis/mq/v1alpha1"
 	v1beta1mq "github.com/upbound/provider-aws/apis/mq/v1beta1"
 	v1beta1neptune "github.com/upbound/provider-aws/apis/neptune/v1beta1"
 	v1beta1networkfirewall "github.com/upbound/provider-aws/apis/networkfirewall/v1beta1"
@@ -170,7 +171,7 @@ import (
 	v1beta1timestreamwrite "github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1"
 	v1beta1transcribe "github.com/upbound/provider-aws/apis/transcribe/v1beta1"
 	v1beta1transfer "github.com/upbound/provider-aws/apis/transfer/v1beta1"
-	v1alpha1 "github.com/upbound/provider-aws/apis/v1alpha1"
+	v1alpha1apis "github.com/upbound/provider-aws/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-aws/apis/v1beta1"
 	v1beta1vpc "github.com/upbound/provider-aws/apis/vpc/v1beta1"
 	v1beta1waf "github.com/upbound/provider-aws/apis/waf/v1beta1"
@@ -304,6 +305,7 @@ func init() {
 		v1beta1mediapackage.SchemeBuilder.AddToScheme,
 		v1beta1mediastore.SchemeBuilder.AddToScheme,
 		v1beta1memorydb.SchemeBuilder.AddToScheme,
+		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1mq.SchemeBuilder.AddToScheme,
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta1networkfirewall.SchemeBuilder.AddToScheme,
@@ -352,7 +354,7 @@ func init() {
 		v1beta1timestreamwrite.SchemeBuilder.AddToScheme,
 		v1beta1transcribe.SchemeBuilder.AddToScheme,
 		v1beta1transfer.SchemeBuilder.AddToScheme,
-		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
 		v1beta1vpc.SchemeBuilder.AddToScheme,
 		v1beta1waf.SchemeBuilder.AddToScheme,

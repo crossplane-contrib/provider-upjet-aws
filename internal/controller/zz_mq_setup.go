@@ -11,6 +11,7 @@ import (
 
 	broker "github.com/upbound/provider-aws/internal/controller/mq/broker"
 	configuration "github.com/upbound/provider-aws/internal/controller/mq/configuration"
+	user "github.com/upbound/provider-aws/internal/controller/mq/user"
 )
 
 // Setup_mq creates all controllers with the supplied logger and adds them to
@@ -19,6 +20,7 @@ func Setup_mq(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		broker.Setup,
 		configuration.Setup,
+		user.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

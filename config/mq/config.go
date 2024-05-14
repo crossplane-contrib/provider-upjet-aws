@@ -50,4 +50,11 @@ func Configure(p *config.Provider) {
 			return conn, nil
 		}
 	})
+
+	p.AddResourceConfigurator("aws_mq_user", func(r *config.Resource) {
+		r.References["broker_id"] = config.Reference{
+			Type: "Broker",
+		}
+		r.Version = "v1alpha1"
+	})
 }
