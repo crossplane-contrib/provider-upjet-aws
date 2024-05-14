@@ -1,0 +1,184 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xe2etestclusters.aws.platformref.upbound.io
+spec:
+  defaultCompositeDeletePolicy: Foreground
+  group: aws.platformref.upbound.io
+  names:
+    kind: XE2ETestCluster
+    plural: xe2etestclusters
+  claimNames:
+    kind: E2ETestCluster
+    plural: e2etestclusters
+  connectionSecretKeys:
+    - kubeconfig
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                parameters:
+                  type: object
+                  description: Cluster configuration parameters.
+                  properties:
+                    id:
+                      type: string
+                      description: ID of this Cluster that other objects will use to refer to it.
+                    region:
+                      type: string
+                      description: Region is the region you'd like your resource to be created in.
+                    iam:
+                      type: object
+                      description: IAM configuration to connect as ClusterAdmin.
+                      properties:
+                        roleArn:
+                          description: The IAM Role ARN to connect as ClusterAdmin.
+                          type: string
+                        userArn:
+                          description: The IAM User ARN to connect as ClusterAdmin.
+                          type: string
+                    networkSelector:
+                      type: string
+                      description: NetworkSelector employs a specific type of network architecture.
+                      enum:
+                        - basic
+                      default: basic
+                    deletionPolicy:
+                      description: Delete the external resources when the Claim/XR is deleted. Defaults to Delete
+                      enum:
+                        - Delete
+                        - Orphan
+                      type: string
+                      default: Delete
+                    providerConfigName:
+                      description: Crossplane ProviderConfig to use for provisioning this resources
+                      type: string
+                      default: default
+                    version:
+                      type: string
+                      description: Kubernetes version of the Cluster
+                      enum:
+                        - "1.28"
+                        - "1.27"
+                        - "1.26"
+                        - "1.25"
+                      default: "1.27"
+                    nodes:
+                      type: object
+                      description: Cluster node configuration parameters.
+                      properties:
+                        count:
+                          type: integer
+                          description: Desired node count, from 1 to 100.
+                        instanceType:
+                          type: string
+                          description: instance types associated with the Node Group.
+                          default: t3.small
+                      required:
+                        - count
+                        - instanceType
+                    irsa:
+                      type: object
+                      description: IRSA configuration parameters.
+                      properties:
+                        serviceAccount:
+                          type: object
+                          description: Configuration for SA
+                          properties:
+                            name:
+                              type: string
+                              description: name kubernetes SA
+                            namespace:
+                              type: string
+                              description: namespace kubernetes SA
+                          required:
+                            - name
+                            - namespace
+                        condition:
+                          type: string
+                          description: This is the whether or not the equals is a hard match or like query
+                          default: StringEquals
+                          enum:
+                            - StringEquals
+                            - StringLike
+                        policyDocument:
+                          type: string
+                          description: The JSON policy document that is the content for the policy.
+                      required:
+                        - condition
+                        - policyDocument
+                        - serviceAccount
+                    targetClusterParameters:
+                      type: object
+                      description: Target EKS Cluster configuration parameters.
+                      properties:
+                        provider:
+                          type: object
+                          description: Configuration for providers to be installed
+                          properties:
+                            familyPackage:
+                              type: string
+                              description: provider-family-aws package url to be used
+                            ec2Package:
+                              type: string
+                              description: provider-aws-ec2 package url to be used
+                            rdsPackage:
+                              type: string
+                              description: provider-aws-iam package url to be used
+                          required:
+                            - familyPackage
+                            - ec2Package
+                            - rdsPackage
+                        crossplaneVersion:
+                          type: string
+                          description: crossplane version to be deployed on the cluster
+                          default: "1.15.2"
+                      required:
+                        - crossplaneVersion
+                        - provider
+                  required:
+                    - deletionPolicy
+                    - id
+                    - nodes
+                    - providerConfigName
+                    - region
+                    - irsa
+                    - targetClusterParameters
+              required:
+                - parameters
+            status:
+              type: object
+              properties:
+                subnetIds:
+                  type: array
+                  items:
+                    type: string
+                irsa:
+                  type: object
+                  properties:
+                    roleArn:
+                      type: string
+                    policyArn:
+                      type: string
+                    chainedRoleARNs:
+                      type: array
+                      items:
+                        type: string
+                webIdentity:
+                  type: object
+                  properties:
+                    roleArn:
+                      type: string
+                    policyArn:
+                      type: string
+                    chainedRoleARNs:
+                      type: array
+                      items:
+                        type: string
