@@ -93,7 +93,7 @@ spec:
                     description: API identifier.
                     type: string
                   apiIdRef:
-                    description: Reference to a API to populate apiId.
+                    description: Reference to a API in apigatewayv2 to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -127,7 +127,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: Selector for a API to populate apiId.
+                    description: Selector for a API in apigatewayv2 to populate apiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -206,7 +206,8 @@ spec:
                       resource to configure a deployment.
                     type: string
                   deploymentIdRef:
-                    description: Reference to a Deployment to populate deploymentId.
+                    description: Reference to a Deployment in apigatewayv2 to populate
+                      deploymentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -240,7 +241,8 @@ spec:
                     - name
                     type: object
                   deploymentIdSelector:
-                    description: Selector for a Deployment to populate deploymentId.
+                    description: Selector for a Deployment in apigatewayv2 to populate
+                      deploymentId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -364,7 +366,7 @@ spec:
                     description: API identifier.
                     type: string
                   apiIdRef:
-                    description: Reference to a API to populate apiId.
+                    description: Reference to a API in apigatewayv2 to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -398,7 +400,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: Selector for a API to populate apiId.
+                    description: Selector for a API in apigatewayv2 to populate apiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -477,7 +479,8 @@ spec:
                       resource to configure a deployment.
                     type: string
                   deploymentIdRef:
-                    description: Reference to a Deployment to populate deploymentId.
+                    description: Reference to a Deployment in apigatewayv2 to populate
+                      deploymentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -511,7 +514,8 @@ spec:
                     - name
                     type: object
                   deploymentIdSelector:
-                    description: Selector for a Deployment to populate deploymentId.
+                    description: Selector for a Deployment in apigatewayv2 to populate
+                      deploymentId.
                     properties:
                       matchControllerRef:
                         description: |-

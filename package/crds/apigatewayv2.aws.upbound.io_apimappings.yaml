@@ -77,7 +77,7 @@ spec:
                     description: API identifier.
                     type: string
                   apiIdRef:
-                    description: Reference to a API to populate apiId.
+                    description: Reference to a API in apigatewayv2 to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: Selector for a API to populate apiId.
+                    description: Selector for a API in apigatewayv2 to populate apiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -159,7 +159,8 @@ spec:
                       resource to configure a domain name.
                     type: string
                   domainNameRef:
-                    description: Reference to a DomainName to populate domainName.
+                    description: Reference to a DomainName in apigatewayv2 to populate
+                      domainName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -193,7 +194,8 @@ spec:
                     - name
                     type: object
                   domainNameSelector:
-                    description: Selector for a DomainName to populate domainName.
+                    description: Selector for a DomainName in apigatewayv2 to populate
+                      domainName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -241,7 +243,8 @@ spec:
                       to configure an API stage.
                     type: string
                   stageRef:
-                    description: Reference to a Stage to populate stage.
+                    description: Reference to a Stage in apigatewayv2 to populate
+                      stage.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -275,7 +278,8 @@ spec:
                     - name
                     type: object
                   stageSelector:
-                    description: Selector for a Stage to populate stage.
+                    description: Selector for a Stage in apigatewayv2 to populate
+                      stage.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -334,7 +338,7 @@ spec:
                     description: API identifier.
                     type: string
                   apiIdRef:
-                    description: Reference to a API to populate apiId.
+                    description: Reference to a API in apigatewayv2 to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -368,7 +372,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: Selector for a API to populate apiId.
+                    description: Selector for a API in apigatewayv2 to populate apiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -416,7 +420,8 @@ spec:
                       resource to configure a domain name.
                     type: string
                   domainNameRef:
-                    description: Reference to a DomainName to populate domainName.
+                    description: Reference to a DomainName in apigatewayv2 to populate
+                      domainName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -450,7 +455,8 @@ spec:
                     - name
                     type: object
                   domainNameSelector:
-                    description: Selector for a DomainName to populate domainName.
+                    description: Selector for a DomainName in apigatewayv2 to populate
+                      domainName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -494,7 +500,8 @@ spec:
                       to configure an API stage.
                     type: string
                   stageRef:
-                    description: Reference to a Stage to populate stage.
+                    description: Reference to a Stage in apigatewayv2 to populate
+                      stage.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -528,7 +535,8 @@ spec:
                     - name
                     type: object
                   stageSelector:
-                    description: Selector for a Stage to populate stage.
+                    description: Selector for a Stage in apigatewayv2 to populate
+                      stage.
                     properties:
                       matchControllerRef:
                         description: |-

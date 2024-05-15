@@ -17,14 +17,14 @@ type MainRouteTableAssociationInitParameters struct {
 
 	// The ID of the Route Table to set as the new
 	// main route table for the target VPC
-	// +crossplane:generate:reference:type=RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// Reference to a RouteTable to populate routeTableId.
+	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a RouteTable to populate routeTableId.
+	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
@@ -66,15 +66,15 @@ type MainRouteTableAssociationParameters struct {
 
 	// The ID of the Route Table to set as the new
 	// main route table for the target VPC
-	// +crossplane:generate:reference:type=RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// Reference to a RouteTable to populate routeTableId.
+	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a RouteTable to populate routeTableId.
+	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 

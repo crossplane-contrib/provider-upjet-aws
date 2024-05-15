@@ -31,14 +31,14 @@ type VPCAssociationAuthorizationInitParameters struct {
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 
 	// The ID of the private hosted zone that you want to authorize associating a VPC with.
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
-	// Reference to a Zone to populate zoneId.
+	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate zoneId.
+	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
@@ -83,15 +83,15 @@ type VPCAssociationAuthorizationParameters struct {
 	VPCRegion *string `json:"vpcRegion,omitempty" tf:"vpc_region,omitempty"`
 
 	// The ID of the private hosted zone that you want to authorize associating a VPC with.
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
-	// Reference to a Zone to populate zoneId.
+	// Reference to a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate zoneId.
+	// Selector for a Zone in route53 to populate zoneId.
 	// +kubebuilder:validation:Optional
 	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }

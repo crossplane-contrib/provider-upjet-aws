@@ -77,7 +77,7 @@ spec:
                     description: API identifier.
                     type: string
                   apiIdRef:
-                    description: Reference to a API to populate apiId.
+                    description: Reference to a API in apigatewayv2 to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: Selector for a API to populate apiId.
+                    description: Selector for a API in apigatewayv2 to populate apiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -174,7 +174,8 @@ spec:
                       to be associated with this route.
                     type: string
                   authorizerIdRef:
-                    description: Reference to a Authorizer to populate authorizerId.
+                    description: Reference to a Authorizer in apigatewayv2 to populate
+                      authorizerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -208,7 +209,8 @@ spec:
                     - name
                     type: object
                   authorizerIdSelector:
-                    description: Selector for a Authorizer to populate authorizerId.
+                    description: Selector for a Authorizer in apigatewayv2 to populate
+                      authorizerId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -390,7 +392,7 @@ spec:
                     description: API identifier.
                     type: string
                   apiIdRef:
-                    description: Reference to a API to populate apiId.
+                    description: Reference to a API in apigatewayv2 to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -424,7 +426,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: Selector for a API to populate apiId.
+                    description: Selector for a API in apigatewayv2 to populate apiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -487,7 +489,8 @@ spec:
                       to be associated with this route.
                     type: string
                   authorizerIdRef:
-                    description: Reference to a Authorizer to populate authorizerId.
+                    description: Reference to a Authorizer in apigatewayv2 to populate
+                      authorizerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -521,7 +524,8 @@ spec:
                     - name
                     type: object
                   authorizerIdSelector:
-                    description: Selector for a Authorizer to populate authorizerId.
+                    description: Selector for a Authorizer in apigatewayv2 to populate
+                      authorizerId.
                     properties:
                       matchControllerRef:
                         description: |-

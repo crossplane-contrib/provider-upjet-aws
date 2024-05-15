@@ -12,20 +12,20 @@ func Configure(p *config.Provider) {
 		r.ExternalName.OmittedFields = append(r.ExternalName.OmittedFields, "name_prefix")
 		r.References = config.References{
 			"security_groups": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+				TerraformName:     "aws_security_group",
 				RefFieldName:      "SecurityGroupRefs",
 				SelectorFieldName: "SecurityGroupSelector",
 			},
 			"subnets": {
-				Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+				TerraformName:     "aws_subnet",
 				RefFieldName:      "SubnetRefs",
 				SelectorFieldName: "SubnetSelector",
 			},
 			"access_logs.bucket": {
-				Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
+				TerraformName: "aws_s3_bucket",
 			},
 			"subnet_mapping.subnet_id": {
-				Type: "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+				TerraformName: "aws_subnet",
 			},
 		}
 		r.UseAsync = true
@@ -35,13 +35,13 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_lb_listener", func(r *config.Resource) {
 		r.References = config.References{
 			"load_balancer_arn": {
-				Type: "LB",
+				TerraformName: "aws_lb",
 			},
 			"default_action.target_group_arn": {
-				Type: "LBTargetGroup",
+				TerraformName: "aws_lb_target_group",
 			},
 			"default_action.forward.target_group.arn": {
-				Type: "LBTargetGroup",
+				TerraformName: "aws_lb_target_group",
 			},
 		}
 	})
@@ -59,7 +59,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_lb_target_group_attachment", func(r *config.Resource) {
 		r.References = config.References{
 			"target_group_arn": {
-				Type: "LBTargetGroup",
+				TerraformName: "aws_lb_target_group",
 			},
 		}
 		r.UseAsync = true

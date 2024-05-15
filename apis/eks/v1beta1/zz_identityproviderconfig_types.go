@@ -16,14 +16,14 @@ import (
 type IdentityProviderConfigInitParameters struct {
 
 	// –  Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// Reference to a Cluster to populate clusterName.
+	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterName.
+	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
@@ -146,15 +146,15 @@ type IdentityProviderConfigOidcParameters struct {
 type IdentityProviderConfigParameters struct {
 
 	// –  Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// Reference to a Cluster to populate clusterName.
+	// Reference to a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterName.
+	// Selector for a Cluster in eks to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 

@@ -95,7 +95,7 @@ spec:
                       to launch this instance.
                     type: string
                   clusterIdentifierRef:
-                    description: Reference to a Cluster to populate clusterIdentifier.
+                    description: Reference to a Cluster in docdb to populate clusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -129,7 +129,7 @@ spec:
                     - name
                     type: object
                   clusterIdentifierSelector:
-                    description: Selector for a Cluster to populate clusterIdentifier.
+                    description: Selector for a Cluster in docdb to populate clusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -251,7 +251,7 @@ spec:
                       to launch this instance.
                     type: string
                   clusterIdentifierRef:
-                    description: Reference to a Cluster to populate clusterIdentifier.
+                    description: Reference to a Cluster in docdb to populate clusterIdentifier.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -285,7 +285,7 @@ spec:
                     - name
                     type: object
                   clusterIdentifierSelector:
-                    description: Selector for a Cluster to populate clusterIdentifier.
+                    description: Selector for a Cluster in docdb to populate clusterIdentifier.
                     properties:
                       matchControllerRef:
                         description: |-

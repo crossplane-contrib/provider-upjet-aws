@@ -16,14 +16,14 @@ import (
 type VaultLockConfigurationInitParameters struct {
 
 	// Name of the backup vault to add a lock configuration for.
-	// +crossplane:generate:reference:type=Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
 
-	// Reference to a Vault to populate backupVaultName.
+	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
 	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
-	// Selector for a Vault to populate backupVaultName.
+	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
 	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 
@@ -60,15 +60,15 @@ type VaultLockConfigurationObservation struct {
 type VaultLockConfigurationParameters struct {
 
 	// Name of the backup vault to add a lock configuration for.
-	// +crossplane:generate:reference:type=Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
 
-	// Reference to a Vault to populate backupVaultName.
+	// Reference to a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
 	BackupVaultNameRef *v1.Reference `json:"backupVaultNameRef,omitempty" tf:"-"`
 
-	// Selector for a Vault to populate backupVaultName.
+	// Selector for a Vault in backup to populate backupVaultName.
 	// +kubebuilder:validation:Optional
 	BackupVaultNameSelector *v1.Selector `json:"backupVaultNameSelector,omitempty" tf:"-"`
 

@@ -178,7 +178,8 @@ spec:
                     description: The ID of the site.
                     type: string
                   siteIdRef:
-                    description: Reference to a Site to populate siteId.
+                    description: Reference to a Site in networkmanager to populate
+                      siteId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -212,7 +213,8 @@ spec:
                     - name
                     type: object
                   siteIdSelector:
-                    description: Selector for a Site to populate siteId.
+                    description: Selector for a Site in networkmanager to populate
+                      siteId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -378,7 +380,8 @@ spec:
                     description: The ID of the site.
                     type: string
                   siteIdRef:
-                    description: Reference to a Site to populate siteId.
+                    description: Reference to a Site in networkmanager to populate
+                      siteId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -412,7 +415,8 @@ spec:
                     - name
                     type: object
                   siteIdSelector:
-                    description: Selector for a Site to populate siteId.
+                    description: Selector for a Site in networkmanager to populate
+                      siteId.
                     properties:
                       matchControllerRef:
                         description: |-

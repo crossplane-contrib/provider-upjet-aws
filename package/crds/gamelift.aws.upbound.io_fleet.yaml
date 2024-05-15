@@ -77,7 +77,7 @@ spec:
                     description: ID of the GameLift Build to be deployed on the fleet.
                     type: string
                   buildIdRef:
-                    description: Reference to a Build to populate buildId.
+                    description: Reference to a Build in gamelift to populate buildId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   buildIdSelector:
-                    description: Selector for a Build to populate buildId.
+                    description: Selector for a Build in gamelift to populate buildId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -376,7 +376,7 @@ spec:
                     description: ID of the GameLift Build to be deployed on the fleet.
                     type: string
                   buildIdRef:
-                    description: Reference to a Build to populate buildId.
+                    description: Reference to a Build in gamelift to populate buildId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -410,7 +410,7 @@ spec:
                     - name
                     type: object
                   buildIdSelector:
-                    description: Selector for a Build to populate buildId.
+                    description: Selector for a Build in gamelift to populate buildId.
                     properties:
                       matchControllerRef:
                         description: |-

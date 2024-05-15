@@ -73,14 +73,14 @@ type EndpointGroupInitParameters struct {
 	HealthCheckProtocol *string `json:"healthCheckProtocol,omitempty" tf:"health_check_protocol,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the listener.
-	// +crossplane:generate:reference:type=Listener
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1.Listener
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 
-	// Reference to a Listener to populate listenerArn.
+	// Reference to a Listener in globalaccelerator to populate listenerArn.
 	// +kubebuilder:validation:Optional
 	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
 
-	// Selector for a Listener to populate listenerArn.
+	// Selector for a Listener in globalaccelerator to populate listenerArn.
 	// +kubebuilder:validation:Optional
 	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
 
@@ -160,15 +160,15 @@ type EndpointGroupParameters struct {
 	HealthCheckProtocol *string `json:"healthCheckProtocol,omitempty" tf:"health_check_protocol,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the listener.
-	// +crossplane:generate:reference:type=Listener
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1.Listener
 	// +kubebuilder:validation:Optional
 	ListenerArn *string `json:"listenerArn,omitempty" tf:"listener_arn,omitempty"`
 
-	// Reference to a Listener to populate listenerArn.
+	// Reference to a Listener in globalaccelerator to populate listenerArn.
 	// +kubebuilder:validation:Optional
 	ListenerArnRef *v1.Reference `json:"listenerArnRef,omitempty" tf:"-"`
 
-	// Selector for a Listener to populate listenerArn.
+	// Selector for a Listener in globalaccelerator to populate listenerArn.
 	// +kubebuilder:validation:Optional
 	ListenerArnSelector *v1.Selector `json:"listenerArnSelector,omitempty" tf:"-"`
 

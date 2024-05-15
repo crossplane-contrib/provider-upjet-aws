@@ -16,15 +16,15 @@ import (
 type AssociationInitParameters struct {
 
 	// ARN of the license configuration.
-	// +crossplane:generate:reference:type=LicenseConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/licensemanager/v1beta1.LicenseConfiguration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
 
-	// Reference to a LicenseConfiguration to populate licenseConfigurationArn.
+	// Reference to a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArnRef *v1.Reference `json:"licenseConfigurationArnRef,omitempty" tf:"-"`
 
-	// Selector for a LicenseConfiguration to populate licenseConfigurationArn.
+	// Selector for a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArnSelector *v1.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
 
@@ -57,16 +57,16 @@ type AssociationObservation struct {
 type AssociationParameters struct {
 
 	// ARN of the license configuration.
-	// +crossplane:generate:reference:type=LicenseConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/licensemanager/v1beta1.LicenseConfiguration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
 
-	// Reference to a LicenseConfiguration to populate licenseConfigurationArn.
+	// Reference to a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArnRef *v1.Reference `json:"licenseConfigurationArnRef,omitempty" tf:"-"`
 
-	// Selector for a LicenseConfiguration to populate licenseConfigurationArn.
+	// Selector for a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArnSelector *v1.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
 

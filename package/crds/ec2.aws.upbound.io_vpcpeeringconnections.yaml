@@ -92,7 +92,7 @@ spec:
                       VPC Peering Connection.
                     type: string
                   peerVpcIdRef:
-                    description: Reference to a VPC to populate peerVpcId.
+                    description: Reference to a VPC in ec2 to populate peerVpcId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -126,7 +126,7 @@ spec:
                     - name
                     type: object
                   peerVpcIdSelector:
-                    description: Selector for a VPC to populate peerVpcId.
+                    description: Selector for a VPC in ec2 to populate peerVpcId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -287,7 +287,7 @@ spec:
                       VPC Peering Connection.
                     type: string
                   peerVpcIdRef:
-                    description: Reference to a VPC to populate peerVpcId.
+                    description: Reference to a VPC in ec2 to populate peerVpcId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -321,7 +321,7 @@ spec:
                     - name
                     type: object
                   peerVpcIdSelector:
-                    description: Selector for a VPC to populate peerVpcId.
+                    description: Selector for a VPC in ec2 to populate peerVpcId.
                     properties:
                       matchControllerRef:
                         description: |-

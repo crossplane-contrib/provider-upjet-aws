@@ -572,14 +572,14 @@ type ServiceInitParameters struct {
 	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
 	// Name of an ECS cluster.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Cluster
 	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
 
-	// Reference to a Cluster to populate cluster.
+	// Reference to a Cluster in ecs to populate cluster.
 	// +kubebuilder:validation:Optional
 	ClusterRef *v1.Reference `json:"clusterRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate cluster.
+	// Selector for a Cluster in ecs to populate cluster.
 	// +kubebuilder:validation:Optional
 	ClusterSelector *v1.Selector `json:"clusterSelector,omitempty" tf:"-"`
 
@@ -658,14 +658,14 @@ type ServiceInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
-	// +crossplane:generate:reference:type=TaskDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.TaskDefinition
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 
-	// Reference to a TaskDefinition to populate taskDefinition.
+	// Reference to a TaskDefinition in ecs to populate taskDefinition.
 	// +kubebuilder:validation:Optional
 	TaskDefinitionRef *v1.Reference `json:"taskDefinitionRef,omitempty" tf:"-"`
 
-	// Selector for a TaskDefinition to populate taskDefinition.
+	// Selector for a TaskDefinition in ecs to populate taskDefinition.
 	// +kubebuilder:validation:Optional
 	TaskDefinitionSelector *v1.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
 
@@ -781,15 +781,15 @@ type ServiceParameters struct {
 	CapacityProviderStrategy []CapacityProviderStrategyParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
 	// Name of an ECS cluster.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	Cluster *string `json:"cluster,omitempty" tf:"cluster,omitempty"`
 
-	// Reference to a Cluster to populate cluster.
+	// Reference to a Cluster in ecs to populate cluster.
 	// +kubebuilder:validation:Optional
 	ClusterRef *v1.Reference `json:"clusterRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate cluster.
+	// Selector for a Cluster in ecs to populate cluster.
 	// +kubebuilder:validation:Optional
 	ClusterSelector *v1.Selector `json:"clusterSelector,omitempty" tf:"-"`
 
@@ -894,15 +894,15 @@ type ServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Family and revision (family:revision) or full ARN of the task definition that you want to run in your service. Required unless using the EXTERNAL deployment controller. If a revision is not specified, the latest ACTIVE revision is used.
-	// +crossplane:generate:reference:type=TaskDefinition
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecs/v1beta1.TaskDefinition
 	// +kubebuilder:validation:Optional
 	TaskDefinition *string `json:"taskDefinition,omitempty" tf:"task_definition,omitempty"`
 
-	// Reference to a TaskDefinition to populate taskDefinition.
+	// Reference to a TaskDefinition in ecs to populate taskDefinition.
 	// +kubebuilder:validation:Optional
 	TaskDefinitionRef *v1.Reference `json:"taskDefinitionRef,omitempty" tf:"-"`
 
-	// Selector for a TaskDefinition to populate taskDefinition.
+	// Selector for a TaskDefinition in ecs to populate taskDefinition.
 	// +kubebuilder:validation:Optional
 	TaskDefinitionSelector *v1.Selector `json:"taskDefinitionSelector,omitempty" tf:"-"`
 

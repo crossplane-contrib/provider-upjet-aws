@@ -45,14 +45,14 @@ type RequestParameterParameters struct {
 type RouteInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Reference to a API to populate apiId.
+	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiId.
+	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -70,14 +70,14 @@ type RouteInitParameters struct {
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_authorizer resource to be associated with this route.
-	// +crossplane:generate:reference:type=Authorizer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Authorizer
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
 
-	// Reference to a Authorizer to populate authorizerId.
+	// Reference to a Authorizer in apigatewayv2 to populate authorizerId.
 	// +kubebuilder:validation:Optional
 	AuthorizerIDRef *v1.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Authorizer to populate authorizerId.
+	// Selector for a Authorizer in apigatewayv2 to populate authorizerId.
 	// +kubebuilder:validation:Optional
 	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 
@@ -164,15 +164,15 @@ type RouteObservation struct {
 type RouteParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Reference to a API to populate apiId.
+	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiId.
+	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -193,15 +193,15 @@ type RouteParameters struct {
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_authorizer resource to be associated with this route.
-	// +crossplane:generate:reference:type=Authorizer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Authorizer
 	// +kubebuilder:validation:Optional
 	AuthorizerID *string `json:"authorizerId,omitempty" tf:"authorizer_id,omitempty"`
 
-	// Reference to a Authorizer to populate authorizerId.
+	// Reference to a Authorizer in apigatewayv2 to populate authorizerId.
 	// +kubebuilder:validation:Optional
 	AuthorizerIDRef *v1.Reference `json:"authorizerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Authorizer to populate authorizerId.
+	// Selector for a Authorizer in apigatewayv2 to populate authorizerId.
 	// +kubebuilder:validation:Optional
 	AuthorizerIDSelector *v1.Selector `json:"authorizerIdSelector,omitempty" tf:"-"`
 

@@ -162,7 +162,7 @@ spec:
                       can only be one Kinesis streaming destination for a given DynamoDB table.
                     type: string
                   tableNameRef:
-                    description: Reference to a Table to populate tableName.
+                    description: Reference to a Table in dynamodb to populate tableName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -196,7 +196,7 @@ spec:
                     - name
                     type: object
                   tableNameSelector:
-                    description: Selector for a Table to populate tableName.
+                    description: Selector for a Table in dynamodb to populate tableName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -335,7 +335,7 @@ spec:
                       can only be one Kinesis streaming destination for a given DynamoDB table.
                     type: string
                   tableNameRef:
-                    description: Reference to a Table to populate tableName.
+                    description: Reference to a Table in dynamodb to populate tableName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -369,7 +369,7 @@ spec:
                     - name
                     type: object
                   tableNameSelector:
-                    description: Selector for a Table to populate tableName.
+                    description: Selector for a Table in dynamodb to populate tableName.
                     properties:
                       matchControllerRef:
                         description: |-

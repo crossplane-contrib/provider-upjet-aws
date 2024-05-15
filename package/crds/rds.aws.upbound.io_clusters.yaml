@@ -299,7 +299,7 @@ spec:
                       NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
                     type: string
                   dbSubnetGroupNameRef:
-                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
+                    description: Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -333,7 +333,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
+                    description: Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -678,7 +678,7 @@ spec:
                             AWS account, the identifier is the ARN of that cluster.
                           type: string
                         sourceClusterIdentifierRef:
-                          description: Reference to a Cluster to populate sourceClusterIdentifier.
+                          description: Reference to a Cluster in rds to populate sourceClusterIdentifier.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -712,7 +712,7 @@ spec:
                           - name
                           type: object
                         sourceClusterIdentifierSelector:
-                          description: Selector for a Cluster to populate sourceClusterIdentifier.
+                          description: Selector for a Cluster in rds to populate sourceClusterIdentifier.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -1283,7 +1283,7 @@ spec:
                       NOTE: This must match the db_subnet_group_name specified on every aws_rds_cluster_instance in the cluster.
                     type: string
                   dbSubnetGroupNameRef:
-                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
+                    description: Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1317,7 +1317,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
+                    description: Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1639,7 +1639,7 @@ spec:
                             AWS account, the identifier is the ARN of that cluster.
                           type: string
                         sourceClusterIdentifierRef:
-                          description: Reference to a Cluster to populate sourceClusterIdentifier.
+                          description: Reference to a Cluster in rds to populate sourceClusterIdentifier.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1673,7 +1673,7 @@ spec:
                           - name
                           type: object
                         sourceClusterIdentifierSelector:
-                          description: Selector for a Cluster to populate sourceClusterIdentifier.
+                          description: Selector for a Cluster in rds to populate sourceClusterIdentifier.
                           properties:
                             matchControllerRef:
                               description: |-

@@ -14,19 +14,19 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_apigatewayv2_api_mapping", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 		r.References["domain_name"] = config.Reference{
-			Type: "DomainName",
+			TerraformName: "aws_apigatewayv2_domain_name",
 		}
 		r.References["stage"] = config.Reference{
-			Type:      "Stage",
-			Extractor: common.PathTerraformIDExtractor,
+			TerraformName: "aws_apigatewayv2_stage",
+			Extractor:     common.PathTerraformIDExtractor,
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_authorizer", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 		r.References["authorizer_uri"] = config.Reference{
 			TerraformName: "aws_lambda_function",
@@ -35,13 +35,13 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_domain_name", func(r *config.Resource) {
 		r.References["domain_name_configuration.certificate_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_acm_certificate",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_deployment", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 		// Triggers is a meta-argument that has comma-separated list of other resources in the same HCL block that tells
 		// terraform to re-create the resource if those in the list changed. Upjet workspaces contain only a single
@@ -53,48 +53,48 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_integration", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_integration_response", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 		r.References["integration_id"] = config.Reference{
-			Type: "Integration",
+			TerraformName: "aws_apigatewayv2_integration",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_model", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_route", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 		r.References["target"] = config.Reference{
 			TerraformName: "aws_apigatewayv2_integration",
 			Extractor:     "github.com/upbound/provider-aws/config/common/apis.IntegrationIDPrefixed()",
 		}
 		r.References["authorizer_id"] = config.Reference{
-			Type: "Authorizer",
+			TerraformName: "aws_apigatewayv2_authorizer",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_route_response", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 		r.References["route_id"] = config.Reference{
-			Type: "Route",
+			TerraformName: "aws_apigatewayv2_route",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_stage", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
-			Type: "API",
+			TerraformName: "aws_apigatewayv2_api",
 		}
 		r.References["deployment_id"] = config.Reference{
-			Type: "Deployment",
+			TerraformName: "aws_apigatewayv2_deployment",
 		}
 	})
 	p.AddResourceConfigurator("aws_apigatewayv2_vpclink", func(r *config.Resource) {

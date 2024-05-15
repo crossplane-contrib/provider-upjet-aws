@@ -16,14 +16,14 @@ import (
 type ConnectAttachmentInitParameters struct {
 
 	// The ID of a core network where you want to create the attachment.
-	// +crossplane:generate:reference:type=CoreNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.CoreNetwork
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
-	// Reference to a CoreNetwork to populate coreNetworkId.
+	// Reference to a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
 	CoreNetworkIDRef *v1.Reference `json:"coreNetworkIdRef,omitempty" tf:"-"`
 
-	// Selector for a CoreNetwork to populate coreNetworkId.
+	// Selector for a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
 	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 
@@ -117,15 +117,15 @@ type ConnectAttachmentObservation struct {
 type ConnectAttachmentParameters struct {
 
 	// The ID of a core network where you want to create the attachment.
-	// +crossplane:generate:reference:type=CoreNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.CoreNetwork
 	// +kubebuilder:validation:Optional
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
-	// Reference to a CoreNetwork to populate coreNetworkId.
+	// Reference to a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
 	CoreNetworkIDRef *v1.Reference `json:"coreNetworkIdRef,omitempty" tf:"-"`
 
-	// Selector for a CoreNetwork to populate coreNetworkId.
+	// Selector for a CoreNetwork in networkmanager to populate coreNetworkId.
 	// +kubebuilder:validation:Optional
 	CoreNetworkIDSelector *v1.Selector `json:"coreNetworkIdSelector,omitempty" tf:"-"`
 

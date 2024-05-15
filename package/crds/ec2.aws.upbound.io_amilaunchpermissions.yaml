@@ -84,7 +84,7 @@ spec:
                     description: ID of the AMI.
                     type: string
                   imageIdRef:
-                    description: Reference to a AMI to populate imageId.
+                    description: Reference to a AMI in ec2 to populate imageId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,7 +118,7 @@ spec:
                     - name
                     type: object
                   imageIdSelector:
-                    description: Selector for a AMI to populate imageId.
+                    description: Selector for a AMI in ec2 to populate imageId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -194,7 +194,7 @@ spec:
                     description: ID of the AMI.
                     type: string
                   imageIdRef:
-                    description: Reference to a AMI to populate imageId.
+                    description: Reference to a AMI in ec2 to populate imageId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -228,7 +228,7 @@ spec:
                     - name
                     type: object
                   imageIdSelector:
-                    description: Selector for a AMI to populate imageId.
+                    description: Selector for a AMI in ec2 to populate imageId.
                     properties:
                       matchControllerRef:
                         description: |-

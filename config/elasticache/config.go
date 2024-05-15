@@ -28,10 +28,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	p.AddResourceConfigurator("aws_elasticache_replication_group", func(r *config.Resource) {
 		r.References["subnet_group_name"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/elasticache/v1beta1.SubnetGroup",
+			TerraformName: "aws_elasticache_subnet_group",
 		}
 		r.References["kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			TerraformName: "aws_kms_key",
 		}
 		r.LateInitializer = config.LateInitializer{
 			// Conflicting configuration arguments: "number_cache_clusters": conflicts with cluster_mode.0.num_node_groups
@@ -120,7 +120,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 
 	p.AddResourceConfigurator("aws_elasticache_user_group", func(r *config.Resource) {
 		r.References["user_ids"] = config.Reference{
-			Type:              "User",
+			TerraformName:     "aws_elasticache_user",
 			RefFieldName:      "UserIDRefs",
 			SelectorFieldName: "UserIDSelector",
 		}

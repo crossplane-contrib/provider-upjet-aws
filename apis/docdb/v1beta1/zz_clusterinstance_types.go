@@ -29,14 +29,14 @@ type ClusterInstanceInitParameters struct {
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
 	// The identifier of the aws_docdb_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
-	// Reference to a Cluster to populate clusterIdentifier.
+	// Reference to a Cluster in docdb to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterIdentifier.
+	// Selector for a Cluster in docdb to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
@@ -174,15 +174,15 @@ type ClusterInstanceParameters struct {
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
 	// The identifier of the aws_docdb_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
-	// Reference to a Cluster to populate clusterIdentifier.
+	// Reference to a Cluster in docdb to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterIdentifier.
+	// Selector for a Cluster in docdb to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 

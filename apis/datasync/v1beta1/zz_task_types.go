@@ -353,14 +353,14 @@ type TaskInitParameters struct {
 	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Name (ARN) of destination DataSync Location.
-	// +crossplane:generate:reference:type=LocationS3
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/datasync/v1beta1.LocationS3
 	DestinationLocationArn *string `json:"destinationLocationArn,omitempty" tf:"destination_location_arn,omitempty"`
 
-	// Reference to a LocationS3 to populate destinationLocationArn.
+	// Reference to a LocationS3 in datasync to populate destinationLocationArn.
 	// +kubebuilder:validation:Optional
 	DestinationLocationArnRef *v1.Reference `json:"destinationLocationArnRef,omitempty" tf:"-"`
 
-	// Selector for a LocationS3 to populate destinationLocationArn.
+	// Selector for a LocationS3 in datasync to populate destinationLocationArn.
 	// +kubebuilder:validation:Optional
 	DestinationLocationArnSelector *v1.Selector `json:"destinationLocationArnSelector,omitempty" tf:"-"`
 
@@ -380,14 +380,14 @@ type TaskInitParameters struct {
 	Schedule []ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// Amazon Resource Name (ARN) of source DataSync Location.
-	// +crossplane:generate:reference:type=LocationS3
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/datasync/v1beta1.LocationS3
 	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`
 
-	// Reference to a LocationS3 to populate sourceLocationArn.
+	// Reference to a LocationS3 in datasync to populate sourceLocationArn.
 	// +kubebuilder:validation:Optional
 	SourceLocationArnRef *v1.Reference `json:"sourceLocationArnRef,omitempty" tf:"-"`
 
-	// Selector for a LocationS3 to populate sourceLocationArn.
+	// Selector for a LocationS3 in datasync to populate sourceLocationArn.
 	// +kubebuilder:validation:Optional
 	SourceLocationArnSelector *v1.Selector `json:"sourceLocationArnSelector,omitempty" tf:"-"`
 
@@ -460,15 +460,15 @@ type TaskParameters struct {
 	CloudwatchLogGroupArnSelector *v1.Selector `json:"cloudwatchLogGroupArnSelector,omitempty" tf:"-"`
 
 	// Amazon Resource Name (ARN) of destination DataSync Location.
-	// +crossplane:generate:reference:type=LocationS3
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/datasync/v1beta1.LocationS3
 	// +kubebuilder:validation:Optional
 	DestinationLocationArn *string `json:"destinationLocationArn,omitempty" tf:"destination_location_arn,omitempty"`
 
-	// Reference to a LocationS3 to populate destinationLocationArn.
+	// Reference to a LocationS3 in datasync to populate destinationLocationArn.
 	// +kubebuilder:validation:Optional
 	DestinationLocationArnRef *v1.Reference `json:"destinationLocationArnRef,omitempty" tf:"-"`
 
-	// Selector for a LocationS3 to populate destinationLocationArn.
+	// Selector for a LocationS3 in datasync to populate destinationLocationArn.
 	// +kubebuilder:validation:Optional
 	DestinationLocationArnSelector *v1.Selector `json:"destinationLocationArnSelector,omitempty" tf:"-"`
 
@@ -498,15 +498,15 @@ type TaskParameters struct {
 	Schedule []ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// Amazon Resource Name (ARN) of source DataSync Location.
-	// +crossplane:generate:reference:type=LocationS3
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/datasync/v1beta1.LocationS3
 	// +kubebuilder:validation:Optional
 	SourceLocationArn *string `json:"sourceLocationArn,omitempty" tf:"source_location_arn,omitempty"`
 
-	// Reference to a LocationS3 to populate sourceLocationArn.
+	// Reference to a LocationS3 in datasync to populate sourceLocationArn.
 	// +kubebuilder:validation:Optional
 	SourceLocationArnRef *v1.Reference `json:"sourceLocationArnRef,omitempty" tf:"-"`
 
-	// Selector for a LocationS3 to populate sourceLocationArn.
+	// Selector for a LocationS3 in datasync to populate sourceLocationArn.
 	// +kubebuilder:validation:Optional
 	SourceLocationArnSelector *v1.Selector `json:"sourceLocationArnSelector,omitempty" tf:"-"`
 

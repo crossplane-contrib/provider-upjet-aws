@@ -26,14 +26,14 @@ type ClusterInstanceInitParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The identifier of the aws_neptune_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
-	// Reference to a Cluster to populate clusterIdentifier.
+	// Reference to a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterIdentifier.
+	// Selector for a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
@@ -47,26 +47,26 @@ type ClusterInstanceInitParameters struct {
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The name of the neptune parameter group to associate with this instance.
-	// +crossplane:generate:reference:type=ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ParameterGroup
 	NeptuneParameterGroupName *string `json:"neptuneParameterGroupName,omitempty" tf:"neptune_parameter_group_name,omitempty"`
 
-	// Reference to a ParameterGroup to populate neptuneParameterGroupName.
+	// Reference to a ParameterGroup in neptune to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupNameRef *v1.Reference `json:"neptuneParameterGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a ParameterGroup to populate neptuneParameterGroupName.
+	// Selector for a ParameterGroup in neptune to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupNameSelector *v1.Selector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A subnet group to associate with this neptune instance. NOTE: This must match the neptune_subnet_group_name of the attached aws_neptune_cluster.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.SubnetGroup
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate neptuneSubnetGroupName.
+	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate neptuneSubnetGroupName.
+	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 
@@ -186,15 +186,15 @@ type ClusterInstanceParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The identifier of the aws_neptune_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
-	// Reference to a Cluster to populate clusterIdentifier.
+	// Reference to a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterIdentifier.
+	// Selector for a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
@@ -211,28 +211,28 @@ type ClusterInstanceParameters struct {
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The name of the neptune parameter group to associate with this instance.
-	// +crossplane:generate:reference:type=ParameterGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ParameterGroup
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupName *string `json:"neptuneParameterGroupName,omitempty" tf:"neptune_parameter_group_name,omitempty"`
 
-	// Reference to a ParameterGroup to populate neptuneParameterGroupName.
+	// Reference to a ParameterGroup in neptune to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupNameRef *v1.Reference `json:"neptuneParameterGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a ParameterGroup to populate neptuneParameterGroupName.
+	// Selector for a ParameterGroup in neptune to populate neptuneParameterGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneParameterGroupNameSelector *v1.Selector `json:"neptuneParameterGroupNameSelector,omitempty" tf:"-"`
 
 	// A subnet group to associate with this neptune instance. NOTE: This must match the neptune_subnet_group_name of the attached aws_neptune_cluster.
-	// +crossplane:generate:reference:type=SubnetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupName *string `json:"neptuneSubnetGroupName,omitempty" tf:"neptune_subnet_group_name,omitempty"`
 
-	// Reference to a SubnetGroup to populate neptuneSubnetGroupName.
+	// Reference to a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameRef *v1.Reference `json:"neptuneSubnetGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SubnetGroup to populate neptuneSubnetGroupName.
+	// Selector for a SubnetGroup in neptune to populate neptuneSubnetGroupName.
 	// +kubebuilder:validation:Optional
 	NeptuneSubnetGroupNameSelector *v1.Selector `json:"neptuneSubnetGroupNameSelector,omitempty" tf:"-"`
 

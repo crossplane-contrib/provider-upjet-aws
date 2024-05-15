@@ -84,14 +84,14 @@ type EC2InboundPermissionParameters struct {
 type FleetInitParameters struct {
 
 	// ID of the GameLift Build to be deployed on the fleet.
-	// +crossplane:generate:reference:type=Build
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/gamelift/v1beta1.Build
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
 
-	// Reference to a Build to populate buildId.
+	// Reference to a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
 	BuildIDRef *v1.Reference `json:"buildIdRef,omitempty" tf:"-"`
 
-	// Selector for a Build to populate buildId.
+	// Selector for a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
 	BuildIDSelector *v1.Selector `json:"buildIdSelector,omitempty" tf:"-"`
 
@@ -216,15 +216,15 @@ type FleetObservation struct {
 type FleetParameters struct {
 
 	// ID of the GameLift Build to be deployed on the fleet.
-	// +crossplane:generate:reference:type=Build
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/gamelift/v1beta1.Build
 	// +kubebuilder:validation:Optional
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
 
-	// Reference to a Build to populate buildId.
+	// Reference to a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
 	BuildIDRef *v1.Reference `json:"buildIdRef,omitempty" tf:"-"`
 
-	// Selector for a Build to populate buildId.
+	// Selector for a Build in gamelift to populate buildId.
 	// +kubebuilder:validation:Optional
 	BuildIDSelector *v1.Selector `json:"buildIdSelector,omitempty" tf:"-"`
 

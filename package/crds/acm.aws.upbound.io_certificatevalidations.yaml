@@ -77,7 +77,7 @@ spec:
                     description: ARN of the certificate that is being validated.
                     type: string
                   certificateArnRef:
-                    description: Reference to a Certificate to populate certificateArn.
+                    description: Reference to a Certificate in acm to populate certificateArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -111,7 +111,7 @@ spec:
                     - name
                     type: object
                   certificateArnSelector:
-                    description: Selector for a Certificate to populate certificateArn.
+                    description: Selector for a Certificate in acm to populate certificateArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -184,7 +184,7 @@ spec:
                     description: ARN of the certificate that is being validated.
                     type: string
                   certificateArnRef:
-                    description: Reference to a Certificate to populate certificateArn.
+                    description: Reference to a Certificate in acm to populate certificateArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -218,7 +218,7 @@ spec:
                     - name
                     type: object
                   certificateArnSelector:
-                    description: Selector for a Certificate to populate certificateArn.
+                    description: Selector for a Certificate in acm to populate certificateArn.
                     properties:
                       matchControllerRef:
                         description: |-

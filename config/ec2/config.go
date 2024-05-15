@@ -16,26 +16,26 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_instance", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["subnet_id"] = config.Reference{
-			Type: "Subnet",
+			TerraformName: "aws_subnet",
 		}
 		r.References["vpc_security_group_ids"] = config.Reference{
-			Type:              "SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "VPCSecurityGroupIDRefs",
 			SelectorFieldName: "VPCSecurityGroupIDSelector",
 		}
 		r.References["security_groups"] = config.Reference{
-			Type:              "SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupRefs",
 			SelectorFieldName: "SecurityGroupSelector",
 		}
 		r.References["root_block_device.kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			TerraformName: "aws_kms_key",
 		}
 		r.References["network_interface.network_interface_id"] = config.Reference{
-			Type: "NetworkInterface",
+			TerraformName: "aws_network_interface",
 		}
 		r.References["ebs_block_device.kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			TerraformName: "aws_kms_key",
 		}
 		r.LateInitializer = config.LateInitializer{
 			// NOTE(muvaf): These are ignored because they conflict with each other.
@@ -57,58 +57,58 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("aws_eip", func(r *config.Resource) {
 		r.References["instance"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "aws_instance",
 		}
 		r.References["network_interface"] = config.Reference{
-			Type: "NetworkInterface",
+			TerraformName: "aws_network_interface",
 		}
 		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route", func(r *config.Resource) {
 		r.References["transit_gateway_attachment_id"] = config.Reference{
-			Type: "TransitGatewayVPCAttachment",
+			TerraformName: "aws_ec2_transit_gateway_vpc_attachment",
 		}
 		r.References["transit_gateway_route_table_id"] = config.Reference{
-			Type: "TransitGatewayRouteTable",
+			TerraformName: "aws_ec2_transit_gateway_route_table",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route_table", func(r *config.Resource) {
 		r.References["transit_gateway_id"] = config.Reference{
-			Type: "TransitGateway",
+			TerraformName: "aws_ec2_transit_gateway",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route_table_association", func(r *config.Resource) {
 		r.References["transit_gateway_attachment_id"] = config.Reference{
-			Type: "TransitGatewayVPCAttachment",
+			TerraformName: "aws_ec2_transit_gateway_vpc_attachment",
 		}
 		r.References["transit_gateway_route_table_id"] = config.Reference{
-			Type: "TransitGatewayRouteTable",
+			TerraformName: "aws_ec2_transit_gateway_route_table",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_vpc_attachment", func(r *config.Resource) {
 		r.References["transit_gateway_id"] = config.Reference{
-			Type: "TransitGateway",
+			TerraformName: "aws_ec2_transit_gateway",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_vpc_attachment_accepter", func(r *config.Resource) {
 		r.References["transit_gateway_attachment_id"] = config.Reference{
-			Type: "TransitGatewayVPCAttachment",
+			TerraformName: "aws_ec2_transit_gateway_vpc_attachment",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_connect", func(r *config.Resource) {
 		r.References["subnet_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			TerraformName:     "aws_subnet",
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
 		r.References["vpc_id"] = config.Reference{
-			Type:              "VPC",
+			TerraformName:     "aws_vpc",
 			RefFieldName:      "VPCIDRef",
 			SelectorFieldName: "VPCIDSelector",
 		}
@@ -116,31 +116,31 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_launch_template", func(r *config.Resource) {
 		r.References["security_group_names"] = config.Reference{
-			Type:              "SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupNameRefs",
 			SelectorFieldName: "SecurityGroupNameSelector",
 		}
 		r.References["block_device_mappings.ebs.kms_key_id"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["iam_instance_profile.arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_instance_profile",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["iam_instance_profile.name"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile",
+			TerraformName: "aws_iam_instance_profile",
 		}
 		r.References["network_interfaces.network_interface_id"] = config.Reference{
-			Type: "NetworkInterface",
+			TerraformName: "aws_network_interface",
 		}
 		r.References["network_interfaces.security_groups"] = config.Reference{
-			Type:              "SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupRefs",
 			SelectorFieldName: "SecurityGroupSelector",
 		}
 		r.References["network_interfaces.subnet_id"] = config.Reference{
-			Type: "Subnet",
+			TerraformName: "aws_subnet",
 		}
 	})
 
@@ -166,15 +166,15 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_network_interface", func(r *config.Resource) {
 		r.References["subnet_id"] = config.Reference{
-			Type: "Subnet",
+			TerraformName: "aws_subnet",
 		}
 		r.References["security_groups"] = config.Reference{
-			Type:              "SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupRefs",
 			SelectorFieldName: "SecurityGroupSelector",
 		}
 		r.References["attachment.instance"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "aws_instance",
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
@@ -198,10 +198,10 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_security_group_rule", func(r *config.Resource) {
 		r.References["security_group_id"] = config.Reference{
-			Type: "SecurityGroup",
+			TerraformName: "aws_security_group",
 		}
 		r.References["source_security_group_id"] = config.Reference{
-			Type: "SecurityGroup",
+			TerraformName: "aws_security_group",
 		}
 		r.References["prefix_list_ids"] = config.Reference{
 			TerraformName:     "aws_ec2_managed_prefix_list",
@@ -255,7 +255,7 @@ func Configure(p *config.Provider) {
 		// Mutually exclusive with aws_vpc_peering_connection_options
 		config.MoveToStatus(r.TerraformResource, "accepter", "requester")
 		r.References["peer_vpc_id"] = config.Reference{
-			Type: "VPC",
+			TerraformName: "aws_vpc",
 		}
 	})
 
@@ -297,31 +297,31 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_route_table_association", func(r *config.Resource) {
 		r.References["subnet_id"] = config.Reference{
-			Type: "Subnet",
+			TerraformName: "aws_subnet",
 		}
 		r.References["route_table_id"] = config.Reference{
-			Type: "RouteTable",
+			TerraformName: "aws_route_table",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_main_route_table_association", func(r *config.Resource) {
 		r.References["route_table_id"] = config.Reference{
-			Type: "RouteTable",
+			TerraformName: "aws_route_table",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_route_table_propagation", func(r *config.Resource) {
 		r.References["transit_gateway_attachment_id"] = config.Reference{
-			Type: "TransitGatewayVPCAttachment",
+			TerraformName: "aws_ec2_transit_gateway_vpc_attachment",
 		}
 		r.References["transit_gateway_route_table_id"] = config.Reference{
-			Type: "TransitGatewayRouteTable",
+			TerraformName: "aws_ec2_transit_gateway_route_table",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_nat_gateway", func(r *config.Resource) {
 		r.References["subnet_id"] = config.Reference{
-			Type: "Subnet",
+			TerraformName: "aws_subnet",
 		}
 	})
 
@@ -367,7 +367,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_ec2_transit_gateway_multicast_domain", func(r *config.Resource) {
 		r.References["transit_gateway_id"] = config.Reference{
-			Type: "TransitGateway",
+			TerraformName: "aws_ec2_transit_gateway",
 		}
 	})
 
@@ -404,25 +404,25 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_vpc_ipam_pool", func(r *config.Resource) {
 		r.References["ipam_scope_id"] = config.Reference{
-			Type: "VPCIpamScope",
+			TerraformName: "aws_vpc_ipam_scope",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_vpc_ipam_scope", func(r *config.Resource) {
 		r.References["ipam_id"] = config.Reference{
-			Type: "VPCIpam",
+			TerraformName: "aws_vpc_ipam",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ami", func(r *config.Resource) {
 		r.References["ebs_block_device.snapshot_id"] = config.Reference{
-			Type: "EBSSnapshot",
+			TerraformName: "aws_ebs_snapshot",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_ami_copy", func(r *config.Resource) {
 		r.References["source_ami_id"] = config.Reference{
-			Type: "AMI",
+			TerraformName: "aws_ami",
 		}
 		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) error {
 			params["ebs_block_device"] = []any{}
@@ -442,13 +442,13 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_ami_launch_permission", func(r *config.Resource) {
 		r.References["image_id"] = config.Reference{
-			Type: "AMI",
+			TerraformName: "aws_ami",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_vpn_connection", func(r *config.Resource) {
 		r.References["vpn_gateway_id"] = config.Reference{
-			Type: "VPNGateway",
+			TerraformName: "aws_vpn_gateway",
 		}
 	})
 

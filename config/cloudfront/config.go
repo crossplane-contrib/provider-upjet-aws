@@ -29,7 +29,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_cloudfront_key_group", func(r *config.Resource) {
 		r.References["items"] = config.Reference{
-			Type:              "PublicKey",
+			TerraformName:     "aws_cloudfront_public_key",
 			RefFieldName:      "ItemRefs",
 			SelectorFieldName: "ItemSelector",
 		}

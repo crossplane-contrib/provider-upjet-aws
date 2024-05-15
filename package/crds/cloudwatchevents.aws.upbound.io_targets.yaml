@@ -350,7 +350,8 @@ spec:
                       If you omit this, the default event bus is used.
                     type: string
                   eventBusNameRef:
-                    description: Reference to a Bus to populate eventBusName.
+                    description: Reference to a Bus in cloudwatchevents to populate
+                      eventBusName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -384,7 +385,8 @@ spec:
                     - name
                     type: object
                   eventBusNameSelector:
-                    description: Selector for a Bus to populate eventBusName.
+                    description: Selector for a Bus in cloudwatchevents to populate
+                      eventBusName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1049,7 +1051,8 @@ spec:
                       If you omit this, the default event bus is used.
                     type: string
                   eventBusNameRef:
-                    description: Reference to a Bus to populate eventBusName.
+                    description: Reference to a Bus in cloudwatchevents to populate
+                      eventBusName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1083,7 +1086,8 @@ spec:
                     - name
                     type: object
                   eventBusNameSelector:
-                    description: Selector for a Bus to populate eventBusName.
+                    description: Selector for a Bus in cloudwatchevents to populate
+                      eventBusName.
                     properties:
                       matchControllerRef:
                         description: |-

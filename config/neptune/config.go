@@ -13,39 +13,39 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_neptune_cluster", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["snapshot_identifier"] = config.Reference{
-			Type: "ClusterSnapshot",
+			TerraformName: "aws_neptune_cluster_snapshot",
 		}
 		r.References["replication_source_identifier"] = config.Reference{
-			Type: "Cluster",
+			TerraformName: "aws_neptune_cluster",
 		}
 		r.References["neptune_subnet_group_name"] = config.Reference{
-			Type: "SubnetGroup",
+			TerraformName: "aws_neptune_subnet_group",
 		}
 		r.References["neptune_cluster_parameter_group_name"] = config.Reference{
-			Type: "ClusterParameterGroup",
+			TerraformName: "aws_neptune_cluster_parameter_group",
 		}
 	})
 	p.AddResourceConfigurator("aws_neptune_cluster_endpoint", func(r *config.Resource) {
 		r.References["cluster_identifier"] = config.Reference{
-			Type: "Cluster",
+			TerraformName: "aws_neptune_cluster",
 		}
 	})
 	p.AddResourceConfigurator("aws_neptune_cluster_instance", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["cluster_identifier"] = config.Reference{
-			Type: "Cluster",
+			TerraformName: "aws_neptune_cluster",
 		}
 		r.References["neptune_parameter_group_name"] = config.Reference{
-			Type: "ParameterGroup",
+			TerraformName: "aws_neptune_parameter_group",
 		}
 		r.References["neptune_subnet_group_name"] = config.Reference{
-			Type: "SubnetGroup",
+			TerraformName: "aws_neptune_subnet_group",
 		}
 	})
 	p.AddResourceConfigurator("aws_neptune_cluster_snapshot", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["db_cluster_identifier"] = config.Reference{
-			Type: "Cluster",
+			TerraformName: "aws_neptune_cluster",
 		}
 	})
 }

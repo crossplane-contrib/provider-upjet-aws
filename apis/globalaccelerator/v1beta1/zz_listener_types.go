@@ -16,14 +16,14 @@ import (
 type ListenerInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of your accelerator.
-	// +crossplane:generate:reference:type=Accelerator
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1.Accelerator
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 
-	// Reference to a Accelerator to populate acceleratorArn.
+	// Reference to a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
 	AcceleratorArnRef *v1.Reference `json:"acceleratorArnRef,omitempty" tf:"-"`
 
-	// Selector for a Accelerator to populate acceleratorArn.
+	// Selector for a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
 	AcceleratorArnSelector *v1.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
 
@@ -58,15 +58,15 @@ type ListenerObservation struct {
 type ListenerParameters struct {
 
 	// The Amazon Resource Name (ARN) of your accelerator.
-	// +crossplane:generate:reference:type=Accelerator
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/globalaccelerator/v1beta1.Accelerator
 	// +kubebuilder:validation:Optional
 	AcceleratorArn *string `json:"acceleratorArn,omitempty" tf:"accelerator_arn,omitempty"`
 
-	// Reference to a Accelerator to populate acceleratorArn.
+	// Reference to a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
 	AcceleratorArnRef *v1.Reference `json:"acceleratorArnRef,omitempty" tf:"-"`
 
-	// Selector for a Accelerator to populate acceleratorArn.
+	// Selector for a Accelerator in globalaccelerator to populate acceleratorArn.
 	// +kubebuilder:validation:Optional
 	AcceleratorArnSelector *v1.Selector `json:"acceleratorArnSelector,omitempty" tf:"-"`
 

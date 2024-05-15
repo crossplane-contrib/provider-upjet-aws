@@ -16,14 +16,14 @@ import (
 type CertificateValidationInitParameters struct {
 
 	// ARN of the certificate that is being validated.
-	// +crossplane:generate:reference:type=Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
-	// Reference to a Certificate to populate certificateArn.
+	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
-	// Selector for a Certificate to populate certificateArn.
+	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 
@@ -48,15 +48,15 @@ type CertificateValidationObservation struct {
 type CertificateValidationParameters struct {
 
 	// ARN of the certificate that is being validated.
-	// +crossplane:generate:reference:type=Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
-	// Reference to a Certificate to populate certificateArn.
+	// Reference to a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnRef *v1.Reference `json:"certificateArnRef,omitempty" tf:"-"`
 
-	// Selector for a Certificate to populate certificateArn.
+	// Selector for a Certificate in acm to populate certificateArn.
 	// +kubebuilder:validation:Optional
 	CertificateArnSelector *v1.Selector `json:"certificateArnSelector,omitempty" tf:"-"`
 

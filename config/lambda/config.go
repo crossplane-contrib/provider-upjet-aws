@@ -14,21 +14,21 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_lambda_alias", func(r *config.Resource) {
 		r.References["function_name"] = config.Reference{
-			Type: "Function",
+			TerraformName: "aws_lambda_function",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_lambda_code_signing_config", func(r *config.Resource) {
 		r.References["allowed_publishers.signing_profile_version_arns"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/signer/v1beta1.SigningProfile",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_signer_signing_profile",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_lambda_event_source_mapping", func(r *config.Resource) {
 		r.References["function_name"] = config.Reference{
-			Type:      "Function",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_lambda_function",
+			Extractor:     common.PathARNExtractor,
 		}
 		delete(r.References, "event_source_arn")
 		// It can be fulfilled by multiple types.
@@ -44,19 +44,19 @@ func Configure(p *config.Provider) {
 	// a future PR.
 	p.AddResourceConfigurator("aws_lambda_function", func(r *config.Resource) {
 		r.References["s3_bucket"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
+			TerraformName: "aws_s3_bucket",
 		}
 		r.References["role"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.Role",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_role",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["vpc_config.security_group_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupIDRefs",
 			SelectorFieldName: "SecurityGroupIDSelector",
 		}
 		r.References["vpc_config.subnet_ids"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet",
+			TerraformName:     "aws_subnet",
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
@@ -72,12 +72,12 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_lambda_function_event_invoke_config", func(r *config.Resource) {
 		r.References["destination_config.on_failure.destination"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/sqs/v1beta1.Queue",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_sqs_queue",
+			Extractor:     common.PathARNExtractor,
 		}
 		r.References["destination_config.on_success.destination"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/sns/v1beta1.Topic",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_sns_topic",
+			Extractor:     common.PathARNExtractor,
 		}
 		delete(r.References, "function_name")
 		delete(r.References, "qualifier")
@@ -85,13 +85,13 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_lambda_function_url", func(r *config.Resource) {
 		r.References["function_name"] = config.Reference{
-			Type: "Function",
+			TerraformName: "aws_lambda_function",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_lambda_invocation", func(r *config.Resource) {
 		r.References["function_name"] = config.Reference{
-			Type: "Function",
+			TerraformName: "aws_lambda_function",
 		}
 	})
 
@@ -100,10 +100,10 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"statement_id_prefix"},
 		}
 		r.References["function_name"] = config.Reference{
-			Type: "Function",
+			TerraformName: "aws_lambda_function",
 		}
 		r.References["qualifier"] = config.Reference{
-			Type: "Alias",
+			TerraformName: "aws_lambda_alias",
 		}
 		delete(r.References, "source_arn")
 	})

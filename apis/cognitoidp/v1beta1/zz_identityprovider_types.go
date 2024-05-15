@@ -33,14 +33,14 @@ type IdentityProviderInitParameters struct {
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
 	// The user pool id
-	// +crossplane:generate:reference:type=UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
-	// Reference to a UserPool to populate userPoolId.
+	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
-	// Selector for a UserPool to populate userPoolId.
+	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }
@@ -100,15 +100,15 @@ type IdentityProviderParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The user pool id
-	// +crossplane:generate:reference:type=UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
-	// Reference to a UserPool to populate userPoolId.
+	// Reference to a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDRef *v1.Reference `json:"userPoolIdRef,omitempty" tf:"-"`
 
-	// Selector for a UserPool to populate userPoolId.
+	// Selector for a UserPool in cognitoidp to populate userPoolId.
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 }

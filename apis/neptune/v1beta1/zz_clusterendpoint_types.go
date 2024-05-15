@@ -16,14 +16,14 @@ import (
 type ClusterEndpointInitParameters struct {
 
 	// The DB cluster identifier of the DB cluster associated with the endpoint.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
-	// Reference to a Cluster to populate clusterIdentifier.
+	// Reference to a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterIdentifier.
+	// Selector for a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 
@@ -80,15 +80,15 @@ type ClusterEndpointObservation struct {
 type ClusterEndpointParameters struct {
 
 	// The DB cluster identifier of the DB cluster associated with the endpoint.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
-	// Reference to a Cluster to populate clusterIdentifier.
+	// Reference to a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierRef *v1.Reference `json:"clusterIdentifierRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterIdentifier.
+	// Selector for a Cluster in neptune to populate clusterIdentifier.
 	// +kubebuilder:validation:Optional
 	ClusterIdentifierSelector *v1.Selector `json:"clusterIdentifierSelector,omitempty" tf:"-"`
 

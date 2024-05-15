@@ -28,38 +28,38 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_servicecatalog_tag_option_resource_association", func(r *config.Resource) {
 		r.References["resource_id"] = config.Reference{
-			Type: "Product",
+			TerraformName: "aws_servicecatalog_product",
 		}
 		r.References["tag_option_id"] = config.Reference{
-			Type: "TagOption",
+			TerraformName: "aws_servicecatalog_tag_option",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_servicecatalog_product_portfolio_association", func(r *config.Resource) {
 		r.References["product_id"] = config.Reference{
-			Type: "Product",
+			TerraformName: "aws_servicecatalog_product",
 		}
 		r.References["portfolio_id"] = config.Reference{
-			Type: "Portfolio",
+			TerraformName: "aws_servicecatalog_portfolio",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_servicecatalog_principal_portfolio_association", func(r *config.Resource) {
 		r.References["portfolio_id"] = config.Reference{
-			Type: "Portfolio",
+			TerraformName: "aws_servicecatalog_portfolio",
 		}
 		r.References["principal_arn"] = config.Reference{
-			Type:      "github.com/upbound/provider-aws/apis/iam/v1beta1.User",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_iam_user",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_servicecatalog_budget_resource_association", func(r *config.Resource) {
 		r.References["resource_id"] = config.Reference{
-			Type: "Product",
+			TerraformName: "aws_servicecatalog_product",
 		}
 		r.References["budget_name"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/budgets/v1beta1.Budget",
+			TerraformName: "aws_budgets_budget",
 		}
 	})
 }

@@ -20,14 +20,14 @@ type CiphertextInitParameters struct {
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// Globally unique key ID for the customer master key.
-	// +crossplane:generate:reference:type=Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Reference to a Key to populate keyId.
+	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
-	// Selector for a Key to populate keyId.
+	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
@@ -55,15 +55,15 @@ type CiphertextParameters struct {
 	Context map[string]*string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// Globally unique key ID for the customer master key.
-	// +crossplane:generate:reference:type=Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Reference to a Key to populate keyId.
+	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
-	// Selector for a Key to populate keyId.
+	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 

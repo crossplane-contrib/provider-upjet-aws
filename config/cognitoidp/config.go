@@ -14,35 +14,35 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_cognito_user_pool_client", func(r *config.Resource) {
 		r.References["user_pool_id"] = config.Reference{
-			Type: "UserPool",
+			TerraformName: "aws_cognito_user_pool",
 		}
 	})
 	p.AddResourceConfigurator("aws_cognito_user_pool_domain", func(r *config.Resource) {
 		r.References["user_pool_id"] = config.Reference{
-			Type: "UserPool",
+			TerraformName: "aws_cognito_user_pool",
 		}
 	})
 	p.AddResourceConfigurator("aws_cognito_user_group", func(r *config.Resource) {
 		r.References["user_pool_id"] = config.Reference{
-			Type: "UserPool",
+			TerraformName: "aws_cognito_user_pool",
 		}
 	})
 	p.AddResourceConfigurator("aws_cognito_resource_server", func(r *config.Resource) {
 		r.References["user_pool_id"] = config.Reference{
-			Type: "UserPool",
+			TerraformName: "aws_cognito_user_pool",
 		}
 	})
 	p.AddResourceConfigurator("aws_cognito_identity_provider", func(r *config.Resource) {
 		r.References["user_pool_id"] = config.Reference{
-			Type: "UserPool",
+			TerraformName: "aws_cognito_user_pool",
 		}
 	})
 	p.AddResourceConfigurator("aws_cognito_user_pool_ui_customization", func(r *config.Resource) {
 		r.References["client_id"] = config.Reference{
-			Type: "UserPoolClient",
+			TerraformName: "aws_cognito_user_pool_client",
 		}
 		r.References["user_pool_id"] = config.Reference{
-			Type: "UserPool",
+			TerraformName: "aws_cognito_user_pool",
 		}
 	})
 	p.AddResourceConfigurator("aws_cognito_user_pool", func(r *config.Resource) {

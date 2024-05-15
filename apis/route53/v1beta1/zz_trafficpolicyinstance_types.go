@@ -16,14 +16,14 @@ import (
 type TrafficPolicyInstanceInitParameters struct {
 
 	// ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// Reference to a Zone to populate hostedZoneId.
+	// Reference to a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDRef *v1.Reference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate hostedZoneId.
+	// Selector for a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
@@ -34,14 +34,14 @@ type TrafficPolicyInstanceInitParameters struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
-	// +crossplane:generate:reference:type=TrafficPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.TrafficPolicy
 	TrafficPolicyID *string `json:"trafficPolicyId,omitempty" tf:"traffic_policy_id,omitempty"`
 
-	// Reference to a TrafficPolicy to populate trafficPolicyId.
+	// Reference to a TrafficPolicy in route53 to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
 	TrafficPolicyIDRef *v1.Reference `json:"trafficPolicyIdRef,omitempty" tf:"-"`
 
-	// Selector for a TrafficPolicy to populate trafficPolicyId.
+	// Selector for a TrafficPolicy in route53 to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
 	TrafficPolicyIDSelector *v1.Selector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
 
@@ -73,15 +73,15 @@ type TrafficPolicyInstanceObservation struct {
 type TrafficPolicyInstanceParameters struct {
 
 	// ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	// +kubebuilder:validation:Optional
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// Reference to a Zone to populate hostedZoneId.
+	// Reference to a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDRef *v1.Reference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate hostedZoneId.
+	// Selector for a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
@@ -99,15 +99,15 @@ type TrafficPolicyInstanceParameters struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
-	// +crossplane:generate:reference:type=TrafficPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.TrafficPolicy
 	// +kubebuilder:validation:Optional
 	TrafficPolicyID *string `json:"trafficPolicyId,omitempty" tf:"traffic_policy_id,omitempty"`
 
-	// Reference to a TrafficPolicy to populate trafficPolicyId.
+	// Reference to a TrafficPolicy in route53 to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
 	TrafficPolicyIDRef *v1.Reference `json:"trafficPolicyIdRef,omitempty" tf:"-"`
 
-	// Selector for a TrafficPolicy to populate trafficPolicyId.
+	// Selector for a TrafficPolicy in route53 to populate trafficPolicyId.
 	// +kubebuilder:validation:Optional
 	TrafficPolicyIDSelector *v1.Selector `json:"trafficPolicyIdSelector,omitempty" tf:"-"`
 

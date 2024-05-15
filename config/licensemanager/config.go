@@ -14,8 +14,8 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_licensemanager_association", func(r *config.Resource) {
 		r.References["license_configuration_arn"] = config.Reference{
-			Type:      "LicenseConfiguration",
-			Extractor: common.PathARNExtractor,
+			TerraformName: "aws_licensemanager_license_configuration",
+			Extractor:     common.PathARNExtractor,
 		}
 	})
 }

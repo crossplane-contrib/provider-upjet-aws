@@ -42,14 +42,14 @@ type VPCIpamPoolInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the scope in which you would like to create the IPAM pool.
-	// +crossplane:generate:reference:type=VPCIpamScope
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIpamScope
 	IpamScopeID *string `json:"ipamScopeId,omitempty" tf:"ipam_scope_id,omitempty"`
 
-	// Reference to a VPCIpamScope to populate ipamScopeId.
+	// Reference to a VPCIpamScope in ec2 to populate ipamScopeId.
 	// +kubebuilder:validation:Optional
 	IpamScopeIDRef *v1.Reference `json:"ipamScopeIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPCIpamScope to populate ipamScopeId.
+	// Selector for a VPCIpamScope in ec2 to populate ipamScopeId.
 	// +kubebuilder:validation:Optional
 	IpamScopeIDSelector *v1.Selector `json:"ipamScopeIdSelector,omitempty" tf:"-"`
 
@@ -182,15 +182,15 @@ type VPCIpamPoolParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the scope in which you would like to create the IPAM pool.
-	// +crossplane:generate:reference:type=VPCIpamScope
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCIpamScope
 	// +kubebuilder:validation:Optional
 	IpamScopeID *string `json:"ipamScopeId,omitempty" tf:"ipam_scope_id,omitempty"`
 
-	// Reference to a VPCIpamScope to populate ipamScopeId.
+	// Reference to a VPCIpamScope in ec2 to populate ipamScopeId.
 	// +kubebuilder:validation:Optional
 	IpamScopeIDRef *v1.Reference `json:"ipamScopeIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPCIpamScope to populate ipamScopeId.
+	// Selector for a VPCIpamScope in ec2 to populate ipamScopeId.
 	// +kubebuilder:validation:Optional
 	IpamScopeIDSelector *v1.Selector `json:"ipamScopeIdSelector,omitempty" tf:"-"`
 

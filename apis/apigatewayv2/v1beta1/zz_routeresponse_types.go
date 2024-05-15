@@ -16,14 +16,14 @@ import (
 type RouteResponseInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Reference to a API to populate apiId.
+	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiId.
+	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -35,14 +35,14 @@ type RouteResponseInitParameters struct {
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_route.
-	// +crossplane:generate:reference:type=Route
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Route
 	RouteID *string `json:"routeId,omitempty" tf:"route_id,omitempty"`
 
-	// Reference to a Route to populate routeId.
+	// Reference to a Route in apigatewayv2 to populate routeId.
 	// +kubebuilder:validation:Optional
 	RouteIDRef *v1.Reference `json:"routeIdRef,omitempty" tf:"-"`
 
-	// Selector for a Route to populate routeId.
+	// Selector for a Route in apigatewayv2 to populate routeId.
 	// +kubebuilder:validation:Optional
 	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 
@@ -75,15 +75,15 @@ type RouteResponseObservation struct {
 type RouteResponseParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
-	// Reference to a API to populate apiId.
+	// Reference to a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDRef *v1.Reference `json:"apiIdRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiId.
+	// Selector for a API in apigatewayv2 to populate apiId.
 	// +kubebuilder:validation:Optional
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
@@ -102,15 +102,15 @@ type RouteResponseParameters struct {
 	ResponseModels map[string]*string `json:"responseModels,omitempty" tf:"response_models,omitempty"`
 
 	// Identifier of the aws_apigatewayv2_route.
-	// +crossplane:generate:reference:type=Route
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.Route
 	// +kubebuilder:validation:Optional
 	RouteID *string `json:"routeId,omitempty" tf:"route_id,omitempty"`
 
-	// Reference to a Route to populate routeId.
+	// Reference to a Route in apigatewayv2 to populate routeId.
 	// +kubebuilder:validation:Optional
 	RouteIDRef *v1.Reference `json:"routeIdRef,omitempty" tf:"-"`
 
-	// Selector for a Route to populate routeId.
+	// Selector for a Route in apigatewayv2 to populate routeId.
 	// +kubebuilder:validation:Optional
 	RouteIDSelector *v1.Selector `json:"routeIdSelector,omitempty" tf:"-"`
 

@@ -81,7 +81,7 @@ spec:
                     description: Name of the domain.
                     type: string
                   domainNameRef:
-                    description: Reference to a Domain to populate domainName.
+                    description: Reference to a Domain in opensearch to populate domainName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -115,7 +115,7 @@ spec:
                     - name
                     type: object
                   domainNameSelector:
-                    description: Selector for a Domain to populate domainName.
+                    description: Selector for a Domain in opensearch to populate domainName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -182,7 +182,7 @@ spec:
                     description: Name of the domain.
                     type: string
                   domainNameRef:
-                    description: Reference to a Domain to populate domainName.
+                    description: Reference to a Domain in opensearch to populate domainName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -216,7 +216,7 @@ spec:
                     - name
                     type: object
                   domainNameSelector:
-                    description: Selector for a Domain to populate domainName.
+                    description: Selector for a Domain in opensearch to populate domainName.
                     properties:
                       matchControllerRef:
                         description: |-

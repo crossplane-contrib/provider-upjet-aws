@@ -71,15 +71,15 @@ type GrantInitParameters struct {
 	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
 
 	// The unique identifier for the customer master key (CMK) that the grant applies to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.
-	// +crossplane:generate:reference:type=Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Reference to a Key to populate keyId.
+	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
-	// Selector for a Key to populate keyId.
+	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
@@ -162,16 +162,16 @@ type GrantParameters struct {
 	GranteePrincipalSelector *v1.Selector `json:"granteePrincipalSelector,omitempty" tf:"-"`
 
 	// The unique identifier for the customer master key (CMK) that the grant applies to. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS account, you must use the key ARN.
-	// +crossplane:generate:reference:type=Key
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Reference to a Key to populate keyId.
+	// Reference to a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
 
-	// Selector for a Key to populate keyId.
+	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 

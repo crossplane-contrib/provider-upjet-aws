@@ -285,14 +285,14 @@ type EBSBlockDeviceInitParameters struct {
 	// ID of an EBS snapshot that will be used to initialize the created
 	// EBS volumes. If set, the volume_size attribute must be at least as large as the referenced
 	// snapshot.
-	// +crossplane:generate:reference:type=EBSSnapshot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EBSSnapshot
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// Reference to a EBSSnapshot to populate snapshotId.
+	// Reference to a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
 	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
 
-	// Selector for a EBSSnapshot to populate snapshotId.
+	// Selector for a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
 	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 
@@ -371,15 +371,15 @@ type EBSBlockDeviceParameters struct {
 	// ID of an EBS snapshot that will be used to initialize the created
 	// EBS volumes. If set, the volume_size attribute must be at least as large as the referenced
 	// snapshot.
-	// +crossplane:generate:reference:type=EBSSnapshot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EBSSnapshot
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
-	// Reference to a EBSSnapshot to populate snapshotId.
+	// Reference to a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
 	SnapshotIDRef *v1.Reference `json:"snapshotIdRef,omitempty" tf:"-"`
 
-	// Selector for a EBSSnapshot to populate snapshotId.
+	// Selector for a EBSSnapshot in ec2 to populate snapshotId.
 	// +kubebuilder:validation:Optional
 	SnapshotIDSelector *v1.Selector `json:"snapshotIdSelector,omitempty" tf:"-"`
 

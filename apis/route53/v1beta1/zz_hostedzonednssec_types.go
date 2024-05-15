@@ -16,14 +16,14 @@ import (
 type HostedZoneDNSSECInitParameters struct {
 
 	// Identifier of the Route 53 Hosted Zone.
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// Reference to a Zone to populate hostedZoneId.
+	// Reference to a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDRef *v1.Reference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate hostedZoneId.
+	// Selector for a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 
@@ -46,15 +46,15 @@ type HostedZoneDNSSECObservation struct {
 type HostedZoneDNSSECParameters struct {
 
 	// Identifier of the Route 53 Hosted Zone.
-	// +crossplane:generate:reference:type=Zone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.Zone
 	// +kubebuilder:validation:Optional
 	HostedZoneID *string `json:"hostedZoneId,omitempty" tf:"hosted_zone_id,omitempty"`
 
-	// Reference to a Zone to populate hostedZoneId.
+	// Reference to a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDRef *v1.Reference `json:"hostedZoneIdRef,omitempty" tf:"-"`
 
-	// Selector for a Zone to populate hostedZoneId.
+	// Selector for a Zone in route53 to populate hostedZoneId.
 	// +kubebuilder:validation:Optional
 	HostedZoneIDSelector *v1.Selector `json:"hostedZoneIdSelector,omitempty" tf:"-"`
 

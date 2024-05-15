@@ -262,7 +262,7 @@ spec:
                       aws_rds_cluster.'
                     type: string
                   dbSubnetGroupNameRef:
-                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
+                    description: Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -296,7 +296,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
+                    description: Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -759,7 +759,7 @@ spec:
                       aws_rds_cluster.'
                     type: string
                   dbSubnetGroupNameRef:
-                    description: Reference to a SubnetGroup to populate dbSubnetGroupName.
+                    description: Reference to a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -793,7 +793,7 @@ spec:
                     - name
                     type: object
                   dbSubnetGroupNameSelector:
-                    description: Selector for a SubnetGroup to populate dbSubnetGroupName.
+                    description: Selector for a SubnetGroup in rds to populate dbSubnetGroupName.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -22,14 +22,14 @@ type ServiceSpecificCredentialInitParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The name of the IAM user that is to be associated with the credentials. The new service-specific credentials have the same permissions as the associated user except that they can be used only to access the specified service.
-	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Reference to a User to populate userName.
+	// Reference to a User in iam to populate userName.
 	// +kubebuilder:validation:Optional
 	UserNameRef *v1.Reference `json:"userNameRef,omitempty" tf:"-"`
 
-	// Selector for a User to populate userName.
+	// Selector for a User in iam to populate userName.
 	// +kubebuilder:validation:Optional
 	UserNameSelector *v1.Selector `json:"userNameSelector,omitempty" tf:"-"`
 }
@@ -66,15 +66,15 @@ type ServiceSpecificCredentialParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The name of the IAM user that is to be associated with the credentials. The new service-specific credentials have the same permissions as the associated user except that they can be used only to access the specified service.
-	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Reference to a User to populate userName.
+	// Reference to a User in iam to populate userName.
 	// +kubebuilder:validation:Optional
 	UserNameRef *v1.Reference `json:"userNameRef,omitempty" tf:"-"`
 
-	// Selector for a User to populate userName.
+	// Selector for a User in iam to populate userName.
 	// +kubebuilder:validation:Optional
 	UserNameSelector *v1.Selector `json:"userNameSelector,omitempty" tf:"-"`
 }

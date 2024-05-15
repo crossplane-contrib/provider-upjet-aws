@@ -30,14 +30,14 @@ type KinesisStreamingDestinationInitParameters struct {
 
 	// The name of the DynamoDB table. There
 	// can only be one Kinesis streaming destination for a given DynamoDB table.
-	// +crossplane:generate:reference:type=Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// Reference to a Table to populate tableName.
+	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
-	// Selector for a Table to populate tableName.
+	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
@@ -78,15 +78,15 @@ type KinesisStreamingDestinationParameters struct {
 
 	// The name of the DynamoDB table. There
 	// can only be one Kinesis streaming destination for a given DynamoDB table.
-	// +crossplane:generate:reference:type=Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
-	// Reference to a Table to populate tableName.
+	// Reference to a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
 
-	// Selector for a Table to populate tableName.
+	// Selector for a Table in dynamodb to populate tableName.
 	// +kubebuilder:validation:Optional
 	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }

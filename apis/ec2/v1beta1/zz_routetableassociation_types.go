@@ -29,26 +29,26 @@ type RouteTableAssociationInitParameters struct {
 	GatewayIDSelector *v1.Selector `json:"gatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the routing table to associate with.
-	// +crossplane:generate:reference:type=RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// Reference to a RouteTable to populate routeTableId.
+	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a RouteTable to populate routeTableId.
+	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// The subnet ID to create an association. Conflicts with gateway_id.
-	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Reference to a Subnet to populate subnetId.
+	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
-	// Selector for a Subnet to populate subnetId.
+	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
@@ -90,28 +90,28 @@ type RouteTableAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the routing table to associate with.
-	// +crossplane:generate:reference:type=RouteTable
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.RouteTable
 	// +kubebuilder:validation:Optional
 	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
 
-	// Reference to a RouteTable to populate routeTableId.
+	// Reference to a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
 
-	// Selector for a RouteTable to populate routeTableId.
+	// Selector for a RouteTable in ec2 to populate routeTableId.
 	// +kubebuilder:validation:Optional
 	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
 
 	// The subnet ID to create an association. Conflicts with gateway_id.
-	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Reference to a Subnet to populate subnetId.
+	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
-	// Selector for a Subnet to populate subnetId.
+	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }

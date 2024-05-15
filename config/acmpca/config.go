@@ -35,7 +35,7 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["certificate_signing_request"].Sensitive = true
 		r.References = map[string]config.Reference{
 			"certificate_authority_arn": {
-				Type: "CertificateAuthority",
+				TerraformName: "aws_acmpca_certificate_authority",
 			},
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
@@ -55,7 +55,7 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["certificate_chain"].Sensitive = true
 		r.References = map[string]config.Reference{
 			"certificate_authority_arn": {
-				Type: "CertificateAuthority",
+				TerraformName: "aws_acmpca_certificate_authority",
 			},
 		}
 	})

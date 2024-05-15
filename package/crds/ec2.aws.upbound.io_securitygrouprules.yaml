@@ -188,7 +188,7 @@ spec:
                     description: Security group to apply this rule to.
                     type: string
                   securityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate securityGroupId.
+                    description: Reference to a SecurityGroup in ec2 to populate securityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -222,7 +222,7 @@ spec:
                     - name
                     type: object
                   securityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate securityGroupId.
+                    description: Selector for a SecurityGroup in ec2 to populate securityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -272,7 +272,7 @@ spec:
                       or self.
                     type: string
                   sourceSecurityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate sourceSecurityGroupId.
+                    description: Reference to a SecurityGroup in ec2 to populate sourceSecurityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -306,7 +306,7 @@ spec:
                     - name
                     type: object
                   sourceSecurityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate sourceSecurityGroupId.
+                    description: Selector for a SecurityGroup in ec2 to populate sourceSecurityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -480,7 +480,7 @@ spec:
                     description: Security group to apply this rule to.
                     type: string
                   securityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate securityGroupId.
+                    description: Reference to a SecurityGroup in ec2 to populate securityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -514,7 +514,7 @@ spec:
                     - name
                     type: object
                   securityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate securityGroupId.
+                    description: Selector for a SecurityGroup in ec2 to populate securityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -564,7 +564,7 @@ spec:
                       or self.
                     type: string
                   sourceSecurityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate sourceSecurityGroupId.
+                    description: Reference to a SecurityGroup in ec2 to populate sourceSecurityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -598,7 +598,7 @@ spec:
                     - name
                     type: object
                   sourceSecurityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate sourceSecurityGroupId.
+                    description: Selector for a SecurityGroup in ec2 to populate sourceSecurityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-

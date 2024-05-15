@@ -117,15 +117,15 @@ type EventSourceMappingInitParameters struct {
 	FilterCriteria []FilterCriteriaInitParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
 
 	// The name or the ARN of the Lambda function that will be subscribing to events.
-	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
-	// Reference to a Function to populate functionName.
+	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
-	// Selector for a Function to populate functionName.
+	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 
@@ -303,16 +303,16 @@ type EventSourceMappingParameters struct {
 	FilterCriteria []FilterCriteriaParameters `json:"filterCriteria,omitempty" tf:"filter_criteria,omitempty"`
 
 	// The name or the ARN of the Lambda function that will be subscribing to events.
-	// +crossplane:generate:reference:type=Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
-	// Reference to a Function to populate functionName.
+	// Reference to a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameRef *v1.Reference `json:"functionNameRef,omitempty" tf:"-"`
 
-	// Selector for a Function to populate functionName.
+	// Selector for a Function in lambda to populate functionName.
 	// +kubebuilder:validation:Optional
 	FunctionNameSelector *v1.Selector `json:"functionNameSelector,omitempty" tf:"-"`
 

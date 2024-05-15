@@ -82,7 +82,7 @@ spec:
                       can be either an ARN or key_id.
                     type: string
                   targetKeyIdRef:
-                    description: Reference to a Key to populate targetKeyId.
+                    description: Reference to a Key in kms to populate targetKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +116,7 @@ spec:
                     - name
                     type: object
                   targetKeyIdSelector:
-                    description: Selector for a Key to populate targetKeyId.
+                    description: Selector for a Key in kms to populate targetKeyId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -176,7 +176,7 @@ spec:
                       can be either an ARN or key_id.
                     type: string
                   targetKeyIdRef:
-                    description: Reference to a Key to populate targetKeyId.
+                    description: Reference to a Key in kms to populate targetKeyId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -210,7 +210,7 @@ spec:
                     - name
                     type: object
                   targetKeyIdSelector:
-                    description: Selector for a Key to populate targetKeyId.
+                    description: Selector for a Key in kms to populate targetKeyId.
                     properties:
                       matchControllerRef:
                         description: |-

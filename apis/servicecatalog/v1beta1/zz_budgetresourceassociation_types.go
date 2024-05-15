@@ -28,14 +28,14 @@ type BudgetResourceAssociationInitParameters struct {
 	BudgetNameSelector *v1.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// Reference to a Product to populate resourceId.
+	// Reference to a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Product to populate resourceId.
+	// Selector for a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
@@ -73,15 +73,15 @@ type BudgetResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// Reference to a Product to populate resourceId.
+	// Reference to a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Product to populate resourceId.
+	// Selector for a Product in servicecatalog to populate resourceId.
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }

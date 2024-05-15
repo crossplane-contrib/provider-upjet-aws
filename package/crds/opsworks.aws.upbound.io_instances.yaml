@@ -176,7 +176,8 @@ spec:
                       type: string
                     type: array
                   layerIdsRefs:
-                    description: References to CustomLayer to populate layerIds.
+                    description: References to CustomLayer in opsworks to populate
+                      layerIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -213,7 +214,8 @@ spec:
                       type: object
                     type: array
                   layerIdsSelector:
-                    description: Selector for a list of CustomLayer to populate layerIds.
+                    description: Selector for a list of CustomLayer in opsworks to
+                      populate layerIds.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -658,7 +660,8 @@ spec:
                       type: string
                     type: array
                   layerIdsRefs:
-                    description: References to CustomLayer to populate layerIds.
+                    description: References to CustomLayer in opsworks to populate
+                      layerIds.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -695,7 +698,8 @@ spec:
                       type: object
                     type: array
                   layerIdsSelector:
-                    description: Selector for a list of CustomLayer to populate layerIds.
+                    description: Selector for a list of CustomLayer in opsworks to
+                      populate layerIds.
                     properties:
                       matchControllerRef:
                         description: |-

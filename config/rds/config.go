@@ -21,13 +21,13 @@ func Configure(p *config.Provider) {
 		// Mutually exclusive with aws_rds_cluster_role_association
 		config.MoveToStatus(r.TerraformResource, "iam_roles")
 		r.References["s3_import.bucket_name"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
+			TerraformName: "aws_s3_bucket",
 		}
 		r.References["restore_to_point_in_time.source_cluster_identifier"] = config.Reference{
-			Type: "Cluster",
+			TerraformName: "aws_rds_cluster",
 		}
 		r.References["db_subnet_group_name"] = config.Reference{
-			Type: "SubnetGroup",
+			TerraformName: "aws_db_subnet_group",
 		}
 		r.References["db_cluster_parameter_group_name"] = config.Reference{
 			TerraformName: "aws_rds_cluster_parameter_group",
@@ -84,22 +84,22 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
 		r.References["restore_to_point_in_time.source_db_instance_identifier"] = config.Reference{
-			Type: "Instance",
+			TerraformName: "aws_db_instance",
 		}
 		r.References["s3_import.bucket_name"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket",
+			TerraformName: "aws_s3_bucket",
 		}
 		r.References["kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			TerraformName: "aws_kms_key",
 		}
 		r.References["performance_insights_kms_key_id"] = config.Reference{
-			Type: "github.com/upbound/provider-aws/apis/kms/v1beta1.Key",
+			TerraformName: "aws_kms_key",
 		}
 		r.References["restore_to_point_in_time.source_cluster_identifier"] = config.Reference{
-			Type: "Cluster",
+			TerraformName: "aws_rds_cluster",
 		}
 		r.References["security_group_names"] = config.Reference{
-			Type:              "github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup",
+			TerraformName:     "aws_security_group",
 			RefFieldName:      "SecurityGroupNameRefs",
 			SelectorFieldName: "SecurityGroupNameSelector",
 		}
@@ -107,7 +107,7 @@ func Configure(p *config.Provider) {
 			TerraformName: "aws_db_parameter_group",
 		}
 		r.References["db_subnet_group_name"] = config.Reference{
-			Type: "SubnetGroup",
+			TerraformName: "aws_db_subnet_group",
 		}
 		delete(r.References, "engine")
 		delete(r.References, "engine_version")

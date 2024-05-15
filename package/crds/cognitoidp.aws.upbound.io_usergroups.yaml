@@ -168,7 +168,8 @@ spec:
                     description: The user pool ID.
                     type: string
                   userPoolIdRef:
-                    description: Reference to a UserPool to populate userPoolId.
+                    description: Reference to a UserPool in cognitoidp to populate
+                      userPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -202,7 +203,8 @@ spec:
                     - name
                     type: object
                   userPoolIdSelector:
-                    description: Selector for a UserPool to populate userPoolId.
+                    description: Selector for a UserPool in cognitoidp to populate
+                      userPoolId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -348,7 +350,8 @@ spec:
                     description: The user pool ID.
                     type: string
                   userPoolIdRef:
-                    description: Reference to a UserPool to populate userPoolId.
+                    description: Reference to a UserPool in cognitoidp to populate
+                      userPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -382,7 +385,8 @@ spec:
                     - name
                     type: object
                   userPoolIdSelector:
-                    description: Selector for a UserPool to populate userPoolId.
+                    description: Selector for a UserPool in cognitoidp to populate
+                      userPoolId.
                     properties:
                       matchControllerRef:
                         description: |-

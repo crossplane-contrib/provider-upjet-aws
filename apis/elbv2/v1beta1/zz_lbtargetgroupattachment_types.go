@@ -22,14 +22,14 @@ type LBTargetGroupAttachmentInitParameters struct {
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The ARN of the target group with which to register targets.
-	// +crossplane:generate:reference:type=LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
-	// Reference to a LBTargetGroup to populate targetGroupArn.
+	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
-	// Selector for a LBTargetGroup to populate targetGroupArn.
+	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 
@@ -71,15 +71,15 @@ type LBTargetGroupAttachmentParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN of the target group with which to register targets.
-	// +crossplane:generate:reference:type=LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
-	// Reference to a LBTargetGroup to populate targetGroupArn.
+	// Reference to a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnRef *v1.Reference `json:"targetGroupArnRef,omitempty" tf:"-"`
 
-	// Selector for a LBTargetGroup to populate targetGroupArn.
+	// Selector for a LBTargetGroup in elbv2 to populate targetGroupArn.
 	// +kubebuilder:validation:Optional
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 

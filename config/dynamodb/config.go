@@ -15,13 +15,13 @@ func Configure(p *config.Provider) {
 	// currently needs an ARN reference for external name
 	p.AddResourceConfigurator("aws_dynamodb_contributor_insights", func(r *config.Resource) {
 		r.References["table_name"] = config.Reference{
-			Type: "Table",
+			TerraformName: "aws_dynamodb_table",
 		}
 	})
 
 	p.AddResourceConfigurator("aws_dynamodb_kinesis_streaming_destination", func(r *config.Resource) {
 		r.References["table_name"] = config.Reference{
-			Type: "Table",
+			TerraformName: "aws_dynamodb_table",
 		}
 
 		r.References["stream_arn"] = config.Reference{
@@ -32,7 +32,7 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("aws_dynamodb_table_item", func(r *config.Resource) {
 		r.References["table_name"] = config.Reference{
-			Type: "Table",
+			TerraformName: "aws_dynamodb_table",
 		}
 		delete(r.References, "hash_key")
 	})

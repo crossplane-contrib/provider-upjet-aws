@@ -81,7 +81,7 @@ spec:
                       scope.
                     type: string
                   ipamIdRef:
-                    description: Reference to a VPCIpam to populate ipamId.
+                    description: Reference to a VPCIpam in ec2 to populate ipamId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -115,7 +115,7 @@ spec:
                     - name
                     type: object
                   ipamIdSelector:
-                    description: Selector for a VPCIpam to populate ipamId.
+                    description: Selector for a VPCIpam in ec2 to populate ipamId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -188,7 +188,7 @@ spec:
                       scope.
                     type: string
                   ipamIdRef:
-                    description: Reference to a VPCIpam to populate ipamId.
+                    description: Reference to a VPCIpam in ec2 to populate ipamId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -222,7 +222,7 @@ spec:
                     - name
                     type: object
                   ipamIdSelector:
-                    description: Selector for a VPCIpam to populate ipamId.
+                    description: Selector for a VPCIpam in ec2 to populate ipamId.
                     properties:
                       matchControllerRef:
                         description: |-

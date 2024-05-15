@@ -84,7 +84,7 @@ spec:
                       main route table for the target VPC
                     type: string
                   routeTableIdRef:
-                    description: Reference to a RouteTable to populate routeTableId.
+                    description: Reference to a RouteTable in ec2 to populate routeTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,7 +118,7 @@ spec:
                     - name
                     type: object
                   routeTableIdSelector:
-                    description: Selector for a RouteTable to populate routeTableId.
+                    description: Selector for a RouteTable in ec2 to populate routeTableId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -257,7 +257,7 @@ spec:
                       main route table for the target VPC
                     type: string
                   routeTableIdRef:
-                    description: Reference to a RouteTable to populate routeTableId.
+                    description: Reference to a RouteTable in ec2 to populate routeTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -291,7 +291,7 @@ spec:
                     - name
                     type: object
                   routeTableIdSelector:
-                    description: Selector for a RouteTable to populate routeTableId.
+                    description: Selector for a RouteTable in ec2 to populate routeTableId.
                     properties:
                       matchControllerRef:
                         description: |-

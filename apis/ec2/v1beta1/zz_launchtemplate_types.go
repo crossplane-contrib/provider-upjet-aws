@@ -978,17 +978,17 @@ type LaunchTemplateInitParameters_2 struct {
 	// The ID of the RAM disk.
 	RAMDiskID *string `json:"ramDiskId,omitempty" tf:"ram_disk_id,omitempty"`
 
-	// References to SecurityGroup to populate securityGroupNames.
+	// References to SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
 	SecurityGroupNameRefs []v1.Reference `json:"securityGroupNameRefs,omitempty" tf:"-"`
 
-	// Selector for a list of SecurityGroup to populate securityGroupNames.
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
 	SecurityGroupNameSelector *v1.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
 	// +listType=set
@@ -1401,17 +1401,17 @@ type LaunchTemplateParameters_2 struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// References to SecurityGroup to populate securityGroupNames.
+	// References to SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
 	SecurityGroupNameRefs []v1.Reference `json:"securityGroupNameRefs,omitempty" tf:"-"`
 
-	// Selector for a list of SecurityGroup to populate securityGroupNames.
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupNames.
 	// +kubebuilder:validation:Optional
 	SecurityGroupNameSelector *v1.Selector `json:"securityGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of security group names to associate with. If you are creating Instances in a VPC, use
 	// vpc_security_group_ids instead.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupNameRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupNameSelector
 	// +kubebuilder:validation:Optional
@@ -1700,44 +1700,44 @@ type NetworkInterfacesInitParameters struct {
 	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The ID of the network interface to attach.
-	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
 	// The primary private IPv4 address.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// References to SecurityGroup to populate securityGroups.
+	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
-	// Selector for a list of SecurityGroup to populate securityGroups.
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The VPC Subnet ID to associate.
-	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Reference to a Subnet to populate subnetId.
+	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
-	// Selector for a Subnet to populate subnetId.
+	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
@@ -1880,15 +1880,15 @@ type NetworkInterfacesParameters struct {
 	NetworkCardIndex *float64 `json:"networkCardIndex,omitempty" tf:"network_card_index,omitempty"`
 
 	// The ID of the network interface to attach.
-	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.NetworkInterface
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
-	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// Reference to a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// Selector for a NetworkInterface in ec2 to populate networkInterfaceId.
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
@@ -1896,16 +1896,16 @@ type NetworkInterfacesParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// References to SecurityGroup to populate securityGroups.
+	// References to SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
 
-	// Selector for a list of SecurityGroup to populate securityGroups.
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroups.
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// A list of security group IDs to associate.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
@@ -1913,15 +1913,15 @@ type NetworkInterfacesParameters struct {
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
 	// The VPC Subnet ID to associate.
-	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Reference to a Subnet to populate subnetId.
+	// Reference to a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
-	// Selector for a Subnet to populate subnetId.
+	// Selector for a Subnet in ec2 to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }

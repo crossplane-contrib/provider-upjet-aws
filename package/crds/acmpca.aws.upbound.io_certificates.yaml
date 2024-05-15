@@ -82,7 +82,8 @@ spec:
                     description: ARN of the certificate authority.
                     type: string
                   certificateAuthorityArnRef:
-                    description: Reference to a CertificateAuthority to populate certificateAuthorityArn.
+                    description: Reference to a CertificateAuthority in acmpca to
+                      populate certificateAuthorityArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +117,8 @@ spec:
                     - name
                     type: object
                   certificateAuthorityArnSelector:
-                    description: Selector for a CertificateAuthority to populate certificateAuthorityArn.
+                    description: Selector for a CertificateAuthority in acmpca to
+                      populate certificateAuthorityArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -227,7 +229,8 @@ spec:
                     description: ARN of the certificate authority.
                     type: string
                   certificateAuthorityArnRef:
-                    description: Reference to a CertificateAuthority to populate certificateAuthorityArn.
+                    description: Reference to a CertificateAuthority in acmpca to
+                      populate certificateAuthorityArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -261,7 +264,8 @@ spec:
                     - name
                     type: object
                   certificateAuthorityArnSelector:
-                    description: Selector for a CertificateAuthority to populate certificateAuthorityArn.
+                    description: Selector for a CertificateAuthority in acmpca to
+                      populate certificateAuthorityArn.
                     properties:
                       matchControllerRef:
                         description: |-

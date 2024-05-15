@@ -955,7 +955,7 @@ spec:
                           description: The ID of the network interface to attach.
                           type: string
                         networkInterfaceIdRef:
-                          description: Reference to a NetworkInterface to populate
+                          description: Reference to a NetworkInterface in ec2 to populate
                             networkInterfaceId.
                           properties:
                             name:
@@ -990,7 +990,7 @@ spec:
                           - name
                           type: object
                         networkInterfaceIdSelector:
-                          description: Selector for a NetworkInterface to populate
+                          description: Selector for a NetworkInterface in ec2 to populate
                             networkInterfaceId.
                           properties:
                             matchControllerRef:
@@ -1034,7 +1034,8 @@ spec:
                           description: The primary private IPv4 address.
                           type: string
                         securityGroupRefs:
-                          description: References to SecurityGroup to populate securityGroups.
+                          description: References to SecurityGroup in ec2 to populate
+                            securityGroups.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -1071,8 +1072,8 @@ spec:
                             type: object
                           type: array
                         securityGroupSelector:
-                          description: Selector for a list of SecurityGroup to populate
-                            securityGroups.
+                          description: Selector for a list of SecurityGroup in ec2
+                            to populate securityGroups.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -1121,7 +1122,7 @@ spec:
                           description: The VPC Subnet ID to associate.
                           type: string
                         subnetIdRef:
-                          description: Reference to a Subnet to populate subnetId.
+                          description: Reference to a Subnet in ec2 to populate subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1155,7 +1156,7 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: Selector for a Subnet to populate subnetId.
+                          description: Selector for a Subnet in ec2 to populate subnetId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -1265,7 +1266,7 @@ spec:
                       be created in.
                     type: string
                   securityGroupNameRefs:
-                    description: References to SecurityGroup to populate securityGroupNames.
+                    description: References to SecurityGroup in ec2 to populate securityGroupNames.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -1302,7 +1303,7 @@ spec:
                       type: object
                     type: array
                   securityGroupNameSelector:
-                    description: Selector for a list of SecurityGroup to populate
+                    description: Selector for a list of SecurityGroup in ec2 to populate
                       securityGroupNames.
                     properties:
                       matchControllerRef:
@@ -2362,7 +2363,7 @@ spec:
                           description: The ID of the network interface to attach.
                           type: string
                         networkInterfaceIdRef:
-                          description: Reference to a NetworkInterface to populate
+                          description: Reference to a NetworkInterface in ec2 to populate
                             networkInterfaceId.
                           properties:
                             name:
@@ -2397,7 +2398,7 @@ spec:
                           - name
                           type: object
                         networkInterfaceIdSelector:
-                          description: Selector for a NetworkInterface to populate
+                          description: Selector for a NetworkInterface in ec2 to populate
                             networkInterfaceId.
                           properties:
                             matchControllerRef:
@@ -2441,7 +2442,8 @@ spec:
                           description: The primary private IPv4 address.
                           type: string
                         securityGroupRefs:
-                          description: References to SecurityGroup to populate securityGroups.
+                          description: References to SecurityGroup in ec2 to populate
+                            securityGroups.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -2478,8 +2480,8 @@ spec:
                             type: object
                           type: array
                         securityGroupSelector:
-                          description: Selector for a list of SecurityGroup to populate
-                            securityGroups.
+                          description: Selector for a list of SecurityGroup in ec2
+                            to populate securityGroups.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -2528,7 +2530,7 @@ spec:
                           description: The VPC Subnet ID to associate.
                           type: string
                         subnetIdRef:
-                          description: Reference to a Subnet to populate subnetId.
+                          description: Reference to a Subnet in ec2 to populate subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -2562,7 +2564,7 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: Selector for a Subnet to populate subnetId.
+                          description: Selector for a Subnet in ec2 to populate subnetId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -2668,7 +2670,7 @@ spec:
                     description: The ID of the RAM disk.
                     type: string
                   securityGroupNameRefs:
-                    description: References to SecurityGroup to populate securityGroupNames.
+                    description: References to SecurityGroup in ec2 to populate securityGroupNames.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -2705,7 +2707,7 @@ spec:
                       type: object
                     type: array
                   securityGroupNameSelector:
-                    description: Selector for a list of SecurityGroup to populate
+                    description: Selector for a list of SecurityGroup in ec2 to populate
                       securityGroupNames.
                     properties:
                       matchControllerRef:

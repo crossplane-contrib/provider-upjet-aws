@@ -33,15 +33,15 @@ type LinkAssociationObservation struct {
 type LinkAssociationParameters struct {
 
 	// The ID of the device.
-	// +crossplane:generate:reference:type=Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Device
 	// +kubebuilder:validation:Optional
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
-	// Reference to a Device to populate deviceId.
+	// Reference to a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
 	DeviceIDRef *v1.Reference `json:"deviceIdRef,omitempty" tf:"-"`
 
-	// Selector for a Device to populate deviceId.
+	// Selector for a Device in networkmanager to populate deviceId.
 	// +kubebuilder:validation:Optional
 	DeviceIDSelector *v1.Selector `json:"deviceIdSelector,omitempty" tf:"-"`
 

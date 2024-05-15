@@ -19,26 +19,26 @@ type ProductPortfolioAssociationInitParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
-	// Reference to a Portfolio to populate portfolioId.
+	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
 	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
 
-	// Selector for a Portfolio to populate portfolioId.
+	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
-	// +crossplane:generate:reference:type=Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
-	// Reference to a Product to populate productId.
+	// Reference to a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
 	ProductIDRef *v1.Reference `json:"productIdRef,omitempty" tf:"-"`
 
-	// Selector for a Product to populate productId.
+	// Selector for a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
 	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
 
@@ -71,28 +71,28 @@ type ProductPortfolioAssociationParameters struct {
 	AcceptLanguage *string `json:"acceptLanguage,omitempty" tf:"accept_language,omitempty"`
 
 	// Portfolio identifier.
-	// +crossplane:generate:reference:type=Portfolio
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Portfolio
 	// +kubebuilder:validation:Optional
 	PortfolioID *string `json:"portfolioId,omitempty" tf:"portfolio_id,omitempty"`
 
-	// Reference to a Portfolio to populate portfolioId.
+	// Reference to a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
 	PortfolioIDRef *v1.Reference `json:"portfolioIdRef,omitempty" tf:"-"`
 
-	// Selector for a Portfolio to populate portfolioId.
+	// Selector for a Portfolio in servicecatalog to populate portfolioId.
 	// +kubebuilder:validation:Optional
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
-	// +crossplane:generate:reference:type=Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
-	// Reference to a Product to populate productId.
+	// Reference to a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
 	ProductIDRef *v1.Reference `json:"productIdRef,omitempty" tf:"-"`
 
-	// Selector for a Product to populate productId.
+	// Selector for a Product in servicecatalog to populate productId.
 	// +kubebuilder:validation:Optional
 	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
 

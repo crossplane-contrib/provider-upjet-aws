@@ -22,16 +22,16 @@ type UserGroupInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// References to User to populate userIds.
+	// References to User in elasticache to populate userIds.
 	// +kubebuilder:validation:Optional
 	UserIDRefs []v1.Reference `json:"userIdRefs,omitempty" tf:"-"`
 
-	// Selector for a list of User to populate userIds.
+	// Selector for a list of User in elasticache to populate userIds.
 	// +kubebuilder:validation:Optional
 	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
 
 	// The list of user IDs that belong to the user group.
-	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserIDRefs
 	// +crossplane:generate:reference:selectorFieldName=UserIDSelector
 	// +listType=set
@@ -78,16 +78,16 @@ type UserGroupParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// References to User to populate userIds.
+	// References to User in elasticache to populate userIds.
 	// +kubebuilder:validation:Optional
 	UserIDRefs []v1.Reference `json:"userIdRefs,omitempty" tf:"-"`
 
-	// Selector for a list of User to populate userIds.
+	// Selector for a list of User in elasticache to populate userIds.
 	// +kubebuilder:validation:Optional
 	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
 
 	// The list of user IDs that belong to the user group.
-	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserIDRefs
 	// +crossplane:generate:reference:selectorFieldName=UserIDSelector
 	// +kubebuilder:validation:Optional

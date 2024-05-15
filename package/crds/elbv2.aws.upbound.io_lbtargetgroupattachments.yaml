@@ -92,7 +92,8 @@ spec:
                       targets.
                     type: string
                   targetGroupArnRef:
-                    description: Reference to a LBTargetGroup to populate targetGroupArn.
+                    description: Reference to a LBTargetGroup in elbv2 to populate
+                      targetGroupArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -126,7 +127,8 @@ spec:
                     - name
                     type: object
                   targetGroupArnSelector:
-                    description: Selector for a LBTargetGroup to populate targetGroupArn.
+                    description: Selector for a LBTargetGroup in elbv2 to populate
+                      targetGroupArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -201,7 +203,8 @@ spec:
                       targets.
                     type: string
                   targetGroupArnRef:
-                    description: Reference to a LBTargetGroup to populate targetGroupArn.
+                    description: Reference to a LBTargetGroup in elbv2 to populate
+                      targetGroupArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -235,7 +238,8 @@ spec:
                     - name
                     type: object
                   targetGroupArnSelector:
-                    description: Selector for a LBTargetGroup to populate targetGroupArn.
+                    description: Selector for a LBTargetGroup in elbv2 to populate
+                      targetGroupArn.
                     properties:
                       matchControllerRef:
                         description: |-

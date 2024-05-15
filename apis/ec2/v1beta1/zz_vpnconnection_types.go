@@ -348,14 +348,14 @@ type VPNConnectionInitParameters_2 struct {
 	TypeSelector *v1.Selector `json:"typeSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Private Gateway.
-	// +crossplane:generate:reference:type=VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNGateway
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 
-	// Reference to a VPNGateway to populate vpnGatewayId.
+	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
 	VPNGatewayIDRef *v1.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPNGateway to populate vpnGatewayId.
+	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
 	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 }
@@ -854,15 +854,15 @@ type VPNConnectionParameters_2 struct {
 	TypeSelector *v1.Selector `json:"typeSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Private Gateway.
-	// +crossplane:generate:reference:type=VPNGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNGateway
 	// +kubebuilder:validation:Optional
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 
-	// Reference to a VPNGateway to populate vpnGatewayId.
+	// Reference to a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
 	VPNGatewayIDRef *v1.Reference `json:"vpnGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPNGateway to populate vpnGatewayId.
+	// Selector for a VPNGateway in ec2 to populate vpnGatewayId.
 	// +kubebuilder:validation:Optional
 	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 }

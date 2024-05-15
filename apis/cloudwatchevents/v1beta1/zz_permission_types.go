@@ -82,14 +82,14 @@ type PermissionInitParameters struct {
 
 	// The name of the event bus to set the permissions on.
 	// If you omit this, the permissions are set on the default event bus.
-	// +crossplane:generate:reference:type=Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
-	// Reference to a Bus to populate eventBusName.
+	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
 
-	// Selector for a Bus to populate eventBusName.
+	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
@@ -134,15 +134,15 @@ type PermissionParameters struct {
 
 	// The name of the event bus to set the permissions on.
 	// If you omit this, the permissions are set on the default event bus.
-	// +crossplane:generate:reference:type=Bus
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta1.Bus
 	// +kubebuilder:validation:Optional
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
-	// Reference to a Bus to populate eventBusName.
+	// Reference to a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameRef *v1.Reference `json:"eventBusNameRef,omitempty" tf:"-"`
 
-	// Selector for a Bus to populate eventBusName.
+	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 

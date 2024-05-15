@@ -127,7 +127,8 @@ spec:
                     description: The Amazon Resource Name (ARN) of the listener.
                     type: string
                   listenerArnRef:
-                    description: Reference to a Listener to populate listenerArn.
+                    description: Reference to a Listener in globalaccelerator to populate
+                      listenerArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -161,7 +162,8 @@ spec:
                     - name
                     type: object
                   listenerArnSelector:
-                    description: Selector for a Listener to populate listenerArn.
+                    description: Selector for a Listener in globalaccelerator to populate
+                      listenerArn.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -302,7 +304,8 @@ spec:
                     description: The Amazon Resource Name (ARN) of the listener.
                     type: string
                   listenerArnRef:
-                    description: Reference to a Listener to populate listenerArn.
+                    description: Reference to a Listener in globalaccelerator to populate
+                      listenerArn.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -336,7 +339,8 @@ spec:
                     - name
                     type: object
                   listenerArnSelector:
-                    description: Selector for a Listener to populate listenerArn.
+                    description: Selector for a Listener in globalaccelerator to populate
+                      listenerArn.
                     properties:
                       matchControllerRef:
                         description: |-
