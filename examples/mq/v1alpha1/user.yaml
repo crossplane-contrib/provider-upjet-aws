@@ -15,7 +15,9 @@ spec:
     brokerIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-user
-    consoleAccess: true
+    # setting consoleAccess will result in an update loop till the broker is
+    # restarted...
+    # consoleAccess: true
     passwordSecretRef:
       key: password
       name: mq-secret
@@ -43,7 +45,7 @@ spec:
       - name: example
     engineType: ActiveMQ
     engineVersion: 5.17.6
-    hostInstanceType: mq.t2.micro
+    hostInstanceType: mq.t3.micro
     user:
     - passwordSecretRef:
         key: password
