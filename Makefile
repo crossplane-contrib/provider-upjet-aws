@@ -82,7 +82,7 @@ UP_CHANNEL = stable
 UPTEST_VERSION = v0.11.1
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
-UXP_VERSION = 1.14.6-up.1
+CROSSPLANE_VERSION = 1.14.6
 
 export UP_VERSION := $(UP_VERSION)
 export UP_CHANNEL := $(UP_CHANNEL)
@@ -370,3 +370,7 @@ delete-build-tags:
 	@EXTRA_BUILDTAGGER_ARGS="--delete" RESTORE_DEEPCOPY_TAGS="true" ./scripts/tag.sh || $(FAIL)
 	@$(OK) Untagging source files.
 endif
+
+# TODO(negz): Update CI to use these targets.
+vendor: modules.download
+vendor.check: modules.check
