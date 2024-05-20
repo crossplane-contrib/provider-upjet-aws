@@ -5,16 +5,16 @@ metadata:
     meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-endpointaccess
 spec:
   forProvider:
     clusterIdentifierSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-endpointaccess
     region: us-west-1
     subnetGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-endpointaccess
 ---
 apiVersion: redshift.aws.upbound.io/v1beta1
 kind: Cluster
@@ -22,8 +22,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-endpointaccess
+  name: example-endpointaccess-c
 spec:
   forProvider:
     clusterType: single-node
@@ -43,8 +43,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: example-endpointaccess
+  name: example-endpointaccess-sg
 spec:
   forProvider:
     region: us-west-1
