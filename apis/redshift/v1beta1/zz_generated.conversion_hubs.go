@@ -13,6 +13,9 @@ func (tr *AuthenticationProfile) Hub() {}
 func (tr *Cluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *EndpointAccess) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *EventSubscription) Hub() {}
 
 // Hub marks this type as a conversion hub.
