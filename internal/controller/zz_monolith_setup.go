@@ -183,6 +183,7 @@ import (
 	approvalruletemplateassociation "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplateassociation"
 	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
+	profilinggroup "github.com/upbound/provider-aws/internal/controller/codeguruprofiler/profilinggroup"
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
 	customactiontype "github.com/upbound/provider-aws/internal/controller/codepipeline/customactiontype"
 	webhookcodepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
@@ -1127,6 +1128,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		approvalruletemplateassociation.Setup,
 		repository.Setup,
 		trigger.Setup,
+		profilinggroup.Setup,
 		codepipeline.Setup,
 		customactiontype.Setup,
 		webhookcodepipeline.Setup,
