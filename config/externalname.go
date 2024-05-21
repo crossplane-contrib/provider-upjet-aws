@@ -67,6 +67,10 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_opensearchserverless_security_policy": config.NameAsIdentifier,
 	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
 	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
+
+	// CodeGuru Profiler
+	// Profiling Group can be imported using the the profiling group name
+	"aws_codeguruprofiler_profiling_group": config.NameAsIdentifier,
 }
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations
