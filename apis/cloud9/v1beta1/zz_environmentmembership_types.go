@@ -33,7 +33,7 @@ type EnvironmentMembershipObservation struct {
 	// The Amazon Resource Name (ARN) of the environment member you want to add.
 	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
 
-	// he user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
+	// The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 

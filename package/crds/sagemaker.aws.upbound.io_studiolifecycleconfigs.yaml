@@ -79,7 +79,8 @@ spec:
                     type: string
                   studioLifecycleConfigAppType:
                     description: The App type that the Lifecycle Configuration is
-                      attached to. Valid values are JupyterServer and KernelGateway.
+                      attached to. Valid values are JupyterServer, JupyterLab, CodeEditor
+                      and KernelGateway.
                     type: string
                   studioLifecycleConfigContent:
                     description: The content of your Studio Lifecycle Configuration
@@ -109,7 +110,8 @@ spec:
                 properties:
                   studioLifecycleConfigAppType:
                     description: The App type that the Lifecycle Configuration is
-                      attached to. Valid values are JupyterServer and KernelGateway.
+                      attached to. Valid values are JupyterServer, JupyterLab, CodeEditor
+                      and KernelGateway.
                     type: string
                   studioLifecycleConfigContent:
                     description: The content of your Studio Lifecycle Configuration
@@ -315,7 +317,8 @@ spec:
                     type: string
                   studioLifecycleConfigAppType:
                     description: The App type that the Lifecycle Configuration is
-                      attached to. Valid values are JupyterServer and KernelGateway.
+                      attached to. Valid values are JupyterServer, JupyterLab, CodeEditor
+                      and KernelGateway.
                     type: string
                   studioLifecycleConfigContent:
                     description: The content of your Studio Lifecycle Configuration

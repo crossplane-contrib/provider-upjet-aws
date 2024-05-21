@@ -18,6 +18,10 @@ type FunctionInitParameters struct {
 	// Comment.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to on key value store per function.
+	// +listType=set
+	KeyValueStoreAssociations []*string `json:"keyValueStoreAssociations,omitempty" tf:"key_value_store_associations,omitempty"`
+
 	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
@@ -37,6 +41,10 @@ type FunctionObservation struct {
 	Etag *string `json:"etag,omitempty" tf:"etag,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to on key value store per function.
+	// +listType=set
+	KeyValueStoreAssociations []*string `json:"keyValueStoreAssociations,omitempty" tf:"key_value_store_associations,omitempty"`
 
 	// ETag hash of any LIVE stage of the function.
 	LiveStageEtag *string `json:"liveStageEtag,omitempty" tf:"live_stage_etag,omitempty"`
@@ -60,6 +68,11 @@ type FunctionParameters struct {
 	// Comment.
 	// +kubebuilder:validation:Optional
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
+
+	// List of aws_cloudfront_key_value_store ARNs to be associated to the function. AWS limits associations to on key value store per function.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	KeyValueStoreAssociations []*string `json:"keyValueStoreAssociations,omitempty" tf:"key_value_store_associations,omitempty"`
 
 	// Whether to publish creation/change as Live CloudFront Function Version. Defaults to true.
 	// +kubebuilder:validation:Optional

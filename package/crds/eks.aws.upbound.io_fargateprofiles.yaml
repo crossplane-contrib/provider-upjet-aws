@@ -74,9 +74,7 @@ spec:
               forProvider:
                 properties:
                   clusterName:
-                    description: 100 characters in length. Must begin with an alphanumeric
-                      character, and must only contain alphanumeric characters, dashes
-                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    description: –  Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -360,9 +358,7 @@ spec:
                   autoscaler.
                 properties:
                   clusterName:
-                    description: 100 characters in length. Must begin with an alphanumeric
-                      character, and must only contain alphanumeric characters, dashes
-                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    description: –  Name of the EKS Cluster.
                     type: string
                   clusterNameRef:
                     description: Reference to a Cluster in eks to populate clusterName.
@@ -807,9 +803,7 @@ spec:
                     description: Amazon Resource Name (ARN) of the EKS Fargate Profile.
                     type: string
                   clusterName:
-                    description: 100 characters in length. Must begin with an alphanumeric
-                      character, and must only contain alphanumeric characters, dashes
-                      and underscores (^[0-9A-Za-z][A-Za-z0-9\-_]+$).
+                    description: –  Name of the EKS Cluster.
                     type: string
                   id:
                     description: EKS Cluster name and EKS Fargate Profile name separated

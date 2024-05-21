@@ -297,6 +297,8 @@ spec:
                   id:
                     description: The ID of the DHCP Options Set.
                     type: string
+                  ipv6AddressPreferredLeaseTime:
+                    type: string
                   netbiosNameServers:
                     description: List of NETBIOS name servers.
                     type: string

@@ -85,8 +85,8 @@ spec:
                       Requires automatic_backup_retention_days to be set.
                     type: string
                   deploymentType:
-                    description: '- The filesystem deployment type. Supports MULTI_AZ_1
-                      and SINGLE_AZ_1.'
+                    description: '- The filesystem deployment type. Supports MULTI_AZ_1,
+                      SINGLE_AZ_1, and SINGLE_AZ_2.'
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
@@ -129,6 +129,12 @@ spec:
                     - name
                     - namespace
                     type: object
+                  haPairs:
+                    description: '- The number of ha_pairs to deploy for the file
+                      system. Valid values are 1 through 12. Value of 2 or greater
+                      required for SINGLE_AZ_2. Only value of 1 is supported with
+                      SINGLE_AZ_1 or MULTI_AZ_1 but not required.'
+                    type: number
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest, Defaults to an AWS managed KMS Key.
@@ -387,7 +393,10 @@ spec:
                     x-kubernetes-list-type: set
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Valid
-                      values between 1024 and 196608.
+                      values between 1024 and 196608 for file systems with deployment_type
+                      SINGLE_AZ_1 and MULTI_AZ_1. Valid values between 2048 (1024
+                      per ha pair) and 1048576 for file systems with deployment_type
+                      SINGLE_AZ_2.
                     type: number
                   storageType:
                     description: '- The filesystem storage type. defaults to SSD.'
@@ -472,7 +481,7 @@ spec:
                     type: object
                   subnetIds:
                     description: A list of IDs for the subnets that the file system
-                      will be accessible from. Upto 2 subnets can be provided.
+                      will be accessible from. Up to 2 subnets can be provided.
                     items:
                       type: string
                     type: array
@@ -485,7 +494,17 @@ spec:
                   throughputCapacity:
                     description: Sets the throughput capacity (in MBps) for the file
                       system that you're creating. Valid values are 128, 256, 512,
-                      1024, 2048, and 4096.
+                      1024, 2048, and 4096. This parameter is only supported when
+                      not using the ha_pairs parameter. Either throughput_capacity
+                      or throughput_capacity_per_ha_pair must be specified.
+                    type: number
+                  throughputCapacityPerHaPair:
+                    description: Sets the throughput capacity (in MBps) for the file
+                      system that you're creating. Valid value when using 1 ha_pair
+                      are 128, 256, 512, 1024, 2048, and 4096. Valid values when using
+                      2 or more ha_pairs are 3072,6144. This parameter is only supported
+                      when specifying the ha_pairs parameter. Either throughput_capacity
+                      or throughput_capacity_per_ha_pair must be specified.
                     type: number
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
@@ -519,8 +538,8 @@ spec:
                       Requires automatic_backup_retention_days to be set.
                     type: string
                   deploymentType:
-                    description: '- The filesystem deployment type. Supports MULTI_AZ_1
-                      and SINGLE_AZ_1.'
+                    description: '- The filesystem deployment type. Supports MULTI_AZ_1,
+                      SINGLE_AZ_1, and SINGLE_AZ_2.'
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
@@ -544,6 +563,12 @@ spec:
                       FSx selects an unused IP address range for you from the 198.19.*
                       range.
                     type: string
+                  haPairs:
+                    description: '- The number of ha_pairs to deploy for the file
+                      system. Valid values are 1 through 12. Value of 2 or greater
+                      required for SINGLE_AZ_2. Only value of 1 is supported with
+                      SINGLE_AZ_1 or MULTI_AZ_1 but not required.'
+                    type: number
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest, Defaults to an AWS managed KMS Key.
@@ -798,7 +823,10 @@ spec:
                     x-kubernetes-list-type: set
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Valid
-                      values between 1024 and 196608.
+                      values between 1024 and 196608 for file systems with deployment_type
+                      SINGLE_AZ_1 and MULTI_AZ_1. Valid values between 2048 (1024
+                      per ha pair) and 1048576 for file systems with deployment_type
+                      SINGLE_AZ_2.
                     type: number
                   storageType:
                     description: '- The filesystem storage type. defaults to SSD.'
@@ -883,7 +911,7 @@ spec:
                     type: object
                   subnetIds:
                     description: A list of IDs for the subnets that the file system
-                      will be accessible from. Upto 2 subnets can be provided.
+                      will be accessible from. Up to 2 subnets can be provided.
                     items:
                       type: string
                     type: array
@@ -896,7 +924,17 @@ spec:
                   throughputCapacity:
                     description: Sets the throughput capacity (in MBps) for the file
                       system that you're creating. Valid values are 128, 256, 512,
-                      1024, 2048, and 4096.
+                      1024, 2048, and 4096. This parameter is only supported when
+                      not using the ha_pairs parameter. Either throughput_capacity
+                      or throughput_capacity_per_ha_pair must be specified.
+                    type: number
+                  throughputCapacityPerHaPair:
+                    description: Sets the throughput capacity (in MBps) for the file
+                      system that you're creating. Valid value when using 1 ha_pair
+                      are 128, 256, 512, 1024, 2048, and 4096. Valid values when using
+                      2 or more ha_pairs are 3072,6144. This parameter is only supported
+                      when specifying the ha_pairs parameter. Either throughput_capacity
+                      or throughput_capacity_per_ha_pair must be specified.
                     type: number
                   weeklyMaintenanceStartTime:
                     description: The preferred start time (in d:HH:MM format) to perform
@@ -1075,10 +1113,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.deploymentType)
                 || (has(self.initProvider) && has(self.initProvider.deploymentType))'
-            - message: spec.forProvider.throughputCapacity is a required parameter
+            - message: spec.forProvider.storageCapacity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.throughputCapacity)
-                || (has(self.initProvider) && has(self.initProvider.throughputCapacity))'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageCapacity)
+                || (has(self.initProvider) && has(self.initProvider.storageCapacity))'
           status:
             description: OntapFileSystemStatus defines the observed state of OntapFileSystem.
             properties:
@@ -1099,8 +1137,8 @@ spec:
                       Requires automatic_backup_retention_days to be set.
                     type: string
                   deploymentType:
-                    description: '- The filesystem deployment type. Supports MULTI_AZ_1
-                      and SINGLE_AZ_1.'
+                    description: '- The filesystem deployment type. Supports MULTI_AZ_1,
+                      SINGLE_AZ_1, and SINGLE_AZ_2.'
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
@@ -1168,6 +1206,12 @@ spec:
                           type: array
                       type: object
                     type: array
+                  haPairs:
+                    description: '- The number of ha_pairs to deploy for the file
+                      system. Valid values are 1 through 12. Value of 2 or greater
+                      required for SINGLE_AZ_2. Only value of 1 is supported with
+                      SINGLE_AZ_1 or MULTI_AZ_1 but not required.'
+                    type: number
                   id:
                     description: Identifier of the file system, e.g., fs-12345678
                     type: string
@@ -1209,14 +1253,17 @@ spec:
                     x-kubernetes-list-type: set
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Valid
-                      values between 1024 and 196608.
+                      values between 1024 and 196608 for file systems with deployment_type
+                      SINGLE_AZ_1 and MULTI_AZ_1. Valid values between 2048 (1024
+                      per ha pair) and 1048576 for file systems with deployment_type
+                      SINGLE_AZ_2.
                     type: number
                   storageType:
                     description: '- The filesystem storage type. defaults to SSD.'
                     type: string
                   subnetIds:
                     description: A list of IDs for the subnets that the file system
-                      will be accessible from. Upto 2 subnets can be provided.
+                      will be accessible from. Up to 2 subnets can be provided.
                     items:
                       type: string
                     type: array
@@ -1237,7 +1284,17 @@ spec:
                   throughputCapacity:
                     description: Sets the throughput capacity (in MBps) for the file
                       system that you're creating. Valid values are 128, 256, 512,
-                      1024, 2048, and 4096.
+                      1024, 2048, and 4096. This parameter is only supported when
+                      not using the ha_pairs parameter. Either throughput_capacity
+                      or throughput_capacity_per_ha_pair must be specified.
+                    type: number
+                  throughputCapacityPerHaPair:
+                    description: Sets the throughput capacity (in MBps) for the file
+                      system that you're creating. Valid value when using 1 ha_pair
+                      are 128, 256, 512, 1024, 2048, and 4096. Valid values when using
+                      2 or more ha_pairs are 3072,6144. This parameter is only supported
+                      when specifying the ha_pairs parameter. Either throughput_capacity
+                      or throughput_capacity_per_ha_pair must be specified.
                     type: number
                   vpcId:
                     description: Identifier of the Virtual Private Cloud for the file

@@ -702,6 +702,9 @@ type TargetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
 
+	// Used to delete managed rules created by AWS. Defaults to false.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// Parameters used when you are using the rule to invoke an API Gateway REST endpoint. Documented below. A maximum of 1 is allowed.
 	HTTPTarget []HTTPTargetInitParameters `json:"httpTarget,omitempty" tf:"http_target,omitempty"`
 
@@ -779,6 +782,9 @@ type TargetObservation struct {
 	// If you omit this, the default event bus is used.
 	EventBusName *string `json:"eventBusName,omitempty" tf:"event_bus_name,omitempty"`
 
+	// Used to delete managed rules created by AWS. Defaults to false.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// Parameters used when you are using the rule to invoke an API Gateway REST endpoint. Documented below. A maximum of 1 is allowed.
 	HTTPTarget []HTTPTargetObservation `json:"httpTarget,omitempty" tf:"http_target,omitempty"`
 
@@ -852,6 +858,10 @@ type TargetParameters struct {
 	// Selector for a Bus in cloudwatchevents to populate eventBusName.
 	// +kubebuilder:validation:Optional
 	EventBusNameSelector *v1.Selector `json:"eventBusNameSelector,omitempty" tf:"-"`
+
+	// Used to delete managed rules created by AWS. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Parameters used when you are using the rule to invoke an API Gateway REST endpoint. Documented below. A maximum of 1 is allowed.
 	// +kubebuilder:validation:Optional

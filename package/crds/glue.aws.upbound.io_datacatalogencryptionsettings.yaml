@@ -191,9 +191,13 @@ spec:
                           items:
                             properties:
                               catalogEncryptionMode:
-                                description: The encryption-at-rest mode for encrypting
-                                  Data Catalog data. Valid values are DISABLED and
-                                  SSE-KMS.
+                                description: 'The encryption-at-rest mode for encrypting
+                                  Data Catalog data. Valid values: DISABLED, SSE-KMS,
+                                  SSE-KMS-WITH-SERVICE-ROLE.'
+                                type: string
+                              catalogEncryptionServiceRole:
+                                description: The ARN of the AWS IAM role used for
+                                  accessing encrypted Data Catalog data.
                                 type: string
                               sseAwsKmsKeyId:
                                 description: The ARN of the AWS KMS key to use for
@@ -416,9 +420,13 @@ spec:
                           items:
                             properties:
                               catalogEncryptionMode:
-                                description: The encryption-at-rest mode for encrypting
-                                  Data Catalog data. Valid values are DISABLED and
-                                  SSE-KMS.
+                                description: 'The encryption-at-rest mode for encrypting
+                                  Data Catalog data. Valid values: DISABLED, SSE-KMS,
+                                  SSE-KMS-WITH-SERVICE-ROLE.'
+                                type: string
+                              catalogEncryptionServiceRole:
+                                description: The ARN of the AWS IAM role used for
+                                  accessing encrypted Data Catalog data.
                                 type: string
                               sseAwsKmsKeyId:
                                 description: The ARN of the AWS KMS key to use for
@@ -725,9 +733,13 @@ spec:
                           items:
                             properties:
                               catalogEncryptionMode:
-                                description: The encryption-at-rest mode for encrypting
-                                  Data Catalog data. Valid values are DISABLED and
-                                  SSE-KMS.
+                                description: 'The encryption-at-rest mode for encrypting
+                                  Data Catalog data. Valid values: DISABLED, SSE-KMS,
+                                  SSE-KMS-WITH-SERVICE-ROLE.'
+                                type: string
+                              catalogEncryptionServiceRole:
+                                description: The ARN of the AWS IAM role used for
+                                  accessing encrypted Data Catalog data.
                                 type: string
                               sseAwsKmsKeyId:
                                 description: The ARN of the AWS KMS key to use for

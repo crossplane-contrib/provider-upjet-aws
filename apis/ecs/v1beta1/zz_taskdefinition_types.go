@@ -418,6 +418,9 @@ type TaskDefinitionInitParameters struct {
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 
+	// Whether should track latest task definition or the one created with the resource. Default is false.
+	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
+
 	// Configuration block for volumes that containers in your task may use. Detailed below.
 	Volume []VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
 }
@@ -491,6 +494,9 @@ type TaskDefinitionObservation struct {
 
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
+
+	// Whether should track latest task definition or the one created with the resource. Default is false.
+	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
 	// Configuration block for volumes that containers in your task may use. Detailed below.
 	Volume []VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
@@ -582,6 +588,10 @@ type TaskDefinitionParameters struct {
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
 	// +kubebuilder:validation:Optional
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
+
+	// Whether should track latest task definition or the one created with the resource. Default is false.
+	// +kubebuilder:validation:Optional
+	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
 	// Configuration block for volumes that containers in your task may use. Detailed below.
 	// +kubebuilder:validation:Optional

@@ -15,22 +15,19 @@ import (
 
 type EgressFilterInitParameters struct {
 
-	// Egress filter type. By default, the type is DROP_ALL.
-	// Valid values are ALLOW_ALL and DROP_ALL.
+	// Egress filter type. By default, the type is DROP_ALL. Valid values are ALLOW_ALL and DROP_ALL.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EgressFilterObservation struct {
 
-	// Egress filter type. By default, the type is DROP_ALL.
-	// Valid values are ALLOW_ALL and DROP_ALL.
+	// Egress filter type. By default, the type is DROP_ALL. Valid values are ALLOW_ALL and DROP_ALL.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EgressFilterParameters struct {
 
-	// Egress filter type. By default, the type is DROP_ALL.
-	// Valid values are ALLOW_ALL and DROP_ALL.
+	// Egress filter type. By default, the type is DROP_ALL. Valid values are ALLOW_ALL and DROP_ALL.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -98,12 +95,18 @@ type MeshSpecInitParameters struct {
 
 	// Egress filter rules for the service mesh.
 	EgressFilter []EgressFilterInitParameters `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
+
+	// The service discovery information for the service mesh.
+	ServiceDiscovery []ServiceDiscoveryInitParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type MeshSpecObservation struct {
 
 	// Egress filter rules for the service mesh.
 	EgressFilter []EgressFilterObservation `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
+
+	// The service discovery information for the service mesh.
+	ServiceDiscovery []ServiceDiscoveryObservation `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type MeshSpecParameters struct {
@@ -111,6 +114,29 @@ type MeshSpecParameters struct {
 	// Egress filter rules for the service mesh.
 	// +kubebuilder:validation:Optional
 	EgressFilter []EgressFilterParameters `json:"egressFilter,omitempty" tf:"egress_filter,omitempty"`
+
+	// The service discovery information for the service mesh.
+	// +kubebuilder:validation:Optional
+	ServiceDiscovery []ServiceDiscoveryParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
+}
+
+type ServiceDiscoveryInitParameters struct {
+
+	// The IP version to use to control traffic within the mesh. Valid values are IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, and IPv6_ONLY.
+	IPPreference *string `json:"ipPreference,omitempty" tf:"ip_preference,omitempty"`
+}
+
+type ServiceDiscoveryObservation struct {
+
+	// The IP version to use to control traffic within the mesh. Valid values are IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, and IPv6_ONLY.
+	IPPreference *string `json:"ipPreference,omitempty" tf:"ip_preference,omitempty"`
+}
+
+type ServiceDiscoveryParameters struct {
+
+	// The IP version to use to control traffic within the mesh. Valid values are IPv6_PREFERRED, IPv4_PREFERRED, IPv4_ONLY, and IPv6_ONLY.
+	// +kubebuilder:validation:Optional
+	IPPreference *string `json:"ipPreference,omitempty" tf:"ip_preference,omitempty"`
 }
 
 // MeshSpec defines the desired state of Mesh

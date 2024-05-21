@@ -609,6 +609,73 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SnowflakeConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnowflakeConfiguration[i3].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.SnowflakeConfiguration[i3].RoleArnRef,
+				Selector:     mg.Spec.ForProvider.SnowflakeConfiguration[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.SnowflakeConfiguration[i3].RoleArn")
+		}
+		mg.Spec.ForProvider.SnowflakeConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.SnowflakeConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SnowflakeConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArnRef,
+					Selector:     mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SnowflakeConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArnRef,
+					Selector:     mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArn")
+			}
+			mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.SplunkConfiguration); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.SplunkConfiguration[i3].S3Configuration); i4++ {
 			{
@@ -1234,6 +1301,73 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			}
 			mg.Spec.InitProvider.RedshiftConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.RedshiftConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SnowflakeConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnowflakeConfiguration[i3].RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.SnowflakeConfiguration[i3].RoleArnRef,
+				Selector:     mg.Spec.InitProvider.SnowflakeConfiguration[i3].RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.SnowflakeConfiguration[i3].RoleArn")
+		}
+		mg.Spec.InitProvider.SnowflakeConfiguration[i3].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.SnowflakeConfiguration[i3].RoleArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SnowflakeConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArnRef,
+					Selector:     mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArn")
+			}
+			mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SnowflakeConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArnRef,
+					Selector:     mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArn")
+			}
+			mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SnowflakeConfiguration[i3].S3Configuration[i4].RoleArnRef = rsp.ResolvedReference
 
 		}
 	}

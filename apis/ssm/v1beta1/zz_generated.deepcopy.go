@@ -4187,6 +4187,11 @@ func (in *PatchBaselineObservation) DeepCopyInto(out *PatchBaselineObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.JSON != nil {
+		in, out := &in.JSON, &out.JSON
+		*out = new(string)
+		**out = **in
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)

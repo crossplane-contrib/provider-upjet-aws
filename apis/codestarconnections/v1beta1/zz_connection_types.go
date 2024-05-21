@@ -21,7 +21,7 @@ type ConnectionInitParameters struct {
 	// The name of the connection to be created. The name must be unique in the calling AWS account. Changing name will create a new resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the external provider where your third-party code repository is configured. Valid values are Bitbucket, GitHub or GitHubEnterpriseServer. Changing provider_type will create a new resource. Conflicts with host_arn
+	// The name of the external provider where your third-party code repository is configured. Valid values are Bitbucket, GitHub, GitHubEnterpriseServer, GitLab or GitLabSelfManaged. Changing provider_type will create a new resource. Conflicts with host_arn
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -46,7 +46,7 @@ type ConnectionObservation struct {
 	// The name of the connection to be created. The name must be unique in the calling AWS account. Changing name will create a new resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the external provider where your third-party code repository is configured. Valid values are Bitbucket, GitHub or GitHubEnterpriseServer. Changing provider_type will create a new resource. Conflicts with host_arn
+	// The name of the external provider where your third-party code repository is configured. Valid values are Bitbucket, GitHub, GitHubEnterpriseServer, GitLab or GitLabSelfManaged. Changing provider_type will create a new resource. Conflicts with host_arn
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -68,7 +68,7 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the external provider where your third-party code repository is configured. Valid values are Bitbucket, GitHub or GitHubEnterpriseServer. Changing provider_type will create a new resource. Conflicts with host_arn
+	// The name of the external provider where your third-party code repository is configured. Valid values are Bitbucket, GitHub, GitHubEnterpriseServer, GitLab or GitLabSelfManaged. Changing provider_type will create a new resource. Conflicts with host_arn
 	// +kubebuilder:validation:Optional
 	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
 

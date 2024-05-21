@@ -71,6 +71,25 @@ type AcceleratorTotalMemoryMibParameters struct {
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
+type AlarmSpecificationInitParameters struct {
+
+	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+}
+
+type AlarmSpecificationObservation struct {
+
+	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+}
+
+type AlarmSpecificationParameters struct {
+
+	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	// +kubebuilder:validation:Optional
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+}
+
 type AutoscalingGroupInitParameters struct {
 
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
@@ -712,7 +731,7 @@ type InitialLifecycleHookParameters struct {
 
 type InstanceMaintenancePolicyInitParameters struct {
 
-	// Specifies the upper limit on the number of instances that are in the InService or Pending state with a healthy status during an instance replacement activity.
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
 	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
@@ -721,7 +740,7 @@ type InstanceMaintenancePolicyInitParameters struct {
 
 type InstanceMaintenancePolicyObservation struct {
 
-	// Specifies the upper limit on the number of instances that are in the InService or Pending state with a healthy status during an instance replacement activity.
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
 	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
@@ -730,7 +749,7 @@ type InstanceMaintenancePolicyObservation struct {
 
 type InstanceMaintenancePolicyParameters struct {
 
-	// Specifies the upper limit on the number of instances that are in the InService or Pending state with a healthy status during an instance replacement activity.
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
 	// +kubebuilder:validation:Optional
 	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage" tf:"max_healthy_percentage,omitempty"`
 
@@ -1534,6 +1553,9 @@ type OverrideParameters struct {
 
 type PreferencesInitParameters struct {
 
+	// Alarm Specification for Instance Refresh.
+	AlarmSpecification []AlarmSpecificationInitParameters `json:"alarmSpecification,omitempty" tf:"alarm_specification,omitempty"`
+
 	// Automatically rollback if instance refresh fails. Defaults to false. This option may only be set to true when specifying a launch_template or mixed_instances_policy.
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
 
@@ -1545,6 +1567,9 @@ type PreferencesInitParameters struct {
 
 	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
+
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
@@ -1561,6 +1586,9 @@ type PreferencesInitParameters struct {
 
 type PreferencesObservation struct {
 
+	// Alarm Specification for Instance Refresh.
+	AlarmSpecification []AlarmSpecificationObservation `json:"alarmSpecification,omitempty" tf:"alarm_specification,omitempty"`
+
 	// Automatically rollback if instance refresh fails. Defaults to false. This option may only be set to true when specifying a launch_template or mixed_instances_policy.
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
 
@@ -1572,6 +1600,9 @@ type PreferencesObservation struct {
 
 	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
+
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
@@ -1588,6 +1619,10 @@ type PreferencesObservation struct {
 
 type PreferencesParameters struct {
 
+	// Alarm Specification for Instance Refresh.
+	// +kubebuilder:validation:Optional
+	AlarmSpecification []AlarmSpecificationParameters `json:"alarmSpecification,omitempty" tf:"alarm_specification,omitempty"`
+
 	// Automatically rollback if instance refresh fails. Defaults to false. This option may only be set to true when specifying a launch_template or mixed_instances_policy.
 	// +kubebuilder:validation:Optional
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
@@ -1603,6 +1638,10 @@ type PreferencesParameters struct {
 	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	// +kubebuilder:validation:Optional
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
+
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	// +kubebuilder:validation:Optional
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
 
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	// +kubebuilder:validation:Optional

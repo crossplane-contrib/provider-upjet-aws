@@ -15,6 +15,9 @@ import (
 
 type EndpointAccessInitParameters struct {
 
+	// The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
+
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
@@ -60,6 +63,9 @@ type EndpointAccessObservation struct {
 	// The Redshift Endpoint Access Name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
+
 	// The port that Amazon Redshift Serverless listens on.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
@@ -79,6 +85,10 @@ type EndpointAccessObservation struct {
 }
 
 type EndpointAccessParameters struct {
+
+	// The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+	// +kubebuilder:validation:Optional
+	OwnerAccount *string `json:"ownerAccount,omitempty" tf:"owner_account,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

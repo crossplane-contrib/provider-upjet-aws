@@ -75,6 +75,8 @@ type EIPObservation struct {
 	// ID that AWS assigns to represent the allocation of the Elastic IP address for use with instances in a VPC.
 	AllocationID *string `json:"allocationId,omitempty" tf:"allocation_id,omitempty"`
 
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// User-specified primary or secondary private IP address to associate with the Elastic IP address. If no private IP address is specified, the Elastic IP address is associated with the primary private IP address.
 	AssociateWithPrivateIP *string `json:"associateWithPrivateIp,omitempty" tf:"associate_with_private_ip,omitempty"`
 
@@ -110,6 +112,9 @@ type EIPObservation struct {
 
 	// Contains the private IP address (if in VPC).
 	PrivateIP *string `json:"privateIp,omitempty" tf:"private_ip,omitempty"`
+
+	// The DNS pointer (PTR) record for the IP address.
+	PtrRecord *string `json:"ptrRecord,omitempty" tf:"ptr_record,omitempty"`
 
 	// Public DNS associated with the Elastic IP address.
 	PublicDNS *string `json:"publicDns,omitempty" tf:"public_dns,omitempty"`

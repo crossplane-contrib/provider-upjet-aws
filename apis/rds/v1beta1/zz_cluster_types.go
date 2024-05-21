@@ -97,11 +97,20 @@ type ClusterInitParameters struct {
 	// The default is false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the Aurora Userguide documentation for more information.
+	// The ID of the Directory Service Active Directory domain to create the cluster in.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// The name of the IAM role to be used when making API calls to the Directory Service.
+	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
+
+	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the User Guide for Aurora for more information.
 	EnableGlobalWriteForwarding *bool `json:"enableGlobalWriteForwarding,omitempty" tf:"enable_global_write_forwarding,omitempty"`
 
-	// Enable HTTP endpoint (data API). Only valid when engine_mode is set to serverless.
+	// Enable HTTP endpoint (data API). Only valid for some combinations of engine_mode, engine and engine_version and only available in some regions. See the Region and version availability section of the documentation. This option also does not work with any of these options specified: snapshot_identifier, replication_source_identifier, s3_import.
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
+
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
 	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	// +listType=set
@@ -198,7 +207,7 @@ type ClusterInitParameters struct {
 	// Specifies whether the DB cluster is encrypted. The default is false for provisioned engine_mode and true for serverless engine_mode. When restoring an unencrypted snapshot_identifier, the kms_key_id argument must be provided to encrypt the restored cluster.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// (Forces new for Multi-AZ DB clusters) Specifies the storage type to be associated with the DB cluster. For Aurora DB clusters, storage_type modifications can be done in-place. For Multi-AZ DB Clusters, the iops argument must also be set. Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters); io1 (Multi-AZ DB Clusters).
+	// (Forces new for Multi-AZ DB clusters) Specifies the storage type to be associated with the DB cluster. For Aurora DB clusters, storage_type modifications can be done in-place. For Multi-AZ DB Clusters, the iops argument must also be set. Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1, io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters); io1 (Multi-AZ DB Clusters).
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -302,11 +311,20 @@ type ClusterObservation struct {
 	// The default is false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the Aurora Userguide documentation for more information.
+	// The ID of the Directory Service Active Directory domain to create the cluster in.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// The name of the IAM role to be used when making API calls to the Directory Service.
+	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
+
+	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the User Guide for Aurora for more information.
 	EnableGlobalWriteForwarding *bool `json:"enableGlobalWriteForwarding,omitempty" tf:"enable_global_write_forwarding,omitempty"`
 
-	// Enable HTTP endpoint (data API). Only valid when engine_mode is set to serverless.
+	// Enable HTTP endpoint (data API). Only valid for some combinations of engine_mode, engine and engine_version and only available in some regions. See the Region and version availability section of the documentation. This option also does not work with any of these options specified: snapshot_identifier, replication_source_identifier, s3_import.
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
+
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
 	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	// +listType=set
@@ -407,7 +425,7 @@ type ClusterObservation struct {
 	// Specifies whether the DB cluster is encrypted. The default is false for provisioned engine_mode and true for serverless engine_mode. When restoring an unencrypted snapshot_identifier, the kms_key_id argument must be provided to encrypt the restored cluster.
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// (Forces new for Multi-AZ DB clusters) Specifies the storage type to be associated with the DB cluster. For Aurora DB clusters, storage_type modifications can be done in-place. For Multi-AZ DB Clusters, the iops argument must also be set. Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters); io1 (Multi-AZ DB Clusters).
+	// (Forces new for Multi-AZ DB clusters) Specifies the storage type to be associated with the DB cluster. For Aurora DB clusters, storage_type modifications can be done in-place. For Multi-AZ DB Clusters, the iops argument must also be set. Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1, io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters); io1 (Multi-AZ DB Clusters).
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -528,13 +546,25 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the Aurora Userguide documentation for more information.
+	// The ID of the Directory Service Active Directory domain to create the cluster in.
+	// +kubebuilder:validation:Optional
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// The name of the IAM role to be used when making API calls to the Directory Service.
+	// +kubebuilder:validation:Optional
+	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
+
+	// Whether cluster should forward writes to an associated global cluster. Applied to secondary clusters to enable them to forward writes to an aws_rds_global_cluster's primary cluster. See the User Guide for Aurora for more information.
 	// +kubebuilder:validation:Optional
 	EnableGlobalWriteForwarding *bool `json:"enableGlobalWriteForwarding,omitempty" tf:"enable_global_write_forwarding,omitempty"`
 
-	// Enable HTTP endpoint (data API). Only valid when engine_mode is set to serverless.
+	// Enable HTTP endpoint (data API). Only valid for some combinations of engine_mode, engine and engine_version and only available in some regions. See the Region and version availability section of the documentation. This option also does not work with any of these options specified: snapshot_identifier, replication_source_identifier, s3_import.
 	// +kubebuilder:validation:Optional
 	EnableHTTPEndpoint *bool `json:"enableHttpEndpoint,omitempty" tf:"enable_http_endpoint,omitempty"`
+
+	// Whether read replicas can forward write operations to the writer DB instance in the DB cluster. By default, write operations aren't allowed on reader DB instances.. See the User Guide for Aurora for more information. NOTE: Local write forwarding requires Aurora MySQL version 3.04 or higher.
+	// +kubebuilder:validation:Optional
+	EnableLocalWriteForwarding *bool `json:"enableLocalWriteForwarding,omitempty" tf:"enable_local_write_forwarding,omitempty"`
 
 	// Set of log types to export to cloudwatch. If omitted, no logs will be exported. The following log types are supported: audit, error, general, slowquery, postgresql (PostgreSQL).
 	// +kubebuilder:validation:Optional
@@ -666,7 +696,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageEncrypted *bool `json:"storageEncrypted,omitempty" tf:"storage_encrypted,omitempty"`
 
-	// (Forces new for Multi-AZ DB clusters) Specifies the storage type to be associated with the DB cluster. For Aurora DB clusters, storage_type modifications can be done in-place. For Multi-AZ DB Clusters, the iops argument must also be set. Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters); io1 (Multi-AZ DB Clusters).
+	// (Forces new for Multi-AZ DB clusters) Specifies the storage type to be associated with the DB cluster. For Aurora DB clusters, storage_type modifications can be done in-place. For Multi-AZ DB Clusters, the iops argument must also be set. Valid values are: "", aurora-iopt1 (Aurora DB Clusters); io1, io2 (Multi-AZ DB Clusters). Default: "" (Aurora DB Clusters); io1 (Multi-AZ DB Clusters).
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
@@ -954,7 +984,7 @@ type ClusterStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Cluster is the Schema for the Clusters API. Manages an RDS Aurora Cluster
+// Cluster is the Schema for the Clusters API. Manages an RDS Aurora Cluster or a RDS Multi-AZ DB Cluster
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

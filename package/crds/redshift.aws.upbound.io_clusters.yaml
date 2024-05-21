@@ -481,6 +481,9 @@ spec:
                   masterUsername:
                     description: Username for the master DB user.
                     type: string
+                  multiAz:
+                    description: Specifies if the Redshift cluster is multi-AZ.
+                    type: boolean
                   nodeType:
                     description: The node type to be provisioned for the cluster.
                     type: string
@@ -1047,6 +1050,9 @@ spec:
                   masterUsername:
                     description: Username for the master DB user.
                     type: string
+                  multiAz:
+                    description: Specifies if the Redshift cluster is multi-AZ.
+                    type: boolean
                   nodeType:
                     description: The node type to be provisioned for the cluster.
                     type: string
@@ -1578,6 +1584,9 @@ spec:
                   masterUsername:
                     description: Username for the master DB user.
                     type: string
+                  multiAz:
+                    description: Specifies if the Redshift cluster is multi-AZ.
+                    type: boolean
                   nodeType:
                     description: The node type to be provisioned for the cluster.
                     type: string

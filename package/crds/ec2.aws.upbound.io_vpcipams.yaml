@@ -107,6 +107,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  tier:
+                    description: specifies the IPAM tier. Valid options include free
+                      and advanced. Default is advanced.
+                    type: string
                 required:
                 - region
                 type: object
@@ -153,6 +157,10 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  tier:
+                    description: specifies the IPAM tier. Valid options include free
+                      and advanced. Default is advanced.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -399,6 +407,10 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  tier:
+                    description: specifies the IPAM tier. Valid options include free
+                      and advanced. Default is advanced.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

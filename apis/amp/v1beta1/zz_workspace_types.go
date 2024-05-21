@@ -37,6 +37,18 @@ type WorkspaceInitParameters struct {
 	// The alias of the prometheus workspace. See more in AWS Docs.
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
+	// The ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
+
 	// Logging configuration for the workspace. See Logging Configuration below for details.
 	LoggingConfiguration []LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
@@ -55,6 +67,9 @@ type WorkspaceObservation struct {
 
 	// Identifier of the workspace
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
 	// Logging configuration for the workspace. See Logging Configuration below for details.
 	LoggingConfiguration []LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
@@ -76,6 +91,19 @@ type WorkspaceParameters struct {
 	// The alias of the prometheus workspace. See more in AWS Docs.
 	// +kubebuilder:validation:Optional
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
+
+	// The ARN for the KMS encryption key. If this argument is not provided, then the AWS owned encryption key will be used to encrypt the data in the workspace. See more in AWS Docs
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +kubebuilder:validation:Optional
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// Reference to a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnRef *v1.Reference `json:"kmsKeyArnRef,omitempty" tf:"-"`
+
+	// Selector for a Key in kms to populate kmsKeyArn.
+	// +kubebuilder:validation:Optional
+	KMSKeyArnSelector *v1.Selector `json:"kmsKeyArnSelector,omitempty" tf:"-"`
 
 	// Logging configuration for the workspace. See Logging Configuration below for details.
 	// +kubebuilder:validation:Optional

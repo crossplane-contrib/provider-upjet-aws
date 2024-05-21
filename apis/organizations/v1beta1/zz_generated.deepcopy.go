@@ -878,6 +878,11 @@ func (in *OrganizationObservation) DeepCopyInto(out *OrganizationObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MasterAccountName != nil {
+		in, out := &in.MasterAccountName, &out.MasterAccountName
+		*out = new(string)
+		**out = **in
+	}
 	if in.NonMasterAccounts != nil {
 		in, out := &in.NonMasterAccounts, &out.NonMasterAccounts
 		*out = make([]NonMasterAccountsObservation, len(*in))

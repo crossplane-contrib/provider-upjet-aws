@@ -138,8 +138,11 @@ type TargetIPInitParameters struct {
 	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The port at ip that you want to forward DNS queries to. Default value is 53
+	// The port at ip that you want to forward DNS queries to. Default value is 53.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type TargetIPObservation struct {
@@ -147,8 +150,11 @@ type TargetIPObservation struct {
 	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The port at ip that you want to forward DNS queries to. Default value is 53
+	// The port at ip that you want to forward DNS queries to. Default value is 53.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type TargetIPParameters struct {
@@ -157,9 +163,13 @@ type TargetIPParameters struct {
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip" tf:"ip,omitempty"`
 
-	// The port at ip that you want to forward DNS queries to. Default value is 53
+	// The port at ip that you want to forward DNS queries to. Default value is 53.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 // RuleSpec defines the desired state of Rule

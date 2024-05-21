@@ -105,14 +105,17 @@ spec:
                                   type: object
                                 type: array
                               permission:
-                                description: Logging permissions assigned to the grantee
-                                  for the bucket.
+                                description: 'Logging permissions assigned to the
+                                  grantee for the bucket. Valid values: FULL_CONTROL,
+                                  WRITE, WRITE_ACP, READ, READ_ACP. See What permissions
+                                  can I grant? for more details about what each permission
+                                  means in the context of buckets.'
                                 type: string
                             type: object
                           type: array
                         owner:
-                          description: Configuration block of the bucket owner's display
-                            name and ID. See below.
+                          description: Configuration block for the bucket owner's
+                            display name and ID. See below.
                           items:
                             properties:
                               displayName:
@@ -129,7 +132,7 @@ spec:
                     description: Canned ACL to apply to the bucket.
                     type: string
                   bucket:
-                    description: Name of the bucket.
+                    description: Bucket to which to apply the ACL.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -260,14 +263,17 @@ spec:
                                   type: object
                                 type: array
                               permission:
-                                description: Logging permissions assigned to the grantee
-                                  for the bucket.
+                                description: 'Logging permissions assigned to the
+                                  grantee for the bucket. Valid values: FULL_CONTROL,
+                                  WRITE, WRITE_ACP, READ, READ_ACP. See What permissions
+                                  can I grant? for more details about what each permission
+                                  means in the context of buckets.'
                                 type: string
                             type: object
                           type: array
                         owner:
-                          description: Configuration block of the bucket owner's display
-                            name and ID. See below.
+                          description: Configuration block for the bucket owner's
+                            display name and ID. See below.
                           items:
                             properties:
                               displayName:
@@ -284,7 +290,7 @@ spec:
                     description: Canned ACL to apply to the bucket.
                     type: string
                   bucket:
-                    description: Name of the bucket.
+                    description: Bucket to which to apply the ACL.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in s3 to populate bucket.
@@ -571,14 +577,17 @@ spec:
                                   type: object
                                 type: array
                               permission:
-                                description: Logging permissions assigned to the grantee
-                                  for the bucket.
+                                description: 'Logging permissions assigned to the
+                                  grantee for the bucket. Valid values: FULL_CONTROL,
+                                  WRITE, WRITE_ACP, READ, READ_ACP. See What permissions
+                                  can I grant? for more details about what each permission
+                                  means in the context of buckets.'
                                 type: string
                             type: object
                           type: array
                         owner:
-                          description: Configuration block of the bucket owner's display
-                            name and ID. See below.
+                          description: Configuration block for the bucket owner's
+                            display name and ID. See below.
                           items:
                             properties:
                               displayName:
@@ -595,7 +604,7 @@ spec:
                     description: Canned ACL to apply to the bucket.
                     type: string
                   bucket:
-                    description: Name of the bucket.
+                    description: Bucket to which to apply the ACL.
                     type: string
                   expectedBucketOwner:
                     description: Account ID of the expected bucket owner.

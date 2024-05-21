@@ -67,6 +67,56 @@ func (mg *ApprovalRuleTemplateAssociation) ResolveReferences( // ResolveReferenc
 	return nil
 }
 
+// ResolveReferences of this Repository.
+func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
+	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
+	}
+	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Trigger.
 func (mg *Trigger) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

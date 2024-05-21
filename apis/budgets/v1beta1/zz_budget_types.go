@@ -14,24 +14,33 @@ import (
 )
 
 type AutoAdjustDataInitParameters struct {
+
+	// The string that defines whether your budget auto-adjusts based on historical or forecasted data. Valid values: FORECAST,HISTORICAL
 	AutoAdjustType *string `json:"autoAdjustType,omitempty" tf:"auto_adjust_type,omitempty"`
 
+	// Configuration block of Historical Options. Required for auto_adjust_type of HISTORICAL Configuration block that defines the historical data that your auto-adjusting budget is based on.
 	HistoricalOptions []HistoricalOptionsInitParameters `json:"historicalOptions,omitempty" tf:"historical_options,omitempty"`
 }
 
 type AutoAdjustDataObservation struct {
+
+	// The string that defines whether your budget auto-adjusts based on historical or forecasted data. Valid values: FORECAST,HISTORICAL
 	AutoAdjustType *string `json:"autoAdjustType,omitempty" tf:"auto_adjust_type,omitempty"`
 
+	// Configuration block of Historical Options. Required for auto_adjust_type of HISTORICAL Configuration block that defines the historical data that your auto-adjusting budget is based on.
 	HistoricalOptions []HistoricalOptionsObservation `json:"historicalOptions,omitempty" tf:"historical_options,omitempty"`
 
+	// The last time that your budget was auto-adjusted.
 	LastAutoAdjustTime *string `json:"lastAutoAdjustTime,omitempty" tf:"last_auto_adjust_time,omitempty"`
 }
 
 type AutoAdjustDataParameters struct {
 
+	// The string that defines whether your budget auto-adjusts based on historical or forecasted data. Valid values: FORECAST,HISTORICAL
 	// +kubebuilder:validation:Optional
 	AutoAdjustType *string `json:"autoAdjustType" tf:"auto_adjust_type,omitempty"`
 
+	// Configuration block of Historical Options. Required for auto_adjust_type of HISTORICAL Configuration block that defines the historical data that your auto-adjusting budget is based on.
 	// +kubebuilder:validation:Optional
 	HistoricalOptions []HistoricalOptionsParameters `json:"historicalOptions,omitempty" tf:"historical_options,omitempty"`
 }
@@ -41,7 +50,7 @@ type BudgetInitParameters struct {
 	// The ID of the target account for budget. Will use current user's account_id by default if omitted.
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Object containing [AutoAdjustData] which determines the budget amount for an auto-adjusting budget.
+	// Object containing AutoAdjustData which determines the budget amount for an auto-adjusting budget.
 	AutoAdjustData []AutoAdjustDataInitParameters `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
 
 	// Whether this budget tracks monetary cost or usage.
@@ -65,6 +74,10 @@ type BudgetInitParameters struct {
 	// Object containing Planned Budget Limits. Can be used multiple times to plan more than one budget limit. See PlannedBudgetLimits documentation.
 	PlannedLimit []PlannedLimitInitParameters `json:"plannedLimit,omitempty" tf:"planned_limit,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The end of the time period covered by the budget. There are no restrictions on the end date. Format: 2017-01-01_12:00.
 	TimePeriodEnd *string `json:"timePeriodEnd,omitempty" tf:"time_period_end,omitempty"`
 
@@ -83,7 +96,7 @@ type BudgetObservation struct {
 	// The ARN of the budget.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Object containing [AutoAdjustData] which determines the budget amount for an auto-adjusting budget.
+	// Object containing AutoAdjustData which determines the budget amount for an auto-adjusting budget.
 	AutoAdjustData []AutoAdjustDataObservation `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
 
 	// Whether this budget tracks monetary cost or usage.
@@ -110,6 +123,14 @@ type BudgetObservation struct {
 	// Object containing Planned Budget Limits. Can be used multiple times to plan more than one budget limit. See PlannedBudgetLimits documentation.
 	PlannedLimit []PlannedLimitObservation `json:"plannedLimit,omitempty" tf:"planned_limit,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
 	// The end of the time period covered by the budget. There are no restrictions on the end date. Format: 2017-01-01_12:00.
 	TimePeriodEnd *string `json:"timePeriodEnd,omitempty" tf:"time_period_end,omitempty"`
 
@@ -126,7 +147,7 @@ type BudgetParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
-	// Object containing [AutoAdjustData] which determines the budget amount for an auto-adjusting budget.
+	// Object containing AutoAdjustData which determines the budget amount for an auto-adjusting budget.
 	// +kubebuilder:validation:Optional
 	AutoAdjustData []AutoAdjustDataParameters `json:"autoAdjustData,omitempty" tf:"auto_adjust_data,omitempty"`
 
@@ -162,6 +183,11 @@ type BudgetParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The end of the time period covered by the budget. There are no restrictions on the end date. Format: 2017-01-01_12:00.
 	// +kubebuilder:validation:Optional
@@ -322,17 +348,23 @@ type CostTypesParameters struct {
 }
 
 type HistoricalOptionsInitParameters struct {
+
+	// The number of budget periods included in the moving-average calculation that determines your auto-adjusted budget amount.
 	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod,omitempty" tf:"budget_adjustment_period,omitempty"`
 }
 
 type HistoricalOptionsObservation struct {
+
+	// The number of budget periods included in the moving-average calculation that determines your auto-adjusted budget amount.
 	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod,omitempty" tf:"budget_adjustment_period,omitempty"`
 
+	// The integer that describes how many budget periods in your BudgetAdjustmentPeriod are included in the calculation of your current budget limit. If the first budget period in your BudgetAdjustmentPeriod has no cost data, then that budget period isn’t included in the average that determines your budget limit. You can’t set your own LookBackAvailablePeriods. The value is automatically calculated from the budget_adjustment_period and your historical cost data.
 	LookbackAvailablePeriods *float64 `json:"lookbackAvailablePeriods,omitempty" tf:"lookback_available_periods,omitempty"`
 }
 
 type HistoricalOptionsParameters struct {
 
+	// The number of budget periods included in the moving-average calculation that determines your auto-adjusted budget amount.
 	// +kubebuilder:validation:Optional
 	BudgetAdjustmentPeriod *float64 `json:"budgetAdjustmentPeriod" tf:"budget_adjustment_period,omitempty"`
 }

@@ -100,7 +100,7 @@ spec:
                       Can be one or more. These can be updated without destroying
                       and recreating the service only if force_new_deployment = true
                       and not changing from 0 capacity_provider_strategy blocks to
-                      greater than 0, or vice versa. See below.
+                      greater than 0, or vice versa. See below. Conflicts with launch_type.
                     items:
                       properties:
                         base:
@@ -347,7 +347,8 @@ spec:
                     type: object
                   launchType:
                     description: Launch type on which to run your service. The valid
-                      values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
+                      values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts
+                      with capacity_provider_strategy.
                     type: string
                   loadBalancer:
                     description: Configuration block for load balancers. See below.
@@ -780,6 +781,50 @@ spec:
                                   all the containers in the task definition of this
                                   Amazon ECS service.
                                 type: string
+                              timeout:
+                                description: Configuration timeouts for Service Connect
+                                items:
+                                  properties:
+                                    idleTimeoutSeconds:
+                                      description: The amount of time in seconds a
+                                        connection will stay active while idle. A
+                                        value of 0 can be set to disable idleTimeout.
+                                      type: number
+                                    perRequestTimeoutSeconds:
+                                      description: The amount of time in seconds for
+                                        the upstream to respond with a complete response
+                                        per request. A value of 0 can be set to disable
+                                        perRequestTimeout. Can only be set when appProtocol
+                                        isn't TCP.
+                                      type: number
+                                  type: object
+                                type: array
+                              tls:
+                                description: The configuration for enabling Transport
+                                  Layer Security (TLS)
+                                items:
+                                  properties:
+                                    issuerCertAuthority:
+                                      description: The details of the certificate
+                                        authority which will issue the certificate.
+                                      items:
+                                        properties:
+                                          awsPcaAuthorityArn:
+                                            description: The ARN of the aws_acmpca_certificate_authority
+                                              used to create the TLS Certificates.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    kmsKey:
+                                      description: The KMS key used to encrypt the
+                                        private key in Secrets Manager.
+                                      type: string
+                                    roleArn:
+                                      description: The ARN of the IAM Role that's
+                                        associated with the Service Connect TLS.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           type: array
                       type: object
@@ -903,7 +948,7 @@ spec:
                       type: string
                     description: Map of arbitrary keys and values that, when changed,
                       will trigger an in-place update (redeployment). Useful with
-                      timestamp(). See example above.
+                      plantimestamp(). See example above.
                     type: object
                     x-kubernetes-map-type: granular
                   waitForSteadyState:
@@ -953,7 +998,7 @@ spec:
                       Can be one or more. These can be updated without destroying
                       and recreating the service only if force_new_deployment = true
                       and not changing from 0 capacity_provider_strategy blocks to
-                      greater than 0, or vice versa. See below.
+                      greater than 0, or vice versa. See below. Conflicts with launch_type.
                     items:
                       properties:
                         base:
@@ -1200,7 +1245,8 @@ spec:
                     type: object
                   launchType:
                     description: Launch type on which to run your service. The valid
-                      values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
+                      values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts
+                      with capacity_provider_strategy.
                     type: string
                   loadBalancer:
                     description: Configuration block for load balancers. See below.
@@ -1629,6 +1675,50 @@ spec:
                                   all the containers in the task definition of this
                                   Amazon ECS service.
                                 type: string
+                              timeout:
+                                description: Configuration timeouts for Service Connect
+                                items:
+                                  properties:
+                                    idleTimeoutSeconds:
+                                      description: The amount of time in seconds a
+                                        connection will stay active while idle. A
+                                        value of 0 can be set to disable idleTimeout.
+                                      type: number
+                                    perRequestTimeoutSeconds:
+                                      description: The amount of time in seconds for
+                                        the upstream to respond with a complete response
+                                        per request. A value of 0 can be set to disable
+                                        perRequestTimeout. Can only be set when appProtocol
+                                        isn't TCP.
+                                      type: number
+                                  type: object
+                                type: array
+                              tls:
+                                description: The configuration for enabling Transport
+                                  Layer Security (TLS)
+                                items:
+                                  properties:
+                                    issuerCertAuthority:
+                                      description: The details of the certificate
+                                        authority which will issue the certificate.
+                                      items:
+                                        properties:
+                                          awsPcaAuthorityArn:
+                                            description: The ARN of the aws_acmpca_certificate_authority
+                                              used to create the TLS Certificates.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    kmsKey:
+                                      description: The KMS key used to encrypt the
+                                        private key in Secrets Manager.
+                                      type: string
+                                    roleArn:
+                                      description: The ARN of the IAM Role that's
+                                        associated with the Service Connect TLS.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           type: array
                       type: object
@@ -1752,7 +1842,7 @@ spec:
                       type: string
                     description: Map of arbitrary keys and values that, when changed,
                       will trigger an in-place update (redeployment). Useful with
-                      timestamp(). See example above.
+                      plantimestamp(). See example above.
                     type: object
                     x-kubernetes-map-type: granular
                   waitForSteadyState:
@@ -1959,7 +2049,7 @@ spec:
                       Can be one or more. These can be updated without destroying
                       and recreating the service only if force_new_deployment = true
                       and not changing from 0 capacity_provider_strategy blocks to
-                      greater than 0, or vice versa. See below.
+                      greater than 0, or vice versa. See below. Conflicts with launch_type.
                     items:
                       properties:
                         base:
@@ -2061,7 +2151,8 @@ spec:
                     type: string
                   launchType:
                     description: Launch type on which to run your service. The valid
-                      values are EC2, FARGATE, and EXTERNAL. Defaults to EC2.
+                      values are EC2, FARGATE, and EXTERNAL. Defaults to EC2. Conflicts
+                      with capacity_provider_strategy.
                     type: string
                   loadBalancer:
                     description: Configuration block for load balancers. See below.
@@ -2257,6 +2348,50 @@ spec:
                                   all the containers in the task definition of this
                                   Amazon ECS service.
                                 type: string
+                              timeout:
+                                description: Configuration timeouts for Service Connect
+                                items:
+                                  properties:
+                                    idleTimeoutSeconds:
+                                      description: The amount of time in seconds a
+                                        connection will stay active while idle. A
+                                        value of 0 can be set to disable idleTimeout.
+                                      type: number
+                                    perRequestTimeoutSeconds:
+                                      description: The amount of time in seconds for
+                                        the upstream to respond with a complete response
+                                        per request. A value of 0 can be set to disable
+                                        perRequestTimeout. Can only be set when appProtocol
+                                        isn't TCP.
+                                      type: number
+                                  type: object
+                                type: array
+                              tls:
+                                description: The configuration for enabling Transport
+                                  Layer Security (TLS)
+                                items:
+                                  properties:
+                                    issuerCertAuthority:
+                                      description: The details of the certificate
+                                        authority which will issue the certificate.
+                                      items:
+                                        properties:
+                                          awsPcaAuthorityArn:
+                                            description: The ARN of the aws_acmpca_certificate_authority
+                                              used to create the TLS Certificates.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    kmsKey:
+                                      description: The KMS key used to encrypt the
+                                        private key in Secrets Manager.
+                                      type: string
+                                    roleArn:
+                                      description: The ARN of the IAM Role that's
+                                        associated with the Service Connect TLS.
+                                      type: string
+                                  type: object
+                                type: array
                             type: object
                           type: array
                       type: object
@@ -2312,7 +2447,7 @@ spec:
                       type: string
                     description: Map of arbitrary keys and values that, when changed,
                       will trigger an in-place update (redeployment). Useful with
-                      timestamp(). See example above.
+                      plantimestamp(). See example above.
                     type: object
                     x-kubernetes-map-type: granular
                   waitForSteadyState:

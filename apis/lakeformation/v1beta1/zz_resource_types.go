@@ -15,10 +15,13 @@ import (
 
 type ResourceInitParameters struct {
 
-	// –  Amazon Resource Name (ARN) of the resource, an S3 path.
+	// –  Amazon Resource Name (ARN) of the resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// linked role must exist and is used.
+	// Flag to enable AWS LakeFormation hybrid access permission mode.
+	HybridAccessEnabled *bool `json:"hybridAccessEnabled,omitempty" tf:"hybrid_access_enabled,omitempty"`
+
+	// –  Role that has read/write access to the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -30,34 +33,51 @@ type ResourceInitParameters struct {
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// Designates an AWS Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
+	UseServiceLinkedRole *bool `json:"useServiceLinkedRole,omitempty" tf:"use_service_linked_role,omitempty"`
+
+	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
 }
 
 type ResourceObservation struct {
 
-	// –  Amazon Resource Name (ARN) of the resource, an S3 path.
+	// –  Amazon Resource Name (ARN) of the resource.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Flag to enable AWS LakeFormation hybrid access permission mode.
+	HybridAccessEnabled *bool `json:"hybridAccessEnabled,omitempty" tf:"hybrid_access_enabled,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The date and time the resource was last modified in RFC 3339 format.
+	// Date and time the resource was last modified in RFC 3339 format.
 	LastModified *string `json:"lastModified,omitempty" tf:"last_modified,omitempty"`
 
-	// linked role must exist and is used.
+	// –  Role that has read/write access to the resource.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Designates an AWS Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
+	UseServiceLinkedRole *bool `json:"useServiceLinkedRole,omitempty" tf:"use_service_linked_role,omitempty"`
+
+	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
 }
 
 type ResourceParameters struct {
 
-	// –  Amazon Resource Name (ARN) of the resource, an S3 path.
+	// –  Amazon Resource Name (ARN) of the resource.
 	// +kubebuilder:validation:Optional
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Flag to enable AWS LakeFormation hybrid access permission mode.
+	// +kubebuilder:validation:Optional
+	HybridAccessEnabled *bool `json:"hybridAccessEnabled,omitempty" tf:"hybrid_access_enabled,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// linked role must exist and is used.
+	// –  Role that has read/write access to the resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -70,6 +90,13 @@ type ResourceParameters struct {
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// Designates an AWS Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog.
+	// +kubebuilder:validation:Optional
+	UseServiceLinkedRole *bool `json:"useServiceLinkedRole,omitempty" tf:"use_service_linked_role,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	WithFederation *bool `json:"withFederation,omitempty" tf:"with_federation,omitempty"`
 }
 
 // ResourceSpec defines the desired state of Resource

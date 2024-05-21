@@ -4153,6 +4153,11 @@ func (in *RuleInitParameters) DeepCopyInto(out *RuleInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.IsEnabled != nil {
 		in, out := &in.IsEnabled, &out.IsEnabled
 		*out = new(bool)
@@ -4266,6 +4271,11 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -4361,6 +4371,11 @@ func (in *RuleParameters) DeepCopyInto(out *RuleParameters) {
 	if in.EventPattern != nil {
 		in, out := &in.EventPattern, &out.EventPattern
 		*out = new(string)
+		**out = **in
+	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.IsEnabled != nil {
@@ -4751,6 +4766,11 @@ func (in *TargetInitParameters) DeepCopyInto(out *TargetInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPTarget != nil {
 		in, out := &in.HTTPTarget, &out.HTTPTarget
 		*out = make([]HTTPTargetInitParameters, len(*in))
@@ -4930,6 +4950,11 @@ func (in *TargetObservation) DeepCopyInto(out *TargetObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPTarget != nil {
 		in, out := &in.HTTPTarget, &out.HTTPTarget
 		*out = make([]HTTPTargetObservation, len(*in))
@@ -5071,6 +5096,11 @@ func (in *TargetParameters) DeepCopyInto(out *TargetParameters) {
 		in, out := &in.EventBusNameSelector, &out.EventBusNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ForceDestroy != nil {
+		in, out := &in.ForceDestroy, &out.ForceDestroy
+		*out = new(bool)
+		**out = **in
 	}
 	if in.HTTPTarget != nil {
 		in, out := &in.HTTPTarget, &out.HTTPTarget

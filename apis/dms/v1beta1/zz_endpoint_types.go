@@ -135,7 +135,7 @@ type EndpointInitParameters struct {
 	// SSL mode to use for the connection. Valid values are none, require, verify-ca, verify-full
 	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
 
-	// ARN of the IAM role that specifies AWS DMS as the trusted entity and has the required permissions to access the value in SecretsManagerSecret.
+	// ARN of the IAM role that specifies AWS DMS as the trusted entity and has the required permissions to access the value in the Secrets Manager secret referred to by secrets_manager_arn. The role must allow the iam:PassRole action.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	SecretsManagerAccessRoleArn *string `json:"secretsManagerAccessRoleArn,omitempty" tf:"secrets_manager_access_role_arn,omitempty"`
@@ -148,7 +148,7 @@ type EndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretsManagerAccessRoleArnSelector *v1.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
 
-	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only when engine_name is aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift, or sqlserver.
+	// text values for username, password , server_name, and port. You can't specify both.
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 
 	// Host name of the server.
@@ -233,10 +233,10 @@ type EndpointObservation struct {
 	// SSL mode to use for the connection. Valid values are none, require, verify-ca, verify-full
 	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
 
-	// ARN of the IAM role that specifies AWS DMS as the trusted entity and has the required permissions to access the value in SecretsManagerSecret.
+	// ARN of the IAM role that specifies AWS DMS as the trusted entity and has the required permissions to access the value in the Secrets Manager secret referred to by secrets_manager_arn. The role must allow the iam:PassRole action.
 	SecretsManagerAccessRoleArn *string `json:"secretsManagerAccessRoleArn,omitempty" tf:"secrets_manager_access_role_arn,omitempty"`
 
-	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only when engine_name is aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift, or sqlserver.
+	// text values for username, password , server_name, and port. You can't specify both.
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 
 	// Host name of the server.
@@ -346,7 +346,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SSLMode *string `json:"sslMode,omitempty" tf:"ssl_mode,omitempty"`
 
-	// ARN of the IAM role that specifies AWS DMS as the trusted entity and has the required permissions to access the value in SecretsManagerSecret.
+	// ARN of the IAM role that specifies AWS DMS as the trusted entity and has the required permissions to access the value in the Secrets Manager secret referred to by secrets_manager_arn. The role must allow the iam:PassRole action.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
@@ -360,7 +360,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SecretsManagerAccessRoleArnSelector *v1.Selector `json:"secretsManagerAccessRoleArnSelector,omitempty" tf:"-"`
 
-	// Full ARN, partial ARN, or friendly name of the SecretsManagerSecret that contains the endpoint connection details. Supported only when engine_name is aurora, aurora-postgresql, mariadb, mongodb, mysql, oracle, postgres, redshift, or sqlserver.
+	// text values for username, password , server_name, and port. You can't specify both.
 	// +kubebuilder:validation:Optional
 	SecretsManagerArn *string `json:"secretsManagerArn,omitempty" tf:"secrets_manager_arn,omitempty"`
 

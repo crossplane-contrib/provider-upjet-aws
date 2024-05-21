@@ -1457,35 +1457,6 @@ type OutlierDetectionParameters struct {
 	MaxServerErrors *float64 `json:"maxServerErrors" tf:"max_server_errors,omitempty"`
 }
 
-type ServiceDiscoveryInitParameters struct {
-
-	// Any AWS Cloud Map information for the virtual node.
-	AwsCloudMap []AwsCloudMapInitParameters `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
-
-	// DNS service name for the virtual node.
-	DNS []DNSInitParameters `json:"dns,omitempty" tf:"dns,omitempty"`
-}
-
-type ServiceDiscoveryObservation struct {
-
-	// Any AWS Cloud Map information for the virtual node.
-	AwsCloudMap []AwsCloudMapObservation `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
-
-	// DNS service name for the virtual node.
-	DNS []DNSObservation `json:"dns,omitempty" tf:"dns,omitempty"`
-}
-
-type ServiceDiscoveryParameters struct {
-
-	// Any AWS Cloud Map information for the virtual node.
-	// +kubebuilder:validation:Optional
-	AwsCloudMap []AwsCloudMapParameters `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
-
-	// DNS service name for the virtual node.
-	// +kubebuilder:validation:Optional
-	DNS []DNSParameters `json:"dns,omitempty" tf:"dns,omitempty"`
-}
-
 type SpecBackendDefaultsInitParameters struct {
 
 	// Client policy for the backend.
@@ -1630,6 +1601,35 @@ type SpecLoggingParameters struct {
 	// Access log configuration for a virtual node.
 	// +kubebuilder:validation:Optional
 	AccessLog []LoggingAccessLogParameters `json:"accessLog,omitempty" tf:"access_log,omitempty"`
+}
+
+type SpecServiceDiscoveryInitParameters struct {
+
+	// Any AWS Cloud Map information for the virtual node.
+	AwsCloudMap []AwsCloudMapInitParameters `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
+
+	// DNS service name for the virtual node.
+	DNS []DNSInitParameters `json:"dns,omitempty" tf:"dns,omitempty"`
+}
+
+type SpecServiceDiscoveryObservation struct {
+
+	// Any AWS Cloud Map information for the virtual node.
+	AwsCloudMap []AwsCloudMapObservation `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
+
+	// DNS service name for the virtual node.
+	DNS []DNSObservation `json:"dns,omitempty" tf:"dns,omitempty"`
+}
+
+type SpecServiceDiscoveryParameters struct {
+
+	// Any AWS Cloud Map information for the virtual node.
+	// +kubebuilder:validation:Optional
+	AwsCloudMap []AwsCloudMapParameters `json:"awsCloudMap,omitempty" tf:"aws_cloud_map,omitempty"`
+
+	// DNS service name for the virtual node.
+	// +kubebuilder:validation:Optional
+	DNS []DNSParameters `json:"dns,omitempty" tf:"dns,omitempty"`
 }
 
 type TCPIdleInitParameters struct {
@@ -2136,7 +2136,7 @@ type VirtualNodeSpecInitParameters struct {
 	Logging []SpecLoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
 	// Service discovery information for the virtual node.
-	ServiceDiscovery []ServiceDiscoveryInitParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
+	ServiceDiscovery []SpecServiceDiscoveryInitParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type VirtualNodeSpecObservation struct {
@@ -2154,7 +2154,7 @@ type VirtualNodeSpecObservation struct {
 	Logging []SpecLoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
 
 	// Service discovery information for the virtual node.
-	ServiceDiscovery []ServiceDiscoveryObservation `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
+	ServiceDiscovery []SpecServiceDiscoveryObservation `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type VirtualNodeSpecParameters struct {
@@ -2177,7 +2177,7 @@ type VirtualNodeSpecParameters struct {
 
 	// Service discovery information for the virtual node.
 	// +kubebuilder:validation:Optional
-	ServiceDiscovery []ServiceDiscoveryParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
+	ServiceDiscovery []SpecServiceDiscoveryParameters `json:"serviceDiscovery,omitempty" tf:"service_discovery,omitempty"`
 }
 
 type VirtualServiceClientPolicyInitParameters struct {

@@ -362,4 +362,4 @@ require (
 // copied from the Terraform provider
 replace github.com/hashicorp/terraform-plugin-log => github.com/gdavison/terraform-plugin-log v0.0.0-20230928191232-6c653d8ef8fb
 
-replace github.com/hashicorp/terraform-provider-aws => github.com/ulucinar/upbound-terraform-provider-aws v0.0.0-20240521140234-22a438b08fc6
+replace github.com/hashicorp/terraform-provider-aws => github.com/upbound/terraform-provider-aws v0.0.0-20240521154033-d7fd46669203

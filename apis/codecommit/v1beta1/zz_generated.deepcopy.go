@@ -446,6 +446,21 @@ func (in *RepositoryInitParameters) DeepCopyInto(out *RepositoryInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -539,6 +554,11 @@ func (in *RepositoryObservation) DeepCopyInto(out *RepositoryObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.RepositoryID != nil {
 		in, out := &in.RepositoryID, &out.RepositoryID
 		*out = new(string)
@@ -600,6 +620,21 @@ func (in *RepositoryParameters) DeepCopyInto(out *RepositoryParameters) {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSKeyID != nil {
+		in, out := &in.KMSKeyID, &out.KMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIDRef != nil {
+		in, out := &in.KMSKeyIDRef, &out.KMSKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyIDSelector != nil {
+		in, out := &in.KMSKeyIDSelector, &out.KMSKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

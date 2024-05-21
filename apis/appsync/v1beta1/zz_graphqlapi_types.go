@@ -70,6 +70,9 @@ type GraphQLAPIInitParameters struct {
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled. For more information about introspection, see GraphQL introspection.
+	IntrospectionConfig *string `json:"introspectionConfig,omitempty" tf:"introspection_config,omitempty"`
+
 	// Nested argument containing Lambda authorizer configuration. Defined below.
 	LambdaAuthorizerConfig []GraphQLAPILambdaAuthorizerConfigInitParameters `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
 
@@ -81,6 +84,12 @@ type GraphQLAPIInitParameters struct {
 
 	// Nested argument containing OpenID Connect configuration. Defined below.
 	OpenIDConnectConfig []GraphQLAPIOpenIDConnectConfigInitParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
+
+	// The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
+	QueryDepthLimit *float64 `json:"queryDepthLimit,omitempty" tf:"query_depth_limit,omitempty"`
+
+	// The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
+	ResolverCountLimit *float64 `json:"resolverCountLimit,omitempty" tf:"resolver_count_limit,omitempty"`
 
 	// Schema definition, in GraphQL schema language format.
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
@@ -152,6 +161,9 @@ type GraphQLAPIObservation struct {
 	// API ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled. For more information about introspection, see GraphQL introspection.
+	IntrospectionConfig *string `json:"introspectionConfig,omitempty" tf:"introspection_config,omitempty"`
+
 	// Nested argument containing Lambda authorizer configuration. Defined below.
 	LambdaAuthorizerConfig []GraphQLAPILambdaAuthorizerConfigObservation `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
 
@@ -163,6 +175,12 @@ type GraphQLAPIObservation struct {
 
 	// Nested argument containing OpenID Connect configuration. Defined below.
 	OpenIDConnectConfig []GraphQLAPIOpenIDConnectConfigObservation `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
+
+	// The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
+	QueryDepthLimit *float64 `json:"queryDepthLimit,omitempty" tf:"query_depth_limit,omitempty"`
+
+	// The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
+	ResolverCountLimit *float64 `json:"resolverCountLimit,omitempty" tf:"resolver_count_limit,omitempty"`
 
 	// Schema definition, in GraphQL schema language format.
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
@@ -248,6 +266,10 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled. For more information about introspection, see GraphQL introspection.
+	// +kubebuilder:validation:Optional
+	IntrospectionConfig *string `json:"introspectionConfig,omitempty" tf:"introspection_config,omitempty"`
+
 	// Nested argument containing Lambda authorizer configuration. Defined below.
 	// +kubebuilder:validation:Optional
 	LambdaAuthorizerConfig []GraphQLAPILambdaAuthorizerConfigParameters `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
@@ -264,10 +286,18 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	OpenIDConnectConfig []GraphQLAPIOpenIDConnectConfigParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
+	// The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
+	// +kubebuilder:validation:Optional
+	QueryDepthLimit *float64 `json:"queryDepthLimit,omitempty" tf:"query_depth_limit,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// The maximum number of resolvers that can be invoked in a single request. The default value is 0 (or unspecified), which will set the limit to 10000. When specified, the limit value can be between 1 and 10000. This field will produce a limit error if the operation falls out of bounds.
+	// +kubebuilder:validation:Optional
+	ResolverCountLimit *float64 `json:"resolverCountLimit,omitempty" tf:"resolver_count_limit,omitempty"`
 
 	// Schema definition, in GraphQL schema language format.
 	// +kubebuilder:validation:Optional

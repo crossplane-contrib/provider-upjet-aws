@@ -151,6 +151,14 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                           x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: A map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
+                          type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeSize:
@@ -301,6 +309,14 @@ spec:
                           additionalProperties:
                             type: string
                           description: Key-value map of resource tags.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: A map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
                           type: object
                           x-kubernetes-map-type: granular
                         throughput:
@@ -619,6 +635,14 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                           x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: A map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
+                          type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeSize:
@@ -765,6 +789,14 @@ spec:
                           additionalProperties:
                             type: string
                           description: Key-value map of resource tags.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: A map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
                           type: object
                           x-kubernetes-map-type: granular
                         throughput:
@@ -1242,6 +1274,14 @@ spec:
                           description: Key-value map of resource tags.
                           type: object
                           x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: A map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
+                          type: object
+                          x-kubernetes-map-type: granular
                         throughput:
                           type: number
                         volumeId:
@@ -1420,6 +1460,14 @@ spec:
                           additionalProperties:
                             type: string
                           description: Key-value map of resource tags.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        tagsAll:
+                          additionalProperties:
+                            type: string
+                          description: A map of tags assigned to the resource, including
+                            those inherited from the provider default_tags configuration
+                            block.
                           type: object
                           x-kubernetes-map-type: granular
                         throughput:

@@ -96,6 +96,7 @@ spec:
                       type: object
                     type: array
                   userPoolId:
+                    description: User pool the client belongs to.
                     type: string
                   userPoolIdRef:
                     description: Reference to a UserPool in cognitoidp to populate
@@ -208,6 +209,7 @@ spec:
                       type: object
                     type: array
                   userPoolId:
+                    description: User pool the client belongs to.
                     type: string
                   userPoolIdRef:
                     description: Reference to a UserPool in cognitoidp to populate
@@ -494,6 +496,7 @@ spec:
                       type: string
                     type: array
                   userPoolId:
+                    description: User pool the client belongs to.
                     type: string
                 type: object
               conditions:

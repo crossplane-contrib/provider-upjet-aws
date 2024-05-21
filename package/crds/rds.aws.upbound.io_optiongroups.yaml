@@ -82,7 +82,8 @@ spec:
                       option group should be associated with.
                     type: string
                   option:
-                    description: List of options to apply.
+                    description: The options to apply. See option Block below for
+                      more details.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
@@ -96,7 +97,8 @@ spec:
                           description: Name of the option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: List of option settings to apply.
+                          description: The option settings to apply. See option_settings
+                            Block below for more details.
                           items:
                             properties:
                               name:
@@ -172,7 +174,8 @@ spec:
                       option group should be associated with.
                     type: string
                   option:
-                    description: List of options to apply.
+                    description: The options to apply. See option Block below for
+                      more details.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
@@ -186,7 +189,8 @@ spec:
                           description: Name of the option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: List of option settings to apply.
+                          description: The option settings to apply. See option_settings
+                            Block below for more details.
                           items:
                             properties:
                               name:
@@ -430,7 +434,8 @@ spec:
                       option group should be associated with.
                     type: string
                   option:
-                    description: List of options to apply.
+                    description: The options to apply. See option Block below for
+                      more details.
                     items:
                       properties:
                         dbSecurityGroupMemberships:
@@ -444,7 +449,8 @@ spec:
                           description: Name of the option (e.g., MEMCACHED).
                           type: string
                         optionSettings:
-                          description: List of option settings to apply.
+                          description: The option settings to apply. See option_settings
+                            Block below for more details.
                           items:
                             properties:
                               name:

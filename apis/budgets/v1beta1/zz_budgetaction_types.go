@@ -89,6 +89,10 @@ type BudgetActionInitParameters struct {
 
 	// A list of subscribers. See Subscriber.
 	Subscriber []SubscriberInitParameters `json:"subscriber,omitempty" tf:"subscriber,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BudgetActionObservation struct {
@@ -131,6 +135,14 @@ type BudgetActionObservation struct {
 
 	// A list of subscribers. See Subscriber.
 	Subscriber []SubscriberObservation `json:"subscriber,omitempty" tf:"subscriber,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type BudgetActionParameters struct {
@@ -195,6 +207,11 @@ type BudgetActionParameters struct {
 	// A list of subscribers. See Subscriber.
 	// +kubebuilder:validation:Optional
 	Subscriber []SubscriberParameters `json:"subscriber,omitempty" tf:"subscriber,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DefinitionInitParameters struct {

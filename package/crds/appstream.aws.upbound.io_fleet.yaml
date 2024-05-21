@@ -81,6 +81,10 @@ spec:
                         desiredInstances:
                           description: Desired number of streaming instances.
                           type: number
+                        desiredSessions:
+                          description: Desired number of user sessions for a multi-session
+                            fleet. This is not allowed for single-session fleets.
+                          type: number
                       type: object
                     type: array
                   description:
@@ -196,7 +200,8 @@ spec:
                   idleDisconnectTimeoutInSeconds:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
-                      the disconnect_timeout_in_seconds time interval begins.
+                      the disconnect_timeout_in_seconds time interval begins. Defaults
+                      to 60 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
@@ -207,6 +212,10 @@ spec:
                   instanceType:
                     description: Instance type to use when launching fleet instances.
                     type: string
+                  maxSessionsPerInstance:
+                    description: The maximum number of user sessions on an instance.
+                      This only applies to multi-session fleets.
+                    type: number
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.
@@ -353,6 +362,10 @@ spec:
                         desiredInstances:
                           description: Desired number of streaming instances.
                           type: number
+                        desiredSessions:
+                          description: Desired number of user sessions for a multi-session
+                            fleet. This is not allowed for single-session fleets.
+                          type: number
                       type: object
                     type: array
                   description:
@@ -468,7 +481,8 @@ spec:
                   idleDisconnectTimeoutInSeconds:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
-                      the disconnect_timeout_in_seconds time interval begins.
+                      the disconnect_timeout_in_seconds time interval begins. Defaults
+                      to 60 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
@@ -479,6 +493,10 @@ spec:
                   instanceType:
                     description: Instance type to use when launching fleet instances.
                     type: string
+                  maxSessionsPerInstance:
+                    description: The maximum number of user sessions on an instance.
+                      This only applies to multi-session fleets.
+                    type: number
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.
@@ -798,6 +816,10 @@ spec:
                         desiredInstances:
                           description: Desired number of streaming instances.
                           type: number
+                        desiredSessions:
+                          description: Desired number of user sessions for a multi-session
+                            fleet. This is not allowed for single-session fleets.
+                          type: number
                         inUse:
                           description: Number of instances in use for streaming.
                           type: number
@@ -853,7 +875,8 @@ spec:
                   idleDisconnectTimeoutInSeconds:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
-                      the disconnect_timeout_in_seconds time interval begins.
+                      the disconnect_timeout_in_seconds time interval begins. Defaults
+                      to 60 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
@@ -864,6 +887,10 @@ spec:
                   instanceType:
                     description: Instance type to use when launching fleet instances.
                     type: string
+                  maxSessionsPerInstance:
+                    description: The maximum number of user sessions on an instance.
+                      This only applies to multi-session fleets.
+                    type: number
                   maxUserDurationInSeconds:
                     description: Maximum amount of time that a streaming session can
                       remain active, in seconds.

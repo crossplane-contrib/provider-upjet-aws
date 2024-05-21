@@ -76,7 +76,8 @@ spec:
                   policy:
                     description: The policy document. This is a JSON formatted string.
                       See more details about Policy Parameters in the official AWS
-                      docs.
+                      docs. Consider using the aws_ecr_lifecycle_policy_document data_source
+                      to generate/manage the JSON document used for the policy argument.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -178,7 +179,8 @@ spec:
                   policy:
                     description: The policy document. This is a JSON formatted string.
                       See more details about Policy Parameters in the official AWS
-                      docs.
+                      docs. Consider using the aws_ecr_lifecycle_policy_document data_source
+                      to generate/manage the JSON document used for the policy argument.
                     type: string
                   repository:
                     description: Name of the repository to apply the policy.
@@ -440,7 +442,8 @@ spec:
                   policy:
                     description: The policy document. This is a JSON formatted string.
                       See more details about Policy Parameters in the official AWS
-                      docs.
+                      docs. Consider using the aws_ecr_lifecycle_policy_document data_source
+                      to generate/manage the JSON document used for the policy argument.
                     type: string
                   registryId:
                     description: The registry ID where the repository was created.

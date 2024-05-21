@@ -82,21 +82,29 @@ spec:
                       be created in.
                     type: string
                   signatureValidityPeriod:
-                    description: The validity period for a signing job.
+                    description: The validity period for a signing job. See signature_validity_period
+                      Block below for details.
                     items:
                       properties:
                         type:
+                          description: 'The time unit for signature validity. Valid
+                            values: DAYS, MONTHS, YEARS.'
                           type: string
                         value:
+                          description: The numerical value of the time unit for signature
+                            validity.
                           type: number
                       type: object
                     type: array
                   signingMaterial:
+                    description: The AWS Certificate Manager certificate that will
+                      be used to sign code with the new signing profile. See signing_material
+                      Block below for details.
                     items:
                       properties:
                         certificateArn:
-                          description: The Amazon Resource Name (ARN) for the signing
-                            profile.
+                          description: The Amazon Resource Name (ARN) of the certificates
+                            that is used to sign your code.
                           type: string
                       type: object
                     type: array
@@ -127,21 +135,29 @@ spec:
                       signing profile.
                     type: string
                   signatureValidityPeriod:
-                    description: The validity period for a signing job.
+                    description: The validity period for a signing job. See signature_validity_period
+                      Block below for details.
                     items:
                       properties:
                         type:
+                          description: 'The time unit for signature validity. Valid
+                            values: DAYS, MONTHS, YEARS.'
                           type: string
                         value:
+                          description: The numerical value of the time unit for signature
+                            validity.
                           type: number
                       type: object
                     type: array
                   signingMaterial:
+                    description: The AWS Certificate Manager certificate that will
+                      be used to sign code with the new signing profile. See signing_material
+                      Block below for details.
                     items:
                       properties:
                         certificateArn:
-                          description: The Amazon Resource Name (ARN) for the signing
-                            profile.
+                          description: The Amazon Resource Name (ARN) of the certificates
+                            that is used to sign your code.
                           type: string
                       type: object
                     type: array
@@ -343,33 +359,45 @@ spec:
                       signing profile.
                     type: string
                   revocationRecord:
-                    description: Revocation information for a signing profile.
+                    description: Revocation information for a signing profile. See
+                      revocation_record Block below for details.
                     items:
                       properties:
                         revocationEffectiveFrom:
+                          description: The time when revocation becomes effective.
                           type: string
                         revokedAt:
+                          description: The time when the signing profile was revoked.
                           type: string
                         revokedBy:
+                          description: The identity of the revoker.
                           type: string
                       type: object
                     type: array
                   signatureValidityPeriod:
-                    description: The validity period for a signing job.
+                    description: The validity period for a signing job. See signature_validity_period
+                      Block below for details.
                     items:
                       properties:
                         type:
+                          description: 'The time unit for signature validity. Valid
+                            values: DAYS, MONTHS, YEARS.'
                           type: string
                         value:
+                          description: The numerical value of the time unit for signature
+                            validity.
                           type: number
                       type: object
                     type: array
                   signingMaterial:
+                    description: The AWS Certificate Manager certificate that will
+                      be used to sign code with the new signing profile. See signing_material
+                      Block below for details.
                     items:
                       properties:
                         certificateArn:
-                          description: The Amazon Resource Name (ARN) for the signing
-                            profile.
+                          description: The Amazon Resource Name (ARN) of the certificates
+                            that is used to sign your code.
                           type: string
                       type: object
                     type: array

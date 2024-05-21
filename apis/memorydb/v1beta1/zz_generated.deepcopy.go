@@ -319,8 +319,12 @@ func (in *AuthenticationModeParameters) DeepCopyInto(out *AuthenticationModePara
 	*out = *in
 	if in.PasswordsSecretRef != nil {
 		in, out := &in.PasswordsSecretRef, &out.PasswordsSecretRef
-		*out = make([]v1.SecretKeySelector, len(*in))
-		copy(*out, *in)
+		*out = new([]v1.SecretKeySelector)
+		if **in != nil {
+			in, out := *in, *out
+			*out = make([]v1.SecretKeySelector, len(*in))
+			copy(*out, *in)
+		}
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type

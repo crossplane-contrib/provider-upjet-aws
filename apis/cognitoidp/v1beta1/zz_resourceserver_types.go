@@ -24,6 +24,7 @@ type ResourceServerInitParameters struct {
 	// A list of Authorization Scope.
 	Scope []ScopeInitParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// User pool the client belongs to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
@@ -51,6 +52,7 @@ type ResourceServerObservation struct {
 	// A list of all scopes configured for this resource server in the format identifier/scope_name.
 	ScopeIdentifiers []*string `json:"scopeIdentifiers,omitempty" tf:"scope_identifiers,omitempty"`
 
+	// User pool the client belongs to.
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 }
 
@@ -73,6 +75,7 @@ type ResourceServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
+	// User pool the client belongs to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
