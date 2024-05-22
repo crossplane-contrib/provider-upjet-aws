@@ -12,6 +12,7 @@ PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.5.5
 export TERRAFORM_PROVIDER_VERSION := 5.31.0
+export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
@@ -158,6 +159,9 @@ build.init: $(UP)
 # Setup Terraform for fetching provider schema
 TERRAFORM := $(TOOLS_HOST_DIR)/terraform-$(TERRAFORM_VERSION)
 TERRAFORM_WORKDIR := $(WORK_DIR)/terraform
+TERRAFORM_CLI_CONFIG_FILE := $(TERRAFORM_WORKDIR)/.terraformrc-custom
+TERRAFORM_FILESYSTEM_MIRROR := $(TOOLS_HOST_DIR)/$(TERRAFORM_PROVIDER_RELEASE)
+TERRAFORM_PROVIDER := $(TERRAFORM_FILESYSTEM_MIRROR)/registry.terraform.io/$(TERRAFORM_PROVIDER_SOURCE)/$(TERRAFORM_PROVIDER_VERSION)/$(SAFEHOST_PLATFORM)/terraform-provider-aws
 TERRAFORM_PROVIDER_SCHEMA := config/schema.json
 
 $(TERRAFORM):
@@ -169,12 +173,21 @@ $(TERRAFORM):
 	@rm -fr $(TOOLS_HOST_DIR)/tmp-terraform
 	@$(OK) installing terraform $(HOSTOS)-$(HOSTARCH)
 
-$(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM)
+$(TERRAFORM_PROVIDER):
+	@$(INFO) installing terraform AWS provider for the platform $(SAFEHOST_PLATFORM)
+	@mkdir -p $(dir $(TERRAFORM_PROVIDER))
+	@curl -fsSL https://github.com/upbound/terraform-provider-aws/releases/download/$(TERRAFORM_PROVIDER_RELEASE)/terraform-provider-aws_$(TERRAFORM_PROVIDER_RELEASE)_$(SAFEHOST_PLATFORM).zip -o $(TERRAFORM_PROVIDER).zip
+	@unzip $(TERRAFORM_PROVIDER).zip -d $(dir $(TERRAFORM_PROVIDER))
+	@rm -fr $(TERRAFORM_PROVIDER).zip
+	@$(OK) installing terraform provider $(SAFEHOST_PLATFORM)
+
+$(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER)
 	@$(INFO) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
 	@mkdir -p $(TERRAFORM_WORKDIR)
 	@echo '{"terraform":[{"required_providers":[{"provider":{"source":"'"$(TERRAFORM_PROVIDER_SOURCE)"'","version":"'"$(TERRAFORM_PROVIDER_VERSION)"'"}}],"required_version":"'"$(TERRAFORM_VERSION)"'"}]}' > $(TERRAFORM_WORKDIR)/main.tf.json
-	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) init -upgrade > $(TERRAFORM_WORKDIR)/terraform-logs.txt 2>&1
-	@$(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
+	@echo 'provider_installation { filesystem_mirror { path = "'"$(TERRAFORM_FILESYSTEM_MIRROR)"'", include = ["hashicorp/aws"] }, direct { exclude = ["hashicorp/aws"] } }' > $(TERRAFORM_CLI_CONFIG_FILE)
+	@TF_CLI_CONFIG_FILE=$(TERRAFORM_CLI_CONFIG_FILE) $(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) init -upgrade > $(TERRAFORM_WORKDIR)/terraform-logs.txt 2>&1
+	@TF_CLI_CONFIG_FILE=$(TERRAFORM_CLI_CONFIG_FILE) $(TERRAFORM) -chdir=$(TERRAFORM_WORKDIR) providers schema -json=true > $(TERRAFORM_PROVIDER_SCHEMA) 2>> $(TERRAFORM_WORKDIR)/terraform-logs.txt
 	@$(OK) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
 
 pull-docs:
