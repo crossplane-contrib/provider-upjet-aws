@@ -183,6 +183,7 @@ $(TERRAFORM_PROVIDER):
 
 $(TERRAFORM_PROVIDER_SCHEMA): $(TERRAFORM) $(TERRAFORM_PROVIDER)
 	@$(INFO) generating provider schema for $(TERRAFORM_PROVIDER_SOURCE) $(TERRAFORM_PROVIDER_VERSION)
+	@rm -fr $(TERRAFORM_WORKDIR)
 	@mkdir -p $(TERRAFORM_WORKDIR)
 	@echo '{"terraform":[{"required_providers":[{"provider":{"source":"'"$(TERRAFORM_PROVIDER_SOURCE)"'","version":"'"$(TERRAFORM_PROVIDER_VERSION)"'"}}],"required_version":"'"$(TERRAFORM_VERSION)"'"}]}' > $(TERRAFORM_WORKDIR)/main.tf.json
 	@echo 'provider_installation { filesystem_mirror { path = "'"$(TERRAFORM_FILESYSTEM_MIRROR)"'", include = ["hashicorp/aws"] }, direct { exclude = ["hashicorp/aws"] } }' > $(TERRAFORM_CLI_CONFIG_FILE)
