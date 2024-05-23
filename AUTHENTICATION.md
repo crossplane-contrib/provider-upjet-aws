@@ -16,7 +16,7 @@ configured by means of `aws.upbound.io/v1beta1/ProviderConfig` resources.
 
 The authentication mechanism to be used can be selected by setting the
 `spec.credentials.source` field of the `ProviderConfig` to one of the following
-values: 
+values:
 - `Secret`
 - `IRSA`
 - `WebIdentity`
@@ -24,7 +24,7 @@ to configure long-term credentials, IRSA and authentication with an assumed Web
 identity, respectively.
 
 If no authentication mechanism is specified, the default is to use the
-`Secret` authentication mechanism. 
+`Secret` authentication mechanism.
 
 *Note*: Please note that with Upbound managed control-planes (MCP), we will only support
 the `Secret` authentication mechanism with `provider-aws` until EKS clusters can
@@ -108,30 +108,28 @@ metadata:
 
 Thus, we need to have the `ServiceAccount` under which `provider-aws` is running
 annotated with the key `eks.amazonaws.com/role-arn`, and this can be accomplished
-in a number of ways. One approach is to use a `ControllerConfig` while
+in a number of ways. One approach is to use a `DeploymentRuntimeConfig` while
 installing the provider:
 
 ```yaml
-apiVersion: pkg.crossplane.io/v1alpha1
-kind: ControllerConfig
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
 metadata:
-  name: irsa-controllerconfig
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/iam-role-name
+  name: irsa-drc
 spec:
-  podSecurityContext:
-    fsGroup: 2000
+  serviceAccountTemplate:
+    metadata:
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::111122223333:role/iam-role-name
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: provider-aws
+  name: upbound-provider-aws-ec2
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws:v0.4.0
-  packagePullSecrets:
-    - name: package-pull-secret
-  controllerConfigRef:
-    name: irsa-controllerconfig
+  package: xpkg.upbound.io/upbound/provider-aws-ec2:v1.4.0
+  runtimeConfigRef:
+    name: irsa-drc
 ```
 
 After the `ServiceAccount` under which `provider-aws` is running is annotated,
