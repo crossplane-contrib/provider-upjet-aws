@@ -1630,8 +1630,9 @@ spec:
                     description: Whether to enable encryption at rest.
                     type: boolean
                   authTokenSecretRef:
-                    description: Password used to access a password protected server.
-                      Can be specified only if transit_encryption_enabled = true.
+                    description: |-
+                      Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
+                      If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
                     properties:
                       key:
                         description: The key to select.
@@ -1651,6 +1652,11 @@ spec:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.
                     type: string
+                  autoGenerateAuthToken:
+                    description: |-
+                      Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
+                      If true, the auth token will be auto-generated and stored in the Secret referenced by the authTokenSecretRef field.
+                    type: boolean
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
@@ -2122,8 +2128,9 @@ spec:
                     description: Whether to enable encryption at rest.
                     type: boolean
                   authTokenSecretRef:
-                    description: Password used to access a password protected server.
-                      Can be specified only if transit_encryption_enabled = true.
+                    description: |-
+                      Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
+                      If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
                     properties:
                       key:
                         description: The key to select.

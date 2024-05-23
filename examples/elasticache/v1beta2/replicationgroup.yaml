@@ -2,6 +2,60 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: SubnetGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: bar
+  name: subnet-group
+spec:
+  forProvider:
+    region: us-east-1
+    subnetIdRefs:
+      - name: foo-1a
+      - name: foo-1b
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo-1a
+spec:
+  forProvider:
+    availabilityZone: us-east-1a
+    cidrBlock: 10.0.1.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo-1b
+spec:
+  forProvider:
+    availabilityZone: us-east-1b
+    cidrBlock: 10.0.2.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-east-1
+---
 apiVersion: elasticache.aws.upbound.io/v1beta2
 kind: ReplicationGroup
 metadata:
@@ -14,13 +68,25 @@ metadata:
 spec:
   forProvider:
     automaticFailoverEnabled: true
+    atRestEncryptionEnabled: true
+    autoGenerateAuthToken: true
+    authTokenSecretRef:
+      name: redis-auth-token
+      namespace: crossplane-system
+      key: auth-token
     description: example description
     maintenanceWindow: sun:05:00-sun:09:00
-    nodeType: cache.m4.large
+    nodeType: cache.t4g.small
     numCacheClusters: 2
+    transitEncryptionEnabled: true
     parameterGroupName: default.redis7
     port: 6379
+    subnetGroupNameRef:
+      name: subnet-group
     preferredCacheClusterAzs:
-      - us-west-1a
-      - us-west-1b
-    region: us-west-1
+      - us-east-1a
+      - us-east-1b
+    region: us-east-1
+  writeConnectionSecretToRef:
+    name: redis-conn
+    namespace: crossplane-system

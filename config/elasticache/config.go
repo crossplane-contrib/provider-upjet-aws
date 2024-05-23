@@ -5,14 +5,20 @@
 package elasticache
 
 import (
+	"fmt"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
+	"github.com/crossplane/upjet/pkg/types/comments"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/upbound/provider-aws/apis/elasticache/v1beta1"
 	"github.com/upbound/provider-aws/apis/elasticache/v1beta2"
+	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for the elasticache group.
@@ -52,6 +58,42 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		delete(r.References, "log_delivery_configuration.destination")
 		r.UseAsync = true
+
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["configuration_endpoint_address"].(string); ok {
+				conn["configuration_endpoint_address"] = []byte(a)
+			}
+			if a, ok := attr["primary_endpoint_address"].(string); ok {
+				conn["primary_endpoint_address"] = []byte(a)
+			}
+			if a, ok := attr["reader_endpoint_address"].(string); ok {
+				conn["reader_endpoint_address"] = []byte(a)
+			}
+			if a, ok := attr["port"]; ok {
+				conn["port"] = []byte(fmt.Sprintf("%v", a))
+			}
+			return conn, nil
+		}
+
+		// Auth token generation
+		desc, _ := comments.New("If true, the auth token will be auto-generated and"+
+			" stored in the Secret referenced by the authTokenSecretRef field.",
+			comments.WithTFTag("-"))
+		r.TerraformResource.Schema["auto_generate_auth_token"] = &schema.Schema{
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: desc.String(),
+		}
+		r.InitializerFns = append(r.InitializerFns,
+			common.PasswordGenerator(
+				"spec.forProvider.authTokenSecretRef",
+				"spec.forProvider.autoGenerateAuthToken",
+			))
+		r.TerraformResource.Schema["auth_token"].Description = "If you set" +
+			" autoGenerateAuthToken to true, the Secret referenced here will be" +
+			" created or updated with generated auth token if it does not already" +
+			" contain one."
 
 		r.Version = "v1beta2"
 		r.Conversions = append(r.Conversions,
