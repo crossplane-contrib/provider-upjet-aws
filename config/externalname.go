@@ -48,6 +48,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
 	"aws_eks_pod_identity_association": eksPodIdentityAssociation(),
 
+	// mq
+	//
+	// admin
+	"aws_mq_user": mqUser(),
+
 	// opensearchserverless
 	//
 	// AccessPolicy can be imported using the policy name
@@ -2738,6 +2743,17 @@ func cognitoUserPoolClient() config.ExternalName {
 		// Ideally, we'd return parameters.user_pool_id/external_name if this is invoked during a call to terraform import,
 		// and the externalName if this is invoked during a call to terraform refresh. But I don't know how to distinguish
 		// between them inside this function.
+		return externalName, nil
+	}
+	return e
+}
+
+func mqUser() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(ctx context.Context, externalName string, parameters map[string]interface{}, cfg map[string]interface{}) (string, error) {
+		if externalName == "" {
+			return "invalidnonemptystring", nil
+		}
 		return externalName, nil
 	}
 	return e

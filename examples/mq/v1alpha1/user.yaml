@@ -1,0 +1,89 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: mq.aws.upbound.io/v1alpha1
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+    upjet.upbound.io/manual-intervention: "Note that there is a race between Broker and User controllers."
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    brokerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-user
+    # setting consoleAccess will result in an update loop till the broker is
+    # restarted...
+    # consoleAccess: true
+    passwordSecretRef:
+      key: password
+      name: mq-secret
+      namespace: upbound-system
+    username: test-user
+    region: us-west-1
+
+---
+
+apiVersion: mq.aws.upbound.io/v1beta1
+kind: Broker
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+  labels:
+    testing.upbound.io/example-name: example-user
+  name: user-example-broker
+spec:
+  forProvider:
+    # Due to an existing Terrajet limitation, we cannot use "metadata.name" for "brokerName"
+    # Details can be found in https://github.com/crossplane/terrajet/issues/280
+    brokerName: user-example-broker
+    region: us-west-1
+    securityGroupRefs:
+      - name: example
+    engineType: ActiveMQ
+    engineVersion: 5.17.6
+    hostInstanceType: mq.t3.micro
+    user:
+    - passwordSecretRef:
+        key: password
+        name: mq-secret
+        namespace: upbound-system
+      username: admin
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1alpha1/user
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-broker.sh
+  labels:
+    testing.upbound.io/example-name: mq-secret
+  name: mq-secret
+  namespace: upbound-system
+type: Opaque
+stringData:
+  password: "Upboundtest!"
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    description: Allow TLS inbound traffic
+    name: mq_broker
+    tags:
+      Name: mq_broker
