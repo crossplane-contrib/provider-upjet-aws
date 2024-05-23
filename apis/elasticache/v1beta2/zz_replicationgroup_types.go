@@ -207,7 +207,15 @@ type ReplicationGroupInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to enable encryption in transit.
+	// Changing this argument with an engine_version < 7.0.5 will force a replacement.
+	// Engine versions prior to 7.0.5 only allow this transit encryption to be configured during creation of the replication group.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
+
+	// A setting that enables clients to migrate to in-transit encryption with no downtime.
+	// Valid values are preferred and required.
+	// When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply.
+	// See the TransitEncryptionMode field in the CreateReplicationGroup API documentation for additional details.
+	TransitEncryptionMode *string `json:"transitEncryptionMode,omitempty" tf:"transit_encryption_mode,omitempty"`
 
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
 	// +listType=set
@@ -359,7 +367,15 @@ type ReplicationGroupObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// Whether to enable encryption in transit.
+	// Changing this argument with an engine_version < 7.0.5 will force a replacement.
+	// Engine versions prior to 7.0.5 only allow this transit encryption to be configured during creation of the replication group.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
+
+	// A setting that enables clients to migrate to in-transit encryption with no downtime.
+	// Valid values are preferred and required.
+	// When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply.
+	// See the TransitEncryptionMode field in the CreateReplicationGroup API documentation for additional details.
+	TransitEncryptionMode *string `json:"transitEncryptionMode,omitempty" tf:"transit_encryption_mode,omitempty"`
 
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
 	// +listType=set
@@ -553,8 +569,17 @@ type ReplicationGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether to enable encryption in transit.
+	// Changing this argument with an engine_version < 7.0.5 will force a replacement.
+	// Engine versions prior to 7.0.5 only allow this transit encryption to be configured during creation of the replication group.
 	// +kubebuilder:validation:Optional
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
+
+	// A setting that enables clients to migrate to in-transit encryption with no downtime.
+	// Valid values are preferred and required.
+	// When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply.
+	// See the TransitEncryptionMode field in the CreateReplicationGroup API documentation for additional details.
+	// +kubebuilder:validation:Optional
+	TransitEncryptionMode *string `json:"transitEncryptionMode,omitempty" tf:"transit_encryption_mode,omitempty"`
 
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
 	// +kubebuilder:validation:Optional

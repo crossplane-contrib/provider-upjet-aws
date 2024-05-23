@@ -86,9 +86,20 @@ spec:
                           items:
                             properties:
                               type:
-                                description: |-
-                                  Egress filter type. By default, the type is DROP_ALL.
-                                  Valid values are ALLOW_ALL and DROP_ALL.
+                                description: Egress filter type. By default, the type
+                                  is DROP_ALL. Valid values are ALLOW_ALL and DROP_ALL.
+                                type: string
+                            type: object
+                          type: array
+                        serviceDiscovery:
+                          description: The service discovery information for the service
+                            mesh.
+                          items:
+                            properties:
+                              ipPreference:
+                                description: The IP version to use to control traffic
+                                  within the mesh. Valid values are IPv6_PREFERRED,
+                                  IPv4_PREFERRED, IPv4_ONLY, and IPv6_ONLY.
                                 type: string
                             type: object
                           type: array
@@ -125,9 +136,20 @@ spec:
                           items:
                             properties:
                               type:
-                                description: |-
-                                  Egress filter type. By default, the type is DROP_ALL.
-                                  Valid values are ALLOW_ALL and DROP_ALL.
+                                description: Egress filter type. By default, the type
+                                  is DROP_ALL. Valid values are ALLOW_ALL and DROP_ALL.
+                                type: string
+                            type: object
+                          type: array
+                        serviceDiscovery:
+                          description: The service discovery information for the service
+                            mesh.
+                          items:
+                            properties:
+                              ipPreference:
+                                description: The IP version to use to control traffic
+                                  within the mesh. Valid values are IPv6_PREFERRED,
+                                  IPv4_PREFERRED, IPv4_ONLY, and IPv6_ONLY.
                                 type: string
                             type: object
                           type: array
@@ -339,9 +361,20 @@ spec:
                           items:
                             properties:
                               type:
-                                description: |-
-                                  Egress filter type. By default, the type is DROP_ALL.
-                                  Valid values are ALLOW_ALL and DROP_ALL.
+                                description: Egress filter type. By default, the type
+                                  is DROP_ALL. Valid values are ALLOW_ALL and DROP_ALL.
+                                type: string
+                            type: object
+                          type: array
+                        serviceDiscovery:
+                          description: The service discovery information for the service
+                            mesh.
+                          items:
+                            properties:
+                              ipPreference:
+                                description: The IP version to use to control traffic
+                                  within the mesh. Valid values are IPv6_PREFERRED,
+                                  IPv4_PREFERRED, IPv4_ONLY, and IPv6_ONLY.
                                 type: string
                             type: object
                           type: array

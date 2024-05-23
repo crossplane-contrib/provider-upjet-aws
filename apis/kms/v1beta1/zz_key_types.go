@@ -52,9 +52,15 @@ type KeyInitParameters struct {
 	// A valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Custom period of time between each rotation date. Must be a number between 90 and 2560 (inclusive).
+	RotationPeriodInDays *float64 `json:"rotationPeriodInDays,omitempty" tf:"rotation_period_in_days,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }
 
 type KeyObservation struct {
@@ -104,6 +110,9 @@ type KeyObservation struct {
 	// A valid policy JSON document. Although this is a key policy, not an IAM policy, an aws_iam_policy_document, in the form that designates a principal, can be used.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// Custom period of time between each rotation date. Must be a number between 90 and 2560 (inclusive).
+	RotationPeriodInDays *float64 `json:"rotationPeriodInDays,omitempty" tf:"rotation_period_in_days,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -111,6 +120,9 @@ type KeyObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }
 
 type KeyParameters struct {
@@ -167,10 +179,18 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Custom period of time between each rotation date. Must be a number between 90 and 2560 (inclusive).
+	// +kubebuilder:validation:Optional
+	RotationPeriodInDays *float64 `json:"rotationPeriodInDays,omitempty" tf:"rotation_period_in_days,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Identifies the external key that serves as key material for the KMS key in an external key store.
+	// +kubebuilder:validation:Optional
+	XksKeyID *string `json:"xksKeyId,omitempty" tf:"xks_key_id,omitempty"`
 }
 
 // KeySpec defines the desired state of Key

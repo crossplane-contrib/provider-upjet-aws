@@ -511,9 +511,9 @@ spec:
                         protocol:
                           description: Protocol. If you select a protocol of -1 (semantically
                             equivalent to all, which is not a valid value here), you
-                            must specify a from_port and to_port equal to 0.  The
-                            supported values are defined in the IpProtocol argument
-                            on the IpPermission API reference.12.
+                            must specify a from_port and to_port equal to 0. The supported
+                            values are defined in the IpProtocol argument on the IpPermission
+                            API reference.12.
                           type: string
                         securityGroups:
                           description: List of security groups. A group name can be
@@ -571,9 +571,9 @@ spec:
                         protocol:
                           description: Protocol. If you select a protocol of -1 (semantically
                             equivalent to all, which is not a valid value here), you
-                            must specify a from_port and to_port equal to 0.  The
-                            supported values are defined in the IpProtocol argument
-                            on the IpPermission API reference.12.
+                            must specify a from_port and to_port equal to 0. The supported
+                            values are defined in the IpProtocol argument on the IpPermission
+                            API reference.12.
                           type: string
                         securityGroups:
                           description: List of security groups. A group name can be

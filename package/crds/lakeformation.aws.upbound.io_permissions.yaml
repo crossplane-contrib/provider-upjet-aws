@@ -84,6 +84,25 @@ spec:
                     description: Whether the permissions are to be granted for the
                       Data Catalog. Defaults to false.
                     type: boolean
+                  dataCellsFilter:
+                    description: Configuration block for a data cells filter resource.
+                      Detailed below.
+                    items:
+                      properties:
+                        databaseName:
+                          description: The name of the database.
+                          type: string
+                        name:
+                          description: The name of the data cells filter.
+                          type: string
+                        tableCatalogId:
+                          description: The ID of the Data Catalog.
+                          type: string
+                        tableName:
+                          description: The name of the table.
+                          type: string
+                      type: object
+                    type: array
                   dataLocation:
                     description: Configuration block for a data location resource.
                       Detailed below.
@@ -499,6 +518,25 @@ spec:
                     description: Whether the permissions are to be granted for the
                       Data Catalog. Defaults to false.
                     type: boolean
+                  dataCellsFilter:
+                    description: Configuration block for a data cells filter resource.
+                      Detailed below.
+                    items:
+                      properties:
+                        databaseName:
+                          description: The name of the database.
+                          type: string
+                        name:
+                          description: The name of the data cells filter.
+                          type: string
+                        tableCatalogId:
+                          description: The ID of the Data Catalog.
+                          type: string
+                        tableName:
+                          description: The name of the table.
+                          type: string
+                      type: object
+                    type: array
                   dataLocation:
                     description: Configuration block for a data location resource.
                       Detailed below.
@@ -1076,6 +1114,25 @@ spec:
                     description: Whether the permissions are to be granted for the
                       Data Catalog. Defaults to false.
                     type: boolean
+                  dataCellsFilter:
+                    description: Configuration block for a data cells filter resource.
+                      Detailed below.
+                    items:
+                      properties:
+                        databaseName:
+                          description: The name of the database.
+                          type: string
+                        name:
+                          description: The name of the data cells filter.
+                          type: string
+                        tableCatalogId:
+                          description: The ID of the Data Catalog.
+                          type: string
+                        tableName:
+                          description: The name of the table.
+                          type: string
+                      type: object
+                    type: array
                   dataLocation:
                     description: Configuration block for a data location resource.
                       Detailed below.

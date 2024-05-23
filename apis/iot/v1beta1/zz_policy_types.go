@@ -17,6 +17,10 @@ type PolicyInitParameters struct {
 
 	// The policy document. This is a JSON formatted string. Use the IoT Developer Guide for more information on IoT Policies.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PolicyObservation struct {
@@ -31,6 +35,14 @@ type PolicyObservation struct {
 
 	// The policy document. This is a JSON formatted string. Use the IoT Developer Guide for more information on IoT Policies.
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type PolicyParameters struct {
@@ -43,6 +55,11 @@ type PolicyParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // PolicySpec defines the desired state of Policy

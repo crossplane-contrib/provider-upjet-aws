@@ -23,6 +23,9 @@ spec:
       threshold: 100
       thresholdType: PERCENTAGE
     region: us-west-1
+    tags:
+      Tag1: Value1
+      Tag2: Value2
     timePeriodEnd: 2087-06-15_00:00
     timePeriodStart: 2017-07-01_00:00
     timeUnit: MONTHLY

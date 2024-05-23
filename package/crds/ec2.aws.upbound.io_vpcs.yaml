@@ -579,7 +579,7 @@ spec:
                       VPC creation
                     type: string
                   dhcpOptionsId:
-                    description: The ID of the VPC
+                    description: DHCP options id of the desired VPC.
                     type: string
                   enableDnsHostnames:
                     description: A boolean flag to enable/disable DNS hostnames in

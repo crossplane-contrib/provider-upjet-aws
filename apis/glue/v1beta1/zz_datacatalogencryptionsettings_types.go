@@ -130,8 +130,11 @@ type DataCatalogEncryptionSettingsParameters struct {
 
 type EncryptionAtRestInitParameters struct {
 
-	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
+	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
+
+	// The ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
+	CatalogEncryptionServiceRole *string `json:"catalogEncryptionServiceRole,omitempty" tf:"catalog_encryption_service_role,omitempty"`
 
 	// The ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -149,8 +152,11 @@ type EncryptionAtRestInitParameters struct {
 
 type EncryptionAtRestObservation struct {
 
-	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
+	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode,omitempty" tf:"catalog_encryption_mode,omitempty"`
+
+	// The ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
+	CatalogEncryptionServiceRole *string `json:"catalogEncryptionServiceRole,omitempty" tf:"catalog_encryption_service_role,omitempty"`
 
 	// The ARN of the AWS KMS key to use for encryption at rest.
 	SseAwsKMSKeyID *string `json:"sseAwsKmsKeyId,omitempty" tf:"sse_aws_kms_key_id,omitempty"`
@@ -158,9 +164,13 @@ type EncryptionAtRestObservation struct {
 
 type EncryptionAtRestParameters struct {
 
-	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED and SSE-KMS.
+	// The encryption-at-rest mode for encrypting Data Catalog data. Valid values: DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE.
 	// +kubebuilder:validation:Optional
 	CatalogEncryptionMode *string `json:"catalogEncryptionMode" tf:"catalog_encryption_mode,omitempty"`
+
+	// The ARN of the AWS IAM role used for accessing encrypted Data Catalog data.
+	// +kubebuilder:validation:Optional
+	CatalogEncryptionServiceRole *string `json:"catalogEncryptionServiceRole,omitempty" tf:"catalog_encryption_service_role,omitempty"`
 
 	// The ARN of the AWS KMS key to use for encryption at rest.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key

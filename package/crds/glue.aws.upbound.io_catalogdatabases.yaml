@@ -104,6 +104,19 @@ spec:
                   description:
                     description: Description of the database.
                     type: string
+                  federatedDatabase:
+                    description: Configuration block that references an entity outside
+                      the AWS Glue Data Catalog. See federated_database below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: Name of the connection to the external metastore.
+                          type: string
+                        identifier:
+                          description: Unique identifier for the federated database.
+                          type: string
+                      type: object
+                    type: array
                   locationUri:
                     description: Location of the database (for example, an HDFS path).
                     type: string
@@ -188,6 +201,19 @@ spec:
                   description:
                     description: Description of the database.
                     type: string
+                  federatedDatabase:
+                    description: Configuration block that references an entity outside
+                      the AWS Glue Data Catalog. See federated_database below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: Name of the connection to the external metastore.
+                          type: string
+                        identifier:
+                          description: Unique identifier for the federated database.
+                          type: string
+                      type: object
+                    type: array
                   locationUri:
                     description: Location of the database (for example, an HDFS path).
                     type: string
@@ -421,6 +447,19 @@ spec:
                   description:
                     description: Description of the database.
                     type: string
+                  federatedDatabase:
+                    description: Configuration block that references an entity outside
+                      the AWS Glue Data Catalog. See federated_database below.
+                    items:
+                      properties:
+                        connectionName:
+                          description: Name of the connection to the external metastore.
+                          type: string
+                        identifier:
+                          description: Unique identifier for the federated database.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: Catalog ID and name of the database.
                     type: string

@@ -195,6 +195,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DedicatedLogVolume != nil {
+		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeleteAutomatedBackups != nil {
 		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
 		*out = new(bool)
@@ -210,8 +215,34 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainAuthSecretArn != nil {
+		in, out := &in.DomainAuthSecretArn, &out.DomainAuthSecretArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainDNSIps != nil {
+		in, out := &in.DomainDNSIps, &out.DomainDNSIps
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DomainFqdn != nil {
+		in, out := &in.DomainFqdn, &out.DomainFqdn
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainIAMRoleName != nil {
 		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainOu != nil {
+		in, out := &in.DomainOu, &out.DomainOu
 		*out = new(string)
 		**out = **in
 	}
@@ -643,6 +674,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DedicatedLogVolume != nil {
+		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeleteAutomatedBackups != nil {
 		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
 		*out = new(bool)
@@ -658,8 +694,34 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainAuthSecretArn != nil {
+		in, out := &in.DomainAuthSecretArn, &out.DomainAuthSecretArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainDNSIps != nil {
+		in, out := &in.DomainDNSIps, &out.DomainDNSIps
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DomainFqdn != nil {
+		in, out := &in.DomainFqdn, &out.DomainFqdn
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainIAMRoleName != nil {
 		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainOu != nil {
+		in, out := &in.DomainOu, &out.DomainOu
 		*out = new(string)
 		**out = **in
 	}
@@ -1078,6 +1140,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DedicatedLogVolume != nil {
+		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeleteAutomatedBackups != nil {
 		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
 		*out = new(bool)
@@ -1093,8 +1160,34 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainAuthSecretArn != nil {
+		in, out := &in.DomainAuthSecretArn, &out.DomainAuthSecretArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainDNSIps != nil {
+		in, out := &in.DomainDNSIps, &out.DomainDNSIps
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DomainFqdn != nil {
+		in, out := &in.DomainFqdn, &out.DomainFqdn
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainIAMRoleName != nil {
 		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainOu != nil {
+		in, out := &in.DomainOu, &out.DomainOu
 		*out = new(string)
 		**out = **in
 	}

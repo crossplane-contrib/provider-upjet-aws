@@ -1370,6 +1370,11 @@ func (in *KeyInitParameters) DeepCopyInto(out *KeyInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RotationPeriodInDays != nil {
+		in, out := &in.RotationPeriodInDays, &out.RotationPeriodInDays
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1385,6 +1390,11 @@ func (in *KeyInitParameters) DeepCopyInto(out *KeyInitParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.XksKeyID != nil {
+		in, out := &in.XksKeyID, &out.XksKeyID
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -1498,6 +1508,11 @@ func (in *KeyObservation) DeepCopyInto(out *KeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RotationPeriodInDays != nil {
+		in, out := &in.RotationPeriodInDays, &out.RotationPeriodInDays
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1529,6 +1544,11 @@ func (in *KeyObservation) DeepCopyInto(out *KeyObservation) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.XksKeyID != nil {
+		in, out := &in.XksKeyID, &out.XksKeyID
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -1600,6 +1620,11 @@ func (in *KeyParameters) DeepCopyInto(out *KeyParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RotationPeriodInDays != nil {
+		in, out := &in.RotationPeriodInDays, &out.RotationPeriodInDays
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1615,6 +1640,11 @@ func (in *KeyParameters) DeepCopyInto(out *KeyParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.XksKeyID != nil {
+		in, out := &in.XksKeyID, &out.XksKeyID
+		*out = new(string)
+		**out = **in
 	}
 }
 

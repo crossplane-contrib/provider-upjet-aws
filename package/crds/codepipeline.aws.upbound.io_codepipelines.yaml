@@ -185,6 +185,15 @@ spec:
                           type: string
                       type: object
                     type: array
+                  executionMode:
+                    description: The method that the pipeline will use to handle multiple
+                      executions. The default mode is SUPERSEDED. For value values,
+                      refer to the AWS documentation.
+                    type: string
+                  pipelineType:
+                    description: 'Type of the pipeline. Possible values are: V1 and
+                      V2. Default value is V1.'
+                    type: string
                   region:
                     description: |-
                       The region in which to run the action.
@@ -350,6 +359,181 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  trigger:
+                    description: A trigger block. Valid only when pipeline_type is
+                      V2. Triggers are documented below.
+                    items:
+                      properties:
+                        gitConfiguration:
+                          description: Provides the filter criteria and the source
+                            stage for the repository event that starts the pipeline.
+                            For more information, refer to the AWS documentation.
+                            A git_configuration block is documented below.
+                          items:
+                            properties:
+                              pullRequest:
+                                description: The field where the repository event
+                                  that will start the pipeline is specified as pull
+                                  requests. A pull_request block is documented below.
+                                items:
+                                  properties:
+                                    branches:
+                                      description: The field that specifies to filter
+                                        on branches for the pull request trigger configuration.
+                                        A branches block is documented below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    events:
+                                      description: A list that specifies which pull
+                                        request events to filter on (opened, updated,
+                                        closed) for the trigger configuration. Possible
+                                        values are OPEN, UPDATED  and CLOSED.
+                                      items:
+                                        type: string
+                                      type: array
+                                    filePaths:
+                                      description: The field that specifies to filter
+                                        on file paths for the pull request trigger
+                                        configuration. A file_paths block is documented
+                                        below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              push:
+                                description: The field where the repository event
+                                  that will start the pipeline, such as pushing Git
+                                  tags, is specified with details. A push block is
+                                  documented below.
+                                items:
+                                  properties:
+                                    branches:
+                                      description: The field that specifies to filter
+                                        on branches for the pull request trigger configuration.
+                                        A branches block is documented below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    filePaths:
+                                      description: The field that specifies to filter
+                                        on file paths for the pull request trigger
+                                        configuration. A file_paths block is documented
+                                        below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tags:
+                                      description: Key-value map of resource tags.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              sourceActionName:
+                                description: The name of the pipeline source action
+                                  where the trigger configuration.
+                                type: string
+                            type: object
+                          type: array
+                        providerType:
+                          description: The source provider for the event. Possible
+                            value is CodeStarSourceConnection.
+                          type: string
+                      type: object
+                    type: array
+                  variable:
+                    description: A pipeline-level variable block. Valid only when
+                      pipeline_type is V2. Variable are documented below.
+                    items:
+                      properties:
+                        defaultValue:
+                          description: The default value of a pipeline-level variable.
+                          type: string
+                        description:
+                          description: The description of a pipeline-level variable.
+                          type: string
+                        name:
+                          description: The name of a pipeline-level variable.
+                          type: string
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -473,6 +657,15 @@ spec:
                           type: string
                       type: object
                     type: array
+                  executionMode:
+                    description: The method that the pipeline will use to handle multiple
+                      executions. The default mode is SUPERSEDED. For value values,
+                      refer to the AWS documentation.
+                    type: string
+                  pipelineType:
+                    description: 'Type of the pipeline. Possible values are: V1 and
+                      V2. Default value is V1.'
+                    type: string
                   roleArn:
                     description: A service role Amazon Resource Name (ARN) that grants
                       AWS CodePipeline permission to make calls to AWS services on
@@ -630,6 +823,181 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  trigger:
+                    description: A trigger block. Valid only when pipeline_type is
+                      V2. Triggers are documented below.
+                    items:
+                      properties:
+                        gitConfiguration:
+                          description: Provides the filter criteria and the source
+                            stage for the repository event that starts the pipeline.
+                            For more information, refer to the AWS documentation.
+                            A git_configuration block is documented below.
+                          items:
+                            properties:
+                              pullRequest:
+                                description: The field where the repository event
+                                  that will start the pipeline is specified as pull
+                                  requests. A pull_request block is documented below.
+                                items:
+                                  properties:
+                                    branches:
+                                      description: The field that specifies to filter
+                                        on branches for the pull request trigger configuration.
+                                        A branches block is documented below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    events:
+                                      description: A list that specifies which pull
+                                        request events to filter on (opened, updated,
+                                        closed) for the trigger configuration. Possible
+                                        values are OPEN, UPDATED  and CLOSED.
+                                      items:
+                                        type: string
+                                      type: array
+                                    filePaths:
+                                      description: The field that specifies to filter
+                                        on file paths for the pull request trigger
+                                        configuration. A file_paths block is documented
+                                        below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              push:
+                                description: The field where the repository event
+                                  that will start the pipeline, such as pushing Git
+                                  tags, is specified with details. A push block is
+                                  documented below.
+                                items:
+                                  properties:
+                                    branches:
+                                      description: The field that specifies to filter
+                                        on branches for the pull request trigger configuration.
+                                        A branches block is documented below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    filePaths:
+                                      description: The field that specifies to filter
+                                        on file paths for the pull request trigger
+                                        configuration. A file_paths block is documented
+                                        below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tags:
+                                      description: Key-value map of resource tags.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              sourceActionName:
+                                description: The name of the pipeline source action
+                                  where the trigger configuration.
+                                type: string
+                            type: object
+                          type: array
+                        providerType:
+                          description: The source provider for the event. Possible
+                            value is CodeStarSourceConnection.
+                          type: string
+                      type: object
+                    type: array
+                  variable:
+                    description: A pipeline-level variable block. Valid only when
+                      pipeline_type is V2. Variable are documented below.
+                    items:
+                      properties:
+                        defaultValue:
+                          description: The default value of a pipeline-level variable.
+                          type: string
+                        description:
+                          description: The description of a pipeline-level variable.
+                          type: string
+                        name:
+                          description: The name of a pipeline-level variable.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -853,8 +1221,17 @@ spec:
                           type: string
                       type: object
                     type: array
+                  executionMode:
+                    description: The method that the pipeline will use to handle multiple
+                      executions. The default mode is SUPERSEDED. For value values,
+                      refer to the AWS documentation.
+                    type: string
                   id:
                     description: The codepipeline ID.
+                    type: string
+                  pipelineType:
+                    description: 'Type of the pipeline. Possible values are: V1 and
+                      V2. Default value is V1.'
                     type: string
                   roleArn:
                     description: A service role Amazon Resource Name (ARN) that grants
@@ -950,6 +1327,181 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  trigger:
+                    description: A trigger block. Valid only when pipeline_type is
+                      V2. Triggers are documented below.
+                    items:
+                      properties:
+                        gitConfiguration:
+                          description: Provides the filter criteria and the source
+                            stage for the repository event that starts the pipeline.
+                            For more information, refer to the AWS documentation.
+                            A git_configuration block is documented below.
+                          items:
+                            properties:
+                              pullRequest:
+                                description: The field where the repository event
+                                  that will start the pipeline is specified as pull
+                                  requests. A pull_request block is documented below.
+                                items:
+                                  properties:
+                                    branches:
+                                      description: The field that specifies to filter
+                                        on branches for the pull request trigger configuration.
+                                        A branches block is documented below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    events:
+                                      description: A list that specifies which pull
+                                        request events to filter on (opened, updated,
+                                        closed) for the trigger configuration. Possible
+                                        values are OPEN, UPDATED  and CLOSED.
+                                      items:
+                                        type: string
+                                      type: array
+                                    filePaths:
+                                      description: The field that specifies to filter
+                                        on file paths for the pull request trigger
+                                        configuration. A file_paths block is documented
+                                        below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              push:
+                                description: The field where the repository event
+                                  that will start the pipeline, such as pushing Git
+                                  tags, is specified with details. A push block is
+                                  documented below.
+                                items:
+                                  properties:
+                                    branches:
+                                      description: The field that specifies to filter
+                                        on branches for the pull request trigger configuration.
+                                        A branches block is documented below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    filePaths:
+                                      description: The field that specifies to filter
+                                        on file paths for the pull request trigger
+                                        configuration. A file_paths block is documented
+                                        below.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tags:
+                                      description: Key-value map of resource tags.
+                                      items:
+                                        properties:
+                                          excludes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be excluded
+                                              from starting the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includes:
+                                            description: A list of patterns of Git
+                                              tags that, when pushed, are to be included
+                                              as criteria that starts the pipeline.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              sourceActionName:
+                                description: The name of the pipeline source action
+                                  where the trigger configuration.
+                                type: string
+                            type: object
+                          type: array
+                        providerType:
+                          description: The source provider for the event. Possible
+                            value is CodeStarSourceConnection.
+                          type: string
+                      type: object
+                    type: array
+                  variable:
+                    description: A pipeline-level variable block. Valid only when
+                      pipeline_type is V2. Variable are documented below.
+                    items:
+                      properties:
+                        defaultValue:
+                          description: The default value of a pipeline-level variable.
+                          type: string
+                        description:
+                          description: The description of a pipeline-level variable.
+                          type: string
+                        name:
+                          description: The name of a pipeline-level variable.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

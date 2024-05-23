@@ -84,6 +84,11 @@ spec:
                             with One Zone storage. If omitted, regional storage will
                             be used.
                           type: string
+                        fileSystemId:
+                          description: The ID of the destination file system for the
+                            replication. If no ID is provided, then EFS creates a
+                            new file system with the default settings.
+                          type: string
                         kmsKeyId:
                           description: The Key ID, ARN, alias, or alias ARN of the
                             KMS key that should be used to encrypt the replica file
@@ -202,6 +207,11 @@ spec:
                             should be created. If specified, the replica will be created
                             with One Zone storage. If omitted, regional storage will
                             be used.
+                          type: string
+                        fileSystemId:
+                          description: The ID of the destination file system for the
+                            replication. If no ID is provided, then EFS creates a
+                            new file system with the default settings.
                           type: string
                         kmsKeyId:
                           description: The Key ID, ARN, alias, or alias ARN of the
@@ -481,7 +491,9 @@ spec:
                             be used.
                           type: string
                         fileSystemId:
-                          description: The fs ID of the replica.
+                          description: The ID of the destination file system for the
+                            replication. If no ID is provided, then EFS creates a
+                            new file system with the default settings.
                           type: string
                         kmsKeyId:
                           description: The Key ID, ARN, alias, or alias ARN of the

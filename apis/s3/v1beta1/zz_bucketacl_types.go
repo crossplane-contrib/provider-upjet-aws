@@ -18,7 +18,7 @@ type AccessControlPolicyGrantInitParameters struct {
 	// Configuration block for the person being granted permissions. See below.
 	Grantee []GranteeInitParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
 
-	// Logging permissions assigned to the grantee for the bucket.
+	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP. See What permissions can I grant? for more details about what each permission means in the context of buckets.
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
@@ -27,7 +27,7 @@ type AccessControlPolicyGrantObservation struct {
 	// Configuration block for the person being granted permissions. See below.
 	Grantee []GranteeObservation `json:"grantee,omitempty" tf:"grantee,omitempty"`
 
-	// Logging permissions assigned to the grantee for the bucket.
+	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP. See What permissions can I grant? for more details about what each permission means in the context of buckets.
 	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type AccessControlPolicyGrantParameters struct {
 	// +kubebuilder:validation:Optional
 	Grantee []GranteeParameters `json:"grantee,omitempty" tf:"grantee,omitempty"`
 
-	// Logging permissions assigned to the grantee for the bucket.
+	// Logging permissions assigned to the grantee for the bucket. Valid values: FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP. See What permissions can I grant? for more details about what each permission means in the context of buckets.
 	// +kubebuilder:validation:Optional
 	Permission *string `json:"permission" tf:"permission,omitempty"`
 }
@@ -47,7 +47,7 @@ type AccessControlPolicyInitParameters struct {
 	// Set of grant configuration blocks. See below.
 	Grant []AccessControlPolicyGrantInitParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
-	// Configuration block of the bucket owner's display name and ID. See below.
+	// Configuration block for the bucket owner's display name and ID. See below.
 	Owner []OwnerInitParameters `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
@@ -56,7 +56,7 @@ type AccessControlPolicyObservation struct {
 	// Set of grant configuration blocks. See below.
 	Grant []AccessControlPolicyGrantObservation `json:"grant,omitempty" tf:"grant,omitempty"`
 
-	// Configuration block of the bucket owner's display name and ID. See below.
+	// Configuration block for the bucket owner's display name and ID. See below.
 	Owner []OwnerObservation `json:"owner,omitempty" tf:"owner,omitempty"`
 }
 
@@ -66,7 +66,7 @@ type AccessControlPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Grant []AccessControlPolicyGrantParameters `json:"grant,omitempty" tf:"grant,omitempty"`
 
-	// Configuration block of the bucket owner's display name and ID. See below.
+	// Configuration block for the bucket owner's display name and ID. See below.
 	// +kubebuilder:validation:Optional
 	Owner []OwnerParameters `json:"owner" tf:"owner,omitempty"`
 }
@@ -79,7 +79,7 @@ type BucketACLInitParameters struct {
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
 	AccessControlPolicy []AccessControlPolicyInitParameters `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
-	// Name of the bucket.
+	// Bucket to which to apply the ACL.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -104,7 +104,7 @@ type BucketACLObservation struct {
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
 	AccessControlPolicy []AccessControlPolicyObservation `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
-	// Name of the bucket.
+	// Bucket to which to apply the ACL.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
 	// Account ID of the expected bucket owner.
@@ -124,7 +124,7 @@ type BucketACLParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessControlPolicy []AccessControlPolicyParameters `json:"accessControlPolicy,omitempty" tf:"access_control_policy,omitempty"`
 
-	// Name of the bucket.
+	// Bucket to which to apply the ACL.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

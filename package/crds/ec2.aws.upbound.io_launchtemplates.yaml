@@ -1353,7 +1353,10 @@ spec:
                     x-kubernetes-list-type: set
                   tagSpecifications:
                     description: The tags to apply to the resources during launch.
-                      See Tag Specifications below for more details.
+                      See Tag Specifications below for more details. Default tags
+                      are currently not propagated to ASG created resources so you
+                      may wish to inject your default tags into this variable against
+                      the relevant child resource types created.
                     items:
                       properties:
                         resourceType:
@@ -2757,7 +2760,10 @@ spec:
                     x-kubernetes-list-type: set
                   tagSpecifications:
                     description: The tags to apply to the resources during launch.
-                      See Tag Specifications below for more details.
+                      See Tag Specifications below for more details. Default tags
+                      are currently not propagated to ASG created resources so you
+                      may wish to inject your default tags into this variable against
+                      the relevant child resource types created.
                     items:
                       properties:
                         resourceType:
@@ -3792,7 +3798,10 @@ spec:
                     x-kubernetes-list-type: set
                   tagSpecifications:
                     description: The tags to apply to the resources during launch.
-                      See Tag Specifications below for more details.
+                      See Tag Specifications below for more details. Default tags
+                      are currently not propagated to ASG created resources so you
+                      may wish to inject your default tags into this variable against
+                      the relevant child resource types created.
                     items:
                       properties:
                         resourceType:

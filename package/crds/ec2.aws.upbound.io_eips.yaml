@@ -661,6 +661,8 @@ spec:
                     description: ID that AWS assigns to represent the allocation of
                       the Elastic IP address for use with instances in a VPC.
                     type: string
+                  arn:
+                    type: string
                   associateWithPrivateIp:
                     description: User-specified primary or secondary private IP address
                       to associate with the Elastic IP address. If no private IP address
@@ -704,6 +706,9 @@ spec:
                     type: string
                   privateIp:
                     description: Contains the private IP address (if in VPC).
+                    type: string
+                  ptrRecord:
+                    description: The DNS pointer (PTR) record for the IP address.
                     type: string
                   publicDns:
                     description: Public DNS associated with the Elastic IP address.

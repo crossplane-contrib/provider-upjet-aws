@@ -994,7 +994,7 @@ type LaunchTemplateInitParameters_2 struct {
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
-	// The tags to apply to the resources during launch. See Tag Specifications below for more details.
+	// The tags to apply to the resources during launch. See Tag Specifications below for more details. Default tags are currently not propagated to ASG created resources so you may wish to inject your default tags into this variable against the relevant child resource types created.
 	TagSpecifications []TagSpecificationsInitParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1244,7 +1244,7 @@ type LaunchTemplateObservation_2 struct {
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
-	// The tags to apply to the resources during launch. See Tag Specifications below for more details.
+	// The tags to apply to the resources during launch. See Tag Specifications below for more details. Default tags are currently not propagated to ASG created resources so you may wish to inject your default tags into this variable against the relevant child resource types created.
 	TagSpecifications []TagSpecificationsObservation `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Key-value map of resource tags.
@@ -1418,7 +1418,7 @@ type LaunchTemplateParameters_2 struct {
 	// +listType=set
 	SecurityGroupNames []*string `json:"securityGroupNames,omitempty" tf:"security_group_names,omitempty"`
 
-	// The tags to apply to the resources during launch. See Tag Specifications below for more details.
+	// The tags to apply to the resources during launch. See Tag Specifications below for more details. Default tags are currently not propagated to ASG created resources so you may wish to inject your default tags into this variable against the relevant child resource types created.
 	// +kubebuilder:validation:Optional
 	TagSpecifications []TagSpecificationsParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 

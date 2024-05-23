@@ -78,16 +78,26 @@ spec:
                       current user's account_id by default if omitted.
                     type: string
                   autoAdjustData:
-                    description: Object containing [AutoAdjustData] which determines
+                    description: Object containing AutoAdjustData which determines
                       the budget amount for an auto-adjusting budget.
                     items:
                       properties:
                         autoAdjustType:
+                          description: 'The string that defines whether your budget
+                            auto-adjusts based on historical or forecasted data. Valid
+                            values: FORECAST,HISTORICAL'
                           type: string
                         historicalOptions:
+                          description: Configuration block of Historical Options.
+                            Required for auto_adjust_type of HISTORICAL Configuration
+                            block that defines the historical data that your auto-adjusting
+                            budget is based on.
                           items:
                             properties:
                               budgetAdjustmentPeriod:
+                                description: The number of budget periods included
+                                  in the moving-average calculation that determines
+                                  your auto-adjusted budget amount.
                                 type: number
                             type: object
                           type: array
@@ -231,6 +241,12 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   timePeriodEnd:
                     description: 'The end of the time period covered by the budget.
                       There are no restrictions on the end date. Format: 2017-01-01_12:00.'
@@ -267,16 +283,26 @@ spec:
                       current user's account_id by default if omitted.
                     type: string
                   autoAdjustData:
-                    description: Object containing [AutoAdjustData] which determines
+                    description: Object containing AutoAdjustData which determines
                       the budget amount for an auto-adjusting budget.
                     items:
                       properties:
                         autoAdjustType:
+                          description: 'The string that defines whether your budget
+                            auto-adjusts based on historical or forecasted data. Valid
+                            values: FORECAST,HISTORICAL'
                           type: string
                         historicalOptions:
+                          description: Configuration block of Historical Options.
+                            Required for auto_adjust_type of HISTORICAL Configuration
+                            block that defines the historical data that your auto-adjusting
+                            budget is based on.
                           items:
                             properties:
                               budgetAdjustmentPeriod:
+                                description: The number of budget periods included
+                                  in the moving-average calculation that determines
+                                  your auto-adjusted budget amount.
                                 type: number
                             type: object
                           type: array
@@ -416,6 +442,12 @@ spec:
                           type: string
                       type: object
                     type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   timePeriodEnd:
                     description: 'The end of the time period covered by the budget.
                       There are no restrictions on the end date. Format: 2017-01-01_12:00.'
@@ -621,22 +653,42 @@ spec:
                     description: The ARN of the budget.
                     type: string
                   autoAdjustData:
-                    description: Object containing [AutoAdjustData] which determines
+                    description: Object containing AutoAdjustData which determines
                       the budget amount for an auto-adjusting budget.
                     items:
                       properties:
                         autoAdjustType:
+                          description: 'The string that defines whether your budget
+                            auto-adjusts based on historical or forecasted data. Valid
+                            values: FORECAST,HISTORICAL'
                           type: string
                         historicalOptions:
+                          description: Configuration block of Historical Options.
+                            Required for auto_adjust_type of HISTORICAL Configuration
+                            block that defines the historical data that your auto-adjusting
+                            budget is based on.
                           items:
                             properties:
                               budgetAdjustmentPeriod:
+                                description: The number of budget periods included
+                                  in the moving-average calculation that determines
+                                  your auto-adjusted budget amount.
                                 type: number
                               lookbackAvailablePeriods:
+                                description: The integer that describes how many budget
+                                  periods in your BudgetAdjustmentPeriod are included
+                                  in the calculation of your current budget limit.
+                                  If the first budget period in your BudgetAdjustmentPeriod
+                                  has no cost data, then that budget period isn’t
+                                  included in the average that determines your budget
+                                  limit. You can’t set your own LookBackAvailablePeriods.
+                                  The value is automatically calculated from the budget_adjustment_period
+                                  and your historical cost data.
                                 type: number
                             type: object
                           type: array
                         lastAutoAdjustTime:
+                          description: The last time that your budget was auto-adjusted.
                           type: string
                       type: object
                     type: array
@@ -777,6 +829,19 @@ spec:
                           type: string
                       type: object
                     type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
+                    type: object
+                    x-kubernetes-map-type: granular
                   timePeriodEnd:
                     description: 'The end of the time period covered by the budget.
                       There are no restrictions on the end date. Format: 2017-01-01_12:00.'

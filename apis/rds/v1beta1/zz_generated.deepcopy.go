@@ -973,6 +973,16 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Domain != nil {
+		in, out := &in.Domain, &out.Domain
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainIAMRoleName != nil {
+		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnableGlobalWriteForwarding != nil {
 		in, out := &in.EnableGlobalWriteForwarding, &out.EnableGlobalWriteForwarding
 		*out = new(bool)
@@ -980,6 +990,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.EnableHTTPEndpoint != nil {
 		in, out := &in.EnableHTTPEndpoint, &out.EnableHTTPEndpoint
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableLocalWriteForwarding != nil {
+		in, out := &in.EnableLocalWriteForwarding, &out.EnableLocalWriteForwarding
 		*out = new(bool)
 		**out = **in
 	}
@@ -2068,6 +2083,16 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Domain != nil {
+		in, out := &in.Domain, &out.Domain
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainIAMRoleName != nil {
+		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnableGlobalWriteForwarding != nil {
 		in, out := &in.EnableGlobalWriteForwarding, &out.EnableGlobalWriteForwarding
 		*out = new(bool)
@@ -2075,6 +2100,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.EnableHTTPEndpoint != nil {
 		in, out := &in.EnableHTTPEndpoint, &out.EnableHTTPEndpoint
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableLocalWriteForwarding != nil {
+		in, out := &in.EnableLocalWriteForwarding, &out.EnableLocalWriteForwarding
 		*out = new(bool)
 		**out = **in
 	}
@@ -2809,6 +2839,16 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Domain != nil {
+		in, out := &in.Domain, &out.Domain
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainIAMRoleName != nil {
+		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnableGlobalWriteForwarding != nil {
 		in, out := &in.EnableGlobalWriteForwarding, &out.EnableGlobalWriteForwarding
 		*out = new(bool)
@@ -2816,6 +2856,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.EnableHTTPEndpoint != nil {
 		in, out := &in.EnableHTTPEndpoint, &out.EnableHTTPEndpoint
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableLocalWriteForwarding != nil {
+		in, out := &in.EnableLocalWriteForwarding, &out.EnableLocalWriteForwarding
 		*out = new(bool)
 		**out = **in
 	}

@@ -387,6 +387,11 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.TransitEncryptionMode != nil {
+		in, out := &in.TransitEncryptionMode, &out.TransitEncryptionMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserGroupIds != nil {
 		in, out := &in.UserGroupIds, &out.UserGroupIds
 		*out = make([]*string, len(*in))
@@ -714,6 +719,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.TransitEncryptionMode != nil {
+		in, out := &in.TransitEncryptionMode, &out.TransitEncryptionMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserGroupIds != nil {
 		in, out := &in.UserGroupIds, &out.UserGroupIds
 		*out = make([]*string, len(*in))
@@ -987,6 +997,11 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	if in.TransitEncryptionEnabled != nil {
 		in, out := &in.TransitEncryptionEnabled, &out.TransitEncryptionEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.TransitEncryptionMode != nil {
+		in, out := &in.TransitEncryptionMode, &out.TransitEncryptionMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.UserGroupIds != nil {

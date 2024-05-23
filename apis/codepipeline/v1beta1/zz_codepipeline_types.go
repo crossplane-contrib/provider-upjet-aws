@@ -206,10 +206,45 @@ type ArtifactStoreParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type BranchesInitParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type BranchesObservation struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type BranchesParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	// +kubebuilder:validation:Optional
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	// +kubebuilder:validation:Optional
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
 type CodepipelineInitParameters struct {
 
 	// One or more artifact_store blocks. Artifact stores are documented below.
 	ArtifactStore []ArtifactStoreInitParameters `json:"artifactStore,omitempty" tf:"artifact_store,omitempty"`
+
+	// The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED. For value values, refer to the AWS documentation.
+	ExecutionMode *string `json:"executionMode,omitempty" tf:"execution_mode,omitempty"`
+
+	// Type of the pipeline. Possible values are: V1 and V2. Default value is V1.
+	PipelineType *string `json:"pipelineType,omitempty" tf:"pipeline_type,omitempty"`
 
 	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
@@ -230,6 +265,12 @@ type CodepipelineInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A trigger block. Valid only when pipeline_type is V2. Triggers are documented below.
+	Trigger []TriggerInitParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
+
+	// A pipeline-level variable block. Valid only when pipeline_type is V2. Variable are documented below.
+	Variable []VariableInitParameters `json:"variable,omitempty" tf:"variable,omitempty"`
 }
 
 type CodepipelineObservation struct {
@@ -240,8 +281,14 @@ type CodepipelineObservation struct {
 	// One or more artifact_store blocks. Artifact stores are documented below.
 	ArtifactStore []ArtifactStoreObservation `json:"artifactStore,omitempty" tf:"artifact_store,omitempty"`
 
+	// The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED. For value values, refer to the AWS documentation.
+	ExecutionMode *string `json:"executionMode,omitempty" tf:"execution_mode,omitempty"`
+
 	// The codepipeline ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Type of the pipeline. Possible values are: V1 and V2. Default value is V1.
+	PipelineType *string `json:"pipelineType,omitempty" tf:"pipeline_type,omitempty"`
 
 	// A service role Amazon Resource Name (ARN) that grants AWS CodePipeline permission to make calls to AWS services on your behalf.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -256,6 +303,12 @@ type CodepipelineObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// A trigger block. Valid only when pipeline_type is V2. Triggers are documented below.
+	Trigger []TriggerObservation `json:"trigger,omitempty" tf:"trigger,omitempty"`
+
+	// A pipeline-level variable block. Valid only when pipeline_type is V2. Variable are documented below.
+	Variable []VariableObservation `json:"variable,omitempty" tf:"variable,omitempty"`
 }
 
 type CodepipelineParameters struct {
@@ -263,6 +316,14 @@ type CodepipelineParameters struct {
 	// One or more artifact_store blocks. Artifact stores are documented below.
 	// +kubebuilder:validation:Optional
 	ArtifactStore []ArtifactStoreParameters `json:"artifactStore,omitempty" tf:"artifact_store,omitempty"`
+
+	// The method that the pipeline will use to handle multiple executions. The default mode is SUPERSEDED. For value values, refer to the AWS documentation.
+	// +kubebuilder:validation:Optional
+	ExecutionMode *string `json:"executionMode,omitempty" tf:"execution_mode,omitempty"`
+
+	// Type of the pipeline. Possible values are: V1 and V2. Default value is V1.
+	// +kubebuilder:validation:Optional
+	PipelineType *string `json:"pipelineType,omitempty" tf:"pipeline_type,omitempty"`
 
 	// The region in which to run the action.
 	// Region is the region you'd like your resource to be created in.
@@ -292,6 +353,14 @@ type CodepipelineParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A trigger block. Valid only when pipeline_type is V2. Triggers are documented below.
+	// +kubebuilder:validation:Optional
+	Trigger []TriggerParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
+
+	// A pipeline-level variable block. Valid only when pipeline_type is V2. Variable are documented below.
+	// +kubebuilder:validation:Optional
+	Variable []VariableParameters `json:"variable,omitempty" tf:"variable,omitempty"`
 }
 
 type EncryptionKeyInitParameters struct {
@@ -323,6 +392,210 @@ type EncryptionKeyParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type FilePathsInitParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type FilePathsObservation struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type FilePathsParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	// +kubebuilder:validation:Optional
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	// +kubebuilder:validation:Optional
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type GitConfigurationInitParameters struct {
+
+	// The field where the repository event that will start the pipeline is specified as pull requests. A pull_request block is documented below.
+	PullRequest []PullRequestInitParameters `json:"pullRequest,omitempty" tf:"pull_request,omitempty"`
+
+	// The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details. A push block is documented below.
+	Push []PushInitParameters `json:"push,omitempty" tf:"push,omitempty"`
+
+	// The name of the pipeline source action where the trigger configuration.
+	SourceActionName *string `json:"sourceActionName,omitempty" tf:"source_action_name,omitempty"`
+}
+
+type GitConfigurationObservation struct {
+
+	// The field where the repository event that will start the pipeline is specified as pull requests. A pull_request block is documented below.
+	PullRequest []PullRequestObservation `json:"pullRequest,omitempty" tf:"pull_request,omitempty"`
+
+	// The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details. A push block is documented below.
+	Push []PushObservation `json:"push,omitempty" tf:"push,omitempty"`
+
+	// The name of the pipeline source action where the trigger configuration.
+	SourceActionName *string `json:"sourceActionName,omitempty" tf:"source_action_name,omitempty"`
+}
+
+type GitConfigurationParameters struct {
+
+	// The field where the repository event that will start the pipeline is specified as pull requests. A pull_request block is documented below.
+	// +kubebuilder:validation:Optional
+	PullRequest []PullRequestParameters `json:"pullRequest,omitempty" tf:"pull_request,omitempty"`
+
+	// The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details. A push block is documented below.
+	// +kubebuilder:validation:Optional
+	Push []PushParameters `json:"push,omitempty" tf:"push,omitempty"`
+
+	// The name of the pipeline source action where the trigger configuration.
+	// +kubebuilder:validation:Optional
+	SourceActionName *string `json:"sourceActionName" tf:"source_action_name,omitempty"`
+}
+
+type PullRequestInitParameters struct {
+
+	// The field that specifies to filter on branches for the pull request trigger configuration. A branches block is documented below.
+	Branches []BranchesInitParameters `json:"branches,omitempty" tf:"branches,omitempty"`
+
+	// A list that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration. Possible values are OPEN, UPDATED  and CLOSED.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// The field that specifies to filter on file paths for the pull request trigger configuration. A file_paths block is documented below.
+	FilePaths []FilePathsInitParameters `json:"filePaths,omitempty" tf:"file_paths,omitempty"`
+}
+
+type PullRequestObservation struct {
+
+	// The field that specifies to filter on branches for the pull request trigger configuration. A branches block is documented below.
+	Branches []BranchesObservation `json:"branches,omitempty" tf:"branches,omitempty"`
+
+	// A list that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration. Possible values are OPEN, UPDATED  and CLOSED.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// The field that specifies to filter on file paths for the pull request trigger configuration. A file_paths block is documented below.
+	FilePaths []FilePathsObservation `json:"filePaths,omitempty" tf:"file_paths,omitempty"`
+}
+
+type PullRequestParameters struct {
+
+	// The field that specifies to filter on branches for the pull request trigger configuration. A branches block is documented below.
+	// +kubebuilder:validation:Optional
+	Branches []BranchesParameters `json:"branches,omitempty" tf:"branches,omitempty"`
+
+	// A list that specifies which pull request events to filter on (opened, updated, closed) for the trigger configuration. Possible values are OPEN, UPDATED  and CLOSED.
+	// +kubebuilder:validation:Optional
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// The field that specifies to filter on file paths for the pull request trigger configuration. A file_paths block is documented below.
+	// +kubebuilder:validation:Optional
+	FilePaths []FilePathsParameters `json:"filePaths,omitempty" tf:"file_paths,omitempty"`
+}
+
+type PushBranchesInitParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type PushBranchesObservation struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type PushBranchesParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	// +kubebuilder:validation:Optional
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	// +kubebuilder:validation:Optional
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type PushFilePathsInitParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type PushFilePathsObservation struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type PushFilePathsParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	// +kubebuilder:validation:Optional
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	// +kubebuilder:validation:Optional
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type PushInitParameters struct {
+
+	// The field that specifies to filter on branches for the pull request trigger configuration. A branches block is documented below.
+	Branches []PushBranchesInitParameters `json:"branches,omitempty" tf:"branches,omitempty"`
+
+	// The field that specifies to filter on file paths for the pull request trigger configuration. A file_paths block is documented below.
+	FilePaths []PushFilePathsInitParameters `json:"filePaths,omitempty" tf:"file_paths,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags []TagsInitParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type PushObservation struct {
+
+	// The field that specifies to filter on branches for the pull request trigger configuration. A branches block is documented below.
+	Branches []PushBranchesObservation `json:"branches,omitempty" tf:"branches,omitempty"`
+
+	// The field that specifies to filter on file paths for the pull request trigger configuration. A file_paths block is documented below.
+	FilePaths []PushFilePathsObservation `json:"filePaths,omitempty" tf:"file_paths,omitempty"`
+
+	// Key-value map of resource tags.
+	Tags []TagsObservation `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type PushParameters struct {
+
+	// The field that specifies to filter on branches for the pull request trigger configuration. A branches block is documented below.
+	// +kubebuilder:validation:Optional
+	Branches []PushBranchesParameters `json:"branches,omitempty" tf:"branches,omitempty"`
+
+	// The field that specifies to filter on file paths for the pull request trigger configuration. A file_paths block is documented below.
+	// +kubebuilder:validation:Optional
+	FilePaths []PushFilePathsParameters `json:"filePaths,omitempty" tf:"file_paths,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	Tags []TagsParameters `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type StageInitParameters struct {
 
 	// The action(s) to include in the stage. Defined as an action block below
@@ -348,6 +621,103 @@ type StageParameters struct {
 	Action []ActionParameters `json:"action" tf:"action,omitempty"`
 
 	// The name of the stage.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
+type TagsInitParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type TagsObservation struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type TagsParameters struct {
+
+	// A list of patterns of Git tags that, when pushed, are to be excluded from starting the pipeline.
+	// +kubebuilder:validation:Optional
+	Excludes []*string `json:"excludes,omitempty" tf:"excludes,omitempty"`
+
+	// A list of patterns of Git tags that, when pushed, are to be included as criteria that starts the pipeline.
+	// +kubebuilder:validation:Optional
+	Includes []*string `json:"includes,omitempty" tf:"includes,omitempty"`
+}
+
+type TriggerInitParameters struct {
+
+	// Provides the filter criteria and the source stage for the repository event that starts the pipeline. For more information, refer to the AWS documentation. A git_configuration block is documented below.
+	GitConfiguration []GitConfigurationInitParameters `json:"gitConfiguration,omitempty" tf:"git_configuration,omitempty"`
+
+	// The source provider for the event. Possible value is CodeStarSourceConnection.
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+}
+
+type TriggerObservation struct {
+
+	// Provides the filter criteria and the source stage for the repository event that starts the pipeline. For more information, refer to the AWS documentation. A git_configuration block is documented below.
+	GitConfiguration []GitConfigurationObservation `json:"gitConfiguration,omitempty" tf:"git_configuration,omitempty"`
+
+	// The source provider for the event. Possible value is CodeStarSourceConnection.
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+}
+
+type TriggerParameters struct {
+
+	// Provides the filter criteria and the source stage for the repository event that starts the pipeline. For more information, refer to the AWS documentation. A git_configuration block is documented below.
+	// +kubebuilder:validation:Optional
+	GitConfiguration []GitConfigurationParameters `json:"gitConfiguration" tf:"git_configuration,omitempty"`
+
+	// The source provider for the event. Possible value is CodeStarSourceConnection.
+	// +kubebuilder:validation:Optional
+	ProviderType *string `json:"providerType" tf:"provider_type,omitempty"`
+}
+
+type VariableInitParameters struct {
+
+	// The default value of a pipeline-level variable.
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// The description of a pipeline-level variable.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type VariableObservation struct {
+
+	// The default value of a pipeline-level variable.
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// The description of a pipeline-level variable.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of a pipeline-level variable.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type VariableParameters struct {
+
+	// The default value of a pipeline-level variable.
+	// +kubebuilder:validation:Optional
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// The description of a pipeline-level variable.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of a pipeline-level variable.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }

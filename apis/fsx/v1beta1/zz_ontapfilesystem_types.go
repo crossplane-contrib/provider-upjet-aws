@@ -97,7 +97,7 @@ type OntapFileSystemInitParameters struct {
 	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. Requires automatic_backup_retention_days to be set.
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
-	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
+	// - The filesystem deployment type. Supports MULTI_AZ_1, SINGLE_AZ_1, and SINGLE_AZ_2.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
 	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration below.
@@ -105,6 +105,9 @@ type OntapFileSystemInitParameters struct {
 
 	// Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.
 	EndpointIPAddressRange *string `json:"endpointIpAddressRange,omitempty" tf:"endpoint_ip_address_range,omitempty"`
+
+	// - The number of ha_pairs to deploy for the file system. Valid values are 1 through 12. Value of 2 or greater required for SINGLE_AZ_2. Only value of 1 is supported with SINGLE_AZ_1 or MULTI_AZ_1 but not required.
+	HaPairs *float64 `json:"haPairs,omitempty" tf:"ha_pairs,omitempty"`
 
 	// ARN for the KMS Key to encrypt the file system at rest, Defaults to an AWS managed KMS Key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -150,7 +153,7 @@ type OntapFileSystemInitParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
+	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608 for file systems with deployment_type SINGLE_AZ_1 and MULTI_AZ_1. Valid values between 2048 (1024 per ha pair) and 1048576 for file systems with deployment_type SINGLE_AZ_2.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
 	// - The filesystem storage type. defaults to SSD.
@@ -164,7 +167,7 @@ type OntapFileSystemInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. Upto 2 subnets can be provided.
+	// A list of IDs for the subnets that the file system will be accessible from. Up to 2 subnets can be provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -174,8 +177,11 @@ type OntapFileSystemInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096. This parameter is only supported when not using the ha_pairs parameter. Either throughput_capacity or throughput_capacity_per_ha_pair must be specified.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid value when using 1 ha_pair are 128, 256, 512, 1024, 2048, and 4096. Valid values when using 2 or more ha_pairs are 3072,6144. This parameter is only supported when specifying the ha_pairs parameter. Either throughput_capacity or throughput_capacity_per_ha_pair must be specified.
+	ThroughputCapacityPerHaPair *float64 `json:"throughputCapacityPerHaPair,omitempty" tf:"throughput_capacity_per_ha_pair,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
@@ -195,7 +201,7 @@ type OntapFileSystemObservation struct {
 	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00 specifies 5 AM daily. Requires automatic_backup_retention_days to be set.
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
-	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
+	// - The filesystem deployment type. Supports MULTI_AZ_1, SINGLE_AZ_1, and SINGLE_AZ_2.
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
 	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system. See Disk Iops Configuration below.
@@ -206,6 +212,9 @@ type OntapFileSystemObservation struct {
 
 	// The endpoints that are used to access data or to manage the file system using the NetApp ONTAP CLI, REST API, or NetApp SnapMirror. See Endpoints below.
 	Endpoints []EndpointsObservation `json:"endpoints,omitempty" tf:"endpoints,omitempty"`
+
+	// - The number of ha_pairs to deploy for the file system. Valid values are 1 through 12. Value of 2 or greater required for SINGLE_AZ_2. Only value of 1 is supported with SINGLE_AZ_1 or MULTI_AZ_1 but not required.
+	HaPairs *float64 `json:"haPairs,omitempty" tf:"ha_pairs,omitempty"`
 
 	// Identifier of the file system, e.g., fs-12345678
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -230,13 +239,13 @@ type OntapFileSystemObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
+	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608 for file systems with deployment_type SINGLE_AZ_1 and MULTI_AZ_1. Valid values between 2048 (1024 per ha pair) and 1048576 for file systems with deployment_type SINGLE_AZ_2.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
 	// - The filesystem storage type. defaults to SSD.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. Upto 2 subnets can be provided.
+	// A list of IDs for the subnets that the file system will be accessible from. Up to 2 subnets can be provided.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Key-value map of resource tags.
@@ -247,8 +256,11 @@ type OntapFileSystemObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096. This parameter is only supported when not using the ha_pairs parameter. Either throughput_capacity or throughput_capacity_per_ha_pair must be specified.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid value when using 1 ha_pair are 128, 256, 512, 1024, 2048, and 4096. Valid values when using 2 or more ha_pairs are 3072,6144. This parameter is only supported when specifying the ha_pairs parameter. Either throughput_capacity or throughput_capacity_per_ha_pair must be specified.
+	ThroughputCapacityPerHaPair *float64 `json:"throughputCapacityPerHaPair,omitempty" tf:"throughput_capacity_per_ha_pair,omitempty"`
 
 	// Identifier of the Virtual Private Cloud for the file system.
 	VPCID *string `json:"vpcId,omitempty" tf:"vpc_id,omitempty"`
@@ -267,7 +279,7 @@ type OntapFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	DailyAutomaticBackupStartTime *string `json:"dailyAutomaticBackupStartTime,omitempty" tf:"daily_automatic_backup_start_time,omitempty"`
 
-	// - The filesystem deployment type. Supports MULTI_AZ_1 and SINGLE_AZ_1.
+	// - The filesystem deployment type. Supports MULTI_AZ_1, SINGLE_AZ_1, and SINGLE_AZ_2.
 	// +kubebuilder:validation:Optional
 	DeploymentType *string `json:"deploymentType,omitempty" tf:"deployment_type,omitempty"`
 
@@ -282,6 +294,10 @@ type OntapFileSystemParameters struct {
 	// The ONTAP administrative password for the fsxadmin user that you can use to administer your file system using the ONTAP CLI and REST API.
 	// +kubebuilder:validation:Optional
 	FSXAdminPasswordSecretRef *v1.SecretKeySelector `json:"fsxAdminPasswordSecretRef,omitempty" tf:"-"`
+
+	// - The number of ha_pairs to deploy for the file system. Valid values are 1 through 12. Value of 2 or greater required for SINGLE_AZ_2. Only value of 1 is supported with SINGLE_AZ_1 or MULTI_AZ_1 but not required.
+	// +kubebuilder:validation:Optional
+	HaPairs *float64 `json:"haPairs,omitempty" tf:"ha_pairs,omitempty"`
 
 	// ARN for the KMS Key to encrypt the file system at rest, Defaults to an AWS managed KMS Key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
@@ -336,7 +352,7 @@ type OntapFileSystemParameters struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608.
+	// The storage capacity (GiB) of the file system. Valid values between 1024 and 196608 for file systems with deployment_type SINGLE_AZ_1 and MULTI_AZ_1. Valid values between 2048 (1024 per ha pair) and 1048576 for file systems with deployment_type SINGLE_AZ_2.
 	// +kubebuilder:validation:Optional
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
 
@@ -352,7 +368,7 @@ type OntapFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// A list of IDs for the subnets that the file system will be accessible from. Upto 2 subnets can be provided.
+	// A list of IDs for the subnets that the file system will be accessible from. Up to 2 subnets can be provided.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
@@ -364,9 +380,13 @@ type OntapFileSystemParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096.
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid values are 128, 256, 512, 1024, 2048, and 4096. This parameter is only supported when not using the ha_pairs parameter. Either throughput_capacity or throughput_capacity_per_ha_pair must be specified.
 	// +kubebuilder:validation:Optional
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
+
+	// Sets the throughput capacity (in MBps) for the file system that you're creating. Valid value when using 1 ha_pair are 128, 256, 512, 1024, 2048, and 4096. Valid values when using 2 or more ha_pairs are 3072,6144. This parameter is only supported when specifying the ha_pairs parameter. Either throughput_capacity or throughput_capacity_per_ha_pair must be specified.
+	// +kubebuilder:validation:Optional
+	ThroughputCapacityPerHaPair *float64 `json:"throughputCapacityPerHaPair,omitempty" tf:"throughput_capacity_per_ha_pair,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
@@ -410,7 +430,7 @@ type OntapFileSystem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentType) || (has(self.initProvider) && has(self.initProvider.deploymentType))",message="spec.forProvider.deploymentType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.throughputCapacity) || (has(self.initProvider) && has(self.initProvider.throughputCapacity))",message="spec.forProvider.throughputCapacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageCapacity) || (has(self.initProvider) && has(self.initProvider.storageCapacity))",message="spec.forProvider.storageCapacity is a required parameter"
 	Spec   OntapFileSystemSpec   `json:"spec"`
 	Status OntapFileSystemStatus `json:"status,omitempty"`
 }

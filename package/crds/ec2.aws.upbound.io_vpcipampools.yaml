@@ -112,6 +112,11 @@ spec:
                     description: 'Limits which AWS service the pool can be used in.
                       Only useable on public scopes. Valid Values: ec2.'
                     type: string
+                  cascade:
+                    description: Enables you to quickly delete an IPAM pool and all
+                      resources within that pool, including provisioned CIDRs, allocations,
+                      and other pools.
+                    type: boolean
                   description:
                     description: A description for the IPAM pool.
                     type: string
@@ -356,6 +361,11 @@ spec:
                     description: 'Limits which AWS service the pool can be used in.
                       Only useable on public scopes. Valid Values: ec2.'
                     type: string
+                  cascade:
+                    description: Enables you to quickly delete an IPAM pool and all
+                      resources within that pool, including provisioned CIDRs, allocations,
+                      and other pools.
+                    type: boolean
                   description:
                     description: A description for the IPAM pool.
                     type: string
@@ -761,6 +771,11 @@ spec:
                     description: 'Limits which AWS service the pool can be used in.
                       Only useable on public scopes. Valid Values: ec2.'
                     type: string
+                  cascade:
+                    description: Enables you to quickly delete an IPAM pool and all
+                      resources within that pool, including provisioned CIDRs, allocations,
+                      and other pools.
+                    type: boolean
                   description:
                     description: A description for the IPAM pool.
                     type: string

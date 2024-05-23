@@ -129,6 +129,38 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                  recordingMode:
+                    description: Recording mode - see below.
+                    items:
+                      properties:
+                        recordingFrequency:
+                          description: Default reecording frequency. CONTINUOUS or
+                            DAILY.
+                          type: string
+                        recordingModeOverride:
+                          description: Recording mode overrides. Detailed below.
+                          items:
+                            properties:
+                              description:
+                                description: A description you provide of the override.
+                                type: string
+                              recordingFrequency:
+                                description: Default reecording frequency. CONTINUOUS
+                                  or DAILY.
+                                type: string
+                              resourceTypes:
+                                description: A list that specifies the types of AWS
+                                  resources for which AWS Config excludes records
+                                  configuration changes. See relevant part of AWS
+                                  Docs for available types.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -283,6 +315,38 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  recordingMode:
+                    description: Recording mode - see below.
+                    items:
+                      properties:
+                        recordingFrequency:
+                          description: Default reecording frequency. CONTINUOUS or
+                            DAILY.
+                          type: string
+                        recordingModeOverride:
+                          description: Recording mode overrides. Detailed below.
+                          items:
+                            properties:
+                              description:
+                                description: A description you provide of the override.
+                                type: string
+                              recordingFrequency:
+                                description: Default reecording frequency. CONTINUOUS
+                                  or DAILY.
+                                type: string
+                              resourceTypes:
+                                description: A list that specifies the types of AWS
+                                  resources for which AWS Config excludes records
+                                  configuration changes. See relevant part of AWS
+                                  Docs for available types.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                       type: object
                     type: array
                   roleArn:
@@ -596,6 +660,38 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  recordingMode:
+                    description: Recording mode - see below.
+                    items:
+                      properties:
+                        recordingFrequency:
+                          description: Default reecording frequency. CONTINUOUS or
+                            DAILY.
+                          type: string
+                        recordingModeOverride:
+                          description: Recording mode overrides. Detailed below.
+                          items:
+                            properties:
+                              description:
+                                description: A description you provide of the override.
+                                type: string
+                              recordingFrequency:
+                                description: Default reecording frequency. CONTINUOUS
+                                  or DAILY.
+                                type: string
+                              resourceTypes:
+                                description: A list that specifies the types of AWS
+                                  resources for which AWS Config excludes records
+                                  configuration changes. See relevant part of AWS
+                                  Docs for available types.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                       type: object
                     type: array
                   roleArn:

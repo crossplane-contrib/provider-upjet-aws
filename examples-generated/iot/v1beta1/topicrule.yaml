@@ -39,8 +39,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: iot/v1beta1/topicrule
   labels:
-    testing.upbound.io/example-name: role
-  name: role
+    testing.upbound.io/example-name: myrole
+  name: myrole
 spec:
   forProvider:
     assumeRolePolicy: ${data.aws_iam_policy_document.assume_role.json}
@@ -53,14 +53,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: iot/v1beta1/topicrule
   labels:
-    testing.upbound.io/example-name: iam_policy_for_lambda
-  name: iam-policy-for-lambda
+    testing.upbound.io/example-name: mypolicy
+  name: mypolicy
 spec:
   forProvider:
-    policy: ${data.aws_iam_policy_document.iam_policy_for_lambda.json}
+    policy: ${data.aws_iam_policy_document.mypolicy.json}
     roleSelector:
       matchLabels:
-        testing.upbound.io/example-name: role
+        testing.upbound.io/example-name: myrole
 
 ---
 

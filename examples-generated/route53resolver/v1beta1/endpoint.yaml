@@ -18,6 +18,9 @@ spec:
         matchLabels:
           testing.upbound.io/example-name: sn2
     name: foo
+    protocols:
+    - Do53
+    - DoH
     region: us-west-1
     securityGroupIdRefs:
     - name: sg1

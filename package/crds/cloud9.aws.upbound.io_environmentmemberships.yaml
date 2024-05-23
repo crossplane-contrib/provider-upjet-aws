@@ -457,7 +457,7 @@ spec:
                       member you want to add.
                     type: string
                   userId:
-                    description: he user ID in AWS Identity and Access Management
+                    description: The user ID in AWS Identity and Access Management
                       (AWS IAM) of the environment member.
                     type: string
                 type: object

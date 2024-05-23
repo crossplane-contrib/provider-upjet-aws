@@ -115,7 +115,7 @@ type StateMachineObservation struct {
 	// The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
-	// The ARN of the state machine.
+	// The ARN of the state machine version.
 	StateMachineVersionArn *string `json:"stateMachineVersionArn,omitempty" tf:"state_machine_version_arn,omitempty"`
 
 	// The current status of the state machine. Either ACTIVE or DELETING.

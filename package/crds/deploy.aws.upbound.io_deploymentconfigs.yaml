@@ -390,6 +390,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  arn:
+                    description: The ARN of the deployment config.
+                    type: string
                   computePlatform:
                     description: The compute platform can be Server, Lambda, or ECS.
                       Default is Server.

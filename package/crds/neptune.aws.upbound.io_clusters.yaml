@@ -665,6 +665,10 @@ spec:
                     description: Specifies whether the Neptune cluster is encrypted.
                       The default is false if not specified.
                     type: boolean
+                  storageType:
+                    description: 'Storage type associated with the cluster standard/iopt1.
+                      Default: standard'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -1360,6 +1364,10 @@ spec:
                     description: Specifies whether the Neptune cluster is encrypted.
                       The default is false if not specified.
                     type: boolean
+                  storageType:
+                    description: 'Storage type associated with the cluster standard/iopt1.
+                      Default: standard'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -1785,6 +1793,10 @@ spec:
                     description: Specifies whether the Neptune cluster is encrypted.
                       The default is false if not specified.
                     type: boolean
+                  storageType:
+                    description: 'Storage type associated with the cluster standard/iopt1.
+                      Default: standard'
+                    type: string
                   tags:
                     additionalProperties:
                       type: string

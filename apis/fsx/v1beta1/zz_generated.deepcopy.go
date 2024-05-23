@@ -2228,6 +2228,11 @@ func (in *OntapFileSystemInitParameters) DeepCopyInto(out *OntapFileSystemInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.HaPairs != nil {
+		in, out := &in.HaPairs, &out.HaPairs
+		*out = new(float64)
+		**out = **in
+	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
@@ -2346,6 +2351,11 @@ func (in *OntapFileSystemInitParameters) DeepCopyInto(out *OntapFileSystemInitPa
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ThroughputCapacityPerHaPair != nil {
+		in, out := &in.ThroughputCapacityPerHaPair, &out.ThroughputCapacityPerHaPair
+		*out = new(float64)
+		**out = **in
+	}
 	if in.WeeklyMaintenanceStartTime != nil {
 		in, out := &in.WeeklyMaintenanceStartTime, &out.WeeklyMaintenanceStartTime
 		*out = new(string)
@@ -2441,6 +2451,11 @@ func (in *OntapFileSystemObservation) DeepCopyInto(out *OntapFileSystemObservati
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.HaPairs != nil {
+		in, out := &in.HaPairs, &out.HaPairs
+		*out = new(float64)
+		**out = **in
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -2553,6 +2568,11 @@ func (in *OntapFileSystemObservation) DeepCopyInto(out *OntapFileSystemObservati
 		*out = new(float64)
 		**out = **in
 	}
+	if in.ThroughputCapacityPerHaPair != nil {
+		in, out := &in.ThroughputCapacityPerHaPair, &out.ThroughputCapacityPerHaPair
+		*out = new(float64)
+		**out = **in
+	}
 	if in.VPCID != nil {
 		in, out := &in.VPCID, &out.VPCID
 		*out = new(string)
@@ -2608,6 +2628,11 @@ func (in *OntapFileSystemParameters) DeepCopyInto(out *OntapFileSystemParameters
 	if in.FSXAdminPasswordSecretRef != nil {
 		in, out := &in.FSXAdminPasswordSecretRef, &out.FSXAdminPasswordSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.HaPairs != nil {
+		in, out := &in.HaPairs, &out.HaPairs
+		*out = new(float64)
 		**out = **in
 	}
 	if in.KMSKeyID != nil {
@@ -2730,6 +2755,11 @@ func (in *OntapFileSystemParameters) DeepCopyInto(out *OntapFileSystemParameters
 	}
 	if in.ThroughputCapacity != nil {
 		in, out := &in.ThroughputCapacity, &out.ThroughputCapacity
+		*out = new(float64)
+		**out = **in
+	}
+	if in.ThroughputCapacityPerHaPair != nil {
+		in, out := &in.ThroughputCapacityPerHaPair, &out.ThroughputCapacityPerHaPair
 		*out = new(float64)
 		**out = **in
 	}

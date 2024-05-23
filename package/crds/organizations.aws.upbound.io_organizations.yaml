@@ -376,6 +376,9 @@ spec:
                   masterAccountId:
                     description: Identifier of the master account
                     type: string
+                  masterAccountName:
+                    description: Name of the master account
+                    type: string
                   nonMasterAccounts:
                     description: 'List of organization accounts excluding the master
                       account. For a list including the master account, see the accounts

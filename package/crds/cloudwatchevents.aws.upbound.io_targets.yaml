@@ -425,6 +425,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  forceDestroy:
+                    description: Used to delete managed rules created by AWS. Defaults
+                      to false.
+                    type: boolean
                   httpTarget:
                     description: Parameters used when you are using the rule to invoke
                       an API Gateway REST endpoint. Documented below. A maximum of
@@ -1126,6 +1130,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  forceDestroy:
+                    description: Used to delete managed rules created by AWS. Defaults
+                      to false.
+                    type: boolean
                   httpTarget:
                     description: Parameters used when you are using the rule to invoke
                       an API Gateway REST endpoint. Documented below. A maximum of
@@ -1833,6 +1841,10 @@ spec:
                       The name or ARN of the event bus to associate with the rule.
                       If you omit this, the default event bus is used.
                     type: string
+                  forceDestroy:
+                    description: Used to delete managed rules created by AWS. Defaults
+                      to false.
+                    type: boolean
                   httpTarget:
                     description: Parameters used when you are using the rule to invoke
                       an API Gateway REST endpoint. Documented below. A maximum of

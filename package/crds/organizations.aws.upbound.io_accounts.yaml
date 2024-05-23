@@ -400,6 +400,7 @@ spec:
                       must be present for this argument to perform drift detection.
                     type: string
                   status:
+                    description: The status of the account in the organization.
                     type: string
                   tags:
                     additionalProperties:

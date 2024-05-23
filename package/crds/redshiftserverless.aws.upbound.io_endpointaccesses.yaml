@@ -73,6 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  ownerAccount:
+                    description: The owner Amazon Web Services account for the Amazon
+                      Redshift Serverless workgroup.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -266,6 +270,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  ownerAccount:
+                    description: The owner Amazon Web Services account for the Amazon
+                      Redshift Serverless workgroup.
+                    type: string
                   subnetIdRefs:
                     description: References to Subnet in ec2 to populate subnetIds.
                     items:
@@ -626,6 +634,10 @@ spec:
                     type: string
                   id:
                     description: The Redshift Endpoint Access Name.
+                    type: string
+                  ownerAccount:
+                    description: The owner Amazon Web Services account for the Amazon
+                      Redshift Serverless workgroup.
                     type: string
                   port:
                     description: The port that Amazon Redshift Serverless listens

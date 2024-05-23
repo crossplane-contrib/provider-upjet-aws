@@ -100,9 +100,11 @@ spec:
                       and Kinesis). Defaults to false.
                     type: boolean
                   destinationConfig:
-                    description: An Amazon SQS queue or Amazon SNS topic destination
-                      for failed records. Only available for stream sources (DynamoDB
-                      and Kinesis). Detailed below.
+                    description: An Amazon SQS queue, Amazon SNS topic or Amazon S3
+                      bucket (only available for Kafka sources) destination for failed
+                      records. Only available for stream sources (DynamoDB and Kinesis)
+                      and Kafka sources (Amazon MSK and Self-managed Apache Kafka).
+                      Detailed below.
                     items:
                       properties:
                         onFailure:
@@ -348,9 +350,9 @@ spec:
                     items:
                       properties:
                         type:
-                          description: The type of this configuration.  For Self Managed
-                            Kafka you will need to supply blocks for type VPC_SUBNET
-                            and VPC_SECURITY_GROUP.
+                          description: The type of authentication protocol, VPC components,
+                            or virtual host for your event source. For valid values,
+                            refer to the AWS documentation.
                           type: string
                         uri:
                           description: The URI for this configuration.  For type VPC_SUBNET
@@ -433,9 +435,11 @@ spec:
                       and Kinesis). Defaults to false.
                     type: boolean
                   destinationConfig:
-                    description: An Amazon SQS queue or Amazon SNS topic destination
-                      for failed records. Only available for stream sources (DynamoDB
-                      and Kinesis). Detailed below.
+                    description: An Amazon SQS queue, Amazon SNS topic or Amazon S3
+                      bucket (only available for Kafka sources) destination for failed
+                      records. Only available for stream sources (DynamoDB and Kinesis)
+                      and Kafka sources (Amazon MSK and Self-managed Apache Kafka).
+                      Detailed below.
                     items:
                       properties:
                         onFailure:
@@ -677,9 +681,9 @@ spec:
                     items:
                       properties:
                         type:
-                          description: The type of this configuration.  For Self Managed
-                            Kafka you will need to supply blocks for type VPC_SUBNET
-                            and VPC_SECURITY_GROUP.
+                          description: The type of authentication protocol, VPC components,
+                            or virtual host for your event source. For valid values,
+                            refer to the AWS documentation.
                           type: string
                         uri:
                           description: The URI for this configuration.  For type VPC_SUBNET
@@ -919,9 +923,11 @@ spec:
                       and Kinesis). Defaults to false.
                     type: boolean
                   destinationConfig:
-                    description: An Amazon SQS queue or Amazon SNS topic destination
-                      for failed records. Only available for stream sources (DynamoDB
-                      and Kinesis). Detailed below.
+                    description: An Amazon SQS queue, Amazon SNS topic or Amazon S3
+                      bucket (only available for Kafka sources) destination for failed
+                      records. Only available for stream sources (DynamoDB and Kinesis)
+                      and Kafka sources (Amazon MSK and Self-managed Apache Kafka).
+                      Detailed below.
                     items:
                       properties:
                         onFailure:
@@ -1103,9 +1109,9 @@ spec:
                     items:
                       properties:
                         type:
-                          description: The type of this configuration.  For Self Managed
-                            Kafka you will need to supply blocks for type VPC_SUBNET
-                            and VPC_SECURITY_GROUP.
+                          description: The type of authentication protocol, VPC components,
+                            or virtual host for your event source. For valid values,
+                            refer to the AWS documentation.
                           type: string
                         uri:
                           description: The URI for this configuration.  For type VPC_SUBNET

@@ -124,12 +124,20 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  rotationPeriodInDays:
+                    description: Custom period of time between each rotation date.
+                      Must be a number between 90 and 2560 (inclusive).
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  xksKeyId:
+                    description: Identifies the external key that serves as key material
+                      for the KMS key in an external key store.
+                    type: string
                 required:
                 - region
                 type: object
@@ -193,12 +201,20 @@ spec:
                       key policy, not an IAM policy, an aws_iam_policy_document, in
                       the form that designates a principal, can be used.
                     type: string
+                  rotationPeriodInDays:
+                    description: Custom period of time between each rotation date.
+                      Must be a number between 90 and 2560 (inclusive).
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  xksKeyId:
+                    description: Identifies the external key that serves as key material
+                      for the KMS key in an external key store.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -427,6 +443,10 @@ spec:
                       key policy, not an IAM policy, an aws_iam_policy_document, in
                       the form that designates a principal, can be used.
                     type: string
+                  rotationPeriodInDays:
+                    description: Custom period of time between each rotation date.
+                      Must be a number between 90 and 2560 (inclusive).
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -441,6 +461,10 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  xksKeyId:
+                    description: Identifies the external key that serves as key material
+                      for the KMS key in an external key store.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

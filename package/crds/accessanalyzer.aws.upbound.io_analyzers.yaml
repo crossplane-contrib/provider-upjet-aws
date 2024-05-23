@@ -73,6 +73,25 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  configuration:
+                    description: A block that specifies the configuration of the analyzer.
+                      Documented below
+                    items:
+                      properties:
+                        unusedAccess:
+                          description: A block that specifies the configuration of
+                            an unused access analyzer for an AWS organization or account.
+                            Documented below
+                          items:
+                            properties:
+                              unusedAccessAge:
+                                description: The specified access age in days for
+                                  which to generate findings for unused access.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -84,8 +103,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of Analyzer. Valid values are ACCOUNT or ORGANIZATION.
-                      Defaults to ACCOUNT.
+                    description: Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION,
+                      ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults
+                      to ACCOUNT.
                     type: string
                 required:
                 - region
@@ -103,6 +123,25 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  configuration:
+                    description: A block that specifies the configuration of the analyzer.
+                      Documented below
+                    items:
+                      properties:
+                        unusedAccess:
+                          description: A block that specifies the configuration of
+                            an unused access analyzer for an AWS organization or account.
+                            Documented below
+                          items:
+                            properties:
+                              unusedAccessAge:
+                                description: The specified access age in days for
+                                  which to generate findings for unused access.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -110,8 +149,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of Analyzer. Valid values are ACCOUNT or ORGANIZATION.
-                      Defaults to ACCOUNT.
+                    description: Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION,
+                      ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults
+                      to ACCOUNT.
                     type: string
                 type: object
               managementPolicies:
@@ -289,6 +329,25 @@ spec:
                   arn:
                     description: ARN of the Analyzer.
                     type: string
+                  configuration:
+                    description: A block that specifies the configuration of the analyzer.
+                      Documented below
+                    items:
+                      properties:
+                        unusedAccess:
+                          description: A block that specifies the configuration of
+                            an unused access analyzer for an AWS organization or account.
+                            Documented below
+                          items:
+                            properties:
+                              unusedAccessAge:
+                                description: The specified access age in days for
+                                  which to generate findings for unused access.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   id:
                     description: Analyzer name.
                     type: string
@@ -306,8 +365,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   type:
-                    description: Type of Analyzer. Valid values are ACCOUNT or ORGANIZATION.
-                      Defaults to ACCOUNT.
+                    description: Type of Analyzer. Valid values are ACCOUNT, ORGANIZATION,
+                      ACCOUNT_UNUSED_ACCESS , ORGANIZATION_UNUSED_ACCESS. Defaults
+                      to ACCOUNT.
                     type: string
                 type: object
               conditions:

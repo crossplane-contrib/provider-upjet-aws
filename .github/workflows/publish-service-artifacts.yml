@@ -42,7 +42,7 @@ jobs:
       regorg: ${{ github.event.inputs.regorg }}
       branch_name: ${{ github.event.inputs.branch_name }}
       version: ${{ github.event.inputs.version }}
-      go-version: 1.21
+      go-version: 1.22
       cleanup-disk: true
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR_RC }}

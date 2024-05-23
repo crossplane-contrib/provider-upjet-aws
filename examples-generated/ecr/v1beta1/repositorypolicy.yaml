@@ -4,15 +4,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ecr/v1beta1/repositorypolicy
   labels:
-    testing.upbound.io/example-name: foopolicy
-  name: foopolicy
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    policy: ${data.aws_iam_policy_document.foopolicy.json}
+    policy: ${data.aws_iam_policy_document.example.json}
     region: us-west-1
     repositorySelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -22,8 +22,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ecr/v1beta1/repositorypolicy
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     region: us-west-1

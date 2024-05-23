@@ -13,6 +13,35 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessConfigInitParameters struct {
+
+	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
+}
+
+type AccessConfigObservation struct {
+
+	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
+}
+
+type AccessConfigParameters struct {
+
+	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
+	// +kubebuilder:validation:Optional
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	// +kubebuilder:validation:Optional
+	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
+}
+
 type CertificateAuthorityInitParameters struct {
 }
 
@@ -26,6 +55,9 @@ type CertificateAuthorityParameters struct {
 }
 
 type ClusterInitParameters struct {
+
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	AccessConfig []AccessConfigInitParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +listType=set
@@ -67,6 +99,9 @@ type ClusterInitParameters struct {
 }
 
 type ClusterObservation struct {
+
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	AccessConfig []AccessConfigObservation `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// ARN of the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -129,6 +164,10 @@ type ClusterObservation struct {
 }
 
 type ClusterParameters struct {
+
+	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
+	// +kubebuilder:validation:Optional
+	AccessConfig []AccessConfigParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +kubebuilder:validation:Optional

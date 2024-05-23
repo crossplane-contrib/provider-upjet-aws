@@ -439,6 +439,12 @@ spec:
                                                     a single file, or leave them unaggregated.
                                                     Valid values are None and SingleFile.
                                                   type: string
+                                                targetFileSize:
+                                                  description: The desired file size,
+                                                    in MB, for each output file that
+                                                    Amazon AppFlow writes to the flow
+                                                    destination. Integer value.
+                                                  type: number
                                               type: object
                                             type: array
                                           fileType:
@@ -1700,6 +1706,12 @@ spec:
                                                     a single file, or leave them unaggregated.
                                                     Valid values are None and SingleFile.
                                                   type: string
+                                                targetFileSize:
+                                                  description: The desired file size,
+                                                    in MB, for each output file that
+                                                    Amazon AppFlow writes to the flow
+                                                    destination. Integer value.
+                                                  type: number
                                               type: object
                                             type: array
                                           fileType:
@@ -3058,6 +3070,12 @@ spec:
                                                     a single file, or leave them unaggregated.
                                                     Valid values are None and SingleFile.
                                                   type: string
+                                                targetFileSize:
+                                                  description: The desired file size,
+                                                    in MB, for each output file that
+                                                    Amazon AppFlow writes to the flow
+                                                    destination. Integer value.
+                                                  type: number
                                               type: object
                                             type: array
                                           fileType:
@@ -3379,6 +3397,9 @@ spec:
                           type: array
                       type: object
                     type: array
+                  flowStatus:
+                    description: The current status of the flow.
+                    type: string
                   id:
                     type: string
                   kmsArn:

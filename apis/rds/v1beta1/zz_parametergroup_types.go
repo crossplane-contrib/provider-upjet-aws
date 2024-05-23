@@ -21,7 +21,7 @@ type ParameterGroupInitParameters struct {
 	// The family of the DB parameter group.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
+	// The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
 	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Key-value map of resource tags.
@@ -43,7 +43,7 @@ type ParameterGroupObservation struct {
 	// The db parameter group name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
+	// The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Key-value map of resource tags.
@@ -65,7 +65,7 @@ type ParameterGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// A list of DB parameters to apply. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
+	// The DB parameters to apply. See parameter Block below for more details. Note that parameters may differ from a family to an other. Full list of all parameters can be discovered via aws rds describe-db-parameters after initial creation of the group.
 	// +kubebuilder:validation:Optional
 	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
@@ -87,7 +87,7 @@ type ParameterInitParameters struct {
 	// specify "pending-reboot" here.
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB parameter group.
+	// The name of the DB parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the DB parameter.
@@ -101,7 +101,7 @@ type ParameterObservation struct {
 	// specify "pending-reboot" here.
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB parameter group.
+	// The name of the DB parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the DB parameter.
@@ -116,7 +116,7 @@ type ParameterParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplyMethod *string `json:"applyMethod,omitempty" tf:"apply_method,omitempty"`
 
-	// The name of the DB parameter group.
+	// The name of the DB parameter.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 

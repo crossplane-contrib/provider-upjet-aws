@@ -81,10 +81,11 @@ type InstanceInitParameters struct {
 	// The identifier of the CA certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// The character set name to use for DB
-	// encoding in Oracle and Microsoft SQL instances (collation). This can't be changed. See Oracle Character Sets
-	// Supported in Amazon RDS
-	// or Server-Level Collation for Microsoft SQL Server for more information.
+	// The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
+	// This can't be changed.
+	// See Oracle Character Sets Supported in Amazon RDS or
+	// Server-Level Collation for Microsoft SQL Server for more information.
+	// Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
 	CharacterSetName *string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty"`
 
 	// –  Copy all Instance tags to snapshots. Default is false.
@@ -117,19 +118,35 @@ type InstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
+	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
+	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
+
 	// Specifies whether to remove automated backups immediately after the DB instance is deleted. Default is true.
 	DeleteAutomatedBackups *bool `json:"deleteAutomatedBackups,omitempty" tf:"delete_automated_backups,omitempty"`
 
 	// If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// The ID of the Directory Service Active Directory domain to create the instance in.
+	// The ID of the Directory Service Active Directory domain to create the instance in. Conflicts with domain_fqdn, domain_ou, domain_auth_secret_arn and a domain_dns_ips.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The name of the IAM role to be used when making API calls to the Directory Service.
+	// The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain. Conflicts with domain and domain_iam_role_name.
+	DomainAuthSecretArn *string `json:"domainAuthSecretArn,omitempty" tf:"domain_auth_secret_arn,omitempty"`
+
+	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
+	// +listType=set
+	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
+
+	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+	DomainFqdn *string `json:"domainFqdn,omitempty" tf:"domain_fqdn,omitempty"`
+
+	// The name of the IAM role to be used when making API calls to the Directory Service. Conflicts with domain_fqdn, domain_ou, domain_auth_secret_arn and a domain_dns_ips.
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
 
-	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine). MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace.
+	// The self managed Active Directory organizational unit for your DB instance to join. Conflicts with domain and domain_iam_role_name.
+	DomainOu *string `json:"domainOu,omitempty" tf:"domain_ou,omitempty"`
+
+	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. For supported values, see the EnableCloudwatchLogsExports.member.N parameter in API action CreateDBInstance.
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -411,10 +428,11 @@ type InstanceObservation struct {
 	// The identifier of the CA certificate for the DB instance.
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// The character set name to use for DB
-	// encoding in Oracle and Microsoft SQL instances (collation). This can't be changed. See Oracle Character Sets
-	// Supported in Amazon RDS
-	// or Server-Level Collation for Microsoft SQL Server for more information.
+	// The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
+	// This can't be changed.
+	// See Oracle Character Sets Supported in Amazon RDS or
+	// Server-Level Collation for Microsoft SQL Server for more information.
+	// Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
 	CharacterSetName *string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty"`
 
 	// –  Copy all Instance tags to snapshots. Default is false.
@@ -438,19 +456,35 @@ type InstanceObservation struct {
 	// for additional read replica constraints.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
+	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
+	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
+
 	// Specifies whether to remove automated backups immediately after the DB instance is deleted. Default is true.
 	DeleteAutomatedBackups *bool `json:"deleteAutomatedBackups,omitempty" tf:"delete_automated_backups,omitempty"`
 
 	// If the DB instance should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// The ID of the Directory Service Active Directory domain to create the instance in.
+	// The ID of the Directory Service Active Directory domain to create the instance in. Conflicts with domain_fqdn, domain_ou, domain_auth_secret_arn and a domain_dns_ips.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The name of the IAM role to be used when making API calls to the Directory Service.
+	// The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain. Conflicts with domain and domain_iam_role_name.
+	DomainAuthSecretArn *string `json:"domainAuthSecretArn,omitempty" tf:"domain_auth_secret_arn,omitempty"`
+
+	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
+	// +listType=set
+	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
+
+	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+	DomainFqdn *string `json:"domainFqdn,omitempty" tf:"domain_fqdn,omitempty"`
+
+	// The name of the IAM role to be used when making API calls to the Directory Service. Conflicts with domain_fqdn, domain_ou, domain_auth_secret_arn and a domain_dns_ips.
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
 
-	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine). MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace.
+	// The self managed Active Directory organizational unit for your DB instance to join. Conflicts with domain and domain_iam_role_name.
+	DomainOu *string `json:"domainOu,omitempty" tf:"domain_ou,omitempty"`
+
+	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. For supported values, see the EnableCloudwatchLogsExports.member.N parameter in API action CreateDBInstance.
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`
 
@@ -717,10 +751,11 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
-	// The character set name to use for DB
-	// encoding in Oracle and Microsoft SQL instances (collation). This can't be changed. See Oracle Character Sets
-	// Supported in Amazon RDS
-	// or Server-Level Collation for Microsoft SQL Server for more information.
+	// The character set name to use for DB encoding in Oracle and Microsoft SQL instances (collation).
+	// This can't be changed.
+	// See Oracle Character Sets Supported in Amazon RDS or
+	// Server-Level Collation for Microsoft SQL Server for more information.
+	// Cannot be set  with replicate_source_db, restore_to_point_in_time, s3_import, or snapshot_identifier.
 	// +kubebuilder:validation:Optional
 	CharacterSetName *string `json:"characterSetName,omitempty" tf:"character_set_name,omitempty"`
 
@@ -759,6 +794,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
+	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
+	// +kubebuilder:validation:Optional
+	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
+
 	// Specifies whether to remove automated backups immediately after the DB instance is deleted. Default is true.
 	// +kubebuilder:validation:Optional
 	DeleteAutomatedBackups *bool `json:"deleteAutomatedBackups,omitempty" tf:"delete_automated_backups,omitempty"`
@@ -767,15 +806,32 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// The ID of the Directory Service Active Directory domain to create the instance in.
+	// The ID of the Directory Service Active Directory domain to create the instance in. Conflicts with domain_fqdn, domain_ou, domain_auth_secret_arn and a domain_dns_ips.
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The name of the IAM role to be used when making API calls to the Directory Service.
+	// The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain. Conflicts with domain and domain_iam_role_name.
+	// +kubebuilder:validation:Optional
+	DomainAuthSecretArn *string `json:"domainAuthSecretArn,omitempty" tf:"domain_auth_secret_arn,omitempty"`
+
+	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
+
+	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+	// +kubebuilder:validation:Optional
+	DomainFqdn *string `json:"domainFqdn,omitempty" tf:"domain_fqdn,omitempty"`
+
+	// The name of the IAM role to be used when making API calls to the Directory Service. Conflicts with domain_fqdn, domain_ou, domain_auth_secret_arn and a domain_dns_ips.
 	// +kubebuilder:validation:Optional
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
 
-	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine). MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace.
+	// The self managed Active Directory organizational unit for your DB instance to join. Conflicts with domain and domain_iam_role_name.
+	// +kubebuilder:validation:Optional
+	DomainOu *string `json:"domainOu,omitempty" tf:"domain_ou,omitempty"`
+
+	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. For supported values, see the EnableCloudwatchLogsExports.member.N parameter in API action CreateDBInstance.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnabledCloudwatchLogsExports []*string `json:"enabledCloudwatchLogsExports,omitempty" tf:"enabled_cloudwatch_logs_exports,omitempty"`

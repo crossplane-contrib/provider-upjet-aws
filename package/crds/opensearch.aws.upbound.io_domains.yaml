@@ -184,6 +184,11 @@ spec:
                             settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK
                             or NO_ROLLBACK.'
                           type: string
+                        useOffPeakWindow:
+                          description: Whether to schedule Auto-Tune optimizations
+                            that require blue/green deployments during the domain's
+                            configured daily off-peak window. Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   clusterConfig:
@@ -221,6 +226,9 @@ spec:
                           description: Instance type of data nodes in the cluster.
                           type: string
                         multiAzWithStandbyEnabled:
+                          description: Whether a multi-AZ domain is turned on with
+                            a standby AZ. For more information, see Configuring a
+                            multi-AZ domain in Amazon OpenSearch Service.
                           type: boolean
                         warmCount:
                           description: Number of warm nodes in the cluster. Valid
@@ -298,9 +306,9 @@ spec:
                             true.
                           type: boolean
                         tlsSecurityPolicy:
-                          description: 'Name of the TLS security policy that needs
-                            to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07
-                            and Policy-Min-TLS-1-2-2019-07.'
+                          description: Name of the TLS security policy that needs
+                            to be applied to the HTTPS endpoint. For valid values,
+                            refer to the AWS documentation.
                           type: string
                       type: object
                     type: array
@@ -665,6 +673,11 @@ spec:
                             settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK
                             or NO_ROLLBACK.'
                           type: string
+                        useOffPeakWindow:
+                          description: Whether to schedule Auto-Tune optimizations
+                            that require blue/green deployments during the domain's
+                            configured daily off-peak window. Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   clusterConfig:
@@ -702,6 +715,9 @@ spec:
                           description: Instance type of data nodes in the cluster.
                           type: string
                         multiAzWithStandbyEnabled:
+                          description: Whether a multi-AZ domain is turned on with
+                            a standby AZ. For more information, see Configuring a
+                            multi-AZ domain in Amazon OpenSearch Service.
                           type: boolean
                         warmCount:
                           description: Number of warm nodes in the cluster. Valid
@@ -779,9 +795,9 @@ spec:
                             true.
                           type: boolean
                         tlsSecurityPolicy:
-                          description: 'Name of the TLS security policy that needs
-                            to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07
-                            and Policy-Min-TLS-1-2-2019-07.'
+                          description: Name of the TLS security policy that needs
+                            to be applied to the HTTPS endpoint. For valid values,
+                            refer to the AWS documentation.
                           type: string
                       type: object
                     type: array
@@ -1310,6 +1326,11 @@ spec:
                             settings when disabling Auto-Tune. Valid values: DEFAULT_ROLLBACK
                             or NO_ROLLBACK.'
                           type: string
+                        useOffPeakWindow:
+                          description: Whether to schedule Auto-Tune optimizations
+                            that require blue/green deployments during the domain's
+                            configured daily off-peak window. Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   clusterConfig:
@@ -1347,6 +1368,9 @@ spec:
                           description: Instance type of data nodes in the cluster.
                           type: string
                         multiAzWithStandbyEnabled:
+                          description: Whether a multi-AZ domain is turned on with
+                            a standby AZ. For more information, see Configuring a
+                            multi-AZ domain in Amazon OpenSearch Service.
                           type: boolean
                         warmCount:
                           description: Number of warm nodes in the cluster. Valid
@@ -1428,9 +1452,9 @@ spec:
                             true.
                           type: boolean
                         tlsSecurityPolicy:
-                          description: 'Name of the TLS security policy that needs
-                            to be applied to the HTTPS endpoint. Valid values:  Policy-Min-TLS-1-0-2019-07
-                            and Policy-Min-TLS-1-2-2019-07.'
+                          description: Name of the TLS security policy that needs
+                            to be applied to the HTTPS endpoint. For valid values,
+                            refer to the AWS documentation.
                           type: string
                       type: object
                     type: array

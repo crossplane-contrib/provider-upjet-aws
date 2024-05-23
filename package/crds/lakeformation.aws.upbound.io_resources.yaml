@@ -74,15 +74,18 @@ spec:
               forProvider:
                 properties:
                   arn:
-                    description: –  Amazon Resource Name (ARN) of the resource, an
-                      S3 path.
+                    description: –  Amazon Resource Name (ARN) of the resource.
                     type: string
+                  hybridAccessEnabled:
+                    description: Flag to enable AWS LakeFormation hybrid access permission
+                      mode.
+                    type: boolean
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
                   roleArn:
-                    description: linked role must exist and is used.
+                    description: –  Role that has read/write access to the resource.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -158,6 +161,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  useServiceLinkedRole:
+                    description: Designates an AWS Identity and Access Management
+                      (IAM) service-linked role by registering this role with the
+                      Data Catalog.
+                    type: boolean
+                  withFederation:
+                    type: boolean
                 required:
                 - region
                 type: object
@@ -175,11 +185,14 @@ spec:
                   autoscaler.
                 properties:
                   arn:
-                    description: –  Amazon Resource Name (ARN) of the resource, an
-                      S3 path.
+                    description: –  Amazon Resource Name (ARN) of the resource.
                     type: string
+                  hybridAccessEnabled:
+                    description: Flag to enable AWS LakeFormation hybrid access permission
+                      mode.
+                    type: boolean
                   roleArn:
-                    description: linked role must exist and is used.
+                    description: –  Role that has read/write access to the resource.
                     type: string
                   roleArnRef:
                     description: Reference to a Role in iam to populate roleArn.
@@ -255,6 +268,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  useServiceLinkedRole:
+                    description: Designates an AWS Identity and Access Management
+                      (IAM) service-linked role by registering this role with the
+                      Data Catalog.
+                    type: boolean
+                  withFederation:
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -434,18 +454,28 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: –  Amazon Resource Name (ARN) of the resource, an
-                      S3 path.
+                    description: –  Amazon Resource Name (ARN) of the resource.
                     type: string
+                  hybridAccessEnabled:
+                    description: Flag to enable AWS LakeFormation hybrid access permission
+                      mode.
+                    type: boolean
                   id:
                     type: string
                   lastModified:
-                    description: The date and time the resource was last modified
-                      in RFC 3339 format.
+                    description: Date and time the resource was last modified in RFC
+                      3339 format.
                     type: string
                   roleArn:
-                    description: linked role must exist and is used.
+                    description: –  Role that has read/write access to the resource.
                     type: string
+                  useServiceLinkedRole:
+                    description: Designates an AWS Identity and Access Management
+                      (IAM) service-linked role by registering this role with the
+                      Data Catalog.
+                    type: boolean
+                  withFederation:
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

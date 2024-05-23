@@ -73,6 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  credentialArn:
+                    description: ARN of the Secret which will be used to authenticate
+                      against the registry.
+                    type: string
                   ecrRepositoryPrefix:
                     description: The repository name prefix to use when caching images
                       from the source registry.
@@ -101,6 +105,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  credentialArn:
+                    description: ARN of the Secret which will be used to authenticate
+                      against the registry.
+                    type: string
                   ecrRepositoryPrefix:
                     description: The repository name prefix to use when caching images
                       from the source registry.
@@ -292,6 +300,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  credentialArn:
+                    description: ARN of the Secret which will be used to authenticate
+                      against the registry.
+                    type: string
                   ecrRepositoryPrefix:
                     description: The repository name prefix to use when caching images
                       from the source registry.

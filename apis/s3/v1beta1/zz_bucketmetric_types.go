@@ -15,6 +15,19 @@ import (
 
 type BucketMetricFilterInitParameters struct {
 
+	// S3 Access Point ARN for filtering (singular).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	AccessPoint *string `json:"accessPoint,omitempty" tf:"access_point,omitempty"`
+
+	// Reference to a AccessPoint in s3control to populate accessPoint.
+	// +kubebuilder:validation:Optional
+	AccessPointRef *v1.Reference `json:"accessPointRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPoint.
+	// +kubebuilder:validation:Optional
+	AccessPointSelector *v1.Selector `json:"accessPointSelector,omitempty" tf:"-"`
+
 	// Object prefix for filtering (singular).
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -25,6 +38,9 @@ type BucketMetricFilterInitParameters struct {
 
 type BucketMetricFilterObservation struct {
 
+	// S3 Access Point ARN for filtering (singular).
+	AccessPoint *string `json:"accessPoint,omitempty" tf:"access_point,omitempty"`
+
 	// Object prefix for filtering (singular).
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -34,6 +50,20 @@ type BucketMetricFilterObservation struct {
 }
 
 type BucketMetricFilterParameters struct {
+
+	// S3 Access Point ARN for filtering (singular).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3control/v1beta1.AccessPoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	AccessPoint *string `json:"accessPoint,omitempty" tf:"access_point,omitempty"`
+
+	// Reference to a AccessPoint in s3control to populate accessPoint.
+	// +kubebuilder:validation:Optional
+	AccessPointRef *v1.Reference `json:"accessPointRef,omitempty" tf:"-"`
+
+	// Selector for a AccessPoint in s3control to populate accessPoint.
+	// +kubebuilder:validation:Optional
+	AccessPointSelector *v1.Selector `json:"accessPointSelector,omitempty" tf:"-"`
 
 	// Object prefix for filtering (singular).
 	// +kubebuilder:validation:Optional

@@ -135,7 +135,7 @@ type ApplicationInitParameters struct {
 	// Whether to force stop an unresponsive Flink-based application.
 	ForceStop *bool `json:"forceStop,omitempty" tf:"force_stop,omitempty"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18.
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 
 	// The ARN of the IAM role used by the application to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources.
@@ -185,7 +185,7 @@ type ApplicationObservation struct {
 	// The current timestamp when the application was last updated.
 	LastUpdateTimestamp *string `json:"lastUpdateTimestamp,omitempty" tf:"last_update_timestamp,omitempty"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18.
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 
 	// The ARN of the IAM role used by the application to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources.
@@ -232,7 +232,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18.
 	// +kubebuilder:validation:Optional
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 

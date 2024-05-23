@@ -165,7 +165,8 @@ spec:
                         type: object
                     type: object
                   sourceIds:
-                    description: Ids of sources to listen to.
+                    description: Ids of sources to listen to. If you don't specify
+                      a value, notifications are provided for all sources.
                     items:
                       type: string
                     type: array
@@ -284,7 +285,8 @@ spec:
                         type: object
                     type: object
                   sourceIds:
-                    description: Ids of sources to listen to.
+                    description: Ids of sources to listen to. If you don't specify
+                      a value, notifications are provided for all sources.
                     items:
                       type: string
                     type: array
@@ -472,10 +474,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.eventCategories)
                 || (has(self.initProvider) && has(self.initProvider.eventCategories))'
-            - message: spec.forProvider.sourceIds is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceIds)
-                || (has(self.initProvider) && has(self.initProvider.sourceIds))'
             - message: spec.forProvider.sourceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceType)
@@ -504,7 +502,8 @@ spec:
                     description: SNS topic arn to send events on.
                     type: string
                   sourceIds:
-                    description: Ids of sources to listen to.
+                    description: Ids of sources to listen to. If you don't specify
+                      a value, notifications are provided for all sources.
                     items:
                       type: string
                     type: array

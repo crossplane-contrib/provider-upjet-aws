@@ -15,33 +15,33 @@ import (
 
 type AuthenticationModeInitParameters struct {
 
-	// Indicates whether the user requires a password to authenticate. Must be set to password.
+	// Specifies the authentication type. Valid values are: password or iam.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AuthenticationModeObservation struct {
 
-	// The number of passwords belonging to the user.
+	// Number of passwords belonging to the user if type is set to password.
 	PasswordCount *float64 `json:"passwordCount,omitempty" tf:"password_count,omitempty"`
 
-	// Indicates whether the user requires a password to authenticate. Must be set to password.
+	// Specifies the authentication type. Valid values are: password or iam.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AuthenticationModeParameters struct {
 
-	// The set of passwords used for authentication. You can create up to two passwords for each user.
-	// +kubebuilder:validation:Required
-	PasswordsSecretRef []v1.SecretKeySelector `json:"passwordsSecretRef" tf:"-"`
+	// Set of passwords used for authentication if type is set to password. You can create up to two passwords for each user.
+	// +kubebuilder:validation:Optional
+	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
-	// Indicates whether the user requires a password to authenticate. Must be set to password.
+	// Specifies the authentication type. Valid values are: password or iam.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type UserInitParameters struct {
 
-	// The access permissions string used for this user.
+	// Access permissions string used for this user.
 	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
 
 	// Denotes the user's authentication properties. Detailed below.
@@ -54,10 +54,10 @@ type UserInitParameters struct {
 
 type UserObservation struct {
 
-	// The access permissions string used for this user.
+	// Access permissions string used for this user.
 	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
 
-	// The ARN of the user.
+	// ARN of the user.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Denotes the user's authentication properties. Detailed below.
@@ -66,7 +66,7 @@ type UserObservation struct {
 	// Same as user_name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The minimum engine version supported for the user.
+	// Minimum engine version supported for the user.
 	MinimumEngineVersion *string `json:"minimumEngineVersion,omitempty" tf:"minimum_engine_version,omitempty"`
 
 	// Key-value map of resource tags.
@@ -80,7 +80,7 @@ type UserObservation struct {
 
 type UserParameters struct {
 
-	// The access permissions string used for this user.
+	// Access permissions string used for this user.
 	// +kubebuilder:validation:Optional
 	AccessString *string `json:"accessString,omitempty" tf:"access_string,omitempty"`
 

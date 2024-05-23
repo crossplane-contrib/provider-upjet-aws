@@ -76,12 +76,11 @@ spec:
                     description: Description of the IAM policy.
                     type: string
                   path:
-                    description: |-
-                      Path in which to create the policy.
-                      See IAM Identifiers for more information.
+                    description: Path in which to create the policy. See IAM Identifiers
+                      for more information.
                     type: string
                   policy:
-                    description: The policy document. This is a JSON formatted string
+                    description: Policy document. This is a JSON formatted string
                     type: string
                   tags:
                     additionalProperties:
@@ -107,12 +106,11 @@ spec:
                     description: Description of the IAM policy.
                     type: string
                   path:
-                    description: |-
-                      Path in which to create the policy.
-                      See IAM Identifiers for more information.
+                    description: Path in which to create the policy. See IAM Identifiers
+                      for more information.
                     type: string
                   policy:
-                    description: The policy document. This is a JSON formatted string
+                    description: Policy document. This is a JSON formatted string
                     type: string
                   tags:
                     additionalProperties:
@@ -299,24 +297,27 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN assigned by AWS to this policy.
+                    description: ARN assigned by AWS to this policy.
                     type: string
+                  attachmentCount:
+                    description: Number of entities (users, groups, and roles) that
+                      the policy is attached to.
+                    type: number
                   description:
                     description: Description of the IAM policy.
                     type: string
                   id:
-                    description: The ARN assigned by AWS to this policy.
+                    description: ARN assigned by AWS to this policy.
                     type: string
                   path:
-                    description: |-
-                      Path in which to create the policy.
-                      See IAM Identifiers for more information.
+                    description: Path in which to create the policy. See IAM Identifiers
+                      for more information.
                     type: string
                   policy:
-                    description: The policy document. This is a JSON formatted string
+                    description: Policy document. This is a JSON formatted string
                     type: string
                   policyId:
-                    description: The policy's ID.
+                    description: Policy's ID.
                     type: string
                   tags:
                     additionalProperties:

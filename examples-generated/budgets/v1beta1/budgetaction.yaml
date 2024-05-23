@@ -31,6 +31,9 @@ spec:
     subscriber:
     - address: example@example.example
       subscriptionType: EMAIL
+    tags:
+      Tag1: Value1
+      Tag2: Value2
 
 ---
 

@@ -79,8 +79,8 @@ spec:
                     type: boolean
                   peerOwnerId:
                     description: |-
-                      The AWS account ID of the owner of the peer VPC.
-                      Defaults to the account ID the AWS provider is currently connected to.
+                      The AWS account ID of the target peer VPC.
+                      Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
                     type: string
                   peerRegion:
                     description: |-
@@ -88,8 +88,8 @@ spec:
                       and use the aws_vpc_peering_connection_accepter to manage the accepter side.
                     type: string
                   peerVpcId:
-                    description: The ID of the VPC with which you are creating the
-                      VPC Peering Connection.
+                    description: The ID of the target VPC with which you are creating
+                      the VPC Peering Connection.
                     type: string
                   peerVpcIdRef:
                     description: Reference to a VPC in ec2 to populate peerVpcId.
@@ -274,8 +274,8 @@ spec:
                     type: boolean
                   peerOwnerId:
                     description: |-
-                      The AWS account ID of the owner of the peer VPC.
-                      Defaults to the account ID the AWS provider is currently connected to.
+                      The AWS account ID of the target peer VPC.
+                      Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
                     type: string
                   peerRegion:
                     description: |-
@@ -283,8 +283,8 @@ spec:
                       and use the aws_vpc_peering_connection_accepter to manage the accepter side.
                     type: string
                   peerVpcId:
-                    description: The ID of the VPC with which you are creating the
-                      VPC Peering Connection.
+                    description: The ID of the target VPC with which you are creating
+                      the VPC Peering Connection.
                     type: string
                   peerVpcIdRef:
                     description: Reference to a VPC in ec2 to populate peerVpcId.
@@ -642,8 +642,8 @@ spec:
                     type: string
                   peerOwnerId:
                     description: |-
-                      The AWS account ID of the owner of the peer VPC.
-                      Defaults to the account ID the AWS provider is currently connected to.
+                      The AWS account ID of the target peer VPC.
+                      Defaults to the account ID the AWS provider is currently connected to, so must be managed if connecting cross-account.
                     type: string
                   peerRegion:
                     description: |-
@@ -651,8 +651,8 @@ spec:
                       and use the aws_vpc_peering_connection_accepter to manage the accepter side.
                     type: string
                   peerVpcId:
-                    description: The ID of the VPC with which you are creating the
-                      VPC Peering Connection.
+                    description: The ID of the target VPC with which you are creating
+                      the VPC Peering Connection.
                     type: string
                   requester:
                     description: |-

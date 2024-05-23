@@ -171,9 +171,20 @@ spec:
                   name:
                     description: The friendly name of the Route 53 Resolver endpoint.
                     type: string
+                  protocols:
+                    description: 'The protocols you want to use for the Route 53 Resolver
+                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
+                    type: string
+                  resolverEndpointType:
+                    description: 'The Route 53 Resolver endpoint IP address type.
+                      Valid values: IPV4, IPV6, DUALSTACK.'
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -379,6 +390,17 @@ spec:
                     type: array
                   name:
                     description: The friendly name of the Route 53 Resolver endpoint.
+                    type: string
+                  protocols:
+                    description: 'The protocols you want to use for the Route 53 Resolver
+                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  resolverEndpointType:
+                    description: 'The Route 53 Resolver endpoint IP address type.
+                      Valid values: IPV4, IPV6, DUALSTACK.'
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -689,6 +711,17 @@ spec:
                     type: array
                   name:
                     description: The friendly name of the Route 53 Resolver endpoint.
+                    type: string
+                  protocols:
+                    description: 'The protocols you want to use for the Route 53 Resolver
+                      endpoint. Valid values: DoH, Do53, DoH-FIPS.'
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  resolverEndpointType:
+                    description: 'The Route 53 Resolver endpoint IP address type.
+                      Valid values: IPV4, IPV6, DUALSTACK.'
                     type: string
                   securityGroupIds:
                     description: The ID of one or more security groups that you want

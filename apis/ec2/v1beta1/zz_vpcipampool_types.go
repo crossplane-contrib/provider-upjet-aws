@@ -38,6 +38,9 @@ type VPCIpamPoolInitParameters struct {
 	// Limits which AWS service the pool can be used in. Only useable on public scopes. Valid Values: ec2.
 	AwsService *string `json:"awsService,omitempty" tf:"aws_service,omitempty"`
 
+	// Enables you to quickly delete an IPAM pool and all resources within that pool, including provisioned CIDRs, allocations, and other pools.
+	Cascade *bool `json:"cascade,omitempty" tf:"cascade,omitempty"`
+
 	// A description for the IPAM pool.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -108,6 +111,9 @@ type VPCIpamPoolObservation struct {
 	// Limits which AWS service the pool can be used in. Only useable on public scopes. Valid Values: ec2.
 	AwsService *string `json:"awsService,omitempty" tf:"aws_service,omitempty"`
 
+	// Enables you to quickly delete an IPAM pool and all resources within that pool, including provisioned CIDRs, allocations, and other pools.
+	Cascade *bool `json:"cascade,omitempty" tf:"cascade,omitempty"`
+
 	// A description for the IPAM pool.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -176,6 +182,10 @@ type VPCIpamPoolParameters struct {
 	// Limits which AWS service the pool can be used in. Only useable on public scopes. Valid Values: ec2.
 	// +kubebuilder:validation:Optional
 	AwsService *string `json:"awsService,omitempty" tf:"aws_service,omitempty"`
+
+	// Enables you to quickly delete an IPAM pool and all resources within that pool, including provisioned CIDRs, allocations, and other pools.
+	// +kubebuilder:validation:Optional
+	Cascade *bool `json:"cascade,omitempty" tf:"cascade,omitempty"`
 
 	// A description for the IPAM pool.
 	// +kubebuilder:validation:Optional

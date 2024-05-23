@@ -92,7 +92,7 @@ type FlowLogInitParameters struct {
 	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
-	// The fields to include in the flow log record, in the order in which they should appear.
+	// The fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
 	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
@@ -168,7 +168,7 @@ type FlowLogObservation struct {
 	// The type of the logging destination. Valid values: cloud-watch-logs, s3, kinesis-data-firehose. Default: cloud-watch-logs.
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
-	// The fields to include in the flow log record, in the order in which they should appear.
+	// The fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 
 	// Deprecated: Use log_destination instead. The name of the CloudWatch log group. Either log_group_name or log_destination must be set.
@@ -250,7 +250,7 @@ type FlowLogParameters struct {
 	// +kubebuilder:validation:Optional
 	LogDestinationType *string `json:"logDestinationType,omitempty" tf:"log_destination_type,omitempty"`
 
-	// The fields to include in the flow log record, in the order in which they should appear.
+	// The fields to include in the flow log record. Accepted format example: "$${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport}".
 	// +kubebuilder:validation:Optional
 	LogFormat *string `json:"logFormat,omitempty" tf:"log_format,omitempty"`
 

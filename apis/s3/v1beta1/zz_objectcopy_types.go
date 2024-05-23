@@ -189,6 +189,9 @@ type ObjectCopyObservation struct {
 	// Canned ACL to apply. Valid values are private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, and bucket-owner-full-control. Conflicts with grant.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// ARN of the object.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
 	// Name of the bucket to put the file in.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
