@@ -20,7 +20,7 @@ spec:
     - namespace: AWS/EC2
     - namespace: AWS/EBS
     outputFormat: json
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: metric_stream_to_firehose
@@ -93,7 +93,7 @@ spec:
   forProvider:
     destination: s3
     name: metric-stream-test-stream
-    region: us-west-1
+    region: us-east-2
     s3Configuration:
     - bucketArnRef:
         name: bucket
@@ -113,4 +113,4 @@ metadata:
   name: bucket
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

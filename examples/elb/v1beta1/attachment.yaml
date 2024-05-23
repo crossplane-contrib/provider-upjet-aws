@@ -12,7 +12,7 @@ spec:
       name: example
     instanceRef:
       name: upbound-instance
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -37,7 +37,7 @@ spec:
         instanceProtocol: http
         lbPort: 80
         lbProtocol: http
-    region: us-west-1
+    region: us-east-2
     subnetsRefs:
       - name: sample-subnet1
       - name: sample-subnet2
@@ -50,7 +50,7 @@ metadata:
   name: upbound-instance
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     ami: ami-07b068f843ec78e72
     instanceType: t2.micro
     networkInterface:
@@ -68,7 +68,7 @@ metadata:
   name: sample-ni
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdRef:
       name: sample-subnet1
     privateIps:
@@ -82,8 +82,8 @@ metadata:
   name: sample-subnet1
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
@@ -96,8 +96,8 @@ metadata:
   name: sample-subnet2
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1a
+    region: us-east-2
+    availabilityZone: us-east-2a
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24
@@ -110,7 +110,7 @@ metadata:
   name: sample-vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -123,6 +123,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdRef:
       name: sample-vpc

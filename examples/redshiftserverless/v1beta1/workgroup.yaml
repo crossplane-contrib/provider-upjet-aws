@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     namespaceName: concurrency-scaling
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: redshiftserverless.aws.upbound.io/v1beta1
 kind: RedshiftServerlessNamespace
@@ -25,4 +25,4 @@ metadata:
   name: concurrency-scaling
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

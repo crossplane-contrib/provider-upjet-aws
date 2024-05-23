@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: simple
     name: servicea.simpleapp.local
-    region: us-west-1
+    region: us-east-2
     spec:
     - provider:
       - virtualNode:
@@ -34,7 +34,7 @@ metadata:
   name: simple
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: appmesh.aws.upbound.io/v1beta1
 kind: VirtualNode
@@ -50,7 +50,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: simple
     name: serviceBv1
-    region: us-west-1
+    region: us-east-2
     spec:
       - backend:
           - virtualService:

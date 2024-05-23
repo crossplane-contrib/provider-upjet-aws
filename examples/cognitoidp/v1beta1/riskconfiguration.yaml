@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     riskExceptionConfiguration:
     - blockedIpRangeList:
       - 10.10.10.10/32
@@ -39,4 +39,4 @@ spec:
         requireSymbols: false
         requireUppercase: false
         temporaryPasswordValidityDays: 7
-    region: us-west-1
+    region: us-east-2

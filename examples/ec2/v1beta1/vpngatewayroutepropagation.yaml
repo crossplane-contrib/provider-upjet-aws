@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     routeTableIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -32,7 +32,7 @@ metadata:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: example
     vpcIdRef:
@@ -48,7 +48,7 @@ metadata:
   name: route-vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -65,7 +65,7 @@ metadata:
   name: vpn-gw
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: main
     vpcIdRef:

@@ -10,7 +10,7 @@ metadata:
     testing.upbound.io/example-name: vault
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     kmsKeyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: vault
@@ -25,7 +25,7 @@ spec:
   forProvider:
     deletionWindowInDays: 10
     description: KMS key 1
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: Plan
@@ -35,7 +35,7 @@ metadata:
     testing.upbound.io/example-name: vault
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     advancedBackupSetting:
       - backupOptions:
           WindowsVSS: enabled
@@ -69,7 +69,7 @@ spec:
     planIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vault
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
@@ -112,7 +112,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     backupVaultNameSelector:
       matchLabels:
         testing.upbound.io/example-name: vault
@@ -134,7 +134,7 @@ spec:
     backupVaultNameSelector:
       matchLabels:
         testing.upbound.io/example-name: vault
-    region: us-west-1
+    region: us-east-2
     snsTopicArnSelector:
       matchLabels:
         testing.upbound.io/example-name: vault
@@ -148,4 +148,4 @@ metadata:
 spec:
   forProvider:
     displayName: backup-vault-events
-    region: us-west-1
+    region: us-east-2

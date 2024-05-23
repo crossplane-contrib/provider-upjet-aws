@@ -14,7 +14,7 @@ spec:
   forProvider:
     meshName: simple
     name: example-gateway-route
-    region: us-west-1
+    region: us-east-2
     spec:
     - httpRoute:
       - action:
@@ -43,7 +43,7 @@ spec:
   forProvider:
     meshName: simple
     name: example-virtual-gateway
-    region: us-west-1
+    region: us-east-2
     spec:
       - listener:
           - portMapping:
@@ -62,7 +62,7 @@ metadata:
   name: simple
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: appmesh.aws.upbound.io/v1beta1
 kind: VirtualService
@@ -78,7 +78,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: simple
     name: servicea.simpleapp.local
-    region: us-west-1
+    region: us-east-2
     spec:
       - provider:
           - virtualNode:
@@ -100,7 +100,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: simple
     name: serviceBv1
-    region: us-west-1
+    region: us-east-2
     spec:
       - backend:
           - virtualService:

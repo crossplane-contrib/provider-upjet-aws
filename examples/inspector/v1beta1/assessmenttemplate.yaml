@@ -14,12 +14,12 @@ spec:
   forProvider:
     name: example
     duration: 3600
-    region: us-west-1
+    region: us-east-2
     rulesPackageArns:
-    - arn:aws:inspector:us-west-1:166987590008:rulespackage/0-TKgzoVOa
-    - arn:aws:inspector:us-west-1:166987590008:rulespackage/0-TxmXimXF
-    - arn:aws:inspector:us-west-1:166987590008:rulespackage/0-byoQRFYm
-    - arn:aws:inspector:us-west-1:166987590008:rulespackage/0-xUY8iRqX
+    - arn:aws:inspector:us-east-2:166987590008:rulespackage/0-TKgzoVOa
+    - arn:aws:inspector:us-east-2:166987590008:rulespackage/0-TxmXimXF
+    - arn:aws:inspector:us-east-2:166987590008:rulespackage/0-byoQRFYm
+    - arn:aws:inspector:us-east-2:166987590008:rulespackage/0-xUY8iRqX
     targetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -37,4 +37,4 @@ metadata:
 spec:
   forProvider:
     name: example
-    region: us-west-1
+    region: us-east-2

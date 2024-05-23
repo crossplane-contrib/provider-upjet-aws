@@ -23,7 +23,7 @@ spec:
         targetArnSelector:
           matchLabels:
             testing.upbound.io/example-name: myerrortopic
-    region: us-west-1
+    region: us-east-2
     sns:
     - messageFormat: RAW
       roleArnSelector:
@@ -72,7 +72,7 @@ metadata:
   name: myerrortopic
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -86,4 +86,4 @@ metadata:
   name: mytopic
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

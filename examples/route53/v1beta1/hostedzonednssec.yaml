@@ -15,7 +15,7 @@ spec:
     hostedZoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -82,7 +82,7 @@ spec:
           ]
           Version = "2012-10-17"
         })}
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -97,4 +97,4 @@ metadata:
 spec:
   forProvider:
     name: mycompany.test
-    region: us-west-1
+    region: us-east-2

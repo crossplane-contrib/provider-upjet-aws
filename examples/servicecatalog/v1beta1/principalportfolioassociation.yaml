@@ -18,7 +18,7 @@ spec:
     principalArnSelector:
       matchLabels:
         testing.upbound.io/example-name: user
-    region: us-west-1
+    region: us-east-2
     acceptLanguage: en
 ---
 apiVersion: servicecatalog.aws.upbound.io/v1beta1
@@ -34,7 +34,7 @@ spec:
     description: List of my organizations apps
     name: My App Portfolio
     providerName: Brett
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: User

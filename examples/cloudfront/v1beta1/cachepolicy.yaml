@@ -10,7 +10,7 @@ metadata:
     testing.upbound.io/example-name: cachepolicy
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     comment: test comment
     defaultTtl: 50
     maxTtl: 100

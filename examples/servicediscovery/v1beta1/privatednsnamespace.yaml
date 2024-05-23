@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     name: example
-    region: us-west-1
+    region: us-east-2
     description: example
     vpcRef:
       name: sample-vpc

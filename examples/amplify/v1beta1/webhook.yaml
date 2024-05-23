@@ -19,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: master
     description: triggermaster
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: amplify.aws.upbound.io/v1beta1
 kind: App
@@ -32,7 +32,7 @@ metadata:
 spec:
   forProvider:
     name: app
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: amplify.aws.upbound.io/v1beta1
 kind: Branch
@@ -47,5 +47,5 @@ spec:
     appIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     stage: PRODUCTION

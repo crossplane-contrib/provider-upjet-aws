@@ -18,7 +18,7 @@ spec:
     description: Example IP set
     ipAddressVersion: IPV4
     name: example
-    region: us-west-1
+    region: us-east-2
     scope: REGIONAL
     tags:
       Tag1: Value1

@@ -18,7 +18,7 @@ spec:
     lagIdSelector:
       matchLabels:
         testing.upbound.io/example-name: hoge
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: directconnect.aws.upbound.io/v1beta1
 kind: Connection
@@ -33,7 +33,7 @@ spec:
     bandwidth: 1Gbps
     location: PNP51
     name: example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: directconnect.aws.upbound.io/v1beta1
 kind: Lag
@@ -49,4 +49,4 @@ spec:
     forceDestroy: true
     location: PNP51
     name: tf-dx-lag
-    region: us-west-1
+    region: us-east-2

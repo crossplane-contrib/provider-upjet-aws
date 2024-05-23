@@ -14,7 +14,7 @@ spec:
   forProvider:
     domainName: example-domain-name
     engineVersion: OpenSearch_1.0
-    region: us-west-1
+    region: us-east-2
     clusterConfig:
       - instanceType: m4.large.search
     ebsOptions:

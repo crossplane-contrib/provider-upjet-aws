@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     autoPlacement: "on"
-    availabilityZone: us-west-1a
+    availabilityZone: us-east-2a
     hostRecovery: "on"
     instanceType: c5.18xlarge
-    region: us-west-1
+    region: us-east-2

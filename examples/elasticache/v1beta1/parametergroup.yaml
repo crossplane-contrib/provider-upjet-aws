@@ -19,4 +19,4 @@ spec:
       value: "yes"
     - name: min-slaves-to-write
       value: "2"
-    region: us-west-1
+    region: us-east-2

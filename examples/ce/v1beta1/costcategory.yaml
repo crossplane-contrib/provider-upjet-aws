@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     name: NAME
-    region: us-west-1
+    region: us-east-2
     rule:
     - rule:
       - dimension:

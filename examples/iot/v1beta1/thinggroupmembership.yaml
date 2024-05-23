@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     overrideDynamicGroup: true
-    region: us-west-1
+    region: us-east-2
     thingGroupName: parent
     thingName: example
 
@@ -29,7 +29,7 @@ metadata:
   name: parent
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -41,4 +41,4 @@ spec:
   forProvider:
     attributes:
       First: examplevalue
-    region: us-west-1
+    region: us-east-2

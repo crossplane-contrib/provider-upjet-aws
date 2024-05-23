@@ -13,4 +13,4 @@ spec:
       value: "100000"
     - name: record-ttl-millis
       value: "100000"
-    region: us-west-1
+    region: us-east-2

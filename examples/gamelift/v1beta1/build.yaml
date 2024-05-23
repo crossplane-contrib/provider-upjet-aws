@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     name: example-build
     operatingSystem: WINDOWS_2012
     storageLocation:

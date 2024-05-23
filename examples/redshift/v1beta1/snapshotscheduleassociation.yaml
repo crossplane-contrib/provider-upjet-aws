@@ -15,7 +15,7 @@ spec:
     clusterIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    region: us-west-1
+    region: us-east-2
     scheduleIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: default
@@ -40,7 +40,7 @@ spec:
       namespace: upbound-system
     masterUsername: exampleuser
     nodeType: ra3.xlplus
-    region: us-west-1
+    region: us-east-2
     skipFinalSnapshot: true
 
 ---
@@ -73,4 +73,4 @@ spec:
   forProvider:
     definitions:
     - rate(12 hours)
-    region: us-west-1
+    region: us-east-2

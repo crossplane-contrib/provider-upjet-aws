@@ -10,7 +10,7 @@ metadata:
   name: example-snapshot
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: HelloWorld_snap
     volumeIdSelector:
@@ -27,8 +27,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: us-west-1c
-    region: us-west-1
+    availabilityZone: us-east-2c
+    region: us-east-2
     size: 1
     tags:
       Name: HelloWorld

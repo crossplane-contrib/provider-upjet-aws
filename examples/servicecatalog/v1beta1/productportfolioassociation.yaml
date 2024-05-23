@@ -18,7 +18,7 @@ spec:
     productIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     acceptLanguage: en
 ---
 apiVersion: servicecatalog.aws.upbound.io/v1beta1
@@ -34,9 +34,9 @@ spec:
     name: example
     owner: "test testovich"
     provisioningArtifactParameters:
-      - templateUrl: https://s3-us-west-1.amazonaws.com/cloudformation-templates-us-west-1/LAMP_Single_Instance.template
+      - templateUrl: https://s3-us-east-2.amazonaws.com/cloudformation-templates-us-east-2/LAMP_Single_Instance.template
         type: "CLOUD_FORMATION_TEMPLATE"
-    region: us-west-1
+    region: us-east-2
     tags:
       foo: bar
     type: "CLOUD_FORMATION_TEMPLATE"
@@ -54,4 +54,4 @@ spec:
     description: List of my organizations apps
     name: My App Portfolio
     providerName: Brett
-    region: us-west-1
+    region: us-east-2

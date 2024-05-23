@@ -12,6 +12,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    destination: us-west-1
-    region: us-west-1
+    destination: us-east-2
+    region: us-east-2
     source: us-east-1

@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdRefs:
     - name: example
 ---
@@ -26,9 +26,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: us-west-1a
+    availabilityZone: us-east-2a
     cidrBlock: 10.0.0.0/24
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -44,4 +44,4 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2

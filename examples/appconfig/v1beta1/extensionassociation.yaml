@@ -15,7 +15,7 @@ spec:
     extensionArnSelector:
       matchLabels:
         testing.upbound.io/example-name: test
-    region: us-west-1
+    region: us-east-2
     resourceArnSelector:
       matchLabels:
         testing.upbound.io/example-name: test
@@ -33,7 +33,7 @@ metadata:
 spec:
   forProvider:
     name: test
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -59,7 +59,7 @@ spec:
       point: ON_DEPLOYMENT_COMPLETE
     description: test description
     name: test
-    region: us-west-1
+    region: us-east-2
     tags:
       Type: AppConfig Extension
 
@@ -105,4 +105,4 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

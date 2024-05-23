@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     accountId: "123456789012"
-    region: us-west-1
+    region: us-east-2
     snapshotIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example_snapshot
@@ -29,7 +29,7 @@ metadata:
   name: example-snapshot
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     volumeIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -44,6 +44,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: us-west-1a
-    region: us-west-1
+    availabilityZone: us-east-2a
+    region: us-east-2
     size: 40

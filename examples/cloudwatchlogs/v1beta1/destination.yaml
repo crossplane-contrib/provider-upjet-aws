@@ -12,7 +12,7 @@ metadata:
   name: destination
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: iam_for_cloudwatch
@@ -32,7 +32,7 @@ metadata:
     testing.upbound.io/example-name: kinesis_for_cloudwatch
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     retentionPeriod: 48
     shardCount: 1
     shardLevelMetrics:

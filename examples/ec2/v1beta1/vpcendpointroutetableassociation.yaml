@@ -10,7 +10,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     routeTableIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -28,7 +28,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: example
     vpcIdSelector:
@@ -45,8 +45,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
-    serviceName: com.amazonaws.us-west-1.s3
+    region: us-east-2
+    serviceName: com.amazonaws.us-east-2.s3
     vpcEndpointType: Gateway
     vpcIdSelector:
       matchLabels:
@@ -62,5 +62,5 @@ metadata:
   name: vpc1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 10.0.0.0/16

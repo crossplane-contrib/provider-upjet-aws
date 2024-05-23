@@ -18,7 +18,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: lb
     name: foo-policy
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -33,10 +33,10 @@ metadata:
 spec:
   forProvider:
     availabilityZones:
-    - us-west-1a
+    - us-east-2a
     listener:
     - instancePort: 8000
       instanceProtocol: http
       lbPort: 80
       lbProtocol: http
-    region: us-west-1
+    region: us-east-2

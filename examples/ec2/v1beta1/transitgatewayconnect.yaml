@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     transitGatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -30,7 +30,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     multicastSupport: enable
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
@@ -43,7 +43,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdRefs:
     - name: sample-subnet1
     transitGatewayIdSelector:
@@ -60,7 +60,7 @@ metadata:
     meta.upbound.io/example-id: ec2/v1beta1/transitgatewayconnect
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -73,8 +73,8 @@ metadata:
     meta.upbound.io/example-id: ec2/v1beta1/transitgatewayconnect
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24

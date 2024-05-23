@@ -14,4 +14,4 @@ spec:
   forProvider:
     channelId: sample-channel
     description: A sample channel.
-    region: us-west-1
+    region: us-east-2

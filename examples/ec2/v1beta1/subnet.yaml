@@ -8,8 +8,8 @@ metadata:
   name: sample-subnet1
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
@@ -20,8 +20,8 @@ metadata:
   name: sample-subnet2
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1c
+    region: us-east-2
+    availabilityZone: us-east-2c
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24

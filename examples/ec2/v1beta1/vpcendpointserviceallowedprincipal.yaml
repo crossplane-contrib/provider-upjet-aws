@@ -14,7 +14,7 @@ metadata:
 spec:
   forProvider:
     principalArn: ${data.aws_caller_identity.current.arn}
-    region: us-west-1
+    region: us-east-2
     vpcEndpointServiceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: foo
@@ -34,4 +34,4 @@ spec:
     acceptanceRequired: false
     networkLoadBalancerArns:
       - ${networkLoadBalancerArn}
-    region: us-west-1
+    region: us-east-2

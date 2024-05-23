@@ -18,7 +18,7 @@ spec:
                   matchLabels:
                     testing.upbound.io/example-name: test
             outputLocation: s3://upbound-example/output/
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -32,4 +32,4 @@ spec:
   forProvider:
     deletionWindowInDays: 7
     description: Athena KMS Key
-    region: us-west-1
+    region: us-east-2

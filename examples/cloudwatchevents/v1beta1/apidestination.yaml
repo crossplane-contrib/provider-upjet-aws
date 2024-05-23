@@ -15,7 +15,7 @@ spec:
     httpMethod: POST
     invocationEndpoint: https://api.publicapis.org/entries
     invocationRateLimitPerSecond: 20
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -47,4 +47,4 @@ spec:
               namespace: upbound-system
     authorizationType: API_KEY
     description: A connection description
-    region: us-west-1
+    region: us-east-2

@@ -14,4 +14,4 @@ spec:
   forProvider:
     name: example-connection
     providerType: GitHub
-    region: us-west-1
+    region: us-east-2

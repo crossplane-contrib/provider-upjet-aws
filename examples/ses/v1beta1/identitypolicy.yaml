@@ -25,12 +25,12 @@ spec:
                   "Principal": {
                       "AWS": "*"
                   },
-                  "Resource": "arn:aws:ses:us-west-1:153891904029:identity/testdomain.com",
+                  "Resource": "arn:aws:ses:us-east-2:153891904029:identity/testdomain.com",
                   "Action": ["SES:SendEmail", "SES:SendRawEmail"]
               }
           ]
       }
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -45,4 +45,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

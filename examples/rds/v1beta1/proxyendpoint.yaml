@@ -10,7 +10,7 @@ metadata:
     upjet.upbound.io/manual-intervention: "This resource has a reference to Proxy, which needs manual intervention."
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     dbProxyEndpointName: example
     dbProxyName: example
     targetRole: READ_ONLY

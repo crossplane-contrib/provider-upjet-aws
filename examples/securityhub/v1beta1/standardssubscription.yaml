@@ -12,5 +12,5 @@ metadata:
   name: cis
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     standardsArn: arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0

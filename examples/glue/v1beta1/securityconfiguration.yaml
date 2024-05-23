@@ -22,7 +22,7 @@ spec:
           matchLabels:
              testing.upbound.io/example-name: glue-example-key
         s3EncryptionMode: SSE-KMS
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
@@ -32,6 +32,6 @@ metadata:
   name: glue-example-key
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Created with Crossplane
     deletionWindowInDays: 7

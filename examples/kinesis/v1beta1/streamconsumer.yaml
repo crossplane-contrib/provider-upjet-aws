@@ -10,7 +10,7 @@ metadata:
     meta.upbound.io/example-id: kinesis/v1beta1/streamconsumer
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     name: example-consumer
     streamArnRef:
       name: example
@@ -25,7 +25,7 @@ metadata:
     meta.upbound.io/example-id: kinesis/v1beta1/streamconsumer
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     retentionPeriod: 48
     shardCount: 1
     shardLevelMetrics:

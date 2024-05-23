@@ -19,4 +19,4 @@ spec:
       - base: 1
         capacityProvider: FARGATE
         weight: 100
-    region: us-west-1
+    region: us-east-2

@@ -19,7 +19,7 @@ spec:
     - tableNameSelector:
         matchLabels:
           testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     serviceRoleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -37,7 +37,7 @@ spec:
   forProvider:
     authenticationType: API_KEY
     name: tf_appsync_example
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: dynamodb.aws.upbound.io/v1beta1
 kind: Table
@@ -54,7 +54,7 @@ spec:
       type: S
     hashKey: UserId
     readCapacity: 1
-    region: us-west-1
+    region: us-east-2
     writeCapacity: 1
 ---
 apiVersion: iam.aws.upbound.io/v1beta1

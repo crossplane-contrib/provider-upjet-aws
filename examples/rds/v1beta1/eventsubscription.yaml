@@ -24,7 +24,7 @@ spec:
     - read replica
     - recovery
     - restoration
-    region: us-west-1
+    region: us-east-2
     snsTopicSelector:
       matchLabels:
         testing.upbound.io/example-name: default
@@ -42,4 +42,4 @@ metadata:
   name: default
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

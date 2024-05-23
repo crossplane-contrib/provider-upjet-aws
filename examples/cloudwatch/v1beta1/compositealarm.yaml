@@ -23,4 +23,4 @@ spec:
     okActionsSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2

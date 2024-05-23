@@ -14,7 +14,7 @@ spec:
   forProvider:
     meshName: simple
     name: example-virtual-gateway
-    region: us-west-1
+    region: us-east-2
     spec:
     - listener:
       - portMapping:
@@ -33,4 +33,4 @@ metadata:
   name: simple
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

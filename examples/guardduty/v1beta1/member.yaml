@@ -17,7 +17,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: primary
     email: "required@example.com"
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -34,7 +34,7 @@ spec:
     name: peer
   forProvider:
     enable: true
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -49,4 +49,4 @@ metadata:
 spec:
   forProvider:
     enable: true
-    region: us-west-1
+    region: us-east-2

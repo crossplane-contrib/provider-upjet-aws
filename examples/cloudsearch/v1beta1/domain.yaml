@@ -26,7 +26,7 @@ spec:
       search: true
       sort: true
       type: double
-    region: us-west-1
+    region: us-east-2
     scalingParameters:
     - desiredInstanceType: search.medium
 ---
@@ -57,4 +57,4 @@ spec:
     domainNameSelector:
       matchLabels:
         testing.upbound.io/example-name: domain
-    region: us-west-1
+    region: us-east-2

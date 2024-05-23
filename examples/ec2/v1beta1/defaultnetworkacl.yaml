@@ -29,7 +29,7 @@ spec:
       protocol: "-1"
       ruleNo: 100
       toPort: 0
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
@@ -42,4 +42,4 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
-    region: us-west-1
+    region: us-east-2

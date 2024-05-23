@@ -15,7 +15,7 @@ spec:
     directoryIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     target:
     - id: "243569053065"
 
@@ -38,7 +38,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    region: us-west-1
+    region: us-east-2
     type: MicrosoftAD
     vpcSettings:
       - subnetIdsRefs:
@@ -58,9 +58,9 @@ metadata:
   name: subnetone
 spec:
   forProvider:
-    availabilityZone: us-west-1a
+    availabilityZone: us-east-2a
     cidrBlock: 10.0.1.0/24
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -75,9 +75,9 @@ metadata:
   name: subnettwo
 spec:
   forProvider:
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2b
     cidrBlock: 10.0.2.0/24
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -95,7 +95,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2
 
 ---
 

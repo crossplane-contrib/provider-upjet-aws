@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 172.16.10.0/28
-    region: us-west-1
+    region: us-east-2
     reservationType: prefix
     subnetIdSelector:
       matchLabels:
@@ -29,8 +29,8 @@ metadata:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: default
     cidrBlock: 172.16.10.0/24
@@ -43,7 +43,7 @@ metadata:
     meta.upbound.io/example-id: ec2/v1beta1/subnetcidrreservation
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: default

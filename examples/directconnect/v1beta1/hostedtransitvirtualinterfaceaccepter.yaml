@@ -20,7 +20,7 @@ spec:
     virtualInterfaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: creator
-    region: us-west-1
+    region: us-east-2
     tags:
       Side: Accepter
 
@@ -40,7 +40,7 @@ spec:
   forProvider:
     amazonSideAsn: "64512"
     name: tf-dxg-example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -61,7 +61,7 @@ spec:
         testing.upbound.io/example-name: example
     name: tf-transit-vif-example
     ownerAccountId: "${data.aws_peer_account_id}"
-    region: us-west-1
+    region: us-east-2
     vlan: 4094
 
 ---
@@ -79,4 +79,4 @@ spec:
     bandwidth: 1Gbps
     location: PNP51
     name: example
-    region: us-west-1
+    region: us-east-2

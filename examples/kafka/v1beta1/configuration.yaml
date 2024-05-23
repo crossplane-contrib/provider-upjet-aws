@@ -11,7 +11,7 @@ spec:
     kafkaVersions:
     - 2.1.0
     name: example
-    region: us-west-1
+    region: us-east-2
     serverProperties: |
       auto.create.topics.enable = true
       delete.topic.enable = true

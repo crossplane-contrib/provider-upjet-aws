@@ -10,7 +10,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     fileSystemIdSelector:
       matchLabels:
         testing.upbound.io/example-name: efs
@@ -31,7 +31,7 @@ metadata:
   name: sample-vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: EFSVpc
@@ -46,8 +46,8 @@ metadata:
   name: efs-subnet1
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: efs
@@ -63,7 +63,7 @@ metadata:
   name: efs-sg
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: efs
@@ -78,7 +78,7 @@ metadata:
     testing.upbound.io/example-name: efs
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     creationToken: my-product
     tags:
       Name: MyProduct

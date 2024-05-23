@@ -13,7 +13,7 @@ metadata:
   name: example-domainsamloptions
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     samlOptions:
     - enabled: true
       idp:
@@ -39,4 +39,4 @@ spec:
     - ebsEnabled: true
       volumeSize: 30
     elasticsearchVersion: "5.3"
-    region: us-west-1
+    region: us-east-2

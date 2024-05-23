@@ -16,7 +16,7 @@ spec:
     provisioningRoleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: role
-    region: us-west-1
+    region: us-east-2
     templateBody: |-
       ${jsonencode({
           Parameters = {
@@ -103,7 +103,7 @@ spec:
           }
         ]
       }
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -118,4 +118,4 @@ metadata:
 spec:
   forProvider:
     active: true
-    region: us-west-1
+    region: us-east-2

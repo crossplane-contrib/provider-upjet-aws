@@ -20,7 +20,7 @@ spec:
       namespace: upbound-system
     masterUsername: exampleuser
     nodeType: ra3.xlplus
-    region: us-west-1
+    region: us-east-2
     skipFinalSnapshot: true
 
 ---

@@ -10,7 +10,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     action: lambda:InvokeFunction
     functionNameRef:
       name: example-permission
@@ -32,7 +32,7 @@ spec:
     s3Key: hello-python.zip
     handler: index.py
     packageType: Zip
-    region: us-west-1
+    region: us-east-2
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: role
@@ -129,7 +129,7 @@ metadata:
   name: example-permission
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdRef:
       name: example-permission
     cidrBlock: 172.16.10.0/24
@@ -148,7 +148,7 @@ spec:
     name: allow_tls
     tags:
       Name: allow_tls
-    region: us-west-1
+    region: us-east-2
     vpcIdRef:
       name: example-permission
 ---
@@ -162,7 +162,7 @@ metadata:
   name: example-permission
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: example-permission

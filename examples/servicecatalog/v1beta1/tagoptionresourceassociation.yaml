@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     resourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -31,7 +31,7 @@ metadata:
 spec:
   forProvider:
     key: nyckel
-    region: us-west-1
+    region: us-east-2
     value: värde
 ---
 apiVersion: servicecatalog.aws.upbound.io/v1beta1
@@ -47,9 +47,9 @@ spec:
     name: example
     owner: "test testovich"
     provisioningArtifactParameters:
-      - templateUrl: https://s3-us-west-1.amazonaws.com/cloudformation-templates-us-west-1/LAMP_Single_Instance.template
+      - templateUrl: https://s3-us-east-2.amazonaws.com/cloudformation-templates-us-east-2/LAMP_Single_Instance.template
         type: "CLOUD_FORMATION_TEMPLATE"
-    region: us-west-1
+    region: us-east-2
     tags:
       foo: bar
     type: "CLOUD_FORMATION_TEMPLATE"

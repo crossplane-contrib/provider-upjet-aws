@@ -23,7 +23,7 @@ spec:
               "AWS": "*"
             },
           "Action": "es:*",
-          "Resource": "arn:aws:es:us-west-1:domain/example/*"
+          "Resource": "arn:aws:es:us-east-2:domain/example/*"
           }
         ]
       }
@@ -33,4 +33,4 @@ spec:
     - ebsEnabled: true
       volumeSize: 30
     elasticsearchVersion: "5.3"
-    region: us-west-1
+    region: us-east-2

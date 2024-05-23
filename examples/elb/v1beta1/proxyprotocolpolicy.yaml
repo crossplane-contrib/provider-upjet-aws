@@ -18,7 +18,7 @@ spec:
     loadBalancerSelector:
       matchLabels:
         testing.upbound.io/example-name: lb
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -33,7 +33,7 @@ metadata:
 spec:
   forProvider:
     availabilityZones:
-    - us-west-1a
+    - us-east-2a
     listener:
     - instancePort: 25
       instanceProtocol: tcp
@@ -43,4 +43,4 @@ spec:
       instanceProtocol: tcp
       lbPort: 587
       lbProtocol: tcp
-    region: us-west-1
+    region: us-east-2

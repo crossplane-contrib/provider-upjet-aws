@@ -12,7 +12,7 @@ metadata:
     testing.upbound.io/example-name: example-efs-encrypted
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     creationToken: my-product
     encrypted: true
     kmsKeyIdRef:
@@ -30,6 +30,6 @@ metadata:
     testing.upbound.io/example-name: example-key
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Created with Crossplane
     deletionWindowInDays: 7

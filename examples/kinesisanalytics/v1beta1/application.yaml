@@ -10,7 +10,7 @@ metadata:
     meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     inputs:
     - kinesisStream:
       - resourceArnRef:
@@ -41,7 +41,7 @@ metadata:
     meta.upbound.io/example-id: kinesisanalytics/v1beta1/application
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     retentionPeriod: 48
     shardCount: 1
     shardLevelMetrics:

@@ -12,9 +12,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     availabilityZones:
-      - us-west-1b
+      - us-east-2b
     maxSize: 1
     minSize: 1
     launchConfigurationSelector:
@@ -38,4 +38,4 @@ spec:
   forProvider:
     imageId: ami-0454207e5367abf01
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2

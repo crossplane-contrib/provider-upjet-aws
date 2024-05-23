@@ -10,7 +10,7 @@ metadata:
     meta.upbound.io/example-id: rds/v1beta1/cluster
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     engine: aurora-postgresql
     masterUsername: cpadmin
     autoGeneratePassword: true

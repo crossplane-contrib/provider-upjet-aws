@@ -17,7 +17,7 @@ spec:
         testing.upbound.io/example-name: example
     dynamodbTarget:
     - path: table-name
-    region: us-west-1
+    region: us-east-2
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -61,5 +61,5 @@ metadata:
   name: aws-glue-catalog-database
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     catalogId: "${data.aws_account_id}"

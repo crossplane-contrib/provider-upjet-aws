@@ -13,6 +13,6 @@ metadata:
 spec:
   forProvider:
     name: ${Rand.RFC1123Subdomain}
-    region: us-west-1
+    region: us-east-2
     retentionPeriod: 7
     terminationProtectionEnabled: false

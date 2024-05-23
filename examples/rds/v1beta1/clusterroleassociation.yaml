@@ -12,7 +12,7 @@ metadata:
   name: example-cra
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     dbClusterIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: example-cra
@@ -34,7 +34,7 @@ metadata:
   name: example-cluster-cra
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     engine: aurora-postgresql
     masterUsername: cpadmin
     masterPasswordSecretRef:

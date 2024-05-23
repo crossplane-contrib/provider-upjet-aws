@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     name: www
     records:
     - "dev.upbound.io"
@@ -26,4 +26,4 @@ metadata:
 spec:
   forProvider:
     name: mycompany.test
-    region: us-west-1
+    region: us-east-2

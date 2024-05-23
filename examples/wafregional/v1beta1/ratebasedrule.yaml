@@ -22,7 +22,7 @@ spec:
       type: "IPMatch"
     rateKey: "IP"
     rateLimit: 100
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -42,4 +42,4 @@ spec:
       - type: "IPV4"
         value: "192.0.2.44/32"
     name: "tfIPSet"
-    region: us-west-1
+    region: us-east-2

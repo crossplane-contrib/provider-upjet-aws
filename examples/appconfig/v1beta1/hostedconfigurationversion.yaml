@@ -24,7 +24,7 @@ spec:
       namespace: upbound-system
     contentType: application/json
     description: Example Freeform Hosted Configuration Version
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: appconfig.aws.upbound.io/v1beta1
 kind: Application
@@ -38,7 +38,7 @@ spec:
   forProvider:
     description: Example AppConfig Application
     name: example-application-tf
-    region: us-west-1
+    region: us-east-2
     tags:
       Type: AppConfig Application
 ---
@@ -58,7 +58,7 @@ spec:
     description: Example Configuration Profile
     locationUri: hosted
     name: example-configuration-profile-tf
-    region: us-west-1
+    region: us-east-2
     tags:
       Type: AppConfig Configuration Profile
 ---

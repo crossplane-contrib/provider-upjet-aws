@@ -28,7 +28,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: front_end
     priority: 100
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -42,7 +42,7 @@ metadata:
   name: front-end
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     securityGroupSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
@@ -66,7 +66,7 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -83,7 +83,7 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: testing
     vpcIdSelector:
@@ -102,8 +102,8 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
@@ -121,8 +121,8 @@ metadata:
     testing.upbound.io/example-name: elbv2s2
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1a
+    region: us-east-2
+    availabilityZone: us-east-2a
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2
@@ -140,7 +140,7 @@ metadata:
     testing.upbound.io/example-name: elbv2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Allow TLS inbound traffic
     name: allow_tls
     tags:
@@ -161,7 +161,7 @@ metadata:
   name: front-end
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     port: 443
     defaultAction:
       - targetGroupArnSelector:
@@ -188,7 +188,7 @@ spec:
     targetType: ip
     port: 80
     protocol: HTTP
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: elbv2

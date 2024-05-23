@@ -17,7 +17,7 @@ spec:
     clusterSelector:
       matchLabels:
           testing.upbound.io/example-name: example-cluster
-    region: us-west-1
+    region: us-east-2
     launchType: EC2
     propagateTags: TASK_DEFINITION
 ---
@@ -31,7 +31,7 @@ metadata:
     testing.upbound.io/example-name: example-definition
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     family: sampleservice
     containerDefinitions: |-
       [
@@ -54,4 +54,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

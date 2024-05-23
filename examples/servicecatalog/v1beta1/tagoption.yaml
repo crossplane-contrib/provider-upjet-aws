@@ -13,5 +13,5 @@ metadata:
 spec:
   forProvider:
     key: nyckel
-    region: us-west-1
+    region: us-east-2
     value: värde

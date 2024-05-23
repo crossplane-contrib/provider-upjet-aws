@@ -18,7 +18,7 @@ spec:
     environmentVariables:
       REACT_APP_API_SERVER: https://api.example.com
     framework: React
-    region: us-west-1
+    region: us-east-2
     stage: PRODUCTION
 ---
 apiVersion: amplify.aws.upbound.io/v1beta1
@@ -32,4 +32,4 @@ metadata:
 spec:
   forProvider:
     name: app
-    region: us-west-1
+    region: us-east-2

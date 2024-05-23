@@ -10,7 +10,7 @@ metadata:
     upjet.upbound.io/manual-intervention: "The ARN of the Vault in the policy needs to be entered manually."
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     backupVaultNameSelector:
       matchLabels:
         testing.upbound.io/example-name: vault
@@ -35,7 +35,7 @@ spec:
               "backup:GetBackupVaultNotifications",
               "backup:PutBackupVaultNotifications"
             ],
-            "Resource": "arn:aws:backup:us-west-1:609897127049:backup-vault:example-bucket-vault"
+            "Resource": "arn:aws:backup:us-east-2:609897127049:backup-vault:example-bucket-vault"
           }
         ]
       }

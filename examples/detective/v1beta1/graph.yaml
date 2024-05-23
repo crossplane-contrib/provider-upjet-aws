@@ -12,6 +12,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: example-detective-graph

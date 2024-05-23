@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     workgroupName: example
     subnetIdRefs:
       - name: subnet
@@ -28,7 +28,7 @@ metadata:
 spec:
   forProvider:
     namespaceName: concurrency-scaling
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: redshiftserverless.aws.upbound.io/v1beta1
 kind: RedshiftServerlessNamespace
@@ -40,7 +40,7 @@ metadata:
   name: concurrency-scaling
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
@@ -50,9 +50,9 @@ metadata:
   name: subnet
 spec:
   forProvider:
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2b
     cidrBlock: 10.0.2.0/24
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -68,4 +68,4 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2

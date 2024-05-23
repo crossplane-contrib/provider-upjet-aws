@@ -13,7 +13,7 @@ spec:
     prefixListIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     transitGatewayAttachmentIdSelector:
       matchLabels:
         testing.upbound.io/example-name: attachment1
@@ -35,7 +35,7 @@ spec:
     prefixListIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -50,7 +50,7 @@ spec:
     addressFamily: IPv4
     maxEntries: 5
     name: All VPC CIDR-s
-    region: us-west-1
+    region: us-east-2
     tags:
       Env: live
 
@@ -64,7 +64,7 @@ metadata:
   name: attachment1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnet1
@@ -85,7 +85,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     multicastSupport: enable
 
 ---
@@ -98,7 +98,7 @@ metadata:
   name: subnet1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 10.0.1.0/24
     vpcIdSelector:
       matchLabels:
@@ -114,7 +114,7 @@ metadata:
   name: vpc1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 10.0.0.0/16
 
 ---
@@ -127,7 +127,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     transitGatewayIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

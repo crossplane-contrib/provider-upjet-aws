@@ -10,5 +10,5 @@ metadata:
   name: web
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     strategy: cluster

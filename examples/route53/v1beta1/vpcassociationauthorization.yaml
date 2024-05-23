@@ -10,7 +10,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: alternate
@@ -29,7 +29,7 @@ metadata:
 spec:
   forProvider:
     name: mycompany.test
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -44,7 +44,7 @@ spec:
     cidrBlock: 10.7.0.0/16
     enableDnsHostnames: true
     enableDnsSupport: true
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -59,4 +59,4 @@ spec:
     cidrBlock: 10.6.0.0/16
     enableDnsHostnames: true
     enableDnsSupport: true
-    region: us-west-1
+    region: us-east-2

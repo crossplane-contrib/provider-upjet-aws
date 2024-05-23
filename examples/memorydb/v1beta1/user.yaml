@@ -18,7 +18,7 @@ spec:
         name: memorydb-user-password-2
         namespace: upbound-system
       type: password  
-    region: us-west-1
+    region: us-east-2
   writeConnectionSecretToRef:
     name: user-conn
     namespace: default

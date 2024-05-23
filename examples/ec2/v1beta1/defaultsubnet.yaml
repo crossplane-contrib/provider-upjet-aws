@@ -12,7 +12,7 @@ metadata:
   name: default-az1
 spec:
   forProvider:
-    availabilityZone: us-west-1a
-    region: us-west-1
+    availabilityZone: us-east-2a
+    region: us-east-2
     tags:
-      Name: Default subnet for us-west-1a
+      Name: Default subnet for us-east-2a

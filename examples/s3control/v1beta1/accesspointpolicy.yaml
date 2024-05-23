@@ -24,10 +24,10 @@ spec:
             Principal = {
               AWS = "*"
             }
-            Resource = "arn:aws:s3:us-west-1:${data.aws_account_id}:accesspoint/example/object/*"
+            Resource = "arn:aws:s3:us-east-2:${data.aws_account_id}:accesspoint/example/object/*"
           }]
         })}
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3control.aws.upbound.io/v1beta1
 kind: AccessPoint
@@ -48,7 +48,7 @@ spec:
       blockPublicPolicy: false
       ignorePublicAcls: true
       restrictPublicBuckets: false
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
@@ -61,4 +61,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

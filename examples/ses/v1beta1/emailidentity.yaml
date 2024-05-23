@@ -13,4 +13,4 @@ metadata:
 spec:
   forProvider:
     email: v1-email@example.com
-    region: us-west-1
+    region: us-east-2

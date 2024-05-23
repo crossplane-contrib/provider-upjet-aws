@@ -20,7 +20,7 @@ spec:
     keySelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -35,7 +35,7 @@ metadata:
 spec:
   forProvider:
     description: tf-test-desc
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -50,7 +50,7 @@ metadata:
   name: default
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -69,4 +69,4 @@ spec:
         testing.upbound.io/example-name: default
     key: object_key
     contentBase64: dGhpcyBpcyBhIHRleHQg
-    region: us-west-1
+    region: us-east-2

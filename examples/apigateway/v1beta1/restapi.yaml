@@ -11,7 +11,7 @@ metadata:
 spec:
   forProvider:
     name: auth-demo
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPIPolicy
@@ -42,7 +42,7 @@ spec:
           }
         ]
       }
-    region: us-west-1
+    region: us-east-2
     restApiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: test
@@ -58,9 +58,9 @@ spec:
     authorizerCredentialsSelector:
       matchLabels:
         testing.upbound.io/example-name: restapi
-    authorizerUri: arn:aws:apigateway:us-west-1:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-1:609897127049:function:official-providers-noop-test-func/invocations
+    authorizerUri: arn:aws:apigateway:us-east-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-east-2:609897127049:function:official-providers-noop-test-func/invocations
     name: demo
-    region: us-west-1
+    region: us-east-2
     restApiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: restapi
@@ -74,7 +74,7 @@ metadata:
 spec:
   forProvider:
     description: Example description
-    region: us-west-1
+    region: us-east-2
     restApiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: restapi
@@ -91,7 +91,7 @@ spec:
     location:
       - type: API
     properties: '{"description":"Example"}'
-    region: us-west-1
+    region: us-east-2
     restApiIdSelector:
       matchLabels:
         testing.upbound.io/example-name: restapi
@@ -104,7 +104,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     responseParameters:
       gatewayresponse.header.Authorization: '''Basic'''
     responseTemplates:

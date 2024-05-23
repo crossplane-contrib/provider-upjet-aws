@@ -10,7 +10,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: s3-canned
@@ -26,6 +26,6 @@ metadata:
     testing.upbound.io/example-name: s3-canned
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: SampleBucketCannedAcl

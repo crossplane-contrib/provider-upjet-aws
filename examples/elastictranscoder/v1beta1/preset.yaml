@@ -23,7 +23,7 @@ spec:
     container: mp4
     description: Sample Preset
     name: sample_preset
-    region: us-west-1
+    region: us-east-2
     thumbnails:
     - format: png
       interval: "120"

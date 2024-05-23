@@ -16,7 +16,7 @@ spec:
     ipamPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -31,8 +31,8 @@ metadata:
 spec:
   forProvider:
     operatingRegions:
-    - regionName: us-west-1
-    region: us-west-1
+    - regionName: us-east-2
+    region: us-east-2
 
 ---
 
@@ -50,8 +50,8 @@ spec:
     ipamScopeIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    locale: us-west-1
-    region: us-west-1
+    locale: us-east-2
+    region: us-east-2
 
 ---
 
@@ -69,7 +69,7 @@ spec:
     ipamIdSelector: 
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -87,4 +87,4 @@ spec:
     ipamPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2

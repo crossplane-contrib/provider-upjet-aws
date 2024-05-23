@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     endpointSelector:
       matchLabels:
         testing.upbound.io/example-name: sns
@@ -38,7 +38,7 @@ spec:
     maxMessageSize: 2048
     messageRetentionSeconds: 86400
     receiveWaitTimeSeconds: 10
-    region: us-west-1
+    region: us-east-2
     tags:
       Environment: production
 
@@ -54,4 +54,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: simple
     name: serviceB-route
-    region: us-west-1
+    region: us-east-2
     spec:
     - httpRoute:
       - action:
@@ -49,7 +49,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: simple
     name: serviceBv1
-    region: us-west-1
+    region: us-east-2
     spec:
       - backend:
           - virtualService:
@@ -72,7 +72,7 @@ metadata:
   name: simple
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: appmesh.aws.upbound.io/v1beta1
 kind: VirtualNode
@@ -88,7 +88,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: simple
     name: serviceBv2
-    region: us-west-1
+    region: us-east-2
     spec:
       - backend:
           - virtualService:
@@ -115,7 +115,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: simple
     name: serviceB
-    region: us-west-1
+    region: us-east-2
     spec:
       - listener:
           - portMapping:

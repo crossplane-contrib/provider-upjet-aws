@@ -17,4 +17,4 @@ spec:
       version: "1"
     description: Motor generator unit
     name: MGU
-    region: us-west-1
+    region: us-east-2

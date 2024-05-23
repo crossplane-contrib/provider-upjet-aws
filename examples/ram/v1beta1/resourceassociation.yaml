@@ -13,7 +13,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     resourceArn: ${arn}
     resourceShareArnSelector:
       matchLabels:
@@ -34,7 +34,7 @@ spec:
   forProvider:
     allowExternalPrincipals: true
     name: example
-    region: us-west-1
+    region: us-east-2
     tags:
       Environment: Production
 
@@ -51,8 +51,8 @@ metadata:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1a
+    region: us-east-2
+    availabilityZone: us-east-2a
     vpcIdRef:
       name: default
     cidrBlock: 172.16.10.0/24
@@ -68,7 +68,7 @@ metadata:
   name: default
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: default

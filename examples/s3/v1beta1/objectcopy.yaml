@@ -20,5 +20,5 @@ spec:
       type: Group
       uri: http://acs.amazonaws.com/groups/global/AllUsers
     key: file_name
-    region: us-west-1
+    region: us-east-2
     source: source_bucket_name/file_name

@@ -19,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     message: Message of the invitation
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: detective.aws.upbound.io/v1beta1
 kind: Graph
@@ -31,4 +31,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

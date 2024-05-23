@@ -15,7 +15,7 @@ spec:
     inputParameter:
     - parameterName: AccessKeysRotatedParameterMaxAccessKeyAge
       parameterValue: "90"
-    region: us-west-1
+    region: us-east-2
     templateBody: |
       Parameters:
         AccessKeysRotatedParameterMaxAccessKeyAge:
@@ -41,7 +41,7 @@ metadata:
   name: foo
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: r

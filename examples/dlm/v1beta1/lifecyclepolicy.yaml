@@ -33,7 +33,7 @@ spec:
           SnapshotCreator: DLM
       targetTags:
         Snapshot: "true"
-    region: us-west-1
+    region: us-east-2
     state: ENABLED
 
 ---

@@ -15,7 +15,7 @@ spec:
     nameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     targets:
     - key: tag:Environment
       values:
@@ -52,4 +52,4 @@ spec:
         }
       }
     documentType: Command
-    region: us-west-1
+    region: us-east-2

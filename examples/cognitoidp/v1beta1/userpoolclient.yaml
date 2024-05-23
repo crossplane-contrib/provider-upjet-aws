@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     name: userpoolclient
-    region: us-west-1
+    region: us-east-2
 
 ---
 apiVersion: cognitoidp.aws.upbound.io/v1beta1
@@ -27,7 +27,7 @@ metadata:
 spec:
   forProvider:
     name: userpoolclient
-    region: us-west-1
+    region: us-east-2
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: userpoolclient
@@ -42,7 +42,7 @@ metadata:
 spec:
   forProvider:
     name: name-that-doesnt-match-id-regex
-    region: us-west-1
+    region: us-east-2
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: userpoolclient

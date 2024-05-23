@@ -22,7 +22,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: tf-transit-vif-example
-    region: us-west-1
+    region: us-east-2
     vlan: 4094
 
 ---
@@ -39,7 +39,7 @@ spec:
   forProvider:
     amazonSideAsn: "64512"
     name: tf-dxg-example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -56,4 +56,4 @@ spec:
     bandwidth: 1Gbps
     location: EqLA3
     name: tf-dx-connection
-    region: us-west-1
+    region: us-east-2

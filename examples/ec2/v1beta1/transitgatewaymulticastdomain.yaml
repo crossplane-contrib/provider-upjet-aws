@@ -12,7 +12,7 @@ metadata:
   name: domain
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     staticSourcesSupport: enable
     tags:
       Name: Transit_Gateway_Multicast_Domain_Example

@@ -10,7 +10,7 @@ metadata:
     meta.upbound.io/example-id: kinesisanalyticsv2/v1beta1/application
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     applicationConfiguration:
     - applicationCodeConfiguration:
       - codeContentType: ZIPFILE

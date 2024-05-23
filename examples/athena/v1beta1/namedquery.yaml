@@ -15,7 +15,7 @@ spec:
         testing.upbound.io/example-name: example
     name: bar
     query: SELECT * FROM example limit 10;
-    region: us-west-1
+    region: us-east-2
     workgroupSelector:
       matchLabels:
         testing.upbound.io/example-name: test

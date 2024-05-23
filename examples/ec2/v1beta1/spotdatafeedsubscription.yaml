@@ -14,7 +14,7 @@ spec:
   forProvider:
     bucket: up-spotdata
     prefix: my_subdirectory
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -26,4 +26,4 @@ metadata:
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

@@ -14,7 +14,7 @@ spec:
   forProvider:
     behaviorOnMxFailure: REJECT_MESSAGE
     mailFromDomain: subdomain.example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -28,4 +28,4 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

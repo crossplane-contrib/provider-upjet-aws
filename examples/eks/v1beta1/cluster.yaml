@@ -13,7 +13,7 @@ metadata:
     testing.upbound.io/example-name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     roleArnRef:
       name: sample-eks-cluster
     vpcConfig:
@@ -69,9 +69,9 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/cluster
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     mapPublicIpOnLaunch: true
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
@@ -86,9 +86,9 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/cluster
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     mapPublicIpOnLaunch: true
-    availabilityZone: us-west-1a
+    availabilityZone: us-east-2a
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24
@@ -103,8 +103,8 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/cluster
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.12.0/24
@@ -119,7 +119,7 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/cluster
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: example
     vpcIdRef:
@@ -135,7 +135,7 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/cluster
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     routeTableIdRef:
       name: example
     subnetIdRef:
@@ -152,7 +152,7 @@ metadata:
 spec:
   forProvider:
     enableDnsHostnames: true
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
@@ -167,7 +167,7 @@ metadata:
     meta.upbound.io/example-id: eks/v1beta1/cluster
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdRef:
       name: sample-vpc
 
@@ -183,7 +183,7 @@ spec:
   forProvider:
     defaultRouteTableIdRef:
       name: sample-vpc
-    region: us-west-1
+    region: us-east-2
     route:
       - gatewayIdRef:
           name: example

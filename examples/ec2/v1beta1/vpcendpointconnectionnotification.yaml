@@ -19,7 +19,7 @@ spec:
     connectionNotificationArnSelector:
       matchLabels:
         testing.upbound.io/example-name: topic
-    region: us-west-1
+    region: us-east-2
     vpcEndpointServiceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: foo
@@ -48,7 +48,7 @@ spec:
               "Resource": "arn:aws:sns:*:*:vpce-notification-topic"
           }]
       }
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpointService
@@ -63,4 +63,4 @@ spec:
     acceptanceRequired: false
     networkLoadBalancerArns:
       - ${networkLoadBalancerArn}
-    region: us-west-1
+    region: us-east-2

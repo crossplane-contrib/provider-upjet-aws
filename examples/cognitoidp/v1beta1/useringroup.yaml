@@ -15,7 +15,7 @@ spec:
     groupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -35,7 +35,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -53,7 +53,7 @@ metadata:
 spec:
   forProvider:
     name: example
-    region: us-west-1
+    region: us-east-2
     userPoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -78,4 +78,4 @@ spec:
       requireSymbols: false
       requireUppercase: false
       temporaryPasswordValidityDays: 7
-    region: us-west-1
+    region: us-east-2

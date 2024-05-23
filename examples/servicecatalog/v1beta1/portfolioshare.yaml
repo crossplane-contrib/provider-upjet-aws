@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: portfolio
     principalId: "${data.aws_peer_account_id}"
-    region: us-west-1
+    region: us-east-2
     type: ACCOUNT
 ---
 apiVersion: servicecatalog.aws.upbound.io/v1beta1
@@ -32,4 +32,4 @@ spec:
     description: List of my organizations apps
     name: My App Portfolio
     providerName: Brett
-    region: us-west-1
+    region: us-east-2

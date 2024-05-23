@@ -16,7 +16,7 @@ spec:
     instanceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: web
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -28,7 +28,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpc: true
 
 ---
@@ -42,8 +42,8 @@ metadata:
 spec:
   forProvider:
     ami: ami-0d9858aa3c6322f73
-    availabilityZone: us-west-1c
+    availabilityZone: us-east-2c
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: HelloWorld

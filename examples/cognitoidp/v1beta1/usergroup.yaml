@@ -14,7 +14,7 @@ spec:
   forProvider:
     name: example
     precedence: 42
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: group_role
@@ -36,7 +36,7 @@ metadata:
 spec:
   forProvider:
     name: identity pool
-    region: us-west-1
+    region: us-east-2
 
 ---
 

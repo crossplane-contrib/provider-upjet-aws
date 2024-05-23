@@ -17,7 +17,7 @@ spec:
     masterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -31,7 +31,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -47,7 +47,7 @@ spec:
   providerConfigRef:
     name: peer
   forProvider:
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -64,4 +64,4 @@ spec:
     accountId: "${data.aws_peer_account_id}"
     email: test@example.com
     invite: true
-    region: us-west-1
+    region: us-east-2

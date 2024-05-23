@@ -12,7 +12,7 @@ metadata:
   name: example-dbiabr
 spec:
   forProvider:
-    region: us-east-2
+    region: us-west-2
     retentionPeriod: 7
     sourceDbInstanceArnSelector:
       matchLabels:
@@ -43,7 +43,7 @@ spec:
       key: password
       name: example-dbinstance
       namespace: upbound-system
-    region: us-west-1
+    region: us-east-2
     skipFinalSnapshot: true
     username: foo
   writeConnectionSecretToRef:

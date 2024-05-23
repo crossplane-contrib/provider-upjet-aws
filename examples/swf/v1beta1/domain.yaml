@@ -13,5 +13,5 @@ metadata:
 spec:
   forProvider:
     description: SWF Domain
-    region: us-west-1
+    region: us-east-2
     workflowExecutionRetentionPeriodInDays: "0"

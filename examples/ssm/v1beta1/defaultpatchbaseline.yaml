@@ -15,7 +15,7 @@ spec:
     baselineIdRef:
       name: example
     operatingSystem: WINDOWS
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -32,4 +32,4 @@ spec:
     approvedPatches:
     - KB123456
     name: example
-    region: us-west-1
+    region: us-east-2

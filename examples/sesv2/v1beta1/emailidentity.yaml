@@ -12,5 +12,5 @@ metadata:
   name: v2-example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     email: v2-example@example.com

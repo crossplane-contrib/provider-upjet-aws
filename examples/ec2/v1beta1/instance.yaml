@@ -13,7 +13,7 @@ metadata:
   name: sample-instance
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     ami: ami-07b068f843ec78e72
     instanceType: t2.micro
     networkInterface:
@@ -36,7 +36,7 @@ metadata:
   name: sample-instance
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sample-instance
@@ -55,8 +55,8 @@ metadata:
   name: sample-instance
 spec:
   forProvider:
-    region: us-west-1
-    availabilityZone: us-west-1b
+    region: us-east-2
+    availabilityZone: us-east-2b
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sample-instance
@@ -74,7 +74,7 @@ metadata:
   name: sample-instance
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc

@@ -15,7 +15,7 @@ spec:
     applicationSelector:
       matchLabels:
         testing.upbound.io/example-name: tftest
-    region: us-west-1
+    region: us-east-2
     solutionStackName: 64bit Amazon Linux 2 v5.6.2 running Node.js 16
 
 ---
@@ -34,4 +34,4 @@ spec:
       - deleteSourceFromS3: true
         maxCount: 128
         serviceRole: arn:aws:iam::153891904029:role/aws-elasticbeanstalk-service-role
-    region: us-west-1
+    region: us-east-2

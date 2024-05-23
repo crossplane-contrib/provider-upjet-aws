@@ -13,6 +13,6 @@ metadata:
 spec:
   forProvider:
     html: <h1>Hello {{name}},</h1><p>Your favorite animal is {{favoriteanimal}}.</p>
-    region: us-west-1
+    region: us-east-2
     subject: Greetings, {{name}}!
     text: "Hello {{name}},\r\nYour favorite animal is {{favoriteanimal}}."

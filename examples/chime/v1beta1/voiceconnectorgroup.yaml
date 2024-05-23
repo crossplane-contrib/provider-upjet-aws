@@ -21,7 +21,7 @@ spec:
       voiceConnectorIdSelector:
         matchLabels:
           testing.upbound.io/example-name: vc2
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: chime.aws.upbound.io/v1beta1
 kind: VoiceConnector
@@ -33,7 +33,7 @@ metadata:
   name: vc1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     requireEncryption: true
 ---
 apiVersion: chime.aws.upbound.io/v1beta1
@@ -46,5 +46,5 @@ metadata:
   name: vc2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     requireEncryption: true

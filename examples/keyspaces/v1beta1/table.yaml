@@ -15,7 +15,7 @@ spec:
     keyspaceNameSelector:
       matchLabels:
         testing.upbound.io/example-name: keyspacelabel
-    region: us-west-1
+    region: us-east-2
     schemaDefinition:
     - column:
       - name: message
@@ -36,4 +36,4 @@ metadata:
   name: keyspacename
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2

@@ -15,4 +15,4 @@ spec:
     name: example-host
     providerEndpoint: https://example.com
     providerType: GitHubEnterpriseServer
-    region: us-west-1
+    region: us-east-2

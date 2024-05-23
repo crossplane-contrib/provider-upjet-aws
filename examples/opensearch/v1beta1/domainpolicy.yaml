@@ -25,7 +25,7 @@ spec:
               }
           ]
       }
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -37,7 +37,7 @@ spec:
   forProvider:
     domainName: example
     engineVersion: OpenSearch_1.0
-    region: us-west-1
+    region: us-east-2
     clusterConfig:
       - instanceType: m4.large.search
     ebsOptions:

@@ -11,4 +11,4 @@ metadata:
 spec:
   forProvider:
     description: My client certificate
-    region: us-west-1
+    region: us-east-2

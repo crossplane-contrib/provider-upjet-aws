@@ -20,5 +20,5 @@ spec:
     - maximumCount: 1
       minimumCount: 0
     providerName: example
-    region: us-west-1
+    region: us-east-2
     version: "1"

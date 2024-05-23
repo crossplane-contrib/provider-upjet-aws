@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     resourceSetName: example
 ---
 apiVersion: route53recoveryreadiness.aws.upbound.io/v1beta1
@@ -25,7 +25,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     resourceSetType: AWS::CloudWatch::Alarm
     resources:
       - resourceArnSelector:
@@ -49,6 +49,6 @@ spec:
     metricName: CPUUtilization
     namespace: AWS/EC2
     period: 120
-    region: us-west-1
+    region: us-east-2
     statistic: Average
     threshold: 80

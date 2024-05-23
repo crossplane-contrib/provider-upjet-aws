@@ -20,7 +20,7 @@ spec:
       name: example-secret
       namespace: upbound-system
     hsmServerPublicCertificate: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 

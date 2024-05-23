@@ -14,7 +14,7 @@ spec:
   forProvider:
     # principal: AWS Account ID, AWS Organizations Organization ARN, AWS Organizations Organization Unit ARN
     principal: "123456789012"
-    region: us-west-1
+    region: us-east-2
     resourceShareArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -32,6 +32,6 @@ spec:
   forProvider:
     allowExternalPrincipals: true
     name: example
-    region: us-west-1
+    region: us-east-2
     tags:
       Environment: Production

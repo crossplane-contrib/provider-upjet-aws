@@ -20,4 +20,4 @@ spec:
         value: "09876543210"
     groupByAttribute: AwsAccountId
     name: example-insight
-    region: us-west-1
+    region: us-east-2

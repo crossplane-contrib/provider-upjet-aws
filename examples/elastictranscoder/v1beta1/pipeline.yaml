@@ -17,7 +17,7 @@ spec:
         testing.upbound.io/example-name: input_bucket_label
     role: arn:aws:iam::153891904029:role/Elastic_Transcoder_Default_Role
     name: pipeline_tf_test_name
-    region: us-west-1
+    region: us-east-2
     contentConfig:
       - bucketSelector:
           matchLabels:
@@ -40,7 +40,7 @@ metadata:
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     forceDestroy: true
 
 ---
@@ -54,7 +54,7 @@ metadata:
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     forceDestroy: true
 
 ---
@@ -68,5 +68,5 @@ metadata:
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     forceDestroy: true

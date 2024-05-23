@@ -10,7 +10,7 @@ metadata:
     upjet.upbound.io/manual-intervention: "Requires a Role with permissions on both buckets."
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     bucketSelector:
       matchLabels:
         testing.upbound.io/example-name: s3

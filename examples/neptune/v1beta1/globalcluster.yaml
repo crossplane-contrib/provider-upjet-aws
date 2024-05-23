@@ -14,4 +14,4 @@ spec:
   forProvider:
     engine: neptune
     engineVersion: 1.2.0.0
-    region: us-west-1
+    region: us-east-2

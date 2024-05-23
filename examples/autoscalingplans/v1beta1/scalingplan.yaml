@@ -19,7 +19,7 @@ spec:
         values:
         - example
     name: example-dynamic-cost-optimization
-    region: us-west-1
+    region: us-east-2
     scalingInstruction:
     - maxCapacity: 3
       minCapacity: 0
@@ -45,9 +45,9 @@ metadata:
 spec:
   forProvider:
     desiredCapacity: 1
-    region: us-west-1
+    region: us-east-2
     availabilityZones:
-    - us-west-1b
+    - us-east-2b
     maxSize: 1
     minSize: 1
     launchConfigurationSelector:
@@ -73,4 +73,4 @@ spec:
   forProvider:
     imageId: ami-0430743863c514c80
     instanceType: t2.micro
-    region: us-west-1
+    region: us-east-2

@@ -15,7 +15,7 @@ spec:
     # Due to an existing Terrajet limitation, we cannot use "metadata.name" for "brokerName"
     # Details can be found in https://github.com/crossplane/terrajet/issues/280
     brokerName: example-broker
-    region: us-west-1
+    region: us-east-2
     securityGroupRefs:
     - name: example
     engineType: ActiveMQ
@@ -52,7 +52,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     description: Allow TLS inbound traffic
     name: allow_tls
     tags:

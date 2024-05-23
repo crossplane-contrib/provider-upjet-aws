@@ -18,7 +18,7 @@ spec:
     description: Example Configuration Profile
     locationUri: hosted
     name: example-configuration-profile-tf
-    region: us-west-1
+    region: us-east-2
     tags:
       Type: AppConfig Configuration Profile
 ---
@@ -34,6 +34,6 @@ spec:
   forProvider:
     description: Example AppConfig Application
     name: example-application-tf
-    region: us-west-1
+    region: us-east-2
     tags:
       Type: AppConfig Application

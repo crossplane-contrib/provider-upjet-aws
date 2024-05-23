@@ -13,7 +13,7 @@ metadata:
   name: sample-cluster
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     engine: memcached
     maintenanceWindow: sun:05:00-sun:09:00
     nodeType: cache.t2.micro
@@ -39,7 +39,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -56,7 +56,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdRefs:
       - name: example
 
@@ -72,9 +72,9 @@ metadata:
   name: example
 spec:
   forProvider:
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2b
     cidrBlock: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -92,4 +92,4 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
-    region: us-west-1
+    region: us-east-2

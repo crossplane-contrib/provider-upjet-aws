@@ -18,7 +18,7 @@ spec:
     distribution: Random
     filterPattern: testpattern
     logGroupName: example
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: iam_for_cloudwatch
@@ -31,7 +31,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     tags:
       Application: serviceA
       Environment: production
@@ -48,7 +48,7 @@ metadata:
     testing.upbound.io/example-name: stream
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     retentionPeriod: 48
     shardCount: 1
     shardLevelMetrics:

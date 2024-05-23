@@ -25,7 +25,7 @@ spec:
       resourceValue: RESOURCE_ID
     - name: SSEAlgorithm
       staticValue: AES256
-    region: us-west-1
+    region: us-east-2
     resourceType: AWS::S3::Bucket
     retryAttemptSeconds: 600
     targetId: AWS-EnableS3BucketEncryption
@@ -44,7 +44,7 @@ metadata:
   name: this
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     source:
       - owner: AWS
         sourceIdentifier: S3_BUCKET_VERSIONING_ENABLED
@@ -61,7 +61,7 @@ metadata:
   name: example-recorder
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: r

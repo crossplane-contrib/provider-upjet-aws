@@ -12,6 +12,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     studioLifecycleConfigAppType: JupyterServer
     studioLifecycleConfigContent: ${base64encode("echo Hello")}

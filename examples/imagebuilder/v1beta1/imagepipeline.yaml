@@ -20,7 +20,7 @@ spec:
     infrastructureConfigurationArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -42,9 +42,9 @@ spec:
         volumeSize: 100
         volumeType: gp2
     component:
-    - componentArn: arn:aws:imagebuilder:us-west-1:153891904029:component/test-component/1.0.0/1
-    parentImage: "arn:aws:imagebuilder:us-west-1:aws:image/amazon-linux-2-x86/x.x.x"
-    region: us-west-1
+    - componentArn: arn:aws:imagebuilder:us-east-2:153891904029:component/test-component/1.0.0/1
+    parentImage: "arn:aws:imagebuilder:us-east-2:aws:image/amazon-linux-2-x86/x.x.x"
+    region: us-east-2
     version: 1.0.0
 
 ---
@@ -62,7 +62,7 @@ spec:
     instanceProfileNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    region: us-west-1
+    region: us-east-2
 
 ---
 

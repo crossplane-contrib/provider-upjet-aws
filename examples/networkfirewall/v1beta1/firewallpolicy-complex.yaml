@@ -29,7 +29,7 @@ spec:
           - resourceArnSelector:
               matchLabels:
                 testing.upbound.io/example-name: example-deny
-    region: us-west-1
+    region: us-east-2
 
 ---
 
@@ -45,7 +45,7 @@ spec:
   forProvider:
     capacity: 1
     name: example-forward-all
-    region: us-west-1
+    region: us-east-2
     ruleGroup:
       - rulesSource:
         - statelessRulesAndCustomActions:
@@ -75,7 +75,7 @@ spec:
   forProvider:
     capacity: 1000
     name: example-allow-domainlist
-    region: us-west-1
+    region: us-east-2
     ruleGroup:
       - ruleVariables:
         - ipSets:
@@ -107,7 +107,7 @@ spec:
   forProvider:
     capacity: 300
     name: example-deny
-    region: us-west-1
+    region: us-east-2
     ruleGroup:
       - ruleVariables:
         - ipSets:

@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     enableSipLogs: true
-    region: us-west-1
+    region: us-east-2
     voiceConnectorIdSelector:
       matchLabels:
         testing.upbound.io/example-name: default
@@ -28,5 +28,5 @@ metadata:
   name: default
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     requireEncryption: true

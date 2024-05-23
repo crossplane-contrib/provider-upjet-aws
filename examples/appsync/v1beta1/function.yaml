@@ -19,7 +19,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: example
-    region: us-west-1
+    region: us-east-2
     requestMappingTemplate: |
       {
           "version": "2018-05-29",
@@ -51,7 +51,7 @@ spec:
         testing.upbound.io/example-name: example
     httpConfig:
     - endpoint: http://example.com
-    region: us-west-1
+    region: us-east-2
     type: HTTP
 ---
 apiVersion: appsync.aws.upbound.io/v1beta1
@@ -66,7 +66,7 @@ spec:
   forProvider:
     authenticationType: API_KEY
     name: example
-    region: us-west-1
+    region: us-east-2
     schema: |
       type Mutation {
         putPost(id: ID!, title: String!): Post

@@ -10,7 +10,7 @@ metadata:
     meta.upbound.io/example-id: ec2/v1beta1/vpc
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc

@@ -15,7 +15,7 @@ spec:
   forProvider:
     cdcStartTime: "1484346880"
     migrationType: full-load
-    region: us-west-1
+    region: us-east-2
     replicationInstanceArnSelector:
       matchLabels:
         testing.upbound.io/example-name: test-dms-replication-instance-tf
@@ -48,7 +48,7 @@ spec:
     multiAz: false
     preferredMaintenanceWindow: sun:10:30-sun:14:30
     publiclyAccessible: true
-    region: us-west-1
+    region: us-east-2
     replicationInstanceClass: dms.t2.micro
     tags:
       Name: test
@@ -374,18 +374,18 @@ metadata:
   name: test-source
 spec:
   forProvider:
-    certificateArn: arn:aws:dms:us-west-1:153891904029:cert:5RO6Q5Y2PWAZWQG7X5GSQLYXMH56CEH4DMXACGA
+    certificateArn: arn:aws:dms:us-east-2:153891904029:cert:5RO6Q5Y2PWAZWQG7X5GSQLYXMH56CEH4DMXACGA
     databaseName: test-source
     endpointType: source
     engineName: aurora
     extraConnectionAttributes: ""
-    kmsKeyArn: arn:aws:kms:us-west-1:153891904029:key/5478859d-f936-492a-bd04-f77095b7aa0e
+    kmsKeyArn: arn:aws:kms:us-east-2:153891904029:key/5478859d-f936-492a-bd04-f77095b7aa0e
     passwordSecretRef:
       key: example-key
       name: endpoint-secret
       namespace: upbound-system
     port: 3306
-    region: us-west-1
+    region: us-east-2
     serverName: test-source
     sslMode: none
     tags:
@@ -405,18 +405,18 @@ metadata:
   name: test-target
 spec:
   forProvider:
-    certificateArn: arn:aws:dms:us-west-1:153891904029:cert:5RO6Q5Y2PWAZWQG7X5GSQLYXMH56CEH4DMXACGA
+    certificateArn: arn:aws:dms:us-east-2:153891904029:cert:5RO6Q5Y2PWAZWQG7X5GSQLYXMH56CEH4DMXACGA
     databaseName: test-target
     endpointType: target
     engineName: aurora
     extraConnectionAttributes: ""
-    kmsKeyArn: arn:aws:kms:us-west-1:153891904029:key/5478859d-f936-492a-bd04-f77095b7aa0e
+    kmsKeyArn: arn:aws:kms:us-east-2:153891904029:key/5478859d-f936-492a-bd04-f77095b7aa0e
     passwordSecretRef:
       key: example-key
       name: endpoint-secret
       namespace: upbound-system
     port: 3307
-    region: us-west-1
+    region: us-east-2
     serverName: test
     sslMode: none
     tags:
@@ -440,7 +440,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: test
 
@@ -489,7 +489,7 @@ spec:
   forProvider:
     deletionWindowInDays: 7
     description: KMS Key
-    region: us-west-1
+    region: us-east-2
 
 ---
 

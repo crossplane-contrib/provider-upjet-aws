@@ -16,7 +16,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example-pia
     namespace: example
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example-pia
@@ -35,7 +35,7 @@ metadata:
   name: eks-cluster-pia
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     roleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example-pia
@@ -99,9 +99,9 @@ metadata:
   name: sample-subnet1
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     mapPublicIpOnLaunch: true
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2b
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.10.0/24
@@ -118,9 +118,9 @@ metadata:
   name: sample-subnet2
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     mapPublicIpOnLaunch: true
-    availabilityZone: us-west-1a
+    availabilityZone: us-east-2a
     vpcIdRef:
       name: sample-vpc
     cidrBlock: 172.16.11.0/24
@@ -138,7 +138,7 @@ metadata:
 spec:
   forProvider:
     enableDnsHostnames: true
-    region: us-west-1
+    region: us-east-2
     cidrBlock: 172.16.0.0/16
     tags:
       Name: DemoVpc
