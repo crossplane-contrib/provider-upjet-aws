@@ -163,8 +163,8 @@ An IRSA configuration requires multiple components:
 * Creating an IAM policy granting the AWS provider access to AWS resources.
 * Creating an IAM role for the AWS provider to associate with the AWS provider.
 * Creating a Kubernetes service account.
-* Create a `ControllerConfig` to associate the IAM role ARN.
-* Apply the `ControllerConfig` to the `Provider`.
+* Create a `DeploymentRuntimeConfig` to associate the IAM role ARN.
+* Apply the `DeploymentRuntimeConfig` to the `Provider`.
 * Instruct the `ProviderConfig` to use `IRSA` credentials.
 
 <!-- Disable heading acronym rule to ignore "OIDC" -->
@@ -199,10 +199,10 @@ $ aws iam list-open-id-connect-providers
 ```
 
 ##### Create an IAM policy
-Define the actions the AWS provider can take by creating an IAM policy. 
+Define the actions the AWS provider can take by creating an IAM policy.
 
 For example, here is a custom IAM policy to enable `SystemAdministrator` level
-access. 
+access.
 ```json
 {
     "Version": "2012-10-17",
@@ -215,7 +215,7 @@ access.
     ]
 }
 ```
-Apply the policy using the AWS command-line command 
+Apply the policy using the AWS command-line command
 ```shell
 aws iam create-policy \
 --policy-name <new policy name> \
@@ -223,7 +223,7 @@ aws iam create-policy \
 ```
 
 For example, to create a new policy named `custom-irsa-policy` from a policy
-file named `custom-policy.json`:  
+file named `custom-policy.json`:
 ```shell
 $ aws iam create-policy --policy-name custom-irsa-policy --policy-document file://custom-policy.json
 {
@@ -256,32 +256,32 @@ policy and generate a service account. You **must** change the role trust policy
 after creating it with `eksctl`.
 
 To use `eksctl` to create a new service account and IAM role use the command
-`eksctl create iamserviceaccount`. 
+`eksctl create iamserviceaccount`.
 
 ```shell
 eksctl create iamserviceaccount \
 --name <kubernetes service account name> \
 --role-name <IAM role name> \
---cluster <the name of the EKS cluster> 
+--cluster <the name of the EKS cluster>
 --attach-policy-arn <the ARN of the policy to apply> \
 --namespace upbound-system \
 --approve
 ```
 
-| Configuration option | Description | 
+| Configuration option | Description |
 | ---- | ---- |
 | `--name` | The name of the Kubernetes service account to create. |
-| `--role-name` | The name of the AWS IAM role to create. | 
+| `--role-name` | The name of the AWS IAM role to create. |
 | `--cluster` | The name of the EKS cluster. |
-| `--attach-policy-arn` | The ARN of the policy to attach to this service account and role. | 
+| `--attach-policy-arn` | The ARN of the policy to attach to this service account and role. |
 | `--namespace` | The namespace to create the Kubernetes service account in. This must be the same namespace as Universal Crossplane. (The Universal Crossplane default namespace is `upbound-system`.) |
 
 For example, to create a new service account with the configuration:
 
-| Configuration option | Configuration value | 
+| Configuration option | Configuration value |
 | ---- | ---- |
 | `--name` | `my-upbound-sa` |
-| `--role-name` | `eks-test-role` | 
+| `--role-name` | `eks-test-role` |
 | `--cluster` | `upbound-docs` |
 | `--attach-policy-arn` | `arn:aws:iam::000000000000:policy/custom-irsa-policy` |
 | `--namespace` | `upbound-system` |
@@ -325,7 +325,7 @@ Tokens:              my-upbound-sa-token-spq5k
 Events:              <none>
 ```
 
-Confirm the attachment between the IAM policy and new IAM role with the command 
+Confirm the attachment between the IAM policy and new IAM role with the command
 ```shell
 aws iam list-attached-role-policies \
 --role-name <role name> \
@@ -373,11 +373,11 @@ $ aws iam get-role \
 ```
 ##### Update the IAM role
 The IAM role created by `eksctl` doesn't have the correct `Conditions` for the
-AWS provider. 
+AWS provider.
 
-Update the role `Trust relationship`. 
+Update the role `Trust relationship`.
 
-Use the output of `aws iam-get role` as a starting template.  
+Use the output of `aws iam-get role` as a starting template.
 
 * Replace the `Condition.StringEquals` with `Condition.StringLike`.
 ```shell
@@ -387,14 +387,14 @@ Use the output of `aws iam-get role` as a starting template.
 
 * Replace the body of the new `Condition.StringLike` with the provider string.
 First, get the `OIDC issuer` with the command `aws eks decribe-cluster --name
-<cluster-name>`. 
+<cluster-name>`.
 
-For example, 
+For example,
 ```shell
 $ aws eks describe-cluster --name upbound-docs --query "cluster.identity.oidc.issuer" --output text | sed -E 's_^https?://__'
 oidc.eks.us-east-2.amazonaws.com/id/266A01FA1DBF8083FA1C23EB7D4736E4
 ```
-Use this value to build the new contents, in the form:  
+Use this value to build the new contents, in the form:
 `"<oidc issuer>:sub": "system:serviceaccount:<Universal Crossplane
 namespace>:provider-aws-*"`
 
@@ -443,10 +443,10 @@ aws iam update-assume-role-policy \
 --policy-document file://role.json
 ```
 
-##### Create a ControllerConfig
-A `ControllerConfig` creates settings used by the `Provider` deployment.
+##### Create a DeploymentRuntimeConfig
+A `DeploymentRuntimeConfig` creates settings used by the `Provider` deployment.
 
-For IRSA, the `ControllerConfig` provides an `annotation` of the ARN of the role
+For IRSA, the `DeploymentRuntimeConfig` provides an `annotation` of the ARN of the role
 used by the Kubernetes service account.
 
 First, use `kubectl describe service-account <name> -n upbound-system` to get
@@ -466,37 +466,36 @@ Tokens:              my-upbound-sa-token-spq5k
 Events:              <none>
 ```
 
-The `Annotations` value is the input for the `ControllerConfig`.
-
-_Note:_ the `ControllerConfig` required for IRSA configuration doesn't require a
-`spec` body.
+The `Annotations` value is the input for the `DeploymentRuntimeConfig`.
 
 ```yaml
-apiVersion: pkg.crossplane.io/v1alpha1
-kind: ControllerConfig
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
 metadata:
-  name: irsa-controllerconfig
-  annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::000000000000:role/eks-test-role
+  name: irsa-drc
 spec:
+  serviceAccountTemplate:
+    metadata:
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::000000000000:role/eks-test-role
 ```
 
-Apply the `ControllerConfig` with `kubectl apply -f` and verify the installation
-with `kubectl get controllerconfig`.
+Apply the `DeploymentRuntimeConfig` with `kubectl apply -f` and verify the installation
+with `kubectl get deploymentruntimeconfigs`.
 
 ```shell
-$ kubectl apply -f controller-config.yml
-$ kubectl get controllerconfig
+$ kubectl apply -f deployment-runtime-config.yml
+$ kubectl get deploymentruntimeconfigs
 NAME                    AGE
-irsa-controllerconfig   6s
+irsa-drc   6s
 ```
 
 ##### Create a Provider
-The `Provider` object references the `ControllerConfig` to use the AWS IAM role
+The `Provider` object references the `DeploymentRuntimeConfig` to use the AWS IAM role
 ARN.
 
-The `Provider.spec.controllerConfigRef.name` must match the
-`ControllerConfig.name` value. 
+The `Provider.spec.runtimeConfigRef.name` must match the
+`DeploymentRuntimeConfig.metadata.name` value.
 
 ```yaml
 apiVersion: pkg.crossplane.io/v1
@@ -505,8 +504,8 @@ metadata:
   name: provider-aws-s3
 spec:
   package: xpkg.upbound.io/upbound/provider-aws-s3:latest
-  controllerConfigRef:
-    name: irsa-controllerconfig
+  runtimeConfigRef:
+    name: irsa-drc
 ```
 
 Apply the `Provider` object with `kubectl apply -f` and verify with `kubectl get
@@ -524,9 +523,9 @@ _Note_: it may take up to five minutes for the provider `HEALTHY` value to be
 
 ##### Create a ProviderConfig
 The `ProviderConfig` explicitly configures the official AWS provider-family to use
-`IRSA` authentication. 
+`IRSA` authentication.
 
-Define the `ProviderConfig.spec.credentials.source` as `IRSA`. 
+Define the `ProviderConfig.spec.credentials.source` as `IRSA`.
 
 ```yaml
 apiVersion: aws.upbound.io/v1beta1
