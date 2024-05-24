@@ -2121,6 +2121,24 @@ spec:
                   atRestEncryptionEnabled:
                     description: Whether to enable encryption at rest.
                     type: boolean
+                  authTokenSecretRef:
+                    description: Password used to access a password protected server.
+                      Can be specified only if transit_encryption_enabled = true.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   authTokenUpdateStrategy:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.

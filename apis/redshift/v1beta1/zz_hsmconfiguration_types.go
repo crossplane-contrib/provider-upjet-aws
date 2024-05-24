@@ -24,6 +24,9 @@ type HSMConfigurationInitParameters struct {
 	// The name of the partition in the HSM where the Amazon Redshift clusters will store their database encryption keys.
 	HSMPartitionName *string `json:"hsmPartitionName,omitempty" tf:"hsm_partition_name,omitempty"`
 
+	// The password required to access the HSM partition.
+	HSMPartitionPasswordSecretRef v1.SecretKeySelector `json:"hsmPartitionPasswordSecretRef" tf:"-"`
+
 	// The HSMs public certificate file. When using Cloud HSM, the file name is server.pem.
 	HSMServerPublicCertificate *string `json:"hsmServerPublicCertificate,omitempty" tf:"hsm_server_public_certificate,omitempty"`
 

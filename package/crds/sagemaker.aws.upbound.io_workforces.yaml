@@ -293,8 +293,6 @@ spec:
                           description: The OIDC IdP user information endpoint used
                             to configure your private workforce.
                           type: string
-                      required:
-                      - clientSecretSecretRef
                       type: object
                     type: array
                   region:
@@ -539,6 +537,24 @@ spec:
                           description: The client ID for your Amazon Cognito user
                             pool.
                           type: string
+                        clientSecretSecretRef:
+                          description: The OIDC IdP client secret used to configure
+                            your private workforce.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         issuer:
                           description: The OIDC IdP issuer used to configure your
                             private workforce.
@@ -559,6 +575,8 @@ spec:
                           description: The OIDC IdP user information endpoint used
                             to configure your private workforce.
                           type: string
+                      required:
+                      - clientSecretSecretRef
                       type: object
                     type: array
                   sourceIpConfig:

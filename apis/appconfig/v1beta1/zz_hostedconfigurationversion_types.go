@@ -41,6 +41,9 @@ type HostedConfigurationVersionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationProfileIDSelector *v1.Selector `json:"configurationProfileIdSelector,omitempty" tf:"-"`
 
+	// Content of the configuration or the configuration data.
+	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
+
 	// Standard MIME type describing the format of the configuration content. For more information, see Content-Type.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 

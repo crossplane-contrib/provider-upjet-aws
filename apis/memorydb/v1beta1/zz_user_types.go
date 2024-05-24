@@ -14,6 +14,7 @@ import (
 )
 
 type AuthenticationModeInitParameters struct {
+	Passwords []*string `json:"passwordsSecretRef,omitempty" tf:"-"`
 
 	// Specifies the authentication type. Valid values are: password or iam.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`

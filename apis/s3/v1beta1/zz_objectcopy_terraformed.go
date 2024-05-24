@@ -21,7 +21,7 @@ func (mg *ObjectCopy) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ObjectCopy
 func (tr *ObjectCopy) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"customer_key": "spec.forProvider.customerKeySecretRef", "kms_encryption_context": "spec.forProvider.kmsEncryptionContextSecretRef", "kms_key_id": "spec.forProvider.kmsKeyIdSecretRef", "source_customer_key": "spec.forProvider.sourceCustomerKeySecretRef"}
+	return map[string]string{"customer_key": "customerKeySecretRef", "kms_encryption_context": "kmsEncryptionContextSecretRef", "kms_key_id": "kmsKeyIdSecretRef", "source_customer_key": "sourceCustomerKeySecretRef"}
 }
 
 // GetObservation of this ObjectCopy

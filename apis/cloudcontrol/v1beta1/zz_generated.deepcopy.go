@@ -63,6 +63,11 @@ func (in *ResourceInitParameters) DeepCopyInto(out *ResourceInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SchemaSecretRef != nil {
+		in, out := &in.SchemaSecretRef, &out.SchemaSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.TypeName != nil {
 		in, out := &in.TypeName, &out.TypeName
 		*out = new(string)

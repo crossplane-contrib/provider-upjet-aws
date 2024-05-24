@@ -43,6 +43,10 @@ type BucketReplicationConfigurationInitParameters struct {
 
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketReplicationConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
+	// For more details, see Using S3 Object Lock with replication.
+	TokenSecretRef *v1.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
 type BucketReplicationConfigurationObservation struct {

@@ -106,6 +106,9 @@ type OntapFileSystemInitParameters struct {
 	// Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.
 	EndpointIPAddressRange *string `json:"endpointIpAddressRange,omitempty" tf:"endpoint_ip_address_range,omitempty"`
 
+	// The ONTAP administrative password for the fsxadmin user that you can use to administer your file system using the ONTAP CLI and REST API.
+	FSXAdminPasswordSecretRef *v1.SecretKeySelector `json:"fsxAdminPasswordSecretRef,omitempty" tf:"-"`
+
 	// - The number of ha_pairs to deploy for the file system. Valid values are 1 through 12. Value of 2 or greater required for SINGLE_AZ_2. Only value of 1 is supported with SINGLE_AZ_1 or MULTI_AZ_1 but not required.
 	HaPairs *float64 `json:"haPairs,omitempty" tf:"ha_pairs,omitempty"`
 

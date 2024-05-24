@@ -21,7 +21,7 @@ func (mg *DomainName) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this DomainName
 func (tr *DomainName) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"certificate_private_key": "spec.forProvider.certificatePrivateKeySecretRef"}
+	return map[string]string{"certificate_private_key": "certificatePrivateKeySecretRef"}
 }
 
 // GetObservation of this DomainName

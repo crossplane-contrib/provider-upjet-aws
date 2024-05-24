@@ -37,6 +37,9 @@ type DomainNameInitParameters struct {
 	// Unique name to use when registering this certificate as an IAM server certificate. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name. Required if certificate_arn is not set.
 	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
 
+	// Private key associated with the domain certificate given in certificate_body. Only valid for EDGE endpoint configuration type. Conflicts with certificate_arn, regional_certificate_arn, and regional_certificate_name.
+	CertificatePrivateKeySecretRef *v1.SecretKeySelector `json:"certificatePrivateKeySecretRef,omitempty" tf:"-"`
+
 	// Fully-qualified domain name to register.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 

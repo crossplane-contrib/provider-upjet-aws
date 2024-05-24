@@ -21,7 +21,7 @@ func (mg *Application) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Application
 func (tr *Application) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"app_source[*].password": "spec.forProvider.appSource[*].passwordSecretRef", "app_source[*].ssh_key": "spec.forProvider.appSource[*].sshKeySecretRef", "ssl_configuration[*].private_key": "spec.forProvider.sslConfiguration[*].privateKeySecretRef"}
+	return map[string]string{"app_source[*].password": "appSource[*].passwordSecretRef", "app_source[*].ssh_key": "appSource[*].sshKeySecretRef", "ssl_configuration[*].private_key": "sslConfiguration[*].privateKeySecretRef"}
 }
 
 // GetObservation of this Application

@@ -1047,6 +1047,28 @@ spec:
                     description: ID of the KMS key used to encrypt the cluster admin
                       credentials secret.
                     type: string
+                  masterPasswordSecretRef:
+                    description: |-
+                      Password for the master DB user.
+                      Conflicts with manage_master_password.
+                      One of master_password or manage_master_password is required unless snapshot_identifier is provided.
+                      Note that this may show up in logs, and it will be stored in the state file.
+                      Password must contain at least 8 characters and contain at least one uppercase letter, one lowercase letter, and one number.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   masterUsername:
                     description: Username for the master DB user.
                     type: string

@@ -289,6 +289,44 @@ spec:
                             type: string
                         type: object
                     type: object
+                  certificateChainSecretRef:
+                    description: PEM-encoded certificate chain that includes any intermediate
+                      certificates and chains up to root CA. Required for subordinate
+                      Certificate Authorities. Not allowed for root Certificate Authorities.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  certificateSecretRef:
+                    description: PEM-encoded certificate for the Certificate Authority.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                required:
+                - certificateSecretRef
                 type: object
               managementPolicies:
                 default:

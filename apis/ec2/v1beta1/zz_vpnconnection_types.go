@@ -255,6 +255,9 @@ type VPNConnectionInitParameters_2 struct {
 	// The lifetime for phase 2 of the IKE negotiation for the first VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	Tunnel1Phase2LifetimeSeconds *float64 `json:"tunnel1Phase2LifetimeSeconds,omitempty" tf:"tunnel1_phase2_lifetime_seconds,omitempty"`
 
+	// The preshared key of the first VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
+	Tunnel1PresharedKeySecretRef *v1.SecretKeySelector `json:"tunnel1PresharedKeySecretRef,omitempty" tf:"-"`
+
 	// The percentage of the rekey window for the first VPN tunnel (determined by tunnel1_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	Tunnel1RekeyFuzzPercentage *float64 `json:"tunnel1RekeyFuzzPercentage,omitempty" tf:"tunnel1_rekey_fuzz_percentage,omitempty"`
 
@@ -318,6 +321,9 @@ type VPNConnectionInitParameters_2 struct {
 
 	// The lifetime for phase 2 of the IKE negotiation for the second VPN tunnel, in seconds. Valid value is between 900 and 3600.
 	Tunnel2Phase2LifetimeSeconds *float64 `json:"tunnel2Phase2LifetimeSeconds,omitempty" tf:"tunnel2_phase2_lifetime_seconds,omitempty"`
+
+	// The preshared key of the second VPN tunnel. The preshared key must be between 8 and 64 characters in length and cannot start with zero(0). Allowed characters are alphanumeric characters, periods(.) and underscores(_).
+	Tunnel2PresharedKeySecretRef *v1.SecretKeySelector `json:"tunnel2PresharedKeySecretRef,omitempty" tf:"-"`
 
 	// The percentage of the rekey window for the second VPN tunnel (determined by tunnel2_rekey_margin_time_seconds) during which the rekey time is randomly selected. Valid value is between 0 and 100.
 	Tunnel2RekeyFuzzPercentage *float64 `json:"tunnel2RekeyFuzzPercentage,omitempty" tf:"tunnel2_rekey_fuzz_percentage,omitempty"`

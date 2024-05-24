@@ -118,8 +118,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - accountPasswordSecretRef
                       type: object
                     type: array
                 required:
@@ -162,6 +160,25 @@ spec:
                             on descendant computer objects for the organizational
                             units specified.'
                           type: string
+                        accountPasswordSecretRef:
+                          description: Password for the account.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - accountPasswordSecretRef
                       type: object
                     type: array
                 type: object

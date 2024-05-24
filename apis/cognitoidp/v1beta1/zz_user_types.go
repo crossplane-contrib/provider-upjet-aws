@@ -36,6 +36,12 @@ type UserInitParameters struct {
 	// Set to RESEND to resend the invitation message to a user that already exists and reset the expiration limit on the user's account. Set to SUPPRESS to suppress sending the message. Only one value can be specified. Amazon Cognito does not store the message_action value.
 	MessageAction *string `json:"messageAction,omitempty" tf:"message_action,omitempty"`
 
+	// The user's permanent password. This password must conform to the password policy specified by user pool the user belongs to. The welcome message always contains only temporary_password value. You can suppress sending the welcome message with the message_action argument. Amazon Cognito does not store the password value. Conflicts with temporary_password.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
+	// The user's temporary password. Conflicts with password.
+	TemporaryPasswordSecretRef *v1.SecretKeySelector `json:"temporaryPasswordSecretRef,omitempty" tf:"-"`
+
 	// The user's validation data. This is an array of name-value pairs that contain user attributes and attribute values that you can use for custom validation, such as restricting the types of user accounts that can be registered. Amazon Cognito does not store the validation_data value. For more information, see Customizing User Pool Workflows with Lambda Triggers.
 	// +mapType=granular
 	ValidationData map[string]*string `json:"validationData,omitempty" tf:"validation_data,omitempty"`

@@ -430,6 +430,42 @@ spec:
                     description: The platform that the app is registered with. See
                       Platform for supported platforms.
                     type: string
+                  platformCredentialSecretRef:
+                    description: Application Platform credential. See Credential for
+                      type of credential required for platform.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  platformPrincipalSecretRef:
+                    description: Application Platform principal. See Principal for
+                      type of principal required for platform.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   successFeedbackRoleArn:
                     description: The IAM role ARN permitted to receive success feedback
                       for this application and give SNS write access to use CloudWatch
@@ -513,6 +549,8 @@ spec:
                     description: The sample rate percentage (0-100) of successfully
                       delivered messages.
                     type: string
+                required:
+                - platformCredentialSecretRef
                 type: object
               managementPolicies:
                 default:

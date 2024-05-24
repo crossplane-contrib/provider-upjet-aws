@@ -7,10 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *DataCatalog) Hub() {}
+func (tr *Database) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Database) Hub() {}
+func (tr *DataCatalog) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NamedQuery) Hub() {}

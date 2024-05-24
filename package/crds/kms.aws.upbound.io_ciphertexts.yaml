@@ -279,6 +279,26 @@ spec:
                             type: string
                         type: object
                     type: object
+                  plaintextSecretRef:
+                    description: Data to be encrypted. Note that this may show up
+                      in logs, and it will be stored in the state file.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                required:
+                - plaintextSecretRef
                 type: object
               managementPolicies:
                 default:

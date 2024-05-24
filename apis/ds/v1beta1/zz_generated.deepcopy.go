@@ -499,6 +499,7 @@ func (in *DirectoryInitParameters) DeepCopyInto(out *DirectoryInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.ShortName != nil {
 		in, out := &in.ShortName, &out.ShortName
 		*out = new(string)
@@ -892,6 +893,11 @@ func (in *SharedDirectoryInitParameters) DeepCopyInto(out *SharedDirectoryInitPa
 	if in.Method != nil {
 		in, out := &in.Method, &out.Method
 		*out = new(string)
+		**out = **in
+	}
+	if in.NotesSecretRef != nil {
+		in, out := &in.NotesSecretRef, &out.NotesSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.Target != nil {

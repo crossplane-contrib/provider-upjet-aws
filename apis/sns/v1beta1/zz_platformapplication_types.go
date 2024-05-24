@@ -49,6 +49,12 @@ type PlatformApplicationInitParameters struct {
 	// The platform that the app is registered with. See Platform for supported platforms.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
 
+	// Application Platform credential. See Credential for type of credential required for platform.
+	PlatformCredentialSecretRef v1.SecretKeySelector `json:"platformCredentialSecretRef" tf:"-"`
+
+	// Application Platform principal. See Principal for type of principal required for platform.
+	PlatformPrincipalSecretRef *v1.SecretKeySelector `json:"platformPrincipalSecretRef,omitempty" tf:"-"`
+
 	// The IAM role ARN permitted to receive success feedback for this application and give SNS write access to use CloudWatch logs on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()

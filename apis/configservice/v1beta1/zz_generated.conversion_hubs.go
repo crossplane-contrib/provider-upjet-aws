@@ -7,6 +7,9 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *AWSConfigurationRecorderStatus) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ConfigRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -14,9 +17,6 @@ func (tr *ConfigurationAggregator) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ConfigurationRecorder) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *AWSConfigurationRecorderStatus) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ConformancePack) Hub() {}

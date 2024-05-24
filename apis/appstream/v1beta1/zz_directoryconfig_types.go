@@ -70,6 +70,9 @@ type ServiceAccountCredentialsInitParameters struct {
 
 	// User name of the account. This account must have the following privileges: create computer objects, join computers to the domain, and change/reset the password on descendant computer objects for the organizational units specified.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Password for the account.
+	AccountPasswordSecretRef v1.SecretKeySelector `json:"accountPasswordSecretRef" tf:"-"`
 }
 
 type ServiceAccountCredentialsObservation struct {
@@ -85,7 +88,7 @@ type ServiceAccountCredentialsParameters struct {
 	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
 
 	// Password for the account.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AccountPasswordSecretRef v1.SecretKeySelector `json:"accountPasswordSecretRef" tf:"-"`
 }
 

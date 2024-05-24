@@ -18,6 +18,9 @@ type PublicKeyInitParameters struct {
 	// An optional comment about the public key.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 
+	// The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+	EncodedKeySecretRef v1.SecretKeySelector `json:"encodedKeySecretRef" tf:"-"`
+
 	// The name for the public key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }

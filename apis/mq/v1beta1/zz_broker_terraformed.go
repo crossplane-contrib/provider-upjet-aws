@@ -21,7 +21,7 @@ func (mg *Broker) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Broker
 func (tr *Broker) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"ldap_server_metadata[*].service_account_password": "spec.forProvider.ldapServerMetadata[*].serviceAccountPasswordSecretRef", "user[*].password": "spec.forProvider.user[*].passwordSecretRef"}
+	return map[string]string{"ldap_server_metadata[*].service_account_password": "ldapServerMetadata[*].serviceAccountPasswordSecretRef", "user[*].password": "user[*].passwordSecretRef"}
 }
 
 // GetObservation of this Broker
@@ -118,6 +118,11 @@ func (tr *Broker) LateInitialize(attrs []byte) (bool, error) {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return false, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+	opts = append(opts, resource.WithConditionalFilter("User", initParams))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)

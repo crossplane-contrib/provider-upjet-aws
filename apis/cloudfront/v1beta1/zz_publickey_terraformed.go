@@ -21,7 +21,7 @@ func (mg *PublicKey) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this PublicKey
 func (tr *PublicKey) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"encoded_key": "spec.forProvider.encodedKeySecretRef"}
+	return map[string]string{"encoded_key": "encodedKeySecretRef"}
 }
 
 // GetObservation of this PublicKey

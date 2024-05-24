@@ -301,6 +301,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  connectionPropertiesSecretRef:
+                    additionalProperties:
+                      type: string
+                    type: object
                   connectionType:
                     description: '–  The type of the connection. Supported are: CUSTOM,
                       JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to

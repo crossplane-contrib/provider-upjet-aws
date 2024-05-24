@@ -21,7 +21,7 @@ func (mg *ReplicaExternalKey) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ReplicaExternalKey
 func (tr *ReplicaExternalKey) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"key_material_base64": "spec.forProvider.keyMaterialBase64SecretRef"}
+	return map[string]string{"key_material_base64": "keyMaterialBase64SecretRef"}
 }
 
 // GetObservation of this ReplicaExternalKey

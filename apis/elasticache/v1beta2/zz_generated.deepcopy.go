@@ -158,6 +158,11 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AuthTokenSecretRef != nil {
+		in, out := &in.AuthTokenSecretRef, &out.AuthTokenSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.AuthTokenUpdateStrategy != nil {
 		in, out := &in.AuthTokenUpdateStrategy, &out.AuthTokenUpdateStrategy
 		*out = new(string)

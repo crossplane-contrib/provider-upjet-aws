@@ -21,7 +21,7 @@ func (mg *OntapFileSystem) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OntapFileSystem
 func (tr *OntapFileSystem) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"fsx_admin_password": "spec.forProvider.fsxAdminPasswordSecretRef"}
+	return map[string]string{"fsx_admin_password": "fsxAdminPasswordSecretRef"}
 }
 
 // GetObservation of this OntapFileSystem

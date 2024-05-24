@@ -803,6 +803,9 @@ type MasterUserOptionsInitParameters struct {
 
 	// Main user's username, which is stored in the Amazon OpenSearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
 	MasterUserName *string `json:"masterUserName,omitempty" tf:"master_user_name,omitempty"`
+
+	// Main user's password, which is stored in the Amazon OpenSearch Service domain's internal database. Only specify if internal_user_database_enabled is set to true.
+	MasterUserPasswordSecretRef *v1.SecretKeySelector `json:"masterUserPasswordSecretRef,omitempty" tf:"-"`
 }
 
 type MasterUserOptionsObservation struct {

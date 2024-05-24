@@ -141,6 +141,16 @@ func (in *CertificateInitParameters) DeepCopyInto(out *CertificateInitParameters
 		*out = new(bool)
 		**out = **in
 	}
+	if in.CAPemSecretRef != nil {
+		in, out := &in.CAPemSecretRef, &out.CAPemSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.CertificatePemSecretRef != nil {
+		in, out := &in.CertificatePemSecretRef, &out.CertificatePemSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Csr != nil {
 		in, out := &in.Csr, &out.Csr
 		*out = new(string)

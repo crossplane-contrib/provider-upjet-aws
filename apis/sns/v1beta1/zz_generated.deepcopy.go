@@ -93,6 +93,12 @@ func (in *PlatformApplicationInitParameters) DeepCopyInto(out *PlatformApplicati
 		*out = new(string)
 		**out = **in
 	}
+	out.PlatformCredentialSecretRef = in.PlatformCredentialSecretRef
+	if in.PlatformPrincipalSecretRef != nil {
+		in, out := &in.PlatformPrincipalSecretRef, &out.PlatformPrincipalSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.SuccessFeedbackRoleArn != nil {
 		in, out := &in.SuccessFeedbackRoleArn, &out.SuccessFeedbackRoleArn
 		*out = new(string)

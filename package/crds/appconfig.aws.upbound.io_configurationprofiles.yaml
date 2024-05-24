@@ -525,6 +525,24 @@ spec:
                       Maximum of 2. See Validator below for more details.
                     items:
                       properties:
+                        contentSecretRef:
+                          description: Either the JSON Schema content or the ARN of
+                            an AWS Lambda function.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         type:
                           description: 'Type of validator. Valid values: JSON_SCHEMA
                             and LAMBDA.'

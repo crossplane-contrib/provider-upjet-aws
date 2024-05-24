@@ -175,6 +175,9 @@ type ConfigurationProfileParameters struct {
 
 type ValidatorInitParameters struct {
 
+	// Either the JSON Schema content or the ARN of an AWS Lambda function.
+	ContentSecretRef *v1.SecretKeySelector `json:"contentSecretRef,omitempty" tf:"-"`
+
 	// Type of validator. Valid values: JSON_SCHEMA and LAMBDA.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

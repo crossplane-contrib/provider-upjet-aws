@@ -21,7 +21,7 @@ func (mg *Certificate) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Certificate
 func (tr *Certificate) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"ca_pem": "spec.forProvider.caPemSecretRef", "certificate_pem": "spec.forProvider.certificatePemSecretRef", "private_key": "status.atProvider.privateKey", "public_key": "status.atProvider.publicKey"}
+	return map[string]string{"ca_pem": "caPemSecretRef", "certificate_pem": "certificatePemSecretRef", "private_key": "status.atProvider.privateKey", "public_key": "status.atProvider.publicKey"}
 }
 
 // GetObservation of this Certificate

@@ -30,6 +30,9 @@ type CertificateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
+	// Certificate Signing Request in PEM format.
+	CertificateSigningRequestSecretRef v1.SecretKeySelector `json:"certificateSigningRequestSecretRef" tf:"-"`
+
 	// Algorithm to use to sign certificate requests. Valid values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA, SHA512WITHRSA, SHA512WITHECDSA.
 	SigningAlgorithm *string `json:"signingAlgorithm,omitempty" tf:"signing_algorithm,omitempty"`
 

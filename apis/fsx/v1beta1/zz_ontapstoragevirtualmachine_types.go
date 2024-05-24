@@ -135,6 +135,8 @@ type OntapStorageVirtualMachineInitParameters struct {
 	// Specifies the root volume security style, Valid values are UNIX, NTFS, and MIXED. All volumes created under this SVM will inherit the root security style unless the security style is specified on the volume. Default value is UNIX.
 	RootVolumeSecurityStyle *string `json:"rootVolumeSecurityStyle,omitempty" tf:"root_volume_security_style,omitempty"`
 
+	SvmAdminPasswordSecretRef *v1.SecretKeySelector `json:"svmAdminPasswordSecretRef,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -251,6 +253,9 @@ type SelfManagedActiveDirectoryConfigurationInitParameters struct {
 	// The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. For example, OU=FSx,DC=yourdomain,DC=corp,DC=com. Only accepts OU as the direct parent of the SVM. If none is provided, the SVM is created in the default location of your self-managed AD directory. To learn more, see RFC 2253.
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
+	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -294,7 +299,7 @@ type SelfManagedActiveDirectoryConfigurationParameters struct {
 	OrganizationalUnitDistinguishedName *string `json:"organizationalUnitDistinguishedName,omitempty" tf:"organizational_unit_distinguished_name,omitempty"`
 
 	// The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.

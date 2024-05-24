@@ -30,6 +30,8 @@ type UserInitParameters struct {
 
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`

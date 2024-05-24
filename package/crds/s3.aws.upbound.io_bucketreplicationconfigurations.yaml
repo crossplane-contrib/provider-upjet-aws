@@ -1223,6 +1223,25 @@ spec:
                           type: string
                       type: object
                     type: array
+                  tokenSecretRef:
+                    description: |-
+                      Token to allow replication to be enabled on an Object Lock-enabled bucket. You must contact AWS support for the bucket's "Object Lock token".
+                      For more details, see Using S3 Object Lock with replication.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                 type: object
               managementPolicies:
                 default:

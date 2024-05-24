@@ -291,6 +291,25 @@ spec:
                     description: Method used when sharing a directory. Valid values
                       are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
                     type: string
+                  notesSecretRef:
+                    description: Message sent by the directory owner to the directory
+                      consumer to help the directory consumer administrator determine
+                      whether to approve or reject the share invitation.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   target:
                     description: Identifier for the directory consumer account with
                       whom the directory is to be shared. See below.

@@ -462,6 +462,26 @@ spec:
                       regional_certificate_arn, and regional_certificate_name. Required
                       if certificate_arn is not set.
                     type: string
+                  certificatePrivateKeySecretRef:
+                    description: Private key associated with the domain certificate
+                      given in certificate_body. Only valid for EDGE endpoint configuration
+                      type. Conflicts with certificate_arn, regional_certificate_arn,
+                      and regional_certificate_name.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   domainName:
                     description: Fully-qualified domain name to register.
                     type: string

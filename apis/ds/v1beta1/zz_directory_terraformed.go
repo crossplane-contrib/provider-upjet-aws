@@ -21,7 +21,7 @@ func (mg *Directory) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Directory
 func (tr *Directory) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+	return map[string]string{"password": "passwordSecretRef"}
 }
 
 // GetObservation of this Directory

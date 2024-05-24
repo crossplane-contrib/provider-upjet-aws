@@ -26,6 +26,12 @@ type CertificateAuthorityCertificateInitParameters struct {
 	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
+
+	// PEM-encoded certificate chain that includes any intermediate certificates and chains up to root CA. Required for subordinate Certificate Authorities. Not allowed for root Certificate Authorities.
+	CertificateChainSecretRef *v1.SecretKeySelector `json:"certificateChainSecretRef,omitempty" tf:"-"`
+
+	// PEM-encoded certificate for the Certificate Authority.
+	CertificateSecretRef v1.SecretKeySelector `json:"certificateSecretRef" tf:"-"`
 }
 
 type CertificateAuthorityCertificateObservation struct {

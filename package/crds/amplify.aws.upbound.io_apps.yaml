@@ -366,11 +366,50 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  accessTokenSecretRef:
+                    description: Personal access token for a third-party source control
+                      system for an Amplify app. This token must have write access
+                      to the relevant repo to create a webhook and a read-only deploy
+                      key for the Amplify project. The token is not stored, so after
+                      applying this attribute can be removed and the setup token deleted.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   autoBranchCreationConfig:
                     description: Automated branch creation configuration for an Amplify
                       app. An auto_branch_creation_config block is documented below.
                     items:
                       properties:
+                        basicAuthCredentialsSecretRef:
+                          description: Basic authorization credentials for the autocreated
+                            branch.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         buildSpec:
                           description: Build specification (build spec) for the autocreated
                             branch.
@@ -415,6 +454,24 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  basicAuthCredentialsSecretRef:
+                    description: Credentials for basic authorization for an Amplify
+                      app.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   buildSpec:
                     description: The build specification (build spec) for an Amplify
                       app.
@@ -551,6 +608,25 @@ spec:
                   name:
                     description: Name for an Amplify app.
                     type: string
+                  oauthTokenSecretRef:
+                    description: OAuth token for a third-party source control system
+                      for an Amplify app. The OAuth token is used to create a webhook
+                      and a read-only deploy key. The OAuth token is not stored.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   platform:
                     description: 'Platform or framework for an Amplify app. Valid
                       values: WEB, WEB_COMPUTE. Default value: WEB.'

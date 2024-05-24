@@ -21,7 +21,7 @@ func (mg *HostedConfigurationVersion) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this HostedConfigurationVersion
 func (tr *HostedConfigurationVersion) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"content": "spec.forProvider.contentSecretRef"}
+	return map[string]string{"content": "contentSecretRef"}
 }
 
 // GetObservation of this HostedConfigurationVersion

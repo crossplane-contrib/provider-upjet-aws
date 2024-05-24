@@ -21,7 +21,7 @@ func (mg *Server) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Server
 func (tr *Server) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"host_key": "spec.forProvider.hostKeySecretRef", "post_authentication_login_banner": "spec.forProvider.postAuthenticationLoginBannerSecretRef", "pre_authentication_login_banner": "spec.forProvider.preAuthenticationLoginBannerSecretRef"}
+	return map[string]string{"host_key": "hostKeySecretRef", "post_authentication_login_banner": "postAuthenticationLoginBannerSecretRef", "pre_authentication_login_banner": "preAuthenticationLoginBannerSecretRef"}
 }
 
 // GetObservation of this Server

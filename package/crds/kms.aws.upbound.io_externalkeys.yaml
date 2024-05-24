@@ -175,6 +175,26 @@ spec:
                       import can only be false. Imported keys default to true unless
                       expired.
                     type: boolean
+                  keyMaterialBase64SecretRef:
+                    description: Base64 encoded 256-bit symmetric encryption key material
+                      to import. The CMK is permanently associated with this key material.
+                      The same key material can be reimported, but you cannot import
+                      different key material.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   multiRegion:
                     description: Indicates whether the KMS key is a multi-Region (true)
                       or regional (false) key. Defaults to false.

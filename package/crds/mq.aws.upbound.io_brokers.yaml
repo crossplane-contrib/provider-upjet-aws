@@ -635,8 +635,6 @@ spec:
                         username:
                           description: Username of the user.
                           type: string
-                      required:
-                      - passwordSecretRef
                       type: object
                     type: array
                 required:
@@ -910,6 +908,23 @@ spec:
                           description: Whether the directory search scope is the entire
                             sub-tree.
                           type: boolean
+                        serviceAccountPasswordSecretRef:
+                          description: Service account password.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         serviceAccountUsername:
                           description: Service account username.
                           type: string
@@ -1170,6 +1185,25 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        passwordSecretRef:
+                          description: Password of the user. It must be 12 to 250
+                            characters long, at least 4 unique characters, and must
+                            not contain commas.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         replicationUser:
                           description: Whether to set set replication user. Defaults
                             to false.
@@ -1177,6 +1211,8 @@ spec:
                         username:
                           description: Username of the user.
                           type: string
+                      required:
+                      - passwordSecretRef
                       type: object
                     type: array
                 type: object

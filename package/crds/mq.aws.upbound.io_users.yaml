@@ -278,10 +278,30 @@ spec:
                     items:
                       type: string
                     type: array
+                  passwordSecretRef:
+                    description: A SecretKeySelector is a reference to a secret key
+                      in an arbitrary namespace.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   replicationUser:
                     type: boolean
                   username:
                     type: string
+                required:
+                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:

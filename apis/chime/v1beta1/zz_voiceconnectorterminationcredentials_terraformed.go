@@ -21,7 +21,7 @@ func (mg *VoiceConnectorTerminationCredentials) GetTerraformResourceType() strin
 
 // GetConnectionDetailsMapping for this VoiceConnectorTerminationCredentials
 func (tr *VoiceConnectorTerminationCredentials) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"credentials[*].password": "spec.forProvider.credentials[*].passwordSecretRef"}
+	return map[string]string{"credentials[*].password": "credentials[*].passwordSecretRef"}
 }
 
 // GetObservation of this VoiceConnectorTerminationCredentials

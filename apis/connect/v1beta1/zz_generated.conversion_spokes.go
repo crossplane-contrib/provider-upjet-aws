@@ -15,48 +15,60 @@ import (
 
 // ConvertTo converts this HoursOfOperation to the hub type.
 func (tr *HoursOfOperation) ConvertTo(dstRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := dstRaw.GetObjectKind().GroupVersionKind().Version
 	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
-		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", tr.GetObjectKind().GroupVersionKind().Version, dstRaw.GetObjectKind().GroupVersionKind().Version)
+		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", spokeVersion, hubVersion)
 	}
 	return nil
 }
 
 // ConvertFrom converts from the hub type to the HoursOfOperation type.
 func (tr *HoursOfOperation) ConvertFrom(srcRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := srcRaw.GetObjectKind().GroupVersionKind().Version
 	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
-		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", srcRaw.GetObjectKind().GroupVersionKind().Version, tr.GetObjectKind().GroupVersionKind().Version)
+		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", hubVersion, spokeVersion)
 	}
 	return nil
 }
 
 // ConvertTo converts this Queue to the hub type.
 func (tr *Queue) ConvertTo(dstRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := dstRaw.GetObjectKind().GroupVersionKind().Version
 	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
-		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", tr.GetObjectKind().GroupVersionKind().Version, dstRaw.GetObjectKind().GroupVersionKind().Version)
+		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", spokeVersion, hubVersion)
 	}
 	return nil
 }
 
 // ConvertFrom converts from the hub type to the Queue type.
 func (tr *Queue) ConvertFrom(srcRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := srcRaw.GetObjectKind().GroupVersionKind().Version
 	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
-		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", srcRaw.GetObjectKind().GroupVersionKind().Version, tr.GetObjectKind().GroupVersionKind().Version)
+		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", hubVersion, spokeVersion)
 	}
 	return nil
 }
 
 // ConvertTo converts this RoutingProfile to the hub type.
 func (tr *RoutingProfile) ConvertTo(dstRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := dstRaw.GetObjectKind().GroupVersionKind().Version
 	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
-		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", tr.GetObjectKind().GroupVersionKind().Version, dstRaw.GetObjectKind().GroupVersionKind().Version)
+		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", spokeVersion, hubVersion)
 	}
 	return nil
 }
 
 // ConvertFrom converts from the hub type to the RoutingProfile type.
 func (tr *RoutingProfile) ConvertFrom(srcRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := srcRaw.GetObjectKind().GroupVersionKind().Version
 	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
-		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", srcRaw.GetObjectKind().GroupVersionKind().Version, tr.GetObjectKind().GroupVersionKind().Version)
+		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", hubVersion, spokeVersion)
 	}
 	return nil
 }

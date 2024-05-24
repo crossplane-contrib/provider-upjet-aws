@@ -31,6 +31,9 @@ type ResourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
+	// JSON string of the CloudFormation resource type schema which is used for plan time validation where possible. Automatically fetched if not provided. In large scale environments with multiple resources using the same type_name, it is recommended to fetch the schema once via the aws_cloudformation_type data source and use this argument to reduce DescribeType API operation throttling. This value is marked sensitive only to prevent large plan differences from showing.
+	SchemaSecretRef *v1.SecretKeySelector `json:"schemaSecretRef,omitempty" tf:"-"`
+
 	// CloudFormation resource type name. For example, AWS::EC2::VPC.
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 

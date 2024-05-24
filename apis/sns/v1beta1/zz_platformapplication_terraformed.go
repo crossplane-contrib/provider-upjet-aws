@@ -21,7 +21,7 @@ func (mg *PlatformApplication) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this PlatformApplication
 func (tr *PlatformApplication) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"platform_credential": "spec.forProvider.platformCredentialSecretRef", "platform_principal": "spec.forProvider.platformPrincipalSecretRef"}
+	return map[string]string{"platform_credential": "platformCredentialSecretRef", "platform_principal": "platformPrincipalSecretRef"}
 }
 
 // GetObservation of this PlatformApplication

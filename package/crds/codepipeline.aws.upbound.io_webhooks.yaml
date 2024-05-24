@@ -244,6 +244,25 @@ spec:
                           description: A valid CIDR block for IP filtering. Required
                             for IP.
                           type: string
+                        secretTokenSecretRef:
+                          description: The shared secret for the GitHub repository
+                            webhook. Set this as secret in your github_repository_webhook's
+                            configuration block. Required for GITHUB_HMAC.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                       type: object
                     type: array
                   filter:

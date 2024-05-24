@@ -28,6 +28,9 @@ type ServerCertificateInitParameters struct {
 	// See IAM Identifiers for more details on IAM Paths.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
+	// encoded format.
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

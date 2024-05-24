@@ -36,6 +36,10 @@ type BucketObjectLockConfigurationInitParameters struct {
 
 	// Configuration block for specifying the Object Lock rule for the specified object. See below.
 	Rule []BucketObjectLockConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// Token to allow Object Lock to be enabled for an existing bucket. You must contact AWS support for the bucket's "Object Lock token".
+	// The token is generated in the back-end when versioning is enabled on a bucket. For more details on versioning, see the aws_s3_bucket_versioning resource.
+	TokenSecretRef *v1.SecretKeySelector `json:"tokenSecretRef,omitempty" tf:"-"`
 }
 
 type BucketObjectLockConfigurationObservation struct {

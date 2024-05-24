@@ -79,6 +79,9 @@ type UserInitParameters struct {
 	// The user name for the account. For instances not using SAML for identity management, the user name can include up to 20 characters. If you are using SAML for identity management, the user name can include up to 64 characters from [a-zA-Z0-9_-.\@]+.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The password for the user account. A password is required if you are using Amazon Connect for identity management. Otherwise, it is an error to include a password.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// A block that contains information about the phone settings for the user. Documented below.
 	PhoneConfig []UserPhoneConfigInitParameters `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
 

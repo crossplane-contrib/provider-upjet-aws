@@ -329,6 +329,45 @@ spec:
                       message. Only one value can be specified. Amazon Cognito does
                       not store the message_action value.
                     type: string
+                  passwordSecretRef:
+                    description: The user's permanent password. This password must
+                      conform to the password policy specified by user pool the user
+                      belongs to. The welcome message always contains only temporary_password
+                      value. You can suppress sending the welcome message with the
+                      message_action argument. Amazon Cognito does not store the password
+                      value. Conflicts with temporary_password.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  temporaryPasswordSecretRef:
+                    description: The user's temporary password. Conflicts with password.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   validationData:
                     additionalProperties:
                       type: string

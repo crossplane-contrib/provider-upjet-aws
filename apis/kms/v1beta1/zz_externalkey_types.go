@@ -27,6 +27,9 @@ type ExternalKeyInitParameters struct {
 	// Specifies whether the key is enabled. Keys pending import can only be false. Imported keys default to true unless expired.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Base64 encoded 256-bit symmetric encryption key material to import. The CMK is permanently associated with this key material. The same key material can be reimported, but you cannot import different key material.
+	KeyMaterialBase64SecretRef *v1.SecretKeySelector `json:"keyMaterialBase64SecretRef,omitempty" tf:"-"`
+
 	// Indicates whether the KMS key is a multi-Region (true) or regional (false) key. Defaults to false.
 	MultiRegion *bool `json:"multiRegion,omitempty" tf:"multi_region,omitempty"`
 

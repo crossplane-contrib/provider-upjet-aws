@@ -21,7 +21,7 @@ func (mg *SharedDirectory) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SharedDirectory
 func (tr *SharedDirectory) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"notes": "spec.forProvider.notesSecretRef"}
+	return map[string]string{"notes": "notesSecretRef"}
 }
 
 // GetObservation of this SharedDirectory

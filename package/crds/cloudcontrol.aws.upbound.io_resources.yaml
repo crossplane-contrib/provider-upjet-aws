@@ -287,6 +287,30 @@ spec:
                             type: string
                         type: object
                     type: object
+                  schemaSecretRef:
+                    description: JSON string of the CloudFormation resource type schema
+                      which is used for plan time validation where possible. Automatically
+                      fetched if not provided. In large scale environments with multiple
+                      resources using the same type_name, it is recommended to fetch
+                      the schema once via the aws_cloudformation_type data source
+                      and use this argument to reduce DescribeType API operation throttling.
+                      This value is marked sensitive only to prevent large plan differences
+                      from showing.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   typeName:
                     description: CloudFormation resource type name. For example, AWS::EC2::VPC.
                     type: string

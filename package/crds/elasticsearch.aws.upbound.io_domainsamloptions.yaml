@@ -181,6 +181,25 @@ spec:
                             full permissions to the cluster, equivalent to a new master
                             user.
                           type: string
+                        masterUserNameSecretRef:
+                          description: This username from the SAML IdP receives full
+                            permissions to the cluster, equivalent to a new master
+                            user.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         rolesKey:
                           description: Element of the SAML assertion to use for backend
                             roles. Default is roles.

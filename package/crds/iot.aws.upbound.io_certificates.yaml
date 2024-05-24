@@ -149,6 +149,46 @@ spec:
                     description: Boolean flag to indicate if the certificate should
                       be active
                     type: boolean
+                  caPemSecretRef:
+                    description: The CA certificate for the certificate to be registered.
+                      If this is set, the CA needs to be registered with AWS IoT beforehand.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  certificatePemSecretRef:
+                    description: |-
+                      The certificate to be registered. If ca_pem is unspecified, review
+                      RegisterCertificateWithoutCA.
+                      If ca_pem is specified, review
+                      RegisterCertificate
+                      for more information on registering a certificate.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   csr:
                     description: |-
                       The certificate signing request. Review

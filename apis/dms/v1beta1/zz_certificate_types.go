@@ -15,6 +15,12 @@ import (
 
 type CertificateInitParameters struct {
 
+	// The contents of the .pem X.509 certificate file for the certificate. Either certificate_pem or certificate_wallet must be set.
+	CertificatePemSecretRef *v1.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
+
+	// The contents of the Oracle Wallet certificate for use with SSL, provided as a base64-encoded String. Either certificate_pem or certificate_wallet must be set.
+	CertificateWalletSecretRef *v1.SecretKeySelector `json:"certificateWalletSecretRef,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

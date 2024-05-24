@@ -21,7 +21,7 @@ func (mg *Endpoint) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Endpoint
 func (tr *Endpoint) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"kafka_settings[*].sasl_password": "spec.forProvider.kafkaSettings[*].saslPasswordSecretRef", "kafka_settings[*].ssl_client_key_password": "spec.forProvider.kafkaSettings[*].sslClientKeyPasswordSecretRef", "password": "spec.forProvider.passwordSecretRef", "redis_settings[*].auth_password": "spec.forProvider.redisSettings[*].authPasswordSecretRef"}
+	return map[string]string{"kafka_settings[*].sasl_password": "kafkaSettings[*].saslPasswordSecretRef", "kafka_settings[*].ssl_client_key_password": "kafkaSettings[*].sslClientKeyPasswordSecretRef", "password": "passwordSecretRef", "redis_settings[*].auth_password": "redisSettings[*].authPasswordSecretRef"}
 }
 
 // GetObservation of this Endpoint

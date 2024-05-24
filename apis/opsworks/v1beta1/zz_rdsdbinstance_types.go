@@ -15,6 +15,9 @@ import (
 
 type RDSDBInstanceInitParameters struct {
 
+	// A db password
+	DBPasswordSecretRef v1.SecretKeySelector `json:"dbPasswordSecretRef" tf:"-"`
+
 	// A db username
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 

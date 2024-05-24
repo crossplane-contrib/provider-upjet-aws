@@ -17,6 +17,9 @@ type APIKeyInitParameters struct {
 
 	// Header Name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type APIKeyObservation struct {
@@ -32,7 +35,7 @@ type APIKeyParameters struct {
 	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Header Value. Created and stored in AWS Secrets Manager.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -87,6 +90,9 @@ type AuthParametersParameters struct {
 
 type BasicInitParameters struct {
 
+	// A password for the authorization. Created and stored in AWS Secrets Manager.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// A username for the authorization.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -100,7 +106,7 @@ type BasicObservation struct {
 type BasicParameters struct {
 
 	// A password for the authorization. Created and stored in AWS Secrets Manager.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// A username for the authorization.
@@ -115,6 +121,9 @@ type BodyInitParameters struct {
 
 	// Header Name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type BodyObservation struct {
@@ -145,6 +154,9 @@ type ClientParametersInitParameters struct {
 
 	// The client ID for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The client secret for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 }
 
 type ClientParametersObservation struct {
@@ -160,7 +172,7 @@ type ClientParametersParameters struct {
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The client secret for the credentials to use for authorization. Created and stored in AWS Secrets Manager.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 }
 
@@ -223,6 +235,9 @@ type HeaderInitParameters struct {
 
 	// Header Name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type HeaderObservation struct {
@@ -295,6 +310,9 @@ type OauthHTTPParametersBodyInitParameters struct {
 
 	// Header Name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersBodyObservation struct {
@@ -328,6 +346,9 @@ type OauthHTTPParametersHeaderInitParameters struct {
 
 	// Header Name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersHeaderObservation struct {
@@ -400,6 +421,9 @@ type OauthHTTPParametersQueryStringInitParameters struct {
 
 	// Header Name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type OauthHTTPParametersQueryStringObservation struct {
@@ -482,6 +506,9 @@ type QueryStringInitParameters struct {
 
 	// Header Name.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Header Value. Created and stored in AWS Secrets Manager.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type QueryStringObservation struct {

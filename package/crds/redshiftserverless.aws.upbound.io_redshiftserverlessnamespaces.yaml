@@ -400,6 +400,43 @@ spec:
                     description: ID of the KMS key used to encrypt the namespace's
                       admin credentials secret.
                     type: string
+                  adminUserPasswordSecretRef:
+                    description: |-
+                      The password of the administrator for the first database created in the namespace.
+                      Conflicts with manage_admin_password.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  adminUsernameSecretRef:
+                    description: The username of the administrator for the first database
+                      created in the namespace.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   dbName:
                     description: The name of the first database created in the namespace.
                     type: string

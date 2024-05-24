@@ -131,6 +131,23 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  codeSecretRef:
+                    description: Source code of the function
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   comment:
                     description: Comment.
                     type: string
@@ -150,6 +167,8 @@ spec:
                     description: Identifier of the function's runtime. Valid values
                       are cloudfront-js-1.0 and cloudfront-js-2.0.
                     type: string
+                required:
+                - codeSecretRef
                 type: object
               managementPolicies:
                 default:

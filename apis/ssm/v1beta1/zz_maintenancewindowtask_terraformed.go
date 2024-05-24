@@ -21,7 +21,7 @@ func (mg *MaintenanceWindowTask) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this MaintenanceWindowTask
 func (tr *MaintenanceWindowTask) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"task_invocation_parameters[*].lambda_parameters[*].payload": "spec.forProvider.taskInvocationParameters[*].lambdaParameters[*].payloadSecretRef", "task_invocation_parameters[*].step_functions_parameters[*].input": "spec.forProvider.taskInvocationParameters[*].stepFunctionsParameters[*].inputSecretRef"}
+	return map[string]string{"task_invocation_parameters[*].lambda_parameters[*].payload": "taskInvocationParameters[*].lambdaParameters[*].payloadSecretRef", "task_invocation_parameters[*].step_functions_parameters[*].input": "taskInvocationParameters[*].stepFunctionsParameters[*].inputSecretRef"}
 }
 
 // GetObservation of this MaintenanceWindowTask

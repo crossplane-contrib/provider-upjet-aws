@@ -21,7 +21,7 @@ func (mg *HSMConfiguration) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this HSMConfiguration
 func (tr *HSMConfiguration) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"hsm_partition_password": "spec.forProvider.hsmPartitionPasswordSecretRef"}
+	return map[string]string{"hsm_partition_password": "hsmPartitionPasswordSecretRef"}
 }
 
 // GetObservation of this HSMConfiguration

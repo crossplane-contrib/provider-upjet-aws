@@ -30,6 +30,9 @@ type CiphertextInitParameters struct {
 	// Selector for a Key in kms to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+
+	// Data to be encrypted. Note that this may show up in logs, and it will be stored in the state file.
+	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
 }
 
 type CiphertextObservation struct {

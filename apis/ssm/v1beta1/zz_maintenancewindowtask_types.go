@@ -105,6 +105,9 @@ type LambdaParametersInitParameters struct {
 	// Pass client-specific information to the Lambda function that you are invoking.
 	ClientContext *string `json:"clientContext,omitempty" tf:"client_context,omitempty"`
 
+	// JSON to provide to your Lambda function as input.
+	PayloadSecretRef *v1.SecretKeySelector `json:"payloadSecretRef,omitempty" tf:"-"`
+
 	// Specify a Lambda function version or alias name.
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 }
@@ -608,6 +611,9 @@ type RunCommandParametersParameters struct {
 }
 
 type StepFunctionsParametersInitParameters struct {
+
+	// The inputs for the STEP_FUNCTION task.
+	InputSecretRef *v1.SecretKeySelector `json:"inputSecretRef,omitempty" tf:"-"`
 
 	// The name of the maintenance window task.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

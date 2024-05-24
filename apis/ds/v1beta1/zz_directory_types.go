@@ -136,6 +136,9 @@ type DirectoryInitParameters struct {
 	// The fully qualified name for the directory, such as corp.example.com
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The password for the directory administrator or connector user.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The short name of the directory, such as CORP.
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 

@@ -45,6 +45,9 @@ type ParameterInitParameters_2 struct {
 
 	// Type of the parameter. Valid types are String, StringList and SecureString.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Value of the parameter.15 and later, this may require additional configuration handling for certain scenarios.15 Upgrade Guide.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type ParameterObservation_2 struct {

@@ -21,7 +21,7 @@ func (mg *ConfigurationProfile) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ConfigurationProfile
 func (tr *ConfigurationProfile) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"validator[*].content": "spec.forProvider.validator[*].contentSecretRef"}
+	return map[string]string{"validator[*].content": "validator[*].contentSecretRef"}
 }
 
 // GetObservation of this ConfigurationProfile
