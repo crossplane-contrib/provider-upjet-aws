@@ -18,9 +18,6 @@ spec:
         testing.upbound.io/example-name: example-ci
     engine: aurora-postgresql
     instanceClass: db.r5.large
-    dbParameterGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-ci
 
 ---
 
@@ -36,6 +33,11 @@ spec:
   forProvider:
     region: us-west-1
     engine: aurora-postgresql
+    engineVersion: "15.6"
+    dbClusterParameterGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-ci
+    preferredBackupWindow: "04:00-05:00"
     masterUsername: cpadmin
     masterPasswordSecretRef:
       name: sample-cluster-password
@@ -60,19 +62,18 @@ stringData:
 ---
 
 apiVersion: rds.aws.upbound.io/v1beta1
-kind: ParameterGroup
+kind: ClusterParameterGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: rds/v1beta1/clusterinstance
   labels:
     testing.upbound.io/example-name: example-ci
-  name: example-parametergroup-ci
+  name: example-clusterparametergroup-ci
 spec:
   forProvider:
     region: us-west-1
+    description: RDS default cluster parameter group
     family: aurora-postgresql15
-    description: example
     parameter:
-      - name: application_name
-        value: "example"
-        applyMethod: immediate
+      - name: apg_plan_mgmt.capture_plan_baselines
+        value: "manual"

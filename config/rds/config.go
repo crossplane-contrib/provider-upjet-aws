@@ -112,6 +112,9 @@ func Configure(p *config.Provider) {
 		delete(r.References, "engine")
 		delete(r.References, "engine_version")
 		r.UseAsync = true
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"engine_version", "db_parameter_group_name", "preferred_backup_window"},
+		}
 	})
 	p.AddResourceConfigurator("aws_db_instance", func(r *config.Resource) {
 		r.References["db_subnet_group_name"] = config.Reference{
