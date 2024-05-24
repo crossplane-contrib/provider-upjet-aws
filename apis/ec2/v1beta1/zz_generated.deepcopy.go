@@ -51334,6 +51334,11 @@ func (in *VPNConnectionInitParameters_2) DeepCopyInto(out *VPNConnectionInitPara
 		*out = new(float64)
 		**out = **in
 	}
+	if in.Tunnel1PresharedKeySecretRef != nil {
+		in, out := &in.Tunnel1PresharedKeySecretRef, &out.Tunnel1PresharedKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Tunnel1RekeyFuzzPercentage != nil {
 		in, out := &in.Tunnel1RekeyFuzzPercentage, &out.Tunnel1RekeyFuzzPercentage
 		*out = new(float64)
@@ -51471,6 +51476,11 @@ func (in *VPNConnectionInitParameters_2) DeepCopyInto(out *VPNConnectionInitPara
 	if in.Tunnel2Phase2LifetimeSeconds != nil {
 		in, out := &in.Tunnel2Phase2LifetimeSeconds, &out.Tunnel2Phase2LifetimeSeconds
 		*out = new(float64)
+		**out = **in
+	}
+	if in.Tunnel2PresharedKeySecretRef != nil {
+		in, out := &in.Tunnel2PresharedKeySecretRef, &out.Tunnel2PresharedKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.Tunnel2RekeyFuzzPercentage != nil {

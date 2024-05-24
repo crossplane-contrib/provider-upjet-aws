@@ -430,6 +430,28 @@ spec:
                       message integrity check to ensure that the encryption key was
                       transmitted without error.
                     type: string
+                  customerKeySecretRef:
+                    description: Specifies the customer-provided encryption key for
+                      Amazon S3 to use in encrypting data. This value is used to store
+                      the object and then it is discarded; Amazon S3 does not store
+                      the encryption key. The key must be appropriate for use with
+                      the algorithm specified in the x-amz-server-side-encryption-customer-algorithm
+                      header.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   expectedBucketOwner:
                     description: Account id of the expected destination bucket owner.
                       If the destination bucket is owned by a different account, the
@@ -482,6 +504,45 @@ spec:
                   key:
                     description: Name of the object once it is in the bucket.
                     type: string
+                  kmsEncryptionContextSecretRef:
+                    description: Specifies the AWS KMS Encryption Context to use for
+                      object encryption. The value is a base64-encoded UTF-8 string
+                      holding JSON with the encryption context key-value pairs.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  kmsKeyIdSecretRef:
+                    description: 'Specifies the AWS KMS Key ARN to use for object
+                      encryption. This value is a fully qualified ARN of the KMS Key.
+                      If using aws_kms_key, use the exported arn attribute: kms_key_id
+                      = aws_kms_key.foo.arn'
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   metadata:
                     additionalProperties:
                       type: string
@@ -540,6 +601,26 @@ spec:
                       message integrity check to ensure that the encryption key was
                       transmitted without error.
                     type: string
+                  sourceCustomerKeySecretRef:
+                    description: Specifies the customer-provided encryption key for
+                      Amazon S3 to use to decrypt the source object. The encryption
+                      key provided in this header must be one that was used when the
+                      source object was created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageClass:
                     description: Specifies the desired storage class for the object.
                       Defaults to STANDARD.

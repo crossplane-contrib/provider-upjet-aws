@@ -21,7 +21,7 @@ func (mg *Parameter) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Parameter
 func (tr *Parameter) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"value": "spec.forProvider.valueSecretRef"}
+	return map[string]string{"value": "valueSecretRef"}
 }
 
 // GetObservation of this Parameter

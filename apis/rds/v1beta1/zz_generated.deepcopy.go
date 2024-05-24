@@ -1064,6 +1064,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MasterPasswordSecretRef != nil {
+		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.MasterUserSecretKMSKeyID != nil {
 		in, out := &in.MasterUserSecretKMSKeyID, &out.MasterUserSecretKMSKeyID
 		*out = new(string)

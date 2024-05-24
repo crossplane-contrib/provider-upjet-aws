@@ -7,6 +7,9 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *Definition) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Destination) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -26,6 +29,3 @@ func (tr *Stream) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SubscriptionFilter) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Definition) Hub() {}

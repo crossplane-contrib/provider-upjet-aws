@@ -18,6 +18,9 @@ type BranchInitParameters struct {
 	// ARN for a backend environment that is part of an Amplify app.
 	BackendEnvironmentArn *string `json:"backendEnvironmentArn,omitempty" tf:"backend_environment_arn,omitempty"`
 
+	// Basic authorization credentials for the branch.
+	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
+
 	// Description for the branch.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

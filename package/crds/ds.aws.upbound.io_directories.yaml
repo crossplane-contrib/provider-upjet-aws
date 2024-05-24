@@ -709,6 +709,24 @@ spec:
                     description: The fully qualified name for the directory, such
                       as corp.example.com
                     type: string
+                  passwordSecretRef:
+                    description: The password for the directory administrator or connector
+                      user.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   shortName:
                     description: The short name of the directory, such as CORP.
                     type: string
@@ -897,6 +915,8 @@ spec:
                           type: object
                       type: object
                     type: array
+                required:
+                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:

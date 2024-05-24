@@ -121,6 +121,9 @@ type ObjectCopyInitParameters struct {
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
 	CustomerKeyMd5 *string `json:"customerKeyMd5,omitempty" tf:"customer_key_md5,omitempty"`
 
+	// Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data. This value is used to store the object and then it is discarded; Amazon S3 does not store the encryption key. The key must be appropriate for use with the algorithm specified in the x-amz-server-side-encryption-customer-algorithm header.
+	CustomerKeySecretRef *v1.SecretKeySelector `json:"customerKeySecretRef,omitempty" tf:"-"`
+
 	// Account id of the expected destination bucket owner. If the destination bucket is owned by a different account, the request will fail with an HTTP 403 (Access Denied) error.
 	ExpectedBucketOwner *string `json:"expectedBucketOwner,omitempty" tf:"expected_bucket_owner,omitempty"`
 
@@ -135,6 +138,12 @@ type ObjectCopyInitParameters struct {
 
 	// Configuration block for header grants. Documented below. Conflicts with acl.
 	Grant []ObjectCopyGrantInitParameters `json:"grant,omitempty" tf:"grant,omitempty"`
+
+	// Specifies the AWS KMS Encryption Context to use for object encryption. The value is a base64-encoded UTF-8 string holding JSON with the encryption context key-value pairs.
+	KMSEncryptionContextSecretRef *v1.SecretKeySelector `json:"kmsEncryptionContextSecretRef,omitempty" tf:"-"`
+
+	// Specifies the AWS KMS Key ARN to use for object encryption. This value is a fully qualified ARN of the KMS Key. If using aws_kms_key, use the exported arn attribute: kms_key_id = aws_kms_key.foo.arn
+	KMSKeyIDSecretRef *v1.SecretKeySelector `json:"kmsKeyIdSecretRef,omitempty" tf:"-"`
 
 	// Name of the object once it is in the bucket.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
@@ -169,6 +178,9 @@ type ObjectCopyInitParameters struct {
 
 	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
 	SourceCustomerKeyMd5 *string `json:"sourceCustomerKeyMd5,omitempty" tf:"source_customer_key_md5,omitempty"`
+
+	// Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object. The encryption key provided in this header must be one that was used when the source object was created.
+	SourceCustomerKeySecretRef *v1.SecretKeySelector `json:"sourceCustomerKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the desired storage class for the object. Defaults to STANDARD.
 	StorageClass *string `json:"storageClass,omitempty" tf:"storage_class,omitempty"`

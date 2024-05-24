@@ -627,6 +627,16 @@ func (in *RedshiftServerlessNamespaceInitParameters) DeepCopyInto(out *RedshiftS
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdminUserPasswordSecretRef != nil {
+		in, out := &in.AdminUserPasswordSecretRef, &out.AdminUserPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AdminUsernameSecretRef != nil {
+		in, out := &in.AdminUsernameSecretRef, &out.AdminUsernameSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.DBName != nil {
 		in, out := &in.DBName, &out.DBName
 		*out = new(string)

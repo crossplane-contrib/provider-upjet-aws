@@ -21,7 +21,7 @@ func (mg *Domain) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Domain
 func (tr *Domain) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"advanced_security_options[*].master_user_options[*].master_user_password": "spec.forProvider.advancedSecurityOptions[*].masterUserOptions[*].masterUserPasswordSecretRef"}
+	return map[string]string{"advanced_security_options[*].master_user_options[*].master_user_password": "advancedSecurityOptions[*].masterUserOptions[*].masterUserPasswordSecretRef"}
 }
 
 // GetObservation of this Domain

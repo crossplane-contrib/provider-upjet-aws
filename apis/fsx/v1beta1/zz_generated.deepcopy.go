@@ -2228,6 +2228,11 @@ func (in *OntapFileSystemInitParameters) DeepCopyInto(out *OntapFileSystemInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.FSXAdminPasswordSecretRef != nil {
+		in, out := &in.FSXAdminPasswordSecretRef, &out.FSXAdminPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.HaPairs != nil {
 		in, out := &in.HaPairs, &out.HaPairs
 		*out = new(float64)
@@ -2950,6 +2955,11 @@ func (in *OntapStorageVirtualMachineInitParameters) DeepCopyInto(out *OntapStora
 		*out = new(string)
 		**out = **in
 	}
+	if in.SvmAdminPasswordSecretRef != nil {
+		in, out := &in.SvmAdminPasswordSecretRef, &out.SvmAdminPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3484,6 +3494,7 @@ func (in *SelfManagedActiveDirectoryConfigurationInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -3623,6 +3634,7 @@ func (in *SelfManagedActiveDirectoryInitParameters) DeepCopyInto(out *SelfManage
 		*out = new(string)
 		**out = **in
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)

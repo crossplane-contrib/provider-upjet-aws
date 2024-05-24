@@ -10,19 +10,19 @@ package v1beta1
 func (tr *AppCookieStickinessPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ELB) Hub() {}
+func (tr *Attachment) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Attachment) Hub() {}
+func (tr *BackendServerPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ELB) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LBCookieStickinessPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LBSSLNegotiationPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BackendServerPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ListenerPolicy) Hub() {}

@@ -6374,6 +6374,11 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.PhoneConfig != nil {
 		in, out := &in.PhoneConfig, &out.PhoneConfig
 		*out = make([]UserPhoneConfigInitParameters, len(*in))

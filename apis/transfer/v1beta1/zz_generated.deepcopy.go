@@ -2487,6 +2487,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.HostKeySecretRef != nil {
+		in, out := &in.HostKeySecretRef, &out.HostKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.IdentityProviderType != nil {
 		in, out := &in.IdentityProviderType, &out.IdentityProviderType
 		*out = new(string)
@@ -2511,6 +2516,16 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		in, out := &in.LoggingRoleSelector, &out.LoggingRoleSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PostAuthenticationLoginBannerSecretRef != nil {
+		in, out := &in.PostAuthenticationLoginBannerSecretRef, &out.PostAuthenticationLoginBannerSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.PreAuthenticationLoginBannerSecretRef != nil {
+		in, out := &in.PreAuthenticationLoginBannerSecretRef, &out.PreAuthenticationLoginBannerSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.ProtocolDetails != nil {
 		in, out := &in.ProtocolDetails, &out.ProtocolDetails

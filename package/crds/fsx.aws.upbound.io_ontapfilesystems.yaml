@@ -563,6 +563,25 @@ spec:
                       FSx selects an unused IP address range for you from the 198.19.*
                       range.
                     type: string
+                  fsxAdminPasswordSecretRef:
+                    description: The ONTAP administrative password for the fsxadmin
+                      user that you can use to administer your file system using the
+                      ONTAP CLI and REST API.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   haPairs:
                     description: '- The number of ha_pairs to deploy for the file
                       system. Valid values are 1 through 12. Value of 2 or greater

@@ -140,6 +140,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.MasterPasswordSecretRef != nil {
+		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)

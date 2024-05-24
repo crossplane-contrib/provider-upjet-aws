@@ -1040,6 +1040,24 @@ spec:
                                 description: Pass client-specific information to the
                                   Lambda function that you are invoking.
                                 type: string
+                              payloadSecretRef:
+                                description: JSON to provide to your Lambda function
+                                  as input.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               qualifier:
                                 description: Specify a Lambda function version or
                                   alias name.
@@ -1385,6 +1403,23 @@ spec:
                             Documented below.
                           items:
                             properties:
+                              inputSecretRef:
+                                description: The inputs for the STEP_FUNCTION task.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               name:
                                 description: The name of the maintenance window task.
                                 type: string

@@ -17,6 +17,9 @@ type AuthenticationConfigurationInitParameters struct {
 
 	// A valid CIDR block for IP filtering. Required for IP.
 	AllowedIPRange *string `json:"allowedIpRange,omitempty" tf:"allowed_ip_range,omitempty"`
+
+	// The shared secret for the GitHub repository webhook. Set this as secret in your github_repository_webhook's configuration block. Required for GITHUB_HMAC.
+	SecretTokenSecretRef *v1.SecretKeySelector `json:"secretTokenSecretRef,omitempty" tf:"-"`
 }
 
 type AuthenticationConfigurationObservation struct {

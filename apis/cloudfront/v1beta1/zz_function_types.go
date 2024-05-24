@@ -15,6 +15,9 @@ import (
 
 type FunctionInitParameters struct {
 
+	// Source code of the function
+	CodeSecretRef v1.SecretKeySelector `json:"codeSecretRef" tf:"-"`
+
 	// Comment.
 	Comment *string `json:"comment,omitempty" tf:"comment,omitempty"`
 

@@ -74,6 +74,7 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 			}
 		}
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.ReplicationUser != nil {
 		in, out := &in.ReplicationUser, &out.ReplicationUser
 		*out = new(bool)

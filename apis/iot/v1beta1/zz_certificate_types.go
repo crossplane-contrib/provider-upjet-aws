@@ -18,6 +18,16 @@ type CertificateInitParameters struct {
 	// Boolean flag to indicate if the certificate should be active
 	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
+	// The CA certificate for the certificate to be registered. If this is set, the CA needs to be registered with AWS IoT beforehand.
+	CAPemSecretRef *v1.SecretKeySelector `json:"caPemSecretRef,omitempty" tf:"-"`
+
+	// The certificate to be registered. If ca_pem is unspecified, review
+	// RegisterCertificateWithoutCA.
+	// If ca_pem is specified, review
+	// RegisterCertificate
+	// for more information on registering a certificate.
+	CertificatePemSecretRef *v1.SecretKeySelector `json:"certificatePemSecretRef,omitempty" tf:"-"`
+
 	// The certificate signing request. Review
 	// CreateCertificateFromCsr
 	// for more information on generating a certificate from a certificate signing request (CSR).

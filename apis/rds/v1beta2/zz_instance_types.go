@@ -271,6 +271,11 @@ type InstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
+	// Password for the master DB user. Note that this may show up in
+	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 

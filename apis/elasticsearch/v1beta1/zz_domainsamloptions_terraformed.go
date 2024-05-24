@@ -21,7 +21,7 @@ func (mg *DomainSAMLOptions) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this DomainSAMLOptions
 func (tr *DomainSAMLOptions) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"saml_options[*].master_user_name": "spec.forProvider.samlOptions[*].masterUserNameSecretRef"}
+	return map[string]string{"saml_options[*].master_user_name": "samlOptions[*].masterUserNameSecretRef"}
 }
 
 // GetObservation of this DomainSAMLOptions

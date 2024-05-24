@@ -21,7 +21,7 @@ func (mg *CertificateAuthorityCertificate) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this CertificateAuthorityCertificate
 func (tr *CertificateAuthorityCertificate) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"certificate": "spec.forProvider.certificateSecretRef", "certificate_chain": "spec.forProvider.certificateChainSecretRef"}
+	return map[string]string{"certificate": "certificateSecretRef", "certificate_chain": "certificateChainSecretRef"}
 }
 
 // GetObservation of this CertificateAuthorityCertificate

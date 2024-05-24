@@ -19,10 +19,10 @@ func (tr *InstanceAccessControlAttributes) Hub() {}
 func (tr *ManagedPolicyAttachment) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PermissionsBoundaryAttachment) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *PermissionSet) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PermissionSetInlinePolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PermissionsBoundaryAttachment) Hub() {}

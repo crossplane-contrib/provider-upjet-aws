@@ -223,8 +223,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - privateKeySecretRef
                       type: object
                     type: array
                   stackId:
@@ -326,10 +324,45 @@ spec:
                     description: SCM configuration of the app as described below.
                     items:
                       properties:
+                        passwordSecretRef:
+                          description: Password to use when authenticating to the
+                            source.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         revision:
                           description: For sources that are version-aware, the revision
                             to use.
                           type: string
+                        sshKeySecretRef:
+                          description: SSH key to use when authenticating to the source.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         type:
                           description: The type of source to use. For example, "archive".
                           type: string
@@ -419,6 +452,26 @@ spec:
                           description: Can be used to specify an intermediate certificate
                             authority key or client authentication.
                           type: string
+                        privateKeySecretRef:
+                          description: The private key; the contents of the certificate's
+                            domain.key file.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - privateKeySecretRef
                       type: object
                     type: array
                   stackId:

@@ -110,6 +110,9 @@ type SAMLOptionsInitParameters struct {
 	// This backend role from the SAML IdP receives full permissions to the cluster, equivalent to a new master user.
 	MasterBackendRole *string `json:"masterBackendRole,omitempty" tf:"master_backend_role,omitempty"`
 
+	// This username from the SAML IdP receives full permissions to the cluster, equivalent to a new master user.
+	MasterUserNameSecretRef *v1.SecretKeySelector `json:"masterUserNameSecretRef,omitempty" tf:"-"`
+
 	// Element of the SAML assertion to use for backend roles. Default is roles.
 	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
 

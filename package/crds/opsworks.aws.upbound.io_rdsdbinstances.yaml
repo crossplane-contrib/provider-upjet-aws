@@ -263,6 +263,23 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  dbPasswordSecretRef:
+                    description: A db password
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   dbUser:
                     description: A db username
                     type: string
@@ -422,6 +439,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - dbPasswordSecretRef
                 type: object
               managementPolicies:
                 default:

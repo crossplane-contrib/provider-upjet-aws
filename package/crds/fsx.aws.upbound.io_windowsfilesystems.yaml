@@ -470,8 +470,6 @@ spec:
                             self-managed AD domain that Amazon FSx will use to join
                             to your AD domain.
                           type: string
-                      required:
-                      - passwordSecretRef
                       type: object
                     type: array
                   skipFinalBackup:
@@ -975,11 +973,32 @@ spec:
                             of your self-managed AD directory. To learn more, see
                             RFC 2253.
                           type: string
+                        passwordSecretRef:
+                          description: The password for the service account on your
+                            self-managed AD domain that Amazon FSx will use to join
+                            to your AD domain.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         username:
                           description: The user name for the service account on your
                             self-managed AD domain that Amazon FSx will use to join
                             to your AD domain.
                           type: string
+                      required:
+                      - passwordSecretRef
                       type: object
                     type: array
                   skipFinalBackup:

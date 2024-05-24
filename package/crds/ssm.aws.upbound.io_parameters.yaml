@@ -198,6 +198,25 @@ spec:
                     description: Type of the parameter. Valid types are String, StringList
                       and SecureString.
                     type: string
+                  valueSecretRef:
+                    description: Value of the parameter.15 and later, this may require
+                      additional configuration handling for certain scenarios.15 Upgrade
+                      Guide.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                 type: object
               managementPolicies:
                 default:

@@ -563,6 +563,26 @@ spec:
                                   database. Only specify if internal_user_database_enabled
                                   is set to true.
                                 type: string
+                              masterUserPasswordSecretRef:
+                                description: Main user's password, which is stored
+                                  in the Amazon Elasticsearch Service domain's internal
+                                  database. Only specify if internal_user_database_enabled
+                                  is set to true.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                             type: object
                           type: array
                       type: object

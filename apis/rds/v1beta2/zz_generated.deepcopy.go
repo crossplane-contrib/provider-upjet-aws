@@ -402,6 +402,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.PerformanceInsightsEnabled != nil {
 		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
 		*out = new(bool)

@@ -304,6 +304,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  certificateSigningRequestSecretRef:
+                    description: Certificate Signing Request in PEM format.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   signingAlgorithm:
                     description: 'Algorithm to use to sign certificate requests. Valid
                       values: SHA256WITHRSA, SHA256WITHECDSA, SHA384WITHRSA, SHA384WITHECDSA,
@@ -331,6 +348,8 @@ spec:
                           type: string
                       type: object
                     type: array
+                required:
+                - certificateSigningRequestSecretRef
                 type: object
               managementPolicies:
                 default:

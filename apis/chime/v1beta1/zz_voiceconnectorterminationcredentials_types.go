@@ -15,6 +15,9 @@ import (
 
 type CredentialsInitParameters struct {
 
+	// RFC2617 compliant password associated with the SIP credentials.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// RFC2617 compliant username associated with the SIP credentials.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -28,7 +31,7 @@ type CredentialsObservation struct {
 type CredentialsParameters struct {
 
 	// RFC2617 compliant password associated with the SIP credentials.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// RFC2617 compliant username associated with the SIP credentials.

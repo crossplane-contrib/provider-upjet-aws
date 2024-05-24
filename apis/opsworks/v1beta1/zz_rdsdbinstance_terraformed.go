@@ -21,7 +21,7 @@ func (mg *RDSDBInstance) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this RDSDBInstance
 func (tr *RDSDBInstance) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"db_password": "spec.forProvider.dbPasswordSecretRef"}
+	return map[string]string{"db_password": "dbPasswordSecretRef"}
 }
 
 // GetObservation of this RDSDBInstance

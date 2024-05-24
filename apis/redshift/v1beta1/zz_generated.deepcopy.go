@@ -377,6 +377,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.MasterPasswordSecretRef != nil {
+		in, out := &in.MasterPasswordSecretRef, &out.MasterPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.MasterUsername != nil {
 		in, out := &in.MasterUsername, &out.MasterUsername
 		*out = new(string)
@@ -1860,6 +1865,7 @@ func (in *HSMConfigurationInitParameters) DeepCopyInto(out *HSMConfigurationInit
 		*out = new(string)
 		**out = **in
 	}
+	out.HSMPartitionPasswordSecretRef = in.HSMPartitionPasswordSecretRef
 	if in.HSMServerPublicCertificate != nil {
 		in, out := &in.HSMServerPublicCertificate, &out.HSMServerPublicCertificate
 		*out = new(string)

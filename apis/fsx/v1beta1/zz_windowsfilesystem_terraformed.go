@@ -21,7 +21,7 @@ func (mg *WindowsFileSystem) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this WindowsFileSystem
 func (tr *WindowsFileSystem) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"self_managed_active_directory[*].password": "spec.forProvider.selfManagedActiveDirectory[*].passwordSecretRef"}
+	return map[string]string{"self_managed_active_directory[*].password": "selfManagedActiveDirectory[*].passwordSecretRef"}
 }
 
 // GetObservation of this WindowsFileSystem

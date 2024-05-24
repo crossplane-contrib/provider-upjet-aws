@@ -10,10 +10,10 @@ package v1beta1
 func (tr *AccessPoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AccountPublicAccessBlock) Hub() {}
+func (tr *AccessPointPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AccessPointPolicy) Hub() {}
+func (tr *AccountPublicAccessBlock) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MultiRegionAccessPoint) Hub() {}

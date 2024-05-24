@@ -15,12 +15,18 @@ import (
 
 type AppInitParameters struct {
 
+	// Personal access token for a third-party source control system for an Amplify app. This token must have write access to the relevant repo to create a webhook and a read-only deploy key for the Amplify project. The token is not stored, so after applying this attribute can be removed and the setup token deleted.
+	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
+
 	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
 	AutoBranchCreationConfig []AutoBranchCreationConfigInitParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
 	// Automated branch creation glob patterns for an Amplify app.
 	// +listType=set
 	AutoBranchCreationPatterns []*string `json:"autoBranchCreationPatterns,omitempty" tf:"auto_branch_creation_patterns,omitempty"`
+
+	// Credentials for basic authorization for an Amplify app.
+	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
@@ -65,6 +71,9 @@ type AppInitParameters struct {
 
 	// Name for an Amplify app.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// OAuth token for a third-party source control system for an Amplify app. The OAuth token is used to create a webhook and a read-only deploy key. The OAuth token is not stored.
+	OauthTokenSecretRef *v1.SecretKeySelector `json:"oauthTokenSecretRef,omitempty" tf:"-"`
 
 	// Platform or framework for an Amplify app. Valid values: WEB, WEB_COMPUTE. Default value: WEB.
 	Platform *string `json:"platform,omitempty" tf:"platform,omitempty"`
@@ -245,6 +254,9 @@ type AppParameters struct {
 }
 
 type AutoBranchCreationConfigInitParameters struct {
+
+	// Basic authorization credentials for the autocreated branch.
+	BasicAuthCredentialsSecretRef *v1.SecretKeySelector `json:"basicAuthCredentialsSecretRef,omitempty" tf:"-"`
 
 	// Build specification (build spec) for the autocreated branch.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`

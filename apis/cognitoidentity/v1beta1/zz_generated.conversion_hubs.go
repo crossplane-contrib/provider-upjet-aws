@@ -7,10 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Pool) Hub() {}
+func (tr *CognitoIdentityPoolProviderPrincipalTag) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *CognitoIdentityPoolProviderPrincipalTag) Hub() {}
+func (tr *Pool) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PoolRolesAttachment) Hub() {}

@@ -14,6 +14,7 @@ import (
 )
 
 type AuthenticationModeInitParameters struct {
+	Passwords []*string `json:"passwordsSecretRef,omitempty" tf:"-"`
 
 	// Specifies the authentication type. Possible options are: password, no-password-required or iam.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -50,6 +51,8 @@ type UserInitParameters struct {
 
 	// Indicates a password is not required for this user.
 	NoPasswordRequired *bool `json:"noPasswordRequired,omitempty" tf:"no_password_required,omitempty"`
+
+	Passwords []*string `json:"passwordsSecretRef,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular

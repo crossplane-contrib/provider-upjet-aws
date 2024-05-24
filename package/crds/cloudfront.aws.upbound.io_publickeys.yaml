@@ -121,9 +121,29 @@ spec:
                   comment:
                     description: An optional comment about the public key.
                     type: string
+                  encodedKeySecretRef:
+                    description: The encoded public key that you want to add to CloudFront
+                      to use with features like field-level encryption.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   name:
                     description: The name for the public key.
                     type: string
+                required:
+                - encodedKeySecretRef
                 type: object
               managementPolicies:
                 default:

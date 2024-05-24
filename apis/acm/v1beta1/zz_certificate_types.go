@@ -40,6 +40,9 @@ type CertificateInitParameters struct {
 	// Configuration block used to set certificate options. Detailed below.
 	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
+	// Certificate's PEM-formatted private key
+	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
+
 	// Set of domains that should be SANs in the issued certificate.
 	// +listType=set
 	SubjectAlternativeNames []*string `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`

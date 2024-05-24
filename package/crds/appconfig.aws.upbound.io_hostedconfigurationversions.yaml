@@ -435,6 +435,24 @@ spec:
                             type: string
                         type: object
                     type: object
+                  contentSecretRef:
+                    description: Content of the configuration or the configuration
+                      data.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   contentType:
                     description: Standard MIME type describing the format of the configuration
                       content. For more information, see Content-Type.
@@ -442,6 +460,8 @@ spec:
                   description:
                     description: Description of the configuration.
                     type: string
+                required:
+                - contentSecretRef
                 type: object
               managementPolicies:
                 default:

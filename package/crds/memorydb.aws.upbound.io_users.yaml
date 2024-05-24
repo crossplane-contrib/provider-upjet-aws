@@ -143,6 +143,10 @@ spec:
                       below.
                     items:
                       properties:
+                        passwordsSecretRef:
+                          items:
+                            type: string
+                          type: array
                         type:
                           description: 'Specifies the authentication type. Valid values
                             are: password or iam.'

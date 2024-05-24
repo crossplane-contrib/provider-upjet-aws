@@ -21,7 +21,7 @@ func (mg *BucketObjectLockConfiguration) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this BucketObjectLockConfiguration
 func (tr *BucketObjectLockConfiguration) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"token": "spec.forProvider.tokenSecretRef"}
+	return map[string]string{"token": "tokenSecretRef"}
 }
 
 // GetObservation of this BucketObjectLockConfiguration

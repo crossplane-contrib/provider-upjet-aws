@@ -968,6 +968,26 @@ spec:
                     description: The ARN for a lambda function to use for the Identity
                       provider.
                     type: string
+                  hostKeySecretRef:
+                    description: RSA, ECDSA, or ED25519 private key (e.g., as generated
+                      by the ssh-keygen -t rsa -b 2048 -N "" -m PEM -f my-new-server-key,
+                      ssh-keygen -t ecdsa -b 256 -N "" -m PEM -f my-new-server-key
+                      or ssh-keygen -t ed25519 -N "" -f my-new-server-key commands).
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   identityProviderType:
                     description: The mode of authentication enabled for this service.
                       The default value is SERVICE_MANAGED, which allows you to store
@@ -1065,6 +1085,44 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
+                    type: object
+                  postAuthenticationLoginBannerSecretRef:
+                    description: Specify a string to display when users connect to
+                      a server. This string is displayed after the user authenticates.
+                      The SFTP protocol does not support post-authentication display
+                      banners.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  preAuthenticationLoginBannerSecretRef:
+                    description: Specify a string to display when users connect to
+                      a server. This string is displayed before the user authenticates.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
                     type: object
                   protocolDetails:
                     description: The protocol settings that are configured for your

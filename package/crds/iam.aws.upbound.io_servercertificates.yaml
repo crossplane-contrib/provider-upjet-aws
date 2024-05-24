@@ -140,12 +140,31 @@ spec:
                       AWS CloudFront, the path must be in format /cloudfront/your_path_here.
                       See IAM Identifiers for more details on IAM Paths.
                     type: string
+                  privateKeySecretRef:
+                    description: encoded format.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                required:
+                - privateKeySecretRef
                 type: object
               managementPolicies:
                 default:

@@ -10,6 +10,9 @@ package v1beta1
 func (tr *GroupTag) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *LaunchConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *LifecycleHook) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -20,6 +23,3 @@ func (tr *Policy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Schedule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LaunchConfiguration) Hub() {}

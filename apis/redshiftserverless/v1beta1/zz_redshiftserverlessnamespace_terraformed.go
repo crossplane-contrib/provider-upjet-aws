@@ -21,7 +21,7 @@ func (mg *RedshiftServerlessNamespace) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this RedshiftServerlessNamespace
 func (tr *RedshiftServerlessNamespace) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"admin_user_password": "spec.forProvider.adminUserPasswordSecretRef", "admin_username": "spec.forProvider.adminUsernameSecretRef"}
+	return map[string]string{"admin_user_password": "adminUserPasswordSecretRef", "admin_username": "adminUsernameSecretRef"}
 }
 
 // GetObservation of this RedshiftServerlessNamespace

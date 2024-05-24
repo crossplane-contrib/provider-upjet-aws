@@ -21,7 +21,7 @@ func (mg *Ciphertext) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Ciphertext
 func (tr *Ciphertext) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"plaintext": "spec.forProvider.plaintextSecretRef"}
+	return map[string]string{"plaintext": "plaintextSecretRef"}
 }
 
 // GetObservation of this Ciphertext

@@ -21,7 +21,7 @@ func (mg *Branch) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Branch
 func (tr *Branch) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"basic_auth_credentials": "spec.forProvider.basicAuthCredentialsSecretRef"}
+	return map[string]string{"basic_auth_credentials": "basicAuthCredentialsSecretRef"}
 }
 
 // GetObservation of this Branch

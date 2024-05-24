@@ -7,7 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Trail) Hub() {}
+func (tr *EventDataStore) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *EventDataStore) Hub() {}
+func (tr *Trail) Hub() {}

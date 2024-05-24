@@ -177,6 +177,9 @@ type ActionAuthenticateOidcInitParameters struct {
 	// The OAuth 2.0 client identifier.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The OAuth 2.0 client secret.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
 	// The OIDC issuer identifier of the IdP.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -249,7 +252,7 @@ type ActionAuthenticateOidcParameters struct {
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OIDC issuer identifier of the IdP.

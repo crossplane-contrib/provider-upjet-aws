@@ -3252,6 +3252,7 @@ func (in *ServerCertificateInitParameters) DeepCopyInto(out *ServerCertificateIn
 		*out = new(string)
 		**out = **in
 	}
+	out.PrivateKeySecretRef = in.PrivateKeySecretRef
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

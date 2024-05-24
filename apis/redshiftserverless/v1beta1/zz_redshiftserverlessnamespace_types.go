@@ -18,6 +18,13 @@ type RedshiftServerlessNamespaceInitParameters struct {
 	// ID of the KMS key used to encrypt the namespace's admin credentials secret.
 	AdminPasswordSecretKMSKeyID *string `json:"adminPasswordSecretKmsKeyId,omitempty" tf:"admin_password_secret_kms_key_id,omitempty"`
 
+	// The password of the administrator for the first database created in the namespace.
+	// Conflicts with manage_admin_password.
+	AdminUserPasswordSecretRef *v1.SecretKeySelector `json:"adminUserPasswordSecretRef,omitempty" tf:"-"`
+
+	// The username of the administrator for the first database created in the namespace.
+	AdminUsernameSecretRef *v1.SecretKeySelector `json:"adminUsernameSecretRef,omitempty" tf:"-"`
+
 	// The name of the first database created in the namespace.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 

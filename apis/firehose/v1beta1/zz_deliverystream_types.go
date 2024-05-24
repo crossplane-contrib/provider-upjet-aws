@@ -930,6 +930,9 @@ type HTTPEndpointConfigurationCloudwatchLoggingOptionsParameters struct {
 
 type HTTPEndpointConfigurationInitParameters struct {
 
+	// The access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.
+	AccessKeySecretRef *v1.SecretKeySelector `json:"accessKeySecretRef,omitempty" tf:"-"`
+
 	// Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).
 	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
 
@@ -2971,6 +2974,9 @@ type RedshiftConfigurationInitParameters struct {
 	// The name of the table in the redshift cluster that the s3 bucket will copy to.
 	DataTableName *string `json:"dataTableName,omitempty" tf:"data_table_name,omitempty"`
 
+	// The password for the username above.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []RedshiftConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -3065,7 +3071,7 @@ type RedshiftConfigurationParameters struct {
 	DataTableName *string `json:"dataTableName" tf:"data_table_name,omitempty"`
 
 	// The password for the username above.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The data processing configuration.  See processing_configuration block below for details.
@@ -4135,8 +4141,14 @@ type SnowflakeConfigurationInitParameters struct {
 	// The Snowflake database name.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
+	// The passphrase for the private key.
+	KeyPassphraseSecretRef *v1.SecretKeySelector `json:"keyPassphraseSecretRef,omitempty" tf:"-"`
+
 	// The name of the metadata column.
 	MetadataColumnName *string `json:"metadataColumnName,omitempty" tf:"metadata_column_name,omitempty"`
+
+	// The private key for authentication.
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// The processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration []SnowflakeConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
@@ -4261,7 +4273,7 @@ type SnowflakeConfigurationParameters struct {
 	MetadataColumnName *string `json:"metadataColumnName,omitempty" tf:"metadata_column_name,omitempty"`
 
 	// The private key for authentication.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// The processing configuration. See processing_configuration block below for details.
@@ -4690,6 +4702,9 @@ type SplunkConfigurationInitParameters struct {
 	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
+	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
+	HecTokenSecretRef v1.SecretKeySelector `json:"hecTokenSecretRef" tf:"-"`
+
 	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -4763,7 +4778,7 @@ type SplunkConfigurationParameters struct {
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
 	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	HecTokenSecretRef v1.SecretKeySelector `json:"hecTokenSecretRef" tf:"-"`
 
 	// The data processing configuration.  See processing_configuration block below for details.

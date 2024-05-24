@@ -90,6 +90,9 @@ type OidcConfigInitParameters struct {
 	// The client ID for your Amazon Cognito user pool.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The OIDC IdP client secret used to configure your private workforce.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
 	// The OIDC IdP issuer used to configure your private workforce.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -141,7 +144,7 @@ type OidcConfigParameters struct {
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OIDC IdP client secret used to configure your private workforce.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OIDC IdP issuer used to configure your private workforce.

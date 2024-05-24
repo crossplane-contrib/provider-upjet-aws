@@ -176,6 +176,10 @@ spec:
                       below.
                     items:
                       properties:
+                        passwordsSecretRef:
+                          items:
+                            type: string
+                          type: array
                         type:
                           description: 'Specifies the authentication type. Possible
                             options are: password, no-password-required or iam.'
@@ -188,6 +192,10 @@ spec:
                   noPasswordRequired:
                     description: Indicates a password is not required for this user.
                     type: boolean
+                  passwordsSecretRef:
+                    items:
+                      type: string
+                    type: array
                   tags:
                     additionalProperties:
                       type: string

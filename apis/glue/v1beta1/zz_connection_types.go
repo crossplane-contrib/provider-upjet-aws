@@ -14,6 +14,7 @@ import (
 )
 
 type ConnectionInitParameters struct {
+	ConnectionProperties map[string]*string `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
 	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`

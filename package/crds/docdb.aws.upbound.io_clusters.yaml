@@ -676,6 +676,26 @@ spec:
                             type: string
                         type: object
                     type: object
+                  masterPasswordSecretRef:
+                    description: |-
+                      Password for the master DB user. Note that this may
+                      show up in logs, and it will be stored in the state file. Please refer to the DocumentDB Naming Constraints.
+                      Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   masterUsername:
                     description: Username for the master DB user.
                     type: string

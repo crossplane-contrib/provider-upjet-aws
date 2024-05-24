@@ -302,6 +302,26 @@ spec:
                       for an email domain identity.
                     items:
                       properties:
+                        domainSigningPrivateKeySecretRef:
+                          description: '[Bring Your Own DKIM] A private key that''s
+                            used to generate a DKIM signature. The private key must
+                            use 1024 or 2048-bit RSA encryption, and must be encoded
+                            using base64 encoding.'
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         domainSigningSelector:
                           description: '[Bring Your Own DKIM] A string that''s used
                             to identify a public key in the DNS configuration for

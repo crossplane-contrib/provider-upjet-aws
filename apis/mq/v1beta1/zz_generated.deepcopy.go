@@ -1266,6 +1266,11 @@ func (in *LdapServerMetadataInitParameters) DeepCopyInto(out *LdapServerMetadata
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ServiceAccountPasswordSecretRef != nil {
+		in, out := &in.ServiceAccountPasswordSecretRef, &out.ServiceAccountPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ServiceAccountUsername != nil {
 		in, out := &in.ServiceAccountUsername, &out.ServiceAccountUsername
 		*out = new(string)
@@ -1634,6 +1639,7 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 			}
 		}
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.ReplicationUser != nil {
 		in, out := &in.ReplicationUser, &out.ReplicationUser
 		*out = new(bool)

@@ -15,8 +15,14 @@ import (
 
 type AppSourceInitParameters struct {
 
+	// Password to use when authenticating to the source.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// For sources that are version-aware, the revision to use.
 	Revision *string `json:"revision,omitempty" tf:"revision,omitempty"`
+
+	// SSH key to use when authenticating to the source.
+	SSHKeySecretRef *v1.SecretKeySelector `json:"sshKeySecretRef,omitempty" tf:"-"`
 
 	// The type of source to use. For example, "archive".
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -318,6 +324,9 @@ type SSLConfigurationInitParameters struct {
 
 	// Can be used to specify an intermediate certificate authority key or client authentication.
 	Chain *string `json:"chain,omitempty" tf:"chain,omitempty"`
+
+	// The private key; the contents of the certificate's domain.key file.
+	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 
 type SSLConfigurationObservation struct {
@@ -340,7 +349,7 @@ type SSLConfigurationParameters struct {
 	Chain *string `json:"chain,omitempty" tf:"chain,omitempty"`
 
 	// The private key; the contents of the certificate's domain.key file.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 

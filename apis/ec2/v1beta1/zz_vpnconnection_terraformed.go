@@ -21,7 +21,7 @@ func (mg *VPNConnection) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this VPNConnection
 func (tr *VPNConnection) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"customer_gateway_configuration": "status.atProvider.customerGatewayConfiguration", "tunnel1_preshared_key": "spec.forProvider.tunnel1PresharedKeySecretRef", "tunnel2_preshared_key": "spec.forProvider.tunnel2PresharedKeySecretRef"}
+	return map[string]string{"customer_gateway_configuration": "status.atProvider.customerGatewayConfiguration", "tunnel1_preshared_key": "tunnel1PresharedKeySecretRef", "tunnel2_preshared_key": "tunnel2PresharedKeySecretRef"}
 }
 
 // GetObservation of this VPNConnection

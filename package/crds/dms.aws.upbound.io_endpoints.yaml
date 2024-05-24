@@ -1101,6 +1101,26 @@ spec:
                             from thousands of tables to the same partition, which
                             causes throttling. Default is false.
                           type: boolean
+                        saslPasswordSecretRef:
+                          description: Secure password you created when you first
+                            set up your MSK cluster to validate a client identity
+                            and make an encrypted connection between server and client
+                            using SASL-SSL authentication.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         saslUsername:
                           description: Secure user name you created when you first
                             set up your MSK cluster to validate a client identity
@@ -1126,6 +1146,24 @@ spec:
                           description: ARN for the client private key used to securely
                             connect to a Kafka target endpoint.
                           type: string
+                        sslClientKeyPasswordSecretRef:
+                          description: Password for the client private key used to
+                            securely connect to a Kafka target endpoint.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         topic:
                           description: Kafka topic for migration. Default is kafka-default-topic.
                           type: string
@@ -1295,6 +1333,23 @@ spec:
                           type: string
                       type: object
                     type: array
+                  passwordSecretRef:
+                    description: Password to be used to login to the endpoint database.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   pauseReplicationTasks:
                     description: Only tasks paused by the resource will be restarted
                       after the modification completes. Default is false.
@@ -1384,6 +1439,25 @@ spec:
                   redisSettings:
                     items:
                       properties:
+                        authPasswordSecretRef:
+                          description: The password provided with the auth-role and
+                            auth-token options of the AuthType setting for a Redis
+                            target endpoint.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         authType:
                           description: Authentication type to access the MongoDB source
                             endpoint. Default is password.

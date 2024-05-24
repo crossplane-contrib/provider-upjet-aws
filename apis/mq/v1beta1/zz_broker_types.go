@@ -439,6 +439,9 @@ type LdapServerMetadataInitParameters struct {
 	// Whether the directory search scope is the entire sub-tree.
 	RoleSearchSubtree *bool `json:"roleSearchSubtree,omitempty" tf:"role_search_subtree,omitempty"`
 
+	// Service account password.
+	ServiceAccountPasswordSecretRef *v1.SecretKeySelector `json:"serviceAccountPasswordSecretRef,omitempty" tf:"-"`
+
 	// Service account username.
 	ServiceAccountUsername *string `json:"serviceAccountUsername,omitempty" tf:"service_account_username,omitempty"`
 
@@ -612,6 +615,9 @@ type UserInitParameters struct {
 	// +listType=set
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
+	// Password of the user. It must be 12 to 250 characters long, at least 4 unique characters, and must not contain commas.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// Whether to set set replication user. Defaults to false.
 	ReplicationUser *bool `json:"replicationUser,omitempty" tf:"replication_user,omitempty"`
 
@@ -647,7 +653,7 @@ type UserParameters struct {
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
 
 	// Password of the user. It must be 12 to 250 characters long, at least 4 unique characters, and must not contain commas.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Whether to set set replication user. Defaults to false.

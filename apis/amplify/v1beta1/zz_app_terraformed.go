@@ -21,7 +21,7 @@ func (mg *App) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this App
 func (tr *App) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"access_token": "spec.forProvider.accessTokenSecretRef", "auto_branch_creation_config[*].basic_auth_credentials": "spec.forProvider.autoBranchCreationConfig[*].basicAuthCredentialsSecretRef", "basic_auth_credentials": "spec.forProvider.basicAuthCredentialsSecretRef", "oauth_token": "spec.forProvider.oauthTokenSecretRef"}
+	return map[string]string{"access_token": "accessTokenSecretRef", "auto_branch_creation_config[*].basic_auth_credentials": "autoBranchCreationConfig[*].basicAuthCredentialsSecretRef", "basic_auth_credentials": "basicAuthCredentialsSecretRef", "oauth_token": "oauthTokenSecretRef"}
 }
 
 // GetObservation of this App

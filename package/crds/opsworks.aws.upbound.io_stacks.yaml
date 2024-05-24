@@ -556,10 +556,45 @@ spec:
                       as described below.
                     items:
                       properties:
+                        passwordSecretRef:
+                          description: Password to use when authenticating to the
+                            source.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         revision:
                           description: For sources that are version-aware, the revision
                             to use.
                           type: string
+                        sshKeySecretRef:
+                          description: SSH key to use when authenticating to the source.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         type:
                           description: The type of source to use. For example, "archive".
                           type: string

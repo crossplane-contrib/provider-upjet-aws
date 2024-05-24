@@ -192,8 +192,6 @@ spec:
                               userInfoEndpoint:
                                 description: User info endpoint of the IdP.
                                 type: string
-                            required:
-                            - clientSecretSecretRef
                             type: object
                           type: array
                         fixedResponse:
@@ -674,6 +672,23 @@ spec:
                               clientId:
                                 description: OAuth 2.0 client identifier.
                                 type: string
+                              clientSecretSecretRef:
+                                description: OAuth 2.0 client secret.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               issuer:
                                 description: OIDC issuer identifier of the IdP.
                                 type: string
@@ -699,6 +714,8 @@ spec:
                               userInfoEndpoint:
                                 description: User info endpoint of the IdP.
                                 type: string
+                            required:
+                            - clientSecretSecretRef
                             type: object
                           type: array
                         fixedResponse:

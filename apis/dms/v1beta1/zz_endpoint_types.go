@@ -114,6 +114,9 @@ type EndpointInitParameters struct {
 	// Configuration block for MongoDB settings. See below.
 	MongodbSettings []MongodbSettingsInitParameters `json:"mongodbSettings,omitempty" tf:"mongodb_settings,omitempty"`
 
+	// Password to be used to login to the endpoint database.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// Only tasks paused by the resource will be restarted after the modification completes. Default is false.
 	PauseReplicationTasks *bool `json:"pauseReplicationTasks,omitempty" tf:"pause_replication_tasks,omitempty"`
 
@@ -432,6 +435,12 @@ type KafkaSettingsInitParameters struct {
 
 	// ARN for the client private key used to securely connect to a Kafka target endpoint.
 	SSLClientKeyArn *string `json:"sslClientKeyArn,omitempty" tf:"ssl_client_key_arn,omitempty"`
+
+	// Password for the client private key used to securely connect to a Kafka target endpoint.
+	SSLClientKeyPasswordSecretRef *v1.SecretKeySelector `json:"sslClientKeyPasswordSecretRef,omitempty" tf:"-"`
+
+	// Secure password you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
+	SaslPasswordSecretRef *v1.SecretKeySelector `json:"saslPasswordSecretRef,omitempty" tf:"-"`
 
 	// Secure user name you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.
 	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
@@ -907,6 +916,9 @@ type PostgresSettingsParameters struct {
 }
 
 type RedisSettingsInitParameters struct {
+
+	// The password provided with the auth-role and auth-token options of the AuthType setting for a Redis target endpoint.
+	AuthPasswordSecretRef *v1.SecretKeySelector `json:"authPasswordSecretRef,omitempty" tf:"-"`
 
 	// Authentication type to access the MongoDB source endpoint. Default is password.
 	AuthType *string `json:"authType,omitempty" tf:"auth_type,omitempty"`

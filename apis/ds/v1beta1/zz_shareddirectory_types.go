@@ -31,6 +31,9 @@ type SharedDirectoryInitParameters struct {
 	// Method used when sharing a directory. Valid values are ORGANIZATIONS and HANDSHAKE. Default is HANDSHAKE.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
+	// Message sent by the directory owner to the directory consumer to help the directory consumer administrator determine whether to approve or reject the share invitation.
+	NotesSecretRef *v1.SecretKeySelector `json:"notesSecretRef,omitempty" tf:"-"`
+
 	// Identifier for the directory consumer account with whom the directory is to be shared. See below.
 	Target []TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 }

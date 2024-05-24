@@ -21,7 +21,7 @@ func (mg *Broker) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Broker
 func (tr *Broker) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"ldap_server_metadata[*].service_account_password": "spec.forProvider.ldapServerMetadata[*].serviceAccountPasswordSecretRef", "user[*].password": "spec.forProvider.user[*].passwordSecretRef"}
+	return map[string]string{"ldap_server_metadata[*].service_account_password": "ldapServerMetadata[*].serviceAccountPasswordSecretRef", "user[*].password": "user[*].passwordSecretRef"}
 }
 
 // GetObservation of this Broker

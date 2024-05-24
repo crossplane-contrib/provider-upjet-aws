@@ -21,7 +21,7 @@ func (mg *LBListener) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LBListener
 func (tr *LBListener) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"default_action[*].authenticate_oidc[*].client_secret": "spec.forProvider.defaultAction[*].authenticateOidc[*].clientSecretSecretRef"}
+	return map[string]string{"default_action[*].authenticate_oidc[*].client_secret": "defaultAction[*].authenticateOidc[*].clientSecretSecretRef"}
 }
 
 // GetObservation of this LBListener
