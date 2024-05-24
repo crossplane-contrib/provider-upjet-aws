@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: CC0-1.0
 
 run:
-  timeout: 60m
+  timeout: 90m
   show-stats: true
-  concurrency: 3
+  concurrency: 1
 
 output:
   # colored-line-number|line-number|json|tab|checkstyle|code-climate, default is "colored-line-number"
