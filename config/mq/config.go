@@ -49,6 +49,18 @@ func Configure(p *config.Provider) {
 			}
 			return conn, nil
 		}
+		// we need to prevent a race between the Broker.mq & User.mq
+		// controllers when the users are specified under the spec.forProvider.
+		// This configuration will prevent the upjet runtime from
+		// late-initializing spec.forProvider.user when the bootstrap users
+		// are specified under spec.initProvider. Without this configuration,
+		// spec.forProvider gets initialized even if the bootstrap users are
+		// specified under spec.initProvider.
+		r.LateInitializer = config.LateInitializer{
+			ConditionalIgnoredFields: []string{
+				"user",
+			},
+		}
 	})
 
 	p.AddResourceConfigurator("aws_mq_user", func(r *config.Resource) {

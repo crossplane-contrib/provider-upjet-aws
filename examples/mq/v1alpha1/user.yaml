@@ -7,7 +7,6 @@ kind: User
 metadata:
   annotations:
     meta.upbound.io/example-id: mq/v1alpha1/user
-    upjet.upbound.io/manual-intervention: "Note that there is a race between Broker and User controllers."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -47,6 +46,17 @@ spec:
     engineType: ActiveMQ
     engineVersion: 5.17.6
     hostInstanceType: mq.t3.micro
+  # bootstrap users must be specified under spec.initProvider if the Broker.mq
+  # MR is to be used together with User.mq MRs, as the controllers for these
+  # MRs race on the external ActiveMQ broker users if the bootstrap users are
+  # specified under spec.forProvider, and the AWS CreateBroker/mq
+  # REST operation requires at least one user to be specified while
+  # provisioning a broker. Other techniques, such as pausing reconciliations
+  # for the Broker.mq object using the pause annotation, or preventing updates
+  # using the management policies will also prevent this race between
+  # the controllers but the "XRM way" is to use the spec.initProvider API in
+  # this situation.
+  initProvider:
     user:
     - passwordSecretRef:
         key: password
