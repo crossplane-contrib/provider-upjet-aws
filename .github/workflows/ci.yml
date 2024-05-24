@@ -103,4 +103,5 @@ jobs:
           GOLANGCI_LINT_CACHE: ${{ steps.go_cache.outputs.analysis_cache }}
           SKIP_LINTER_ANALYSIS: false
           RUN_BUILDTAGGER: true
+          GOGC: "50"
         run: make lint
