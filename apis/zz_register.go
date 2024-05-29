@@ -217,7 +217,6 @@ import (
 	v1beta1opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta1"
 	v1beta2opensearch "github.com/upbound/provider-aws/apis/opensearch/v1beta2"
 	v1beta1opensearchserverless "github.com/upbound/provider-aws/apis/opensearchserverless/v1beta1"
-	v1beta2opensearchserverless "github.com/upbound/provider-aws/apis/opensearchserverless/v1beta2"
 	v1beta1opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta1"
 	v1beta2opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta2"
 	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
@@ -510,7 +509,6 @@ func init() {
 		v1beta1opensearch.SchemeBuilder.AddToScheme,
 		v1beta2opensearch.SchemeBuilder.AddToScheme,
 		v1beta1opensearchserverless.SchemeBuilder.AddToScheme,
-		v1beta2opensearchserverless.SchemeBuilder.AddToScheme,
 		v1beta1opsworks.SchemeBuilder.AddToScheme,
 		v1beta2opsworks.SchemeBuilder.AddToScheme,
 		v1beta1organizations.SchemeBuilder.AddToScheme,
