@@ -81,7 +81,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -100,7 +100,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BucketRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Object", "ObjectList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Object", "ObjectList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -119,7 +119,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.Key = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Bucket", "BucketList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -138,7 +138,7 @@ func (mg *ApplicationVersion) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.InitProvider.Bucket = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BucketRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta1", "Object", "ObjectList")
+		m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Object", "ObjectList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -169,7 +169,7 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticbeanstalk.aws.upbound.io", "v1beta1", "Application", "ApplicationList")
+		m, l, err = apisresolver.GetManagedResource("elasticbeanstalk.aws.upbound.io", "v1beta2", "Application", "ApplicationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -188,7 +188,7 @@ func (mg *ConfigurationTemplate) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.Application = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ApplicationRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticbeanstalk.aws.upbound.io", "v1beta1", "Application", "ApplicationList")
+		m, l, err = apisresolver.GetManagedResource("elasticbeanstalk.aws.upbound.io", "v1beta2", "Application", "ApplicationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

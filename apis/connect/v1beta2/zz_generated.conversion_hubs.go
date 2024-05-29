@@ -7,10 +7,19 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
-func (tr *HoursOfOperation) Hub() {}
+func (tr *BotAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Queue) Hub() {}
+func (tr *InstanceStorageConfig) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *QuickConnect) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *RoutingProfile) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *User) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *UserHierarchyStructure) Hub() {}

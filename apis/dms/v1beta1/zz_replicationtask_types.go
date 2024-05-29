@@ -44,7 +44,7 @@ type ReplicationTaskInitParameters struct {
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// ARN that uniquely identifies the source endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta2.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
 
@@ -67,7 +67,7 @@ type ReplicationTaskInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ARN that uniquely identifies the target endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta2.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`
 
@@ -171,7 +171,7 @@ type ReplicationTaskParameters struct {
 	ResourceIdentifier *string `json:"resourceIdentifier,omitempty" tf:"resource_identifier,omitempty"`
 
 	// ARN that uniquely identifies the source endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta2.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	// +kubebuilder:validation:Optional
 	SourceEndpointArn *string `json:"sourceEndpointArn,omitempty" tf:"source_endpoint_arn,omitempty"`
@@ -198,7 +198,7 @@ type ReplicationTaskParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// ARN that uniquely identifies the target endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.Endpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta2.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("endpoint_arn",true)
 	// +kubebuilder:validation:Optional
 	TargetEndpointArn *string `json:"targetEndpointArn,omitempty" tf:"target_endpoint_arn,omitempty"`

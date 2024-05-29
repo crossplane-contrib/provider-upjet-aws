@@ -78,7 +78,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta2", "Database", "DatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -97,7 +97,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.Database = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta1", "Workgroup", "WorkgroupList")
+		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta2", "Workgroup", "WorkgroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -116,7 +116,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.Workgroup = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkgroupRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta1", "Database", "DatabaseList")
+		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta2", "Database", "DatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -135,7 +135,7 @@ func (mg *NamedQuery) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.Database = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta1", "Workgroup", "WorkgroupList")
+		m, l, err = apisresolver.GetManagedResource("athena.aws.upbound.io", "v1beta2", "Workgroup", "WorkgroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

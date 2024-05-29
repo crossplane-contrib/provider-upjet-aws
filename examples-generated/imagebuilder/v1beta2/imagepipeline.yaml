@@ -1,0 +1,20 @@
+apiVersion: imagebuilder.aws.upbound.io/v1beta2
+kind: ImagePipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: imagebuilder/v1beta2/imagepipeline
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    imageRecipeArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    infrastructureConfigurationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    region: us-west-1
+    schedule:
+    - scheduleExpression: cron(0 0 * * ? *)

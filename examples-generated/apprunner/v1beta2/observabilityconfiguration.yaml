@@ -1,0 +1,16 @@
+apiVersion: apprunner.aws.upbound.io/v1beta2
+kind: ObservabilityConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apprunner/v1beta2/observabilityconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    observabilityConfigurationName: example
+    region: us-west-1
+    tags:
+      Name: example-apprunner-observability-configuration
+    traceConfiguration:
+    - vendor: AWSXRAY

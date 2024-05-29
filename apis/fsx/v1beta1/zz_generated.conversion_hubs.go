@@ -8,18 +8,3 @@ package v1beta1
 
 // Hub marks this type as a conversion hub.
 func (tr *Backup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DataRepositoryAssociation) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LustreFileSystem) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *OntapFileSystem) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *OntapStorageVirtualMachine) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WindowsFileSystem) Hub() {}

@@ -19,7 +19,7 @@ type DeploymentInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// REST API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -96,7 +96,7 @@ type DeploymentParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// REST API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`

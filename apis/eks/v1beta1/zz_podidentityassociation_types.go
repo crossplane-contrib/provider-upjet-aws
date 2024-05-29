@@ -16,7 +16,7 @@ import (
 type PodIdentityAssociationInitParameters struct {
 
 	// The name of the cluster to create the association in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in eks to populate clusterName.
@@ -85,7 +85,7 @@ type PodIdentityAssociationObservation struct {
 type PodIdentityAssociationParameters struct {
 
 	// The name of the cluster to create the association in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 

@@ -16,7 +16,7 @@ import (
 type ClusterRoleAssociationInitParameters struct {
 
 	// DB Cluster Identifier to associate with the IAM Role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`
 
@@ -63,7 +63,7 @@ type ClusterRoleAssociationObservation struct {
 type ClusterRoleAssociationParameters struct {
 
 	// DB Cluster Identifier to associate with the IAM Role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DBClusterIdentifier *string `json:"dbClusterIdentifier,omitempty" tf:"db_cluster_identifier,omitempty"`

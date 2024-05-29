@@ -10,9 +10,6 @@ package v1beta1
 func (tr *Certificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Endpoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *EventSubscription) Hub() {}
 
 // Hub marks this type as a conversion hub.

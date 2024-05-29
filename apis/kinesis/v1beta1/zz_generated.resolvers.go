@@ -77,7 +77,7 @@ func (mg *StreamConsumer) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta2", "Stream", "StreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -96,7 +96,7 @@ func (mg *StreamConsumer) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta2", "Stream", "StreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

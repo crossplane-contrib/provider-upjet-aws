@@ -1,0 +1,30 @@
+apiVersion: connect.aws.upbound.io/v1beta2
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta2/user
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identityInfo:
+    - firstName: example
+      lastName: example2
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    phoneConfig:
+    - afterContactWorkTimeLimit: 0
+      phoneType: SOFT_PHONE
+    region: us-west-1
+    routingProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    securityProfileIds:
+    - ${aws_connect_security_profile.example.security_profile_id}

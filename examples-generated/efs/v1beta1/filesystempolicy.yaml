@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: efs.aws.upbound.io/v1beta1
+apiVersion: efs.aws.upbound.io/v1beta2
 kind: FileSystem
 metadata:
   annotations:

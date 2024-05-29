@@ -7,13 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Channel) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Input) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *InputSecurityGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Multiplex) Hub() {}

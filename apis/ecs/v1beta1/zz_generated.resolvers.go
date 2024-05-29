@@ -81,7 +81,7 @@ func (mg *ClusterCapacityProviders) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -100,7 +100,7 @@ func (mg *ClusterCapacityProviders) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.ClusterName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("ecs.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

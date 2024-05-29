@@ -28,7 +28,7 @@ func (mg *Addon) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -66,7 +66,7 @@ func (mg *Addon) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ServiceAccountRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceAccountRoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -284,7 +284,7 @@ func (mg *FargateProfile) ResolveReferences(ctx context.Context, c client.Reader
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -341,7 +341,7 @@ func (mg *FargateProfile) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.SubnetIDRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -648,7 +648,7 @@ func (mg *PodIdentityAssociation) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -686,7 +686,7 @@ func (mg *PodIdentityAssociation) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("eks.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

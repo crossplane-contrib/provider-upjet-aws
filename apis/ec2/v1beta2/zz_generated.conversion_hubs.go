@@ -7,4 +7,43 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
+func (tr *EBSSnapshotImport) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *FlowLog) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Instance) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *LaunchTemplate) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Route) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *SpotFleetRequest) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *SpotInstanceRequest) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *TrafficMirrorFilterRule) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCEndpoint) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCIpamPoolCidr) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCPeeringConnection) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCPeeringConnectionAccepter) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPCPeeringConnectionOptions) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *VPNConnection) Hub() {}

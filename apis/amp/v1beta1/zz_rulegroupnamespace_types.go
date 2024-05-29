@@ -42,7 +42,7 @@ type RuleGroupNamespaceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// ID of the prometheus workspace the rule group namespace should be linked to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amp/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amp/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`

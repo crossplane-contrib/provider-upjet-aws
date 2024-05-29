@@ -16,7 +16,7 @@ import (
 type RouteResponseInitParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta2.API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// Reference to a API in apigatewayv2 to populate apiId.
@@ -75,7 +75,7 @@ type RouteResponseObservation struct {
 type RouteResponseParameters struct {
 
 	// API identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta1.API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigatewayv2/v1beta2.API
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 

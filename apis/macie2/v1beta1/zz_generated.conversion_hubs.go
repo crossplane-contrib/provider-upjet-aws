@@ -10,13 +10,7 @@ package v1beta1
 func (tr *Account) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ClassificationJob) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *CustomDataIdentifier) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FindingsFilter) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *InvitationAccepter) Hub() {}

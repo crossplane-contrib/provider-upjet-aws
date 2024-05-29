@@ -16,7 +16,7 @@ import (
 type WebhookInitParameters struct {
 
 	// Unique ID for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta1.App
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
@@ -67,7 +67,7 @@ type WebhookObservation struct {
 type WebhookParameters struct {
 
 	// Unique ID for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta1.App
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/amplify/v1beta2.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`

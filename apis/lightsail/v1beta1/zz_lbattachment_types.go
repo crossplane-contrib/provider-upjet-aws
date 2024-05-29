@@ -16,7 +16,7 @@ import (
 type LBAttachmentInitParameters struct {
 
 	// The name of the instance to attach to the load balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta2.Instance
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// Reference to a Instance in lightsail to populate instanceName.
@@ -55,7 +55,7 @@ type LBAttachmentObservation struct {
 type LBAttachmentParameters struct {
 
 	// The name of the instance to attach to the load balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta2.Instance
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 

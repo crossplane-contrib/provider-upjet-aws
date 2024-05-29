@@ -168,7 +168,7 @@ type InstanceInitParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// List of the layers the instance will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.CustomLayer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta2.CustomLayer
 	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
 
 	// References to CustomLayer in opsworks to populate layerIds.
@@ -206,7 +206,7 @@ type InstanceInitParameters struct {
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Identifier of the stack the instance will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta2.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
@@ -459,7 +459,7 @@ type InstanceParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// List of the layers the instance will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.CustomLayer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta2.CustomLayer
 	// +kubebuilder:validation:Optional
 	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
 
@@ -503,7 +503,7 @@ type InstanceParameters struct {
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Identifier of the stack the instance will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta2.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`

@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: glacier.aws.upbound.io/v1beta1
+apiVersion: glacier.aws.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:

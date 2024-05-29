@@ -8,9 +8,3 @@ package v1beta1
 
 // Hub marks this type as a conversion hub.
 func (tr *Stack) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *StackSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *StackSetInstance) Hub() {}

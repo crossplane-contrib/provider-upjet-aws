@@ -16,9 +16,6 @@ func (tr *Collection) Hub() {}
 func (tr *LifecyclePolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SecurityConfig) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SecurityPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.

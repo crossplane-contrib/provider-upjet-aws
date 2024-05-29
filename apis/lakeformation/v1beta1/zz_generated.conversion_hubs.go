@@ -10,7 +10,4 @@ package v1beta1
 func (tr *DataLakeSettings) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Permissions) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Resource) Hub() {}

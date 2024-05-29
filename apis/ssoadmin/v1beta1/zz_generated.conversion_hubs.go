@@ -10,16 +10,10 @@ package v1beta1
 func (tr *AccountAssignment) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *CustomerManagedPolicyAttachment) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *InstanceAccessControlAttributes) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagedPolicyAttachment) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PermissionsBoundaryAttachment) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PermissionSet) Hub() {}

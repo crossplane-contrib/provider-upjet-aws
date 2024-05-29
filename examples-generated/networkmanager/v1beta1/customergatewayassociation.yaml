@@ -52,7 +52,7 @@ spec:
 
 ---
 
-apiVersion: networkmanager.aws.upbound.io/v1beta1
+apiVersion: networkmanager.aws.upbound.io/v1beta2
 kind: Device
 metadata:
   annotations:
@@ -87,7 +87,7 @@ spec:
 
 ---
 
-apiVersion: networkmanager.aws.upbound.io/v1beta1
+apiVersion: networkmanager.aws.upbound.io/v1beta2
 kind: Site
 metadata:
   annotations:
@@ -124,7 +124,7 @@ spec:
 
 ---
 
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.upbound.io/v1beta2
 kind: VPNConnection
 metadata:
   annotations:

@@ -16,9 +16,6 @@ func (tr *Attachment) Hub() {}
 func (tr *BackendServerPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ELB) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LBCookieStickinessPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.

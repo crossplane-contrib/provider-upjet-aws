@@ -8,21 +8,3 @@ package v1beta1
 
 // Hub marks this type as a conversion hub.
 func (tr *Component) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ContainerRecipe) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DistributionConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Image) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ImagePipeline) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ImageRecipe) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *InfrastructureConfiguration) Hub() {}

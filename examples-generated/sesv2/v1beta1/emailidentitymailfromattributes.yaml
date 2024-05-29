@@ -14,7 +14,7 @@ spec:
 
 ---
 
-apiVersion: sesv2.aws.upbound.io/v1beta1
+apiVersion: sesv2.aws.upbound.io/v1beta2
 kind: EmailIdentity
 metadata:
   annotations:

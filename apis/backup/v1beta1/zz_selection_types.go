@@ -74,7 +74,7 @@ type SelectionInitParameters struct {
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Plan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta2.Plan
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// Reference to a Plan in backup to populate planId.
@@ -152,7 +152,7 @@ type SelectionParameters struct {
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Plan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta2.Plan
 	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 

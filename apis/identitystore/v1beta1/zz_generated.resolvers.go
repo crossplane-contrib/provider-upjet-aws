@@ -9,9 +9,10 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -44,7 +45,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 	mg.Spec.ForProvider.GroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta2", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -82,7 +83,7 @@ func (mg *GroupMembership) ResolveReferences( // ResolveReferences of this Group
 	mg.Spec.InitProvider.GroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("identitystore.aws.upbound.io", "v1beta2", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

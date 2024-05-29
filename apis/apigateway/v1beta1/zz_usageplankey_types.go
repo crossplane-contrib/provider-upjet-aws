@@ -32,7 +32,7 @@ type UsagePlanKeyInitParameters struct {
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
 	// Id of the usage plan resource representing to associate the key to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.UsagePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.UsagePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`
 
@@ -92,7 +92,7 @@ type UsagePlanKeyParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Id of the usage plan resource representing to associate the key to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.UsagePlan
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.UsagePlan
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	UsagePlanID *string `json:"usagePlanId,omitempty" tf:"usage_plan_id,omitempty"`

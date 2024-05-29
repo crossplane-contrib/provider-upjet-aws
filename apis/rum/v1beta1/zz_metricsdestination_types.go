@@ -16,7 +16,7 @@ import (
 type MetricsDestinationInitParameters struct {
 
 	// The name of the CloudWatch RUM app monitor that will send the metrics.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rum/v1beta1.AppMonitor
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rum/v1beta2.AppMonitor
 	AppMonitorName *string `json:"appMonitorName,omitempty" tf:"app_monitor_name,omitempty"`
 
 	// Reference to a AppMonitor in rum to populate appMonitorName.
@@ -68,7 +68,7 @@ type MetricsDestinationObservation struct {
 type MetricsDestinationParameters struct {
 
 	// The name of the CloudWatch RUM app monitor that will send the metrics.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rum/v1beta1.AppMonitor
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rum/v1beta2.AppMonitor
 	// +kubebuilder:validation:Optional
 	AppMonitorName *string `json:"appMonitorName,omitempty" tf:"app_monitor_name,omitempty"`
 

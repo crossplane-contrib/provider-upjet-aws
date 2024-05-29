@@ -470,7 +470,7 @@ func (mg *SnapshotScheduleAssociation) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -508,7 +508,7 @@ func (mg *SnapshotScheduleAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.ScheduleIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScheduleIdentifierRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -608,7 +608,7 @@ func (mg *UsageLimit) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -627,7 +627,7 @@ func (mg *UsageLimit) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIdentifierRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("redshift.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

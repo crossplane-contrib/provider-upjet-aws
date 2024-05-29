@@ -119,7 +119,7 @@ func (mg *AccessPointPolicy) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta1", "AccessPoint", "AccessPointList")
+		m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta2", "AccessPoint", "AccessPointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -138,7 +138,7 @@ func (mg *AccessPointPolicy) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.AccessPointArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccessPointArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta1", "AccessPoint", "AccessPointList")
+		m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta2", "AccessPoint", "AccessPointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -314,7 +314,7 @@ func (mg *ObjectLambdaAccessPointPolicy) ResolveReferences(ctx context.Context, 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta1", "ObjectLambdaAccessPoint", "ObjectLambdaAccessPointList")
+		m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta2", "ObjectLambdaAccessPoint", "ObjectLambdaAccessPointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -333,7 +333,7 @@ func (mg *ObjectLambdaAccessPointPolicy) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.Name = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta1", "ObjectLambdaAccessPoint", "ObjectLambdaAccessPointList")
+		m, l, err = apisresolver.GetManagedResource("s3control.aws.upbound.io", "v1beta2", "ObjectLambdaAccessPoint", "ObjectLambdaAccessPointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
