@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: CC0-1.0
 
-package v1beta1
+package v1beta2
 
 import (
 	"github.com/crossplane/crossplane-runtime/pkg/reference"
