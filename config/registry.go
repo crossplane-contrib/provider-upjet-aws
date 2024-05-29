@@ -6,10 +6,15 @@ package config
 
 import (
 	"context"
+	"fmt"
+	"regexp"
+	"strconv"
+
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/registry/reference"
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
 	tfjson "github.com/hashicorp/terraform-json"
@@ -51,6 +56,16 @@ var skipList = []string{
 	"aws_appflow_connector_profile$",   // failure with unknown reason.
 	"aws_rds_reserved_instance",        // Expense of testing
 }
+
+var (
+	reAPIVersion = regexp.MustCompile(`^v(\d+)((alpha|beta)(\d+))?$`)
+)
+
+const (
+	errFmtCannotBumpSingletonList = "cannot bump the API version for the resource %q containing a singleton list in its API"
+	errFmtCannotFindPrev          = "cannot compute the previous API versions for the resource %q containing a singleton list in its API"
+	errFmtInvalidAPIVersion       = "cannot parse %q as a Kubernetes API version string"
+)
 
 // workaround for the TF AWS v4.67.0-based no-fork release: We would like to
 // keep the types in the generated CRDs intact
@@ -106,6 +121,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		config.WithMainTemplate(hack.MainTemplate),
 		config.WithTerraformProvider(p),
 		config.WithTerraformPluginFrameworkProvider(fwProvider),
+		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),
 		config.WithDefaultResourceOptions(
 			GroupKindOverrides(),
 			KindOverrides(),
@@ -127,7 +143,88 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 	}
 
 	pc.ConfigureResources()
-	return pc, nil
+	return pc, bumpVersionsWithEmbeddedLists(pc)
+}
+
+func bumpVersionsWithEmbeddedLists(pc *config.Provider) error {
+	for name, r := range pc.Resources {
+		r := r
+		// nothing to do if no singleton list has been converted to
+		// an embedded object
+		if len(r.CRDListConversionPaths()) == 0 {
+			continue
+		}
+
+		bumped, err := bumpAPIVersion(r.Version)
+		if err != nil {
+			return errors.Wrapf(err, errFmtCannotBumpSingletonList, r.Name)
+		}
+
+		if r.PreviousVersions == nil {
+			prev, err := getPreviousVersions(bumped)
+			if err != nil {
+				return errors.Wrapf(err, errFmtCannotFindPrev, r.Name)
+			}
+			r.PreviousVersions = prev
+		}
+
+		currentVer := r.Version
+		r.Version = bumped
+		// we would like to set the storage version to v1beta1 to facilitate
+		// downgrades.
+		r.SetCRDStorageVersion(currentVer)
+		r.ControllerReconcileVersion = currentVer
+		r.Conversions = []conversion.Conversion{
+			conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
+			conversion.NewSingletonListConversion(conversion.AllVersions, bumped, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
+			conversion.NewSingletonListConversion(bumped, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
+		pc.Resources[name] = r
+	}
+	return nil
+}
+
+// returns a new API version by bumping the last number if the
+// API version string is a Kubernetes API version string such
+// as v1alpha1, v1beta1 or v1. Otherwise, returns an error.
+// If the specified version is v1beta1, then the bumped version is v1beta2.
+// If the specified version is v1, then the bumped version is v2.
+func bumpAPIVersion(v string) (string, error) {
+	m := reAPIVersion.FindStringSubmatch(v)
+	switch {
+	// e.g., v1
+	case len(m) == 2:
+		n, err := strconv.ParseUint(m[1], 10, 0)
+		if err != nil {
+			return "", errors.Wrapf(err, errFmtInvalidAPIVersion, v)
+		}
+		return fmt.Sprintf("v%d", n+1), nil
+
+	// e.g., v1beta1
+	case len(m) == 5:
+		n, err := strconv.ParseUint(m[4], 10, 0)
+		if err != nil {
+			return "", errors.Wrapf(err, errFmtInvalidAPIVersion, v)
+		}
+		return fmt.Sprintf("v%s%s%d", m[1], m[3], n+1), nil
+
+	default:
+		// then cannot bump this version string
+		return "", errors.Errorf(errFmtInvalidAPIVersion, v)
+	}
+}
+
+func getPreviousVersions(v string) ([]string, error) {
+	p := "v1beta1"
+	var result []string
+	var err error
+	for p != v {
+		result = append(result, p)
+		p, err = bumpAPIVersion(p)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return result, nil
 }
 
 // CLIReconciledResourceList returns the list of resources that have external
