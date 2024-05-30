@@ -6,19 +6,18 @@ package config
 
 import (
 	"context"
+	// Note(ezgidemirel): we are importing this to embed provider schema document
+	_ "embed"
 	"fmt"
 	"regexp"
 	"strconv"
 
-	// Note(ezgidemirel): we are importing this to embed provider schema document
-	_ "embed"
-
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/registry/reference"
+	"github.com/crossplane/upjet/pkg/schema/traverser"
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
 	tfjson "github.com/hashicorp/terraform-json"
-	fwprovider "github.com/hashicorp/terraform-plugin-framework/provider"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
@@ -94,17 +93,24 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 // In that case, we will only use the JSON schema for generating
 // the CRDs.
 func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider, error) {
-	var p *schema.Provider
-	var fwProvider fwprovider.Provider
-	var err error
-	if generationProvider {
-		p, err = getProviderSchema(providerSchema)
-		fwProvider, _, _ = xpprovider.GetProvider(ctx)
-	} else {
-		fwProvider, p, err = xpprovider.GetProvider(ctx)
-	}
+	fwProvider, sdkProvider, err := xpprovider.GetProvider(ctx)
 	if err != nil {
-		return nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
+		return nil, errors.Wrap(err, "cannot get the Terraform framework and SDK providers")
+	}
+
+	if generationProvider {
+		p, err := getProviderSchema(providerSchema)
+		if err != nil {
+			return nil, errors.Wrap(err, "cannot read the Terraform SDK provider from the JSON schema for code generation")
+		}
+		if err := traverser.TFResourceSchema(sdkProvider.ResourcesMap).TraverseTFSchemas(traverser.NewMaxItemsSync(p.ResourcesMap)); err != nil {
+			return nil, errors.Wrap(err, "cannot sync the MaxItems constraints between the Go schema and the JSON schema")
+		}
+		// use the JSON schema to temporarily prevent float64->int64
+		// conversions in the CRD APIs.
+		// We would like to convert to int64s with the next major release of
+		// the provider.
+		sdkProvider = p
 	}
 
 	modulePath := "github.com/upbound/provider-aws"
@@ -119,7 +125,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		config.WithSkipList(skipList),
 		config.WithFeaturesPackage("internal/features"),
 		config.WithMainTemplate(hack.MainTemplate),
-		config.WithTerraformProvider(p),
+		config.WithTerraformProvider(sdkProvider),
 		config.WithTerraformPluginFrameworkProvider(fwProvider),
 		config.WithSchemaTraversers(&config.SingletonListEmbedder{}),
 		config.WithDefaultResourceOptions(
