@@ -97,7 +97,7 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
-  name: sample-eks-cluster
+  name: access-entry-eks-cluster
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
 spec:
@@ -120,14 +120,14 @@ spec:
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
-  name: sample-cluster-policy
+  name: access-entry-cluster-policy
   annotations:
     meta.upbound.io/example-id: eks/v1beta1/accessentry
 spec:
   forProvider:
     policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
     roleRef:
-      name: sample-eks-cluster
+      name: access-entry-eks-cluster
 
 ---
 
