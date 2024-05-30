@@ -40,7 +40,7 @@ type AndInitParameters struct {
 	// Maximum object size (in bytes) to which the rule applies.
 	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
@@ -56,7 +56,7 @@ type AndObservation struct {
 	// Maximum object size (in bytes) to which the rule applies.
 	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Key-value map of resource tags. All of these tags must exist in the object's tag set in order for the rule to apply.
@@ -74,7 +74,7 @@ type AndParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// Prefix identifying one or more objects to which the rule applies.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
@@ -300,7 +300,7 @@ type RuleFilterInitParameters struct {
 	// Maximum object size (in bytes) to which the rule applies.
 	ObjectSizeLessThan *string `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Configuration block for specifying a tag key and value. See below.
@@ -318,7 +318,7 @@ type RuleFilterObservation struct {
 	// Maximum object size (in bytes) to which the rule applies.
 	ObjectSizeLessThan *string `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// Configuration block for specifying a tag key and value. See below.
@@ -339,7 +339,7 @@ type RuleFilterParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectSizeLessThan *string `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
 
-	// DEPRECATED Use filter instead. This has been deprecated by Amazon S3. Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if filter is not specified.
+	// Prefix identifying one or more objects to which the rule applies. Defaults to an empty string ("") if not specified.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
