@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: DomainName
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/domainname
+    upjet.upbound.io/manual-intervention: "The Certificate needs to be provisioned successfully which requires a real domain."
+    crossplane.io/external-name: example-email.upbound-providers.io
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-domainname
+spec:
+  forProvider:
+    region: us-west-1
+    domainNameConfiguration:
+      - certificateArnSelector:
+          matchLabels:
+            upjet.upbound.io/test-group: apigatewayv2-domainname
+        endpointType: REGIONAL
+        securityPolicy: TLS_1_2
+
+---
+
+apiVersion: acm.aws.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/domainname
+    upjet.upbound.io/manual-intervention: "The domain given as spec.forProvider.domainName needs to be created beforehand."
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-domainname
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    domainName: example-email.upbound-providers.io
+    tags:
+      Environment: test
+    validationMethod: EMAIL

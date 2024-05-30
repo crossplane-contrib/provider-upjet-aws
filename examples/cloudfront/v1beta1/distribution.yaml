@@ -5,9 +5,11 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: Distribution
 metadata:
-  name: example-distribution
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/distribution
   labels:
     testing.upbound.io/example-name: distribution
+  name: example-distribution
 spec:
   forProvider:
     region: us-west-1
@@ -100,10 +102,14 @@ spec:
       Environment: production
     viewerCertificate:
       - cloudfrontDefaultCertificate: true
+
 ---
+
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: MonitoringSubscription
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/distribution
   name: example-monitoring-subscription
 spec:
   forProvider:

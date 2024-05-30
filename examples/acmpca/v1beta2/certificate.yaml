@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: acmpca.aws.upbound.io/v1beta2
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: acmpca/v1beta2/certificate
+    upjet.upbound.io/manual-intervention: It depends on CertificateAuthority which
+      is not suitable for continuous automated testing.
+  name: example
+spec:
+  forProvider:
+    certificateAuthorityArnRef:
+      name: example
+    certificateSigningRequestSecretRef:
+      key: certificate_signing_request
+      name: acmpca-ca
+      namespace: upbound-system
+    region: eu-central-1
+    signingAlgorithm: SHA256WITHRSA
+    templateArn: arn:aws:acm-pca:::template/RootCACertificate/V1
+    validity:
+      type: YEARS
+      value: "1"
+  providerConfigRef:
+    name: default
+  writeConnectionSecretToRef:
+    name: acmpca-certificate
+    namespace: upbound-system

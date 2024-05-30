@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: networkfirewall.aws.upbound.io/v1beta2
+kind: RuleGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkfirewall/v1beta2/rulegroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 100
+    name: example
+    region: us-west-1
+    ruleGroup:
+      rulesSource:
+        rulesSourceList:
+          generatedRulesType: DENYLIST
+          targetTypes:
+          - HTTP_HOST
+          targets:
+          - test.example.com
+    tags:
+      Tag1: Value1
+      Tag2: Value2
+    type: STATEFUL

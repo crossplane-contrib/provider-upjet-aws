@@ -6,6 +6,7 @@ apiVersion: ec2.aws.upbound.io/v1beta2
 kind: Route
 metadata:
   annotations:
+    meta.upbound.io/example-id: ec2/v1beta2/route
     uptest.upbound.io/disable-import: "true"
   name: route
 spec:
@@ -22,9 +23,11 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTable
 metadata:
-  name: table
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta2/route
   labels:
     testing.upbound.io/example-name: table
+  name: table
 spec:
   forProvider:
     region: us-west-1
@@ -38,6 +41,8 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: InternetGateway
 metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta2/route
   name: routegw
 spec:
   forProvider:
@@ -52,9 +57,11 @@ spec:
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
-  name: route-vpc
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta2/route
   labels:
     testing.upbound.io/example-name: route-vpc
+  name: route-vpc
 spec:
   forProvider:
     region: us-west-1

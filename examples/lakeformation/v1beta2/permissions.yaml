@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: lakeformation.aws.upbound.io/v1beta2
+kind: Permissions
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta2/permissions
+  name: example
+spec:
+  forProvider:
+    database:
+      catalogId: "609897127049"
+      name: example
+    permissions:
+    - ALL
+    - ALTER
+    - CREATE_TABLE
+    - DROP
+    principal: ${aws_iam_role.workflow_role.arn}
+    region: us-east-1
+
+---
+
+apiVersion: glue.aws.upbound.io/v1beta2
+kind: CatalogDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta2/permissions
+  name: example
+spec:
+  forProvider:
+    catalogId: "609897127049"
+    region: us-east-1
+
+---
+
+apiVersion: glue.aws.upbound.io/v1beta2
+kind: CatalogTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lakeformation/v1beta2/permissions
+  name: example
+spec:
+  forProvider:
+    catalogId: "609897127049"
+    databaseNameRef:
+      name: example
+    region: us-east-1
+    storageDescriptor:
+      columns:
+      - name: my_column_1
+        type: string
+      - name: my_column_2
+        type: string
+      - name: my_column_3
+        type: string
+    tableType: EXTERNAL

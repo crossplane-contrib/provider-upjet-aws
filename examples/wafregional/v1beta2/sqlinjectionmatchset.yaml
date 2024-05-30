@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: wafregional.aws.upbound.io/v1beta2
+kind: SQLInjectionMatchSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafregional/v1beta2/sqlinjectionmatchset
+  labels:
+    testing.upbound.io/example-name: sql_injection_match_set
+  name: sql-injection-match-set
+spec:
+  forProvider:
+    name: tf-sql_injection_match_set
+    region: us-west-1
+    sqlInjectionMatchTuple:
+    - fieldToMatch:
+        type: QUERY_STRING
+      textTransformation: URL_DECODE

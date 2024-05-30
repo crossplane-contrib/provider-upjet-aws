@@ -1,0 +1,78 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: autoscalingplans.aws.upbound.io/v1beta2
+kind: ScalingPlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscalingplans/v1beta2/scalingplan
+    upjet.upbound.io/manual-intervention: This resource depends on AutoscalingGroup
+      with manual intervention.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationSource:
+      tagFilter:
+      - key: application
+        values:
+        - example
+    name: example-dynamic-cost-optimization
+    region: us-west-1
+    scalingInstruction:
+    - maxCapacity: 3
+      minCapacity: 0
+      resourceId: autoScalingGroup/example
+      scalableDimension: autoscaling:autoScalingGroup:DesiredCapacity
+      serviceNamespace: autoscaling
+      targetTrackingConfiguration:
+      - predefinedScalingMetricSpecification:
+          predefinedScalingMetricType: ASGAverageCPUUtilization
+        targetValue: 70
+
+---
+
+apiVersion: autoscaling.aws.upbound.io/v1beta3
+kind: AutoscalingGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscalingplans/v1beta2/scalingplan
+    upjet.upbound.io/manual-intervention: This resource depends on LaunchConfiguration
+      with manual intervention.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    availabilityZones:
+    - us-west-1b
+    desiredCapacity: 1
+    launchConfigurationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: as_conf
+    maxSize: 1
+    minSize: 1
+    region: us-west-1
+    tag:
+    - key: AmazonECSManaged
+      propagateAtLaunch: true
+      value: "true"
+
+---
+
+apiVersion: autoscaling.aws.upbound.io/v1beta2
+kind: LaunchConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscalingplans/v1beta2/scalingplan
+    upjet.upbound.io/manual-intervention: This resource refers to an AMI ID.
+  labels:
+    testing.upbound.io/example-name: as_conf
+  name: as-conf
+spec:
+  forProvider:
+    imageId: ami-0430743863c514c80
+    instanceType: t2.micro
+    region: us-west-1

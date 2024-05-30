@@ -1,0 +1,18 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: eks.aws.upbound.io/v1beta2
+kind: IdentityProviderConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta2/identityproviderconfig
+    uptest.upbound.io/timeout: "3600"
+  name: example
+spec:
+  forProvider:
+    clusterName: test
+    oidc:
+      clientId: test-audience
+      issuerUrl: https://issuer.url
+    region: us-west-1

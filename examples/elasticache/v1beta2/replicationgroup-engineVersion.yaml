@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: elasticache.aws.upbound.io/v1beta2
+kind: ReplicationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    automaticFailoverEnabled: true
+    description: example description
+    engineVersion: "7.1"
+    nodeType: cache.m4.large
+    numCacheClusters: 2
+    parameterGroupName: default.redis7
+    port: 6379
+    region: us-west-1

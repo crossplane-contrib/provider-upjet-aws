@@ -1,0 +1,119 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta2
+kind: API
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+  name: auth-api
+spec:
+  forProvider:
+    name: test-http-api
+    protocolType: HTTP
+    region: us-west-1
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+  name: example
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-http
+    region: us-west-1
+    routeKey: POST /login
+    targetSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-http
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta2
+kind: Integration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+  name: example
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-http
+    integrationMethod: POST
+    integrationType: HTTP_PROXY
+    integrationUri: https://api.example.com
+    region: us-west-1
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+  name: example
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-http
+    description: Example deployment
+    region: us-west-1
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta2
+kind: Authorizer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+  name: test-authorizer
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-http
+    authorizerType: JWT
+    identitySources:
+    - $request.header.Authorization
+    jwtConfiguration:
+      audience:
+      - example
+      issuer: https://accounts.google.com/
+    name: example-authorizer
+    region: us-west-1
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta2
+kind: Stage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-http
+  name: example
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-http
+    name: example-stage
+    region: us-west-1

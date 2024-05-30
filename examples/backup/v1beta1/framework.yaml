@@ -5,6 +5,8 @@
 apiVersion: backup.aws.upbound.io/v1beta1
 kind: Framework
 metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/framework
   name: example
 spec:
   forProvider:

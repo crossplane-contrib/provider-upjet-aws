@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ecr.aws.upbound.io/v1beta2
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta2/repository
+  name: alper-test-repo
+spec:
+  forProvider:
+    imageTagMutability: IMMUTABLE
+    region: us-east-1

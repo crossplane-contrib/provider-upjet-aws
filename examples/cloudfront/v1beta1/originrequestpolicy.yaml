@@ -5,6 +5,8 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: OriginRequestPolicy
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta1/originrequestpolicy
   name: example-origin-request-policy
 spec:
   forProvider:
