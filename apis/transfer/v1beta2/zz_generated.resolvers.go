@@ -14,12 +14,104 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/upbound/provider-aws/config/common"
-	client "sigs.k8s.io/controller-runtime/pkg/client"
-
-	// ResolveReferences of this Server.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+func (mg *Connector) ResolveReferences( // ResolveReferences of this Connector.
+	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccessRole),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.ForProvider.AccessRoleRef,
+			Selector:     mg.Spec.ForProvider.AccessRoleSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccessRole")
+	}
+	mg.Spec.ForProvider.AccessRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccessRoleRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.SftpConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SftpConfig.UserSecretID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.SftpConfig.UserSecretIDRef,
+				Selector:     mg.Spec.ForProvider.SftpConfig.UserSecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.SftpConfig.UserSecretID")
+		}
+		mg.Spec.ForProvider.SftpConfig.UserSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.SftpConfig.UserSecretIDRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccessRole),
+			Extract:      resource.ExtractParamPath("arn", true),
+			Reference:    mg.Spec.InitProvider.AccessRoleRef,
+			Selector:     mg.Spec.InitProvider.AccessRoleSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AccessRole")
+	}
+	mg.Spec.InitProvider.AccessRole = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccessRoleRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.SftpConfig != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("secretsmanager.aws.upbound.io", "v1beta1", "Secret", "SecretList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SftpConfig.UserSecretID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SftpConfig.UserSecretIDRef,
+				Selector:     mg.Spec.InitProvider.SftpConfig.UserSecretIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.SftpConfig.UserSecretID")
+		}
+		mg.Spec.InitProvider.SftpConfig.UserSecretID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.SftpConfig.UserSecretIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
+// ResolveReferences of this Server.
 func (mg *Server) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList

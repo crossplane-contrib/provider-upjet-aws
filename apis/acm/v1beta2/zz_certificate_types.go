@@ -16,7 +16,16 @@ import (
 type CertificateInitParameters struct {
 
 	// ARN of an ACM PCA
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acmpca/v1beta2.CertificateAuthority
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+
+	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// Certificate's PEM-formatted public key
 	CertificateBody *string `json:"certificateBody,omitempty" tf:"certificate_body,omitempty"`
@@ -142,8 +151,17 @@ type CertificateObservation struct {
 type CertificateParameters struct {
 
 	// ARN of an ACM PCA
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acmpca/v1beta2.CertificateAuthority
 	// +kubebuilder:validation:Optional
 	CertificateAuthorityArn *string `json:"certificateAuthorityArn,omitempty" tf:"certificate_authority_arn,omitempty"`
+
+	// Reference to a CertificateAuthority in acmpca to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnRef *v1.Reference `json:"certificateAuthorityArnRef,omitempty" tf:"-"`
+
+	// Selector for a CertificateAuthority in acmpca to populate certificateAuthorityArn.
+	// +kubebuilder:validation:Optional
+	CertificateAuthorityArnSelector *v1.Selector `json:"certificateAuthorityArnSelector,omitempty" tf:"-"`
 
 	// Certificate's PEM-formatted public key
 	// +kubebuilder:validation:Optional

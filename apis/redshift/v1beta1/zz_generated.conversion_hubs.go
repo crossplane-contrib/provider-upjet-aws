@@ -10,6 +10,9 @@ package v1beta1
 func (tr *AuthenticationProfile) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *EndpointAccess) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *EventSubscription) Hub() {}
 
 // Hub marks this type as a conversion hub.

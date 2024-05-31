@@ -103,7 +103,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		if err != nil {
 			return nil, errors.Wrap(err, "cannot read the Terraform SDK provider from the JSON schema for code generation")
 		}
-		if err := traverser.TFResourceSchema(sdkProvider.ResourcesMap).TraverseTFSchemas(traverser.NewMaxItemsSync(p.ResourcesMap)); err != nil {
+		if err := traverser.TFResourceSchema(sdkProvider.ResourcesMap).Traverse(traverser.NewMaxItemsSync(p.ResourcesMap)); err != nil {
 			return nil, errors.Wrap(err, "cannot sync the MaxItems constraints between the Go schema and the JSON schema")
 		}
 		// use the JSON schema to temporarily prevent float64->int64
