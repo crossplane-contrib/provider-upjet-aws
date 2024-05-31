@@ -103,6 +103,9 @@ func Configure(p *config.Provider) {
 		r.References = config.References{
 			"cluster_name": {
 				TerraformName: "aws_eks_cluster",
+				// Use the terraform id instead of the external name because the external name is set before the cluster
+				// has been created.
+				Extractor: common.PathTerraformIDExtractor,
 			},
 			// Principal Arn can refer to either the ARN of an IAM user or an IAM role, with a strong best-practice
 			// recommendation to always use roles. However, the eks Access Policy resource won't do anything unless
@@ -110,7 +113,7 @@ func Configure(p *config.Provider) {
 			// the principal arn from the Access Entry, we provide an easy means of ordered creation.
 			"principal_arn": {
 				TerraformName: "aws_eks_access_entry",
-				Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_arn",false)`,
+				Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_arn",true)`,
 			},
 		}
 	})
@@ -118,6 +121,9 @@ func Configure(p *config.Provider) {
 		r.References = config.References{
 			"cluster_name": {
 				TerraformName: "aws_eks_cluster",
+				// Use the terraform id instead of the external name because the external name is set before the cluster
+				// has been created.
+				Extractor: common.PathTerraformIDExtractor,
 			},
 			"principal_arn": {
 				TerraformName:     "aws_iam_role",
