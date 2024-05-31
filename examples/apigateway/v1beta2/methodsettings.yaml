@@ -3,47 +3,68 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: apigateway.aws.upbound.io/v1beta2
+kind: MethodSettings
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/methodsettings
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-all
+spec:
+  forProvider:
+    methodPath: '*/*'
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+    settings:
+      metricsEnabled: true
+    stageNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+---
+apiVersion: apigateway.aws.upbound.io/v1beta2
 kind: Stage
 metadata:
   annotations:
-    meta.upbound.io/example-id: apigateway/v1beta2/stage
+    meta.upbound.io/example-id: apigateway/v1beta2/methodsettings
   labels:
-    testing.upbound.io/example-name: stage
-  name: example-stage
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-stage
 spec:
   forProvider:
     deploymentIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-stage
+        testing.upbound.io/example-name: example-methodsettings
     region: us-west-1
     restApiIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-stage
+        testing.upbound.io/example-name: example-methodsettings
     stageName: development
 ---
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: Deployment
 metadata:
   annotations:
-    meta.upbound.io/example-id: apigateway/v1beta2/stage
+    meta.upbound.io/example-id: apigateway/v1beta2/methodsettings
   labels:
-    testing.upbound.io/example-name: example-stage
-  name: example-stage-deployment
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-deployment
 spec:
   forProvider:
     region: us-west-1
     restApiIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-stage
+        testing.upbound.io/example-name: example-methodsettings
 ---
 apiVersion: apigateway.aws.upbound.io/v1beta1
 kind: RestAPI
 metadata:
   annotations:
-    meta.upbound.io/example-id: apigateway/v1beta2/stage
+    meta.upbound.io/example-id: apigateway/v1beta2/methodsettings
   labels:
-    testing.upbound.io/example-name: example-stage
-  name: example-stage-restapi
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-restapi
 spec:
   forProvider:
     body: |-

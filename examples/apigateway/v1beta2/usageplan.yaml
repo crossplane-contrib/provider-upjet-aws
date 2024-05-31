@@ -1,0 +1,124 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apigateway.aws.upbound.io/v1beta2
+kind: UsagePlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/usageplan
+  labels:
+    testing.upbound.io/example-name: stage
+  name: example-usageplan
+spec:
+  forProvider:
+    apiStages:
+      - apiIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: stage
+        stageSelector:
+          matchLabels:
+            testing.upbound.io/example-name: stage
+      - apiIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: stage
+        stageSelector:
+          matchLabels:
+            testing.upbound.io/example-name: stage
+    description: my description
+    name: my-usage-plan
+    productCode: MYCODE
+    quotaSettings:
+      limit: 20
+      offset: 2
+      period: WEEK
+    region: us-west-1
+    throttleSettings:
+      burstLimit: 5
+      rateLimit: 10
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/usageplan
+  labels:
+    testing.upbound.io/example-name: stage
+  name: stage
+spec:
+  forProvider:
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: stage
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/usageplan
+  labels:
+    testing.upbound.io/example-name: stage
+  name: test-demo
+spec:
+  forProvider:
+    body: |-
+      ${jsonencode({
+          openapi = "3.0.1"
+          info = {
+            title   = "example"
+            version = "1.0"
+          }
+          paths = {
+            "/path1" = {
+              get = {
+                x-amazon-apigateway-integration = {
+                  httpMethod           = "GET"
+                  payloadFormatVersion = "1.0"
+                  type                 = "HTTP_PROXY"
+                  uri                  = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+                }
+              }
+            }
+          }
+        })}
+    name: test-demo
+    region: us-west-1
+---
+apiVersion: apigateway.aws.upbound.io/v1beta2
+kind: Stage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/usageplan
+  labels:
+    testing.upbound.io/example-name: stage
+  name: development
+spec:
+  forProvider:
+    deploymentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: stage
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: stage
+    stageName: development
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: Stage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/usageplan
+  labels:
+    testing.upbound.io/example-name: stage
+  name: production
+spec:
+  forProvider:
+    deploymentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: stage
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: stage
+    stageName: production
