@@ -5,9 +5,11 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta2
 kind: FieldLevelEncryptionConfig
 metadata:
-  name: example-field-level-encryption-config
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionconfig
   labels:
-    testing.upbound.io/example-name: publickey
+    testing.upbound.io/example-name: example-field-level-encryption-config
+  name: example-field-level-encryption-config
 spec:
   forProvider:
     region: us-west-1
@@ -24,7 +26,7 @@ spec:
         items:
           - profileIdSelector:
               matchLabels:
-                testing.upbound.io/example-name: publickey
+                testing.upbound.io/example-name: example-field-level-encryption-config
             queryArg: Arg1
 
 ---
@@ -32,9 +34,11 @@ spec:
 apiVersion: cloudfront.aws.upbound.io/v1beta2
 kind: FieldLevelEncryptionProfile
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionconfig
   name: example-field-level-encryption-profile
   labels:
-    testing.upbound.io/example-name: publickey
+    testing.upbound.io/example-name: example-field-level-encryption-config
 spec:
   forProvider:
     region: us-west-1
@@ -42,12 +46,12 @@ spec:
     encryptionEntities:
       items:
         - fieldPatterns:
-            - items:
-                - DateOfBirth
+            items:
+              - DateOfBirth
           providerId: testprovider
           publicKeyIdSelector:
             matchLabels:
-              testing.upbound.io/example-name: publickey
+              testing.upbound.io/example-name: example-field-level-encryption-config
     name: ${Rand.RFC1123Subdomain}
 
 ---
@@ -55,9 +59,11 @@ spec:
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: PublicKey
 metadata:
-  name: example-public-key
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionconfig
   labels:
-    testing.upbound.io/example-name: publickey
+    testing.upbound.io/example-name: example-field-level-encryption-config
+  name: example-public-key-config
 spec:
   forProvider:
     region: us-west-1
@@ -66,7 +72,7 @@ spec:
       name: publickeysecret
       namespace: upbound-system
       key: publickeyPEM
-    name: test_key
+    name: test_key2
 
 ---
 

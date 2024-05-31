@@ -5,9 +5,11 @@
 apiVersion: cloudfront.aws.upbound.io/v1beta2
 kind: FieldLevelEncryptionProfile
 metadata:
-  name: example-field-level-encryption-profile
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionprofile
   labels:
-    testing.upbound.io/example-name: publickey
+    testing.upbound.io/example-name: example-field-level-encryption-profile
+  name: example-field-level-encryption-profile
 spec:
   forProvider:
     region: us-west-1
@@ -15,12 +17,12 @@ spec:
     encryptionEntities:
       items:
       - fieldPatterns:
-          - items:
-              - DateOfBirth
+          items:
+            - DateOfBirth
         providerId: testprovider
         publicKeyIdSelector:
           matchLabels:
-            testing.upbound.io/example-name: publickey
+            testing.upbound.io/example-name: example-field-level-encryption-profile
     name: ${Rand.RFC1123Subdomain}
 
 ---
@@ -28,9 +30,11 @@ spec:
 apiVersion: cloudfront.aws.upbound.io/v1beta1
 kind: PublicKey
 metadata:
-  name: example-public-key
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/fieldlevelencryptionprofile
   labels:
-    testing.upbound.io/example-name: publickey
+    testing.upbound.io/example-name: example-field-level-encryption-profile
+  name: example-public-key-prof
 spec:
   forProvider:
     region: us-west-1
