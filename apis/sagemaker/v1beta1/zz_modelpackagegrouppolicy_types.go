@@ -16,7 +16,7 @@ import (
 type ModelPackageGroupPolicyInitParameters struct {
 
 	// The name of the model package group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.ModelPackageGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sagemaker/v1beta1.ModelPackageGroup
 	ModelPackageGroupName *string `json:"modelPackageGroupName,omitempty" tf:"model_package_group_name,omitempty"`
 
 	// Reference to a ModelPackageGroup in sagemaker to populate modelPackageGroupName.
@@ -44,7 +44,7 @@ type ModelPackageGroupPolicyObservation struct {
 type ModelPackageGroupPolicyParameters struct {
 
 	// The name of the model package group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.ModelPackageGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sagemaker/v1beta1.ModelPackageGroup
 	// +kubebuilder:validation:Optional
 	ModelPackageGroupName *string `json:"modelPackageGroupName,omitempty" tf:"model_package_group_name,omitempty"`
 

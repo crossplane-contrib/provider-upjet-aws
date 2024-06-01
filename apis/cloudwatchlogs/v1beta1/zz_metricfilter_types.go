@@ -16,7 +16,7 @@ import (
 type MetricFilterInitParameters struct {
 
 	// The name of the log group to associate the metric filter with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cloudwatchlogs/v1beta1.Group
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
 	// Reference to a Group in cloudwatchlogs to populate logGroupName.
@@ -54,7 +54,7 @@ type MetricFilterObservation struct {
 type MetricFilterParameters struct {
 
 	// The name of the log group to associate the metric filter with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cloudwatchlogs/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 

@@ -9,16 +9,16 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	framework "github.com/upbound/provider-aws/internal/controller/backup/framework"
-	globalsettings "github.com/upbound/provider-aws/internal/controller/backup/globalsettings"
-	plan "github.com/upbound/provider-aws/internal/controller/backup/plan"
-	regionsettings "github.com/upbound/provider-aws/internal/controller/backup/regionsettings"
-	reportplan "github.com/upbound/provider-aws/internal/controller/backup/reportplan"
-	selection "github.com/upbound/provider-aws/internal/controller/backup/selection"
-	vault "github.com/upbound/provider-aws/internal/controller/backup/vault"
-	vaultlockconfiguration "github.com/upbound/provider-aws/internal/controller/backup/vaultlockconfiguration"
-	vaultnotifications "github.com/upbound/provider-aws/internal/controller/backup/vaultnotifications"
-	vaultpolicy "github.com/upbound/provider-aws/internal/controller/backup/vaultpolicy"
+	framework "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/framework"
+	globalsettings "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/globalsettings"
+	plan "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/plan"
+	regionsettings "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/regionsettings"
+	reportplan "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/reportplan"
+	selection "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/selection"
+	vault "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/vault"
+	vaultlockconfiguration "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/vaultlockconfiguration"
+	vaultnotifications "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/vaultnotifications"
+	vaultpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/backup/vaultpolicy"
 )
 
 // Setup_backup creates all controllers with the supplied logger and adds them to

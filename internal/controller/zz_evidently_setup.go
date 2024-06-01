@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	feature "github.com/upbound/provider-aws/internal/controller/evidently/feature"
-	project "github.com/upbound/provider-aws/internal/controller/evidently/project"
-	segment "github.com/upbound/provider-aws/internal/controller/evidently/segment"
+	feature "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/evidently/feature"
+	project "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/evidently/project"
+	segment "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/evidently/segment"
 )
 
 // Setup_evidently creates all controllers with the supplied logger and adds them to

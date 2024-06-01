@@ -25,7 +25,7 @@ type UserProfileInitParameters struct {
 	SSHUsername *string `json:"sshUsername,omitempty" tf:"ssh_username,omitempty"`
 
 	// The user's IAM ARN
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
 
@@ -71,7 +71,7 @@ type UserProfileParameters struct {
 	SSHUsername *string `json:"sshUsername,omitempty" tf:"ssh_username,omitempty"`
 
 	// The user's IAM ARN
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`

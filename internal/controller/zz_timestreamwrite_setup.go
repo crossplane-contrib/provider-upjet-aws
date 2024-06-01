@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	database "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
-	table "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
+	database "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/timestreamwrite/database"
+	table "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/timestreamwrite/table"
 )
 
 // Setup_timestreamwrite creates all controllers with the supplied logger and adds them to

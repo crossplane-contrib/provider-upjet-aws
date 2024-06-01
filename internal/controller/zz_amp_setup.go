@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	alertmanagerdefinition "github.com/upbound/provider-aws/internal/controller/amp/alertmanagerdefinition"
-	rulegroupnamespace "github.com/upbound/provider-aws/internal/controller/amp/rulegroupnamespace"
-	workspace "github.com/upbound/provider-aws/internal/controller/amp/workspace"
+	alertmanagerdefinition "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/amp/alertmanagerdefinition"
+	rulegroupnamespace "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/amp/rulegroupnamespace"
+	workspace "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/amp/workspace"
 )
 
 // Setup_amp creates all controllers with the supplied logger and adds them to

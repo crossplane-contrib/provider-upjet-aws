@@ -16,7 +16,7 @@ import (
 type AliasInitParameters struct {
 
 	// Identifier for the key for which the alias is for, can be either an ARN or key_id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/kms/v1beta1.Key
 	TargetKeyID *string `json:"targetKeyId,omitempty" tf:"target_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate targetKeyId.
@@ -50,7 +50,7 @@ type AliasParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Identifier for the key for which the alias is for, can be either an ARN or key_id.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	TargetKeyID *string `json:"targetKeyId,omitempty" tf:"target_key_id,omitempty"`
 

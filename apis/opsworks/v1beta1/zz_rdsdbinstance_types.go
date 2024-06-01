@@ -22,7 +22,7 @@ type RDSDBInstanceInitParameters struct {
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
 	// The db instance to register for this stack. Changing this will force a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
 
@@ -35,7 +35,7 @@ type RDSDBInstanceInitParameters struct {
 	RDSDBInstanceArnSelector *v1.Selector `json:"rdsDbInstanceArnSelector,omitempty" tf:"-"`
 
 	// The stack to register a db instance for. Changing this will force a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
@@ -74,7 +74,7 @@ type RDSDBInstanceParameters struct {
 	DBUser *string `json:"dbUser,omitempty" tf:"db_user,omitempty"`
 
 	// The db instance to register for this stack. Changing this will force a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RDSDBInstanceArn *string `json:"rdsDbInstanceArn,omitempty" tf:"rds_db_instance_arn,omitempty"`
@@ -88,7 +88,7 @@ type RDSDBInstanceParameters struct {
 	RDSDBInstanceArnSelector *v1.Selector `json:"rdsDbInstanceArnSelector,omitempty" tf:"-"`
 
 	// The stack to register a db instance for. Changing this will force a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`

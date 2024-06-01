@@ -9,19 +9,19 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	activereceiptruleset "github.com/upbound/provider-aws/internal/controller/ses/activereceiptruleset"
-	configurationset "github.com/upbound/provider-aws/internal/controller/ses/configurationset"
-	domaindkim "github.com/upbound/provider-aws/internal/controller/ses/domaindkim"
-	domainidentity "github.com/upbound/provider-aws/internal/controller/ses/domainidentity"
-	domainmailfrom "github.com/upbound/provider-aws/internal/controller/ses/domainmailfrom"
-	emailidentity "github.com/upbound/provider-aws/internal/controller/ses/emailidentity"
-	eventdestination "github.com/upbound/provider-aws/internal/controller/ses/eventdestination"
-	identitynotificationtopic "github.com/upbound/provider-aws/internal/controller/ses/identitynotificationtopic"
-	identitypolicy "github.com/upbound/provider-aws/internal/controller/ses/identitypolicy"
-	receiptfilter "github.com/upbound/provider-aws/internal/controller/ses/receiptfilter"
-	receiptrule "github.com/upbound/provider-aws/internal/controller/ses/receiptrule"
-	receiptruleset "github.com/upbound/provider-aws/internal/controller/ses/receiptruleset"
-	template "github.com/upbound/provider-aws/internal/controller/ses/template"
+	activereceiptruleset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/activereceiptruleset"
+	configurationset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/configurationset"
+	domaindkim "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/domaindkim"
+	domainidentity "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/domainidentity"
+	domainmailfrom "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/domainmailfrom"
+	emailidentity "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/emailidentity"
+	eventdestination "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/eventdestination"
+	identitynotificationtopic "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/identitynotificationtopic"
+	identitypolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/identitypolicy"
+	receiptfilter "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/receiptfilter"
+	receiptrule "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/receiptrule"
+	receiptruleset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/receiptruleset"
+	template "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ses/template"
 )
 
 // Setup_ses creates all controllers with the supplied logger and adds them to

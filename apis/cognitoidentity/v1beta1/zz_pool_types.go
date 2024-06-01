@@ -16,7 +16,7 @@ import (
 type CognitoIdentityProvidersInitParameters struct {
 
 	// The client ID for the Amazon Cognito Identity User Pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cognitoidp/v1beta1.UserPoolClient
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Reference to a UserPoolClient in cognitoidp to populate clientId.
@@ -49,7 +49,7 @@ type CognitoIdentityProvidersObservation struct {
 type CognitoIdentityProvidersParameters struct {
 
 	// The client ID for the Amazon Cognito Identity User Pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPoolClient
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cognitoidp/v1beta1.UserPoolClient
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
@@ -93,8 +93,8 @@ type PoolInitParameters struct {
 	OpenIDConnectProviderArns []*string `json:"openidConnectProviderArns,omitempty" tf:"openid_connect_provider_arns,omitempty"`
 
 	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.SAMLProvider
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.SAMLProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	SAMLProviderArns []*string `json:"samlProviderArns,omitempty" tf:"saml_provider_arns,omitempty"`
 
 	// References to SAMLProvider in iam to populate samlProviderArns.
@@ -192,8 +192,8 @@ type PoolParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.SAMLProvider
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.SAMLProvider
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	SAMLProviderArns []*string `json:"samlProviderArns,omitempty" tf:"saml_provider_arns,omitempty"`
 

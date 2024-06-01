@@ -19,7 +19,7 @@ type ResourcePolicyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshiftserverless/v1beta1.Snapshot
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/redshiftserverless/v1beta1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -56,7 +56,7 @@ type ResourcePolicyParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshiftserverless/v1beta1.Snapshot
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/redshiftserverless/v1beta1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`

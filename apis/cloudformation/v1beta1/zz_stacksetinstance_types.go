@@ -75,7 +75,7 @@ type StackSetInstanceInitParameters struct {
 	RetainStack *bool `json:"retainStack,omitempty" tf:"retain_stack,omitempty"`
 
 	// Name of the StackSet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudformation/v1beta1.StackSet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cloudformation/v1beta1.StackSet
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 
 	// Reference to a StackSet in cloudformation to populate stackSetName.
@@ -228,7 +228,7 @@ type StackSetInstanceParameters struct {
 	RetainStack *bool `json:"retainStack,omitempty" tf:"retain_stack,omitempty"`
 
 	// Name of the StackSet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudformation/v1beta1.StackSet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cloudformation/v1beta1.StackSet
 	// +kubebuilder:validation:Optional
 	StackSetName *string `json:"stackSetName,omitempty" tf:"stack_set_name,omitempty"`
 

@@ -63,7 +63,7 @@ type DataRepositoryAssociationInitParameters struct {
 	DeleteDataInFilesystem *bool `json:"deleteDataInFilesystem,omitempty" tf:"delete_data_in_filesystem,omitempty"`
 
 	// The ID of the Amazon FSx file system to on which to create a data repository association.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta1.LustreFileSystem
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/fsx/v1beta1.LustreFileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
@@ -147,7 +147,7 @@ type DataRepositoryAssociationParameters struct {
 	DeleteDataInFilesystem *bool `json:"deleteDataInFilesystem,omitempty" tf:"delete_data_in_filesystem,omitempty"`
 
 	// The ID of the Amazon FSx file system to on which to create a data repository association.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta1.LustreFileSystem
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/fsx/v1beta1.LustreFileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`

@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	bytematchset "github.com/upbound/provider-aws/internal/controller/waf/bytematchset"
-	geomatchset "github.com/upbound/provider-aws/internal/controller/waf/geomatchset"
-	ipset "github.com/upbound/provider-aws/internal/controller/waf/ipset"
-	ratebasedrule "github.com/upbound/provider-aws/internal/controller/waf/ratebasedrule"
-	regexmatchset "github.com/upbound/provider-aws/internal/controller/waf/regexmatchset"
-	regexpatternset "github.com/upbound/provider-aws/internal/controller/waf/regexpatternset"
-	rule "github.com/upbound/provider-aws/internal/controller/waf/rule"
-	sizeconstraintset "github.com/upbound/provider-aws/internal/controller/waf/sizeconstraintset"
-	sqlinjectionmatchset "github.com/upbound/provider-aws/internal/controller/waf/sqlinjectionmatchset"
-	webacl "github.com/upbound/provider-aws/internal/controller/waf/webacl"
-	xssmatchset "github.com/upbound/provider-aws/internal/controller/waf/xssmatchset"
+	bytematchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/bytematchset"
+	geomatchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/geomatchset"
+	ipset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/ipset"
+	ratebasedrule "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/ratebasedrule"
+	regexmatchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/regexmatchset"
+	regexpatternset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/regexpatternset"
+	rule "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/rule"
+	sizeconstraintset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/sizeconstraintset"
+	sqlinjectionmatchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/sqlinjectionmatchset"
+	webacl "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/webacl"
+	xssmatchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/waf/xssmatchset"
 )
 
 // Setup_waf creates all controllers with the supplied logger and adds them to

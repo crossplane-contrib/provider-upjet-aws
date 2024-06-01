@@ -9,9 +9,9 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
 
-	"github.com/upbound/provider-aws/apis/kafka/v1beta1"
-	"github.com/upbound/provider-aws/apis/kafka/v1beta2"
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/kafka/v1beta1"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/kafka/v1beta2"
+	"github.com/crossplane-contrib/provider-upjet-aws/config/common"
 )
 
 // Configure adds configurations for the kafka group.

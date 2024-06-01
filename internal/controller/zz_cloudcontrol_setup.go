@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	resource "github.com/upbound/provider-aws/internal/controller/cloudcontrol/resource"
+	resource "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudcontrol/resource"
 )
 
 // Setup_cloudcontrol creates all controllers with the supplied logger and adds them to

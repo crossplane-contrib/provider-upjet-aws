@@ -25,10 +25,10 @@ import (
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	ujresource "github.com/crossplane/upjet/pkg/resource"
 
-	"github.com/upbound/provider-aws/apis/eks/v1beta1"
-	"github.com/upbound/provider-aws/apis/v1alpha1"
-	"github.com/upbound/provider-aws/internal/clients"
-	"github.com/upbound/provider-aws/internal/features"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/eks/v1beta1"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/v1alpha1"
+	"github.com/crossplane-contrib/provider-upjet-aws/internal/clients"
+	"github.com/crossplane-contrib/provider-upjet-aws/internal/features"
 )
 
 const (

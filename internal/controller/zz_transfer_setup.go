@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
-	sshkey "github.com/upbound/provider-aws/internal/controller/transfer/sshkey"
-	tag "github.com/upbound/provider-aws/internal/controller/transfer/tag"
-	user "github.com/upbound/provider-aws/internal/controller/transfer/user"
-	workflow "github.com/upbound/provider-aws/internal/controller/transfer/workflow"
+	server "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/transfer/server"
+	sshkey "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/transfer/sshkey"
+	tag "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/transfer/tag"
+	user "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/transfer/user"
+	workflow "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/transfer/workflow"
 )
 
 // Setup_transfer creates all controllers with the supplied logger and adds them to

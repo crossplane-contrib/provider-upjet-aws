@@ -22,7 +22,7 @@ type AMILaunchPermissionInitParameters struct {
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
 	// ID of the AMI.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.AMI
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.AMI
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// Reference to a AMI in ec2 to populate imageId.
@@ -72,7 +72,7 @@ type AMILaunchPermissionParameters struct {
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
 	// ID of the AMI.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.AMI
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.AMI
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 

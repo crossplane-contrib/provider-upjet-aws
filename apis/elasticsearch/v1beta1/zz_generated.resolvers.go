@@ -16,7 +16,7 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Domain.
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 )
 
 func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error {

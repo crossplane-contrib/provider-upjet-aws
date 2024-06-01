@@ -9,16 +9,16 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	delegationset "github.com/upbound/provider-aws/internal/controller/route53/delegationset"
-	healthcheck "github.com/upbound/provider-aws/internal/controller/route53/healthcheck"
-	hostedzonednssec "github.com/upbound/provider-aws/internal/controller/route53/hostedzonednssec"
-	record "github.com/upbound/provider-aws/internal/controller/route53/record"
-	resolverconfig "github.com/upbound/provider-aws/internal/controller/route53/resolverconfig"
-	trafficpolicy "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicy"
-	trafficpolicyinstance "github.com/upbound/provider-aws/internal/controller/route53/trafficpolicyinstance"
-	vpcassociationauthorization "github.com/upbound/provider-aws/internal/controller/route53/vpcassociationauthorization"
-	zone "github.com/upbound/provider-aws/internal/controller/route53/zone"
-	zoneassociation "github.com/upbound/provider-aws/internal/controller/route53/zoneassociation"
+	delegationset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/delegationset"
+	healthcheck "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/healthcheck"
+	hostedzonednssec "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/hostedzonednssec"
+	record "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/record"
+	resolverconfig "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/resolverconfig"
+	trafficpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/trafficpolicy"
+	trafficpolicyinstance "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/trafficpolicyinstance"
+	vpcassociationauthorization "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/vpcassociationauthorization"
+	zone "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/zone"
+	zoneassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/route53/zoneassociation"
 )
 
 // Setup_route53 creates all controllers with the supplied logger and adds them to

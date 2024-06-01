@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	container "github.com/upbound/provider-aws/internal/controller/mediastore/container"
-	containerpolicy "github.com/upbound/provider-aws/internal/controller/mediastore/containerpolicy"
+	container "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/mediastore/container"
+	containerpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/mediastore/containerpolicy"
 )
 
 // Setup_mediastore creates all controllers with the supplied logger and adds them to

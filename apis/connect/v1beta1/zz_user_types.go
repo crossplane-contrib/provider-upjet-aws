@@ -64,7 +64,7 @@ type UserInitParameters struct {
 	IdentityInfo []IdentityInfoInitParameters `json:"identityInfo,omitempty" tf:"identity_info,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -86,7 +86,7 @@ type UserInitParameters struct {
 	PhoneConfig []UserPhoneConfigInitParameters `json:"phoneConfig,omitempty" tf:"phone_config,omitempty"`
 
 	// The identifier of the routing profile for the user.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta2.RoutingProfile
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/connect/v1beta2.RoutingProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("routing_profile_id",true)
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`
 
@@ -168,7 +168,7 @@ type UserParameters struct {
 	IdentityInfo []IdentityInfoParameters `json:"identityInfo,omitempty" tf:"identity_info,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
@@ -199,7 +199,7 @@ type UserParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The identifier of the routing profile for the user.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta2.RoutingProfile
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/connect/v1beta2.RoutingProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("routing_profile_id",true)
 	// +kubebuilder:validation:Optional
 	RoutingProfileID *string `json:"routingProfileId,omitempty" tf:"routing_profile_id,omitempty"`

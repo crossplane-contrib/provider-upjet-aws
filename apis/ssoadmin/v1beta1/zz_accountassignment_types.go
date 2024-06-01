@@ -47,8 +47,8 @@ type AccountAssignmentParameters struct {
 	InstanceArn *string `json:"instanceArn" tf:"instance_arn,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Permission Set that the admin wants to grant the principal access to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssoadmin/v1beta1.PermissionSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssoadmin/v1beta1.PermissionSet
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`
 
@@ -61,7 +61,7 @@ type AccountAssignmentParameters struct {
 	PermissionSetArnSelector *v1.Selector `json:"permissionSetArnSelector,omitempty" tf:"-"`
 
 	// An identifier for an object in SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). This can be set to the crossplane external-name of either a Group or User in the identitystore api group, but the Ref and Selector fields will only work with a Group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/identitystore/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/identitystore/v1beta1.Group
 	// +crossplane:generate:reference:refFieldName=PrincipalIDFromGroupRef
 	// +crossplane:generate:reference:selectorFieldName=PrincipalIDFromGroupSelector
 	// +kubebuilder:validation:Optional

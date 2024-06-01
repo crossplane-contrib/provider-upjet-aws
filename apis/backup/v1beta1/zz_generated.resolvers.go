@@ -12,11 +12,11 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	common "github.com/upbound/provider-aws/config/common"
+	common "github.com/crossplane-contrib/provider-upjet-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Plan.
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 )
 
 func (mg *Plan) ResolveReferences(ctx context.Context, c client.Reader) error {

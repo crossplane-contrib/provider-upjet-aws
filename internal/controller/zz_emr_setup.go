@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
+	securityconfiguration "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/emr/securityconfiguration"
 )
 
 // Setup_emr creates all controllers with the supplied logger and adds them to

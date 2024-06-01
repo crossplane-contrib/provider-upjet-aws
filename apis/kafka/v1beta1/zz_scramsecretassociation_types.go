@@ -16,7 +16,7 @@ import (
 type ScramSecretAssociationInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/kafka/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
@@ -29,7 +29,7 @@ type ScramSecretAssociationInitParameters struct {
 	ClusterArnSelector *v1.Selector `json:"clusterArnSelector,omitempty" tf:"-"`
 
 	// List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:refFieldName=SecretArnRefs
 	// +crossplane:generate:reference:selectorFieldName=SecretArnSelector
 	// +listType=set
@@ -60,7 +60,7 @@ type ScramSecretAssociationObservation struct {
 type ScramSecretAssociationParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/kafka/v1beta2.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
@@ -79,7 +79,7 @@ type ScramSecretAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// List of all AWS Secrets Manager secret ARNs to associate with the cluster. Secrets not referenced, selected or listed here will be disassociated from the cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/secretsmanager/v1beta1.Secret
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/secretsmanager/v1beta1.Secret
 	// +crossplane:generate:reference:refFieldName=SecretArnRefs
 	// +crossplane:generate:reference:selectorFieldName=SecretArnSelector
 	// +kubebuilder:validation:Optional

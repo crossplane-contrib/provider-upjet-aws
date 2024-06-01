@@ -25,7 +25,7 @@ type PermissionInitParameters struct {
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
 	// The stack to set the permissions for
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
@@ -38,7 +38,7 @@ type PermissionInitParameters struct {
 	StackIDSelector *v1.Selector `json:"stackIdSelector,omitempty" tf:"-"`
 
 	// The user's IAM ARN to set permissions for
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`
 
@@ -87,7 +87,7 @@ type PermissionParameters struct {
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
 	// The stack to set the permissions for
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
@@ -101,7 +101,7 @@ type PermissionParameters struct {
 	StackIDSelector *v1.Selector `json:"stackIdSelector,omitempty" tf:"-"`
 
 	// The user's IAM ARN to set permissions for
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	UserArn *string `json:"userArn,omitempty" tf:"user_arn,omitempty"`

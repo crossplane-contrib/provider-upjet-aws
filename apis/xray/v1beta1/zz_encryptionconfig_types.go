@@ -16,7 +16,7 @@ import (
 type EncryptionConfigInitParameters struct {
 
 	// An AWS KMS customer master key (CMK) ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
@@ -47,7 +47,7 @@ type EncryptionConfigObservation struct {
 type EncryptionConfigParameters struct {
 
 	// An AWS KMS customer master key (CMK) ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`

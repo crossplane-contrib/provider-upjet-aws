@@ -11,8 +11,8 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
 
-	"github.com/upbound/provider-aws/apis/elasticache/v1beta1"
-	"github.com/upbound/provider-aws/apis/elasticache/v1beta2"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/elasticache/v1beta1"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/elasticache/v1beta2"
 )
 
 // Configure adds configurations for the elasticache group.

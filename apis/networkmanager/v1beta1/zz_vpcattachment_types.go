@@ -16,7 +16,7 @@ import (
 type VPCAttachmentInitParameters struct {
 
 	// The ID of a core network for the VPC attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.CoreNetwork
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/networkmanager/v1beta1.CoreNetwork
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
 	// Reference to a CoreNetwork in networkmanager to populate coreNetworkId.
@@ -31,8 +31,8 @@ type VPCAttachmentInitParameters struct {
 	Options []VPCAttachmentOptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
 	// The subnet ARN of the VPC attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +listType=set
 	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`
 
@@ -49,7 +49,7 @@ type VPCAttachmentInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ARN of the VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`
 
@@ -157,7 +157,7 @@ type VPCAttachmentOptionsParameters struct {
 type VPCAttachmentParameters struct {
 
 	// The ID of a core network for the VPC attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.CoreNetwork
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/networkmanager/v1beta1.CoreNetwork
 	// +kubebuilder:validation:Optional
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
@@ -179,8 +179,8 @@ type VPCAttachmentParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The subnet ARN of the VPC attachment.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetArns []*string `json:"subnetArns,omitempty" tf:"subnet_arns,omitempty"`
@@ -199,7 +199,7 @@ type VPCAttachmentParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ARN of the VPC.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.VPC
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	VPCArn *string `json:"vpcArn,omitempty" tf:"vpc_arn,omitempty"`

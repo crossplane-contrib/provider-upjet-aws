@@ -18,7 +18,7 @@ type DefaultPatchBaselineInitParameters struct {
 	// ID of the patch baseline.
 	// Can be an ID or an ARN.
 	// When specifying an AWS-provided patch baseline, must be the ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.PatchBaseline
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssm/v1beta1.PatchBaseline
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
 
@@ -45,7 +45,7 @@ type DefaultPatchBaselineInitParameters struct {
 	// SUSE,
 	// UBUNTU, and
 	// WINDOWS.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.PatchBaseline
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssm/v1beta1.PatchBaseline
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("operating_system",false)
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`
 
@@ -90,7 +90,7 @@ type DefaultPatchBaselineParameters struct {
 	// ID of the patch baseline.
 	// Can be an ID or an ARN.
 	// When specifying an AWS-provided patch baseline, must be the ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.PatchBaseline
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssm/v1beta1.PatchBaseline
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BaselineID *string `json:"baselineId,omitempty" tf:"baseline_id,omitempty"`
@@ -118,7 +118,7 @@ type DefaultPatchBaselineParameters struct {
 	// SUSE,
 	// UBUNTU, and
 	// WINDOWS.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.PatchBaseline
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssm/v1beta1.PatchBaseline
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("operating_system",false)
 	// +kubebuilder:validation:Optional
 	OperatingSystem *string `json:"operatingSystem,omitempty" tf:"operating_system,omitempty"`

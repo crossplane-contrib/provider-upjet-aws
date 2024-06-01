@@ -55,8 +55,8 @@ type RuleConfigParameters struct {
 type SafetyRuleInitParameters struct {
 
 	// Routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.TerraformID()
 	AssertedControls []*string `json:"assertedControls,omitempty" tf:"asserted_controls,omitempty"`
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate assertedControls.
@@ -68,8 +68,8 @@ type SafetyRuleInitParameters struct {
 	AssertedControlsSelector *v1.Selector `json:"assertedControlsSelector,omitempty" tf:"-"`
 
 	// ARN of the control panel in which this safety rule will reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.ControlPanel
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/route53recoverycontrolconfig/v1beta1.ControlPanel
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.TerraformID()
 	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
 
 	// Reference to a ControlPanel in route53recoverycontrolconfig to populate controlPanelArn.
@@ -131,8 +131,8 @@ type SafetyRuleObservation struct {
 type SafetyRuleParameters struct {
 
 	// Routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	AssertedControls []*string `json:"assertedControls,omitempty" tf:"asserted_controls,omitempty"`
 
@@ -145,8 +145,8 @@ type SafetyRuleParameters struct {
 	AssertedControlsSelector *v1.Selector `json:"assertedControlsSelector,omitempty" tf:"-"`
 
 	// ARN of the control panel in which this safety rule will reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.ControlPanel
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/route53recoverycontrolconfig/v1beta1.ControlPanel
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	ControlPanelArn *string `json:"controlPanelArn,omitempty" tf:"control_panel_arn,omitempty"`
 

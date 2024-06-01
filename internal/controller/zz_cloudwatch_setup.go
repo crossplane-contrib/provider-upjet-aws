@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	compositealarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/compositealarm"
-	dashboard "github.com/upbound/provider-aws/internal/controller/cloudwatch/dashboard"
-	metricalarm "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricalarm"
-	metricstream "github.com/upbound/provider-aws/internal/controller/cloudwatch/metricstream"
+	compositealarm "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudwatch/compositealarm"
+	dashboard "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudwatch/dashboard"
+	metricalarm "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudwatch/metricalarm"
+	metricstream "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudwatch/metricstream"
 )
 
 // Setup_cloudwatch creates all controllers with the supplied logger and adds them to

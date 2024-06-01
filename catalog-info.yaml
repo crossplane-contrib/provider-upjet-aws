@@ -8,7 +8,7 @@ metadata:
   name: provider-aws
   description: "Official AWS Provider for Crossplane by Upbound"
   links:
-    - url: https://github.com/upbound/provider-aws/blob/main/docs/Quickstart.md
+    - url: https://github.com/crossplane-contrib/provider-upjet-aws/blob/main/docs/Quickstart.md
       title: Provider AWS Quickstart
     - url: https://marketplace.upbound.io/providers/upbound/provider-family-aws/latest
       title: Provider AWS Family Marketplace

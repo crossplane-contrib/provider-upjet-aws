@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	appmonitor "github.com/upbound/provider-aws/internal/controller/rum/appmonitor"
-	metricsdestination "github.com/upbound/provider-aws/internal/controller/rum/metricsdestination"
+	appmonitor "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/rum/appmonitor"
+	metricsdestination "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/rum/metricsdestination"
 )
 
 // Setup_rum creates all controllers with the supplied logger and adds them to

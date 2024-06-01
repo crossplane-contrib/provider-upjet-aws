@@ -38,7 +38,7 @@ type DatabaseInitParameters struct {
 	ACLConfiguration []ACLConfigurationInitParameters `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
 
 	// Name of S3 bucket to save the results of the query execution.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -102,7 +102,7 @@ type DatabaseParameters struct {
 	ACLConfiguration []ACLConfigurationParameters `json:"aclConfiguration,omitempty" tf:"acl_configuration,omitempty"`
 
 	// Name of S3 bucket to save the results of the query execution.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`

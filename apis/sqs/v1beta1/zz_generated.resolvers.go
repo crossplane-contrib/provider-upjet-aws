@@ -11,8 +11,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	errors "github.com/pkg/errors"
-	common "github.com/upbound/provider-aws/config/common"
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	common "github.com/crossplane-contrib/provider-upjet-aws/config/common"
+	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

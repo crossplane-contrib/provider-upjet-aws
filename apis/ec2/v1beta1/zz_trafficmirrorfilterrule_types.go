@@ -101,7 +101,7 @@ type TrafficMirrorFilterRuleInitParameters struct {
 	TrafficDirection *string `json:"trafficDirection,omitempty" tf:"traffic_direction,omitempty"`
 
 	// ID of the traffic mirror filter to which this rule should be added
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TrafficMirrorFilter
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.TrafficMirrorFilter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	TrafficMirrorFilterID *string `json:"trafficMirrorFilterId,omitempty" tf:"traffic_mirror_filter_id,omitempty"`
 
@@ -197,7 +197,7 @@ type TrafficMirrorFilterRuleParameters struct {
 	TrafficDirection *string `json:"trafficDirection,omitempty" tf:"traffic_direction,omitempty"`
 
 	// ID of the traffic mirror filter to which this rule should be added
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.TrafficMirrorFilter
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.TrafficMirrorFilter
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TrafficMirrorFilterID *string `json:"trafficMirrorFilterId,omitempty" tf:"traffic_mirror_filter_id,omitempty"`

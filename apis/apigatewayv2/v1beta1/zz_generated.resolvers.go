@@ -13,10 +13,10 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	common "github.com/upbound/provider-aws/config/common"
-	apis "github.com/upbound/provider-aws/config/common/apis"
-	lambda "github.com/upbound/provider-aws/config/common/apis/lambda"
-	apisresolver "github.com/upbound/provider-aws/internal/apis"
+	common "github.com/crossplane-contrib/provider-upjet-aws/config/common"
+	apis "github.com/crossplane-contrib/provider-upjet-aws/config/common/apis"
+	lambda "github.com/crossplane-contrib/provider-upjet-aws/config/common/apis/lambda"
+	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

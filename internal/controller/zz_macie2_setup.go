@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	account "github.com/upbound/provider-aws/internal/controller/macie2/account"
-	classificationjob "github.com/upbound/provider-aws/internal/controller/macie2/classificationjob"
-	customdataidentifier "github.com/upbound/provider-aws/internal/controller/macie2/customdataidentifier"
-	findingsfilter "github.com/upbound/provider-aws/internal/controller/macie2/findingsfilter"
-	invitationaccepter "github.com/upbound/provider-aws/internal/controller/macie2/invitationaccepter"
-	member "github.com/upbound/provider-aws/internal/controller/macie2/member"
+	account "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/macie2/account"
+	classificationjob "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/macie2/classificationjob"
+	customdataidentifier "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/macie2/customdataidentifier"
+	findingsfilter "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/macie2/findingsfilter"
+	invitationaccepter "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/macie2/invitationaccepter"
+	member "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/macie2/member"
 )
 
 // Setup_macie2 creates all controllers with the supplied logger and adds them to

@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/upbound/provider-aws/apis/mq/v1alpha1"
-	features "github.com/upbound/provider-aws/internal/features"
+	v1alpha1 "github.com/crossplane-contrib/provider-upjet-aws/apis/mq/v1alpha1"
+	features "github.com/crossplane-contrib/provider-upjet-aws/internal/features"
 )
 
 // Setup adds a controller that reconciles User managed resources.

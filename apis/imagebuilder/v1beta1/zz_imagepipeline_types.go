@@ -86,7 +86,7 @@ type ImagePipelineInitParameters struct {
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
 
 	// Amazon Resource Name (ARN) of the image recipe.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.ImageRecipe
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/imagebuilder/v1beta1.ImageRecipe
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
 
@@ -105,7 +105,7 @@ type ImagePipelineInitParameters struct {
 	ImageTestsConfiguration []ImagePipelineImageTestsConfigurationInitParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.InfrastructureConfiguration
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/imagebuilder/v1beta1.InfrastructureConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`
 
@@ -214,7 +214,7 @@ type ImagePipelineParameters struct {
 	EnhancedImageMetadataEnabled *bool `json:"enhancedImageMetadataEnabled,omitempty" tf:"enhanced_image_metadata_enabled,omitempty"`
 
 	// Amazon Resource Name (ARN) of the image recipe.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.ImageRecipe
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/imagebuilder/v1beta1.ImageRecipe
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ImageRecipeArn *string `json:"imageRecipeArn,omitempty" tf:"image_recipe_arn,omitempty"`
@@ -236,7 +236,7 @@ type ImagePipelineParameters struct {
 	ImageTestsConfiguration []ImagePipelineImageTestsConfigurationParameters `json:"imageTestsConfiguration,omitempty" tf:"image_tests_configuration,omitempty"`
 
 	// Amazon Resource Name (ARN) of the Image Builder Infrastructure Configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.InfrastructureConfiguration
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/imagebuilder/v1beta1.InfrastructureConfiguration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	InfrastructureConfigurationArn *string `json:"infrastructureConfigurationArn,omitempty" tf:"infrastructure_configuration_arn,omitempty"`

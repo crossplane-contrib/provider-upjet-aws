@@ -16,7 +16,7 @@ import (
 type VaultLockConfigurationInitParameters struct {
 
 	// Name of the backup vault to add a lock configuration for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/backup/v1beta1.Vault
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
 
 	// Reference to a Vault in backup to populate backupVaultName.
@@ -60,7 +60,7 @@ type VaultLockConfigurationObservation struct {
 type VaultLockConfigurationParameters struct {
 
 	// Name of the backup vault to add a lock configuration for.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/backup/v1beta1.Vault
 	// +kubebuilder:validation:Optional
 	BackupVaultName *string `json:"backupVaultName,omitempty" tf:"backup_vault_name,omitempty"`
 

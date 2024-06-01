@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	certificate "github.com/upbound/provider-aws/internal/controller/acm/certificate"
-	certificatevalidation "github.com/upbound/provider-aws/internal/controller/acm/certificatevalidation"
+	certificate "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/acm/certificate"
+	certificatevalidation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/acm/certificatevalidation"
 )
 
 // Setup_acm creates all controllers with the supplied logger and adds them to

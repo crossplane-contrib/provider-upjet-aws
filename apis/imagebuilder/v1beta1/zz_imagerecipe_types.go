@@ -183,7 +183,7 @@ type ImageRecipeBlockDeviceMappingParameters struct {
 type ImageRecipeComponentInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.Component
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/imagebuilder/v1beta1.Component
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`
 
@@ -211,7 +211,7 @@ type ImageRecipeComponentObservation struct {
 type ImageRecipeComponentParameters struct {
 
 	// Amazon Resource Name (ARN) of the Image Builder Component to associate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/imagebuilder/v1beta1.Component
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/imagebuilder/v1beta1.Component
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ComponentArn *string `json:"componentArn,omitempty" tf:"component_arn,omitempty"`

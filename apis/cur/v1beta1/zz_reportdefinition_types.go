@@ -36,7 +36,7 @@ type ReportDefinitionInitParameters struct {
 	ReportVersioning *string `json:"reportVersioning,omitempty" tf:"report_versioning,omitempty"`
 
 	// Name of the existing S3 bucket to hold generated reports.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/s3/v1beta1.Bucket
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 
 	// Reference to a Bucket in s3 to populate s3Bucket.
@@ -131,7 +131,7 @@ type ReportDefinitionParameters struct {
 	ReportVersioning *string `json:"reportVersioning,omitempty" tf:"report_versioning,omitempty"`
 
 	// Name of the existing S3 bucket to hold generated reports.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/s3/v1beta1.Bucket
 	// +kubebuilder:validation:Optional
 	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
 

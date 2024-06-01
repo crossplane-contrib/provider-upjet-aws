@@ -34,7 +34,7 @@ type BrokerInitParameters struct {
 	DataReplicationMode *string `json:"dataReplicationMode,omitempty" tf:"data_replication_mode,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when data_replication_mode is CRDR.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mq/v1beta1.Broker
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/mq/v1beta1.Broker
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	DataReplicationPrimaryBrokerArn *string `json:"dataReplicationPrimaryBrokerArn,omitempty" tf:"data_replication_primary_broker_arn,omitempty"`
 
@@ -82,7 +82,7 @@ type BrokerInitParameters struct {
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs assigned to the broker.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +listType=set
@@ -100,7 +100,7 @@ type BrokerInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs in which to launch the broker. A SINGLE_INSTANCE deployment requires one subnet. An ACTIVE_STANDBY_MULTI_AZ deployment requires multiple subnets.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +listType=set
@@ -226,7 +226,7 @@ type BrokerParameters struct {
 	DataReplicationMode *string `json:"dataReplicationMode,omitempty" tf:"data_replication_mode,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the primary broker that is used to replicate data from in a data replication pair, and is applied to the replica broker. Must be set when data_replication_mode is CRDR.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mq/v1beta1.Broker
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/mq/v1beta1.Broker
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	DataReplicationPrimaryBrokerArn *string `json:"dataReplicationPrimaryBrokerArn,omitempty" tf:"data_replication_primary_broker_arn,omitempty"`
@@ -289,7 +289,7 @@ type BrokerParameters struct {
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
 	// List of security group IDs assigned to the broker.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
 	// +kubebuilder:validation:Optional
@@ -309,7 +309,7 @@ type BrokerParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// List of subnet IDs in which to launch the broker. A SINGLE_INSTANCE deployment requires one subnet. An ACTIVE_STANDBY_MULTI_AZ deployment requires multiple subnets.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetIDSelector
 	// +kubebuilder:validation:Optional
@@ -329,7 +329,7 @@ type BrokerParameters struct {
 type ConfigurationInitParameters struct {
 
 	// The Configuration ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mq/v1beta1.Configuration
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/mq/v1beta1.Configuration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -357,7 +357,7 @@ type ConfigurationObservation struct {
 type ConfigurationParameters struct {
 
 	// The Configuration ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mq/v1beta1.Configuration
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/mq/v1beta1.Configuration
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

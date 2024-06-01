@@ -84,7 +84,7 @@ type EC2InboundPermissionParameters struct {
 type FleetInitParameters struct {
 
 	// ID of the GameLift Build to be deployed on the fleet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/gamelift/v1beta1.Build
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/gamelift/v1beta1.Build
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
 
 	// Reference to a Build in gamelift to populate buildId.
@@ -111,8 +111,8 @@ type FleetInitParameters struct {
 	FleetType *string `json:"fleetType,omitempty" tf:"fleet_type,omitempty"`
 
 	// ARN of an IAM role that instances in the fleet can assume.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate instanceRoleArn.
@@ -216,7 +216,7 @@ type FleetObservation struct {
 type FleetParameters struct {
 
 	// ID of the GameLift Build to be deployed on the fleet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/gamelift/v1beta1.Build
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/gamelift/v1beta1.Build
 	// +kubebuilder:validation:Optional
 	BuildID *string `json:"buildId,omitempty" tf:"build_id,omitempty"`
 
@@ -249,8 +249,8 @@ type FleetParameters struct {
 	FleetType *string `json:"fleetType,omitempty" tf:"fleet_type,omitempty"`
 
 	// ARN of an IAM role that instances in the fleet can assume.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	InstanceRoleArn *string `json:"instanceRoleArn,omitempty" tf:"instance_role_arn,omitempty"`
 

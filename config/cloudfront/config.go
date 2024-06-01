@@ -7,7 +7,7 @@ package cloudfront
 import (
 	"github.com/crossplane/upjet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/crossplane-contrib/provider-upjet-aws/config/common"
 )
 
 // Configure adds configurations for the cloudfront group.

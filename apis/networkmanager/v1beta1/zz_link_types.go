@@ -51,7 +51,7 @@ type LinkInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
 
@@ -67,7 +67,7 @@ type LinkInitParameters struct {
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
 	// The ID of the site.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Site
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/networkmanager/v1beta1.Site
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 
 	// Reference to a Site in networkmanager to populate siteId.
@@ -131,7 +131,7 @@ type LinkParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the global network.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.GlobalNetwork
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/networkmanager/v1beta1.GlobalNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	GlobalNetworkID *string `json:"globalNetworkId,omitempty" tf:"global_network_id,omitempty"`
@@ -154,7 +154,7 @@ type LinkParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the site.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Site
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/networkmanager/v1beta1.Site
 	// +kubebuilder:validation:Optional
 	SiteID *string `json:"siteId,omitempty" tf:"site_id,omitempty"`
 

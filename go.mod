@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: CC0-1.0
 
-module github.com/upbound/provider-aws
+module github.com/crossplane-contrib/provider-upjet-aws
 
 go 1.22.2
 

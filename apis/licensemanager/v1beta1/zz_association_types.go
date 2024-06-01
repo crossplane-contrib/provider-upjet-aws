@@ -16,8 +16,8 @@ import (
 type AssociationInitParameters struct {
 
 	// ARN of the license configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/licensemanager/v1beta1.LicenseConfiguration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/licensemanager/v1beta1.LicenseConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
 
 	// Reference to a LicenseConfiguration in licensemanager to populate licenseConfigurationArn.
@@ -29,7 +29,7 @@ type AssociationInitParameters struct {
 	LicenseConfigurationArnSelector *v1.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
 
 	// ARN of the resource associated with the license configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -57,8 +57,8 @@ type AssociationObservation struct {
 type AssociationParameters struct {
 
 	// ARN of the license configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/licensemanager/v1beta1.LicenseConfiguration
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/licensemanager/v1beta1.LicenseConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	LicenseConfigurationArn *string `json:"licenseConfigurationArn,omitempty" tf:"license_configuration_arn,omitempty"`
 
@@ -76,7 +76,7 @@ type AssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// ARN of the resource associated with the license configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`

@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	alternatecontact "github.com/upbound/provider-aws/internal/controller/account/alternatecontact"
+	alternatecontact "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/account/alternatecontact"
 )
 
 // Setup_account creates all controllers with the supplied logger and adds them to

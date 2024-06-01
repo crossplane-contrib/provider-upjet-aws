@@ -27,7 +27,7 @@ type KeyGroupInitParameters struct {
 	ItemSelector *v1.Selector `json:"itemSelector,omitempty" tf:"-"`
 
 	// A list of the identifiers of the public keys in the key group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.PublicKey
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cloudfront/v1beta1.PublicKey
 	// +crossplane:generate:reference:refFieldName=ItemRefs
 	// +crossplane:generate:reference:selectorFieldName=ItemSelector
 	// +listType=set
@@ -71,7 +71,7 @@ type KeyGroupParameters struct {
 	ItemSelector *v1.Selector `json:"itemSelector,omitempty" tf:"-"`
 
 	// A list of the identifiers of the public keys in the key group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudfront/v1beta1.PublicKey
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cloudfront/v1beta1.PublicKey
 	// +crossplane:generate:reference:refFieldName=ItemRefs
 	// +crossplane:generate:reference:selectorFieldName=ItemSelector
 	// +kubebuilder:validation:Optional

@@ -16,7 +16,7 @@ import (
 type TrackerAssociationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/location/v1beta1.GeofenceCollection
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/location/v1beta1.GeofenceCollection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("collection_arn",true)
 	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
 
@@ -29,7 +29,7 @@ type TrackerAssociationInitParameters struct {
 	ConsumerArnSelector *v1.Selector `json:"consumerArnSelector,omitempty" tf:"-"`
 
 	// The name of the tracker resource to be associated with a geofence collection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/location/v1beta1.Tracker
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/location/v1beta1.Tracker
 	TrackerName *string `json:"trackerName,omitempty" tf:"tracker_name,omitempty"`
 
 	// Reference to a Tracker in location to populate trackerName.
@@ -55,7 +55,7 @@ type TrackerAssociationObservation struct {
 type TrackerAssociationParameters struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all AWS.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/location/v1beta1.GeofenceCollection
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/location/v1beta1.GeofenceCollection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("collection_arn",true)
 	// +kubebuilder:validation:Optional
 	ConsumerArn *string `json:"consumerArn,omitempty" tf:"consumer_arn,omitempty"`
@@ -74,7 +74,7 @@ type TrackerAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the tracker resource to be associated with a geofence collection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/location/v1beta1.Tracker
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/location/v1beta1.Tracker
 	// +kubebuilder:validation:Optional
 	TrackerName *string `json:"trackerName,omitempty" tf:"tracker_name,omitempty"`
 

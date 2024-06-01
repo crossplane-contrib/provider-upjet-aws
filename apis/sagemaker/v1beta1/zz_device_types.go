@@ -58,7 +58,7 @@ type DeviceInitParameters struct {
 	Device []DeviceDeviceInitParameters `json:"device,omitempty" tf:"device,omitempty"`
 
 	// The name of the Device Fleet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.DeviceFleet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sagemaker/v1beta1.DeviceFleet
 	DeviceFleetName *string `json:"deviceFleetName,omitempty" tf:"device_fleet_name,omitempty"`
 
 	// Reference to a DeviceFleet in sagemaker to populate deviceFleetName.
@@ -93,7 +93,7 @@ type DeviceParameters struct {
 	Device []DeviceDeviceParameters `json:"device,omitempty" tf:"device,omitempty"`
 
 	// The name of the Device Fleet.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.DeviceFleet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sagemaker/v1beta1.DeviceFleet
 	// +kubebuilder:validation:Optional
 	DeviceFleetName *string `json:"deviceFleetName,omitempty" tf:"device_fleet_name,omitempty"`
 

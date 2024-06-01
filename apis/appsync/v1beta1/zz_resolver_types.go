@@ -73,7 +73,7 @@ type ResolverInitParameters struct {
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Data source name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Datasource
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/appsync/v1beta1.Datasource
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 
 	// Reference to a Datasource in appsync to populate dataSource.
@@ -156,7 +156,7 @@ type ResolverObservation struct {
 type ResolverParameters struct {
 
 	// API ID for the GraphQL API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.GraphQLAPI
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/appsync/v1beta1.GraphQLAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
@@ -178,7 +178,7 @@ type ResolverParameters struct {
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Data source name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta1.Datasource
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/appsync/v1beta1.Datasource
 	// +kubebuilder:validation:Optional
 	DataSource *string `json:"dataSource,omitempty" tf:"data_source,omitempty"`
 

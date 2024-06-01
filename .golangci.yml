@@ -42,7 +42,7 @@ linters-settings:
   goimports:
     # put imports beginning with prefix after 3rd-party packages;
     # it's a comma-separated list of prefixes
-    local-prefixes: github.com/upbound/provider-aws
+    local-prefixes: github.com/crossplane-contrib/provider-upjet-aws
 
   gocyclo:
     # minimal code complexity to report, 30 by default (but we recommend 10-20)
@@ -140,7 +140,7 @@ issues:
         - gosec
         - scopelint
         - unparam
-    
+
     # Ease some gocritic warnings on test files.
     - path: _test\.go
       text: "(unnamedResult|exitAfterDefer)"

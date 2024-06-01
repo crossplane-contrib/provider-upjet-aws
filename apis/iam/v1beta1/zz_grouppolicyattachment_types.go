@@ -16,7 +16,7 @@ import (
 type GroupPolicyAttachmentInitParameters struct {
 
 	// The group the policy should be applied to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Group
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
 	// Reference to a Group in iam to populate group.
@@ -28,8 +28,8 @@ type GroupPolicyAttachmentInitParameters struct {
 	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
 
 	// The ARN of the policy you want to apply
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
 	// Reference to a Policy in iam to populate policyArn.
@@ -55,7 +55,7 @@ type GroupPolicyAttachmentObservation struct {
 type GroupPolicyAttachmentParameters struct {
 
 	// The group the policy should be applied to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
@@ -68,8 +68,8 @@ type GroupPolicyAttachmentParameters struct {
 	GroupSelector *v1.Selector `json:"groupSelector,omitempty" tf:"-"`
 
 	// The ARN of the policy you want to apply
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 

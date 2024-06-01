@@ -16,7 +16,7 @@ import (
 type GroupMembershipInitParameters struct {
 
 	// The identifier for a group in the Identity Store.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/identitystore/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/identitystore/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("group_id",true)
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
@@ -29,7 +29,7 @@ type GroupMembershipInitParameters struct {
 	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 
 	// The identifier for a user in the Identity Store.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/identitystore/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/identitystore/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_id",true)
 	MemberID *string `json:"memberId,omitempty" tf:"member_id,omitempty"`
 
@@ -62,7 +62,7 @@ type GroupMembershipObservation struct {
 type GroupMembershipParameters struct {
 
 	// The identifier for a group in the Identity Store.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/identitystore/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/identitystore/v1beta1.Group
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("group_id",true)
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
@@ -80,7 +80,7 @@ type GroupMembershipParameters struct {
 	IdentityStoreID *string `json:"identityStoreId" tf:"identity_store_id,omitempty"`
 
 	// The identifier for a user in the Identity Store.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/identitystore/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/identitystore/v1beta1.User
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("user_id",true)
 	// +kubebuilder:validation:Optional
 	MemberID *string `json:"memberId,omitempty" tf:"member_id,omitempty"`
