@@ -48,6 +48,16 @@ func (in *CertificateInitParameters) DeepCopyInto(out *CertificateInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.CertificateAuthorityArnRef != nil {
+		in, out := &in.CertificateAuthorityArnRef, &out.CertificateAuthorityArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CertificateAuthorityArnSelector != nil {
+		in, out := &in.CertificateAuthorityArnSelector, &out.CertificateAuthorityArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CertificateBody != nil {
 		in, out := &in.CertificateBody, &out.CertificateBody
 		*out = new(string)
@@ -347,6 +357,16 @@ func (in *CertificateParameters) DeepCopyInto(out *CertificateParameters) {
 		in, out := &in.CertificateAuthorityArn, &out.CertificateAuthorityArn
 		*out = new(string)
 		**out = **in
+	}
+	if in.CertificateAuthorityArnRef != nil {
+		in, out := &in.CertificateAuthorityArnRef, &out.CertificateAuthorityArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.CertificateAuthorityArnSelector != nil {
+		in, out := &in.CertificateAuthorityArnSelector, &out.CertificateAuthorityArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CertificateBody != nil {
 		in, out := &in.CertificateBody, &out.CertificateBody
