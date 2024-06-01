@@ -8,12 +8,12 @@ package v1beta1
 
 import (
 	"context"
+
+	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

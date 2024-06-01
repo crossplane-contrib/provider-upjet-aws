@@ -8,16 +8,16 @@ package v1beta1
 
 import (
 	"context"
+
+	common "github.com/crossplane-contrib/provider-upjet-aws/config/common"
+	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	common "github.com/crossplane-contrib/provider-upjet-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Database.
-	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
 func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) error {

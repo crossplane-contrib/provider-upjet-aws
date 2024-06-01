@@ -8,17 +8,18 @@ package v1beta1
 
 import (
 	"context"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	errors "github.com/pkg/errors"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	common "github.com/crossplane-contrib/provider-upjet-aws/config/common"
 	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
+	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this Codepipeline.
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
-func (mg *Codepipeline) ResolveReferences( // ResolveReferences of this Codepipeline.
-	ctx context.Context, c client.Reader) error {
+func (mg *Codepipeline) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)

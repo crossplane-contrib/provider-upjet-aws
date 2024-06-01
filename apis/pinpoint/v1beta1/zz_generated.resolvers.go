@@ -8,16 +8,17 @@ package v1beta1
 
 import (
 	"context"
+	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
+
+	// ResolveReferences of this SMSChannel.
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
-func (mg *SMSChannel) ResolveReferences( // ResolveReferences of this SMSChannel.
-	ctx context.Context, c client.Reader) error {
+func (mg *SMSChannel) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)

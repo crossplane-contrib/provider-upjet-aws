@@ -8,14 +8,14 @@ package v1alpha1
 
 import (
 	"context"
+
+	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this User.
-	apisresolver "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 )
 
 func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
