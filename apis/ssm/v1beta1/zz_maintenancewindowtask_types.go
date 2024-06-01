@@ -157,8 +157,8 @@ type MaintenanceWindowTaskInitParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate serviceRoleArn.
@@ -173,7 +173,7 @@ type MaintenanceWindowTaskInitParameters struct {
 	Targets []MaintenanceWindowTaskTargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
 	// The ARN of the task to execute.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	TaskArn *string `json:"taskArn,omitempty" tf:"task_arn,omitempty"`
 
@@ -192,7 +192,7 @@ type MaintenanceWindowTaskInitParameters struct {
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 
 	// The Id of the maintenance window to register the task with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.MaintenanceWindow
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssm/v1beta1.MaintenanceWindow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
 
@@ -285,8 +285,8 @@ type MaintenanceWindowTaskParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
@@ -303,7 +303,7 @@ type MaintenanceWindowTaskParameters struct {
 	Targets []MaintenanceWindowTaskTargetsParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
 	// The ARN of the task to execute.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TaskArn *string `json:"taskArn,omitempty" tf:"task_arn,omitempty"`
@@ -325,7 +325,7 @@ type MaintenanceWindowTaskParameters struct {
 	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
 
 	// The Id of the maintenance window to register the task with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.MaintenanceWindow
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssm/v1beta1.MaintenanceWindow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WindowID *string `json:"windowId,omitempty" tf:"window_id,omitempty"`
@@ -366,7 +366,7 @@ type MaintenanceWindowTaskTargetsParameters struct {
 type NotificationConfigInitParameters struct {
 
 	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	NotificationArn *string `json:"notificationArn,omitempty" tf:"notification_arn,omitempty"`
 
@@ -400,7 +400,7 @@ type NotificationConfigObservation struct {
 type NotificationConfigParameters struct {
 
 	// An Amazon Resource Name (ARN) for a Simple Notification Service (SNS) topic. Run Command pushes notifications about command status changes to this topic.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	NotificationArn *string `json:"notificationArn,omitempty" tf:"notification_arn,omitempty"`
@@ -443,7 +443,7 @@ type RunCommandParametersInitParameters struct {
 	NotificationConfig []NotificationConfigInitParameters `json:"notificationConfig,omitempty" tf:"notification_config,omitempty"`
 
 	// The name of the Amazon S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	OutputS3Bucket *string `json:"outputS3Bucket,omitempty" tf:"output_s3_bucket,omitempty"`
 
@@ -462,7 +462,7 @@ type RunCommandParametersInitParameters struct {
 	Parameter []RunCommandParametersParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`
 
@@ -570,7 +570,7 @@ type RunCommandParametersParameters struct {
 	NotificationConfig []NotificationConfigParameters `json:"notificationConfig,omitempty" tf:"notification_config,omitempty"`
 
 	// The name of the Amazon S3 bucket.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	OutputS3Bucket *string `json:"outputS3Bucket,omitempty" tf:"output_s3_bucket,omitempty"`
@@ -592,7 +592,7 @@ type RunCommandParametersParameters struct {
 	Parameter []RunCommandParametersParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServiceRoleArn *string `json:"serviceRoleArn,omitempty" tf:"service_role_arn,omitempty"`

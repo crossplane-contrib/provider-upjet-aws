@@ -16,7 +16,7 @@ import (
 type GroupMembershipInitParameters struct {
 
 	// –  The IAM Group name to attach the list of users to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Group
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
 	// Reference to a Group in iam to populate group.
@@ -39,7 +39,7 @@ type GroupMembershipInitParameters struct {
 	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 
 	// A list of IAM User names to associate with the Group
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserRefs
 	// +crossplane:generate:reference:selectorFieldName=UserSelector
 	// +listType=set
@@ -64,7 +64,7 @@ type GroupMembershipObservation struct {
 type GroupMembershipParameters struct {
 
 	// –  The IAM Group name to attach the list of users to
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Group
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Group
 	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
@@ -89,7 +89,7 @@ type GroupMembershipParameters struct {
 	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 
 	// A list of IAM User names to associate with the Group
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.User
 	// +crossplane:generate:reference:refFieldName=UserRefs
 	// +crossplane:generate:reference:selectorFieldName=UserSelector
 	// +kubebuilder:validation:Optional

@@ -25,7 +25,7 @@ type SchemaInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the registry in which this schema belongs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/schemas/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/schemas/v1beta1.Registry
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 
 	// Reference to a Registry in schemas to populate registryName.
@@ -104,7 +104,7 @@ type SchemaParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the registry in which this schema belongs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/schemas/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/schemas/v1beta1.Registry
 	// +kubebuilder:validation:Optional
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 

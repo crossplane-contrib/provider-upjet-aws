@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	acl "github.com/upbound/provider-aws/internal/controller/memorydb/acl"
-	cluster "github.com/upbound/provider-aws/internal/controller/memorydb/cluster"
-	parametergroup "github.com/upbound/provider-aws/internal/controller/memorydb/parametergroup"
-	snapshot "github.com/upbound/provider-aws/internal/controller/memorydb/snapshot"
-	subnetgroup "github.com/upbound/provider-aws/internal/controller/memorydb/subnetgroup"
-	user "github.com/upbound/provider-aws/internal/controller/memorydb/user"
+	acl "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/memorydb/acl"
+	cluster "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/memorydb/cluster"
+	parametergroup "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/memorydb/parametergroup"
+	snapshot "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/memorydb/snapshot"
+	subnetgroup "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/memorydb/subnetgroup"
+	user "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/memorydb/user"
 )
 
 // Setup_memorydb creates all controllers with the supplied logger and adds them to

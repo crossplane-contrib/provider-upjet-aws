@@ -16,8 +16,8 @@ import (
 type RolePolicyAttachmentInitParameters struct {
 
 	// The ARN of the policy you want to apply
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
 	// Reference to a Policy in iam to populate policyArn.
@@ -29,7 +29,7 @@ type RolePolicyAttachmentInitParameters struct {
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// The name of the IAM role to which the policy should be applied
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// Reference to a Role in iam to populate role.
@@ -54,8 +54,8 @@ type RolePolicyAttachmentObservation struct {
 type RolePolicyAttachmentParameters struct {
 
 	// The ARN of the policy you want to apply
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	PolicyArn *string `json:"policyArn,omitempty" tf:"policy_arn,omitempty"`
 
@@ -68,7 +68,7 @@ type RolePolicyAttachmentParameters struct {
 	PolicyArnSelector *v1.Selector `json:"policyArnSelector,omitempty" tf:"-"`
 
 	// The name of the IAM role to which the policy should be applied
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 

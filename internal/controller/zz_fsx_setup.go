@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	backup "github.com/upbound/provider-aws/internal/controller/fsx/backup"
-	datarepositoryassociation "github.com/upbound/provider-aws/internal/controller/fsx/datarepositoryassociation"
-	lustrefilesystem "github.com/upbound/provider-aws/internal/controller/fsx/lustrefilesystem"
-	ontapfilesystem "github.com/upbound/provider-aws/internal/controller/fsx/ontapfilesystem"
-	ontapstoragevirtualmachine "github.com/upbound/provider-aws/internal/controller/fsx/ontapstoragevirtualmachine"
-	windowsfilesystem "github.com/upbound/provider-aws/internal/controller/fsx/windowsfilesystem"
+	backup "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/fsx/backup"
+	datarepositoryassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/fsx/datarepositoryassociation"
+	lustrefilesystem "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/fsx/lustrefilesystem"
+	ontapfilesystem "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/fsx/ontapfilesystem"
+	ontapstoragevirtualmachine "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/fsx/ontapstoragevirtualmachine"
+	windowsfilesystem "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/fsx/windowsfilesystem"
 )
 
 // Setup_fsx creates all controllers with the supplied logger and adds them to

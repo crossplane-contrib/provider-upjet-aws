@@ -45,7 +45,7 @@ type ManagedPolicyAttachmentParameters struct {
 	ManagedPolicyArn *string `json:"managedPolicyArn" tf:"managed_policy_arn,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Permission Set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssoadmin/v1beta1.PermissionSet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssoadmin/v1beta1.PermissionSet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	PermissionSetArn *string `json:"permissionSetArn,omitempty" tf:"permission_set_arn,omitempty"`

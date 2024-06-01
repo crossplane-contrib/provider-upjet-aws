@@ -19,7 +19,7 @@ type DomainPolicyInitParameters struct {
 	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
 
 	// Name of the domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opensearch/v1beta1.Domain
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// Reference to a Domain in opensearch to populate domainName.
@@ -49,7 +49,7 @@ type DomainPolicyParameters struct {
 	AccessPolicies *string `json:"accessPolicies,omitempty" tf:"access_policies,omitempty"`
 
 	// Name of the domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opensearch/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opensearch/v1beta1.Domain
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 

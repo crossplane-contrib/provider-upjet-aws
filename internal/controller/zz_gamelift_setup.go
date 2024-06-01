@@ -9,11 +9,11 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	alias "github.com/upbound/provider-aws/internal/controller/gamelift/alias"
-	build "github.com/upbound/provider-aws/internal/controller/gamelift/build"
-	fleet "github.com/upbound/provider-aws/internal/controller/gamelift/fleet"
-	gamesessionqueue "github.com/upbound/provider-aws/internal/controller/gamelift/gamesessionqueue"
-	script "github.com/upbound/provider-aws/internal/controller/gamelift/script"
+	alias "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/gamelift/alias"
+	build "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/gamelift/build"
+	fleet "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/gamelift/fleet"
+	gamesessionqueue "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/gamelift/gamesessionqueue"
+	script "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/gamelift/script"
 )
 
 // Setup_gamelift creates all controllers with the supplied logger and adds them to

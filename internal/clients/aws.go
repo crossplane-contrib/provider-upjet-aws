@@ -24,7 +24,7 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/upbound/provider-aws/apis/v1beta1"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/v1beta1"
 )
 
 const (

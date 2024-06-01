@@ -9,10 +9,10 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	principalassociation "github.com/upbound/provider-aws/internal/controller/ram/principalassociation"
-	resourceassociation "github.com/upbound/provider-aws/internal/controller/ram/resourceassociation"
-	resourceshare "github.com/upbound/provider-aws/internal/controller/ram/resourceshare"
-	resourceshareaccepter "github.com/upbound/provider-aws/internal/controller/ram/resourceshareaccepter"
+	principalassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ram/principalassociation"
+	resourceassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ram/resourceassociation"
+	resourceshare "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ram/resourceshare"
+	resourceshareaccepter "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ram/resourceshareaccepter"
 )
 
 // Setup_ram creates all controllers with the supplied logger and adds them to

@@ -9,14 +9,14 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	accesspoint "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
-	accesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/accesspointpolicy"
-	accountpublicaccessblock "github.com/upbound/provider-aws/internal/controller/s3control/accountpublicaccessblock"
-	multiregionaccesspoint "github.com/upbound/provider-aws/internal/controller/s3control/multiregionaccesspoint"
-	multiregionaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/multiregionaccesspointpolicy"
-	objectlambdaaccesspoint "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspoint"
-	objectlambdaaccesspointpolicy "github.com/upbound/provider-aws/internal/controller/s3control/objectlambdaaccesspointpolicy"
-	storagelensconfiguration "github.com/upbound/provider-aws/internal/controller/s3control/storagelensconfiguration"
+	accesspoint "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/s3control/accesspoint"
+	accesspointpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/s3control/accesspointpolicy"
+	accountpublicaccessblock "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/s3control/accountpublicaccessblock"
+	multiregionaccesspoint "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/s3control/multiregionaccesspoint"
+	multiregionaccesspointpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/s3control/multiregionaccesspointpolicy"
+	objectlambdaaccesspoint "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/s3control/objectlambdaaccesspoint"
+	objectlambdaaccesspointpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/s3control/objectlambdaaccesspointpolicy"
+	storagelensconfiguration "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/s3control/storagelensconfiguration"
 )
 
 // Setup_s3control creates all controllers with the supplied logger and adds them to

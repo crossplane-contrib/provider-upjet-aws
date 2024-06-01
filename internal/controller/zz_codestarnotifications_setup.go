@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	notificationrule "github.com/upbound/provider-aws/internal/controller/codestarnotifications/notificationrule"
+	notificationrule "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/codestarnotifications/notificationrule"
 )
 
 // Setup_codestarnotifications creates all controllers with the supplied logger and adds them to

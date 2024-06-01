@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	bytematchset "github.com/upbound/provider-aws/internal/controller/wafregional/bytematchset"
-	geomatchset "github.com/upbound/provider-aws/internal/controller/wafregional/geomatchset"
-	ipset "github.com/upbound/provider-aws/internal/controller/wafregional/ipset"
-	ratebasedrule "github.com/upbound/provider-aws/internal/controller/wafregional/ratebasedrule"
-	regexmatchset "github.com/upbound/provider-aws/internal/controller/wafregional/regexmatchset"
-	regexpatternset "github.com/upbound/provider-aws/internal/controller/wafregional/regexpatternset"
-	rule "github.com/upbound/provider-aws/internal/controller/wafregional/rule"
-	sizeconstraintset "github.com/upbound/provider-aws/internal/controller/wafregional/sizeconstraintset"
-	sqlinjectionmatchset "github.com/upbound/provider-aws/internal/controller/wafregional/sqlinjectionmatchset"
-	webacl "github.com/upbound/provider-aws/internal/controller/wafregional/webacl"
-	xssmatchset "github.com/upbound/provider-aws/internal/controller/wafregional/xssmatchset"
+	bytematchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/bytematchset"
+	geomatchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/geomatchset"
+	ipset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/ipset"
+	ratebasedrule "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/ratebasedrule"
+	regexmatchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/regexmatchset"
+	regexpatternset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/regexpatternset"
+	rule "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/rule"
+	sizeconstraintset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/sizeconstraintset"
+	sqlinjectionmatchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/sqlinjectionmatchset"
+	webacl "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/webacl"
+	xssmatchset "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/wafregional/xssmatchset"
 )
 
 // Setup_wafregional creates all controllers with the supplied logger and adds them to

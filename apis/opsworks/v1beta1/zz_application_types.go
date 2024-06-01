@@ -124,7 +124,7 @@ type ApplicationInitParameters struct {
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
 	// ID of the stack the application will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
@@ -260,7 +260,7 @@ type ApplicationParameters struct {
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
 	// ID of the stack the application will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`

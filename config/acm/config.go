@@ -22,7 +22,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_acm_certificate", func(r *config.Resource) {
 		r.LateInitializer = config.LateInitializer{
 			// These are ignored because they conflict with each other.
-			// See the following for more details: https://github.com/upbound/provider-aws/issues/464
+			// See the following for more details: https://github.com/crossplane-contrib/provider-upjet-aws/issues/464
 			IgnoredFields: []string{
 				"validation_method",
 				"key_algorithm",

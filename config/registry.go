@@ -18,7 +18,7 @@ import (
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
 
-	"github.com/upbound/provider-aws/hack"
+	"github.com/crossplane-contrib/provider-upjet-aws/hack"
 )
 
 var (
@@ -92,7 +92,7 @@ func GetProvider(ctx context.Context, generationProvider bool) (*config.Provider
 		return nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
 	}
 
-	modulePath := "github.com/upbound/provider-aws"
+	modulePath := "github.com/crossplane-contrib/provider-upjet-aws"
 	pc := config.NewProvider([]byte(providerSchema), "aws",
 		modulePath, providerMetadata,
 		config.WithShortName("aws"),

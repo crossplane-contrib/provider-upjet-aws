@@ -34,7 +34,7 @@ type ProvisioningArtifactInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Identifier of the product.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/servicecatalog/v1beta1.Product
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
@@ -125,7 +125,7 @@ type ProvisioningArtifactParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Identifier of the product.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/servicecatalog/v1beta1.Product
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`

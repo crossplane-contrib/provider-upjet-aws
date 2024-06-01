@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	accountsettingdefault "github.com/upbound/provider-aws/internal/controller/ecs/accountsettingdefault"
-	capacityprovider "github.com/upbound/provider-aws/internal/controller/ecs/capacityprovider"
-	cluster "github.com/upbound/provider-aws/internal/controller/ecs/cluster"
-	clustercapacityproviders "github.com/upbound/provider-aws/internal/controller/ecs/clustercapacityproviders"
-	service "github.com/upbound/provider-aws/internal/controller/ecs/service"
-	taskdefinition "github.com/upbound/provider-aws/internal/controller/ecs/taskdefinition"
+	accountsettingdefault "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ecs/accountsettingdefault"
+	capacityprovider "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ecs/capacityprovider"
+	cluster "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ecs/cluster"
+	clustercapacityproviders "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ecs/clustercapacityproviders"
+	service "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ecs/service"
+	taskdefinition "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ecs/taskdefinition"
 )
 
 // Setup_ecs creates all controllers with the supplied logger and adds them to

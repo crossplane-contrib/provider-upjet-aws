@@ -36,7 +36,7 @@ type SecurityGroupRuleInitParameters_2 struct {
 	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// List of Prefix List IDs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +crossplane:generate:reference:refFieldName=PrefixListIDRefs
 	// +crossplane:generate:reference:selectorFieldName=PrefixListIDSelector
 	PrefixListIds []*string `json:"prefixListIds,omitempty" tf:"prefix_list_ids,omitempty"`
@@ -45,7 +45,7 @@ type SecurityGroupRuleInitParameters_2 struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Security group to apply this rule to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.SecurityGroup
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
 	// Reference to a SecurityGroup in ec2 to populate securityGroupId.
@@ -60,7 +60,7 @@ type SecurityGroupRuleInitParameters_2 struct {
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	// Security group id to allow access to/from, depending on the type. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or self.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.SecurityGroup
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
 
 	// Reference to a SecurityGroup in ec2 to populate sourceSecurityGroupId.
@@ -149,7 +149,7 @@ type SecurityGroupRuleParameters_2 struct {
 	PrefixListIDSelector *v1.Selector `json:"prefixListIdSelector,omitempty" tf:"-"`
 
 	// List of Prefix List IDs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +crossplane:generate:reference:refFieldName=PrefixListIDRefs
 	// +crossplane:generate:reference:selectorFieldName=PrefixListIDSelector
 	// +kubebuilder:validation:Optional
@@ -165,7 +165,7 @@ type SecurityGroupRuleParameters_2 struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Security group to apply this rule to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
 
@@ -182,7 +182,7 @@ type SecurityGroupRuleParameters_2 struct {
 	Self *bool `json:"self,omitempty" tf:"self,omitempty"`
 
 	// Security group id to allow access to/from, depending on the type. Cannot be specified with cidr_blocks, ipv6_cidr_blocks, or self.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SourceSecurityGroupID *string `json:"sourceSecurityGroupId,omitempty" tf:"source_security_group_id,omitempty"`
 

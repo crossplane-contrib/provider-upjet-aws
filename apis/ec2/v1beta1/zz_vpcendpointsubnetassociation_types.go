@@ -16,7 +16,7 @@ import (
 type VPCEndpointSubnetAssociationInitParameters struct {
 
 	// The ID of the subnet to be associated with the VPC endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -28,7 +28,7 @@ type VPCEndpointSubnetAssociationInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the subnet will be associated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
@@ -61,7 +61,7 @@ type VPCEndpointSubnetAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the subnet to be associated with the VPC endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -74,7 +74,7 @@ type VPCEndpointSubnetAssociationParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the subnet will be associated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`

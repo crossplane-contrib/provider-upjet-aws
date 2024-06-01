@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	budgetresourceassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/budgetresourceassociation"
-	constraint "github.com/upbound/provider-aws/internal/controller/servicecatalog/constraint"
-	portfolio "github.com/upbound/provider-aws/internal/controller/servicecatalog/portfolio"
-	portfolioshare "github.com/upbound/provider-aws/internal/controller/servicecatalog/portfolioshare"
-	principalportfolioassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/principalportfolioassociation"
-	product "github.com/upbound/provider-aws/internal/controller/servicecatalog/product"
-	productportfolioassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/productportfolioassociation"
-	provisioningartifact "github.com/upbound/provider-aws/internal/controller/servicecatalog/provisioningartifact"
-	serviceaction "github.com/upbound/provider-aws/internal/controller/servicecatalog/serviceaction"
-	tagoption "github.com/upbound/provider-aws/internal/controller/servicecatalog/tagoption"
-	tagoptionresourceassociation "github.com/upbound/provider-aws/internal/controller/servicecatalog/tagoptionresourceassociation"
+	budgetresourceassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/budgetresourceassociation"
+	constraint "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/constraint"
+	portfolio "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/portfolio"
+	portfolioshare "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/portfolioshare"
+	principalportfolioassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/principalportfolioassociation"
+	product "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/product"
+	productportfolioassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/productportfolioassociation"
+	provisioningartifact "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/provisioningartifact"
+	serviceaction "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/serviceaction"
+	tagoption "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/tagoption"
+	tagoptionresourceassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/servicecatalog/tagoptionresourceassociation"
 )
 
 // Setup_servicecatalog creates all controllers with the supplied logger and adds them to

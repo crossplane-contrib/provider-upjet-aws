@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/crossplane-contrib/provider-upjet-aws/config/common"
 )
 
 // Configure adds configurations for the docdb group.

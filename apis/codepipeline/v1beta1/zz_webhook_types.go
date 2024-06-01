@@ -87,7 +87,7 @@ type WebhookInitParameters struct {
 	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
 
 	// The name of the pipeline.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codepipeline/v1beta1.Codepipeline
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/codepipeline/v1beta1.Codepipeline
 	TargetPipeline *string `json:"targetPipeline,omitempty" tf:"target_pipeline,omitempty"`
 
 	// Reference to a Codepipeline in codepipeline to populate targetPipeline.
@@ -163,7 +163,7 @@ type WebhookParameters struct {
 	TargetAction *string `json:"targetAction,omitempty" tf:"target_action,omitempty"`
 
 	// The name of the pipeline.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codepipeline/v1beta1.Codepipeline
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/codepipeline/v1beta1.Codepipeline
 	// +kubebuilder:validation:Optional
 	TargetPipeline *string `json:"targetPipeline,omitempty" tf:"target_pipeline,omitempty"`
 

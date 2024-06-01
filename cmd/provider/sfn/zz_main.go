@@ -34,13 +34,13 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/metrics"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	"github.com/upbound/provider-aws/apis"
-	"github.com/upbound/provider-aws/apis/v1alpha1"
-	"github.com/upbound/provider-aws/config"
-	resolverapis "github.com/upbound/provider-aws/internal/apis"
-	"github.com/upbound/provider-aws/internal/clients"
-	"github.com/upbound/provider-aws/internal/controller"
-	"github.com/upbound/provider-aws/internal/features"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/v1alpha1"
+	"github.com/crossplane-contrib/provider-upjet-aws/config"
+	resolverapis "github.com/crossplane-contrib/provider-upjet-aws/internal/apis"
+	"github.com/crossplane-contrib/provider-upjet-aws/internal/clients"
+	"github.com/crossplane-contrib/provider-upjet-aws/internal/controller"
+	"github.com/crossplane-contrib/provider-upjet-aws/internal/features"
 )
 
 const (

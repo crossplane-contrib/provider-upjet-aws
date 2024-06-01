@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
-	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
+	jobdefinition "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/batch/jobdefinition"
+	schedulingpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/batch/schedulingpolicy"
 )
 
 // Setup_batch creates all controllers with the supplied logger and adds them to

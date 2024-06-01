@@ -25,7 +25,7 @@ type SchemaInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ARN of the Glue Registry to create the schema in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/glue/v1beta1.Registry
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`
 
@@ -115,7 +115,7 @@ type SchemaParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN of the Glue Registry to create the schema in.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/glue/v1beta1.Registry
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RegistryArn *string `json:"registryArn,omitempty" tf:"registry_arn,omitempty"`

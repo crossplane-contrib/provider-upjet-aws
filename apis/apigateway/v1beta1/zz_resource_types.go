@@ -16,7 +16,7 @@ import (
 type ResourceInitParameters struct {
 
 	// ID of the parent API resource
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("root_resource_id",true)
 	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
 
@@ -32,7 +32,7 @@ type ResourceInitParameters struct {
 	PathPart *string `json:"pathPart,omitempty" tf:"path_part,omitempty"`
 
 	// ID of the associated REST API
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -66,7 +66,7 @@ type ResourceObservation struct {
 type ResourceParameters struct {
 
 	// ID of the parent API resource
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("root_resource_id",true)
 	// +kubebuilder:validation:Optional
 	ParentID *string `json:"parentId,omitempty" tf:"parent_id,omitempty"`
@@ -89,7 +89,7 @@ type ResourceParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// ID of the associated REST API
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/apigateway/v1beta1.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`

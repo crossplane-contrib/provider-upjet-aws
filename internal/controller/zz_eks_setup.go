@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	addon "github.com/upbound/provider-aws/internal/controller/eks/addon"
-	cluster "github.com/upbound/provider-aws/internal/controller/eks/cluster"
-	clusterauth "github.com/upbound/provider-aws/internal/controller/eks/clusterauth"
-	fargateprofile "github.com/upbound/provider-aws/internal/controller/eks/fargateprofile"
-	identityproviderconfig "github.com/upbound/provider-aws/internal/controller/eks/identityproviderconfig"
-	nodegroup "github.com/upbound/provider-aws/internal/controller/eks/nodegroup"
-	podidentityassociation "github.com/upbound/provider-aws/internal/controller/eks/podidentityassociation"
+	addon "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/eks/addon"
+	cluster "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/eks/cluster"
+	clusterauth "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/eks/clusterauth"
+	fargateprofile "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/eks/fargateprofile"
+	identityproviderconfig "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/eks/identityproviderconfig"
+	nodegroup "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/eks/nodegroup"
+	podidentityassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/eks/podidentityassociation"
 )
 
 // Setup_eks creates all controllers with the supplied logger and adds them to

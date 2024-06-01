@@ -9,9 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	detector "github.com/upbound/provider-aws/internal/controller/guardduty/detector"
-	filter "github.com/upbound/provider-aws/internal/controller/guardduty/filter"
-	member "github.com/upbound/provider-aws/internal/controller/guardduty/member"
+	detector "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/guardduty/detector"
+	filter "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/guardduty/filter"
+	member "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/guardduty/member"
 )
 
 // Setup_guardduty creates all controllers with the supplied logger and adds them to

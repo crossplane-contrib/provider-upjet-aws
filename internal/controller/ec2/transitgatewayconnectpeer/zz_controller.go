@@ -21,8 +21,8 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/provider-aws/apis/ec2/v1beta1"
-	features "github.com/upbound/provider-aws/internal/features"
+	v1beta1 "github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1"
+	features "github.com/crossplane-contrib/provider-upjet-aws/internal/features"
 )
 
 // Setup adds a controller that reconciles TransitGatewayConnectPeer managed resources.

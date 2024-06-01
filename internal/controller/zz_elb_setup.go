@@ -9,15 +9,15 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	appcookiestickinesspolicy "github.com/upbound/provider-aws/internal/controller/elb/appcookiestickinesspolicy"
-	attachment "github.com/upbound/provider-aws/internal/controller/elb/attachment"
-	backendserverpolicy "github.com/upbound/provider-aws/internal/controller/elb/backendserverpolicy"
-	elb "github.com/upbound/provider-aws/internal/controller/elb/elb"
-	lbcookiestickinesspolicy "github.com/upbound/provider-aws/internal/controller/elb/lbcookiestickinesspolicy"
-	lbsslnegotiationpolicy "github.com/upbound/provider-aws/internal/controller/elb/lbsslnegotiationpolicy"
-	listenerpolicy "github.com/upbound/provider-aws/internal/controller/elb/listenerpolicy"
-	policy "github.com/upbound/provider-aws/internal/controller/elb/policy"
-	proxyprotocolpolicy "github.com/upbound/provider-aws/internal/controller/elb/proxyprotocolpolicy"
+	appcookiestickinesspolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/appcookiestickinesspolicy"
+	attachment "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/attachment"
+	backendserverpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/backendserverpolicy"
+	elb "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/elb"
+	lbcookiestickinesspolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/lbcookiestickinesspolicy"
+	lbsslnegotiationpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/lbsslnegotiationpolicy"
+	listenerpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/listenerpolicy"
+	policy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/policy"
+	proxyprotocolpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/elb/proxyprotocolpolicy"
 )
 
 // Setup_elb creates all controllers with the supplied logger and adds them to

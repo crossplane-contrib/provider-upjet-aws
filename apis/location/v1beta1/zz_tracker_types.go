@@ -19,7 +19,7 @@ type TrackerInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A key identifier for an AWS KMS customer managed key assigned to the Amazon Location resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// Reference to a Key in kms to populate kmsKeyId.
@@ -76,7 +76,7 @@ type TrackerParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A key identifier for an AWS KMS customer managed key assigned to the Amazon Location resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 

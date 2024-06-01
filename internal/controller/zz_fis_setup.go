@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	experimenttemplate "github.com/upbound/provider-aws/internal/controller/fis/experimenttemplate"
+	experimenttemplate "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/fis/experimenttemplate"
 )
 
 // Setup_fis creates all controllers with the supplied logger and adds them to

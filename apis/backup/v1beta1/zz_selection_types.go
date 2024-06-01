@@ -54,8 +54,8 @@ type SelectionInitParameters struct {
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate iamRoleArn.
@@ -74,7 +74,7 @@ type SelectionInitParameters struct {
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Plan
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/backup/v1beta1.Plan
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// Reference to a Plan in backup to populate planId.
@@ -129,8 +129,8 @@ type SelectionParameters struct {
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// The ARN of the IAM role that AWS Backup uses to authenticate when restoring and backing up the target resource. See the AWS Backup Developer Guide for additional information about using AWS managed policies or creating custom policies attached to the IAM role.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
@@ -152,7 +152,7 @@ type SelectionParameters struct {
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
 
 	// The backup plan ID to be associated with the selection of resources.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta1.Plan
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/backup/v1beta1.Plan
 	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 

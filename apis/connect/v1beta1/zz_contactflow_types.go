@@ -28,7 +28,7 @@ type ContactFlowInitParameters struct {
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -111,7 +111,7 @@ type ContactFlowParameters struct {
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// Specifies the identifier of the hosting Amazon Connect Instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`

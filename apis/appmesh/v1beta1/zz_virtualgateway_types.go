@@ -105,7 +105,7 @@ type BackendDefaultsParameters struct {
 type CertificateAcmInitParameters struct {
 
 	// ARN for the certificate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
@@ -127,7 +127,7 @@ type CertificateAcmObservation struct {
 type CertificateAcmParameters struct {
 
 	// ARN for the certificate.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/acm/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/acm/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`

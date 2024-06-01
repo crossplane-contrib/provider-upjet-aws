@@ -16,7 +16,7 @@ import (
 type ContainerPolicyInitParameters struct {
 
 	// The name of the container.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mediastore/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/mediastore/v1beta1.Container
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
 	// Reference to a Container in mediastore to populate containerName.
@@ -45,7 +45,7 @@ type ContainerPolicyObservation struct {
 type ContainerPolicyParameters struct {
 
 	// The name of the container.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/mediastore/v1beta1.Container
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/mediastore/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 

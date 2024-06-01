@@ -29,7 +29,7 @@ type ClusterInstanceInitParameters struct {
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
 	// The identifier of the aws_docdb_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/docdb/v1beta1.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in docdb to populate clusterIdentifier.
@@ -174,7 +174,7 @@ type ClusterInstanceParameters struct {
 	CACertIdentifier *string `json:"caCertIdentifier,omitempty" tf:"ca_cert_identifier,omitempty"`
 
 	// The identifier of the aws_docdb_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/docdb/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/docdb/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 

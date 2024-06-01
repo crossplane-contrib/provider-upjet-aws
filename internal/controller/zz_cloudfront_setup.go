@@ -9,19 +9,19 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	cachepolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/cachepolicy"
-	distribution "github.com/upbound/provider-aws/internal/controller/cloudfront/distribution"
-	fieldlevelencryptionconfig "github.com/upbound/provider-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
-	fieldlevelencryptionprofile "github.com/upbound/provider-aws/internal/controller/cloudfront/fieldlevelencryptionprofile"
-	function "github.com/upbound/provider-aws/internal/controller/cloudfront/function"
-	keygroup "github.com/upbound/provider-aws/internal/controller/cloudfront/keygroup"
-	monitoringsubscription "github.com/upbound/provider-aws/internal/controller/cloudfront/monitoringsubscription"
-	originaccesscontrol "github.com/upbound/provider-aws/internal/controller/cloudfront/originaccesscontrol"
-	originaccessidentity "github.com/upbound/provider-aws/internal/controller/cloudfront/originaccessidentity"
-	originrequestpolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/originrequestpolicy"
-	publickey "github.com/upbound/provider-aws/internal/controller/cloudfront/publickey"
-	realtimelogconfig "github.com/upbound/provider-aws/internal/controller/cloudfront/realtimelogconfig"
-	responseheaderspolicy "github.com/upbound/provider-aws/internal/controller/cloudfront/responseheaderspolicy"
+	cachepolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/cachepolicy"
+	distribution "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/distribution"
+	fieldlevelencryptionconfig "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/fieldlevelencryptionconfig"
+	fieldlevelencryptionprofile "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/fieldlevelencryptionprofile"
+	function "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/function"
+	keygroup "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/keygroup"
+	monitoringsubscription "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/monitoringsubscription"
+	originaccesscontrol "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/originaccesscontrol"
+	originaccessidentity "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/originaccessidentity"
+	originrequestpolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/originrequestpolicy"
+	publickey "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/publickey"
+	realtimelogconfig "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/realtimelogconfig"
+	responseheaderspolicy "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/cloudfront/responseheaderspolicy"
 )
 
 // Setup_cloudfront creates all controllers with the supplied logger and adds them to

@@ -28,7 +28,7 @@ type HostedPublicVirtualInterfaceInitParameters struct {
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/directconnect/v1beta1.Connection
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
 	// Reference to a Connection in directconnect to populate connectionId.
@@ -120,7 +120,7 @@ type HostedPublicVirtualInterfaceParameters struct {
 	BGPAuthKey *string `json:"bgpAuthKey,omitempty" tf:"bgp_auth_key,omitempty"`
 
 	// The ID of the Direct Connect connection (or LAG) on which to create the virtual interface.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/directconnect/v1beta1.Connection
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 

@@ -117,7 +117,7 @@ type OrganizationAggregationSourceInitParameters struct {
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// ARN of the IAM role used to retrieve AWS Organization details associated with the aggregator account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -153,7 +153,7 @@ type OrganizationAggregationSourceParameters struct {
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
 
 	// ARN of the IAM role used to retrieve AWS Organization details associated with the aggregator account.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`

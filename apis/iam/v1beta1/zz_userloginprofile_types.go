@@ -25,7 +25,7 @@ type UserLoginProfileInitParameters struct {
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 
 	// The IAM user's name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.User
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
 	// Reference to a User in iam to populate user.
@@ -78,7 +78,7 @@ type UserLoginProfileParameters struct {
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
 
 	// The IAM user's name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.User
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 

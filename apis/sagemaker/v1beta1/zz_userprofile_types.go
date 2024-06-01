@@ -238,7 +238,7 @@ type SpaceStorageSettingsDefaultEBSStorageSettingsParameters struct {
 type UserProfileInitParameters struct {
 
 	// The ID of the associated Domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sagemaker/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
@@ -305,7 +305,7 @@ type UserProfileObservation struct {
 type UserProfileParameters struct {
 
 	// The ID of the associated Domain.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Domain
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sagemaker/v1beta1.Domain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`

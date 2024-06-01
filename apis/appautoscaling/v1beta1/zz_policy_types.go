@@ -331,7 +331,7 @@ type PolicyParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Resource type and unique identifier string for the resource associated with the scaling policy. Documentation can be found in the ResourceId parameter at: AWS Application Auto Scaling API Reference
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/appautoscaling/v1beta1.Target
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_id",false)
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
@@ -345,7 +345,7 @@ type PolicyParameters struct {
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// Scalable dimension of the scalable target. Documentation can be found in the ScalableDimension parameter at: AWS Application Auto Scaling API Reference
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/appautoscaling/v1beta1.Target
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("scalable_dimension",false)
 	// +kubebuilder:validation:Optional
 	ScalableDimension *string `json:"scalableDimension,omitempty" tf:"scalable_dimension,omitempty"`
@@ -359,7 +359,7 @@ type PolicyParameters struct {
 	ScalableDimensionSelector *v1.Selector `json:"scalableDimensionSelector,omitempty" tf:"-"`
 
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appautoscaling/v1beta1.Target
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/appautoscaling/v1beta1.Target
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("service_namespace",false)
 	// +kubebuilder:validation:Optional
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`

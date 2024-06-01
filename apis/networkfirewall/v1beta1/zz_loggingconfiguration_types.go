@@ -58,7 +58,7 @@ type LogDestinationConfigParameters struct {
 type LoggingConfigurationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.Firewall
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/networkfirewall/v1beta1.Firewall
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`
 
@@ -108,7 +108,7 @@ type LoggingConfigurationObservation struct {
 type LoggingConfigurationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Network Firewall firewall.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkfirewall/v1beta1.Firewall
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/networkfirewall/v1beta1.Firewall
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FirewallArn *string `json:"firewallArn,omitempty" tf:"firewall_arn,omitempty"`

@@ -168,7 +168,7 @@ type InstanceInitParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// List of the layers the instance will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.CustomLayer
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.CustomLayer
 	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
 
 	// References to CustomLayer in opsworks to populate layerIds.
@@ -200,13 +200,13 @@ type InstanceInitParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Associated security groups.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Identifier of the stack the instance will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
@@ -225,7 +225,7 @@ type InstanceInitParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Subnet ID to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -459,7 +459,7 @@ type InstanceParameters struct {
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
 	// List of the layers the instance will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.CustomLayer
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.CustomLayer
 	// +kubebuilder:validation:Optional
 	LayerIds []*string `json:"layerIds,omitempty" tf:"layer_ids,omitempty"`
 
@@ -496,14 +496,14 @@ type InstanceParameters struct {
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
 	// Associated security groups.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Identifier of the stack the instance will belong to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/opsworks/v1beta1.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
@@ -525,7 +525,7 @@ type InstanceParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Subnet ID to attach to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 

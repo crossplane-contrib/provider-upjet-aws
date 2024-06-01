@@ -29,8 +29,8 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/fieldpath"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	"github.com/upbound/provider-aws/apis/v1beta1"
-	"github.com/upbound/provider-aws/internal/version"
+	"github.com/crossplane-contrib/provider-upjet-aws/apis/v1beta1"
+	"github.com/crossplane-contrib/provider-upjet-aws/internal/version"
 )
 
 const (

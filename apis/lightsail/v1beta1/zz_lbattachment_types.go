@@ -16,7 +16,7 @@ import (
 type LBAttachmentInitParameters struct {
 
 	// The name of the instance to attach to the load balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/lightsail/v1beta1.Instance
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// Reference to a Instance in lightsail to populate instanceName.
@@ -28,7 +28,7 @@ type LBAttachmentInitParameters struct {
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Lightsail load balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.LB
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/lightsail/v1beta1.LB
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
 
 	// Reference to a LB in lightsail to populate lbName.
@@ -55,7 +55,7 @@ type LBAttachmentObservation struct {
 type LBAttachmentParameters struct {
 
 	// The name of the instance to attach to the load balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/lightsail/v1beta1.Instance
 	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
@@ -68,7 +68,7 @@ type LBAttachmentParameters struct {
 	InstanceNameSelector *v1.Selector `json:"instanceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Lightsail load balancer.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lightsail/v1beta1.LB
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/lightsail/v1beta1.LB
 	// +kubebuilder:validation:Optional
 	LBName *string `json:"lbName,omitempty" tf:"lb_name,omitempty"`
 

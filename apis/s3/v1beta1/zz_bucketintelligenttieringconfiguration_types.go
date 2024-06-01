@@ -48,7 +48,7 @@ type BucketIntelligentTieringConfigurationFilterParameters struct {
 type BucketIntelligentTieringConfigurationInitParameters struct {
 
 	// Name of the bucket this intelligent tiering configuration is associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
@@ -96,7 +96,7 @@ type BucketIntelligentTieringConfigurationObservation struct {
 type BucketIntelligentTieringConfigurationParameters struct {
 
 	// Name of the bucket this intelligent tiering configuration is associated with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta1.Bucket
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/s3/v1beta1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`

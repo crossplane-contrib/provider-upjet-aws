@@ -16,7 +16,7 @@ import (
 type ResourceShareAccepterInitParameters struct {
 
 	// The ARN of the resource share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.PrincipalAssociation
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ram/v1beta1.PrincipalAssociation
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_share_arn",false)
 	ShareArn *string `json:"shareArn,omitempty" tf:"share_arn,omitempty"`
 
@@ -65,7 +65,7 @@ type ResourceShareAccepterParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ARN of the resource share.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ram/v1beta1.PrincipalAssociation
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ram/v1beta1.PrincipalAssociation
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_share_arn",false)
 	// +kubebuilder:validation:Optional
 	ShareArn *string `json:"shareArn,omitempty" tf:"share_arn,omitempty"`

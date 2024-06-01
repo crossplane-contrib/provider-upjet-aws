@@ -40,7 +40,7 @@ type AssociationInitParameters struct {
 	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
 
 	// The name of the SSM document to apply.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.Document
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssm/v1beta1.Document
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Document in ssm to populate name.
@@ -163,7 +163,7 @@ type AssociationParameters struct {
 	MaxErrors *string `json:"maxErrors,omitempty" tf:"max_errors,omitempty"`
 
 	// The name of the SSM document to apply.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ssm/v1beta1.Document
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ssm/v1beta1.Document
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -9,13 +9,13 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
-	globaltable "github.com/upbound/provider-aws/internal/controller/dynamodb/globaltable"
-	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
-	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
-	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
-	tablereplica "github.com/upbound/provider-aws/internal/controller/dynamodb/tablereplica"
-	tag "github.com/upbound/provider-aws/internal/controller/dynamodb/tag"
+	contributorinsights "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/dynamodb/contributorinsights"
+	globaltable "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/dynamodb/globaltable"
+	kinesisstreamingdestination "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/dynamodb/kinesisstreamingdestination"
+	table "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/dynamodb/table"
+	tableitem "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/dynamodb/tableitem"
+	tablereplica "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/dynamodb/tablereplica"
+	tag "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/dynamodb/tag"
 )
 
 // Setup_dynamodb creates all controllers with the supplied logger and adds them to

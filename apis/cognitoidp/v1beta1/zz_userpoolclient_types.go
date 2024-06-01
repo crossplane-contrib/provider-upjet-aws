@@ -19,7 +19,7 @@ type AnalyticsConfigurationInitParameters struct {
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 
 	// Application ID for an Amazon Pinpoint application.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/pinpoint/v1beta1.App
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/pinpoint/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("application_id",true)
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
 
@@ -35,7 +35,7 @@ type AnalyticsConfigurationInitParameters struct {
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
 
 	// ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics. Conflicts with application_arn.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -76,7 +76,7 @@ type AnalyticsConfigurationParameters struct {
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 
 	// Application ID for an Amazon Pinpoint application.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/pinpoint/v1beta1.App
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/pinpoint/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("application_id",true)
 	// +kubebuilder:validation:Optional
 	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
@@ -94,7 +94,7 @@ type AnalyticsConfigurationParameters struct {
 	ExternalID *string `json:"externalId,omitempty" tf:"external_id,omitempty"`
 
 	// ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon Pinpoint analytics. Conflicts with application_arn.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
@@ -227,7 +227,7 @@ type UserPoolClientInitParameters struct {
 	TokenValidityUnits []TokenValidityUnitsInitParameters `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
 
 	// User pool the client belongs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cognitoidp/v1beta1.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -430,7 +430,7 @@ type UserPoolClientParameters struct {
 	TokenValidityUnits []TokenValidityUnitsParameters `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
 
 	// User pool the client belongs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/cognitoidp/v1beta1.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 

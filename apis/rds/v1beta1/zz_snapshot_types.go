@@ -16,7 +16,7 @@ import (
 type SnapshotInitParameters struct {
 
 	// The DB Instance Identifier from which to take the snapshot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`
 
@@ -109,7 +109,7 @@ type SnapshotObservation struct {
 type SnapshotParameters struct {
 
 	// The DB Instance Identifier from which to take the snapshot.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta2.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/rds/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	DBInstanceIdentifier *string `json:"dbInstanceIdentifier,omitempty" tf:"db_instance_identifier,omitempty"`

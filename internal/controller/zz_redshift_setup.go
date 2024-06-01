@@ -9,18 +9,18 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	authenticationprofile "github.com/upbound/provider-aws/internal/controller/redshift/authenticationprofile"
-	cluster "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
-	eventsubscription "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
-	hsmclientcertificate "github.com/upbound/provider-aws/internal/controller/redshift/hsmclientcertificate"
-	hsmconfiguration "github.com/upbound/provider-aws/internal/controller/redshift/hsmconfiguration"
-	parametergroup "github.com/upbound/provider-aws/internal/controller/redshift/parametergroup"
-	scheduledaction "github.com/upbound/provider-aws/internal/controller/redshift/scheduledaction"
-	snapshotcopygrant "github.com/upbound/provider-aws/internal/controller/redshift/snapshotcopygrant"
-	snapshotschedule "github.com/upbound/provider-aws/internal/controller/redshift/snapshotschedule"
-	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
-	subnetgroup "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
-	usagelimit "github.com/upbound/provider-aws/internal/controller/redshift/usagelimit"
+	authenticationprofile "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/authenticationprofile"
+	cluster "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/cluster"
+	eventsubscription "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/eventsubscription"
+	hsmclientcertificate "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/hsmclientcertificate"
+	hsmconfiguration "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/hsmconfiguration"
+	parametergroup "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/parametergroup"
+	scheduledaction "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/scheduledaction"
+	snapshotcopygrant "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/snapshotcopygrant"
+	snapshotschedule "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/snapshotschedule"
+	snapshotscheduleassociation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/snapshotscheduleassociation"
+	subnetgroup "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/subnetgroup"
+	usagelimit "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/redshift/usagelimit"
 )
 
 // Setup_redshift creates all controllers with the supplied logger and adds them to

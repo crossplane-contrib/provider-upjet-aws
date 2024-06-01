@@ -200,7 +200,7 @@ type HeaderParameters struct {
 type IPSetReferenceInitParameters struct {
 
 	// Set of Managed Prefix IP ARN(s)
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ReferenceArn *string `json:"referenceArn,omitempty" tf:"reference_arn,omitempty"`
 
@@ -222,7 +222,7 @@ type IPSetReferenceObservation struct {
 type IPSetReferenceParameters struct {
 
 	// Set of Managed Prefix IP ARN(s)
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.ManagedPrefixList
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/ec2/v1beta1.ManagedPrefixList
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ReferenceArn *string `json:"referenceArn,omitempty" tf:"reference_arn,omitempty"`

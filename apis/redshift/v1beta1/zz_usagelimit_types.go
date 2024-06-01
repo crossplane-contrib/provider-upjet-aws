@@ -22,7 +22,7 @@ type UsageLimitInitParameters struct {
 	BreachAction *string `json:"breachAction,omitempty" tf:"breach_action,omitempty"`
 
 	// The identifier of the cluster that you want to limit usage.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/redshift/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
@@ -94,7 +94,7 @@ type UsageLimitParameters struct {
 	BreachAction *string `json:"breachAction,omitempty" tf:"breach_action,omitempty"`
 
 	// The identifier of the cluster that you want to limit usage.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/redshift/v1beta1.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`

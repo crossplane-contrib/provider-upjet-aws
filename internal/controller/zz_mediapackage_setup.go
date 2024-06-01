@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	channel "github.com/upbound/provider-aws/internal/controller/mediapackage/channel"
+	channel "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/mediapackage/channel"
 )
 
 // Setup_mediapackage creates all controllers with the supplied logger and adds them to

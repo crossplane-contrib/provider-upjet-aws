@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	eventintegration "github.com/upbound/provider-aws/internal/controller/appintegrations/eventintegration"
+	eventintegration "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/appintegrations/eventintegration"
 )
 
 // Setup_appintegrations creates all controllers with the supplied logger and adds them to

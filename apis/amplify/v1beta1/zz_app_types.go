@@ -57,8 +57,8 @@ type AppInitParameters struct {
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// AWS Identity and Access Management (IAM) service role for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	IAMServiceRoleArn *string `json:"iamServiceRoleArn,omitempty" tf:"iam_service_role_arn,omitempty"`
 
 	// Reference to a Role in iam to populate iamServiceRoleArn.
@@ -213,8 +213,8 @@ type AppParameters struct {
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// AWS Identity and Access Management (IAM) service role for an Amplify app.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane-contrib/provider-upjet-aws/config/common.ARNExtractor()
 	// +kubebuilder:validation:Optional
 	IAMServiceRoleArn *string `json:"iamServiceRoleArn,omitempty" tf:"iam_service_role_arn,omitempty"`
 

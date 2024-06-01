@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	app "github.com/upbound/provider-aws/internal/controller/pinpoint/app"
-	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
+	app "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/pinpoint/app"
+	smschannel "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/pinpoint/smschannel"
 )
 
 // Setup_pinpoint creates all controllers with the supplied logger and adds them to

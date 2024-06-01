@@ -35,7 +35,7 @@ type CloudWatchDestinationParameters struct {
 type ConfigurationSetEventDestinationInitParameters struct {
 
 	// The name of the configuration set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sesv2/v1beta1.ConfigurationSet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sesv2/v1beta1.ConfigurationSet
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
 	// Reference to a ConfigurationSet in sesv2 to populate configurationSetName.
@@ -71,7 +71,7 @@ type ConfigurationSetEventDestinationObservation struct {
 type ConfigurationSetEventDestinationParameters struct {
 
 	// The name of the configuration set.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sesv2/v1beta1.ConfigurationSet
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sesv2/v1beta1.ConfigurationSet
 	// +kubebuilder:validation:Optional
 	ConfigurationSetName *string `json:"configurationSetName,omitempty" tf:"configuration_set_name,omitempty"`
 
@@ -208,7 +208,7 @@ type EventDestinationParameters struct {
 type KinesisFirehoseDestinationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
 	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
 
@@ -221,7 +221,7 @@ type KinesisFirehoseDestinationInitParameters struct {
 	DeliveryStreamArnSelector *v1.Selector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
@@ -246,7 +246,7 @@ type KinesisFirehoseDestinationObservation struct {
 type KinesisFirehoseDestinationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that the Amazon SES API v2 sends email events to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/firehose/v1beta1.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
@@ -260,7 +260,7 @@ type KinesisFirehoseDestinationParameters struct {
 	DeliveryStreamArnSelector *v1.Selector `json:"deliveryStreamArnSelector,omitempty" tf:"-"`
 
 	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses to send email events to the Amazon Kinesis Data Firehose stream.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
@@ -276,7 +276,7 @@ type KinesisFirehoseDestinationParameters struct {
 
 type PinpointDestinationInitParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/pinpoint/v1beta1.App
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/pinpoint/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
 
@@ -295,7 +295,7 @@ type PinpointDestinationObservation struct {
 
 type PinpointDestinationParameters struct {
 
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/pinpoint/v1beta1.App
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/pinpoint/v1beta1.App
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ApplicationArn *string `json:"applicationArn,omitempty" tf:"application_arn,omitempty"`
@@ -312,7 +312,7 @@ type PinpointDestinationParameters struct {
 type SnsDestinationInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`
 
@@ -334,7 +334,7 @@ type SnsDestinationObservation struct {
 type SnsDestinationParameters struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to publish email events to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/sns/v1beta1.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TopicArn *string `json:"topicArn,omitempty" tf:"topic_arn,omitempty"`

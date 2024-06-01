@@ -9,12 +9,12 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	devicepool "github.com/upbound/provider-aws/internal/controller/devicefarm/devicepool"
-	instanceprofile "github.com/upbound/provider-aws/internal/controller/devicefarm/instanceprofile"
-	networkprofile "github.com/upbound/provider-aws/internal/controller/devicefarm/networkprofile"
-	project "github.com/upbound/provider-aws/internal/controller/devicefarm/project"
-	testgridproject "github.com/upbound/provider-aws/internal/controller/devicefarm/testgridproject"
-	upload "github.com/upbound/provider-aws/internal/controller/devicefarm/upload"
+	devicepool "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/devicefarm/devicepool"
+	instanceprofile "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/devicefarm/instanceprofile"
+	networkprofile "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/devicefarm/networkprofile"
+	project "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/devicefarm/project"
+	testgridproject "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/devicefarm/testgridproject"
+	upload "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/devicefarm/upload"
 )
 
 // Setup_devicefarm creates all controllers with the supplied logger and adds them to

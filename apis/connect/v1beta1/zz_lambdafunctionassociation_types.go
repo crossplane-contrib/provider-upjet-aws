@@ -31,7 +31,7 @@ type LambdaFunctionAssociationObservation struct {
 type LambdaFunctionAssociationParameters struct {
 
 	// Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/lambda/v1beta1.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`
@@ -45,7 +45,7 @@ type LambdaFunctionAssociationParameters struct {
 	FunctionArnSelector *v1.Selector `json:"functionArnSelector,omitempty" tf:"-"`
 
 	// The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/connect/v1beta1.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`

@@ -9,8 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	association "github.com/upbound/provider-aws/internal/controller/licensemanager/association"
-	licenseconfiguration "github.com/upbound/provider-aws/internal/controller/licensemanager/licenseconfiguration"
+	association "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/licensemanager/association"
+	licenseconfiguration "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/licensemanager/licenseconfiguration"
 )
 
 // Setup_licensemanager creates all controllers with the supplied logger and adds them to

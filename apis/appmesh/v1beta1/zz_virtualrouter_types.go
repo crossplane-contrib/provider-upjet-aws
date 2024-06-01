@@ -45,7 +45,7 @@ type SpecListenerPortMappingParameters struct {
 type VirtualRouterInitParameters struct {
 
 	// Name of the service mesh in which to create the virtual router. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.Mesh
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/appmesh/v1beta1.Mesh
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`
 
@@ -112,7 +112,7 @@ type VirtualRouterObservation struct {
 type VirtualRouterParameters struct {
 
 	// Name of the service mesh in which to create the virtual router. Must be between 1 and 255 characters in length.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appmesh/v1beta1.Mesh
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/appmesh/v1beta1.Mesh
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MeshName *string `json:"meshName,omitempty" tf:"mesh_name,omitempty"`

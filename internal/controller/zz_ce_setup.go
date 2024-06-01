@@ -9,7 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	anomalymonitor "github.com/upbound/provider-aws/internal/controller/ce/anomalymonitor"
+	anomalymonitor "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/ce/anomalymonitor"
 )
 
 // Setup_ce creates all controllers with the supplied logger and adds them to

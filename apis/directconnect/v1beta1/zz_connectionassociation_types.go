@@ -16,7 +16,7 @@ import (
 type ConnectionAssociationInitParameters struct {
 
 	// The ID of the connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/directconnect/v1beta1.Connection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
@@ -29,7 +29,7 @@ type ConnectionAssociationInitParameters struct {
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the LAG with which to associate the connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Lag
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/directconnect/v1beta1.Lag
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	LagID *string `json:"lagId,omitempty" tf:"lag_id,omitempty"`
 
@@ -56,7 +56,7 @@ type ConnectionAssociationObservation struct {
 type ConnectionAssociationParameters struct {
 
 	// The ID of the connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Connection
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/directconnect/v1beta1.Connection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
@@ -70,7 +70,7 @@ type ConnectionAssociationParameters struct {
 	ConnectionIDSelector *v1.Selector `json:"connectionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the LAG with which to associate the connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/directconnect/v1beta1.Lag
+	// +crossplane:generate:reference:type=github.com/crossplane-contrib/provider-upjet-aws/apis/directconnect/v1beta1.Lag
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LagID *string `json:"lagId,omitempty" tf:"lag_id,omitempty"`

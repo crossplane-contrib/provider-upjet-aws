@@ -9,17 +9,17 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
-	alias "github.com/upbound/provider-aws/internal/controller/lambda/alias"
-	codesigningconfig "github.com/upbound/provider-aws/internal/controller/lambda/codesigningconfig"
-	eventsourcemapping "github.com/upbound/provider-aws/internal/controller/lambda/eventsourcemapping"
-	function "github.com/upbound/provider-aws/internal/controller/lambda/function"
-	functioneventinvokeconfig "github.com/upbound/provider-aws/internal/controller/lambda/functioneventinvokeconfig"
-	functionurl "github.com/upbound/provider-aws/internal/controller/lambda/functionurl"
-	invocation "github.com/upbound/provider-aws/internal/controller/lambda/invocation"
-	layerversion "github.com/upbound/provider-aws/internal/controller/lambda/layerversion"
-	layerversionpermission "github.com/upbound/provider-aws/internal/controller/lambda/layerversionpermission"
-	permission "github.com/upbound/provider-aws/internal/controller/lambda/permission"
-	provisionedconcurrencyconfig "github.com/upbound/provider-aws/internal/controller/lambda/provisionedconcurrencyconfig"
+	alias "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/alias"
+	codesigningconfig "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/codesigningconfig"
+	eventsourcemapping "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/eventsourcemapping"
+	function "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/function"
+	functioneventinvokeconfig "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/functioneventinvokeconfig"
+	functionurl "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/functionurl"
+	invocation "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/invocation"
+	layerversion "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/layerversion"
+	layerversionpermission "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/layerversionpermission"
+	permission "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/permission"
+	provisionedconcurrencyconfig "github.com/crossplane-contrib/provider-upjet-aws/internal/controller/lambda/provisionedconcurrencyconfig"
 )
 
 // Setup_lambda creates all controllers with the supplied logger and adds them to

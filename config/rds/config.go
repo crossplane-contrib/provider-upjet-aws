@@ -12,7 +12,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/types/comments"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/crossplane-contrib/provider-upjet-aws/config/common"
 )
 
 // Configure adds configurations for the rds group.

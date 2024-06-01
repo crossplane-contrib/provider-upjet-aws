@@ -7,7 +7,7 @@ package datasync
 import (
 	"github.com/crossplane/upjet/pkg/config"
 
-	"github.com/upbound/provider-aws/config/common"
+	"github.com/crossplane-contrib/provider-upjet-aws/config/common"
 )
 
 // Configure adds configurations for the datasync group.
