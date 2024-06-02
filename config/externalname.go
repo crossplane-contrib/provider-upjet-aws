@@ -68,6 +68,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
 	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
 
+	// dynamodb
+	//
+	// DynamoDB table resource policy can be important using the DynamoDB resource identifier
+	"aws_dynamodb_resource_policy": config.IdentifierFromProvider,
+
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
 	"aws_codeguruprofiler_profiling_group": config.NameAsIdentifier,
@@ -923,7 +928,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// DynamoDB Global Tables can be imported using the global table name
 	"aws_dynamodb_global_table": config.NameAsIdentifier,
 	// aws_dynamodb_tag can be imported by using the DynamoDB resource identifier and key, separated by a comma (,)
-	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),
+	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),	
 
 	// sns
 	//

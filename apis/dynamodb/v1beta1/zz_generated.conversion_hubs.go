@@ -16,6 +16,9 @@ func (tr *GlobalTable) Hub() {}
 func (tr *KinesisStreamingDestination) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ResourcePolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *TableItem) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -12,6 +12,13 @@ import (
 
 // Configure adds configurations for the dynamodb group.
 func Configure(p *config.Provider) {
+	p.AddResourceConfigurator("aws_dynamodb_resource_policy", func(r *config.Resource) {
+		r.References["resource_arn"] = config.Reference{
+			TerraformName: "aws_dynamodb_table",
+			Extractor:     common.PathARNExtractor,
+		}
+	})
+	
 	// currently needs an ARN reference for external name
 	p.AddResourceConfigurator("aws_dynamodb_contributor_insights", func(r *config.Resource) {
 		r.References["table_name"] = config.Reference{
