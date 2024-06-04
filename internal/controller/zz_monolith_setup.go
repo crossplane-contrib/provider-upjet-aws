@@ -911,6 +911,7 @@ import (
 	languagemodel "github.com/upbound/provider-aws/internal/controller/transcribe/languagemodel"
 	vocabularytranscribe "github.com/upbound/provider-aws/internal/controller/transcribe/vocabulary"
 	vocabularyfilter "github.com/upbound/provider-aws/internal/controller/transcribe/vocabularyfilter"
+	connectortransfer "github.com/upbound/provider-aws/internal/controller/transfer/connector"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	sshkey "github.com/upbound/provider-aws/internal/controller/transfer/sshkey"
 	tagtransfer "github.com/upbound/provider-aws/internal/controller/transfer/tag"
@@ -1854,6 +1855,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		languagemodel.Setup,
 		vocabularytranscribe.Setup,
 		vocabularyfilter.Setup,
+		connectortransfer.Setup,
 		server.Setup,
 		sshkey.Setup,
 		tagtransfer.Setup,

@@ -894,6 +894,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_transfer_ssh_key": config.IdentifierFromProvider,
 	// Transfer Workflows can be imported using the worflow_idgit
 	"aws_transfer_workflow": config.IdentifierFromProvider,
+	// aws_transfer_tag can be imported by using the Transfer Family resource identifier and key, separated by a comma (,)
+	// Example: arn:aws:transfer:us-east-1:123456789012:server/s-1234567890abcdef0,Name
+	"aws_transfer_tag": config.IdentifierFromProvider,
+	// Transfer Connector can be imported using the connector_id.
+	// Example: c-4221a88afd5f4362a
+	"aws_transfer_connector": config.IdentifierFromProvider,
 
 	// dynamodb
 	//
@@ -2681,12 +2687,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_transcribe_vocabulary": config.ParameterAsIdentifier("vocabulary_name"),
 	// Transcribe VocabularyFilter can be imported using the vocabulary_filter_name
 	"aws_transcribe_vocabulary_filter": config.ParameterAsIdentifier("vocabulary_filter_name"),
-
-	// transfer
-	//
-	// aws_transfer_tag can be imported by using the Transfer Family resource identifier and key, separated by a comma (,)
-	// Example: arn:aws:transfer:us-east-1:123456789012:server/s-1234567890abcdef0,Name
-	"aws_transfer_tag": config.IdentifierFromProvider,
 
 	// vpc_network
 	//
