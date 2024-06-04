@@ -1,0 +1,24 @@
+apiVersion: transfer.aws.upbound.io/v1beta1
+kind: Connector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: transfer/v1beta1/connector
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    as2Config:
+    - compression: DISABLED
+      encryptionAlgorithm: AWS128_CBC
+      localProfileId: ${aws_transfer_profile.local.profile_id}
+      mdnResponse: NONE
+      mdnSigningAlgorithm: NONE
+      messageSubject: For Connector
+      partnerProfileId: ${aws_transfer_profile.partner.profile_id}
+      signingAlgorithm: NONE
+    region: us-west-1
+    url: http://www.test.com
