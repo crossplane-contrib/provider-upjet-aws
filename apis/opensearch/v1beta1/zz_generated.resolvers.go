@@ -13,6 +13,7 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
 	// ResolveReferences of this Domain.
@@ -25,8 +26,30 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EncryptAtRest); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EncryptAtRest[i3].KMSKeyID),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.ForProvider.EncryptAtRest[i3].KMSKeyIDRef,
+				Selector:     mg.Spec.ForProvider.EncryptAtRest[i3].KMSKeyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EncryptAtRest[i3].KMSKeyID")
+		}
+		mg.Spec.ForProvider.EncryptAtRest[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EncryptAtRest[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LogPublishingOptions); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
@@ -48,6 +71,69 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 		mg.Spec.ForProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCOptions); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIDRefs,
+				Selector:      mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIDSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIds")
+		}
+		mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.VPCOptions[i3].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.VPCOptions); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCOptions[i3].SubnetIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.VPCOptions[i3].SubnetIDRefs,
+				Selector:      mg.Spec.ForProvider.VPCOptions[i3].SubnetIDSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.VPCOptions[i3].SubnetIds")
+		}
+		mg.Spec.ForProvider.VPCOptions[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.VPCOptions[i3].SubnetIDRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.EncryptAtRest); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EncryptAtRest[i3].KMSKeyID),
+				Extract:      common.ARNExtractor(),
+				Reference:    mg.Spec.InitProvider.EncryptAtRest[i3].KMSKeyIDRef,
+				Selector:     mg.Spec.InitProvider.EncryptAtRest[i3].KMSKeyIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EncryptAtRest[i3].KMSKeyID")
+		}
+		mg.Spec.InitProvider.EncryptAtRest[i3].KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.EncryptAtRest[i3].KMSKeyIDRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.LogPublishingOptions); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
@@ -67,6 +153,48 @@ func (mg *Domain) ResolveReferences(ctx context.Context, c client.Reader) error 
 		}
 		mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.LogPublishingOptions[i3].CloudwatchLogGroupArnRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCOptions); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIDRefs,
+				Selector:      mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIDSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIds")
+		}
+		mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCOptions[i3].SecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VPCOptions); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCOptions[i3].SubnetIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.VPCOptions[i3].SubnetIDRefs,
+				Selector:      mg.Spec.InitProvider.VPCOptions[i3].SubnetIDSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VPCOptions[i3].SubnetIds")
+		}
+		mg.Spec.InitProvider.VPCOptions[i3].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.VPCOptions[i3].SubnetIDRefs = mrsp.ResolvedReferences
 
 	}
 
