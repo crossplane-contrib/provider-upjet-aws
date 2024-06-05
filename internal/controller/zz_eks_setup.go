@@ -9,6 +9,8 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
+	accessentry "github.com/upbound/provider-aws/internal/controller/eks/accessentry"
+	accesspolicyassociation "github.com/upbound/provider-aws/internal/controller/eks/accesspolicyassociation"
 	addon "github.com/upbound/provider-aws/internal/controller/eks/addon"
 	cluster "github.com/upbound/provider-aws/internal/controller/eks/cluster"
 	clusterauth "github.com/upbound/provider-aws/internal/controller/eks/clusterauth"
@@ -22,6 +24,8 @@ import (
 // the supplied manager.
 func Setup_eks(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		accessentry.Setup,
+		accesspolicyassociation.Setup,
 		addon.Setup,
 		cluster.Setup,
 		clusterauth.Setup,
