@@ -70,7 +70,6 @@ import (
 	"github.com/upbound/provider-aws/config/networkmanager"
 	"github.com/upbound/provider-aws/config/opensearch"
 	"github.com/upbound/provider-aws/config/opensearchserverless"
-	"github.com/upbound/provider-aws/config/opsworks"
 	"github.com/upbound/provider-aws/config/organization"
 	"github.com/upbound/provider-aws/config/qldb"
 	"github.com/upbound/provider-aws/config/ram"
@@ -171,7 +170,6 @@ func init() {
 	ProviderConfiguration.AddConfig(qldb.Configure)
 	ProviderConfiguration.AddConfig(fsx.Configure)
 	ProviderConfiguration.AddConfig(networkmanager.Configure)
-	ProviderConfiguration.AddConfig(opsworks.Configure)
 	ProviderConfiguration.AddConfig(sagemaker.Configure)
 	ProviderConfiguration.AddConfig(redshiftserverless.Configure)
 	ProviderConfiguration.AddConfig(kendra.Configure)
