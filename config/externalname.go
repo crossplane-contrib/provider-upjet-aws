@@ -2477,54 +2477,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// WorkSpaces IP groups can be imported using their GroupID
 	"aws_workspaces_ip_group": config.IdentifierFromProvider,
 
-	// opsworks
-	//
-	// OpsWorks stacks can be imported using the id
-	"aws_opsworks_stack": config.IdentifierFromProvider,
-	// OpsWorks static web server Layers can be imported using the id
-	"aws_opsworks_static_web_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_user_profile": config.IdentifierFromProvider,
-	// OpsWorks Custom Layers can be imported using the id
-	"aws_opsworks_custom_layer": config.IdentifierFromProvider,
-	// Opsworks Application can be imported using the id
-	"aws_opsworks_application": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_ecs_cluster_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_ganglia_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_haproxy_layer": config.IdentifierFromProvider,
-	// Opsworks Instances can be imported using the instance id
-	"aws_opsworks_instance": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_java_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_memcached_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_mysql_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_nodejs_app_layer": config.IdentifierFromProvider,
-	// OpsWorks PHP Application Layers can be imported using the id
-	"aws_opsworks_php_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_rails_app_layer": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_rds_db_instance": config.IdentifierFromProvider,
-	// No import
-	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
-	"aws_opsworks_permission": config.IdentifierFromProvider,
-
 	// ssoadmin
 	//
 	// SSO Account Assignments can be imported using the principal_id, principal_type, target_id, target_type, permission_set_arn, instance_arn separated by commas (,)

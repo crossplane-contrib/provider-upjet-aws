@@ -24,7 +24,7 @@ import (
 // does not have a region notion.
 func RegionAddition() config.ResourceOption { //nolint:gocyclo
 	return func(r *config.Resource) {
-		if r.ShortGroup == "iam" || r.ShortGroup == "opsworks" {
+		if r.ShortGroup == "iam" {
 			return
 		}
 		c := "Region is the region you'd like your resource to be created in.\n"
