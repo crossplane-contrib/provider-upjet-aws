@@ -15,7 +15,7 @@ spec:
           {
             "Effect": "Allow",
             "Principal": {
-              "AWS": "arn:aws:iam::123456789012:root"
+              "AWS": "arn:aws:iam::${data.aws_account_id}:root"
             },
             "Action": [
               "dynamodb:BatchGetItem",
@@ -29,7 +29,7 @@ spec:
               "dynamodb:DeleteItem"
             ],
             "Resource": [
-              "arn:aws:dynamodb:us-east-2:123456789012:table/example"
+              "arn:aws:dynamodb:us-east-2:${data.aws_account_id}:table/example"
             ]
           }
         ]
