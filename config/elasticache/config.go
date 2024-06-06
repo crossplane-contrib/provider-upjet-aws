@@ -7,14 +7,14 @@ package elasticache
 import (
 	"fmt"
 
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+	"github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/types/comments"
-
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/upbound/provider-aws/apis/elasticache/v1beta1"
 	"github.com/upbound/provider-aws/apis/elasticache/v1beta2"
@@ -77,9 +77,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 
 		// Auth token generation
-		desc, _ := comments.New("If true, the auth token will be auto-generated and"+
+		desc, err := comments.New("If true, the auth token will be auto-generated and"+
 			" stored in the Secret referenced by the authTokenSecretRef field.",
 			comments.WithTFTag("-"))
+		if err != nil {
+			panic(errors.Wrap(err, "cannot configure the generated comment for the auto_generate_auth_token argument of the aws_elasticache_replication_group resource"))
+		}
+
 		r.TerraformResource.Schema["auto_generate_auth_token"] = &schema.Schema{
 			Type:        schema.TypeBool,
 			Optional:    true,

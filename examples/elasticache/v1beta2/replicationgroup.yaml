@@ -5,21 +5,25 @@
 apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: SubnetGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
   labels:
-    testing.upbound.io/example-name: bar
+    testing.upbound.io/example-name: replicationgroup
   name: subnet-group
 spec:
   forProvider:
     region: us-east-1
-    subnetIdRefs:
-      - name: foo-1a
-      - name: foo-1b
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replicationgroup
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
   labels:
-    testing.upbound.io/example-name: foo
+    testing.upbound.io/example-name: replicationgroup
   name: foo-1a
 spec:
   forProvider:
@@ -28,13 +32,15 @@ spec:
     region: us-east-1
     vpcIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: replicationgroup
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
   labels:
-    testing.upbound.io/example-name: foo
+    testing.upbound.io/example-name: replicationgroup
   name: foo-1b
 spec:
   forProvider:
@@ -43,13 +49,15 @@ spec:
     region: us-east-1
     vpcIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: replicationgroup
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
   labels:
-    testing.upbound.io/example-name: foo
+    testing.upbound.io/example-name: replicationgroup
   name: foo
 spec:
   forProvider:
@@ -60,7 +68,7 @@ apiVersion: elasticache.aws.upbound.io/v1beta2
 kind: ReplicationGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: elasticache/v1beta1/replicationgroup
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
     uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
@@ -72,7 +80,7 @@ spec:
     autoGenerateAuthToken: true
     authTokenSecretRef:
       name: redis-auth-token
-      namespace: crossplane-system
+      namespace: upbound-system
       key: auth-token
     description: example description
     maintenanceWindow: sun:05:00-sun:09:00
@@ -81,12 +89,13 @@ spec:
     transitEncryptionEnabled: true
     parameterGroupName: default.redis7
     port: 6379
-    subnetGroupNameRef:
-      name: subnet-group
+    subnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replicationgroup
     preferredCacheClusterAzs:
       - us-east-1a
       - us-east-1b
     region: us-east-1
   writeConnectionSecretToRef:
     name: redis-conn
-    namespace: crossplane-system
+    namespace: upbound-system
