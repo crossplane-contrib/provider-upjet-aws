@@ -928,7 +928,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// DynamoDB Global Tables can be imported using the global table name
 	"aws_dynamodb_global_table": config.NameAsIdentifier,
 	// aws_dynamodb_tag can be imported by using the DynamoDB resource identifier and key, separated by a comma (,)
-	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),	
+	"aws_dynamodb_tag": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }},{{ .parameters.key }}"),
 
 	// sns
 	//
