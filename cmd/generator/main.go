@@ -49,7 +49,9 @@ func dumpGeneratedResourceList(p *ujconfig.Provider, targetPath *string) {
 		generatedResources = append(generatedResources, name)
 	}
 	sort.Strings(generatedResources)
-	buff, err := json.Marshal(generatedResources)
+	// Indentation is not necessary, as it's a flat JSON array, but newlines prevent git conflicts from concurrent PRs
+	// adding new resources that are not alphabetically adjacent.
+	buff, err := json.MarshalIndent(generatedResources, "", "")
 	if err != nil {
 		panic(fmt.Sprintf("Cannot marshal native schema versions to JSON: %s", err.Error()))
 	}
