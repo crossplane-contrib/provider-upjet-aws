@@ -676,6 +676,7 @@
 "aws_rds_global_cluster",
 "aws_redshift_authentication_profile",
 "aws_redshift_cluster",
+"aws_redshift_endpoint_access",
 "aws_redshift_event_subscription",
 "aws_redshift_hsm_client_certificate",
 "aws_redshift_hsm_configuration",

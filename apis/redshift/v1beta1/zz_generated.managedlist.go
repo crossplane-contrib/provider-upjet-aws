@@ -25,6 +25,15 @@ func (l *ClusterList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this EndpointAccessList.
+func (l *EndpointAccessList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this EventSubscriptionList.
 func (l *EventSubscriptionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

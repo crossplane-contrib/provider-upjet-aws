@@ -1235,6 +1235,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_redshift_hsm_configuration": config.ParameterAsIdentifier("hsm_configuration_identifier"),
 	// Redshift usage limits can be imported using the id
 	"aws_redshift_usage_limit": config.IdentifierFromProvider,
+	// Redshift endpoint access can be imported using the endpoint_name
+	"aws_redshift_endpoint_access": config.ParameterAsIdentifier("endpoint_name"),
 
 	// redshiftserverless
 	//

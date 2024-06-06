@@ -725,6 +725,7 @@ import (
 	subnetgrouprds "github.com/upbound/provider-aws/internal/controller/rds/subnetgroup"
 	authenticationprofile "github.com/upbound/provider-aws/internal/controller/redshift/authenticationprofile"
 	clusterredshift "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
+	endpointaccess "github.com/upbound/provider-aws/internal/controller/redshift/endpointaccess"
 	eventsubscriptionredshift "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
 	hsmclientcertificate "github.com/upbound/provider-aws/internal/controller/redshift/hsmclientcertificate"
 	hsmconfiguration "github.com/upbound/provider-aws/internal/controller/redshift/hsmconfiguration"
@@ -735,7 +736,7 @@ import (
 	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
 	subnetgroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
 	usagelimit "github.com/upbound/provider-aws/internal/controller/redshift/usagelimit"
-	endpointaccess "github.com/upbound/provider-aws/internal/controller/redshiftserverless/endpointaccess"
+	endpointaccessredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/endpointaccess"
 	redshiftserverlessnamespace "github.com/upbound/provider-aws/internal/controller/redshiftserverless/redshiftserverlessnamespace"
 	resourcepolicyredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/resourcepolicy"
 	snapshotredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/snapshot"
@@ -1670,6 +1671,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		subnetgrouprds.Setup,
 		authenticationprofile.Setup,
 		clusterredshift.Setup,
+		endpointaccess.Setup,
 		eventsubscriptionredshift.Setup,
 		hsmclientcertificate.Setup,
 		hsmconfiguration.Setup,
@@ -1680,7 +1682,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		snapshotscheduleassociation.Setup,
 		subnetgroupredshift.Setup,
 		usagelimit.Setup,
-		endpointaccess.Setup,
+		endpointaccessredshiftserverless.Setup,
 		redshiftserverlessnamespace.Setup,
 		resourcepolicyredshiftserverless.Setup,
 		snapshotredshiftserverless.Setup,
