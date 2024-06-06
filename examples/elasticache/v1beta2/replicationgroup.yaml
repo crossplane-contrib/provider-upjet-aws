@@ -2,11 +2,73 @@
 #
 # SPDX-License-Identifier: CC0-1.0
 
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: SubnetGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
+  labels:
+    testing.upbound.io/example-name: replicationgroup
+  name: subnet-group
+spec:
+  forProvider:
+    region: us-east-1
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replicationgroup
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
+  labels:
+    testing.upbound.io/example-name: replicationgroup
+  name: foo-1a
+spec:
+  forProvider:
+    availabilityZone: us-east-1a
+    cidrBlock: 10.0.1.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replicationgroup
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
+  labels:
+    testing.upbound.io/example-name: replicationgroup
+  name: foo-1b
+spec:
+  forProvider:
+    availabilityZone: us-east-1b
+    cidrBlock: 10.0.2.0/24
+    region: us-east-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replicationgroup
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
+  labels:
+    testing.upbound.io/example-name: replicationgroup
+  name: foo
+spec:
+  forProvider:
+    cidrBlock: 10.0.0.0/16
+    region: us-east-1
+---
 apiVersion: elasticache.aws.upbound.io/v1beta2
 kind: ReplicationGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: elasticache/v1beta1/replicationgroup
+    meta.upbound.io/example-id: elasticache/v1beta2/replicationgroup
     uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
@@ -14,13 +76,26 @@ metadata:
 spec:
   forProvider:
     automaticFailoverEnabled: true
+    atRestEncryptionEnabled: true
+    autoGenerateAuthToken: true
+    authTokenSecretRef:
+      name: redis-auth-token
+      namespace: upbound-system
+      key: auth-token
     description: example description
     maintenanceWindow: sun:05:00-sun:09:00
-    nodeType: cache.m4.large
+    nodeType: cache.t4g.small
     numCacheClusters: 2
+    transitEncryptionEnabled: true
     parameterGroupName: default.redis7
     port: 6379
+    subnetGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: replicationgroup
     preferredCacheClusterAzs:
-      - us-west-1a
-      - us-west-1b
-    region: us-west-1
+      - us-east-1a
+      - us-east-1b
+    region: us-east-1
+  writeConnectionSecretToRef:
+    name: redis-conn
+    namespace: upbound-system

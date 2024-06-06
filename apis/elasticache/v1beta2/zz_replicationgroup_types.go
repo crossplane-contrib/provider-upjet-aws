@@ -71,6 +71,7 @@ type ReplicationGroupInitParameters struct {
 	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
+	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
 	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
 	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
@@ -396,12 +397,19 @@ type ReplicationGroupParameters struct {
 	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
+	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
 
 	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
 	// +kubebuilder:validation:Optional
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
+
+	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
+	// If true, the auth token will be auto-generated and stored in the Secret referenced by the authTokenSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGenerateAuthToken *bool `json:"autoGenerateAuthToken,omitempty" tf:"-"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine type "redis" and if the engine version is 6 or higher.
