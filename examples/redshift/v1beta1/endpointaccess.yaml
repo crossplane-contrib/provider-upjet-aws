@@ -4,14 +4,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: redshift/v1beta1/endpointaccess
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: example-endpointaccess
   name: example-endpointaccess
 spec:
   forProvider:
     clusterIdentifierSelector:
       matchLabels:
         testing.upbound.io/example-name: example-endpointaccess
-    region: us-west-1
+    region: us-east-2
     subnetGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-endpointaccess
@@ -34,7 +34,7 @@ spec:
       namespace: upbound-system
     masterUsername: exampleuser
     nodeType: ra3.xlplus
-    region: us-west-1
+    region: us-east-2
     skipFinalSnapshot: true
 ---
 apiVersion: redshift.aws.upbound.io/v1beta1
@@ -47,7 +47,7 @@ metadata:
   name: example-endpointaccess-sg
 spec:
   forProvider:
-    region: us-west-1
+    region: us-east-2
     subnetIdRefs:
     - name: foo
     - name: bar
@@ -64,9 +64,9 @@ metadata:
   name: bar
 spec:
   forProvider:
-    availabilityZone: us-west-1b
+    availabilityZone: us-east-2b
     cidrBlock: 10.1.2.0/24
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: tf-dbsubnet-test-2
     vpcIdSelector:
@@ -83,9 +83,9 @@ metadata:
   name: foo
 spec:
   forProvider:
-    availabilityZone: us-west-1a
+    availabilityZone: us-east-2c
     cidrBlock: 10.1.1.0/24
-    region: us-west-1
+    region: us-east-2
     tags:
       Name: tf-dbsubnet-test-1
     vpcIdSelector:
@@ -103,7 +103,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
-    region: us-west-1
+    region: us-east-2
 ---
 apiVersion: v1
 kind: Secret
