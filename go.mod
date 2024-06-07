@@ -23,10 +23,12 @@ require (
 	github.com/crossplane/upjet v1.4.1
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
+	github.com/hashicorp/awspolicyequivalence v1.6.0
 	github.com/hashicorp/terraform-json v0.21.0
 	github.com/hashicorp/terraform-plugin-framework v1.8.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.33.0
 	github.com/hashicorp/terraform-provider-aws v0.0.0-00010101000000-000000000000
+	github.com/json-iterator/go v1.1.12
 	github.com/pkg/errors v0.9.1
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v3 v3.0.1
@@ -259,7 +261,6 @@ require (
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.22.0 // indirect
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.53 // indirect
 	github.com/hashicorp/aws-sdk-go-base/v2/awsv1shim/v2 v2.0.0-beta.54 // indirect
-	github.com/hashicorp/awspolicyequivalence v1.6.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
@@ -289,7 +290,6 @@ require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
-	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattbaird/jsonpatch v0.0.0-20230413205102-771768614e91 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
