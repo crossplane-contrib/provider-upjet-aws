@@ -71,7 +71,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// dynamodb
 	//
 	// DynamoDB table resource policy can be important using the DynamoDB resource identifier
-	"aws_dynamodb_resource_policy": config.IdentifierFromProvider,
+	"aws_dynamodb_resource_policy": config.TemplatedStringAsIdentifier("name", "arn:aws:dynamodb:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:table/{{ .external_name }}"),
 
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
