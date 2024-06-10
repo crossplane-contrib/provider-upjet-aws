@@ -7,13 +7,12 @@ kind: AccountAssignment
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
-    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed)."
   labels:
     testing.upbound.io/example-name: ssoadmin-accountassignment
   name: ssoadmin-accountassignment
 spec:
   forProvider:
-    instanceArn: ARN of a manually created SSO instance in the same region specified below
+    instanceArn: "${data.sso_instance_arn}"
     permissionSetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: ssoadmin-accountassignment
@@ -22,7 +21,7 @@ spec:
         testing.upbound.io/example-name: ssoadmin-accountassignment
     principalType: GROUP
     region: us-east-1
-    targetId: "012347678910"
+    targetId: "${data.aws_account_id}"
     targetType: AWS_ACCOUNT
 
 ---
@@ -31,14 +30,13 @@ kind: PermissionSet
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
-    upjet.upbound.io/manual-intervention: "This resource requires a valid instanceArn(The Amazon Resource Name (ARN) of the SSO Instance under which the operation will be executed)."
   labels:
     testing.upbound.io/example-name: ssoadmin-accountassignment
   name: ssoadmin-accountassignment
 spec:
   forProvider:
     description: An example
-    instanceArn: ARN of a manually created SSO instance in the same region specified below
+    instanceArn: "${data.sso_instance_arn}"
     name: example-acct-assignment
     region: us-east-1
     sessionDuration: PT2H
@@ -49,12 +47,11 @@ kind: Group
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta1/accountassignment
-    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
   labels:
     testing.upbound.io/example-name: ssoadmin-accountassignment
   name: ssoadmin-accountassignment
 spec:
   forProvider:
-    identityStoreId: identity store id from a manually created SSO instance in the same region specified below
+    identityStoreId: "${data.identity_store_id}"
     region: us-east-1
     displayName: example-acct-assignment

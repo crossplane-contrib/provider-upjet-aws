@@ -7,16 +7,12 @@ kind: PermissionsBoundaryAttachment
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta2/permissionsboundaryattachment
-    upjet.upbound.io/manual-intervention: This resource requires a valid instanceArn(The
-      Amazon Resource Name (ARN) of the SSO Instance under which the operation will
-      be executed).
   labels:
     testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
   name: ssoadmin-permissions-boundary-attachment
 spec:
   forProvider:
-    instanceArn: ARN of a manually created SSO instance in the same region specified
-      below
+    instanceArn: "${data.sso_instance_arn}"
     permissionSetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
@@ -60,15 +56,11 @@ kind: PermissionSet
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta2/permissionsboundaryattachment
-    upjet.upbound.io/manual-intervention: This resource requires a valid instanceArn(The
-      Amazon Resource Name (ARN) of the SSO Instance under which the operation will
-      be executed).
   labels:
     testing.upbound.io/example-name: ssoadmin-permissions-boundary-attachment
   name: ssoadmin-permissions-boundary-attachment
 spec:
   forProvider:
-    instanceArn: ARN of a manually created SSO instance in the same region specified
-      below
+    instanceArn: "${data.sso_instance_arn}"
     name: example-pba
     region: us-east-1

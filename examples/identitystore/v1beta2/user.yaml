@@ -7,7 +7,6 @@ kind: User
 metadata:
   annotations:
     meta.upbound.io/example-id: identitystore/v1beta2/user
-    upjet.upbound.io/manual-intervention: This resource requires a valid identityStoreId
   labels:
     testing.upbound.io/example-name: example-user
   name: example-user
@@ -16,8 +15,7 @@ spec:
     displayName: John Doe
     emails:
       value: john@example.com
-    identityStoreId: Identity store id from a manually created SSO instance in the
-      same region specified below
+    identityStoreId: "${data.identity_store_id}"
     name:
       familyName: Doe
       givenName: John

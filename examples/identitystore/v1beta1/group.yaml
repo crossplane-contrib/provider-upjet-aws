@@ -7,7 +7,6 @@ kind: Group
 metadata:
   annotations:
     meta.upbound.io/example-id: identitystore/v1beta1/group
-    upjet.upbound.io/manual-intervention: "This resource requires a valid identityStoreId"
   labels:
     testing.upbound.io/example-name: example-group
   name: example-group
@@ -15,5 +14,5 @@ spec:
   forProvider:
     description: Example description
     displayName: Example group
-    identityStoreId: Identity store id from a manually created SSO instance in the same region specified below
+    identityStoreId: "${data.identity_store_id}"
     region: us-east-1
