@@ -2586,8 +2586,10 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Transfer Workflows can be imported using the worflow_idgit
 	"aws_transfer_workflow": config.IdentifierFromProvider,
 
-	// vpc_network
+	// vpc
 	//
+	// Note: This resource uses the ec2 go sdk group, but we released it in a package named vpc because we missed it
+	// from a list of naming convention exceptions.
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_vpc_network_performance_metric_subscription": config.IdentifierFromProvider,
