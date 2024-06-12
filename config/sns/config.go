@@ -8,7 +8,6 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	awspolicy "github.com/hashicorp/awspolicyequivalence"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 
 	"github.com/upbound/provider-aws/config/common"
@@ -35,11 +34,11 @@ func Configure(p *config.Provider) {
 				return diff, nil
 			}
 
-			vOld, err := removePolicyVersion(diff.Attributes["policy"].Old)
+			vOld, err := common.RemovePolicyVersion(diff.Attributes["policy"].Old)
 			if err != nil {
 				return nil, errors.Wrap(err, "failed to remove Version from the old AWS policy document")
 			}
-			vNew, err := removePolicyVersion(diff.Attributes["policy"].New)
+			vNew, err := common.RemovePolicyVersion(diff.Attributes["policy"].New)
 			if err != nil {
 				return nil, errors.Wrap(err, "failed to remove Version from the new AWS policy document")
 			}
@@ -54,18 +53,4 @@ func Configure(p *config.Provider) {
 			return diff, nil
 		}
 	})
-}
-
-func removePolicyVersion(p string) (string, error) {
-	var policy any
-	if err := jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal([]byte(p), &policy); err != nil {
-		return "", errors.Wrap(err, "failed to unmarshal the policy from JSON")
-	}
-	m, ok := policy.(map[string]any)
-	if !ok {
-		return p, nil
-	}
-	delete(m, "Version")
-	r, err := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(m)
-	return string(r), errors.Wrap(err, "failed to marshal the policy map as JSON")
 }
