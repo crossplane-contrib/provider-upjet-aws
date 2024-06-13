@@ -308,6 +308,7 @@
 "aws_ec2_capacity_reservation",
 "aws_ec2_carrier_gateway",
 "aws_ec2_host",
+"aws_ec2_instance_connect_endpoint",
 "aws_ec2_instance_state",
 "aws_ec2_managed_prefix_list",
 "aws_ec2_managed_prefix_list_entry",
