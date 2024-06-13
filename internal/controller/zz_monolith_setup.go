@@ -312,6 +312,7 @@ import (
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
 	hostec2 "github.com/upbound/provider-aws/internal/controller/ec2/host"
 	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
+	instanceconnectendpoint "github.com/upbound/provider-aws/internal/controller/ec2/instanceconnectendpoint"
 	instancestate "github.com/upbound/provider-aws/internal/controller/ec2/instancestate"
 	internetgateway "github.com/upbound/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/provider-aws/internal/controller/ec2/keypair"
@@ -1258,6 +1259,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		flowlog.Setup,
 		hostec2.Setup,
 		instanceec2.Setup,
+		instanceconnectendpoint.Setup,
 		instancestate.Setup,
 		internetgateway.Setup,
 		keypair.Setup,

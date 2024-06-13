@@ -396,6 +396,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_default_security_group": config.IdentifierFromProvider,
 	// aws_ec2_transit_gateway_connect_peer can be imported by using the EC2 Transit Gateway Connect Peer identifier
 	"aws_ec2_transit_gateway_connect_peer": config.IdentifierFromProvider,
+	// aws_ec2_instance_connect_endpoint can be imported by using the id attribute
+	"aws_ec2_instance_connect_endpoint": config.IdentifierFromProvider,
 	// aws_ec2_instance_state can be imported by using the instance_id attribute
 	"aws_ec2_instance_state": config.IdentifierFromProvider,
 	// Network Insights Analyses can be imported using the id

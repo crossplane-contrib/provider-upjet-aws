@@ -34,6 +34,7 @@ import (
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
 	host "github.com/upbound/provider-aws/internal/controller/ec2/host"
 	instance "github.com/upbound/provider-aws/internal/controller/ec2/instance"
+	instanceconnectendpoint "github.com/upbound/provider-aws/internal/controller/ec2/instanceconnectendpoint"
 	instancestate "github.com/upbound/provider-aws/internal/controller/ec2/instancestate"
 	internetgateway "github.com/upbound/provider-aws/internal/controller/ec2/internetgateway"
 	keypair "github.com/upbound/provider-aws/internal/controller/ec2/keypair"
@@ -140,6 +141,7 @@ func Setup_ec2(mgr ctrl.Manager, o controller.Options) error {
 		flowlog.Setup,
 		host.Setup,
 		instance.Setup,
+		instanceconnectendpoint.Setup,
 		instancestate.Setup,
 		internetgateway.Setup,
 		keypair.Setup,

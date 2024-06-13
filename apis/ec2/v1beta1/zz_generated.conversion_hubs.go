@@ -82,6 +82,9 @@ func (tr *Host) Hub() {}
 func (tr *Instance) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *InstanceConnectEndpoint) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *InstanceState) Hub() {}
 
 // Hub marks this type as a conversion hub.
