@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: gamelift.aws.upbound.io/v1beta2
+kind: Build
+metadata:
+  annotations:
+    meta.upbound.io/example-id: gamelift/v1beta2/build
+  name: example
+spec:
+  forProvider:
+    name: example-build
+    operatingSystem: WINDOWS_2012
+    region: us-west-1
+    storageLocation:
+      bucketRef:
+        name: example
+      key: new_object_key
+      roleArnRef:
+        name: example

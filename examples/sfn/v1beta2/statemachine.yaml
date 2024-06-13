@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sfn.aws.upbound.io/v1beta2
+kind: StateMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sfn/v1beta2/statemachine
+  name: my-state-machine
+spec:
+  forProvider:
+    definition: |
+      {
+        "Comment": "A Hello World example of the Amazon States Language using an AWS Lambda Function",
+        "StartAt": "HelloWorld",
+        "States": {
+          "HelloWorld": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-west-1:609897127049:function:example",
+            "End": true
+          }
+        }
+      }
+    region: us-west-1
+    roleArnRef:
+      name: example
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sfn/v1beta2/statemachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "states.amazonaws.com"
+            },
+            "Effect": "Allow",
+            "Sid": ""
+          }
+        ]
+      }

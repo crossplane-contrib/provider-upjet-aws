@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudfront.aws.upbound.io/v1beta2
+kind: CachePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/cachepolicy
+  labels:
+    testing.upbound.io/example-name: cachepolicy
+  name: example-policy
+spec:
+  forProvider:
+    comment: test comment
+    defaultTtl: 50
+    maxTtl: 100
+    minTtl: 1
+    name: example-policy
+    parametersInCacheKeyAndForwardedToOrigin:
+      cookiesConfig:
+        cookieBehavior: whitelist
+        cookies:
+          items:
+          - example
+      headersConfig:
+        headerBehavior: whitelist
+        headers:
+          items:
+          - example
+      queryStringsConfig:
+        queryStringBehavior: whitelist
+        queryStrings:
+          items:
+          - example
+    region: us-west-1

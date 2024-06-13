@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: wafregional.aws.upbound.io/v1beta2
+kind: ByteMatchSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: wafregional/v1beta2/bytematchset
+  labels:
+    testing.upbound.io/example-name: byte_set
+  name: byte-set
+spec:
+  forProvider:
+    byteMatchTuples:
+    - fieldToMatch:
+        data: referer
+        type: HEADER
+      positionalConstraint: CONTAINS
+      targetString: badrefer1
+      textTransformation: NONE
+    name: tf_waf_byte_match_set
+    region: us-west-1

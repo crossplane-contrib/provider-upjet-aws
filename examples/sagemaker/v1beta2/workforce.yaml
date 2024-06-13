@@ -1,0 +1,74 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sagemaker.aws.upbound.io/v1beta2
+kind: Workforce
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta2/workforce
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cognitoConfig:
+      clientIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      userPoolSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    region: us-west-2
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta2
+kind: UserPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta2/workforce
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    region: us-west-2
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolClient
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta2/workforce
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    generateSecret: true
+    name: example
+    region: us-west-2
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cognitoidp.aws.upbound.io/v1beta1
+kind: UserPoolDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta2/workforce
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: testdom
+    region: us-west-2
+    userPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
