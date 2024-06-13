@@ -75,7 +75,7 @@ func (mg *CertificateValidation) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta2", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -94,7 +94,7 @@ func (mg *CertificateValidation) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.CertificateArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CertificateArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("acm.aws.upbound.io", "v1beta2", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

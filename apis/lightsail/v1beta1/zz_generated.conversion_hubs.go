@@ -13,9 +13,6 @@ func (tr *Bucket) Hub() {}
 func (tr *Certificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ContainerService) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Disk) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -26,9 +23,6 @@ func (tr *Domain) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *DomainEntry) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Instance) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *InstancePublicPorts) Hub() {}

@@ -7,7 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Broker) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Configuration) Hub() {}

@@ -26,7 +26,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("mq.aws.upbound.io", "v1beta1", "Broker", "BrokerList")
+		m, l, err = apisresolver.GetManagedResource("mq.aws.upbound.io", "v1beta2", "Broker", "BrokerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.BrokerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BrokerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("mq.aws.upbound.io", "v1beta1", "Broker", "BrokerList")
+		m, l, err = apisresolver.GetManagedResource("mq.aws.upbound.io", "v1beta2", "Broker", "BrokerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

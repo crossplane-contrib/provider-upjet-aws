@@ -31,7 +31,7 @@ type ProductPortfolioAssociationInitParameters struct {
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta2.Product
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 
 	// Reference to a Product in servicecatalog to populate productId.
@@ -84,7 +84,7 @@ type ProductPortfolioAssociationParameters struct {
 	PortfolioIDSelector *v1.Selector `json:"portfolioIdSelector,omitempty" tf:"-"`
 
 	// Product identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta2.Product
 	// +kubebuilder:validation:Optional
 	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
 

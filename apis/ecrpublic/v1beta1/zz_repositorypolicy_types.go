@@ -19,7 +19,7 @@ type RepositoryPolicyInitParameters struct {
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// Name of the repository to apply the policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecrpublic/v1beta1.Repository
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecrpublic/v1beta2.Repository
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
 	// Reference to a Repository in ecrpublic to populate repositoryName.
@@ -56,7 +56,7 @@ type RepositoryPolicyParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Name of the repository to apply the policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecrpublic/v1beta1.Repository
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ecrpublic/v1beta2.Repository
 	// +kubebuilder:validation:Optional
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 

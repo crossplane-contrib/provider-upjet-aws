@@ -7,34 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Bucket) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BucketAccelerateConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BucketACL) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketAnalyticsConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BucketCorsConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketIntelligentTieringConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketInventory) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketLifecycleConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketLogging) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketMetric) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BucketNotification) Hub() {}
@@ -43,34 +19,13 @@ func (tr *BucketNotification) Hub() {}
 func (tr *BucketObject) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BucketObjectLockConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketOwnershipControls) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BucketPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BucketPublicAccessBlock) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BucketReplicationConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BucketRequestPaymentConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketServerSideEncryptionConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketVersioning) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BucketWebsiteConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Object) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ObjectCopy) Hub() {}

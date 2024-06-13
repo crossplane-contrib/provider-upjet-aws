@@ -19,7 +19,7 @@ type ContributorInsightsInitParameters struct {
 	IndexName *string `json:"indexName,omitempty" tf:"index_name,omitempty"`
 
 	// The name of the table to enable contributor insights
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
 	// Reference to a Table in dynamodb to populate tableName.
@@ -53,7 +53,7 @@ type ContributorInsightsParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The name of the table to enable contributor insights
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta1.Table
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 

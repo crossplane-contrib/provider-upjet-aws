@@ -25,7 +25,7 @@ type ResourceServerInitParameters struct {
 	Scope []ScopeInitParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// User pool the client belongs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -76,7 +76,7 @@ type ResourceServerParameters struct {
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// User pool the client belongs to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 

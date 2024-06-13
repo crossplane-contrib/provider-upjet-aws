@@ -11,15 +11,3 @@ func (tr *APICache) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *APIKey) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Datasource) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Function) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *GraphQLAPI) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Resolver) Hub() {}

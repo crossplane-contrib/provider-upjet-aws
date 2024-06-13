@@ -16,7 +16,7 @@ import (
 type ConnectionInitParameters struct {
 
 	// The ID of the second device in the connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ConnectedDeviceID *string `json:"connectedDeviceId,omitempty" tf:"connected_device_id,omitempty"`
 
@@ -35,7 +35,7 @@ type ConnectionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the first device in the connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
@@ -105,7 +105,7 @@ type ConnectionObservation struct {
 type ConnectionParameters struct {
 
 	// The ID of the second device in the connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ConnectedDeviceID *string `json:"connectedDeviceId,omitempty" tf:"connected_device_id,omitempty"`
@@ -127,7 +127,7 @@ type ConnectionParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the first device in the connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta1.Device
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/networkmanager/v1beta2.Device
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`

@@ -7,40 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *App) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *AppImageConfig) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *CodeRepository) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Device) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DeviceFleet) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Domain) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Endpoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *EndpointConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FeatureGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Image) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ImageVersion) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Model) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ModelPackageGroup) Hub() {}
@@ -49,25 +19,10 @@ func (tr *ModelPackageGroup) Hub() {}
 func (tr *ModelPackageGroupPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *NotebookInstance) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *NotebookInstanceLifecycleConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ServicecatalogPortfolioStatus) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Space) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *StudioLifecycleConfig) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *UserProfile) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Workforce) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Workteam) Hub() {}

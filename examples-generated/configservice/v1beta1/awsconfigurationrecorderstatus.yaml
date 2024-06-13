@@ -13,7 +13,7 @@ spec:
 
 ---
 
-apiVersion: configservice.aws.upbound.io/v1beta1
+apiVersion: configservice.aws.upbound.io/v1beta2
 kind: ConfigurationRecorder
 metadata:
   annotations:
@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: configservice.aws.upbound.io/v1beta1
+apiVersion: configservice.aws.upbound.io/v1beta2
 kind: DeliveryChannel
 metadata:
   annotations:
@@ -97,7 +97,7 @@ spec:
 
 ---
 
-apiVersion: s3.aws.upbound.io/v1beta1
+apiVersion: s3.aws.upbound.io/v1beta2
 kind: Bucket
 metadata:
   annotations:

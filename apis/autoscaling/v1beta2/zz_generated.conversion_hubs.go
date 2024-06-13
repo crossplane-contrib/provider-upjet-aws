@@ -10,4 +10,10 @@ package v1beta2
 func (tr *Attachment) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AutoscalingGroup) Hub() {}
+func (tr *GroupTag) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *LaunchConfiguration) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Policy) Hub() {}

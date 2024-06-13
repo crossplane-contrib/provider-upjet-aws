@@ -7,7 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Vault) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *VaultLock) Hub() {}

@@ -27,7 +27,7 @@ func (mg *LicenseAssociation) ResolveReferences( // ResolveReferences of this Li
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -46,7 +46,7 @@ func (mg *LicenseAssociation) ResolveReferences( // ResolveReferences of this Li
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -77,7 +77,7 @@ func (mg *RoleAssociation) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -96,7 +96,7 @@ func (mg *RoleAssociation) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -177,7 +177,7 @@ func (mg *WorkspaceAPIKey) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -196,7 +196,7 @@ func (mg *WorkspaceAPIKey) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -227,7 +227,7 @@ func (mg *WorkspaceSAMLConfiguration) ResolveReferences(ctx context.Context, c c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -246,7 +246,7 @@ func (mg *WorkspaceSAMLConfiguration) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("grafana.aws.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

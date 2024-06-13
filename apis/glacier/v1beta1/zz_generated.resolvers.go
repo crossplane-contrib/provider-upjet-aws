@@ -82,7 +82,7 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("glacier.aws.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("glacier.aws.upbound.io", "v1beta2", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -101,7 +101,7 @@ func (mg *VaultLock) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.VaultName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VaultNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("glacier.aws.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("glacier.aws.upbound.io", "v1beta2", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

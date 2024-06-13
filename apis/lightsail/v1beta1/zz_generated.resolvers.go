@@ -9,9 +9,10 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -44,7 +45,7 @@ func (mg *DiskAttachment) ResolveReferences( // ResolveReferences of this DiskAt
 	mg.Spec.ForProvider.DiskName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DiskNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -82,7 +83,7 @@ func (mg *DiskAttachment) ResolveReferences( // ResolveReferences of this DiskAt
 	mg.Spec.InitProvider.DiskName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DiskNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -144,7 +145,7 @@ func (mg *InstancePublicPorts) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -163,7 +164,7 @@ func (mg *InstancePublicPorts) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.InstanceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -194,7 +195,7 @@ func (mg *LBAttachment) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -232,7 +233,7 @@ func (mg *LBAttachment) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.LBName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LBNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -313,7 +314,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -351,7 +352,7 @@ func (mg *StaticIPAttachment) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.StaticIPName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StaticIPNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("lightsail.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

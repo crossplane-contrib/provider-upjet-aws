@@ -1,0 +1,39 @@
+apiVersion: s3control.aws.upbound.io/v1beta2
+kind: StorageLensConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3control/v1beta2/storagelensconfiguration
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    configId: example-1
+    region: us-west-1
+    storageLensConfiguration:
+    - accountLevel:
+      - activityMetrics:
+        - enabled: true
+        bucketLevel:
+        - activityMetrics:
+          - enabled: true
+      dataExport:
+      - cloudWatchMetrics:
+        - enabled: true
+        s3BucketDestination:
+        - accountId: ${data.aws_caller_identity.current.account_id}
+          arnSelector:
+            matchLabels:
+              testing.upbound.io/example-name: target
+          encryption:
+          - sseS3:
+            - {}
+          format: CSV
+          outputSchemaVersion: V_1
+      enabled: true
+      exclude:
+      - buckets:
+        - ${aws_s3_bucket.b1.arn}
+        - ${aws_s3_bucket.b2.arn}
+        regions:
+        - us-east-2

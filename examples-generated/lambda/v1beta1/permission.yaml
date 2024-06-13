@@ -49,7 +49,7 @@ spec:
 
 ---
 
-apiVersion: lambda.aws.upbound.io/v1beta1
+apiVersion: lambda.aws.upbound.io/v1beta2
 kind: Alias
 metadata:
   annotations:
@@ -68,7 +68,7 @@ spec:
 
 ---
 
-apiVersion: lambda.aws.upbound.io/v1beta1
+apiVersion: lambda.aws.upbound.io/v1beta2
 kind: Function
 metadata:
   annotations:

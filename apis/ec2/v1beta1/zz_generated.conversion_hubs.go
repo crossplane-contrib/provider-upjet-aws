@@ -58,9 +58,6 @@ func (tr *EBSSnapshot) Hub() {}
 func (tr *EBSSnapshotCopy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *EBSSnapshotImport) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *EBSVolume) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -73,13 +70,7 @@ func (tr *EIP) Hub() {}
 func (tr *EIPAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *FlowLog) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Host) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Instance) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *InstanceState) Hub() {}
@@ -89,9 +80,6 @@ func (tr *InternetGateway) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *KeyPair) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LaunchTemplate) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MainRouteTableAssociation) Hub() {}
@@ -157,12 +145,6 @@ func (tr *SnapshotCreateVolumePermission) Hub() {}
 func (tr *SpotDatafeedSubscription) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SpotFleetRequest) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SpotInstanceRequest) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Subnet) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -173,9 +155,6 @@ func (tr *Tag) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TrafficMirrorFilter) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *TrafficMirrorFilterRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TransitGateway) Hub() {}
@@ -241,9 +220,6 @@ func (tr *VPCDHCPOptions) Hub() {}
 func (tr *VPCDHCPOptionsAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *VPCEndpoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *VPCEndpointConnectionNotification) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -268,9 +244,6 @@ func (tr *VPCIpam) Hub() {}
 func (tr *VPCIpamPool) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *VPCIpamPoolCidr) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *VPCIpamPoolCidrAllocation) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -278,18 +251,6 @@ func (tr *VPCIpamScope) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VPCIPv4CidrBlockAssociation) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VPCPeeringConnection) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VPCPeeringConnectionAccepter) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VPCPeeringConnectionOptions) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VPNConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VPNConnectionRoute) Hub() {}

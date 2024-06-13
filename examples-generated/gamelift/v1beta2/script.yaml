@@ -1,0 +1,22 @@
+apiVersion: gamelift.aws.upbound.io/v1beta2
+kind: Script
+metadata:
+  annotations:
+    meta.upbound.io/example-id: gamelift/v1beta2/script
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-script
+    region: us-west-1
+    storageLocation:
+    - bucketSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      keySelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example

@@ -116,7 +116,7 @@ type RouteInitParameters struct {
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC Endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPCEndpoint
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
 	// Reference to a VPCEndpoint in ec2 to populate vpcEndpointId.
@@ -128,7 +128,7 @@ type RouteInitParameters struct {
 	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC peering connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCPeeringConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPCPeeringConnection
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 
 	// Reference to a VPCPeeringConnection in ec2 to populate vpcPeeringConnectionId.
@@ -320,7 +320,7 @@ type RouteParameters struct {
 	TransitGatewayIDSelector *v1.Selector `json:"transitGatewayIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC Endpoint.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPCEndpoint
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
@@ -333,7 +333,7 @@ type RouteParameters struct {
 	VPCEndpointIDSelector *v1.Selector `json:"vpcEndpointIdSelector,omitempty" tf:"-"`
 
 	// Identifier of a VPC peering connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCPeeringConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPCPeeringConnection
 	// +kubebuilder:validation:Optional
 	VPCPeeringConnectionID *string `json:"vpcPeeringConnectionId,omitempty" tf:"vpc_peering_connection_id,omitempty"`
 

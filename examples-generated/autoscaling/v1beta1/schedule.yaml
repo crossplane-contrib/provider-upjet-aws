@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: autoscaling.aws.upbound.io/v1beta2
+apiVersion: autoscaling.aws.upbound.io/v1beta3
 kind: AutoscalingGroup
 metadata:
   annotations:

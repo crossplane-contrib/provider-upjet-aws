@@ -27,7 +27,7 @@ type GatewayResponseInitParameters struct {
 	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
 
 	// String identifier of the associated REST API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -86,7 +86,7 @@ type GatewayResponseParameters struct {
 	ResponseType *string `json:"responseType,omitempty" tf:"response_type,omitempty"`
 
 	// String identifier of the associated REST API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`

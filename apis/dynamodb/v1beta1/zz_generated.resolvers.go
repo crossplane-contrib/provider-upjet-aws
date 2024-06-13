@@ -27,7 +27,7 @@ func (mg *ContributorInsights) ResolveReferences( // ResolveReferences of this C
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -46,7 +46,7 @@ func (mg *ContributorInsights) ResolveReferences( // ResolveReferences of this C
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -77,7 +77,7 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta2", "Stream", "StreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -96,7 +96,7 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -115,7 +115,7 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta2", "Stream", "StreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -134,7 +134,7 @@ func (mg *KinesisStreamingDestination) ResolveReferences(ctx context.Context, c 
 	mg.Spec.InitProvider.StreamArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StreamArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -165,7 +165,7 @@ func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -184,7 +184,7 @@ func (mg *TableItem) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -215,7 +215,7 @@ func (mg *TableReplica) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -253,7 +253,7 @@ func (mg *TableReplica) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta1", "Table", "TableList")
+		m, l, err = apisresolver.GetManagedResource("dynamodb.aws.upbound.io", "v1beta2", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

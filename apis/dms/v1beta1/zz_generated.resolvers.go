@@ -400,7 +400,7 @@ func (mg *ReplicationTask) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.ReplicationInstanceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ReplicationInstanceArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dms.aws.upbound.io", "v1beta1", "Endpoint", "EndpointList")
+		m, l, err = apisresolver.GetManagedResource("dms.aws.upbound.io", "v1beta2", "Endpoint", "EndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -419,7 +419,7 @@ func (mg *ReplicationTask) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.SourceEndpointArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceEndpointArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dms.aws.upbound.io", "v1beta1", "Endpoint", "EndpointList")
+		m, l, err = apisresolver.GetManagedResource("dms.aws.upbound.io", "v1beta2", "Endpoint", "EndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -457,7 +457,7 @@ func (mg *ReplicationTask) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.InitProvider.ReplicationInstanceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ReplicationInstanceArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dms.aws.upbound.io", "v1beta1", "Endpoint", "EndpointList")
+		m, l, err = apisresolver.GetManagedResource("dms.aws.upbound.io", "v1beta2", "Endpoint", "EndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -476,7 +476,7 @@ func (mg *ReplicationTask) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.InitProvider.SourceEndpointArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SourceEndpointArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dms.aws.upbound.io", "v1beta1", "Endpoint", "EndpointList")
+		m, l, err = apisresolver.GetManagedResource("dms.aws.upbound.io", "v1beta2", "Endpoint", "EndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

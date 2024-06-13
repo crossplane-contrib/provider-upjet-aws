@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: identitystore.aws.upbound.io/v1beta1
+apiVersion: identitystore.aws.upbound.io/v1beta2
 kind: User
 metadata:
   annotations:

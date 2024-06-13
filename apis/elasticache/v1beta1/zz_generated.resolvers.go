@@ -369,7 +369,7 @@ func (mg *UserGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -388,7 +388,7 @@ func (mg *UserGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.UserIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.UserIDRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

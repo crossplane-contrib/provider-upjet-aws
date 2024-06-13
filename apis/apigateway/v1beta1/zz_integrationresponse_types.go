@@ -53,7 +53,7 @@ type IntegrationResponseInitParameters struct {
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// ID of the associated REST API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
@@ -163,7 +163,7 @@ type IntegrationResponseParameters struct {
 	ResponseTemplates map[string]*string `json:"responseTemplates,omitempty" tf:"response_templates,omitempty"`
 
 	// ID of the associated REST API.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta1.RestAPI
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/apigateway/v1beta2.RestAPI
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`

@@ -19,7 +19,4 @@ func (tr *NetworkProfile) Hub() {}
 func (tr *Project) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *TestGridProject) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Upload) Hub() {}

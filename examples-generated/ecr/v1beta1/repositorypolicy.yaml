@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: ecr.aws.upbound.io/v1beta1
+apiVersion: ecr.aws.upbound.io/v1beta2
 kind: Repository
 metadata:
   annotations:

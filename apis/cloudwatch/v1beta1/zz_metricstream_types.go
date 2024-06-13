@@ -112,7 +112,7 @@ type MetricStreamInitParameters struct {
 	ExcludeFilter []ExcludeFilterInitParameters `json:"excludeFilter,omitempty" tf:"exclude_filter,omitempty"`
 
 	// ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
 	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`
 
@@ -213,7 +213,7 @@ type MetricStreamParameters struct {
 	ExcludeFilter []ExcludeFilterParameters `json:"excludeFilter,omitempty" tf:"exclude_filter,omitempty"`
 
 	// ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta1.DeliveryStream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/firehose/v1beta2.DeliveryStream
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",false)
 	// +kubebuilder:validation:Optional
 	FirehoseArn *string `json:"firehoseArn,omitempty" tf:"firehose_arn,omitempty"`

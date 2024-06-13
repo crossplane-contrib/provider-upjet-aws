@@ -16,9 +16,6 @@ func (tr *ActionTarget) Hub() {}
 func (tr *FindingAggregator) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Insight) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *InviteAccepter) Hub() {}
 
 // Hub marks this type as a conversion hub.

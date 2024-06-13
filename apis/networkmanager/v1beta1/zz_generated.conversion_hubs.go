@@ -10,9 +10,6 @@ package v1beta1
 func (tr *AttachmentAccepter) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ConnectAttachment) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Connection) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -22,25 +19,13 @@ func (tr *CoreNetwork) Hub() {}
 func (tr *CustomerGatewayAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Device) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *GlobalNetwork) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Link) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LinkAssociation) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Site) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TransitGatewayConnectPeerAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TransitGatewayRegistration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VPCAttachment) Hub() {}

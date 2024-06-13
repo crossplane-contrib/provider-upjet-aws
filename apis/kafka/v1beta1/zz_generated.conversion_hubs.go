@@ -11,6 +11,3 @@ func (tr *Configuration) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ScramSecretAssociation) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ServerlessCluster) Hub() {}

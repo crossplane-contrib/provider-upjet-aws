@@ -29,7 +29,7 @@ type AssociationInitParameters struct {
 	LicenseConfigurationArnSelector *v1.Selector `json:"licenseConfigurationArnSelector,omitempty" tf:"-"`
 
 	// ARN of the resource associated with the license configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`
 
@@ -76,7 +76,7 @@ type AssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// ARN of the resource associated with the license configuration.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ResourceArn *string `json:"resourceArn,omitempty" tf:"resource_arn,omitempty"`

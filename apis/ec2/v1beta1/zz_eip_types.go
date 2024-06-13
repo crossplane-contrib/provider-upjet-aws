@@ -28,7 +28,7 @@ type EIPInitParameters struct {
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// EC2 instance ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 
 	// Reference to a Instance in ec2 to populate instance.
@@ -158,7 +158,7 @@ type EIPParameters struct {
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// EC2 instance ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +kubebuilder:validation:Optional
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
 

@@ -7,9 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Cluster) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ClusterActivityStream) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -50,9 +47,6 @@ func (tr *ParameterGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Proxy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ProxyDefaultTargetGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ProxyEndpoint) Hub() {}

@@ -14,6 +14,3 @@ func (tr *ReadinessCheck) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *RecoveryGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ResourceSet) Hub() {}

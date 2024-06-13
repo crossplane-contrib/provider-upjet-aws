@@ -38,7 +38,7 @@ type UserGroupInitParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The user pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -104,7 +104,7 @@ type UserGroupParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 
 	// The user pool ID.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 

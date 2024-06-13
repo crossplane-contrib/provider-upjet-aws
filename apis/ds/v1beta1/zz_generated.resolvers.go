@@ -26,7 +26,7 @@ func (mg *ConditionalForwarder) ResolveReferences( // ResolveReferences of this 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ds.aws.upbound.io", "v1beta1", "Directory", "DirectoryList")
+		m, l, err = apisresolver.GetManagedResource("ds.aws.upbound.io", "v1beta2", "Directory", "DirectoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

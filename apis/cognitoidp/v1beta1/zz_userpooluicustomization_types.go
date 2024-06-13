@@ -34,7 +34,7 @@ type UserPoolUICustomizationInitParameters struct {
 	ImageFile *string `json:"imageFile,omitempty" tf:"image_file,omitempty"`
 
 	// The user pool ID for the user pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
 	// Reference to a UserPool in cognitoidp to populate userPoolId.
@@ -104,7 +104,7 @@ type UserPoolUICustomizationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The user pool ID for the user pool.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta2.UserPool
 	// +kubebuilder:validation:Optional
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 

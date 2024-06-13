@@ -26,7 +26,7 @@ type ClusterInstanceInitParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The identifier of the aws_neptune_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta2.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in neptune to populate clusterIdentifier.
@@ -195,7 +195,7 @@ type ClusterInstanceParameters struct {
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
 	// The identifier of the aws_neptune_cluster in which to launch this instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 

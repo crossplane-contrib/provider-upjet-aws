@@ -7,9 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *App) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BackendEnvironment) Hub() {}
 
 // Hub marks this type as a conversion hub.

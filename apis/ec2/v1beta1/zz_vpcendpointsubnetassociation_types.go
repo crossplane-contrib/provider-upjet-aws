@@ -28,7 +28,7 @@ type VPCEndpointSubnetAssociationInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the subnet will be associated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
 
@@ -74,7 +74,7 @@ type VPCEndpointSubnetAssociationParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint with which the subnet will be associated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPCEndpoint
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPCEndpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`

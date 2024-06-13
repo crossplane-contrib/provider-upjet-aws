@@ -15,7 +15,7 @@ spec:
 
 ---
 
-apiVersion: fsx.aws.upbound.io/v1beta1
+apiVersion: fsx.aws.upbound.io/v1beta2
 kind: LustreFileSystem
 metadata:
   annotations:

@@ -14,6 +14,3 @@ func (tr *ControlPanel) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *RoutingControl) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SafetyRule) Hub() {}

@@ -120,7 +120,7 @@ func (mg *SSHKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -139,7 +139,7 @@ func (mg *SSHKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta2", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -158,7 +158,7 @@ func (mg *SSHKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.UserName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -177,7 +177,7 @@ func (mg *SSHKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta1", "User", "UserList")
+		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta2", "User", "UserList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -376,7 +376,7 @@ func (mg *Tag) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -395,7 +395,7 @@ func (mg *Tag) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ResourceArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("transfer.aws.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

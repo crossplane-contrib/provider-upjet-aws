@@ -16,7 +16,7 @@ import (
 type ScramSecretAssociationInitParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`
 
@@ -60,7 +60,7 @@ type ScramSecretAssociationObservation struct {
 type ScramSecretAssociationParameters struct {
 
 	// Amazon Resource Name (ARN) of the MSK cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta2.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kafka/v1beta3.Cluster
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ClusterArn *string `json:"clusterArn,omitempty" tf:"cluster_arn,omitempty"`

@@ -57,7 +57,7 @@ type PolicyAttributeParameters struct {
 type PolicyInitParameters struct {
 
 	// The load balancer on which the policy is defined.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta2.ELB
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 
 	// Reference to a ELB in elb to populate loadBalancerName.
@@ -99,7 +99,7 @@ type PolicyObservation struct {
 type PolicyParameters struct {
 
 	// The load balancer on which the policy is defined.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta2.ELB
 	// +kubebuilder:validation:Optional
 	LoadBalancerName *string `json:"loadBalancerName,omitempty" tf:"load_balancer_name,omitempty"`
 
