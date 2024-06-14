@@ -179,9 +179,13 @@ import (
 	resourcepolicy "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/resourcepolicy"
 	stream "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/stream"
 	subscriptionfilter "github.com/upbound/provider-aws/internal/controller/cloudwatchlogs/subscriptionfilter"
+	domaincodeartifact "github.com/upbound/provider-aws/internal/controller/codeartifact/domain"
+	domainpermissionspolicy "github.com/upbound/provider-aws/internal/controller/codeartifact/domainpermissionspolicy"
+	repository "github.com/upbound/provider-aws/internal/controller/codeartifact/repository"
+	repositorypermissionspolicy "github.com/upbound/provider-aws/internal/controller/codeartifact/repositorypermissionspolicy"
 	approvalruletemplate "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplate"
 	approvalruletemplateassociation "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplateassociation"
-	repository "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
+	repositorycodecommit "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
 	customactiontype "github.com/upbound/provider-aws/internal/controller/codepipeline/customactiontype"
@@ -1122,9 +1126,13 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		resourcepolicy.Setup,
 		stream.Setup,
 		subscriptionfilter.Setup,
+		domaincodeartifact.Setup,
+		domainpermissionspolicy.Setup,
+		repository.Setup,
+		repositorypermissionspolicy.Setup,
 		approvalruletemplate.Setup,
 		approvalruletemplateassociation.Setup,
-		repository.Setup,
+		repositorycodecommit.Setup,
 		trigger.Setup,
 		codepipeline.Setup,
 		customactiontype.Setup,
