@@ -1,0 +1,7 @@
+# Run this command to always ignore formatting commits in `git blame`
+# git config blame.ignoreRevsFile .git-blame-ignore-revs
+# Github applies this automatically, but you must do it manually for local use.
+
+# Alphabetized config/externalname.go
+bed636f69e92ebb358389c8b53d9047c993aa8dd
+
