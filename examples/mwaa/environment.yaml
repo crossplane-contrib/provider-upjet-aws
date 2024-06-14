@@ -1,0 +1,272 @@
+apiVersion: mwaa.aws.upbound.io/v1beta1
+kind: Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example
+    dagS3Path: dags/
+    executionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    networkConfiguration:
+      - securityGroupIdRefs:
+          - name: example
+        subnetIdRefs:
+          - name: sample-subnet1
+          - name: sample-subnet2
+    region: us-west-1
+    sourceBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: versioning-example
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-policy-attachment
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
+  labels:
+    testing.upbound.io/example-name: role
+  name: sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": "airflow:PublishMetrics",
+                  "Resource": "arn:aws:airflow:us-west-1:${data.aws_account_id}:environment/example"
+              },
+              { 
+                  "Effect": "Deny",
+                  "Action": "s3:ListAllMyBuckets",
+                  "Resource": "*"
+              },
+              { 
+                  "Effect": "Allow",
+                  "Action": [ 
+                      "s3:GetObject*",
+                      "s3:GetBucket*",
+                      "s3:List*"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::versioning-example",
+                      "arn:aws:s3:::versioning-example/*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "logs:CreateLogStream",
+                      "logs:CreateLogGroup",
+                      "logs:PutLogEvents",
+                      "logs:GetLogEvents",
+                      "logs:GetLogRecord",
+                      "logs:GetLogGroupFields",
+                      "logs:GetQueryResults"
+                  ],
+                  "Resource": [
+                      "arn:aws:logs:us-west-1:${data.aws_account_id}:log-group:airflow-example-*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "logs:DescribeLogGroups"
+                  ],
+                  "Resource": [
+                      "*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:GetAccountPublicAccessBlock"
+                  ],
+                  "Resource": [
+                      "*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": "cloudwatch:PutMetricData",
+                  "Resource": "*"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "sqs:ChangeMessageVisibility",
+                      "sqs:DeleteMessage",
+                      "sqs:GetQueueAttributes",
+                      "sqs:GetQueueUrl",
+                      "sqs:ReceiveMessage",
+                      "sqs:SendMessage"
+                  ],
+                  "Resource": "arn:aws:sqs:us-west-1:*:airflow-celery-*"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "kms:Decrypt",
+                      "kms:DescribeKey",
+                      "kms:GenerateDataKey*",
+                      "kms:Encrypt"
+                  ],
+                  "NotResource": "arn:aws:kms:*:${data.aws_account_id}:key/*",
+                  "Condition": {
+                      "StringLike": {
+                          "kms:ViaService": [
+                              "sqs.us-west-1.amazonaws.com"
+                          ]
+                      }
+                  }
+              }
+          ]
+      }
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketVersioning
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucketversioning
+  labels:
+    testing.upbound.io/example-name: versioning_example
+  name: versioning-example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+    versioningConfiguration:
+      status: Enabled
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/bucket
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    description: Allow TLS inbound traffic
+    name: allow_tls
+    tags:
+      Name: allow_tls
+    vpcIdRef:
+      name: sample-vpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet2
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1c
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.11.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/vpc
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc

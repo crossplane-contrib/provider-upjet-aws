@@ -77,6 +77,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 // belonging to Terraform Plugin SDKv2 resources to be reconciled
 // under the no-fork architecture for this provider.
 var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
+	// mwaa
+	//
+	// mwaa_environment can be imported using the name
+	"aws_mwaa_environment": config.NameAsIdentifier,
+
 	// ACM
 	// Imported using ARN that has a random substring:
 	// arn:aws:acm:eu-central-1:123456789012:certificate/7e7a28d2-163f-4b8f-b9cd-822f96c08d6a
