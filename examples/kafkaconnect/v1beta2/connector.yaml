@@ -1,0 +1,407 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: kafkaconnect.aws.upbound.io/v1beta2
+kind: Connector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+    upjet.upbound.io/manual-intervention: This resource requires a valid kafka broker
+      connectionString
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: connector
+  name: connector
+spec:
+  forProvider:
+    capacity:
+      autoscaling:
+        maxWorkerCount: 2
+        mcuCount: 1
+        minWorkerCount: 1
+        scaleInPolicy:
+          cpuUtilizationPercentage: 20
+        scaleOutPolicy:
+          cpuUtilizationPercentage: 80
+    connectorConfiguration:
+      connector.class: org.apache.kafka.connect.file.FileStreamSinkConnector
+      tasks.max: "1"
+      topics: example
+    kafkaCluster:
+      apacheKafkaCluster:
+        bootstrapServers: REPLACE-ME plaintext kafka broker string:9092
+        vpc:
+          securityGroupSelector:
+            matchLabels:
+              testing.upbound.io/example-name: connector
+          subnetSelector:
+            matchLabels:
+              testing.upbound.io/example-name: connector
+    kafkaClusterClientAuthentication:
+      authenticationType: NONE
+    kafkaClusterEncryptionInTransit:
+      encryptionType: PLAINTEXT
+    kafkaconnectVersion: 2.7.1
+    logDelivery:
+      workerLogDelivery:
+        cloudwatchLogs:
+          enabled: true
+          logGroupSelector:
+            matchLabels:
+              testing.upbound.io/example-name: connector
+        firehose:
+          deliveryStreamSelector:
+            matchLabels:
+              testing.upbound.io/example-name: connector
+          enabled: true
+    name: connector
+    plugin:
+    - customPlugin:
+        arnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: connector
+        revision: 1
+    region: us-east-2
+    serviceExecutionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector
+    workerConfiguration:
+      arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: connector
+      revision: 1
+
+---
+
+apiVersion: kafkaconnect.aws.upbound.io/v1beta1
+kind: WorkerConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: connector
+spec:
+  forProvider:
+    name: ${Rand.RFC1123Subdomain}
+    propertiesFileContent: |
+      key.converter=org.apache.kafka.connect.storage.StringConverter
+      value.converter=org.apache.kafka.connect.storage.StringConverter
+    region: us-east-2
+
+---
+
+apiVersion: kafkaconnect.aws.upbound.io/v1beta2
+kind: CustomPlugin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: example
+spec:
+  forProvider:
+    contentType: ZIP
+    location:
+      s3:
+        bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: connector
+        fileKeySelector:
+          matchLabels:
+            testing.upbound.io/example-name: connector
+    name: empty-example
+    region: us-east-2
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: connector
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "kafkaconnect.amazonaws.com",
+                "firehose.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+    managedPolicyArns:
+    - arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+
+---
+
+apiVersion: firehose.aws.upbound.io/v1beta2
+kind: DeliveryStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: connector
+spec:
+  forProvider:
+    destination: extended_s3
+    extendedS3Configuration:
+      bucketArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: connector
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: connector
+    name: ${Rand.RFC1123Subdomain}
+    region: us-east-2
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: ${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    forceDestroy: true
+    region: us-east-2
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+    uptest.upbound.io/disable-import: "true"
+  labels:
+    testing.upbound.io/example-name: connector
+  name: example
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector
+    contentBase64: |
+      UEsDBAoAAAAAAPpkXlcAAAAAAAAAAAAAAAAFABwAZW1wdHlVVAkAA4gGQGWIBkBldXgLAAEE6AMAAAToAwAAUEsBAh4DCgAAAAAA+mReVwAAAAAAAAAAAAAAAAUAGAAAAAAAAAAAALSBAAAAAGVtcHR5VVQFAAOIBkBldXgLAAEE6AMAAAToAwAAUEsFBgAAAAABAAEASwAAAD8AAAAAAA==
+    contentType: application/zip
+    key: empty.zip
+    region: us-east-2
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: sg
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: subnet-az1
+spec:
+  forProvider:
+    availabilityZone: us-east-2a
+    cidrBlock: 192.168.0.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: subnet-az2
+spec:
+  forProvider:
+    availabilityZone: us-east-2b
+    cidrBlock: 192.168.1.0/24
+    region: us-east-2
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: connector
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: vpc
+spec:
+  forProvider:
+    cidrBlock: 192.168.0.0/22
+    region: us-east-2
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: test
+spec:
+  forProvider:
+    region: us-east-2
+    retentionInDays: 1
+
+---
+
+apiVersion: kafka.aws.upbound.io/v1beta3
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: connector
+  name: example
+spec:
+  forProvider:
+    brokerNodeGroupInfo:
+      clientSubnetsRefs:
+      - name: subnet-az1
+      - name: subnet-az2
+      instanceType: kafka.t3.small
+      securityGroupsRefs:
+      - name: sg
+      storageInfo:
+        ebsStorageInfo:
+          volumeSize: 1000
+    clusterName: example
+    configurationInfo:
+      arnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: connector
+      revision: 1
+    encryptionInfo:
+      encryptionInTransit:
+        clientBroker: PLAINTEXT
+    kafkaVersion: 2.7.0
+    loggingInfo:
+      brokerLogs:
+        cloudwatchLogs:
+          enabled: true
+          logGroupSelector:
+            matchLabels:
+              testing.upbound.io/example-name: connector
+    numberOfBrokerNodes: 2
+    openMonitoring:
+      prometheus:
+        jmxExporter:
+          enabledInBroker: true
+        nodeExporter:
+          enabledInBroker: true
+    region: us-east-2
+    tags:
+      foo: bar
+
+---
+
+apiVersion: kafka.aws.upbound.io/v1beta1
+kind: Configuration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: example
+spec:
+  forProvider:
+    kafkaVersions:
+    - 2.7.0
+    name: example
+    region: us-east-2
+    serverProperties: |
+      auto.create.topics.enable = true
+      delete.topic.enable = true
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: ingress
+spec:
+  forProvider:
+    cidrBlocks:
+    - 0.0.0.0/0
+    fromPort: 0
+    protocol: all
+    region: us-east-2
+    securityGroupIdRef:
+      name: sg
+    toPort: 0
+    type: ingress
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kafkaconnect/v1beta2/connector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: egress
+spec:
+  forProvider:
+    cidrBlocks:
+    - 0.0.0.0/0
+    fromPort: 0
+    protocol: all
+    region: us-east-2
+    securityGroupIdRef:
+      name: sg
+    toPort: 0
+    type: egress

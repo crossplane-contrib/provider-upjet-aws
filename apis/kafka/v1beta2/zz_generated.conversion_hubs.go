@@ -7,4 +7,4 @@
 package v1beta2
 
 // Hub marks this type as a conversion hub.
-func (tr *Cluster) Hub() {}
+func (tr *ServerlessCluster) Hub() {}

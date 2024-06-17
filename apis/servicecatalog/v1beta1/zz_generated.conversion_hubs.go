@@ -22,16 +22,10 @@ func (tr *PortfolioShare) Hub() {}
 func (tr *PrincipalPortfolioAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Product) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ProductPortfolioAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ProvisioningArtifact) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ServiceAction) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TagOption) Hub() {}

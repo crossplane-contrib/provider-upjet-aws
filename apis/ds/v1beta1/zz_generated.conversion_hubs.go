@@ -8,9 +8,3 @@ package v1beta1
 
 // Hub marks this type as a conversion hub.
 func (tr *ConditionalForwarder) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Directory) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SharedDirectory) Hub() {}

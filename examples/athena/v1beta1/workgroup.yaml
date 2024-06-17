@@ -5,6 +5,8 @@
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: Workgroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/workgroup
   labels:
     testing.upbound.io/example-name: test
   name: test
@@ -25,6 +27,8 @@ spec:
 apiVersion: kms.aws.upbound.io/v1beta1
 kind: Key
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/workgroup
   labels:
     testing.upbound.io/example-name: test
   name: test

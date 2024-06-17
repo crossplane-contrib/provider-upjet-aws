@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: memorydb.aws.upbound.io/v1beta2
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta2/user
+  labels:
+    testing.upbound.io/example-name: memorydb-user
+  name: memorydb-user
+spec:
+  forProvider:
+    accessString: on ~* &* +@all
+    authenticationMode:
+      passwordsSecretRef:
+      - key: password
+        name: memorydb-user-password-1
+        namespace: upbound-system
+      - key: password
+        name: memorydb-user-password-2
+        namespace: upbound-system
+      type: password
+    region: us-west-1
+  writeConnectionSecretToRef:
+    name: user-conn
+    namespace: default
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: memorydb-user-password-1
+  name: memorydb-user-password-1
+  namespace: upbound-system
+stringData:
+  password: TestCr0ssplanePassw0rd!
+type: Opaque
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: memorydb/v1beta1/user
+  labels:
+    testing.upbound.io/example-name: memorydb-user-password-2
+  name: memorydb-user-password-2
+  namespace: upbound-system
+stringData:
+  password: AnotherCr0ssplanePassw0rd!
+type: Opaque

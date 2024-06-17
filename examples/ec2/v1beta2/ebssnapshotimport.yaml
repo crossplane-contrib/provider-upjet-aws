@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ec2.aws.upbound.io/v1beta2
+kind: EBSSnapshotImport
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta2/ebssnapshotimport
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    diskContainer:
+      format: VMDK
+      userBucket:
+        s3Bucket: upbound-provider-test-data
+        s3Key: centos.vmdk
+    region: us-east-1
+    tags:
+      Name: HelloWorld

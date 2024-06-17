@@ -1,0 +1,95 @@
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: APIMapping
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/apimapping
+    upjet.upbound.io/manual-intervention: "The DomainName resource should be ready and that requires a real domain."
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-domainname
+  name: example
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-domainname
+    domainNameSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-domainname
+    region: us-west-1
+    stageSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-domainname
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: API
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/apimapping
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-domainname
+  name: domainname-api
+spec:
+  forProvider:
+    region: us-west-1
+    name: test-http-api
+    protocolType: HTTP
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Stage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/apimapping
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-domainname
+  name: example-domainname
+spec:
+  forProvider:
+    region: us-west-1
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-domainname
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: DomainName
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/apimapping
+    upjet.upbound.io/manual-intervention: "The Certificate needs to be provisioned successfully which requires a real domain."
+    crossplane.io/external-name: example-email.upbound-providers.io
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-domainname
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    domainNameConfiguration:
+      - certificateArnSelector:
+          matchLabels:
+            upjet.upbound.io/test-group: apigatewayv2-domainname
+        endpointType: REGIONAL
+        securityPolicy: TLS_1_2
+
+---
+
+apiVersion: acm.aws.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/apimapping
+    upjet.upbound.io/manual-intervention: "The domain given as spec.forProvider.domainName needs to be created beforehand."
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-domainname
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    domainName: example-email.upbound-providers.io
+    tags:
+      Environment: test
+    validationMethod: EMAIL

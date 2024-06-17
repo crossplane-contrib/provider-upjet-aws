@@ -120,7 +120,7 @@ type EnvironmentParameters struct {
 type MonitorInitParameters struct {
 
 	// ARN of the Amazon CloudWatch alarm.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.MetricAlarm
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta2.MetricAlarm
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	AlarmArn *string `json:"alarmArn,omitempty" tf:"alarm_arn,omitempty"`
 
@@ -158,7 +158,7 @@ type MonitorObservation struct {
 type MonitorParameters struct {
 
 	// ARN of the Amazon CloudWatch alarm.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta1.MetricAlarm
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta2.MetricAlarm
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	AlarmArn *string `json:"alarmArn,omitempty" tf:"alarm_arn,omitempty"`

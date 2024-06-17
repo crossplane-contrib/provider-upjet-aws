@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: guardduty.aws.upbound.io/v1beta2
+kind: Detector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guardduty/v1beta2/detector
+  labels:
+    testing.upbound.io/example-name: Detector
+  name: detector
+spec:
+  forProvider:
+    datasources:
+      s3Logs:
+        enable: true
+    enable: true
+    region: us-west-1

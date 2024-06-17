@@ -30,7 +30,7 @@ spec:
 
 ---
 
-apiVersion: elasticsearch.aws.upbound.io/v1beta1
+apiVersion: elasticsearch.aws.upbound.io/v1beta2
 kind: Domain
 metadata:
   annotations:

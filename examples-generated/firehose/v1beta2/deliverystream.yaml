@@ -1,0 +1,108 @@
+apiVersion: firehose.aws.upbound.io/v1beta2
+kind: DeliveryStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: firehose/v1beta2/deliverystream
+  labels:
+    testing.upbound.io/example-name: extended_s3_stream
+  name: extended-s3-stream
+spec:
+  forProvider:
+    destination: extended_s3
+    extendedS3Configuration:
+    - bucketArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: bucket
+      processingConfiguration:
+      - enabled: "true"
+        processors:
+        - parameters:
+          - parameterName: LambdaArn
+            parameterValue: ${aws_lambda_function.lambda_processor.arn}:$LATEST
+          type: Lambda
+      roleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: firehose_role
+    name: terraform-kinesis-firehose-extended-s3-test-stream
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: firehose/v1beta2/deliverystream
+  labels:
+    testing.upbound.io/example-name: firehose_role
+  name: firehose-role
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.firehose_assume_role.json}
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: firehose/v1beta2/deliverystream
+  labels:
+    testing.upbound.io/example-name: lambda_iam
+  name: lambda-iam
+spec:
+  forProvider:
+    assumeRolePolicy: ${data.aws_iam_policy_document.lambda_assume_role.json}
+
+---
+
+apiVersion: lambda.aws.upbound.io/v1beta2
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: firehose/v1beta2/deliverystream
+  labels:
+    testing.upbound.io/example-name: lambda_processor
+  name: lambda-processor
+spec:
+  forProvider:
+    filename: lambda.zip
+    handler: exports.handler
+    region: us-west-1
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lambda_iam
+    runtime: nodejs16.x
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: firehose/v1beta2/deliverystream
+  labels:
+    testing.upbound.io/example-name: bucket
+  name: bucket
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: BucketACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: firehose/v1beta2/deliverystream
+  labels:
+    testing.upbound.io/example-name: bucket_acl
+  name: bucket-acl
+spec:
+  forProvider:
+    acl: private
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: bucket
+    region: us-west-1

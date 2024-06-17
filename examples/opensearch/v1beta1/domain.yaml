@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    domainName: example-domain-name
+    domainName: ${Rand.RFC1123Subdomain}
     engineVersion: OpenSearch_1.0
     region: us-west-1
     clusterConfig:

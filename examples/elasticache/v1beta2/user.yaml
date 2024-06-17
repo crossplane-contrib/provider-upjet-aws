@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: elasticache.aws.upbound.io/v1beta2
+kind: User
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta2/user
+    upjet.upbound.io/manual-intervention: This resource needs secrets that must contain
+      valid credentials.
+  name: sample-user
+spec:
+  forProvider:
+    accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
+      -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
+      -georadiusbymember
+    engine: REDIS
+    passwordsSecretRef:
+    - key: pwd-1
+      name: user-passwords
+      namespace: crossplane-system
+    - key: pwd-2
+      name: user-passwords
+      namespace: crossplane-system
+    region: us-west-1
+    userName: testUserName
+  writeConnectionSecretToRef:
+    name: user-conn
+    namespace: default

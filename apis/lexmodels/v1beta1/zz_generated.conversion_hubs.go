@@ -7,13 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Bot) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BotAlias) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Intent) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SlotType) Hub() {}

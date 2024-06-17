@@ -10,9 +10,6 @@ package v1beta1
 func (tr *Activation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Association) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DefaultPatchBaseline) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -25,9 +22,6 @@ func (tr *MaintenanceWindow) Hub() {}
 func (tr *MaintenanceWindowTarget) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MaintenanceWindowTask) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Parameter) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -35,9 +29,6 @@ func (tr *PatchBaseline) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PatchGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ResourceDataSync) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ServiceSetting) Hub() {}

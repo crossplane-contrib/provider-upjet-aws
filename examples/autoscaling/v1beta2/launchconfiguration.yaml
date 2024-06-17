@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: autoscaling.aws.upbound.io/v1beta2
+kind: LaunchConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: autoscaling/v1beta2/launchconfiguration
+  labels:
+    testing.upbound.io/example-name: as_conf
+  name: as-conf
+spec:
+  forProvider:
+    imageId: ami-0454207e5367abf01
+    instanceType: t2.micro
+    region: us-west-1

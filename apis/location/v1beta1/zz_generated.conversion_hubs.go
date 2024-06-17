@@ -10,9 +10,6 @@ package v1beta1
 func (tr *GeofenceCollection) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *PlaceIndex) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *RouteCalculator) Hub() {}
 
 // Hub marks this type as a conversion hub.

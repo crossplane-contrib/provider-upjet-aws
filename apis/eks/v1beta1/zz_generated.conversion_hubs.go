@@ -10,16 +10,7 @@ package v1beta1
 func (tr *Addon) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Cluster) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FargateProfile) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *IdentityProviderConfig) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *NodeGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PodIdentityAssociation) Hub() {}

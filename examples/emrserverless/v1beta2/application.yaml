@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: emrserverless.aws.upbound.io/v1beta2
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emrserverless/v1beta2/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: app
+spec:
+  forProvider:
+    maximumCapacity:
+      cpu: 2 vCPU
+      memory: 2 GB
+    name: example
+    region: us-west-1
+    releaseLabel: emr-6.6.0
+    type: hive

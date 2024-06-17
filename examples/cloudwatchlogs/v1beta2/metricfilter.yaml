@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta2
+kind: MetricFilter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta2/metricfilter
+  labels:
+    testing.upbound.io/example-name: yada
+  name: test
+spec:
+  forProvider:
+    logGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: dada
+    metricTransformation:
+      name: EventCount
+      namespace: YourNamespace
+      value: "1"
+    pattern: ""
+    region: us-west-1
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudwatchlogs/v1beta2/metricfilter
+  labels:
+    testing.upbound.io/example-name: dada
+  name: test
+spec:
+  forProvider:
+    region: us-west-1

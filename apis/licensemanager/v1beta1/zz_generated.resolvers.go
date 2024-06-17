@@ -46,7 +46,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 	mg.Spec.ForProvider.LicenseConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LicenseConfigurationArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -84,7 +84,7 @@ func (mg *Association) ResolveReferences( // ResolveReferences of this Associati
 	mg.Spec.InitProvider.LicenseConfigurationArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LicenseConfigurationArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

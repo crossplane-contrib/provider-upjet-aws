@@ -26,7 +26,7 @@ func (mg *AppCookieStickinessPolicy) ResolveReferences( // ResolveReferences of 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -57,7 +57,7 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -76,7 +76,7 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.ELB = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ELBRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -95,7 +95,7 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.Instance = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -114,7 +114,7 @@ func (mg *Attachment) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.ELB = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ELBRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -145,7 +145,7 @@ func (mg *BackendServerPolicy) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -164,7 +164,7 @@ func (mg *BackendServerPolicy) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.LoadBalancerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadBalancerNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -283,7 +283,7 @@ func (mg *LBCookieStickinessPolicy) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -302,7 +302,7 @@ func (mg *LBCookieStickinessPolicy) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.LoadBalancer = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadBalancerRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -333,7 +333,7 @@ func (mg *LBSSLNegotiationPolicy) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -352,7 +352,7 @@ func (mg *LBSSLNegotiationPolicy) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.LoadBalancer = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadBalancerRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -383,7 +383,7 @@ func (mg *ListenerPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -402,7 +402,7 @@ func (mg *ListenerPolicy) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.LoadBalancerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadBalancerNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -433,7 +433,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -474,7 +474,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -526,7 +526,7 @@ func (mg *ProxyProtocolPolicy) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -545,7 +545,7 @@ func (mg *ProxyProtocolPolicy) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.LoadBalancer = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LoadBalancerRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta1", "ELB", "ELBList")
+		m, l, err = apisresolver.GetManagedResource("elb.aws.upbound.io", "v1beta2", "ELB", "ELBList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

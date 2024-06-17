@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: apigateway.aws.upbound.io/v1beta1
+apiVersion: apigateway.aws.upbound.io/v1beta2
 kind: DocumentationPart
 metadata:
   annotations:
@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: apigateway.aws.upbound.io/v1beta1
+apiVersion: apigateway.aws.upbound.io/v1beta2
 kind: RestAPI
 metadata:
   annotations:

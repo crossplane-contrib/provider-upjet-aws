@@ -7,19 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *AccessPoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BackupPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FileSystem) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FileSystemPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MountTarget) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ReplicationConfiguration) Hub() {}

@@ -29,17 +29,6 @@ func Configure(p *config.Provider) {
 				SelectorFieldName: "SecurityGroupIDSelector",
 			},
 		}
-		r.ServerSideApplyMergeStrategies["vpc_config"] = config.MergeStrategy{
-			ListMergeStrategy: config.ListMergeStrategy{
-				MergeStrategy: config.ListTypeMap,
-				ListMapKeys: config.ListMapKeys{
-					InjectedKey: config.InjectedKey{
-						Key:          "index",
-						DefaultValue: `"0"`,
-					},
-				},
-			},
-		}
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_eks_node_group", func(r *config.Resource) {

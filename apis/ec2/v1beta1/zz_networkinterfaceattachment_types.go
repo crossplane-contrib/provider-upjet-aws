@@ -19,7 +19,7 @@ type NetworkInterfaceAttachmentInitParameters struct {
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// Instance ID to attach.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
@@ -72,7 +72,7 @@ type NetworkInterfaceAttachmentParameters struct {
 	DeviceIndex *float64 `json:"deviceIndex,omitempty" tf:"device_index,omitempty"`
 
 	// Instance ID to attach.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Instance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`

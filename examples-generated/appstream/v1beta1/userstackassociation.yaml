@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: appstream.aws.upbound.io/v1beta1
+apiVersion: appstream.aws.upbound.io/v1beta2
 kind: Stack
 metadata:
   annotations:

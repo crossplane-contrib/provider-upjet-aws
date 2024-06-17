@@ -7,19 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *DirectoryConfig) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Fleet) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FleetStackAssociation) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ImageBuilder) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Stack) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *User) Hub() {}

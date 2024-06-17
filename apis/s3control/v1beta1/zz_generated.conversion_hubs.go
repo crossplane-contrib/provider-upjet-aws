@@ -7,25 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *AccessPoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *AccessPointPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *AccountPublicAccessBlock) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MultiRegionAccessPoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MultiRegionAccessPointPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ObjectLambdaAccessPoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ObjectLambdaAccessPointPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *StorageLensConfiguration) Hub() {}

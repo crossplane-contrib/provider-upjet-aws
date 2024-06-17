@@ -1,0 +1,36 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: elasticsearch.aws.upbound.io/v1beta2
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticsearch/v1beta2/domain
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessPolicies: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "*"
+            },
+          "Action": "es:*",
+          "Resource": "arn:aws:es:us-west-1:domain/example/*"
+          }
+        ]
+      }
+    clusterConfig:
+      instanceType: r4.large.elasticsearch
+    ebsOptions:
+      ebsEnabled: true
+      volumeSize: 30
+    elasticsearchVersion: "5.3"
+    region: us-west-1

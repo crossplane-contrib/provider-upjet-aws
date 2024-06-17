@@ -52,3 +52,63 @@ func (tr *AutoscalingGroup) ConvertFrom(srcRaw conversion.Hub) error {
 	}
 	return nil
 }
+
+// ConvertTo converts this GroupTag to the hub type.
+func (tr *GroupTag) ConvertTo(dstRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := dstRaw.GetObjectKind().GroupVersionKind().Version
+	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
+		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", spokeVersion, hubVersion)
+	}
+	return nil
+}
+
+// ConvertFrom converts from the hub type to the GroupTag type.
+func (tr *GroupTag) ConvertFrom(srcRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := srcRaw.GetObjectKind().GroupVersionKind().Version
+	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
+		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", hubVersion, spokeVersion)
+	}
+	return nil
+}
+
+// ConvertTo converts this LaunchConfiguration to the hub type.
+func (tr *LaunchConfiguration) ConvertTo(dstRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := dstRaw.GetObjectKind().GroupVersionKind().Version
+	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
+		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", spokeVersion, hubVersion)
+	}
+	return nil
+}
+
+// ConvertFrom converts from the hub type to the LaunchConfiguration type.
+func (tr *LaunchConfiguration) ConvertFrom(srcRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := srcRaw.GetObjectKind().GroupVersionKind().Version
+	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
+		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", hubVersion, spokeVersion)
+	}
+	return nil
+}
+
+// ConvertTo converts this Policy to the hub type.
+func (tr *Policy) ConvertTo(dstRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := dstRaw.GetObjectKind().GroupVersionKind().Version
+	if err := ujconversion.RoundTrip(dstRaw.(resource.Terraformed), tr); err != nil {
+		return errors.Wrapf(err, "cannot convert from the spoke version %q to the hub version %q", spokeVersion, hubVersion)
+	}
+	return nil
+}
+
+// ConvertFrom converts from the hub type to the Policy type.
+func (tr *Policy) ConvertFrom(srcRaw conversion.Hub) error {
+	spokeVersion := tr.GetObjectKind().GroupVersionKind().Version
+	hubVersion := srcRaw.GetObjectKind().GroupVersionKind().Version
+	if err := ujconversion.RoundTrip(tr, srcRaw.(resource.Terraformed)); err != nil {
+		return errors.Wrapf(err, "cannot convert from the hub version %q to the spoke version %q", hubVersion, spokeVersion)
+	}
+	return nil
+}

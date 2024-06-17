@@ -28,7 +28,7 @@ func (mg *APICache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta2", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -47,7 +47,7 @@ func (mg *APICache) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta2", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -78,7 +78,7 @@ func (mg *APIKey) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
+		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta2", "GraphQLAPI", "GraphQLAPIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

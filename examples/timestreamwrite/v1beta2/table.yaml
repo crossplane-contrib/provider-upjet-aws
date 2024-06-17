@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: timestreamwrite.aws.upbound.io/v1beta2
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreamwrite/v1beta2/table
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-east-2
+    tableName: example
+
+---
+
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreamwrite/v1beta2/table
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-east-2

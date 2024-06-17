@@ -10,7 +10,4 @@ package v1beta1
 func (tr *EncryptionConfig) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Group) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SamplingRule) Hub() {}

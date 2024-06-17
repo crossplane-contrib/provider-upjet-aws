@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: acm.aws.upbound.io/v1beta1
+apiVersion: acm.aws.upbound.io/v1beta2
 kind: Certificate
 metadata:
   annotations:
@@ -32,7 +32,7 @@ spec:
 
 ---
 
-apiVersion: elbv2.aws.upbound.io/v1beta1
+apiVersion: elbv2.aws.upbound.io/v1beta2
 kind: LBListener
 metadata:
   annotations:
@@ -47,7 +47,7 @@ spec:
 
 ---
 
-apiVersion: route53.aws.upbound.io/v1beta1
+apiVersion: route53.aws.upbound.io/v1beta2
 kind: Record
 metadata:
   annotations:

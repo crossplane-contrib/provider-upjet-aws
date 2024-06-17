@@ -7,13 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *CompositeAlarm) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Dashboard) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MetricAlarm) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MetricStream) Hub() {}

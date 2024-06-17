@@ -9,6 +9,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
+	connector "github.com/upbound/provider-aws/internal/controller/transfer/connector"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	sshkey "github.com/upbound/provider-aws/internal/controller/transfer/sshkey"
 	tag "github.com/upbound/provider-aws/internal/controller/transfer/tag"
@@ -20,6 +21,7 @@ import (
 // the supplied manager.
 func Setup_transfer(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		connector.Setup,
 		server.Setup,
 		sshkey.Setup,
 		tag.Setup,

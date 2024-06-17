@@ -16,7 +16,7 @@ import (
 type SubscriptionFilterInitParameters struct {
 
 	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`
 
@@ -80,7 +80,7 @@ type SubscriptionFilterObservation struct {
 type SubscriptionFilterParameters struct {
 
 	// The ARN of the destination to deliver matching log events to. Kinesis stream or Lambda function ARN.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta1.Stream
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn,omitempty" tf:"destination_arn,omitempty"`

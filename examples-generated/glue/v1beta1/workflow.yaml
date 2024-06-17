@@ -12,7 +12,7 @@ spec:
 
 ---
 
-apiVersion: glue.aws.upbound.io/v1beta1
+apiVersion: glue.aws.upbound.io/v1beta2
 kind: Trigger
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: glue.aws.upbound.io/v1beta1
+apiVersion: glue.aws.upbound.io/v1beta2
 kind: Trigger
 metadata:
   annotations:

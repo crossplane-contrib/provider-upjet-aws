@@ -16,7 +16,7 @@ import (
 type BackupInitParameters struct {
 
 	// The ID of the file system to back up. Required if backing up Lustre or Windows file systems.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta1.LustreFileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta2.LustreFileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
@@ -71,7 +71,7 @@ type BackupObservation struct {
 type BackupParameters struct {
 
 	// The ID of the file system to back up. Required if backing up Lustre or Windows file systems.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta1.LustreFileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/fsx/v1beta2.LustreFileSystem
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`

@@ -7,16 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *ConfigurationSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ConfigurationSetEventDestination) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DedicatedIPPool) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *EmailIdentity) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *EmailIdentityFeedbackAttributes) Hub() {}

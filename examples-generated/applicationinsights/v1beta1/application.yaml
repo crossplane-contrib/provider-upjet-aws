@@ -12,7 +12,7 @@ spec:
 
 ---
 
-apiVersion: resourcegroups.aws.upbound.io/v1beta1
+apiVersion: resourcegroups.aws.upbound.io/v1beta2
 kind: Group
 metadata:
   annotations:

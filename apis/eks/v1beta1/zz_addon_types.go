@@ -24,7 +24,7 @@ type AddonInitParameters struct {
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
 	// –  Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in eks to populate clusterName.
@@ -143,7 +143,7 @@ type AddonParameters struct {
 	AddonVersion *string `json:"addonVersion,omitempty" tf:"addon_version,omitempty"`
 
 	// –  Name of the EKS Cluster.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 

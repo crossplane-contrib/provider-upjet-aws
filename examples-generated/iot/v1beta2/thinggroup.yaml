@@ -1,0 +1,11 @@
+apiVersion: iot.aws.upbound.io/v1beta2
+kind: ThingGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta2/thinggroup
+  labels:
+    testing.upbound.io/example-name: parent
+  name: parent
+spec:
+  forProvider:
+    region: us-west-1

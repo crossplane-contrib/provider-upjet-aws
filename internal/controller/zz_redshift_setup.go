@@ -11,6 +11,7 @@ import (
 
 	authenticationprofile "github.com/upbound/provider-aws/internal/controller/redshift/authenticationprofile"
 	cluster "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
+	endpointaccess "github.com/upbound/provider-aws/internal/controller/redshift/endpointaccess"
 	eventsubscription "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
 	hsmclientcertificate "github.com/upbound/provider-aws/internal/controller/redshift/hsmclientcertificate"
 	hsmconfiguration "github.com/upbound/provider-aws/internal/controller/redshift/hsmconfiguration"
@@ -29,6 +30,7 @@ func Setup_redshift(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		authenticationprofile.Setup,
 		cluster.Setup,
+		endpointaccess.Setup,
 		eventsubscription.Setup,
 		hsmclientcertificate.Setup,
 		hsmconfiguration.Setup,

@@ -8,6 +8,3 @@ package v1beta1
 
 // Hub marks this type as a conversion hub.
 func (tr *Ledger) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Stream) Hub() {}

@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: amp.aws.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta2/workspace
+    uptest.upbound.io/update-parameter: '{"tags":{"update-test-tag":"val"}}'
+  labels:
+    testing.upbound.io/example-name: amp
+  name: demo
+spec:
+  forProvider:
+    region: us-east-1
+
+---
+
+apiVersion: amp.aws.upbound.io/v1beta1
+kind: RuleGroupNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta2/workspace
+  labels:
+    testing.upbound.io/example-name: amp
+  name: demo
+spec:
+  forProvider:
+    data: |
+      groups:
+        - name: test
+          rules:
+          - record: metric:recording_rule
+            expr: avg(rate(container_cpu_usage_seconds_total[5m]))
+    region: us-east-1
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: amp
+
+---
+
+apiVersion: amp.aws.upbound.io/v1beta1
+kind: AlertManagerDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta2/workspace
+  labels:
+    testing.upbound.io/example-name: amp
+  name: demo
+spec:
+  forProvider:
+    definition: |
+      alertmanager_config: |
+        route:
+          receiver: 'default'
+        receivers:
+          - name: 'default'
+    region: us-east-1
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: amp

@@ -1,0 +1,135 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta2
+kind: API
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-websocket
+  name: websocket-api
+spec:
+  forProvider:
+    name: example-websocket-api
+    protocolType: WEBSOCKET
+    region: us-west-1
+    routeSelectionExpression: $request.body.action
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Model
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-websocket
+  name: example-websocket
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-websocket
+    contentType: application/json
+    name: example
+    region: us-west-1
+    schema: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "title": "ExampleModel",
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" }
+        }
+      }
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta2
+kind: Integration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-websocket
+  name: example-websocket
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-websocket
+    integrationMethod: POST
+    integrationType: HTTP
+    integrationUri: https://api.example.com
+    region: us-west-1
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: IntegrationResponse
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+    upjet.upbound.io/manual-intervention: It requires a working Lambda function ARN
+      and we cannot upload a working function code.
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-websocket
+  name: example-websocket
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-websocket
+    integrationIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-websocket
+    integrationResponseKey: /400/
+    region: us-west-1
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+    upjet.upbound.io/manual-intervention: It requires a working Lambda function ARN
+      and we cannot upload a working function code.
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-websocket
+  name: example-websocket
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-websocket
+    region: us-west-1
+    routeKey: POST /login
+    targetSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-websocket
+
+---
+
+apiVersion: apigatewayv2.aws.upbound.io/v1beta1
+kind: RouteResponse
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta2/api
+    upjet.upbound.io/manual-intervention: Route resource this depends on requires
+      manual intervention.
+  labels:
+    upjet.upbound.io/test-group: apigatewayv2-websocket
+  name: example-websocket
+spec:
+  forProvider:
+    apiIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-websocket
+    region: us-west-1
+    routeIdSelector:
+      matchLabels:
+        upjet.upbound.io/test-group: apigatewayv2-websocket
+    routeResponseKey: $default

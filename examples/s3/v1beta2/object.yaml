@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Object
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/object
+    uptest.upbound.io/disable-import: "true"
+  labels:
+    testing.upbound.io/example-name: object
+  name: example-object
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: s3
+    contentBase64: dGhpcyBpcyBhIHRleHQg
+    key: object_key
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta2/object
+  labels:
+    testing.upbound.io/example-name: s3
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    objectLockEnabled: true
+    region: us-west-1
+    tags:
+      Name: SampleBucket

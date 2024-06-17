@@ -26,7 +26,7 @@ func (mg *HealthCheck) ResolveReferences( // ResolveReferences of this HealthChe
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io", "v1beta1", "MetricAlarm", "MetricAlarmList")
+		m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io", "v1beta2", "MetricAlarm", "MetricAlarmList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *HealthCheck) ResolveReferences( // ResolveReferences of this HealthChe
 	mg.Spec.ForProvider.CloudwatchAlarmName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudwatchAlarmNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io", "v1beta1", "MetricAlarm", "MetricAlarmList")
+		m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io", "v1beta2", "MetricAlarm", "MetricAlarmList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

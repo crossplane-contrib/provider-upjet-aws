@@ -31,7 +31,7 @@ type LambdaFunctionAssociationObservation struct {
 type LambdaFunctionAssociationParameters struct {
 
 	// Amazon Resource Name (ARN) of the Lambda Function, omitting any version or alias qualifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta1.Function
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/lambda/v1beta2.Function
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	FunctionArn *string `json:"functionArn,omitempty" tf:"function_arn,omitempty"`

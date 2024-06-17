@@ -187,6 +187,7 @@ import (
 	approvalruletemplateassociation "github.com/upbound/provider-aws/internal/controller/codecommit/approvalruletemplateassociation"
 	repositorycodecommit "github.com/upbound/provider-aws/internal/controller/codecommit/repository"
 	trigger "github.com/upbound/provider-aws/internal/controller/codecommit/trigger"
+	profilinggroup "github.com/upbound/provider-aws/internal/controller/codeguruprofiler/profilinggroup"
 	codepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/codepipeline"
 	customactiontype "github.com/upbound/provider-aws/internal/controller/codepipeline/customactiontype"
 	webhookcodepipeline "github.com/upbound/provider-aws/internal/controller/codepipeline/webhook"
@@ -728,6 +729,7 @@ import (
 	subnetgrouprds "github.com/upbound/provider-aws/internal/controller/rds/subnetgroup"
 	authenticationprofile "github.com/upbound/provider-aws/internal/controller/redshift/authenticationprofile"
 	clusterredshift "github.com/upbound/provider-aws/internal/controller/redshift/cluster"
+	endpointaccess "github.com/upbound/provider-aws/internal/controller/redshift/endpointaccess"
 	eventsubscriptionredshift "github.com/upbound/provider-aws/internal/controller/redshift/eventsubscription"
 	hsmclientcertificate "github.com/upbound/provider-aws/internal/controller/redshift/hsmclientcertificate"
 	hsmconfiguration "github.com/upbound/provider-aws/internal/controller/redshift/hsmconfiguration"
@@ -738,7 +740,7 @@ import (
 	snapshotscheduleassociation "github.com/upbound/provider-aws/internal/controller/redshift/snapshotscheduleassociation"
 	subnetgroupredshift "github.com/upbound/provider-aws/internal/controller/redshift/subnetgroup"
 	usagelimit "github.com/upbound/provider-aws/internal/controller/redshift/usagelimit"
-	endpointaccess "github.com/upbound/provider-aws/internal/controller/redshiftserverless/endpointaccess"
+	endpointaccessredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/endpointaccess"
 	redshiftserverlessnamespace "github.com/upbound/provider-aws/internal/controller/redshiftserverless/redshiftserverlessnamespace"
 	resourcepolicyredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/resourcepolicy"
 	snapshotredshiftserverless "github.com/upbound/provider-aws/internal/controller/redshiftserverless/snapshot"
@@ -915,6 +917,7 @@ import (
 	languagemodel "github.com/upbound/provider-aws/internal/controller/transcribe/languagemodel"
 	vocabularytranscribe "github.com/upbound/provider-aws/internal/controller/transcribe/vocabulary"
 	vocabularyfilter "github.com/upbound/provider-aws/internal/controller/transcribe/vocabularyfilter"
+	connectortransfer "github.com/upbound/provider-aws/internal/controller/transfer/connector"
 	server "github.com/upbound/provider-aws/internal/controller/transfer/server"
 	sshkey "github.com/upbound/provider-aws/internal/controller/transfer/sshkey"
 	tagtransfer "github.com/upbound/provider-aws/internal/controller/transfer/tag"
@@ -1134,6 +1137,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		approvalruletemplateassociation.Setup,
 		repositorycodecommit.Setup,
 		trigger.Setup,
+		profilinggroup.Setup,
 		codepipeline.Setup,
 		customactiontype.Setup,
 		webhookcodepipeline.Setup,
@@ -1675,6 +1679,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		subnetgrouprds.Setup,
 		authenticationprofile.Setup,
 		clusterredshift.Setup,
+		endpointaccess.Setup,
 		eventsubscriptionredshift.Setup,
 		hsmclientcertificate.Setup,
 		hsmconfiguration.Setup,
@@ -1685,7 +1690,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		snapshotscheduleassociation.Setup,
 		subnetgroupredshift.Setup,
 		usagelimit.Setup,
-		endpointaccess.Setup,
+		endpointaccessredshiftserverless.Setup,
 		redshiftserverlessnamespace.Setup,
 		resourcepolicyredshiftserverless.Setup,
 		snapshotredshiftserverless.Setup,
@@ -1862,6 +1867,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		languagemodel.Setup,
 		vocabularytranscribe.Setup,
 		vocabularyfilter.Setup,
+		connectortransfer.Setup,
 		server.Setup,
 		sshkey.Setup,
 		tagtransfer.Setup,

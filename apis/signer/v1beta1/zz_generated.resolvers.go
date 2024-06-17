@@ -9,9 +9,10 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -75,7 +76,7 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io", "v1beta1", "SigningProfile", "SigningProfileList")
+		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io", "v1beta2", "SigningProfile", "SigningProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -94,7 +95,7 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.ProfileName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProfileNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io", "v1beta1", "SigningProfile", "SigningProfileList")
+		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io", "v1beta2", "SigningProfile", "SigningProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -113,7 +114,7 @@ func (mg *SigningProfilePermission) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.ProfileVersion = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProfileVersionRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io", "v1beta1", "SigningProfile", "SigningProfileList")
+		m, l, err = apisresolver.GetManagedResource("signer.aws.upbound.io", "v1beta2", "SigningProfile", "SigningProfileList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

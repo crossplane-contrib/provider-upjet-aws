@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: glue.aws.upbound.io/v1beta2
+kind: CatalogTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta2/catalogtable
+  name: example
+spec:
+  forProvider:
+    catalogId: ${data.aws_account_id}
+    databaseNameRef:
+      name: example
+    region: us-east-1
+    storageDescriptor:
+      columns:
+      - name: my_column_1
+        type: string
+      - name: my_column_2
+        type: string
+      - name: my_column_3
+        type: string
+    tableType: EXTERNAL

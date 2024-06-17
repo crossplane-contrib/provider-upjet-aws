@@ -5,6 +5,8 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: API
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/api
   name: auth-api
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -13,10 +15,14 @@ spec:
     region: us-west-1
     name: test-http-api
     protocolType: HTTP
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Route
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/route
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -30,10 +36,14 @@ spec:
     targetSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-http
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Integration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/integration
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -46,10 +56,14 @@ spec:
     integrationMethod: POST
     integrationUri: "https://api.example.com"
     region: us-west-1
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Deployment
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/deployment
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -60,10 +74,14 @@ spec:
         upjet.upbound.io/test-group: apigatewayv2-http
     description: Example deployment
     region: us-west-1
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Authorizer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/authorizer
   name: test-authorizer
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http
@@ -80,10 +98,14 @@ spec:
     jwtConfiguration:
       - issuer: https://accounts.google.com/
         audience: [example]
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Stage
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/stage
   name: example
   labels:
     upjet.upbound.io/test-group: apigatewayv2-http

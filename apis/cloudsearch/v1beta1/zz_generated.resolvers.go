@@ -9,9 +9,10 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -25,7 +26,7 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences( // ResolveReferences of 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.upbound.io", "v1beta2", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -44,7 +45,7 @@ func (mg *DomainServiceAccessPolicy) ResolveReferences( // ResolveReferences of 
 	mg.Spec.ForProvider.DomainName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("cloudsearch.aws.upbound.io", "v1beta2", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

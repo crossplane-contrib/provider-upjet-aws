@@ -7,22 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *API) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *APIMapping) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Authorizer) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Deployment) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DomainName) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Integration) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *IntegrationResponse) Hub() {}
@@ -35,9 +23,6 @@ func (tr *Route) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *RouteResponse) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Stage) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VPCLink) Hub() {}

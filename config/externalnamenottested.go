@@ -671,8 +671,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// Redshift Cluster IAM Roless can be imported using the cluster_identifier
 	"aws_redshift_cluster_iam_roles": config.ParameterAsIdentifier("cluster_identifier"),
-	// Redshift endpoint access can be imported using the name
-	"aws_redshift_endpoint_access": config.ParameterAsIdentifier("endpoint_name"),
 	// Redshift endpoint authorization can be imported using the id
 	// Example: 01234567910:cluster-example-id
 	"aws_redshift_endpoint_authorization": config.TemplatedStringAsIdentifier("", "{{ .parameters.account }}:{{ .external_name }}"),

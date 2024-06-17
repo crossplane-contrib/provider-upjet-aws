@@ -10,9 +10,6 @@ package v1beta1
 func (tr *ActiveReceiptRuleSet) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ConfigurationSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DomainDKIM) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -23,9 +20,6 @@ func (tr *DomainMailFrom) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *EmailIdentity) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *EventDestination) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *IdentityNotificationTopic) Hub() {}

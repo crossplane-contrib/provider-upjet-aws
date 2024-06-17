@@ -20,6 +20,11 @@ func Configure(p *config.Provider) {
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_acm_certificate", func(r *config.Resource) {
+		r.References = map[string]config.Reference{
+			"certificate_authority_arn": {
+				TerraformName: "aws_acmpca_certificate_authority",
+			},
+		}
 		r.LateInitializer = config.LateInitializer{
 			// These are ignored because they conflict with each other.
 			// See the following for more details: https://github.com/upbound/provider-aws/issues/464
