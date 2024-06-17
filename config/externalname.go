@@ -149,7 +149,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_cloudtrail": config.TemplatedStringAsIdentifier("name", "arn:aws:cloudtrail:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:trail/{{ .external_name }}"),
 	// Event data stores can be imported using their arn
 	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
-	
+
 	// codeartifact
 	//
 	// CodeArtifact Domain can be imported using the CodeArtifact Domain arn
