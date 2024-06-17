@@ -364,6 +364,8 @@ func init() {
 		v1beta1cloudwatchevents.SchemeBuilder.AddToScheme,
 		v1beta2cloudwatchevents.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatchlogs.SchemeBuilder.AddToScheme,
+		v1beta2cloudwatchlogs.SchemeBuilder.AddToScheme,
+		v1beta1codeartifact.SchemeBuilder.AddToScheme,
 		v1beta1codecommit.SchemeBuilder.AddToScheme,
 		v1beta1codeguruprofiler.SchemeBuilder.AddToScheme,
 		v1beta1codepipeline.SchemeBuilder.AddToScheme,

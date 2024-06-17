@@ -667,10 +667,8 @@ func (in *RepositoryInitParameters) DeepCopyInto(out *RepositoryInitParameters) 
 	}
 	if in.ExternalConnections != nil {
 		in, out := &in.ExternalConnections, &out.ExternalConnections
-		*out = make([]ExternalConnectionsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ExternalConnectionsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Repository != nil {
 		in, out := &in.Repository, &out.Repository
@@ -774,10 +772,8 @@ func (in *RepositoryObservation) DeepCopyInto(out *RepositoryObservation) {
 	}
 	if in.ExternalConnections != nil {
 		in, out := &in.ExternalConnections, &out.ExternalConnections
-		*out = make([]ExternalConnectionsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ExternalConnectionsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
@@ -870,10 +866,8 @@ func (in *RepositoryParameters) DeepCopyInto(out *RepositoryParameters) {
 	}
 	if in.ExternalConnections != nil {
 		in, out := &in.ExternalConnections, &out.ExternalConnections
-		*out = make([]ExternalConnectionsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ExternalConnectionsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

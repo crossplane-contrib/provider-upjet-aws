@@ -163,14 +163,12 @@ spec:
                     description: An array of external connections associated with
                       the repository. Only one external connection can be set per
                       repository. see External Connections.
-                    items:
-                      properties:
-                        externalConnectionName:
-                          description: The name of the external connection associated
-                            with a repository.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      externalConnectionName:
+                        description: The name of the external connection associated
+                          with a repository.
+                        type: string
+                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -378,14 +376,12 @@ spec:
                     description: An array of external connections associated with
                       the repository. Only one external connection can be set per
                       repository. see External Connections.
-                    items:
-                      properties:
-                        externalConnectionName:
-                          description: The name of the external connection associated
-                            with a repository.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      externalConnectionName:
+                        description: The name of the external connection associated
+                          with a repository.
+                        type: string
+                    type: object
                   repository:
                     description: The name of the repository to create.
                     type: string
@@ -682,18 +678,16 @@ spec:
                     description: An array of external connections associated with
                       the repository. Only one external connection can be set per
                       repository. see External Connections.
-                    items:
-                      properties:
-                        externalConnectionName:
-                          description: The name of the external connection associated
-                            with a repository.
-                          type: string
-                        packageFormat:
-                          type: string
-                        status:
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      externalConnectionName:
+                        description: The name of the external connection associated
+                          with a repository.
+                        type: string
+                      packageFormat:
+                        type: string
+                      status:
+                        type: string
+                    type: object
                   id:
                     description: The ARN of the repository.
                     type: string

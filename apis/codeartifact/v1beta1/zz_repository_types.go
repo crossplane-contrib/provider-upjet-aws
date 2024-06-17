@@ -58,7 +58,7 @@ type RepositoryInitParameters struct {
 	DomainSelector *v1.Selector `json:"domainSelector,omitempty" tf:"-"`
 
 	// An array of external connections associated with the repository. Only one external connection can be set per repository. see External Connections.
-	ExternalConnections []ExternalConnectionsInitParameters `json:"externalConnections,omitempty" tf:"external_connections,omitempty"`
+	ExternalConnections *ExternalConnectionsInitParameters `json:"externalConnections,omitempty" tf:"external_connections,omitempty"`
 
 	// The name of the repository to create.
 	Repository *string `json:"repository,omitempty" tf:"repository,omitempty"`
@@ -89,7 +89,7 @@ type RepositoryObservation struct {
 	DomainOwner *string `json:"domainOwner,omitempty" tf:"domain_owner,omitempty"`
 
 	// An array of external connections associated with the repository. Only one external connection can be set per repository. see External Connections.
-	ExternalConnections []ExternalConnectionsObservation `json:"externalConnections,omitempty" tf:"external_connections,omitempty"`
+	ExternalConnections *ExternalConnectionsObservation `json:"externalConnections,omitempty" tf:"external_connections,omitempty"`
 
 	// The ARN of the repository.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -135,7 +135,7 @@ type RepositoryParameters struct {
 
 	// An array of external connections associated with the repository. Only one external connection can be set per repository. see External Connections.
 	// +kubebuilder:validation:Optional
-	ExternalConnections []ExternalConnectionsParameters `json:"externalConnections,omitempty" tf:"external_connections,omitempty"`
+	ExternalConnections *ExternalConnectionsParameters `json:"externalConnections,omitempty" tf:"external_connections,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
