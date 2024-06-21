@@ -85,7 +85,7 @@ func (mg *DomainPermissionsPolicy) ResolveReferences(ctx context.Context, c clie
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
-			Extract:      resource.ExtractParamPath("domain", false),
+			Extract:      ExtractDomainName(),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -96,25 +96,6 @@ func (mg *DomainPermissionsPolicy) ResolveReferences(ctx context.Context, c clie
 	}
 	mg.Spec.ForProvider.Domain = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DomainRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Domain", "DomainList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Domain),
-			Extract:      resource.ExtractParamPath("domain", false),
-			Reference:    mg.Spec.InitProvider.DomainRef,
-			Selector:     mg.Spec.InitProvider.DomainSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.Domain")
-	}
-	mg.Spec.InitProvider.Domain = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.DomainRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -135,7 +116,7 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
-			Extract:      resource.ExtractParamPath("domain", false),
+			Extract:      ExtractDomainName(),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -168,25 +149,6 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.Upstream[i3].RepositoryNameRef = rsp.ResolvedReference
 
 	}
-	{
-		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Domain", "DomainList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Domain),
-			Extract:      resource.ExtractParamPath("domain", false),
-			Reference:    mg.Spec.InitProvider.DomainRef,
-			Selector:     mg.Spec.InitProvider.DomainSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.Domain")
-	}
-	mg.Spec.InitProvider.Domain = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.DomainRef = rsp.ResolvedReference
-
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Upstream); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
@@ -228,7 +190,7 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
-			Extract:      resource.ExtractParamPath("domain", false),
+			Extract:      ExtractDomainName(),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -247,7 +209,7 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Repository),
-			Extract:      resource.ExtractParamPath("repository", false),
+			Extract:      ExtractRepositoryName(),
 			Reference:    mg.Spec.ForProvider.RepositoryRef,
 			Selector:     mg.Spec.ForProvider.RepositorySelector,
 			To:           reference.To{List: l, Managed: m},
@@ -258,44 +220,6 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 	}
 	mg.Spec.ForProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Domain", "DomainList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Domain),
-			Extract:      resource.ExtractParamPath("domain", false),
-			Reference:    mg.Spec.InitProvider.DomainRef,
-			Selector:     mg.Spec.InitProvider.DomainSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.Domain")
-	}
-	mg.Spec.InitProvider.Domain = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.DomainRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("codeartifact.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Repository),
-			Extract:      resource.ExtractParamPath("repository", false),
-			Reference:    mg.Spec.InitProvider.RepositoryRef,
-			Selector:     mg.Spec.InitProvider.RepositorySelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.Repository")
-	}
-	mg.Spec.InitProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.RepositoryRef = rsp.ResolvedReference
 
 	return nil
 }

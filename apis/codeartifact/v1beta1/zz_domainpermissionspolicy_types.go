@@ -15,21 +15,8 @@ import (
 
 type DomainPermissionsPolicyInitParameters struct {
 
-	// The name of the domain on which to set the resource policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codeartifact/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",false)
-	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
-
 	// The account number of the AWS account that owns the domain.
 	DomainOwner *string `json:"domainOwner,omitempty" tf:"domain_owner,omitempty"`
-
-	// Reference to a Domain in codeartifact to populate domain.
-	// +kubebuilder:validation:Optional
-	DomainRef *v1.Reference `json:"domainRef,omitempty" tf:"-"`
-
-	// Selector for a Domain in codeartifact to populate domain.
-	// +kubebuilder:validation:Optional
-	DomainSelector *v1.Selector `json:"domainSelector,omitempty" tf:"-"`
 
 	// A JSON policy string to be set as the access control resource policy on the provided domain.
 	PolicyDocument *string `json:"policyDocument,omitempty" tf:"policy_document,omitempty"`
@@ -63,7 +50,7 @@ type DomainPermissionsPolicyParameters struct {
 
 	// The name of the domain on which to set the resource policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/codeartifact/v1beta1.Domain
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",false)
+	// +crossplane:generate:reference:extractor=ExtractDomainName()
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
