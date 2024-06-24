@@ -154,6 +154,17 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Event data stores can be imported using their arn
 	"aws_cloudtrail_event_data_store": config.IdentifierFromProvider,
 
+	// codeartifact
+	//
+	// CodeArtifact Domain can be imported using the CodeArtifact Domain arn
+	"aws_codeartifact_domain": config.TemplatedStringAsIdentifier("", "arn:aws:codeartifact:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .external_name }}"),
+	// CodeArtifact Domain Permissions Policies can be imported using the CodeArtifact Domain ARN
+	"aws_codeartifact_domain_permissions_policy": config.TemplatedStringAsIdentifier("", "arn:aws:codeartifact:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .parameters.domain }}"),
+	// CodeArtifact Repository can be imported using the CodeArtifact Repository ARN
+	"aws_codeartifact_repository": config.TemplatedStringAsIdentifier("", "arn:aws:codeartifact:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:repository/{{ .parameters.domain }}/{{ .external_name }}"),
+	// CodeArtifact Repository Permissions Policies can be imported using the CodeArtifact Repository ARN
+	"aws_codeartifact_repository_permissions_policy": config.TemplatedStringAsIdentifier("", "arn:aws:codeartifact:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:repository/{{ .parameters.domain }}/{{ .parameters.repository }}"),
+
 	// cognitoidentity
 	//
 	// us-west-2_abc123

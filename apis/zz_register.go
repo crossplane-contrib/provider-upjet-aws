@@ -72,6 +72,7 @@ import (
 	v1beta2cloudwatchevents "github.com/upbound/provider-aws/apis/cloudwatchevents/v1beta2"
 	v1beta1cloudwatchlogs "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1"
 	v1beta2cloudwatchlogs "github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta2"
+	v1beta1codeartifact "github.com/upbound/provider-aws/apis/codeartifact/v1beta1"
 	v1beta1codecommit "github.com/upbound/provider-aws/apis/codecommit/v1beta1"
 	v1beta1codeguruprofiler "github.com/upbound/provider-aws/apis/codeguruprofiler/v1beta1"
 	v1beta1codepipeline "github.com/upbound/provider-aws/apis/codepipeline/v1beta1"
@@ -364,6 +365,7 @@ func init() {
 		v1beta2cloudwatchevents.SchemeBuilder.AddToScheme,
 		v1beta1cloudwatchlogs.SchemeBuilder.AddToScheme,
 		v1beta2cloudwatchlogs.SchemeBuilder.AddToScheme,
+		v1beta1codeartifact.SchemeBuilder.AddToScheme,
 		v1beta1codecommit.SchemeBuilder.AddToScheme,
 		v1beta1codeguruprofiler.SchemeBuilder.AddToScheme,
 		v1beta1codepipeline.SchemeBuilder.AddToScheme,

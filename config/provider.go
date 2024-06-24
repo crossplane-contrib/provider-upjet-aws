@@ -21,6 +21,7 @@ import (
 	"github.com/upbound/provider-aws/config/cloudwatch"
 	"github.com/upbound/provider-aws/config/cloudwatchevents"
 	"github.com/upbound/provider-aws/config/cloudwatchlogs"
+	"github.com/upbound/provider-aws/config/codeartifact"
 	"github.com/upbound/provider-aws/config/cognitoidentity"
 	"github.com/upbound/provider-aws/config/cognitoidp"
 	"github.com/upbound/provider-aws/config/connect"
@@ -107,6 +108,7 @@ func init() {
 	ProviderConfiguration.AddConfig(cloudsearch.Configure)
 	ProviderConfiguration.AddConfig(cloudwatch.Configure)
 	ProviderConfiguration.AddConfig(cloudwatchlogs.Configure)
+	ProviderConfiguration.AddConfig(codeartifact.Configure)
 	ProviderConfiguration.AddConfig(cognitoidentity.Configure)
 	ProviderConfiguration.AddConfig(cognitoidp.Configure)
 	ProviderConfiguration.AddConfig(connect.Configure)
