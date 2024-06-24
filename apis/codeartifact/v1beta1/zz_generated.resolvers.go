@@ -85,7 +85,7 @@ func (mg *DomainPermissionsPolicy) ResolveReferences(ctx context.Context, c clie
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
-			Extract:      ExtractDomainName(),
+			Extract:      resource.ExtractParamPath("domain", true),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -116,7 +116,7 @@ func (mg *Repository) ResolveReferences(ctx context.Context, c client.Reader) er
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
-			Extract:      ExtractDomainName(),
+			Extract:      resource.ExtractParamPath("domain", true),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -190,7 +190,7 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Domain),
-			Extract:      ExtractDomainName(),
+			Extract:      resource.ExtractParamPath("domain", true),
 			Reference:    mg.Spec.ForProvider.DomainRef,
 			Selector:     mg.Spec.ForProvider.DomainSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -209,7 +209,7 @@ func (mg *RepositoryPermissionsPolicy) ResolveReferences(ctx context.Context, c 
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Repository),
-			Extract:      ExtractRepositoryName(),
+			Extract:      resource.ExtractParamPath("repository", true),
 			Reference:    mg.Spec.ForProvider.RepositoryRef,
 			Selector:     mg.Spec.ForProvider.RepositorySelector,
 			To:           reference.To{List: l, Managed: m},

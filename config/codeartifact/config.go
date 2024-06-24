@@ -22,26 +22,26 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_codeartifact_domain_permissions_policy", func(r *config.Resource) {
 		r.References["domain"] = config.Reference{
 			TerraformName: "aws_codeartifact_domain",
-			Extractor:     "ExtractDomainName()",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",true)`,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_codeartifact_repository", func(r *config.Resource) {
 		r.References["domain"] = config.Reference{
 			TerraformName: "aws_codeartifact_domain",
-			Extractor:     "ExtractDomainName()",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",true)`,
 		}
 	})
 
 	p.AddResourceConfigurator("aws_codeartifact_repository_permissions_policy", func(r *config.Resource) {
 		r.References["domain"] = config.Reference{
 			TerraformName: "aws_codeartifact_domain",
-			Extractor:     "ExtractDomainName()",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("domain",true)`,
 		}
 
 		r.References["repository"] = config.Reference{
 			TerraformName: "aws_codeartifact_repository",
-			Extractor:     "ExtractRepositoryName()",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("repository",true)`,
 		}
 	})
 }
