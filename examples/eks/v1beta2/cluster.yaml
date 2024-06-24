@@ -86,7 +86,7 @@ metadata:
   name: sample-subnet2
 spec:
   forProvider:
-    availabilityZone: us-west-1a
+    availabilityZone: us-west-1c
     cidrBlock: 172.16.11.0/24
     mapPublicIpOnLaunch: true
     region: us-west-1
