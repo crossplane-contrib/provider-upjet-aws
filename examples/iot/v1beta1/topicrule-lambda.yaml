@@ -1,0 +1,142 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: TopicRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: topicrule_lambda
+  labels:
+    testing.upbound.io/example-name: topicrule-lambda
+  name: topicrule-lambda
+spec:
+  forProvider:
+    description: Example rule
+    enabled: true
+    region: us-east-2
+    sql: SELECT * FROM 'topic/test'
+    sqlVersion: "2016-03-23"
+    lambda:
+      - functionArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-lambda
+            testing.upbound.io/action-type: primary
+    errorAction:
+      - lambda:
+          - functionArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-lambda
+                testing.upbound.io/action-type: error
+
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-lambda
+  name: topicrule-lambda
+spec:
+  forProvider:
+    managedPolicyArns:
+      - arn:aws:iam::aws:policy/AmazonS3FullAccess
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "lambda.amazonaws.com",
+                "iot.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-lambda
+    testing.upbound.io/action-type: primary
+  name: topicrule-lambda-action
+spec:
+  forProvider:
+    region: us-east-2
+    handler: handler
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-lambda
+    runtime: nodejs18.x
+    s3BucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-lambda
+        testing.upbound.io/bucket-type: lambda
+    s3Key: lambda.zip
+
+---
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-lambda
+    testing.upbound.io/action-type: error
+  name: topicrule-lambda-error
+spec:
+  forProvider:
+    region: us-east-2
+    handler: handler
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-lambda
+    runtime: nodejs18.x
+    s3BucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-lambda
+        testing.upbound.io/bucket-type: lambda
+    s3Key: lambda.zip
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}-lambda
+  labels:
+    testing.upbound.io/example-name: topicrule-lambda
+    testing.upbound.io/bucket-type: lambda
+  name: topicrule-lambda-lambda
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketObject
+#TODO: Replace with the non-deprecated Object kind once its terraform id is stable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-lambda
+  name: lambda-example
+spec:
+  forProvider:
+    region: us-east-2
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-lambda
+        testing.upbound.io/bucket-type: lambda
+    # A zip file for a "hello world" javascript lambda
+    contentBase64: UEsDBBQAAAAIAFd7c1eDOfFtMAAAADEAAAAIABwAaW5kZXguanNVVAkAA7WZWmWrmVpldXgLAAEE6AMAAAToAwAAS60oyC8qKdbLSMxLyUktUrBV0NBUsLVTSM7PK87PSdXLyU/XUPfLB/FLUvNK1DUBUEsBAh4DFAAAAAgAV3tzV4M58W0wAAAAMQAAAAgAGAAAAAAAAQAAALSBAAAAAGluZGV4LmpzVVQFAAO1mVpldXgLAAEE6AMAAAToAwAAUEsFBgAAAAABAAEATgAAAHIAAAAAAA==
+    contentType: application/zip
+    key: lambda.zip

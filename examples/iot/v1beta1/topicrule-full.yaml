@@ -1,0 +1,585 @@
+apiVersion: iot.aws.upbound.io/v1beta1
+kind: TopicRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: topicrule_full
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+  name: topicrule-full
+spec:
+  forProvider:
+    description: Example rule
+    ruleName:
+    enabled: true
+    region: us-east-2
+    sql: SELECT * FROM 'topic/test'
+    sqlVersion: "2016-03-23"
+    # The AWS api allows a max of 10 actions.
+    cloudwatchLogs:
+      - logGroupNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+    dynamodbv2:
+      - roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+        putItem:
+          - tableNameSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-full
+                testing.upbound.io/action-type: primary
+    firehose:
+      - deliveryStreamNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+    kinesis:
+      - streamNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+    lambda:
+      - functionArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+    republish:
+      - topic: ${topic(1)}
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+    s3:
+      - key: ${topic(2)}
+        bucketNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+    sqs:
+      - queueUrlSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+        useBase64: false
+    stepFunctions:
+      - stateMachineNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+    timestream:
+      - databaseNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        tableNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+        dimension:
+          - name: d
+            value: ${topic(1)}
+    errorAction:
+      - cloudwatchLogs:
+          - logGroupNameSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-full
+                testing.upbound.io/action-type: error
+            roleArnSelector:
+              matchLabels:
+                testing.upbound.io/example-name: topicrule-full
+        # If you specify multiple error actions, terraform only applies one of them and then there's a perpetual diff.
+        # It's unclear if this is a terraform provider bug or an AWS api limitation.
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+  name: topicrule-full
+spec:
+  forProvider:
+    managedPolicyArns:
+      - arn:aws:iam::aws:policy/AmazonS3FullAccess
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": [
+                "firehose.amazonaws.com",
+                "lambda.amazonaws.com",
+                "iot.amazonaws.com",
+                "states.amazonaws.com"
+              ]
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+    readCapacity: 20
+    writeCapacity: 20
+    attribute:
+      - name: a
+        type: S
+    hashKey: a
+
+---
+apiVersion: dynamodb.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+    readCapacity: 20
+    writeCapacity: 20
+    attribute:
+      - name: a
+        type: S
+    hashKey: a
+
+---
+apiVersion: firehose.aws.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+    name: topicrule-action
+    destination: extended_s3
+    extendedS3Configuration:
+      - bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: primary
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+
+
+---
+apiVersion: firehose.aws.upbound.io/v1beta1
+kind: DeliveryStream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+    name: topicrule-error
+    destination: extended_s3
+    extendedS3Configuration:
+      - bucketArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+            testing.upbound.io/action-type: error
+        roleArnSelector:
+          matchLabels:
+            testing.upbound.io/example-name: topicrule-full
+
+---
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+    retentionPeriod: 24
+    shardCount: 1
+
+---
+apiVersion: kinesis.aws.upbound.io/v1beta1
+kind: Stream
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+    retentionPeriod: 24
+    shardCount: 1
+
+---
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+    handler: handler
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+    runtime: nodejs18.x
+    s3BucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+        testing.upbound.io/bucket-type: lambda
+    s3Key: lambda.zip
+
+---
+apiVersion: lambda.aws.upbound.io/v1beta1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+    handler: handler
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+    runtime: nodejs18.x
+    s3BucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+        testing.upbound.io/bucket-type: lambda
+    s3Key: lambda.zip
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}-lambda
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/bucket-type: lambda
+  name: topicrule-full-lambda
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketObject
+#TODO: Replace with the non-deprecated Object kind once its terraform id is stable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+  name: lambda-example
+spec:
+  forProvider:
+    region: us-east-2
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+        testing.upbound.io/bucket-type: lambda
+    # A zip file for a "hello world" javascript lambda
+    contentBase64: UEsDBBQAAAAIAFd7c1eDOfFtMAAAADEAAAAIABwAaW5kZXguanNVVAkAA7WZWmWrmVpldXgLAAEE6AMAAAToAwAAS60oyC8qKdbLSMxLyUktUrBV0NBUsLVTSM7PK87PSdXLyU/XUPfLB/FLUvNK1DUBUEsBAh4DFAAAAAgAV3tzV4M58W0wAAAAMQAAAAgAGAAAAAAAAQAAALSBAAAAAGluZGV4LmpzVVQFAAO1mVpldXgLAAEE6AMAAAToAwAAUEsFBgAAAAABAAEATgAAAHIAAAAAAA==
+    contentType: application/zip
+    key: lambda.zip
+
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}-primary
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+---
+
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}-error
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+---
+
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+---
+apiVersion: sns.aws.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+---
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: sfn.aws.upbound.io/v1beta1
+kind: StateMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+    definition: |
+      {
+        "Comment": "A Hello World example of the Amazon States Language using an AWS Lambda Function",
+        "StartAt": "HelloWorld",
+        "States": {
+          "HelloWorld": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-2:609897127049:function:example",
+            "End": true
+          }
+        }
+      }
+
+---
+apiVersion: sfn.aws.upbound.io/v1beta1
+kind: StateMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+    definition: |
+      {
+        "Comment": "A Hello World example of the Amazon States Language using an AWS Lambda Function",
+        "StartAt": "HelloWorld",
+        "States": {
+          "HelloWorld": {
+            "Type": "Task",
+            "Resource": "arn:aws:lambda:us-east-2:609897127049:function:example",
+            "End": true
+          }
+        }
+      }
+
+---
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+---
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Database
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+
+---
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: primary
+  name: topicrule-full-action
+spec:
+  forProvider:
+    region: us-east-2
+    tableName: primary
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+        testing.upbound.io/action-type: primary
+---
+apiVersion: timestreamwrite.aws.upbound.io/v1beta1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta1/topicrule
+  labels:
+    testing.upbound.io/example-name: topicrule-full
+    testing.upbound.io/action-type: error
+  name: topicrule-full-error
+spec:
+  forProvider:
+    region: us-east-2
+    tableName: error
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: topicrule-full
+        testing.upbound.io/action-type: error
+
