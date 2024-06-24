@@ -53,6 +53,7 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
 				"release_version",
+				"version",
 			},
 		}
 		r.UseAsync = true
