@@ -555,7 +555,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_iam_policy":      iamPolicy(),
 	"aws_iam_user":        config.NameAsIdentifier,
 	"aws_iam_group":       config.NameAsIdentifier,
-	"aws_iam_role":        config.NameAsIdentifier,
+	"aws_iam_role":        config.TemplatedStringAsIdentifier("", "{{ .parameters.path }}/{{ .external_name }}"),
 	"aws_iam_role_policy": config.TemplatedStringAsIdentifier("name", "{{ .parameters.role }}:{{ .external_name }}"),
 	// Imported using the role name and policy arn separated by /
 	// test-role/arn:aws:iam::xxxxxxxxxxxx:policy/test-policy
