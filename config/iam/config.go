@@ -5,6 +5,9 @@
 package iam
 
 import (
+	"errors"
+	"strings"
+
 	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-aws/config/common"
@@ -31,6 +34,15 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_iam_role", func(r *config.Resource) {
 		r.MetaResource.ArgumentDocs["inline_policy"] = `Configuration block defining an exclusive set of IAM inline policies associated with the IAM role. See below. If no blocks are configured, Crossplane will not manage any inline policies in this resource. Configuring one empty block (i.e., inline_policy {}) will cause Crossplane to remove all inline policies added out of band on apply.`
 		r.MetaResource.ArgumentDocs["managed_policy_arns"] = `Set of exclusive IAM managed policy ARNs to attach to the IAM role. If this attribute is not configured, Crossplane will ignore policy attachments to this resource. When configured, Crossplane will align the role's managed policy attachments with this set by attaching or detaching managed policies. Configuring an empty set (i.e., managed_policy_arns = []) will cause Crossplane to remove all managed policy attachments.`
+
+		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+			w := strings.Split(tfstate["arn"].(string), "/")
+			if len(w) < 2 {
+				return "", errors.New("the IAM role ARN does not have the expected format")
+			}
+			// Expected external name format: role/path/role-name
+			return strings.Join(w[1:len(w)-1], "/"), nil
+		}
 
 		// Both inline and attached policies can either be specified in and managed by the Role resource, or by separate
 		// RolePolicy and RolePolicyAttachment resources, so the Role should not late initialize them if they were unset
