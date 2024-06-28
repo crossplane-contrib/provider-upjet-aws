@@ -619,6 +619,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// c-0187d1eb-88c8-475a-9b79-16ef5a10c94f
 	"aws_mq_configuration": config.IdentifierFromProvider,
 
+	// mwaa
+	//
+	// mwaa_environment can be imported using the name
+	"aws_mwaa_environment": config.NameAsIdentifier,
+
 	// neptune
 	//
 	"aws_neptune_cluster": config.ParameterAsIdentifier("cluster_identifier"),
