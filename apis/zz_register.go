@@ -209,6 +209,7 @@ import (
 	v1alpha1 "github.com/upbound/provider-aws/apis/mq/v1alpha1"
 	v1beta1mq "github.com/upbound/provider-aws/apis/mq/v1beta1"
 	v1beta2mq "github.com/upbound/provider-aws/apis/mq/v1beta2"
+	v1beta1mwaa "github.com/upbound/provider-aws/apis/mwaa/v1beta1"
 	v1beta1neptune "github.com/upbound/provider-aws/apis/neptune/v1beta1"
 	v1beta2neptune "github.com/upbound/provider-aws/apis/neptune/v1beta2"
 	v1beta1networkfirewall "github.com/upbound/provider-aws/apis/networkfirewall/v1beta1"
@@ -502,6 +503,7 @@ func init() {
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1mq.SchemeBuilder.AddToScheme,
 		v1beta2mq.SchemeBuilder.AddToScheme,
+		v1beta1mwaa.SchemeBuilder.AddToScheme,
 		v1beta1neptune.SchemeBuilder.AddToScheme,
 		v1beta2neptune.SchemeBuilder.AddToScheme,
 		v1beta1networkfirewall.SchemeBuilder.AddToScheme,
