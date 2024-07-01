@@ -7,7 +7,6 @@ kind: CustomerManagedPolicyAttachment
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta2/customermanagedpolicyattachment
-    upjet.upbound.io/manual-intervention: This resource requires a valid instanceArn(The
       Amazon Resource Name (ARN) of the SSO Instance under which the operation will
       be executed).
   labels:
@@ -21,8 +20,7 @@ spec:
       policyNameSelector:
         matchLabels:
           testing.upbound.io/example-name: ssoadmin-customer-managed-policy-attachment
-    instanceArn: ARN of a manually created SSO instance in the same region specified
-      below
+    instanceArn: "${data.sso_instance_arn}"
     permissionSetArnSelector:
       matchLabels:
         testing.upbound.io/example-name: ssoadmin-customer-managed-policy-attachment
@@ -60,15 +58,11 @@ kind: PermissionSet
 metadata:
   annotations:
     meta.upbound.io/example-id: ssoadmin/v1beta2/customermanagedpolicyattachment
-    upjet.upbound.io/manual-intervention: This resource requires a valid instanceArn(The
-      Amazon Resource Name (ARN) of the SSO Instance under which the operation will
-      be executed).
   labels:
     testing.upbound.io/example-name: ssoadmin-customer-managed-policy-attachment
   name: ssoadmin-customer-managed-policy-attachment
 spec:
   forProvider:
-    instanceArn: ARN of a manually created SSO instance in the same region specified
-      below
+    instanceArn: "${data.sso_instance_arn}"
     name: example-cmpa
     region: us-east-1
