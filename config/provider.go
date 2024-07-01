@@ -66,6 +66,7 @@ import (
 	"github.com/upbound/provider-aws/config/medialive"
 	"github.com/upbound/provider-aws/config/memorydb"
 	"github.com/upbound/provider-aws/config/mq"
+	"github.com/upbound/provider-aws/config/mwaa"
 	"github.com/upbound/provider-aws/config/neptune"
 	"github.com/upbound/provider-aws/config/networkfirewall"
 	"github.com/upbound/provider-aws/config/networkmanager"
@@ -146,6 +147,7 @@ func init() {
 	ProviderConfiguration.AddConfig(licensemanager.Configure)
 	ProviderConfiguration.AddConfig(memorydb.Configure)
 	ProviderConfiguration.AddConfig(mq.Configure)
+	ProviderConfiguration.AddConfig(mwaa.Configure)
 	ProviderConfiguration.AddConfig(neptune.Configure)
 	ProviderConfiguration.AddConfig(networkfirewall.Configure)
 	ProviderConfiguration.AddConfig(opensearch.Configure)

@@ -592,6 +592,7 @@
 "aws_mskconnect_connector",
 "aws_mskconnect_custom_plugin",
 "aws_mskconnect_worker_configuration",
+"aws_mwaa_environment",
 "aws_nat_gateway",
 "aws_neptune_cluster",
 "aws_neptune_cluster_endpoint",
