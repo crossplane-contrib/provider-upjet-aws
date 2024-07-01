@@ -33,7 +33,7 @@ type LaunchTemplateInitParameters struct {
 	// Name of the EC2 Launch Template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
+	// EC2 Launch Template version number.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -45,7 +45,7 @@ type LaunchTemplateObservation struct {
 	// Name of the EC2 Launch Template. Conflicts with id.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
+	// EC2 Launch Template version number.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -59,7 +59,7 @@ type LaunchTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.
+	// EC2 Launch Template version number.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version" tf:"version,omitempty"`
 }

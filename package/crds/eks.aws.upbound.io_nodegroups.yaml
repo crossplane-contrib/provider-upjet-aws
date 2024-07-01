@@ -1715,12 +1715,7 @@ spec:
                           id.
                         type: string
                       version:
-                        description: EC2 Launch Template version number. While the
-                          API accepts values like $Default and $Latest, the API will
-                          convert the value to the associated version number (e.g.,
-                          1). Using the default_version or latest_version attribute
-                          of the aws_launch_template resource or data source is recommended
-                          for this argument.
+                        description: EC2 Launch Template version number.
                         type: string
                     type: object
                   nodeRoleArn:
@@ -2190,12 +2185,7 @@ spec:
                           id.
                         type: string
                       version:
-                        description: EC2 Launch Template version number. While the
-                          API accepts values like $Default and $Latest, the API will
-                          convert the value to the associated version number (e.g.,
-                          1). Using the default_version or latest_version attribute
-                          of the aws_launch_template resource or data source is recommended
-                          for this argument.
+                        description: EC2 Launch Template version number.
                         type: string
                     type: object
                   nodeRoleArn:
@@ -2833,12 +2823,7 @@ spec:
                           id.
                         type: string
                       version:
-                        description: EC2 Launch Template version number. While the
-                          API accepts values like $Default and $Latest, the API will
-                          convert the value to the associated version number (e.g.,
-                          1). Using the default_version or latest_version attribute
-                          of the aws_launch_template resource or data source is recommended
-                          for this argument.
+                        description: EC2 Launch Template version number.
                         type: string
                     type: object
                   nodeRoleArn:
