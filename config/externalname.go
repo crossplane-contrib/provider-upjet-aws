@@ -69,8 +69,14 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
 
 	// CodeGuru Profiler
+	//
 	// Profiling Group can be imported using the the profiling group name
 	"aws_codeguruprofiler_profiling_group": config.NameAsIdentifier,
+
+	// dynamodb
+	//
+	// DynamoDB table resource policy can be important using the DynamoDB resource identifier
+	"aws_dynamodb_resource_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }}"),
 }
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations

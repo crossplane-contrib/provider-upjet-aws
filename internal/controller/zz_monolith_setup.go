@@ -287,6 +287,7 @@ import (
 	contributorinsights "github.com/upbound/provider-aws/internal/controller/dynamodb/contributorinsights"
 	globaltable "github.com/upbound/provider-aws/internal/controller/dynamodb/globaltable"
 	kinesisstreamingdestination "github.com/upbound/provider-aws/internal/controller/dynamodb/kinesisstreamingdestination"
+	resourcepolicydynamodb "github.com/upbound/provider-aws/internal/controller/dynamodb/resourcepolicy"
 	table "github.com/upbound/provider-aws/internal/controller/dynamodb/table"
 	tableitem "github.com/upbound/provider-aws/internal/controller/dynamodb/tableitem"
 	tablereplica "github.com/upbound/provider-aws/internal/controller/dynamodb/tablereplica"
@@ -1237,6 +1238,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		contributorinsights.Setup,
 		globaltable.Setup,
 		kinesisstreamingdestination.Setup,
+		resourcepolicydynamodb.Setup,
 		table.Setup,
 		tableitem.Setup,
 		tablereplica.Setup,
