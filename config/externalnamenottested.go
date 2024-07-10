@@ -173,6 +173,19 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_vpc_ipv6_cidr_block_association can be imported by using the VPC CIDR Association ID
 	"aws_vpc_ipv6_cidr_block_association": config.IdentifierFromProvider,
 
+	// glue
+	//
+	"aws_glue_dev_endpoint": config.NameAsIdentifier,
+	// Imported using id, e.g., tfm-c2cafbe83b1c575f49eaca9939220e2fcd58e2d5
+	"aws_glue_ml_transform": config.IdentifierFromProvider,
+	// It has no naming argument, imported with their catalog ID (usually
+	// AWS account ID), database name, table name and partition values e.g.,
+	// 123456789012:MyDatabase:MyTable:val1#val2
+	"aws_glue_partition": config.IdentifierFromProvider,
+	// Documentation does not match schema where there are multiple indexes
+	// each with their own name.
+	"aws_glue_partition_index": config.IdentifierFromProvider,
+
 	// securityhub
 	//
 	// imported using the AWS account ID
@@ -351,11 +364,50 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// Note: This resource was deleted in v5.31.0
 	"aws_redshift_security_group": config.NameAsIdentifier,
 
+	// route53
+	//
+	// Imported by using the Route 53 Hosted Zone identifier and KMS Key
+	// identifier, separated by a comma (,), e.g., Z1D633PJN98FT9,example
+	// disabled until it's successfully tested
+	"aws_route53_key_signing_key": FormattedIdentifierUserDefinedNameLast("name", ",", "hosted_zone_id"),
+	// xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+	// disabled until it's successfully tested
+	"aws_route53_query_log": config.IdentifierFromProvider,
+
 	// route53domains
 	//
 	// No import
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_route53domains_registered_domain": config.IdentifierFromProvider,
+
+	// route53resolver
+	//
+	// rdsc-be1866ecc1683e95
+	// disabled until it's successfully tested
+	"aws_route53_resolver_dnssec_config": config.IdentifierFromProvider,
+	// rdsc-be1866ecc1683e95
+	// disabled until it's successfully tested
+	"aws_route53_resolver_firewall_config": config.IdentifierFromProvider,
+	// rslvr-fdl-0123456789abcdef
+	// disabled until it's successfully tested
+	"aws_route53_resolver_firewall_domain_list": config.IdentifierFromProvider,
+	// Imported using the Route 53 Resolver DNS Firewall rule group ID and
+	// domain list ID separated by ':', e.g.,
+	// rslvr-frg-0123456789abcdef:rslvr-fdl-0123456789abcdef
+	// disabled until it's successfully tested
+	"aws_route53_resolver_firewall_rule": config.IdentifierFromProvider,
+	// rslvr-frg-0123456789abcdef
+	// disabled until it's successfully tested
+	"aws_route53_resolver_firewall_rule_group": config.IdentifierFromProvider,
+	// rslvr-frgassoc-0123456789abcdef
+	// disabled until it's successfully tested
+	"aws_route53_resolver_firewall_rule_group_association": config.IdentifierFromProvider,
+	// rqlc-92edc3b1838248bf
+	// disabled until it's successfully tested
+	"aws_route53_resolver_query_log_config": config.IdentifierFromProvider,
+	// rqlca-b320624fef3c4d70
+	// disabled until it's successfully tested
+	"aws_route53_resolver_query_log_config_association": config.IdentifierFromProvider,
 
 	// s3outposts
 	//
