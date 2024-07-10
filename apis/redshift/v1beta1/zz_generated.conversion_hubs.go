@@ -10,9 +10,6 @@ package v1beta1
 func (tr *AuthenticationProfile) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Cluster) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *EndpointAccess) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -26,9 +23,6 @@ func (tr *HSMConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ParameterGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ScheduledAction) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SnapshotCopyGrant) Hub() {}

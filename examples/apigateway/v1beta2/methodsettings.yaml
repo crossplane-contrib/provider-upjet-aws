@@ -1,0 +1,93 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apigateway.aws.upbound.io/v1beta2
+kind: MethodSettings
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/methodsettings
+    uptest.upbound.io/disable-import: "true"
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-all
+spec:
+  forProvider:
+    methodPath: '*/*'
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+    settings:
+      metricsEnabled: true
+    stageNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+---
+apiVersion: apigateway.aws.upbound.io/v1beta2
+kind: Stage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/methodsettings
+    uptest.upbound.io/disable-import: "true"
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-stage
+spec:
+  forProvider:
+    deploymentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+    stageName: development
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/methodsettings
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-deployment
+spec:
+  forProvider:
+    region: us-west-1
+    restApiIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-methodsettings
+---
+apiVersion: apigateway.aws.upbound.io/v1beta1
+kind: RestAPI
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apigateway/v1beta2/methodsettings
+  labels:
+    testing.upbound.io/example-name: example-methodsettings
+  name: example-methodsettings-restapi
+spec:
+  forProvider:
+    body: |-
+      ${jsonencode({
+          openapi = "3.0.1"
+          info = {
+            title   = "example"
+            version = "1.0"
+          }
+          paths = {
+            "/path1" = {
+              get = {
+                x-amazon-apigateway-integration = {
+                  httpMethod           = "GET"
+                  payloadFormatVersion = "1.0"
+                  type                 = "HTTP_PROXY"
+                  uri                  = "https://ip-ranges.amazonaws.com/ip-ranges.json"
+                }
+              }
+            }
+          }
+        })}
+    name: test-demo
+    region: us-west-1

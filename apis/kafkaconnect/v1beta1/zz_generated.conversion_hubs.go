@@ -7,10 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Connector) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *CustomPlugin) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *WorkerConfiguration) Hub() {}

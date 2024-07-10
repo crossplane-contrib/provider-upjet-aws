@@ -115,7 +115,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+		m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta2", "DeliveryStream", "DeliveryStreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -153,7 +153,7 @@ func (mg *MetricStream) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta1", "DeliveryStream", "DeliveryStreamList")
+		m, l, err = apisresolver.GetManagedResource("firehose.aws.upbound.io", "v1beta2", "DeliveryStream", "DeliveryStreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

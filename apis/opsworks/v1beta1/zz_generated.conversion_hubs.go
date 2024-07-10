@@ -10,49 +10,13 @@ package v1beta1
 func (tr *Application) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *CustomLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *EcsClusterLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *GangliaLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *HAProxyLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Instance) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *JavaAppLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MemcachedLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MySQLLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *NodeJSAppLayer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Permission) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *PHPAppLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *RailsAppLayer) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *RDSDBInstance) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Stack) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *StaticWebLayer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *UserProfile) Hub() {}

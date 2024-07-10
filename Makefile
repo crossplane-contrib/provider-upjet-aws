@@ -78,9 +78,11 @@ export SUBPACKAGES := $(SUBPACKAGES)
 # Setup Kubernetes tools
 
 KIND_VERSION = v0.23.0
-UP_VERSION = v0.30.0
+UP_VERSION = v0.31.0
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.11.1
+UPTEST_LOCAL_VERSION = v0.12.0-9.gac371c9
+UPTEST_LOCAL_CHANNEL = main
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
 CROSSPLANE_VERSION = 1.14.6
@@ -89,6 +91,16 @@ export UP_VERSION := $(UP_VERSION)
 export UP_CHANNEL := $(UP_CHANNEL)
 
 -include build/makelib/k8s_tools.mk
+
+# uptest download and install
+UPTEST_LOCAL := $(TOOLS_HOST_DIR)/uptest-$(UPTEST_LOCAL_VERSION)
+
+$(UPTEST_LOCAL):
+	@$(INFO) installing uptest $(UPTEST_LOCAL)
+	@mkdir -p $(TOOLS_HOST_DIR)
+	@curl -fsSLo $(UPTEST_LOCAL) https://s3.us-west-2.amazonaws.com/crossplane.uptest.releases/$(UPTEST_LOCAL_CHANNEL)/$(UPTEST_LOCAL_VERSION)/bin/$(SAFEHOST_PLATFORM)/uptest || $(FAIL)
+	@chmod +x $(UPTEST_LOCAL)
+	@$(OK) installing uptest $(UPTEST_LOCAL)
 
 # ====================================================================================
 # Setup Images
@@ -218,9 +230,9 @@ CROSSPLANE_NAMESPACE = upbound-system
 #   aws_secret_access_key = REDACTED'
 #   The associated `ProviderConfig`s will be named as `default` and `peer`.
 # - UPTEST_DATASOURCE_PATH (optional), see https://github.com/upbound/uptest#injecting-dynamic-values-and-datasource
-uptest: $(UPTEST) $(KUBECTL) $(KUTTL)
+uptest: $(UPTEST_LOCAL) $(KUBECTL) $(KUTTL)
 	@$(INFO) running automated tests
-	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
+	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST_LOCAL) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
 	@$(OK) running automated tests
 
 uptest-local:

@@ -16,9 +16,6 @@ func (tr *HealthCheck) Hub() {}
 func (tr *HostedZoneDNSSEC) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Record) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ResolverConfig) Hub() {}
 
 // Hub marks this type as a conversion hub.

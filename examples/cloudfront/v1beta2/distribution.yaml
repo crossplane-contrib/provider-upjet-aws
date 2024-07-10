@@ -1,0 +1,122 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cloudfront.aws.upbound.io/v1beta2
+kind: Distribution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/distribution
+  labels:
+    testing.upbound.io/example-name: distribution
+  name: example-distribution
+spec:
+  forProvider:
+    comment: Some comment
+    defaultCacheBehavior:
+      allowedMethods:
+      - DELETE
+      - GET
+      - HEAD
+      - OPTIONS
+      - PATCH
+      - POST
+      - PUT
+      cachedMethods:
+      - GET
+      - HEAD
+      defaultTtl: 3600
+      forwardedValues:
+        cookies:
+          forward: none
+        queryString: false
+      maxTtl: 86400
+      minTtl: 0
+      targetOriginId: customOrigin
+      viewerProtocolPolicy: allow-all
+    defaultRootObject: index.html
+    enabled: true
+    isIpv6Enabled: true
+    orderedCacheBehavior:
+    - allowedMethods:
+      - GET
+      - HEAD
+      - OPTIONS
+      cachedMethods:
+      - GET
+      - HEAD
+      - OPTIONS
+      compress: true
+      defaultTtl: 86400
+      forwardedValues:
+        cookies:
+          forward: none
+        headers:
+        - Origin
+        queryString: false
+      maxTtl: 31536000
+      minTtl: 0
+      pathPattern: /content/immutable/*
+      targetOriginId: customOrigin
+      viewerProtocolPolicy: redirect-to-https
+    - allowedMethods:
+      - GET
+      - HEAD
+      - OPTIONS
+      cachedMethods:
+      - GET
+      - HEAD
+      compress: true
+      defaultTtl: 3600
+      forwardedValues:
+        cookies:
+          forward: none
+        queryString: false
+      maxTtl: 86400
+      minTtl: 0
+      pathPattern: /content/*
+      targetOriginId: customOrigin
+      viewerProtocolPolicy: redirect-to-https
+    origin:
+    - customOriginConfig:
+        httpPort: 80
+        httpsPort: 443
+        originKeepaliveTimeout: 5
+        originProtocolPolicy: https-only
+        originReadTimeout: 10
+        originSslProtocols:
+        - TLSv1.2
+      domainName: app.my.cloud
+      originId: customOrigin
+    priceClass: PriceClass_200
+    region: us-west-1
+    restrictions:
+      geoRestriction:
+        locations:
+        - US
+        - CA
+        - GB
+        - DE
+        restrictionType: whitelist
+    tags:
+      Environment: production
+    viewerCertificate:
+      cloudfrontDefaultCertificate: true
+
+---
+
+apiVersion: cloudfront.aws.upbound.io/v1beta2
+kind: MonitoringSubscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudfront/v1beta2/distribution
+  name: example-monitoring-subscription
+spec:
+  forProvider:
+    distributionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: distribution
+    monitoringSubscription:
+      realtimeMetricsSubscriptionConfig:
+        realtimeMetricsSubscriptionStatus: Enabled
+    region: us-west-1

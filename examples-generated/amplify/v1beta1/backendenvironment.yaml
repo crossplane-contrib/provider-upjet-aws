@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: amplify.aws.upbound.io/v1beta1
+apiVersion: amplify.aws.upbound.io/v1beta2
 kind: App
 metadata:
   annotations:

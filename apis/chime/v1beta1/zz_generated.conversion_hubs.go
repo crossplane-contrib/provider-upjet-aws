@@ -19,9 +19,6 @@ func (tr *VoiceConnectorLogging) Hub() {}
 func (tr *VoiceConnectorOrigination) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *VoiceConnectorStreaming) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *VoiceConnectorTermination) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -5,6 +5,8 @@
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: API
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/api
   name: websocket-api
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
@@ -14,10 +16,14 @@ spec:
     protocolType: WEBSOCKET
     region: us-west-1
     routeSelectionExpression: $request.body.action
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Model
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/model
   name: example-websocket
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
@@ -38,10 +44,14 @@ spec:
           "id": { "type": "string" }
         }
       }
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Integration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/integration
   name: example-websocket
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
@@ -54,12 +64,15 @@ spec:
     integrationMethod: POST
     integrationUri: "https://api.example.com"
     region: us-west-1
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: IntegrationResponse
 metadata:
   name: example-websocket
   annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/integrationresponse
     upjet.upbound.io/manual-intervention: "It requires a working Lambda function ARN and we cannot upload a working function code."
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
@@ -73,12 +86,15 @@ spec:
         upjet.upbound.io/test-group: apigatewayv2-websocket
     integrationResponseKey: "/400/"
     region: us-west-1
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: Route
 metadata:
   name: example-websocket
   annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/route
     upjet.upbound.io/manual-intervention: "It requires a working Lambda function ARN and we cannot upload a working function code."
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket
@@ -92,12 +108,15 @@ spec:
     targetSelector:
       matchLabels:
         upjet.upbound.io/test-group: apigatewayv2-websocket
+
 ---
+
 apiVersion: apigatewayv2.aws.upbound.io/v1beta1
 kind: RouteResponse
 metadata:
   name: example-websocket
   annotations:
+    meta.upbound.io/example-id: apigatewayv2/v1beta1/routeresponse
     upjet.upbound.io/manual-intervention: "Route resource this depends on requires manual intervention."
   labels:
     upjet.upbound.io/test-group: apigatewayv2-websocket

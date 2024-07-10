@@ -18,6 +18,8 @@ spec:
 apiVersion: amp.aws.upbound.io/v1beta1
 kind: RuleGroupNamespace
 metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/workspace
   labels:
     testing.upbound.io/example-name: amp
   name: demo
@@ -37,6 +39,8 @@ spec:
 apiVersion: amp.aws.upbound.io/v1beta1
 kind: AlertManagerDefinition
 metadata:
+  annotations:
+    meta.upbound.io/example-id: amp/v1beta1/workspace
   labels:
     testing.upbound.io/example-name: amp
   name: demo

@@ -875,7 +875,7 @@ func (mg *EIP) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -913,7 +913,7 @@ func (mg *EIP) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.NetworkInterface = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkInterfaceRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -982,7 +982,7 @@ func (mg *EIPAssociation) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.AllocationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AllocationIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1020,7 +1020,7 @@ func (mg *EIPAssociation) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.InitProvider.AllocationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AllocationIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1480,7 +1480,7 @@ func (mg *InstanceState) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1499,7 +1499,7 @@ func (mg *InstanceState) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2610,7 +2610,7 @@ func (mg *NetworkInterfaceAttachment) ResolveReferences(ctx context.Context, c c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2648,7 +2648,7 @@ func (mg *NetworkInterfaceAttachment) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.NetworkInterfaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkInterfaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2698,7 +2698,7 @@ func (mg *NetworkInterfaceSgAttachment) ResolveReferences(ctx context.Context, c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2736,7 +2736,7 @@ func (mg *NetworkInterfaceSgAttachment) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5847,7 +5847,7 @@ func (mg *VPCEndpointRouteTableAssociation) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.RouteTableID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RouteTableIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5885,7 +5885,7 @@ func (mg *VPCEndpointRouteTableAssociation) ResolveReferences(ctx context.Contex
 	mg.Spec.InitProvider.RouteTableID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RouteTableIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5935,7 +5935,7 @@ func (mg *VPCEndpointSecurityGroupAssociation) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -5973,7 +5973,7 @@ func (mg *VPCEndpointSecurityGroupAssociation) ResolveReferences(ctx context.Con
 	mg.Spec.InitProvider.SecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SecurityGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6073,7 +6073,7 @@ func (mg *VPCEndpointSubnetAssociation) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6111,7 +6111,7 @@ func (mg *VPCEndpointSubnetAssociation) ResolveReferences(ctx context.Context, c
 	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPCEndpoint", "VPCEndpointList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6782,7 +6782,7 @@ func (mg *VPNConnectionRoute) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPNConnection", "VPNConnectionList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPNConnection", "VPNConnectionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -6801,7 +6801,7 @@ func (mg *VPNConnectionRoute) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.VPNConnectionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VPNConnectionIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPNConnection", "VPNConnectionList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPNConnection", "VPNConnectionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7058,7 +7058,7 @@ func (mg *VolumeAttachment) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -7096,7 +7096,7 @@ func (mg *VolumeAttachment) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.VolumeID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VolumeIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

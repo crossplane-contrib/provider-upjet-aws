@@ -14,6 +14,3 @@ func (tr *PrivateDNSNamespace) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PublicDNSNamespace) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Service) Hub() {}

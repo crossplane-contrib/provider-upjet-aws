@@ -7,19 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Framework) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *GlobalSettings) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Plan) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *RegionSettings) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ReportPlan) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Selection) Hub() {}

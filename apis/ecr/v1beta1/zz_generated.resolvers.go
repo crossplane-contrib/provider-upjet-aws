@@ -26,7 +26,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io", "v1beta2", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -45,7 +45,7 @@ func (mg *LifecyclePolicy) ResolveReferences( // ResolveReferences of this Lifec
 	mg.Spec.ForProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io", "v1beta2", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -131,7 +131,7 @@ func (mg *RepositoryPolicy) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io", "v1beta2", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -150,7 +150,7 @@ func (mg *RepositoryPolicy) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.Repository = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("ecr.aws.upbound.io", "v1beta2", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

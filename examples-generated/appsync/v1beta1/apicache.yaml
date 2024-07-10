@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: appsync.aws.upbound.io/v1beta1
+apiVersion: appsync.aws.upbound.io/v1beta2
 kind: GraphQLAPI
 metadata:
   annotations:

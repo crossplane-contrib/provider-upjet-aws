@@ -1,0 +1,28 @@
+apiVersion: mq.aws.upbound.io/v1beta2
+kind: Broker
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mq/v1beta2/broker
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    brokerName: example
+    configuration:
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+      revision: ${aws_mq_configuration.test.latest_revision}
+    engineType: ActiveMQ
+    engineVersion: 5.17.6
+    hostInstanceType: mq.t2.micro
+    region: us-west-1
+    securityGroupRefs:
+    - name: test
+    user:
+    - passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      username: ExampleUser

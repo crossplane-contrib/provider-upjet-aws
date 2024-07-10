@@ -9,8 +9,9 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	errors "github.com/pkg/errors"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -24,7 +25,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("ecrpublic.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("ecrpublic.aws.upbound.io", "v1beta2", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -43,7 +44,7 @@ func (mg *RepositoryPolicy) ResolveReferences( // ResolveReferences of this Repo
 	mg.Spec.ForProvider.RepositoryName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("ecrpublic.aws.upbound.io", "v1beta1", "Repository", "RepositoryList")
+		m, l, err = apisresolver.GetManagedResource("ecrpublic.aws.upbound.io", "v1beta2", "Repository", "RepositoryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

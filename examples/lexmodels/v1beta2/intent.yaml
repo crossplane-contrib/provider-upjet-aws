@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: lexmodels.aws.upbound.io/v1beta2
+kind: Intent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lexmodels/v1beta2/intent
+  name: example
+spec:
+  forProvider:
+    confirmationPrompt:
+      maxAttempts: 2
+      message:
+      - content: Okay, your {FlowerType} will be ready for pickup by {PickupTime}
+          on {PickupDate}.  Does this sound okay?
+        contentType: PlainText
+    createVersion: false
+    description: Intent to order a bouquet of flowers for pick up
+    fulfillmentActivity:
+      type: ReturnIntent
+    region: us-east-1
+    rejectionStatement:
+      message:
+      - content: Okay, I will not place your order.
+        contentType: PlainText
+    sampleUtterances:
+    - I would like to order some flowers
+    - I would like to pick up flowers

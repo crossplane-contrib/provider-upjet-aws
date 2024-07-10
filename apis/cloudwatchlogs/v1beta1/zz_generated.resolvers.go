@@ -45,7 +45,7 @@ func (mg *Destination) ResolveReferences( // ResolveReferences of this Destinati
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta2", "Stream", "StreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -83,7 +83,7 @@ func (mg *Destination) ResolveReferences( // ResolveReferences of this Destinati
 	mg.Spec.InitProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta2", "Stream", "StreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -264,7 +264,7 @@ func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta2", "Stream", "StreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -302,7 +302,7 @@ func (mg *SubscriptionFilter) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta1", "Stream", "StreamList")
+		m, l, err = apisresolver.GetManagedResource("kinesis.aws.upbound.io", "v1beta2", "Stream", "StreamList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

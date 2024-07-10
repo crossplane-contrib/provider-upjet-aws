@@ -122,7 +122,7 @@ func (mg *FleetStackAssociation) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appstream.aws.upbound.io", "v1beta1", "Fleet", "FleetList")
+		m, l, err = apisresolver.GetManagedResource("appstream.aws.upbound.io", "v1beta2", "Fleet", "FleetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -141,7 +141,7 @@ func (mg *FleetStackAssociation) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.FleetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FleetNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appstream.aws.upbound.io", "v1beta1", "Stack", "StackList")
+		m, l, err = apisresolver.GetManagedResource("appstream.aws.upbound.io", "v1beta2", "Stack", "StackList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -285,7 +285,7 @@ func (mg *UserStackAssociation) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.AuthenticationType = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AuthenticationTypeRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appstream.aws.upbound.io", "v1beta1", "Stack", "StackList")
+		m, l, err = apisresolver.GetManagedResource("appstream.aws.upbound.io", "v1beta2", "Stack", "StackList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

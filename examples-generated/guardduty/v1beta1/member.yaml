@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: guardduty.aws.upbound.io/v1beta1
+apiVersion: guardduty.aws.upbound.io/v1beta2
 kind: Detector
 metadata:
   annotations:
@@ -37,7 +37,7 @@ spec:
 
 ---
 
-apiVersion: guardduty.aws.upbound.io/v1beta1
+apiVersion: guardduty.aws.upbound.io/v1beta2
 kind: Detector
 metadata:
   annotations:

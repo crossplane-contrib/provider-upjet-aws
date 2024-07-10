@@ -7,16 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Alias) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Build) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Fleet) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *GameSessionQueue) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Script) Hub() {}

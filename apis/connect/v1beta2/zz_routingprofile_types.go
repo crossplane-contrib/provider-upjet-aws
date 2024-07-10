@@ -100,7 +100,7 @@ type QueueConfigsParameters struct {
 type RoutingProfileInitParameters struct {
 
 	// Specifies the default outbound queue for the Routing Profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta2.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta3.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("queue_id",true)
 	DefaultOutboundQueueID *string `json:"defaultOutboundQueueId,omitempty" tf:"default_outbound_queue_id,omitempty"`
 
@@ -183,7 +183,7 @@ type RoutingProfileObservation struct {
 type RoutingProfileParameters struct {
 
 	// Specifies the default outbound queue for the Routing Profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta2.Queue
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta3.Queue
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("queue_id",true)
 	// +kubebuilder:validation:Optional
 	DefaultOutboundQueueID *string `json:"defaultOutboundQueueId,omitempty" tf:"default_outbound_queue_id,omitempty"`

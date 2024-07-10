@@ -19,7 +19,7 @@ type VPNConnectionRouteInitParameters struct {
 	DestinationCidrBlock *string `json:"destinationCidrBlock,omitempty" tf:"destination_cidr_block,omitempty"`
 
 	// The ID of the VPN connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPNConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`
 
@@ -55,7 +55,7 @@ type VPNConnectionRouteParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// The ID of the VPN connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPNConnection
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPNConnection
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPNConnectionID *string `json:"vpnConnectionId,omitempty" tf:"vpn_connection_id,omitempty"`

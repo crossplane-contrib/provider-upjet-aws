@@ -19,9 +19,6 @@ func (tr *DestinationPolicy) Hub() {}
 func (tr *Group) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MetricFilter) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ResourcePolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.

@@ -25,7 +25,7 @@ type PermissionInitParameters struct {
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
 	// The stack to set the permissions for
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta2.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`
 
@@ -87,7 +87,7 @@ type PermissionParameters struct {
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
 	// The stack to set the permissions for
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta1.Stack
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/opsworks/v1beta2.Stack
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StackID *string `json:"stackId,omitempty" tf:"stack_id,omitempty"`

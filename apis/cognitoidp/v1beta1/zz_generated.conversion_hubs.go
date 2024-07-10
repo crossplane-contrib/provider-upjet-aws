@@ -13,9 +13,6 @@ func (tr *IdentityProvider) Hub() {}
 func (tr *ResourceServer) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *RiskConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *User) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -23,9 +20,6 @@ func (tr *UserGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *UserInGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *UserPool) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *UserPoolClient) Hub() {}

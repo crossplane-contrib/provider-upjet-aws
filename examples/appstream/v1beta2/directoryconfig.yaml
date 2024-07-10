@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: appstream.aws.upbound.io/v1beta2
+kind: DirectoryConfig
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appstream/v1beta2/directoryconfig
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    directoryName: corp.example.com
+    organizationalUnitDistinguishedNames:
+    - DISTINGUISHED NAME
+    region: us-east-1
+    serviceAccountCredentials:
+      accountName: DOMAIN\username
+      accountPasswordSecretRef:
+        key: credentials
+        name: example-secret
+        namespace: upbound-system
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+stringData:
+  credentials: change-me
+type: Opaque

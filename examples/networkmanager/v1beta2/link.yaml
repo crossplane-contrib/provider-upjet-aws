@@ -1,0 +1,56 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: networkmanager.aws.upbound.io/v1beta2
+kind: Link
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta2/link
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bandwidth:
+      downloadSpeed: 50
+      uploadSpeed: 10
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    providerName: MegaCorp
+    region: us-west-1
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: networkmanager.aws.upbound.io/v1beta2
+kind: Site
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta2/link
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    region: us-west-1
+
+---
+
+apiVersion: networkmanager.aws.upbound.io/v1beta1
+kind: GlobalNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta2/link
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

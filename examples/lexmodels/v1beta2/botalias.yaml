@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: lexmodels.aws.upbound.io/v1beta2
+kind: BotAlias
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lexmodels/v1beta2/botalias
+  name: example
+spec:
+  forProvider:
+    botName: example
+    botVersion: $LATEST
+    description: Production Version of the OrderFlowers Bot.
+    region: us-east-1

@@ -29,17 +29,6 @@ func Configure(p *config.Provider) {
 				SelectorFieldName: "SecurityGroupIDSelector",
 			},
 		}
-		r.ServerSideApplyMergeStrategies["vpc_config"] = config.MergeStrategy{
-			ListMergeStrategy: config.ListMergeStrategy{
-				MergeStrategy: config.ListTypeMap,
-				ListMapKeys: config.ListMapKeys{
-					InjectedKey: config.InjectedKey{
-						Key:          "index",
-						DefaultValue: `"0"`,
-					},
-				},
-			},
-		}
 		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("aws_eks_node_group", func(r *config.Resource) {
@@ -64,10 +53,11 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
 				"release_version",
+				"version",
 			},
 		}
 		r.UseAsync = true
-		r.MetaResource.ArgumentDocs["launch_template.version"] = `- (Required) EC2 Launch Template version number. While the API accepts values like $Default and $Latest, the API will convert the value to the associated version number (e.g., 1). Using the default_version or latest_version attribute of the aws_launch_template resource or data source is recommended for this argument.`
+		r.MetaResource.ArgumentDocs["launch_template.version"] = `- (Required) EC2 Launch Template version number.`
 		r.MetaResource.ArgumentDocs["subnet_ids"] = `- Identifiers of EC2 Subnets to associate with the EKS Node Group. Amazon EKS managed node groups can be launched in both public and private subnets. If you plan to deploy load balancers to a subnet, the private subnet must have tag kubernetes.io/role/internal-elb, the public subnet must have tag kubernetes.io/role/elb.`
 	})
 	p.AddResourceConfigurator("aws_eks_identity_provider_config", func(r *config.Resource) {

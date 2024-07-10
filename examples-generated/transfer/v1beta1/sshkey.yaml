@@ -50,7 +50,7 @@ spec:
 
 ---
 
-apiVersion: transfer.aws.upbound.io/v1beta1
+apiVersion: transfer.aws.upbound.io/v1beta2
 kind: Server
 metadata:
   annotations:
@@ -67,7 +67,7 @@ spec:
 
 ---
 
-apiVersion: transfer.aws.upbound.io/v1beta1
+apiVersion: transfer.aws.upbound.io/v1beta2
 kind: User
 metadata:
   annotations:

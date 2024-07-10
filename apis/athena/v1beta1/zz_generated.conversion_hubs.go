@@ -7,13 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Database) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DataCatalog) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NamedQuery) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Workgroup) Hub() {}

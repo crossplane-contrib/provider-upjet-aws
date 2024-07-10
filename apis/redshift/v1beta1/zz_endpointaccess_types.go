@@ -16,7 +16,7 @@ import (
 type EndpointAccessInitParameters struct {
 
 	// The cluster identifier of the cluster to access.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta2.Cluster
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 
 	// Reference to a Cluster in redshift to populate clusterIdentifier.
@@ -90,7 +90,7 @@ type EndpointAccessObservation struct {
 type EndpointAccessParameters struct {
 
 	// The cluster identifier of the cluster to access.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/redshift/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterIdentifier *string `json:"clusterIdentifier,omitempty" tf:"cluster_identifier,omitempty"`
 

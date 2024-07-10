@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: signer.aws.upbound.io/v1beta1
+apiVersion: signer.aws.upbound.io/v1beta2
 kind: SigningProfile
 metadata:
   annotations:

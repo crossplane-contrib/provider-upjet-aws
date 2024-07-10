@@ -16,7 +16,7 @@ import (
 type MountTargetInitParameters struct {
 
 	// The ID of the file system for which the mount target is intended.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta1.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 
 	// Reference to a FileSystem in efs to populate fileSystemId.
@@ -103,7 +103,7 @@ type MountTargetObservation struct {
 type MountTargetParameters struct {
 
 	// The ID of the file system for which the mount target is intended.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta1.FileSystem
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/efs/v1beta2.FileSystem
 	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
 

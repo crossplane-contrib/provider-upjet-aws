@@ -27,7 +27,7 @@ spec:
 
 ---
 
-apiVersion: s3control.aws.upbound.io/v1beta1
+apiVersion: s3control.aws.upbound.io/v1beta2
 kind: AccessPoint
 metadata:
   annotations:
@@ -50,7 +50,7 @@ spec:
 
 ---
 
-apiVersion: s3.aws.upbound.io/v1beta1
+apiVersion: s3.aws.upbound.io/v1beta2
 kind: Bucket
 metadata:
   annotations:

@@ -5,6 +5,8 @@
 apiVersion: athena.aws.upbound.io/v1beta1
 kind: Database
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/database
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -20,6 +22,8 @@ spec:
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
+  annotations:
+    meta.upbound.io/example-id: athena/v1beta1/database
   labels:
     testing.upbound.io/example-name: upbound-example
   name: ${Rand.RFC1123Subdomain}

@@ -101,7 +101,7 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMRoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("backup.aws.upbound.io", "v1beta1", "Plan", "PlanList")
+		m, l, err = apisresolver.GetManagedResource("backup.aws.upbound.io", "v1beta2", "Plan", "PlanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -139,7 +139,7 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.InitProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IAMRoleArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("backup.aws.upbound.io", "v1beta1", "Plan", "PlanList")
+		m, l, err = apisresolver.GetManagedResource("backup.aws.upbound.io", "v1beta2", "Plan", "PlanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

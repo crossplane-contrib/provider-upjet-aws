@@ -16,7 +16,7 @@ import (
 type BudgetResourceAssociationInitParameters struct {
 
 	// Budget name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta1.Budget
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta2.Budget
 	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
 
 	// Reference to a Budget in budgets to populate budgetName.
@@ -28,7 +28,7 @@ type BudgetResourceAssociationInitParameters struct {
 	BudgetNameSelector *v1.Selector `json:"budgetNameSelector,omitempty" tf:"-"`
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta2.Product
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// Reference to a Product in servicecatalog to populate resourceId.
@@ -55,7 +55,7 @@ type BudgetResourceAssociationObservation struct {
 type BudgetResourceAssociationParameters struct {
 
 	// Budget name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta1.Budget
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/budgets/v1beta2.Budget
 	// +kubebuilder:validation:Optional
 	BudgetName *string `json:"budgetName,omitempty" tf:"budget_name,omitempty"`
 
@@ -73,7 +73,7 @@ type BudgetResourceAssociationParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// Resource identifier.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta1.Product
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/servicecatalog/v1beta2.Product
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 

@@ -1,0 +1,207 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: datasync.aws.upbound.io/v1beta2
+kind: LocationS3
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-location-source
+  name: datasync-location-source
+spec:
+  forProvider:
+    region: us-west-1
+    s3BucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-s3-source
+    s3Config:
+      bucketAccessRoleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: datasync-role
+    subdirectory: /
+
+---
+
+apiVersion: datasync.aws.upbound.io/v1beta2
+kind: LocationS3
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-location-destination
+  name: datasync-location-destination
+spec:
+  forProvider:
+    region: us-west-1
+    s3BucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-s3-destination
+    s3Config:
+      bucketAccessRoleArnSelector:
+        matchLabels:
+          testing.upbound.io/example-name: datasync-role
+    subdirectory: /
+
+---
+
+apiVersion: datasync.aws.upbound.io/v1beta2
+kind: Task
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-task-example
+  name: datasync-task-example
+spec:
+  forProvider:
+    cloudwatchLogGroupArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-cloudwatchloggroup
+    destinationLocationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-location-destination
+    name: datasync-task-example
+    options:
+      bytesPerSecond: -1
+      gid: NONE
+      posixPermissions: NONE
+      preserveDeletedFiles: REMOVE
+      uid: NONE
+      verifyMode: ONLY_FILES_TRANSFERRED
+    region: us-west-1
+    sourceLocationArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-location-source
+
+---
+
+apiVersion: cloudwatchlogs.aws.upbound.io/v1beta1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-cloudwatchloggroup
+  name: datasync-cloudwatchloggroup
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-s3-source
+  name: upbound-datasync-s3-source
+spec:
+  forProvider:
+    forceDestroy: true
+    objectLockEnabled: true
+    region: us-west-1
+
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-s3-destination
+  name: upbound-datasync-s3-destination
+spec:
+  forProvider:
+    forceDestroy: true
+    objectLockEnabled: true
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-role
+  name: datasync-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "datasync.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-policy
+  name: datasync-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": [
+              "s3:GetBucketLocation",
+              "s3:ListBucket",
+              "s3:ListBucketMultipartUploads",
+              "s3:AbortMultipartUpload",
+              "s3:DeleteObject",
+              "s3:GetObject",
+              "s3:ListMultipartUploadParts",
+              "s3:PutObjectTagging",
+              "s3:GetObjectTagging",
+              "s3:PutObject"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::upbound-datasync-s3-source",
+                "arn:aws:s3:::upbound-datasync-s3-source/*",
+                "arn:aws:s3:::upbound-datasync-s3-destination",
+                "arn:aws:s3:::upbound-datasync-s3-destination/*"
+              ]
+          }
+        ]
+      }
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasync/v1beta2/locations3
+  labels:
+    testing.upbound.io/example-name: datasync-rpa
+  name: datasync-rpa
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: datasync-role

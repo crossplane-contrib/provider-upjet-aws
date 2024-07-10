@@ -25,19 +25,10 @@ func (tr *ClientCertificate) Hub() {}
 func (tr *Deployment) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *DocumentationPart) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DocumentationVersion) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *DomainName) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *GatewayResponse) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Integration) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *IntegrationResponse) Hub() {}
@@ -49,9 +40,6 @@ func (tr *Method) Hub() {}
 func (tr *MethodResponse) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MethodSettings) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Model) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -61,16 +49,7 @@ func (tr *RequestValidator) Hub() {}
 func (tr *Resource) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *RestAPI) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *RestAPIPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Stage) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *UsagePlan) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *UsagePlanKey) Hub() {}

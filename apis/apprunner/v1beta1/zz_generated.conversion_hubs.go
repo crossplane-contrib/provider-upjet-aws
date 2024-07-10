@@ -13,10 +13,4 @@ func (tr *AutoScalingConfigurationVersion) Hub() {}
 func (tr *Connection) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ObservabilityConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Service) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *VPCConnector) Hub() {}

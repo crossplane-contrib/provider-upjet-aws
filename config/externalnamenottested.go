@@ -56,17 +56,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// HSM modules can be imported using their HSM ID
 	"aws_cloudhsm_v2_hsm": config.IdentifierFromProvider,
 
-	// codeartifact
-	//
-	// CodeArtifact Domain can be imported using the CodeArtifact Domain arn
-	"aws_codeartifact_domain": config.IdentifierFromProvider,
-	// CodeArtifact Domain Permissions Policies can be imported using the CodeArtifact Domain ARN
-	"aws_codeartifact_domain_permissions_policy": config.IdentifierFromProvider,
-	// CodeArtifact Repository can be imported using the CodeArtifact Repository ARN
-	"aws_codeartifact_repository": config.IdentifierFromProvider,
-	// CodeArtifact Repository Permissions Policies can be imported using the CodeArtifact Repository ARN
-	"aws_codeartifact_repository_permissions_policy": config.IdentifierFromProvider,
-
 	// codebuild
 	//
 	// CodeBuild Project can be imported using the name

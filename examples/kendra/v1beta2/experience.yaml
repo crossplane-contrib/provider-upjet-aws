@@ -1,0 +1,44 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: kendra.aws.upbound.io/v1beta2
+kind: Experience
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kendra/v1beta2/experience
+    upjet.upbound.io/manual-intervention: Uptest doesn't pick up successful resource
+      status
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: experiencename
+spec:
+  forProvider:
+    configuration:
+      userIdentityConfiguration:
+        identityAttributeName: e4c8e4a8-3091-7073-dc39-8bfc99e6ebe8
+    description: My Kendra Experience
+    indexIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: experiencename
+    region: us-east-1
+    roleArn: arn:aws:iam::153891904029:role/service-role/AmazonKendra-my-experience-role
+
+---
+
+apiVersion: kendra.aws.upbound.io/v1beta2
+kind: Index
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kendra/v1beta2/experience
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: index-3
+spec:
+  forProvider:
+    name: index-3
+    region: us-east-1
+    roleArn: arn:aws:iam::153891904029:role/kendra-index-role

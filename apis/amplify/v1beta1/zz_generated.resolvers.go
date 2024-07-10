@@ -78,7 +78,7 @@ func (mg *BackendEnvironment) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "App", "AppList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta2", "App", "AppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -109,7 +109,7 @@ func (mg *Branch) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "App", "AppList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta2", "App", "AppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -140,7 +140,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "App", "AppList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta2", "App", "AppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -178,7 +178,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.BranchName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BranchNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta1", "App", "AppList")
+		m, l, err = apisresolver.GetManagedResource("amplify.aws.upbound.io", "v1beta2", "App", "AppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: iot.aws.upbound.io/v1beta2
+kind: ThingType
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1beta2/thingtype
+  labels:
+    testing.upbound.io/example-name: example
+  name: lightbulb
+spec:
+  forProvider:
+    name: my_iot_thing
+    region: us-west-1

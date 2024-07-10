@@ -16,6 +16,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/resource"
+	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -125,4 +126,19 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) config.NewIni
 			return errors.Wrap(xpresource.NewAPIPatchingApplicator(client).Apply(ctx, s), "cannot apply password secret")
 		})
 	}
+}
+
+// RemovePolicyVersion removes the "Version" field from a JSON-encoded policy string.
+func RemovePolicyVersion(p string) (string, error) {
+	var policy any
+	if err := jsoniter.ConfigCompatibleWithStandardLibrary.Unmarshal([]byte(p), &policy); err != nil {
+		return "", errors.Wrap(err, "failed to unmarshal the policy from JSON")
+	}
+	m, ok := policy.(map[string]any)
+	if !ok {
+		return p, nil
+	}
+	delete(m, "Version")
+	r, err := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(m)
+	return string(r), errors.Wrap(err, "failed to marshal the policy map as JSON")
 }

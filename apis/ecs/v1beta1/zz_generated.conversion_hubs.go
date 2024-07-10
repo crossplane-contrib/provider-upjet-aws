@@ -10,16 +10,4 @@ package v1beta1
 func (tr *AccountSettingDefault) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *CapacityProvider) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Cluster) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ClusterCapacityProviders) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Service) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *TaskDefinition) Hub() {}

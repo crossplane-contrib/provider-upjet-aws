@@ -98,7 +98,7 @@ type UserDefinedFunctionParameters struct {
 	ClassName *string `json:"className,omitempty" tf:"class_name,omitempty"`
 
 	// The name of the Database to create the Function.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta1.CatalogDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 

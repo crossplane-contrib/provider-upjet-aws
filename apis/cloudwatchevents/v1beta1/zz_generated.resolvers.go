@@ -27,7 +27,7 @@ func (mg *APIDestination) ResolveReferences( // ResolveReferences of this APIDes
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudwatchevents.aws.upbound.io", "v1beta1", "Connection", "ConnectionList")
+		m, l, err = apisresolver.GetManagedResource("cloudwatchevents.aws.upbound.io", "v1beta2", "Connection", "ConnectionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -46,7 +46,7 @@ func (mg *APIDestination) ResolveReferences( // ResolveReferences of this APIDes
 	mg.Spec.ForProvider.ConnectionArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConnectionArnRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cloudwatchevents.aws.upbound.io", "v1beta1", "Connection", "ConnectionList")
+		m, l, err = apisresolver.GetManagedResource("cloudwatchevents.aws.upbound.io", "v1beta2", "Connection", "ConnectionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

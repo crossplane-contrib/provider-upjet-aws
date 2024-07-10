@@ -60,8 +60,6 @@ spec:
   package: docker.io/<your-docker-name>/provider-aws-ec2:<the-version-taken-from-the-output-of-the-previous-command>
 ```
 
-Use `monolith` instead of `ec2` to build and publish the monolithic provider.
-
 ### Add a New Resource
 
 Follow the guide [here](https://github.com/crossplane/upjet/blob/v0.10.0/docs/add-new-resource-short.md).

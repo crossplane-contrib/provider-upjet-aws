@@ -13,7 +13,4 @@ func (tr *Secret) Hub() {}
 func (tr *SecretPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SecretRotation) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SecretVersion) Hub() {}

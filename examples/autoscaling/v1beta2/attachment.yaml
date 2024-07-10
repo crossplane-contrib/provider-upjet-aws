@@ -6,7 +6,7 @@ apiVersion: autoscaling.aws.upbound.io/v1beta2
 kind: Attachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: autoscaling/v1beta1/attachment
+    meta.upbound.io/example-id: autoscaling/v1beta2/attachment
   labels:
     testing.upbound.io/example-name: example
   name: asg-attachment-bar
@@ -21,11 +21,12 @@ spec:
     region: us-west-1
 
 ---
-apiVersion: autoscaling.aws.upbound.io/v1beta2
+
+apiVersion: autoscaling.aws.upbound.io/v1beta3
 kind: AutoscalingGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: autoscaling/v1beta1/attachment
+    meta.upbound.io/example-id: autoscaling/v1beta2/attachment
   labels:
     testing.upbound.io/example-name: asg
   name: attachment-example
@@ -45,11 +46,12 @@ spec:
         value: "true"
 
 ---
-apiVersion: autoscaling.aws.upbound.io/v1beta1
+
+apiVersion: autoscaling.aws.upbound.io/v1beta2
 kind: LaunchConfiguration
 metadata:
   annotations:
-    meta.upbound.io/example-id: autoscaling/v1beta1/attachment
+    meta.upbound.io/example-id: autoscaling/v1beta2/attachment
   labels:
     testing.upbound.io/example-name: attachment-example
   name: attachment-example
@@ -60,11 +62,12 @@ spec:
     region: us-west-1
 
 ---
-apiVersion: elb.aws.upbound.io/v1beta1
+
+apiVersion: elb.aws.upbound.io/v1beta2
 kind: ELB
 metadata:
   annotations:
-    meta.upbound.io/example-id: autoscaling/v1beta1/attachment
+    meta.upbound.io/example-id: autoscaling/v1beta2/attachment
   labels:
     testing.upbound.io/example-name: bar
   name: attachment-example

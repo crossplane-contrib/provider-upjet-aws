@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: ecs.aws.upbound.io/v1beta2
+kind: TaskDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecs/v1beta2/taskdefinition
+  name: sample-task
+spec:
+  forProvider:
+    containerDefinitions: |-
+      [
+        {
+          "name": "first",
+          "image": "service-first",
+          "cpu": 10,
+          "memory": 512,
+          "essential":true
+        }
+      ]
+    family: sampleservice
+    region: us-west-1

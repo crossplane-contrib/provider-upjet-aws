@@ -16,10 +16,335 @@ import (
 	common "github.com/upbound/provider-aws/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 
-	// ResolveReferences of this Instance.
+	// ResolveReferences of this Cluster.
 	apisresolver "github.com/upbound/provider-aws/internal/apis"
 )
 
+func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ClusterParameterGroup", "ClusterParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBClusterParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.DBClusterParameterGroupNameRef,
+			Selector:     mg.Spec.ForProvider.DBClusterParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBClusterParameterGroupName")
+	}
+	mg.Spec.ForProvider.DBClusterParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBClusterParameterGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ParameterGroup", "ParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBInstanceParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.DBInstanceParameterGroupNameRef,
+			Selector:     mg.Spec.ForProvider.DBInstanceParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBInstanceParameterGroupName")
+	}
+	mg.Spec.ForProvider.DBInstanceParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBInstanceParameterGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBSubnetGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.DBSubnetGroupNameRef,
+			Selector:     mg.Spec.ForProvider.DBSubnetGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBSubnetGroupName")
+	}
+	mg.Spec.ForProvider.DBSubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBSubnetGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyID")
+	}
+	mg.Spec.ForProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MasterUserSecretKMSKeyID),
+			Extract:      resource.ExtractParamPath("key_id", true),
+			Reference:    mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef,
+			Selector:     mg.Spec.ForProvider.MasterUserSecretKMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MasterUserSecretKMSKeyID")
+	}
+	mg.Spec.ForProvider.MasterUserSecretKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MasterUserSecretKMSKeyIDRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.RestoreToPointInTime != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifier),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifierRef,
+				Selector:     mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifierSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifier")
+		}
+		mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.RestoreToPointInTime.SourceClusterIdentifierRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.S3Import != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.S3Import.BucketName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.S3Import.BucketNameRef,
+				Selector:     mg.Spec.ForProvider.S3Import.BucketNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.S3Import.BucketName")
+		}
+		mg.Spec.ForProvider.S3Import.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.S3Import.BucketNameRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.VPCSecurityGroupIDRefs,
+			Selector:      mg.Spec.ForProvider.VPCSecurityGroupIDSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCSecurityGroupIds")
+	}
+	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ClusterParameterGroup", "ClusterParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBClusterParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.DBClusterParameterGroupNameRef,
+			Selector:     mg.Spec.InitProvider.DBClusterParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBClusterParameterGroupName")
+	}
+	mg.Spec.InitProvider.DBClusterParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBClusterParameterGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ParameterGroup", "ParameterGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBInstanceParameterGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.DBInstanceParameterGroupNameRef,
+			Selector:     mg.Spec.InitProvider.DBInstanceParameterGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBInstanceParameterGroupName")
+	}
+	mg.Spec.InitProvider.DBInstanceParameterGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBInstanceParameterGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "SubnetGroup", "SubnetGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBSubnetGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.DBSubnetGroupNameRef,
+			Selector:     mg.Spec.InitProvider.DBSubnetGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBSubnetGroupName")
+	}
+	mg.Spec.InitProvider.DBSubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBSubnetGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
+			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyID")
+	}
+	mg.Spec.InitProvider.KMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MasterUserSecretKMSKeyID),
+			Extract:      resource.ExtractParamPath("key_id", true),
+			Reference:    mg.Spec.InitProvider.MasterUserSecretKMSKeyIDRef,
+			Selector:     mg.Spec.InitProvider.MasterUserSecretKMSKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MasterUserSecretKMSKeyID")
+	}
+	mg.Spec.InitProvider.MasterUserSecretKMSKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MasterUserSecretKMSKeyIDRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.RestoreToPointInTime != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifier),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifierRef,
+				Selector:     mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifierSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifier")
+		}
+		mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.RestoreToPointInTime.SourceClusterIdentifierRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.S3Import != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.S3Import.BucketName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.S3Import.BucketNameRef,
+				Selector:     mg.Spec.InitProvider.S3Import.BucketNameSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.S3Import.BucketName")
+		}
+		mg.Spec.InitProvider.S3Import.BucketName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.S3Import.BucketNameRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.VPCSecurityGroupIDRefs,
+			Selector:      mg.Spec.InitProvider.VPCSecurityGroupIDSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCSecurityGroupIds")
+	}
+	mg.Spec.InitProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this Instance.
 func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
@@ -294,6 +619,56 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.InitProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this ProxyDefaultTargetGroup.
+func (mg *ProxyDefaultTargetGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "Proxy", "ProxyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DBProxyName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.DBProxyNameRef,
+			Selector:     mg.Spec.ForProvider.DBProxyNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DBProxyName")
+	}
+	mg.Spec.ForProvider.DBProxyName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DBProxyNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "Proxy", "ProxyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DBProxyName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.DBProxyNameRef,
+			Selector:     mg.Spec.InitProvider.DBProxyNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DBProxyName")
+	}
+	mg.Spec.InitProvider.DBProxyName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DBProxyNameRef = rsp.ResolvedReference
 
 	return nil
 }

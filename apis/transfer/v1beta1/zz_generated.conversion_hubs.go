@@ -7,19 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Connector) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Server) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SSHKey) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Tag) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *User) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Workflow) Hub() {}

@@ -27,7 +27,7 @@ func (mg *BudgetResourceAssociation) ResolveReferences( // ResolveReferences of 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta1", "Budget", "BudgetList")
+		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta2", "Budget", "BudgetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -46,7 +46,7 @@ func (mg *BudgetResourceAssociation) ResolveReferences( // ResolveReferences of 
 	mg.Spec.ForProvider.BudgetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BudgetNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -65,7 +65,7 @@ func (mg *BudgetResourceAssociation) ResolveReferences( // ResolveReferences of 
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta1", "Budget", "BudgetList")
+		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta2", "Budget", "BudgetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -84,7 +84,7 @@ func (mg *BudgetResourceAssociation) ResolveReferences( // ResolveReferences of 
 	mg.Spec.InitProvider.BudgetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.BudgetNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -134,7 +134,7 @@ func (mg *Constraint) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PortfolioIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -172,7 +172,7 @@ func (mg *Constraint) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PortfolioIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -360,7 +360,7 @@ func (mg *ProductPortfolioAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PortfolioIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -398,7 +398,7 @@ func (mg *ProductPortfolioAssociation) ResolveReferences(ctx context.Context, c 
 	mg.Spec.InitProvider.PortfolioID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PortfolioIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -429,7 +429,7 @@ func (mg *ProvisioningArtifact) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -448,7 +448,7 @@ func (mg *ProvisioningArtifact) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.ProductID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ProductIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -479,7 +479,7 @@ func (mg *TagOptionResourceAssociation) ResolveReferences(ctx context.Context, c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -517,7 +517,7 @@ func (mg *TagOptionResourceAssociation) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.TagOptionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TagOptionIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta1", "Product", "ProductList")
+		m, l, err = apisresolver.GetManagedResource("servicecatalog.aws.upbound.io", "v1beta2", "Product", "ProductList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

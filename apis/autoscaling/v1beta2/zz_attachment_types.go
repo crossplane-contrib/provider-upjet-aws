@@ -16,7 +16,7 @@ import (
 type AttachmentInitParameters struct {
 
 	// Name of ASG to associate with the ELB.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta3.AutoscalingGroup
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
 	// Reference to a AutoscalingGroup in autoscaling to populate autoscalingGroupName.
@@ -28,7 +28,7 @@ type AttachmentInitParameters struct {
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the ELB.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta2.ELB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
 
@@ -41,7 +41,7 @@ type AttachmentInitParameters struct {
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
 	// ARN of a load balancer target group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBTargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	LBTargetGroupArn *string `json:"lbTargetGroupArn,omitempty" tf:"lb_target_group_arn,omitempty"`
 
@@ -71,7 +71,7 @@ type AttachmentObservation struct {
 type AttachmentParameters struct {
 
 	// Name of ASG to associate with the ELB.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.AutoscalingGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta3.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	AutoscalingGroupName *string `json:"autoscalingGroupName,omitempty" tf:"autoscaling_group_name,omitempty"`
 
@@ -84,7 +84,7 @@ type AttachmentParameters struct {
 	AutoscalingGroupNameSelector *v1.Selector `json:"autoscalingGroupNameSelector,omitempty" tf:"-"`
 
 	// Name of the ELB.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.ELB
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta2.ELB
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ELB *string `json:"elb,omitempty" tf:"elb,omitempty"`
@@ -98,7 +98,7 @@ type AttachmentParameters struct {
 	ELBSelector *v1.Selector `json:"elbSelector,omitempty" tf:"-"`
 
 	// ARN of a load balancer target group.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta1.LBTargetGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBTargetGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	LBTargetGroupArn *string `json:"lbTargetGroupArn,omitempty" tf:"lb_target_group_arn,omitempty"`

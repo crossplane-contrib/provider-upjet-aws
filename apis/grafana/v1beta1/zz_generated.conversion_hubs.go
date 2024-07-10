@@ -13,9 +13,6 @@ func (tr *LicenseAssociation) Hub() {}
 func (tr *RoleAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Workspace) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *WorkspaceAPIKey) Hub() {}
 
 // Hub marks this type as a conversion hub.

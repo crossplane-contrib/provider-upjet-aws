@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: elb.aws.upbound.io/v1beta1
+apiVersion: elb.aws.upbound.io/v1beta2
 kind: ELB
 metadata:
   annotations:
