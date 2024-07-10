@@ -40,7 +40,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// dynamodb
 	//
-	// DynamoDB table resource policy can be important using the DynamoDB resource identifier
+	// DynamoDB table resource policy can be imported using the DynamoDB resource identifier
 	"aws_dynamodb_resource_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }}"),
 
 	// ec2
