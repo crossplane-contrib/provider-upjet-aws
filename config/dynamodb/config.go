@@ -36,4 +36,11 @@ func Configure(p *config.Provider) {
 		}
 		delete(r.References, "hash_key")
 	})
+
+	p.AddResourceConfigurator("aws_dynamodb_resource_policy", func(r *config.Resource) {
+		r.References["resource_arn"] = config.Reference{
+			TerraformName: "aws_dynamodb_table",
+			Extractor:     common.PathARNExtractor,
+		}
+	})
 }

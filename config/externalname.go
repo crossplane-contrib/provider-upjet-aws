@@ -38,6 +38,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// us-west-2_abc123/3ho4ek12345678909nh3fmhpko
 	"aws_cognito_user_pool_client": cognitoUserPoolClient(),
 
+	// dynamodb
+	//
+	// DynamoDB table resource policy can be important using the DynamoDB resource identifier
+	"aws_dynamodb_resource_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.resource_arn }}"),
+
 	// ec2
 	//
 	// Imported by using the id: sgr-02108b27edd666983
