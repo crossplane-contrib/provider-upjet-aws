@@ -1,0 +1,433 @@
+apiVersion: mwaa.aws.upbound.io/v1beta1
+kind: Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+    uptest.upbound.io/timeout: "14400"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-environment-test
+spec:
+  forProvider:
+    dagS3Path: dags/
+    executionRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_role
+    networkConfiguration:
+      securityGroupIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example_security_group
+      subnetIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example_subnet
+    region: us-west-1
+    sourceBucketArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_bucket
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_role
+  name: example-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Principal": {
+                  "Service": ["airflow.amazonaws.com","airflow-env.amazonaws.com"]
+              },
+              "Action": "sts:AssumeRole"
+            }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_policy_attachment
+  name: example-policy-attachment
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_user_policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_user_policy
+  name: example-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": "airflow:PublishMetrics",
+                  "Resource": "arn:aws:airflow:us-west-1:153891904029:environment/example-environment-test"
+              },
+              { 
+                  "Effect": "Deny",
+                  "Action": "s3:ListAllMyBuckets",
+                  "Resource": "*"
+              },
+              { 
+                  "Effect": "Allow",
+                  "Action": [ 
+                      "s3:GetObject*",
+                      "s3:GetBucket*",
+                      "s3:List*"
+                  ],
+                  "Resource": [
+                      "arn:aws:s3:::bucket-mwaaupb-test",
+                      "arn:aws:s3:::bucket-mwaaupb-test/*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "logs:CreateLogStream",
+                      "logs:CreateLogGroup",
+                      "logs:PutLogEvents",
+                      "logs:GetLogEvents",
+                      "logs:GetLogRecord",
+                      "logs:GetLogGroupFields",
+                      "logs:GetQueryResults"
+                  ],
+                  "Resource": [
+                      "arn:aws:logs:us-west-1:153891904029:log-group:airflow-example-environment-test-*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "logs:DescribeLogGroups"
+                  ],
+                  "Resource": [
+                      "*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:GetAccountPublicAccessBlock"
+                  ],
+                  "Resource": [
+                      "*"
+                  ]
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": "cloudwatch:PutMetricData",
+                  "Resource": "*"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "sqs:ChangeMessageVisibility",
+                      "sqs:DeleteMessage",
+                      "sqs:GetQueueAttributes",
+                      "sqs:GetQueueUrl",
+                      "sqs:ReceiveMessage",
+                      "sqs:SendMessage"
+                  ],
+                  "Resource": "arn:aws:sqs:us-west-1:*:airflow-celery-*"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "kms:Decrypt",
+                      "kms:DescribeKey",
+                      "kms:GenerateDataKey*",
+                      "kms:Encrypt"
+                  ],
+                  "NotResource": "arn:aws:kms:*:153891904029:key/*",
+                  "Condition": {
+                      "StringLike": {
+                          "kms:ViaService": [
+                              "sqs.us-west-1.amazonaws.com"
+                          ]
+                      }
+                  }
+              }
+          ]
+      }
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_bucket
+  name: bucket-mwaaupb-test
+spec:
+  forProvider:
+    region: us-west-1
+---
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: BucketVersioning
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_versioning
+  name: example-versioning
+spec:
+  forProvider:
+    bucketSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_bucket
+    region: us-west-1
+    versioningConfiguration:
+    - status: Enabled
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_security_group
+  name: example-security-group
+spec:
+  forProvider:
+    region: us-west-1
+    description: Allow required traffic for MWAA
+    name: allow_mwaa_traffic
+    vpcIdRef:
+      name: example-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: securitygrouprule
+  name: securitygroupruleself1
+spec:
+  forProvider:
+    region: us-west-1
+    fromPort: 0
+    protocol: "-1"
+    toPort: 65535
+    type: ingress
+    self: true
+    securityGroupIdRef:
+      name: example-security-group
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupIngressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_ingress_rule
+  name: example-ingress-rule-http
+spec:
+  forProvider:
+    cidrIpv4: 0.0.0.0/0
+    fromPort: 80
+    toPort: 80
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdRef:
+      name: example-security-group
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupIngressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_ingress_rule
+  name: example-ingress-rule-https
+spec:
+  forProvider:
+    cidrIpv4: 0.0.0.0/0
+    fromPort: 443
+    toPort: 443
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdRef:
+      name: example-security-group
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupIngressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_ingress_rule
+  name: example-ingress-rule-postgresql
+spec:
+  forProvider:
+    cidrIpv4: 0.0.0.0/0
+    fromPort: 5432
+    toPort: 5432
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdRef:
+      name: example-security-group
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupEgressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_egress_rule
+  name: example-egress-rule-all
+spec:
+  forProvider:
+    cidrIpv4: 0.0.0.0/0
+    fromPort: 0
+    toPort: 0
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdRef:
+      name: example-security-group
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: example-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_subnet
+  name: example-subnet1
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    vpcIdRef:
+      name: example-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example_subnet
+  name: example-subnet2
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1b
+    vpcIdRef:
+      name: example-vpc
+    cidrBlock: 172.16.11.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: rta-mwaa
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdRef:
+      name: example-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: rta1
+  name: rta1
+spec:
+  forProvider:
+    region: us-west-1
+    routeTableIdRef:
+      name: rta-mwaa
+    subnetIdRef:
+      name: example-subnet1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: rta2
+  name: rta2
+spec:
+  forProvider:
+    region: us-west-1
+    routeTableIdRef:
+      name: rta-mwaa
+    subnetIdRef:
+      name: example-subnet2
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-mwaa
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdRef:
+      name: example-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mwaa/v1beta1/environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: route
+spec:
+  forProvider:
+    region: us-west-1
+    destinationCidrBlock: 0.0.0.0/0
+    gatewayIdRef:
+      name: example-mwaa
+    routeTableIdRef:
+      name: rta-mwaa
