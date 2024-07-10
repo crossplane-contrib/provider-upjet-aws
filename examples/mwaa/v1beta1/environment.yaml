@@ -29,6 +29,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_role
@@ -53,6 +54,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_policy_attachment
@@ -70,6 +72,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_user_policy
@@ -176,6 +179,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: Bucket
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_bucket
@@ -188,6 +192,7 @@ apiVersion: s3.aws.upbound.io/v1beta1
 kind: BucketVersioning
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_versioning
@@ -205,6 +210,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_security_group
@@ -221,6 +227,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupRule
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: securitygrouprule
@@ -240,6 +247,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupIngressRule
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_ingress_rule
@@ -258,6 +266,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupIngressRule
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_ingress_rule
@@ -276,6 +285,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupIngressRule
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_ingress_rule
@@ -294,6 +304,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroupEgressRule
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_egress_rule
@@ -312,6 +323,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example
@@ -327,6 +339,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_subnet
@@ -343,6 +356,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example_subnet
@@ -359,6 +373,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTable
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example
@@ -373,6 +388,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTableAssociation
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: rta1
@@ -389,6 +405,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTableAssociation
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: rta2
@@ -405,6 +422,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: InternetGateway
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example
@@ -419,6 +437,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Route
 metadata:
   annotations:
+    uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: mwaa/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example
