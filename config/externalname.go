@@ -1419,7 +1419,12 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Example: arn:aws:imagebuilder:us-east-1:123456789012:infrastructure-configuration/example
 	"aws_imagebuilder_infrastructure_configuration": config.IdentifierFromProvider,
 
+	// mwaa
 	// inspector
+	//
+	// mwaa_environment can be imported using the name
+	"aws_mwaa_environment": config.NameAsIdentifier,
+
 	//
 	// Inspector Assessment Targets can be imported via their Amazon Resource Name (ARN)
 	// Example: arn:aws:inspector:us-east-1:123456789012:target/0-xxxxxxx
