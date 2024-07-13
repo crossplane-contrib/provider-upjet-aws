@@ -22,7 +22,7 @@ permissions:
 env:
   SUPPORTED_RELEASES_NUMBER: '1'
   # comma separated list of images, without tag
-  IMAGES: "xpkg.upbound.io/upbound/provider-aws"
+  IMAGES: "xpkg.upbound.io/upbound/provider-family-aws"
 
 jobs:
   setup-vars:
