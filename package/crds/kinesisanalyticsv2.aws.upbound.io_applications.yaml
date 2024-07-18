@@ -4514,6 +4514,10 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   cloudwatchLoggingOptions:
                     description: A CloudWatch log stream to monitor application configuration
                       errors.
@@ -5663,6 +5667,10 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   cloudwatchLoggingOptions:
                     description: A CloudWatch log stream to monitor application configuration
                       errors.
@@ -6533,6 +6541,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   arn:
                     description: The ARN of the application.
                     type: string

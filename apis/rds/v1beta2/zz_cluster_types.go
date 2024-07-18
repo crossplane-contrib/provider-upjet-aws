@@ -36,6 +36,9 @@ type ClusterInitParameters struct {
 	// Days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
+	// The CA certificate identifier to use for the DB cluster's server certificate.
+	CACertificateIdentifier *string `json:"caCertificateIdentifier,omitempty" tf:"ca_certificate_identifier,omitempty"`
+
 	// – List of RDS Instances that are a part of this cluster
 	// +listType=set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
@@ -278,6 +281,12 @@ type ClusterObservation struct {
 	// Days to retain backups for. Default 1
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
+	// The CA certificate identifier to use for the DB cluster's server certificate.
+	CACertificateIdentifier *string `json:"caCertificateIdentifier,omitempty" tf:"ca_certificate_identifier,omitempty"`
+
+	// Expiration date of the DB instance’s server certificate
+	CACertificateValidTill *string `json:"caCertificateValidTill,omitempty" tf:"ca_certificate_valid_till,omitempty"`
+
 	// – List of RDS Instances that are a part of this cluster
 	// +listType=set
 	ClusterMembers []*string `json:"clusterMembers,omitempty" tf:"cluster_members,omitempty"`
@@ -478,6 +487,10 @@ type ClusterParameters struct {
 	// Days to retain backups for. Default 1
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
+
+	// The CA certificate identifier to use for the DB cluster's server certificate.
+	// +kubebuilder:validation:Optional
+	CACertificateIdentifier *string `json:"caCertificateIdentifier,omitempty" tf:"ca_certificate_identifier,omitempty"`
 
 	// – List of RDS Instances that are a part of this cluster
 	// +kubebuilder:validation:Optional

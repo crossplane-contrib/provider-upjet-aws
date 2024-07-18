@@ -97,6 +97,9 @@ type ClusterInitParameters struct {
 	// The weekly time range during which system maintenance can occur, in (UTC) e.g., wed:04:00-wed:04:30
 	PreferredMaintenanceWindow *string `json:"preferredMaintenanceWindow,omitempty" tf:"preferred_maintenance_window,omitempty"`
 
+	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
+	RestoreToPointInTime *RestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
@@ -212,6 +215,9 @@ type ClusterObservation struct {
 
 	// A read-only endpoint for the DocumentDB cluster, automatically load-balanced across replicas
 	ReaderEndpoint *string `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
+
+	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
+	RestoreToPointInTime *RestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
@@ -351,6 +357,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
+	// +kubebuilder:validation:Optional
+	RestoreToPointInTime *RestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
+
 	// Determines whether a final DB snapshot is created before the DB cluster is deleted. If true is specified, no DB snapshot is created. If false is specified, a DB snapshot is created before the DB cluster is deleted, using the value from final_snapshot_identifier. Default is false.
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
@@ -388,6 +398,55 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
+}
+
+type RestoreToPointInTimeInitParameters struct {
+
+	// The date and time to restore from. Value must be a time in Universal Coordinated Time (UTC) format and must be before the latest restorable time for the DB instance. Cannot be specified with use_latest_restorable_time.
+	RestoreToTime *string `json:"restoreToTime,omitempty" tf:"restore_to_time,omitempty"`
+
+	// The type of restore to be performed. Valid values are full-copy, copy-on-write.
+	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
+
+	// The identifier of the source DB cluster from which to restore. Must match the identifier of an existing DB cluster.
+	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
+
+	// A boolean value that indicates whether the DB cluster is restored from the latest backup time. Defaults to false. Cannot be specified with restore_to_time.
+	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
+}
+
+type RestoreToPointInTimeObservation struct {
+
+	// The date and time to restore from. Value must be a time in Universal Coordinated Time (UTC) format and must be before the latest restorable time for the DB instance. Cannot be specified with use_latest_restorable_time.
+	RestoreToTime *string `json:"restoreToTime,omitempty" tf:"restore_to_time,omitempty"`
+
+	// The type of restore to be performed. Valid values are full-copy, copy-on-write.
+	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
+
+	// The identifier of the source DB cluster from which to restore. Must match the identifier of an existing DB cluster.
+	SourceClusterIdentifier *string `json:"sourceClusterIdentifier,omitempty" tf:"source_cluster_identifier,omitempty"`
+
+	// A boolean value that indicates whether the DB cluster is restored from the latest backup time. Defaults to false. Cannot be specified with restore_to_time.
+	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
+}
+
+type RestoreToPointInTimeParameters struct {
+
+	// The date and time to restore from. Value must be a time in Universal Coordinated Time (UTC) format and must be before the latest restorable time for the DB instance. Cannot be specified with use_latest_restorable_time.
+	// +kubebuilder:validation:Optional
+	RestoreToTime *string `json:"restoreToTime,omitempty" tf:"restore_to_time,omitempty"`
+
+	// The type of restore to be performed. Valid values are full-copy, copy-on-write.
+	// +kubebuilder:validation:Optional
+	RestoreType *string `json:"restoreType,omitempty" tf:"restore_type,omitempty"`
+
+	// The identifier of the source DB cluster from which to restore. Must match the identifier of an existing DB cluster.
+	// +kubebuilder:validation:Optional
+	SourceClusterIdentifier *string `json:"sourceClusterIdentifier" tf:"source_cluster_identifier,omitempty"`
+
+	// A boolean value that indicates whether the DB cluster is restored from the latest backup time. Defaults to false. Cannot be specified with restore_to_time.
+	// +kubebuilder:validation:Optional
+	UseLatestRestorableTime *bool `json:"useLatestRestorableTime,omitempty" tf:"use_latest_restorable_time,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster

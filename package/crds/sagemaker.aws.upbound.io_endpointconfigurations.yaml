@@ -1861,7 +1861,7 @@ spec:
                           properties:
                             captureMode:
                               description: Specifies the data to be captured. Should
-                                be one of Input or Output.
+                                be one of Input, Output or InputAndOutput.
                               type: string
                           type: object
                         type: array
@@ -2002,6 +2002,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -2191,6 +2198,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -2366,7 +2380,7 @@ spec:
                           properties:
                             captureMode:
                               description: Specifies the data to be captured. Should
-                                be one of Input or Output.
+                                be one of Input, Output or InputAndOutput.
                               type: string
                           type: object
                         type: array
@@ -2507,6 +2521,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -2692,6 +2713,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -3034,7 +3062,7 @@ spec:
                           properties:
                             captureMode:
                               description: Specifies the data to be captured. Should
-                                be one of Input or Output.
+                                be one of Input, Output or InputAndOutput.
                               type: string
                           type: object
                         type: array
@@ -3103,6 +3131,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -3212,6 +3247,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number

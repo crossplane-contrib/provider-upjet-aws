@@ -364,6 +364,11 @@ func (in *APIKeyObservation) DeepCopyInto(out *APIKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIKeyID != nil {
+		in, out := &in.APIKeyID, &out.APIKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)

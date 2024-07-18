@@ -746,10 +746,6 @@ spec:
                   grantId:
                     description: The unique identifier for the grant.
                     type: string
-                  grantToken:
-                    description: The grant token for the created grant. For more information,
-                      see Grant Tokens.
-                    type: string
                   granteePrincipal:
                     description: The principal that is given permission to perform
                       the operations that the grant permits in ARN format.

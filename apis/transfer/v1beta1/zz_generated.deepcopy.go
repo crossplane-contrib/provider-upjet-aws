@@ -2798,6 +2798,11 @@ func (in *SSHKeyObservation) DeepCopyInto(out *SSHKeyObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SSHKeyID != nil {
+		in, out := &in.SSHKeyID, &out.SSHKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID
 		*out = new(string)

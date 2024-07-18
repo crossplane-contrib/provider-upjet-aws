@@ -20,6 +20,10 @@ type WorkerConfigurationInitParameters_2 struct {
 
 	// Contents of connect-distributed.properties file. The value can be either base64 encoded or in raw format.
 	PropertiesFileContent *string `json:"propertiesFileContent,omitempty" tf:"properties_file_content,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type WorkerConfigurationObservation_2 struct {
@@ -40,6 +44,14 @@ type WorkerConfigurationObservation_2 struct {
 
 	// Contents of connect-distributed.properties file. The value can be either base64 encoded or in raw format.
 	PropertiesFileContent *string `json:"propertiesFileContent,omitempty" tf:"properties_file_content,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type WorkerConfigurationParameters_2 struct {
@@ -60,6 +72,11 @@ type WorkerConfigurationParameters_2 struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 // WorkerConfigurationSpec defines the desired state of WorkerConfiguration

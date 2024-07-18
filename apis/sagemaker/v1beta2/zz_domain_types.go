@@ -18,6 +18,8 @@ type CanvasAppSettingsInitParameters struct {
 	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
 	DirectDeploySettings *DirectDeploySettingsInitParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
+	GenerativeAISettings *GenerativeAISettingsInitParameters `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
+
 	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsInitParameters `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
 
@@ -38,6 +40,8 @@ type CanvasAppSettingsObservation struct {
 
 	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
 	DirectDeploySettings *DirectDeploySettingsObservation `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
+
+	GenerativeAISettings *GenerativeAISettingsObservation `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
 
 	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsObservation `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
@@ -61,6 +65,9 @@ type CanvasAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectDeploySettings *DirectDeploySettingsParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	GenerativeAISettings *GenerativeAISettingsParameters `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
+
 	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	// +kubebuilder:validation:Optional
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsParameters `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
@@ -80,6 +87,45 @@ type CanvasAppSettingsParameters struct {
 	// The workspace settings for the SageMaker Canvas application. See workspace_settings Block below.
 	// +kubebuilder:validation:Optional
 	WorkspaceSettings *WorkspaceSettingsParameters `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
+}
+
+type CodeEditorAppSettingsCustomImageInitParameters struct {
+
+	// The name of the App Image Config.
+	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+
+	// The name of the Custom Image.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+}
+
+type CodeEditorAppSettingsCustomImageObservation struct {
+
+	// The name of the App Image Config.
+	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+
+	// The name of the Custom Image.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+}
+
+type CodeEditorAppSettingsCustomImageParameters struct {
+
+	// The name of the App Image Config.
+	// +kubebuilder:validation:Optional
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
+
+	// The name of the Custom Image.
+	// +kubebuilder:validation:Optional
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	// +kubebuilder:validation:Optional
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type CodeEditorAppSettingsDefaultResourceSpecInitParameters struct {
@@ -143,6 +189,9 @@ type CodeEditorAppSettingsDefaultResourceSpecParameters struct {
 
 type CodeEditorAppSettingsInitParameters struct {
 
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	CustomImage []CodeEditorAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *CodeEditorAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -153,6 +202,9 @@ type CodeEditorAppSettingsInitParameters struct {
 
 type CodeEditorAppSettingsObservation struct {
 
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	CustomImage []CodeEditorAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec *CodeEditorAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -162,6 +214,10 @@ type CodeEditorAppSettingsObservation struct {
 }
 
 type CodeEditorAppSettingsParameters struct {
+
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// +kubebuilder:validation:Optional
+	CustomImage []CodeEditorAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
@@ -1065,6 +1121,25 @@ type EFSFileSystemConfigParameters struct {
 	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
 	// +kubebuilder:validation:Optional
 	FileSystemPath *string `json:"fileSystemPath" tf:"file_system_path,omitempty"`
+}
+
+type GenerativeAISettingsInitParameters struct {
+
+	// The Amazon Resource Name (ARN) assigned by AWS to this Domain.
+	AmazonBedrockRoleArn *string `json:"amazonBedrockRoleArn,omitempty" tf:"amazon_bedrock_role_arn,omitempty"`
+}
+
+type GenerativeAISettingsObservation struct {
+
+	// The Amazon Resource Name (ARN) assigned by AWS to this Domain.
+	AmazonBedrockRoleArn *string `json:"amazonBedrockRoleArn,omitempty" tf:"amazon_bedrock_role_arn,omitempty"`
+}
+
+type GenerativeAISettingsParameters struct {
+
+	// The Amazon Resource Name (ARN) assigned by AWS to this Domain.
+	// +kubebuilder:validation:Optional
+	AmazonBedrockRoleArn *string `json:"amazonBedrockRoleArn,omitempty" tf:"amazon_bedrock_role_arn,omitempty"`
 }
 
 type IdentityProviderOauthSettingsInitParameters struct {

@@ -4203,6 +4203,11 @@ func (in *LayerVersionObservation) DeepCopyInto(out *LayerVersionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CodeSha256 != nil {
+		in, out := &in.CodeSha256, &out.CodeSha256
+		*out = new(string)
+		**out = **in
+	}
 	if in.CompatibleArchitectures != nil {
 		in, out := &in.CompatibleArchitectures, &out.CompatibleArchitectures
 		*out = make([]*string, len(*in))

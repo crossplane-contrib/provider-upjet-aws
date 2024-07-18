@@ -1185,6 +1185,13 @@ spec:
                       using your own OIDC Identity Provider. Conflicts with cognito_config.
                       see OIDC Config details below.
                     properties:
+                      authenticationRequestExtraParams:
+                        additionalProperties:
+                          type: string
+                        description: A string to string map of identifiers specific
+                          to the custom identity provider (IdP) being used.
+                        type: object
+                        x-kubernetes-map-type: granular
                       authorizationEndpoint:
                         description: The OIDC IdP authorization endpoint used to configure
                           your private workforce.
@@ -1221,6 +1228,11 @@ spec:
                       logoutEndpoint:
                         description: The OIDC IdP logout endpoint used to configure
                           your private workforce.
+                        type: string
+                      scope:
+                        description: An array of string identifiers used to refer
+                          to the specific pieces of user data or claims that the client
+                          application wants to access.
                         type: string
                       tokenEndpoint:
                         description: The OIDC IdP token endpoint used to configure
@@ -1457,6 +1469,13 @@ spec:
                       using your own OIDC Identity Provider. Conflicts with cognito_config.
                       see OIDC Config details below.
                     properties:
+                      authenticationRequestExtraParams:
+                        additionalProperties:
+                          type: string
+                        description: A string to string map of identifiers specific
+                          to the custom identity provider (IdP) being used.
+                        type: object
+                        x-kubernetes-map-type: granular
                       authorizationEndpoint:
                         description: The OIDC IdP authorization endpoint used to configure
                           your private workforce.
@@ -1493,6 +1512,11 @@ spec:
                       logoutEndpoint:
                         description: The OIDC IdP logout endpoint used to configure
                           your private workforce.
+                        type: string
+                      scope:
+                        description: An array of string identifiers used to refer
+                          to the specific pieces of user data or claims that the client
+                          application wants to access.
                         type: string
                       tokenEndpoint:
                         description: The OIDC IdP token endpoint used to configure
@@ -1739,6 +1763,13 @@ spec:
                       using your own OIDC Identity Provider. Conflicts with cognito_config.
                       see OIDC Config details below.
                     properties:
+                      authenticationRequestExtraParams:
+                        additionalProperties:
+                          type: string
+                        description: A string to string map of identifiers specific
+                          to the custom identity provider (IdP) being used.
+                        type: object
+                        x-kubernetes-map-type: granular
                       authorizationEndpoint:
                         description: The OIDC IdP authorization endpoint used to configure
                           your private workforce.
@@ -1757,6 +1788,11 @@ spec:
                       logoutEndpoint:
                         description: The OIDC IdP logout endpoint used to configure
                           your private workforce.
+                        type: string
+                      scope:
+                        description: An array of string identifiers used to refer
+                          to the specific pieces of user data or claims that the client
+                          application wants to access.
                         type: string
                       tokenEndpoint:
                         description: The OIDC IdP token endpoint used to configure

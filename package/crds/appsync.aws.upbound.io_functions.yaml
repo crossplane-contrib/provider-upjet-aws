@@ -1132,11 +1132,11 @@ spec:
                     description: Describes a runtime used by an AWS AppSync pipeline
                       resolver or AWS AppSync function. Specifies the name and version
                       of the runtime to use. Note that if a runtime is specified,
-                      code must also be specified. See Runtime.
+                      code must also be specified. See runtime Block for details.
                     properties:
                       name:
-                        description: Function name. The function name does not have
-                          to be unique.
+                        description: The name of the runtime to use. Currently, the
+                          only allowed value is APPSYNC_JS.
                         type: string
                       runtimeVersion:
                         description: The version of the runtime to use. Currently,
@@ -1145,7 +1145,7 @@ spec:
                     type: object
                   syncConfig:
                     description: Describes a Sync configuration for a resolver. See
-                      Sync Config.
+                      sync_config Block for details.
                     properties:
                       conflictDetection:
                         description: Conflict Detection strategy to use. Valid values
@@ -1158,8 +1158,8 @@ spec:
                         type: string
                       lambdaConflictHandlerConfig:
                         description: Lambda Conflict Handler Config when configuring
-                          LAMBDA as the Conflict Handler. See Lambda Conflict Handler
-                          Config.
+                          LAMBDA as the Conflict Handler. See lambda_conflict_handler_config
+                          Block for details.
                         properties:
                           lambdaConflictHandlerArn:
                             description: ARN for the Lambda function to use as the
@@ -1373,11 +1373,11 @@ spec:
                     description: Describes a runtime used by an AWS AppSync pipeline
                       resolver or AWS AppSync function. Specifies the name and version
                       of the runtime to use. Note that if a runtime is specified,
-                      code must also be specified. See Runtime.
+                      code must also be specified. See runtime Block for details.
                     properties:
                       name:
-                        description: Function name. The function name does not have
-                          to be unique.
+                        description: The name of the runtime to use. Currently, the
+                          only allowed value is APPSYNC_JS.
                         type: string
                       runtimeVersion:
                         description: The version of the runtime to use. Currently,
@@ -1386,7 +1386,7 @@ spec:
                     type: object
                   syncConfig:
                     description: Describes a Sync configuration for a resolver. See
-                      Sync Config.
+                      sync_config Block for details.
                     properties:
                       conflictDetection:
                         description: Conflict Detection strategy to use. Valid values
@@ -1399,8 +1399,8 @@ spec:
                         type: string
                       lambdaConflictHandlerConfig:
                         description: Lambda Conflict Handler Config when configuring
-                          LAMBDA as the Conflict Handler. See Lambda Conflict Handler
-                          Config.
+                          LAMBDA as the Conflict Handler. See lambda_conflict_handler_config
+                          Block for details.
                         properties:
                           lambdaConflictHandlerArn:
                             description: ARN for the Lambda function to use as the
@@ -1633,11 +1633,11 @@ spec:
                     description: Describes a runtime used by an AWS AppSync pipeline
                       resolver or AWS AppSync function. Specifies the name and version
                       of the runtime to use. Note that if a runtime is specified,
-                      code must also be specified. See Runtime.
+                      code must also be specified. See runtime Block for details.
                     properties:
                       name:
-                        description: Function name. The function name does not have
-                          to be unique.
+                        description: The name of the runtime to use. Currently, the
+                          only allowed value is APPSYNC_JS.
                         type: string
                       runtimeVersion:
                         description: The version of the runtime to use. Currently,
@@ -1646,7 +1646,7 @@ spec:
                     type: object
                   syncConfig:
                     description: Describes a Sync configuration for a resolver. See
-                      Sync Config.
+                      sync_config Block for details.
                     properties:
                       conflictDetection:
                         description: Conflict Detection strategy to use. Valid values
@@ -1659,8 +1659,8 @@ spec:
                         type: string
                       lambdaConflictHandlerConfig:
                         description: Lambda Conflict Handler Config when configuring
-                          LAMBDA as the Conflict Handler. See Lambda Conflict Handler
-                          Config.
+                          LAMBDA as the Conflict Handler. See lambda_conflict_handler_config
+                          Block for details.
                         properties:
                           lambdaConflictHandlerArn:
                             description: ARN for the Lambda function to use as the

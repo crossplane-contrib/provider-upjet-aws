@@ -1575,6 +1575,24 @@ spec:
                           ERROR_ONLY, WARN_ERROR and DISABLED. Default value is DISABLED.
                         type: string
                     type: object
+                  metadataConfiguration:
+                    description: The Lustre metadata configuration used when creating
+                      an Amazon FSx for Lustre file system. This can be used to specify
+                      a user provisioned metadata scale. This is only supported when
+                      deployment_type is set to PERSISTENT_2. See Metadata Configuration
+                      below.
+                    properties:
+                      iops:
+                        description: Amount of IOPS provisioned for metadata. This
+                          parameter should only be used when the mode is set to USER_PROVISIONED.
+                          Valid Values are 1500,3000,6000 and 12000 through 192000
+                          in increments of 12000.
+                        type: number
+                      mode:
+                        description: Mode for the metadata configuration of the file
+                          system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+                        type: string
+                    type: object
                   perUnitStorageThroughput:
                     description: '- Describes the amount of read and write throughput
                       for each 1 tebibyte of storage, in MB/s/TiB, required for the
@@ -1994,6 +2012,24 @@ spec:
                         description: Sets which data repository events are logged
                           by Amazon FSx. Valid values are WARN_ONLY, FAILURE_ONLY,
                           ERROR_ONLY, WARN_ERROR and DISABLED. Default value is DISABLED.
+                        type: string
+                    type: object
+                  metadataConfiguration:
+                    description: The Lustre metadata configuration used when creating
+                      an Amazon FSx for Lustre file system. This can be used to specify
+                      a user provisioned metadata scale. This is only supported when
+                      deployment_type is set to PERSISTENT_2. See Metadata Configuration
+                      below.
+                    properties:
+                      iops:
+                        description: Amount of IOPS provisioned for metadata. This
+                          parameter should only be used when the mode is set to USER_PROVISIONED.
+                          Valid Values are 1500,3000,6000 and 12000 through 192000
+                          in increments of 12000.
+                        type: number
+                      mode:
+                        description: Mode for the metadata configuration of the file
+                          system. Valid values are AUTOMATIC, and USER_PROVISIONED.
                         type: string
                     type: object
                   perUnitStorageThroughput:
@@ -2503,6 +2539,24 @@ spec:
                         description: Sets which data repository events are logged
                           by Amazon FSx. Valid values are WARN_ONLY, FAILURE_ONLY,
                           ERROR_ONLY, WARN_ERROR and DISABLED. Default value is DISABLED.
+                        type: string
+                    type: object
+                  metadataConfiguration:
+                    description: The Lustre metadata configuration used when creating
+                      an Amazon FSx for Lustre file system. This can be used to specify
+                      a user provisioned metadata scale. This is only supported when
+                      deployment_type is set to PERSISTENT_2. See Metadata Configuration
+                      below.
+                    properties:
+                      iops:
+                        description: Amount of IOPS provisioned for metadata. This
+                          parameter should only be used when the mode is set to USER_PROVISIONED.
+                          Valid Values are 1500,3000,6000 and 12000 through 192000
+                          in increments of 12000.
+                        type: number
+                      mode:
+                        description: Mode for the metadata configuration of the file
+                          system. Valid values are AUTOMATIC, and USER_PROVISIONED.
                         type: string
                     type: object
                   mountName:

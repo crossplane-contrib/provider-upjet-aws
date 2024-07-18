@@ -429,7 +429,7 @@ type GitConfigurationInitParameters struct {
 	// The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details. A push block is documented below.
 	Push []PushInitParameters `json:"push,omitempty" tf:"push,omitempty"`
 
-	// The name of the pipeline source action where the trigger configuration.
+	// The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 	SourceActionName *string `json:"sourceActionName,omitempty" tf:"source_action_name,omitempty"`
 }
 
@@ -441,7 +441,7 @@ type GitConfigurationObservation struct {
 	// The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details. A push block is documented below.
 	Push []PushObservation `json:"push,omitempty" tf:"push,omitempty"`
 
-	// The name of the pipeline source action where the trigger configuration.
+	// The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 	SourceActionName *string `json:"sourceActionName,omitempty" tf:"source_action_name,omitempty"`
 }
 
@@ -455,7 +455,7 @@ type GitConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Push []PushParameters `json:"push,omitempty" tf:"push,omitempty"`
 
-	// The name of the pipeline source action where the trigger configuration.
+	// The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 	// +kubebuilder:validation:Optional
 	SourceActionName *string `json:"sourceActionName" tf:"source_action_name,omitempty"`
 }

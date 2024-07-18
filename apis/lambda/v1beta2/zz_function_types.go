@@ -181,7 +181,10 @@ type FunctionInitParameters struct {
 	// Whether to publish creation/change as new Lambda Function Version. Defaults to false.
 	Publish *bool `json:"publish,omitempty" tf:"publish,omitempty"`
 
-	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// Whether to replace the security groups on the function's VPC configuration prior to destruction.
+	// Removing these security group associations prior to function destruction can speed up security group deletion times of AWS's internal cleanup operations.
+	// By default, the security groups will be replaced with the default security group in the function's configured VPC.
+	// Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
@@ -192,7 +195,8 @@ type FunctionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// List of security group IDs to assign to the function's VPC configuration prior to destruction.
+	// replace_security_groups_on_destroy must be set to true to use this attribute.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector
@@ -266,6 +270,9 @@ type FunctionObservation struct {
 	// Amazon Resource Name (ARN) identifying your Lambda Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Base64-encoded representation of raw SHA-256 sum of the zip file.
+	CodeSha256 *string `json:"codeSha256,omitempty" tf:"code_sha256,omitempty"`
+
 	// To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.
 	CodeSigningConfigArn *string `json:"codeSigningConfigArn,omitempty" tf:"code_signing_config_arn,omitempty"`
 
@@ -325,10 +332,14 @@ type FunctionObservation struct {
 	// Qualified ARN (ARN with lambda version number) to be used for invoking Lambda Function from API Gateway - to be used in aws_api_gateway_integration's uri.
 	QualifiedInvokeArn *string `json:"qualifiedInvokeArn,omitempty" tf:"qualified_invoke_arn,omitempty"`
 
-	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// Whether to replace the security groups on the function's VPC configuration prior to destruction.
+	// Removing these security group associations prior to function destruction can speed up security group deletion times of AWS's internal cleanup operations.
+	// By default, the security groups will be replaced with the default security group in the function's configured VPC.
+	// Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
-	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// List of security group IDs to assign to the function's VPC configuration prior to destruction.
+	// replace_security_groups_on_destroy must be set to true to use this attribute.
 	// +listType=set
 	ReplacementSecurityGroupIds []*string `json:"replacementSecurityGroupIds,omitempty" tf:"replacement_security_group_ids,omitempty"`
 
@@ -468,7 +479,10 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// AWS no longer supports this operation. This attribute now has no effect and will be removed in a future major version. Whether to replace the security groups on associated lambda network interfaces upon destruction. Removing these security groups from orphaned network interfaces can speed up security group deletion times by avoiding a dependency on AWS's internal cleanup operations. By default, the ENI security groups will be replaced with the default security group in the function's VPC. Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
+	// Whether to replace the security groups on the function's VPC configuration prior to destruction.
+	// Removing these security group associations prior to function destruction can speed up security group deletion times of AWS's internal cleanup operations.
+	// By default, the security groups will be replaced with the default security group in the function's configured VPC.
+	// Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
 	// +kubebuilder:validation:Optional
 	ReplaceSecurityGroupsOnDestroy *bool `json:"replaceSecurityGroupsOnDestroy,omitempty" tf:"replace_security_groups_on_destroy,omitempty"`
 
@@ -480,7 +494,8 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplacementSecurityGroupIDSelector *v1.Selector `json:"replacementSecurityGroupIdSelector,omitempty" tf:"-"`
 
-	// List of security group IDs to assign to orphaned Lambda function network interfaces upon destruction. replace_security_groups_on_destroy must be set to true to use this attribute.
+	// List of security group IDs to assign to the function's VPC configuration prior to destruction.
+	// replace_security_groups_on_destroy must be set to true to use this attribute.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=ReplacementSecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=ReplacementSecurityGroupIDSelector

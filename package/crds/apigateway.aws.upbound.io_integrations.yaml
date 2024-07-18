@@ -1848,8 +1848,9 @@ spec:
                         type: object
                     type: object
                   timeoutMilliseconds:
-                    description: Custom timeout between 50 and 29,000 milliseconds.
-                      The default value is 29,000 milliseconds.
+                    description: Custom timeout between 50 and 300,000 milliseconds.
+                      The default value is 29,000 milliseconds. You need to raise
+                      a Service Quota Ticket to increase time beyond 29,000 milliseconds.
                     type: number
                   tlsConfig:
                     description: TLS configuration. See below.
@@ -2346,8 +2347,9 @@ spec:
                         type: object
                     type: object
                   timeoutMilliseconds:
-                    description: Custom timeout between 50 and 29,000 milliseconds.
-                      The default value is 29,000 milliseconds.
+                    description: Custom timeout between 50 and 300,000 milliseconds.
+                      The default value is 29,000 milliseconds. You need to raise
+                      a Service Quota Ticket to increase time beyond 29,000 milliseconds.
                     type: number
                   tlsConfig:
                     description: TLS configuration. See below.
@@ -2706,8 +2708,9 @@ spec:
                     description: ID of the associated REST API.
                     type: string
                   timeoutMilliseconds:
-                    description: Custom timeout between 50 and 29,000 milliseconds.
-                      The default value is 29,000 milliseconds.
+                    description: Custom timeout between 50 and 300,000 milliseconds.
+                      The default value is 29,000 milliseconds. You need to raise
+                      a Service Quota Ticket to increase time beyond 29,000 milliseconds.
                     type: number
                   tlsConfig:
                     description: TLS configuration. See below.
