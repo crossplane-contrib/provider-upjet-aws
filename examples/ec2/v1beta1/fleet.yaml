@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: LaunchTemplate
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    imageId: ami-074be47313f84fa38
+    instanceInitiatedShutdownBehavior: terminate
+    instanceType: t3.micro
+    name: example
+    region: us-west-2
+    tags:
+      example: "true"
+    tagSpecifications:
+      - resourceType: instance
+        tags:
+          example: "true"
+      - resourceType: volume
+        tags:
+          example: "true"
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Fleet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/fleet
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    launchTemplateConfig:
+      - launchTemplateSpecification:
+          launchTemplateIdSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+          version: "1"
+          override:
+            - instanceType: t3.micro
+    name: example
+    onDemandOptions:
+      minTargetCapacity: 1
+      singleAvailabilityZone: true
+      singleInstanceType: true
+    region: us-west-2
+    targetCapacitySpecification:
+      defaultTargetCapacityType: on-demand
+      onDemandTargetCapacity: 1
+      totalTargetCapacity: 1
+    tags:
+      example: "true"
+    terminateInstances: true
+    type: instant
