@@ -31,6 +31,19 @@ func Configure(p *config.Provider) {
 			RefFieldName:      "SubnetIDRefs",
 			SelectorFieldName: "SubnetIDSelector",
 		}
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["endpoint"].(string); ok {
+				conn["endpoint"] = []byte(a)
+			}
+			if a, ok := attr["dashboard_endpoint"].(string); ok {
+				conn["dashboard_endpoint"] = []byte(a)
+			}
+			if a, ok := attr["kibana_endpoint"].(string); ok {
+				conn["kibana_endpoint"] = []byte(a)
+			}
+			return conn, nil
+		}
 
 		r.UseAsync = true
 	})
