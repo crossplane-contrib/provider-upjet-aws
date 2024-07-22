@@ -21,3 +21,6 @@ spec:
       - ebsEnabled: true
         volumeType: gp2
         volumeSize: 10
+  writeConnectionSecretToRef:
+    name: sample-opensearch-domain-secret
+    namespace: upbound-system

@@ -21,3 +21,6 @@ spec:
       volumeType: gp2
     engineVersion: OpenSearch_1.0
     region: us-west-1
+  writeConnectionSecretToRef:
+    name: sample-opensearch-domain-secret
+    namespace: upbound-system
