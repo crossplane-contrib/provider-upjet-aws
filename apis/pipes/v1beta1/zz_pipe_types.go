@@ -247,6 +247,25 @@ type CapacityProviderStrategyParameters struct {
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
+type CloudwatchLogsLogDestinationInitParameters struct {
+
+	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+}
+
+type CloudwatchLogsLogDestinationObservation struct {
+
+	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+}
+
+type CloudwatchLogsLogDestinationParameters struct {
+
+	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+	// +kubebuilder:validation:Optional
+	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
+}
+
 type CloudwatchLogsParametersInitParameters struct {
 
 	// The name of the log stream.
@@ -996,6 +1015,25 @@ type FilterParameters struct {
 	Pattern *string `json:"pattern" tf:"pattern,omitempty"`
 }
 
+type FirehoseLogDestinationInitParameters struct {
+
+	// Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
+}
+
+type FirehoseLogDestinationObservation struct {
+
+	// Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+	DeliveryStreamArn *string `json:"deliveryStreamArn,omitempty" tf:"delivery_stream_arn,omitempty"`
+}
+
+type FirehoseLogDestinationParameters struct {
+
+	// Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to which EventBridge delivers the pipe log records.
+	// +kubebuilder:validation:Optional
+	DeliveryStreamArn *string `json:"deliveryStreamArn" tf:"delivery_stream_arn,omitempty"`
+}
+
 type HTTPParametersInitParameters struct {
 
 	// Key-value mapping of the headers that need to be sent as part of request invoking the API Gateway REST API or EventBridge ApiDestination.
@@ -1205,6 +1243,55 @@ type LambdaFunctionParametersParameters struct {
 	// Specify whether to invoke the function synchronously or asynchronously. Valid Values: REQUEST_RESPONSE, FIRE_AND_FORGET.
 	// +kubebuilder:validation:Optional
 	InvocationType *string `json:"invocationType" tf:"invocation_type,omitempty"`
+}
+
+type LogConfigurationInitParameters struct {
+
+	// Amazon CloudWatch Logs logging configuration settings for the pipe. Detailed below.
+	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationInitParameters `json:"cloudwatchLogsLogDestination,omitempty" tf:"cloudwatch_logs_log_destination,omitempty"`
+
+	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
+	FirehoseLogDestination *FirehoseLogDestinationInitParameters `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
+
+	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Amazon S3 logging configuration settings for the pipe. Detailed below.
+	S3LogDestination *S3LogDestinationInitParameters `json:"s3LogDestination,omitempty" tf:"s3_log_destination,omitempty"`
+}
+
+type LogConfigurationObservation struct {
+
+	// Amazon CloudWatch Logs logging configuration settings for the pipe. Detailed below.
+	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationObservation `json:"cloudwatchLogsLogDestination,omitempty" tf:"cloudwatch_logs_log_destination,omitempty"`
+
+	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
+	FirehoseLogDestination *FirehoseLogDestinationObservation `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
+
+	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// Amazon S3 logging configuration settings for the pipe. Detailed below.
+	S3LogDestination *S3LogDestinationObservation `json:"s3LogDestination,omitempty" tf:"s3_log_destination,omitempty"`
+}
+
+type LogConfigurationParameters struct {
+
+	// Amazon CloudWatch Logs logging configuration settings for the pipe. Detailed below.
+	// +kubebuilder:validation:Optional
+	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationParameters `json:"cloudwatchLogsLogDestination,omitempty" tf:"cloudwatch_logs_log_destination,omitempty"`
+
+	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
+	// +kubebuilder:validation:Optional
+	FirehoseLogDestination *FirehoseLogDestinationParameters `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
+
+	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
+	// +kubebuilder:validation:Optional
+	Level *string `json:"level" tf:"level,omitempty"`
+
+	// Amazon S3 logging configuration settings for the pipe. Detailed below.
+	// +kubebuilder:validation:Optional
+	S3LogDestination *S3LogDestinationParameters `json:"s3LogDestination,omitempty" tf:"s3_log_destination,omitempty"`
 }
 
 type ManagedStreamingKafkaParametersCredentialsInitParameters struct {
@@ -1427,6 +1514,9 @@ type PipeInitParameters struct {
 	// +kubebuilder:validation:Optional
 	EnrichmentSelector *v1.Selector `json:"enrichmentSelector,omitempty" tf:"-"`
 
+	// Logging configuration settings for the pipe. Detailed below.
+	LogConfiguration *LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
+
 	// ARN of the role that allows the pipe to send data to the target.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -1497,6 +1587,9 @@ type PipeObservation struct {
 	// Same as name.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Logging configuration settings for the pipe. Detailed below.
+	LogConfiguration *LogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
+
 	// ARN of the role that allows the pipe to send data to the target.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
@@ -1548,6 +1641,10 @@ type PipeParameters struct {
 	// Selector for a APIDestination in cloudwatchevents to populate enrichment.
 	// +kubebuilder:validation:Optional
 	EnrichmentSelector *v1.Selector `json:"enrichmentSelector,omitempty" tf:"-"`
+
+	// Logging configuration settings for the pipe. Detailed below.
+	// +kubebuilder:validation:Optional
+	LogConfiguration *LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -1895,6 +1992,55 @@ type RetryStrategyParameters struct {
 	Attempts *float64 `json:"attempts,omitempty" tf:"attempts,omitempty"`
 }
 
+type S3LogDestinationInitParameters struct {
+
+	// Name of the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Amazon Web Services account that owns the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
+
+	// EventBridge format for the log records. Valid values json, plain and w3c.
+	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
+
+	// Prefix text with which to begin Amazon S3 log object names.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type S3LogDestinationObservation struct {
+
+	// Name of the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// Amazon Web Services account that owns the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+	BucketOwner *string `json:"bucketOwner,omitempty" tf:"bucket_owner,omitempty"`
+
+	// EventBridge format for the log records. Valid values json, plain and w3c.
+	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
+
+	// Prefix text with which to begin Amazon S3 log object names.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type S3LogDestinationParameters struct {
+
+	// Name of the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+	// +kubebuilder:validation:Optional
+	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+
+	// Amazon Web Services account that owns the Amazon S3 bucket to which EventBridge delivers the log records for the pipe.
+	// +kubebuilder:validation:Optional
+	BucketOwner *string `json:"bucketOwner" tf:"bucket_owner,omitempty"`
+
+	// EventBridge format for the log records. Valid values json, plain and w3c.
+	// +kubebuilder:validation:Optional
+	OutputFormat *string `json:"outputFormat,omitempty" tf:"output_format,omitempty"`
+
+	// Prefix text with which to begin Amazon S3 log object names.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
 type SagemakerPipelineParametersInitParameters struct {
 
 	// List of Parameter names and values for SageMaker Model Building Pipeline execution. Detailed below.
@@ -1948,7 +2094,7 @@ type SelfManagedKafkaParametersCredentialsParameters struct {
 
 	// The ARN of the Secrets Manager secret containing the credentials.
 	// +kubebuilder:validation:Optional
-	BasicAuth *string `json:"basicAuth" tf:"basic_auth,omitempty"`
+	BasicAuth *string `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 
 	// The ARN of the Secrets Manager secret containing the credentials.
 	// +kubebuilder:validation:Optional
