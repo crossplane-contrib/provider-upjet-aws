@@ -22,7 +22,7 @@ spec:
     idleDisconnectTimeoutInSeconds: 60
     imageName: Amazon-AppStream2-Sample-Image-03-11-2023
     instanceType: stream.standard.large
-    maxUserDurationInSeconds: 600
+    maxUserDurationInSeconds: 960
     name: test-fleet
     region: us-east-1
     tags:
