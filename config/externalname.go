@@ -1928,6 +1928,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Pinpoint SMS Channel can be imported using the application-id
 	"aws_pinpoint_sms_channel": FormattedIdentifierFromProvider("", "application_id"),
 
+	// pipes
+	// 
+	// Pipes can be imported using the name
+	"aws_pipes_pipe": config.NameAsIdentifier,
+
 	// qldb
 	//
 	// QLDB Ledgers can be imported using the name

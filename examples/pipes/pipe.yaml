@@ -1,0 +1,135 @@
+apiVersion: pipes.aws.upbound.io/v1beta1
+kind: Pipe
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source
+    targetSelector:
+      matchLabels:
+        testing.upbound.io/example-name: target
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      {
+          "Version": "2012-10-17",
+          "Statement": {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "pipes.amazonaws.com"
+            }
+          }
+        }
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider:
+    policy: |-
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sqs:DeleteMessage",
+                "sqs:GetQueueAttributes",
+                "sqs:ReceiveMessage"
+              ],
+              "Resource": [
+                "*"
+              ]
+            }
+          ]
+        }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: target
+  name: target
+spec:
+  forProvider:
+    policy: |-
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": [
+                "sqs:SendMessage"
+              ],
+              "Resource": [
+                "*"
+              ]
+            }
+          ]
+        }
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: source
+  name: source
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: sqs.aws.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: pipes/v1beta1/pipe
+  labels:
+    testing.upbound.io/example-name: target
+  name: target
+spec:
+  forProvider:
+    region: us-west-1
