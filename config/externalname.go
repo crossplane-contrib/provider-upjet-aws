@@ -1929,7 +1929,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_pinpoint_sms_channel": FormattedIdentifierFromProvider("", "application_id"),
 
 	// pipes
-	// 
+	//
 	// Pipes can be imported using the name
 	"aws_pipes_pipe": config.NameAsIdentifier,
 
