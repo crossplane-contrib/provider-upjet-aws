@@ -259,14 +259,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// emr
 	//
-	// EMR clusters can be imported using the id
-	"aws_emr_cluster": config.IdentifierFromProvider,
-	// EMR Instance Fleet can be imported with the EMR Cluster identifier and Instance Fleet identifier separated by a forward slash (/)
-	// j-123456ABCDEF/if-15EK4O09RZLNR
-	"aws_emr_instance_fleet": config.IdentifierFromProvider,
-	// EMR task instance group can be imported using their EMR Cluster id and Instance Group id separated by a forward-slash /
-	// j-123456ABCDEF/ig-15EK4O09RZLNR
-	"aws_emr_instance_group": config.IdentifierFromProvider,
 	// EMR Managed Scaling Policies can be imported via the EMR Cluster identifier
 	"aws_emr_managed_scaling_policy": FormattedIdentifierFromProvider("", "cluster_id"),
 	// EMR studios can be imported using the id

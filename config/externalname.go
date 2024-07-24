@@ -1246,6 +1246,15 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// EMR Security Configurations can be imported using the name
 	"aws_emr_security_configuration": config.NameAsIdentifier,
+	//
+	// EMR Cluster can be imported using the id
+	"aws_emr_cluster": config.IdentifierFromProvider,
+	// EMR Instance Fleet can be imported with the EMR Cluster identifier and Instance Fleet identifier separated by a forward slash (/)
+	// j-123456ABCDEF/if-15EK4O09RZLNR
+	"aws_emr_instance_fleet": config.IdentifierFromProvider,
+	// EMR task instance group can be imported using their EMR Cluster id and Instance Group id separated by a forward-slash /
+	// j-123456ABCDEF/ig-15EK4O09RZLNR
+	"aws_emr_instance_group": config.IdentifierFromProvider,
 
 	// emrserverless
 	//
