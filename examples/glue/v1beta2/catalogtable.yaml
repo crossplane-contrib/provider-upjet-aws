@@ -7,12 +7,14 @@ kind: CatalogTable
 metadata:
   annotations:
     meta.upbound.io/example-id: glue/v1beta2/catalogtable
-  name: example
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-ct
 spec:
   forProvider:
-    catalogId: ${data.aws_account_id}
+    catalogId: "${data.aws_account_id}"
     databaseNameRef:
-      name: example
+      name: example-ct-cd
     region: us-east-1
     storageDescriptor:
       columns:
@@ -23,3 +25,16 @@ spec:
       - name: my_column_3
         type: string
     tableType: EXTERNAL
+---
+apiVersion: glue.aws.upbound.io/v1beta2
+kind: CatalogDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: glue/v1beta2/catalogtable
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-ct-cd
+spec:
+  forProvider:
+    catalogId: "${data.aws_account_id}"
+    region: us-east-1
