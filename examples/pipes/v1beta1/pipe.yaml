@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: pipes.aws.upbound.io/v1beta1
 kind: Pipe
 metadata:
@@ -28,7 +32,7 @@ metadata:
     meta.upbound.io/example-id: pipes/v1beta1/pipe
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-pipe-role
 spec:
   forProvider:
     assumeRolePolicy: |-
