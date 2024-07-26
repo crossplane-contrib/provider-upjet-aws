@@ -660,6 +660,7 @@
 "aws_organizations_policy_attachment",
 "aws_pinpoint_app",
 "aws_pinpoint_sms_channel",
+"aws_pipes_pipe",
 "aws_placement_group",
 "aws_prometheus_alert_manager_definition",
 "aws_prometheus_rule_group_namespace",

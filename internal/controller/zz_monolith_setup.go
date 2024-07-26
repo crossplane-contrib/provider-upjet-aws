@@ -699,6 +699,7 @@ import (
 	policyattachmentorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policyattachment"
 	apppinpoint "github.com/upbound/provider-aws/internal/controller/pinpoint/app"
 	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
+	pipe "github.com/upbound/provider-aws/internal/controller/pipes/pipe"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
 	ledger "github.com/upbound/provider-aws/internal/controller/qldb/ledger"
 	streamqldb "github.com/upbound/provider-aws/internal/controller/qldb/stream"
@@ -1651,6 +1652,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		policyattachmentorganizations.Setup,
 		apppinpoint.Setup,
 		smschannel.Setup,
+		pipe.Setup,
 		providerconfig.Setup,
 		ledger.Setup,
 		streamqldb.Setup,
