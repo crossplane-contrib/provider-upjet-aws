@@ -414,6 +414,8 @@ import (
 	filesystempolicy "github.com/upbound/provider-aws/internal/controller/efs/filesystempolicy"
 	mounttarget "github.com/upbound/provider-aws/internal/controller/efs/mounttarget"
 	replicationconfigurationefs "github.com/upbound/provider-aws/internal/controller/efs/replicationconfiguration"
+	accessentry "github.com/upbound/provider-aws/internal/controller/eks/accessentry"
+	accesspolicyassociation "github.com/upbound/provider-aws/internal/controller/eks/accesspolicyassociation"
 	addon "github.com/upbound/provider-aws/internal/controller/eks/addon"
 	clustereks "github.com/upbound/provider-aws/internal/controller/eks/cluster"
 	clusterauth "github.com/upbound/provider-aws/internal/controller/eks/clusterauth"
@@ -1369,6 +1371,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		filesystempolicy.Setup,
 		mounttarget.Setup,
 		replicationconfigurationefs.Setup,
+		accessentry.Setup,
+		accesspolicyassociation.Setup,
 		addon.Setup,
 		clustereks.Setup,
 		clusterauth.Setup,
