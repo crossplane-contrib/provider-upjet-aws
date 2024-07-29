@@ -92,6 +92,20 @@ spec:
                       below.
                     items:
                       properties:
+                        accountFilterType:
+                          description: 'Limit deployment targets to individual accounts
+                            or include additional accounts with provided OUs. Valid
+                            values: INTERSECTION, DIFFERENCE, UNION, NONE.'
+                          type: string
+                        accounts:
+                          description: List of accounts to deploy stack set updates.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        accountsUrl:
+                          description: S3 URL of the file containing the list of accounts.
+                          type: string
                         organizationalUnitIds:
                           description: The organization root ID or organizational
                             unit (OU) IDs to which StackSets deploys.
@@ -267,6 +281,20 @@ spec:
                       below.
                     items:
                       properties:
+                        accountFilterType:
+                          description: 'Limit deployment targets to individual accounts
+                            or include additional accounts with provided OUs. Valid
+                            values: INTERSECTION, DIFFERENCE, UNION, NONE.'
+                          type: string
+                        accounts:
+                          description: List of accounts to deploy stack set updates.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        accountsUrl:
+                          description: S3 URL of the file containing the list of accounts.
+                          type: string
                         organizationalUnitIds:
                           description: The organization root ID or organizational
                             unit (OU) IDs to which StackSets deploys.
@@ -594,6 +622,20 @@ spec:
                       below.
                     items:
                       properties:
+                        accountFilterType:
+                          description: 'Limit deployment targets to individual accounts
+                            or include additional accounts with provided OUs. Valid
+                            values: INTERSECTION, DIFFERENCE, UNION, NONE.'
+                          type: string
+                        accounts:
+                          description: List of accounts to deploy stack set updates.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        accountsUrl:
+                          description: S3 URL of the file containing the list of accounts.
+                          type: string
                         organizationalUnitIds:
                           description: The organization root ID or organizational
                             unit (OU) IDs to which StackSets deploys.
@@ -815,16 +857,30 @@ spec:
                       DELEGATED_ADMIN.'
                     type: string
                   deploymentTargets:
-                    description: The AWS Organizations accounts to which StackSets
-                      deploys. StackSets doesn't deploy stack instances to the organization
+                    description: AWS Organizations accounts to which StackSets deploys.
+                      StackSets doesn't deploy stack instances to the organization
                       management account, even if the organization management account
                       is in your organization or in an OU in your organization. Drift
                       detection is not possible for this argument. See deployment_targets
                       below.
                     properties:
+                      accountFilterType:
+                        description: 'Limit deployment targets to individual accounts
+                          or include additional accounts with provided OUs. Valid
+                          values: INTERSECTION, DIFFERENCE, UNION, NONE.'
+                        type: string
+                      accounts:
+                        description: List of accounts to deploy stack set updates.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      accountsUrl:
+                        description: S3 URL of the file containing the list of accounts.
+                        type: string
                       organizationalUnitIds:
-                        description: The organization root ID or organizational unit
-                          (OU) IDs to which StackSets deploys.
+                        description: Organization root ID or organizational unit (OU)
+                          IDs to which StackSets deploys.
                         items:
                           type: string
                         type: array
@@ -835,31 +891,31 @@ spec:
                       stack set operation.
                     properties:
                       failureToleranceCount:
-                        description: The number of accounts, per Region, for which
-                          this operation can fail before AWS CloudFormation stops
-                          the operation in that Region.
+                        description: Number of accounts, per Region, for which this
+                          operation can fail before AWS CloudFormation stops the operation
+                          in that Region.
                         type: number
                       failureTolerancePercentage:
-                        description: The percentage of accounts, per Region, for which
+                        description: Percentage of accounts, per Region, for which
                           this stack operation can fail before AWS CloudFormation
                           stops the operation in that Region.
                         type: number
                       maxConcurrentCount:
-                        description: The maximum number of accounts in which to perform
+                        description: Maximum number of accounts in which to perform
                           this operation at one time.
                         type: number
                       maxConcurrentPercentage:
-                        description: The maximum percentage of accounts in which to
-                          perform this operation at one time.
+                        description: Maximum percentage of accounts in which to perform
+                          this operation at one time.
                         type: number
                       regionConcurrencyType:
-                        description: The concurrency type of deploying StackSets operations
+                        description: Concurrency type of deploying StackSets operations
                           in Regions, could be in parallel or one Region at a time.
                           Valid values are SEQUENTIAL and PARALLEL.
                         type: string
                       regionOrder:
-                        description: The order of the Regions in where you want to
-                          perform the stack operation.
+                        description: Order of the Regions in where you want to perform
+                          the stack operation.
                         items:
                           type: string
                         type: array
@@ -986,16 +1042,30 @@ spec:
                       DELEGATED_ADMIN.'
                     type: string
                   deploymentTargets:
-                    description: The AWS Organizations accounts to which StackSets
-                      deploys. StackSets doesn't deploy stack instances to the organization
+                    description: AWS Organizations accounts to which StackSets deploys.
+                      StackSets doesn't deploy stack instances to the organization
                       management account, even if the organization management account
                       is in your organization or in an OU in your organization. Drift
                       detection is not possible for this argument. See deployment_targets
                       below.
                     properties:
+                      accountFilterType:
+                        description: 'Limit deployment targets to individual accounts
+                          or include additional accounts with provided OUs. Valid
+                          values: INTERSECTION, DIFFERENCE, UNION, NONE.'
+                        type: string
+                      accounts:
+                        description: List of accounts to deploy stack set updates.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      accountsUrl:
+                        description: S3 URL of the file containing the list of accounts.
+                        type: string
                       organizationalUnitIds:
-                        description: The organization root ID or organizational unit
-                          (OU) IDs to which StackSets deploys.
+                        description: Organization root ID or organizational unit (OU)
+                          IDs to which StackSets deploys.
                         items:
                           type: string
                         type: array
@@ -1006,31 +1076,31 @@ spec:
                       stack set operation.
                     properties:
                       failureToleranceCount:
-                        description: The number of accounts, per Region, for which
-                          this operation can fail before AWS CloudFormation stops
-                          the operation in that Region.
+                        description: Number of accounts, per Region, for which this
+                          operation can fail before AWS CloudFormation stops the operation
+                          in that Region.
                         type: number
                       failureTolerancePercentage:
-                        description: The percentage of accounts, per Region, for which
+                        description: Percentage of accounts, per Region, for which
                           this stack operation can fail before AWS CloudFormation
                           stops the operation in that Region.
                         type: number
                       maxConcurrentCount:
-                        description: The maximum number of accounts in which to perform
+                        description: Maximum number of accounts in which to perform
                           this operation at one time.
                         type: number
                       maxConcurrentPercentage:
-                        description: The maximum percentage of accounts in which to
-                          perform this operation at one time.
+                        description: Maximum percentage of accounts in which to perform
+                          this operation at one time.
                         type: number
                       regionConcurrencyType:
-                        description: The concurrency type of deploying StackSets operations
+                        description: Concurrency type of deploying StackSets operations
                           in Regions, could be in parallel or one Region at a time.
                           Valid values are SEQUENTIAL and PARALLEL.
                         type: string
                       regionOrder:
-                        description: The order of the Regions in where you want to
-                          perform the stack operation.
+                        description: Order of the Regions in where you want to perform
+                          the stack operation.
                         items:
                           type: string
                         type: array
@@ -1309,16 +1379,30 @@ spec:
                       DELEGATED_ADMIN.'
                     type: string
                   deploymentTargets:
-                    description: The AWS Organizations accounts to which StackSets
-                      deploys. StackSets doesn't deploy stack instances to the organization
+                    description: AWS Organizations accounts to which StackSets deploys.
+                      StackSets doesn't deploy stack instances to the organization
                       management account, even if the organization management account
                       is in your organization or in an OU in your organization. Drift
                       detection is not possible for this argument. See deployment_targets
                       below.
                     properties:
+                      accountFilterType:
+                        description: 'Limit deployment targets to individual accounts
+                          or include additional accounts with provided OUs. Valid
+                          values: INTERSECTION, DIFFERENCE, UNION, NONE.'
+                        type: string
+                      accounts:
+                        description: List of accounts to deploy stack set updates.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      accountsUrl:
+                        description: S3 URL of the file containing the list of accounts.
+                        type: string
                       organizationalUnitIds:
-                        description: The organization root ID or organizational unit
-                          (OU) IDs to which StackSets deploys.
+                        description: Organization root ID or organizational unit (OU)
+                          IDs to which StackSets deploys.
                         items:
                           type: string
                         type: array
@@ -1337,37 +1421,37 @@ spec:
                       stack set operation.
                     properties:
                       failureToleranceCount:
-                        description: The number of accounts, per Region, for which
-                          this operation can fail before AWS CloudFormation stops
-                          the operation in that Region.
+                        description: Number of accounts, per Region, for which this
+                          operation can fail before AWS CloudFormation stops the operation
+                          in that Region.
                         type: number
                       failureTolerancePercentage:
-                        description: The percentage of accounts, per Region, for which
+                        description: Percentage of accounts, per Region, for which
                           this stack operation can fail before AWS CloudFormation
                           stops the operation in that Region.
                         type: number
                       maxConcurrentCount:
-                        description: The maximum number of accounts in which to perform
+                        description: Maximum number of accounts in which to perform
                           this operation at one time.
                         type: number
                       maxConcurrentPercentage:
-                        description: The maximum percentage of accounts in which to
-                          perform this operation at one time.
+                        description: Maximum percentage of accounts in which to perform
+                          this operation at one time.
                         type: number
                       regionConcurrencyType:
-                        description: The concurrency type of deploying StackSets operations
+                        description: Concurrency type of deploying StackSets operations
                           in Regions, could be in parallel or one Region at a time.
                           Valid values are SEQUENTIAL and PARALLEL.
                         type: string
                       regionOrder:
-                        description: The order of the Regions in where you want to
-                          perform the stack operation.
+                        description: Order of the Regions in where you want to perform
+                          the stack operation.
                         items:
                           type: string
                         type: array
                     type: object
                   organizationalUnitId:
-                    description: The organization root ID or organizational unit (OU)
+                    description: Organization root ID or organizational unit (OU)
                       ID in which the stack is deployed.
                     type: string
                   parameterOverrides:
@@ -1395,8 +1479,8 @@ spec:
                             on the StackSet. Defaults to current account.
                           type: string
                         organizationalUnitId:
-                          description: The organization root ID or organizational
-                            unit (OU) ID in which the stack is deployed.
+                          description: Organization root ID or organizational unit
+                            (OU) ID in which the stack is deployed.
                           type: string
                         stackId:
                           description: Stack identifier.

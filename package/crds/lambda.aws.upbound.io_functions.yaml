@@ -1885,6 +1885,10 @@ spec:
                     description: Amazon Resource Name (ARN) identifying your Lambda
                       Function.
                     type: string
+                  codeSha256:
+                    description: Base64-encoded representation of raw SHA-256 sum
+                      of the zip file.
+                    type: string
                   codeSigningConfigArn:
                     description: To enable code signing for this function, specify
                       the ARN of a code-signing configuration. A code-signing configuration
@@ -2606,16 +2610,11 @@ spec:
                       be created in.
                     type: string
                   replaceSecurityGroupsOnDestroy:
-                    description: AWS no longer supports this operation. This attribute
-                      now has no effect and will be removed in a future major version.
-                      Whether to replace the security groups on associated lambda
-                      network interfaces upon destruction. Removing these security
-                      groups from orphaned network interfaces can speed up security
-                      group deletion times by avoiding a dependency on AWS's internal
-                      cleanup operations. By default, the ENI security groups will
-                      be replaced with the default security group in the function's
-                      VPC. Set the replacement_security_group_ids attribute to use
-                      a custom list of security groups for replacement.
+                    description: |-
+                      Whether to replace the security groups on the function's VPC configuration prior to destruction.
+                      Removing these security group associations prior to function destruction can speed up security group deletion times of AWS's internal cleanup operations.
+                      By default, the security groups will be replaced with the default security group in the function's configured VPC.
+                      Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
                     type: boolean
                   replacementSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
@@ -2696,9 +2695,9 @@ spec:
                         type: object
                     type: object
                   replacementSecurityGroupIds:
-                    description: List of security group IDs to assign to orphaned
-                      Lambda function network interfaces upon destruction. replace_security_groups_on_destroy
-                      must be set to true to use this attribute.
+                    description: |-
+                      List of security group IDs to assign to the function's VPC configuration prior to destruction.
+                      replace_security_groups_on_destroy must be set to true to use this attribute.
                     items:
                       type: string
                     type: array
@@ -3407,16 +3406,11 @@ spec:
                       Function Version. Defaults to false.
                     type: boolean
                   replaceSecurityGroupsOnDestroy:
-                    description: AWS no longer supports this operation. This attribute
-                      now has no effect and will be removed in a future major version.
-                      Whether to replace the security groups on associated lambda
-                      network interfaces upon destruction. Removing these security
-                      groups from orphaned network interfaces can speed up security
-                      group deletion times by avoiding a dependency on AWS's internal
-                      cleanup operations. By default, the ENI security groups will
-                      be replaced with the default security group in the function's
-                      VPC. Set the replacement_security_group_ids attribute to use
-                      a custom list of security groups for replacement.
+                    description: |-
+                      Whether to replace the security groups on the function's VPC configuration prior to destruction.
+                      Removing these security group associations prior to function destruction can speed up security group deletion times of AWS's internal cleanup operations.
+                      By default, the security groups will be replaced with the default security group in the function's configured VPC.
+                      Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
                     type: boolean
                   replacementSecurityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate replacementSecurityGroupIds.
@@ -3497,9 +3491,9 @@ spec:
                         type: object
                     type: object
                   replacementSecurityGroupIds:
-                    description: List of security group IDs to assign to orphaned
-                      Lambda function network interfaces upon destruction. replace_security_groups_on_destroy
-                      must be set to true to use this attribute.
+                    description: |-
+                      List of security group IDs to assign to the function's VPC configuration prior to destruction.
+                      replace_security_groups_on_destroy must be set to true to use this attribute.
                     items:
                       type: string
                     type: array
@@ -4086,6 +4080,10 @@ spec:
                     description: Amazon Resource Name (ARN) identifying your Lambda
                       Function.
                     type: string
+                  codeSha256:
+                    description: Base64-encoded representation of raw SHA-256 sum
+                      of the zip file.
+                    type: string
                   codeSigningConfigArn:
                     description: To enable code signing for this function, specify
                       the ARN of a code-signing configuration. A code-signing configuration
@@ -4237,21 +4235,16 @@ spec:
                       used in aws_api_gateway_integration's uri.
                     type: string
                   replaceSecurityGroupsOnDestroy:
-                    description: AWS no longer supports this operation. This attribute
-                      now has no effect and will be removed in a future major version.
-                      Whether to replace the security groups on associated lambda
-                      network interfaces upon destruction. Removing these security
-                      groups from orphaned network interfaces can speed up security
-                      group deletion times by avoiding a dependency on AWS's internal
-                      cleanup operations. By default, the ENI security groups will
-                      be replaced with the default security group in the function's
-                      VPC. Set the replacement_security_group_ids attribute to use
-                      a custom list of security groups for replacement.
+                    description: |-
+                      Whether to replace the security groups on the function's VPC configuration prior to destruction.
+                      Removing these security group associations prior to function destruction can speed up security group deletion times of AWS's internal cleanup operations.
+                      By default, the security groups will be replaced with the default security group in the function's configured VPC.
+                      Set the replacement_security_group_ids attribute to use a custom list of security groups for replacement.
                     type: boolean
                   replacementSecurityGroupIds:
-                    description: List of security group IDs to assign to orphaned
-                      Lambda function network interfaces upon destruction. replace_security_groups_on_destroy
-                      must be set to true to use this attribute.
+                    description: |-
+                      List of security group IDs to assign to the function's VPC configuration prior to destruction.
+                      replace_security_groups_on_destroy must be set to true to use this attribute.
                     items:
                       type: string
                     type: array

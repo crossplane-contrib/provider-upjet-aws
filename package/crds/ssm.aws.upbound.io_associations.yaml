@@ -230,6 +230,12 @@ spec:
                     description: The mode for generating association compliance. You
                       can specify AUTO or MANUAL.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   targets:
                     description: A block containing the targets of the SSM association.
                       Targets are documented below. AWS currently supports a maximum
@@ -422,6 +428,12 @@ spec:
                     description: The mode for generating association compliance. You
                       can specify AUTO or MANUAL.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   targets:
                     description: A block containing the targets of the SSM association.
                       Targets are documented below. AWS currently supports a maximum
@@ -705,6 +717,20 @@ spec:
                     description: The mode for generating association compliance. You
                       can specify AUTO or MANUAL.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
+                    x-kubernetes-map-type: granular
                   targets:
                     description: A block containing the targets of the SSM association.
                       Targets are documented below. AWS currently supports a maximum
@@ -1000,6 +1026,12 @@ spec:
                     description: The mode for generating association compliance. You
                       can specify AUTO or MANUAL.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   targets:
                     description: A block containing the targets of the SSM association.
                       Targets are documented below. AWS currently supports a maximum
@@ -1190,6 +1222,12 @@ spec:
                     description: The mode for generating association compliance. You
                       can specify AUTO or MANUAL.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   targets:
                     description: A block containing the targets of the SSM association.
                       Targets are documented below. AWS currently supports a maximum
@@ -1471,6 +1509,20 @@ spec:
                     description: The mode for generating association compliance. You
                       can specify AUTO or MANUAL.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
+                    x-kubernetes-map-type: granular
                   targets:
                     description: A block containing the targets of the SSM association.
                       Targets are documented below. AWS currently supports a maximum

@@ -64,6 +64,10 @@ type AssociationInitParameters struct {
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	Targets []TargetsInitParameters `json:"targets,omitempty" tf:"targets,omitempty"`
 
@@ -120,6 +124,14 @@ type AssociationObservation struct {
 
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	Targets []TargetsObservation `json:"targets,omitempty" tf:"targets,omitempty"`
@@ -196,6 +208,11 @@ type AssociationParameters struct {
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// +kubebuilder:validation:Optional
 	SyncCompliance *string `json:"syncCompliance,omitempty" tf:"sync_compliance,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A block containing the targets of the SSM association. Targets are documented below. AWS currently supports a maximum of 5 targets.
 	// +kubebuilder:validation:Optional

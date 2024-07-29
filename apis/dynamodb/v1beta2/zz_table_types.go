@@ -436,28 +436,34 @@ type ServerSideEncryptionParameters struct {
 type TTLInitParameters struct {
 
 	// Name of the table attribute to store the TTL timestamp in.
+	// Required if enabled is true, must not be set otherwise.
 	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
 
 	// Whether TTL is enabled.
+	// Default value is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type TTLObservation struct {
 
 	// Name of the table attribute to store the TTL timestamp in.
+	// Required if enabled is true, must not be set otherwise.
 	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
 
 	// Whether TTL is enabled.
+	// Default value is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type TTLParameters struct {
 
 	// Name of the table attribute to store the TTL timestamp in.
+	// Required if enabled is true, must not be set otherwise.
 	// +kubebuilder:validation:Optional
-	AttributeName *string `json:"attributeName" tf:"attribute_name,omitempty"`
+	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
 
 	// Whether TTL is enabled.
+	// Default value is false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }

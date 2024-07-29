@@ -754,6 +754,7 @@ spec:
                           session using a proxy to be pinned to the same underlying
                           database connection. Including an item in the list exempts
                           that class of SQL operations from the pinning behavior.
+                          This setting is only supported for MySQL engine family databases.
                           Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
                         items:
                           type: string
@@ -899,6 +900,7 @@ spec:
                           session using a proxy to be pinned to the same underlying
                           database connection. Including an item in the list exempts
                           that class of SQL operations from the pinning behavior.
+                          This setting is only supported for MySQL engine family databases.
                           Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
                         items:
                           type: string
@@ -1202,6 +1204,7 @@ spec:
                           session using a proxy to be pinned to the same underlying
                           database connection. Including an item in the list exempts
                           that class of SQL operations from the pinning behavior.
+                          This setting is only supported for MySQL engine family databases.
                           Currently, the only allowed value is EXCLUDE_VARIABLE_SETS.
                         items:
                           type: string

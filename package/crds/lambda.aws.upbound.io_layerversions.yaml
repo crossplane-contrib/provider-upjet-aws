@@ -126,9 +126,10 @@ spec:
                       of the existing layer version and creation of a new layer version.
                     type: boolean
                   sourceCodeHash:
-                    description: Used to trigger updates. Must be set to a base64-encoded
-                      SHA256 hash of the package file specified with either filename
-                      or s3_key. The usual way to set this is ${filebase64sha256("file.11.12
+                    description: Virtual attribute used to trigger replacement when
+                      source code changes. Must be set to a base64-encoded SHA256
+                      hash of the package file specified with either filename or s3_key.
+                      The usual way to set this is ${filebase64sha256("file.11.12
                       or later) or ${base64sha256(file("file.11.11 and earlier), where
                       "file.zip" is the local filename of the lambda layer source
                       archive.
@@ -197,9 +198,10 @@ spec:
                       of the existing layer version and creation of a new layer version.
                     type: boolean
                   sourceCodeHash:
-                    description: Used to trigger updates. Must be set to a base64-encoded
-                      SHA256 hash of the package file specified with either filename
-                      or s3_key. The usual way to set this is ${filebase64sha256("file.11.12
+                    description: Virtual attribute used to trigger replacement when
+                      source code changes. Must be set to a base64-encoded SHA256
+                      hash of the package file specified with either filename or s3_key.
+                      The usual way to set this is ${filebase64sha256("file.11.12
                       or later) or ${base64sha256(file("file.11.11 and earlier), where
                       "file.zip" is the local filename of the lambda layer source
                       archive.
@@ -385,6 +387,10 @@ spec:
                   arn:
                     description: ARN of the Lambda Layer with version.
                     type: string
+                  codeSha256:
+                    description: Base64-encoded representation of raw SHA-256 sum
+                      of the zip file.
+                    type: string
                   compatibleArchitectures:
                     description: List of Architectures this layer is compatible with.
                       Currently x86_64 and arm64 can be specified.
@@ -447,9 +453,10 @@ spec:
                       of the existing layer version and creation of a new layer version.
                     type: boolean
                   sourceCodeHash:
-                    description: Used to trigger updates. Must be set to a base64-encoded
-                      SHA256 hash of the package file specified with either filename
-                      or s3_key. The usual way to set this is ${filebase64sha256("file.11.12
+                    description: Virtual attribute used to trigger replacement when
+                      source code changes. Must be set to a base64-encoded SHA256
+                      hash of the package file specified with either filename or s3_key.
+                      The usual way to set this is ${filebase64sha256("file.11.12
                       or later) or ${base64sha256(file("file.11.11 and earlier), where
                       "file.zip" is the local filename of the lambda layer source
                       archive.

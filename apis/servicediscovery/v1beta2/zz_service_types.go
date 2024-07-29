@@ -15,7 +15,7 @@ import (
 
 type DNSConfigInitParameters struct {
 
-	// An array that contains one DnsRecord object for each resource record set.
+	// An array that contains one DnsRecord object for each resource record set. See dns_records Block for details.
 	DNSRecords []DNSRecordsInitParameters `json:"dnsRecords,omitempty" tf:"dns_records,omitempty"`
 
 	// The ID of the namespace to use for DNS configuration.
@@ -37,7 +37,7 @@ type DNSConfigInitParameters struct {
 
 type DNSConfigObservation struct {
 
-	// An array that contains one DnsRecord object for each resource record set.
+	// An array that contains one DnsRecord object for each resource record set. See dns_records Block for details.
 	DNSRecords []DNSRecordsObservation `json:"dnsRecords,omitempty" tf:"dns_records,omitempty"`
 
 	// The ID of the namespace to use for DNS configuration.
@@ -49,7 +49,7 @@ type DNSConfigObservation struct {
 
 type DNSConfigParameters struct {
 
-	// An array that contains one DnsRecord object for each resource record set.
+	// An array that contains one DnsRecord object for each resource record set. See dns_records Block for details.
 	// +kubebuilder:validation:Optional
 	DNSRecords []DNSRecordsParameters `json:"dnsRecords" tf:"dns_records,omitempty"`
 
@@ -161,19 +161,19 @@ type HealthCheckCustomConfigParameters struct {
 
 type ServiceInitParameters struct {
 
-	// A complex type that contains information about the resource record sets that you want Amazon Route 53 to create when you register an instance.
+	// A complex type that contains information about the resource record sets that you want Amazon Route 53 to create when you register an instance. See dns_config Block for details.
 	DNSConfig *DNSConfigInitParameters `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
 
 	// The description of the service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A boolean that indicates all instances should be deleted from the service so that the service can be destroyed without error. These instances are not recoverable.
+	// A boolean that indicates all instances should be deleted from the service so that the service can be destroyed without error. These instances are not recoverable. Defaults to false.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces.
+	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces. See health_check_config Block for details.
 	HealthCheckConfig *HealthCheckConfigInitParameters `json:"healthCheckConfig,omitempty" tf:"health_check_config,omitempty"`
 
-	// A complex type that contains settings for ECS managed health checks.
+	// A complex type that contains settings for ECS managed health checks. See health_check_custom_config Block for details.
 	HealthCheckCustomConfig *HealthCheckCustomConfigInitParameters `json:"healthCheckCustomConfig,omitempty" tf:"health_check_custom_config,omitempty"`
 
 	// The name of the service.
@@ -195,19 +195,19 @@ type ServiceObservation struct {
 	// The ARN of the service.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// A complex type that contains information about the resource record sets that you want Amazon Route 53 to create when you register an instance.
+	// A complex type that contains information about the resource record sets that you want Amazon Route 53 to create when you register an instance. See dns_config Block for details.
 	DNSConfig *DNSConfigObservation `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
 
 	// The description of the service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A boolean that indicates all instances should be deleted from the service so that the service can be destroyed without error. These instances are not recoverable.
+	// A boolean that indicates all instances should be deleted from the service so that the service can be destroyed without error. These instances are not recoverable. Defaults to false.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces.
+	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces. See health_check_config Block for details.
 	HealthCheckConfig *HealthCheckConfigObservation `json:"healthCheckConfig,omitempty" tf:"health_check_config,omitempty"`
 
-	// A complex type that contains settings for ECS managed health checks.
+	// A complex type that contains settings for ECS managed health checks. See health_check_custom_config Block for details.
 	HealthCheckCustomConfig *HealthCheckCustomConfigObservation `json:"healthCheckCustomConfig,omitempty" tf:"health_check_custom_config,omitempty"`
 
 	// The ID of the service.
@@ -233,7 +233,7 @@ type ServiceObservation struct {
 
 type ServiceParameters struct {
 
-	// A complex type that contains information about the resource record sets that you want Amazon Route 53 to create when you register an instance.
+	// A complex type that contains information about the resource record sets that you want Amazon Route 53 to create when you register an instance. See dns_config Block for details.
 	// +kubebuilder:validation:Optional
 	DNSConfig *DNSConfigParameters `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
 
@@ -241,15 +241,15 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A boolean that indicates all instances should be deleted from the service so that the service can be destroyed without error. These instances are not recoverable.
+	// A boolean that indicates all instances should be deleted from the service so that the service can be destroyed without error. These instances are not recoverable. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
-	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces.
+	// A complex type that contains settings for an optional health check. Only for Public DNS namespaces. See health_check_config Block for details.
 	// +kubebuilder:validation:Optional
 	HealthCheckConfig *HealthCheckConfigParameters `json:"healthCheckConfig,omitempty" tf:"health_check_config,omitempty"`
 
-	// A complex type that contains settings for ECS managed health checks.
+	// A complex type that contains settings for ECS managed health checks. See health_check_custom_config Block for details.
 	// +kubebuilder:validation:Optional
 	HealthCheckCustomConfig *HealthCheckCustomConfigParameters `json:"healthCheckCustomConfig,omitempty" tf:"health_check_custom_config,omitempty"`
 

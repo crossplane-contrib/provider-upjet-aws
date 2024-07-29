@@ -61,5 +61,5 @@ metadata:
   name: aws-glue-catalog-database
 spec:
   forProvider:
-    catalogId: ${data.aws_account_id}
+    catalogId: "${data.aws_account_id}"
     region: us-west-1

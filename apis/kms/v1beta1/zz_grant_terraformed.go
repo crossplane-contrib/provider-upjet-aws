@@ -21,7 +21,7 @@ func (mg *Grant) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Grant
 func (tr *Grant) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"grant_token": "status.atProvider.grantToken"}
 }
 
 // GetObservation of this Grant

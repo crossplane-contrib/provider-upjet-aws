@@ -18,7 +18,7 @@ type AuthorizationConfigInitParameters struct {
 	// Authorization type that the HTTP endpoint requires. Default values is AWS_IAM.
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
-	// Identity and Access Management (IAM) settings. See AWS IAM Config.
+	// Identity and Access Management (IAM) settings. See aws_iam_config Block for details.
 	AwsIAMConfig *AwsIAMConfigInitParameters `json:"awsIamConfig,omitempty" tf:"aws_iam_config,omitempty"`
 }
 
@@ -27,7 +27,7 @@ type AuthorizationConfigObservation struct {
 	// Authorization type that the HTTP endpoint requires. Default values is AWS_IAM.
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
-	// Identity and Access Management (IAM) settings. See AWS IAM Config.
+	// Identity and Access Management (IAM) settings. See aws_iam_config Block for details.
 	AwsIAMConfig *AwsIAMConfigObservation `json:"awsIamConfig,omitempty" tf:"aws_iam_config,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type AuthorizationConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
-	// Identity and Access Management (IAM) settings. See AWS IAM Config.
+	// Identity and Access Management (IAM) settings. See aws_iam_config Block for details.
 	// +kubebuilder:validation:Optional
 	AwsIAMConfig *AwsIAMConfigParameters `json:"awsIamConfig,omitempty" tf:"aws_iam_config,omitempty"`
 }
@@ -76,25 +76,25 @@ type DatasourceInitParameters struct {
 	// Description of the data source.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// DynamoDB settings. See DynamoDB Config
+	// DynamoDB settings. See dynamodb_config Block for details.
 	DynamodbConfig *DynamodbConfigInitParameters `json:"dynamodbConfig,omitempty" tf:"dynamodb_config,omitempty"`
 
-	// Amazon Elasticsearch settings. See ElasticSearch Config
+	// Amazon Elasticsearch settings. See elasticsearch_config Block for details.
 	ElasticsearchConfig *ElasticsearchConfigInitParameters `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
 
-	// AWS EventBridge settings. See Event Bridge Config
+	// AWS EventBridge settings. See event_bridge_config Block for details.
 	EventBridgeConfig *EventBridgeConfigInitParameters `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
 
-	// HTTP settings. See HTTP Config
+	// HTTP settings. See http_config Block for details.
 	HTTPConfig *HTTPConfigInitParameters `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
 
-	// AWS Lambda settings. See Lambda Config
+	// AWS Lambda settings. See lambda_config Block for details.
 	LambdaConfig *LambdaConfigInitParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Amazon OpenSearch Service settings. See OpenSearch Service Config
+	// Amazon OpenSearch Service settings. See opensearchservice_config Block for details.
 	OpensearchserviceConfig *OpensearchserviceConfigInitParameters `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
-	// AWS RDS settings. See Relational Database Config
+	// AWS RDS settings. See relational_database_config Block for details.
 	RelationalDatabaseConfig *RelationalDatabaseConfigInitParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
 	// IAM service role ARN for the data source. Required if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
@@ -125,27 +125,27 @@ type DatasourceObservation struct {
 	// Description of the data source.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// DynamoDB settings. See DynamoDB Config
+	// DynamoDB settings. See dynamodb_config Block for details.
 	DynamodbConfig *DynamodbConfigObservation `json:"dynamodbConfig,omitempty" tf:"dynamodb_config,omitempty"`
 
-	// Amazon Elasticsearch settings. See ElasticSearch Config
+	// Amazon Elasticsearch settings. See elasticsearch_config Block for details.
 	ElasticsearchConfig *ElasticsearchConfigObservation `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
 
-	// AWS EventBridge settings. See Event Bridge Config
+	// AWS EventBridge settings. See event_bridge_config Block for details.
 	EventBridgeConfig *EventBridgeConfigObservation `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
 
-	// HTTP settings. See HTTP Config
+	// HTTP settings. See http_config Block for details.
 	HTTPConfig *HTTPConfigObservation `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// AWS Lambda settings. See Lambda Config
+	// AWS Lambda settings. See lambda_config Block for details.
 	LambdaConfig *LambdaConfigObservation `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Amazon OpenSearch Service settings. See OpenSearch Service Config
+	// Amazon OpenSearch Service settings. See opensearchservice_config Block for details.
 	OpensearchserviceConfig *OpensearchserviceConfigObservation `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
-	// AWS RDS settings. See Relational Database Config
+	// AWS RDS settings. See relational_database_config Block for details.
 	RelationalDatabaseConfig *RelationalDatabaseConfigObservation `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
 	// IAM service role ARN for the data source. Required if type is specified as AWS_LAMBDA, AMAZON_DYNAMODB, AMAZON_ELASTICSEARCH, AMAZON_EVENTBRIDGE, or AMAZON_OPENSEARCH_SERVICE.
@@ -175,37 +175,37 @@ type DatasourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// DynamoDB settings. See DynamoDB Config
+	// DynamoDB settings. See dynamodb_config Block for details.
 	// +kubebuilder:validation:Optional
 	DynamodbConfig *DynamodbConfigParameters `json:"dynamodbConfig,omitempty" tf:"dynamodb_config,omitempty"`
 
-	// Amazon Elasticsearch settings. See ElasticSearch Config
+	// Amazon Elasticsearch settings. See elasticsearch_config Block for details.
 	// +kubebuilder:validation:Optional
 	ElasticsearchConfig *ElasticsearchConfigParameters `json:"elasticsearchConfig,omitempty" tf:"elasticsearch_config,omitempty"`
 
-	// AWS EventBridge settings. See Event Bridge Config
+	// AWS EventBridge settings. See event_bridge_config Block for details.
 	// +kubebuilder:validation:Optional
 	EventBridgeConfig *EventBridgeConfigParameters `json:"eventBridgeConfig,omitempty" tf:"event_bridge_config,omitempty"`
 
-	// HTTP settings. See HTTP Config
+	// HTTP settings. See http_config Block for details.
 	// +kubebuilder:validation:Optional
 	HTTPConfig *HTTPConfigParameters `json:"httpConfig,omitempty" tf:"http_config,omitempty"`
 
-	// AWS Lambda settings. See Lambda Config
+	// AWS Lambda settings. See lambda_config Block for details.
 	// +kubebuilder:validation:Optional
 	LambdaConfig *LambdaConfigParameters `json:"lambdaConfig,omitempty" tf:"lambda_config,omitempty"`
 
-	// Amazon OpenSearch Service settings. See OpenSearch Service Config
+	// Amazon OpenSearch Service settings. See opensearchservice_config Block for details.
 	// +kubebuilder:validation:Optional
 	OpensearchserviceConfig *OpensearchserviceConfigParameters `json:"opensearchserviceConfig,omitempty" tf:"opensearchservice_config,omitempty"`
 
-	// AWS region of the DynamoDB table. Defaults to current region.
+	// AWS Region for RDS HTTP endpoint. Defaults to current region.
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// AWS RDS settings. See Relational Database Config
+	// AWS RDS settings. See relational_database_config Block for details.
 	// +kubebuilder:validation:Optional
 	RelationalDatabaseConfig *RelationalDatabaseConfigParameters `json:"relationalDatabaseConfig,omitempty" tf:"relational_database_config,omitempty"`
 
@@ -269,7 +269,7 @@ type DeltaSyncConfigParameters struct {
 
 type DynamodbConfigInitParameters struct {
 
-	// The DeltaSyncConfig for a versioned data source. See Delta Sync Config
+	// The DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
 	DeltaSyncConfig *DeltaSyncConfigInitParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
 	// Name of the DynamoDB table.
@@ -293,7 +293,7 @@ type DynamodbConfigInitParameters struct {
 
 type DynamodbConfigObservation struct {
 
-	// The DeltaSyncConfig for a versioned data source. See Delta Sync Config
+	// The DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
 	DeltaSyncConfig *DeltaSyncConfigObservation `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
 	// AWS region of the DynamoDB table. Defaults to current region.
@@ -311,7 +311,7 @@ type DynamodbConfigObservation struct {
 
 type DynamodbConfigParameters struct {
 
-	// The DeltaSyncConfig for a versioned data source. See Delta Sync Config
+	// The DeltaSyncConfig for a versioned data source. See delta_sync_config Block for details.
 	// +kubebuilder:validation:Optional
 	DeltaSyncConfig *DeltaSyncConfigParameters `json:"deltaSyncConfig,omitempty" tf:"delta_sync_config,omitempty"`
 
@@ -352,7 +352,7 @@ type ElasticsearchConfigObservation struct {
 	// HTTP endpoint of the Elasticsearch domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// AWS region of the DynamoDB table. Defaults to current region.
+	// AWS region of Elasticsearch domain. Defaults to current region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
@@ -362,7 +362,7 @@ type ElasticsearchConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
-	// AWS region of the DynamoDB table. Defaults to current region.
+	// AWS region of Elasticsearch domain. Defaults to current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
@@ -388,29 +388,29 @@ type EventBridgeConfigParameters struct {
 
 type HTTPConfigInitParameters struct {
 
-	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
+	// Authorization configuration in case the HTTP endpoint requires authorization. See authorization_config Block for details.
 	AuthorizationConfig *AuthorizationConfigInitParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
-	// HTTP endpoint of the Elasticsearch domain.
+	// HTTP URL.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
 type HTTPConfigObservation struct {
 
-	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
+	// Authorization configuration in case the HTTP endpoint requires authorization. See authorization_config Block for details.
 	AuthorizationConfig *AuthorizationConfigObservation `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
-	// HTTP endpoint of the Elasticsearch domain.
+	// HTTP URL.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
 type HTTPConfigParameters struct {
 
-	// Authorization configuration in case the HTTP endpoint requires authorization. See Authorization Config.
+	// Authorization configuration in case the HTTP endpoint requires authorization. See authorization_config Block for details.
 	// +kubebuilder:validation:Optional
 	AuthorizationConfig *AuthorizationConfigParameters `json:"authorizationConfig,omitempty" tf:"authorization_config,omitempty"`
 
-	// HTTP endpoint of the Elasticsearch domain.
+	// HTTP URL.
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 }
@@ -441,7 +441,7 @@ type HTTPEndpointConfigObservation struct {
 	// Logical database name.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// AWS region of the DynamoDB table. Defaults to current region.
+	// AWS Region for RDS HTTP endpoint. Defaults to current region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
 	// Logical schema name.
@@ -462,7 +462,7 @@ type HTTPEndpointConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// AWS region of the DynamoDB table. Defaults to current region.
+	// AWS Region for RDS HTTP endpoint. Defaults to current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 
@@ -492,33 +492,33 @@ type LambdaConfigParameters struct {
 
 type OpensearchserviceConfigInitParameters struct {
 
-	// HTTP endpoint of the Elasticsearch domain.
+	// HTTP endpoint of the OpenSearch domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 }
 
 type OpensearchserviceConfigObservation struct {
 
-	// HTTP endpoint of the Elasticsearch domain.
+	// HTTP endpoint of the OpenSearch domain.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
-	// AWS region of the DynamoDB table. Defaults to current region.
+	// AWS region of the OpenSearch domain. Defaults to current region.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type OpensearchserviceConfigParameters struct {
 
-	// HTTP endpoint of the Elasticsearch domain.
+	// HTTP endpoint of the OpenSearch domain.
 	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
-	// AWS region of the DynamoDB table. Defaults to current region.
+	// AWS region of the OpenSearch domain. Defaults to current region.
 	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type RelationalDatabaseConfigInitParameters struct {
 
-	// Amazon RDS HTTP endpoint configuration. See HTTP Endpoint Config.
+	// Amazon RDS HTTP endpoint configuration. See http_endpoint_config Block for details.
 	HTTPEndpointConfig *HTTPEndpointConfigInitParameters `json:"httpEndpointConfig,omitempty" tf:"http_endpoint_config,omitempty"`
 
 	// Source type for the relational database. Valid values: RDS_HTTP_ENDPOINT.
@@ -527,7 +527,7 @@ type RelationalDatabaseConfigInitParameters struct {
 
 type RelationalDatabaseConfigObservation struct {
 
-	// Amazon RDS HTTP endpoint configuration. See HTTP Endpoint Config.
+	// Amazon RDS HTTP endpoint configuration. See http_endpoint_config Block for details.
 	HTTPEndpointConfig *HTTPEndpointConfigObservation `json:"httpEndpointConfig,omitempty" tf:"http_endpoint_config,omitempty"`
 
 	// Source type for the relational database. Valid values: RDS_HTTP_ENDPOINT.
@@ -536,7 +536,7 @@ type RelationalDatabaseConfigObservation struct {
 
 type RelationalDatabaseConfigParameters struct {
 
-	// Amazon RDS HTTP endpoint configuration. See HTTP Endpoint Config.
+	// Amazon RDS HTTP endpoint configuration. See http_endpoint_config Block for details.
 	// +kubebuilder:validation:Optional
 	HTTPEndpointConfig *HTTPEndpointConfigParameters `json:"httpEndpointConfig,omitempty" tf:"http_endpoint_config,omitempty"`
 

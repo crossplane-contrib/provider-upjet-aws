@@ -1401,7 +1401,8 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphqlApi. Defined below.
+                      the GraphSQL API. See additional_authentication_provider Block
+                      for details.
                     items:
                       properties:
                         authenticationType:
@@ -1410,7 +1411,8 @@ spec:
                           type: string
                         lambdaAuthorizerConfig:
                           description: Nested argument containing Lambda authorizer
-                            configuration. Defined below.
+                            configuration. See lambda_authorizer_config Block for
+                            details.
                           properties:
                             authorizerResultTtlInSeconds:
                               description: Number of seconds a response should be
@@ -1433,7 +1435,7 @@ spec:
                           type: object
                         openidConnectConfig:
                           description: Nested argument containing OpenID Connect configuration.
-                            Defined below.
+                            See openid_connect_config Block for details.
                           properties:
                             authTtl:
                               description: Number of milliseconds a token is valid
@@ -1458,8 +1460,8 @@ spec:
                               type: string
                           type: object
                         userPoolConfig:
-                          description: Amazon Cognito User Pool configuration. Defined
-                            below.
+                          description: Amazon Cognito User Pool configuration. See
+                            user_pool_config Block for details.
                           properties:
                             appIdClientRegex:
                               description: Regular expression for validating the incoming
@@ -1488,7 +1490,7 @@ spec:
                     type: string
                   lambdaAuthorizerConfig:
                     description: Nested argument containing Lambda authorizer configuration.
-                      Defined below.
+                      See lambda_authorizer_config Block for details.
                     properties:
                       authorizerResultTtlInSeconds:
                         description: Number of seconds a response should be cached
@@ -1510,7 +1512,7 @@ spec:
                     type: object
                   logConfig:
                     description: Nested argument containing logging configuration.
-                      Defined below.
+                      See log_config Block for details.
                     properties:
                       cloudwatchLogsRoleArn:
                         description: Amazon Resource Name of the service role that
@@ -1603,11 +1605,11 @@ spec:
                         type: string
                     type: object
                   name:
-                    description: User-supplied name for the GraphqlApi.
+                    description: User-supplied name for the GraphSQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
-                      Defined below.
+                      See openid_connect_config Block for details.
                     properties:
                       authTtl:
                         description: Number of milliseconds a token is valid after
@@ -1660,7 +1662,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userPoolConfig:
-                    description: Amazon Cognito User Pool configuration. Defined below.
+                    description: Amazon Cognito User Pool configuration. See user_pool_config
+                      Block for details.
                     properties:
                       appIdClientRegex:
                         description: Regular expression for validating the incoming
@@ -1783,7 +1786,8 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphqlApi. Defined below.
+                      the GraphSQL API. See additional_authentication_provider Block
+                      for details.
                     items:
                       properties:
                         authenticationType:
@@ -1792,7 +1796,8 @@ spec:
                           type: string
                         lambdaAuthorizerConfig:
                           description: Nested argument containing Lambda authorizer
-                            configuration. Defined below.
+                            configuration. See lambda_authorizer_config Block for
+                            details.
                           properties:
                             authorizerResultTtlInSeconds:
                               description: Number of seconds a response should be
@@ -1815,7 +1820,7 @@ spec:
                           type: object
                         openidConnectConfig:
                           description: Nested argument containing OpenID Connect configuration.
-                            Defined below.
+                            See openid_connect_config Block for details.
                           properties:
                             authTtl:
                               description: Number of milliseconds a token is valid
@@ -1840,8 +1845,8 @@ spec:
                               type: string
                           type: object
                         userPoolConfig:
-                          description: Amazon Cognito User Pool configuration. Defined
-                            below.
+                          description: Amazon Cognito User Pool configuration. See
+                            user_pool_config Block for details.
                           properties:
                             appIdClientRegex:
                               description: Regular expression for validating the incoming
@@ -1870,7 +1875,7 @@ spec:
                     type: string
                   lambdaAuthorizerConfig:
                     description: Nested argument containing Lambda authorizer configuration.
-                      Defined below.
+                      See lambda_authorizer_config Block for details.
                     properties:
                       authorizerResultTtlInSeconds:
                         description: Number of seconds a response should be cached
@@ -1892,7 +1897,7 @@ spec:
                     type: object
                   logConfig:
                     description: Nested argument containing logging configuration.
-                      Defined below.
+                      See log_config Block for details.
                     properties:
                       cloudwatchLogsRoleArn:
                         description: Amazon Resource Name of the service role that
@@ -1985,11 +1990,11 @@ spec:
                         type: string
                     type: object
                   name:
-                    description: User-supplied name for the GraphqlApi.
+                    description: User-supplied name for the GraphSQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
-                      Defined below.
+                      See openid_connect_config Block for details.
                     properties:
                       authTtl:
                         description: Number of milliseconds a token is valid after
@@ -2038,7 +2043,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userPoolConfig:
-                    description: Amazon Cognito User Pool configuration. Defined below.
+                    description: Amazon Cognito User Pool configuration. See user_pool_config
+                      Block for details.
                     properties:
                       appIdClientRegex:
                         description: Regular expression for validating the incoming
@@ -2327,7 +2333,8 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphqlApi. Defined below.
+                      the GraphSQL API. See additional_authentication_provider Block
+                      for details.
                     items:
                       properties:
                         authenticationType:
@@ -2336,7 +2343,8 @@ spec:
                           type: string
                         lambdaAuthorizerConfig:
                           description: Nested argument containing Lambda authorizer
-                            configuration. Defined below.
+                            configuration. See lambda_authorizer_config Block for
+                            details.
                           properties:
                             authorizerResultTtlInSeconds:
                               description: Number of seconds a response should be
@@ -2359,7 +2367,7 @@ spec:
                           type: object
                         openidConnectConfig:
                           description: Nested argument containing OpenID Connect configuration.
-                            Defined below.
+                            See openid_connect_config Block for details.
                           properties:
                             authTtl:
                               description: Number of milliseconds a token is valid
@@ -2384,8 +2392,8 @@ spec:
                               type: string
                           type: object
                         userPoolConfig:
-                          description: Amazon Cognito User Pool configuration. Defined
-                            below.
+                          description: Amazon Cognito User Pool configuration. See
+                            user_pool_config Block for details.
                           properties:
                             appIdClientRegex:
                               description: Regular expression for validating the incoming
@@ -2420,7 +2428,7 @@ spec:
                     type: string
                   lambdaAuthorizerConfig:
                     description: Nested argument containing Lambda authorizer configuration.
-                      Defined below.
+                      See lambda_authorizer_config Block for details.
                     properties:
                       authorizerResultTtlInSeconds:
                         description: Number of seconds a response should be cached
@@ -2442,7 +2450,7 @@ spec:
                     type: object
                   logConfig:
                     description: Nested argument containing logging configuration.
-                      Defined below.
+                      See log_config Block for details.
                     properties:
                       cloudwatchLogsRoleArn:
                         description: Amazon Resource Name of the service role that
@@ -2461,11 +2469,11 @@ spec:
                         type: string
                     type: object
                   name:
-                    description: User-supplied name for the GraphqlApi.
+                    description: User-supplied name for the GraphSQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
-                      Defined below.
+                      See openid_connect_config Block for details.
                     properties:
                       authTtl:
                         description: Number of milliseconds a token is valid after
@@ -2528,7 +2536,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   userPoolConfig:
-                    description: Amazon Cognito User Pool configuration. Defined below.
+                    description: Amazon Cognito User Pool configuration. See user_pool_config
+                      Block for details.
                     properties:
                       appIdClientRegex:
                         description: Regular expression for validating the incoming

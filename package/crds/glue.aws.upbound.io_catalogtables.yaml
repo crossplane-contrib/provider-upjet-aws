@@ -239,6 +239,12 @@ spec:
                       Developer Guide. See storage_descriptor below.
                     items:
                       properties:
+                        additionalLocations:
+                          description: List of locations that point to the path where
+                            a Delta table is located.
+                          items:
+                            type: string
+                          type: array
                         bucketColumns:
                           description: List of reducer grouping columns, clustering
                             columns, and bucketing columns in the table.
@@ -529,6 +535,12 @@ spec:
                       Developer Guide. See storage_descriptor below.
                     items:
                       properties:
+                        additionalLocations:
+                          description: List of locations that point to the path where
+                            a Delta table is located.
+                          items:
+                            type: string
+                          type: array
                         bucketColumns:
                           description: List of reducer grouping columns, clustering
                             columns, and bucketing columns in the table.
@@ -979,6 +991,12 @@ spec:
                       Developer Guide. See storage_descriptor below.
                     items:
                       properties:
+                        additionalLocations:
+                          description: List of locations that point to the path where
+                            a Delta table is located.
+                          items:
+                            type: string
+                          type: array
                         bucketColumns:
                           description: List of reducer grouping columns, clustering
                             columns, and bucketing columns in the table.
@@ -1451,6 +1469,12 @@ spec:
                       storage of this table. For more information, refer to the Glue
                       Developer Guide. See storage_descriptor below.
                     properties:
+                      additionalLocations:
+                        description: List of locations that point to the path where
+                          a Delta table is located.
+                        items:
+                          type: string
+                        type: array
                       bucketColumns:
                         description: List of reducer grouping columns, clustering
                           columns, and bucketing columns in the table.
@@ -1724,6 +1748,12 @@ spec:
                       storage of this table. For more information, refer to the Glue
                       Developer Guide. See storage_descriptor below.
                     properties:
+                      additionalLocations:
+                        description: List of locations that point to the path where
+                          a Delta table is located.
+                        items:
+                          type: string
+                        type: array
                       bucketColumns:
                         description: List of reducer grouping columns, clustering
                           columns, and bucketing columns in the table.
@@ -2157,6 +2187,12 @@ spec:
                       storage of this table. For more information, refer to the Glue
                       Developer Guide. See storage_descriptor below.
                     properties:
+                      additionalLocations:
+                        description: List of locations that point to the path where
+                          a Delta table is located.
+                        items:
+                          type: string
+                        type: array
                       bucketColumns:
                         description: List of reducer grouping columns, clustering
                           columns, and bucketing columns in the table.

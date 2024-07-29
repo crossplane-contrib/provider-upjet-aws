@@ -653,7 +653,8 @@ spec:
                     type: string
                   provisioningArtifactParameters:
                     description: Configuration block for provisioning artifact (i.e.,
-                      version) parameters. Detailed below.
+                      version) parameters. See provisioning_artifact_parameters Block
+                      for details.
                     properties:
                       description:
                         description: Description of the provisioning artifact (i.e.,
@@ -740,7 +741,8 @@ spec:
                     type: string
                   provisioningArtifactParameters:
                     description: Configuration block for provisioning artifact (i.e.,
-                      version) parameters. Detailed below.
+                      version) parameters. See provisioning_artifact_parameters Block
+                      for details.
                     properties:
                       description:
                         description: Description of the provisioning artifact (i.e.,
@@ -1014,7 +1016,8 @@ spec:
                     type: string
                   provisioningArtifactParameters:
                     description: Configuration block for provisioning artifact (i.e.,
-                      version) parameters. Detailed below.
+                      version) parameters. See provisioning_artifact_parameters Block
+                      for details.
                     properties:
                       description:
                         description: Description of the provisioning artifact (i.e.,

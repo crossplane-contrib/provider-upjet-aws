@@ -34,5 +34,5 @@ spec:
       Name: dynamodb-table-1
     ttl:
     - attributeName: TimeToExist
-      enabled: false
+      enabled: true
     writeCapacity: 20

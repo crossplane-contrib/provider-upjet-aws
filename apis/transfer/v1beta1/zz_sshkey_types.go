@@ -51,6 +51,8 @@ type SSHKeyObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	SSHKeyID *string `json:"sshKeyId,omitempty" tf:"ssh_key_id,omitempty"`
+
 	// (Requirement) The Server ID of the Transfer Server (e.g., s-12345678)
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 

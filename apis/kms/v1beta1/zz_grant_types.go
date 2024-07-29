@@ -110,9 +110,6 @@ type GrantObservation struct {
 	// The unique identifier for the grant.
 	GrantID *string `json:"grantId,omitempty" tf:"grant_id,omitempty"`
 
-	// The grant token for the created grant. For more information, see Grant Tokens.
-	GrantToken *string `json:"grantToken,omitempty" tf:"grant_token,omitempty"`
-
 	// The principal that is given permission to perform the operations that the grant permits in ARN format.
 	GranteePrincipal *string `json:"granteePrincipal,omitempty" tf:"grantee_principal,omitempty"`
 

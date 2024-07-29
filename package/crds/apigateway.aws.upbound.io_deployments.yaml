@@ -73,6 +73,30 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  canarySettings:
+                    description: Input configuration for the canary deployment when
+                      the deployment is a canary release deployment. See `canary_settings
+                      below.
+                    properties:
+                      percentTraffic:
+                        description: Percentage (0.0-100.0) of traffic routed to the
+                          canary deployment.
+                        type: number
+                      stageVariableOverrides:
+                        additionalProperties:
+                          type: string
+                        description: Stage variable overrides used for the canary
+                          release deployment. They can override existing stage variables
+                          or add new stage variables for the canary release deployment.
+                          These stage variables are represented as a string-to-string
+                          map between stage variable names and their values.
+                        type: object
+                        x-kubernetes-map-type: granular
+                      useStageCache:
+                        description: Boolean flag to indicate whether the canary release
+                          deployment uses the stage cache or not.
+                        type: boolean
+                    type: object
                   description:
                     description: Description of the deployment
                     type: string
@@ -202,6 +226,30 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  canarySettings:
+                    description: Input configuration for the canary deployment when
+                      the deployment is a canary release deployment. See `canary_settings
+                      below.
+                    properties:
+                      percentTraffic:
+                        description: Percentage (0.0-100.0) of traffic routed to the
+                          canary deployment.
+                        type: number
+                      stageVariableOverrides:
+                        additionalProperties:
+                          type: string
+                        description: Stage variable overrides used for the canary
+                          release deployment. They can override existing stage variables
+                          or add new stage variables for the canary release deployment.
+                          These stage variables are represented as a string-to-string
+                          map between stage variable names and their values.
+                        type: object
+                        x-kubernetes-map-type: granular
+                      useStageCache:
+                        description: Boolean flag to indicate whether the canary release
+                          deployment uses the stage cache or not.
+                        type: boolean
+                    type: object
                   description:
                     description: Description of the deployment
                     type: string
@@ -484,6 +532,30 @@ spec:
             properties:
               atProvider:
                 properties:
+                  canarySettings:
+                    description: Input configuration for the canary deployment when
+                      the deployment is a canary release deployment. See `canary_settings
+                      below.
+                    properties:
+                      percentTraffic:
+                        description: Percentage (0.0-100.0) of traffic routed to the
+                          canary deployment.
+                        type: number
+                      stageVariableOverrides:
+                        additionalProperties:
+                          type: string
+                        description: Stage variable overrides used for the canary
+                          release deployment. They can override existing stage variables
+                          or add new stage variables for the canary release deployment.
+                          These stage variables are represented as a string-to-string
+                          map between stage variable names and their values.
+                        type: object
+                        x-kubernetes-map-type: granular
+                      useStageCache:
+                        description: Boolean flag to indicate whether the canary release
+                          deployment uses the stage cache or not.
+                        type: boolean
+                    type: object
                   createdDate:
                     description: Creation date of the deployment
                     type: string

@@ -709,7 +709,7 @@ spec:
                   deliveryOptions:
                     description: An object that defines the dedicated IP pool that
                       is used to send emails that you send using the configuration
-                      set.
+                      set. See delivery_options Block for details.
                     properties:
                       sendingPoolName:
                         description: The name of the dedicated IP pool to associate
@@ -728,7 +728,8 @@ spec:
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
                       collects reputation metrics for the emails that you send that
-                      use the configuration set.
+                      use the configuration set. See reputation_options Block for
+                      details.
                     properties:
                       reputationMetricsEnabled:
                         description: If true, tracking of reputation metrics is enabled
@@ -738,7 +739,8 @@ spec:
                     type: object
                   sendingOptions:
                     description: An object that defines whether or not Amazon SES
-                      can send email that you send using the configuration set.
+                      can send email that you send using the configuration set. See
+                      sending_options Block for details.
                     properties:
                       sendingEnabled:
                         description: If true, email sending is enabled for the configuration
@@ -748,7 +750,8 @@ spec:
                     type: object
                   suppressionOptions:
                     description: An object that contains information about the suppression
-                      list preferences for your account.
+                      list preferences for your account. See suppression_options Block
+                      for details.
                     properties:
                       suppressedReasons:
                         description: 'A list that contains the reasons that email
@@ -767,6 +770,7 @@ spec:
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.
+                      See tracking_options Block for details.
                     properties:
                       customRedirectDomain:
                         description: The domain to use for tracking open and click
@@ -775,11 +779,13 @@ spec:
                     type: object
                   vdmOptions:
                     description: An object that defines the VDM settings that apply
-                      to emails that you send using the configuration set.
+                      to emails that you send using the configuration set. See vdm_options
+                      Block for details.
                     properties:
                       dashboardOptions:
                         description: Specifies additional settings for your VDM configuration
-                          as applicable to the Dashboard.
+                          as applicable to the Dashboard. See dashboard_options Block
+                          for details.
                         properties:
                           engagementMetrics:
                             description: 'Specifies the status of your VDM engagement
@@ -788,7 +794,8 @@ spec:
                         type: object
                       guardianOptions:
                         description: Specifies additional settings for your VDM configuration
-                          as applicable to the Guardian.
+                          as applicable to the Guardian. See guardian_options Block
+                          for details.
                         properties:
                           optimizedSharedDelivery:
                             description: 'Specifies the status of your VDM optimized
@@ -815,7 +822,7 @@ spec:
                   deliveryOptions:
                     description: An object that defines the dedicated IP pool that
                       is used to send emails that you send using the configuration
-                      set.
+                      set. See delivery_options Block for details.
                     properties:
                       sendingPoolName:
                         description: The name of the dedicated IP pool to associate
@@ -830,7 +837,8 @@ spec:
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
                       collects reputation metrics for the emails that you send that
-                      use the configuration set.
+                      use the configuration set. See reputation_options Block for
+                      details.
                     properties:
                       reputationMetricsEnabled:
                         description: If true, tracking of reputation metrics is enabled
@@ -840,7 +848,8 @@ spec:
                     type: object
                   sendingOptions:
                     description: An object that defines whether or not Amazon SES
-                      can send email that you send using the configuration set.
+                      can send email that you send using the configuration set. See
+                      sending_options Block for details.
                     properties:
                       sendingEnabled:
                         description: If true, email sending is enabled for the configuration
@@ -850,7 +859,8 @@ spec:
                     type: object
                   suppressionOptions:
                     description: An object that contains information about the suppression
-                      list preferences for your account.
+                      list preferences for your account. See suppression_options Block
+                      for details.
                     properties:
                       suppressedReasons:
                         description: 'A list that contains the reasons that email
@@ -869,6 +879,7 @@ spec:
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.
+                      See tracking_options Block for details.
                     properties:
                       customRedirectDomain:
                         description: The domain to use for tracking open and click
@@ -877,11 +888,13 @@ spec:
                     type: object
                   vdmOptions:
                     description: An object that defines the VDM settings that apply
-                      to emails that you send using the configuration set.
+                      to emails that you send using the configuration set. See vdm_options
+                      Block for details.
                     properties:
                       dashboardOptions:
                         description: Specifies additional settings for your VDM configuration
-                          as applicable to the Dashboard.
+                          as applicable to the Dashboard. See dashboard_options Block
+                          for details.
                         properties:
                           engagementMetrics:
                             description: 'Specifies the status of your VDM engagement
@@ -890,7 +903,8 @@ spec:
                         type: object
                       guardianOptions:
                         description: Specifies additional settings for your VDM configuration
-                          as applicable to the Guardian.
+                          as applicable to the Guardian. See guardian_options Block
+                          for details.
                         properties:
                           optimizedSharedDelivery:
                             description: 'Specifies the status of your VDM optimized
@@ -1077,7 +1091,7 @@ spec:
                   deliveryOptions:
                     description: An object that defines the dedicated IP pool that
                       is used to send emails that you send using the configuration
-                      set.
+                      set. See delivery_options Block for details.
                     properties:
                       sendingPoolName:
                         description: The name of the dedicated IP pool to associate
@@ -1094,7 +1108,8 @@ spec:
                   reputationOptions:
                     description: An object that defines whether or not Amazon SES
                       collects reputation metrics for the emails that you send that
-                      use the configuration set.
+                      use the configuration set. See reputation_options Block for
+                      details.
                     properties:
                       lastFreshStart:
                         description: The date and time (in Unix time) when the reputation
@@ -1110,7 +1125,8 @@ spec:
                     type: object
                   sendingOptions:
                     description: An object that defines whether or not Amazon SES
-                      can send email that you send using the configuration set.
+                      can send email that you send using the configuration set. See
+                      sending_options Block for details.
                     properties:
                       sendingEnabled:
                         description: If true, email sending is enabled for the configuration
@@ -1120,7 +1136,8 @@ spec:
                     type: object
                   suppressionOptions:
                     description: An object that contains information about the suppression
-                      list preferences for your account.
+                      list preferences for your account. See suppression_options Block
+                      for details.
                     properties:
                       suppressedReasons:
                         description: 'A list that contains the reasons that email
@@ -1144,6 +1161,7 @@ spec:
                   trackingOptions:
                     description: An object that defines the open and click tracking
                       options for emails that you send using the configuration set.
+                      See tracking_options Block for details.
                     properties:
                       customRedirectDomain:
                         description: The domain to use for tracking open and click
@@ -1152,11 +1170,13 @@ spec:
                     type: object
                   vdmOptions:
                     description: An object that defines the VDM settings that apply
-                      to emails that you send using the configuration set.
+                      to emails that you send using the configuration set. See vdm_options
+                      Block for details.
                     properties:
                       dashboardOptions:
                         description: Specifies additional settings for your VDM configuration
-                          as applicable to the Dashboard.
+                          as applicable to the Dashboard. See dashboard_options Block
+                          for details.
                         properties:
                           engagementMetrics:
                             description: 'Specifies the status of your VDM engagement
@@ -1165,7 +1185,8 @@ spec:
                         type: object
                       guardianOptions:
                         description: Specifies additional settings for your VDM configuration
-                          as applicable to the Guardian.
+                          as applicable to the Guardian. See guardian_options Block
+                          for details.
                         properties:
                           optimizedSharedDelivery:
                             description: 'Specifies the status of your VDM optimized

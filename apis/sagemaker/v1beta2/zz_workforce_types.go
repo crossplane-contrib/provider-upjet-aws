@@ -84,6 +84,10 @@ type CognitoConfigParameters struct {
 
 type OidcConfigInitParameters struct {
 
+	// A string to string map of identifiers specific to the custom identity provider (IdP) being used.
+	// +mapType=granular
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
+
 	// The OIDC IdP authorization endpoint used to configure your private workforce.
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
@@ -102,6 +106,9 @@ type OidcConfigInitParameters struct {
 	// The OIDC IdP logout endpoint used to configure your private workforce.
 	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
 
+	// An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
 	// The OIDC IdP token endpoint used to configure your private workforce.
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
@@ -110,6 +117,10 @@ type OidcConfigInitParameters struct {
 }
 
 type OidcConfigObservation struct {
+
+	// A string to string map of identifiers specific to the custom identity provider (IdP) being used.
+	// +mapType=granular
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The OIDC IdP authorization endpoint used to configure your private workforce.
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
@@ -126,6 +137,9 @@ type OidcConfigObservation struct {
 	// The OIDC IdP logout endpoint used to configure your private workforce.
 	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
 
+	// An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
 	// The OIDC IdP token endpoint used to configure your private workforce.
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 
@@ -134,6 +148,11 @@ type OidcConfigObservation struct {
 }
 
 type OidcConfigParameters struct {
+
+	// A string to string map of identifiers specific to the custom identity provider (IdP) being used.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
 	// The OIDC IdP authorization endpoint used to configure your private workforce.
 	// +kubebuilder:validation:Optional
@@ -158,6 +177,10 @@ type OidcConfigParameters struct {
 	// The OIDC IdP logout endpoint used to configure your private workforce.
 	// +kubebuilder:validation:Optional
 	LogoutEndpoint *string `json:"logoutEndpoint" tf:"logout_endpoint,omitempty"`
+
+	// An array of string identifiers used to refer to the specific pieces of user data or claims that the client application wants to access.
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The OIDC IdP token endpoint used to configure your private workforce.
 	// +kubebuilder:validation:Optional
