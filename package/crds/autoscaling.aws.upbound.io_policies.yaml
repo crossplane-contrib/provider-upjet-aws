@@ -2287,7 +2287,7 @@ spec:
                             properties:
                               metricDataQueries:
                                 description: List of up to 10 structures that defines
-                                  custom capacity metric in predictive scaling policy
+                                  custom scaling metric in predictive scaling policy
                                 items:
                                   properties:
                                     expression:
@@ -2297,7 +2297,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -2305,9 +2305,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -2354,7 +2354,7 @@ spec:
                             properties:
                               metricDataQueries:
                                 description: List of up to 10 structures that defines
-                                  custom load metric in predictive scaling policy
+                                  custom scaling metric in predictive scaling policy
                                 items:
                                   properties:
                                     expression:
@@ -2364,7 +2364,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -2372,9 +2372,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -2431,7 +2431,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -2439,9 +2439,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -2487,19 +2487,11 @@ spec:
                             description: Predefined load metric specification.
                             properties:
                               predefinedMetricType:
-                                description: Metric type. Valid values are ASGTotalCPUUtilization,
-                                  ASGTotalNetworkIn, ASGTotalNetworkOut, or ALBTargetGroupRequestCount.
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           predefinedMetricPairSpecification:
@@ -2508,45 +2500,22 @@ spec:
                               metric and load metric to use.
                             properties:
                               predefinedMetricType:
-                                description: 'Which metrics to use. There are two
-                                  different types of metrics for each metric type:
-                                  one is a load metric and one is a scaling metric.
-                                  For example, if the metric type is ASGCPUUtilization,
-                                  the Auto Scaling group''s total CPU metric is used
-                                  as the load metric, and the average CPU metric is
-                                  used for the scaling metric. Valid values are ASGCPUUtilization,
-                                  ASGNetworkIn, ASGNetworkOut, or ALBRequestCount.'
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           predefinedScalingMetricSpecification:
                             description: Predefined scaling metric specification.
                             properties:
                               predefinedMetricType:
-                                description: Describes a scaling metric for a predictive
-                                  scaling policy. Valid values are ASGAverageCPUUtilization,
-                                  ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           targetValue:
@@ -2634,8 +2603,8 @@ spec:
                                     metric_stat, but not both.
                                   type: string
                                 id:
-                                  description: Short name for the metric used in predictive
-                                    scaling policy.
+                                  description: Short name for the metric used in target
+                                    tracking scaling policy.
                                   type: string
                                 label:
                                   description: Human-readable label for this metric
@@ -2643,9 +2612,9 @@ spec:
                                   type: string
                                 metricStat:
                                   description: Structure that defines CloudWatch metric
-                                    to be used in predictive scaling policy. You must
-                                    specify either expression or metric_stat, but
-                                    not both.
+                                    to be used in target tracking scaling policy.
+                                    You must specify either expression or metric_stat,
+                                    but not both.
                                   properties:
                                     metric:
                                       description: Structure that defines the CloudWatch
@@ -2703,19 +2672,11 @@ spec:
                         description: Predefined metric. Conflicts with customized_metric_specification.
                         properties:
                           predefinedMetricType:
-                            description: Describes a scaling metric for a predictive
-                              scaling policy. Valid values are ASGAverageCPUUtilization,
-                              ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+                            description: Metric type.
                             type: string
                           resourceLabel:
-                            description: Label that uniquely identifies a specific
-                              Application Load Balancer target group from which to
-                              determine the request count served by your Auto Scaling
-                              group. You create the resource label by appending the
-                              final portion of the load balancer ARN and the final
-                              portion of the target group ARN into a single value,
-                              separated by a forward slash (/). Refer to PredefinedMetricSpecification
-                              for more information.
+                            description: Identifies the resource associated with the
+                              metric type.
                             type: string
                         type: object
                       targetValue:
@@ -2797,7 +2758,7 @@ spec:
                             properties:
                               metricDataQueries:
                                 description: List of up to 10 structures that defines
-                                  custom capacity metric in predictive scaling policy
+                                  custom scaling metric in predictive scaling policy
                                 items:
                                   properties:
                                     expression:
@@ -2807,7 +2768,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -2815,9 +2776,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -2864,7 +2825,7 @@ spec:
                             properties:
                               metricDataQueries:
                                 description: List of up to 10 structures that defines
-                                  custom load metric in predictive scaling policy
+                                  custom scaling metric in predictive scaling policy
                                 items:
                                   properties:
                                     expression:
@@ -2874,7 +2835,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -2882,9 +2843,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -2941,7 +2902,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -2949,9 +2910,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -2997,19 +2958,11 @@ spec:
                             description: Predefined load metric specification.
                             properties:
                               predefinedMetricType:
-                                description: Metric type. Valid values are ASGTotalCPUUtilization,
-                                  ASGTotalNetworkIn, ASGTotalNetworkOut, or ALBTargetGroupRequestCount.
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           predefinedMetricPairSpecification:
@@ -3018,45 +2971,22 @@ spec:
                               metric and load metric to use.
                             properties:
                               predefinedMetricType:
-                                description: 'Which metrics to use. There are two
-                                  different types of metrics for each metric type:
-                                  one is a load metric and one is a scaling metric.
-                                  For example, if the metric type is ASGCPUUtilization,
-                                  the Auto Scaling group''s total CPU metric is used
-                                  as the load metric, and the average CPU metric is
-                                  used for the scaling metric. Valid values are ASGCPUUtilization,
-                                  ASGNetworkIn, ASGNetworkOut, or ALBRequestCount.'
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           predefinedScalingMetricSpecification:
                             description: Predefined scaling metric specification.
                             properties:
                               predefinedMetricType:
-                                description: Describes a scaling metric for a predictive
-                                  scaling policy. Valid values are ASGAverageCPUUtilization,
-                                  ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           targetValue:
@@ -3140,8 +3070,8 @@ spec:
                                     metric_stat, but not both.
                                   type: string
                                 id:
-                                  description: Short name for the metric used in predictive
-                                    scaling policy.
+                                  description: Short name for the metric used in target
+                                    tracking scaling policy.
                                   type: string
                                 label:
                                   description: Human-readable label for this metric
@@ -3149,9 +3079,9 @@ spec:
                                   type: string
                                 metricStat:
                                   description: Structure that defines CloudWatch metric
-                                    to be used in predictive scaling policy. You must
-                                    specify either expression or metric_stat, but
-                                    not both.
+                                    to be used in target tracking scaling policy.
+                                    You must specify either expression or metric_stat,
+                                    but not both.
                                   properties:
                                     metric:
                                       description: Structure that defines the CloudWatch
@@ -3209,19 +3139,11 @@ spec:
                         description: Predefined metric. Conflicts with customized_metric_specification.
                         properties:
                           predefinedMetricType:
-                            description: Describes a scaling metric for a predictive
-                              scaling policy. Valid values are ASGAverageCPUUtilization,
-                              ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+                            description: Metric type.
                             type: string
                           resourceLabel:
-                            description: Label that uniquely identifies a specific
-                              Application Load Balancer target group from which to
-                              determine the request count served by your Auto Scaling
-                              group. You create the resource label by appending the
-                              final portion of the load balancer ARN and the final
-                              portion of the target group ARN into a single value,
-                              separated by a forward slash (/). Refer to PredefinedMetricSpecification
-                              for more information.
+                            description: Identifies the resource associated with the
+                              metric type.
                             type: string
                         type: object
                       targetValue:
@@ -3426,8 +3348,8 @@ spec:
                       AWS will default to the group's specified cooldown period.
                     type: number
                   id:
-                    description: Short name for the metric used in predictive scaling
-                      policy.
+                    description: Short name for the metric used in target tracking
+                      scaling policy.
                     type: string
                   metricAggregationType:
                     description: Aggregation type for the policy's metrics. Valid
@@ -3470,7 +3392,7 @@ spec:
                             properties:
                               metricDataQueries:
                                 description: List of up to 10 structures that defines
-                                  custom capacity metric in predictive scaling policy
+                                  custom scaling metric in predictive scaling policy
                                 items:
                                   properties:
                                     expression:
@@ -3480,7 +3402,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -3488,9 +3410,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -3537,7 +3459,7 @@ spec:
                             properties:
                               metricDataQueries:
                                 description: List of up to 10 structures that defines
-                                  custom load metric in predictive scaling policy
+                                  custom scaling metric in predictive scaling policy
                                 items:
                                   properties:
                                     expression:
@@ -3547,7 +3469,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -3555,9 +3477,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -3614,7 +3536,7 @@ spec:
                                       type: string
                                     id:
                                       description: Short name for the metric used
-                                        in predictive scaling policy.
+                                        in target tracking scaling policy.
                                       type: string
                                     label:
                                       description: Human-readable label for this metric
@@ -3622,9 +3544,9 @@ spec:
                                       type: string
                                     metricStat:
                                       description: Structure that defines CloudWatch
-                                        metric to be used in predictive scaling policy.
-                                        You must specify either expression or metric_stat,
-                                        but not both.
+                                        metric to be used in target tracking scaling
+                                        policy. You must specify either expression
+                                        or metric_stat, but not both.
                                       properties:
                                         metric:
                                           description: Structure that defines the
@@ -3670,19 +3592,11 @@ spec:
                             description: Predefined load metric specification.
                             properties:
                               predefinedMetricType:
-                                description: Metric type. Valid values are ASGTotalCPUUtilization,
-                                  ASGTotalNetworkIn, ASGTotalNetworkOut, or ALBTargetGroupRequestCount.
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           predefinedMetricPairSpecification:
@@ -3691,45 +3605,22 @@ spec:
                               metric and load metric to use.
                             properties:
                               predefinedMetricType:
-                                description: 'Which metrics to use. There are two
-                                  different types of metrics for each metric type:
-                                  one is a load metric and one is a scaling metric.
-                                  For example, if the metric type is ASGCPUUtilization,
-                                  the Auto Scaling group''s total CPU metric is used
-                                  as the load metric, and the average CPU metric is
-                                  used for the scaling metric. Valid values are ASGCPUUtilization,
-                                  ASGNetworkIn, ASGNetworkOut, or ALBRequestCount.'
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           predefinedScalingMetricSpecification:
                             description: Predefined scaling metric specification.
                             properties:
                               predefinedMetricType:
-                                description: Describes a scaling metric for a predictive
-                                  scaling policy. Valid values are ASGAverageCPUUtilization,
-                                  ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+                                description: Metric type.
                                 type: string
                               resourceLabel:
-                                description: Label that uniquely identifies a specific
-                                  Application Load Balancer target group from which
-                                  to determine the request count served by your Auto
-                                  Scaling group. You create the resource label by
-                                  appending the final portion of the load balancer
-                                  ARN and the final portion of the target group ARN
-                                  into a single value, separated by a forward slash
-                                  (/). Refer to PredefinedMetricSpecification for
-                                  more information.
+                                description: Identifies the resource associated with
+                                  the metric type.
                                 type: string
                             type: object
                           targetValue:
@@ -3813,8 +3704,8 @@ spec:
                                     metric_stat, but not both.
                                   type: string
                                 id:
-                                  description: Short name for the metric used in predictive
-                                    scaling policy.
+                                  description: Short name for the metric used in target
+                                    tracking scaling policy.
                                   type: string
                                 label:
                                   description: Human-readable label for this metric
@@ -3822,9 +3713,9 @@ spec:
                                   type: string
                                 metricStat:
                                   description: Structure that defines CloudWatch metric
-                                    to be used in predictive scaling policy. You must
-                                    specify either expression or metric_stat, but
-                                    not both.
+                                    to be used in target tracking scaling policy.
+                                    You must specify either expression or metric_stat,
+                                    but not both.
                                   properties:
                                     metric:
                                       description: Structure that defines the CloudWatch
@@ -3882,19 +3773,11 @@ spec:
                         description: Predefined metric. Conflicts with customized_metric_specification.
                         properties:
                           predefinedMetricType:
-                            description: Describes a scaling metric for a predictive
-                              scaling policy. Valid values are ASGAverageCPUUtilization,
-                              ASGAverageNetworkIn, ASGAverageNetworkOut, or ALBRequestCountPerTarget.
+                            description: Metric type.
                             type: string
                           resourceLabel:
-                            description: Label that uniquely identifies a specific
-                              Application Load Balancer target group from which to
-                              determine the request count served by your Auto Scaling
-                              group. You create the resource label by appending the
-                              final portion of the load balancer ARN and the final
-                              portion of the target group ARN into a single value,
-                              separated by a forward slash (/). Refer to PredefinedMetricSpecification
-                              for more information.
+                            description: Identifies the resource associated with the
+                              metric type.
                             type: string
                         type: object
                       targetValue:

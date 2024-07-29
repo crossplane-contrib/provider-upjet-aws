@@ -15,26 +15,26 @@ import (
 
 type ConfigurationSetInitParameters struct {
 
-	// An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.
+	// An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set. See delivery_options Block for details.
 	DeliveryOptions *DeliveryOptionsInitParameters `json:"deliveryOptions,omitempty" tf:"delivery_options,omitempty"`
 
-	// An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.
+	// An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set. See reputation_options Block for details.
 	ReputationOptions *ReputationOptionsInitParameters `json:"reputationOptions,omitempty" tf:"reputation_options,omitempty"`
 
-	// An object that defines whether or not Amazon SES can send email that you send using the configuration set.
+	// An object that defines whether or not Amazon SES can send email that you send using the configuration set. See sending_options Block for details.
 	SendingOptions *SendingOptionsInitParameters `json:"sendingOptions,omitempty" tf:"sending_options,omitempty"`
 
-	// An object that contains information about the suppression list preferences for your account.
+	// An object that contains information about the suppression list preferences for your account. See suppression_options Block for details.
 	SuppressionOptions *SuppressionOptionsInitParameters `json:"suppressionOptions,omitempty" tf:"suppression_options,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// An object that defines the open and click tracking options for emails that you send using the configuration set.
+	// An object that defines the open and click tracking options for emails that you send using the configuration set. See tracking_options Block for details.
 	TrackingOptions *TrackingOptionsInitParameters `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
 
-	// An object that defines the VDM settings that apply to emails that you send using the configuration set.
+	// An object that defines the VDM settings that apply to emails that you send using the configuration set. See vdm_options Block for details.
 	VdmOptions *VdmOptionsInitParameters `json:"vdmOptions,omitempty" tf:"vdm_options,omitempty"`
 }
 
@@ -43,18 +43,18 @@ type ConfigurationSetObservation struct {
 	// ARN of the Configuration Set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.
+	// An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set. See delivery_options Block for details.
 	DeliveryOptions *DeliveryOptionsObservation `json:"deliveryOptions,omitempty" tf:"delivery_options,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.
+	// An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set. See reputation_options Block for details.
 	ReputationOptions *ReputationOptionsObservation `json:"reputationOptions,omitempty" tf:"reputation_options,omitempty"`
 
-	// An object that defines whether or not Amazon SES can send email that you send using the configuration set.
+	// An object that defines whether or not Amazon SES can send email that you send using the configuration set. See sending_options Block for details.
 	SendingOptions *SendingOptionsObservation `json:"sendingOptions,omitempty" tf:"sending_options,omitempty"`
 
-	// An object that contains information about the suppression list preferences for your account.
+	// An object that contains information about the suppression list preferences for your account. See suppression_options Block for details.
 	SuppressionOptions *SuppressionOptionsObservation `json:"suppressionOptions,omitempty" tf:"suppression_options,omitempty"`
 
 	// Key-value map of resource tags.
@@ -64,16 +64,16 @@ type ConfigurationSetObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// An object that defines the open and click tracking options for emails that you send using the configuration set.
+	// An object that defines the open and click tracking options for emails that you send using the configuration set. See tracking_options Block for details.
 	TrackingOptions *TrackingOptionsObservation `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
 
-	// An object that defines the VDM settings that apply to emails that you send using the configuration set.
+	// An object that defines the VDM settings that apply to emails that you send using the configuration set. See vdm_options Block for details.
 	VdmOptions *VdmOptionsObservation `json:"vdmOptions,omitempty" tf:"vdm_options,omitempty"`
 }
 
 type ConfigurationSetParameters struct {
 
-	// An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.
+	// An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set. See delivery_options Block for details.
 	// +kubebuilder:validation:Optional
 	DeliveryOptions *DeliveryOptionsParameters `json:"deliveryOptions,omitempty" tf:"delivery_options,omitempty"`
 
@@ -82,15 +82,15 @@ type ConfigurationSetParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.
+	// An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set. See reputation_options Block for details.
 	// +kubebuilder:validation:Optional
 	ReputationOptions *ReputationOptionsParameters `json:"reputationOptions,omitempty" tf:"reputation_options,omitempty"`
 
-	// An object that defines whether or not Amazon SES can send email that you send using the configuration set.
+	// An object that defines whether or not Amazon SES can send email that you send using the configuration set. See sending_options Block for details.
 	// +kubebuilder:validation:Optional
 	SendingOptions *SendingOptionsParameters `json:"sendingOptions,omitempty" tf:"sending_options,omitempty"`
 
-	// An object that contains information about the suppression list preferences for your account.
+	// An object that contains information about the suppression list preferences for your account. See suppression_options Block for details.
 	// +kubebuilder:validation:Optional
 	SuppressionOptions *SuppressionOptionsParameters `json:"suppressionOptions,omitempty" tf:"suppression_options,omitempty"`
 
@@ -99,11 +99,11 @@ type ConfigurationSetParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// An object that defines the open and click tracking options for emails that you send using the configuration set.
+	// An object that defines the open and click tracking options for emails that you send using the configuration set. See tracking_options Block for details.
 	// +kubebuilder:validation:Optional
 	TrackingOptions *TrackingOptionsParameters `json:"trackingOptions,omitempty" tf:"tracking_options,omitempty"`
 
-	// An object that defines the VDM settings that apply to emails that you send using the configuration set.
+	// An object that defines the VDM settings that apply to emails that you send using the configuration set. See vdm_options Block for details.
 	// +kubebuilder:validation:Optional
 	VdmOptions *VdmOptionsParameters `json:"vdmOptions,omitempty" tf:"vdm_options,omitempty"`
 }
@@ -256,29 +256,29 @@ type TrackingOptionsParameters struct {
 
 type VdmOptionsInitParameters struct {
 
-	// Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+	// Specifies additional settings for your VDM configuration as applicable to the Dashboard. See dashboard_options Block for details.
 	DashboardOptions *DashboardOptionsInitParameters `json:"dashboardOptions,omitempty" tf:"dashboard_options,omitempty"`
 
-	// Specifies additional settings for your VDM configuration as applicable to the Guardian.
+	// Specifies additional settings for your VDM configuration as applicable to the Guardian. See guardian_options Block for details.
 	GuardianOptions *GuardianOptionsInitParameters `json:"guardianOptions,omitempty" tf:"guardian_options,omitempty"`
 }
 
 type VdmOptionsObservation struct {
 
-	// Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+	// Specifies additional settings for your VDM configuration as applicable to the Dashboard. See dashboard_options Block for details.
 	DashboardOptions *DashboardOptionsObservation `json:"dashboardOptions,omitempty" tf:"dashboard_options,omitempty"`
 
-	// Specifies additional settings for your VDM configuration as applicable to the Guardian.
+	// Specifies additional settings for your VDM configuration as applicable to the Guardian. See guardian_options Block for details.
 	GuardianOptions *GuardianOptionsObservation `json:"guardianOptions,omitempty" tf:"guardian_options,omitempty"`
 }
 
 type VdmOptionsParameters struct {
 
-	// Specifies additional settings for your VDM configuration as applicable to the Dashboard.
+	// Specifies additional settings for your VDM configuration as applicable to the Dashboard. See dashboard_options Block for details.
 	// +kubebuilder:validation:Optional
 	DashboardOptions *DashboardOptionsParameters `json:"dashboardOptions,omitempty" tf:"dashboard_options,omitempty"`
 
-	// Specifies additional settings for your VDM configuration as applicable to the Guardian.
+	// Specifies additional settings for your VDM configuration as applicable to the Guardian. See guardian_options Block for details.
 	// +kubebuilder:validation:Optional
 	GuardianOptions *GuardianOptionsParameters `json:"guardianOptions,omitempty" tf:"guardian_options,omitempty"`
 }

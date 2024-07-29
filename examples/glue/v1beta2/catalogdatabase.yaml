@@ -12,5 +12,5 @@ metadata:
   name: example
 spec:
   forProvider:
-    catalogId: ${data.aws_account_id}
+    catalogId: "${data.aws_account_id}"
     region: us-east-1

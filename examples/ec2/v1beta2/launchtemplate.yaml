@@ -23,10 +23,6 @@ spec:
       cpuCredits: standard
     disableApiTermination: true
     ebsOptimized: "true"
-    elasticGpuSpecifications:
-    - type: test
-    elasticInferenceAccelerator:
-      type: eia1.medium
     instanceInitiatedShutdownBehavior: terminate
     instanceMarketOptions:
       marketType: spot

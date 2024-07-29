@@ -13,7 +13,52 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeploymentCanarySettingsInitParameters struct {
+
+	// Percentage (0.0-100.0) of traffic routed to the canary deployment.
+	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
+
+	// Stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.
+	// +mapType=granular
+	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
+
+	// Boolean flag to indicate whether the canary release deployment uses the stage cache or not.
+	UseStageCache *bool `json:"useStageCache,omitempty" tf:"use_stage_cache,omitempty"`
+}
+
+type DeploymentCanarySettingsObservation struct {
+
+	// Percentage (0.0-100.0) of traffic routed to the canary deployment.
+	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
+
+	// Stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.
+	// +mapType=granular
+	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
+
+	// Boolean flag to indicate whether the canary release deployment uses the stage cache or not.
+	UseStageCache *bool `json:"useStageCache,omitempty" tf:"use_stage_cache,omitempty"`
+}
+
+type DeploymentCanarySettingsParameters struct {
+
+	// Percentage (0.0-100.0) of traffic routed to the canary deployment.
+	// +kubebuilder:validation:Optional
+	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
+
+	// Stage variable overrides used for the canary release deployment. They can override existing stage variables or add new stage variables for the canary release deployment. These stage variables are represented as a string-to-string map between stage variable names and their values.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	StageVariableOverrides map[string]*string `json:"stageVariableOverrides,omitempty" tf:"stage_variable_overrides,omitempty"`
+
+	// Boolean flag to indicate whether the canary release deployment uses the stage cache or not.
+	// +kubebuilder:validation:Optional
+	UseStageCache *bool `json:"useStageCache,omitempty" tf:"use_stage_cache,omitempty"`
+}
+
 type DeploymentInitParameters struct {
+
+	// Input configuration for the canary deployment when the deployment is a canary release deployment. See `canary_settings below.
+	CanarySettings *DeploymentCanarySettingsInitParameters `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 
 	// Description of the deployment
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -47,6 +92,9 @@ type DeploymentInitParameters struct {
 }
 
 type DeploymentObservation struct {
+
+	// Input configuration for the canary deployment when the deployment is a canary release deployment. See `canary_settings below.
+	CanarySettings *DeploymentCanarySettingsObservation `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 
 	// Creation date of the deployment
 	CreatedDate *string `json:"createdDate,omitempty" tf:"created_date,omitempty"`
@@ -85,6 +133,10 @@ type DeploymentObservation struct {
 }
 
 type DeploymentParameters struct {
+
+	// Input configuration for the canary deployment when the deployment is a canary release deployment. See `canary_settings below.
+	// +kubebuilder:validation:Optional
+	CanarySettings *DeploymentCanarySettingsParameters `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 
 	// Description of the deployment
 	// +kubebuilder:validation:Optional

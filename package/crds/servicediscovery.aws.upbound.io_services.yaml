@@ -845,11 +845,11 @@ spec:
                   dnsConfig:
                     description: A complex type that contains information about the
                       resource record sets that you want Amazon Route 53 to create
-                      when you register an instance.
+                      when you register an instance. See dns_config Block for details.
                     properties:
                       dnsRecords:
                         description: An array that contains one DnsRecord object for
-                          each resource record set.
+                          each resource record set. See dns_records Block for details.
                         items:
                           properties:
                             ttl:
@@ -952,11 +952,13 @@ spec:
                   forceDestroy:
                     description: A boolean that indicates all instances should be
                       deleted from the service so that the service can be destroyed
-                      without error. These instances are not recoverable.
+                      without error. These instances are not recoverable. Defaults
+                      to false.
                     type: boolean
                   healthCheckConfig:
                     description: A complex type that contains settings for an optional
-                      health check. Only for Public DNS namespaces.
+                      health check. Only for Public DNS namespaces. See health_check_config
+                      Block for details.
                     properties:
                       failureThreshold:
                         description: The number of consecutive health checks. Maximum
@@ -976,7 +978,7 @@ spec:
                     type: object
                   healthCheckCustomConfig:
                     description: A complex type that contains settings for ECS managed
-                      health checks.
+                      health checks. See health_check_custom_config Block for details.
                     properties:
                       failureThreshold:
                         description: The number of 30-second intervals that you want
@@ -1029,11 +1031,11 @@ spec:
                   dnsConfig:
                     description: A complex type that contains information about the
                       resource record sets that you want Amazon Route 53 to create
-                      when you register an instance.
+                      when you register an instance. See dns_config Block for details.
                     properties:
                       dnsRecords:
                         description: An array that contains one DnsRecord object for
-                          each resource record set.
+                          each resource record set. See dns_records Block for details.
                         items:
                           properties:
                             ttl:
@@ -1136,11 +1138,13 @@ spec:
                   forceDestroy:
                     description: A boolean that indicates all instances should be
                       deleted from the service so that the service can be destroyed
-                      without error. These instances are not recoverable.
+                      without error. These instances are not recoverable. Defaults
+                      to false.
                     type: boolean
                   healthCheckConfig:
                     description: A complex type that contains settings for an optional
-                      health check. Only for Public DNS namespaces.
+                      health check. Only for Public DNS namespaces. See health_check_config
+                      Block for details.
                     properties:
                       failureThreshold:
                         description: The number of consecutive health checks. Maximum
@@ -1160,7 +1164,7 @@ spec:
                     type: object
                   healthCheckCustomConfig:
                     description: A complex type that contains settings for ECS managed
-                      health checks.
+                      health checks. See health_check_custom_config Block for details.
                     properties:
                       failureThreshold:
                         description: The number of 30-second intervals that you want
@@ -1374,11 +1378,11 @@ spec:
                   dnsConfig:
                     description: A complex type that contains information about the
                       resource record sets that you want Amazon Route 53 to create
-                      when you register an instance.
+                      when you register an instance. See dns_config Block for details.
                     properties:
                       dnsRecords:
                         description: An array that contains one DnsRecord object for
-                          each resource record set.
+                          each resource record set. See dns_records Block for details.
                         items:
                           properties:
                             ttl:
@@ -1405,11 +1409,13 @@ spec:
                   forceDestroy:
                     description: A boolean that indicates all instances should be
                       deleted from the service so that the service can be destroyed
-                      without error. These instances are not recoverable.
+                      without error. These instances are not recoverable. Defaults
+                      to false.
                     type: boolean
                   healthCheckConfig:
                     description: A complex type that contains settings for an optional
-                      health check. Only for Public DNS namespaces.
+                      health check. Only for Public DNS namespaces. See health_check_config
+                      Block for details.
                     properties:
                       failureThreshold:
                         description: The number of consecutive health checks. Maximum
@@ -1429,7 +1435,7 @@ spec:
                     type: object
                   healthCheckCustomConfig:
                     description: A complex type that contains settings for ECS managed
-                      health checks.
+                      health checks. See health_check_custom_config Block for details.
                     properties:
                       failureThreshold:
                         description: The number of 30-second intervals that you want

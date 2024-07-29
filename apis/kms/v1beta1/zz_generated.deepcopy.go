@@ -1109,11 +1109,6 @@ func (in *GrantObservation) DeepCopyInto(out *GrantObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.GrantToken != nil {
-		in, out := &in.GrantToken, &out.GrantToken
-		*out = new(string)
-		**out = **in
-	}
 	if in.GranteePrincipal != nil {
 		in, out := &in.GranteePrincipal, &out.GranteePrincipal
 		*out = new(string)

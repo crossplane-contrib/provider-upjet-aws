@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountId: ${data.aws_account_id}
+    accountId: "${data.aws_account_id}"
     region: us-west-1
     stackSetNameSelector:
       matchLabels:

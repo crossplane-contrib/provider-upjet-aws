@@ -54,6 +54,7 @@ type EnvironmentInitParameters struct {
 	// The relative path to the DAG folder on your Amazon S3 storage bucket. For example, dags. For more information, see Importing DAGs on Amazon MWAA.
 	DagS3Path *string `json:"dagS3Path,omitempty" tf:"dag_s3_path,omitempty"`
 
+	// Defines whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
 	// Environment class for the cluster. Possible options are mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
@@ -87,8 +88,12 @@ type EnvironmentInitParameters struct {
 	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs.
 	LoggingConfiguration *LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
+
 	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
+
+	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
 	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
 	MinWorkers *float64 `json:"minWorkers,omitempty" tf:"min_workers,omitempty"`
@@ -158,6 +163,7 @@ type EnvironmentObservation struct {
 	// The VPC endpoint for the environment's Amazon RDS database
 	DatabaseVPCEndpointService *string `json:"databaseVpcEndpointService,omitempty" tf:"database_vpc_endpoint_service,omitempty"`
 
+	// Defines whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
 	// Environment class for the cluster. Possible options are mw1.small, mw1.medium, mw1.large. Will be set by default to mw1.small. Please check the AWS Pricing for more information about the environment classes.
@@ -176,8 +182,12 @@ type EnvironmentObservation struct {
 	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs.
 	LoggingConfiguration *LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
+
 	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
+
+	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
 	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
 	MinWorkers *float64 `json:"minWorkers,omitempty" tf:"min_workers,omitempty"`
@@ -250,6 +260,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	DagS3Path *string `json:"dagS3Path,omitempty" tf:"dag_s3_path,omitempty"`
 
+	// Defines whether the VPC endpoints configured for the environment are created and managed by the customer or by AWS. If set to SERVICE, Amazon MWAA will create and manage the required VPC endpoints in your VPC. If set to CUSTOMER, you must create, and manage, the VPC endpoints for your VPC. Defaults to SERVICE if not set.
 	// +kubebuilder:validation:Optional
 	EndpointManagement *string `json:"endpointManagement,omitempty" tf:"endpoint_management,omitempty"`
 
@@ -288,9 +299,15 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration *LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
+
 	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	// +kubebuilder:validation:Optional
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
 	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
 	// +kubebuilder:validation:Optional

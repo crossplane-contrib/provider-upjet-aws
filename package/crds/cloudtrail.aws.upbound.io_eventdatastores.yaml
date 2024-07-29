@@ -142,6 +142,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  billingMode:
+                    description: The billing mode for the event data store. The valid
+                      values are EXTENDABLE_RETENTION_PRICING and FIXED_RETENTION_PRICING.
+                      Defaults to EXTENDABLE_RETENTION_PRICING.
+                    type: string
                   kmsKeyId:
                     description: Specifies the AWS KMS key ID to use to encrypt the
                       events delivered by CloudTrail. The value can be an alias name
@@ -340,6 +345,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  billingMode:
+                    description: The billing mode for the event data store. The valid
+                      values are EXTENDABLE_RETENTION_PRICING and FIXED_RETENTION_PRICING.
+                      Defaults to EXTENDABLE_RETENTION_PRICING.
+                    type: string
                   kmsKeyId:
                     description: Specifies the AWS KMS key ID to use to encrypt the
                       events delivered by CloudTrail. The value can be an alias name
@@ -698,6 +708,11 @@ spec:
                     type: array
                   arn:
                     description: ARN of the event data store.
+                    type: string
+                  billingMode:
+                    description: The billing mode for the event data store. The valid
+                      values are EXTENDABLE_RETENTION_PRICING and FIXED_RETENTION_PRICING.
+                      Defaults to EXTENDABLE_RETENTION_PRICING.
                     type: string
                   id:
                     description: Name of the event data store.

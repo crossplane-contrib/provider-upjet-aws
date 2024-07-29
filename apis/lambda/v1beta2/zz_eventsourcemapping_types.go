@@ -439,19 +439,19 @@ type OnFailureParameters struct {
 
 type ScalingConfigInitParameters struct {
 
-	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be between 2 and 1000. See Configuring maximum concurrency for Amazon SQS event sources.
+	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be greater than or equal to 2. See Configuring maximum concurrency for Amazon SQS event sources. You need to raise a Service Quota Ticket to increase the concurrency beyond 1000.
 	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }
 
 type ScalingConfigObservation struct {
 
-	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be between 2 and 1000. See Configuring maximum concurrency for Amazon SQS event sources.
+	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be greater than or equal to 2. See Configuring maximum concurrency for Amazon SQS event sources. You need to raise a Service Quota Ticket to increase the concurrency beyond 1000.
 	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }
 
 type ScalingConfigParameters struct {
 
-	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be between 2 and 1000. See Configuring maximum concurrency for Amazon SQS event sources.
+	// Limits the number of concurrent instances that the Amazon SQS event source can invoke. Must be greater than or equal to 2. See Configuring maximum concurrency for Amazon SQS event sources. You need to raise a Service Quota Ticket to increase the concurrency beyond 1000.
 	// +kubebuilder:validation:Optional
 	MaximumConcurrency *float64 `json:"maximumConcurrency,omitempty" tf:"maximum_concurrency,omitempty"`
 }

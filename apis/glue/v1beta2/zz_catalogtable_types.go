@@ -543,6 +543,9 @@ type SortColumnsParameters struct {
 
 type StorageDescriptorInitParameters struct {
 
+	// List of locations that point to the path where a Delta table is located.
+	AdditionalLocations []*string `json:"additionalLocations,omitempty" tf:"additional_locations,omitempty"`
+
 	// List of reducer grouping columns, clustering columns, and bucketing columns in the table.
 	BucketColumns []*string `json:"bucketColumns,omitempty" tf:"bucket_columns,omitempty"`
 
@@ -586,6 +589,9 @@ type StorageDescriptorInitParameters struct {
 
 type StorageDescriptorObservation struct {
 
+	// List of locations that point to the path where a Delta table is located.
+	AdditionalLocations []*string `json:"additionalLocations,omitempty" tf:"additional_locations,omitempty"`
+
 	// List of reducer grouping columns, clustering columns, and bucketing columns in the table.
 	BucketColumns []*string `json:"bucketColumns,omitempty" tf:"bucket_columns,omitempty"`
 
@@ -628,6 +634,10 @@ type StorageDescriptorObservation struct {
 }
 
 type StorageDescriptorParameters struct {
+
+	// List of locations that point to the path where a Delta table is located.
+	// +kubebuilder:validation:Optional
+	AdditionalLocations []*string `json:"additionalLocations,omitempty" tf:"additional_locations,omitempty"`
 
 	// List of reducer grouping columns, clustering columns, and bucketing columns in the table.
 	// +kubebuilder:validation:Optional

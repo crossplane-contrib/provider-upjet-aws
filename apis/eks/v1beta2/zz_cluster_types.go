@@ -18,7 +18,7 @@ type AccessConfigInitParameters struct {
 	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	// Whether or not to bootstrap the access config values to the cluster. Default is false.
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
@@ -27,7 +27,7 @@ type AccessConfigObservation struct {
 	// The authentication mode for the cluster. Valid values are CONFIG_MAP, API or API_AND_CONFIG_MAP
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	// Whether or not to bootstrap the access config values to the cluster. Default is false.
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type AccessConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
-	// Whether or not to bootstrap the access config values to the cluster. Default is true.
+	// Whether or not to bootstrap the access config values to the cluster. Default is false.
 	// +kubebuilder:validation:Optional
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
@@ -58,6 +58,9 @@ type ClusterInitParameters struct {
 
 	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
 	AccessConfig *AccessConfigInitParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
+
+	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
+	BootstrapSelfManagedAddons *bool `json:"bootstrapSelfManagedAddons,omitempty" tf:"bootstrap_self_managed_addons,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +listType=set
@@ -103,6 +106,9 @@ type ClusterObservation struct {
 
 	// ARN of the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
+	BootstrapSelfManagedAddons *bool `json:"bootstrapSelfManagedAddons,omitempty" tf:"bootstrap_self_managed_addons,omitempty"`
 
 	// Attribute block containing certificate-authority-data for your cluster. Detailed below.
 	CertificateAuthority []CertificateAuthorityObservation `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
@@ -164,6 +170,10 @@ type ClusterParameters struct {
 	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
 	// +kubebuilder:validation:Optional
 	AccessConfig *AccessConfigParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
+
+	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
+	// +kubebuilder:validation:Optional
+	BootstrapSelfManagedAddons *bool `json:"bootstrapSelfManagedAddons,omitempty" tf:"bootstrap_self_managed_addons,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +kubebuilder:validation:Optional

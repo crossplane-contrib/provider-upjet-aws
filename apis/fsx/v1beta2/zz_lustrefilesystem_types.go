@@ -95,6 +95,9 @@ type LustreFileSystemInitParameters struct {
 	// The Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs.
 	LogConfiguration *LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
+	// The Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See Metadata Configuration below.
+	MetadataConfiguration *MetadataConfigurationInitParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
+
 	// - Describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
 	PerUnitStorageThroughput *float64 `json:"perUnitStorageThroughput,omitempty" tf:"per_unit_storage_throughput,omitempty"`
 
@@ -196,6 +199,9 @@ type LustreFileSystemObservation struct {
 
 	// The Lustre logging configuration used when creating an Amazon FSx for Lustre file system. When logging is enabled, Lustre logs error and warning events for data repositories associated with your file system to Amazon CloudWatch Logs.
 	LogConfiguration *LogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
+
+	// The Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See Metadata Configuration below.
+	MetadataConfiguration *MetadataConfigurationObservation `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
 
 	// The value to be used when mounting the filesystem.
 	MountName *string `json:"mountName,omitempty" tf:"mount_name,omitempty"`
@@ -307,6 +313,10 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	LogConfiguration *LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
+	// The Lustre metadata configuration used when creating an Amazon FSx for Lustre file system. This can be used to specify a user provisioned metadata scale. This is only supported when deployment_type is set to PERSISTENT_2. See Metadata Configuration below.
+	// +kubebuilder:validation:Optional
+	MetadataConfiguration *MetadataConfigurationParameters `json:"metadataConfiguration,omitempty" tf:"metadata_configuration,omitempty"`
+
 	// - Describes the amount of read and write throughput for each 1 tebibyte of storage, in MB/s/TiB, required for the PERSISTENT_1 and PERSISTENT_2 deployment_type. Valid values for PERSISTENT_1 deployment_type and SSD storage_type are 50, 100, 200. Valid values for PERSISTENT_1 deployment_type and HDD storage_type are 12, 40. Valid values for PERSISTENT_2 deployment_type and  SSD storage_type are 125, 250, 500, 1000.
 	// +kubebuilder:validation:Optional
 	PerUnitStorageThroughput *float64 `json:"perUnitStorageThroughput,omitempty" tf:"per_unit_storage_throughput,omitempty"`
@@ -367,6 +377,35 @@ type LustreFileSystemParameters struct {
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
 	// +kubebuilder:validation:Optional
 	WeeklyMaintenanceStartTime *string `json:"weeklyMaintenanceStartTime,omitempty" tf:"weekly_maintenance_start_time,omitempty"`
+}
+
+type MetadataConfigurationInitParameters struct {
+
+	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type MetadataConfigurationObservation struct {
+
+	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000.
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type MetadataConfigurationParameters struct {
+
+	// Amount of IOPS provisioned for metadata. This parameter should only be used when the mode is set to USER_PROVISIONED. Valid Values are 1500,3000,6000 and 12000 through 192000 in increments of 12000.
+	// +kubebuilder:validation:Optional
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Mode for the metadata configuration of the file system. Valid values are AUTOMATIC, and USER_PROVISIONED.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type RootSquashConfigurationInitParameters struct {

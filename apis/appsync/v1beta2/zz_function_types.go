@@ -61,10 +61,10 @@ type FunctionInitParameters struct {
 	// Function response mapping template.
 	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
 
-	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See Runtime.
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
 	Runtime *RuntimeInitParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// Describes a Sync configuration for a resolver. See Sync Config.
+	// Describes a Sync configuration for a resolver. See sync_config Block for details.
 	SyncConfig *SyncConfigInitParameters `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 }
 
@@ -106,10 +106,10 @@ type FunctionObservation struct {
 	// Function response mapping template.
 	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
 
-	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See Runtime.
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
 	Runtime *RuntimeObservation `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// Describes a Sync configuration for a resolver. See Sync Config.
+	// Describes a Sync configuration for a resolver. See sync_config Block for details.
 	SyncConfig *SyncConfigObservation `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 }
 
@@ -175,11 +175,11 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ResponseMappingTemplate *string `json:"responseMappingTemplate,omitempty" tf:"response_mapping_template,omitempty"`
 
-	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See Runtime.
+	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync function. Specifies the name and version of the runtime to use. Note that if a runtime is specified, code must also be specified. See runtime Block for details.
 	// +kubebuilder:validation:Optional
 	Runtime *RuntimeParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// Describes a Sync configuration for a resolver. See Sync Config.
+	// Describes a Sync configuration for a resolver. See sync_config Block for details.
 	// +kubebuilder:validation:Optional
 	SyncConfig *SyncConfigParameters `json:"syncConfig,omitempty" tf:"sync_config,omitempty"`
 }
@@ -205,7 +205,7 @@ type LambdaConflictHandlerConfigParameters struct {
 
 type RuntimeInitParameters struct {
 
-	// Function name. The function name does not have to be unique.
+	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
@@ -214,7 +214,7 @@ type RuntimeInitParameters struct {
 
 type RuntimeObservation struct {
 
-	// Function name. The function name does not have to be unique.
+	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The version of the runtime to use. Currently, the only allowed version is 1.0.0.
@@ -223,7 +223,7 @@ type RuntimeObservation struct {
 
 type RuntimeParameters struct {
 
-	// Function name. The function name does not have to be unique.
+	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -240,7 +240,7 @@ type SyncConfigInitParameters struct {
 	// Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
 	ConflictHandler *string `json:"conflictHandler,omitempty" tf:"conflict_handler,omitempty"`
 
-	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
+	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See lambda_conflict_handler_config Block for details.
 	LambdaConflictHandlerConfig *LambdaConflictHandlerConfigInitParameters `json:"lambdaConflictHandlerConfig,omitempty" tf:"lambda_conflict_handler_config,omitempty"`
 }
 
@@ -252,7 +252,7 @@ type SyncConfigObservation struct {
 	// Conflict Resolution strategy to perform in the event of a conflict. Valid values are NONE, OPTIMISTIC_CONCURRENCY, AUTOMERGE, and LAMBDA.
 	ConflictHandler *string `json:"conflictHandler,omitempty" tf:"conflict_handler,omitempty"`
 
-	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
+	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See lambda_conflict_handler_config Block for details.
 	LambdaConflictHandlerConfig *LambdaConflictHandlerConfigObservation `json:"lambdaConflictHandlerConfig,omitempty" tf:"lambda_conflict_handler_config,omitempty"`
 }
 
@@ -266,7 +266,7 @@ type SyncConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ConflictHandler *string `json:"conflictHandler,omitempty" tf:"conflict_handler,omitempty"`
 
-	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See Lambda Conflict Handler Config.
+	// Lambda Conflict Handler Config when configuring LAMBDA as the Conflict Handler. See lambda_conflict_handler_config Block for details.
 	// +kubebuilder:validation:Optional
 	LambdaConflictHandlerConfig *LambdaConflictHandlerConfigParameters `json:"lambdaConflictHandlerConfig,omitempty" tf:"lambda_conflict_handler_config,omitempty"`
 }

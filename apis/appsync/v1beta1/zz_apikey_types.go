@@ -27,6 +27,9 @@ type APIKeyObservation struct {
 	// ID of the associated AppSync API
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
+	// API Key ID (Formatted as ApiId:Key)
+	APIKeyID *string `json:"apiKeyId,omitempty" tf:"api_key_id,omitempty"`
+
 	// API key description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

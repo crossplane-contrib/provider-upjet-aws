@@ -266,6 +266,9 @@ type FunctionObservation struct {
 	// Amazon Resource Name (ARN) identifying your Lambda Function.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// Base64-encoded representation of raw SHA-256 sum of the zip file.
+	CodeSha256 *string `json:"codeSha256,omitempty" tf:"code_sha256,omitempty"`
+
 	// To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.
 	CodeSigningConfigArn *string `json:"codeSigningConfigArn,omitempty" tf:"code_signing_config_arn,omitempty"`
 

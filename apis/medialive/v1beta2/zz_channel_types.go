@@ -5272,8 +5272,11 @@ type InputLossSettingsParameters struct {
 }
 
 type InputSettingsInitParameters struct {
+
+	// Used to select the audio stream to decode for inputs that have multiple. See Audio Selectors for more details.
 	AudioSelector []AudioSelectorInitParameters `json:"audioSelector,omitempty" tf:"audio_selector,omitempty"`
 
+	// Used to select the caption input to use for inputs that have multiple available. See Caption Selectors for more details.
 	CaptionSelector []CaptionSelectorInitParameters `json:"captionSelector,omitempty" tf:"caption_selector,omitempty"`
 
 	// Enable or disable the deblock filter when filtering.
@@ -5304,8 +5307,11 @@ type InputSettingsInitParameters struct {
 }
 
 type InputSettingsObservation struct {
+
+	// Used to select the audio stream to decode for inputs that have multiple. See Audio Selectors for more details.
 	AudioSelector []AudioSelectorObservation `json:"audioSelector,omitempty" tf:"audio_selector,omitempty"`
 
+	// Used to select the caption input to use for inputs that have multiple available. See Caption Selectors for more details.
 	CaptionSelector []CaptionSelectorObservation `json:"captionSelector,omitempty" tf:"caption_selector,omitempty"`
 
 	// Enable or disable the deblock filter when filtering.
@@ -5337,9 +5343,11 @@ type InputSettingsObservation struct {
 
 type InputSettingsParameters struct {
 
+	// Used to select the audio stream to decode for inputs that have multiple. See Audio Selectors for more details.
 	// +kubebuilder:validation:Optional
 	AudioSelector []AudioSelectorParameters `json:"audioSelector,omitempty" tf:"audio_selector,omitempty"`
 
+	// Used to select the caption input to use for inputs that have multiple available. See Caption Selectors for more details.
 	// +kubebuilder:validation:Optional
 	CaptionSelector []CaptionSelectorParameters `json:"captionSelector,omitempty" tf:"caption_selector,omitempty"`
 

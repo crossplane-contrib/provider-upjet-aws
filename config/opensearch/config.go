@@ -6,6 +6,7 @@ package opensearch
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/config/common"
 )
@@ -33,6 +34,13 @@ func Configure(p *config.Provider) {
 		}
 
 		r.UseAsync = true
+
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "advanced_security_options.#")
+			}
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_opensearch_domain_policy", func(r *config.Resource) {

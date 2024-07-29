@@ -1181,7 +1181,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins. Defaults
-                      to 60 seconds.
+                      to 0. Valid value is between 60 and 3600 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
@@ -1456,7 +1456,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins. Defaults
-                      to 60 seconds.
+                      to 0. Valid value is between 60 and 3600 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
@@ -1844,7 +1844,7 @@ spec:
                     description: Amount of time that users can be idle (inactive)
                       before they are disconnected from their streaming session and
                       the disconnect_timeout_in_seconds time interval begins. Defaults
-                      to 60 seconds.
+                      to 0. Valid value is between 60 and 3600 seconds.
                     type: number
                   imageArn:
                     description: ARN of the public, private, or shared image to use.
