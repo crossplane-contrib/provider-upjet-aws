@@ -1134,6 +1134,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   cloudwatchLoggingOptions:
                     description: A CloudWatch log stream to monitor application configuration
                       errors.
@@ -2402,6 +2406,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   cloudwatchLoggingOptions:
                     description: A CloudWatch log stream to monitor application configuration
                       errors.
@@ -3385,6 +3393,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   arn:
                     description: The ARN of the application.
                     type: string

@@ -199,6 +199,13 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              generativeAiSettings:
+                                properties:
+                                  amazonBedrockRoleArn:
+                                    description: The user profile Amazon Resource
+                                      Name (ARN).
+                                    type: string
+                                type: object
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -316,6 +323,24 @@ spec:
                             Editor App Settings below.
                           items:
                             properties:
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a CodeEditor app. see Custom
+                                  Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
@@ -901,6 +926,13 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              generativeAiSettings:
+                                properties:
+                                  amazonBedrockRoleArn:
+                                    description: The user profile Amazon Resource
+                                      Name (ARN).
+                                    type: string
+                                type: object
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -1018,6 +1050,24 @@ spec:
                             Editor App Settings below.
                           items:
                             properties:
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a CodeEditor app. see Custom
+                                  Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
@@ -1709,6 +1759,13 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              generativeAiSettings:
+                                properties:
+                                  amazonBedrockRoleArn:
+                                    description: The user profile Amazon Resource
+                                      Name (ARN).
+                                    type: string
+                                type: object
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -1826,6 +1883,24 @@ spec:
                             Editor App Settings below.
                           items:
                             properties:
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a CodeEditor app. see Custom
+                                  Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created

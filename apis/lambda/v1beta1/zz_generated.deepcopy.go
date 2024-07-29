@@ -2803,6 +2803,11 @@ func (in *FunctionObservation) DeepCopyInto(out *FunctionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CodeSha256 != nil {
+		in, out := &in.CodeSha256, &out.CodeSha256
+		*out = new(string)
+		**out = **in
+	}
 	if in.CodeSigningConfigArn != nil {
 		in, out := &in.CodeSigningConfigArn, &out.CodeSigningConfigArn
 		*out = new(string)

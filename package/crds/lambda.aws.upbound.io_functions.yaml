@@ -1885,6 +1885,10 @@ spec:
                     description: Amazon Resource Name (ARN) identifying your Lambda
                       Function.
                     type: string
+                  codeSha256:
+                    description: Base64-encoded representation of raw SHA-256 sum
+                      of the zip file.
+                    type: string
                   codeSigningConfigArn:
                     description: To enable code signing for this function, specify
                       the ARN of a code-signing configuration. A code-signing configuration

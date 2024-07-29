@@ -139,6 +139,10 @@ spec:
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
                     type: string
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
+                    type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
                       units (DPUs) that can be allocated when this job runs. Required
@@ -354,6 +358,10 @@ spec:
                     description: The version of glue to use, for example "1.0". Ray
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
+                    type: string
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
@@ -734,6 +742,10 @@ spec:
                     type: string
                   id:
                     description: Job name
+                    type: string
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing

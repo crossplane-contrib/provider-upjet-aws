@@ -95,6 +95,10 @@ spec:
                   cloudwatchLogs:
                     items:
                       properties:
+                        batchMode:
+                          description: The payload that contains a JSON array of records
+                            will be sent to CloudWatch via a batch call.
+                          type: boolean
                         logGroupName:
                           description: The CloudWatch log group name.
                           type: string
@@ -247,6 +251,11 @@ spec:
                         cloudwatchLogs:
                           items:
                             properties:
+                              batchMode:
+                                description: The payload that contains a JSON array
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
+                                type: boolean
                               logGroupName:
                                 description: The CloudWatch log group name.
                                 type: string
@@ -1279,6 +1288,10 @@ spec:
                   cloudwatchLogs:
                     items:
                       properties:
+                        batchMode:
+                          description: The payload that contains a JSON array of records
+                            will be sent to CloudWatch via a batch call.
+                          type: boolean
                         logGroupName:
                           description: The CloudWatch log group name.
                           type: string
@@ -1431,6 +1444,11 @@ spec:
                         cloudwatchLogs:
                           items:
                             properties:
+                              batchMode:
+                                description: The payload that contains a JSON array
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
+                                type: boolean
                               logGroupName:
                                 description: The CloudWatch log group name.
                                 type: string
@@ -2632,6 +2650,10 @@ spec:
                   cloudwatchLogs:
                     items:
                       properties:
+                        batchMode:
+                          description: The payload that contains a JSON array of records
+                            will be sent to CloudWatch via a batch call.
+                          type: boolean
                         logGroupName:
                           description: The CloudWatch log group name.
                           type: string
@@ -2784,6 +2806,11 @@ spec:
                         cloudwatchLogs:
                           items:
                             properties:
+                              batchMode:
+                                description: The payload that contains a JSON array
+                                  of records will be sent to CloudWatch via a batch
+                                  call.
+                                type: boolean
                               logGroupName:
                                 description: The CloudWatch log group name.
                                 type: string

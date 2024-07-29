@@ -87,6 +87,12 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -530,6 +536,12 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -1134,6 +1146,12 @@ spec:
                   arn:
                     description: ARN of the cluster.
                     type: string
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   certificateAuthority:
                     description: Attribute block containing certificate-authority-data
                       for your cluster. Detailed below.
