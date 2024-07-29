@@ -153,7 +153,7 @@ type LBInitParameters struct {
 	// Whether inbound security group rules are enforced for traffic originating from a PrivateLink. Only valid for Load Balancers of type network. The possible values are on and off.
 	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string `json:"enforceSecurityGroupInboundRulesOnPrivateLinkTraffic,omitempty" tf:"enforce_security_group_inbound_rules_on_private_link_traffic,omitempty"`
 
-	// Type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
+	// Type of IP addresses used by the subnets for your load balancer. The possible values depend upon the load balancer type: ipv4 (all load balancer types), dualstack (all load balancer types), and dualstack-without-public-ipv4 (type application only).
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Time in seconds that the connection is allowed to be idle. Only valid for Load Balancers of type application. Default: 60.
@@ -268,7 +268,7 @@ type LBObservation struct {
 	// ARN of the load balancer (matches arn).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
+	// Type of IP addresses used by the subnets for your load balancer. The possible values depend upon the load balancer type: ipv4 (all load balancer types), dualstack (all load balancer types), and dualstack-without-public-ipv4 (type application only).
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Time in seconds that the connection is allowed to be idle. Only valid for Load Balancers of type application. Default: 60.
@@ -373,7 +373,7 @@ type LBParameters struct {
 	// +kubebuilder:validation:Optional
 	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string `json:"enforceSecurityGroupInboundRulesOnPrivateLinkTraffic,omitempty" tf:"enforce_security_group_inbound_rules_on_private_link_traffic,omitempty"`
 
-	// Type of IP addresses used by the subnets for your load balancer. The possible values are ipv4 and dualstack.
+	// Type of IP addresses used by the subnets for your load balancer. The possible values depend upon the load balancer type: ipv4 (all load balancer types), dualstack (all load balancer types), and dualstack-without-public-ipv4 (type application only).
 	// +kubebuilder:validation:Optional
 	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 

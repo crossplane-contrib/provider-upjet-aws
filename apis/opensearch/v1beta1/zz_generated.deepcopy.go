@@ -862,6 +862,11 @@ func (in *DomainInitParameters) DeepCopyInto(out *DomainInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogPublishingOptions != nil {
 		in, out := &in.LogPublishingOptions, &out.LogPublishingOptions
 		*out = make([]LogPublishingOptionsInitParameters, len(*in))
@@ -1072,6 +1077,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.KibanaEndpoint != nil {
 		in, out := &in.KibanaEndpoint, &out.KibanaEndpoint
 		*out = new(string)
@@ -1238,6 +1248,11 @@ func (in *DomainParameters) DeepCopyInto(out *DomainParameters) {
 	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
 		*out = new(string)
 		**out = **in
 	}

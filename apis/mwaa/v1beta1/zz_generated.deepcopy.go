@@ -194,8 +194,18 @@ func (in *EnvironmentInitParameters) DeepCopyInto(out *EnvironmentInitParameters
 		*out = new(LoggingConfigurationInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.MaxWebservers != nil {
+		in, out := &in.MaxWebservers, &out.MaxWebservers
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MaxWorkers != nil {
 		in, out := &in.MaxWorkers, &out.MaxWorkers
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MinWebservers != nil {
+		in, out := &in.MinWebservers, &out.MinWebservers
 		*out = new(float64)
 		**out = **in
 	}
@@ -394,8 +404,18 @@ func (in *EnvironmentObservation) DeepCopyInto(out *EnvironmentObservation) {
 		*out = new(LoggingConfigurationObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.MaxWebservers != nil {
+		in, out := &in.MaxWebservers, &out.MaxWebservers
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MaxWorkers != nil {
 		in, out := &in.MaxWorkers, &out.MaxWorkers
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MinWebservers != nil {
+		in, out := &in.MinWebservers, &out.MinWebservers
 		*out = new(float64)
 		**out = **in
 	}
@@ -586,8 +606,18 @@ func (in *EnvironmentParameters) DeepCopyInto(out *EnvironmentParameters) {
 		*out = new(LoggingConfigurationParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.MaxWebservers != nil {
+		in, out := &in.MaxWebservers, &out.MaxWebservers
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MaxWorkers != nil {
 		in, out := &in.MaxWorkers, &out.MaxWorkers
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MinWebservers != nil {
+		in, out := &in.MinWebservers, &out.MinWebservers
 		*out = new(float64)
 		**out = **in
 	}

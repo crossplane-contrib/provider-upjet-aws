@@ -223,6 +223,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(AccessConfigInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.BootstrapSelfManagedAddons != nil {
+		in, out := &in.BootstrapSelfManagedAddons, &out.BootstrapSelfManagedAddons
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnabledClusterLogTypes != nil {
 		in, out := &in.EnabledClusterLogTypes, &out.EnabledClusterLogTypes
 		*out = make([]*string, len(*in))
@@ -345,6 +350,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	if in.Arn != nil {
 		in, out := &in.Arn, &out.Arn
 		*out = new(string)
+		**out = **in
+	}
+	if in.BootstrapSelfManagedAddons != nil {
+		in, out := &in.BootstrapSelfManagedAddons, &out.BootstrapSelfManagedAddons
+		*out = new(bool)
 		**out = **in
 	}
 	if in.CertificateAuthority != nil {
@@ -483,6 +493,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		in, out := &in.AccessConfig, &out.AccessConfig
 		*out = new(AccessConfigParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.BootstrapSelfManagedAddons != nil {
+		in, out := &in.BootstrapSelfManagedAddons, &out.BootstrapSelfManagedAddons
+		*out = new(bool)
+		**out = **in
 	}
 	if in.EnabledClusterLogTypes != nil {
 		in, out := &in.EnabledClusterLogTypes, &out.EnabledClusterLogTypes

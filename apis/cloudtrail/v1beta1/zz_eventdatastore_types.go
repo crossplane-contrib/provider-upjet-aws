@@ -126,6 +126,9 @@ type EventDataStoreInitParameters struct {
 	// The advanced event selectors to use to select the events for the data store. For more information about how to use advanced event selectors, see Log events by using advanced event selectors in the CloudTrail User Guide.
 	AdvancedEventSelector []EventDataStoreAdvancedEventSelectorInitParameters `json:"advancedEventSelector,omitempty" tf:"advanced_event_selector,omitempty"`
 
+	// The billing mode for the event data store. The valid values are EXTENDABLE_RETENTION_PRICING and FIXED_RETENTION_PRICING. Defaults to EXTENDABLE_RETENTION_PRICING.
+	BillingMode *string `json:"billingMode,omitempty" tf:"billing_mode,omitempty"`
+
 	// Specifies the AWS KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -166,6 +169,9 @@ type EventDataStoreObservation struct {
 	// ARN of the event data store.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The billing mode for the event data store. The valid values are EXTENDABLE_RETENTION_PRICING and FIXED_RETENTION_PRICING. Defaults to EXTENDABLE_RETENTION_PRICING.
+	BillingMode *string `json:"billingMode,omitempty" tf:"billing_mode,omitempty"`
+
 	// Name of the event data store.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -201,6 +207,10 @@ type EventDataStoreParameters struct {
 	// The advanced event selectors to use to select the events for the data store. For more information about how to use advanced event selectors, see Log events by using advanced event selectors in the CloudTrail User Guide.
 	// +kubebuilder:validation:Optional
 	AdvancedEventSelector []EventDataStoreAdvancedEventSelectorParameters `json:"advancedEventSelector,omitempty" tf:"advanced_event_selector,omitempty"`
+
+	// The billing mode for the event data store. The valid values are EXTENDABLE_RETENTION_PRICING and FIXED_RETENTION_PRICING. Defaults to EXTENDABLE_RETENTION_PRICING.
+	// +kubebuilder:validation:Optional
+	BillingMode *string `json:"billingMode,omitempty" tf:"billing_mode,omitempty"`
 
 	// Specifies the AWS KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by alias/, a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key

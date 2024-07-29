@@ -112,6 +112,35 @@ type CognitoMemberDefinitionParameters struct {
 	UserPoolSelector *v1.Selector `json:"userPoolSelector,omitempty" tf:"-"`
 }
 
+type IAMPolicyConstraintsInitParameters struct {
+
+	// When SourceIp is Enabled the worker's IP address when a task is rendered in the worker portal is added to the IAM policy as a Condition used to generate the Amazon S3 presigned URL. This IP address is checked by Amazon S3 and must match in order for the Amazon S3 resource to be rendered in the worker portal. Valid values are Enabled or Disabled
+	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+
+	// When VpcSourceIp is Enabled the worker's IP address when a task is rendered in private worker portal inside the VPC is added to the IAM policy as a Condition used to generate the Amazon S3 presigned URL. To render the task successfully Amazon S3 checks that the presigned URL is being accessed over an Amazon S3 VPC Endpoint, and that the worker's IP address matches the IP address in the IAM policy. To learn more about configuring private worker portal, see Use Amazon VPC mode from a private worker portal. Valid values are Enabled or Disabled
+	VPCSourceIP *string `json:"vpcSourceIp,omitempty" tf:"vpc_source_ip,omitempty"`
+}
+
+type IAMPolicyConstraintsObservation struct {
+
+	// When SourceIp is Enabled the worker's IP address when a task is rendered in the worker portal is added to the IAM policy as a Condition used to generate the Amazon S3 presigned URL. This IP address is checked by Amazon S3 and must match in order for the Amazon S3 resource to be rendered in the worker portal. Valid values are Enabled or Disabled
+	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+
+	// When VpcSourceIp is Enabled the worker's IP address when a task is rendered in private worker portal inside the VPC is added to the IAM policy as a Condition used to generate the Amazon S3 presigned URL. To render the task successfully Amazon S3 checks that the presigned URL is being accessed over an Amazon S3 VPC Endpoint, and that the worker's IP address matches the IP address in the IAM policy. To learn more about configuring private worker portal, see Use Amazon VPC mode from a private worker portal. Valid values are Enabled or Disabled
+	VPCSourceIP *string `json:"vpcSourceIp,omitempty" tf:"vpc_source_ip,omitempty"`
+}
+
+type IAMPolicyConstraintsParameters struct {
+
+	// When SourceIp is Enabled the worker's IP address when a task is rendered in the worker portal is added to the IAM policy as a Condition used to generate the Amazon S3 presigned URL. This IP address is checked by Amazon S3 and must match in order for the Amazon S3 resource to be rendered in the worker portal. Valid values are Enabled or Disabled
+	// +kubebuilder:validation:Optional
+	SourceIP *string `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+
+	// When VpcSourceIp is Enabled the worker's IP address when a task is rendered in private worker portal inside the VPC is added to the IAM policy as a Condition used to generate the Amazon S3 presigned URL. To render the task successfully Amazon S3 checks that the presigned URL is being accessed over an Amazon S3 VPC Endpoint, and that the worker's IP address matches the IP address in the IAM policy. To learn more about configuring private worker portal, see Use Amazon VPC mode from a private worker portal. Valid values are Enabled or Disabled
+	// +kubebuilder:validation:Optional
+	VPCSourceIP *string `json:"vpcSourceIp,omitempty" tf:"vpc_source_ip,omitempty"`
+}
+
 type MemberDefinitionInitParameters struct {
 
 	// The Amazon Cognito user group that is part of the work team. See Cognito Member Definition details below.
@@ -182,6 +211,44 @@ type OidcMemberDefinitionParameters struct {
 	Groups []*string `json:"groups" tf:"groups,omitempty"`
 }
 
+type S3PresignInitParameters struct {
+
+	// Use this parameter to specify the allowed request source. Possible sources are either SourceIp or VpcSourceIp. see IAM Policy Constraints details below.
+	IAMPolicyConstraints *IAMPolicyConstraintsInitParameters `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
+}
+
+type S3PresignObservation struct {
+
+	// Use this parameter to specify the allowed request source. Possible sources are either SourceIp or VpcSourceIp. see IAM Policy Constraints details below.
+	IAMPolicyConstraints *IAMPolicyConstraintsObservation `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
+}
+
+type S3PresignParameters struct {
+
+	// Use this parameter to specify the allowed request source. Possible sources are either SourceIp or VpcSourceIp. see IAM Policy Constraints details below.
+	// +kubebuilder:validation:Optional
+	IAMPolicyConstraints *IAMPolicyConstraintsParameters `json:"iamPolicyConstraints,omitempty" tf:"iam_policy_constraints,omitempty"`
+}
+
+type WorkerAccessConfigurationInitParameters struct {
+
+	// Defines any Amazon S3 resource constraints. see S3 Presign details below.
+	S3Presign *S3PresignInitParameters `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
+}
+
+type WorkerAccessConfigurationObservation struct {
+
+	// Defines any Amazon S3 resource constraints. see S3 Presign details below.
+	S3Presign *S3PresignObservation `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
+}
+
+type WorkerAccessConfigurationParameters struct {
+
+	// Defines any Amazon S3 resource constraints. see S3 Presign details below.
+	// +kubebuilder:validation:Optional
+	S3Presign *S3PresignParameters `json:"s3Presign,omitempty" tf:"s3_presign,omitempty"`
+}
+
 type WorkteamInitParameters struct {
 
 	// A description of the work team.
@@ -196,6 +263,9 @@ type WorkteamInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL. see Worker Access Configuration details below.
+	WorkerAccessConfiguration *WorkerAccessConfigurationInitParameters `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
 
 	// The name of the Workteam (must be unique).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Workforce
@@ -239,6 +309,9 @@ type WorkteamObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL. see Worker Access Configuration details below.
+	WorkerAccessConfiguration *WorkerAccessConfigurationObservation `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
+
 	// The name of the Workteam (must be unique).
 	WorkforceName *string `json:"workforceName,omitempty" tf:"workforce_name,omitempty"`
 }
@@ -266,6 +339,10 @@ type WorkteamParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL. see Worker Access Configuration details below.
+	// +kubebuilder:validation:Optional
+	WorkerAccessConfiguration *WorkerAccessConfigurationParameters `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
 
 	// The name of the Workteam (must be unique).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Workforce

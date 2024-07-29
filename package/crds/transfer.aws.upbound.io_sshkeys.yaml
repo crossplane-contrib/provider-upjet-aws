@@ -601,6 +601,8 @@ spec:
                     description: (Requirement) The Server ID of the Transfer Server
                       (e.g., s-12345678)
                     type: string
+                  sshKeyId:
+                    type: string
                   userName:
                     description: (Requirement) The name of the user account that is
                       assigned to one or more servers.

@@ -629,6 +629,9 @@ type TaskDefinitionPlacementConstraintsParameters struct {
 
 type VolumeInitParameters struct {
 
+	// Whether the volume should be configured at launch time. This is used to create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each task definition revision may only have one volume configured at launch in the volume configuration.
+	ConfigureAtLaunch *bool `json:"configureAtLaunch,omitempty" tf:"configure_at_launch,omitempty"`
+
 	// Configuration block to configure a docker volume. Detailed below.
 	DockerVolumeConfiguration *DockerVolumeConfigurationInitParameters `json:"dockerVolumeConfiguration,omitempty" tf:"docker_volume_configuration,omitempty"`
 
@@ -648,6 +651,9 @@ type VolumeInitParameters struct {
 
 type VolumeObservation struct {
 
+	// Whether the volume should be configured at launch time. This is used to create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each task definition revision may only have one volume configured at launch in the volume configuration.
+	ConfigureAtLaunch *bool `json:"configureAtLaunch,omitempty" tf:"configure_at_launch,omitempty"`
+
 	// Configuration block to configure a docker volume. Detailed below.
 	DockerVolumeConfiguration *DockerVolumeConfigurationObservation `json:"dockerVolumeConfiguration,omitempty" tf:"docker_volume_configuration,omitempty"`
 
@@ -666,6 +672,10 @@ type VolumeObservation struct {
 }
 
 type VolumeParameters struct {
+
+	// Whether the volume should be configured at launch time. This is used to create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each task definition revision may only have one volume configured at launch in the volume configuration.
+	// +kubebuilder:validation:Optional
+	ConfigureAtLaunch *bool `json:"configureAtLaunch,omitempty" tf:"configure_at_launch,omitempty"`
 
 	// Configuration block to configure a docker volume. Detailed below.
 	// +kubebuilder:validation:Optional

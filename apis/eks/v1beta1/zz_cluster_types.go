@@ -59,6 +59,9 @@ type ClusterInitParameters struct {
 	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
 	AccessConfig []AccessConfigInitParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
 
+	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
+	BootstrapSelfManagedAddons *bool `json:"bootstrapSelfManagedAddons,omitempty" tf:"bootstrap_self_managed_addons,omitempty"`
+
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
@@ -105,6 +108,9 @@ type ClusterObservation struct {
 
 	// ARN of the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
+	BootstrapSelfManagedAddons *bool `json:"bootstrapSelfManagedAddons,omitempty" tf:"bootstrap_self_managed_addons,omitempty"`
 
 	// Attribute block containing certificate-authority-data for your cluster. Detailed below.
 	CertificateAuthority []CertificateAuthorityObservation `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
@@ -168,6 +174,10 @@ type ClusterParameters struct {
 	// Configuration block for the access config associated with your cluster, see Amazon EKS Access Entries.
 	// +kubebuilder:validation:Optional
 	AccessConfig []AccessConfigParameters `json:"accessConfig,omitempty" tf:"access_config,omitempty"`
+
+	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
+	// +kubebuilder:validation:Optional
+	BootstrapSelfManagedAddons *bool `json:"bootstrapSelfManagedAddons,omitempty" tf:"bootstrap_self_managed_addons,omitempty"`
 
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +kubebuilder:validation:Optional

@@ -887,6 +887,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.CACertificateIdentifier != nil {
+		in, out := &in.CACertificateIdentifier, &out.CACertificateIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClusterMembers != nil {
 		in, out := &in.ClusterMembers, &out.ClusterMembers
 		*out = make([]*string, len(*in))
@@ -2027,6 +2032,16 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.CACertificateIdentifier != nil {
+		in, out := &in.CACertificateIdentifier, &out.CACertificateIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.CACertificateValidTill != nil {
+		in, out := &in.CACertificateValidTill, &out.CACertificateValidTill
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClusterMembers != nil {
 		in, out := &in.ClusterMembers, &out.ClusterMembers
 		*out = make([]*string, len(*in))
@@ -2756,6 +2771,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.BackupRetentionPeriod != nil {
 		in, out := &in.BackupRetentionPeriod, &out.BackupRetentionPeriod
 		*out = new(float64)
+		**out = **in
+	}
+	if in.CACertificateIdentifier != nil {
+		in, out := &in.CACertificateIdentifier, &out.CACertificateIdentifier
+		*out = new(string)
 		**out = **in
 	}
 	if in.ClusterMembers != nil {

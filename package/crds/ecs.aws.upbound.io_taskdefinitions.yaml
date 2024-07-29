@@ -304,6 +304,13 @@ spec:
                       your task may use. Detailed below.
                     items:
                       properties:
+                        configureAtLaunch:
+                          description: Whether the volume should be configured at
+                            launch time. This is used to create Amazon EBS volumes
+                            for standalone tasks or tasks created as part of a service.
+                            Each task definition revision may only have one volume
+                            configured at launch in the volume configuration.
+                          type: boolean
                         dockerVolumeConfiguration:
                           description: Configuration block to configure a docker volume.
                             Detailed below.
@@ -692,6 +699,13 @@ spec:
                       your task may use. Detailed below.
                     items:
                       properties:
+                        configureAtLaunch:
+                          description: Whether the volume should be configured at
+                            launch time. This is used to create Amazon EBS volumes
+                            for standalone tasks or tasks created as part of a service.
+                            Each task definition revision may only have one volume
+                            configured at launch in the volume configuration.
+                          type: boolean
                         dockerVolumeConfiguration:
                           description: Configuration block to configure a docker volume.
                             Detailed below.
@@ -1195,6 +1209,13 @@ spec:
                       your task may use. Detailed below.
                     items:
                       properties:
+                        configureAtLaunch:
+                          description: Whether the volume should be configured at
+                            launch time. This is used to create Amazon EBS volumes
+                            for standalone tasks or tasks created as part of a service.
+                            Each task definition revision may only have one volume
+                            configured at launch in the volume configuration.
+                          type: boolean
                         dockerVolumeConfiguration:
                           description: Configuration block to configure a docker volume.
                             Detailed below.
@@ -1681,6 +1702,13 @@ spec:
                       your task may use. Detailed below.
                     items:
                       properties:
+                        configureAtLaunch:
+                          description: Whether the volume should be configured at
+                            launch time. This is used to create Amazon EBS volumes
+                            for standalone tasks or tasks created as part of a service.
+                            Each task definition revision may only have one volume
+                            configured at launch in the volume configuration.
+                          type: boolean
                         dockerVolumeConfiguration:
                           description: Configuration block to configure a docker volume.
                             Detailed below.
@@ -2050,6 +2078,13 @@ spec:
                       your task may use. Detailed below.
                     items:
                       properties:
+                        configureAtLaunch:
+                          description: Whether the volume should be configured at
+                            launch time. This is used to create Amazon EBS volumes
+                            for standalone tasks or tasks created as part of a service.
+                            Each task definition revision may only have one volume
+                            configured at launch in the volume configuration.
+                          type: boolean
                         dockerVolumeConfiguration:
                           description: Configuration block to configure a docker volume.
                             Detailed below.
@@ -2534,6 +2569,13 @@ spec:
                       your task may use. Detailed below.
                     items:
                       properties:
+                        configureAtLaunch:
+                          description: Whether the volume should be configured at
+                            launch time. This is used to create Amazon EBS volumes
+                            for standalone tasks or tasks created as part of a service.
+                            Each task definition revision may only have one volume
+                            configured at launch in the volume configuration.
+                          type: boolean
                         dockerVolumeConfiguration:
                           description: Configuration block to configure a docker volume.
                             Detailed below.

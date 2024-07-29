@@ -12,7 +12,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    catalogId: ${data.aws_account_id}
+    catalogId: "${data.aws_account_id}"
     connectionPropertiesSecretRef:
       name: example-secret
       namespace: upbound-system

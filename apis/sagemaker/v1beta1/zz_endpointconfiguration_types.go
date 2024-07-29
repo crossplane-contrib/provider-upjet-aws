@@ -422,6 +422,9 @@ type ProductionVariantsInitParameters struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -473,6 +476,9 @@ type ProductionVariantsObservation struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -518,6 +524,10 @@ type ProductionVariantsParameters struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	// +kubebuilder:validation:Optional
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
+
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	// +kubebuilder:validation:Optional
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional
@@ -666,6 +676,9 @@ type ShadowProductionVariantsInitParameters struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -707,6 +720,9 @@ type ShadowProductionVariantsObservation struct {
 
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
+
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
@@ -753,6 +769,10 @@ type ShadowProductionVariantsParameters struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	// +kubebuilder:validation:Optional
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
+
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	// +kubebuilder:validation:Optional
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
 
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional

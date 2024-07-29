@@ -23,6 +23,10 @@ type CustomPluginInitParameters_2 struct {
 
 	// Information about the location of a custom plugin. See below.
 	Location []LocationInitParameters `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type CustomPluginObservation_2 struct {
@@ -49,6 +53,14 @@ type CustomPluginObservation_2 struct {
 
 	// the state of the custom plugin.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type CustomPluginParameters_2 struct {
@@ -73,6 +85,11 @@ type CustomPluginParameters_2 struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LocationInitParameters struct {

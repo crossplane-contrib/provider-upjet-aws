@@ -204,6 +204,57 @@ spec:
                             type: string
                         type: object
                     type: object
+                  logConfiguration:
+                    description: Logging configuration settings for the pipe. Detailed
+                      below.
+                    properties:
+                      cloudwatchLogsLogDestination:
+                        description: Amazon CloudWatch Logs logging configuration
+                          settings for the pipe. Detailed below.
+                        properties:
+                          logGroupArn:
+                            description: Amazon Web Services Resource Name (ARN) for
+                              the CloudWatch log group to which EventBridge sends
+                              the log records.
+                            type: string
+                        type: object
+                      firehoseLogDestination:
+                        description: Amazon Kinesis Data Firehose logging configuration
+                          settings for the pipe. Detailed below.
+                        properties:
+                          deliveryStreamArn:
+                            description: Amazon Resource Name (ARN) of the Kinesis
+                              Data Firehose delivery stream to which EventBridge delivers
+                              the pipe log records.
+                            type: string
+                        type: object
+                      level:
+                        description: The level of logging detail to include. Valid
+                          values OFF, ERROR, INFO and TRACE.
+                        type: string
+                      s3LogDestination:
+                        description: Amazon S3 logging configuration settings for
+                          the pipe. Detailed below.
+                        properties:
+                          bucketName:
+                            description: Name of the Amazon S3 bucket to which EventBridge
+                              delivers the log records for the pipe.
+                            type: string
+                          bucketOwner:
+                            description: Amazon Web Services account that owns the
+                              Amazon S3 bucket to which EventBridge delivers the log
+                              records for the pipe.
+                            type: string
+                          outputFormat:
+                            description: EventBridge format for the log records. Valid
+                              values json, plain and w3c.
+                            type: string
+                          prefix:
+                            description: Prefix text with which to begin Amazon S3
+                              log object names.
+                            type: string
+                        type: object
+                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -1591,6 +1642,57 @@ spec:
                             enum:
                             - Always
                             - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  logConfiguration:
+                    description: Logging configuration settings for the pipe. Detailed
+                      below.
+                    properties:
+                      cloudwatchLogsLogDestination:
+                        description: Amazon CloudWatch Logs logging configuration
+                          settings for the pipe. Detailed below.
+                        properties:
+                          logGroupArn:
+                            description: Amazon Web Services Resource Name (ARN) for
+                              the CloudWatch log group to which EventBridge sends
+                              the log records.
+                            type: string
+                        type: object
+                      firehoseLogDestination:
+                        description: Amazon Kinesis Data Firehose logging configuration
+                          settings for the pipe. Detailed below.
+                        properties:
+                          deliveryStreamArn:
+                            description: Amazon Resource Name (ARN) of the Kinesis
+                              Data Firehose delivery stream to which EventBridge delivers
+                              the pipe log records.
+                            type: string
+                        type: object
+                      level:
+                        description: The level of logging detail to include. Valid
+                          values OFF, ERROR, INFO and TRACE.
+                        type: string
+                      s3LogDestination:
+                        description: Amazon S3 logging configuration settings for
+                          the pipe. Detailed below.
+                        properties:
+                          bucketName:
+                            description: Name of the Amazon S3 bucket to which EventBridge
+                              delivers the log records for the pipe.
+                            type: string
+                          bucketOwner:
+                            description: Amazon Web Services account that owns the
+                              Amazon S3 bucket to which EventBridge delivers the log
+                              records for the pipe.
+                            type: string
+                          outputFormat:
+                            description: EventBridge format for the log records. Valid
+                              values json, plain and w3c.
+                            type: string
+                          prefix:
+                            description: Prefix text with which to begin Amazon S3
+                              log object names.
                             type: string
                         type: object
                     type: object
@@ -3067,6 +3169,57 @@ spec:
                   id:
                     description: Same as name.
                     type: string
+                  logConfiguration:
+                    description: Logging configuration settings for the pipe. Detailed
+                      below.
+                    properties:
+                      cloudwatchLogsLogDestination:
+                        description: Amazon CloudWatch Logs logging configuration
+                          settings for the pipe. Detailed below.
+                        properties:
+                          logGroupArn:
+                            description: Amazon Web Services Resource Name (ARN) for
+                              the CloudWatch log group to which EventBridge sends
+                              the log records.
+                            type: string
+                        type: object
+                      firehoseLogDestination:
+                        description: Amazon Kinesis Data Firehose logging configuration
+                          settings for the pipe. Detailed below.
+                        properties:
+                          deliveryStreamArn:
+                            description: Amazon Resource Name (ARN) of the Kinesis
+                              Data Firehose delivery stream to which EventBridge delivers
+                              the pipe log records.
+                            type: string
+                        type: object
+                      level:
+                        description: The level of logging detail to include. Valid
+                          values OFF, ERROR, INFO and TRACE.
+                        type: string
+                      s3LogDestination:
+                        description: Amazon S3 logging configuration settings for
+                          the pipe. Detailed below.
+                        properties:
+                          bucketName:
+                            description: Name of the Amazon S3 bucket to which EventBridge
+                              delivers the log records for the pipe.
+                            type: string
+                          bucketOwner:
+                            description: Amazon Web Services account that owns the
+                              Amazon S3 bucket to which EventBridge delivers the log
+                              records for the pipe.
+                            type: string
+                          outputFormat:
+                            description: EventBridge format for the log records. Valid
+                              values json, plain and w3c.
+                            type: string
+                          prefix:
+                            description: Prefix text with which to begin Amazon S3
+                              log object names.
+                            type: string
+                        type: object
+                    type: object
                   roleArn:
                     description: ARN of the role that allows the pipe to send data
                       to the target.

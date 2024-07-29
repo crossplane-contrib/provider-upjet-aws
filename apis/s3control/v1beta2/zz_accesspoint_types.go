@@ -34,7 +34,7 @@ type AccessPointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Name you want to assign to this access point.
+	// Name you want to assign to this access point. See the AWS documentation for naming conditions.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Valid JSON document that specifies the policy that you want to apply to this access point. Removing policy from your configuration or setting policy to null or an empty string (i.e., policy = "") will not delete the policy since it could have been set by aws_s3control_access_point_policy. To remove the policy, set it to "{}" (an empty JSON document).
@@ -78,7 +78,7 @@ type AccessPointObservation struct {
 	// For Access Point of an AWS Partition S3 Bucket, the AWS account ID and access point name separated by a colon (:). For S3 on Outposts Bucket, the ARN of the Access Point.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name you want to assign to this access point.
+	// Name you want to assign to this access point. See the AWS documentation for naming conditions.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Indicates whether this access point allows access from the public Internet. Values are VPC (the access point doesn't allow access from the public Internet) and Internet (the access point allows access from the public Internet, subject to the access point and bucket access policies).
@@ -118,7 +118,7 @@ type AccessPointParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Name you want to assign to this access point.
+	// Name you want to assign to this access point. See the AWS documentation for naming conditions.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

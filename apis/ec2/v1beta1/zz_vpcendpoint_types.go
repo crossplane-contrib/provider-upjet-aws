@@ -57,6 +57,65 @@ type DNSOptionsParameters struct {
 	PrivateDNSOnlyForInboundResolverEndpoint *bool `json:"privateDnsOnlyForInboundResolverEndpoint,omitempty" tf:"private_dns_only_for_inbound_resolver_endpoint,omitempty"`
 }
 
+type SubnetConfigurationInitParameters struct {
+
+	// The IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
+	IPv4 *string `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
+
+	// The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// The ID of the VPC endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type SubnetConfigurationObservation struct {
+
+	// The IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
+	IPv4 *string `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
+
+	// The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// The ID of the VPC endpoint.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type SubnetConfigurationParameters struct {
+
+	// The IPv4 address to assign to the endpoint network interface in the subnet. You must provide an IPv4 address if the VPC endpoint supports IPv4.
+	// +kubebuilder:validation:Optional
+	IPv4 *string `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
+
+	// The IPv6 address to assign to the endpoint network interface in the subnet. You must provide an IPv6 address if the VPC endpoint supports IPv6.
+	// +kubebuilder:validation:Optional
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// The ID of the VPC endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in ec2 to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
 type VPCEndpointInitParameters_2 struct {
 
 	// Accept the VPC endpoint (the VPC endpoint and service need to be in the same AWS account).
@@ -87,6 +146,9 @@ type VPCEndpointInitParameters_2 struct {
 	// Selector for a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
+
+	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
+	SubnetConfiguration []SubnetConfigurationInitParameters `json:"subnetConfiguration,omitempty" tf:"subnet_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -166,6 +228,9 @@ type VPCEndpointObservation_2 struct {
 	// The state of the VPC endpoint.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
+	SubnetConfiguration []SubnetConfigurationObservation `json:"subnetConfiguration,omitempty" tf:"subnet_configuration,omitempty"`
+
 	// The ID of one or more subnets in which to create a network interface for the endpoint. Applicable for endpoints of type GatewayLoadBalancer and Interface. Interface type endpoints cannot function without being assigned to a subnet.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -226,6 +291,10 @@ type VPCEndpointParameters_2 struct {
 	// Selector for a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
+
+	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
+	// +kubebuilder:validation:Optional
+	SubnetConfiguration []SubnetConfigurationParameters `json:"subnetConfiguration,omitempty" tf:"subnet_configuration,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

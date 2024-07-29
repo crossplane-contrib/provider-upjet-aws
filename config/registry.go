@@ -21,6 +21,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
+	"k8s.io/apimachinery/pkg/util/sets"
 
 	"github.com/upbound/provider-aws/hack"
 )
@@ -206,11 +207,21 @@ func bumpVersionsWithEmbeddedLists(pc *config.Provider) error {
 }
 
 func configureSingletonListAPIConverters(r *config.Resource) error {
-	bumped, err := bumpAPIVersion(r.Version)
-	if err != nil {
-		return errors.Wrapf(err, errFmtCannotBumpSingletonList, r.Name)
+	bumped := r.Version
+	currentVer := "v1beta2"
+	// Field renamings for these three resources already bump their versions.
+	// Please see config.injectFieldRenamingConversionFunctions().
+	// We do not bump their versions again here.
+	if !sets.New("aws_connect_hours_of_operation", "aws_connect_queue", "aws_db_instance").Has(r.Name) {
+		var err error
+		bumped, err = bumpAPIVersion(r.Version)
+		if err != nil {
+			return errors.Wrapf(err, errFmtCannotBumpSingletonList, r.Name)
+		}
+		currentVer = r.Version
 	}
 
+	r.Version = bumped
 	if r.PreviousVersions == nil {
 		prev, err := getPreviousVersions(bumped)
 		if err != nil {
@@ -218,18 +229,23 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 		}
 		r.PreviousVersions = prev
 	}
-	currentVer := r.Version
-	r.Version = bumped
 	// we would like to set the storage version to v1beta1 to facilitate
 	// downgrades.
 	r.SetCRDStorageVersion(currentVer)
 	// because the controller reconciles on the API version with the singleton list API,
 	// no need for a Terraform conversion.
 	r.ControllerReconcileVersion = currentVer
-	r.Conversions = []conversion.Conversion{
+
+	// assumes the first element is the identity conversion from
+	// the default resource and removes it because we will register another
+	// identity converter below.
+	r.Conversions = r.Conversions[1:]
+	r.Conversions = append([]conversion.Conversion{
 		conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
 		conversion.NewSingletonListConversion(conversion.AllVersions, bumped, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
-		conversion.NewSingletonListConversion(bumped, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
+		conversion.NewSingletonListConversion(bumped, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList),
+	}, r.Conversions...)
+
 	return nil
 }
 
