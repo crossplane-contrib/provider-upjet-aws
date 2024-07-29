@@ -1,0 +1,94 @@
+apiVersion: elasticache.aws.upbound.io/v1beta1
+kind: ServerlessCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/serverlesscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cacheUsageLimits:
+    - dataStorage:
+      - maximum: 10
+        unit: GB
+      ecpuPerSecond:
+      - maximum: 5000
+    description: Test Server
+    engine: memcached
+    majorEngineVersion: "1.6"
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels: 
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/serverlesscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/serverlesscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-vpc
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/serverlesscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-subnet1
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elasticache/v1beta1/serverlesscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: sample-subnet2
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1c
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.20.0/24

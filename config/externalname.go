@@ -50,6 +50,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
 
+	// elasticache
+	//
+	// Imported by using the serverless cache name
+	"aws_elasticache_serverless_cache": config.NameAsIdentifier,
+
 	// eks
 	//
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field

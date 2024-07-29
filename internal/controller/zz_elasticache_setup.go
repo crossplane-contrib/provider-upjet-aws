@@ -12,6 +12,7 @@ import (
 	cluster "github.com/upbound/provider-aws/internal/controller/elasticache/cluster"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
+	serverlesscache "github.com/upbound/provider-aws/internal/controller/elasticache/serverlesscache"
 	subnetgroup "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
 	user "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroup "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
@@ -24,6 +25,7 @@ func Setup_elasticache(mgr ctrl.Manager, o controller.Options) error {
 		cluster.Setup,
 		parametergroup.Setup,
 		replicationgroup.Setup,
+		serverlesscache.Setup,
 		subnetgroup.Setup,
 		user.Setup,
 		usergroup.Setup,
