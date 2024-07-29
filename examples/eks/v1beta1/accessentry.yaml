@@ -43,7 +43,7 @@ spec:
         testing.upbound.io/example-name: access-entry
     policyArn: "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
     accessScope:
-      - type: cluster
+      type: cluster
 
 
 ---
