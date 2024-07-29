@@ -400,6 +400,9 @@ type DomainInitParameters struct {
 	// while Elasticsearch has elasticsearch_version
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
+	// The IP address type for the endpoint. Valid values are ipv4 and dualstack.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// Configuration block for publishing slow and application logs to CloudWatch Logs. This block can be declared multiple times, for each log_type, within the same resource. Detailed below.
 	LogPublishingOptions []LogPublishingOptionsInitParameters `json:"logPublishingOptions,omitempty" tf:"log_publishing_options,omitempty"`
 
@@ -473,6 +476,9 @@ type DomainObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The IP address type for the endpoint. Valid values are ipv4 and dualstack.
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
+
 	// (Deprecated) Domain-specific endpoint for kibana without https scheme. Use the dashboard_endpoint attribute instead.
 	KibanaEndpoint *string `json:"kibanaEndpoint,omitempty" tf:"kibana_endpoint,omitempty"`
 
@@ -545,6 +551,10 @@ type DomainParameters struct {
 	// while Elasticsearch has elasticsearch_version
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// The IP address type for the endpoint. Valid values are ipv4 and dualstack.
+	// +kubebuilder:validation:Optional
+	IPAddressType *string `json:"ipAddressType,omitempty" tf:"ip_address_type,omitempty"`
 
 	// Configuration block for publishing slow and application logs to CloudWatch Logs. This block can be declared multiple times, for each log_type, within the same resource. Detailed below.
 	// +kubebuilder:validation:Optional

@@ -64,6 +64,9 @@ type CloudwatchAlarmParameters struct {
 
 type CloudwatchLogsInitParameters struct {
 
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
+	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
+
 	// The CloudWatch log group name.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
@@ -73,6 +76,9 @@ type CloudwatchLogsInitParameters struct {
 
 type CloudwatchLogsObservation struct {
 
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
+	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
+
 	// The CloudWatch log group name.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
@@ -81,6 +87,10 @@ type CloudwatchLogsObservation struct {
 }
 
 type CloudwatchLogsParameters struct {
+
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
+	// +kubebuilder:validation:Optional
+	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The CloudWatch log group name.
 	// +kubebuilder:validation:Optional
@@ -456,6 +466,9 @@ type ErrorActionCloudwatchAlarmParameters struct {
 
 type ErrorActionCloudwatchLogsInitParameters struct {
 
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
+	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
+
 	// The CloudWatch log group name.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
@@ -465,6 +478,9 @@ type ErrorActionCloudwatchLogsInitParameters struct {
 
 type ErrorActionCloudwatchLogsObservation struct {
 
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
+	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
+
 	// The CloudWatch log group name.
 	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
 
@@ -473,6 +489,10 @@ type ErrorActionCloudwatchLogsObservation struct {
 }
 
 type ErrorActionCloudwatchLogsParameters struct {
+
+	// The payload that contains a JSON array of records will be sent to CloudWatch via a batch call.
+	// +kubebuilder:validation:Optional
+	BatchMode *bool `json:"batchMode,omitempty" tf:"batch_mode,omitempty"`
 
 	// The CloudWatch log group name.
 	// +kubebuilder:validation:Optional
