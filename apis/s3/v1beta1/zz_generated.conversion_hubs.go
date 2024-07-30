@@ -28,4 +28,7 @@ func (tr *BucketPublicAccessBlock) Hub() {}
 func (tr *BucketRequestPaymentConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *DirectoryBucket) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ObjectCopy) Hub() {}
