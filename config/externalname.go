@@ -80,6 +80,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
 	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
 
+	// s3
+	//
+	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
+	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
+
 	// simpledb
 	//
 	// SimpleDB Domains can be imported using the name
@@ -2150,7 +2155,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_rum_metrics_destination": config.IdentifierFromProvider,
 
 	// s3
-	//
 	// S3 bucket can be imported using the bucket
 	"aws_s3_bucket": config.ParameterAsIdentifier("bucket"),
 	// the S3 bucket accelerate configuration resource should be imported using the bucket

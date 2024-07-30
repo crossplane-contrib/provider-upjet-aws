@@ -1,0 +1,15 @@
+# https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Endpoints.html
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: DirectoryBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/directorybucket
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}--usw2-az1--x-s3
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location:
+    - name: usw2-az1
+    region: us-west-2
