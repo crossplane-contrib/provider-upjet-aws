@@ -26,6 +26,9 @@ spec:
     subnetGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+  writeConnectionSecretToRef:
+    name: sample-cluster
+    namespace: crossplane
 
 ---
 
