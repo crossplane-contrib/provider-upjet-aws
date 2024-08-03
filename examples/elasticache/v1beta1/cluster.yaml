@@ -28,7 +28,7 @@ spec:
         testing.upbound.io/example-name: example
   writeConnectionSecretToRef:
     name: sample-cluster
-    namespace: crossplane
+    namespace: default
 
 ---
 
