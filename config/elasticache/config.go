@@ -29,6 +29,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
 			conn := map[string][]byte{}
+			// This only works for memcached clusters
 			if a, ok := attr["cluster_address"].(string); ok {
 				conn["cluster_address"] = []byte(a)
 			}
