@@ -27,6 +27,14 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["parameter_group_name"] = config.Reference{
 			TerraformName: "aws_elasticache_parameter_group",
 		}
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			// This only works for memcached clusters
+			if a, ok := attr["cluster_address"].(string); ok {
+				conn["cluster_address"] = []byte(a)
+			}
+			return conn, nil
+		}
 		// log_delivery_configuration.destination can point to either
 		// a CloudWatch Logs LogGroup or Kinesis Data Firehose resource.
 		delete(r.References, "log_delivery_configuration.destination")
