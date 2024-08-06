@@ -169,12 +169,6 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["kms_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",
 		}
-		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
-			if diff != nil && diff.Attributes != nil {
-				delete(diff.Attributes, "security_group_names.#")
-			}
-			return diff, nil
-		}
 	})
 
 	p.AddResourceConfigurator("aws_elasticache_user_group", func(r *config.Resource) {
