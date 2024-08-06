@@ -3,31 +3,6 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: ec2.aws.upbound.io/v1beta1
-kind: LaunchTemplate
-metadata:
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    imageId: ami-074be47313f84fa38
-    instanceInitiatedShutdownBehavior: terminate
-    instanceType: t3.micro
-    name: example
-    region: us-west-2
-    tags:
-      example: "true"
-    tagSpecifications:
-      - resourceType: instance
-        tags:
-          example: "true"
-      - resourceType: volume
-        tags:
-          example: "true"
-
----
-
-apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Fleet
 metadata:
   annotations:
@@ -59,3 +34,29 @@ spec:
       example: "true"
     terminateInstances: true
     type: instant
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: LaunchTemplate
+metadata:
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    imageId: ami-074be47313f84fa38
+    instanceInitiatedShutdownBehavior: terminate
+    instanceType: t3.micro
+    name: example
+    region: us-west-2
+    tags:
+      example: "true"
+    tagSpecifications:
+      - resourceType: instance
+        tags:
+          example: "true"
+      - resourceType: volume
+        tags:
+          example: "true"
+
