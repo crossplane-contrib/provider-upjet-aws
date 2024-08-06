@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CapacityReservationOptionsInitParameters struct {
+
+	// Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. Valid values: use-capacity-reservations-first.
+	UsageStrategy *string `json:"usageStrategy,omitempty" tf:"usage_strategy,omitempty"`
+}
+
+type CapacityReservationOptionsObservation struct {
+
+	// Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. Valid values: use-capacity-reservations-first.
+	UsageStrategy *string `json:"usageStrategy,omitempty" tf:"usage_strategy,omitempty"`
+}
+
+type CapacityReservationOptionsParameters struct {
+
+	// Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. Valid values: use-capacity-reservations-first.
+	// +kubebuilder:validation:Optional
+	UsageStrategy *string `json:"usageStrategy,omitempty" tf:"usage_strategy,omitempty"`
+}
+
 type FleetInitParameters struct {
 
 	// Reserved.
@@ -466,6 +485,9 @@ type OnDemandOptionsInitParameters struct {
 	// The order of the launch template overrides to use in fulfilling On-Demand capacity. Valid values: lowestPrice, prioritized. Default: lowestPrice.
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 
+	// Demand capacity. Supported only for fleets of type instant.
+	CapacityReservationOptions *CapacityReservationOptionsInitParameters `json:"capacityReservationOptions,omitempty" tf:"capacity_reservation_options,omitempty"`
+
 	// The maximum amount per hour for On-Demand Instances that you're willing to pay.
 	MaxTotalPrice *string `json:"maxTotalPrice,omitempty" tf:"max_total_price,omitempty"`
 
@@ -484,6 +506,9 @@ type OnDemandOptionsObservation struct {
 
 	// The order of the launch template overrides to use in fulfilling On-Demand capacity. Valid values: lowestPrice, prioritized. Default: lowestPrice.
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
+
+	// Demand capacity. Supported only for fleets of type instant.
+	CapacityReservationOptions *CapacityReservationOptionsObservation `json:"capacityReservationOptions,omitempty" tf:"capacity_reservation_options,omitempty"`
 
 	// The maximum amount per hour for On-Demand Instances that you're willing to pay.
 	MaxTotalPrice *string `json:"maxTotalPrice,omitempty" tf:"max_total_price,omitempty"`
@@ -504,6 +529,10 @@ type OnDemandOptionsParameters struct {
 	// The order of the launch template overrides to use in fulfilling On-Demand capacity. Valid values: lowestPrice, prioritized. Default: lowestPrice.
 	// +kubebuilder:validation:Optional
 	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
+
+	// Demand capacity. Supported only for fleets of type instant.
+	// +kubebuilder:validation:Optional
+	CapacityReservationOptions *CapacityReservationOptionsParameters `json:"capacityReservationOptions,omitempty" tf:"capacity_reservation_options,omitempty"`
 
 	// The maximum amount per hour for On-Demand Instances that you're willing to pay.
 	// +kubebuilder:validation:Optional
@@ -687,6 +716,9 @@ type OverrideInstanceRequirementsInitParameters struct {
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
+
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
 	MemoryGibPerVcpu *OverrideInstanceRequirementsMemoryGibPerVcpuInitParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
@@ -705,7 +737,7 @@ type OverrideInstanceRequirementsInitParameters struct {
 	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
@@ -884,6 +916,9 @@ type OverrideInstanceRequirementsObservation struct {
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
+
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
 	MemoryGibPerVcpu *OverrideInstanceRequirementsMemoryGibPerVcpuObservation `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
@@ -902,7 +937,7 @@ type OverrideInstanceRequirementsObservation struct {
 	// Indicate whether instance types must support On-Demand Instance Hibernation, either true or false. Default is false.
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 
 	// Block describing the minimum and maximum total local storage (GB). Default is no minimum or maximum.
@@ -979,6 +1014,10 @@ type OverrideInstanceRequirementsParameters struct {
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	// +kubebuilder:validation:Optional
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
+
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
 	MemoryGibPerVcpu *OverrideInstanceRequirementsMemoryGibPerVcpuParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
@@ -1003,7 +1042,7 @@ type OverrideInstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	RequireHibernateSupport *bool `json:"requireHibernateSupport,omitempty" tf:"require_hibernate_support,omitempty"`
 
-	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100.
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Default is 100. Conflicts with max_spot_price_as_percentage_of_optimal_on_demand_price
 	// +kubebuilder:validation:Optional
 	SpotMaxPricePercentageOverLowestPrice *float64 `json:"spotMaxPricePercentageOverLowestPrice,omitempty" tf:"spot_max_price_percentage_over_lowest_price,omitempty"`
 

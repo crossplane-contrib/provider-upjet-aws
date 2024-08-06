@@ -445,6 +445,20 @@ spec:
                                       type: string
                                     type: array
                                     x-kubernetes-list-type: set
+                                  maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                    description: The price protection threshold for
+                                      Spot Instances. This is the maximum you’ll pay
+                                      for a Spot Instance, expressed as a percentage
+                                      higher than the cheapest M, C, or R instance
+                                      type with your specified attributes. When Amazon
+                                      EC2 Auto Scaling selects instance types with
+                                      your attributes, we will exclude instance types
+                                      whose price is higher than your threshold. The
+                                      parameter accepts an integer, which Amazon EC2
+                                      Auto Scaling interprets as a percentage. To
+                                      turn off price protection, specify a high value,
+                                      such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+                                    type: number
                                   memoryGibPerVcpu:
                                     description: Block describing the minimum and
                                       maximum amount of memory (GiB) per vCPU. Default
@@ -533,7 +547,8 @@ spec:
                                       parameter accepts an integer, which Amazon EC2
                                       Auto Scaling interprets as a percentage. To
                                       turn off price protection, specify a high value,
-                                      such as 999999. Default is 100.
+                                      such as 999999. Default is 100. Conflicts with
+                                      max_spot_price_as_percentage_of_optimal_on_demand_price
                                     type: number
                                   totalLocalStorageGb:
                                     description: Block describing the minimum and
@@ -602,6 +617,16 @@ spec:
                           use in fulfilling On-Demand capacity. Valid values: lowestPrice,
                           prioritized. Default: lowestPrice.'
                         type: string
+                      capacityReservationOptions:
+                        description: Demand capacity. Supported only for fleets of
+                          type instant.
+                        properties:
+                          usageStrategy:
+                            description: 'Indicates whether to use unused Capacity
+                              Reservations for fulfilling On-Demand capacity. Valid
+                              values: use-capacity-reservations-first.'
+                            type: string
+                        type: object
                       maxTotalPrice:
                         description: The maximum amount per hour for On-Demand Instances
                           that you're willing to pay.
@@ -1111,6 +1136,20 @@ spec:
                                       type: string
                                     type: array
                                     x-kubernetes-list-type: set
+                                  maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                    description: The price protection threshold for
+                                      Spot Instances. This is the maximum you’ll pay
+                                      for a Spot Instance, expressed as a percentage
+                                      higher than the cheapest M, C, or R instance
+                                      type with your specified attributes. When Amazon
+                                      EC2 Auto Scaling selects instance types with
+                                      your attributes, we will exclude instance types
+                                      whose price is higher than your threshold. The
+                                      parameter accepts an integer, which Amazon EC2
+                                      Auto Scaling interprets as a percentage. To
+                                      turn off price protection, specify a high value,
+                                      such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+                                    type: number
                                   memoryGibPerVcpu:
                                     description: Block describing the minimum and
                                       maximum amount of memory (GiB) per vCPU. Default
@@ -1199,7 +1238,8 @@ spec:
                                       parameter accepts an integer, which Amazon EC2
                                       Auto Scaling interprets as a percentage. To
                                       turn off price protection, specify a high value,
-                                      such as 999999. Default is 100.
+                                      such as 999999. Default is 100. Conflicts with
+                                      max_spot_price_as_percentage_of_optimal_on_demand_price
                                     type: number
                                   totalLocalStorageGb:
                                     description: Block describing the minimum and
@@ -1268,6 +1308,16 @@ spec:
                           use in fulfilling On-Demand capacity. Valid values: lowestPrice,
                           prioritized. Default: lowestPrice.'
                         type: string
+                      capacityReservationOptions:
+                        description: Demand capacity. Supported only for fleets of
+                          type instant.
+                        properties:
+                          usageStrategy:
+                            description: 'Indicates whether to use unused Capacity
+                              Reservations for fulfilling On-Demand capacity. Valid
+                              values: use-capacity-reservations-first.'
+                            type: string
+                        type: object
                       maxTotalPrice:
                         description: The maximum amount per hour for On-Demand Instances
                           that you're willing to pay.
@@ -1794,6 +1844,20 @@ spec:
                                       type: string
                                     type: array
                                     x-kubernetes-list-type: set
+                                  maxSpotPriceAsPercentageOfOptimalOnDemandPrice:
+                                    description: The price protection threshold for
+                                      Spot Instances. This is the maximum you’ll pay
+                                      for a Spot Instance, expressed as a percentage
+                                      higher than the cheapest M, C, or R instance
+                                      type with your specified attributes. When Amazon
+                                      EC2 Auto Scaling selects instance types with
+                                      your attributes, we will exclude instance types
+                                      whose price is higher than your threshold. The
+                                      parameter accepts an integer, which Amazon EC2
+                                      Auto Scaling interprets as a percentage. To
+                                      turn off price protection, specify a high value,
+                                      such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+                                    type: number
                                   memoryGibPerVcpu:
                                     description: Block describing the minimum and
                                       maximum amount of memory (GiB) per vCPU. Default
@@ -1882,7 +1946,8 @@ spec:
                                       parameter accepts an integer, which Amazon EC2
                                       Auto Scaling interprets as a percentage. To
                                       turn off price protection, specify a high value,
-                                      such as 999999. Default is 100.
+                                      such as 999999. Default is 100. Conflicts with
+                                      max_spot_price_as_percentage_of_optimal_on_demand_price
                                     type: number
                                   totalLocalStorageGb:
                                     description: Block describing the minimum and
@@ -1951,6 +2016,16 @@ spec:
                           use in fulfilling On-Demand capacity. Valid values: lowestPrice,
                           prioritized. Default: lowestPrice.'
                         type: string
+                      capacityReservationOptions:
+                        description: Demand capacity. Supported only for fleets of
+                          type instant.
+                        properties:
+                          usageStrategy:
+                            description: 'Indicates whether to use unused Capacity
+                              Reservations for fulfilling On-Demand capacity. Valid
+                              values: use-capacity-reservations-first.'
+                            type: string
+                        type: object
                       maxTotalPrice:
                         description: The maximum amount per hour for On-Demand Instances
                           that you're willing to pay.
