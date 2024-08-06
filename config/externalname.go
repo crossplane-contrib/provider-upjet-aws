@@ -1118,9 +1118,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// eks
 	//
 	// import EKS access entry using the cluster_name and principal_arn separated by a colon (:).
-	"aws_eks_access_entry": FormattedIdentifierFromParameters(":", "cluster_name", "principal_arn"),
+	"aws_eks_access_entry": TemplatedStringAsIdentifierWithNoName("{{ .parameters.cluster_name }}:{{ .parameters.principal_arn }}"),
 	// import EKS access entry using the cluster_name principal_arn and policy_arn separated by a (#) which the tf provider docs incorrectly describe as a colon.
-	"aws_eks_access_policy_association": FormattedIdentifierFromParameters("#", "cluster_name", "principal_arn", "policy_arn"),
+	"aws_eks_access_policy_association": TemplatedStringAsIdentifierWithNoName("{{ .parameters.cluster_name }}#{{ .parameters.principal_arn }}#{{ .parameters.policy_arn }}"),
 	// "aws_eks_addon": config.TemplatedStringAsIdentifier("addon_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
 	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierFromProvider(":", "cluster_name", "addon_name"),
@@ -2977,12 +2977,6 @@ func getPermissionSetId(tfstate map[string]any) (string, error) {
 // IDs that use elements from the parameters in a certain string format.
 // It should be used in cases where all information in the ID is gathered from
 // the spec and not user defined like name. For example, zone_id:vpc_id.
-//
-// TODO: This should set keys as IdentifierFields, because if they're missing observe-only resources won't work.
-// But that would remove them from spec.initProvider, which would be a breaking schema change for existing resources
-// that we don't have a good way to handle yet.
-//
-// For new resources, prefer using FormattedIdentifierFromParameters instead.
 func FormattedIdentifierFromProvider(separator string, keys ...string) config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
@@ -3000,19 +2994,6 @@ func FormattedIdentifierFromProvider(separator string, keys ...string) config.Ex
 		}
 		return strings.Join(vals, separator), nil
 	}
-	return e
-}
-
-// FormattedIdentifierFromParameters is a helper function to construct Terraform
-// IDs that use elements from the parameters joined by some separator string.
-// It should be used in cases where all information in the ID is gathered from
-// the spec and not user defined like name. For example, zone_id:vpc_id.
-// This function sets the keys as IdentifierFields, which means that they are always required, even for observe-only
-// resources. Because the id is constructed exclusively from the keys, omitting them (even if the external name
-// annotation is set) leaves the provider unable to find the terraform id to use to observe the resource.
-func FormattedIdentifierFromParameters(separator string, keys ...string) config.ExternalName {
-	e := FormattedIdentifierFromProvider(separator, keys...)
-	e.IdentifierFields = append(e.IdentifierFields, keys...)
 	return e
 }
 
