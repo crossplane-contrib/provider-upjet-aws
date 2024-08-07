@@ -75,6 +75,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
 	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
 
+	// osis
+	//
+	// OSIS Pipeline can be imported using the name
+	"aws_osis_pipeline": config.NameAsIdentifier,
+
 	// simpledb
 	//
 	// SimpleDB Domains can be imported using the name
