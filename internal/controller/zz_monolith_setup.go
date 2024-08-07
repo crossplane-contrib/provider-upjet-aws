@@ -423,6 +423,7 @@ import (
 	clusterelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/cluster"
 	parametergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
+	serverlesscache "github.com/upbound/provider-aws/internal/controller/elasticache/serverlesscache"
 	subnetgroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
 	userelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
@@ -1376,6 +1377,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		clusterelasticache.Setup,
 		parametergroupelasticache.Setup,
 		replicationgroup.Setup,
+		serverlesscache.Setup,
 		subnetgroupelasticache.Setup,
 		userelasticache.Setup,
 		usergroupelasticache.Setup,
