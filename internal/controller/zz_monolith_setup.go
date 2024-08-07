@@ -314,6 +314,7 @@ import (
 	egressonlyinternetgateway "github.com/upbound/provider-aws/internal/controller/ec2/egressonlyinternetgateway"
 	eip "github.com/upbound/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/provider-aws/internal/controller/ec2/eipassociation"
+	fleetec2 "github.com/upbound/provider-aws/internal/controller/ec2/fleet"
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
 	hostec2 "github.com/upbound/provider-aws/internal/controller/ec2/host"
 	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
@@ -1268,6 +1269,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		egressonlyinternetgateway.Setup,
 		eip.Setup,
 		eipassociation.Setup,
+		fleetec2.Setup,
 		flowlog.Setup,
 		hostec2.Setup,
 		instanceec2.Setup,
