@@ -41,6 +41,15 @@ func Configure(p *config.Provider) {
 			}
 			return diff, nil
 		}
+
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["endpoint"].(string); ok {
+				conn["endpoint"] = []byte(a)
+			}
+			return conn, nil
+		}
+
 	})
 
 	p.AddResourceConfigurator("aws_opensearch_domain_policy", func(r *config.Resource) {
