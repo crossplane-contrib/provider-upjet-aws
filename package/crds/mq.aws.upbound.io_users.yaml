@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: User is the Schema for the Users API. <no value>
+        description: User is the Schema for the Users API.
         properties:
           apiVersion:
             description: |-
@@ -149,6 +149,8 @@ spec:
                         type: object
                     type: object
                   consoleAccess:
+                    description: Setting consoleAccess will result in an update loop
+                      till the MQ Broker to which this user belongs is restarted.
                     type: boolean
                   groups:
                     items:
@@ -273,6 +275,8 @@ spec:
                         type: object
                     type: object
                   consoleAccess:
+                    description: Setting consoleAccess will result in an update loop
+                      till the MQ Broker to which this user belongs is restarted.
                     type: boolean
                   groups:
                     items:
@@ -486,6 +490,8 @@ spec:
                   brokerId:
                     type: string
                   consoleAccess:
+                    description: Setting consoleAccess will result in an update loop
+                      till the MQ Broker to which this user belongs is restarted.
                     type: boolean
                   groups:
                     items:
