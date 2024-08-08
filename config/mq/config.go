@@ -8,6 +8,7 @@ import (
 	"fmt"
 
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/registry"
 )
 
 // Configure adds configurations for the mq group.
@@ -68,5 +69,9 @@ func Configure(p *config.Provider) {
 			TerraformName: "aws_mq_broker",
 		}
 		r.Version = "v1alpha1"
+		r.MetaResource = &registry.Resource{
+			ArgumentDocs: make(map[string]string),
+		}
+		r.MetaResource.ArgumentDocs["console_access"] = `- (Optional) Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.`
 	})
 }

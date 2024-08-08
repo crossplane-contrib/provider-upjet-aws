@@ -26,6 +26,7 @@ type UserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerIDSelector *v1.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
 
+	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
@@ -40,6 +41,7 @@ type UserInitParameters struct {
 type UserObservation struct {
 	BrokerID *string `json:"brokerId,omitempty" tf:"broker_id,omitempty"`
 
+	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
 	Groups []*string `json:"groups,omitempty" tf:"groups,omitempty"`
@@ -65,6 +67,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	BrokerIDSelector *v1.Selector `json:"brokerIdSelector,omitempty" tf:"-"`
 
+	// Setting consoleAccess will result in an update loop till the MQ Broker to which this user belongs is restarted.
 	// +kubebuilder:validation:Optional
 	ConsoleAccess *bool `json:"consoleAccess,omitempty" tf:"console_access,omitempty"`
 
@@ -113,7 +116,7 @@ type UserStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// User is the Schema for the Users API. <no value>
+// User is the Schema for the Users API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
