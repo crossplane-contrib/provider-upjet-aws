@@ -1,0 +1,237 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: AccessEntry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+  labels:
+    testing.upbound.io/example-name: access-entry
+  name: access-entry
+spec:
+  forProvider:
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: access-entry
+    kubernetesGroups:
+    - group-1
+    - group-2
+    principalArnFromRoleRef:
+      name: custom-role
+    region: us-east-2
+    type: STANDARD
+---
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: AccessPolicyAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+  labels:
+    testing.upbound.io/example-name: access-entry
+  name: access-entry
+spec:
+  forProvider:
+    region: us-east-2
+    clusterNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: access-entry
+    principalArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: access-entry
+    policyArn: "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+    accessScope:
+      type: cluster
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: custom-role
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "AWS": "arn:aws:iam::${data.aws_account_id}:root"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: eks.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+    uptest.upbound.io/timeout: "2400"
+  name: access-entry
+  labels:
+    testing.upbound.io/example-name: access-entry
+spec:
+  forProvider:
+    accessConfig:
+      - authenticationMode: "API_AND_CONFIG_MAP"
+        bootstrapClusterCreatorAdminPermissions: true
+    region: us-east-2
+    roleArnRef:
+      name: access-entry-eks-cluster
+    vpcConfig:
+      - subnetIdRefs:
+          - name: sample-subnet1
+          - name: sample-subnet2
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  name: access-entry-eks-cluster
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  name: access-entry-cluster-policy
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+    roleRef:
+      name: access-entry-eks-cluster
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet1
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    region: us-east-2
+    mapPublicIpOnLaunch: true
+    availabilityZone: us-east-2b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.10.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: sample-subnet2
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    region: us-east-2
+    mapPublicIpOnLaunch: true
+    availabilityZone: us-east-2a
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.11.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  name: private-subnet
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    region: us-east-2
+    availabilityZone: us-east-2b
+    vpcIdRef:
+      name: sample-vpc
+    cidrBlock: 172.16.12.0/24
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    region: us-east-2
+    tags:
+      Name: example
+    vpcIdRef:
+      name: sample-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    region: us-east-2
+    routeTableIdRef:
+      name: example
+    subnetIdRef:
+      name: private-subnet
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  name: sample-vpc
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    enableDnsHostnames: true
+    region: us-east-2
+    cidrBlock: 172.16.0.0/16
+    tags:
+      Name: DemoVpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    region: us-east-2
+    vpcIdRef:
+      name: sample-vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: DefaultRouteTable
+metadata:
+  name: example
+  annotations:
+    meta.upbound.io/example-id: eks/v1beta1/accessentry
+spec:
+  forProvider:
+    defaultRouteTableIdRef:
+      name: sample-vpc
+    region: us-east-2
+    route:
+      - gatewayIdRef:
+          name: example
+        cidrBlock: 0.0.0.0/0
