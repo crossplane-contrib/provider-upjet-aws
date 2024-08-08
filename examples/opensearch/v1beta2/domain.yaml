@@ -12,6 +12,9 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
+  writeConnectionSecretToRef:
+    name: example-domain
+    namespace: default
   forProvider:
     clusterConfig:
       instanceType: m4.large.search

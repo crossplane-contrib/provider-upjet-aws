@@ -11,6 +11,9 @@ metadata:
     testing.upbound.io/example-name: example
   name: example
 spec:
+  writeConnectionSecretToRef:
+    name: example-domain
+    namespace: default
   forProvider:
     domainName: ${Rand.RFC1123Subdomain}
     engineVersion: OpenSearch_1.0

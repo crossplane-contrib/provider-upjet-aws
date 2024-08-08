@@ -172,6 +172,13 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		)
 	})
 
+	p.AddResourceConfigurator("aws_elasticache_serverless_cache", func(r *config.Resource) {
+		r.UseAsync = true
+		r.References["kms_key_id"] = config.Reference{
+			TerraformName: "aws_kms_key",
+		}
+	})
+
 	p.AddResourceConfigurator("aws_elasticache_user_group", func(r *config.Resource) {
 		r.References["user_ids"] = config.Reference{
 			TerraformName:     "aws_elasticache_user",

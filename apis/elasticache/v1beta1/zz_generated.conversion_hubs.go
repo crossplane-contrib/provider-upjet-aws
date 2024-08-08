@@ -13,6 +13,9 @@ func (tr *Cluster) Hub() {}
 func (tr *ParameterGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ServerlessCache) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SubnetGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.

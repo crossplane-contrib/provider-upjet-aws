@@ -205,6 +205,15 @@ func (l *EgressOnlyInternetGatewayList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this FleetList.
+func (l *FleetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this FlowLogList.
 func (l *FlowLogList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

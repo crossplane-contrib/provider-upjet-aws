@@ -50,6 +50,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
 
+	// elasticache
+	//
+	// Imported by using the serverless cache name
+	"aws_elasticache_serverless_cache": config.NameAsIdentifier,
+
 	// eks
 	//
 	// PodIdentityAssociation can be imported using the association ID by passing spec.forProvider.clusterName field
@@ -889,6 +894,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_carrier_gateway": config.IdentifierFromProvider,
 	// aws_ec2_instance_state can be imported by using the instance_id attribute
 	"aws_ec2_instance_state": config.IdentifierFromProvider,
+	// aws_ec2_fleet can be imported by using the Fleet identifier
+	"aws_ec2_fleet": config.IdentifierFromProvider,
 	// Network Insights Analyses can be imported using the id
 	"aws_ec2_network_insights_analysis": config.IdentifierFromProvider,
 	// Prefix Lists can be imported using the id
