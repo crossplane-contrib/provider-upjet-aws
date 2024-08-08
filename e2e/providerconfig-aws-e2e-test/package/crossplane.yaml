@@ -1,0 +1,26 @@
+apiVersion: meta.pkg.crossplane.io/v1alpha1
+kind: Configuration
+metadata:
+  name: providerconfig-aws-e2e-test
+  annotations:
+    meta.crossplane.io/maintainer: Upbound <support@upbound.io>
+    meta.crossplane.io/source: github.com/crossplane-contrib/provider-upjet-aws
+    meta.crossplane.io/license: Apache-2.0
+    meta.crossplane.io/description: |
+      This reference platform Configuration allows you to setup an EKS Cluster with Crossplane control plane tailored
+      for testing AWS provider configuration scenarios such as IRSA and WebIdentity.
+    meta.crossplane.io/readme: |
+      This reference platform Configuration allows you to setup an EKS Cluster with Crossplane control plane tailored
+      for testing AWS provider configuration scenarios such as IRSA and WebIdentity.
+      To learn more checkout the [GitHub
+      repo](https://github.com/crossplane-contrib/provider-upjet-aws/blob/main/e2e/providerconfig-aws-e2e-test/README.md)
+spec:
+  crossplane:
+    version: ">=v1.15.2-0"
+  dependsOn:
+    - configuration: xpkg.upbound.io/upbound/configuration-aws-eks
+      # renovate: datasource=github-releases depName=upbound/configuration-aws-eks
+      version: "v0.9.0"
+    - configuration: xpkg.upbound.io/upbound/configuration-aws-eks-irsa
+      # renovate: datasource=github-releases depName=upbound/configuration-aws-eks-irsa
+      version: "v0.7.0"
