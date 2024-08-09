@@ -1512,7 +1512,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// TODO: For now API is not normalized. While testing resource we can check the actual ID and normalize the API.
 	"aws_iot_thing_principal_attachment": config.IdentifierFromProvider,
 	// IOT Thing Types can be imported using the name
-	"aws_iot_thing_type": config.IdentifierFromProvider,
+	// NameAsIdentifier would be better, but that would be a breaking api change to remove spec.forProvider.name
+	"aws_iot_thing_type": FormattedIdentifierFromProvider("", "name"),
 	// IoT Topic Rules can be imported using the name
 	"aws_iot_topic_rule": config.NameAsIdentifier,
 	// IoT topic rule destinations can be imported using the arn
