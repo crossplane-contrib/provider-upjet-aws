@@ -40,6 +40,7 @@ const (
 	// authentication types
 	authKeyIRSA        = "IRSA"
 	authKeyWebIdentity = "WebIdentity"
+	authKeyPodIdentity = "PodIdentity"
 	authKeyUpbound     = "Upbound"
 	// authKeySAML        = "SAML"
 
@@ -49,6 +50,7 @@ const (
 	errAWSConfig            = "failed to get AWS config"
 	errAWSConfigIRSA        = "failed to get AWS config using IAM Roles for Service Accounts"
 	errAWSConfigWebIdentity = "failed to get AWS config using web identity token"
+	errAWSConfigPodIdentity = "failed to get AWS config using pod identity"
 	errAWSConfigUpbound     = "failed to get AWS config using Upbound identity"
 
 	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
@@ -100,6 +102,11 @@ func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runti
 		cfg, err = UseDefault(ctx, region)
 		if err != nil {
 			return nil, errors.Wrap(err, errAWSConfigIRSA)
+		}
+	case authKeyPodIdentity:
+		cfg, err = UseDefault(ctx, region)
+		if err != nil {
+			return nil, errors.Wrap(err, errAWSConfigPodIdentity)
 		}
 	case authKeyWebIdentity:
 		cfg, err = UseWebIdentityToken(ctx, region, &pc.Spec, c)
