@@ -226,7 +226,7 @@ type Tag struct {
 // ProviderCredentials required to authenticate.
 type ProviderCredentials struct {
 	// Source of the provider credentials.
-	// +kubebuilder:validation:Enum=None;Secret;IRSA;WebIdentity;Upbound
+	// +kubebuilder:validation:Enum=None;Secret;IRSA;WebIdentity;PodIdentity;Upbound
 	Source xpv1.CredentialsSource `json:"source"`
 
 	// WebIdentity defines the options for assuming an IAM role with a Web Identity.
