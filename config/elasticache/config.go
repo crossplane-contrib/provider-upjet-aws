@@ -33,6 +33,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			if a, ok := attr["cluster_address"].(string); ok {
 				conn["cluster_address"] = []byte(a)
 			}
+			if a, ok := attr["port"].(string); ok {
+				conn["port"] = []byte(a)
+			}
 			return conn, nil
 		}
 		// log_delivery_configuration.destination can point to either
