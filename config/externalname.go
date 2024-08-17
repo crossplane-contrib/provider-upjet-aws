@@ -395,6 +395,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// batch
 	//
+	// AWS Batch compute can be imported using the compute_environment_name
+	"aws_batch_compute_environment": config.ParameterAsIdentifier("compute_environment_name"),
+	// AWS Batch job queue can be imported using the ARN
+	// arn:aws:batch:us-east-1:123456789012:job-queue/sample
+	"aws_batch_job_queue": config.IdentifierFromProvider,
 	// Batch Job Definition can be imported using ARN that has a random substring, revision at the end:
 	// arn:aws:batch:us-east-1:123456789012:job-definition/sample:1
 	"aws_batch_job_definition": config.IdentifierFromProvider,
