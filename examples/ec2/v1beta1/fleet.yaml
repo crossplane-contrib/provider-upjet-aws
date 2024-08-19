@@ -18,9 +18,8 @@ spec:
             matchLabels:
               testing.upbound.io/example-name: example
           version: "1"
-          override:
-            - instanceType: t3.micro
-    name: example
+        override:
+          - instanceType: t3.micro
     onDemandOptions:
       minTargetCapacity: 1
       singleAvailabilityZone: true
@@ -37,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: ec2.aws.upbound.io/v1beta1
+apiVersion: ec2.aws.upbound.io/v1beta2
 kind: LaunchTemplate
 metadata:
   labels:
