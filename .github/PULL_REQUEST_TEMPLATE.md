@@ -1,6 +1,6 @@
 <!--
 Please read through https://git.io/fj2m9 if this is your first time opening a
-request to this repo. Find us in https://crossplane.slack.com
+pull request to this repo. Find us in https://crossplane.slack.com
 if you need any help contributing.
 -->
 
