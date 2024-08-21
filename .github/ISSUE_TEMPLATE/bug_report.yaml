@@ -1,14 +1,14 @@
 name: Bug Report
-description: Help us diagnose and fix bugs in Official AWS Provider
-labels: bug,needs:triage
+description: Help us diagnose and fix bugs in this provider
+labels: ["bug","needs:triage"]
 title: "[Bug]: "
 body:
   - type: markdown
     attributes:
       value: |
-        # Thank you for helping to improve Official AWS Provider!
+        # Thank you for helping to improve this provider!
 
-        - If you're not currently using the most recent version of the Upbound Official AWS Provider, we recommend upgrading. Your issue might have already been addressed in the latest release.
+        - If you're not currently using the most recent version of the provider, we recommend upgrading. Your issue might have already been addressed in the latest release.
 
   - type: checkboxes
     id: existing_issue
@@ -20,7 +20,7 @@ body:
       options:
         - label: I have searched the existing issues
           required: true
- 
+
   - type: textarea
     id: affected
     attributes:

@@ -3,10 +3,9 @@ title: Configuration
 weight: 2
 ---
 
-# AWS official provider-family documentation
-Upbound supports and maintains the Upbound AWS official provider-family.
+# Configuration
 
-## Install the provider-family-aws
+## Install the provider-family-aws provider
 ### Prerequisites
 #### Upbound Up command-line
 The Upbound Up command-line simplifies configuration and management of Upbound
@@ -48,7 +47,6 @@ metadata:
   name: provider-aws-s3
 spec:
   package: xpkg.upbound.io/upbound/provider-aws-s3:<version>
-EOF
 ```
 
 Define the `provider-aws-s3` version with `spec.package`.
@@ -311,7 +309,7 @@ Verify the creation of the service account with the command `kubectl describe sa
 created IAM role.
 
 From the example service account named `my-upbound-sa`:
-```yaml
+```shell
 $ kubectl describe sa \
 -n upbound-system \
 my-upbound-sa
@@ -452,7 +450,7 @@ used by the Kubernetes service account.
 First, use `kubectl describe service-account <name> -n upbound-system` to get
 the ARN value.
 
-```yaml
+```shell
 $ kubectl describe service-account \
 my-upbound-sa \
 -n upbound-system
