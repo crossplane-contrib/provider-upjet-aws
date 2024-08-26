@@ -54,6 +54,7 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{
 				"release_version",
 				"version",
+				"scaling_config",
 			},
 		}
 		r.UseAsync = true
