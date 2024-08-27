@@ -1211,6 +1211,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_lb_target_group": config.IdentifierFromProvider,
 	// No import.
 	"aws_lb_target_group_attachment": config.IdentifierFromProvider,
+	// Trust Stores can be imported using their ARN
+	"aws_lb_trust_store": config.IdentifierFromProvider,
 
 	// emr
 	//
