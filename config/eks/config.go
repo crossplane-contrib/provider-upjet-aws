@@ -55,6 +55,9 @@ func Configure(p *config.Provider) {
 				"release_version",
 				"version",
 			},
+			ConditionalIgnoredFields: []string{
+				"scaling_config",
+			},
 		}
 		r.UseAsync = true
 		r.MetaResource.ArgumentDocs["launch_template.version"] = `- (Required) EC2 Launch Template version number.`
