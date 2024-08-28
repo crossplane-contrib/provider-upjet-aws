@@ -54,6 +54,8 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{
 				"release_version",
 				"version",
+			},
+			ConditionalIgnoredFields: []string{
 				"scaling_config",
 			},
 		}

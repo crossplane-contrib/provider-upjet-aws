@@ -119,8 +119,12 @@ func (tr *NodeGroup) LateInitialize(attrs []byte) (bool, error) {
 	}
 	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
 	opts = append(opts, resource.WithNameFilter("ReleaseVersion"))
-	opts = append(opts, resource.WithNameFilter("ScalingConfig"))
 	opts = append(opts, resource.WithNameFilter("Version"))
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return false, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+	opts = append(opts, resource.WithConditionalFilter("ScalingConfig", initParams))
 
 	li := resource.NewGenericLateInitializer(opts...)
 	return li.LateInitialize(&tr.Spec.ForProvider, params)
