@@ -293,6 +293,16 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.GlobalReplicationGroupIDRef != nil {
+		in, out := &in.GlobalReplicationGroupIDRef, &out.GlobalReplicationGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GlobalReplicationGroupIDSelector != nil {
+		in, out := &in.GlobalReplicationGroupIDSelector, &out.GlobalReplicationGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.IPDiscovery != nil {
 		in, out := &in.IPDiscovery, &out.IPDiscovery
 		*out = new(string)
@@ -904,6 +914,16 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 		in, out := &in.GlobalReplicationGroupID, &out.GlobalReplicationGroupID
 		*out = new(string)
 		**out = **in
+	}
+	if in.GlobalReplicationGroupIDRef != nil {
+		in, out := &in.GlobalReplicationGroupIDRef, &out.GlobalReplicationGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GlobalReplicationGroupIDSelector != nil {
+		in, out := &in.GlobalReplicationGroupIDSelector, &out.GlobalReplicationGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPDiscovery != nil {
 		in, out := &in.IPDiscovery, &out.IPDiscovery

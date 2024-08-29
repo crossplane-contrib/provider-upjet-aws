@@ -183,6 +183,56 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 	return nil
 }
 
+// ResolveReferences of this GlobalReplicationGroup.
+func (mg *GlobalReplicationGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "ReplicationGroup", "ReplicationGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryReplicationGroupID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.PrimaryReplicationGroupIDRef,
+			Selector:     mg.Spec.ForProvider.PrimaryReplicationGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrimaryReplicationGroupID")
+	}
+	mg.Spec.ForProvider.PrimaryReplicationGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrimaryReplicationGroupIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "ReplicationGroup", "ReplicationGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryReplicationGroupID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.PrimaryReplicationGroupIDRef,
+			Selector:     mg.Spec.InitProvider.PrimaryReplicationGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrimaryReplicationGroupID")
+	}
+	mg.Spec.InitProvider.PrimaryReplicationGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrimaryReplicationGroupIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ReplicationGroup.
 func (mg *ReplicationGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

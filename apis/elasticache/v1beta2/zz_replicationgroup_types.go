@@ -106,7 +106,17 @@ type ReplicationGroupInitParameters struct {
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
 	// The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter cannot be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.GlobalReplicationGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("global_replication_group_id",true)
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
+
+	// Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
+	// +kubebuilder:validation:Optional
+	GlobalReplicationGroupIDRef *v1.Reference `json:"globalReplicationGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
+	// +kubebuilder:validation:Optional
+	GlobalReplicationGroupIDSelector *v1.Selector `json:"globalReplicationGroupIdSelector,omitempty" tf:"-"`
 
 	// The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.
 	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
@@ -447,8 +457,18 @@ type ReplicationGroupParameters struct {
 	FinalSnapshotIdentifier *string `json:"finalSnapshotIdentifier,omitempty" tf:"final_snapshot_identifier,omitempty"`
 
 	// The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter cannot be set.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elasticache/v1beta1.GlobalReplicationGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("global_replication_group_id",true)
 	// +kubebuilder:validation:Optional
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
+
+	// Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
+	// +kubebuilder:validation:Optional
+	GlobalReplicationGroupIDRef *v1.Reference `json:"globalReplicationGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
+	// +kubebuilder:validation:Optional
+	GlobalReplicationGroupIDSelector *v1.Selector `json:"globalReplicationGroupIdSelector,omitempty" tf:"-"`
 
 	// The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.
 	// +kubebuilder:validation:Optional

@@ -424,6 +424,7 @@ import (
 	nodegroup "github.com/upbound/provider-aws/internal/controller/eks/nodegroup"
 	podidentityassociation "github.com/upbound/provider-aws/internal/controller/eks/podidentityassociation"
 	clusterelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/cluster"
+	globalreplicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/globalreplicationgroup"
 	parametergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
 	serverlesscache "github.com/upbound/provider-aws/internal/controller/elasticache/serverlesscache"
@@ -1383,6 +1384,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		nodegroup.Setup,
 		podidentityassociation.Setup,
 		clusterelasticache.Setup,
+		globalreplicationgroup.Setup,
 		parametergroupelasticache.Setup,
 		replicationgroup.Setup,
 		serverlesscache.Setup,

@@ -215,11 +215,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// ElastiCache Security Groups can be imported by name
 	// Note: This resource was deleted in v5.31.0
 	"aws_elasticache_security_group": config.NameAsIdentifier,
-	// ElastiCache Global Replication Groups can be imported using the global_replication_group_id,
-	// which is an attribute reported in the state.
-	// TODO: we need to check the value of a global_replication_group_id to
-	// see if further normalization is possible
-	"aws_elasticache_global_replication_group": config.IdentifierFromProvider,
 	// ElastiCache user group associations can be imported using the user_group_id and user_id:
 	// userGoupId1,userId
 	"aws_elasticache_user_group_association": FormattedIdentifierFromProvider(",", "user_group_id", "user_id"),

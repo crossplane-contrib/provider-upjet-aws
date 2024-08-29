@@ -9,6 +9,7 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
@@ -25,6 +26,25 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	var rsp reference.ResolutionResponse
 	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "GlobalReplicationGroup", "GlobalReplicationGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.GlobalReplicationGroupID),
+			Extract:      resource.ExtractParamPath("global_replication_group_id", true),
+			Reference:    mg.Spec.ForProvider.GlobalReplicationGroupIDRef,
+			Selector:     mg.Spec.ForProvider.GlobalReplicationGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GlobalReplicationGroupID")
+	}
+	mg.Spec.ForProvider.GlobalReplicationGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.GlobalReplicationGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
@@ -82,6 +102,25 @@ func (mg *ReplicationGroup) ResolveReferences( // ResolveReferences of this Repl
 	}
 	mg.Spec.ForProvider.SubnetGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "GlobalReplicationGroup", "GlobalReplicationGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GlobalReplicationGroupID),
+			Extract:      resource.ExtractParamPath("global_replication_group_id", true),
+			Reference:    mg.Spec.InitProvider.GlobalReplicationGroupIDRef,
+			Selector:     mg.Spec.InitProvider.GlobalReplicationGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GlobalReplicationGroupID")
+	}
+	mg.Spec.InitProvider.GlobalReplicationGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GlobalReplicationGroupIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
 		if err != nil {
