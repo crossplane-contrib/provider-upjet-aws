@@ -453,6 +453,7 @@ import (
 	lblistenerrule "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenerrule"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
+	lbtruststore "github.com/upbound/provider-aws/internal/controller/elbv2/lbtruststore"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
 	applicationemrserverless "github.com/upbound/provider-aws/internal/controller/emrserverless/application"
 	feature "github.com/upbound/provider-aws/internal/controller/evidently/feature"
@@ -1410,6 +1411,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lblistenerrule.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
+		lbtruststore.Setup,
 		securityconfiguration.Setup,
 		applicationemrserverless.Setup,
 		feature.Setup,

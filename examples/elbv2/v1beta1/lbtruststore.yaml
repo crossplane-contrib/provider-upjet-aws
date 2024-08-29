@@ -1,0 +1,14 @@
+apiVersion: elbv2.aws.upbound.io/v1beta1
+kind: LBTrustStore
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elbv2/v1beta1/lbtruststore
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    caCertificatesBundleS3Bucket: uptest-test-lbtrusttore
+    caCertificatesBundleS3Key: certificates/ca_certificate.pem
+    name: upbound-ex-lb-ts
+    region: us-west-1

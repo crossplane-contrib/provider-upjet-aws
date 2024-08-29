@@ -64,4 +64,9 @@ func Configure(p *config.Provider) {
 		}
 		r.UseAsync = true
 	})
+
+	p.AddResourceConfigurator("aws_lb_trust_store", func(r *config.Resource) {
+		r.ShortGroup = "elbv2"
+		r.Kind = "LBTrustStore"
+	})
 }

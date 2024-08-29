@@ -536,6 +536,7 @@
 "aws_lb_ssl_negotiation_policy",
 "aws_lb_target_group",
 "aws_lb_target_group_attachment",
+"aws_lb_trust_store",
 "aws_lex_bot",
 "aws_lex_bot_alias",
 "aws_lex_intent",
