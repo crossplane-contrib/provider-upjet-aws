@@ -800,6 +800,7 @@ import (
 	bucketserversideencryptionconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketserversideencryptionconfiguration"
 	bucketversioning "github.com/upbound/provider-aws/internal/controller/s3/bucketversioning"
 	bucketwebsiteconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
+	directorybucket "github.com/upbound/provider-aws/internal/controller/s3/directorybucket"
 	object "github.com/upbound/provider-aws/internal/controller/s3/object"
 	objectcopy "github.com/upbound/provider-aws/internal/controller/s3/objectcopy"
 	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
@@ -1758,6 +1759,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		bucketserversideencryptionconfiguration.Setup,
 		bucketversioning.Setup,
 		bucketwebsiteconfiguration.Setup,
+		directorybucket.Setup,
 		object.Setup,
 		objectcopy.Setup,
 		accesspoints3control.Setup,
