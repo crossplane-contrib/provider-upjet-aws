@@ -2155,6 +2155,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_rum_metrics_destination": config.IdentifierFromProvider,
 
 	// s3
+	//
 	// S3 bucket can be imported using the bucket
 	"aws_s3_bucket": config.ParameterAsIdentifier("bucket"),
 	// the S3 bucket accelerate configuration resource should be imported using the bucket

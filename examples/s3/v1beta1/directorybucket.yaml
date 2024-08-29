@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-Endpoints.html
 apiVersion: s3.aws.upbound.io/v1beta1
 kind: DirectoryBucket
