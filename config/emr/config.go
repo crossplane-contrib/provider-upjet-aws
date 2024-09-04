@@ -11,5 +11,8 @@ func Configure(p *config.Provider) {
 		r.References["ec2_attributes.additional_slave_security_groups"] = config.Reference{
 			TerraformName: "aws_security_group",
 		}
+		r.References["ec2_attributes.key_name"] = config.Reference{
+			TerraformName: "aws_key_pair",
+		}
 	})
 }
