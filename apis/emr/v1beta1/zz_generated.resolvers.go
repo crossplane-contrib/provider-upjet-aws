@@ -9,6 +9,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
@@ -76,7 +77,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EC2Attributes.EmrManagedMasterSecurityGroup),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.EC2Attributes.EmrManagedMasterSecurityGroupRef,
 				Selector:     mg.Spec.ForProvider.EC2Attributes.EmrManagedMasterSecurityGroupSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -97,7 +98,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EC2Attributes.EmrManagedSlaveSecurityGroup),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.EC2Attributes.EmrManagedSlaveSecurityGroupRef,
 				Selector:     mg.Spec.ForProvider.EC2Attributes.EmrManagedSlaveSecurityGroupSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -118,7 +119,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EC2Attributes.InstanceProfile),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractParamPath("arn", true),
 				Reference:    mg.Spec.ForProvider.EC2Attributes.InstanceProfileRef,
 				Selector:     mg.Spec.ForProvider.EC2Attributes.InstanceProfileSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -160,7 +161,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EC2Attributes.SubnetID),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.EC2Attributes.SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.EC2Attributes.SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -199,7 +200,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRole),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractParamPath("arn", true),
 			Reference:    mg.Spec.ForProvider.ServiceRoleRef,
 			Selector:     mg.Spec.ForProvider.ServiceRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -261,7 +262,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EC2Attributes.EmrManagedMasterSecurityGroup),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.EC2Attributes.EmrManagedMasterSecurityGroupRef,
 				Selector:     mg.Spec.InitProvider.EC2Attributes.EmrManagedMasterSecurityGroupSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -282,7 +283,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EC2Attributes.EmrManagedSlaveSecurityGroup),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.EC2Attributes.EmrManagedSlaveSecurityGroupRef,
 				Selector:     mg.Spec.InitProvider.EC2Attributes.EmrManagedSlaveSecurityGroupSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -303,7 +304,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EC2Attributes.InstanceProfile),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractParamPath("arn", true),
 				Reference:    mg.Spec.InitProvider.EC2Attributes.InstanceProfileRef,
 				Selector:     mg.Spec.InitProvider.EC2Attributes.InstanceProfileSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -345,7 +346,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EC2Attributes.SubnetID),
-				Extract:      reference.ExternalName(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.EC2Attributes.SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.EC2Attributes.SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -384,7 +385,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRole),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractParamPath("arn", true),
 			Reference:    mg.Spec.InitProvider.ServiceRoleRef,
 			Selector:     mg.Spec.InitProvider.ServiceRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -415,7 +416,7 @@ func (mg *InstanceFleet) ResolveReferences(ctx context.Context, c client.Reader)
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ClusterIDRef,
 			Selector:     mg.Spec.ForProvider.ClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -434,7 +435,7 @@ func (mg *InstanceFleet) ResolveReferences(ctx context.Context, c client.Reader)
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ClusterIDRef,
 			Selector:     mg.Spec.InitProvider.ClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -465,7 +466,7 @@ func (mg *InstanceGroup) ResolveReferences(ctx context.Context, c client.Reader)
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ClusterIDRef,
 			Selector:     mg.Spec.ForProvider.ClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -484,7 +485,7 @@ func (mg *InstanceGroup) ResolveReferences(ctx context.Context, c client.Reader)
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
-			Extract:      reference.ExternalName(),
+			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ClusterIDRef,
 			Selector:     mg.Spec.InitProvider.ClusterIDSelector,
 			To:           reference.To{List: l, Managed: m},

@@ -158,6 +158,7 @@ type ClusterInitParameters struct {
 
 	// IAM role that will be assumed by the Amazon EMR service to access AWS resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
 	// Reference to a Role in iam to populate serviceRole.
@@ -418,6 +419,7 @@ type ClusterParameters struct {
 
 	// IAM role that will be assumed by the Amazon EMR service to access AWS resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
@@ -761,6 +763,7 @@ type EC2AttributesInitParameters struct {
 
 	// Identifier of the Amazon EC2 EMR-Managed security group for the master node.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	EmrManagedMasterSecurityGroup *string `json:"emrManagedMasterSecurityGroup,omitempty" tf:"emr_managed_master_security_group,omitempty"`
 
 	// Reference to a SecurityGroup in ec2 to populate emrManagedMasterSecurityGroup.
@@ -773,6 +776,7 @@ type EC2AttributesInitParameters struct {
 
 	// Identifier of the Amazon EC2 EMR-Managed security group for the slave nodes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	EmrManagedSlaveSecurityGroup *string `json:"emrManagedSlaveSecurityGroup,omitempty" tf:"emr_managed_slave_security_group,omitempty"`
 
 	// Reference to a SecurityGroup in ec2 to populate emrManagedSlaveSecurityGroup.
@@ -785,6 +789,7 @@ type EC2AttributesInitParameters struct {
 
 	// Instance Profile for EC2 instances of the cluster assume this role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	InstanceProfile *string `json:"instanceProfile,omitempty" tf:"instance_profile,omitempty"`
 
 	// Reference to a InstanceProfile in iam to populate instanceProfile.
@@ -812,6 +817,7 @@ type EC2AttributesInitParameters struct {
 
 	// VPC subnet id where you want the job flow to launch. Cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in an Amazon VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Reference to a Subnet in ec2 to populate subnetId.
@@ -888,6 +894,7 @@ type EC2AttributesParameters struct {
 
 	// Identifier of the Amazon EC2 EMR-Managed security group for the master node.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EmrManagedMasterSecurityGroup *string `json:"emrManagedMasterSecurityGroup,omitempty" tf:"emr_managed_master_security_group,omitempty"`
 
@@ -901,6 +908,7 @@ type EC2AttributesParameters struct {
 
 	// Identifier of the Amazon EC2 EMR-Managed security group for the slave nodes.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EmrManagedSlaveSecurityGroup *string `json:"emrManagedSlaveSecurityGroup,omitempty" tf:"emr_managed_slave_security_group,omitempty"`
 
@@ -914,6 +922,7 @@ type EC2AttributesParameters struct {
 
 	// Instance Profile for EC2 instances of the cluster assume this role.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	InstanceProfile *string `json:"instanceProfile,omitempty" tf:"instance_profile,omitempty"`
 
@@ -944,6 +953,7 @@ type EC2AttributesParameters struct {
 
 	// VPC subnet id where you want the job flow to launch. Cannot specify the cc1.4xlarge instance type for nodes of a job flow launched in an Amazon VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
