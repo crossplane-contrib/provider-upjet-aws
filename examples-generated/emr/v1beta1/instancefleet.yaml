@@ -1,0 +1,38 @@
+apiVersion: emr.aws.upbound.io/v1beta1
+kind: InstanceFleet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emr/v1beta1/instancefleet
+  labels:
+    testing.upbound.io/example-name: task
+  name: task
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cluster
+    instanceTypeConfigs:
+    - bidPriceAsPercentageOfOnDemandPrice: 100
+      ebsConfig:
+      - size: 100
+        type: gp2
+        volumesPerInstance: 1
+      instanceType: m4.xlarge
+      weightedCapacity: 1
+    - bidPriceAsPercentageOfOnDemandPrice: 100
+      ebsConfig:
+      - size: 100
+        type: gp2
+        volumesPerInstance: 1
+      instanceType: m4.2xlarge
+      weightedCapacity: 2
+    launchSpecifications:
+    - spotSpecification:
+      - allocationStrategy: capacity-optimized
+        blockDurationMinutes: 0
+        timeoutAction: TERMINATE_CLUSTER
+        timeoutDurationMinutes: 10
+    name: task fleet
+    region: us-west-1
+    targetOnDemandCapacity: 1
+    targetSpotCapacity: 1

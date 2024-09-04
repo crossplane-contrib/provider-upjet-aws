@@ -9,6 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
+	cluster "github.com/upbound/provider-aws/internal/controller/emr/cluster"
+	instancefleet "github.com/upbound/provider-aws/internal/controller/emr/instancefleet"
+	instancegroup "github.com/upbound/provider-aws/internal/controller/emr/instancegroup"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
 )
 
@@ -16,6 +19,9 @@ import (
 // the supplied manager.
 func Setup_emr(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		cluster.Setup,
+		instancefleet.Setup,
+		instancegroup.Setup,
 		securityconfiguration.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

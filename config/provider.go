@@ -45,7 +45,6 @@ import (
 	"github.com/upbound/provider-aws/config/elasticache"
 	"github.com/upbound/provider-aws/config/elb"
 	"github.com/upbound/provider-aws/config/elbv2"
-	"github.com/upbound/provider-aws/config/emr"
 	"github.com/upbound/provider-aws/config/firehose"
 	"github.com/upbound/provider-aws/config/fsx"
 	"github.com/upbound/provider-aws/config/gamelift"
@@ -133,7 +132,6 @@ func init() {
 	ProviderConfiguration.AddConfig(elasticache.Configure)
 	ProviderConfiguration.AddConfig(elb.Configure)
 	ProviderConfiguration.AddConfig(elbv2.Configure)
-	ProviderConfiguration.AddConfig(emr.Configure)
 	ProviderConfiguration.AddConfig(firehose.Configure)
 	ProviderConfiguration.AddConfig(gamelift.Configure)
 	ProviderConfiguration.AddConfig(globalaccelerator.Configure)
