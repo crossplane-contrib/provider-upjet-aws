@@ -14,5 +14,8 @@ func Configure(p *config.Provider) {
 		r.References["ec2_attributes.key_name"] = config.Reference{
 			TerraformName: "aws_key_pair",
 		}
+		r.References["log_uri"] = config.Reference{
+			TerraformName: "aws_s3_bucket",
+		}
 	})
 }
