@@ -15,24 +15,22 @@ spec:
       - Spark
     ec2Attributes:
       subnetIdSelector:
-        name: example_subnet
+        matchLabels:
+          testing.upbound.io/example-name: example_subnet
       emrManagedMasterSecurityGroupSelector:
-        matchLabels: example_security_group
+        matchLabels:
+          testing.upbound.io/example-name: example_security_group
       emrManagedSlaveSecurityGroupSelector:
-        matchLabels: example_security_group
+        matchLabels:
+          testing.upbound.io/example-name: example_security_group
       instanceProfileSelector:
-        matchLabels: emr_profile_instance_profile
+        matchLabels:
+          testing.upbound.io/example-name: instance_profile_example
     masterInstanceGroup:
-      instanceType: m5.xlarge
+      instanceType: m1.medium
     coreInstanceGroup:
       instanceCount: 1
-      instanceType: m5.xlarge
-    bootstrapAction:
-      name: runif
-      path: s3://elasticmapreduce/bootstrap-actions/run-if
-      args:
-        - instance.isMaster=true
-        - echo running on master node
+      instanceType: m1.medium
     terminationProtection: false
     configurationsJson: |
       [
@@ -62,24 +60,11 @@ spec:
         }
       ]
     serviceRoleSelector:
-      name: example_service_role
+      matchLabels:
+        testing.upbound.io/example-name: example_service_role
     tags:
       for-use-with-amazon-emr-managed-policies: "true"
     region: us-west-1
----
-apiVersion: ec2.aws.upbound.io/v1beta1
-kind: VPC
-metadata:
-  annotations:
-    uptest.upbound.io/disable-import: "true"
-    meta.upbound.io/example-id: emr/v1beta1/cluster
-  labels:
-    testing.upbound.io/example-name: example_vpc
-  name: example-vpc
-spec:
-  forProvider:
-    region: us-west-1
-    cidrBlock: 10.0.0.0/16
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
@@ -89,12 +74,13 @@ metadata:
     meta.upbound.io/example-id: emr/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example_security_group
-  name: emr-master-security-group
+  name: emr-security-group
 spec:
   forProvider:
     description: Allow inbound traffic
     vpcIdSelector:
-      matchLabels: example_vpc
+      matchLabels:
+        testing.upbound.io/example-name: example_vpc
     tags:
       for-use-with-amazon-emr-managed-policies: "true"
     region: us-west-1
@@ -139,6 +125,21 @@ spec:
         testing.upbound.io/example-name: example_security_group
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_vpc
+  name: vpc-emr-example
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 10.0.0.0/16
+    enableDnsHostnames: true
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
@@ -151,8 +152,8 @@ spec:
   forProvider:
     region: us-west-1
     availabilityZone: us-west-1a
-    vpcIdSelector:
-      matchLabels: example_vpc
+    vpcIdRef:
+      name: vpc-emr-example
     cidrBlock: 10.0.0.0/20
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
@@ -161,12 +162,35 @@ metadata:
   annotations:
     uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_internet_gateway
   name: example-internet-gateway
 spec:
   forProvider:
     vpcIdSelector:
-      matchLabels: example_vpc
+      matchLabels:
+        testing.upbound.io/example-name: example_vpc
     region: us-west-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: route
+spec:
+  forProvider:
+    region: us-west-1
+    destinationCidrBlock: 0.0.0.0/0
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_internet_gateway
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_rtb
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTable
@@ -176,12 +200,13 @@ metadata:
     meta.upbound.io/example-id: emr/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example_rtb
-  name: example_rtb
+  name: example-rtb
 spec:
   forProvider:
     region: us-west-1
     vpcIdSelector:
-      matchLabels: example_vpc
+      matchLabels:
+        testing.upbound.io/example-name: example_vpc
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: RouteTableAssociation
@@ -196,9 +221,11 @@ spec:
   forProvider:
     region: us-west-1
     routeTableIdSelector:
-      matchLabels: example_rtb
+      matchLabels:
+        testing.upbound.io/example-name: example_rtb
     subnetIdSelector:
-      matchLabels: example_subnet
+      matchLabels:
+        testing.upbound.io/example-name: example_subnet
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
@@ -236,6 +263,22 @@ metadata:
   name: example-policy-attachment
 spec:
   forProvider:
+    policyArn: arn:aws:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_service_role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_policy_attachment
+  name: example-policy-attachment2
+spec:
+  forProvider:
     policyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example_service_policy
@@ -251,73 +294,62 @@ metadata:
     meta.upbound.io/example-id: emr/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example_service_policy
-  name: example-service-policy
+  name: example-service-policy-custom
 spec:
   forProvider:
     policy: |
       {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Effect": "Allow",
-            "Action": [
-              "ec2:AuthorizeSecurityGroupEgress",
-              "ec2:AuthorizeSecurityGroupIngress",
-              "ec2:CancelSpotInstanceRequests",
-              "ec2:CreateNetworkInterface",
-              "ec2:CreateSecurityGroup",
-              "ec2:CreateTags",
-              "ec2:DeleteNetworkInterface",
-              "ec2:DeleteSecurityGroup",
-              "ec2:DeleteTags",
-              "ec2:DescribeAvailabilityZones",
-              "ec2:DescribeAccountAttributes",
-              "ec2:DescribeDhcpOptions",
-              "ec2:DescribeInstanceStatus",
-              "ec2:DescribeInstances",
-              "ec2:DescribeKeyPairs",
-              "ec2:DescribeNetworkAcls",
-              "ec2:DescribeNetworkInterfaces",
-              "ec2:DescribePrefixLists",
-              "ec2:DescribeRouteTables",
-              "ec2:DescribeSecurityGroups",
-              "ec2:DescribeSpotInstanceRequests",
-              "ec2:DescribeSpotPriceHistory",
-              "ec2:DescribeSubnets",
-              "ec2:DescribeVpcAttribute",
-              "ec2:DescribeVpcEndpoints",
-              "ec2:DescribeVpcEndpointServices",
-              "ec2:DescribeVpcs",
-              "ec2:DetachNetworkInterface",
-              "ec2:ModifyImageAttribute",
-              "ec2:ModifyInstanceAttribute",
-              "ec2:RequestSpotInstances",
-              "ec2:RevokeSecurityGroupEgress",
-              "ec2:RunInstances",
-              "ec2:TerminateInstances",
-              "ec2:DeleteVolume",
-              "ec2:DescribeVolumeStatus",
-              "ec2:DescribeVolumes",
-              "ec2:DetachVolume",
-              "iam:GetRole",
-              "iam:GetRolePolicy",
-              "iam:ListInstanceProfiles",
-              "iam:ListRolePolicies",
-              "iam:PassRole",
-              "s3:CreateBucket",
-              "s3:Get*",
-              "s3:List*",
-              "sdb:BatchPutAttributes",
-              "sdb:Select",
-              "sqs:CreateQueue",
-              "sqs:Delete*",
-              "sqs:GetQueue*",
-              "sqs:PurgeQueue",
-              "sqs:ReceiveMessage",
-            ],
-            "Resource": "*"
-          }
-        ]
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Sid": "CreateInNetwork",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:CreateNetworkInterface",
+                      "ec2:RunInstances",
+                      "ec2:CreateFleet",
+                      "ec2:CreateLaunchTemplate",
+                      "ec2:CreateLaunchTemplateVersion",
+                      "ec2:DeleteLaunchTemplate",
+                      "ec2:DescribeLaunchTemplates"
+                  ],
+                  "Resource": "*"
+              },
+              {
+                  "Sid": "ManageSecurityGroups",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:AuthorizeSecurityGroupEgress",
+                      "ec2:AuthorizeSecurityGroupIngress",
+                      "ec2:RevokeSecurityGroupEgress",
+                      "ec2:RevokeSecurityGroupIngress"
+                  ],
+                  "Resource": [
+                      "arn:aws:ec2:*:*:security-group/*"
+                  ]
+              },
+              {
+                  "Sid": "CreateDefaultSecurityGroupInVPC",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:CreateSecurityGroup"
+                  ],
+                  "Resource": [
+                      "arn:aws:ec2:*:*:vpc/*"
+                  ]
+              },
+              {
+                  "Sid": "PassRoleForEC2",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "*",
+                  "Condition": {
+                      "StringLike": {
+                          "iam:PassedToService": "ec2.amazonaws.com"
+                      }
+                  }
+              }
+          ]
       }
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
@@ -327,8 +359,8 @@ metadata:
     uptest.upbound.io/disable-import: "true"
     meta.upbound.io/example-id: emr/v1beta1/cluster
   labels:
-    testing.upbound.io/example-name: instance_profile
-  name: instance-profile
+    testing.upbound.io/example-name: instance_profile_example
+  name: instance-profile-role
 spec:
   forProvider:
     roleSelector:
@@ -368,58 +400,10 @@ metadata:
     meta.upbound.io/example-id: emr/v1beta1/cluster
   labels:
     testing.upbound.io/example-name: example_policy_attachment2
-  name: example-policy-attachment2
+  name: example-policy-attachment3
 spec:
   forProvider:
-    policyArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example_instance_profile_policy
+    policyArn: arn:aws:iam::aws:policy/AmazonEMRFullAccessPolicy_v2
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: instance_profile_role
----
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: Policy
-metadata:
-  annotations:
-    uptest.upbound.io/disable-import: "true"
-    meta.upbound.io/example-id: emr/v1beta1/cluster
-  labels:
-    testing.upbound.io/example-name: example_instance_profile_policy
-  name: example-instance-profile-policy
-spec:
-  forProvider:
-    policy: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Effect": "Allow",
-            "Action": [
-              "cloudwatch:*",
-              "dynamodb:*",
-              "ec2:Describe*",
-              "elasticmapreduce:Describe*",
-              "elasticmapreduce:ListBootstrapActions",
-              "elasticmapreduce:ListClusters",
-              "elasticmapreduce:ListInstanceGroups",
-              "elasticmapreduce:ListInstances",
-              "elasticmapreduce:ListSteps",
-              "kinesis:CreateStream",
-              "kinesis:DeleteStream",
-              "kinesis:DescribeStream",
-              "kinesis:GetRecords",
-              "kinesis:GetShardIterator",
-              "kinesis:MergeShards",
-              "kinesis:PutRecord",
-              "kinesis:SplitShard",
-              "rds:Describe*",
-              "s3:*",
-              "sdb:*",
-              "sns:*",
-              "sqs:*",
-            ],
-            "Resource": "*"
-          }
-        ]
-      }
