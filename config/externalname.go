@@ -1141,12 +1141,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// elasticache
 	//
-	"aws_elasticache_cluster":           config.ParameterAsIdentifier("cluster_id"),
-	"aws_elasticache_parameter_group":   config.IdentifierFromProvider,
-	"aws_elasticache_replication_group": config.ParameterAsIdentifier("replication_group_id"),
-	"aws_elasticache_subnet_group":      config.NameAsIdentifier,
-	"aws_elasticache_user":              config.ParameterAsIdentifier("user_id"),
-	"aws_elasticache_user_group":        config.ParameterAsIdentifier("user_group_id"),
+	"aws_elasticache_cluster": config.ParameterAsIdentifier("cluster_id"),
+	// ElastiCache Global Replication Groups can be imported using the global_replication_group_id
+	"aws_elasticache_global_replication_group": config.IdentifierFromProvider,
+	"aws_elasticache_parameter_group":          config.IdentifierFromProvider,
+	"aws_elasticache_replication_group":        config.ParameterAsIdentifier("replication_group_id"),
+	"aws_elasticache_subnet_group":             config.NameAsIdentifier,
+	"aws_elasticache_user":                     config.ParameterAsIdentifier("user_id"),
+	"aws_elasticache_user_group":               config.ParameterAsIdentifier("user_group_id"),
 
 	// elasticbeanstalk
 	//

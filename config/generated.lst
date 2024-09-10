@@ -377,6 +377,7 @@
 "aws_elastic_beanstalk_application_version",
 "aws_elastic_beanstalk_configuration_template",
 "aws_elasticache_cluster",
+"aws_elasticache_global_replication_group",
 "aws_elasticache_parameter_group",
 "aws_elasticache_replication_group",
 "aws_elasticache_serverless_cache",

@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/pkg/controller"
 
 	cluster "github.com/upbound/provider-aws/internal/controller/elasticache/cluster"
+	globalreplicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/globalreplicationgroup"
 	parametergroup "github.com/upbound/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
 	serverlesscache "github.com/upbound/provider-aws/internal/controller/elasticache/serverlesscache"
@@ -23,6 +24,7 @@ import (
 func Setup_elasticache(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		cluster.Setup,
+		globalreplicationgroup.Setup,
 		parametergroup.Setup,
 		replicationgroup.Setup,
 		serverlesscache.Setup,
