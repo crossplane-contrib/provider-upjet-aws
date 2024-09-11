@@ -23,8 +23,12 @@ type ComputeEnvironmentInitParameters struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+<<<<<<< HEAD
 	// +crossplane:generate:reference:refFieldName=ServiceRoleRef
 	// +crossplane:generate:reference:selectorFieldName=ServiceRoleSelector
+=======
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
 	// Reference to a Role in iam to populate serviceRole.
@@ -109,8 +113,12 @@ type ComputeEnvironmentParameters struct {
 
 	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+<<<<<<< HEAD
 	// +crossplane:generate:reference:refFieldName=ServiceRoleRef
 	// +crossplane:generate:reference:selectorFieldName=ServiceRoleSelector
+=======
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	// +kubebuilder:validation:Optional
 	ServiceRole *string `json:"serviceRole,omitempty" tf:"service_role,omitempty"`
 
@@ -162,8 +170,12 @@ type ComputeResourcesInitParameters struct {
 
 	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+<<<<<<< HEAD
 	// +crossplane:generate:reference:refFieldName=InstanceRoleRef
 	// +crossplane:generate:reference:selectorFieldName=InstanceRoleSelector
+=======
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	InstanceRole *string `json:"instanceRole,omitempty" tf:"instance_role,omitempty"`
 
 	// Reference to a InstanceProfile in iam to populate instanceRole.
@@ -189,8 +201,11 @@ type ComputeResourcesInitParameters struct {
 
 	// The Amazon EC2 placement group to associate with your compute resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.PlacementGroup
+<<<<<<< HEAD
 	// +crossplane:generate:reference:refFieldName=PlacementGroupRef
 	// +crossplane:generate:reference:selectorFieldName=PlacementGroupSelector
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
 	// Reference to a PlacementGroup in ec2 to populate placementGroup.
@@ -202,6 +217,7 @@ type ComputeResourcesInitParameters struct {
 	PlacementGroupSelector *v1.Selector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
+<<<<<<< HEAD
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
@@ -231,6 +247,15 @@ type ComputeResourcesInitParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:refFieldName=SubnetRefs
 	// +crossplane:generate:reference:selectorFieldName=SubnetSelector
+=======
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
+	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
+
+	// A list of VPC subnets into which the compute resources are launched.
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
@@ -328,8 +353,12 @@ type ComputeResourcesParameters struct {
 
 	// The Amazon ECS instance role applied to Amazon EC2 instances in a compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.InstanceProfile
+<<<<<<< HEAD
 	// +crossplane:generate:reference:refFieldName=InstanceRoleRef
 	// +crossplane:generate:reference:selectorFieldName=InstanceRoleSelector
+=======
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	// +kubebuilder:validation:Optional
 	InstanceRole *string `json:"instanceRole,omitempty" tf:"instance_role,omitempty"`
 
@@ -360,8 +389,11 @@ type ComputeResourcesParameters struct {
 
 	// The Amazon EC2 placement group to associate with your compute resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.PlacementGroup
+<<<<<<< HEAD
 	// +crossplane:generate:reference:refFieldName=PlacementGroupRef
 	// +crossplane:generate:reference:selectorFieldName=PlacementGroupSelector
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	// +kubebuilder:validation:Optional
 	PlacementGroup *string `json:"placementGroup,omitempty" tf:"placement_group,omitempty"`
 
@@ -374,13 +406,17 @@ type ComputeResourcesParameters struct {
 	PlacementGroupSelector *v1.Selector `json:"placementGroupSelector,omitempty" tf:"-"`
 
 	// A list of EC2 security group that are associated with instances launched in the compute environment. This parameter is required for Fargate compute environments.
+<<<<<<< HEAD
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupSelector
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+<<<<<<< HEAD
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
 	// +kubebuilder:validation:Optional
 	SecurityGroupRefs []v1.Reference `json:"securityGroupRefs,omitempty" tf:"-"`
@@ -389,10 +425,13 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupSelector *v1.Selector `json:"securityGroupSelector,omitempty" tf:"-"`
 
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. This parameter is required for SPOT compute environments. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional
 	SpotIAMFleetRole *string `json:"spotIamFleetRole,omitempty" tf:"spot_iam_fleet_role,omitempty"`
 
+<<<<<<< HEAD
 	// References to Subnet in ec2 to populate subnets.
 	// +kubebuilder:validation:Optional
 	SubnetRefs []v1.Reference `json:"subnetRefs,omitempty" tf:"-"`
@@ -408,6 +447,12 @@ type ComputeResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+=======
+	// A list of VPC subnets into which the compute resources are launched.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Subnets []*string `json:"subnets" tf:"subnets,omitempty"`
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 
 	// Key-value pair tags to be applied to resources that are launched in the compute environment. This parameter isn't applicable to jobs running on Fargate resources, and shouldn't be specified.
 	// +kubebuilder:validation:Optional

@@ -343,6 +343,7 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+<<<<<<< HEAD
                       securityGroupRefs:
                         description: References to SecurityGroup in ec2 to populate
                           securityGroupIds.
@@ -422,6 +423,8 @@ spec:
                                 type: string
                             type: object
                         type: object
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
                       spotIamFleetRole:
                         description: The Amazon Resource Name (ARN) of the Amazon
                           EC2 Spot Fleet IAM role applied to a SPOT compute environment.
@@ -429,6 +432,7 @@ spec:
                           This parameter isn't applicable to jobs running on Fargate
                           resources, and shouldn't be specified.
                         type: string
+<<<<<<< HEAD
                       subnetRefs:
                         description: References to Subnet in ec2 to populate subnets.
                         items:
@@ -507,6 +511,8 @@ spec:
                                 type: string
                             type: object
                         type: object
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
                       subnets:
                         description: A list of VPC subnets into which the compute
                           resources are launched.
@@ -939,6 +945,7 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+<<<<<<< HEAD
                       securityGroupRefs:
                         description: References to SecurityGroup in ec2 to populate
                           securityGroupIds.
@@ -1018,6 +1025,8 @@ spec:
                                 type: string
                             type: object
                         type: object
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
                       spotIamFleetRole:
                         description: The Amazon Resource Name (ARN) of the Amazon
                           EC2 Spot Fleet IAM role applied to a SPOT compute environment.
@@ -1025,6 +1034,7 @@ spec:
                           This parameter isn't applicable to jobs running on Fargate
                           resources, and shouldn't be specified.
                         type: string
+<<<<<<< HEAD
                       subnetRefs:
                         description: References to Subnet in ec2 to populate subnets.
                         items:
@@ -1103,6 +1113,8 @@ spec:
                                 type: string
                             type: object
                         type: object
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
                       subnets:
                         description: A list of VPC subnets into which the compute
                           resources are launched.

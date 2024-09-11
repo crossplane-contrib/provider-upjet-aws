@@ -553,6 +553,7 @@ func (in *ComputeResourcesInitParameters) DeepCopyInto(out *ComputeResourcesInit
 			}
 		}
 	}
+<<<<<<< HEAD
 	if in.SecurityGroupRefs != nil {
 		in, out := &in.SecurityGroupRefs, &out.SecurityGroupRefs
 		*out = make([]v1.Reference, len(*in))
@@ -565,11 +566,14 @@ func (in *ComputeResourcesInitParameters) DeepCopyInto(out *ComputeResourcesInit
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	if in.SpotIAMFleetRole != nil {
 		in, out := &in.SpotIAMFleetRole, &out.SpotIAMFleetRole
 		*out = new(string)
 		**out = **in
 	}
+<<<<<<< HEAD
 	if in.SubnetRefs != nil {
 		in, out := &in.SubnetRefs, &out.SubnetRefs
 		*out = make([]v1.Reference, len(*in))
@@ -582,6 +586,8 @@ func (in *ComputeResourcesInitParameters) DeepCopyInto(out *ComputeResourcesInit
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	if in.Subnets != nil {
 		in, out := &in.Subnets, &out.Subnets
 		*out = make([]*string, len(*in))
@@ -859,6 +865,7 @@ func (in *ComputeResourcesParameters) DeepCopyInto(out *ComputeResourcesParamete
 			}
 		}
 	}
+<<<<<<< HEAD
 	if in.SecurityGroupRefs != nil {
 		in, out := &in.SecurityGroupRefs, &out.SecurityGroupRefs
 		*out = make([]v1.Reference, len(*in))
@@ -871,11 +878,14 @@ func (in *ComputeResourcesParameters) DeepCopyInto(out *ComputeResourcesParamete
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	if in.SpotIAMFleetRole != nil {
 		in, out := &in.SpotIAMFleetRole, &out.SpotIAMFleetRole
 		*out = new(string)
 		**out = **in
 	}
+<<<<<<< HEAD
 	if in.SubnetRefs != nil {
 		in, out := &in.SubnetRefs, &out.SubnetRefs
 		*out = make([]v1.Reference, len(*in))
@@ -888,6 +898,8 @@ func (in *ComputeResourcesParameters) DeepCopyInto(out *ComputeResourcesParamete
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+=======
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	if in.Subnets != nil {
 		in, out := &in.Subnets, &out.Subnets
 		*out = make([]*string, len(*in))

@@ -9,6 +9,7 @@ metadata:
 spec:
   forProvider:
     computeEnvironmentOrder:
+<<<<<<< HEAD
       - computeEnvironmentSelector:
           matchLabels:
             testing.upbound.io/example-name: sample
@@ -327,3 +328,12 @@ spec:
   forProvider:
     cidrBlock: 10.1.0.0/16
     region: us-west-1
+=======
+    - computeEnvironmentSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_environment_1
+      order: 1
+    priority: 1
+    region: us-west-1
+    state: ENABLED
+>>>>>>> d250edec9 (feat: add aws batch compute and job queue)
