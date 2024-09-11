@@ -9,7 +9,9 @@ import (
 
 	"github.com/crossplane/upjet/pkg/controller"
 
+	computeenvironment "github.com/upbound/provider-aws/internal/controller/batch/computeenvironment"
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
+	jobqueue "github.com/upbound/provider-aws/internal/controller/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
 )
 
@@ -17,7 +19,9 @@ import (
 // the supplied manager.
 func Setup_batch(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		computeenvironment.Setup,
 		jobdefinition.Setup,
+		jobqueue.Setup,
 		schedulingpolicy.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

@@ -29,6 +29,9 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// terraform-plugin-framework
 	"aws_appconfig_environment": appConfigEnvironment(),
 
+	// AWS Batch job queue can be imported using the name
+	"aws_batch_job_queue": config.NameAsIdentifier,
+
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
 	"aws_codeguruprofiler_profiling_group": config.NameAsIdentifier,
@@ -402,6 +405,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// batch
 	//
+	// AWS Batch compute can be imported using the compute_environment_name
+	"aws_batch_compute_environment": config.ParameterAsIdentifier("compute_environment_name"),
 	// Batch Job Definition can be imported using ARN that has a random substring, revision at the end:
 	// arn:aws:batch:us-east-1:123456789012:job-definition/sample:1
 	"aws_batch_job_definition": config.IdentifierFromProvider,

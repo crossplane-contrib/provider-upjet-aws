@@ -125,7 +125,9 @@ import (
 	vaultlockconfiguration "github.com/upbound/provider-aws/internal/controller/backup/vaultlockconfiguration"
 	vaultnotifications "github.com/upbound/provider-aws/internal/controller/backup/vaultnotifications"
 	vaultpolicy "github.com/upbound/provider-aws/internal/controller/backup/vaultpolicy"
+	computeenvironment "github.com/upbound/provider-aws/internal/controller/batch/computeenvironment"
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
+	jobqueue "github.com/upbound/provider-aws/internal/controller/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
@@ -1086,7 +1088,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vaultlockconfiguration.Setup,
 		vaultnotifications.Setup,
 		vaultpolicy.Setup,
+		computeenvironment.Setup,
 		jobdefinition.Setup,
+		jobqueue.Setup,
 		schedulingpolicy.Setup,
 		budget.Setup,
 		budgetaction.Setup,
