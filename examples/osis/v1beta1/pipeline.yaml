@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: osis.aws.upbound.io/v1beta1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: osis/v1beta1/pipeline
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    maxUnits: 1
+    minUnits: 1
+    pipelineConfigurationBody: |
+      version: "2"
+      example-pipeline:
+          source:
+              http:
+                  path: "/example"
+          sink:
+          - s3:
+              aws:
+                  sts_role_arn: "arn:aws:iam::609897127049:role/example-osi-pipeline-role"
+                  region: "us-west-1"
+              bucket: "example-upbound-osis-pipeline-example"
+              threshold:
+                  event_collect_timeout: "60s"
+              codec:
+                  ndjson:
+    pipelineName: example
+    region: us-west-1
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: osis/v1beta1/pipeline
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-osi-pipeline-role
+spec:
+  forProvider:
+    assumeRolePolicy: |-
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Action": "sts:AssumeRole",
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "osis-pipelines.amazonaws.com"
+            }
+          }
+        ]
+      }
+---
+
+apiVersion: s3.aws.upbound.io/v1beta2
+kind: Bucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: osis/v1beta1/pipeline
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-upbound-osis-pipeline-example
+spec:
+  forProvider:
+    region: us-west-1

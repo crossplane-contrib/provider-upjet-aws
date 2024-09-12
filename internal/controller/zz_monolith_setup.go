@@ -703,6 +703,7 @@ import (
 	organizationalunit "github.com/upbound/provider-aws/internal/controller/organizations/organizationalunit"
 	policyorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policy"
 	policyattachmentorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policyattachment"
+	pipelineosis "github.com/upbound/provider-aws/internal/controller/osis/pipeline"
 	apppinpoint "github.com/upbound/provider-aws/internal/controller/pinpoint/app"
 	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
 	pipe "github.com/upbound/provider-aws/internal/controller/pipes/pipe"
@@ -1663,6 +1664,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		organizationalunit.Setup,
 		policyorganizations.Setup,
 		policyattachmentorganizations.Setup,
+		pipelineosis.Setup,
 		apppinpoint.Setup,
 		smschannel.Setup,
 		pipe.Setup,
