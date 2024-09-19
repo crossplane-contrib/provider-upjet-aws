@@ -2,6 +2,7 @@
 "aws_accessanalyzer_analyzer",
 "aws_accessanalyzer_archive_rule",
 "aws_account_alternate_contact",
+"aws_account_region",
 "aws_acm_certificate",
 "aws_acm_certificate_validation",
 "aws_acmpca_certificate",
