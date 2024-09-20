@@ -9,21 +9,22 @@ metadata:
 spec:
   forProvider:
     computeResources:
-      instanceRole: arn:aws:iam::<ACCOUNT_ID>:instance-profile/sample
-        # matchLabels:
-        #   testing.upbound.io/example-name: ecs_instance_role
+      instanceRoleSelector:
+        matchLabels:
+          testing.upbound.io/example-name: ecs_instance_role
       instanceType:
       - c4.large
       maxVcpus: 16
       minVcpus: 0
-      # placementGroupSelector:
-      #   matchLabels:
-      #     testing.upbound.io/example-name: sample
-      securityGroupIds:
-      - sg-1234567890abcdef0
-      subnets:
-      - subnet-1234567890abcdef0
-      - subnet-0987654321fedcba0
+      placementGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample
+      securityGroupIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample
       type: EC2
     region: us-west-1
     serviceRoleSelector:
@@ -45,7 +46,7 @@ spec:
   forProvider:
     roleSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: ecs_instance_role
 
 ---
 
@@ -59,7 +60,19 @@ metadata:
   name: aws-batch-service-role
 spec:
   forProvider:
-    assumeRolePolicy: ${data.aws_iam_policy_document.batch_assume_role.json}
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
 
 ---
 
@@ -73,7 +86,19 @@ metadata:
   name: ecs-instance-role
 spec:
   forProvider:
-    assumeRolePolicy: ${data.aws_iam_policy_document.ec2_assume_role.json}
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "eks.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
 
 ---
 
