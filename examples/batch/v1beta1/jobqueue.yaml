@@ -134,7 +134,7 @@ spec:
   forProvider:
     policyArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sample_policy
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: aws_batch_service_role
@@ -153,10 +153,37 @@ spec:
   forProvider:
     policyArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: sample_policy
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: ecs_instance_role
+
+---
+
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
+  labels:
+    testing.upbound.io/example-name: sample_policy
+  name: sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+              "Sid": "VisualEditor0",
+              "Effect": "Allow",
+              "Action": "elastic-inference:Connect",
+              "Resource": "*"
+          }
+        ]
+      }
+
+
 
 ---
 
