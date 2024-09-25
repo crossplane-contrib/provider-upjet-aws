@@ -12,6 +12,7 @@ import (
 	analyzer "github.com/upbound/provider-aws/internal/controller/accessanalyzer/analyzer"
 	archiverule "github.com/upbound/provider-aws/internal/controller/accessanalyzer/archiverule"
 	alternatecontact "github.com/upbound/provider-aws/internal/controller/account/alternatecontact"
+	region "github.com/upbound/provider-aws/internal/controller/account/region"
 	certificate "github.com/upbound/provider-aws/internal/controller/acm/certificate"
 	certificatevalidation "github.com/upbound/provider-aws/internal/controller/acm/certificatevalidation"
 	certificateacmpca "github.com/upbound/provider-aws/internal/controller/acmpca/certificate"
@@ -973,6 +974,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		analyzer.Setup,
 		archiverule.Setup,
 		alternatecontact.Setup,
+		region.Setup,
 		certificate.Setup,
 		certificatevalidation.Setup,
 		certificateacmpca.Setup,
