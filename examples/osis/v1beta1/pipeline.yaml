@@ -23,7 +23,7 @@ spec:
           sink:
           - s3:
               aws:
-                  sts_role_arn: "arn:aws:iam::609897127049:role/example-osi-pipeline-role"
+                  sts_role_arn: "arn:aws:iam::153891904029:role/example-osi-pipeline-role"
                   region: "us-west-1"
               bucket: "example-upbound-osis-pipeline-example"
               threshold:
