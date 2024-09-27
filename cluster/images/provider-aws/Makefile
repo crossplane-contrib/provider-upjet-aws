@@ -77,9 +77,9 @@ batch-process: $(UP)
 		--auth-ext $(XPKG_DIR)/auth.yaml \
 		--crd-root $(XPKG_DIR)/crds \
 		--ignore $(XPKG_IGNORE) \
-		--crd-group-override monolith=* --crd-group-override config=$(PROVIDER_NAME) \
+		--crd-group-override monolith=* --crd-group-override config=$(CONFIG_CRD_GROUP) \
 		--package-metadata-template $(XPKG_DIR)/crossplane.yaml.tmpl \
-		--template-var XpkgRegOrg=$(XPKG_REG_ORGS) --template-var DepConstraint="$(DEP_CONSTRAINT)" --template-var ProviderName=$(PROVIDER_NAME) \
+		--template-var XpkgRegOrg=$(XPKG_REG_ORGS) --template-var DepConstraint="$(DEP_CONSTRAINT)" --template-var ProviderName=$(PROVIDER_NAME) --template-var ProviderAuthGroup=$(PROVIDER_AUTH_GROUP) \
 		--concurrency $(CONCURRENCY) \
 		--push-retry 10 || $(FAIL)
 	@$(OK) Done processing smaller provider packages for: "$(SUBPACKAGES)"
