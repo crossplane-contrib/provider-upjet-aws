@@ -27,7 +27,7 @@ metadata:
       If you encounter an issue please reach out on support@upbound.io email
       address. This is a subpackage for the {{ .Service }} API group.
     friendly-name.meta.crossplane.io: Provider AWS ({{ .Service }})
-    auth.upbound.io/group: {{ .ProviderName }}.upbound.io
+    auth.upbound.io/group: {{ .ProviderAuthGroup }}.upbound.io
 spec:
 {{ if ne .Service "monolith" }}
   crossplane:
