@@ -553,10 +553,34 @@ func (in *ComputeResourcesInitParameters) DeepCopyInto(out *ComputeResourcesInit
 			}
 		}
 	}
+	if in.SecurityGroupRefs != nil {
+		in, out := &in.SecurityGroupRefs, &out.SecurityGroupRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupSelector != nil {
+		in, out := &in.SecurityGroupSelector, &out.SecurityGroupSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SpotIAMFleetRole != nil {
 		in, out := &in.SpotIAMFleetRole, &out.SpotIAMFleetRole
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetRefs != nil {
+		in, out := &in.SubnetRefs, &out.SubnetRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetSelector != nil {
+		in, out := &in.SubnetSelector, &out.SubnetSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Subnets != nil {
 		in, out := &in.Subnets, &out.Subnets
@@ -835,10 +859,34 @@ func (in *ComputeResourcesParameters) DeepCopyInto(out *ComputeResourcesParamete
 			}
 		}
 	}
+	if in.SecurityGroupRefs != nil {
+		in, out := &in.SecurityGroupRefs, &out.SecurityGroupRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupSelector != nil {
+		in, out := &in.SecurityGroupSelector, &out.SecurityGroupSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SpotIAMFleetRole != nil {
 		in, out := &in.SpotIAMFleetRole, &out.SpotIAMFleetRole
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetRefs != nil {
+		in, out := &in.SubnetRefs, &out.SubnetRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetSelector != nil {
+		in, out := &in.SubnetSelector, &out.SubnetSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Subnets != nil {
 		in, out := &in.Subnets, &out.Subnets

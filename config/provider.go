@@ -14,6 +14,7 @@ import (
 	"github.com/upbound/provider-aws/config/athena"
 	"github.com/upbound/provider-aws/config/autoscaling"
 	"github.com/upbound/provider-aws/config/backup"
+	"github.com/upbound/provider-aws/config/batch"
 	"github.com/upbound/provider-aws/config/budgets"
 	"github.com/upbound/provider-aws/config/cloudformation"
 	"github.com/upbound/provider-aws/config/cloudfront"
@@ -184,4 +185,5 @@ func init() {
 	ProviderConfiguration.AddConfig(identitystore.Configure)
 	ProviderConfiguration.AddConfig(iot.Configure)
 	ProviderConfiguration.AddConfig(cloudformation.Configure)
+	ProviderConfiguration.AddConfig(batch.Configure)
 }

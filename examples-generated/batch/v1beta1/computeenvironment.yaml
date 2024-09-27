@@ -19,10 +19,10 @@ spec:
       placementGroupSelector:
         matchLabels:
           testing.upbound.io/example-name: sample
-      securityGroupIds:
-      - ${aws_security_group.sample.id}
-      subnets:
-      - ${aws_subnet.sample.id}
+      securityGroupRefs:
+      - name: sample
+      subnetRefs:
+      - name: sample
       type: EC2
     region: us-west-1
     serviceRoleSelector:
