@@ -119,6 +119,7 @@
 "aws_batch_job_definition",
 "aws_batch_job_queue",
 "aws_batch_scheduling_policy",
+"aws_bedrockagent_agent",
 "aws_budgets_budget",
 "aws_budgets_budget_action",
 "aws_ce_anomaly_monitor",
