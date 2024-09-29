@@ -29,6 +29,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// terraform-plugin-framework
 	"aws_appconfig_environment": appConfigEnvironment(),
 
+	// bedrockagent
+	//
+	// Bedrock Agent can be imported using the agent arn
+	"aws_bedrockagent_agent": bedrockAgent(),
+
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
 	"aws_codeguruprofiler_profiling_group": config.NameAsIdentifier,
@@ -2858,6 +2863,19 @@ func kmsAlias() config.ExternalName {
 	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]interface{}, _ map[string]interface{}) (string, error) {
 		if !strings.HasPrefix(externalName, "alias/") {
 			return fmt.Sprintf("alias/%s", externalName), nil
+		}
+		return externalName, nil
+	}
+	return e
+}
+
+func bedrockAgent() config.ExternalName {
+	// Terraform does not allow agent id to be empty.
+	// Using a stub value to pass validation.
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		if len(externalName) == 0 {
+			return "STUB123456", nil
 		}
 		return externalName, nil
 	}
