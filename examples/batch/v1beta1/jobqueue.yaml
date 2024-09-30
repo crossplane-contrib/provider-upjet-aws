@@ -38,10 +38,12 @@ spec:
       placementGroupSelector:
         matchLabels:
           testing.upbound.io/example-name: sample
-      securityGroupRefs:
-        - name: sample
-      subnetRefs:
-        - name: sample
+      securityGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample
+      subnetSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample
       type: EC2
     region: us-west-1
     serviceRoleSelector:
@@ -289,8 +291,10 @@ metadata:
   name: sample
 spec:
   forProvider:
-    name: aws_batch_compute_environment_security_group
     region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample
 ---
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
