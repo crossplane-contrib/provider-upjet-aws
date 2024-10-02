@@ -55,6 +55,7 @@ metadata:
     testing.upbound.io/example-name: aws_batch_service_role
   name: aws-batch-service-role
 spec:
+  deletionPolicy: Orphan
   forProvider:
     assumeRolePolicy: |
       {
@@ -104,6 +105,7 @@ metadata:
   name: aws-batch-service-role
 spec:
   forProvider:
+    deletionPolicy: Orphan
     policyArnSelector:
       matchLabels:
         testing.upbound.io/example-name: aws_batch_service_policy
@@ -150,6 +152,7 @@ metadata:
     testing.upbound.io/example-name: aws_batch_service_policy
   name: batch-sample-user-policy
 spec:
+  deletionPolicy: Orphan
   forProvider:
     policy: |
       {
