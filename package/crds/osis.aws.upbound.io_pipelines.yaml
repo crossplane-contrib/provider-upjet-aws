@@ -133,11 +133,6 @@ spec:
                       file. If you provide the configuration as a string, each new
                       line must be escaped with \n.
                     type: string
-                  pipelineName:
-                    description: The name of the OpenSearch Ingestion pipeline to
-                      create. Pipeline names are unique across the pipelines owned
-                      by an account within an AWS Region.
-                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -247,11 +242,6 @@ spec:
                       accepts the pipeline configuration as a string or within a .yaml
                       file. If you provide the configuration as a string, each new
                       line must be escaped with \n.
-                    type: string
-                  pipelineName:
-                    description: The name of the OpenSearch Ingestion pipeline to
-                      create. Pipeline names are unique across the pipelines owned
-                      by an account within an AWS Region.
                     type: string
                   tags:
                     additionalProperties:
@@ -463,10 +453,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.pipelineConfigurationBody)
                 || (has(self.initProvider) && has(self.initProvider.pipelineConfigurationBody))'
-            - message: spec.forProvider.pipelineName is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.pipelineName)
-                || (has(self.initProvider) && has(self.initProvider.pipelineName))'
           status:
             description: PipelineStatus defines the observed state of Pipeline.
             properties:
@@ -545,11 +531,6 @@ spec:
                       accepts the pipeline configuration as a string or within a .yaml
                       file. If you provide the configuration as a string, each new
                       line must be escaped with \n.
-                    type: string
-                  pipelineName:
-                    description: The name of the OpenSearch Ingestion pipeline to
-                      create. Pipeline names are unique across the pipelines owned
-                      by an account within an AWS Region.
                     type: string
                   tags:
                     additionalProperties:

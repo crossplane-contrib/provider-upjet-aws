@@ -35,6 +35,5 @@ func Configure(p *config.Provider) {
 			TerraformName: "aws_cloudwatch_log_group",
 		}
 
-		r.UseAsync = true
 	})
 }
