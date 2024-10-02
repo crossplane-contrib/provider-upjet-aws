@@ -18,13 +18,13 @@ spec:
       minVcpus: 0
       placementGroupSelector:
         matchLabels:
-          testing.upbound.io/example-name: sample
+          testing.upbound.io/example-name: sample_pg
       securityGroupSelector:
         matchLabels:
-          testing.upbound.io/example-name: sample
+          testing.upbound.io/example-name: sample_sg
       subnetSelector:
         matchLabels:
-          testing.upbound.io/example-name: sample
+          testing.upbound.io/example-name: sample_subnet
       type: EC2
     region: us-west-1
     serviceRoleSelector:
@@ -136,7 +136,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-    testing.upbound.io/example-name: sample
+    testing.upbound.io/example-name: sample_pg
   name: sample
 spec:
   forProvider:
@@ -271,7 +271,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-    testing.upbound.io/example-name: sample
+    testing.upbound.io/example-name: sample_sg
   name: sample
 spec:
   forProvider:
@@ -286,7 +286,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-    testing.upbound.io/example-name: sample
+    testing.upbound.io/example-name: sample_subnet
   name: sample
 spec:
   forProvider:
