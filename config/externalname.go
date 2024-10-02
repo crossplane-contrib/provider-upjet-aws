@@ -86,7 +86,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// osis
 	//
 	// OSIS Pipeline can be imported using the name
-	"aws_osis_pipeline": config.NameAsIdentifier,
+	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
 
 	// s3
 	//

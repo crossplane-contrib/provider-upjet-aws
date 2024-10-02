@@ -339,11 +339,6 @@ func (in *PipelineInitParameters) DeepCopyInto(out *PipelineInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.PipelineName != nil {
-		in, out := &in.PipelineName, &out.PipelineName
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -471,11 +466,6 @@ func (in *PipelineObservation) DeepCopyInto(out *PipelineObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.PipelineName != nil {
-		in, out := &in.PipelineName, &out.PipelineName
-		*out = new(string)
-		**out = **in
-	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -563,11 +553,6 @@ func (in *PipelineParameters) DeepCopyInto(out *PipelineParameters) {
 	}
 	if in.PipelineConfigurationBody != nil {
 		in, out := &in.PipelineConfigurationBody, &out.PipelineConfigurationBody
-		*out = new(string)
-		**out = **in
-	}
-	if in.PipelineName != nil {
-		in, out := &in.PipelineName, &out.PipelineName
 		*out = new(string)
 		**out = **in
 	}

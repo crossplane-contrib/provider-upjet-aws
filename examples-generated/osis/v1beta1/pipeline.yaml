@@ -26,7 +26,6 @@ spec:
                 event_collect_timeout: "60s"
               codec:
                 ndjson:
-    pipelineName: example
     region: us-west-1
 
 ---

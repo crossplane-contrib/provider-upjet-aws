@@ -119,9 +119,6 @@ type PipelineInitParameters struct {
 	// The pipeline configuration in YAML format. This argument accepts the pipeline configuration as a string or within a .yaml file. If you provide the configuration as a string, each new line must be escaped with \n.
 	PipelineConfigurationBody *string `json:"pipelineConfigurationBody,omitempty" tf:"pipeline_configuration_body,omitempty"`
 
-	// The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.
-	PipelineName *string `json:"pipelineName,omitempty" tf:"pipeline_name,omitempty"`
-
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -160,9 +157,6 @@ type PipelineObservation struct {
 	// The pipeline configuration in YAML format. This argument accepts the pipeline configuration as a string or within a .yaml file. If you provide the configuration as a string, each new line must be escaped with \n.
 	PipelineConfigurationBody *string `json:"pipelineConfigurationBody,omitempty" tf:"pipeline_configuration_body,omitempty"`
 
-	// The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.
-	PipelineName *string `json:"pipelineName,omitempty" tf:"pipeline_name,omitempty"`
-
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -199,10 +193,6 @@ type PipelineParameters struct {
 	// The pipeline configuration in YAML format. This argument accepts the pipeline configuration as a string or within a .yaml file. If you provide the configuration as a string, each new line must be escaped with \n.
 	// +kubebuilder:validation:Optional
 	PipelineConfigurationBody *string `json:"pipelineConfigurationBody,omitempty" tf:"pipeline_configuration_body,omitempty"`
-
-	// The name of the OpenSearch Ingestion pipeline to create. Pipeline names are unique across the pipelines owned by an account within an AWS Region.
-	// +kubebuilder:validation:Optional
-	PipelineName *string `json:"pipelineName,omitempty" tf:"pipeline_name,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -293,7 +283,6 @@ type Pipeline struct {
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxUnits) || (has(self.initProvider) && has(self.initProvider.maxUnits))",message="spec.forProvider.maxUnits is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minUnits) || (has(self.initProvider) && has(self.initProvider.minUnits))",message="spec.forProvider.minUnits is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pipelineConfigurationBody) || (has(self.initProvider) && has(self.initProvider.pipelineConfigurationBody))",message="spec.forProvider.pipelineConfigurationBody is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pipelineName) || (has(self.initProvider) && has(self.initProvider.pipelineName))",message="spec.forProvider.pipelineName is a required parameter"
 	Spec   PipelineSpec   `json:"spec"`
 	Status PipelineStatus `json:"status,omitempty"`
 }
