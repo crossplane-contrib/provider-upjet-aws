@@ -14,7 +14,7 @@ env:
 
 jobs:
   detect-api-groups:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       api_groups: ${{ steps.api-groups.outputs.list }}
     steps:
@@ -38,7 +38,7 @@ jobs:
           echo "list=${OUTPUT}" >> $GITHUB_OUTPUT
 
   uptest:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: detect-api-groups
     strategy:
       fail-fast: false
@@ -136,7 +136,7 @@ jobs:
           kubectl delete managed --all
 
   report:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: uptest
     if: always()
     env:
