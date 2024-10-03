@@ -665,6 +665,7 @@
 "aws_organizations_organizational_unit",
 "aws_organizations_policy",
 "aws_organizations_policy_attachment",
+"aws_osis_pipeline",
 "aws_pinpoint_app",
 "aws_pinpoint_sms_channel",
 "aws_pipes_pipe",

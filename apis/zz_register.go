@@ -222,6 +222,7 @@ import (
 	v1beta1opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta1"
 	v1beta2opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta2"
 	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
+	v1beta1osis "github.com/upbound/provider-aws/apis/osis/v1beta1"
 	v1beta1pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	v1beta2pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta2"
 	v1beta1pipes "github.com/upbound/provider-aws/apis/pipes/v1beta1"
@@ -517,6 +518,7 @@ func init() {
 		v1beta1opsworks.SchemeBuilder.AddToScheme,
 		v1beta2opsworks.SchemeBuilder.AddToScheme,
 		v1beta1organizations.SchemeBuilder.AddToScheme,
+		v1beta1osis.SchemeBuilder.AddToScheme,
 		v1beta1pinpoint.SchemeBuilder.AddToScheme,
 		v1beta2pinpoint.SchemeBuilder.AddToScheme,
 		v1beta1pipes.SchemeBuilder.AddToScheme,
