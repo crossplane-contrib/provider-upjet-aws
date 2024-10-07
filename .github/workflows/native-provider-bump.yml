@@ -12,6 +12,6 @@ jobs:
     uses: upbound/official-providers-ci/.github/workflows/native-provider-bump.yml@standard-runners
     with:
       provider-source: hashicorp/aws
-      go-version: 1.22
+      go-version: 1.23
     secrets:
       TOKEN: ${{ secrets.OFFICIAL_PROVIDERS_GA_TOKEN }}

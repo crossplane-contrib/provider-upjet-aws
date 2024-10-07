@@ -16,7 +16,7 @@ jobs:
   ci:
     uses: upbound/official-providers-ci/.github/workflows/provider-ci.yml@standard-runners
     with:
-      go-version: "1.22"
+      go-version: "1.23"
       golangci-skip: true # we will run the linter via "make lint"
       cleanup-disk: true
     secrets:
@@ -60,7 +60,7 @@ jobs:
       - name: Setup Go
         uses: actions/setup-go@0a12ed9d6a96ab950c8f026ed9f722fe0da7ef32 # v5
         with:
-          go-version: "1.22"
+          go-version: "1.23"
 
       - name: Find the Go Build Cache
         id: go_cache
