@@ -14,6 +14,7 @@ spec:
       EFS: true
     resourceTypeOptInPreference:
       Aurora: true
+      CloudFormation: true
       DocumentDB: true
       DynamoDB: true
       EBS: true
@@ -22,5 +23,8 @@ spec:
       FSx: true
       Neptune: true
       RDS: true
+      Redshift: true
+      S3: true
+      SAP HANA on Amazon EC2: true
       Storage Gateway: true
       VirtualMachine: true

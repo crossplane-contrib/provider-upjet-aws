@@ -3663,6 +3663,17 @@ func (in *ClusterSnapshotInitParameters) DeepCopyInto(out *ClusterSnapshotInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3787,6 +3798,17 @@ func (in *ClusterSnapshotObservation) DeepCopyInto(out *ClusterSnapshotObservati
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SnapshotType != nil {
 		in, out := &in.SnapshotType, &out.SnapshotType
 		*out = new(string)
@@ -3883,6 +3905,17 @@ func (in *ClusterSnapshotParameters) DeepCopyInto(out *ClusterSnapshotParameters
 		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
+	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -4434,6 +4467,17 @@ func (in *DBSnapshotCopyInitParameters) DeepCopyInto(out *DBSnapshotCopyInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SourceDBSnapshotIdentifier != nil {
 		in, out := &in.SourceDBSnapshotIdentifier, &out.SourceDBSnapshotIdentifier
 		*out = new(string)
@@ -4597,6 +4641,17 @@ func (in *DBSnapshotCopyObservation) DeepCopyInto(out *DBSnapshotCopyObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SnapshotType != nil {
 		in, out := &in.SnapshotType, &out.SnapshotType
 		*out = new(string)
@@ -4718,6 +4773,17 @@ func (in *DBSnapshotCopyParameters) DeepCopyInto(out *DBSnapshotCopyParameters) 
 		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
+	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.SourceDBSnapshotIdentifier != nil {
 		in, out := &in.SourceDBSnapshotIdentifier, &out.SourceDBSnapshotIdentifier
@@ -5206,6 +5272,11 @@ func (in *GlobalClusterInitParameters) DeepCopyInto(out *GlobalClusterInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -5358,6 +5429,11 @@ func (in *GlobalClusterObservation) DeepCopyInto(out *GlobalClusterObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -5427,6 +5503,11 @@ func (in *GlobalClusterParameters) DeepCopyInto(out *GlobalClusterParameters) {
 	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
 		*out = new(string)
 		**out = **in
 	}
@@ -7272,6 +7353,11 @@ func (in *OptionGroupInitParameters) DeepCopyInto(out *OptionGroupInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -7367,6 +7453,11 @@ func (in *OptionGroupObservation) DeepCopyInto(out *OptionGroupObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -7439,6 +7530,11 @@ func (in *OptionGroupParameters) DeepCopyInto(out *OptionGroupParameters) {
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -7803,6 +7899,11 @@ func (in *ParameterGroupInitParameters) DeepCopyInto(out *ParameterGroupInitPara
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -7893,6 +7994,11 @@ func (in *ParameterGroupObservation) DeepCopyInto(out *ParameterGroupObservation
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -7960,6 +8066,11 @@ func (in *ParameterGroupParameters) DeepCopyInto(out *ParameterGroupParameters) 
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {

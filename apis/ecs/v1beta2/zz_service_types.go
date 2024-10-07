@@ -280,8 +280,11 @@ type ManagedEBSVolumeInitParameters struct {
 	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// The tags to apply to the volume. See below.
+	TagSpecifications []TagSpecificationsInitParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
+
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Volume type.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -310,8 +313,11 @@ type ManagedEBSVolumeObservation struct {
 	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// The tags to apply to the volume. See below.
+	TagSpecifications []TagSpecificationsObservation `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
+
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Volume type.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -347,9 +353,13 @@ type ManagedEBSVolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// The tags to apply to the volume. See below.
+	// +kubebuilder:validation:Optional
+	TagSpecifications []TagSpecificationsParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
+
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	// +kubebuilder:validation:Optional
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Volume type.
 	// +kubebuilder:validation:Optional
@@ -742,6 +752,9 @@ type ServiceInitParameters struct {
 	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
+
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	ForceNewDeployment *bool `json:"forceNewDeployment,omitempty" tf:"force_new_deployment,omitempty"`
 
@@ -849,6 +862,9 @@ type ServiceObservation struct {
 
 	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	ForceNewDeployment *bool `json:"forceNewDeployment,omitempty" tf:"force_new_deployment,omitempty"`
@@ -964,6 +980,10 @@ type ServiceParameters struct {
 	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	// +kubebuilder:validation:Optional
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	// +kubebuilder:validation:Optional
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	// +kubebuilder:validation:Optional
@@ -1150,6 +1170,48 @@ type TLSParameters struct {
 	// ARN of the IAM Role that's associated with the Service Connect TLS.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type TagSpecificationsInitParameters struct {
+
+	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// The type of volume resource. Valid values, volume.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type TagSpecificationsObservation struct {
+
+	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// The type of volume resource. Valid values, volume.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type TagSpecificationsParameters struct {
+
+	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	// +kubebuilder:validation:Optional
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// The type of volume resource. Valid values, volume.
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+
+	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type TimeoutInitParameters struct {

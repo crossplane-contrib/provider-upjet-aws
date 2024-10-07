@@ -1726,6 +1726,18 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    properties:
+                      supportType:
+                        description: Support type to use for the cluster. If the cluster
+                          is set to EXTENDED, it will enter extended support at the
+                          end of standard support. If the cluster is set to STANDARD,
+                          it will be automatically upgraded at the end of standard
+                          support. Valid values are EXTENDED, STANDARD
+                        type: string
+                    type: object
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
@@ -2148,6 +2160,18 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    properties:
+                      supportType:
+                        description: Support type to use for the cluster. If the cluster
+                          is set to EXTENDED, it will enter extended support at the
+                          end of standard support. If the cluster is set to STANDARD,
+                          it will be automatically upgraded at the end of standard
+                          support. Valid values are EXTENDED, STANDARD
+                        type: string
+                    type: object
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
@@ -2730,6 +2754,18 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    properties:
+                      supportType:
+                        description: Support type to use for the cluster. If the cluster
+                          is set to EXTENDED, it will enter extended support at the
+                          end of standard support. If the cluster is set to STANDARD,
+                          it will be automatically upgraded at the end of standard
+                          support. Valid values are EXTENDED, STANDARD
+                        type: string
+                    type: object
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation

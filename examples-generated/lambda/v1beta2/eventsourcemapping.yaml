@@ -14,3 +14,5 @@ spec:
         testing.upbound.io/example-name: example
     region: us-west-1
     startingPosition: LATEST
+    tags:
+      Name: dynamodb

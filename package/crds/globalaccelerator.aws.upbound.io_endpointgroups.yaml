@@ -77,6 +77,10 @@ spec:
                     description: The list of endpoint objects. Fields documented below.
                     items:
                       properties:
+                        attachmentArn:
+                          description: An ARN of an exposed cross-account attachment.
+                            See the AWS documentation for more details.
+                          type: string
                         clientIpPreservationEnabled:
                           description: Indicates whether client IP address preservation
                             is enabled for an Application Load Balancer endpoint.
@@ -254,6 +258,10 @@ spec:
                     description: The list of endpoint objects. Fields documented below.
                     items:
                       properties:
+                        attachmentArn:
+                          description: An ARN of an exposed cross-account attachment.
+                            See the AWS documentation for more details.
+                          type: string
                         clientIpPreservationEnabled:
                           description: Indicates whether client IP address preservation
                             is enabled for an Application Load Balancer endpoint.
@@ -587,6 +595,10 @@ spec:
                     description: The list of endpoint objects. Fields documented below.
                     items:
                       properties:
+                        attachmentArn:
+                          description: An ARN of an exposed cross-account attachment.
+                            See the AWS documentation for more details.
+                          type: string
                         clientIpPreservationEnabled:
                           description: Indicates whether client IP address preservation
                             is enabled for an Application Load Balancer endpoint.

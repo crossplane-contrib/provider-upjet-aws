@@ -659,49 +659,60 @@ spec:
               forProvider:
                 properties:
                   configuration:
-                    description: The execute command configuration for the cluster.
-                      Detailed below.
+                    description: Execute command configuration for the cluster. See
+                      configuration Block for details.
                     properties:
                       executeCommandConfiguration:
-                        description: The details of the execute command configuration.
-                          Detailed below.
+                        description: Details of the execute command configuration.
+                          See execute_command_configuration Block for details.
                         properties:
                           kmsKeyId:
-                            description: The AWS Key Management Service key ID to
-                              encrypt the data between the local client and the container.
+                            description: AWS Key Management Service key ID to encrypt
+                              the data between the local client and the container.
                             type: string
                           logConfiguration:
-                            description: The log configuration for the results of
-                              the execute command actions Required when logging is
-                              OVERRIDE. Detailed below.
+                            description: Log configuration for the results of the
+                              execute command actions. Required when logging is OVERRIDE.
+                              See log_configuration Block for details.
                             properties:
                               cloudWatchEncryptionEnabled:
-                                description: Whether or not to enable encryption on
-                                  the CloudWatch logs. If not specified, encryption
-                                  will be disabled.
+                                description: Whether to enable encryption on the CloudWatch
+                                  logs. If not specified, encryption will be disabled.
                                 type: boolean
                               cloudWatchLogGroupName:
                                 description: The name of the CloudWatch log group
                                   to send logs to.
                                 type: string
                               s3BucketEncryptionEnabled:
-                                description: Whether or not to enable encryption on
-                                  the logs sent to S3. If not specified, encryption
-                                  will be disabled.
+                                description: Whether to enable encryption on the logs
+                                  sent to S3. If not specified, encryption will be
+                                  disabled.
                                 type: boolean
                               s3BucketName:
-                                description: The name of the S3 bucket to send logs
-                                  to.
+                                description: Name of the S3 bucket to send logs to.
                                 type: string
                               s3KeyPrefix:
-                                description: An optional folder in the S3 bucket to
-                                  place logs in.
+                                description: Optional folder in the S3 bucket to place
+                                  logs in.
                                 type: string
                             type: object
                           logging:
-                            description: The log setting to use for redirecting logs
-                              for your execute command results. Valid values are NONE,
-                              DEFAULT, and OVERRIDE.
+                            description: 'Log setting to use for redirecting logs
+                              for your execute command results. Valid values: NONE,
+                              DEFAULT, OVERRIDE.'
+                            type: string
+                        type: object
+                      managedStorageConfiguration:
+                        description: Details of the managed storage configuration.
+                          See managed_storage_configuration Block for details.
+                        properties:
+                          fargateEphemeralStorageKmsKeyId:
+                            description: AWS Key Management Service key ID for the
+                              Fargate ephemeral storage.
+                            type: string
+                          kmsKeyId:
+                            description: AWS Key Management Service key ID to encrypt
+                              the managed storage.
                             type: string
                         type: object
                     type: object
@@ -710,11 +721,11 @@ spec:
                       be created in.
                     type: string
                   serviceConnectDefaults:
-                    description: Configures a default Service Connect namespace. Detailed
-                      below.
+                    description: Default Service Connect namespace. See service_connect_defaults
+                      Block for details.
                     properties:
                       namespace:
-                        description: The ARN of the aws_service_discovery_http_namespace
+                        description: ARN of the aws_service_discovery_http_namespace
                           that's used when you create a service and don't specify
                           a Service Connect configuration.
                         type: string
@@ -722,7 +733,7 @@ spec:
                   setting:
                     description: Configuration block(s) with cluster settings. For
                       example, this can be used to enable CloudWatch Container Insights
-                      for a cluster. Detailed below.
+                      for a cluster. See setting Block for details.
                     items:
                       properties:
                         name:
@@ -730,8 +741,8 @@ spec:
                             containerInsights.'
                           type: string
                         value:
-                          description: The value to assign to the setting. Valid values
-                            are enabled and disabled.
+                          description: 'Value to assign to the setting. Valid values:
+                            enabled, disabled.'
                           type: string
                       type: object
                     type: array
@@ -758,58 +769,69 @@ spec:
                   autoscaler.
                 properties:
                   configuration:
-                    description: The execute command configuration for the cluster.
-                      Detailed below.
+                    description: Execute command configuration for the cluster. See
+                      configuration Block for details.
                     properties:
                       executeCommandConfiguration:
-                        description: The details of the execute command configuration.
-                          Detailed below.
+                        description: Details of the execute command configuration.
+                          See execute_command_configuration Block for details.
                         properties:
                           kmsKeyId:
-                            description: The AWS Key Management Service key ID to
-                              encrypt the data between the local client and the container.
+                            description: AWS Key Management Service key ID to encrypt
+                              the data between the local client and the container.
                             type: string
                           logConfiguration:
-                            description: The log configuration for the results of
-                              the execute command actions Required when logging is
-                              OVERRIDE. Detailed below.
+                            description: Log configuration for the results of the
+                              execute command actions. Required when logging is OVERRIDE.
+                              See log_configuration Block for details.
                             properties:
                               cloudWatchEncryptionEnabled:
-                                description: Whether or not to enable encryption on
-                                  the CloudWatch logs. If not specified, encryption
-                                  will be disabled.
+                                description: Whether to enable encryption on the CloudWatch
+                                  logs. If not specified, encryption will be disabled.
                                 type: boolean
                               cloudWatchLogGroupName:
                                 description: The name of the CloudWatch log group
                                   to send logs to.
                                 type: string
                               s3BucketEncryptionEnabled:
-                                description: Whether or not to enable encryption on
-                                  the logs sent to S3. If not specified, encryption
-                                  will be disabled.
+                                description: Whether to enable encryption on the logs
+                                  sent to S3. If not specified, encryption will be
+                                  disabled.
                                 type: boolean
                               s3BucketName:
-                                description: The name of the S3 bucket to send logs
-                                  to.
+                                description: Name of the S3 bucket to send logs to.
                                 type: string
                               s3KeyPrefix:
-                                description: An optional folder in the S3 bucket to
-                                  place logs in.
+                                description: Optional folder in the S3 bucket to place
+                                  logs in.
                                 type: string
                             type: object
                           logging:
-                            description: The log setting to use for redirecting logs
-                              for your execute command results. Valid values are NONE,
-                              DEFAULT, and OVERRIDE.
+                            description: 'Log setting to use for redirecting logs
+                              for your execute command results. Valid values: NONE,
+                              DEFAULT, OVERRIDE.'
+                            type: string
+                        type: object
+                      managedStorageConfiguration:
+                        description: Details of the managed storage configuration.
+                          See managed_storage_configuration Block for details.
+                        properties:
+                          fargateEphemeralStorageKmsKeyId:
+                            description: AWS Key Management Service key ID for the
+                              Fargate ephemeral storage.
+                            type: string
+                          kmsKeyId:
+                            description: AWS Key Management Service key ID to encrypt
+                              the managed storage.
                             type: string
                         type: object
                     type: object
                   serviceConnectDefaults:
-                    description: Configures a default Service Connect namespace. Detailed
-                      below.
+                    description: Default Service Connect namespace. See service_connect_defaults
+                      Block for details.
                     properties:
                       namespace:
-                        description: The ARN of the aws_service_discovery_http_namespace
+                        description: ARN of the aws_service_discovery_http_namespace
                           that's used when you create a service and don't specify
                           a Service Connect configuration.
                         type: string
@@ -817,7 +839,7 @@ spec:
                   setting:
                     description: Configuration block(s) with cluster settings. For
                       example, this can be used to enable CloudWatch Container Insights
-                      for a cluster. Detailed below.
+                      for a cluster. See setting Block for details.
                     items:
                       properties:
                         name:
@@ -825,8 +847,8 @@ spec:
                             containerInsights.'
                           type: string
                         value:
-                          description: The value to assign to the setting. Valid values
-                            are enabled and disabled.
+                          description: 'Value to assign to the setting. Valid values:
+                            enabled, disabled.'
                           type: string
                       type: object
                     type: array
@@ -1013,49 +1035,60 @@ spec:
                     description: ARN that identifies the cluster.
                     type: string
                   configuration:
-                    description: The execute command configuration for the cluster.
-                      Detailed below.
+                    description: Execute command configuration for the cluster. See
+                      configuration Block for details.
                     properties:
                       executeCommandConfiguration:
-                        description: The details of the execute command configuration.
-                          Detailed below.
+                        description: Details of the execute command configuration.
+                          See execute_command_configuration Block for details.
                         properties:
                           kmsKeyId:
-                            description: The AWS Key Management Service key ID to
-                              encrypt the data between the local client and the container.
+                            description: AWS Key Management Service key ID to encrypt
+                              the data between the local client and the container.
                             type: string
                           logConfiguration:
-                            description: The log configuration for the results of
-                              the execute command actions Required when logging is
-                              OVERRIDE. Detailed below.
+                            description: Log configuration for the results of the
+                              execute command actions. Required when logging is OVERRIDE.
+                              See log_configuration Block for details.
                             properties:
                               cloudWatchEncryptionEnabled:
-                                description: Whether or not to enable encryption on
-                                  the CloudWatch logs. If not specified, encryption
-                                  will be disabled.
+                                description: Whether to enable encryption on the CloudWatch
+                                  logs. If not specified, encryption will be disabled.
                                 type: boolean
                               cloudWatchLogGroupName:
                                 description: The name of the CloudWatch log group
                                   to send logs to.
                                 type: string
                               s3BucketEncryptionEnabled:
-                                description: Whether or not to enable encryption on
-                                  the logs sent to S3. If not specified, encryption
-                                  will be disabled.
+                                description: Whether to enable encryption on the logs
+                                  sent to S3. If not specified, encryption will be
+                                  disabled.
                                 type: boolean
                               s3BucketName:
-                                description: The name of the S3 bucket to send logs
-                                  to.
+                                description: Name of the S3 bucket to send logs to.
                                 type: string
                               s3KeyPrefix:
-                                description: An optional folder in the S3 bucket to
-                                  place logs in.
+                                description: Optional folder in the S3 bucket to place
+                                  logs in.
                                 type: string
                             type: object
                           logging:
-                            description: The log setting to use for redirecting logs
-                              for your execute command results. Valid values are NONE,
-                              DEFAULT, and OVERRIDE.
+                            description: 'Log setting to use for redirecting logs
+                              for your execute command results. Valid values: NONE,
+                              DEFAULT, OVERRIDE.'
+                            type: string
+                        type: object
+                      managedStorageConfiguration:
+                        description: Details of the managed storage configuration.
+                          See managed_storage_configuration Block for details.
+                        properties:
+                          fargateEphemeralStorageKmsKeyId:
+                            description: AWS Key Management Service key ID for the
+                              Fargate ephemeral storage.
+                            type: string
+                          kmsKeyId:
+                            description: AWS Key Management Service key ID to encrypt
+                              the managed storage.
                             type: string
                         type: object
                     type: object
@@ -1063,11 +1096,11 @@ spec:
                     description: ARN that identifies the cluster.
                     type: string
                   serviceConnectDefaults:
-                    description: Configures a default Service Connect namespace. Detailed
-                      below.
+                    description: Default Service Connect namespace. See service_connect_defaults
+                      Block for details.
                     properties:
                       namespace:
-                        description: The ARN of the aws_service_discovery_http_namespace
+                        description: ARN of the aws_service_discovery_http_namespace
                           that's used when you create a service and don't specify
                           a Service Connect configuration.
                         type: string
@@ -1075,7 +1108,7 @@ spec:
                   setting:
                     description: Configuration block(s) with cluster settings. For
                       example, this can be used to enable CloudWatch Container Insights
-                      for a cluster. Detailed below.
+                      for a cluster. See setting Block for details.
                     items:
                       properties:
                         name:
@@ -1083,8 +1116,8 @@ spec:
                             containerInsights.'
                           type: string
                         value:
-                          description: The value to assign to the setting. Valid values
-                            are enabled and disabled.
+                          description: 'Value to assign to the setting. Valid values:
+                            enabled, disabled.'
                           type: string
                       type: object
                     type: array

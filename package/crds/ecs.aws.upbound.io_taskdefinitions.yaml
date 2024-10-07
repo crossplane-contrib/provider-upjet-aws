@@ -1694,8 +1694,10 @@ spec:
                       task to make calls to other AWS services.
                     type: string
                   trackLatest:
-                    description: Whether should track latest task definition or the
-                      one created with the resource. Default is false.
+                    description: Whether should track latest ACTIVE task definition
+                      on AWS or the one created with the resource stored in state.
+                      Default is false. Useful in the event the task definition is
+                      modified outside of this resource.
                     type: boolean
                   volume:
                     description: Configuration block for volumes that containers in
@@ -2070,8 +2072,10 @@ spec:
                       task to make calls to other AWS services.
                     type: string
                   trackLatest:
-                    description: Whether should track latest task definition or the
-                      one created with the resource. Default is false.
+                    description: Whether should track latest ACTIVE task definition
+                      on AWS or the one created with the resource stored in state.
+                      Default is false. Useful in the event the task definition is
+                      modified outside of this resource.
                     type: boolean
                   volume:
                     description: Configuration block for volumes that containers in
@@ -2561,8 +2565,10 @@ spec:
                       task to make calls to other AWS services.
                     type: string
                   trackLatest:
-                    description: Whether should track latest task definition or the
-                      one created with the resource. Default is false.
+                    description: Whether should track latest ACTIVE task definition
+                      on AWS or the one created with the resource stored in state.
+                      Default is false. Useful in the event the task definition is
+                      modified outside of this resource.
                     type: boolean
                   volume:
                     description: Configuration block for volumes that containers in

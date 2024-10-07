@@ -1670,6 +1670,10 @@ spec:
                       be enabled for Redis (cluster mode enabled) replication groups.
                       Defaults to false.
                     type: boolean
+                  clusterMode:
+                    description: Specifies whether cluster mode is enabled or disabled.
+                      Valid values are enabled or disabled or compatible
+                    type: string
                   dataTieringEnabled:
                     description: Enables data tiering. Data tiering is only supported
                       for replication groups using the r6gd node type. This parameter
@@ -1892,18 +1896,20 @@ spec:
                       window is a 60 minute period. Example: sun:05:00-sun:09:00'
                     type: string
                   multiAzEnabled:
-                    description: Specifies whether to enable Multi-AZ Support for
-                      the replication group. If true, automatic_failover_enabled must
-                      also be enabled. Defaults to false.
+                    description: |-
+                      Specifies whether to enable Multi-AZ Support for the replication group.
+                      If true, automatic_failover_enabled must also be enabled.
+                      Defaults to false.
                     type: boolean
                   networkType:
                     description: The IP versions for cache cluster connections. Valid
                       values are ipv4, ipv6 or dual_stack.
                     type: string
                   nodeType:
-                    description: Instance class to be used. See AWS documentation
-                      for information on supported node types and guidance on selecting
-                      node types. Required unless global_replication_group_id is set.
+                    description: |-
+                      Instance class to be used.
+                      See AWS documentation for information on supported node types and guidance on selecting node types.
+                      Required unless global_replication_group_id is set.
                       Cannot be set if global_replication_group_id is set.
                     type: string
                   notificationTopicArn:
@@ -1916,6 +1922,7 @@ spec:
                     description: |-
                       Number of node groups (shards) for this Redis replication group.
                       Changing this number will trigger a resizing operation before other settings modifications.
+                      Conflicts with num_cache_clusters.
                     type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
@@ -1946,6 +1953,8 @@ spec:
                       Number of replica nodes in each node group.
                       Changing this number will trigger a resizing operation before other settings modifications.
                       Valid values are 0 to 5.
+                      Conflicts with num_cache_clusters.
+                      Can only be set if num_node_groups is set.
                     type: number
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -2239,6 +2248,10 @@ spec:
                       be enabled for Redis (cluster mode enabled) replication groups.
                       Defaults to false.
                     type: boolean
+                  clusterMode:
+                    description: Specifies whether cluster mode is enabled or disabled.
+                      Valid values are enabled or disabled or compatible
+                    type: string
                   dataTieringEnabled:
                     description: Enables data tiering. Data tiering is only supported
                       for replication groups using the r6gd node type. This parameter
@@ -2461,18 +2474,20 @@ spec:
                       window is a 60 minute period. Example: sun:05:00-sun:09:00'
                     type: string
                   multiAzEnabled:
-                    description: Specifies whether to enable Multi-AZ Support for
-                      the replication group. If true, automatic_failover_enabled must
-                      also be enabled. Defaults to false.
+                    description: |-
+                      Specifies whether to enable Multi-AZ Support for the replication group.
+                      If true, automatic_failover_enabled must also be enabled.
+                      Defaults to false.
                     type: boolean
                   networkType:
                     description: The IP versions for cache cluster connections. Valid
                       values are ipv4, ipv6 or dual_stack.
                     type: string
                   nodeType:
-                    description: Instance class to be used. See AWS documentation
-                      for information on supported node types and guidance on selecting
-                      node types. Required unless global_replication_group_id is set.
+                    description: |-
+                      Instance class to be used.
+                      See AWS documentation for information on supported node types and guidance on selecting node types.
+                      Required unless global_replication_group_id is set.
                       Cannot be set if global_replication_group_id is set.
                     type: string
                   notificationTopicArn:
@@ -2485,6 +2500,7 @@ spec:
                     description: |-
                       Number of node groups (shards) for this Redis replication group.
                       Changing this number will trigger a resizing operation before other settings modifications.
+                      Conflicts with num_cache_clusters.
                     type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
@@ -2511,6 +2527,8 @@ spec:
                       Number of replica nodes in each node group.
                       Changing this number will trigger a resizing operation before other settings modifications.
                       Valid values are 0 to 5.
+                      Conflicts with num_cache_clusters.
+                      Can only be set if num_node_groups is set.
                     type: number
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -2913,6 +2931,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.description is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
+                || (has(self.initProvider) && has(self.initProvider.description))'
           status:
             description: ReplicationGroupStatus defines the observed state of ReplicationGroup.
             properties:
@@ -2948,6 +2971,10 @@ spec:
                   clusterEnabled:
                     description: Indicates if cluster mode is enabled.
                     type: boolean
+                  clusterMode:
+                    description: Specifies whether cluster mode is enabled or disabled.
+                      Valid values are enabled or disabled or compatible
+                    type: string
                   configurationEndpointAddress:
                     description: Address of the replication group configuration endpoint
                       when cluster mode is enabled.
@@ -3039,18 +3066,20 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   multiAzEnabled:
-                    description: Specifies whether to enable Multi-AZ Support for
-                      the replication group. If true, automatic_failover_enabled must
-                      also be enabled. Defaults to false.
+                    description: |-
+                      Specifies whether to enable Multi-AZ Support for the replication group.
+                      If true, automatic_failover_enabled must also be enabled.
+                      Defaults to false.
                     type: boolean
                   networkType:
                     description: The IP versions for cache cluster connections. Valid
                       values are ipv4, ipv6 or dual_stack.
                     type: string
                   nodeType:
-                    description: Instance class to be used. See AWS documentation
-                      for information on supported node types and guidance on selecting
-                      node types. Required unless global_replication_group_id is set.
+                    description: |-
+                      Instance class to be used.
+                      See AWS documentation for information on supported node types and guidance on selecting node types.
+                      Required unless global_replication_group_id is set.
                       Cannot be set if global_replication_group_id is set.
                     type: string
                   notificationTopicArn:
@@ -3063,6 +3092,7 @@ spec:
                     description: |-
                       Number of node groups (shards) for this Redis replication group.
                       Changing this number will trigger a resizing operation before other settings modifications.
+                      Conflicts with num_cache_clusters.
                     type: number
                   parameterGroupName:
                     description: Name of the parameter group to associate with this
@@ -3097,6 +3127,8 @@ spec:
                       Number of replica nodes in each node group.
                       Changing this number will trigger a resizing operation before other settings modifications.
                       Valid values are 0 to 5.
+                      Conflicts with num_cache_clusters.
+                      Can only be set if num_node_groups is set.
                     type: number
                   securityGroupIds:
                     description: IDs of one or more Amazon VPC security groups associated

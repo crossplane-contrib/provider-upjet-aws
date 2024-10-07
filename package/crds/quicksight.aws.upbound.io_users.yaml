@@ -112,7 +112,8 @@ spec:
                     type: string
                   userRole:
                     description: 'The Amazon QuickSight role of the user. The user
-                      role can be one of the following: READER, AUTHOR, or ADMIN'
+                      role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO,
+                      AUTHOR_PRO or ADMIN_PRO.'
                     type: string
                 required:
                 - region
@@ -165,7 +166,8 @@ spec:
                     type: string
                   userRole:
                     description: 'The Amazon QuickSight role of the user. The user
-                      role can be one of the following: READER, AUTHOR, or ADMIN'
+                      role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO,
+                      AUTHOR_PRO or ADMIN_PRO.'
                     type: string
                 type: object
               managementPolicies:
@@ -393,7 +395,8 @@ spec:
                     type: string
                   userRole:
                     description: 'The Amazon QuickSight role of the user. The user
-                      role can be one of the following: READER, AUTHOR, or ADMIN'
+                      role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO,
+                      AUTHOR_PRO or ADMIN_PRO.'
                     type: string
                 type: object
               conditions:

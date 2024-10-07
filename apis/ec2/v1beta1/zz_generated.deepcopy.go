@@ -43115,6 +43115,11 @@ func (in *TransitGatewayInitParameters_2) DeepCopyInto(out *TransitGatewayInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -44309,6 +44314,11 @@ func (in *TransitGatewayObservation_2) DeepCopyInto(out *TransitGatewayObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -44424,6 +44434,11 @@ func (in *TransitGatewayParameters_2) DeepCopyInto(out *TransitGatewayParameters
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
 		*out = new(string)
 		**out = **in
 	}
@@ -46929,6 +46944,11 @@ func (in *TransitGatewayVPCAttachmentAccepterObservation) DeepCopyInto(out *Tran
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -47128,6 +47148,11 @@ func (in *TransitGatewayVPCAttachmentInitParameters) DeepCopyInto(out *TransitGa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetIDRefs != nil {
 		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
 		*out = make([]v1.Reference, len(*in))
@@ -47274,6 +47299,11 @@ func (in *TransitGatewayVPCAttachmentObservation) DeepCopyInto(out *TransitGatew
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -47374,6 +47404,11 @@ func (in *TransitGatewayVPCAttachmentParameters) DeepCopyInto(out *TransitGatewa
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
 		*out = new(string)
 		**out = **in
 	}

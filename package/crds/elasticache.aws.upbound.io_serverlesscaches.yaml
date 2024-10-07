@@ -75,13 +75,13 @@ spec:
                 properties:
                   cacheUsageLimits:
                     description: Sets the cache usage limits for storage and ElastiCache
-                      Processing Units for the cache. See configuration below.
+                      Processing Units for the cache. See cache_usage_limits Block
+                      for details.
                     items:
                       properties:
                         dataStorage:
                           description: The maximum data storage limit in the cache,
-                            expressed in Gigabytes. See Data Storage config for more
-                            details.
+                            expressed in Gigabytes. See data_storage Block for details.
                           items:
                             properties:
                               maximum:
@@ -100,17 +100,19 @@ spec:
                           type: array
                         ecpuPerSecond:
                           description: The configuration for the number of ElastiCache
-                            Processing Units (ECPU) the cache can consume per second.See
-                            config block for more details.
+                            Processing Units (ECPU) the cache can consume per second.
+                            See ecpu_per_second Block for details.
                           items:
                             properties:
                               maximum:
-                                description: The upper limit for data storage the
-                                  cache is set to use. Must be between 1 and 5,000.
+                                description: The maximum number of ECPUs the cache
+                                  can consume per second. Must be between 1,000 and
+                                  15,000,000.
                                 type: number
                               minimum:
-                                description: The lower limit for data storage the
-                                  cache is set to use. Must be between 1 and 5,000.
+                                description: The minimum number of ECPUs the cache
+                                  can consume per second. Must be between 1,000 and
+                                  15,000,000.
                                 type: number
                             type: object
                           type: array
@@ -432,13 +434,13 @@ spec:
                 properties:
                   cacheUsageLimits:
                     description: Sets the cache usage limits for storage and ElastiCache
-                      Processing Units for the cache. See configuration below.
+                      Processing Units for the cache. See cache_usage_limits Block
+                      for details.
                     items:
                       properties:
                         dataStorage:
                           description: The maximum data storage limit in the cache,
-                            expressed in Gigabytes. See Data Storage config for more
-                            details.
+                            expressed in Gigabytes. See data_storage Block for details.
                           items:
                             properties:
                               maximum:
@@ -457,17 +459,19 @@ spec:
                           type: array
                         ecpuPerSecond:
                           description: The configuration for the number of ElastiCache
-                            Processing Units (ECPU) the cache can consume per second.See
-                            config block for more details.
+                            Processing Units (ECPU) the cache can consume per second.
+                            See ecpu_per_second Block for details.
                           items:
                             properties:
                               maximum:
-                                description: The upper limit for data storage the
-                                  cache is set to use. Must be between 1 and 5,000.
+                                description: The maximum number of ECPUs the cache
+                                  can consume per second. Must be between 1,000 and
+                                  15,000,000.
                                 type: number
                               minimum:
-                                description: The lower limit for data storage the
-                                  cache is set to use. Must be between 1 and 5,000.
+                                description: The minimum number of ECPUs the cache
+                                  can consume per second. Must be between 1,000 and
+                                  15,000,000.
                                 type: number
                             type: object
                           type: array
@@ -951,13 +955,13 @@ spec:
                     type: string
                   cacheUsageLimits:
                     description: Sets the cache usage limits for storage and ElastiCache
-                      Processing Units for the cache. See configuration below.
+                      Processing Units for the cache. See cache_usage_limits Block
+                      for details.
                     items:
                       properties:
                         dataStorage:
                           description: The maximum data storage limit in the cache,
-                            expressed in Gigabytes. See Data Storage config for more
-                            details.
+                            expressed in Gigabytes. See data_storage Block for details.
                           items:
                             properties:
                               maximum:
@@ -976,17 +980,19 @@ spec:
                           type: array
                         ecpuPerSecond:
                           description: The configuration for the number of ElastiCache
-                            Processing Units (ECPU) the cache can consume per second.See
-                            config block for more details.
+                            Processing Units (ECPU) the cache can consume per second.
+                            See ecpu_per_second Block for details.
                           items:
                             properties:
                               maximum:
-                                description: The upper limit for data storage the
-                                  cache is set to use. Must be between 1 and 5,000.
+                                description: The maximum number of ECPUs the cache
+                                  can consume per second. Must be between 1,000 and
+                                  15,000,000.
                                 type: number
                               minimum:
-                                description: The lower limit for data storage the
-                                  cache is set to use. Must be between 1 and 5,000.
+                                description: The minimum number of ECPUs the cache
+                                  can consume per second. Must be between 1,000 and
+                                  15,000,000.
                                 type: number
                             type: object
                           type: array
@@ -1006,7 +1012,7 @@ spec:
                     type: string
                   endpoint:
                     description: Represents the information required for client programs
-                      to connect to a cache node. See config below for details.
+                      to connect to a cache node. See endpoint Block for details.
                     items:
                       properties:
                         address:
@@ -1040,7 +1046,7 @@ spec:
                     type: string
                   readerEndpoint:
                     description: Represents the information required for client programs
-                      to connect to a cache node. See config below for details.
+                      to connect to a cache node. See reader_endpoint Block for details.
                     items:
                       properties:
                         address:

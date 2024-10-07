@@ -15,7 +15,7 @@ import (
 
 type AuthenticateCognitoInitParameters struct {
 
-	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. See below.
 	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
@@ -43,7 +43,7 @@ type AuthenticateCognitoInitParameters struct {
 
 type AuthenticateCognitoObservation struct {
 
-	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. See below.
 	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
 
@@ -71,7 +71,7 @@ type AuthenticateCognitoObservation struct {
 
 type AuthenticateCognitoParameters struct {
 
-	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. Detailed below.
+	// Query parameters to include in the redirect request to the authorization endpoint. Max: 10. See below.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	AuthenticationRequestExtraParams map[string]*string `json:"authenticationRequestExtraParams,omitempty" tf:"authentication_request_extra_params,omitempty"`
@@ -226,34 +226,25 @@ type AuthenticateOidcParameters struct {
 
 type DefaultActionInitParameters struct {
 
-	// Configuration block for using Amazon Cognito to authenticate users. Specify only when type is authenticate-cognito. Detailed below.
+	// Configuration block for using Amazon Cognito to authenticate users. Specify only when type is authenticate-cognito. See below.
 	AuthenticateCognito *AuthenticateCognitoInitParameters `json:"authenticateCognito,omitempty" tf:"authenticate_cognito,omitempty"`
 
-	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. Detailed below.
+	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. See below.
 	AuthenticateOidc *AuthenticateOidcInitParameters `json:"authenticateOidc,omitempty" tf:"authenticate_oidc,omitempty"`
 
 	// Information for creating an action that returns a custom HTTP response. Required if type is fixed-response.
 	FixedResponse *FixedResponseInitParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Configuration block for creating an action that distributes requests among one or more target groups.
-	// Specify only if type is forward.
-	// Cannot be specified with target_group_arn.
-	// Detailed below.
+	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. See below.
 	Forward *ForwardInitParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 
-	// Order for the action.
-	// The action with the lowest value for order is performed first.
-	// Valid values are between 1 and 50000.
-	// Defaults to the position in the list of actions.
+	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
-	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
+	// Configuration block for creating a redirect action. Required if type is redirect. See below.
 	Redirect *RedirectInitParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
-	// ARN of the Target Group to which to route traffic.
-	// Specify only if type is forward and you want to route to a single target group.
-	// To route to one or more target groups, use a forward block instead.
-	// Cannot be specified with forward.
+	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead. Can be specified with forward but ARNs must match.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBTargetGroup
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
@@ -271,34 +262,25 @@ type DefaultActionInitParameters struct {
 
 type DefaultActionObservation struct {
 
-	// Configuration block for using Amazon Cognito to authenticate users. Specify only when type is authenticate-cognito. Detailed below.
+	// Configuration block for using Amazon Cognito to authenticate users. Specify only when type is authenticate-cognito. See below.
 	AuthenticateCognito *AuthenticateCognitoObservation `json:"authenticateCognito,omitempty" tf:"authenticate_cognito,omitempty"`
 
-	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. Detailed below.
+	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. See below.
 	AuthenticateOidc *AuthenticateOidcObservation `json:"authenticateOidc,omitempty" tf:"authenticate_oidc,omitempty"`
 
 	// Information for creating an action that returns a custom HTTP response. Required if type is fixed-response.
 	FixedResponse *FixedResponseObservation `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Configuration block for creating an action that distributes requests among one or more target groups.
-	// Specify only if type is forward.
-	// Cannot be specified with target_group_arn.
-	// Detailed below.
+	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. See below.
 	Forward *ForwardObservation `json:"forward,omitempty" tf:"forward,omitempty"`
 
-	// Order for the action.
-	// The action with the lowest value for order is performed first.
-	// Valid values are between 1 and 50000.
-	// Defaults to the position in the list of actions.
+	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
-	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
+	// Configuration block for creating a redirect action. Required if type is redirect. See below.
 	Redirect *RedirectObservation `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
-	// ARN of the Target Group to which to route traffic.
-	// Specify only if type is forward and you want to route to a single target group.
-	// To route to one or more target groups, use a forward block instead.
-	// Cannot be specified with forward.
+	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead. Can be specified with forward but ARNs must match.
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
 
 	// Type of routing action. Valid values are forward, redirect, fixed-response, authenticate-cognito and authenticate-oidc.
@@ -307,11 +289,11 @@ type DefaultActionObservation struct {
 
 type DefaultActionParameters struct {
 
-	// Configuration block for using Amazon Cognito to authenticate users. Specify only when type is authenticate-cognito. Detailed below.
+	// Configuration block for using Amazon Cognito to authenticate users. Specify only when type is authenticate-cognito. See below.
 	// +kubebuilder:validation:Optional
 	AuthenticateCognito *AuthenticateCognitoParameters `json:"authenticateCognito,omitempty" tf:"authenticate_cognito,omitempty"`
 
-	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. Detailed below.
+	// Configuration block for an identity provider that is compliant with OpenID Connect (OIDC). Specify only when type is authenticate-oidc. See below.
 	// +kubebuilder:validation:Optional
 	AuthenticateOidc *AuthenticateOidcParameters `json:"authenticateOidc,omitempty" tf:"authenticate_oidc,omitempty"`
 
@@ -319,28 +301,19 @@ type DefaultActionParameters struct {
 	// +kubebuilder:validation:Optional
 	FixedResponse *FixedResponseParameters `json:"fixedResponse,omitempty" tf:"fixed_response,omitempty"`
 
-	// Configuration block for creating an action that distributes requests among one or more target groups.
-	// Specify only if type is forward.
-	// Cannot be specified with target_group_arn.
-	// Detailed below.
+	// Configuration block for creating an action that distributes requests among one or more target groups. Specify only if type is forward. See below.
 	// +kubebuilder:validation:Optional
 	Forward *ForwardParameters `json:"forward,omitempty" tf:"forward,omitempty"`
 
-	// Order for the action.
-	// The action with the lowest value for order is performed first.
-	// Valid values are between 1 and 50000.
-	// Defaults to the position in the list of actions.
+	// Order for the action. The action with the lowest value for order is performed first. Valid values are between 1 and 50000. Defaults to the position in the list of actions.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
-	// Configuration block for creating a redirect action. Required if type is redirect. Detailed below.
+	// Configuration block for creating a redirect action. Required if type is redirect. See below.
 	// +kubebuilder:validation:Optional
 	Redirect *RedirectParameters `json:"redirect,omitempty" tf:"redirect,omitempty"`
 
-	// ARN of the Target Group to which to route traffic.
-	// Specify only if type is forward and you want to route to a single target group.
-	// To route to one or more target groups, use a forward block instead.
-	// Cannot be specified with forward.
+	// ARN of the Target Group to which to route traffic. Specify only if type is forward and you want to route to a single target group. To route to one or more target groups, use a forward block instead. Can be specified with forward but ARNs must match.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBTargetGroup
 	// +kubebuilder:validation:Optional
 	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
@@ -399,29 +372,29 @@ type FixedResponseParameters struct {
 
 type ForwardInitParameters struct {
 
-	// Configuration block for target group stickiness for the rule. Detailed below.
+	// Configuration block for target group stickiness for the rule. See below.
 	Stickiness *StickinessInitParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
-	// Set of 1-5 target group blocks. Detailed below.
+	// Set of 1-5 target group blocks. See below.
 	TargetGroup []TargetGroupInitParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
 type ForwardObservation struct {
 
-	// Configuration block for target group stickiness for the rule. Detailed below.
+	// Configuration block for target group stickiness for the rule. See below.
 	Stickiness *StickinessObservation `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
-	// Set of 1-5 target group blocks. Detailed below.
+	// Set of 1-5 target group blocks. See below.
 	TargetGroup []TargetGroupObservation `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
 type ForwardParameters struct {
 
-	// Configuration block for target group stickiness for the rule. Detailed below.
+	// Configuration block for target group stickiness for the rule. See below.
 	// +kubebuilder:validation:Optional
 	Stickiness *StickinessParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
-	// Set of 1-5 target group blocks. Detailed below.
+	// Set of 1-5 target group blocks. See below.
 	// +kubebuilder:validation:Optional
 	TargetGroup []TargetGroupParameters `json:"targetGroup" tf:"target_group,omitempty"`
 }
@@ -434,7 +407,7 @@ type LBListenerInitParameters struct {
 	// ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS. For adding additional SSL certificates, see the aws_lb_listener_certificate resource.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
-	// Configuration block for default actions. Detailed below.
+	// Configuration block for default actions. See below.
 	DefaultAction []DefaultActionInitParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the load balancer.
@@ -449,7 +422,7 @@ type LBListenerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
-	// The mutual authentication configuration information. Detailed below.
+	// The mutual authentication configuration information. See below.
 	MutualAuthentication *MutualAuthenticationInitParameters `json:"mutualAuthentication,omitempty" tf:"mutual_authentication,omitempty"`
 
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
@@ -458,7 +431,7 @@ type LBListenerInitParameters struct {
 	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid for Gateway Load Balancers.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
+	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS. Default is ELBSecurityPolicy-2016-08.
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -477,7 +450,7 @@ type LBListenerObservation struct {
 	// ARN of the default SSL server certificate. Exactly one certificate is required if the protocol is HTTPS. For adding additional SSL certificates, see the aws_lb_listener_certificate resource.
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
-	// Configuration block for default actions. Detailed below.
+	// Configuration block for default actions. See below.
 	DefaultAction []DefaultActionObservation `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// ARN of the listener (matches arn).
@@ -486,7 +459,7 @@ type LBListenerObservation struct {
 	// ARN of the load balancer.
 	LoadBalancerArn *string `json:"loadBalancerArn,omitempty" tf:"load_balancer_arn,omitempty"`
 
-	// The mutual authentication configuration information. Detailed below.
+	// The mutual authentication configuration information. See below.
 	MutualAuthentication *MutualAuthenticationObservation `json:"mutualAuthentication,omitempty" tf:"mutual_authentication,omitempty"`
 
 	// Port on which the load balancer is listening. Not valid for Gateway Load Balancers.
@@ -495,7 +468,7 @@ type LBListenerObservation struct {
 	// Protocol for connections from clients to the load balancer. For Application Load Balancers, valid values are HTTP and HTTPS, with a default of HTTP. For Network Load Balancers, valid values are TCP, TLS, UDP, and TCP_UDP. Not valid to use UDP or TCP_UDP if dual-stack mode is enabled. Not valid for Gateway Load Balancers.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
+	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS. Default is ELBSecurityPolicy-2016-08.
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
 	// Key-value map of resource tags.
@@ -517,7 +490,7 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	CertificateArn *string `json:"certificateArn,omitempty" tf:"certificate_arn,omitempty"`
 
-	// Configuration block for default actions. Detailed below.
+	// Configuration block for default actions. See below.
 	// +kubebuilder:validation:Optional
 	DefaultAction []DefaultActionParameters `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
@@ -534,7 +507,7 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadBalancerArnSelector *v1.Selector `json:"loadBalancerArnSelector,omitempty" tf:"-"`
 
-	// The mutual authentication configuration information. Detailed below.
+	// The mutual authentication configuration information. See below.
 	// +kubebuilder:validation:Optional
 	MutualAuthentication *MutualAuthenticationParameters `json:"mutualAuthentication,omitempty" tf:"mutual_authentication,omitempty"`
 
@@ -551,7 +524,7 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
+	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS. Default is ELBSecurityPolicy-2016-08.
 	// +kubebuilder:validation:Optional
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 

@@ -497,7 +497,7 @@ type InstanceInitParameters struct {
 
 type InstanceMarketOptionsInitParameters struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
@@ -506,7 +506,7 @@ type InstanceMarketOptionsInitParameters struct {
 
 type InstanceMarketOptionsObservation struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
 	// Block to configure the options for Spot Instances. See Spot Options below for details on attributes.
@@ -515,7 +515,7 @@ type InstanceMarketOptionsObservation struct {
 
 type InstanceMarketOptionsParameters struct {
 
-	// Type of market for the instance. Valid value is spot. Defaults to spot. Required if spot_options is specified.
+	// Type of market for the instance. Valid values are spot and capacity-block. Defaults to spot. Required if spot_options is specified.
 	// +kubebuilder:validation:Optional
 	MarketType *string `json:"marketType,omitempty" tf:"market_type,omitempty"`
 
@@ -988,7 +988,7 @@ type MetadataOptionsInitParameters struct {
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
 	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
@@ -1006,7 +1006,7 @@ type MetadataOptionsObservation struct {
 	// Desired HTTP PUT response hop limit for instance metadata requests. The larger the number, the further instance metadata requests can travel. Valid values are integer from 1 to 64. Defaults to 1.
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required.
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 
 	// Enables or disables access to instance tags from the instance metadata service. Valid values include enabled or disabled. Defaults to disabled.
@@ -1027,7 +1027,7 @@ type MetadataOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPPutResponseHopLimit *float64 `json:"httpPutResponseHopLimit,omitempty" tf:"http_put_response_hop_limit,omitempty"`
 
-	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required. Defaults to optional.
+	// Whether or not the metadata service requires session tokens, also referred to as Instance Metadata Service Version 2 (IMDSv2). Valid values include optional or required.
 	// +kubebuilder:validation:Optional
 	HTTPTokens *string `json:"httpTokens,omitempty" tf:"http_tokens,omitempty"`
 

@@ -36,6 +36,9 @@ type TransitGatewayInitParameters_2 struct {
 	// Whether Multicast support is enabled. Required to use ec2_transit_gateway_multicast_domain. Valid values: disable, enable. Default value: disable.
 	MulticastSupport *string `json:"multicastSupport,omitempty" tf:"multicast_support,omitempty"`
 
+	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable. Default value: disable.
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -85,6 +88,9 @@ type TransitGatewayObservation_2 struct {
 
 	// Identifier of the default propagation route table
 	PropagationDefaultRouteTableID *string `json:"propagationDefaultRouteTableId,omitempty" tf:"propagation_default_route_table_id,omitempty"`
+
+	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable. Default value: disable.
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -136,6 +142,10 @@ type TransitGatewayParameters_2 struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable. Default value: disable.
+	// +kubebuilder:validation:Optional
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

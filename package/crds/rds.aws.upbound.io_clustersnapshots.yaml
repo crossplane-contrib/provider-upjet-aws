@@ -158,6 +158,13 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  sharedAccounts:
+                    description: List of AWS Account ids to share snapshot with, use
+                      all to make snaphot public.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
@@ -261,6 +268,13 @@ spec:
                   dbClusterSnapshotIdentifier:
                     description: The Identifier for the snapshot.
                     type: string
+                  sharedAccounts:
+                    description: List of AWS Account ids to share snapshot with, use
+                      all to make snaphot public.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
@@ -486,6 +500,13 @@ spec:
                     description: Port that the DB cluster was listening on at the
                       time of the snapshot.
                     type: number
+                  sharedAccounts:
+                    description: List of AWS Account ids to share snapshot with, use
+                      all to make snaphot public.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   snapshotType:
                     type: string
                   sourceDbClusterSnapshotArn:

@@ -342,6 +342,11 @@ func (in *ApplicationVersionInitParameters) DeepCopyInto(out *ApplicationVersion
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Process != nil {
+		in, out := &in.Process, &out.Process
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -440,6 +445,11 @@ func (in *ApplicationVersionObservation) DeepCopyInto(out *ApplicationVersionObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.Process != nil {
+		in, out := &in.Process, &out.Process
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -531,6 +541,11 @@ func (in *ApplicationVersionParameters) DeepCopyInto(out *ApplicationVersionPara
 		in, out := &in.KeySelector, &out.KeySelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.Process != nil {
+		in, out := &in.Process, &out.Process
+		*out = new(bool)
+		**out = **in
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

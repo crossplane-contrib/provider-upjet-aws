@@ -15,29 +15,29 @@ import (
 
 type CacheUsageLimitsInitParameters struct {
 
-	// The maximum data storage limit in the cache, expressed in Gigabytes. See Data Storage config for more details.
+	// The maximum data storage limit in the cache, expressed in Gigabytes. See data_storage Block for details.
 	DataStorage []DataStorageInitParameters `json:"dataStorage,omitempty" tf:"data_storage,omitempty"`
 
-	// The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second.See config block for more details.
+	// The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second. See ecpu_per_second Block for details.
 	EcpuPerSecond []EcpuPerSecondInitParameters `json:"ecpuPerSecond,omitempty" tf:"ecpu_per_second,omitempty"`
 }
 
 type CacheUsageLimitsObservation struct {
 
-	// The maximum data storage limit in the cache, expressed in Gigabytes. See Data Storage config for more details.
+	// The maximum data storage limit in the cache, expressed in Gigabytes. See data_storage Block for details.
 	DataStorage []DataStorageObservation `json:"dataStorage,omitempty" tf:"data_storage,omitempty"`
 
-	// The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second.See config block for more details.
+	// The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second. See ecpu_per_second Block for details.
 	EcpuPerSecond []EcpuPerSecondObservation `json:"ecpuPerSecond,omitempty" tf:"ecpu_per_second,omitempty"`
 }
 
 type CacheUsageLimitsParameters struct {
 
-	// The maximum data storage limit in the cache, expressed in Gigabytes. See Data Storage config for more details.
+	// The maximum data storage limit in the cache, expressed in Gigabytes. See data_storage Block for details.
 	// +kubebuilder:validation:Optional
 	DataStorage []DataStorageParameters `json:"dataStorage,omitempty" tf:"data_storage,omitempty"`
 
-	// The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second.See config block for more details.
+	// The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second. See ecpu_per_second Block for details.
 	// +kubebuilder:validation:Optional
 	EcpuPerSecond []EcpuPerSecondParameters `json:"ecpuPerSecond,omitempty" tf:"ecpu_per_second,omitempty"`
 }
@@ -83,29 +83,29 @@ type DataStorageParameters struct {
 
 type EcpuPerSecondInitParameters struct {
 
-	// The upper limit for data storage the cache is set to use. Must be between 1 and 5,000.
+	// The maximum number of ECPUs the cache can consume per second. Must be between 1,000 and 15,000,000.
 	Maximum *float64 `json:"maximum,omitempty" tf:"maximum,omitempty"`
 
-	// The lower limit for data storage the cache is set to use. Must be between 1 and 5,000.
+	// The minimum number of ECPUs the cache can consume per second. Must be between 1,000 and 15,000,000.
 	Minimum *float64 `json:"minimum,omitempty" tf:"minimum,omitempty"`
 }
 
 type EcpuPerSecondObservation struct {
 
-	// The upper limit for data storage the cache is set to use. Must be between 1 and 5,000.
+	// The maximum number of ECPUs the cache can consume per second. Must be between 1,000 and 15,000,000.
 	Maximum *float64 `json:"maximum,omitempty" tf:"maximum,omitempty"`
 
-	// The lower limit for data storage the cache is set to use. Must be between 1 and 5,000.
+	// The minimum number of ECPUs the cache can consume per second. Must be between 1,000 and 15,000,000.
 	Minimum *float64 `json:"minimum,omitempty" tf:"minimum,omitempty"`
 }
 
 type EcpuPerSecondParameters struct {
 
-	// The upper limit for data storage the cache is set to use. Must be between 1 and 5,000.
+	// The maximum number of ECPUs the cache can consume per second. Must be between 1,000 and 15,000,000.
 	// +kubebuilder:validation:Optional
 	Maximum *float64 `json:"maximum,omitempty" tf:"maximum,omitempty"`
 
-	// The lower limit for data storage the cache is set to use. Must be between 1 and 5,000.
+	// The minimum number of ECPUs the cache can consume per second. Must be between 1,000 and 15,000,000.
 	// +kubebuilder:validation:Optional
 	Minimum *float64 `json:"minimum,omitempty" tf:"minimum,omitempty"`
 }
@@ -142,7 +142,7 @@ type ReaderEndpointParameters struct {
 
 type ServerlessCacheInitParameters struct {
 
-	// Sets the cache usage limits for storage and ElastiCache Processing Units for the cache. See configuration below.
+	// Sets the cache usage limits for storage and ElastiCache Processing Units for the cache. See cache_usage_limits Block for details.
 	CacheUsageLimits []CacheUsageLimitsInitParameters `json:"cacheUsageLimits,omitempty" tf:"cache_usage_limits,omitempty"`
 
 	// The daily time that snapshots will be created from the new serverless cache. Only supported for engine type "redis". Defaults to 0.
@@ -219,7 +219,7 @@ type ServerlessCacheObservation struct {
 	// The Amazon Resource Name (ARN) of the serverless cache.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Sets the cache usage limits for storage and ElastiCache Processing Units for the cache. See configuration below.
+	// Sets the cache usage limits for storage and ElastiCache Processing Units for the cache. See cache_usage_limits Block for details.
 	CacheUsageLimits []CacheUsageLimitsObservation `json:"cacheUsageLimits,omitempty" tf:"cache_usage_limits,omitempty"`
 
 	// Timestamp of when the serverless cache was created.
@@ -231,7 +231,7 @@ type ServerlessCacheObservation struct {
 	// User-provided description for the serverless cache. The default is NULL.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Represents the information required for client programs to connect to a cache node. See config below for details.
+	// Represents the information required for client programs to connect to a cache node. See endpoint Block for details.
 	Endpoint []EndpointObservation `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached or redis.
@@ -249,7 +249,7 @@ type ServerlessCacheObservation struct {
 	// See Describe Cache Engine Versions in the AWS Documentation for supported versions.
 	MajorEngineVersion *string `json:"majorEngineVersion,omitempty" tf:"major_engine_version,omitempty"`
 
-	// Represents the information required for client programs to connect to a cache node. See config below for details.
+	// Represents the information required for client programs to connect to a cache node. See reader_endpoint Block for details.
 	ReaderEndpoint []ReaderEndpointObservation `json:"readerEndpoint,omitempty" tf:"reader_endpoint,omitempty"`
 
 	// A list of the one or more VPC security groups to be associated with the serverless cache. The security group will authorize traffic access for the VPC end-point (private-link). If no other information is given this will be the VPC’s Default Security Group that is associated with the cluster VPC end-point.
@@ -282,7 +282,7 @@ type ServerlessCacheObservation struct {
 
 type ServerlessCacheParameters struct {
 
-	// Sets the cache usage limits for storage and ElastiCache Processing Units for the cache. See configuration below.
+	// Sets the cache usage limits for storage and ElastiCache Processing Units for the cache. See cache_usage_limits Block for details.
 	// +kubebuilder:validation:Optional
 	CacheUsageLimits []CacheUsageLimitsParameters `json:"cacheUsageLimits,omitempty" tf:"cache_usage_limits,omitempty"`
 

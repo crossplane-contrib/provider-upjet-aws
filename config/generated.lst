@@ -592,7 +592,6 @@
 "aws_memorydb_user",
 "aws_mq_broker",
 "aws_mq_configuration",
-"aws_mq_user",
 "aws_msk_cluster",
 "aws_msk_configuration",
 "aws_msk_scram_secret_association",

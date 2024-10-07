@@ -3258,6 +3258,11 @@ func (in *S3ActionInitParameters) DeepCopyInto(out *S3ActionInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IAMRoleArn != nil {
+		in, out := &in.IAMRoleArn, &out.IAMRoleArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.KMSKeyArn != nil {
 		in, out := &in.KMSKeyArn, &out.KMSKeyArn
 		*out = new(string)
@@ -3298,6 +3303,11 @@ func (in *S3ActionObservation) DeepCopyInto(out *S3ActionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IAMRoleArn != nil {
+		in, out := &in.IAMRoleArn, &out.IAMRoleArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.KMSKeyArn != nil {
 		in, out := &in.KMSKeyArn, &out.KMSKeyArn
 		*out = new(string)
@@ -3335,6 +3345,11 @@ func (in *S3ActionParameters) DeepCopyInto(out *S3ActionParameters) {
 	*out = *in
 	if in.BucketName != nil {
 		in, out := &in.BucketName, &out.BucketName
+		*out = new(string)
+		**out = **in
+	}
+	if in.IAMRoleArn != nil {
+		in, out := &in.IAMRoleArn, &out.IAMRoleArn
 		*out = new(string)
 		**out = **in
 	}
