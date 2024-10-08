@@ -178,7 +178,7 @@ spec:
                     type: string
                   name:
                     description: Name for the configuration profile. Must be between
-                      1 and 64 characters in length.
+                      1 and 128 characters in length.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -426,7 +426,7 @@ spec:
                     type: string
                   name:
                     description: Name for the configuration profile. Must be between
-                      1 and 64 characters in length.
+                      1 and 128 characters in length.
                     type: string
                   retrievalRoleArn:
                     description: ARN of an IAM role with permission to access the
@@ -771,7 +771,7 @@ spec:
                     type: string
                   name:
                     description: Name for the configuration profile. Must be between
-                      1 and 64 characters in length.
+                      1 and 128 characters in length.
                     type: string
                   retrievalRoleArn:
                     description: ARN of an IAM role with permission to access the

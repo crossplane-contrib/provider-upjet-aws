@@ -160,6 +160,9 @@ type StackSetInstanceObservation struct {
 
 type StackSetInstanceOperationPreferencesInitParameters struct {
 
+	// Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.
+	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
+
 	// Number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	FailureToleranceCount *float64 `json:"failureToleranceCount,omitempty" tf:"failure_tolerance_count,omitempty"`
 
@@ -181,6 +184,9 @@ type StackSetInstanceOperationPreferencesInitParameters struct {
 
 type StackSetInstanceOperationPreferencesObservation struct {
 
+	// Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.
+	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
+
 	// Number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	FailureToleranceCount *float64 `json:"failureToleranceCount,omitempty" tf:"failure_tolerance_count,omitempty"`
 
@@ -201,6 +207,10 @@ type StackSetInstanceOperationPreferencesObservation struct {
 }
 
 type StackSetInstanceOperationPreferencesParameters struct {
+
+	// Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.
+	// +kubebuilder:validation:Optional
+	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
 
 	// Number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	// +kubebuilder:validation:Optional

@@ -1496,6 +1496,10 @@ spec:
                     description: Name of the table to restore. Must match the name
                       of an existing table.
                     type: string
+                  restoreSourceTableArn:
+                    description: ARN of the source table to restore. Must be supplied
+                      for cross-region restores.
+                    type: string
                   restoreToLatestTime:
                     description: If set, restores table to the most recent point-in-time
                       recovery point.
@@ -1503,7 +1507,8 @@ spec:
                   serverSideEncryption:
                     description: Encryption at rest options. AWS DynamoDB tables are
                       automatically encrypted at rest with an AWS-owned Customer Master
-                      Key if this argument isn't specified. See below.
+                      Key if this argument isn't specified. Must be supplied for cross-region
+                      restores. See below.
                     properties:
                       enabled:
                         description: Whether or not to enable encryption at rest using
@@ -1786,6 +1791,10 @@ spec:
                     description: Name of the table to restore. Must match the name
                       of an existing table.
                     type: string
+                  restoreSourceTableArn:
+                    description: ARN of the source table to restore. Must be supplied
+                      for cross-region restores.
+                    type: string
                   restoreToLatestTime:
                     description: If set, restores table to the most recent point-in-time
                       recovery point.
@@ -1793,7 +1802,8 @@ spec:
                   serverSideEncryption:
                     description: Encryption at rest options. AWS DynamoDB tables are
                       automatically encrypted at rest with an AWS-owned Customer Master
-                      Key if this argument isn't specified. See below.
+                      Key if this argument isn't specified. Must be supplied for cross-region
+                      restores. See below.
                     properties:
                       enabled:
                         description: Whether or not to enable encryption at rest using
@@ -2254,6 +2264,10 @@ spec:
                     description: Name of the table to restore. Must match the name
                       of an existing table.
                     type: string
+                  restoreSourceTableArn:
+                    description: ARN of the source table to restore. Must be supplied
+                      for cross-region restores.
+                    type: string
                   restoreToLatestTime:
                     description: If set, restores table to the most recent point-in-time
                       recovery point.
@@ -2261,7 +2275,8 @@ spec:
                   serverSideEncryption:
                     description: Encryption at rest options. AWS DynamoDB tables are
                       automatically encrypted at rest with an AWS-owned Customer Master
-                      Key if this argument isn't specified. See below.
+                      Key if this argument isn't specified. Must be supplied for cross-region
+                      restores. See below.
                     properties:
                       enabled:
                         description: Whether or not to enable encryption at rest using

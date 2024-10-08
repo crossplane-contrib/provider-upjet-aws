@@ -338,6 +338,9 @@ type S3ActionInitParameters struct {
 	// The name of the S3 bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
+	// The ARN of the IAM role to be used by Amazon Simple Email Service while writing to the Amazon S3 bucket, optionally encrypting your mail via the provided customer managed key, and publishing to the Amazon SNS topic
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
+
 	// The ARN of the KMS key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
 
@@ -355,6 +358,9 @@ type S3ActionObservation struct {
 
 	// The name of the S3 bucket
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
+
+	// The ARN of the IAM role to be used by Amazon Simple Email Service while writing to the Amazon S3 bucket, optionally encrypting your mail via the provided customer managed key, and publishing to the Amazon SNS topic
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// The ARN of the KMS key
 	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
@@ -374,6 +380,10 @@ type S3ActionParameters struct {
 	// The name of the S3 bucket
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
+
+	// The ARN of the IAM role to be used by Amazon Simple Email Service while writing to the Amazon S3 bucket, optionally encrypting your mail via the provided customer managed key, and publishing to the Amazon SNS topic
+	// +kubebuilder:validation:Optional
+	IAMRoleArn *string `json:"iamRoleArn,omitempty" tf:"iam_role_arn,omitempty"`
 
 	// The ARN of the KMS key
 	// +kubebuilder:validation:Optional

@@ -168,6 +168,13 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  sharedAccounts:
+                    description: List of AWS Account ids to share snapshot with, use
+                      all to make snaphot public.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   sourceDbSnapshotIdentifier:
                     description: Snapshot identifier of the source snapshot.
                     type: string
@@ -364,6 +371,13 @@ spec:
                     description: he URL that contains a Signature Version 4 signed
                       request.
                     type: string
+                  sharedAccounts:
+                    description: List of AWS Account ids to share snapshot with, use
+                      all to make snaphot public.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   sourceDbSnapshotIdentifier:
                     description: Snapshot identifier of the source snapshot.
                     type: string
@@ -680,6 +694,13 @@ spec:
                     description: he URL that contains a Signature Version 4 signed
                       request.
                     type: string
+                  sharedAccounts:
+                    description: List of AWS Account ids to share snapshot with, use
+                      all to make snaphot public.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   snapshotType:
                     type: string
                   sourceDbSnapshotIdentifier:

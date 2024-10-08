@@ -891,6 +891,19 @@ spec:
                           type: string
                       type: object
                     type: array
+                  interactiveConfiguration:
+                    description: –  Enables the interactive use cases to use when
+                      running an application.
+                    properties:
+                      livyEndpointEnabled:
+                        description: Enables an Apache Livy endpoint that you can
+                          connect to and run interactive jobs.
+                        type: boolean
+                      studioEnabled:
+                        description: Enables you to connect an application to Amazon
+                          EMR Studio to run interactive workloads in a notebook.
+                        type: boolean
+                    type: object
                   maximumCapacity:
                     description: –  The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
@@ -1032,6 +1045,19 @@ spec:
                           type: string
                       type: object
                     type: array
+                  interactiveConfiguration:
+                    description: –  Enables the interactive use cases to use when
+                      running an application.
+                    properties:
+                      livyEndpointEnabled:
+                        description: Enables an Apache Livy endpoint that you can
+                          connect to and run interactive jobs.
+                        type: boolean
+                      studioEnabled:
+                        description: Enables you to connect an application to Amazon
+                          EMR Studio to run interactive workloads in a notebook.
+                        type: boolean
+                    type: object
                   maximumCapacity:
                     description: –  The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given
@@ -1345,6 +1371,19 @@ spec:
                           type: string
                       type: object
                     type: array
+                  interactiveConfiguration:
+                    description: –  Enables the interactive use cases to use when
+                      running an application.
+                    properties:
+                      livyEndpointEnabled:
+                        description: Enables an Apache Livy endpoint that you can
+                          connect to and run interactive jobs.
+                        type: boolean
+                      studioEnabled:
+                        description: Enables you to connect an application to Amazon
+                          EMR Studio to run interactive workloads in a notebook.
+                        type: boolean
+                    type: object
                   maximumCapacity:
                     description: –  The maximum capacity to allocate when the application
                       is created. This is cumulative across all workers at any given

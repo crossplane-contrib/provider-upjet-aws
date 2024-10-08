@@ -73,6 +73,103 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  encryptionConfiguration:
+                    description: Defines what encryption configuration is used to
+                      encrypt data in the Activity. For more information see the section
+                      Data at rest encyption in the AWS Step Functions User Guide.
+                    properties:
+                      kmsDataKeyReusePeriodSeconds:
+                        description: Maximum duration for which Activities will reuse
+                          data keys. When the period expires, Activities will call
+                          GenerateDataKey. This setting only applies to customer managed
+                          KMS key and does not apply to AWS owned KMS key.
+                        type: number
+                      kmsKeyId:
+                        description: The alias, alias ARN, key ID, or key ARN of the
+                          symmetric encryption KMS key that encrypts the data key.
+                          To specify a KMS key in a different AWS account, the customer
+                          must use the key ARN or alias ARN. For more information
+                          regarding kms_key_id, see KeyId in the KMS documentation.
+                        type: string
+                      kmsKeyIdRef:
+                        description: Reference to a Key in kms to populate kmsKeyId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      kmsKeyIdSelector:
+                        description: Selector for a Key in kms to populate kmsKeyId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      type:
+                        description: 'The encryption option specified for the activity.
+                          Valid values: AWS_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY'
+                        type: string
+                    type: object
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -99,6 +196,103 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  encryptionConfiguration:
+                    description: Defines what encryption configuration is used to
+                      encrypt data in the Activity. For more information see the section
+                      Data at rest encyption in the AWS Step Functions User Guide.
+                    properties:
+                      kmsDataKeyReusePeriodSeconds:
+                        description: Maximum duration for which Activities will reuse
+                          data keys. When the period expires, Activities will call
+                          GenerateDataKey. This setting only applies to customer managed
+                          KMS key and does not apply to AWS owned KMS key.
+                        type: number
+                      kmsKeyId:
+                        description: The alias, alias ARN, key ID, or key ARN of the
+                          symmetric encryption KMS key that encrypts the data key.
+                          To specify a KMS key in a different AWS account, the customer
+                          must use the key ARN or alias ARN. For more information
+                          regarding kms_key_id, see KeyId in the KMS documentation.
+                        type: string
+                      kmsKeyIdRef:
+                        description: Reference to a Key in kms to populate kmsKeyId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      kmsKeyIdSelector:
+                        description: Selector for a Key in kms to populate kmsKeyId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      type:
+                        description: 'The encryption option specified for the activity.
+                          Valid values: AWS_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY'
+                        type: string
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -281,6 +475,29 @@ spec:
                   creationDate:
                     description: The date the activity was created.
                     type: string
+                  encryptionConfiguration:
+                    description: Defines what encryption configuration is used to
+                      encrypt data in the Activity. For more information see the section
+                      Data at rest encyption in the AWS Step Functions User Guide.
+                    properties:
+                      kmsDataKeyReusePeriodSeconds:
+                        description: Maximum duration for which Activities will reuse
+                          data keys. When the period expires, Activities will call
+                          GenerateDataKey. This setting only applies to customer managed
+                          KMS key and does not apply to AWS owned KMS key.
+                        type: number
+                      kmsKeyId:
+                        description: The alias, alias ARN, key ID, or key ARN of the
+                          symmetric encryption KMS key that encrypts the data key.
+                          To specify a KMS key in a different AWS account, the customer
+                          must use the key ARN or alias ARN. For more information
+                          regarding kms_key_id, see KeyId in the KMS documentation.
+                        type: string
+                      type:
+                        description: 'The encryption option specified for the activity.
+                          Valid values: AWS_KMS_KEY, CUSTOMER_MANAGED_KMS_KEY'
+                        type: string
+                    type: object
                   id:
                     description: The Amazon Resource Name (ARN) that identifies the
                       created activity.

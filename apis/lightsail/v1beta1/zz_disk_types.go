@@ -18,7 +18,7 @@ type DiskInitParameters struct {
 	// The Availability Zone in which to create your disk.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The instance port the load balancer will connect.
+	// The size of the disk in GB.
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// Key-value map of resource tags.
@@ -28,19 +28,19 @@ type DiskInitParameters struct {
 
 type DiskObservation struct {
 
-	// The ARN of the Lightsail load balancer.
+	// The ARN of the Lightsail disk.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The Availability Zone in which to create your disk.
 	AvailabilityZone *string `json:"availabilityZone,omitempty" tf:"availability_zone,omitempty"`
 
-	// The timestamp when the load balancer was created.
+	// The timestamp when the disk was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The name of the disk  (matches name).
+	// The name of the disk (matches name).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The instance port the load balancer will connect.
+	// The size of the disk in GB.
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 
 	// The support code for the disk. Include this code in your email to support when you have questions about a disk in Lightsail. This code enables our support team to look up your Lightsail information more easily.
@@ -66,7 +66,7 @@ type DiskParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The instance port the load balancer will connect.
+	// The size of the disk in GB.
 	// +kubebuilder:validation:Optional
 	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
 

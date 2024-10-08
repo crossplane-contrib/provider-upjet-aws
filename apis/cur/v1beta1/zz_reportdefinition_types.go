@@ -53,6 +53,10 @@ type ReportDefinitionInitParameters struct {
 	// Region of the existing S3 bucket to hold generated reports.
 	S3Region *string `json:"s3Region,omitempty" tf:"s3_region,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The frequency on which report data are measured and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.
 	TimeUnit *string `json:"timeUnit,omitempty" tf:"time_unit,omitempty"`
 }
@@ -92,6 +96,14 @@ type ReportDefinitionObservation struct {
 
 	// Region of the existing S3 bucket to hold generated reports.
 	S3Region *string `json:"s3Region,omitempty" tf:"s3_region,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The frequency on which report data are measured and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.
 	TimeUnit *string `json:"timeUnit,omitempty" tf:"time_unit,omitempty"`
@@ -150,6 +162,11 @@ type ReportDefinitionParameters struct {
 	// Region of the existing S3 bucket to hold generated reports.
 	// +kubebuilder:validation:Optional
 	S3Region *string `json:"s3Region,omitempty" tf:"s3_region,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The frequency on which report data are measured and displayed.  Valid values are: DAILY, HOURLY, MONTHLY.
 	// +kubebuilder:validation:Optional

@@ -81,7 +81,7 @@ spec:
                       be created in.
                     type: string
                   sizeInGb:
-                    description: The instance port the load balancer will connect.
+                    description: The size of the disk in GB.
                     type: number
                   tags:
                     additionalProperties:
@@ -109,7 +109,7 @@ spec:
                     description: The Availability Zone in which to create your disk.
                     type: string
                   sizeInGb:
-                    description: The instance port the load balancer will connect.
+                    description: The size of the disk in GB.
                     type: number
                   tags:
                     additionalProperties:
@@ -300,19 +300,19 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Lightsail load balancer.
+                    description: The ARN of the Lightsail disk.
                     type: string
                   availabilityZone:
                     description: The Availability Zone in which to create your disk.
                     type: string
                   createdAt:
-                    description: The timestamp when the load balancer was created.
+                    description: The timestamp when the disk was created.
                     type: string
                   id:
-                    description: The name of the disk  (matches name).
+                    description: The name of the disk (matches name).
                     type: string
                   sizeInGb:
-                    description: The instance port the load balancer will connect.
+                    description: The size of the disk in GB.
                     type: number
                   supportCode:
                     description: The support code for the disk. Include this code

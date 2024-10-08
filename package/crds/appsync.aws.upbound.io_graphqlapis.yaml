@@ -1401,7 +1401,7 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphSQL API. See additional_authentication_provider Block
+                      the GraphQL API. See additional_authentication_provider Block
                       for details.
                     items:
                       properties:
@@ -1476,10 +1476,31 @@ spec:
                           type: object
                       type: object
                     type: array
+                  apiType:
+                    description: API type. Valid values are GRAPHQL or MERGED. A MERGED
+                      type requires merged_api_execution_role_arn to be set.
+                    type: string
                   authenticationType:
                     description: 'Authentication type. Valid values: API_KEY, AWS_IAM,
                       AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA'
                     type: string
+                  enhancedMetricsConfig:
+                    description: Enables and controls the enhanced metrics feature.
+                      See enhanced_metrics_config Block for details.
+                    properties:
+                      dataSourceLevelMetricsBehavior:
+                        description: 'How data source metrics will be emitted to CloudWatch.
+                          Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS'
+                        type: string
+                      operationLevelMetricsConfig:
+                        description: 'How operation metrics will be emitted to CloudWatch.
+                          Valid values: ENABLED, DISABLED'
+                        type: string
+                      resolverLevelMetricsBehavior:
+                        description: 'How resolver metrics will be emitted to CloudWatch.
+                          Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS'
+                        type: string
+                    type: object
                   introspectionConfig:
                     description: Sets the value of the GraphQL API to enable (ENABLED)
                       or disable (DISABLED) introspection. If no value is provided,
@@ -1604,8 +1625,86 @@ spec:
                           NONE.'
                         type: string
                     type: object
+                  mergedApiExecutionRoleArn:
+                    description: ARN of the execution role when api_type is set to
+                      MERGED.
+                    type: string
+                  mergedApiExecutionRoleArnRef:
+                    description: Reference to a Role in iam to populate mergedApiExecutionRoleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  mergedApiExecutionRoleArnSelector:
+                    description: Selector for a Role in iam to populate mergedApiExecutionRoleArn.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   name:
-                    description: User-supplied name for the GraphSQL API.
+                    description: User-supplied name for the GraphQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
@@ -1786,7 +1885,7 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphSQL API. See additional_authentication_provider Block
+                      the GraphQL API. See additional_authentication_provider Block
                       for details.
                     items:
                       properties:
@@ -1861,10 +1960,31 @@ spec:
                           type: object
                       type: object
                     type: array
+                  apiType:
+                    description: API type. Valid values are GRAPHQL or MERGED. A MERGED
+                      type requires merged_api_execution_role_arn to be set.
+                    type: string
                   authenticationType:
                     description: 'Authentication type. Valid values: API_KEY, AWS_IAM,
                       AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA'
                     type: string
+                  enhancedMetricsConfig:
+                    description: Enables and controls the enhanced metrics feature.
+                      See enhanced_metrics_config Block for details.
+                    properties:
+                      dataSourceLevelMetricsBehavior:
+                        description: 'How data source metrics will be emitted to CloudWatch.
+                          Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS'
+                        type: string
+                      operationLevelMetricsConfig:
+                        description: 'How operation metrics will be emitted to CloudWatch.
+                          Valid values: ENABLED, DISABLED'
+                        type: string
+                      resolverLevelMetricsBehavior:
+                        description: 'How resolver metrics will be emitted to CloudWatch.
+                          Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS'
+                        type: string
+                    type: object
                   introspectionConfig:
                     description: Sets the value of the GraphQL API to enable (ENABLED)
                       or disable (DISABLED) introspection. If no value is provided,
@@ -1989,8 +2109,86 @@ spec:
                           NONE.'
                         type: string
                     type: object
+                  mergedApiExecutionRoleArn:
+                    description: ARN of the execution role when api_type is set to
+                      MERGED.
+                    type: string
+                  mergedApiExecutionRoleArnRef:
+                    description: Reference to a Role in iam to populate mergedApiExecutionRoleArn.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  mergedApiExecutionRoleArnSelector:
+                    description: Selector for a Role in iam to populate mergedApiExecutionRoleArn.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   name:
-                    description: User-supplied name for the GraphSQL API.
+                    description: User-supplied name for the GraphQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
@@ -2333,7 +2531,7 @@ spec:
                 properties:
                   additionalAuthenticationProvider:
                     description: One or more additional authentication providers for
-                      the GraphSQL API. See additional_authentication_provider Block
+                      the GraphQL API. See additional_authentication_provider Block
                       for details.
                     items:
                       properties:
@@ -2408,6 +2606,10 @@ spec:
                           type: object
                       type: object
                     type: array
+                  apiType:
+                    description: API type. Valid values are GRAPHQL or MERGED. A MERGED
+                      type requires merged_api_execution_role_arn to be set.
+                    type: string
                   arn:
                     description: ARN
                     type: string
@@ -2415,6 +2617,23 @@ spec:
                     description: 'Authentication type. Valid values: API_KEY, AWS_IAM,
                       AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA'
                     type: string
+                  enhancedMetricsConfig:
+                    description: Enables and controls the enhanced metrics feature.
+                      See enhanced_metrics_config Block for details.
+                    properties:
+                      dataSourceLevelMetricsBehavior:
+                        description: 'How data source metrics will be emitted to CloudWatch.
+                          Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS'
+                        type: string
+                      operationLevelMetricsConfig:
+                        description: 'How operation metrics will be emitted to CloudWatch.
+                          Valid values: ENABLED, DISABLED'
+                        type: string
+                      resolverLevelMetricsBehavior:
+                        description: 'How resolver metrics will be emitted to CloudWatch.
+                          Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS'
+                        type: string
+                    type: object
                   id:
                     description: API ID
                     type: string
@@ -2468,8 +2687,12 @@ spec:
                           NONE.'
                         type: string
                     type: object
+                  mergedApiExecutionRoleArn:
+                    description: ARN of the execution role when api_type is set to
+                      MERGED.
+                    type: string
                   name:
-                    description: User-supplied name for the GraphSQL API.
+                    description: User-supplied name for the GraphQL API.
                     type: string
                   openidConnectConfig:
                     description: Nested argument containing OpenID Connect configuration.
@@ -2531,7 +2754,7 @@ spec:
                   uris:
                     additionalProperties:
                       type: string
-                    description: Map of URIs associated with the APIE.g., uris["GRAPHQL"]
+                    description: Map of URIs associated with the API E.g., uris["GRAPHQL"]
                       = https://ID.appsync-api.REGION.amazonaws.com/graphql
                     type: object
                     x-kubernetes-map-type: granular

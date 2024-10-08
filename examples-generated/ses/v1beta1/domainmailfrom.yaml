@@ -50,7 +50,7 @@ spec:
   forProvider:
     name: example.com
     records:
-    - v=spf1 include:amazonses.com -all
+    - v=spf1 include:amazonses.com ~all
     region: us-west-1
     ttl: "600"
     type: TXT

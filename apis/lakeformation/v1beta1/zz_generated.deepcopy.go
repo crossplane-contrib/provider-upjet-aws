@@ -350,6 +350,11 @@ func (in *DataLakeSettingsInitParameters) DeepCopyInto(out *DataLakeSettingsInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AllowFullTableExternalDataAccess != nil {
+		in, out := &in.AllowFullTableExternalDataAccess, &out.AllowFullTableExternalDataAccess
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AuthorizedSessionTagValueList != nil {
 		in, out := &in.AuthorizedSessionTagValueList, &out.AuthorizedSessionTagValueList
 		*out = make([]*string, len(*in))
@@ -476,6 +481,11 @@ func (in *DataLakeSettingsObservation) DeepCopyInto(out *DataLakeSettingsObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AllowFullTableExternalDataAccess != nil {
+		in, out := &in.AllowFullTableExternalDataAccess, &out.AllowFullTableExternalDataAccess
+		*out = new(bool)
+		**out = **in
+	}
 	if in.AuthorizedSessionTagValueList != nil {
 		in, out := &in.AuthorizedSessionTagValueList, &out.AuthorizedSessionTagValueList
 		*out = make([]*string, len(*in))
@@ -572,6 +582,11 @@ func (in *DataLakeSettingsParameters) DeepCopyInto(out *DataLakeSettingsParamete
 	}
 	if in.AllowExternalDataFiltering != nil {
 		in, out := &in.AllowExternalDataFiltering, &out.AllowExternalDataFiltering
+		*out = new(bool)
+		**out = **in
+	}
+	if in.AllowFullTableExternalDataAccess != nil {
+		in, out := &in.AllowFullTableExternalDataAccess, &out.AllowFullTableExternalDataAccess
 		*out = new(bool)
 		**out = **in
 	}

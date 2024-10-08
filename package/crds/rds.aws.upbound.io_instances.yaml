@@ -5643,7 +5643,6 @@ spec:
                     items:
                       type: string
                     type: array
-                    x-kubernetes-list-type: set
                   domainFqdn:
                     description: The fully qualified domain name (FQDN) of the self
                       managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -5675,6 +5674,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -5711,7 +5717,7 @@ spec:
                   iops:
                     description: |-
                       The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
                       Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
@@ -6306,8 +6312,8 @@ spec:
                     description: |-
                       One of "standard" (magnetic), "gp2" (general
                       purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-                      "gp2" if not.
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+                      SSD). The default is "io1" if iops is specified, "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -6323,6 +6329,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -6638,7 +6648,6 @@ spec:
                     items:
                       type: string
                     type: array
-                    x-kubernetes-list-type: set
                   domainFqdn:
                     description: The fully qualified domain name (FQDN) of the self
                       managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -6670,6 +6679,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -6706,7 +6722,7 @@ spec:
                   iops:
                     description: |-
                       The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
                       Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
@@ -7297,8 +7313,8 @@ spec:
                     description: |-
                       One of "standard" (magnetic), "gp2" (general
                       purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-                      "gp2" if not.
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+                      SSD). The default is "io1" if iops is specified, "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -7314,6 +7330,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -7724,7 +7744,6 @@ spec:
                     items:
                       type: string
                     type: array
-                    x-kubernetes-list-type: set
                   domainFqdn:
                     description: The fully qualified domain name (FQDN) of the self
                       managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -7759,6 +7778,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -7806,7 +7832,7 @@ spec:
                   iops:
                     description: |-
                       The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
                       Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
@@ -8057,8 +8083,8 @@ spec:
                     description: |-
                       One of "standard" (magnetic), "gp2" (general
                       purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-                      "gp2" if not.
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+                      SSD). The default is "io1" if iops is specified, "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -8082,6 +8108,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.

@@ -37,7 +37,7 @@ type ConfigurationProfileInitParameters struct {
 	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
 	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
-	// Name for the configuration profile. Must be between 1 and 64 characters in length.
+	// Name for the configuration profile. Must be between 1 and 128 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// ARN of an IAM role with permission to access the configuration at the specified location_uri. A retrieval role ARN is not required for configurations stored in the AWS AppConfig hosted configuration store. It is required for all other sources that store your configuration.
@@ -87,7 +87,7 @@ type ConfigurationProfileObservation struct {
 	// URI to locate the configuration. You can specify the AWS AppConfig hosted configuration store, Systems Manager (SSM) document, an SSM Parameter Store parameter, or an Amazon S3 object. For the hosted configuration store, specify hosted. For an SSM document, specify either the document name in the format ssm-document://<Document_name> or the ARN. For a parameter, specify either the parameter name in the format ssm-parameter://<Parameter_name> or the ARN. For an Amazon S3 object, specify the URI in the following format: s3://<bucket>/<objectKey>.
 	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
-	// Name for the configuration profile. Must be between 1 and 64 characters in length.
+	// Name for the configuration profile. Must be between 1 and 128 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// ARN of an IAM role with permission to access the configuration at the specified location_uri. A retrieval role ARN is not required for configurations stored in the AWS AppConfig hosted configuration store. It is required for all other sources that store your configuration.
@@ -136,7 +136,7 @@ type ConfigurationProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	LocationURI *string `json:"locationUri,omitempty" tf:"location_uri,omitempty"`
 
-	// Name for the configuration profile. Must be between 1 and 64 characters in length.
+	// Name for the configuration profile. Must be between 1 and 128 characters in length.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

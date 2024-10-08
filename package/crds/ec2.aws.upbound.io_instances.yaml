@@ -3135,8 +3135,9 @@ spec:
                       instances. See Market Options below for details on attributes.
                     properties:
                       marketType:
-                        description: Type of market for the instance. Valid value
-                          is spot. Defaults to spot. Required if spot_options is specified.
+                        description: Type of market for the instance. Valid values
+                          are spot and capacity-block. Defaults to spot. Required
+                          if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.
@@ -3237,7 +3238,6 @@ spec:
                         description: Whether or not the metadata service requires
                           session tokens, also referred to as Instance Metadata Service
                           Version 2 (IMDSv2). Valid values include optional or required.
-                          Defaults to optional.
                         type: string
                       instanceMetadataTags:
                         description: Enables or disables access to instance tags from
@@ -4045,8 +4045,9 @@ spec:
                       instances. See Market Options below for details on attributes.
                     properties:
                       marketType:
-                        description: Type of market for the instance. Valid value
-                          is spot. Defaults to spot. Required if spot_options is specified.
+                        description: Type of market for the instance. Valid values
+                          are spot and capacity-block. Defaults to spot. Required
+                          if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.
@@ -4147,7 +4148,6 @@ spec:
                         description: Whether or not the metadata service requires
                           session tokens, also referred to as Instance Metadata Service
                           Version 2 (IMDSv2). Valid values include optional or required.
-                          Defaults to optional.
                         type: string
                       instanceMetadataTags:
                         description: Enables or disables access to instance tags from
@@ -5048,8 +5048,9 @@ spec:
                       instances. See Market Options below for details on attributes.
                     properties:
                       marketType:
-                        description: Type of market for the instance. Valid value
-                          is spot. Defaults to spot. Required if spot_options is specified.
+                        description: Type of market for the instance. Valid values
+                          are spot and capacity-block. Defaults to spot. Required
+                          if spot_options is specified.
                         type: string
                       spotOptions:
                         description: Block to configure the options for Spot Instances.
@@ -5155,7 +5156,6 @@ spec:
                         description: Whether or not the metadata service requires
                           session tokens, also referred to as Instance Metadata Service
                           Version 2 (IMDSv2). Valid values include optional or required.
-                          Defaults to optional.
                         type: string
                       instanceMetadataTags:
                         description: Enables or disables access to instance tags from
