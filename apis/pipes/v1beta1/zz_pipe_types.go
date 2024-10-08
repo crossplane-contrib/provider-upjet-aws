@@ -250,7 +250,17 @@ type CapacityProviderStrategyParameters struct {
 type CloudwatchLogsLogDestinationInitParameters struct {
 
 	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupArn.
+	// +kubebuilder:validation:Optional
+	LogGroupArnRef *v1.Reference `json:"logGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupArn.
+	// +kubebuilder:validation:Optional
+	LogGroupArnSelector *v1.Selector `json:"logGroupArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsLogDestinationObservation struct {
@@ -262,8 +272,18 @@ type CloudwatchLogsLogDestinationObservation struct {
 type CloudwatchLogsLogDestinationParameters struct {
 
 	// Amazon Web Services Resource Name (ARN) for the CloudWatch log group to which EventBridge sends the log records.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatchlogs/v1beta1.Group
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
-	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
+	LogGroupArn *string `json:"logGroupArn,omitempty" tf:"log_group_arn,omitempty"`
+
+	// Reference to a Group in cloudwatchlogs to populate logGroupArn.
+	// +kubebuilder:validation:Optional
+	LogGroupArnRef *v1.Reference `json:"logGroupArnRef,omitempty" tf:"-"`
+
+	// Selector for a Group in cloudwatchlogs to populate logGroupArn.
+	// +kubebuilder:validation:Optional
+	LogGroupArnSelector *v1.Selector `json:"logGroupArnSelector,omitempty" tf:"-"`
 }
 
 type CloudwatchLogsParametersInitParameters struct {
@@ -1253,6 +1273,10 @@ type LogConfigurationInitParameters struct {
 	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
 	FirehoseLogDestination *FirehoseLogDestinationInitParameters `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
 
+	// String list that specifies whether the execution data (specifically, the payload, awsRequest, and awsResponse fields) is included in the log messages for this pipe. This applies to all log destinations for the pipe. Valid values ALL.
+	// +listType=set
+	IncludeExecutionData []*string `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
+
 	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
@@ -1267,6 +1291,10 @@ type LogConfigurationObservation struct {
 
 	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
 	FirehoseLogDestination *FirehoseLogDestinationObservation `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
+
+	// String list that specifies whether the execution data (specifically, the payload, awsRequest, and awsResponse fields) is included in the log messages for this pipe. This applies to all log destinations for the pipe. Valid values ALL.
+	// +listType=set
+	IncludeExecutionData []*string `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
 
 	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
@@ -1284,6 +1312,11 @@ type LogConfigurationParameters struct {
 	// Amazon Kinesis Data Firehose logging configuration settings for the pipe. Detailed below.
 	// +kubebuilder:validation:Optional
 	FirehoseLogDestination *FirehoseLogDestinationParameters `json:"firehoseLogDestination,omitempty" tf:"firehose_log_destination,omitempty"`
+
+	// String list that specifies whether the execution data (specifically, the payload, awsRequest, and awsResponse fields) is included in the log messages for this pipe. This applies to all log destinations for the pipe. Valid values ALL.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IncludeExecutionData []*string `json:"includeExecutionData,omitempty" tf:"include_execution_data,omitempty"`
 
 	// The level of logging detail to include. Valid values OFF, ERROR, INFO and TRACE.
 	// +kubebuilder:validation:Optional

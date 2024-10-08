@@ -56,7 +56,7 @@ type TopicInitParameters struct {
 	// The display name for the topic
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic (default is false).
+	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic. FIFO topics can't deliver messages to customer managed endpoints, such as email addresses, mobile apps, SMS, or HTTP(S) endpoints. These endpoint types aren't guaranteed to preserve strict message ordering. Default is false.
 	FifoTopic *bool `json:"fifoTopic,omitempty" tf:"fifo_topic,omitempty"`
 
 	// IAM role for failure feedback
@@ -221,7 +221,7 @@ type TopicObservation struct {
 	// The display name for the topic
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic (default is false).
+	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic. FIFO topics can't deliver messages to customer managed endpoints, such as email addresses, mobile apps, SMS, or HTTP(S) endpoints. These endpoint types aren't guaranteed to preserve strict message ordering. Default is false.
 	FifoTopic *bool `json:"fifoTopic,omitempty" tf:"fifo_topic,omitempty"`
 
 	// IAM role for failure feedback
@@ -337,7 +337,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic (default is false).
+	// Boolean indicating whether or not to create a FIFO (first-in-first-out) topic. FIFO topics can't deliver messages to customer managed endpoints, such as email addresses, mobile apps, SMS, or HTTP(S) endpoints. These endpoint types aren't guaranteed to preserve strict message ordering. Default is false.
 	// +kubebuilder:validation:Optional
 	FifoTopic *bool `json:"fifoTopic,omitempty" tf:"fifo_topic,omitempty"`
 

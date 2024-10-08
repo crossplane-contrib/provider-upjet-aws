@@ -92,6 +92,9 @@ type ClusterInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Configuration block for the support policy to use for the cluster.  See upgrade_policy for details.
+	UpgradePolicy *UpgradePolicyInitParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
 	VPCConfig *VPCConfigInitParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
@@ -158,6 +161,9 @@ type ClusterObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
+	// Configuration block for the support policy to use for the cluster.  See upgrade_policy for details.
+	UpgradePolicy *UpgradePolicyObservation `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
 	VPCConfig *VPCConfigObservation `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 
@@ -215,6 +221,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Configuration block for the support policy to use for the cluster.  See upgrade_policy for details.
+	// +kubebuilder:validation:Optional
+	UpgradePolicy *UpgradePolicyParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
 	// Configuration block for the VPC associated with your cluster. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. Detailed below. Also contains attributes detailed in the Attributes section.
 	// +kubebuilder:validation:Optional
@@ -394,6 +404,25 @@ type ProviderParameters struct {
 	// ARN of the Key Management Service (KMS) customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
 	// +kubebuilder:validation:Optional
 	KeyArn *string `json:"keyArn" tf:"key_arn,omitempty"`
+}
+
+type UpgradePolicyInitParameters struct {
+
+	// Support type to use for the cluster. If the cluster is set to EXTENDED, it will enter extended support at the end of standard support. If the cluster is set to STANDARD, it will be automatically upgraded at the end of standard support. Valid values are EXTENDED, STANDARD
+	SupportType *string `json:"supportType,omitempty" tf:"support_type,omitempty"`
+}
+
+type UpgradePolicyObservation struct {
+
+	// Support type to use for the cluster. If the cluster is set to EXTENDED, it will enter extended support at the end of standard support. If the cluster is set to STANDARD, it will be automatically upgraded at the end of standard support. Valid values are EXTENDED, STANDARD
+	SupportType *string `json:"supportType,omitempty" tf:"support_type,omitempty"`
+}
+
+type UpgradePolicyParameters struct {
+
+	// Support type to use for the cluster. If the cluster is set to EXTENDED, it will enter extended support at the end of standard support. If the cluster is set to STANDARD, it will be automatically upgraded at the end of standard support. Valid values are EXTENDED, STANDARD
+	// +kubebuilder:validation:Optional
+	SupportType *string `json:"supportType,omitempty" tf:"support_type,omitempty"`
 }
 
 type VPCConfigInitParameters struct {

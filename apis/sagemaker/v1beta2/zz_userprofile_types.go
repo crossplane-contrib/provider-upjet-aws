@@ -196,64 +196,6 @@ type CanvasAppSettingsWorkspaceSettingsParameters struct {
 	S3KMSKeyID *string `json:"s3KmsKeyId,omitempty" tf:"s3_kms_key_id,omitempty"`
 }
 
-type CustomFileSystemConfigEFSFileSystemConfigInitParameters struct {
-
-	// The ID of your Amazon EFS file system.
-	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
-
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
-	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
-}
-
-type CustomFileSystemConfigEFSFileSystemConfigObservation struct {
-
-	// The ID of your Amazon EFS file system.
-	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
-
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
-	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
-}
-
-type CustomFileSystemConfigEFSFileSystemConfigParameters struct {
-
-	// The ID of your Amazon EFS file system.
-	// +kubebuilder:validation:Optional
-	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
-
-	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
-	// +kubebuilder:validation:Optional
-	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
-}
-
-type SpaceStorageSettingsDefaultEBSStorageSettingsInitParameters struct {
-
-	// The default size of the EBS storage volume for a private space.
-	DefaultEBSVolumeSizeInGb *float64 `json:"defaultEbsVolumeSizeInGb,omitempty" tf:"default_ebs_volume_size_in_gb,omitempty"`
-
-	// The maximum size of the EBS storage volume for a private space.
-	MaximumEBSVolumeSizeInGb *float64 `json:"maximumEbsVolumeSizeInGb,omitempty" tf:"maximum_ebs_volume_size_in_gb,omitempty"`
-}
-
-type SpaceStorageSettingsDefaultEBSStorageSettingsObservation struct {
-
-	// The default size of the EBS storage volume for a private space.
-	DefaultEBSVolumeSizeInGb *float64 `json:"defaultEbsVolumeSizeInGb,omitempty" tf:"default_ebs_volume_size_in_gb,omitempty"`
-
-	// The maximum size of the EBS storage volume for a private space.
-	MaximumEBSVolumeSizeInGb *float64 `json:"maximumEbsVolumeSizeInGb,omitempty" tf:"maximum_ebs_volume_size_in_gb,omitempty"`
-}
-
-type SpaceStorageSettingsDefaultEBSStorageSettingsParameters struct {
-
-	// The default size of the EBS storage volume for a private space.
-	// +kubebuilder:validation:Optional
-	DefaultEBSVolumeSizeInGb *float64 `json:"defaultEbsVolumeSizeInGb" tf:"default_ebs_volume_size_in_gb,omitempty"`
-
-	// The maximum size of the EBS storage volume for a private space.
-	// +kubebuilder:validation:Optional
-	MaximumEBSVolumeSizeInGb *float64 `json:"maximumEbsVolumeSizeInGb" tf:"maximum_ebs_volume_size_in_gb,omitempty"`
-}
-
 type UserProfileInitParameters struct {
 
 	// The ID of the associated Domain.
@@ -580,23 +522,52 @@ type UserSettingsCodeEditorAppSettingsParameters struct {
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
+type UserSettingsCustomFileSystemConfigEFSFileSystemConfigInitParameters struct {
+
+	// The ID of your Amazon EFS file system.
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
+}
+
+type UserSettingsCustomFileSystemConfigEFSFileSystemConfigObservation struct {
+
+	// The ID of your Amazon EFS file system.
+	FileSystemID *string `json:"fileSystemId,omitempty" tf:"file_system_id,omitempty"`
+
+	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
+}
+
+type UserSettingsCustomFileSystemConfigEFSFileSystemConfigParameters struct {
+
+	// The ID of your Amazon EFS file system.
+	// +kubebuilder:validation:Optional
+	FileSystemID *string `json:"fileSystemId" tf:"file_system_id,omitempty"`
+
+	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
+	// +kubebuilder:validation:Optional
+	FileSystemPath *string `json:"fileSystemPath,omitempty" tf:"file_system_path,omitempty"`
+}
+
 type UserSettingsCustomFileSystemConfigInitParameters struct {
 
 	// The default EBS storage settings for a private space. See EFS File System Config below.
-	EFSFileSystemConfig []CustomFileSystemConfigEFSFileSystemConfigInitParameters `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
+	EFSFileSystemConfig []UserSettingsCustomFileSystemConfigEFSFileSystemConfigInitParameters `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
 }
 
 type UserSettingsCustomFileSystemConfigObservation struct {
 
 	// The default EBS storage settings for a private space. See EFS File System Config below.
-	EFSFileSystemConfig []CustomFileSystemConfigEFSFileSystemConfigObservation `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
+	EFSFileSystemConfig []UserSettingsCustomFileSystemConfigEFSFileSystemConfigObservation `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
 }
 
 type UserSettingsCustomFileSystemConfigParameters struct {
 
 	// The default EBS storage settings for a private space. See EFS File System Config below.
 	// +kubebuilder:validation:Optional
-	EFSFileSystemConfig []CustomFileSystemConfigEFSFileSystemConfigParameters `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
+	EFSFileSystemConfig []UserSettingsCustomFileSystemConfigEFSFileSystemConfigParameters `json:"efsFileSystemConfig,omitempty" tf:"efs_file_system_config,omitempty"`
 }
 
 type UserSettingsCustomPosixUserConfigInitParameters struct {
@@ -675,6 +646,9 @@ type UserSettingsInitParameters struct {
 
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
+
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	StudioWebPortalSettings *UserSettingsStudioWebPortalSettingsInitParameters `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
 
 	// The TensorBoard app settings. See TensorBoard App Settings below.
 	TensorBoardAppSettings *UserSettingsTensorBoardAppSettingsInitParameters `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
@@ -1157,6 +1131,9 @@ type UserSettingsObservation struct {
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
 
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	StudioWebPortalSettings *UserSettingsStudioWebPortalSettingsObservation `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
+
 	// The TensorBoard app settings. See TensorBoard App Settings below.
 	TensorBoardAppSettings *UserSettingsTensorBoardAppSettingsObservation `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
 }
@@ -1223,6 +1200,10 @@ type UserSettingsParameters struct {
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
+
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	// +kubebuilder:validation:Optional
+	StudioWebPortalSettings *UserSettingsStudioWebPortalSettingsParameters `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
 
 	// The TensorBoard app settings. See TensorBoard App Settings below.
 	// +kubebuilder:validation:Optional
@@ -1424,23 +1405,87 @@ type UserSettingsSharingSettingsParameters struct {
 	S3OutputPath *string `json:"s3OutputPath,omitempty" tf:"s3_output_path,omitempty"`
 }
 
+type UserSettingsSpaceStorageSettingsDefaultEBSStorageSettingsInitParameters struct {
+
+	// The default size of the EBS storage volume for a private space.
+	DefaultEBSVolumeSizeInGb *float64 `json:"defaultEbsVolumeSizeInGb,omitempty" tf:"default_ebs_volume_size_in_gb,omitempty"`
+
+	// The maximum size of the EBS storage volume for a private space.
+	MaximumEBSVolumeSizeInGb *float64 `json:"maximumEbsVolumeSizeInGb,omitempty" tf:"maximum_ebs_volume_size_in_gb,omitempty"`
+}
+
+type UserSettingsSpaceStorageSettingsDefaultEBSStorageSettingsObservation struct {
+
+	// The default size of the EBS storage volume for a private space.
+	DefaultEBSVolumeSizeInGb *float64 `json:"defaultEbsVolumeSizeInGb,omitempty" tf:"default_ebs_volume_size_in_gb,omitempty"`
+
+	// The maximum size of the EBS storage volume for a private space.
+	MaximumEBSVolumeSizeInGb *float64 `json:"maximumEbsVolumeSizeInGb,omitempty" tf:"maximum_ebs_volume_size_in_gb,omitempty"`
+}
+
+type UserSettingsSpaceStorageSettingsDefaultEBSStorageSettingsParameters struct {
+
+	// The default size of the EBS storage volume for a private space.
+	// +kubebuilder:validation:Optional
+	DefaultEBSVolumeSizeInGb *float64 `json:"defaultEbsVolumeSizeInGb" tf:"default_ebs_volume_size_in_gb,omitempty"`
+
+	// The maximum size of the EBS storage volume for a private space.
+	// +kubebuilder:validation:Optional
+	MaximumEBSVolumeSizeInGb *float64 `json:"maximumEbsVolumeSizeInGb" tf:"maximum_ebs_volume_size_in_gb,omitempty"`
+}
+
 type UserSettingsSpaceStorageSettingsInitParameters struct {
 
 	// The default EBS storage settings for a private space. See Default EBS Storage Settings below.
-	DefaultEBSStorageSettings *SpaceStorageSettingsDefaultEBSStorageSettingsInitParameters `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
+	DefaultEBSStorageSettings *UserSettingsSpaceStorageSettingsDefaultEBSStorageSettingsInitParameters `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
 }
 
 type UserSettingsSpaceStorageSettingsObservation struct {
 
 	// The default EBS storage settings for a private space. See Default EBS Storage Settings below.
-	DefaultEBSStorageSettings *SpaceStorageSettingsDefaultEBSStorageSettingsObservation `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
+	DefaultEBSStorageSettings *UserSettingsSpaceStorageSettingsDefaultEBSStorageSettingsObservation `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
 }
 
 type UserSettingsSpaceStorageSettingsParameters struct {
 
 	// The default EBS storage settings for a private space. See Default EBS Storage Settings below.
 	// +kubebuilder:validation:Optional
-	DefaultEBSStorageSettings *SpaceStorageSettingsDefaultEBSStorageSettingsParameters `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
+	DefaultEBSStorageSettings *UserSettingsSpaceStorageSettingsDefaultEBSStorageSettingsParameters `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
+}
+
+type UserSettingsStudioWebPortalSettingsInitParameters struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
+}
+
+type UserSettingsStudioWebPortalSettingsObservation struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
+}
+
+type UserSettingsStudioWebPortalSettingsParameters struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
 }
 
 type UserSettingsTensorBoardAppSettingsDefaultResourceSpecInitParameters struct {

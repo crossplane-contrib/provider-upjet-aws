@@ -18,7 +18,7 @@ type AppInitParameters struct {
 	// The name of the app.
 	AppName *string `json:"appName,omitempty" tf:"app_name,omitempty"`
 
-	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
+	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway, TensorBoard, CodeEditor, JupyterLab, DetailedProfiler, and Canvas.
 	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
 
 	// The domain ID.
@@ -63,7 +63,7 @@ type AppObservation struct {
 	// The name of the app.
 	AppName *string `json:"appName,omitempty" tf:"app_name,omitempty"`
 
-	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
+	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway, TensorBoard, CodeEditor, JupyterLab, DetailedProfiler, and Canvas.
 	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the app.
@@ -99,7 +99,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	AppName *string `json:"appName,omitempty" tf:"app_name,omitempty"`
 
-	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway and TensorBoard.
+	// The type of app. Valid values are JupyterServer, KernelGateway, RStudioServerPro, RSessionGateway, TensorBoard, CodeEditor, JupyterLab, DetailedProfiler, and Canvas.
 	// +kubebuilder:validation:Optional
 	AppType *string `json:"appType,omitempty" tf:"app_type,omitempty"`
 

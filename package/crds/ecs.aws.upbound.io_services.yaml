@@ -2908,6 +2908,11 @@ spec:
                     description: Whether to enable Amazon ECS Exec for the tasks within
                       the service.
                     type: boolean
+                  forceDelete:
+                    description: Enable to delete a service even if it wasn't scaled
+                      down to zero tasks. It's only necessary to use this if the service
+                      uses the REPLICA scheduling strategy.
+                    type: boolean
                   forceNewDeployment:
                     description: Enable to force a new task deployment of the service.
                       This can be used to update tasks to use a newer Docker image
@@ -3637,7 +3642,7 @@ spec:
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
-                            type: string
+                            type: number
                           volumeType:
                             description: Volume type.
                             type: string
@@ -3832,6 +3837,11 @@ spec:
                   enableExecuteCommand:
                     description: Whether to enable Amazon ECS Exec for the tasks within
                       the service.
+                    type: boolean
+                  forceDelete:
+                    description: Enable to delete a service even if it wasn't scaled
+                      down to zero tasks. It's only necessary to use this if the service
+                      uses the REPLICA scheduling strategy.
                     type: boolean
                   forceNewDeployment:
                     description: Enable to force a new task deployment of the service.
@@ -4558,7 +4568,7 @@ spec:
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
-                            type: string
+                            type: number
                           volumeType:
                             description: Volume type.
                             type: string
@@ -4836,6 +4846,11 @@ spec:
                   enableExecuteCommand:
                     description: Whether to enable Amazon ECS Exec for the tasks within
                       the service.
+                    type: boolean
+                  forceDelete:
+                    description: Enable to delete a service even if it wasn't scaled
+                      down to zero tasks. It's only necessary to use this if the service
+                      uses the REPLICA scheduling strategy.
                     type: boolean
                   forceNewDeployment:
                     description: Enable to force a new task deployment of the service.
@@ -5190,7 +5205,7 @@ spec:
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
-                            type: string
+                            type: number
                           volumeType:
                             description: Volume type.
                             type: string

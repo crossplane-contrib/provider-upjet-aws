@@ -1117,7 +1117,7 @@ spec:
                     type: object
                   autoBranchCreationConfig:
                     description: Automated branch creation configuration for an Amplify
-                      app. An auto_branch_creation_config block is documented below.
+                      app. See auto_branch_creation_config Block for details.
                     properties:
                       basicAuthCredentialsSecretRef:
                         description: Basic authorization credentials for the autocreated
@@ -1202,12 +1202,21 @@ spec:
                     description: The build specification (build spec) for an Amplify
                       app.
                     type: string
+                  cacheConfig:
+                    description: Cache configuration for the Amplify app. See cache_config
+                      Block for details.
+                    properties:
+                      type:
+                        description: 'Type of cache configuration to use for an Amplify
+                          app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.'
+                        type: string
+                    type: object
                   customHeaders:
                     description: The custom HTTP headers for an Amplify app.
                     type: string
                   customRule:
                     description: Custom rewrite and redirect rules for an Amplify
-                      app. A custom_rule block is documented below.
+                      app. See custom_rule Block for details.
                     items:
                       properties:
                         condition:
@@ -1409,7 +1418,7 @@ spec:
                     type: object
                   autoBranchCreationConfig:
                     description: Automated branch creation configuration for an Amplify
-                      app. An auto_branch_creation_config block is documented below.
+                      app. See auto_branch_creation_config Block for details.
                     properties:
                       basicAuthCredentialsSecretRef:
                         description: Basic authorization credentials for the autocreated
@@ -1494,12 +1503,21 @@ spec:
                     description: The build specification (build spec) for an Amplify
                       app.
                     type: string
+                  cacheConfig:
+                    description: Cache configuration for the Amplify app. See cache_config
+                      Block for details.
+                    properties:
+                      type:
+                        description: 'Type of cache configuration to use for an Amplify
+                          app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.'
+                        type: string
+                    type: object
                   customHeaders:
                     description: The custom HTTP headers for an Amplify app.
                     type: string
                   customRule:
                     description: Custom rewrite and redirect rules for an Amplify
-                      app. A custom_rule block is documented below.
+                      app. See custom_rule Block for details.
                     items:
                       properties:
                         condition:
@@ -1841,7 +1859,7 @@ spec:
                     type: string
                   autoBranchCreationConfig:
                     description: Automated branch creation configuration for an Amplify
-                      app. An auto_branch_creation_config block is documented below.
+                      app. See auto_branch_creation_config Block for details.
                     properties:
                       buildSpec:
                         description: Build specification (build spec) for the autocreated
@@ -1890,12 +1908,21 @@ spec:
                     description: The build specification (build spec) for an Amplify
                       app.
                     type: string
+                  cacheConfig:
+                    description: Cache configuration for the Amplify app. See cache_config
+                      Block for details.
+                    properties:
+                      type:
+                        description: 'Type of cache configuration to use for an Amplify
+                          app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.'
+                        type: string
+                    type: object
                   customHeaders:
                     description: The custom HTTP headers for an Amplify app.
                     type: string
                   customRule:
                     description: Custom rewrite and redirect rules for an Amplify
-                      app. A custom_rule block is documented below.
+                      app. See custom_rule Block for details.
                     items:
                       properties:
                         condition:

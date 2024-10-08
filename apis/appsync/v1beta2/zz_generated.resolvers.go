@@ -247,6 +247,25 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.ForProvider.LogConfig.CloudwatchLogsRoleArnRef = rsp.ResolvedReference
 
 	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MergedAPIExecutionRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.ForProvider.MergedAPIExecutionRoleArnRef,
+			Selector:     mg.Spec.ForProvider.MergedAPIExecutionRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MergedAPIExecutionRoleArn")
+	}
+	mg.Spec.ForProvider.MergedAPIExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MergedAPIExecutionRoleArnRef = rsp.ResolvedReference
+
 	if mg.Spec.ForProvider.UserPoolConfig != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io", "v1beta2", "UserPool", "UserPoolList")
@@ -289,6 +308,25 @@ func (mg *GraphQLAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 		mg.Spec.InitProvider.LogConfig.CloudwatchLogsRoleArnRef = rsp.ResolvedReference
 
 	}
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MergedAPIExecutionRoleArn),
+			Extract:      common.ARNExtractor(),
+			Reference:    mg.Spec.InitProvider.MergedAPIExecutionRoleArnRef,
+			Selector:     mg.Spec.InitProvider.MergedAPIExecutionRoleArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MergedAPIExecutionRoleArn")
+	}
+	mg.Spec.InitProvider.MergedAPIExecutionRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MergedAPIExecutionRoleArnRef = rsp.ResolvedReference
+
 	if mg.Spec.InitProvider.UserPoolConfig != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("cognitoidp.aws.upbound.io", "v1beta2", "UserPool", "UserPoolList")

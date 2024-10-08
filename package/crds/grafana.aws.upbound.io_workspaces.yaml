@@ -941,7 +941,7 @@ spec:
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
                       new workspace. Supported values are 8.4, 9.4 and 10.4. If not
-                      specified, defaults to 9.4.
+                      specified, defaults to the latest version.
                     type: string
                   name:
                     description: The Grafana workspace name.
@@ -1148,7 +1148,7 @@ spec:
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
                       new workspace. Supported values are 8.4, 9.4 and 10.4. If not
-                      specified, defaults to 9.4.
+                      specified, defaults to the latest version.
                     type: string
                   name:
                     description: The Grafana workspace name.
@@ -1527,7 +1527,7 @@ spec:
                   grafanaVersion:
                     description: Specifies the version of Grafana to support in the
                       new workspace. Supported values are 8.4, 9.4 and 10.4. If not
-                      specified, defaults to 9.4.
+                      specified, defaults to the latest version.
                     type: string
                   id:
                     type: string

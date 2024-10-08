@@ -281,7 +281,7 @@ type ManagedEBSVolumeInitParameters struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Volume type.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -311,7 +311,7 @@ type ManagedEBSVolumeObservation struct {
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Volume type.
 	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
@@ -349,7 +349,7 @@ type ManagedEBSVolumeParameters struct {
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	// +kubebuilder:validation:Optional
-	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
 	// Volume type.
 	// +kubebuilder:validation:Optional
@@ -742,6 +742,9 @@ type ServiceInitParameters struct {
 	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
+
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	ForceNewDeployment *bool `json:"forceNewDeployment,omitempty" tf:"force_new_deployment,omitempty"`
 
@@ -849,6 +852,9 @@ type ServiceObservation struct {
 
 	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	ForceNewDeployment *bool `json:"forceNewDeployment,omitempty" tf:"force_new_deployment,omitempty"`
@@ -964,6 +970,10 @@ type ServiceParameters struct {
 	// Whether to enable Amazon ECS Exec for the tasks within the service.
 	// +kubebuilder:validation:Optional
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	// +kubebuilder:validation:Optional
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	// +kubebuilder:validation:Optional

@@ -86,6 +86,9 @@ type DataLakeSettingsInitParameters struct {
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
 
+	// Whether to allow a third-party query engine to get data access credentials without session tags when a caller has full data access permissions.
+	AllowFullTableExternalDataAccess *bool `json:"allowFullTableExternalDataAccess,omitempty" tf:"allow_full_table_external_data_access,omitempty"`
+
 	// Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it.
 	AuthorizedSessionTagValueList []*string `json:"authorizedSessionTagValueList,omitempty" tf:"authorized_session_tag_value_list,omitempty"`
 
@@ -118,6 +121,9 @@ type DataLakeSettingsObservation struct {
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
+
+	// Whether to allow a third-party query engine to get data access credentials without session tags when a caller has full data access permissions.
+	AllowFullTableExternalDataAccess *bool `json:"allowFullTableExternalDataAccess,omitempty" tf:"allow_full_table_external_data_access,omitempty"`
 
 	// Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it.
 	AuthorizedSessionTagValueList []*string `json:"authorizedSessionTagValueList,omitempty" tf:"authorized_session_tag_value_list,omitempty"`
@@ -155,6 +161,10 @@ type DataLakeSettingsParameters struct {
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	// +kubebuilder:validation:Optional
 	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
+
+	// Whether to allow a third-party query engine to get data access credentials without session tags when a caller has full data access permissions.
+	// +kubebuilder:validation:Optional
+	AllowFullTableExternalDataAccess *bool `json:"allowFullTableExternalDataAccess,omitempty" tf:"allow_full_table_external_data_access,omitempty"`
 
 	// Lake Formation relies on a privileged process secured by Amazon EMR or the third party integrator to tag the user's role while assuming it.
 	// +kubebuilder:validation:Optional
