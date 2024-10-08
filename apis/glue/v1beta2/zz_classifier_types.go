@@ -15,7 +15,7 @@ import (
 
 type ClassifierInitParameters struct {
 
-	// A classifier for Csv content. Defined below.
+	// A classifier for CSV content. Defined below.
 	CsvClassifier *CsvClassifierInitParameters `json:"csvClassifier,omitempty" tf:"csv_classifier,omitempty"`
 
 	// –  A classifier that uses grok patterns. Defined below.
@@ -30,7 +30,7 @@ type ClassifierInitParameters struct {
 
 type ClassifierObservation struct {
 
-	// A classifier for Csv content. Defined below.
+	// A classifier for CSV content. Defined below.
 	CsvClassifier *CsvClassifierObservation `json:"csvClassifier,omitempty" tf:"csv_classifier,omitempty"`
 
 	// –  A classifier that uses grok patterns. Defined below.
@@ -48,7 +48,7 @@ type ClassifierObservation struct {
 
 type ClassifierParameters struct {
 
-	// A classifier for Csv content. Defined below.
+	// A classifier for CSV content. Defined below.
 	// +kubebuilder:validation:Optional
 	CsvClassifier *CsvClassifierParameters `json:"csvClassifier,omitempty" tf:"csv_classifier,omitempty"`
 
@@ -84,7 +84,7 @@ type CsvClassifierInitParameters struct {
 	// A list of supported custom datatypes. Valid values are BINARY, BOOLEAN, DATE, DECIMAL, DOUBLE, FLOAT, INT, LONG, SHORT, STRING, TIMESTAMP.
 	CustomDatatypes []*string `json:"customDatatypes,omitempty" tf:"custom_datatypes,omitempty"`
 
-	// The delimiter used in the Csv to separate columns.
+	// The delimiter used in the CSV to separate columns.
 	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
 
 	// Specifies whether to trim column values.
@@ -96,6 +96,7 @@ type CsvClassifierInitParameters struct {
 	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
 	QuoteSymbol *string `json:"quoteSymbol,omitempty" tf:"quote_symbol,omitempty"`
 
+	// –  The SerDe for processing CSV. Valid values are OpenCSVSerDe, LazySimpleSerDe, None.
 	Serde *string `json:"serde,omitempty" tf:"serde,omitempty"`
 }
 
@@ -113,7 +114,7 @@ type CsvClassifierObservation struct {
 	// A list of supported custom datatypes. Valid values are BINARY, BOOLEAN, DATE, DECIMAL, DOUBLE, FLOAT, INT, LONG, SHORT, STRING, TIMESTAMP.
 	CustomDatatypes []*string `json:"customDatatypes,omitempty" tf:"custom_datatypes,omitempty"`
 
-	// The delimiter used in the Csv to separate columns.
+	// The delimiter used in the CSV to separate columns.
 	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
 
 	// Specifies whether to trim column values.
@@ -125,6 +126,7 @@ type CsvClassifierObservation struct {
 	// A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
 	QuoteSymbol *string `json:"quoteSymbol,omitempty" tf:"quote_symbol,omitempty"`
 
+	// –  The SerDe for processing CSV. Valid values are OpenCSVSerDe, LazySimpleSerDe, None.
 	Serde *string `json:"serde,omitempty" tf:"serde,omitempty"`
 }
 
@@ -146,7 +148,7 @@ type CsvClassifierParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomDatatypes []*string `json:"customDatatypes,omitempty" tf:"custom_datatypes,omitempty"`
 
-	// The delimiter used in the Csv to separate columns.
+	// The delimiter used in the CSV to separate columns.
 	// +kubebuilder:validation:Optional
 	Delimiter *string `json:"delimiter,omitempty" tf:"delimiter,omitempty"`
 
@@ -162,6 +164,7 @@ type CsvClassifierParameters struct {
 	// +kubebuilder:validation:Optional
 	QuoteSymbol *string `json:"quoteSymbol,omitempty" tf:"quote_symbol,omitempty"`
 
+	// –  The SerDe for processing CSV. Valid values are OpenCSVSerDe, LazySimpleSerDe, None.
 	// +kubebuilder:validation:Optional
 	Serde *string `json:"serde,omitempty" tf:"serde,omitempty"`
 }

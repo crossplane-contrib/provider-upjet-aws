@@ -2657,17 +2657,14 @@ spec:
                                   type: array
                                   x-kubernetes-list-type: set
                                 unshareInterval:
-                                  description: How often this lifecycle policy should
-                                    be evaluated. 1, 2,3,4,6,8,12 or 24 are valid
-                                    values. Conflicts with cron_expression. If set,
-                                    interval_unit and times must also be set.
+                                  description: The period after which snapshots that
+                                    are shared with other AWS accounts are automatically
+                                    unshared.
                                   type: number
                                 unshareIntervalUnit:
-                                  description: The unit for how often the lifecycle
-                                    policy should be evaluated. HOURS is currently
-                                    the only allowed value and also the default value.
-                                    Conflicts with cron_expression. Must be set if
-                                    interval is set.
+                                  description: The unit of time for the automatic
+                                    unsharing interval. Valid values are DAYS, WEEKS,
+                                    MONTHS, YEARS.
                                   type: string
                               type: object
                             tagsToAdd:
@@ -3257,17 +3254,14 @@ spec:
                                   type: array
                                   x-kubernetes-list-type: set
                                 unshareInterval:
-                                  description: How often this lifecycle policy should
-                                    be evaluated. 1, 2,3,4,6,8,12 or 24 are valid
-                                    values. Conflicts with cron_expression. If set,
-                                    interval_unit and times must also be set.
+                                  description: The period after which snapshots that
+                                    are shared with other AWS accounts are automatically
+                                    unshared.
                                   type: number
                                 unshareIntervalUnit:
-                                  description: The unit for how often the lifecycle
-                                    policy should be evaluated. HOURS is currently
-                                    the only allowed value and also the default value.
-                                    Conflicts with cron_expression. Must be set if
-                                    interval is set.
+                                  description: The unit of time for the automatic
+                                    unsharing interval. Valid values are DAYS, WEEKS,
+                                    MONTHS, YEARS.
                                   type: string
                               type: object
                             tagsToAdd:
@@ -3875,17 +3869,14 @@ spec:
                                   type: array
                                   x-kubernetes-list-type: set
                                 unshareInterval:
-                                  description: How often this lifecycle policy should
-                                    be evaluated. 1, 2,3,4,6,8,12 or 24 are valid
-                                    values. Conflicts with cron_expression. If set,
-                                    interval_unit and times must also be set.
+                                  description: The period after which snapshots that
+                                    are shared with other AWS accounts are automatically
+                                    unshared.
                                   type: number
                                 unshareIntervalUnit:
-                                  description: The unit for how often the lifecycle
-                                    policy should be evaluated. HOURS is currently
-                                    the only allowed value and also the default value.
-                                    Conflicts with cron_expression. Must be set if
-                                    interval is set.
+                                  description: The unit of time for the automatic
+                                    unsharing interval. Valid values are DAYS, WEEKS,
+                                    MONTHS, YEARS.
                                   type: string
                               type: object
                             tagsToAdd:

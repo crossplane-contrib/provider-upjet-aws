@@ -248,7 +248,10 @@ spec:
                     type: string
                   fifoTopic:
                     description: Boolean indicating whether or not to create a FIFO
-                      (first-in-first-out) topic (default is false).
+                      (first-in-first-out) topic. FIFO topics can't deliver messages
+                      to customer managed endpoints, such as email addresses, mobile
+                      apps, SMS, or HTTP(S) endpoints. These endpoint types aren't
+                      guaranteed to preserve strict message ordering. Default is false.
                     type: boolean
                   firehoseFailureFeedbackRoleArn:
                     description: IAM role for failure feedback
@@ -1102,7 +1105,10 @@ spec:
                     type: string
                   fifoTopic:
                     description: Boolean indicating whether or not to create a FIFO
-                      (first-in-first-out) topic (default is false).
+                      (first-in-first-out) topic. FIFO topics can't deliver messages
+                      to customer managed endpoints, such as email addresses, mobile
+                      apps, SMS, or HTTP(S) endpoints. These endpoint types aren't
+                      guaranteed to preserve strict message ordering. Default is false.
                     type: boolean
                   firehoseFailureFeedbackRoleArn:
                     description: IAM role for failure feedback
@@ -1969,7 +1975,10 @@ spec:
                     type: string
                   fifoTopic:
                     description: Boolean indicating whether or not to create a FIFO
-                      (first-in-first-out) topic (default is false).
+                      (first-in-first-out) topic. FIFO topics can't deliver messages
+                      to customer managed endpoints, such as email addresses, mobile
+                      apps, SMS, or HTTP(S) endpoints. These endpoint types aren't
+                      guaranteed to preserve strict message ordering. Default is false.
                     type: boolean
                   firehoseFailureFeedbackRoleArn:
                     description: IAM role for failure feedback

@@ -77,6 +77,13 @@ spec:
                     description: The partner event source that the new event bus will
                       be matched with. Must match name.
                     type: string
+                  kmsKeyIdentifier:
+                    description: The identifier of the AWS KMS customer managed key
+                      for EventBridge to use, if you choose to use a customer managed
+                      key to encrypt events on this event bus. The identifier can
+                      be the key Amazon Resource Name (ARN), KeyId, key alias, or
+                      key alias ARN.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -106,6 +113,13 @@ spec:
                   eventSourceName:
                     description: The partner event source that the new event bus will
                       be matched with. Must match name.
+                    type: string
+                  kmsKeyIdentifier:
+                    description: The identifier of the AWS KMS customer managed key
+                      for EventBridge to use, if you choose to use a customer managed
+                      key to encrypt events on this event bus. The identifier can
+                      be the key Amazon Resource Name (ARN), KeyId, key alias, or
+                      key alias ARN.
                     type: string
                   tags:
                     additionalProperties:
@@ -294,6 +308,13 @@ spec:
                       be matched with. Must match name.
                     type: string
                   id:
+                    type: string
+                  kmsKeyIdentifier:
+                    description: The identifier of the AWS KMS customer managed key
+                      for EventBridge to use, if you choose to use a customer managed
+                      key to encrypt events on this event bus. The identifier can
+                      be the key Amazon Resource Name (ARN), KeyId, key alias, or
+                      key alias ARN.
                     type: string
                   tags:
                     additionalProperties:

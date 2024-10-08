@@ -181,6 +181,25 @@ spec:
                       can be found in the ServiceNamespace parameter at: AWS Application
                       Auto Scaling API Reference'
                     type: string
+                  suspendedState:
+                    description: Specifies whether the scaling activities for a scalable
+                      target are in a suspended state.
+                    properties:
+                      dynamicScalingInSuspended:
+                        description: Whether scale in by a target tracking scaling
+                          policy or a step scaling policy is suspended. Default is
+                          false.
+                        type: boolean
+                      dynamicScalingOutSuspended:
+                        description: Whether scale out by a target tracking scaling
+                          policy or a step scaling policy is suspended. Default is
+                          false.
+                        type: boolean
+                      scheduledScalingSuspended:
+                        description: Whether scheduled scaling is suspended. Default
+                          is false.
+                        type: boolean
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -307,6 +326,25 @@ spec:
                       can be found in the ServiceNamespace parameter at: AWS Application
                       Auto Scaling API Reference'
                     type: string
+                  suspendedState:
+                    description: Specifies whether the scaling activities for a scalable
+                      target are in a suspended state.
+                    properties:
+                      dynamicScalingInSuspended:
+                        description: Whether scale in by a target tracking scaling
+                          policy or a step scaling policy is suspended. Default is
+                          false.
+                        type: boolean
+                      dynamicScalingOutSuspended:
+                        description: Whether scale out by a target tracking scaling
+                          policy or a step scaling policy is suspended. Default is
+                          false.
+                        type: boolean
+                      scheduledScalingSuspended:
+                        description: Whether scheduled scaling is suspended. Default
+                          is false.
+                        type: boolean
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -542,6 +580,25 @@ spec:
                       can be found in the ServiceNamespace parameter at: AWS Application
                       Auto Scaling API Reference'
                     type: string
+                  suspendedState:
+                    description: Specifies whether the scaling activities for a scalable
+                      target are in a suspended state.
+                    properties:
+                      dynamicScalingInSuspended:
+                        description: Whether scale in by a target tracking scaling
+                          policy or a step scaling policy is suspended. Default is
+                          false.
+                        type: boolean
+                      dynamicScalingOutSuspended:
+                        description: Whether scale out by a target tracking scaling
+                          policy or a step scaling policy is suspended. Default is
+                          false.
+                        type: boolean
+                      scheduledScalingSuspended:
+                        description: Whether scheduled scaling is suspended. Default
+                          is false.
+                        type: boolean
+                    type: object
                   tags:
                     additionalProperties:
                       type: string

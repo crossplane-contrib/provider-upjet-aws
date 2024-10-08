@@ -260,6 +260,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -506,6 +511,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.UpgradeStorageConfig != nil {
+		in, out := &in.UpgradeStorageConfig, &out.UpgradeStorageConfig
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -740,6 +750,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
 		*out = new(string)
 		**out = **in
 	}
@@ -1005,6 +1020,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.UpgradeStorageConfig != nil {
+		in, out := &in.UpgradeStorageConfig, &out.UpgradeStorageConfig
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -1195,6 +1215,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
 		*out = new(string)
 		**out = **in
 	}
@@ -1447,6 +1472,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	if in.Timezone != nil {
 		in, out := &in.Timezone, &out.Timezone
 		*out = new(string)
+		**out = **in
+	}
+	if in.UpgradeStorageConfig != nil {
+		in, out := &in.UpgradeStorageConfig, &out.UpgradeStorageConfig
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Username != nil {

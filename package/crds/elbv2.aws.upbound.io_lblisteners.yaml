@@ -2150,7 +2150,7 @@ spec:
                     type: string
                   sslPolicy:
                     description: Name of the SSL Policy for the listener. Required
-                      if protocol is HTTPS or TLS.
+                      if protocol is HTTPS or TLS. Default is ELBSecurityPolicy-2016-08.
                     type: string
                   tags:
                     additionalProperties:
@@ -2655,7 +2655,7 @@ spec:
                     type: string
                   sslPolicy:
                     description: Name of the SSL Policy for the listener. Required
-                      if protocol is HTTPS or TLS.
+                      if protocol is HTTPS or TLS. Default is ELBSecurityPolicy-2016-08.
                     type: string
                   tags:
                     additionalProperties:
@@ -3083,7 +3083,7 @@ spec:
                     type: string
                   sslPolicy:
                     description: Name of the SSL Policy for the listener. Required
-                      if protocol is HTTPS or TLS.
+                      if protocol is HTTPS or TLS. Default is ELBSecurityPolicy-2016-08.
                     type: string
                   tags:
                     additionalProperties:

@@ -133,6 +133,25 @@ func (mg *EventSourceMapping) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.FunctionName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FunctionNameRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.KMSKeyArnRef,
+			Selector:     mg.Spec.ForProvider.KMSKeyArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KMSKeyArn")
+	}
+	mg.Spec.ForProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KMSKeyArnRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta2", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -151,6 +170,25 @@ func (mg *EventSourceMapping) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.InitProvider.FunctionName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FunctionNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("kms.aws.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyArn),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KMSKeyArnRef,
+			Selector:     mg.Spec.InitProvider.KMSKeyArnSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KMSKeyArn")
+	}
+	mg.Spec.InitProvider.KMSKeyArn = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KMSKeyArnRef = rsp.ResolvedReference
 
 	return nil
 }

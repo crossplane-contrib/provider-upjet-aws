@@ -418,7 +418,7 @@ type TaskDefinitionInitParameters struct {
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 
-	// Whether should track latest task definition or the one created with the resource. Default is false.
+	// Whether should track latest ACTIVE task definition on AWS or the one created with the resource stored in state. Default is false. Useful in the event the task definition is modified outside of this resource.
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
 	// Configuration block for volumes that containers in your task may use. Detailed below.
@@ -495,7 +495,7 @@ type TaskDefinitionObservation struct {
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 
-	// Whether should track latest task definition or the one created with the resource. Default is false.
+	// Whether should track latest ACTIVE task definition on AWS or the one created with the resource stored in state. Default is false. Useful in the event the task definition is modified outside of this resource.
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
 	// Configuration block for volumes that containers in your task may use. Detailed below.
@@ -589,7 +589,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 
-	// Whether should track latest task definition or the one created with the resource. Default is false.
+	// Whether should track latest ACTIVE task definition on AWS or the one created with the resource stored in state. Default is false. Useful in the event the task definition is modified outside of this resource.
 	// +kubebuilder:validation:Optional
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 

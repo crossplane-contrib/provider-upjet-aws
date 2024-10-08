@@ -263,6 +263,11 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ClusterMode != nil {
+		in, out := &in.ClusterMode, &out.ClusterMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DataTieringEnabled != nil {
 		in, out := &in.DataTieringEnabled, &out.DataTieringEnabled
 		*out = new(bool)
@@ -585,6 +590,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ClusterMode != nil {
+		in, out := &in.ClusterMode, &out.ClusterMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.ConfigurationEndpointAddress != nil {
 		in, out := &in.ConfigurationEndpointAddress, &out.ConfigurationEndpointAddress
 		*out = new(string)
@@ -883,6 +893,11 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	if in.AutomaticFailoverEnabled != nil {
 		in, out := &in.AutomaticFailoverEnabled, &out.AutomaticFailoverEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.ClusterMode != nil {
+		in, out := &in.ClusterMode, &out.ClusterMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.DataTieringEnabled != nil {
