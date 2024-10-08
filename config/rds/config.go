@@ -8,15 +8,17 @@ import (
 	"fmt"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/types/comments"
 
 	"github.com/upbound/provider-aws/config/common"
+	"github.com/upbound/provider-aws/config/rds/utils"
 )
 
 // Configure adds configurations for the rds group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_rds_cluster", func(r *config.Resource) {
 		// Mutually exclusive with aws_rds_cluster_role_association
 		config.MoveToStatus(r.TerraformResource, "iam_roles")
@@ -80,6 +82,20 @@ func Configure(p *config.Provider) {
 			"master DB user. If you set autoGeneratePassword to true, the Secret" +
 			" referenced here will be created or updated with generated password" +
 			" if it does not already contain one."
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Destroy {
+				return diff, nil
+			}
+			// Ignore the engine version diff, if the desired spec version is lower than the external's actual version.
+			// Downgrades are not allowed by AWS RDS.
+			if evDiff, ok := diff.Attributes["engine_version"]; ok && evDiff.Old != "" && evDiff.New != "" {
+				c := utils.CompareEngineVersions(evDiff.New, evDiff.Old)
+				if c <= 0 {
+					delete(diff.Attributes, "engine_version")
+				}
+			}
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
@@ -167,6 +183,20 @@ func Configure(p *config.Provider) {
 			" if it does not already contain one."
 		r.MetaResource.ArgumentDocs["engine"] = "- (Required unless a `snapshotIdentifier` or `replicateSourceDb` is provided) The database engine to use. For supported values, see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine'. For information on the difference between the available Aurora MySQL engines see Comparison in the [Amazon RDS Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html)."
 		r.MetaResource.ArgumentDocs["engine_version"] = "- (Optional) The engine version to use. If `autoMinorVersionUpgrade` is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute `status.atProvider.engineVersionActual`. For supported values, see the EngineVersion parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine version must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine version'."
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Destroy {
+				return diff, nil
+			}
+			// Ignore the engine version diff, if the desired spec version is lower than the external's actual version.
+			// Downgrades are not allowed by AWS RDS.
+			if evDiff, ok := diff.Attributes["engine_version"]; ok && evDiff.Old != "" && evDiff.New != "" {
+				c := utils.CompareEngineVersions(evDiff.New, evDiff.Old)
+				if c <= 0 {
+					delete(diff.Attributes, "engine_version")
+				}
+			}
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_db_proxy", func(r *config.Resource) {
