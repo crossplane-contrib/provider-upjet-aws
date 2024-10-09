@@ -127,6 +127,12 @@ export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)
 export XPKG_DIR := $(XPKG_DIR)
 export XPKG_IGNORE := $(XPKG_IGNORE)
 
+CONFIG_CRD_GROUP = $(PROVIDER_NAME)
+PROVIDER_AUTH_GROUP = $(PROVIDER_NAME)
+
+export CONFIG_CRD_GROUP := $(CONFIG_CRD_GROUP)
+export PROVIDER_AUTH_GROUP := $(PROVIDER_AUTH_GROUP)
+
 -include build/makelib/xpkg.mk
 
 # ====================================================================================
