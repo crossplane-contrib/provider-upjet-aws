@@ -662,6 +662,9 @@ type FlowInitParameters struct {
 	// ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key.
 	KMSArn *string `json:"kmsArn,omitempty" tf:"kms_arn,omitempty"`
 
+	// A Catalog that determines the configuration that Amazon AppFlow uses when it catalogs the data that’s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
+	MetadataCatalogConfig []MetadataCatalogConfigInitParameters `json:"metadataCatalogConfig,omitempty" tf:"metadata_catalog_config,omitempty"`
+
 	// The Source Flow Config that controls how Amazon AppFlow retrieves data from the source connector.
 	SourceFlowConfig []SourceFlowConfigInitParameters `json:"sourceFlowConfig,omitempty" tf:"source_flow_config,omitempty"`
 
@@ -695,6 +698,9 @@ type FlowObservation struct {
 	// ARN (Amazon Resource Name) of the Key Management Service (KMS) key you provide for encryption. This is required if you do not want to use the Amazon AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses the Amazon AppFlow-managed KMS key.
 	KMSArn *string `json:"kmsArn,omitempty" tf:"kms_arn,omitempty"`
 
+	// A Catalog that determines the configuration that Amazon AppFlow uses when it catalogs the data that’s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
+	MetadataCatalogConfig []MetadataCatalogConfigObservation `json:"metadataCatalogConfig,omitempty" tf:"metadata_catalog_config,omitempty"`
+
 	// The Source Flow Config that controls how Amazon AppFlow retrieves data from the source connector.
 	SourceFlowConfig []SourceFlowConfigObservation `json:"sourceFlowConfig,omitempty" tf:"source_flow_config,omitempty"`
 
@@ -727,6 +733,10 @@ type FlowParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSArn *string `json:"kmsArn,omitempty" tf:"kms_arn,omitempty"`
 
+	// A Catalog that determines the configuration that Amazon AppFlow uses when it catalogs the data that’s transferred by the associated flow. When Amazon AppFlow catalogs the data from a flow, it stores metadata in a data catalog.
+	// +kubebuilder:validation:Optional
+	MetadataCatalogConfig []MetadataCatalogConfigParameters `json:"metadataCatalogConfig,omitempty" tf:"metadata_catalog_config,omitempty"`
+
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
@@ -748,6 +758,45 @@ type FlowParameters struct {
 	// A Trigger that determine how and when the flow runs.
 	// +kubebuilder:validation:Optional
 	TriggerConfig []TriggerConfigParameters `json:"triggerConfig,omitempty" tf:"trigger_config,omitempty"`
+}
+
+type GlueDataCatalogInitParameters struct {
+
+	// The name of an existing Glue database to store the metadata tables that Amazon AppFlow creates.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The ARN of an IAM role that grants AppFlow the permissions it needs to create Data Catalog tables, databases, and partitions.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// A naming prefix for each Data Catalog table that Amazon AppFlow creates
+	TablePrefix *string `json:"tablePrefix,omitempty" tf:"table_prefix,omitempty"`
+}
+
+type GlueDataCatalogObservation struct {
+
+	// The name of an existing Glue database to store the metadata tables that Amazon AppFlow creates.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The ARN of an IAM role that grants AppFlow the permissions it needs to create Data Catalog tables, databases, and partitions.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// A naming prefix for each Data Catalog table that Amazon AppFlow creates
+	TablePrefix *string `json:"tablePrefix,omitempty" tf:"table_prefix,omitempty"`
+}
+
+type GlueDataCatalogParameters struct {
+
+	// The name of an existing Glue database to store the metadata tables that Amazon AppFlow creates.
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+
+	// The ARN of an IAM role that grants AppFlow the permissions it needs to create Data Catalog tables, databases, and partitions.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+
+	// A naming prefix for each Data Catalog table that Amazon AppFlow creates
+	// +kubebuilder:validation:Optional
+	TablePrefix *string `json:"tablePrefix" tf:"table_prefix,omitempty"`
 }
 
 type GoogleAnalyticsInitParameters struct {
@@ -952,10 +1001,27 @@ type MarketoParameters struct {
 	Object *string `json:"object" tf:"object,omitempty"`
 }
 
+type MetadataCatalogConfigInitParameters struct {
+	GlueDataCatalog []GlueDataCatalogInitParameters `json:"glueDataCatalog,omitempty" tf:"glue_data_catalog,omitempty"`
+}
+
+type MetadataCatalogConfigObservation struct {
+	GlueDataCatalog []GlueDataCatalogObservation `json:"glueDataCatalog,omitempty" tf:"glue_data_catalog,omitempty"`
+}
+
+type MetadataCatalogConfigParameters struct {
+
+	// +kubebuilder:validation:Optional
+	GlueDataCatalog []GlueDataCatalogParameters `json:"glueDataCatalog,omitempty" tf:"glue_data_catalog,omitempty"`
+}
+
 type PrefixConfigInitParameters struct {
 
 	// Determines the level of granularity that's included in the prefix. Valid values are YEAR, MONTH, DAY, HOUR, and MINUTE.
 	PrefixFormat *string `json:"prefixFormat,omitempty" tf:"prefix_format,omitempty"`
+
+	// Determines whether the destination file path includes either or both of the selected elements. Valid values are EXECUTION_ID and SCHEMA_VERSION
+	PrefixHierarchy []*string `json:"prefixHierarchy,omitempty" tf:"prefix_hierarchy,omitempty"`
 
 	// Determines the format of the prefix, and whether it applies to the file name, file path, or both. Valid values are FILENAME, PATH, and PATH_AND_FILENAME.
 	PrefixType *string `json:"prefixType,omitempty" tf:"prefix_type,omitempty"`
@@ -966,6 +1032,9 @@ type PrefixConfigObservation struct {
 	// Determines the level of granularity that's included in the prefix. Valid values are YEAR, MONTH, DAY, HOUR, and MINUTE.
 	PrefixFormat *string `json:"prefixFormat,omitempty" tf:"prefix_format,omitempty"`
 
+	// Determines whether the destination file path includes either or both of the selected elements. Valid values are EXECUTION_ID and SCHEMA_VERSION
+	PrefixHierarchy []*string `json:"prefixHierarchy,omitempty" tf:"prefix_hierarchy,omitempty"`
+
 	// Determines the format of the prefix, and whether it applies to the file name, file path, or both. Valid values are FILENAME, PATH, and PATH_AND_FILENAME.
 	PrefixType *string `json:"prefixType,omitempty" tf:"prefix_type,omitempty"`
 }
@@ -975,6 +1044,10 @@ type PrefixConfigParameters struct {
 	// Determines the level of granularity that's included in the prefix. Valid values are YEAR, MONTH, DAY, HOUR, and MINUTE.
 	// +kubebuilder:validation:Optional
 	PrefixFormat *string `json:"prefixFormat,omitempty" tf:"prefix_format,omitempty"`
+
+	// Determines whether the destination file path includes either or both of the selected elements. Valid values are EXECUTION_ID and SCHEMA_VERSION
+	// +kubebuilder:validation:Optional
+	PrefixHierarchy []*string `json:"prefixHierarchy,omitempty" tf:"prefix_hierarchy,omitempty"`
 
 	// Determines the format of the prefix, and whether it applies to the file name, file path, or both. Valid values are FILENAME, PATH, and PATH_AND_FILENAME.
 	// +kubebuilder:validation:Optional
@@ -1195,6 +1268,9 @@ type S3OutputFormatConfigPrefixConfigInitParameters struct {
 	// Determines the level of granularity that's included in the prefix. Valid values are YEAR, MONTH, DAY, HOUR, and MINUTE.
 	PrefixFormat *string `json:"prefixFormat,omitempty" tf:"prefix_format,omitempty"`
 
+	// Determines whether the destination file path includes either or both of the selected elements. Valid values are EXECUTION_ID and SCHEMA_VERSION
+	PrefixHierarchy []*string `json:"prefixHierarchy,omitempty" tf:"prefix_hierarchy,omitempty"`
+
 	// Determines the format of the prefix, and whether it applies to the file name, file path, or both. Valid values are FILENAME, PATH, and PATH_AND_FILENAME.
 	PrefixType *string `json:"prefixType,omitempty" tf:"prefix_type,omitempty"`
 }
@@ -1203,6 +1279,9 @@ type S3OutputFormatConfigPrefixConfigObservation struct {
 
 	// Determines the level of granularity that's included in the prefix. Valid values are YEAR, MONTH, DAY, HOUR, and MINUTE.
 	PrefixFormat *string `json:"prefixFormat,omitempty" tf:"prefix_format,omitempty"`
+
+	// Determines whether the destination file path includes either or both of the selected elements. Valid values are EXECUTION_ID and SCHEMA_VERSION
+	PrefixHierarchy []*string `json:"prefixHierarchy,omitempty" tf:"prefix_hierarchy,omitempty"`
 
 	// Determines the format of the prefix, and whether it applies to the file name, file path, or both. Valid values are FILENAME, PATH, and PATH_AND_FILENAME.
 	PrefixType *string `json:"prefixType,omitempty" tf:"prefix_type,omitempty"`
@@ -1213,6 +1292,10 @@ type S3OutputFormatConfigPrefixConfigParameters struct {
 	// Determines the level of granularity that's included in the prefix. Valid values are YEAR, MONTH, DAY, HOUR, and MINUTE.
 	// +kubebuilder:validation:Optional
 	PrefixFormat *string `json:"prefixFormat,omitempty" tf:"prefix_format,omitempty"`
+
+	// Determines whether the destination file path includes either or both of the selected elements. Valid values are EXECUTION_ID and SCHEMA_VERSION
+	// +kubebuilder:validation:Optional
+	PrefixHierarchy []*string `json:"prefixHierarchy,omitempty" tf:"prefix_hierarchy,omitempty"`
 
 	// Determines the format of the prefix, and whether it applies to the file name, file path, or both. Valid values are FILENAME, PATH, and PATH_AND_FILENAME.
 	// +kubebuilder:validation:Optional

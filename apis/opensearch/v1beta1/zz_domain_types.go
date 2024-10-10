@@ -453,8 +453,14 @@ type DomainObservation struct {
 	// Domain-specific endpoint for Dashboard without https scheme.
 	DashboardEndpoint *string `json:"dashboardEndpoint,omitempty" tf:"dashboard_endpoint,omitempty"`
 
+	// V2 domain endpoint for Dashboard that works with both IPv4 and IPv6 addresses, without https scheme.
+	DashboardEndpointV2 *string `json:"dashboardEndpointV2,omitempty" tf:"dashboard_endpoint_v2,omitempty"`
+
 	// Configuration block for domain endpoint HTTP(S) related options. Detailed below.
 	DomainEndpointOptions []DomainEndpointOptionsObservation `json:"domainEndpointOptions,omitempty" tf:"domain_endpoint_options,omitempty"`
+
+	// Dual stack hosted zone ID for the domain.
+	DomainEndpointV2HostedZoneID *string `json:"domainEndpointV2HostedZoneId,omitempty" tf:"domain_endpoint_v2_hosted_zone_id,omitempty"`
 
 	// Unique identifier for the domain.
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
@@ -470,6 +476,9 @@ type DomainObservation struct {
 
 	// Domain-specific endpoint used to submit index, search, and data upload requests.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// V2 domain endpoint that works with both IPv4 and IPv6 addresses, used to submit index, search, and data upload requests.
+	EndpointV2 *string `json:"endpointV2,omitempty" tf:"endpoint_v2,omitempty"`
 
 	// while Elasticsearch has elasticsearch_version
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`

@@ -74,6 +74,10 @@ type LustreFileSystemInitParameters struct {
 	// Sets the Lustre version for the file system that you're creating. Valid values are 2.10 for SCRATCH_1, SCRATCH_2 and PERSISTENT_1 deployment types. Valid values for 2.12 include all deployment types.
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 
+	// A map of tags to apply to the file system's final backup.
+	// +mapType=granular
+	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
+
 	// S3 URI (with optional prefix) that you're using as the data repository for your FSx for Lustre file system. For example, s3://example-bucket/optional-prefix/. Only supported on PERSISTENT_1 deployment types.
 	ImportPath *string `json:"importPath,omitempty" tf:"import_path,omitempty"`
 
@@ -118,6 +122,9 @@ type LustreFileSystemInitParameters struct {
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to true.
+	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
 	// The storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
@@ -185,6 +192,10 @@ type LustreFileSystemObservation struct {
 	// Sets the Lustre version for the file system that you're creating. Valid values are 2.10 for SCRATCH_1, SCRATCH_2 and PERSISTENT_1 deployment types. Valid values for 2.12 include all deployment types.
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 
+	// A map of tags to apply to the file system's final backup.
+	// +mapType=granular
+	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
+
 	// Identifier of the file system, e.g., fs-12345678
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -221,6 +232,9 @@ type LustreFileSystemObservation struct {
 	// A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to true.
+	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
 	// The storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
 	StorageCapacity *float64 `json:"storageCapacity,omitempty" tf:"storage_capacity,omitempty"`
@@ -288,6 +302,11 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	FileSystemTypeVersion *string `json:"fileSystemTypeVersion,omitempty" tf:"file_system_type_version,omitempty"`
 
+	// A map of tags to apply to the file system's final backup.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
+
 	// S3 URI (with optional prefix) that you're using as the data repository for your FSx for Lustre file system. For example, s3://example-bucket/optional-prefix/. Only supported on PERSISTENT_1 deployment types.
 	// +kubebuilder:validation:Optional
 	ImportPath *string `json:"importPath,omitempty" tf:"import_path,omitempty"`
@@ -345,6 +364,10 @@ type LustreFileSystemParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// When enabled, will skip the default final backup taken when the file system is deleted. This configuration must be applied separately before attempting to delete the resource to have the desired behavior. Defaults to true.
+	// +kubebuilder:validation:Optional
+	SkipFinalBackup *bool `json:"skipFinalBackup,omitempty" tf:"skip_final_backup,omitempty"`
 
 	// The storage capacity (GiB) of the file system. Minimum of 1200. See more details at Allowed values for Fsx storage capacity. Update is allowed only for SCRATCH_2, PERSISTENT_1 and PERSISTENT_2 deployment types, See more details at Fsx Storage Capacity Update. Required when not creating filesystem for a backup.
 	// +kubebuilder:validation:Optional

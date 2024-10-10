@@ -136,6 +136,25 @@ type DimensionConfigurationParameters struct {
 	DimensionValueSource *string `json:"dimensionValueSource" tf:"dimension_value_source,omitempty"`
 }
 
+type EventBridgeDestinationInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
+	EventBusArn *string `json:"eventBusArn,omitempty" tf:"event_bus_arn,omitempty"`
+}
+
+type EventBridgeDestinationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
+	EventBusArn *string `json:"eventBusArn,omitempty" tf:"event_bus_arn,omitempty"`
+}
+
+type EventBridgeDestinationParameters struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon EventBridge bus to publish email events to. Only the default bus is supported.
+	// +kubebuilder:validation:Optional
+	EventBusArn *string `json:"eventBusArn" tf:"event_bus_arn,omitempty"`
+}
+
 type EventDestinationInitParameters struct {
 
 	// An object that defines an Amazon CloudWatch destination for email events. See cloud_watch_destination below
@@ -143,6 +162,8 @@ type EventDestinationInitParameters struct {
 
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	EventBridgeDestination []EventBridgeDestinationInitParameters `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination below.
 	KinesisFirehoseDestination []KinesisFirehoseDestinationInitParameters `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
@@ -164,6 +185,8 @@ type EventDestinationObservation struct {
 
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	EventBridgeDestination []EventBridgeDestinationObservation `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination below.
 	KinesisFirehoseDestination []KinesisFirehoseDestinationObservation `json:"kinesisFirehoseDestination,omitempty" tf:"kinesis_firehose_destination,omitempty"`
@@ -187,6 +210,9 @@ type EventDestinationParameters struct {
 	// When the event destination is enabled, the specified event types are sent to the destinations. Default: false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	EventBridgeDestination []EventBridgeDestinationParameters `json:"eventBridgeDestination,omitempty" tf:"event_bridge_destination,omitempty"`
 
 	// An object that defines an Amazon Kinesis Data Firehose destination for email events. See kinesis_firehose_destination below.
 	// +kubebuilder:validation:Optional

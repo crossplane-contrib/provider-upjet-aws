@@ -973,6 +973,9 @@ type HTTPEndpointConfigurationInitParameters struct {
 	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []HTTPEndpointConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
+	// The Secret Manager Configuration. See secrets_manager_configuration block below for details.
+	SecretsManagerConfiguration *SecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
+
 	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
@@ -1008,6 +1011,9 @@ type HTTPEndpointConfigurationObservation struct {
 
 	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []HTTPEndpointConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+
+	// The Secret Manager Configuration. See secrets_manager_configuration block below for details.
+	SecretsManagerConfiguration *SecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
 	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -1068,6 +1074,10 @@ type HTTPEndpointConfigurationParameters struct {
 	// The S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []HTTPEndpointConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
+
+	// The Secret Manager Configuration. See secrets_manager_configuration block below for details.
+	// +kubebuilder:validation:Optional
+	SecretsManagerConfiguration *SecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
 	// The HTTP endpoint URL to which Kinesis Firehose sends your data.
 	// +kubebuilder:validation:Optional
@@ -2977,6 +2987,9 @@ type RedshiftConfigurationInitParameters struct {
 	// The password for the username above.
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
+	// The password for the username above. This value is required if secrets_manager_configuration is not provided.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []RedshiftConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -3004,6 +3017,9 @@ type RedshiftConfigurationInitParameters struct {
 
 	// The S3 Configuration. See s3_configuration below for details.
 	S3Configuration []RedshiftConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	SecretsManagerConfiguration *RedshiftConfigurationSecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
 	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -3044,6 +3060,9 @@ type RedshiftConfigurationObservation struct {
 	// The S3 Configuration. See s3_configuration below for details.
 	S3Configuration []RedshiftConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
 
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	SecretsManagerConfiguration *RedshiftConfigurationSecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
+
 	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -3073,6 +3092,10 @@ type RedshiftConfigurationParameters struct {
 	// The password for the username above.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// The password for the username above. This value is required if secrets_manager_configuration is not provided.
+	// +kubebuilder:validation:Optional
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
@@ -3107,6 +3130,10 @@ type RedshiftConfigurationParameters struct {
 	// The S3 Configuration. See s3_configuration below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []RedshiftConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
+
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// +kubebuilder:validation:Optional
+	SecretsManagerConfiguration *RedshiftConfigurationSecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
 	// The username that the firehose delivery stream will assume. It is strongly recommended that the username and password provided is used exclusively for Amazon Kinesis Firehose purposes, and that the permissions for the account are restricted for Amazon Redshift INSERT permissions.
 	// +kubebuilder:validation:Optional
@@ -3560,6 +3587,45 @@ type RedshiftConfigurationS3ConfigurationParameters struct {
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+}
+
+type RedshiftConfigurationSecretsManagerConfigurationInitParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type RedshiftConfigurationSecretsManagerConfigurationObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type RedshiftConfigurationSecretsManagerConfigurationParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type RequestConfigurationInitParameters struct {
@@ -4017,6 +4083,45 @@ type SchemaConfigurationParameters struct {
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
+type SecretsManagerConfigurationInitParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SecretsManagerConfigurationObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SecretsManagerConfigurationParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
 type SerializerInitParameters struct {
 
 	// Specifies converting data to the ORC format before storing it in Amazon S3. For more information, see Apache ORC. See orc_ser_de block below for details.
@@ -4129,6 +4234,12 @@ type SnowflakeConfigurationInitParameters struct {
 	// The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
 	AccountURL *string `json:"accountUrl,omitempty" tf:"account_url,omitempty"`
 
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 0s.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 128, before delivering it to the destination.  The default value is 1MB.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
 	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []SnowflakeConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -4149,6 +4260,9 @@ type SnowflakeConfigurationInitParameters struct {
 
 	// The private key for authentication.
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+
+	// The private key for authentication. This value is required if secrets_manager_configuration is not provided.
+	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// The processing configuration. See processing_configuration block below for details.
 	ProcessingConfiguration []SnowflakeConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
@@ -4178,6 +4292,9 @@ type SnowflakeConfigurationInitParameters struct {
 	// The Snowflake schema name.
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	SecretsManagerConfiguration *SnowflakeConfigurationSecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
+
 	// The configuration for Snowflake role.
 	SnowflakeRoleConfiguration []SnowflakeRoleConfigurationInitParameters `json:"snowflakeRoleConfiguration,omitempty" tf:"snowflake_role_configuration,omitempty"`
 
@@ -4195,6 +4312,12 @@ type SnowflakeConfigurationObservation struct {
 
 	// The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
 	AccountURL *string `json:"accountUrl,omitempty" tf:"account_url,omitempty"`
+
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 0s.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 128, before delivering it to the destination.  The default value is 1MB.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
 	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	CloudwatchLoggingOptions []SnowflakeConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
@@ -4229,6 +4352,9 @@ type SnowflakeConfigurationObservation struct {
 	// The Snowflake schema name.
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	SecretsManagerConfiguration *SnowflakeConfigurationSecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
+
 	// The configuration for Snowflake role.
 	SnowflakeRoleConfiguration []SnowflakeRoleConfigurationObservation `json:"snowflakeRoleConfiguration,omitempty" tf:"snowflake_role_configuration,omitempty"`
 
@@ -4247,6 +4373,14 @@ type SnowflakeConfigurationParameters struct {
 	// The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.
 	// +kubebuilder:validation:Optional
 	AccountURL *string `json:"accountUrl" tf:"account_url,omitempty"`
+
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 900, before delivering it to the destination.  The default value is 0s.
+	// +kubebuilder:validation:Optional
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 128, before delivering it to the destination.  The default value is 1MB.
+	// +kubebuilder:validation:Optional
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
 
 	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
 	// +kubebuilder:validation:Optional
@@ -4275,6 +4409,10 @@ type SnowflakeConfigurationParameters struct {
 	// The private key for authentication.
 	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
+
+	// The private key for authentication. This value is required if secrets_manager_configuration is not provided.
+	// +kubebuilder:validation:Optional
+	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// The processing configuration. See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
@@ -4309,6 +4447,10 @@ type SnowflakeConfigurationParameters struct {
 	// The Snowflake schema name.
 	// +kubebuilder:validation:Optional
 	Schema *string `json:"schema" tf:"schema,omitempty"`
+
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// +kubebuilder:validation:Optional
+	SecretsManagerConfiguration *SnowflakeConfigurationSecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 
 	// The configuration for Snowflake role.
 	// +kubebuilder:validation:Optional
@@ -4595,6 +4737,45 @@ type SnowflakeConfigurationS3ConfigurationParameters struct {
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
+type SnowflakeConfigurationSecretsManagerConfigurationInitParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SnowflakeConfigurationSecretsManagerConfigurationObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SnowflakeConfigurationSecretsManagerConfigurationParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
 type SnowflakeRoleConfigurationInitParameters struct {
 
 	// Enables or disables the logging. Defaults to false.
@@ -4705,6 +4886,9 @@ type SplunkConfigurationInitParameters struct {
 	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
 	HecTokenSecretRef v1.SecretKeySelector `json:"hecTokenSecretRef" tf:"-"`
 
+	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
+	HecTokenSecretRef *v1.SecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
+
 	// The data processing configuration.  See processing_configuration block below for details.
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
 
@@ -4716,6 +4900,9 @@ type SplunkConfigurationInitParameters struct {
 
 	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []SplunkConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	SecretsManagerConfiguration *SplunkConfigurationSecretsManagerConfigurationInitParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 }
 
 type SplunkConfigurationObservation struct {
@@ -4749,6 +4936,9 @@ type SplunkConfigurationObservation struct {
 
 	// The S3 Configuration. See s3_configuration block below for details.
 	S3Configuration []SplunkConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	SecretsManagerConfiguration *SplunkConfigurationSecretsManagerConfigurationObservation `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 }
 
 type SplunkConfigurationParameters struct {
@@ -4781,6 +4971,10 @@ type SplunkConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	HecTokenSecretRef v1.SecretKeySelector `json:"hecTokenSecretRef" tf:"-"`
 
+	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
+	// +kubebuilder:validation:Optional
+	HecTokenSecretRef *v1.SecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
+
 	// The data processing configuration.  See processing_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	ProcessingConfiguration []SplunkConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
@@ -4796,6 +4990,10 @@ type SplunkConfigurationParameters struct {
 	// The S3 Configuration. See s3_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	S3Configuration []SplunkConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
+
+	// The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if user and private_key are not provided.
+	// +kubebuilder:validation:Optional
+	SecretsManagerConfiguration *SplunkConfigurationSecretsManagerConfigurationParameters `json:"secretsManagerConfiguration,omitempty" tf:"secrets_manager_configuration,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationInitParameters struct {
@@ -5064,6 +5262,45 @@ type SplunkConfigurationS3ConfigurationParameters struct {
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+}
+
+type SplunkConfigurationSecretsManagerConfigurationInitParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SplunkConfigurationSecretsManagerConfigurationObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
+}
+
+type SplunkConfigurationSecretsManagerConfigurationParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The ARN of the Secrets Manager secret. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	SecretArn *string `json:"secretArn,omitempty" tf:"secret_arn,omitempty"`
 }
 
 type VPCConfigInitParameters struct {
