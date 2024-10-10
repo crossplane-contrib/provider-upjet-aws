@@ -120,6 +120,11 @@ spec:
                       stack set operation.
                     items:
                       properties:
+                        concurrencyMode:
+                          description: Specifies how the concurrency level behaves
+                            during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE
+                            and SOFT_FAILURE_TOLERANCE.
+                          type: string
                         failureToleranceCount:
                           description: The number of accounts, per Region, for which
                             this operation can fail before AWS CloudFormation stops
@@ -309,6 +314,11 @@ spec:
                       stack set operation.
                     items:
                       properties:
+                        concurrencyMode:
+                          description: Specifies how the concurrency level behaves
+                            during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE
+                            and SOFT_FAILURE_TOLERANCE.
+                          type: string
                         failureToleranceCount:
                           description: The number of accounts, per Region, for which
                             this operation can fail before AWS CloudFormation stops
@@ -658,6 +668,11 @@ spec:
                       stack set operation.
                     items:
                       properties:
+                        concurrencyMode:
+                          description: Specifies how the concurrency level behaves
+                            during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE
+                            and SOFT_FAILURE_TOLERANCE.
+                          type: string
                         failureToleranceCount:
                           description: The number of accounts, per Region, for which
                             this operation can fail before AWS CloudFormation stops

@@ -1919,6 +1919,11 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RestoreSourceTableArn != nil {
+		in, out := &in.RestoreSourceTableArn, &out.RestoreSourceTableArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.RestoreToLatestTime != nil {
 		in, out := &in.RestoreToLatestTime, &out.RestoreToLatestTime
 		*out = new(bool)
@@ -2337,6 +2342,11 @@ func (in *TableObservation) DeepCopyInto(out *TableObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RestoreSourceTableArn != nil {
+		in, out := &in.RestoreSourceTableArn, &out.RestoreSourceTableArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.RestoreToLatestTime != nil {
 		in, out := &in.RestoreToLatestTime, &out.RestoreToLatestTime
 		*out = new(bool)
@@ -2512,6 +2522,11 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 	}
 	if in.RestoreSourceName != nil {
 		in, out := &in.RestoreSourceName, &out.RestoreSourceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RestoreSourceTableArn != nil {
+		in, out := &in.RestoreSourceTableArn, &out.RestoreSourceTableArn
 		*out = new(string)
 		**out = **in
 	}

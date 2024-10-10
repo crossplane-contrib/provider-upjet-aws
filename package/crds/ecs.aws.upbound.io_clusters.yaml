@@ -124,6 +124,21 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        managedStorageConfiguration:
+                          description: Details of the managed storage configuration.
+                            See managed_storage_configuration Block for details.
+                          items:
+                            properties:
+                              fargateEphemeralStorageKmsKeyId:
+                                description: AWS Key Management Service key ID for
+                                  the Fargate ephemeral storage.
+                                type: string
+                              kmsKeyId:
+                                description: AWS Key Management Service key ID to
+                                  encrypt the managed storage.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   region:
@@ -229,6 +244,21 @@ spec:
                                 description: The log setting to use for redirecting
                                   logs for your execute command results. Valid values
                                   are NONE, DEFAULT, and OVERRIDE.
+                                type: string
+                            type: object
+                          type: array
+                        managedStorageConfiguration:
+                          description: Details of the managed storage configuration.
+                            See managed_storage_configuration Block for details.
+                          items:
+                            properties:
+                              fargateEphemeralStorageKmsKeyId:
+                                description: AWS Key Management Service key ID for
+                                  the Fargate ephemeral storage.
+                                type: string
+                              kmsKeyId:
+                                description: AWS Key Management Service key ID to
+                                  encrypt the managed storage.
                                 type: string
                             type: object
                           type: array
@@ -493,6 +523,21 @@ spec:
                                 description: The log setting to use for redirecting
                                   logs for your execute command results. Valid values
                                   are NONE, DEFAULT, and OVERRIDE.
+                                type: string
+                            type: object
+                          type: array
+                        managedStorageConfiguration:
+                          description: Details of the managed storage configuration.
+                            See managed_storage_configuration Block for details.
+                          items:
+                            properties:
+                              fargateEphemeralStorageKmsKeyId:
+                                description: AWS Key Management Service key ID for
+                                  the Fargate ephemeral storage.
+                                type: string
+                              kmsKeyId:
+                                description: AWS Key Management Service key ID to
+                                  encrypt the managed storage.
                                 type: string
                             type: object
                           type: array

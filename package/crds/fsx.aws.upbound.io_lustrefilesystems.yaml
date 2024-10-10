@@ -129,6 +129,13 @@ spec:
                       and PERSISTENT_1 deployment types. Valid values for 2.12 include
                       all deployment types.
                     type: string
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   importPath:
                     description: S3 URI (with optional prefix) that you're using as
                       the data repository for your FSx for Lustre file system. For
@@ -392,6 +399,12 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  skipFinalBackup:
+                    description: When enabled, will skip the default final backup
+                      taken when the file system is deleted. This configuration must
+                      be applied separately before attempting to delete the resource
+                      to have the desired behavior. Defaults to true.
+                    type: boolean
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Minimum
                       of 1200. See more details at Allowed values for Fsx storage
@@ -573,6 +586,13 @@ spec:
                       and PERSISTENT_1 deployment types. Valid values for 2.12 include
                       all deployment types.
                     type: string
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   importPath:
                     description: S3 URI (with optional prefix) that you're using as
                       the data repository for your FSx for Lustre file system. For
@@ -832,6 +852,12 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  skipFinalBackup:
+                    description: When enabled, will skip the default final backup
+                      taken when the file system is deleted. This configuration must
+                      be applied separately before attempting to delete the resource
+                      to have the desired behavior. Defaults to true.
+                    type: boolean
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Minimum
                       of 1200. See more details at Allowed values for Fsx storage
@@ -1176,6 +1202,13 @@ spec:
                       and PERSISTENT_1 deployment types. Valid values for 2.12 include
                       all deployment types.
                     type: string
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   id:
                     description: Identifier of the file system, e.g., fs-12345678
                     type: string
@@ -1300,6 +1333,12 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  skipFinalBackup:
+                    description: When enabled, will skip the default final backup
+                      taken when the file system is deleted. This configuration must
+                      be applied separately before attempting to delete the resource
+                      to have the desired behavior. Defaults to true.
+                    type: boolean
                   storageCapacity:
                     description: The storage capacity (GiB) of the file system. Minimum
                       of 1200. See more details at Allowed values for Fsx storage

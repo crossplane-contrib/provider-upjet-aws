@@ -233,6 +233,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest. Defaults to an AWS managed KMS Key.
@@ -764,6 +771,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest. Defaults to an AWS managed KMS Key.
@@ -1388,6 +1402,13 @@ spec:
                     description: DNS name for the file system, e.g., fs-12345678.corp.example.com
                       (domain name matching the Active Directory domain name)
                     type: string
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   id:
                     description: Identifier of the file system (e.g. fs-12345678).
                     type: string

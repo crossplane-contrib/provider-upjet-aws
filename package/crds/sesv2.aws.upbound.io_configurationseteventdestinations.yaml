@@ -196,6 +196,16 @@ spec:
                             specified event types are sent to the destinations. Default:
                             false.'
                           type: boolean
+                        eventBridgeDestination:
+                          items:
+                            properties:
+                              eventBusArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Amazon EventBridge bus to publish email events to.
+                                  Only the default bus is supported.
+                                type: string
+                            type: object
+                          type: array
                         kinesisFirehoseDestination:
                           description: An object that defines an Amazon Kinesis Data
                             Firehose destination for email events. See kinesis_firehose_destination
@@ -696,6 +706,16 @@ spec:
                             specified event types are sent to the destinations. Default:
                             false.'
                           type: boolean
+                        eventBridgeDestination:
+                          items:
+                            properties:
+                              eventBusArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Amazon EventBridge bus to publish email events to.
+                                  Only the default bus is supported.
+                                type: string
+                            type: object
+                          type: array
                         kinesisFirehoseDestination:
                           description: An object that defines an Amazon Kinesis Data
                             Firehose destination for email events. See kinesis_firehose_destination
@@ -1283,6 +1303,16 @@ spec:
                             specified event types are sent to the destinations. Default:
                             false.'
                           type: boolean
+                        eventBridgeDestination:
+                          items:
+                            properties:
+                              eventBusArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Amazon EventBridge bus to publish email events to.
+                                  Only the default bus is supported.
+                                type: string
+                            type: object
+                          type: array
                         kinesisFirehoseDestination:
                           description: An object that defines an Amazon Kinesis Data
                             Firehose destination for email events. See kinesis_firehose_destination
