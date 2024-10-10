@@ -2984,9 +2984,6 @@ type RedshiftConfigurationInitParameters struct {
 	// The name of the table in the redshift cluster that the s3 bucket will copy to.
 	DataTableName *string `json:"dataTableName,omitempty" tf:"data_table_name,omitempty"`
 
-	// The password for the username above.
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
-
 	// The password for the username above. This value is required if secrets_manager_configuration is not provided.
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
@@ -3088,10 +3085,6 @@ type RedshiftConfigurationParameters struct {
 	// The name of the table in the redshift cluster that the s3 bucket will copy to.
 	// +kubebuilder:validation:Optional
 	DataTableName *string `json:"dataTableName" tf:"data_table_name,omitempty"`
-
-	// The password for the username above.
-	// +kubebuilder:validation:Optional
-	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The password for the username above. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
@@ -4258,9 +4251,6 @@ type SnowflakeConfigurationInitParameters struct {
 	// The name of the metadata column.
 	MetadataColumnName *string `json:"metadataColumnName,omitempty" tf:"metadata_column_name,omitempty"`
 
-	// The private key for authentication.
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
-
 	// The private key for authentication. This value is required if secrets_manager_configuration is not provided.
 	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
@@ -4405,10 +4395,6 @@ type SnowflakeConfigurationParameters struct {
 	// The name of the metadata column.
 	// +kubebuilder:validation:Optional
 	MetadataColumnName *string `json:"metadataColumnName,omitempty" tf:"metadata_column_name,omitempty"`
-
-	// The private key for authentication.
-	// +kubebuilder:validation:Optional
-	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// The private key for authentication. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
@@ -4883,9 +4869,6 @@ type SplunkConfigurationInitParameters struct {
 	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
 
-	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
-	HecTokenSecretRef v1.SecretKeySelector `json:"hecTokenSecretRef" tf:"-"`
-
 	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
 	HecTokenSecretRef *v1.SecretKeySelector `json:"hecTokenSecretRef,omitempty" tf:"-"`
 
@@ -4966,10 +4949,6 @@ type SplunkConfigurationParameters struct {
 	// The HEC endpoint type. Valid values are Raw or Event. The default value is Raw.
 	// +kubebuilder:validation:Optional
 	HecEndpointType *string `json:"hecEndpointType,omitempty" tf:"hec_endpoint_type,omitempty"`
-
-	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint.
-	// +kubebuilder:validation:Optional
-	HecTokenSecretRef v1.SecretKeySelector `json:"hecTokenSecretRef" tf:"-"`
 
 	// The GUID that you obtain from your Splunk cluster when you create a new HEC endpoint. This value is required if secrets_manager_configuration is not provided.
 	// +kubebuilder:validation:Optional
