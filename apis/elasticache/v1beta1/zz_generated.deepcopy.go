@@ -2289,6 +2289,16 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AuthTokenSecretRef != nil {
+		in, out := &in.AuthTokenSecretRef, &out.AuthTokenSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AuthTokenUpdateStrategy != nil {
+		in, out := &in.AuthTokenUpdateStrategy, &out.AuthTokenUpdateStrategy
+		*out = new(string)
+		**out = **in
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(string)
@@ -2347,6 +2357,21 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.GlobalReplicationGroupIDRef != nil {
+		in, out := &in.GlobalReplicationGroupIDRef, &out.GlobalReplicationGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GlobalReplicationGroupIDSelector != nil {
+		in, out := &in.GlobalReplicationGroupIDSelector, &out.GlobalReplicationGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IPDiscovery != nil {
+		in, out := &in.IPDiscovery, &out.IPDiscovery
+		*out = new(string)
+		**out = **in
+	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
@@ -2377,6 +2402,11 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	if in.MultiAzEnabled != nil {
 		in, out := &in.MultiAzEnabled, &out.MultiAzEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
 		**out = **in
 	}
 	if in.NodeType != nil {
@@ -2529,6 +2559,11 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	if in.TransitEncryptionEnabled != nil {
 		in, out := &in.TransitEncryptionEnabled, &out.TransitEncryptionEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.TransitEncryptionMode != nil {
+		in, out := &in.TransitEncryptionMode, &out.TransitEncryptionMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.UserGroupIds != nil {
@@ -2709,6 +2744,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AuthTokenUpdateStrategy != nil {
+		in, out := &in.AuthTokenUpdateStrategy, &out.AuthTokenUpdateStrategy
+		*out = new(string)
+		**out = **in
+	}
 	if in.AutoMinorVersionUpgrade != nil {
 		in, out := &in.AutoMinorVersionUpgrade, &out.AutoMinorVersionUpgrade
 		*out = new(string)
@@ -2787,6 +2827,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPDiscovery != nil {
+		in, out := &in.IPDiscovery, &out.IPDiscovery
+		*out = new(string)
+		**out = **in
+	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
@@ -2818,6 +2863,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 	if in.MultiAzEnabled != nil {
 		in, out := &in.MultiAzEnabled, &out.MultiAzEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
 		**out = **in
 	}
 	if in.NodeType != nil {
@@ -2976,6 +3026,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.TransitEncryptionMode != nil {
+		in, out := &in.TransitEncryptionMode, &out.TransitEncryptionMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserGroupIds != nil {
 		in, out := &in.UserGroupIds, &out.UserGroupIds
 		*out = make([]*string, len(*in))
@@ -3015,6 +3070,16 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	if in.AuthTokenSecretRef != nil {
 		in, out := &in.AuthTokenSecretRef, &out.AuthTokenSecretRef
 		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AuthTokenUpdateStrategy != nil {
+		in, out := &in.AuthTokenUpdateStrategy, &out.AuthTokenUpdateStrategy
+		*out = new(string)
+		**out = **in
+	}
+	if in.AutoGenerateAuthToken != nil {
+		in, out := &in.AutoGenerateAuthToken, &out.AutoGenerateAuthToken
+		*out = new(bool)
 		**out = **in
 	}
 	if in.AutoMinorVersionUpgrade != nil {
@@ -3075,6 +3140,21 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.GlobalReplicationGroupIDRef != nil {
+		in, out := &in.GlobalReplicationGroupIDRef, &out.GlobalReplicationGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GlobalReplicationGroupIDSelector != nil {
+		in, out := &in.GlobalReplicationGroupIDSelector, &out.GlobalReplicationGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IPDiscovery != nil {
+		in, out := &in.IPDiscovery, &out.IPDiscovery
+		*out = new(string)
+		**out = **in
+	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
@@ -3105,6 +3185,11 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	if in.MultiAzEnabled != nil {
 		in, out := &in.MultiAzEnabled, &out.MultiAzEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.NetworkType != nil {
+		in, out := &in.NetworkType, &out.NetworkType
+		*out = new(string)
 		**out = **in
 	}
 	if in.NodeType != nil {
@@ -3262,6 +3347,11 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	if in.TransitEncryptionEnabled != nil {
 		in, out := &in.TransitEncryptionEnabled, &out.TransitEncryptionEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.TransitEncryptionMode != nil {
+		in, out := &in.TransitEncryptionMode, &out.TransitEncryptionMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.UserGroupIds != nil {

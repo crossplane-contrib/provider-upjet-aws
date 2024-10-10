@@ -343,6 +343,8 @@ spec:
                               runOrder:
                                 description: The order in which actions are run.
                                 type: number
+                              timeoutInMinutes:
+                                type: number
                               version:
                                 description: A string that identifies the action type.
                                 type: string
@@ -806,6 +808,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
+                                type: number
+                              timeoutInMinutes:
                                 type: number
                               version:
                                 description: A string that identifies the action type.
@@ -1302,6 +1306,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
+                                type: number
+                              timeoutInMinutes:
                                 type: number
                               version:
                                 description: A string that identifies the action type.

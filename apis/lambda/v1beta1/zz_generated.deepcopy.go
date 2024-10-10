@@ -1386,6 +1386,21 @@ func (in *EventSourceMappingInitParameters) DeepCopyInto(out *EventSourceMapping
 			}
 		}
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaximumBatchingWindowInSeconds != nil {
 		in, out := &in.MaximumBatchingWindowInSeconds, &out.MaximumBatchingWindowInSeconds
 		*out = new(float64)
@@ -1592,6 +1607,11 @@ func (in *EventSourceMappingObservation) DeepCopyInto(out *EventSourceMappingObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
 	if in.LastModified != nil {
 		in, out := &in.LastModified, &out.LastModified
 		*out = new(string)
@@ -1790,6 +1810,21 @@ func (in *EventSourceMappingParameters) DeepCopyInto(out *EventSourceMappingPara
 				**out = **in
 			}
 		}
+	}
+	if in.KMSKeyArn != nil {
+		in, out := &in.KMSKeyArn, &out.KMSKeyArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyArnRef != nil {
+		in, out := &in.KMSKeyArnRef, &out.KMSKeyArnRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSKeyArnSelector != nil {
+		in, out := &in.KMSKeyArnSelector, &out.KMSKeyArnSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MaximumBatchingWindowInSeconds != nil {
 		in, out := &in.MaximumBatchingWindowInSeconds, &out.MaximumBatchingWindowInSeconds

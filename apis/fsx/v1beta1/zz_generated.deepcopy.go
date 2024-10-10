@@ -1449,6 +1449,22 @@ func (in *LustreFileSystemInitParameters) DeepCopyInto(out *LustreFileSystemInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.FinalBackupTags != nil {
+		in, out := &in.FinalBackupTags, &out.FinalBackupTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.ImportPath != nil {
 		in, out := &in.ImportPath, &out.ImportPath
 		*out = new(string)
@@ -1520,6 +1536,11 @@ func (in *LustreFileSystemInitParameters) DeepCopyInto(out *LustreFileSystemInit
 				**out = **in
 			}
 		}
+	}
+	if in.SkipFinalBackup != nil {
+		in, out := &in.SkipFinalBackup, &out.SkipFinalBackup
+		*out = new(bool)
+		**out = **in
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
@@ -1682,6 +1703,22 @@ func (in *LustreFileSystemObservation) DeepCopyInto(out *LustreFileSystemObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.FinalBackupTags != nil {
+		in, out := &in.FinalBackupTags, &out.FinalBackupTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -1757,6 +1794,11 @@ func (in *LustreFileSystemObservation) DeepCopyInto(out *LustreFileSystemObserva
 				**out = **in
 			}
 		}
+	}
+	if in.SkipFinalBackup != nil {
+		in, out := &in.SkipFinalBackup, &out.SkipFinalBackup
+		*out = new(bool)
+		**out = **in
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
@@ -1886,6 +1928,22 @@ func (in *LustreFileSystemParameters) DeepCopyInto(out *LustreFileSystemParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.FinalBackupTags != nil {
+		in, out := &in.FinalBackupTags, &out.FinalBackupTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.ImportPath != nil {
 		in, out := &in.ImportPath, &out.ImportPath
 		*out = new(string)
@@ -1962,6 +2020,11 @@ func (in *LustreFileSystemParameters) DeepCopyInto(out *LustreFileSystemParamete
 				**out = **in
 			}
 		}
+	}
+	if in.SkipFinalBackup != nil {
+		in, out := &in.SkipFinalBackup, &out.SkipFinalBackup
+		*out = new(bool)
+		**out = **in
 	}
 	if in.StorageCapacity != nil {
 		in, out := &in.StorageCapacity, &out.StorageCapacity
@@ -4005,6 +4068,22 @@ func (in *WindowsFileSystemInitParameters) DeepCopyInto(out *WindowsFileSystemIn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FinalBackupTags != nil {
+		in, out := &in.FinalBackupTags, &out.FinalBackupTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.KMSKeyID != nil {
 		in, out := &in.KMSKeyID, &out.KMSKeyID
 		*out = new(string)
@@ -4231,6 +4310,22 @@ func (in *WindowsFileSystemObservation) DeepCopyInto(out *WindowsFileSystemObser
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FinalBackupTags != nil {
+		in, out := &in.FinalBackupTags, &out.FinalBackupTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -4441,6 +4536,22 @@ func (in *WindowsFileSystemParameters) DeepCopyInto(out *WindowsFileSystemParame
 		*out = make([]WindowsFileSystemDiskIopsConfigurationParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.FinalBackupTags != nil {
+		in, out := &in.FinalBackupTags, &out.FinalBackupTags
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.KMSKeyID != nil {

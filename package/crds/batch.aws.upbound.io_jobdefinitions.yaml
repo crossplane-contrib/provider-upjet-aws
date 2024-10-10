@@ -83,6 +83,11 @@ spec:
                       created. This parameter determines if the previous version is
                       deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
                     type: boolean
+                  ecsProperties:
+                    description: Valid ECS properties provided as a single valid JSON
+                      document. This parameter is only valid if the type parameter
+                      is container.
+                    type: string
                   eksProperties:
                     description: A valid eks properties. This parameter is only valid
                       if the type parameter is container.
@@ -218,6 +223,16 @@ spec:
                                   and don't require the overhead of IP allocation
                                   for each pod for incoming connections.
                                 type: boolean
+                              imagePullSecret:
+                                description: List of Kubernetes secret resources.
+                                  See image_pull_secret below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: Unique identifier.
+                                      type: string
+                                  type: object
+                                type: array
                               metadata:
                                 description: Metadata about the Kubernetes pod.
                                 items:
@@ -415,6 +430,11 @@ spec:
                       created. This parameter determines if the previous version is
                       deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
                     type: boolean
+                  ecsProperties:
+                    description: Valid ECS properties provided as a single valid JSON
+                      document. This parameter is only valid if the type parameter
+                      is container.
+                    type: string
                   eksProperties:
                     description: A valid eks properties. This parameter is only valid
                       if the type parameter is container.
@@ -550,6 +570,16 @@ spec:
                                   and don't require the overhead of IP allocation
                                   for each pod for incoming connections.
                                 type: boolean
+                              imagePullSecret:
+                                description: List of Kubernetes secret resources.
+                                  See image_pull_secret below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: Unique identifier.
+                                      type: string
+                                  type: object
+                                type: array
                               metadata:
                                 description: Metadata about the Kubernetes pod.
                                 items:
@@ -916,6 +946,11 @@ spec:
                       created. This parameter determines if the previous version is
                       deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
                     type: boolean
+                  ecsProperties:
+                    description: Valid ECS properties provided as a single valid JSON
+                      document. This parameter is only valid if the type parameter
+                      is container.
+                    type: string
                   eksProperties:
                     description: A valid eks properties. This parameter is only valid
                       if the type parameter is container.
@@ -1051,6 +1086,16 @@ spec:
                                   and don't require the overhead of IP allocation
                                   for each pod for incoming connections.
                                 type: boolean
+                              imagePullSecret:
+                                description: List of Kubernetes secret resources.
+                                  See image_pull_secret below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: Unique identifier.
+                                      type: string
+                                  type: object
+                                type: array
                               metadata:
                                 description: Metadata about the Kubernetes pod.
                                 items:
