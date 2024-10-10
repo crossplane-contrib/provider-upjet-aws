@@ -15,13 +15,13 @@ import (
 
 type ClusterInitParameters struct {
 
-	// The execute command configuration for the cluster. Detailed below.
+	// Execute command configuration for the cluster. See configuration Block for details.
 	Configuration *ConfigurationInitParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
-	// Configures a default Service Connect namespace. Detailed below.
+	// Default Service Connect namespace. See service_connect_defaults Block for details.
 	ServiceConnectDefaults *ServiceConnectDefaultsInitParameters `json:"serviceConnectDefaults,omitempty" tf:"service_connect_defaults,omitempty"`
 
-	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
+	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. See setting Block for details.
 	Setting []SettingInitParameters `json:"setting,omitempty" tf:"setting,omitempty"`
 
 	// Key-value map of resource tags.
@@ -34,16 +34,16 @@ type ClusterObservation struct {
 	// ARN that identifies the cluster.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The execute command configuration for the cluster. Detailed below.
+	// Execute command configuration for the cluster. See configuration Block for details.
 	Configuration *ConfigurationObservation `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// ARN that identifies the cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Configures a default Service Connect namespace. Detailed below.
+	// Default Service Connect namespace. See service_connect_defaults Block for details.
 	ServiceConnectDefaults *ServiceConnectDefaultsObservation `json:"serviceConnectDefaults,omitempty" tf:"service_connect_defaults,omitempty"`
 
-	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
+	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. See setting Block for details.
 	Setting []SettingObservation `json:"setting,omitempty" tf:"setting,omitempty"`
 
 	// Key-value map of resource tags.
@@ -57,7 +57,7 @@ type ClusterObservation struct {
 
 type ClusterParameters struct {
 
-	// The execute command configuration for the cluster. Detailed below.
+	// Execute command configuration for the cluster. See configuration Block for details.
 	// +kubebuilder:validation:Optional
 	Configuration *ConfigurationParameters `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
@@ -66,11 +66,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// Configures a default Service Connect namespace. Detailed below.
+	// Default Service Connect namespace. See service_connect_defaults Block for details.
 	// +kubebuilder:validation:Optional
 	ServiceConnectDefaults *ServiceConnectDefaultsParameters `json:"serviceConnectDefaults,omitempty" tf:"service_connect_defaults,omitempty"`
 
-	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. Detailed below.
+	// Configuration block(s) with cluster settings. For example, this can be used to enable CloudWatch Container Insights for a cluster. See setting Block for details.
 	// +kubebuilder:validation:Optional
 	Setting []SettingParameters `json:"setting,omitempty" tf:"setting,omitempty"`
 
@@ -82,101 +82,111 @@ type ClusterParameters struct {
 
 type ConfigurationInitParameters struct {
 
-	// The details of the execute command configuration. Detailed below.
+	// Details of the execute command configuration. See execute_command_configuration Block for details.
 	ExecuteCommandConfiguration *ExecuteCommandConfigurationInitParameters `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
+
+	// Details of the managed storage configuration. See managed_storage_configuration Block for details.
+	ManagedStorageConfiguration *ManagedStorageConfigurationInitParameters `json:"managedStorageConfiguration,omitempty" tf:"managed_storage_configuration,omitempty"`
 }
 
 type ConfigurationObservation struct {
 
-	// The details of the execute command configuration. Detailed below.
+	// Details of the execute command configuration. See execute_command_configuration Block for details.
 	ExecuteCommandConfiguration *ExecuteCommandConfigurationObservation `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
+
+	// Details of the managed storage configuration. See managed_storage_configuration Block for details.
+	ManagedStorageConfiguration *ManagedStorageConfigurationObservation `json:"managedStorageConfiguration,omitempty" tf:"managed_storage_configuration,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
-	// The details of the execute command configuration. Detailed below.
+	// Details of the execute command configuration. See execute_command_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	ExecuteCommandConfiguration *ExecuteCommandConfigurationParameters `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
+
+	// Details of the managed storage configuration. See managed_storage_configuration Block for details.
+	// +kubebuilder:validation:Optional
+	ManagedStorageConfiguration *ManagedStorageConfigurationParameters `json:"managedStorageConfiguration,omitempty" tf:"managed_storage_configuration,omitempty"`
 }
 
 type ExecuteCommandConfigurationInitParameters struct {
 
-	// The AWS Key Management Service key ID to encrypt the data between the local client and the container.
+	// AWS Key Management Service key ID to encrypt the data between the local client and the container.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The log configuration for the results of the execute command actions Required when logging is OVERRIDE. Detailed below.
+	// Log configuration for the results of the execute command actions. Required when logging is OVERRIDE. See log_configuration Block for details.
 	LogConfiguration *LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The log setting to use for redirecting logs for your execute command results. Valid values are NONE, DEFAULT, and OVERRIDE.
+	// Log setting to use for redirecting logs for your execute command results. Valid values: NONE, DEFAULT, OVERRIDE.
 	Logging *string `json:"logging,omitempty" tf:"logging,omitempty"`
 }
 
 type ExecuteCommandConfigurationObservation struct {
 
-	// The AWS Key Management Service key ID to encrypt the data between the local client and the container.
+	// AWS Key Management Service key ID to encrypt the data between the local client and the container.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The log configuration for the results of the execute command actions Required when logging is OVERRIDE. Detailed below.
+	// Log configuration for the results of the execute command actions. Required when logging is OVERRIDE. See log_configuration Block for details.
 	LogConfiguration *LogConfigurationObservation `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The log setting to use for redirecting logs for your execute command results. Valid values are NONE, DEFAULT, and OVERRIDE.
+	// Log setting to use for redirecting logs for your execute command results. Valid values: NONE, DEFAULT, OVERRIDE.
 	Logging *string `json:"logging,omitempty" tf:"logging,omitempty"`
 }
 
 type ExecuteCommandConfigurationParameters struct {
 
-	// The AWS Key Management Service key ID to encrypt the data between the local client and the container.
+	// AWS Key Management Service key ID to encrypt the data between the local client and the container.
 	// +kubebuilder:validation:Optional
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// The log configuration for the results of the execute command actions Required when logging is OVERRIDE. Detailed below.
+	// Log configuration for the results of the execute command actions. Required when logging is OVERRIDE. See log_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	LogConfiguration *LogConfigurationParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
 
-	// The log setting to use for redirecting logs for your execute command results. Valid values are NONE, DEFAULT, and OVERRIDE.
+	// Log setting to use for redirecting logs for your execute command results. Valid values: NONE, DEFAULT, OVERRIDE.
 	// +kubebuilder:validation:Optional
 	Logging *string `json:"logging,omitempty" tf:"logging,omitempty"`
 }
 
 type LogConfigurationInitParameters struct {
 
-	// Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
+	// Whether to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
 	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
 
 	// The name of the CloudWatch log group to send logs to.
 	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
 
-	// Whether or not to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
+	// Whether to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
 	S3BucketEncryptionEnabled *bool `json:"s3BucketEncryptionEnabled,omitempty" tf:"s3_bucket_encryption_enabled,omitempty"`
 
-	// The name of the S3 bucket to send logs to.
+	// Name of the S3 bucket to send logs to.
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
-	// An optional folder in the S3 bucket to place logs in.
+	// Optional folder in the S3 bucket to place logs in.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
 type LogConfigurationObservation struct {
 
-	// Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
+	// Whether to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
 	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
 
 	// The name of the CloudWatch log group to send logs to.
 	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
 
-	// Whether or not to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
+	// Whether to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
 	S3BucketEncryptionEnabled *bool `json:"s3BucketEncryptionEnabled,omitempty" tf:"s3_bucket_encryption_enabled,omitempty"`
 
-	// The name of the S3 bucket to send logs to.
+	// Name of the S3 bucket to send logs to.
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
-	// An optional folder in the S3 bucket to place logs in.
+	// Optional folder in the S3 bucket to place logs in.
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
 type LogConfigurationParameters struct {
 
-	// Whether or not to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
+	// Whether to enable encryption on the CloudWatch logs. If not specified, encryption will be disabled.
 	// +kubebuilder:validation:Optional
 	CloudWatchEncryptionEnabled *bool `json:"cloudWatchEncryptionEnabled,omitempty" tf:"cloud_watch_encryption_enabled,omitempty"`
 
@@ -184,34 +194,63 @@ type LogConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudWatchLogGroupName *string `json:"cloudWatchLogGroupName,omitempty" tf:"cloud_watch_log_group_name,omitempty"`
 
-	// Whether or not to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
+	// Whether to enable encryption on the logs sent to S3. If not specified, encryption will be disabled.
 	// +kubebuilder:validation:Optional
 	S3BucketEncryptionEnabled *bool `json:"s3BucketEncryptionEnabled,omitempty" tf:"s3_bucket_encryption_enabled,omitempty"`
 
-	// The name of the S3 bucket to send logs to.
+	// Name of the S3 bucket to send logs to.
 	// +kubebuilder:validation:Optional
 	S3BucketName *string `json:"s3BucketName,omitempty" tf:"s3_bucket_name,omitempty"`
 
-	// An optional folder in the S3 bucket to place logs in.
+	// Optional folder in the S3 bucket to place logs in.
 	// +kubebuilder:validation:Optional
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
 }
 
+type ManagedStorageConfigurationInitParameters struct {
+
+	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
+
+	// AWS Key Management Service key ID to encrypt the managed storage.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type ManagedStorageConfigurationObservation struct {
+
+	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
+
+	// AWS Key Management Service key ID to encrypt the managed storage.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type ManagedStorageConfigurationParameters struct {
+
+	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	// +kubebuilder:validation:Optional
+	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
+
+	// AWS Key Management Service key ID to encrypt the managed storage.
+	// +kubebuilder:validation:Optional
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
 type ServiceConnectDefaultsInitParameters struct {
 
-	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
+	// ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type ServiceConnectDefaultsObservation struct {
 
-	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
+	// ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 }
 
 type ServiceConnectDefaultsParameters struct {
 
-	// The ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
+	// ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration.
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace" tf:"namespace,omitempty"`
 }
@@ -221,7 +260,7 @@ type SettingInitParameters struct {
 	// Name of the setting to manage. Valid values: containerInsights.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value to assign to the setting. Valid values are enabled and disabled.
+	// Value to assign to the setting. Valid values: enabled, disabled.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -230,7 +269,7 @@ type SettingObservation struct {
 	// Name of the setting to manage. Valid values: containerInsights.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The value to assign to the setting. Valid values are enabled and disabled.
+	// Value to assign to the setting. Valid values: enabled, disabled.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -240,7 +279,7 @@ type SettingParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The value to assign to the setting. Valid values are enabled and disabled.
+	// Value to assign to the setting. Valid values: enabled, disabled.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }

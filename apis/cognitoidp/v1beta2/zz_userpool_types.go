@@ -689,6 +689,9 @@ type PasswordPolicyInitParameters struct {
 	// Minimum length of the password policy that you have set.
 	MinimumLength *float64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
 
+	// Number of previous passwords that you want Amazon Cognito to restrict each user from reusing. Users can't set a password that matches any of number of previous passwords specified by this argument. A value of 0 means that password history is not enforced. Valid values are between 0 and 24.
+	PasswordHistorySize *float64 `json:"passwordHistorySize,omitempty" tf:"password_history_size,omitempty"`
+
 	// Whether you have required users to use at least one lowercase letter in their password.
 	RequireLowercase *bool `json:"requireLowercase,omitempty" tf:"require_lowercase,omitempty"`
 
@@ -709,6 +712,9 @@ type PasswordPolicyObservation struct {
 
 	// Minimum length of the password policy that you have set.
 	MinimumLength *float64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
+
+	// Number of previous passwords that you want Amazon Cognito to restrict each user from reusing. Users can't set a password that matches any of number of previous passwords specified by this argument. A value of 0 means that password history is not enforced. Valid values are between 0 and 24.
+	PasswordHistorySize *float64 `json:"passwordHistorySize,omitempty" tf:"password_history_size,omitempty"`
 
 	// Whether you have required users to use at least one lowercase letter in their password.
 	RequireLowercase *bool `json:"requireLowercase,omitempty" tf:"require_lowercase,omitempty"`
@@ -731,6 +737,10 @@ type PasswordPolicyParameters struct {
 	// Minimum length of the password policy that you have set.
 	// +kubebuilder:validation:Optional
 	MinimumLength *float64 `json:"minimumLength,omitempty" tf:"minimum_length,omitempty"`
+
+	// Number of previous passwords that you want Amazon Cognito to restrict each user from reusing. Users can't set a password that matches any of number of previous passwords specified by this argument. A value of 0 means that password history is not enforced. Valid values are between 0 and 24.
+	// +kubebuilder:validation:Optional
+	PasswordHistorySize *float64 `json:"passwordHistorySize,omitempty" tf:"password_history_size,omitempty"`
 
 	// Whether you have required users to use at least one lowercase letter in their password.
 	// +kubebuilder:validation:Optional

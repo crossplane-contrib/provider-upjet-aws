@@ -206,9 +206,10 @@ spec:
                     description: IPAM Pool ID for a IPv6 pool. Conflicts with assign_generated_ipv6_cidr_block.
                     type: string
                   ipv6NetmaskLength:
-                    description: 'Netmask length to request from IPAM Pool. Conflicts
+                    description: Netmask length to request from IPAM Pool. Conflicts
                       with ipv6_cidr_block. This can be omitted if IPAM pool as a
-                      allocation_default_netmask_length set. Valid values: 56.'
+                      allocation_default_netmask_length set. Valid values are from
+                      44 to 60 in increments of 4.
                     type: number
                   region:
                     description: Region is the region you'd like your resource to
@@ -370,9 +371,10 @@ spec:
                     description: IPAM Pool ID for a IPv6 pool. Conflicts with assign_generated_ipv6_cidr_block.
                     type: string
                   ipv6NetmaskLength:
-                    description: 'Netmask length to request from IPAM Pool. Conflicts
+                    description: Netmask length to request from IPAM Pool. Conflicts
                       with ipv6_cidr_block. This can be omitted if IPAM pool as a
-                      allocation_default_netmask_length set. Valid values: 56.'
+                      allocation_default_netmask_length set. Valid values are from
+                      44 to 60 in increments of 4.
                     type: number
                   tags:
                     additionalProperties:
@@ -637,9 +639,10 @@ spec:
                     description: IPAM Pool ID for a IPv6 pool. Conflicts with assign_generated_ipv6_cidr_block.
                     type: string
                   ipv6NetmaskLength:
-                    description: 'Netmask length to request from IPAM Pool. Conflicts
+                    description: Netmask length to request from IPAM Pool. Conflicts
                       with ipv6_cidr_block. This can be omitted if IPAM pool as a
-                      allocation_default_netmask_length set. Valid values: 56.'
+                      allocation_default_netmask_length set. Valid values are from
+                      44 to 60 in increments of 4.
                     type: number
                   mainRouteTableId:
                     description: |-

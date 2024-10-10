@@ -13,6 +13,45 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SuspendedStateInitParameters struct {
+
+	// Whether scale in by a target tracking scaling policy or a step scaling policy is suspended. Default is false.
+	DynamicScalingInSuspended *bool `json:"dynamicScalingInSuspended,omitempty" tf:"dynamic_scaling_in_suspended,omitempty"`
+
+	// Whether scale out by a target tracking scaling policy or a step scaling policy is suspended. Default is false.
+	DynamicScalingOutSuspended *bool `json:"dynamicScalingOutSuspended,omitempty" tf:"dynamic_scaling_out_suspended,omitempty"`
+
+	// Whether scheduled scaling is suspended. Default is false.
+	ScheduledScalingSuspended *bool `json:"scheduledScalingSuspended,omitempty" tf:"scheduled_scaling_suspended,omitempty"`
+}
+
+type SuspendedStateObservation struct {
+
+	// Whether scale in by a target tracking scaling policy or a step scaling policy is suspended. Default is false.
+	DynamicScalingInSuspended *bool `json:"dynamicScalingInSuspended,omitempty" tf:"dynamic_scaling_in_suspended,omitempty"`
+
+	// Whether scale out by a target tracking scaling policy or a step scaling policy is suspended. Default is false.
+	DynamicScalingOutSuspended *bool `json:"dynamicScalingOutSuspended,omitempty" tf:"dynamic_scaling_out_suspended,omitempty"`
+
+	// Whether scheduled scaling is suspended. Default is false.
+	ScheduledScalingSuspended *bool `json:"scheduledScalingSuspended,omitempty" tf:"scheduled_scaling_suspended,omitempty"`
+}
+
+type SuspendedStateParameters struct {
+
+	// Whether scale in by a target tracking scaling policy or a step scaling policy is suspended. Default is false.
+	// +kubebuilder:validation:Optional
+	DynamicScalingInSuspended *bool `json:"dynamicScalingInSuspended,omitempty" tf:"dynamic_scaling_in_suspended,omitempty"`
+
+	// Whether scale out by a target tracking scaling policy or a step scaling policy is suspended. Default is false.
+	// +kubebuilder:validation:Optional
+	DynamicScalingOutSuspended *bool `json:"dynamicScalingOutSuspended,omitempty" tf:"dynamic_scaling_out_suspended,omitempty"`
+
+	// Whether scheduled scaling is suspended. Default is false.
+	// +kubebuilder:validation:Optional
+	ScheduledScalingSuspended *bool `json:"scheduledScalingSuspended,omitempty" tf:"scheduled_scaling_suspended,omitempty"`
+}
+
 type TargetInitParameters struct {
 
 	// Max capacity of the scalable target.
@@ -43,6 +82,9 @@ type TargetInitParameters struct {
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
 
+	// Specifies whether the scaling activities for a scalable target are in a suspended state.
+	SuspendedState *SuspendedStateInitParameters `json:"suspendedState,omitempty" tf:"suspended_state,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -72,6 +114,9 @@ type TargetObservation struct {
 
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
+
+	// Specifies whether the scaling activities for a scalable target are in a suspended state.
+	SuspendedState *SuspendedStateObservation `json:"suspendedState,omitempty" tf:"suspended_state,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -122,6 +167,10 @@ type TargetParameters struct {
 	// AWS service namespace of the scalable target. Documentation can be found in the ServiceNamespace parameter at: AWS Application Auto Scaling API Reference
 	// +kubebuilder:validation:Optional
 	ServiceNamespace *string `json:"serviceNamespace,omitempty" tf:"service_namespace,omitempty"`
+
+	// Specifies whether the scaling activities for a scalable target are in a suspended state.
+	// +kubebuilder:validation:Optional
+	SuspendedState *SuspendedStateParameters `json:"suspendedState,omitempty" tf:"suspended_state,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

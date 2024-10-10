@@ -1399,6 +1399,51 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetGroupHealth:
+                    description: Target health requirements block. See target_group_health
+                      for more information.
+                    properties:
+                      dnsFailover:
+                        description: Block to configure DNS Failover requirements.
+                          See DNS Failover below for details on attributes.
+                        properties:
+                          minimumHealthyTargetsCount:
+                            description: The minimum number of targets that must be
+                              healthy. If the number of healthy targets is below this
+                              value, mark the zone as unhealthy in DNS, so that traffic
+                              is routed only to healthy zones. The possible values
+                              are off or an integer from 1 to the maximum number of
+                              targets. The default is off.
+                            type: string
+                          minimumHealthyTargetsPercentage:
+                            description: The minimum percentage of targets that must
+                              be healthy. If the percentage of healthy targets is
+                              below this value, mark the zone as unhealthy in DNS,
+                              so that traffic is routed only to healthy zones. The
+                              possible values are off or an integer from 1 to 100.
+                              The default is off.
+                            type: string
+                        type: object
+                      unhealthyStateRouting:
+                        description: Block to configure Unhealthy State Routing requirements.
+                          See Unhealthy State Routing below for details on attributes.
+                        properties:
+                          minimumHealthyTargetsCount:
+                            description: The minimum number of targets that must be
+                              healthy. If the number of healthy targets is below this
+                              value, send traffic to all targets, including unhealthy
+                              targets. The possible values are 1 to the maximum number
+                              of targets. The default is 1.
+                            type: number
+                          minimumHealthyTargetsPercentage:
+                            description: The minimum percentage of targets that must
+                              be healthy. If the percentage of healthy targets is
+                              below this value, send traffic to all targets, including
+                              unhealthy targets. The possible values are off or an
+                              integer from 1 to 100. The default is off.
+                            type: string
+                        type: object
+                    type: object
                   targetHealthState:
                     description: Target health state block. Only applicable for Network
                       Load Balancer target groups when protocol is TCP or TLS. See
@@ -1410,6 +1455,12 @@ spec:
                             connections to unhealthy targets. Possible values are
                             true or false. Default: true.'
                           type: boolean
+                        unhealthyDrainingInterval:
+                          description: 'Indicates the time to wait for in-flight requests
+                            to complete when a target becomes unhealthy. The range
+                            is 0-360000. This value has to be set only if enable_unhealthy_connection_termination
+                            is set to false. Default: 0.'
+                          type: number
                       type: object
                     type: array
                   targetType:
@@ -1700,6 +1751,51 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetGroupHealth:
+                    description: Target health requirements block. See target_group_health
+                      for more information.
+                    properties:
+                      dnsFailover:
+                        description: Block to configure DNS Failover requirements.
+                          See DNS Failover below for details on attributes.
+                        properties:
+                          minimumHealthyTargetsCount:
+                            description: The minimum number of targets that must be
+                              healthy. If the number of healthy targets is below this
+                              value, mark the zone as unhealthy in DNS, so that traffic
+                              is routed only to healthy zones. The possible values
+                              are off or an integer from 1 to the maximum number of
+                              targets. The default is off.
+                            type: string
+                          minimumHealthyTargetsPercentage:
+                            description: The minimum percentage of targets that must
+                              be healthy. If the percentage of healthy targets is
+                              below this value, mark the zone as unhealthy in DNS,
+                              so that traffic is routed only to healthy zones. The
+                              possible values are off or an integer from 1 to 100.
+                              The default is off.
+                            type: string
+                        type: object
+                      unhealthyStateRouting:
+                        description: Block to configure Unhealthy State Routing requirements.
+                          See Unhealthy State Routing below for details on attributes.
+                        properties:
+                          minimumHealthyTargetsCount:
+                            description: The minimum number of targets that must be
+                              healthy. If the number of healthy targets is below this
+                              value, send traffic to all targets, including unhealthy
+                              targets. The possible values are 1 to the maximum number
+                              of targets. The default is 1.
+                            type: number
+                          minimumHealthyTargetsPercentage:
+                            description: The minimum percentage of targets that must
+                              be healthy. If the percentage of healthy targets is
+                              below this value, send traffic to all targets, including
+                              unhealthy targets. The possible values are off or an
+                              integer from 1 to 100. The default is off.
+                            type: string
+                        type: object
+                    type: object
                   targetHealthState:
                     description: Target health state block. Only applicable for Network
                       Load Balancer target groups when protocol is TCP or TLS. See
@@ -1711,6 +1807,12 @@ spec:
                             connections to unhealthy targets. Possible values are
                             true or false. Default: true.'
                           type: boolean
+                        unhealthyDrainingInterval:
+                          description: 'Indicates the time to wait for in-flight requests
+                            to complete when a target becomes unhealthy. The range
+                            is 0-360000. This value has to be set only if enable_unhealthy_connection_termination
+                            is set to false. Default: 0.'
+                          type: number
                       type: object
                     type: array
                   targetType:
@@ -2187,6 +2289,51 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetGroupHealth:
+                    description: Target health requirements block. See target_group_health
+                      for more information.
+                    properties:
+                      dnsFailover:
+                        description: Block to configure DNS Failover requirements.
+                          See DNS Failover below for details on attributes.
+                        properties:
+                          minimumHealthyTargetsCount:
+                            description: The minimum number of targets that must be
+                              healthy. If the number of healthy targets is below this
+                              value, mark the zone as unhealthy in DNS, so that traffic
+                              is routed only to healthy zones. The possible values
+                              are off or an integer from 1 to the maximum number of
+                              targets. The default is off.
+                            type: string
+                          minimumHealthyTargetsPercentage:
+                            description: The minimum percentage of targets that must
+                              be healthy. If the percentage of healthy targets is
+                              below this value, mark the zone as unhealthy in DNS,
+                              so that traffic is routed only to healthy zones. The
+                              possible values are off or an integer from 1 to 100.
+                              The default is off.
+                            type: string
+                        type: object
+                      unhealthyStateRouting:
+                        description: Block to configure Unhealthy State Routing requirements.
+                          See Unhealthy State Routing below for details on attributes.
+                        properties:
+                          minimumHealthyTargetsCount:
+                            description: The minimum number of targets that must be
+                              healthy. If the number of healthy targets is below this
+                              value, send traffic to all targets, including unhealthy
+                              targets. The possible values are 1 to the maximum number
+                              of targets. The default is 1.
+                            type: number
+                          minimumHealthyTargetsPercentage:
+                            description: The minimum percentage of targets that must
+                              be healthy. If the percentage of healthy targets is
+                              below this value, send traffic to all targets, including
+                              unhealthy targets. The possible values are off or an
+                              integer from 1 to 100. The default is off.
+                            type: string
+                        type: object
+                    type: object
                   targetHealthState:
                     description: Target health state block. Only applicable for Network
                       Load Balancer target groups when protocol is TCP or TLS. See
@@ -2198,6 +2345,12 @@ spec:
                             connections to unhealthy targets. Possible values are
                             true or false. Default: true.'
                           type: boolean
+                        unhealthyDrainingInterval:
+                          description: 'Indicates the time to wait for in-flight requests
+                            to complete when a target becomes unhealthy. The range
+                            is 0-360000. This value has to be set only if enable_unhealthy_connection_termination
+                            is set to false. Default: 0.'
+                          type: number
                       type: object
                     type: array
                   targetType:

@@ -1115,8 +1115,12 @@ spec:
                       is specified on the volume. Default value is UNIX.
                     type: string
                   svmAdminPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Specifies the password to use when logging on to
+                      the SVM using a secure shell (SSH) connection to the SVM's management
+                      endpoint. Doing so enables you to manage the SVM using the NetApp
+                      ONTAP CLI or REST API. If you do not specify a password, you
+                      can still use the file system's fsxadmin user to manage the
+                      SVM.
                     properties:
                       key:
                         description: The key to select.
@@ -1317,8 +1321,12 @@ spec:
                       is specified on the volume. Default value is UNIX.
                     type: string
                   svmAdminPasswordSecretRef:
-                    description: A SecretKeySelector is a reference to a secret key
-                      in an arbitrary namespace.
+                    description: Specifies the password to use when logging on to
+                      the SVM using a secure shell (SSH) connection to the SVM's management
+                      endpoint. Doing so enables you to manage the SVM using the NetApp
+                      ONTAP CLI or REST API. If you do not specify a password, you
+                      can still use the file system's fsxadmin user to manage the
+                      SVM.
                     properties:
                       key:
                         description: The key to select.

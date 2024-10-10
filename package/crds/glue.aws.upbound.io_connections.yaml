@@ -845,12 +845,13 @@ spec:
               forProvider:
                 properties:
                   catalogId:
-                    description: –  The ID of the Data Catalog in which to create
-                      the connection. If none is supplied, the AWS account ID is used
+                    description: –  ID of the Data Catalog in which to create the
+                      connection. If none is supplied, the AWS account ID is used
                       by default.
                     type: string
                   connectionPropertiesSecretRef:
                     description: value pairs used as parameters for this connection.
+                      For more information, see the AWS Documentation.
                     properties:
                       name:
                         description: Name of the secret.
@@ -863,22 +864,23 @@ spec:
                     - namespace
                     type: object
                   connectionType:
-                    description: '–  The type of the connection. Supported are: CUSTOM,
-                      JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to
-                      JDBC.'
+                    description: '–  Type of the connection. Valid values: AZURECOSMOS,
+                      AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB,
+                      NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
                     type: string
                   description:
                     description: –  Description of the connection.
                     type: string
                   matchCriteria:
-                    description: –  A list of criteria that can be used in selecting
+                    description: –  List of criteria that can be used in selecting
                       this connection.
                     items:
                       type: string
                     type: array
                   physicalConnectionRequirements:
-                    description: A map of physical connection requirements, such as
-                      VPC and SecurityGroup. Defined below.
+                    description: Map of physical connection requirements, such as
+                      VPC and SecurityGroup. See physical_connection_requirements
+                      Block for details.
                     properties:
                       availabilityZone:
                         description: The availability zone of the connection. This
@@ -1075,22 +1077,23 @@ spec:
                       type: string
                     type: object
                   connectionType:
-                    description: '–  The type of the connection. Supported are: CUSTOM,
-                      JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to
-                      JDBC.'
+                    description: '–  Type of the connection. Valid values: AZURECOSMOS,
+                      AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB,
+                      NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
                     type: string
                   description:
                     description: –  Description of the connection.
                     type: string
                   matchCriteria:
-                    description: –  A list of criteria that can be used in selecting
+                    description: –  List of criteria that can be used in selecting
                       this connection.
                     items:
                       type: string
                     type: array
                   physicalConnectionRequirements:
-                    description: A map of physical connection requirements, such as
-                      VPC and SecurityGroup. Defined below.
+                    description: Map of physical connection requirements, such as
+                      VPC and SecurityGroup. See physical_connection_requirements
+                      Block for details.
                     properties:
                       availabilityZone:
                         description: The availability zone of the connection. This
@@ -1435,33 +1438,34 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Glue Connection.
+                    description: ARN of the Glue Connection.
                     type: string
                   catalogId:
-                    description: –  The ID of the Data Catalog in which to create
-                      the connection. If none is supplied, the AWS account ID is used
+                    description: –  ID of the Data Catalog in which to create the
+                      connection. If none is supplied, the AWS account ID is used
                       by default.
                     type: string
                   connectionType:
-                    description: '–  The type of the connection. Supported are: CUSTOM,
-                      JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to
-                      JDBC.'
+                    description: '–  Type of the connection. Valid values: AZURECOSMOS,
+                      AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB,
+                      NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.'
                     type: string
                   description:
                     description: –  Description of the connection.
                     type: string
                   id:
-                    description: Catalog ID and name of the connection
+                    description: Catalog ID and name of the connection.
                     type: string
                   matchCriteria:
-                    description: –  A list of criteria that can be used in selecting
+                    description: –  List of criteria that can be used in selecting
                       this connection.
                     items:
                       type: string
                     type: array
                   physicalConnectionRequirements:
-                    description: A map of physical connection requirements, such as
-                      VPC and SecurityGroup. Defined below.
+                    description: Map of physical connection requirements, such as
+                      VPC and SecurityGroup. See physical_connection_requirements
+                      Block for details.
                     properties:
                       availabilityZone:
                         description: The availability zone of the connection. This

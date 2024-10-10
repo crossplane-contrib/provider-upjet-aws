@@ -153,77 +153,71 @@ type TokenValidityUnitsParameters struct {
 
 type UserPoolClientInitParameters struct {
 
-	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used.
-	// By default, the unit is hours.
-	// The unit can be overridden by a value in token_validity_units.access_token.
+	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used. By default, the unit is hours. The unit can be overridden by a value in token_validity_units.access_token.
 	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
-	// List of allowed OAuth flows (code, implicit, client_credentials).
+	// List of allowed OAuth flows, including code, implicit, and client_credentials. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +listType=set
 	AllowedOauthFlows []*string `json:"allowedOauthFlows,omitempty" tf:"allowed_oauth_flows,omitempty"`
 
-	// Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+	// Whether the client is allowed to use OAuth 2.0 features. allowed_oauth_flows_user_pool_client must be set to true before you can configure the following arguments: callback_urls, logout_urls, allowed_oauth_scopes and allowed_oauth_flows.
 	AllowedOauthFlowsUserPoolClient *bool `json:"allowedOauthFlowsUserPoolClient,omitempty" tf:"allowed_oauth_flows_user_pool_client,omitempty"`
 
-	// List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin).
+	// List of allowed OAuth scopes, including phone, email, openid, profile, and aws.cognito.signin.user.admin. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
-	// Configuration block for Amazon Pinpoint analytics for collecting metrics for this user pool. Detailed below.
+	// Configuration block for Amazon Pinpoint analytics that collects metrics for this user pool. See details below.
 	AnalyticsConfiguration []AnalyticsConfigurationInitParameters `json:"analyticsConfiguration,omitempty" tf:"analytics_configuration,omitempty"`
 
-	// Amazon Cognito creates a session token for each API request in an authentication flow. AuthSessionValidity is the duration, in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires. Valid values between 3 and 15. Default value is 3.
+	// Duration, in minutes, of the session token created by Amazon Cognito for each API request in an authentication flow. The session token must be responded to by the native user of the user pool before it expires. Valid values for auth_session_validity are between 3 and 15, with a default value of 3.
 	AuthSessionValidity *float64 `json:"authSessionValidity,omitempty" tf:"auth_session_validity,omitempty"`
 
-	// List of allowed callback URLs for the identity providers.
+	// List of allowed callback URLs for the identity providers. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +listType=set
 	CallbackUrls []*string `json:"callbackUrls,omitempty" tf:"callback_urls,omitempty"`
 
-	// Default redirect URI. Must be in the list of callback URLs.
+	// Default redirect URI and must be included in the list of callback URLs.
 	DefaultRedirectURI *string `json:"defaultRedirectUri,omitempty" tf:"default_redirect_uri,omitempty"`
 
-	// Activates the propagation of additional user context data.
+	// Enables the propagation of additional user context data.
 	EnablePropagateAdditionalUserContextData *bool `json:"enablePropagateAdditionalUserContextData,omitempty" tf:"enable_propagate_additional_user_context_data,omitempty"`
 
 	// Enables or disables token revocation.
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
-	// List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH).
+	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
 	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
-	// Should an application secret be generated.
+	// Boolean flag indicating whether an application secret should be generated.
 	GenerateSecret *bool `json:"generateSecret,omitempty" tf:"generate_secret,omitempty"`
 
-	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used.
-	// By default, the unit is hours.
-	// The unit can be overridden by a value in token_validity_units.id_token.
+	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used. By default, the unit is hours. The unit can be overridden by a value in token_validity_units.id_token.
 	IDTokenValidity *float64 `json:"idTokenValidity,omitempty" tf:"id_token_validity,omitempty"`
 
-	// List of allowed logout URLs for the identity providers.
+	// List of allowed logout URLs for the identity providers. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +listType=set
 	LogoutUrls []*string `json:"logoutUrls,omitempty" tf:"logout_urls,omitempty"`
 
 	// Name of the application client.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool.
+	// Setting determines the errors and responses returned by Cognito APIs when a user does not exist in the user pool during authentication, account confirmation, and password recovery.
 	PreventUserExistenceErrors *string `json:"preventUserExistenceErrors,omitempty" tf:"prevent_user_existence_errors,omitempty"`
 
-	// List of user pool attributes the application client can read from.
+	// List of user pool attributes that the application client can read from.
 	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
-	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
-	// By default, the unit is days.
-	// The unit can be overridden by a value in token_validity_units.refresh_token.
+	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used. By default, the unit is days. The unit can be overridden by a value in token_validity_units.refresh_token.
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
-	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
+	// List of provider names for the identity providers that are supported on this client. It uses the provider_name attribute of the aws_cognito_identity_provider resource(s), or the equivalent string(s).
 	// +listType=set
 	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
 
-	// Configuration block for units in which the validity times are represented in. Detailed below.
+	// Configuration block for representing the validity times in units. See details below. Detailed below.
 	TokenValidityUnits []TokenValidityUnitsInitParameters `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
 
 	// User pool the client belongs to.
@@ -238,137 +232,129 @@ type UserPoolClientInitParameters struct {
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
-	// List of user pool attributes the application client can write to.
+	// List of user pool attributes that the application client can write to.
 	// +listType=set
 	WriteAttributes []*string `json:"writeAttributes,omitempty" tf:"write_attributes,omitempty"`
 }
 
 type UserPoolClientObservation struct {
 
-	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used.
-	// By default, the unit is hours.
-	// The unit can be overridden by a value in token_validity_units.access_token.
+	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used. By default, the unit is hours. The unit can be overridden by a value in token_validity_units.access_token.
 	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
-	// List of allowed OAuth flows (code, implicit, client_credentials).
+	// List of allowed OAuth flows, including code, implicit, and client_credentials. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +listType=set
 	AllowedOauthFlows []*string `json:"allowedOauthFlows,omitempty" tf:"allowed_oauth_flows,omitempty"`
 
-	// Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+	// Whether the client is allowed to use OAuth 2.0 features. allowed_oauth_flows_user_pool_client must be set to true before you can configure the following arguments: callback_urls, logout_urls, allowed_oauth_scopes and allowed_oauth_flows.
 	AllowedOauthFlowsUserPoolClient *bool `json:"allowedOauthFlowsUserPoolClient,omitempty" tf:"allowed_oauth_flows_user_pool_client,omitempty"`
 
-	// List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin).
+	// List of allowed OAuth scopes, including phone, email, openid, profile, and aws.cognito.signin.user.admin. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
-	// Configuration block for Amazon Pinpoint analytics for collecting metrics for this user pool. Detailed below.
+	// Configuration block for Amazon Pinpoint analytics that collects metrics for this user pool. See details below.
 	AnalyticsConfiguration []AnalyticsConfigurationObservation `json:"analyticsConfiguration,omitempty" tf:"analytics_configuration,omitempty"`
 
-	// Amazon Cognito creates a session token for each API request in an authentication flow. AuthSessionValidity is the duration, in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires. Valid values between 3 and 15. Default value is 3.
+	// Duration, in minutes, of the session token created by Amazon Cognito for each API request in an authentication flow. The session token must be responded to by the native user of the user pool before it expires. Valid values for auth_session_validity are between 3 and 15, with a default value of 3.
 	AuthSessionValidity *float64 `json:"authSessionValidity,omitempty" tf:"auth_session_validity,omitempty"`
 
-	// List of allowed callback URLs for the identity providers.
+	// List of allowed callback URLs for the identity providers. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +listType=set
 	CallbackUrls []*string `json:"callbackUrls,omitempty" tf:"callback_urls,omitempty"`
 
-	// Default redirect URI. Must be in the list of callback URLs.
+	// Default redirect URI and must be included in the list of callback URLs.
 	DefaultRedirectURI *string `json:"defaultRedirectUri,omitempty" tf:"default_redirect_uri,omitempty"`
 
-	// Activates the propagation of additional user context data.
+	// Enables the propagation of additional user context data.
 	EnablePropagateAdditionalUserContextData *bool `json:"enablePropagateAdditionalUserContextData,omitempty" tf:"enable_propagate_additional_user_context_data,omitempty"`
 
 	// Enables or disables token revocation.
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
-	// List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH).
+	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
 	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
-	// Should an application secret be generated.
+	// Boolean flag indicating whether an application secret should be generated.
 	GenerateSecret *bool `json:"generateSecret,omitempty" tf:"generate_secret,omitempty"`
 
 	// ID of the user pool client.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used.
-	// By default, the unit is hours.
-	// The unit can be overridden by a value in token_validity_units.id_token.
+	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used. By default, the unit is hours. The unit can be overridden by a value in token_validity_units.id_token.
 	IDTokenValidity *float64 `json:"idTokenValidity,omitempty" tf:"id_token_validity,omitempty"`
 
-	// List of allowed logout URLs for the identity providers.
+	// List of allowed logout URLs for the identity providers. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +listType=set
 	LogoutUrls []*string `json:"logoutUrls,omitempty" tf:"logout_urls,omitempty"`
 
 	// Name of the application client.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool.
+	// Setting determines the errors and responses returned by Cognito APIs when a user does not exist in the user pool during authentication, account confirmation, and password recovery.
 	PreventUserExistenceErrors *string `json:"preventUserExistenceErrors,omitempty" tf:"prevent_user_existence_errors,omitempty"`
 
-	// List of user pool attributes the application client can read from.
+	// List of user pool attributes that the application client can read from.
 	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
-	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
-	// By default, the unit is days.
-	// The unit can be overridden by a value in token_validity_units.refresh_token.
+	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used. By default, the unit is days. The unit can be overridden by a value in token_validity_units.refresh_token.
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
-	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
+	// List of provider names for the identity providers that are supported on this client. It uses the provider_name attribute of the aws_cognito_identity_provider resource(s), or the equivalent string(s).
 	// +listType=set
 	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
 
-	// Configuration block for units in which the validity times are represented in. Detailed below.
+	// Configuration block for representing the validity times in units. See details below. Detailed below.
 	TokenValidityUnits []TokenValidityUnitsObservation `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
 
 	// User pool the client belongs to.
 	UserPoolID *string `json:"userPoolId,omitempty" tf:"user_pool_id,omitempty"`
 
-	// List of user pool attributes the application client can write to.
+	// List of user pool attributes that the application client can write to.
 	// +listType=set
 	WriteAttributes []*string `json:"writeAttributes,omitempty" tf:"write_attributes,omitempty"`
 }
 
 type UserPoolClientParameters struct {
 
-	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used.
-	// By default, the unit is hours.
-	// The unit can be overridden by a value in token_validity_units.access_token.
+	// Time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used. By default, the unit is hours. The unit can be overridden by a value in token_validity_units.access_token.
 	// +kubebuilder:validation:Optional
 	AccessTokenValidity *float64 `json:"accessTokenValidity,omitempty" tf:"access_token_validity,omitempty"`
 
-	// List of allowed OAuth flows (code, implicit, client_credentials).
+	// List of allowed OAuth flows, including code, implicit, and client_credentials. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AllowedOauthFlows []*string `json:"allowedOauthFlows,omitempty" tf:"allowed_oauth_flows,omitempty"`
 
-	// Whether the client is allowed to follow the OAuth protocol when interacting with Cognito user pools.
+	// Whether the client is allowed to use OAuth 2.0 features. allowed_oauth_flows_user_pool_client must be set to true before you can configure the following arguments: callback_urls, logout_urls, allowed_oauth_scopes and allowed_oauth_flows.
 	// +kubebuilder:validation:Optional
 	AllowedOauthFlowsUserPoolClient *bool `json:"allowedOauthFlowsUserPoolClient,omitempty" tf:"allowed_oauth_flows_user_pool_client,omitempty"`
 
-	// List of allowed OAuth scopes (phone, email, openid, profile, and aws.cognito.signin.user.admin).
+	// List of allowed OAuth scopes, including phone, email, openid, profile, and aws.cognito.signin.user.admin. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AllowedOauthScopes []*string `json:"allowedOauthScopes,omitempty" tf:"allowed_oauth_scopes,omitempty"`
 
-	// Configuration block for Amazon Pinpoint analytics for collecting metrics for this user pool. Detailed below.
+	// Configuration block for Amazon Pinpoint analytics that collects metrics for this user pool. See details below.
 	// +kubebuilder:validation:Optional
 	AnalyticsConfiguration []AnalyticsConfigurationParameters `json:"analyticsConfiguration,omitempty" tf:"analytics_configuration,omitempty"`
 
-	// Amazon Cognito creates a session token for each API request in an authentication flow. AuthSessionValidity is the duration, in minutes, of that session token. Your user pool native user must respond to each authentication challenge before the session expires. Valid values between 3 and 15. Default value is 3.
+	// Duration, in minutes, of the session token created by Amazon Cognito for each API request in an authentication flow. The session token must be responded to by the native user of the user pool before it expires. Valid values for auth_session_validity are between 3 and 15, with a default value of 3.
 	// +kubebuilder:validation:Optional
 	AuthSessionValidity *float64 `json:"authSessionValidity,omitempty" tf:"auth_session_validity,omitempty"`
 
-	// List of allowed callback URLs for the identity providers.
+	// List of allowed callback URLs for the identity providers. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	CallbackUrls []*string `json:"callbackUrls,omitempty" tf:"callback_urls,omitempty"`
 
-	// Default redirect URI. Must be in the list of callback URLs.
+	// Default redirect URI and must be included in the list of callback URLs.
 	// +kubebuilder:validation:Optional
 	DefaultRedirectURI *string `json:"defaultRedirectUri,omitempty" tf:"default_redirect_uri,omitempty"`
 
-	// Activates the propagation of additional user context data.
+	// Enables the propagation of additional user context data.
 	// +kubebuilder:validation:Optional
 	EnablePropagateAdditionalUserContextData *bool `json:"enablePropagateAdditionalUserContextData,omitempty" tf:"enable_propagate_additional_user_context_data,omitempty"`
 
@@ -376,22 +362,20 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableTokenRevocation *bool `json:"enableTokenRevocation,omitempty" tf:"enable_token_revocation,omitempty"`
 
-	// List of authentication flows (ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, ALLOW_REFRESH_TOKEN_AUTH).
+	// List of authentication flows. The available options include ADMIN_NO_SRP_AUTH, CUSTOM_AUTH_FLOW_ONLY, USER_PASSWORD_AUTH, ALLOW_ADMIN_USER_PASSWORD_AUTH, ALLOW_CUSTOM_AUTH, ALLOW_USER_PASSWORD_AUTH, ALLOW_USER_SRP_AUTH, and ALLOW_REFRESH_TOKEN_AUTH.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExplicitAuthFlows []*string `json:"explicitAuthFlows,omitempty" tf:"explicit_auth_flows,omitempty"`
 
-	// Should an application secret be generated.
+	// Boolean flag indicating whether an application secret should be generated.
 	// +kubebuilder:validation:Optional
 	GenerateSecret *bool `json:"generateSecret,omitempty" tf:"generate_secret,omitempty"`
 
-	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used.
-	// By default, the unit is hours.
-	// The unit can be overridden by a value in token_validity_units.id_token.
+	// Time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used. By default, the unit is hours. The unit can be overridden by a value in token_validity_units.id_token.
 	// +kubebuilder:validation:Optional
 	IDTokenValidity *float64 `json:"idTokenValidity,omitempty" tf:"id_token_validity,omitempty"`
 
-	// List of allowed logout URLs for the identity providers.
+	// List of allowed logout URLs for the identity providers. allowed_oauth_flows_user_pool_client must be set to true before you can configure this option.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	LogoutUrls []*string `json:"logoutUrls,omitempty" tf:"logout_urls,omitempty"`
@@ -400,18 +384,16 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Choose which errors and responses are returned by Cognito APIs during authentication, account confirmation, and password recovery when the user does not exist in the user pool. When set to ENABLED and the user does not exist, authentication returns an error indicating either the username or password was incorrect, and account confirmation and password recovery return a response indicating a code was sent to a simulated destination. When set to LEGACY, those APIs will return a UserNotFoundException exception if the user does not exist in the user pool.
+	// Setting determines the errors and responses returned by Cognito APIs when a user does not exist in the user pool during authentication, account confirmation, and password recovery.
 	// +kubebuilder:validation:Optional
 	PreventUserExistenceErrors *string `json:"preventUserExistenceErrors,omitempty" tf:"prevent_user_existence_errors,omitempty"`
 
-	// List of user pool attributes the application client can read from.
+	// List of user pool attributes that the application client can read from.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ReadAttributes []*string `json:"readAttributes,omitempty" tf:"read_attributes,omitempty"`
 
-	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used.
-	// By default, the unit is days.
-	// The unit can be overridden by a value in token_validity_units.refresh_token.
+	// Time limit, between 60 minutes and 10 years, after which the refresh token is no longer valid and cannot be used. By default, the unit is days. The unit can be overridden by a value in token_validity_units.refresh_token.
 	// +kubebuilder:validation:Optional
 	RefreshTokenValidity *float64 `json:"refreshTokenValidity,omitempty" tf:"refresh_token_validity,omitempty"`
 
@@ -420,12 +402,12 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// List of provider names for the identity providers that are supported on this client. Uses the provider_name attribute of aws_cognito_identity_provider resource(s), or the equivalent string(s).
+	// List of provider names for the identity providers that are supported on this client. It uses the provider_name attribute of the aws_cognito_identity_provider resource(s), or the equivalent string(s).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SupportedIdentityProviders []*string `json:"supportedIdentityProviders,omitempty" tf:"supported_identity_providers,omitempty"`
 
-	// Configuration block for units in which the validity times are represented in. Detailed below.
+	// Configuration block for representing the validity times in units. See details below. Detailed below.
 	// +kubebuilder:validation:Optional
 	TokenValidityUnits []TokenValidityUnitsParameters `json:"tokenValidityUnits,omitempty" tf:"token_validity_units,omitempty"`
 
@@ -442,7 +424,7 @@ type UserPoolClientParameters struct {
 	// +kubebuilder:validation:Optional
 	UserPoolIDSelector *v1.Selector `json:"userPoolIdSelector,omitempty" tf:"-"`
 
-	// List of user pool attributes the application client can write to.
+	// List of user pool attributes that the application client can write to.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	WriteAttributes []*string `json:"writeAttributes,omitempty" tf:"write_attributes,omitempty"`

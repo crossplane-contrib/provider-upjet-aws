@@ -2826,8 +2826,9 @@ spec:
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
                       babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
                       kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
-                      names are available only for target endpoint type (e.g. redshift).
+                      redshift,redshift-serverless, s3, sqlserver, sybase. Please
+                      note that some of engine names are available only for target
+                      endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -3714,8 +3715,9 @@ spec:
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
                       babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
                       kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
-                      names are available only for target endpoint type (e.g. redshift).
+                      redshift,redshift-serverless, s3, sqlserver, sybase. Please
+                      note that some of engine names are available only for target
+                      endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.
@@ -4767,8 +4769,9 @@ spec:
                       aurora, aurora-postgresql, azuredb, azure-sql-managed-instance,
                       babelfish, db2, db2-zos, docdb, dynamodb, elasticsearch, kafka,
                       kinesis, mariadb, mongodb, mysql, opensearch, oracle, postgres,
-                      redshift, s3, sqlserver, sybase. Please note that some of engine
-                      names are available only for target endpoint type (e.g. redshift).
+                      redshift,redshift-serverless, s3, sqlserver, sybase. Please
+                      note that some of engine names are available only for target
+                      endpoint type (e.g. redshift).
                     type: string
                   extraConnectionAttributes:
                     description: Additional attributes associated with the connection.

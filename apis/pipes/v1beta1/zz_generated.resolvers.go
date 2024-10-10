@@ -46,12 +46,35 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.Enrichment = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EnrichmentRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.LogConfiguration != nil {
+		if mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnRef,
+					Selector:     mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArn")
+			}
+			mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RoleArn),
 			Extract:      common.ARNExtractor(),
@@ -122,12 +145,35 @@ func (mg *Pipe) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.InitProvider.Enrichment = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EnrichmentRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.LogConfiguration != nil {
+		if mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("cloudwatchlogs.aws.upbound.io", "v1beta1", "Group", "GroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnRef,
+					Selector:     mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArn")
+			}
+			mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LogConfiguration.CloudwatchLogsLogDestination.LogGroupArnRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleArn),
 			Extract:      common.ARNExtractor(),

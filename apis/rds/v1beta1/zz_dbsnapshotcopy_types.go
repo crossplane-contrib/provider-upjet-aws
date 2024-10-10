@@ -39,6 +39,10 @@ type DBSnapshotCopyInitParameters struct {
 	// he URL that contains a Signature Version 4 signed request.
 	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
 
+	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +listType=set
+	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
+
 	// Snapshot identifier of the source snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Snapshot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("db_snapshot_arn",true)
@@ -109,6 +113,10 @@ type DBSnapshotCopyObservation struct {
 	// he URL that contains a Signature Version 4 signed request.
 	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
 
+	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +listType=set
+	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
+
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
 	// Snapshot identifier of the source snapshot.
@@ -173,6 +181,11 @@ type DBSnapshotCopyParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
 	// Snapshot identifier of the source snapshot.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.Snapshot

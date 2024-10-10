@@ -135,6 +135,7 @@ type OntapStorageVirtualMachineInitParameters struct {
 	// Specifies the root volume security style, Valid values are UNIX, NTFS, and MIXED. All volumes created under this SVM will inherit the root security style unless the security style is specified on the volume. Default value is UNIX.
 	RootVolumeSecurityStyle *string `json:"rootVolumeSecurityStyle,omitempty" tf:"root_volume_security_style,omitempty"`
 
+	// Specifies the password to use when logging on to the SVM using a secure shell (SSH) connection to the SVM's management endpoint. Doing so enables you to manage the SVM using the NetApp ONTAP CLI or REST API. If you do not specify a password, you can still use the file system's fsxadmin user to manage the SVM.
 	SvmAdminPasswordSecretRef *v1.SecretKeySelector `json:"svmAdminPasswordSecretRef,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
@@ -213,6 +214,7 @@ type OntapStorageVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	RootVolumeSecurityStyle *string `json:"rootVolumeSecurityStyle,omitempty" tf:"root_volume_security_style,omitempty"`
 
+	// Specifies the password to use when logging on to the SVM using a secure shell (SSH) connection to the SVM's management endpoint. Doing so enables you to manage the SVM using the NetApp ONTAP CLI or REST API. If you do not specify a password, you can still use the file system's fsxadmin user to manage the SVM.
 	// +kubebuilder:validation:Optional
 	SvmAdminPasswordSecretRef *v1.SecretKeySelector `json:"svmAdminPasswordSecretRef,omitempty" tf:"-"`
 

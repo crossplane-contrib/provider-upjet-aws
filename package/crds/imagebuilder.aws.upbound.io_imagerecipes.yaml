@@ -1123,7 +1123,7 @@ spec:
                     properties:
                       uninstallAfterBuild:
                         description: Whether to remove the Systems Manager Agent after
-                          the image has been built. Defaults to false.
+                          the image has been built.
                         type: boolean
                     type: object
                   tags:
@@ -1335,7 +1335,7 @@ spec:
                     properties:
                       uninstallAfterBuild:
                         description: Whether to remove the Systems Manager Agent after
-                          the image has been built. Defaults to false.
+                          the image has been built.
                         type: boolean
                     type: object
                   tags:
@@ -1659,7 +1659,7 @@ spec:
                     properties:
                       uninstallAfterBuild:
                         description: Whether to remove the Systems Manager Agent after
-                          the image has been built. Defaults to false.
+                          the image has been built.
                         type: boolean
                     type: object
                   tags:

@@ -31,6 +31,10 @@ type ClusterSnapshotInitParameters struct {
 	// The Identifier for the snapshot.
 	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 
+	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +listType=set
+	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -69,6 +73,10 @@ type ClusterSnapshotObservation struct {
 
 	// Port that the DB cluster was listening on at the time of the snapshot.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +listType=set
+	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
 	SnapshotType *string `json:"snapshotType,omitempty" tf:"snapshot_type,omitempty"`
 
@@ -117,6 +125,11 @@ type ClusterSnapshotParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

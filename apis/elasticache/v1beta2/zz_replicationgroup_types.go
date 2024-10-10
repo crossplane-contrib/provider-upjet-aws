@@ -85,6 +85,9 @@ type ReplicationGroupInitParameters struct {
 	// Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails. If enabled, num_cache_clusters must be greater than 1. Must be enabled for Redis (cluster mode enabled) replication groups. Defaults to false.
 	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
 
+	// Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+	ClusterMode *string `json:"clusterMode,omitempty" tf:"cluster_mode,omitempty"`
+
 	// Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
 	DataTieringEnabled *bool `json:"dataTieringEnabled,omitempty" tf:"data_tiering_enabled,omitempty"`
 
@@ -139,13 +142,18 @@ type ReplicationGroupInitParameters struct {
 	// ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.
+	// Specifies whether to enable Multi-AZ Support for the replication group.
+	// If true, automatic_failover_enabled must also be enabled.
+	// Defaults to false.
 	MultiAzEnabled *bool `json:"multiAzEnabled,omitempty" tf:"multi_az_enabled,omitempty"`
 
 	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
+	// Instance class to be used.
+	// See AWS documentation for information on supported node types and guidance on selecting node types.
+	// Required unless global_replication_group_id is set.
+	// Cannot be set if global_replication_group_id is set.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// east-1:012345678999:my_sns_topic
@@ -156,6 +164,7 @@ type ReplicationGroupInitParameters struct {
 
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
+	// Conflicts with num_cache_clusters.
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// Name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used. To enable "cluster mode", i.e., data sharding, use a parameter group that has the parameter cluster-enabled set to true.
@@ -170,6 +179,8 @@ type ReplicationGroupInitParameters struct {
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
+	// Conflicts with num_cache_clusters.
+	// Can only be set if num_node_groups is set.
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -261,6 +272,9 @@ type ReplicationGroupObservation struct {
 	// Indicates if cluster mode is enabled.
 	ClusterEnabled *bool `json:"clusterEnabled,omitempty" tf:"cluster_enabled,omitempty"`
 
+	// Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+	ClusterMode *string `json:"clusterMode,omitempty" tf:"cluster_mode,omitempty"`
+
 	// Address of the replication group configuration endpoint when cluster mode is enabled.
 	ConfigurationEndpointAddress *string `json:"configurationEndpointAddress,omitempty" tf:"configuration_endpoint_address,omitempty"`
 
@@ -309,13 +323,18 @@ type ReplicationGroupObservation struct {
 	// +listType=set
 	MemberClusters []*string `json:"memberClusters,omitempty" tf:"member_clusters,omitempty"`
 
-	// Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.
+	// Specifies whether to enable Multi-AZ Support for the replication group.
+	// If true, automatic_failover_enabled must also be enabled.
+	// Defaults to false.
 	MultiAzEnabled *bool `json:"multiAzEnabled,omitempty" tf:"multi_az_enabled,omitempty"`
 
 	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
+	// Instance class to be used.
+	// See AWS documentation for information on supported node types and guidance on selecting node types.
+	// Required unless global_replication_group_id is set.
+	// Cannot be set if global_replication_group_id is set.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// east-1:012345678999:my_sns_topic
@@ -326,6 +345,7 @@ type ReplicationGroupObservation struct {
 
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
+	// Conflicts with num_cache_clusters.
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
 	// Name of the parameter group to associate with this replication group. If this argument is omitted, the default cache parameter group for the specified engine is used. To enable "cluster mode", i.e., data sharding, use a parameter group that has the parameter cluster-enabled set to true.
@@ -346,6 +366,8 @@ type ReplicationGroupObservation struct {
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
+	// Conflicts with num_cache_clusters.
+	// Can only be set if num_node_groups is set.
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
 	// IDs of one or more Amazon VPC security groups associated with this replication group. Use this parameter only when you are creating a replication group in an Amazon Virtual Private Cloud.
@@ -431,6 +453,10 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
 
+	// Specifies whether cluster mode is enabled or disabled. Valid values are enabled or disabled or compatible
+	// +kubebuilder:validation:Optional
+	ClusterMode *string `json:"clusterMode,omitempty" tf:"cluster_mode,omitempty"`
+
 	// Enables data tiering. Data tiering is only supported for replication groups using the r6gd node type. This parameter must be set to true when using r6gd nodes.
 	// +kubebuilder:validation:Optional
 	DataTieringEnabled *bool `json:"dataTieringEnabled,omitempty" tf:"data_tiering_enabled,omitempty"`
@@ -495,7 +521,9 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.
+	// Specifies whether to enable Multi-AZ Support for the replication group.
+	// If true, automatic_failover_enabled must also be enabled.
+	// Defaults to false.
 	// +kubebuilder:validation:Optional
 	MultiAzEnabled *bool `json:"multiAzEnabled,omitempty" tf:"multi_az_enabled,omitempty"`
 
@@ -503,7 +531,10 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
-	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
+	// Instance class to be used.
+	// See AWS documentation for information on supported node types and guidance on selecting node types.
+	// Required unless global_replication_group_id is set.
+	// Cannot be set if global_replication_group_id is set.
 	// +kubebuilder:validation:Optional
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
@@ -517,6 +548,7 @@ type ReplicationGroupParameters struct {
 
 	// Number of node groups (shards) for this Redis replication group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
+	// Conflicts with num_cache_clusters.
 	// +kubebuilder:validation:Optional
 	NumNodeGroups *float64 `json:"numNodeGroups,omitempty" tf:"num_node_groups,omitempty"`
 
@@ -540,6 +572,8 @@ type ReplicationGroupParameters struct {
 	// Number of replica nodes in each node group.
 	// Changing this number will trigger a resizing operation before other settings modifications.
 	// Valid values are 0 to 5.
+	// Conflicts with num_cache_clusters.
+	// Can only be set if num_node_groups is set.
 	// +kubebuilder:validation:Optional
 	ReplicasPerNodeGroup *float64 `json:"replicasPerNodeGroup,omitempty" tf:"replicas_per_node_group,omitempty"`
 
@@ -654,8 +688,9 @@ type ReplicationGroupStatus struct {
 type ReplicationGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ReplicationGroupSpec   `json:"spec"`
-	Status            ReplicationGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || (has(self.initProvider) && has(self.initProvider.description))",message="spec.forProvider.description is a required parameter"
+	Spec   ReplicationGroupSpec   `json:"spec"`
+	Status ReplicationGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

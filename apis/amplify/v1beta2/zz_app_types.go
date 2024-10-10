@@ -18,7 +18,7 @@ type AppInitParameters struct {
 	// Personal access token for a third-party source control system for an Amplify app. This token must have write access to the relevant repo to create a webhook and a read-only deploy key for the Amplify project. The token is not stored, so after applying this attribute can be removed and the setup token deleted.
 	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
-	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
+	// Automated branch creation configuration for an Amplify app. See auto_branch_creation_config Block for details.
 	AutoBranchCreationConfig *AutoBranchCreationConfigInitParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
 	// Automated branch creation glob patterns for an Amplify app.
@@ -31,10 +31,13 @@ type AppInitParameters struct {
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
 
+	// Cache configuration for the Amplify app. See cache_config Block for details.
+	CacheConfig *CacheConfigInitParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
-	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
+	// Custom rewrite and redirect rules for an Amplify app. See custom_rule Block for details.
 	CustomRule []CustomRuleInitParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
 	// Description for an Amplify app.
@@ -91,7 +94,7 @@ type AppObservation struct {
 	// ARN of the Amplify app.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
+	// Automated branch creation configuration for an Amplify app. See auto_branch_creation_config Block for details.
 	AutoBranchCreationConfig *AutoBranchCreationConfigObservation `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
 	// Automated branch creation glob patterns for an Amplify app.
@@ -101,10 +104,13 @@ type AppObservation struct {
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
 
+	// Cache configuration for the Amplify app. See cache_config Block for details.
+	CacheConfig *CacheConfigObservation `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
-	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
+	// Custom rewrite and redirect rules for an Amplify app. See custom_rule Block for details.
 	CustomRule []CustomRuleObservation `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
 	// Default domain for the Amplify app.
@@ -162,7 +168,7 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
-	// Automated branch creation configuration for an Amplify app. An auto_branch_creation_config block is documented below.
+	// Automated branch creation configuration for an Amplify app. See auto_branch_creation_config Block for details.
 	// +kubebuilder:validation:Optional
 	AutoBranchCreationConfig *AutoBranchCreationConfigParameters `json:"autoBranchCreationConfig,omitempty" tf:"auto_branch_creation_config,omitempty"`
 
@@ -179,11 +185,15 @@ type AppParameters struct {
 	// +kubebuilder:validation:Optional
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
 
+	// Cache configuration for the Amplify app. See cache_config Block for details.
+	// +kubebuilder:validation:Optional
+	CacheConfig *CacheConfigParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
+
 	// The custom HTTP headers for an Amplify app.
 	// +kubebuilder:validation:Optional
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
-	// Custom rewrite and redirect rules for an Amplify app. A custom_rule block is documented below.
+	// Custom rewrite and redirect rules for an Amplify app. See custom_rule Block for details.
 	// +kubebuilder:validation:Optional
 	CustomRule []CustomRuleParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
 
@@ -360,6 +370,25 @@ type AutoBranchCreationConfigParameters struct {
 	// Describes the current stage for the autocreated branch. Valid values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST.
 	// +kubebuilder:validation:Optional
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+}
+
+type CacheConfigInitParameters struct {
+
+	// Type of cache configuration to use for an Amplify app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type CacheConfigObservation struct {
+
+	// Type of cache configuration to use for an Amplify app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type CacheConfigParameters struct {
+
+	// Type of cache configuration to use for an Amplify app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type CustomRuleInitParameters struct {

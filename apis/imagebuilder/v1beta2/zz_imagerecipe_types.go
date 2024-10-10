@@ -366,19 +366,19 @@ type ImageRecipeParameters struct {
 
 type SystemsManagerAgentInitParameters struct {
 
-	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
+	// Whether to remove the Systems Manager Agent after the image has been built.
 	UninstallAfterBuild *bool `json:"uninstallAfterBuild,omitempty" tf:"uninstall_after_build,omitempty"`
 }
 
 type SystemsManagerAgentObservation struct {
 
-	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
+	// Whether to remove the Systems Manager Agent after the image has been built.
 	UninstallAfterBuild *bool `json:"uninstallAfterBuild,omitempty" tf:"uninstall_after_build,omitempty"`
 }
 
 type SystemsManagerAgentParameters struct {
 
-	// Whether to remove the Systems Manager Agent after the image has been built. Defaults to false.
+	// Whether to remove the Systems Manager Agent after the image has been built.
 	// +kubebuilder:validation:Optional
 	UninstallAfterBuild *bool `json:"uninstallAfterBuild" tf:"uninstall_after_build,omitempty"`
 }

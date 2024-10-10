@@ -271,6 +271,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineMode != nil {
 		in, out := &in.EngineMode, &out.EngineMode
 		*out = new(string)
@@ -349,6 +354,21 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsEnabled != nil {
+		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyID != nil {
+		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsRetentionPeriod != nil {
+		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
@@ -720,6 +740,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineMode != nil {
 		in, out := &in.EngineMode, &out.EngineMode
 		*out = new(string)
@@ -806,6 +831,21 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsEnabled != nil {
+		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyID != nil {
+		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsRetentionPeriod != nil {
+		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
@@ -1109,6 +1149,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineMode != nil {
 		in, out := &in.EngineMode, &out.EngineMode
 		*out = new(string)
@@ -1187,6 +1232,21 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsEnabled != nil {
+		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyID != nil {
+		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsRetentionPeriod != nil {
+		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
@@ -1338,6 +1398,11 @@ func (in *ClusterRestoreToPointInTimeInitParameters) DeepCopyInto(out *ClusterRe
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SourceClusterResourceID != nil {
+		in, out := &in.SourceClusterResourceID, &out.SourceClusterResourceID
+		*out = new(string)
+		**out = **in
+	}
 	if in.UseLatestRestorableTime != nil {
 		in, out := &in.UseLatestRestorableTime, &out.UseLatestRestorableTime
 		*out = new(bool)
@@ -1370,6 +1435,11 @@ func (in *ClusterRestoreToPointInTimeObservation) DeepCopyInto(out *ClusterResto
 	}
 	if in.SourceClusterIdentifier != nil {
 		in, out := &in.SourceClusterIdentifier, &out.SourceClusterIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceClusterResourceID != nil {
+		in, out := &in.SourceClusterResourceID, &out.SourceClusterResourceID
 		*out = new(string)
 		**out = **in
 	}
@@ -1417,6 +1487,11 @@ func (in *ClusterRestoreToPointInTimeParameters) DeepCopyInto(out *ClusterRestor
 		in, out := &in.SourceClusterIdentifierSelector, &out.SourceClusterIdentifierSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceClusterResourceID != nil {
+		in, out := &in.SourceClusterResourceID, &out.SourceClusterResourceID
+		*out = new(string)
+		**out = **in
 	}
 	if in.UseLatestRestorableTime != nil {
 		in, out := &in.UseLatestRestorableTime, &out.UseLatestRestorableTime
@@ -3804,6 +3879,11 @@ func (in *ScalingConfigurationInitParameters) DeepCopyInto(out *ScalingConfigura
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SecondsBeforeTimeout != nil {
+		in, out := &in.SecondsBeforeTimeout, &out.SecondsBeforeTimeout
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SecondsUntilAutoPause != nil {
 		in, out := &in.SecondsUntilAutoPause, &out.SecondsUntilAutoPause
 		*out = new(float64)
@@ -3844,6 +3924,11 @@ func (in *ScalingConfigurationObservation) DeepCopyInto(out *ScalingConfiguratio
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SecondsBeforeTimeout != nil {
+		in, out := &in.SecondsBeforeTimeout, &out.SecondsBeforeTimeout
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SecondsUntilAutoPause != nil {
 		in, out := &in.SecondsUntilAutoPause, &out.SecondsUntilAutoPause
 		*out = new(float64)
@@ -3881,6 +3966,11 @@ func (in *ScalingConfigurationParameters) DeepCopyInto(out *ScalingConfiguration
 	}
 	if in.MinCapacity != nil {
 		in, out := &in.MinCapacity, &out.MinCapacity
+		*out = new(float64)
+		**out = **in
+	}
+	if in.SecondsBeforeTimeout != nil {
+		in, out := &in.SecondsBeforeTimeout, &out.SecondsBeforeTimeout
 		*out = new(float64)
 		**out = **in
 	}

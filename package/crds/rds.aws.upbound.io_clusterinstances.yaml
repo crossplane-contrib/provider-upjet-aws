@@ -257,7 +257,11 @@ spec:
                         type: object
                     type: object
                   dbSubnetGroupName:
-                    description: 'DB subnet group to associate with this DB instance.
+                    description: 'Specifies the DB subnet group to associate with
+                      this DB instance. The default behavior varies depending on whether
+                      db_subnet_group_name is specified. Please refer to official
+                      AWS documentation to understand how db_subnet_group_name and
+                      publicly_accessible parameters affect DB instance behaviour.
                       NOTE: This must match the db_subnet_group_name of the attached
                       aws_rds_cluster.'
                     type: string
@@ -350,7 +354,7 @@ spec:
                     description: Instance class to use. For details on CPU and memory,
                       see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types.
                       Please see AWS Documentation for currently available instance
-                      classes and complete details.
+                      classes and complete details. For Aurora Serverless v2 use db.serverless.
                     type: string
                   monitoringInterval:
                     description: 'Interval, in seconds, between points when Enhanced
@@ -757,7 +761,11 @@ spec:
                         type: object
                     type: object
                   dbSubnetGroupName:
-                    description: 'DB subnet group to associate with this DB instance.
+                    description: 'Specifies the DB subnet group to associate with
+                      this DB instance. The default behavior varies depending on whether
+                      db_subnet_group_name is specified. Please refer to official
+                      AWS documentation to understand how db_subnet_group_name and
+                      publicly_accessible parameters affect DB instance behaviour.
                       NOTE: This must match the db_subnet_group_name of the attached
                       aws_rds_cluster.'
                     type: string
@@ -850,7 +858,7 @@ spec:
                     description: Instance class to use. For details on CPU and memory,
                       see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types.
                       Please see AWS Documentation for currently available instance
-                      classes and complete details.
+                      classes and complete details. For Aurora Serverless v2 use db.serverless.
                     type: string
                   monitoringInterval:
                     description: 'Interval, in seconds, between points when Enhanced
@@ -1272,7 +1280,11 @@ spec:
                       this instance.
                     type: string
                   dbSubnetGroupName:
-                    description: 'DB subnet group to associate with this DB instance.
+                    description: 'Specifies the DB subnet group to associate with
+                      this DB instance. The default behavior varies depending on whether
+                      db_subnet_group_name is specified. Please refer to official
+                      AWS documentation to understand how db_subnet_group_name and
+                      publicly_accessible parameters affect DB instance behaviour.
                       NOTE: This must match the db_subnet_group_name of the attached
                       aws_rds_cluster.'
                     type: string
@@ -1303,7 +1315,7 @@ spec:
                     description: Instance class to use. For details on CPU and memory,
                       see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types.
                       Please see AWS Documentation for currently available instance
-                      classes and complete details.
+                      classes and complete details. For Aurora Serverless v2 use db.serverless.
                     type: string
                   kmsKeyId:
                     description: ARN for the KMS encryption key if one is set to the

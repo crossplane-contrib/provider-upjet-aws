@@ -134,7 +134,6 @@ type InstanceInitParameters struct {
 	DomainAuthSecretArn *string `json:"domainAuthSecretArn,omitempty" tf:"domain_auth_secret_arn,omitempty"`
 
 	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
-	// +listType=set
 	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
 
 	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -152,6 +151,9 @@ type InstanceInitParameters struct {
 
 	// The database engine to use. For supported values, see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine'. For information on the difference between the available Aurora MySQL engines see Comparison in the [Amazon RDS Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The life cycle type for this DB instance. This setting applies only to RDS for MySQL and RDS for PostgreSQL. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
 	// The engine version to use. If `autoMinorVersionUpgrade` is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute `status.atProvider.engineVersionActual`. For supported values, see the EngineVersion parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine version must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine version'.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
@@ -175,7 +177,7 @@ type InstanceInitParameters struct {
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The amount of provisioned IOPS. Setting this implies a
-	// storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+	// storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
 	// Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
 	// See the RDS User Guide for details.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
@@ -346,8 +348,8 @@ type InstanceInitParameters struct {
 
 	// One of "standard" (magnetic), "gp2" (general
 	// purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-	// or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-	// "gp2" if not.
+	// "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+	// SSD). The default is "io1" if iops is specified, "gp2" if not.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -360,6 +362,9 @@ type InstanceInitParameters struct {
 	// Guide
 	// for more information.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+
+	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
 
 	// Username for the master DB user. Cannot be specified for a replica.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -477,7 +482,6 @@ type InstanceObservation struct {
 	DomainAuthSecretArn *string `json:"domainAuthSecretArn,omitempty" tf:"domain_auth_secret_arn,omitempty"`
 
 	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
-	// +listType=set
 	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
 
 	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -498,6 +502,9 @@ type InstanceObservation struct {
 
 	// The database engine to use. For supported values, see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine'. For information on the difference between the available Aurora MySQL engines see Comparison in the [Amazon RDS Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The life cycle type for this DB instance. This setting applies only to RDS for MySQL and RDS for PostgreSQL. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
 	// The engine version to use. If `autoMinorVersionUpgrade` is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute `status.atProvider.engineVersionActual`. For supported values, see the EngineVersion parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine version must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine version'.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
@@ -531,7 +538,7 @@ type InstanceObservation struct {
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The amount of provisioned IOPS. Setting this implies a
-	// storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+	// storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
 	// Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
 	// See the RDS User Guide for details.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
@@ -665,8 +672,8 @@ type InstanceObservation struct {
 
 	// One of "standard" (magnetic), "gp2" (general
 	// purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-	// or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-	// "gp2" if not.
+	// "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+	// SSD). The default is "io1" if iops is specified, "gp2" if not.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -683,6 +690,9 @@ type InstanceObservation struct {
 	// Guide
 	// for more information.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+
+	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
 
 	// Username for the master DB user. Cannot be specified for a replica.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -821,7 +831,6 @@ type InstanceParameters struct {
 
 	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
 	// +kubebuilder:validation:Optional
-	// +listType=set
 	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
 
 	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -844,6 +853,10 @@ type InstanceParameters struct {
 	// The database engine to use. For supported values, see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine'. For information on the difference between the available Aurora MySQL engines see Comparison in the [Amazon RDS Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The life cycle type for this DB instance. This setting applies only to RDS for MySQL and RDS for PostgreSQL. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	// +kubebuilder:validation:Optional
+	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
 	// The engine version to use. If `autoMinorVersionUpgrade` is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute `status.atProvider.engineVersionActual`. For supported values, see the EngineVersion parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine version must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine version'.
 	// +kubebuilder:validation:Optional
@@ -873,7 +886,7 @@ type InstanceParameters struct {
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
 	// The amount of provisioned IOPS. Setting this implies a
-	// storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+	// storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
 	// Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
 	// See the RDS User Guide for details.
 	// +kubebuilder:validation:Optional
@@ -1077,8 +1090,8 @@ type InstanceParameters struct {
 
 	// One of "standard" (magnetic), "gp2" (general
 	// purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-	// or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-	// "gp2" if not.
+	// "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+	// SSD). The default is "io1" if iops is specified, "gp2" if not.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
@@ -1094,6 +1107,10 @@ type InstanceParameters struct {
 	// for more information.
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+
+	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	// +kubebuilder:validation:Optional
+	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
 
 	// Username for the master DB user. Cannot be specified for a replica.
 	// +kubebuilder:validation:Optional
