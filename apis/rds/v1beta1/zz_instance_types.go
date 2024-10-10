@@ -67,6 +67,9 @@ type InstanceInitParameters struct {
 	// or will use RDS Blue/Green deployments.
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
+	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
+	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
+
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
@@ -114,6 +117,9 @@ type InstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
+	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
+	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
+
 	// Specifies whether to remove automated backups immediately after the DB instance is deleted. Default is true.
 	DeleteAutomatedBackups *bool `json:"deleteAutomatedBackups,omitempty" tf:"delete_automated_backups,omitempty"`
 
@@ -123,8 +129,21 @@ type InstanceInitParameters struct {
 	// The ID of the Directory Service Active Directory domain to create the instance in.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain. Conflicts with domain and domain_iam_role_name.
+	DomainAuthSecretArn *string `json:"domainAuthSecretArn,omitempty" tf:"domain_auth_secret_arn,omitempty"`
+
+	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
+	// +listType=set
+	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
+
+	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+	DomainFqdn *string `json:"domainFqdn,omitempty" tf:"domain_fqdn,omitempty"`
+
 	// The name of the IAM role to be used when making API calls to the Directory Service.
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
+
+	// The self managed Active Directory organizational unit for your DB instance to join. Conflicts with domain and domain_iam_role_name.
+	DomainOu *string `json:"domainOu,omitempty" tf:"domain_ou,omitempty"`
 
 	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine). MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace.
 	// +listType=set
@@ -132,6 +151,9 @@ type InstanceInitParameters struct {
 
 	// The database engine to use. For supported values, see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine'. For information on the difference between the available Aurora MySQL engines see Comparison in the [Amazon RDS Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The life cycle type for this DB instance. This setting applies only to RDS for MySQL and RDS for PostgreSQL. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
 	// The engine version to use. If `autoMinorVersionUpgrade` is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute `status.atProvider.engineVersionActual`. For supported values, see the EngineVersion parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine version must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine version'.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
@@ -144,6 +166,12 @@ type InstanceInitParameters struct {
 	// Specifies whether mappings of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
+
+	// Required if restore_to_point_in_time is specified.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
+	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
 
 	// The instance type of the RDS instance.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
@@ -240,6 +268,19 @@ type InstanceInitParameters struct {
 	// associate.
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
 
+	// Reference to a ParameterGroup in rds to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in rds to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
+
+	// Password for the master DB user. Note that this may show up in
+	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// Specifies whether Performance Insights are enabled. Defaults to false.
 	PerformanceInsightsEnabled *bool `json:"performanceInsightsEnabled,omitempty" tf:"performance_insights_enabled,omitempty"`
 
@@ -329,6 +370,9 @@ type InstanceInitParameters struct {
 	// for more information.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
+	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
+
 	// Username for the master DB user. Cannot be specified for a replica.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
@@ -387,6 +431,9 @@ type InstanceObservation struct {
 	// or will use RDS Blue/Green deployments.
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
 
+	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
+	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
+
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
 	BackupWindow *string `json:"backupWindow,omitempty" tf:"backup_window,omitempty"`
@@ -425,6 +472,9 @@ type InstanceObservation struct {
 	// for additional read replica contraints.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
+	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
+	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
+
 	// Specifies whether to remove automated backups immediately after the DB instance is deleted. Default is true.
 	DeleteAutomatedBackups *bool `json:"deleteAutomatedBackups,omitempty" tf:"delete_automated_backups,omitempty"`
 
@@ -434,8 +484,21 @@ type InstanceObservation struct {
 	// The ID of the Directory Service Active Directory domain to create the instance in.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain. Conflicts with domain and domain_iam_role_name.
+	DomainAuthSecretArn *string `json:"domainAuthSecretArn,omitempty" tf:"domain_auth_secret_arn,omitempty"`
+
+	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
+	// +listType=set
+	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
+
+	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+	DomainFqdn *string `json:"domainFqdn,omitempty" tf:"domain_fqdn,omitempty"`
+
 	// The name of the IAM role to be used when making API calls to the Directory Service.
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
+
+	// The self managed Active Directory organizational unit for your DB instance to join. Conflicts with domain and domain_iam_role_name.
+	DomainOu *string `json:"domainOu,omitempty" tf:"domain_ou,omitempty"`
 
 	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine). MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace.
 	// +listType=set
@@ -446,6 +509,9 @@ type InstanceObservation struct {
 
 	// The database engine to use. For supported values, see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine'. For information on the difference between the available Aurora MySQL engines see Comparison in the [Amazon RDS Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The life cycle type for this DB instance. This setting applies only to RDS for MySQL and RDS for PostgreSQL. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
 	// The engine version to use. If `autoMinorVersionUpgrade` is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute `status.atProvider.engineVersionActual`. For supported values, see the EngineVersion parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine version must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine version'.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
@@ -468,6 +534,12 @@ type InstanceObservation struct {
 
 	// The RDS instance ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Required if restore_to_point_in_time is specified.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
+	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
 
 	// The instance type of the RDS instance.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
@@ -635,6 +707,9 @@ type InstanceObservation struct {
 	// for more information.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
+	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
+
 	// Username for the master DB user. Cannot be specified for a replica.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
@@ -688,6 +763,10 @@ type InstanceParameters struct {
 	// or will use RDS Blue/Green deployments.
 	// +kubebuilder:validation:Optional
 	BackupRetentionPeriod *float64 `json:"backupRetentionPeriod,omitempty" tf:"backup_retention_period,omitempty"`
+
+	// Specifies where automated backups and manual snapshots are stored. Possible values are region (default) and outposts. See Working with Amazon RDS on AWS Outposts for more information.
+	// +kubebuilder:validation:Optional
+	BackupTarget *string `json:"backupTarget,omitempty" tf:"backup_target,omitempty"`
 
 	// The daily time range (in UTC) during which automated backups are created if they are enabled.
 	// Example: "09:46-10:16". Must not overlap with maintenance_window.
@@ -745,6 +824,10 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupNameSelector *v1.Selector `json:"dbSubnetGroupNameSelector,omitempty" tf:"-"`
 
+	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
+	// +kubebuilder:validation:Optional
+	DedicatedLogVolume *bool `json:"dedicatedLogVolume,omitempty" tf:"dedicated_log_volume,omitempty"`
+
 	// Specifies whether to remove automated backups immediately after the DB instance is deleted. Default is true.
 	// +kubebuilder:validation:Optional
 	DeleteAutomatedBackups *bool `json:"deleteAutomatedBackups,omitempty" tf:"delete_automated_backups,omitempty"`
@@ -757,9 +840,26 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// The ARN for the Secrets Manager secret with the self managed Active Directory credentials for the user joining the domain. Conflicts with domain and domain_iam_role_name.
+	// +kubebuilder:validation:Optional
+	DomainAuthSecretArn *string `json:"domainAuthSecretArn,omitempty" tf:"domain_auth_secret_arn,omitempty"`
+
+	// The IPv4 DNS IP addresses of your primary and secondary self managed Active Directory domain controllers. Two IP addresses must be provided. If there isn't a secondary domain controller, use the IP address of the primary domain controller for both entries in the list. Conflicts with domain and domain_iam_role_name.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	DomainDNSIps []*string `json:"domainDnsIps,omitempty" tf:"domain_dns_ips,omitempty"`
+
+	// The fully qualified domain name (FQDN) of the self managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+	// +kubebuilder:validation:Optional
+	DomainFqdn *string `json:"domainFqdn,omitempty" tf:"domain_fqdn,omitempty"`
+
 	// The name of the IAM role to be used when making API calls to the Directory Service.
 	// +kubebuilder:validation:Optional
 	DomainIAMRoleName *string `json:"domainIamRoleName,omitempty" tf:"domain_iam_role_name,omitempty"`
+
+	// The self managed Active Directory organizational unit for your DB instance to join. Conflicts with domain and domain_iam_role_name.
+	// +kubebuilder:validation:Optional
+	DomainOu *string `json:"domainOu,omitempty" tf:"domain_ou,omitempty"`
 
 	// Set of log types to enable for exporting to CloudWatch logs. If omitted, no logs will be exported. Valid values (depending on engine). MySQL and MariaDB: audit, error, general, slowquery. PostgreSQL: postgresql, upgrade. MSSQL: agent , error. Oracle: alert, audit, listener, trace.
 	// +kubebuilder:validation:Optional
@@ -769,6 +869,10 @@ type InstanceParameters struct {
 	// The database engine to use. For supported values, see the Engine parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine'. For information on the difference between the available Aurora MySQL engines see Comparison in the [Amazon RDS Release Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// The life cycle type for this DB instance. This setting applies only to RDS for MySQL and RDS for PostgreSQL. Valid values are open-source-rds-extended-support, open-source-rds-extended-support-disabled. Default value is open-source-rds-extended-support. [Using Amazon RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	// +kubebuilder:validation:Optional
+	EngineLifecycleSupport *string `json:"engineLifecycleSupport,omitempty" tf:"engine_lifecycle_support,omitempty"`
 
 	// The engine version to use. If `autoMinorVersionUpgrade` is enabled, you can provide a prefix of the version such as 5.7 (for 5.7.10). The actual engine version used is returned in the attribute `status.atProvider.engineVersionActual`. For supported values, see the EngineVersion parameter in [API action CreateDBInstance](https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBInstance.html). Note that for Amazon Aurora instances the engine version must match the [DB Cluster](https://marketplace.upbound.io/providers/upbound/provider-aws/latest/resources/rds.aws.upbound.io/Cluster/v1beta1)'s engine version'.
 	// +kubebuilder:validation:Optional
@@ -784,6 +888,14 @@ type InstanceParameters struct {
 	// accounts is enabled.
 	// +kubebuilder:validation:Optional
 	IAMDatabaseAuthenticationEnabled *bool `json:"iamDatabaseAuthenticationEnabled,omitempty" tf:"iam_database_authentication_enabled,omitempty"`
+
+	// Required if restore_to_point_in_time is specified.
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Creates a unique identifier beginning with the specified prefix. Conflicts with identifier.
+	// +kubebuilder:validation:Optional
+	IdentifierPrefix *string `json:"identifierPrefix,omitempty" tf:"identifier_prefix,omitempty"`
 
 	// The instance type of the RDS instance.
 	// +kubebuilder:validation:Optional
@@ -895,6 +1007,14 @@ type InstanceParameters struct {
 	// associate.
 	// +kubebuilder:validation:Optional
 	ParameterGroupName *string `json:"parameterGroupName,omitempty" tf:"parameter_group_name,omitempty"`
+
+	// Reference to a ParameterGroup in rds to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameRef *v1.Reference `json:"parameterGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ParameterGroup in rds to populate parameterGroupName.
+	// +kubebuilder:validation:Optional
+	ParameterGroupNameSelector *v1.Selector `json:"parameterGroupNameSelector,omitempty" tf:"-"`
 
 	// Password for the master DB user. Note that this may show up in
 	// logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
@@ -1012,6 +1132,10 @@ type InstanceParameters struct {
 	// for more information.
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+
+	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	// +kubebuilder:validation:Optional
+	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
 
 	// Username for the master DB user. Cannot be specified for a replica.
 	// +kubebuilder:validation:Optional

@@ -676,6 +676,9 @@ type UserSettingsInitParameters struct {
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
 
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	StudioWebPortalSettings []UserSettingsStudioWebPortalSettingsInitParameters `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
+
 	// The TensorBoard app settings. See TensorBoard App Settings below.
 	TensorBoardAppSettings []UserSettingsTensorBoardAppSettingsInitParameters `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
 }
@@ -1157,6 +1160,9 @@ type UserSettingsObservation struct {
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
 
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	StudioWebPortalSettings []UserSettingsStudioWebPortalSettingsObservation `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
+
 	// The TensorBoard app settings. See TensorBoard App Settings below.
 	TensorBoardAppSettings []UserSettingsTensorBoardAppSettingsObservation `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
 }
@@ -1223,6 +1229,10 @@ type UserSettingsParameters struct {
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
+
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	// +kubebuilder:validation:Optional
+	StudioWebPortalSettings []UserSettingsStudioWebPortalSettingsParameters `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
 
 	// The TensorBoard app settings. See TensorBoard App Settings below.
 	// +kubebuilder:validation:Optional
@@ -1441,6 +1451,41 @@ type UserSettingsSpaceStorageSettingsParameters struct {
 	// The default EBS storage settings for a private space. See Default EBS Storage Settings below.
 	// +kubebuilder:validation:Optional
 	DefaultEBSStorageSettings []SpaceStorageSettingsDefaultEBSStorageSettingsParameters `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
+}
+
+type UserSettingsStudioWebPortalSettingsInitParameters struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
+}
+
+type UserSettingsStudioWebPortalSettingsObservation struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
+}
+
+type UserSettingsStudioWebPortalSettingsParameters struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
 }
 
 type UserSettingsTensorBoardAppSettingsDefaultResourceSpecInitParameters struct {

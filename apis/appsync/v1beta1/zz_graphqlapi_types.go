@@ -62,13 +62,58 @@ type AdditionalAuthenticationProviderParameters struct {
 	UserPoolConfig []UserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 }
 
+type EnhancedMetricsConfigInitParameters struct {
+
+	// How data source metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+	DataSourceLevelMetricsBehavior *string `json:"dataSourceLevelMetricsBehavior,omitempty" tf:"data_source_level_metrics_behavior,omitempty"`
+
+	// How operation metrics will be emitted to CloudWatch. Valid values: ENABLED, DISABLED
+	OperationLevelMetricsConfig *string `json:"operationLevelMetricsConfig,omitempty" tf:"operation_level_metrics_config,omitempty"`
+
+	// How resolver metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+	ResolverLevelMetricsBehavior *string `json:"resolverLevelMetricsBehavior,omitempty" tf:"resolver_level_metrics_behavior,omitempty"`
+}
+
+type EnhancedMetricsConfigObservation struct {
+
+	// How data source metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+	DataSourceLevelMetricsBehavior *string `json:"dataSourceLevelMetricsBehavior,omitempty" tf:"data_source_level_metrics_behavior,omitempty"`
+
+	// How operation metrics will be emitted to CloudWatch. Valid values: ENABLED, DISABLED
+	OperationLevelMetricsConfig *string `json:"operationLevelMetricsConfig,omitempty" tf:"operation_level_metrics_config,omitempty"`
+
+	// How resolver metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+	ResolverLevelMetricsBehavior *string `json:"resolverLevelMetricsBehavior,omitempty" tf:"resolver_level_metrics_behavior,omitempty"`
+}
+
+type EnhancedMetricsConfigParameters struct {
+
+	// How data source metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+	// +kubebuilder:validation:Optional
+	DataSourceLevelMetricsBehavior *string `json:"dataSourceLevelMetricsBehavior" tf:"data_source_level_metrics_behavior,omitempty"`
+
+	// How operation metrics will be emitted to CloudWatch. Valid values: ENABLED, DISABLED
+	// +kubebuilder:validation:Optional
+	OperationLevelMetricsConfig *string `json:"operationLevelMetricsConfig" tf:"operation_level_metrics_config,omitempty"`
+
+	// How resolver metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+	// +kubebuilder:validation:Optional
+	ResolverLevelMetricsBehavior *string `json:"resolverLevelMetricsBehavior" tf:"resolver_level_metrics_behavior,omitempty"`
+}
+
 type GraphQLAPIInitParameters struct {
+
+	// API type. Valid values are GRAPHQL or MERGED. A MERGED type requires merged_api_execution_role_arn to be set.
+	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
 
 	// One or more additional authentication providers for the GraphqlApi. Defined below.
 	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderInitParameters `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
 
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// Enables and controls the enhanced metrics feature. See enhanced_metrics_config Block for details.
+	EnhancedMetricsConfig []EnhancedMetricsConfigInitParameters `json:"enhancedMetricsConfig,omitempty" tf:"enhanced_metrics_config,omitempty"`
 
 	// Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled. For more information about introspection, see GraphQL introspection.
 	IntrospectionConfig *string `json:"introspectionConfig,omitempty" tf:"introspection_config,omitempty"`
@@ -78,6 +123,19 @@ type GraphQLAPIInitParameters struct {
 
 	// Nested argument containing logging configuration. Defined below.
 	LogConfig []LogConfigInitParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
+
+	// ARN of the execution role when api_type is set to MERGED.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate mergedApiExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArnRef *v1.Reference `json:"mergedApiExecutionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate mergedApiExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArnSelector *v1.Selector `json:"mergedApiExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// User-supplied name for the GraphqlApi.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -149,6 +207,9 @@ type GraphQLAPILambdaAuthorizerConfigParameters struct {
 
 type GraphQLAPIObservation struct {
 
+	// API type. Valid values are GRAPHQL or MERGED. A MERGED type requires merged_api_execution_role_arn to be set.
+	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
+
 	// One or more additional authentication providers for the GraphqlApi. Defined below.
 	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderObservation `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
 
@@ -157,6 +218,9 @@ type GraphQLAPIObservation struct {
 
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// Enables and controls the enhanced metrics feature. See enhanced_metrics_config Block for details.
+	EnhancedMetricsConfig []EnhancedMetricsConfigObservation `json:"enhancedMetricsConfig,omitempty" tf:"enhanced_metrics_config,omitempty"`
 
 	// API ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -169,6 +233,9 @@ type GraphQLAPIObservation struct {
 
 	// Nested argument containing logging configuration. Defined below.
 	LogConfig []LogConfigObservation `json:"logConfig,omitempty" tf:"log_config,omitempty"`
+
+	// ARN of the execution role when api_type is set to MERGED.
+	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
 
 	// User-supplied name for the GraphqlApi.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -258,6 +325,10 @@ type GraphQLAPIOpenIDConnectConfigParameters struct {
 
 type GraphQLAPIParameters struct {
 
+	// API type. Valid values are GRAPHQL or MERGED. A MERGED type requires merged_api_execution_role_arn to be set.
+	// +kubebuilder:validation:Optional
+	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
+
 	// One or more additional authentication providers for the GraphqlApi. Defined below.
 	// +kubebuilder:validation:Optional
 	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderParameters `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
@@ -265,6 +336,10 @@ type GraphQLAPIParameters struct {
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// Enables and controls the enhanced metrics feature. See enhanced_metrics_config Block for details.
+	// +kubebuilder:validation:Optional
+	EnhancedMetricsConfig []EnhancedMetricsConfigParameters `json:"enhancedMetricsConfig,omitempty" tf:"enhanced_metrics_config,omitempty"`
 
 	// Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled. For more information about introspection, see GraphQL introspection.
 	// +kubebuilder:validation:Optional
@@ -277,6 +352,20 @@ type GraphQLAPIParameters struct {
 	// Nested argument containing logging configuration. Defined below.
 	// +kubebuilder:validation:Optional
 	LogConfig []LogConfigParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
+
+	// ARN of the execution role when api_type is set to MERGED.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate mergedApiExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArnRef *v1.Reference `json:"mergedApiExecutionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate mergedApiExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArnSelector *v1.Selector `json:"mergedApiExecutionRoleArnSelector,omitempty" tf:"-"`
 
 	// User-supplied name for the GraphqlApi.
 	// +kubebuilder:validation:Optional

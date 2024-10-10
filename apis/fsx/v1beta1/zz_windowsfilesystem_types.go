@@ -190,6 +190,10 @@ type WindowsFileSystemInitParameters struct {
 	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See Disk Iops Configuration below.
 	DiskIopsConfiguration []WindowsFileSystemDiskIopsConfigurationInitParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
 
+	// A map of tags to apply to the file system's final backup.
+	// +mapType=granular
+	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
+
 	// ARN for the KMS Key to encrypt the file system at rest. Defaults to an AWS managed KMS Key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -293,6 +297,10 @@ type WindowsFileSystemObservation struct {
 
 	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See Disk Iops Configuration below.
 	DiskIopsConfiguration []WindowsFileSystemDiskIopsConfigurationObservation `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
+
+	// A map of tags to apply to the file system's final backup.
+	// +mapType=granular
+	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
 
 	// Identifier of the file system (e.g. fs-12345678).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -401,6 +409,11 @@ type WindowsFileSystemParameters struct {
 	// The SSD IOPS configuration for the Amazon FSx for Windows File Server file system. See Disk Iops Configuration below.
 	// +kubebuilder:validation:Optional
 	DiskIopsConfiguration []WindowsFileSystemDiskIopsConfigurationParameters `json:"diskIopsConfiguration,omitempty" tf:"disk_iops_configuration,omitempty"`
+
+	// A map of tags to apply to the file system's final backup.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	FinalBackupTags map[string]*string `json:"finalBackupTags,omitempty" tf:"final_backup_tags,omitempty"`
 
 	// ARN for the KMS Key to encrypt the file system at rest. Defaults to an AWS managed KMS Key.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key

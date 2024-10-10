@@ -84,12 +84,18 @@ type ConfigurationInitParameters struct {
 
 	// The details of the execute command configuration. Detailed below.
 	ExecuteCommandConfiguration []ExecuteCommandConfigurationInitParameters `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
+
+	// Details of the managed storage configuration. See managed_storage_configuration Block for details.
+	ManagedStorageConfiguration []ManagedStorageConfigurationInitParameters `json:"managedStorageConfiguration,omitempty" tf:"managed_storage_configuration,omitempty"`
 }
 
 type ConfigurationObservation struct {
 
 	// The details of the execute command configuration. Detailed below.
 	ExecuteCommandConfiguration []ExecuteCommandConfigurationObservation `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
+
+	// Details of the managed storage configuration. See managed_storage_configuration Block for details.
+	ManagedStorageConfiguration []ManagedStorageConfigurationObservation `json:"managedStorageConfiguration,omitempty" tf:"managed_storage_configuration,omitempty"`
 }
 
 type ConfigurationParameters struct {
@@ -97,6 +103,10 @@ type ConfigurationParameters struct {
 	// The details of the execute command configuration. Detailed below.
 	// +kubebuilder:validation:Optional
 	ExecuteCommandConfiguration []ExecuteCommandConfigurationParameters `json:"executeCommandConfiguration,omitempty" tf:"execute_command_configuration,omitempty"`
+
+	// Details of the managed storage configuration. See managed_storage_configuration Block for details.
+	// +kubebuilder:validation:Optional
+	ManagedStorageConfiguration []ManagedStorageConfigurationParameters `json:"managedStorageConfiguration,omitempty" tf:"managed_storage_configuration,omitempty"`
 }
 
 type ExecuteCommandConfigurationInitParameters struct {
@@ -195,6 +205,35 @@ type LogConfigurationParameters struct {
 	// An optional folder in the S3 bucket to place logs in.
 	// +kubebuilder:validation:Optional
 	S3KeyPrefix *string `json:"s3KeyPrefix,omitempty" tf:"s3_key_prefix,omitempty"`
+}
+
+type ManagedStorageConfigurationInitParameters struct {
+
+	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
+
+	// AWS Key Management Service key ID to encrypt the managed storage.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type ManagedStorageConfigurationObservation struct {
+
+	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
+
+	// AWS Key Management Service key ID to encrypt the managed storage.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+}
+
+type ManagedStorageConfigurationParameters struct {
+
+	// AWS Key Management Service key ID for the Fargate ephemeral storage.
+	// +kubebuilder:validation:Optional
+	FargateEphemeralStorageKMSKeyID *string `json:"fargateEphemeralStorageKmsKeyId,omitempty" tf:"fargate_ephemeral_storage_kms_key_id,omitempty"`
+
+	// AWS Key Management Service key ID to encrypt the managed storage.
+	// +kubebuilder:validation:Optional
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 }
 
 type ServiceConnectDefaultsInitParameters struct {

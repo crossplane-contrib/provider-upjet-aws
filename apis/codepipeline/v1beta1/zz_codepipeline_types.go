@@ -46,6 +46,8 @@ type ActionInitParameters struct {
 	// The order in which actions are run.
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+
 	// A string that identifies the action type.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -85,6 +87,8 @@ type ActionObservation struct {
 
 	// The order in which actions are run.
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
+
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 
 	// A string that identifies the action type.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -136,6 +140,9 @@ type ActionParameters struct {
 	// The order in which actions are run.
 	// +kubebuilder:validation:Optional
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 
 	// A string that identifies the action type.
 	// +kubebuilder:validation:Optional
