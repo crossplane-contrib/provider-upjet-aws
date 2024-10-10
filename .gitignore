@@ -10,6 +10,9 @@ cover.out
 /.vendor-new
 .DS_Store
 kubeconfig
+e2e/*/.cache
+e2e/*/.work
+e2e/*/_output
 
 # ignore IDE folders
 .vscode/
