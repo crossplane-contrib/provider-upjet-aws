@@ -2120,8 +2120,10 @@ func (in *HTTPEndpointConfigurationInitParameters) DeepCopyInto(out *HTTPEndpoin
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SecretsManagerConfigurationInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SecretsManagerConfigurationInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.URL != nil {
 		in, out := &in.URL, &out.URL
@@ -2203,8 +2205,10 @@ func (in *HTTPEndpointConfigurationObservation) DeepCopyInto(out *HTTPEndpointCo
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SecretsManagerConfigurationObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SecretsManagerConfigurationObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.URL != nil {
 		in, out := &in.URL, &out.URL
@@ -2301,8 +2305,10 @@ func (in *HTTPEndpointConfigurationParameters) DeepCopyInto(out *HTTPEndpointCon
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SecretsManagerConfigurationParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SecretsManagerConfigurationParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.URL != nil {
 		in, out := &in.URL, &out.URL
@@ -6474,8 +6480,10 @@ func (in *RedshiftConfigurationInitParameters) DeepCopyInto(out *RedshiftConfigu
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(RedshiftConfigurationSecretsManagerConfigurationInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]RedshiftConfigurationSecretsManagerConfigurationInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -6562,8 +6570,10 @@ func (in *RedshiftConfigurationObservation) DeepCopyInto(out *RedshiftConfigurat
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(RedshiftConfigurationSecretsManagerConfigurationObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]RedshiftConfigurationSecretsManagerConfigurationObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -6665,8 +6675,10 @@ func (in *RedshiftConfigurationParameters) DeepCopyInto(out *RedshiftConfigurati
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(RedshiftConfigurationSecretsManagerConfigurationParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]RedshiftConfigurationSecretsManagerConfigurationParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -8945,8 +8957,10 @@ func (in *SnowflakeConfigurationInitParameters) DeepCopyInto(out *SnowflakeConfi
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SnowflakeConfigurationSecretsManagerConfigurationInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SnowflakeConfigurationSecretsManagerConfigurationInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.SnowflakeRoleConfiguration != nil {
 		in, out := &in.SnowflakeRoleConfiguration, &out.SnowflakeRoleConfiguration
@@ -9065,8 +9079,10 @@ func (in *SnowflakeConfigurationObservation) DeepCopyInto(out *SnowflakeConfigur
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SnowflakeConfigurationSecretsManagerConfigurationObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SnowflakeConfigurationSecretsManagerConfigurationObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.SnowflakeRoleConfiguration != nil {
 		in, out := &in.SnowflakeRoleConfiguration, &out.SnowflakeRoleConfiguration
@@ -9205,8 +9221,10 @@ func (in *SnowflakeConfigurationParameters) DeepCopyInto(out *SnowflakeConfigura
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SnowflakeConfigurationSecretsManagerConfigurationParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SnowflakeConfigurationSecretsManagerConfigurationParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.SnowflakeRoleConfiguration != nil {
 		in, out := &in.SnowflakeRoleConfiguration, &out.SnowflakeRoleConfiguration
@@ -10178,8 +10196,10 @@ func (in *SplunkConfigurationInitParameters) DeepCopyInto(out *SplunkConfigurati
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SplunkConfigurationSecretsManagerConfigurationInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SplunkConfigurationSecretsManagerConfigurationInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 
@@ -10254,8 +10274,10 @@ func (in *SplunkConfigurationObservation) DeepCopyInto(out *SplunkConfigurationO
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SplunkConfigurationSecretsManagerConfigurationObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SplunkConfigurationSecretsManagerConfigurationObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 
@@ -10335,8 +10357,10 @@ func (in *SplunkConfigurationParameters) DeepCopyInto(out *SplunkConfigurationPa
 	}
 	if in.SecretsManagerConfiguration != nil {
 		in, out := &in.SecretsManagerConfiguration, &out.SecretsManagerConfiguration
-		*out = new(SplunkConfigurationSecretsManagerConfigurationParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]SplunkConfigurationSecretsManagerConfigurationParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 
