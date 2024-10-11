@@ -7,10 +7,11 @@ kind: ThingType
 metadata:
   annotations:
     meta.upbound.io/example-id: iot/v1beta1/thingtype
+    uptest.upbound.io/update-parameter: '{"deprecated":true}'
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: lightbulb
   name: lightbulb
 spec:
   forProvider:
     name: "my_iot_thing"
-    region: us-west-1
+    region: us-east-2
