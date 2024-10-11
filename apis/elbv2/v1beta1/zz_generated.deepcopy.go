@@ -4860,8 +4860,10 @@ func (in *LBTargetGroupInitParameters) DeepCopyInto(out *LBTargetGroupInitParame
 	}
 	if in.TargetGroupHealth != nil {
 		in, out := &in.TargetGroupHealth, &out.TargetGroupHealth
-		*out = new(TargetGroupHealthInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]TargetGroupHealthInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.TargetHealthState != nil {
 		in, out := &in.TargetHealthState, &out.TargetHealthState
@@ -5088,8 +5090,10 @@ func (in *LBTargetGroupObservation) DeepCopyInto(out *LBTargetGroupObservation) 
 	}
 	if in.TargetGroupHealth != nil {
 		in, out := &in.TargetGroupHealth, &out.TargetGroupHealth
-		*out = new(TargetGroupHealthObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]TargetGroupHealthObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.TargetHealthState != nil {
 		in, out := &in.TargetHealthState, &out.TargetHealthState
@@ -5237,8 +5241,10 @@ func (in *LBTargetGroupParameters) DeepCopyInto(out *LBTargetGroupParameters) {
 	}
 	if in.TargetGroupHealth != nil {
 		in, out := &in.TargetGroupHealth, &out.TargetGroupHealth
-		*out = new(TargetGroupHealthParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]TargetGroupHealthParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.TargetHealthState != nil {
 		in, out := &in.TargetHealthState, &out.TargetHealthState
@@ -6443,13 +6449,17 @@ func (in *TargetGroupHealthInitParameters) DeepCopyInto(out *TargetGroupHealthIn
 	*out = *in
 	if in.DNSFailover != nil {
 		in, out := &in.DNSFailover, &out.DNSFailover
-		*out = new(DNSFailoverInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]DNSFailoverInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.UnhealthyStateRouting != nil {
 		in, out := &in.UnhealthyStateRouting, &out.UnhealthyStateRouting
-		*out = new(UnhealthyStateRoutingInitParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]UnhealthyStateRoutingInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 
@@ -6468,13 +6478,17 @@ func (in *TargetGroupHealthObservation) DeepCopyInto(out *TargetGroupHealthObser
 	*out = *in
 	if in.DNSFailover != nil {
 		in, out := &in.DNSFailover, &out.DNSFailover
-		*out = new(DNSFailoverObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]DNSFailoverObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.UnhealthyStateRouting != nil {
 		in, out := &in.UnhealthyStateRouting, &out.UnhealthyStateRouting
-		*out = new(UnhealthyStateRoutingObservation)
-		(*in).DeepCopyInto(*out)
+		*out = make([]UnhealthyStateRoutingObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 
@@ -6493,13 +6507,17 @@ func (in *TargetGroupHealthParameters) DeepCopyInto(out *TargetGroupHealthParame
 	*out = *in
 	if in.DNSFailover != nil {
 		in, out := &in.DNSFailover, &out.DNSFailover
-		*out = new(DNSFailoverParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]DNSFailoverParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.UnhealthyStateRouting != nil {
 		in, out := &in.UnhealthyStateRouting, &out.UnhealthyStateRouting
-		*out = new(UnhealthyStateRoutingParameters)
-		(*in).DeepCopyInto(*out)
+		*out = make([]UnhealthyStateRoutingParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 

@@ -272,48 +272,57 @@ spec:
                   targetGroupHealth:
                     description: Target health requirements block. See target_group_health
                       for more information.
-                    properties:
-                      dnsFailover:
-                        description: Block to configure DNS Failover requirements.
-                          See DNS Failover below for details on attributes.
-                        properties:
-                          minimumHealthyTargetsCount:
-                            description: The minimum number of targets that must be
-                              healthy. If the number of healthy targets is below this
-                              value, mark the zone as unhealthy in DNS, so that traffic
-                              is routed only to healthy zones. The possible values
-                              are off or an integer from 1 to the maximum number of
-                              targets. The default is off.
-                            type: string
-                          minimumHealthyTargetsPercentage:
-                            description: The minimum percentage of targets that must
-                              be healthy. If the percentage of healthy targets is
-                              below this value, mark the zone as unhealthy in DNS,
-                              so that traffic is routed only to healthy zones. The
-                              possible values are off or an integer from 1 to 100.
-                              The default is off.
-                            type: string
-                        type: object
-                      unhealthyStateRouting:
-                        description: Block to configure Unhealthy State Routing requirements.
-                          See Unhealthy State Routing below for details on attributes.
-                        properties:
-                          minimumHealthyTargetsCount:
-                            description: The minimum number of targets that must be
-                              healthy. If the number of healthy targets is below this
-                              value, send traffic to all targets, including unhealthy
-                              targets. The possible values are 1 to the maximum number
-                              of targets. The default is 1.
-                            type: number
-                          minimumHealthyTargetsPercentage:
-                            description: The minimum percentage of targets that must
-                              be healthy. If the percentage of healthy targets is
-                              below this value, send traffic to all targets, including
-                              unhealthy targets. The possible values are off or an
-                              integer from 1 to 100. The default is off.
-                            type: string
-                        type: object
-                    type: object
+                    items:
+                      properties:
+                        dnsFailover:
+                          description: Block to configure DNS Failover requirements.
+                            See DNS Failover below for details on attributes.
+                          items:
+                            properties:
+                              minimumHealthyTargetsCount:
+                                description: The minimum number of targets that must
+                                  be healthy. If the number of healthy targets is
+                                  below this value, mark the zone as unhealthy in
+                                  DNS, so that traffic is routed only to healthy zones.
+                                  The possible values are off or an integer from 1
+                                  to the maximum number of targets. The default is
+                                  off.
+                                type: string
+                              minimumHealthyTargetsPercentage:
+                                description: The minimum percentage of targets that
+                                  must be healthy. If the percentage of healthy targets
+                                  is below this value, mark the zone as unhealthy
+                                  in DNS, so that traffic is routed only to healthy
+                                  zones. The possible values are off or an integer
+                                  from 1 to 100. The default is off.
+                                type: string
+                            type: object
+                          type: array
+                        unhealthyStateRouting:
+                          description: Block to configure Unhealthy State Routing
+                            requirements. See Unhealthy State Routing below for details
+                            on attributes.
+                          items:
+                            properties:
+                              minimumHealthyTargetsCount:
+                                description: The minimum number of targets that must
+                                  be healthy. If the number of healthy targets is
+                                  below this value, send traffic to all targets, including
+                                  unhealthy targets. The possible values are 1 to
+                                  the maximum number of targets. The default is 1.
+                                type: number
+                              minimumHealthyTargetsPercentage:
+                                description: The minimum percentage of targets that
+                                  must be healthy. If the percentage of healthy targets
+                                  is below this value, send traffic to all targets,
+                                  including unhealthy targets. The possible values
+                                  are off or an integer from 1 to 100. The default
+                                  is off.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   targetHealthState:
                     description: Target health state block. Only applicable for Network
                       Load Balancer target groups when protocol is TCP or TLS. See
@@ -629,48 +638,57 @@ spec:
                   targetGroupHealth:
                     description: Target health requirements block. See target_group_health
                       for more information.
-                    properties:
-                      dnsFailover:
-                        description: Block to configure DNS Failover requirements.
-                          See DNS Failover below for details on attributes.
-                        properties:
-                          minimumHealthyTargetsCount:
-                            description: The minimum number of targets that must be
-                              healthy. If the number of healthy targets is below this
-                              value, mark the zone as unhealthy in DNS, so that traffic
-                              is routed only to healthy zones. The possible values
-                              are off or an integer from 1 to the maximum number of
-                              targets. The default is off.
-                            type: string
-                          minimumHealthyTargetsPercentage:
-                            description: The minimum percentage of targets that must
-                              be healthy. If the percentage of healthy targets is
-                              below this value, mark the zone as unhealthy in DNS,
-                              so that traffic is routed only to healthy zones. The
-                              possible values are off or an integer from 1 to 100.
-                              The default is off.
-                            type: string
-                        type: object
-                      unhealthyStateRouting:
-                        description: Block to configure Unhealthy State Routing requirements.
-                          See Unhealthy State Routing below for details on attributes.
-                        properties:
-                          minimumHealthyTargetsCount:
-                            description: The minimum number of targets that must be
-                              healthy. If the number of healthy targets is below this
-                              value, send traffic to all targets, including unhealthy
-                              targets. The possible values are 1 to the maximum number
-                              of targets. The default is 1.
-                            type: number
-                          minimumHealthyTargetsPercentage:
-                            description: The minimum percentage of targets that must
-                              be healthy. If the percentage of healthy targets is
-                              below this value, send traffic to all targets, including
-                              unhealthy targets. The possible values are off or an
-                              integer from 1 to 100. The default is off.
-                            type: string
-                        type: object
-                    type: object
+                    items:
+                      properties:
+                        dnsFailover:
+                          description: Block to configure DNS Failover requirements.
+                            See DNS Failover below for details on attributes.
+                          items:
+                            properties:
+                              minimumHealthyTargetsCount:
+                                description: The minimum number of targets that must
+                                  be healthy. If the number of healthy targets is
+                                  below this value, mark the zone as unhealthy in
+                                  DNS, so that traffic is routed only to healthy zones.
+                                  The possible values are off or an integer from 1
+                                  to the maximum number of targets. The default is
+                                  off.
+                                type: string
+                              minimumHealthyTargetsPercentage:
+                                description: The minimum percentage of targets that
+                                  must be healthy. If the percentage of healthy targets
+                                  is below this value, mark the zone as unhealthy
+                                  in DNS, so that traffic is routed only to healthy
+                                  zones. The possible values are off or an integer
+                                  from 1 to 100. The default is off.
+                                type: string
+                            type: object
+                          type: array
+                        unhealthyStateRouting:
+                          description: Block to configure Unhealthy State Routing
+                            requirements. See Unhealthy State Routing below for details
+                            on attributes.
+                          items:
+                            properties:
+                              minimumHealthyTargetsCount:
+                                description: The minimum number of targets that must
+                                  be healthy. If the number of healthy targets is
+                                  below this value, send traffic to all targets, including
+                                  unhealthy targets. The possible values are 1 to
+                                  the maximum number of targets. The default is 1.
+                                type: number
+                              minimumHealthyTargetsPercentage:
+                                description: The minimum percentage of targets that
+                                  must be healthy. If the percentage of healthy targets
+                                  is below this value, send traffic to all targets,
+                                  including unhealthy targets. The possible values
+                                  are off or an integer from 1 to 100. The default
+                                  is off.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   targetHealthState:
                     description: Target health state block. Only applicable for Network
                       Load Balancer target groups when protocol is TCP or TLS. See
@@ -1172,48 +1190,57 @@ spec:
                   targetGroupHealth:
                     description: Target health requirements block. See target_group_health
                       for more information.
-                    properties:
-                      dnsFailover:
-                        description: Block to configure DNS Failover requirements.
-                          See DNS Failover below for details on attributes.
-                        properties:
-                          minimumHealthyTargetsCount:
-                            description: The minimum number of targets that must be
-                              healthy. If the number of healthy targets is below this
-                              value, mark the zone as unhealthy in DNS, so that traffic
-                              is routed only to healthy zones. The possible values
-                              are off or an integer from 1 to the maximum number of
-                              targets. The default is off.
-                            type: string
-                          minimumHealthyTargetsPercentage:
-                            description: The minimum percentage of targets that must
-                              be healthy. If the percentage of healthy targets is
-                              below this value, mark the zone as unhealthy in DNS,
-                              so that traffic is routed only to healthy zones. The
-                              possible values are off or an integer from 1 to 100.
-                              The default is off.
-                            type: string
-                        type: object
-                      unhealthyStateRouting:
-                        description: Block to configure Unhealthy State Routing requirements.
-                          See Unhealthy State Routing below for details on attributes.
-                        properties:
-                          minimumHealthyTargetsCount:
-                            description: The minimum number of targets that must be
-                              healthy. If the number of healthy targets is below this
-                              value, send traffic to all targets, including unhealthy
-                              targets. The possible values are 1 to the maximum number
-                              of targets. The default is 1.
-                            type: number
-                          minimumHealthyTargetsPercentage:
-                            description: The minimum percentage of targets that must
-                              be healthy. If the percentage of healthy targets is
-                              below this value, send traffic to all targets, including
-                              unhealthy targets. The possible values are off or an
-                              integer from 1 to 100. The default is off.
-                            type: string
-                        type: object
-                    type: object
+                    items:
+                      properties:
+                        dnsFailover:
+                          description: Block to configure DNS Failover requirements.
+                            See DNS Failover below for details on attributes.
+                          items:
+                            properties:
+                              minimumHealthyTargetsCount:
+                                description: The minimum number of targets that must
+                                  be healthy. If the number of healthy targets is
+                                  below this value, mark the zone as unhealthy in
+                                  DNS, so that traffic is routed only to healthy zones.
+                                  The possible values are off or an integer from 1
+                                  to the maximum number of targets. The default is
+                                  off.
+                                type: string
+                              minimumHealthyTargetsPercentage:
+                                description: The minimum percentage of targets that
+                                  must be healthy. If the percentage of healthy targets
+                                  is below this value, mark the zone as unhealthy
+                                  in DNS, so that traffic is routed only to healthy
+                                  zones. The possible values are off or an integer
+                                  from 1 to 100. The default is off.
+                                type: string
+                            type: object
+                          type: array
+                        unhealthyStateRouting:
+                          description: Block to configure Unhealthy State Routing
+                            requirements. See Unhealthy State Routing below for details
+                            on attributes.
+                          items:
+                            properties:
+                              minimumHealthyTargetsCount:
+                                description: The minimum number of targets that must
+                                  be healthy. If the number of healthy targets is
+                                  below this value, send traffic to all targets, including
+                                  unhealthy targets. The possible values are 1 to
+                                  the maximum number of targets. The default is 1.
+                                type: number
+                              minimumHealthyTargetsPercentage:
+                                description: The minimum percentage of targets that
+                                  must be healthy. If the percentage of healthy targets
+                                  is below this value, send traffic to all targets,
+                                  including unhealthy targets. The possible values
+                                  are off or an integer from 1 to 100. The default
+                                  is off.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   targetHealthState:
                     description: Target health state block. Only applicable for Network
                       Load Balancer target groups when protocol is TCP or TLS. See

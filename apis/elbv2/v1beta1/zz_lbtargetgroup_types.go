@@ -220,7 +220,7 @@ type LBTargetGroupInitParameters struct {
 	TargetFailover []TargetFailoverInitParameters `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
 
 	// Target health requirements block. See target_group_health for more information.
-	TargetGroupHealth *TargetGroupHealthInitParameters `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
+	TargetGroupHealth []TargetGroupHealthInitParameters `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
 
 	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
 	TargetHealthState []TargetHealthStateInitParameters `json:"targetHealthState,omitempty" tf:"target_health_state,omitempty"`
@@ -321,7 +321,7 @@ type LBTargetGroupObservation struct {
 	TargetFailover []TargetFailoverObservation `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
 
 	// Target health requirements block. See target_group_health for more information.
-	TargetGroupHealth *TargetGroupHealthObservation `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
+	TargetGroupHealth []TargetGroupHealthObservation `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
 
 	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
 	TargetHealthState []TargetHealthStateObservation `json:"targetHealthState,omitempty" tf:"target_health_state,omitempty"`
@@ -420,7 +420,7 @@ type LBTargetGroupParameters struct {
 
 	// Target health requirements block. See target_group_health for more information.
 	// +kubebuilder:validation:Optional
-	TargetGroupHealth *TargetGroupHealthParameters `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
+	TargetGroupHealth []TargetGroupHealthParameters `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
 
 	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
 	// +kubebuilder:validation:Optional
@@ -527,30 +527,30 @@ type TargetFailoverParameters struct {
 type TargetGroupHealthInitParameters struct {
 
 	// Block to configure DNS Failover requirements. See DNS Failover below for details on attributes.
-	DNSFailover *DNSFailoverInitParameters `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
+	DNSFailover []DNSFailoverInitParameters `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
 
 	// Block to configure Unhealthy State Routing requirements. See Unhealthy State Routing below for details on attributes.
-	UnhealthyStateRouting *UnhealthyStateRoutingInitParameters `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
+	UnhealthyStateRouting []UnhealthyStateRoutingInitParameters `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
 }
 
 type TargetGroupHealthObservation struct {
 
 	// Block to configure DNS Failover requirements. See DNS Failover below for details on attributes.
-	DNSFailover *DNSFailoverObservation `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
+	DNSFailover []DNSFailoverObservation `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
 
 	// Block to configure Unhealthy State Routing requirements. See Unhealthy State Routing below for details on attributes.
-	UnhealthyStateRouting *UnhealthyStateRoutingObservation `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
+	UnhealthyStateRouting []UnhealthyStateRoutingObservation `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
 }
 
 type TargetGroupHealthParameters struct {
 
 	// Block to configure DNS Failover requirements. See DNS Failover below for details on attributes.
 	// +kubebuilder:validation:Optional
-	DNSFailover *DNSFailoverParameters `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
+	DNSFailover []DNSFailoverParameters `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
 
 	// Block to configure Unhealthy State Routing requirements. See Unhealthy State Routing below for details on attributes.
 	// +kubebuilder:validation:Optional
-	UnhealthyStateRouting *UnhealthyStateRoutingParameters `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
+	UnhealthyStateRouting []UnhealthyStateRoutingParameters `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
 }
 
 type TargetHealthStateInitParameters struct {
