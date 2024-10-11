@@ -241,6 +241,38 @@ uptest: $(UPTEST_LOCAL) $(KUBECTL) $(KUTTL)
 	@KUBECTL=$(KUBECTL) KUTTL=$(KUTTL) CROSSPLANE_NAMESPACE=$(CROSSPLANE_NAMESPACE) $(UPTEST_LOCAL) e2e "${UPTEST_EXAMPLE_LIST}" --data-source="${UPTEST_DATASOURCE_PATH}" --setup-script=cluster/test/setup.sh --default-conditions="Test" || $(FAIL)
 	@$(OK) running automated tests
 
+# This target triggers an e2e test for testing provider configs.
+# It first builds and publishes the
+# provider-family-aws, provider-aws-ec2 and provider-aws-rds.
+# Then triggers the e2e provider config tests via `make`,
+# which resides in the `e2e/providerconfig-aws-e2e-test` directory
+#
+# For the e2e test, an EKS cluster is created and some demo resources are
+# created with different provider configs. The demo resources are from
+# AWS EC2 and RDS providers.
+# Therefore, the provider packages needs to be published to a registry
+# that the EKS cluster has access to. This defaults to "xpkg.upbound.io"
+# If another registry needs to be used, `XPKG_REG_ORGS` needs to be overridden
+# with a registry that the EKS cluster has access, while invoking this make target.
+#
+# This target also requires the `UPTEST_CLOUD_CREDENTIALS` environment variable
+# to be set. This is used for provisioning the target E2E test environment,
+# including the EKS cluster and necessary environments.
+providerconfig-e2e:
+	$(MAKE) SUBPACKAGES="ec2 rds config" build.all publish
+	AWS_FAMILY_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-family-aws:$(VERSION)" \
+	AWS_EC2_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-ec2:$(VERSION)" \
+	AWS_RDS_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-rds:$(VERSION)" \
+	TARGET_CROSSPLANE_VERSION="1.15.2" \
+		$(MAKE) -C e2e/providerconfig-aws-e2e-test e2e
+
+providerconfig-e2e-nopublish:
+	AWS_FAMILY_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-family-aws:$(VERSION)" \
+	AWS_EC2_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-ec2:$(VERSION)" \
+	AWS_RDS_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-rds:$(VERSION)" \
+	TARGET_CROSSPLANE_VERSION="1.15.2" \
+		$(MAKE) -C e2e/providerconfig-aws-e2e-test e2e
+
 uptest-local:
 	@$(WARN) "this target is deprecated, please use 'make uptest' instead"
 
