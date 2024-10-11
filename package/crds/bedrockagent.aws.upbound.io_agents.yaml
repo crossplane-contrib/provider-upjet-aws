@@ -180,7 +180,7 @@ spec:
                   promptOverrideConfiguration:
                     description: Configurations to override prompt templates in different
                       parts of an agent sequence. For more information, see Advanced
-                      prompts. See prompt_override_configuration block for details.
+                      prompts. See prompt_override_configuration Block for details.
                     items:
                       properties:
                         overrideLambda:
@@ -193,7 +193,7 @@ spec:
                         promptConfigurations:
                           description: Configurations to override a prompt template
                             in one part of an agent sequence. See prompt_configurations
-                            block for details.
+                            Block for details.
                           items:
                             properties:
                               basePromptTemplate:
@@ -208,7 +208,7 @@ spec:
                                   agent invokes a foundation model in the part of
                                   the agent sequence defined by the prompt_type. For
                                   more information, see Inference parameters for foundation
-                                  models. See inference_configuration block for details.
+                                  models. See inference_configuration Block for details.
                                 items:
                                   properties:
                                     maxLength:
@@ -279,6 +279,10 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  skipResourceInUseCheck:
+                    description: Whether the in-use check is skipped when deleting
+                      the agent.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -409,7 +413,7 @@ spec:
                   promptOverrideConfiguration:
                     description: Configurations to override prompt templates in different
                       parts of an agent sequence. For more information, see Advanced
-                      prompts. See prompt_override_configuration block for details.
+                      prompts. See prompt_override_configuration Block for details.
                     items:
                       properties:
                         overrideLambda:
@@ -422,7 +426,7 @@ spec:
                         promptConfigurations:
                           description: Configurations to override a prompt template
                             in one part of an agent sequence. See prompt_configurations
-                            block for details.
+                            Block for details.
                           items:
                             properties:
                               basePromptTemplate:
@@ -437,7 +441,7 @@ spec:
                                   agent invokes a foundation model in the part of
                                   the agent sequence defined by the prompt_type. For
                                   more information, see Inference parameters for foundation
-                                  models. See inference_configuration block for details.
+                                  models. See inference_configuration Block for details.
                                 items:
                                   properties:
                                     maxLength:
@@ -504,6 +508,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  skipResourceInUseCheck:
+                    description: Whether the in-use check is skipped when deleting
+                      the agent.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -738,7 +746,7 @@ spec:
                   promptOverrideConfiguration:
                     description: Configurations to override prompt templates in different
                       parts of an agent sequence. For more information, see Advanced
-                      prompts. See prompt_override_configuration block for details.
+                      prompts. See prompt_override_configuration Block for details.
                     items:
                       properties:
                         overrideLambda:
@@ -751,7 +759,7 @@ spec:
                         promptConfigurations:
                           description: Configurations to override a prompt template
                             in one part of an agent sequence. See prompt_configurations
-                            block for details.
+                            Block for details.
                           items:
                             properties:
                               basePromptTemplate:
@@ -766,7 +774,7 @@ spec:
                                   agent invokes a foundation model in the part of
                                   the agent sequence defined by the prompt_type. For
                                   more information, see Inference parameters for foundation
-                                  models. See inference_configuration block for details.
+                                  models. See inference_configuration Block for details.
                                 items:
                                   properties:
                                     maxLength:
@@ -833,6 +841,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  skipResourceInUseCheck:
+                    description: Whether the in-use check is skipped when deleting
+                      the agent.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
