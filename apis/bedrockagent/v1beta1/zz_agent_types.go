@@ -49,8 +49,11 @@ type AgentInitParameters struct {
 	// Whether to prepare the agent after creation or modification. Defaults to true.
 	PrepareAgent *bool `json:"prepareAgent,omitempty" tf:"prepare_agent,omitempty"`
 
-	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration block for details.
+	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration Block for details.
 	PromptOverrideConfiguration []PromptOverrideConfigurationInitParameters `json:"promptOverrideConfiguration,omitempty" tf:"prompt_override_configuration,omitempty"`
+
+	// Whether the in-use check is skipped when deleting the agent.
+	SkipResourceInUseCheck *bool `json:"skipResourceInUseCheck,omitempty" tf:"skip_resource_in_use_check,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -95,8 +98,11 @@ type AgentObservation struct {
 	// Whether to prepare the agent after creation or modification. Defaults to true.
 	PrepareAgent *bool `json:"prepareAgent,omitempty" tf:"prepare_agent,omitempty"`
 
-	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration block for details.
+	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration Block for details.
 	PromptOverrideConfiguration []PromptOverrideConfigurationObservation `json:"promptOverrideConfiguration,omitempty" tf:"prompt_override_configuration,omitempty"`
+
+	// Whether the in-use check is skipped when deleting the agent.
+	SkipResourceInUseCheck *bool `json:"skipResourceInUseCheck,omitempty" tf:"skip_resource_in_use_check,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -151,7 +157,7 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	PrepareAgent *bool `json:"prepareAgent,omitempty" tf:"prepare_agent,omitempty"`
 
-	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration block for details.
+	// Configurations to override prompt templates in different parts of an agent sequence. For more information, see Advanced prompts. See prompt_override_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	PromptOverrideConfiguration []PromptOverrideConfigurationParameters `json:"promptOverrideConfiguration,omitempty" tf:"prompt_override_configuration,omitempty"`
 
@@ -159,6 +165,10 @@ type AgentParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Whether the in-use check is skipped when deleting the agent.
+	// +kubebuilder:validation:Optional
+	SkipResourceInUseCheck *bool `json:"skipResourceInUseCheck,omitempty" tf:"skip_resource_in_use_check,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -230,7 +240,7 @@ type PromptConfigurationsInitParameters struct {
 	// prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
 	BasePromptTemplate *string `json:"basePromptTemplate,omitempty" tf:"base_prompt_template"`
 
-	// Inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the prompt_type. For more information, see Inference parameters for foundation models. See inference_configuration block for details.
+	// Inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the prompt_type. For more information, see Inference parameters for foundation models. See inference_configuration Block for details.
 	InferenceConfiguration []InferenceConfigurationInitParameters `json:"inferenceConfiguration,omitempty" tf:"inference_configuration"`
 
 	// Whether to override the default parser Lambda function when parsing the raw foundation model output in the part of the agent sequence defined by the prompt_type. If you set the argument as OVERRIDDEN, the override_lambda argument in the prompt_override_configuration block must be specified with the ARN of a Lambda function. Valid values: DEFAULT, OVERRIDDEN.
@@ -251,7 +261,7 @@ type PromptConfigurationsObservation struct {
 	// prompt template with which to replace the default prompt template. You can use placeholder variables in the base prompt template to customize the prompt. For more information, see Prompt template placeholder variables.
 	BasePromptTemplate *string `json:"basePromptTemplate,omitempty" tf:"base_prompt_template,omitempty"`
 
-	// Inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the prompt_type. For more information, see Inference parameters for foundation models. See inference_configuration block for details.
+	// Inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the prompt_type. For more information, see Inference parameters for foundation models. See inference_configuration Block for details.
 	InferenceConfiguration []InferenceConfigurationObservation `json:"inferenceConfiguration,omitempty" tf:"inference_configuration,omitempty"`
 
 	// Whether to override the default parser Lambda function when parsing the raw foundation model output in the part of the agent sequence defined by the prompt_type. If you set the argument as OVERRIDDEN, the override_lambda argument in the prompt_override_configuration block must be specified with the ARN of a Lambda function. Valid values: DEFAULT, OVERRIDDEN.
@@ -273,7 +283,7 @@ type PromptConfigurationsParameters struct {
 	// +kubebuilder:validation:Optional
 	BasePromptTemplate *string `json:"basePromptTemplate,omitempty" tf:"base_prompt_template"`
 
-	// Inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the prompt_type. For more information, see Inference parameters for foundation models. See inference_configuration block for details.
+	// Inference parameters to use when the agent invokes a foundation model in the part of the agent sequence defined by the prompt_type. For more information, see Inference parameters for foundation models. See inference_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	InferenceConfiguration []InferenceConfigurationParameters `json:"inferenceConfiguration,omitempty" tf:"inference_configuration"`
 
@@ -299,7 +309,7 @@ type PromptOverrideConfigurationInitParameters struct {
 	// ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the prompt_configurations block must contain a parser_mode value that is set to OVERRIDDEN.
 	OverrideLambda *string `json:"overrideLambda,omitempty" tf:"override_lambda"`
 
-	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations block for details.
+	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations Block for details.
 	PromptConfigurations []PromptConfigurationsInitParameters `json:"promptConfigurations,omitempty" tf:"prompt_configurations"`
 }
 
@@ -308,7 +318,7 @@ type PromptOverrideConfigurationObservation struct {
 	// ARN of the Lambda function to use when parsing the raw foundation model output in parts of the agent sequence. If you specify this field, at least one of the prompt_configurations block must contain a parser_mode value that is set to OVERRIDDEN.
 	OverrideLambda *string `json:"overrideLambda,omitempty" tf:"override_lambda,omitempty"`
 
-	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations block for details.
+	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations Block for details.
 	PromptConfigurations []PromptConfigurationsObservation `json:"promptConfigurations,omitempty" tf:"prompt_configurations,omitempty"`
 }
 
@@ -318,7 +328,7 @@ type PromptOverrideConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	OverrideLambda *string `json:"overrideLambda,omitempty" tf:"override_lambda"`
 
-	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations block for details.
+	// Configurations to override a prompt template in one part of an agent sequence. See prompt_configurations Block for details.
 	// +kubebuilder:validation:Optional
 	PromptConfigurations []PromptConfigurationsParameters `json:"promptConfigurations,omitempty" tf:"prompt_configurations"`
 }
