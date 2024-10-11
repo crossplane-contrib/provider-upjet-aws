@@ -92,9 +92,124 @@ spec:
                       Block below.
                     items:
                       properties:
+                        customFileSystemConfig:
+                          description: The settings for assigning a custom file system
+                            to a user profile. Permitted users can access this file
+                            system in Amazon SageMaker Studio. See custom_file_system_config
+                            Block below.
+                          items:
+                            properties:
+                              efsFileSystemConfig:
+                                description: The default EBS storage settings for
+                                  a private space. See efs_file_system_config Block
+                                  below.
+                                items:
+                                  properties:
+                                    fileSystemId:
+                                      description: The ID of your Amazon EFS file
+                                        system.
+                                      type: string
+                                    fileSystemPath:
+                                      description: The path to the file system directory
+                                        that is accessible in Amazon SageMaker Studio.
+                                        Permitted users can access only this directory
+                                        and below.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        customPosixUserConfig:
+                          description: Details about the POSIX identity that is used
+                            for file system operations. See custom_posix_user_config
+                            Block below.
+                          items:
+                            properties:
+                              gid:
+                                description: The POSIX group ID.
+                                type: number
+                              uid:
+                                description: The POSIX user ID.
+                                type: number
+                            type: object
+                          type: array
                         executionRole:
                           description: The execution role for the space.
                           type: string
+                        jupyterLabAppSettings:
+                          description: The settings for the JupyterLab application.
+                            See jupyter_lab_app_settings Block below.
+                          items:
+                            properties:
+                              codeRepository:
+                                description: A list of Git repositories that SageMaker
+                                  automatically displays to users for cloning in the
+                                  JupyterServer application. see code_repository Block
+                                  below.
+                                items:
+                                  properties:
+                                    repositoryUrl:
+                                      description: The URL of the Git repository.
+                                      type: string
+                                  type: object
+                                type: array
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a KernelGateway app. see
+                                  custom_image Block below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see default_resource_spec Block
+                                  below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         jupyterServerAppSettings:
                           description: The Jupyter server's app settings. See jupyter_server_app_settings
                             Block below.
@@ -220,6 +335,29 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        spaceStorageSettings:
+                          description: The storage settings for a private space. See
+                            space_storage_settings Block below.
+                          items:
+                            properties:
+                              defaultEbsStorageSettings:
+                                description: The default EBS storage settings for
+                                  a private space. See default_ebs_storage_settings
+                                  Block below.
+                                items:
+                                  properties:
+                                    defaultEbsVolumeSizeInGb:
+                                      description: The default size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                    maximumEbsVolumeSizeInGb:
+                                      description: The maximum size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                       type: object
                     type: array
                   defaultUserSettings:
@@ -1028,6 +1166,28 @@ spec:
                             even if that is the default experience for the domain.
                             Valid values are ENABLED and DISABLED.
                           type: string
+                        studioWebPortalSettings:
+                          description: The Studio Web Portal settings. See studio_web_portal_settings
+                            Block below.
+                          items:
+                            properties:
+                              hiddenAppTypes:
+                                description: The Applications supported in Studio
+                                  that are hidden from the Studio left navigation
+                                  pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              hiddenMlTools:
+                                description: The machine learning tools that are hidden
+                                  from the Studio left navigation pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See tensor_board_app_settings
                             Block below.
@@ -1074,6 +1234,26 @@ spec:
                     description: The domain settings. See domain_settings Block below.
                     items:
                       properties:
+                        dockerSettings:
+                          description: A collection of settings that configure the
+                            domain’s Docker interaction. see docker_settings Block
+                            below.
+                          items:
+                            properties:
+                              enableDockerAccess:
+                                description: Indicates whether the domain can access
+                                  Docker. Valid values are ENABLED and DISABLED.
+                                type: string
+                              vpcOnlyTrustedAccounts:
+                                description: The list of Amazon Web Services accounts
+                                  that are trusted when the domain is created in VPC-only
+                                  mode.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         executionRoleIdentityConfig:
                           description: The configuration for attaching a SageMaker
                             user profile name to the execution role as a sts:SourceIdentity
@@ -1438,9 +1618,124 @@ spec:
                       Block below.
                     items:
                       properties:
+                        customFileSystemConfig:
+                          description: The settings for assigning a custom file system
+                            to a user profile. Permitted users can access this file
+                            system in Amazon SageMaker Studio. See custom_file_system_config
+                            Block below.
+                          items:
+                            properties:
+                              efsFileSystemConfig:
+                                description: The default EBS storage settings for
+                                  a private space. See efs_file_system_config Block
+                                  below.
+                                items:
+                                  properties:
+                                    fileSystemId:
+                                      description: The ID of your Amazon EFS file
+                                        system.
+                                      type: string
+                                    fileSystemPath:
+                                      description: The path to the file system directory
+                                        that is accessible in Amazon SageMaker Studio.
+                                        Permitted users can access only this directory
+                                        and below.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        customPosixUserConfig:
+                          description: Details about the POSIX identity that is used
+                            for file system operations. See custom_posix_user_config
+                            Block below.
+                          items:
+                            properties:
+                              gid:
+                                description: The POSIX group ID.
+                                type: number
+                              uid:
+                                description: The POSIX user ID.
+                                type: number
+                            type: object
+                          type: array
                         executionRole:
                           description: The execution role for the space.
                           type: string
+                        jupyterLabAppSettings:
+                          description: The settings for the JupyterLab application.
+                            See jupyter_lab_app_settings Block below.
+                          items:
+                            properties:
+                              codeRepository:
+                                description: A list of Git repositories that SageMaker
+                                  automatically displays to users for cloning in the
+                                  JupyterServer application. see code_repository Block
+                                  below.
+                                items:
+                                  properties:
+                                    repositoryUrl:
+                                      description: The URL of the Git repository.
+                                      type: string
+                                  type: object
+                                type: array
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a KernelGateway app. see
+                                  custom_image Block below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see default_resource_spec Block
+                                  below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         jupyterServerAppSettings:
                           description: The Jupyter server's app settings. See jupyter_server_app_settings
                             Block below.
@@ -1566,6 +1861,29 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        spaceStorageSettings:
+                          description: The storage settings for a private space. See
+                            space_storage_settings Block below.
+                          items:
+                            properties:
+                              defaultEbsStorageSettings:
+                                description: The default EBS storage settings for
+                                  a private space. See default_ebs_storage_settings
+                                  Block below.
+                                items:
+                                  properties:
+                                    defaultEbsVolumeSizeInGb:
+                                      description: The default size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                    maximumEbsVolumeSizeInGb:
+                                      description: The maximum size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                       type: object
                     type: array
                   defaultUserSettings:
@@ -2374,6 +2692,28 @@ spec:
                             even if that is the default experience for the domain.
                             Valid values are ENABLED and DISABLED.
                           type: string
+                        studioWebPortalSettings:
+                          description: The Studio Web Portal settings. See studio_web_portal_settings
+                            Block below.
+                          items:
+                            properties:
+                              hiddenAppTypes:
+                                description: The Applications supported in Studio
+                                  that are hidden from the Studio left navigation
+                                  pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              hiddenMlTools:
+                                description: The machine learning tools that are hidden
+                                  from the Studio left navigation pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See tensor_board_app_settings
                             Block below.
@@ -2420,6 +2760,26 @@ spec:
                     description: The domain settings. See domain_settings Block below.
                     items:
                       properties:
+                        dockerSettings:
+                          description: A collection of settings that configure the
+                            domain’s Docker interaction. see docker_settings Block
+                            below.
+                          items:
+                            properties:
+                              enableDockerAccess:
+                                description: Indicates whether the domain can access
+                                  Docker. Valid values are ENABLED and DISABLED.
+                                type: string
+                              vpcOnlyTrustedAccounts:
+                                description: The list of Amazon Web Services accounts
+                                  that are trusted when the domain is created in VPC-only
+                                  mode.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         executionRoleIdentityConfig:
                           description: The configuration for attaching a SageMaker
                             user profile name to the execution role as a sts:SourceIdentity
@@ -2954,9 +3314,124 @@ spec:
                       Block below.
                     items:
                       properties:
+                        customFileSystemConfig:
+                          description: The settings for assigning a custom file system
+                            to a user profile. Permitted users can access this file
+                            system in Amazon SageMaker Studio. See custom_file_system_config
+                            Block below.
+                          items:
+                            properties:
+                              efsFileSystemConfig:
+                                description: The default EBS storage settings for
+                                  a private space. See efs_file_system_config Block
+                                  below.
+                                items:
+                                  properties:
+                                    fileSystemId:
+                                      description: The ID of your Amazon EFS file
+                                        system.
+                                      type: string
+                                    fileSystemPath:
+                                      description: The path to the file system directory
+                                        that is accessible in Amazon SageMaker Studio.
+                                        Permitted users can access only this directory
+                                        and below.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        customPosixUserConfig:
+                          description: Details about the POSIX identity that is used
+                            for file system operations. See custom_posix_user_config
+                            Block below.
+                          items:
+                            properties:
+                              gid:
+                                description: The POSIX group ID.
+                                type: number
+                              uid:
+                                description: The POSIX user ID.
+                                type: number
+                            type: object
+                          type: array
                         executionRole:
                           description: The execution role for the space.
                           type: string
+                        jupyterLabAppSettings:
+                          description: The settings for the JupyterLab application.
+                            See jupyter_lab_app_settings Block below.
+                          items:
+                            properties:
+                              codeRepository:
+                                description: A list of Git repositories that SageMaker
+                                  automatically displays to users for cloning in the
+                                  JupyterServer application. see code_repository Block
+                                  below.
+                                items:
+                                  properties:
+                                    repositoryUrl:
+                                      description: The URL of the Git repository.
+                                      type: string
+                                  type: object
+                                type: array
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a KernelGateway app. see
+                                  custom_image Block below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
+                              defaultResourceSpec:
+                                description: The default instance type and the Amazon
+                                  Resource Name (ARN) of the SageMaker image created
+                                  on the instance. see default_resource_spec Block
+                                  below.
+                                items:
+                                  properties:
+                                    instanceType:
+                                      description: The instance type that the image
+                                        version runs on.. For valid values see SageMaker
+                                        Instance Types.
+                                      type: string
+                                    lifecycleConfigArn:
+                                      description: The Amazon Resource Name (ARN)
+                                        of the Lifecycle Configuration attached to
+                                        the Resource.
+                                      type: string
+                                    sagemakerImageArn:
+                                      description: The ARN of the SageMaker image
+                                        that the image version belongs to.
+                                      type: string
+                                    sagemakerImageVersionAlias:
+                                      description: The SageMaker Image Version Alias.
+                                      type: string
+                                    sagemakerImageVersionArn:
+                                      description: The ARN of the image version created
+                                        on the instance.
+                                      type: string
+                                  type: object
+                                type: array
+                              lifecycleConfigArns:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configurations.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         jupyterServerAppSettings:
                           description: The Jupyter server's app settings. See jupyter_server_app_settings
                             Block below.
@@ -3082,6 +3557,29 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        spaceStorageSettings:
+                          description: The storage settings for a private space. See
+                            space_storage_settings Block below.
+                          items:
+                            properties:
+                              defaultEbsStorageSettings:
+                                description: The default EBS storage settings for
+                                  a private space. See default_ebs_storage_settings
+                                  Block below.
+                                items:
+                                  properties:
+                                    defaultEbsVolumeSizeInGb:
+                                      description: The default size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                    maximumEbsVolumeSizeInGb:
+                                      description: The maximum size of the EBS storage
+                                        volume for a private space.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                       type: object
                     type: array
                   defaultUserSettings:
@@ -3664,6 +4162,28 @@ spec:
                             even if that is the default experience for the domain.
                             Valid values are ENABLED and DISABLED.
                           type: string
+                        studioWebPortalSettings:
+                          description: The Studio Web Portal settings. See studio_web_portal_settings
+                            Block below.
+                          items:
+                            properties:
+                              hiddenAppTypes:
+                                description: The Applications supported in Studio
+                                  that are hidden from the Studio left navigation
+                                  pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              hiddenMlTools:
+                                description: The machine learning tools that are hidden
+                                  from the Studio left navigation pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See tensor_board_app_settings
                             Block below.
@@ -3710,6 +4230,26 @@ spec:
                     description: The domain settings. See domain_settings Block below.
                     items:
                       properties:
+                        dockerSettings:
+                          description: A collection of settings that configure the
+                            domain’s Docker interaction. see docker_settings Block
+                            below.
+                          items:
+                            properties:
+                              enableDockerAccess:
+                                description: Indicates whether the domain can access
+                                  Docker. Valid values are ENABLED and DISABLED.
+                                type: string
+                              vpcOnlyTrustedAccounts:
+                                description: The list of Amazon Web Services accounts
+                                  that are trusted when the domain is created in VPC-only
+                                  mode.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         executionRoleIdentityConfig:
                           description: The configuration for attaching a SageMaker
                             user profile name to the execution role as a sts:SourceIdentity
@@ -3974,9 +4514,110 @@ spec:
                     description: The default space settings. See default_space_settings
                       Block below.
                     properties:
+                      customFileSystemConfig:
+                        description: The settings for assigning a custom file system
+                          to a user profile. Permitted users can access this file
+                          system in Amazon SageMaker Studio. See custom_file_system_config
+                          Block below.
+                        items:
+                          properties:
+                            efsFileSystemConfig:
+                              description: The default EBS storage settings for a
+                                private space. See efs_file_system_config Block below.
+                              properties:
+                                fileSystemId:
+                                  description: The ID of your Amazon EFS file system.
+                                  type: string
+                                fileSystemPath:
+                                  description: The path to the file system directory
+                                    that is accessible in Amazon SageMaker Studio.
+                                    Permitted users can access only this directory
+                                    and below.
+                                  type: string
+                              type: object
+                          type: object
+                        type: array
+                      customPosixUserConfig:
+                        description: Details about the POSIX identity that is used
+                          for file system operations. See custom_posix_user_config
+                          Block below.
+                        properties:
+                          gid:
+                            description: The POSIX group ID.
+                            type: number
+                          uid:
+                            description: The POSIX user ID.
+                            type: number
+                        type: object
                       executionRole:
                         description: The execution role for the space.
                         type: string
+                      jupyterLabAppSettings:
+                        description: The settings for the JupyterLab application.
+                          See jupyter_lab_app_settings Block below.
+                        properties:
+                          codeRepository:
+                            description: A list of Git repositories that SageMaker
+                              automatically displays to users for cloning in the JupyterServer
+                              application. see code_repository Block below.
+                            items:
+                              properties:
+                                repositoryUrl:
+                                  description: The URL of the Git repository.
+                                  type: string
+                              type: object
+                            type: array
+                          customImage:
+                            description: A list of custom SageMaker images that are
+                              configured to run as a KernelGateway app. see custom_image
+                              Block below.
+                            items:
+                              properties:
+                                appImageConfigName:
+                                  description: The name of the App Image Config.
+                                  type: string
+                                imageName:
+                                  description: The name of the Custom Image.
+                                  type: string
+                                imageVersionNumber:
+                                  description: The version number of the Custom Image.
+                                  type: number
+                              type: object
+                            type: array
+                          defaultResourceSpec:
+                            description: The default instance type and the Amazon
+                              Resource Name (ARN) of the SageMaker image created on
+                              the instance. see default_resource_spec Block below.
+                            properties:
+                              instanceType:
+                                description: The instance type that the image version
+                                  runs on.. For valid values see SageMaker Instance
+                                  Types.
+                                type: string
+                              lifecycleConfigArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configuration attached to the Resource.
+                                type: string
+                              sagemakerImageArn:
+                                description: The ARN of the SageMaker image that the
+                                  image version belongs to.
+                                type: string
+                              sagemakerImageVersionAlias:
+                                description: The SageMaker Image Version Alias.
+                                type: string
+                              sagemakerImageVersionArn:
+                                description: The ARN of the image version created
+                                  on the instance.
+                                type: string
+                            type: object
+                          lifecycleConfigArns:
+                            description: The Amazon Resource Name (ARN) of the Lifecycle
+                              Configurations.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       jupyterServerAppSettings:
                         description: The Jupyter server's app settings. See jupyter_server_app_settings
                           Block below.
@@ -4088,6 +4729,24 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      spaceStorageSettings:
+                        description: The storage settings for a private space. See
+                          space_storage_settings Block below.
+                        properties:
+                          defaultEbsStorageSettings:
+                            description: The default EBS storage settings for a private
+                              space. See default_ebs_storage_settings Block below.
+                            properties:
+                              defaultEbsVolumeSizeInGb:
+                                description: The default size of the EBS storage volume
+                                  for a private space.
+                                type: number
+                              maximumEbsVolumeSizeInGb:
+                                description: The maximum size of the EBS storage volume
+                                  for a private space.
+                                type: number
+                            type: object
+                        type: object
                     type: object
                   defaultUserSettings:
                     description: The default user settings. See default_user_settings
@@ -4824,6 +5483,25 @@ spec:
                           if that is the default experience for the domain. Valid
                           values are ENABLED and DISABLED.
                         type: string
+                      studioWebPortalSettings:
+                        description: The Studio Web Portal settings. See studio_web_portal_settings
+                          Block below.
+                        properties:
+                          hiddenAppTypes:
+                            description: The Applications supported in Studio that
+                              are hidden from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          hiddenMlTools:
+                            description: The machine learning tools that are hidden
+                              from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       tensorBoardAppSettings:
                         description: The TensorBoard app settings. See tensor_board_app_settings
                           Block below.
@@ -4862,6 +5540,23 @@ spec:
                   domainSettings:
                     description: The domain settings. See domain_settings Block below.
                     properties:
+                      dockerSettings:
+                        description: A collection of settings that configure the domain’s
+                          Docker interaction. see docker_settings Block below.
+                        properties:
+                          enableDockerAccess:
+                            description: Indicates whether the domain can access Docker.
+                              Valid values are ENABLED and DISABLED.
+                            type: string
+                          vpcOnlyTrustedAccounts:
+                            description: The list of Amazon Web Services accounts
+                              that are trusted when the domain is created in VPC-only
+                              mode.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       executionRoleIdentityConfig:
                         description: The configuration for attaching a SageMaker user
                           profile name to the execution role as a sts:SourceIdentity
@@ -5215,9 +5910,110 @@ spec:
                     description: The default space settings. See default_space_settings
                       Block below.
                     properties:
+                      customFileSystemConfig:
+                        description: The settings for assigning a custom file system
+                          to a user profile. Permitted users can access this file
+                          system in Amazon SageMaker Studio. See custom_file_system_config
+                          Block below.
+                        items:
+                          properties:
+                            efsFileSystemConfig:
+                              description: The default EBS storage settings for a
+                                private space. See efs_file_system_config Block below.
+                              properties:
+                                fileSystemId:
+                                  description: The ID of your Amazon EFS file system.
+                                  type: string
+                                fileSystemPath:
+                                  description: The path to the file system directory
+                                    that is accessible in Amazon SageMaker Studio.
+                                    Permitted users can access only this directory
+                                    and below.
+                                  type: string
+                              type: object
+                          type: object
+                        type: array
+                      customPosixUserConfig:
+                        description: Details about the POSIX identity that is used
+                          for file system operations. See custom_posix_user_config
+                          Block below.
+                        properties:
+                          gid:
+                            description: The POSIX group ID.
+                            type: number
+                          uid:
+                            description: The POSIX user ID.
+                            type: number
+                        type: object
                       executionRole:
                         description: The execution role for the space.
                         type: string
+                      jupyterLabAppSettings:
+                        description: The settings for the JupyterLab application.
+                          See jupyter_lab_app_settings Block below.
+                        properties:
+                          codeRepository:
+                            description: A list of Git repositories that SageMaker
+                              automatically displays to users for cloning in the JupyterServer
+                              application. see code_repository Block below.
+                            items:
+                              properties:
+                                repositoryUrl:
+                                  description: The URL of the Git repository.
+                                  type: string
+                              type: object
+                            type: array
+                          customImage:
+                            description: A list of custom SageMaker images that are
+                              configured to run as a KernelGateway app. see custom_image
+                              Block below.
+                            items:
+                              properties:
+                                appImageConfigName:
+                                  description: The name of the App Image Config.
+                                  type: string
+                                imageName:
+                                  description: The name of the Custom Image.
+                                  type: string
+                                imageVersionNumber:
+                                  description: The version number of the Custom Image.
+                                  type: number
+                              type: object
+                            type: array
+                          defaultResourceSpec:
+                            description: The default instance type and the Amazon
+                              Resource Name (ARN) of the SageMaker image created on
+                              the instance. see default_resource_spec Block below.
+                            properties:
+                              instanceType:
+                                description: The instance type that the image version
+                                  runs on.. For valid values see SageMaker Instance
+                                  Types.
+                                type: string
+                              lifecycleConfigArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configuration attached to the Resource.
+                                type: string
+                              sagemakerImageArn:
+                                description: The ARN of the SageMaker image that the
+                                  image version belongs to.
+                                type: string
+                              sagemakerImageVersionAlias:
+                                description: The SageMaker Image Version Alias.
+                                type: string
+                              sagemakerImageVersionArn:
+                                description: The ARN of the image version created
+                                  on the instance.
+                                type: string
+                            type: object
+                          lifecycleConfigArns:
+                            description: The Amazon Resource Name (ARN) of the Lifecycle
+                              Configurations.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       jupyterServerAppSettings:
                         description: The Jupyter server's app settings. See jupyter_server_app_settings
                           Block below.
@@ -5329,6 +6125,24 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      spaceStorageSettings:
+                        description: The storage settings for a private space. See
+                          space_storage_settings Block below.
+                        properties:
+                          defaultEbsStorageSettings:
+                            description: The default EBS storage settings for a private
+                              space. See default_ebs_storage_settings Block below.
+                            properties:
+                              defaultEbsVolumeSizeInGb:
+                                description: The default size of the EBS storage volume
+                                  for a private space.
+                                type: number
+                              maximumEbsVolumeSizeInGb:
+                                description: The maximum size of the EBS storage volume
+                                  for a private space.
+                                type: number
+                            type: object
+                        type: object
                     type: object
                   defaultUserSettings:
                     description: The default user settings. See default_user_settings
@@ -6065,6 +6879,25 @@ spec:
                           if that is the default experience for the domain. Valid
                           values are ENABLED and DISABLED.
                         type: string
+                      studioWebPortalSettings:
+                        description: The Studio Web Portal settings. See studio_web_portal_settings
+                          Block below.
+                        properties:
+                          hiddenAppTypes:
+                            description: The Applications supported in Studio that
+                              are hidden from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          hiddenMlTools:
+                            description: The machine learning tools that are hidden
+                              from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       tensorBoardAppSettings:
                         description: The TensorBoard app settings. See tensor_board_app_settings
                           Block below.
@@ -6103,6 +6936,23 @@ spec:
                   domainSettings:
                     description: The domain settings. See domain_settings Block below.
                     properties:
+                      dockerSettings:
+                        description: A collection of settings that configure the domain’s
+                          Docker interaction. see docker_settings Block below.
+                        properties:
+                          enableDockerAccess:
+                            description: Indicates whether the domain can access Docker.
+                              Valid values are ENABLED and DISABLED.
+                            type: string
+                          vpcOnlyTrustedAccounts:
+                            description: The list of Amazon Web Services accounts
+                              that are trusted when the domain is created in VPC-only
+                              mode.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       executionRoleIdentityConfig:
                         description: The configuration for attaching a SageMaker user
                           profile name to the execution role as a sts:SourceIdentity
@@ -6626,9 +7476,110 @@ spec:
                     description: The default space settings. See default_space_settings
                       Block below.
                     properties:
+                      customFileSystemConfig:
+                        description: The settings for assigning a custom file system
+                          to a user profile. Permitted users can access this file
+                          system in Amazon SageMaker Studio. See custom_file_system_config
+                          Block below.
+                        items:
+                          properties:
+                            efsFileSystemConfig:
+                              description: The default EBS storage settings for a
+                                private space. See efs_file_system_config Block below.
+                              properties:
+                                fileSystemId:
+                                  description: The ID of your Amazon EFS file system.
+                                  type: string
+                                fileSystemPath:
+                                  description: The path to the file system directory
+                                    that is accessible in Amazon SageMaker Studio.
+                                    Permitted users can access only this directory
+                                    and below.
+                                  type: string
+                              type: object
+                          type: object
+                        type: array
+                      customPosixUserConfig:
+                        description: Details about the POSIX identity that is used
+                          for file system operations. See custom_posix_user_config
+                          Block below.
+                        properties:
+                          gid:
+                            description: The POSIX group ID.
+                            type: number
+                          uid:
+                            description: The POSIX user ID.
+                            type: number
+                        type: object
                       executionRole:
                         description: The execution role for the space.
                         type: string
+                      jupyterLabAppSettings:
+                        description: The settings for the JupyterLab application.
+                          See jupyter_lab_app_settings Block below.
+                        properties:
+                          codeRepository:
+                            description: A list of Git repositories that SageMaker
+                              automatically displays to users for cloning in the JupyterServer
+                              application. see code_repository Block below.
+                            items:
+                              properties:
+                                repositoryUrl:
+                                  description: The URL of the Git repository.
+                                  type: string
+                              type: object
+                            type: array
+                          customImage:
+                            description: A list of custom SageMaker images that are
+                              configured to run as a KernelGateway app. see custom_image
+                              Block below.
+                            items:
+                              properties:
+                                appImageConfigName:
+                                  description: The name of the App Image Config.
+                                  type: string
+                                imageName:
+                                  description: The name of the Custom Image.
+                                  type: string
+                                imageVersionNumber:
+                                  description: The version number of the Custom Image.
+                                  type: number
+                              type: object
+                            type: array
+                          defaultResourceSpec:
+                            description: The default instance type and the Amazon
+                              Resource Name (ARN) of the SageMaker image created on
+                              the instance. see default_resource_spec Block below.
+                            properties:
+                              instanceType:
+                                description: The instance type that the image version
+                                  runs on.. For valid values see SageMaker Instance
+                                  Types.
+                                type: string
+                              lifecycleConfigArn:
+                                description: The Amazon Resource Name (ARN) of the
+                                  Lifecycle Configuration attached to the Resource.
+                                type: string
+                              sagemakerImageArn:
+                                description: The ARN of the SageMaker image that the
+                                  image version belongs to.
+                                type: string
+                              sagemakerImageVersionAlias:
+                                description: The SageMaker Image Version Alias.
+                                type: string
+                              sagemakerImageVersionArn:
+                                description: The ARN of the image version created
+                                  on the instance.
+                                type: string
+                            type: object
+                          lifecycleConfigArns:
+                            description: The Amazon Resource Name (ARN) of the Lifecycle
+                              Configurations.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       jupyterServerAppSettings:
                         description: The Jupyter server's app settings. See jupyter_server_app_settings
                           Block below.
@@ -6740,6 +7691,24 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      spaceStorageSettings:
+                        description: The storage settings for a private space. See
+                          space_storage_settings Block below.
+                        properties:
+                          defaultEbsStorageSettings:
+                            description: The default EBS storage settings for a private
+                              space. See default_ebs_storage_settings Block below.
+                            properties:
+                              defaultEbsVolumeSizeInGb:
+                                description: The default size of the EBS storage volume
+                                  for a private space.
+                                type: number
+                              maximumEbsVolumeSizeInGb:
+                                description: The maximum size of the EBS storage volume
+                                  for a private space.
+                                type: number
+                            type: object
+                        type: object
                     type: object
                   defaultUserSettings:
                     description: The default user settings. See default_user_settings
@@ -7250,6 +8219,25 @@ spec:
                           if that is the default experience for the domain. Valid
                           values are ENABLED and DISABLED.
                         type: string
+                      studioWebPortalSettings:
+                        description: The Studio Web Portal settings. See studio_web_portal_settings
+                          Block below.
+                        properties:
+                          hiddenAppTypes:
+                            description: The Applications supported in Studio that
+                              are hidden from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          hiddenMlTools:
+                            description: The machine learning tools that are hidden
+                              from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       tensorBoardAppSettings:
                         description: The TensorBoard app settings. See tensor_board_app_settings
                           Block below.
@@ -7288,6 +8276,23 @@ spec:
                   domainSettings:
                     description: The domain settings. See domain_settings Block below.
                     properties:
+                      dockerSettings:
+                        description: A collection of settings that configure the domain’s
+                          Docker interaction. see docker_settings Block below.
+                        properties:
+                          enableDockerAccess:
+                            description: Indicates whether the domain can access Docker.
+                              Valid values are ENABLED and DISABLED.
+                            type: string
+                          vpcOnlyTrustedAccounts:
+                            description: The list of Amazon Web Services accounts
+                              that are trusted when the domain is created in VPC-only
+                              mode.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       executionRoleIdentityConfig:
                         description: The configuration for attaching a SageMaker user
                           profile name to the execution role as a sts:SourceIdentity

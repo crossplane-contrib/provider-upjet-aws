@@ -117,6 +117,11 @@ spec:
                       uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
+                  backupTarget:
+                    description: Specifies where automated backups and manual snapshots
+                      are stored. Possible values are region (default) and outposts.
+                      See Working with Amazon RDS on AWS Outposts for more information.
+                    type: string
                   backupWindow:
                     description: |-
                       The daily time range (in UTC) during which automated backups are created if they are enabled.
@@ -251,6 +256,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  dedicatedLogVolume:
+                    description: Use a dedicated log volume (DLV) for the DB instance.
+                      Requires Provisioned IOPS. See the AWS documentation for more
+                      details.
+                    type: boolean
                   deleteAutomatedBackups:
                     description: Specifies whether to remove automated backups immediately
                       after the DB instance is deleted. Default is true.
@@ -264,9 +274,33 @@ spec:
                     description: The ID of the Directory Service Active Directory
                       domain to create the instance in.
                     type: string
+                  domainAuthSecretArn:
+                    description: The ARN for the Secrets Manager secret with the self
+                      managed Active Directory credentials for the user joining the
+                      domain. Conflicts with domain and domain_iam_role_name.
+                    type: string
+                  domainDnsIps:
+                    description: The IPv4 DNS IP addresses of your primary and secondary
+                      self managed Active Directory domain controllers. Two IP addresses
+                      must be provided. If there isn't a secondary domain controller,
+                      use the IP address of the primary domain controller for both
+                      entries in the list. Conflicts with domain and domain_iam_role_name.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  domainFqdn:
+                    description: The fully qualified domain name (FQDN) of the self
+                      managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+                    type: string
                   domainIamRoleName:
                     description: The name of the IAM role to be used when making API
                       calls to the Directory Service.
+                    type: string
+                  domainOu:
+                    description: The self managed Active Directory organizational
+                      unit for your DB instance to join. Conflicts with domain and
+                      domain_iam_role_name.
                     type: string
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to enable for exporting to CloudWatch
@@ -286,6 +320,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -309,6 +350,13 @@ spec:
                       Specifies whether mappings of AWS Identity and Access Management (IAM) accounts to database
                       accounts is enabled.
                     type: boolean
+                  identifier:
+                    description: Required if restore_to_point_in_time is specified.
+                    type: string
+                  identifierPrefix:
+                    description: Creates a unique identifier beginning with the specified
+                      prefix. Conflicts with identifier.
+                    type: string
                   instanceClass:
                     description: The instance type of the RDS instance.
                     type: string
@@ -619,6 +667,82 @@ spec:
                       Name of the DB parameter group to
                       associate.
                     type: string
+                  parameterGroupNameRef:
+                    description: Reference to a ParameterGroup in rds to populate
+                      parameterGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  parameterGroupNameSelector:
+                    description: Selector for a ParameterGroup in rds to populate
+                      parameterGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   passwordSecretRef:
                     description: |-
                       Password for the master DB user. Note that this may show up in
@@ -873,6 +997,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -1017,6 +1145,11 @@ spec:
                       uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
+                  backupTarget:
+                    description: Specifies where automated backups and manual snapshots
+                      are stored. Possible values are region (default) and outposts.
+                      See Working with Amazon RDS on AWS Outposts for more information.
+                    type: string
                   backupWindow:
                     description: |-
                       The daily time range (in UTC) during which automated backups are created if they are enabled.
@@ -1151,6 +1284,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  dedicatedLogVolume:
+                    description: Use a dedicated log volume (DLV) for the DB instance.
+                      Requires Provisioned IOPS. See the AWS documentation for more
+                      details.
+                    type: boolean
                   deleteAutomatedBackups:
                     description: Specifies whether to remove automated backups immediately
                       after the DB instance is deleted. Default is true.
@@ -1164,9 +1302,33 @@ spec:
                     description: The ID of the Directory Service Active Directory
                       domain to create the instance in.
                     type: string
+                  domainAuthSecretArn:
+                    description: The ARN for the Secrets Manager secret with the self
+                      managed Active Directory credentials for the user joining the
+                      domain. Conflicts with domain and domain_iam_role_name.
+                    type: string
+                  domainDnsIps:
+                    description: The IPv4 DNS IP addresses of your primary and secondary
+                      self managed Active Directory domain controllers. Two IP addresses
+                      must be provided. If there isn't a secondary domain controller,
+                      use the IP address of the primary domain controller for both
+                      entries in the list. Conflicts with domain and domain_iam_role_name.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  domainFqdn:
+                    description: The fully qualified domain name (FQDN) of the self
+                      managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+                    type: string
                   domainIamRoleName:
                     description: The name of the IAM role to be used when making API
                       calls to the Directory Service.
+                    type: string
+                  domainOu:
+                    description: The self managed Active Directory organizational
+                      unit for your DB instance to join. Conflicts with domain and
+                      domain_iam_role_name.
                     type: string
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to enable for exporting to CloudWatch
@@ -1186,6 +1348,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -1209,6 +1378,13 @@ spec:
                       Specifies whether mappings of AWS Identity and Access Management (IAM) accounts to database
                       accounts is enabled.
                     type: boolean
+                  identifier:
+                    description: Required if restore_to_point_in_time is specified.
+                    type: string
+                  identifierPrefix:
+                    description: Creates a unique identifier beginning with the specified
+                      prefix. Conflicts with identifier.
+                    type: string
                   instanceClass:
                     description: The instance type of the RDS instance.
                     type: string
@@ -1519,6 +1695,102 @@ spec:
                       Name of the DB parameter group to
                       associate.
                     type: string
+                  parameterGroupNameRef:
+                    description: Reference to a ParameterGroup in rds to populate
+                      parameterGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  parameterGroupNameSelector:
+                    description: Selector for a ParameterGroup in rds to populate
+                      parameterGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  passwordSecretRef:
+                    description: |-
+                      Password for the master DB user. Note that this may show up in
+                      logs, and it will be stored in the state file. Cannot be set if manage_master_user_password is set to true.
+                      Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   performanceInsightsEnabled:
                     description: Specifies whether Performance Insights are enabled.
                       Defaults to false.
@@ -1749,6 +2021,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -2062,6 +2338,11 @@ spec:
                       uses low-downtime updates,
                       or will use RDS Blue/Green deployments.
                     type: number
+                  backupTarget:
+                    description: Specifies where automated backups and manual snapshots
+                      are stored. Possible values are region (default) and outposts.
+                      See Working with Amazon RDS on AWS Outposts for more information.
+                    type: string
                   backupWindow:
                     description: |-
                       The daily time range (in UTC) during which automated backups are created if they are enabled.
@@ -2122,6 +2403,11 @@ spec:
                       action CreateDBInstanceReadReplica
                       for additional read replica contraints.
                     type: string
+                  dedicatedLogVolume:
+                    description: Use a dedicated log volume (DLV) for the DB instance.
+                      Requires Provisioned IOPS. See the AWS documentation for more
+                      details.
+                    type: boolean
                   deleteAutomatedBackups:
                     description: Specifies whether to remove automated backups immediately
                       after the DB instance is deleted. Default is true.
@@ -2135,9 +2421,33 @@ spec:
                     description: The ID of the Directory Service Active Directory
                       domain to create the instance in.
                     type: string
+                  domainAuthSecretArn:
+                    description: The ARN for the Secrets Manager secret with the self
+                      managed Active Directory credentials for the user joining the
+                      domain. Conflicts with domain and domain_iam_role_name.
+                    type: string
+                  domainDnsIps:
+                    description: The IPv4 DNS IP addresses of your primary and secondary
+                      self managed Active Directory domain controllers. Two IP addresses
+                      must be provided. If there isn't a secondary domain controller,
+                      use the IP address of the primary domain controller for both
+                      entries in the list. Conflicts with domain and domain_iam_role_name.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  domainFqdn:
+                    description: The fully qualified domain name (FQDN) of the self
+                      managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
+                    type: string
                   domainIamRoleName:
                     description: The name of the IAM role to be used when making API
                       calls to the Directory Service.
+                    type: string
+                  domainOu:
+                    description: The self managed Active Directory organizational
+                      unit for your DB instance to join. Conflicts with domain and
+                      domain_iam_role_name.
                     type: string
                   enabledCloudwatchLogsExports:
                     description: 'Set of log types to enable for exporting to CloudWatch
@@ -2160,6 +2470,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -2193,6 +2510,13 @@ spec:
                     type: boolean
                   id:
                     description: The RDS instance ID.
+                    type: string
+                  identifier:
+                    description: Required if restore_to_point_in_time is specified.
+                    type: string
+                  identifierPrefix:
+                    description: Creates a unique identifier beginning with the specified
+                      prefix. Conflicts with identifier.
                     type: string
                   instanceClass:
                     description: The instance type of the RDS instance.
@@ -2498,6 +2822,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -2877,6 +3205,13 @@ spec:
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
                     type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
+                    type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
                       is enabled, you can provide a prefix of the version such as
@@ -3528,6 +3863,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -3877,6 +4216,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -4525,6 +4871,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -4973,6 +5323,13 @@ spec:
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
                     type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
+                    type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
                       is enabled, you can provide a prefix of the version such as
@@ -5299,6 +5656,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -5643,7 +6004,6 @@ spec:
                     items:
                       type: string
                     type: array
-                    x-kubernetes-list-type: set
                   domainFqdn:
                     description: The fully qualified domain name (FQDN) of the self
                       managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -5675,6 +6035,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -5711,7 +6078,7 @@ spec:
                   iops:
                     description: |-
                       The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
                       Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
@@ -6306,8 +6673,8 @@ spec:
                     description: |-
                       One of "standard" (magnetic), "gp2" (general
                       purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-                      "gp2" if not.
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+                      SSD). The default is "io1" if iops is specified, "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -6323,6 +6690,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -6638,7 +7009,6 @@ spec:
                     items:
                       type: string
                     type: array
-                    x-kubernetes-list-type: set
                   domainFqdn:
                     description: The fully qualified domain name (FQDN) of the self
                       managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -6670,6 +7040,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -6706,7 +7083,7 @@ spec:
                   iops:
                     description: |-
                       The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
                       Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
@@ -7297,8 +7674,8 @@ spec:
                     description: |-
                       One of "standard" (magnetic), "gp2" (general
                       purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-                      "gp2" if not.
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+                      SSD). The default is "io1" if iops is specified, "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -7314,6 +7691,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.
@@ -7724,7 +8105,6 @@ spec:
                     items:
                       type: string
                     type: array
-                    x-kubernetes-list-type: set
                   domainFqdn:
                     description: The fully qualified domain name (FQDN) of the self
                       managed Active Directory domain. Conflicts with domain and domain_iam_role_name.
@@ -7759,6 +8139,13 @@ spec:
                       engine'. For information on the difference between the available
                       Aurora MySQL engines see Comparison in the [Amazon RDS Release
                       Notes](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraMySQLReleaseNotes/Welcome.html).
+                    type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      applies only to RDS for MySQL and RDS for PostgreSQL. Valid
+                      values are open-source-rds-extended-support, open-source-rds-extended-support-disabled.
+                      Default value is open-source-rds-extended-support. [Using Amazon
+                      RDS Extended Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
                     type: string
                   engineVersion:
                     description: The engine version to use. If `autoMinorVersionUpgrade`
@@ -7806,7 +8193,7 @@ spec:
                   iops:
                     description: |-
                       The amount of provisioned IOPS. Setting this implies a
-                      storage_type of "io1". Can only be set when storage_type is "io1" or "gp3".
+                      storage_type of "io1" or "io2". Can only be set when storage_type is "io1", "io2 or "gp3".
                       Cannot be specified for gp3 storage if the allocated_storage value is below a per-engine threshold.
                       See the RDS User Guide for details.
                     type: number
@@ -8057,8 +8444,8 @@ spec:
                     description: |-
                       One of "standard" (magnetic), "gp2" (general
                       purpose SSD), "gp3" (general purpose SSD that needs iops independently)
-                      or "io1" (provisioned IOPS SSD). The default is "io1" if iops is specified,
-                      "gp2" if not.
+                      "io1" (provisioned IOPS SSD) or "io2" (block express storage provisioned IOPS
+                      SSD). The default is "io1" if iops is specified, "gp2" if not.
                     type: string
                   tags:
                     additionalProperties:
@@ -8082,6 +8469,10 @@ spec:
                       Guide
                       for more information.
                     type: string
+                  upgradeStorageConfig:
+                    description: Whether to upgrade the storage file system configuration
+                      on the read replica. Can only be set with replicate_source_db.
+                    type: boolean
                   username:
                     description: Username for the master DB user. Cannot be specified
                       for a replica.

@@ -657,7 +657,7 @@ spec:
               forProvider:
                 properties:
                   csvClassifier:
-                    description: A classifier for Csv content. Defined below.
+                    description: A classifier for CSV content. Defined below.
                     properties:
                       allowSingleColumn:
                         description: Enables the processing of files that contain
@@ -678,7 +678,7 @@ spec:
                           type: string
                         type: array
                       delimiter:
-                        description: The delimiter used in the Csv to separate columns.
+                        description: The delimiter used in the CSV to separate columns.
                         type: string
                       disableValueTrimming:
                         description: Specifies whether to trim column values.
@@ -694,6 +694,8 @@ spec:
                           column delimiter.
                         type: string
                       serde:
+                        description: –  The SerDe for processing CSV. Valid values
+                          are OpenCSVSerDe, LazySimpleSerDe, None.
                         type: string
                     type: object
                   grokClassifier:
@@ -759,7 +761,7 @@ spec:
                   autoscaler.
                 properties:
                   csvClassifier:
-                    description: A classifier for Csv content. Defined below.
+                    description: A classifier for CSV content. Defined below.
                     properties:
                       allowSingleColumn:
                         description: Enables the processing of files that contain
@@ -780,7 +782,7 @@ spec:
                           type: string
                         type: array
                       delimiter:
-                        description: The delimiter used in the Csv to separate columns.
+                        description: The delimiter used in the CSV to separate columns.
                         type: string
                       disableValueTrimming:
                         description: Specifies whether to trim column values.
@@ -796,6 +798,8 @@ spec:
                           column delimiter.
                         type: string
                       serde:
+                        description: –  The SerDe for processing CSV. Valid values
+                          are OpenCSVSerDe, LazySimpleSerDe, None.
                         type: string
                     type: object
                   grokClassifier:
@@ -1014,7 +1018,7 @@ spec:
               atProvider:
                 properties:
                   csvClassifier:
-                    description: A classifier for Csv content. Defined below.
+                    description: A classifier for CSV content. Defined below.
                     properties:
                       allowSingleColumn:
                         description: Enables the processing of files that contain
@@ -1035,7 +1039,7 @@ spec:
                           type: string
                         type: array
                       delimiter:
-                        description: The delimiter used in the Csv to separate columns.
+                        description: The delimiter used in the CSV to separate columns.
                         type: string
                       disableValueTrimming:
                         description: Specifies whether to trim column values.
@@ -1051,6 +1055,8 @@ spec:
                           column delimiter.
                         type: string
                       serde:
+                        description: –  The SerDe for processing CSV. Valid values
+                          are OpenCSVSerDe, LazySimpleSerDe, None.
                         type: string
                     type: object
                   grokClassifier:

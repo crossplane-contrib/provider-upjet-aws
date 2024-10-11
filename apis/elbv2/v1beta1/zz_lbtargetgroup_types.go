@@ -13,6 +13,35 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSFailoverInitParameters struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, mark the zone as unhealthy in DNS, so that traffic is routed only to healthy zones. The possible values are off or an integer from 1 to the maximum number of targets. The default is off.
+	MinimumHealthyTargetsCount *string `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, mark the zone as unhealthy in DNS, so that traffic is routed only to healthy zones. The possible values are off or an integer from 1 to 100. The default is off.
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
+}
+
+type DNSFailoverObservation struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, mark the zone as unhealthy in DNS, so that traffic is routed only to healthy zones. The possible values are off or an integer from 1 to the maximum number of targets. The default is off.
+	MinimumHealthyTargetsCount *string `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, mark the zone as unhealthy in DNS, so that traffic is routed only to healthy zones. The possible values are off or an integer from 1 to 100. The default is off.
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
+}
+
+type DNSFailoverParameters struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, mark the zone as unhealthy in DNS, so that traffic is routed only to healthy zones. The possible values are off or an integer from 1 to the maximum number of targets. The default is off.
+	// +kubebuilder:validation:Optional
+	MinimumHealthyTargetsCount *string `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, mark the zone as unhealthy in DNS, so that traffic is routed only to healthy zones. The possible values are off or an integer from 1 to 100. The default is off.
+	// +kubebuilder:validation:Optional
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
+}
+
 type HealthCheckInitParameters struct {
 
 	// Whether health checks are enabled. Defaults to true.
@@ -190,6 +219,9 @@ type LBTargetGroupInitParameters struct {
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
 	TargetFailover []TargetFailoverInitParameters `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
 
+	// Target health requirements block. See target_group_health for more information.
+	TargetGroupHealth []TargetGroupHealthInitParameters `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
+
 	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
 	TargetHealthState []TargetHealthStateInitParameters `json:"targetHealthState,omitempty" tf:"target_health_state,omitempty"`
 
@@ -288,6 +320,9 @@ type LBTargetGroupObservation struct {
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
 	TargetFailover []TargetFailoverObservation `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
 
+	// Target health requirements block. See target_group_health for more information.
+	TargetGroupHealth []TargetGroupHealthObservation `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
+
 	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
 	TargetHealthState []TargetHealthStateObservation `json:"targetHealthState,omitempty" tf:"target_health_state,omitempty"`
 
@@ -382,6 +417,10 @@ type LBTargetGroupParameters struct {
 	// Target failover block. Only applicable for Gateway Load Balancer target groups. See target_failover for more information.
 	// +kubebuilder:validation:Optional
 	TargetFailover []TargetFailoverParameters `json:"targetFailover,omitempty" tf:"target_failover,omitempty"`
+
+	// Target health requirements block. See target_group_health for more information.
+	// +kubebuilder:validation:Optional
+	TargetGroupHealth []TargetGroupHealthParameters `json:"targetGroupHealth,omitempty" tf:"target_group_health,omitempty"`
 
 	// Target health state block. Only applicable for Network Load Balancer target groups when protocol is TCP or TLS. See target_health_state for more information.
 	// +kubebuilder:validation:Optional
@@ -485,16 +524,51 @@ type TargetFailoverParameters struct {
 	OnUnhealthy *string `json:"onUnhealthy" tf:"on_unhealthy,omitempty"`
 }
 
+type TargetGroupHealthInitParameters struct {
+
+	// Block to configure DNS Failover requirements. See DNS Failover below for details on attributes.
+	DNSFailover []DNSFailoverInitParameters `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
+
+	// Block to configure Unhealthy State Routing requirements. See Unhealthy State Routing below for details on attributes.
+	UnhealthyStateRouting []UnhealthyStateRoutingInitParameters `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
+}
+
+type TargetGroupHealthObservation struct {
+
+	// Block to configure DNS Failover requirements. See DNS Failover below for details on attributes.
+	DNSFailover []DNSFailoverObservation `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
+
+	// Block to configure Unhealthy State Routing requirements. See Unhealthy State Routing below for details on attributes.
+	UnhealthyStateRouting []UnhealthyStateRoutingObservation `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
+}
+
+type TargetGroupHealthParameters struct {
+
+	// Block to configure DNS Failover requirements. See DNS Failover below for details on attributes.
+	// +kubebuilder:validation:Optional
+	DNSFailover []DNSFailoverParameters `json:"dnsFailover,omitempty" tf:"dns_failover,omitempty"`
+
+	// Block to configure Unhealthy State Routing requirements. See Unhealthy State Routing below for details on attributes.
+	// +kubebuilder:validation:Optional
+	UnhealthyStateRouting []UnhealthyStateRoutingParameters `json:"unhealthyStateRouting,omitempty" tf:"unhealthy_state_routing,omitempty"`
+}
+
 type TargetHealthStateInitParameters struct {
 
 	// Indicates whether the load balancer terminates connections to unhealthy targets. Possible values are true or false. Default: true.
 	EnableUnhealthyConnectionTermination *bool `json:"enableUnhealthyConnectionTermination,omitempty" tf:"enable_unhealthy_connection_termination,omitempty"`
+
+	// Indicates the time to wait for in-flight requests to complete when a target becomes unhealthy. The range is 0-360000. This value has to be set only if enable_unhealthy_connection_termination is set to false. Default: 0.
+	UnhealthyDrainingInterval *float64 `json:"unhealthyDrainingInterval,omitempty" tf:"unhealthy_draining_interval,omitempty"`
 }
 
 type TargetHealthStateObservation struct {
 
 	// Indicates whether the load balancer terminates connections to unhealthy targets. Possible values are true or false. Default: true.
 	EnableUnhealthyConnectionTermination *bool `json:"enableUnhealthyConnectionTermination,omitempty" tf:"enable_unhealthy_connection_termination,omitempty"`
+
+	// Indicates the time to wait for in-flight requests to complete when a target becomes unhealthy. The range is 0-360000. This value has to be set only if enable_unhealthy_connection_termination is set to false. Default: 0.
+	UnhealthyDrainingInterval *float64 `json:"unhealthyDrainingInterval,omitempty" tf:"unhealthy_draining_interval,omitempty"`
 }
 
 type TargetHealthStateParameters struct {
@@ -502,6 +576,10 @@ type TargetHealthStateParameters struct {
 	// Indicates whether the load balancer terminates connections to unhealthy targets. Possible values are true or false. Default: true.
 	// +kubebuilder:validation:Optional
 	EnableUnhealthyConnectionTermination *bool `json:"enableUnhealthyConnectionTermination" tf:"enable_unhealthy_connection_termination,omitempty"`
+
+	// Indicates the time to wait for in-flight requests to complete when a target becomes unhealthy. The range is 0-360000. This value has to be set only if enable_unhealthy_connection_termination is set to false. Default: 0.
+	// +kubebuilder:validation:Optional
+	UnhealthyDrainingInterval *float64 `json:"unhealthyDrainingInterval,omitempty" tf:"unhealthy_draining_interval,omitempty"`
 }
 
 // LBTargetGroupSpec defines the desired state of LBTargetGroup
@@ -564,4 +642,33 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&LBTargetGroup{}, &LBTargetGroupList{})
+}
+
+type UnhealthyStateRoutingInitParameters struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
+	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
+}
+
+type UnhealthyStateRoutingObservation struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
+	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
+}
+
+type UnhealthyStateRoutingParameters struct {
+
+	// The minimum number of targets that must be healthy. If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are 1 to the maximum number of targets. The default is 1.
+	// +kubebuilder:validation:Optional
+	MinimumHealthyTargetsCount *float64 `json:"minimumHealthyTargetsCount,omitempty" tf:"minimum_healthy_targets_count,omitempty"`
+
+	// The minimum percentage of targets that must be healthy. If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets. The possible values are off or an integer from 1 to 100. The default is off.
+	// +kubebuilder:validation:Optional
+	MinimumHealthyTargetsPercentage *string `json:"minimumHealthyTargetsPercentage,omitempty" tf:"minimum_healthy_targets_percentage,omitempty"`
 }

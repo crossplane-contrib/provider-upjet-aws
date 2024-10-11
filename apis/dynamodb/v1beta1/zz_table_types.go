@@ -445,6 +445,9 @@ type TableInitParameters struct {
 	// Name of the table to restore. Must match the name of an existing table.
 	RestoreSourceName *string `json:"restoreSourceName,omitempty" tf:"restore_source_name,omitempty"`
 
+	// ARN of the source table to restore. Must be supplied for cross-region restores.
+	RestoreSourceTableArn *string `json:"restoreSourceTableArn,omitempty" tf:"restore_source_table_arn,omitempty"`
+
 	// If set, restores table to the most recent point-in-time recovery point.
 	RestoreToLatestTime *bool `json:"restoreToLatestTime,omitempty" tf:"restore_to_latest_time,omitempty"`
 
@@ -519,6 +522,9 @@ type TableObservation struct {
 
 	// Name of the table to restore. Must match the name of an existing table.
 	RestoreSourceName *string `json:"restoreSourceName,omitempty" tf:"restore_source_name,omitempty"`
+
+	// ARN of the source table to restore. Must be supplied for cross-region restores.
+	RestoreSourceTableArn *string `json:"restoreSourceTableArn,omitempty" tf:"restore_source_table_arn,omitempty"`
 
 	// If set, restores table to the most recent point-in-time recovery point.
 	RestoreToLatestTime *bool `json:"restoreToLatestTime,omitempty" tf:"restore_to_latest_time,omitempty"`
@@ -616,6 +622,10 @@ type TableParameters struct {
 	// Name of the table to restore. Must match the name of an existing table.
 	// +kubebuilder:validation:Optional
 	RestoreSourceName *string `json:"restoreSourceName,omitempty" tf:"restore_source_name,omitempty"`
+
+	// ARN of the source table to restore. Must be supplied for cross-region restores.
+	// +kubebuilder:validation:Optional
+	RestoreSourceTableArn *string `json:"restoreSourceTableArn,omitempty" tf:"restore_source_table_arn,omitempty"`
 
 	// If set, restores table to the most recent point-in-time recovery point.
 	// +kubebuilder:validation:Optional

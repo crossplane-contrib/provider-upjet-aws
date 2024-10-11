@@ -1922,6 +1922,10 @@ spec:
                     description: Domain-specific endpoint for Dashboard without https
                       scheme.
                     type: string
+                  dashboardEndpointV2:
+                    description: V2 domain endpoint for Dashboard that works with
+                      both IPv4 and IPv6 addresses, without https scheme.
+                    type: string
                   domainEndpointOptions:
                     description: Configuration block for domain endpoint HTTP(S) related
                       options. Detailed below.
@@ -1948,6 +1952,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  domainEndpointV2HostedZoneId:
+                    description: Dual stack hosted zone ID for the domain.
+                    type: string
                   domainId:
                     description: Unique identifier for the domain.
                     type: string
@@ -2005,6 +2012,11 @@ spec:
                   endpoint:
                     description: Domain-specific endpoint used to submit index, search,
                       and data upload requests.
+                    type: string
+                  endpointV2:
+                    description: V2 domain endpoint that works with both IPv4 and
+                      IPv6 addresses, used to submit index, search, and data upload
+                      requests.
                     type: string
                   engineVersion:
                     description: while Elasticsearch has elasticsearch_version
@@ -4021,6 +4033,10 @@ spec:
                     description: Domain-specific endpoint for Dashboard without https
                       scheme.
                     type: string
+                  dashboardEndpointV2:
+                    description: V2 domain endpoint for Dashboard that works with
+                      both IPv4 and IPv6 addresses, without https scheme.
+                    type: string
                   domainEndpointOptions:
                     description: Configuration block for domain endpoint HTTP(S) related
                       options. Detailed below.
@@ -4045,6 +4061,9 @@ spec:
                           to the AWS documentation.
                         type: string
                     type: object
+                  domainEndpointV2HostedZoneId:
+                    description: Dual stack hosted zone ID for the domain.
+                    type: string
                   domainId:
                     description: Unique identifier for the domain.
                     type: string
@@ -4098,6 +4117,11 @@ spec:
                   endpoint:
                     description: Domain-specific endpoint used to submit index, search,
                       and data upload requests.
+                    type: string
+                  endpointV2:
+                    description: V2 domain endpoint that works with both IPv4 and
+                      IPv6 addresses, used to submit index, search, and data upload
+                      requests.
                     type: string
                   engineVersion:
                     description: while Elasticsearch has elasticsearch_version

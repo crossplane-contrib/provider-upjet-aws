@@ -1985,6 +1985,27 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        secretsManagerConfiguration:
+                          description: The Secret Manager Configuration. See secrets_manager_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         url:
                           description: The HTTP endpoint URL to which Kinesis Firehose
                             sends your data.
@@ -3226,7 +3247,8 @@ spec:
                             that the s3 bucket will copy to.
                           type: string
                         passwordSecretRef:
-                          description: The password for the username above.
+                          description: The password for the username above. This value
+                            is required if secrets_manager_configuration is not provided.
                           properties:
                             key:
                               description: The key to select.
@@ -3832,6 +3854,28 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         username:
                           description: The username that the firehose delivery stream
                             will assume. It is strongly recommended that the username
@@ -3874,6 +3918,16 @@ spec:
                           description: 'The URL of the Snowflake account. Format:
                             https://[account_identifier].snowflakecomputing.com.'
                           type: string
+                        bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 0 to 900, before delivering
+                            it to the destination.  The default value is 0s.
+                          type: number
+                        bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 to 128, before delivering it to the destination.  The
+                            default value is 1MB.
+                          type: number
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. See cloudwatch_logging_options block below for
@@ -3924,7 +3978,8 @@ spec:
                           description: The name of the metadata column.
                           type: string
                         privateKeySecretRef:
-                          description: The private key for authentication.
+                          description: The private key for authentication. This value
+                            is required if secrets_manager_configuration is not provided.
                           properties:
                             key:
                               description: The key to select.
@@ -4306,6 +4361,28 @@ spec:
                         schema:
                           description: The Snowflake schema name.
                           type: string
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         snowflakeRoleConfiguration:
                           description: The configuration for Snowflake role.
                           items:
@@ -4387,7 +4464,8 @@ spec:
                           type: string
                         hecTokenSecretRef:
                           description: The GUID that you obtain from your Splunk cluster
-                            when you create a new HEC endpoint.
+                            when you create a new HEC endpoint. This value is required
+                            if secrets_manager_configuration is not provided.
                           properties:
                             key:
                               description: The key to select.
@@ -4689,6 +4767,28 @@ spec:
                                         type: string
                                     type: object
                                 type: object
+                            type: object
+                          type: array
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
                             type: object
                           type: array
                       type: object
@@ -6627,6 +6727,27 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        secretsManagerConfiguration:
+                          description: The Secret Manager Configuration. See secrets_manager_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         url:
                           description: The HTTP endpoint URL to which Kinesis Firehose
                             sends your data.
@@ -7868,7 +7989,8 @@ spec:
                             that the s3 bucket will copy to.
                           type: string
                         passwordSecretRef:
-                          description: The password for the username above.
+                          description: The password for the username above. This value
+                            is required if secrets_manager_configuration is not provided.
                           properties:
                             key:
                               description: The key to select.
@@ -8474,6 +8596,28 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         username:
                           description: The username that the firehose delivery stream
                             will assume. It is strongly recommended that the username
@@ -8481,8 +8625,6 @@ spec:
                             Firehose purposes, and that the permissions for the account
                             are restricted for Amazon Redshift INSERT permissions.
                           type: string
-                      required:
-                      - passwordSecretRef
                       type: object
                     type: array
                   serverSideEncryption:
@@ -8513,6 +8655,16 @@ spec:
                           description: 'The URL of the Snowflake account. Format:
                             https://[account_identifier].snowflakecomputing.com.'
                           type: string
+                        bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 0 to 900, before delivering
+                            it to the destination.  The default value is 0s.
+                          type: number
+                        bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 to 128, before delivering it to the destination.  The
+                            default value is 1MB.
+                          type: number
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. See cloudwatch_logging_options block below for
@@ -8563,7 +8715,8 @@ spec:
                           description: The name of the metadata column.
                           type: string
                         privateKeySecretRef:
-                          description: The private key for authentication.
+                          description: The private key for authentication. This value
+                            is required if secrets_manager_configuration is not provided.
                           properties:
                             key:
                               description: The key to select.
@@ -8945,6 +9098,28 @@ spec:
                         schema:
                           description: The Snowflake schema name.
                           type: string
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         snowflakeRoleConfiguration:
                           description: The configuration for Snowflake role.
                           items:
@@ -8974,8 +9149,6 @@ spec:
                         user:
                           description: The user for authentication.
                           type: string
-                      required:
-                      - privateKeySecretRef
                       type: object
                     type: array
                   splunkConfiguration:
@@ -9028,7 +9201,8 @@ spec:
                           type: string
                         hecTokenSecretRef:
                           description: The GUID that you obtain from your Splunk cluster
-                            when you create a new HEC endpoint.
+                            when you create a new HEC endpoint. This value is required
+                            if secrets_manager_configuration is not provided.
                           properties:
                             key:
                               description: The key to select.
@@ -9332,8 +9506,28 @@ spec:
                                 type: object
                             type: object
                           type: array
-                      required:
-                      - hecTokenSecretRef
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   tags:
@@ -10522,6 +10716,27 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        secretsManagerConfiguration:
+                          description: The Secret Manager Configuration. See secrets_manager_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         url:
                           description: The HTTP endpoint URL to which Kinesis Firehose
                             sends your data.
@@ -11300,6 +11515,28 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         username:
                           description: The username that the firehose delivery stream
                             will assume. It is strongly recommended that the username
@@ -11337,6 +11574,16 @@ spec:
                           description: 'The URL of the Snowflake account. Format:
                             https://[account_identifier].snowflakecomputing.com.'
                           type: string
+                        bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 0 to 900, before delivering
+                            it to the destination.  The default value is 0s.
+                          type: number
+                        bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 to 128, before delivering it to the destination.  The
+                            default value is 1MB.
+                          type: number
                         cloudwatchLoggingOptions:
                           description: The CloudWatch Logging Options for the delivery
                             stream. See cloudwatch_logging_options block below for
@@ -11509,6 +11756,28 @@ spec:
                         schema:
                           description: The Snowflake schema name.
                           type: string
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
                         snowflakeRoleConfiguration:
                           description: The configuration for Snowflake role.
                           items:
@@ -11721,6 +11990,28 @@ spec:
                                   by Firehose for calling the Amazon EC2 configuration
                                   API and for creating network interfaces. Make sure
                                   role has necessary IAM permissions
+                                type: string
+                            type: object
+                          type: array
+                        secretsManagerConfiguration:
+                          description: The Secrets Manager configuration. See secrets_manager_configuration
+                            block below for details. This value is required if user
+                            and private_key are not provided.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              secretArn:
+                                description: The ARN of the Secrets Manager secret.
+                                  This value is required if enabled is true.
                                 type: string
                             type: object
                           type: array
@@ -13654,6 +13945,25 @@ spec:
                                 type: object
                             type: object
                         type: object
+                      secretsManagerConfiguration:
+                        description: The Secret Manager Configuration. See secrets_manager_configuration
+                          block below for details.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
                           sends your data.
@@ -14834,7 +15144,8 @@ spec:
                           that the s3 bucket will copy to.
                         type: string
                       passwordSecretRef:
-                        description: The password for the username above.
+                        description: The password for the username above. This value
+                          is required if secrets_manager_configuration is not provided.
                         properties:
                           key:
                             description: The key to select.
@@ -14982,9 +15293,9 @@ spec:
                             type: object
                         type: object
                       s3BackupConfiguration:
-                        description: The configuration for backup in Amazon S3. Required
-                          if s3_backup_mode is Enabled. Supports the same fields as
-                          s3_configuration object.
+                        description: |-
+                          The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
+                          secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
                         properties:
                           bucketArn:
                             description: The ARN of the S3 bucket
@@ -15414,12 +15725,34 @@ spec:
                                 type: object
                             type: object
                         type: object
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       username:
                         description: The username that the firehose delivery stream
                           will assume. It is strongly recommended that the username
                           and password provided is used exclusively for Amazon Kinesis
                           Firehose purposes, and that the permissions for the account
-                          are restricted for Amazon Redshift INSERT permissions.
+                          are restricted for Amazon Redshift INSERT permissions. This
+                          value is required if secrets_manager_configuration is not
+                          provided.
                         type: string
                     type: object
                   region:
@@ -15451,6 +15784,16 @@ spec:
                       accountUrl:
                         description: 'The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.'
                         type: string
+                      bufferingInterval:
+                        description: Buffer incoming data for the specified period
+                          of time, in seconds between 0 to 900, before delivering
+                          it to the destination.  The default value is 0s.
+                        type: number
+                      bufferingSize:
+                        description: Buffer incoming data to the specified size, in
+                          MBs between 1 to 128, before delivering it to the destination.  The
+                          default value is 1MB.
+                        type: number
                       cloudwatchLoggingOptions:
                         description: The CloudWatch Logging Options for the delivery
                           stream. See cloudwatch_logging_options block below for details.
@@ -15498,7 +15841,8 @@ spec:
                         description: The name of the metadata column.
                         type: string
                       privateKeySecretRef:
-                        description: The private key for authentication.
+                        description: The private key for authentication. This value
+                          is required if secrets_manager_configuration is not provided.
                         properties:
                           key:
                             description: The key to select.
@@ -15865,6 +16209,26 @@ spec:
                       schema:
                         description: The Snowflake schema name.
                         type: string
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       snowflakeRoleConfiguration:
                         description: The configuration for Snowflake role.
                         properties:
@@ -15888,7 +16252,8 @@ spec:
                         description: The Snowflake table name.
                         type: string
                       user:
-                        description: The user for authentication.
+                        description: The user for authentication. This value is required
+                          if secrets_manager_configuration is not provided.
                         type: string
                     type: object
                   splunkConfiguration:
@@ -15937,7 +16302,8 @@ spec:
                         type: string
                       hecTokenSecretRef:
                         description: The GUID that you obtain from your Splunk cluster
-                          when you create a new HEC endpoint.
+                          when you create a new HEC endpoint. This value is required
+                          if secrets_manager_configuration is not provided.
                         properties:
                           key:
                             description: The key to select.
@@ -16008,9 +16374,9 @@ spec:
                           300s.  There will be no retry if the value is 0.
                         type: number
                       s3BackupMode:
-                        description: Defines how documents should be delivered to
-                          Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default
-                          value is FailedEventsOnly.
+                        description: |-
+                          Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+                          secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
                         type: string
                       s3Configuration:
                         description: The S3 Configuration. See s3_configuration block
@@ -16225,6 +16591,26 @@ spec:
                                     type: string
                                 type: object
                             type: object
+                        type: object
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
                         type: object
                     type: object
                   tags:
@@ -18042,6 +18428,25 @@ spec:
                                 type: object
                             type: object
                         type: object
+                      secretsManagerConfiguration:
+                        description: The Secret Manager Configuration. See secrets_manager_configuration
+                          block below for details.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
                           sends your data.
@@ -19222,7 +19627,8 @@ spec:
                           that the s3 bucket will copy to.
                         type: string
                       passwordSecretRef:
-                        description: The password for the username above.
+                        description: The password for the username above. This value
+                          is required if secrets_manager_configuration is not provided.
                         properties:
                           key:
                             description: The key to select.
@@ -19370,9 +19776,9 @@ spec:
                             type: object
                         type: object
                       s3BackupConfiguration:
-                        description: The configuration for backup in Amazon S3. Required
-                          if s3_backup_mode is Enabled. Supports the same fields as
-                          s3_configuration object.
+                        description: |-
+                          The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
+                          secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
                         properties:
                           bucketArn:
                             description: The ARN of the S3 bucket
@@ -19802,15 +20208,35 @@ spec:
                                 type: object
                             type: object
                         type: object
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       username:
                         description: The username that the firehose delivery stream
                           will assume. It is strongly recommended that the username
                           and password provided is used exclusively for Amazon Kinesis
                           Firehose purposes, and that the permissions for the account
-                          are restricted for Amazon Redshift INSERT permissions.
+                          are restricted for Amazon Redshift INSERT permissions. This
+                          value is required if secrets_manager_configuration is not
+                          provided.
                         type: string
-                    required:
-                    - passwordSecretRef
                     type: object
                   serverSideEncryption:
                     description: Encrypt at rest options. See server_side_encryption
@@ -19836,6 +20262,16 @@ spec:
                       accountUrl:
                         description: 'The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.'
                         type: string
+                      bufferingInterval:
+                        description: Buffer incoming data for the specified period
+                          of time, in seconds between 0 to 900, before delivering
+                          it to the destination.  The default value is 0s.
+                        type: number
+                      bufferingSize:
+                        description: Buffer incoming data to the specified size, in
+                          MBs between 1 to 128, before delivering it to the destination.  The
+                          default value is 1MB.
+                        type: number
                       cloudwatchLoggingOptions:
                         description: The CloudWatch Logging Options for the delivery
                           stream. See cloudwatch_logging_options block below for details.
@@ -19883,7 +20319,8 @@ spec:
                         description: The name of the metadata column.
                         type: string
                       privateKeySecretRef:
-                        description: The private key for authentication.
+                        description: The private key for authentication. This value
+                          is required if secrets_manager_configuration is not provided.
                         properties:
                           key:
                             description: The key to select.
@@ -20250,6 +20687,26 @@ spec:
                       schema:
                         description: The Snowflake schema name.
                         type: string
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       snowflakeRoleConfiguration:
                         description: The configuration for Snowflake role.
                         properties:
@@ -20273,10 +20730,9 @@ spec:
                         description: The Snowflake table name.
                         type: string
                       user:
-                        description: The user for authentication.
+                        description: The user for authentication. This value is required
+                          if secrets_manager_configuration is not provided.
                         type: string
-                    required:
-                    - privateKeySecretRef
                     type: object
                   splunkConfiguration:
                     description: Configuration options when destination is splunk.
@@ -20324,7 +20780,8 @@ spec:
                         type: string
                       hecTokenSecretRef:
                         description: The GUID that you obtain from your Splunk cluster
-                          when you create a new HEC endpoint.
+                          when you create a new HEC endpoint. This value is required
+                          if secrets_manager_configuration is not provided.
                         properties:
                           key:
                             description: The key to select.
@@ -20395,9 +20852,9 @@ spec:
                           300s.  There will be no retry if the value is 0.
                         type: number
                       s3BackupMode:
-                        description: Defines how documents should be delivered to
-                          Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default
-                          value is FailedEventsOnly.
+                        description: |-
+                          Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+                          secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
                         type: string
                       s3Configuration:
                         description: The S3 Configuration. See s3_configuration block
@@ -20613,8 +21070,26 @@ spec:
                                 type: object
                             type: object
                         type: object
-                    required:
-                    - hecTokenSecretRef
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                     type: object
                   tags:
                     additionalProperties:
@@ -21694,6 +22169,25 @@ spec:
                               has necessary IAM permissions
                             type: string
                         type: object
+                      secretsManagerConfiguration:
+                        description: The Secret Manager Configuration. See secrets_manager_configuration
+                          block below for details.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       url:
                         description: The HTTP endpoint URL to which Kinesis Firehose
                           sends your data.
@@ -22267,9 +22761,9 @@ spec:
                         description: The arn of the role the stream assumes.
                         type: string
                       s3BackupConfiguration:
-                        description: The configuration for backup in Amazon S3. Required
-                          if s3_backup_mode is Enabled. Supports the same fields as
-                          s3_configuration object.
+                        description: |-
+                          The configuration for backup in Amazon S3. Required if s3_backup_mode is Enabled. Supports the same fields as s3_configuration object.
+                          secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if username and password are not provided.
                         properties:
                           bucketArn:
                             description: The ARN of the S3 bucket
@@ -22403,12 +22897,34 @@ spec:
                               has necessary IAM permissions
                             type: string
                         type: object
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       username:
                         description: The username that the firehose delivery stream
                           will assume. It is strongly recommended that the username
                           and password provided is used exclusively for Amazon Kinesis
                           Firehose purposes, and that the permissions for the account
-                          are restricted for Amazon Redshift INSERT permissions.
+                          are restricted for Amazon Redshift INSERT permissions. This
+                          value is required if secrets_manager_configuration is not
+                          provided.
                         type: string
                     type: object
                   serverSideEncryption:
@@ -22435,6 +22951,16 @@ spec:
                       accountUrl:
                         description: 'The URL of the Snowflake account. Format: https://[account_identifier].snowflakecomputing.com.'
                         type: string
+                      bufferingInterval:
+                        description: Buffer incoming data for the specified period
+                          of time, in seconds between 0 to 900, before delivering
+                          it to the destination.  The default value is 0s.
+                        type: number
+                      bufferingSize:
+                        description: Buffer incoming data to the specified size, in
+                          MBs between 1 to 128, before delivering it to the destination.  The
+                          default value is 1MB.
+                        type: number
                       cloudwatchLoggingOptions:
                         description: The CloudWatch Logging Options for the delivery
                           stream. See cloudwatch_logging_options block below for details.
@@ -22593,6 +23119,26 @@ spec:
                       schema:
                         description: The Snowflake schema name.
                         type: string
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
+                            type: string
+                        type: object
                       snowflakeRoleConfiguration:
                         description: The configuration for Snowflake role.
                         properties:
@@ -22616,7 +23162,8 @@ spec:
                         description: The Snowflake table name.
                         type: string
                       user:
-                        description: The user for authentication.
+                        description: The user for authentication. This value is required
+                          if secrets_manager_configuration is not provided.
                         type: string
                     type: object
                   splunkConfiguration:
@@ -22718,9 +23265,9 @@ spec:
                           300s.  There will be no retry if the value is 0.
                         type: number
                       s3BackupMode:
-                        description: Defines how documents should be delivered to
-                          Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default
-                          value is FailedEventsOnly.
+                        description: |-
+                          Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+                          secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
                         type: string
                       s3Configuration:
                         description: The S3 Configuration. See s3_configuration block
@@ -22786,6 +23333,26 @@ spec:
                               Firehose for calling the Amazon EC2 configuration API
                               and for creating network interfaces. Make sure role
                               has necessary IAM permissions
+                            type: string
+                        type: object
+                      secretsManagerConfiguration:
+                        description: The Secrets Manager configuration. See secrets_manager_configuration
+                          block below for details. This value is required if user
+                          and private_key are not provided.
+                        properties:
+                          enabled:
+                            description: Enables or disables the logging. Defaults
+                              to false.
+                            type: boolean
+                          roleArn:
+                            description: The ARN of the IAM role to be assumed by
+                              Firehose for calling the Amazon EC2 configuration API
+                              and for creating network interfaces. Make sure role
+                              has necessary IAM permissions
+                            type: string
+                          secretArn:
+                            description: The ARN of the Secrets Manager secret. This
+                              value is required if enabled is true.
                             type: string
                         type: object
                     type: object

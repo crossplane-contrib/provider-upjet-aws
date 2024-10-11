@@ -431,6 +431,14 @@ spec:
                       DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql,
                       postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).'
                     type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      is valid for cluster types Aurora DB clusters and Multi-AZ DB
+                      clusters. Valid values are open-source-rds-extended-support,
+                      open-source-rds-extended-support-disabled. Default value is
+                      open-source-rds-extended-support. [Using Amazon RDS Extended
+                      Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
+                    type: string
                   engineMode:
                     description: 'Database engine mode. Valid values: global (only
                       valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned,
@@ -660,6 +668,23 @@ spec:
                     description: 'Network type of the cluster. Valid values: IPV4,
                       DUAL.'
                     type: string
+                  performanceInsightsEnabled:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
+                      Performance Insights for the RDS Cluster
+                    type: boolean
+                  performanceInsightsKmsKeyId:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the KMS Key ID to encrypt Performance Insights data. If not
+                      specified, the default RDS KMS key will be used (aws/rds).
+                    type: string
+                  performanceInsightsRetentionPeriod:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the amount of time to retain performance insights data for.
+                      Defaults to 7 days if Performance Insights are enabled. Valid
+                      values are 7, month * 31 (where month is a number of months
+                      from 1-23), and 731. See here for more information on retention
+                      periods.
+                    type: number
                   port:
                     description: Port on which the DB accepts connections
                     type: number
@@ -774,6 +799,12 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        sourceClusterResourceId:
+                          description: Cluster resource ID of the source database
+                            cluster from which to restore. To be used for restoring
+                            a deleted cluster in the same account which still has
+                            a retained automatic backup available.
+                          type: string
                         useLatestRestorableTime:
                           description: Set to true to restore the database cluster
                             to the latest restorable backup time. Defaults to false.
@@ -905,6 +936,12 @@ spec:
                             MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128,
                             256. Valid Aurora PostgreSQL capacity values are (2, 4,
                             8, 16, 32, 64, 192, and 384). Defaults to 1.
+                          type: number
+                        secondsBeforeTimeout:
+                          description: Amount of time, in seconds, that Aurora Serverless
+                            v1 tries to find a scaling point to perform seamless scaling
+                            before enforcing the timeout action. Valid values are
+                            60 through 600. Defaults to 300.
                           type: number
                         secondsUntilAutoPause:
                           description: Time, in seconds, before an Aurora DB cluster
@@ -1438,6 +1475,14 @@ spec:
                       DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql,
                       postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).'
                     type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      is valid for cluster types Aurora DB clusters and Multi-AZ DB
+                      clusters. Valid values are open-source-rds-extended-support,
+                      open-source-rds-extended-support-disabled. Default value is
+                      open-source-rds-extended-support. [Using Amazon RDS Extended
+                      Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
+                    type: string
                   engineMode:
                     description: 'Database engine mode. Valid values: global (only
                       valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned,
@@ -1667,6 +1712,23 @@ spec:
                     description: 'Network type of the cluster. Valid values: IPV4,
                       DUAL.'
                     type: string
+                  performanceInsightsEnabled:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
+                      Performance Insights for the RDS Cluster
+                    type: boolean
+                  performanceInsightsKmsKeyId:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the KMS Key ID to encrypt Performance Insights data. If not
+                      specified, the default RDS KMS key will be used (aws/rds).
+                    type: string
+                  performanceInsightsRetentionPeriod:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the amount of time to retain performance insights data for.
+                      Defaults to 7 days if Performance Insights are enabled. Valid
+                      values are 7, month * 31 (where month is a number of months
+                      from 1-23), and 731. See here for more information on retention
+                      periods.
+                    type: number
                   port:
                     description: Port on which the DB accepts connections
                     type: number
@@ -1777,6 +1839,12 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        sourceClusterResourceId:
+                          description: Cluster resource ID of the source database
+                            cluster from which to restore. To be used for restoring
+                            a deleted cluster in the same account which still has
+                            a retained automatic backup available.
+                          type: string
                         useLatestRestorableTime:
                           description: Set to true to restore the database cluster
                             to the latest restorable backup time. Defaults to false.
@@ -1908,6 +1976,12 @@ spec:
                             MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128,
                             256. Valid Aurora PostgreSQL capacity values are (2, 4,
                             8, 16, 32, 64, 192, and 384). Defaults to 1.
+                          type: number
+                        secondsBeforeTimeout:
+                          description: Amount of time, in seconds, that Aurora Serverless
+                            v1 tries to find a scaling point to perform seamless scaling
+                            before enforcing the timeout action. Valid values are
+                            60 through 600. Defaults to 300.
                           type: number
                         secondsUntilAutoPause:
                           description: Time, in seconds, before an Aurora DB cluster
@@ -2389,6 +2463,14 @@ spec:
                       DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql,
                       postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).'
                     type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      is valid for cluster types Aurora DB clusters and Multi-AZ DB
+                      clusters. Valid values are open-source-rds-extended-support,
+                      open-source-rds-extended-support-disabled. Default value is
+                      open-source-rds-extended-support. [Using Amazon RDS Extended
+                      Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
+                    type: string
                   engineMode:
                     description: 'Database engine mode. Valid values: global (only
                       valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned,
@@ -2486,6 +2568,23 @@ spec:
                     description: 'Network type of the cluster. Valid values: IPV4,
                       DUAL.'
                     type: string
+                  performanceInsightsEnabled:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
+                      Performance Insights for the RDS Cluster
+                    type: boolean
+                  performanceInsightsKmsKeyId:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the KMS Key ID to encrypt Performance Insights data. If not
+                      specified, the default RDS KMS key will be used (aws/rds).
+                    type: string
+                  performanceInsightsRetentionPeriod:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the amount of time to retain performance insights data for.
+                      Defaults to 7 days if Performance Insights are enabled. Valid
+                      values are 7, month * 31 (where month is a number of months
+                      from 1-23), and 731. See here for more information on retention
+                      periods.
+                    type: number
                   port:
                     description: Port on which the DB accepts connections
                     type: number
@@ -2526,6 +2625,12 @@ spec:
                           description: Identifier of the source database cluster from
                             which to restore. When restoring from a cluster in another
                             AWS account, the identifier is the ARN of that cluster.
+                          type: string
+                        sourceClusterResourceId:
+                          description: Cluster resource ID of the source database
+                            cluster from which to restore. To be used for restoring
+                            a deleted cluster in the same account which still has
+                            a retained automatic backup available.
                           type: string
                         useLatestRestorableTime:
                           description: Set to true to restore the database cluster
@@ -2584,6 +2689,12 @@ spec:
                             MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128,
                             256. Valid Aurora PostgreSQL capacity values are (2, 4,
                             8, 16, 32, 64, 192, and 384). Defaults to 1.
+                          type: number
+                        secondsBeforeTimeout:
+                          description: Amount of time, in seconds, that Aurora Serverless
+                            v1 tries to find a scaling point to perform seamless scaling
+                            before enforcing the timeout action. Valid values are
+                            60 through 600. Defaults to 300.
                           type: number
                         secondsUntilAutoPause:
                           description: Time, in seconds, before an Aurora DB cluster
@@ -3152,6 +3263,14 @@ spec:
                       DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql,
                       postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).'
                     type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      is valid for cluster types Aurora DB clusters and Multi-AZ DB
+                      clusters. Valid values are open-source-rds-extended-support,
+                      open-source-rds-extended-support-disabled. Default value is
+                      open-source-rds-extended-support. [Using Amazon RDS Extended
+                      Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
+                    type: string
                   engineMode:
                     description: 'Database engine mode. Valid values: global (only
                       valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned,
@@ -3381,14 +3500,31 @@ spec:
                     description: 'Network type of the cluster. Valid values: IPV4,
                       DUAL.'
                     type: string
+                  performanceInsightsEnabled:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
+                      Performance Insights for the RDS Cluster
+                    type: boolean
+                  performanceInsightsKmsKeyId:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the KMS Key ID to encrypt Performance Insights data. If not
+                      specified, the default RDS KMS key will be used (aws/rds).
+                    type: string
+                  performanceInsightsRetentionPeriod:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the amount of time to retain performance insights data for.
+                      Defaults to 7 days if Performance Insights are enabled. Valid
+                      values are 7, month * 31 (where month is a number of months
+                      from 1-23), and 731. See here for more information on retention
+                      periods.
+                    type: number
                   port:
-                    description: Port on which the DB accepts connections
+                    description: Port on which the DB accepts connections.
                     type: number
                   preferredBackupWindow:
                     description: 'Daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod
                       parameter.Time in UTC. Default: A 30-minute window selected
-                      at random from an 8-hour block of time per regionE.g., 04:00-09:00'
+                      at random from an 8-hour block of time per region, e.g. 04:00-09:00.'
                     type: string
                   preferredMaintenanceWindow:
                     description: Weekly time range during which system maintenance
@@ -3494,6 +3630,12 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      sourceClusterResourceId:
+                        description: Cluster resource ID of the source database cluster
+                          from which to restore. To be used for restoring a deleted
+                          cluster in the same account which still has a retained automatic
+                          backup available.
+                        type: string
                       useLatestRestorableTime:
                         description: Set to true to restore the database cluster to
                           the latest restorable backup time. Defaults to false. Conflicts
@@ -3501,7 +3643,7 @@ spec:
                         type: boolean
                     type: object
                   s3Import:
-                    description: Port on which the DB accepts connections
+                    description: Port on which the DB accepts connections.
                     properties:
                       bucketName:
                         description: Bucket name where your backup is stored
@@ -3621,6 +3763,12 @@ spec:
                           MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256.
                           Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16,
                           32, 64, 192, and 384). Defaults to 1.
+                        type: number
+                      secondsBeforeTimeout:
+                        description: Amount of time, in seconds, that Aurora Serverless
+                          v1 tries to find a scaling point to perform seamless scaling
+                          before enforcing the timeout action. Valid values are 60
+                          through 600. Defaults to 300.
                         type: number
                       secondsUntilAutoPause:
                         description: Time, in seconds, before an Aurora DB cluster
@@ -4151,6 +4299,14 @@ spec:
                       DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql,
                       postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).'
                     type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      is valid for cluster types Aurora DB clusters and Multi-AZ DB
+                      clusters. Valid values are open-source-rds-extended-support,
+                      open-source-rds-extended-support-disabled. Default value is
+                      open-source-rds-extended-support. [Using Amazon RDS Extended
+                      Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
+                    type: string
                   engineMode:
                     description: 'Database engine mode. Valid values: global (only
                       valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned,
@@ -4380,14 +4536,31 @@ spec:
                     description: 'Network type of the cluster. Valid values: IPV4,
                       DUAL.'
                     type: string
+                  performanceInsightsEnabled:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
+                      Performance Insights for the RDS Cluster
+                    type: boolean
+                  performanceInsightsKmsKeyId:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the KMS Key ID to encrypt Performance Insights data. If not
+                      specified, the default RDS KMS key will be used (aws/rds).
+                    type: string
+                  performanceInsightsRetentionPeriod:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the amount of time to retain performance insights data for.
+                      Defaults to 7 days if Performance Insights are enabled. Valid
+                      values are 7, month * 31 (where month is a number of months
+                      from 1-23), and 731. See here for more information on retention
+                      periods.
+                    type: number
                   port:
-                    description: Port on which the DB accepts connections
+                    description: Port on which the DB accepts connections.
                     type: number
                   preferredBackupWindow:
                     description: 'Daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod
                       parameter.Time in UTC. Default: A 30-minute window selected
-                      at random from an 8-hour block of time per regionE.g., 04:00-09:00'
+                      at random from an 8-hour block of time per region, e.g. 04:00-09:00.'
                     type: string
                   preferredMaintenanceWindow:
                     description: Weekly time range during which system maintenance
@@ -4489,6 +4662,12 @@ spec:
                                 type: string
                             type: object
                         type: object
+                      sourceClusterResourceId:
+                        description: Cluster resource ID of the source database cluster
+                          from which to restore. To be used for restoring a deleted
+                          cluster in the same account which still has a retained automatic
+                          backup available.
+                        type: string
                       useLatestRestorableTime:
                         description: Set to true to restore the database cluster to
                           the latest restorable backup time. Defaults to false. Conflicts
@@ -4496,7 +4675,7 @@ spec:
                         type: boolean
                     type: object
                   s3Import:
-                    description: Port on which the DB accepts connections
+                    description: Port on which the DB accepts connections.
                     properties:
                       bucketName:
                         description: Bucket name where your backup is stored
@@ -4616,6 +4795,12 @@ spec:
                           MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256.
                           Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16,
                           32, 64, 192, and 384). Defaults to 1.
+                        type: number
+                      secondsBeforeTimeout:
+                        description: Amount of time, in seconds, that Aurora Serverless
+                          v1 tries to find a scaling point to perform seamless scaling
+                          before enforcing the timeout action. Valid values are 60
+                          through 600. Defaults to 300.
                         type: number
                       secondsUntilAutoPause:
                         description: Time, in seconds, before an Aurora DB cluster
@@ -5094,6 +5279,14 @@ spec:
                       DB cluster. Valid Values: aurora-mysql, aurora-postgresql, mysql,
                       postgres. (Note that mysql and postgres are Multi-AZ RDS clusters).'
                     type: string
+                  engineLifecycleSupport:
+                    description: 'The life cycle type for this DB instance. This setting
+                      is valid for cluster types Aurora DB clusters and Multi-AZ DB
+                      clusters. Valid values are open-source-rds-extended-support,
+                      open-source-rds-extended-support-disabled. Default value is
+                      open-source-rds-extended-support. [Using Amazon RDS Extended
+                      Support]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html'
+                    type: string
                   engineMode:
                     description: 'Database engine mode. Valid values: global (only
                       valid for Aurora MySQL 1.21 and earlier), parallelquery, provisioned,
@@ -5191,14 +5384,31 @@ spec:
                     description: 'Network type of the cluster. Valid values: IPV4,
                       DUAL.'
                     type: string
+                  performanceInsightsEnabled:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
+                      Performance Insights for the RDS Cluster
+                    type: boolean
+                  performanceInsightsKmsKeyId:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the KMS Key ID to encrypt Performance Insights data. If not
+                      specified, the default RDS KMS key will be used (aws/rds).
+                    type: string
+                  performanceInsightsRetentionPeriod:
+                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
+                      the amount of time to retain performance insights data for.
+                      Defaults to 7 days if Performance Insights are enabled. Valid
+                      values are 7, month * 31 (where month is a number of months
+                      from 1-23), and 731. See here for more information on retention
+                      periods.
+                    type: number
                   port:
-                    description: Port on which the DB accepts connections
+                    description: Port on which the DB accepts connections.
                     type: number
                   preferredBackupWindow:
                     description: 'Daily time range during which automated backups
                       are created if automated backups are enabled using the BackupRetentionPeriod
                       parameter.Time in UTC. Default: A 30-minute window selected
-                      at random from an 8-hour block of time per regionE.g., 04:00-09:00'
+                      at random from an 8-hour block of time per region, e.g. 04:00-09:00.'
                     type: string
                   preferredMaintenanceWindow:
                     description: Weekly time range during which system maintenance
@@ -5231,6 +5441,12 @@ spec:
                           which to restore. When restoring from a cluster in another
                           AWS account, the identifier is the ARN of that cluster.
                         type: string
+                      sourceClusterResourceId:
+                        description: Cluster resource ID of the source database cluster
+                          from which to restore. To be used for restoring a deleted
+                          cluster in the same account which still has a retained automatic
+                          backup available.
+                        type: string
                       useLatestRestorableTime:
                         description: Set to true to restore the database cluster to
                           the latest restorable backup time. Defaults to false. Conflicts
@@ -5238,7 +5454,7 @@ spec:
                         type: boolean
                     type: object
                   s3Import:
-                    description: Port on which the DB accepts connections
+                    description: Port on which the DB accepts connections.
                     properties:
                       bucketName:
                         description: Bucket name where your backup is stored
@@ -5284,6 +5500,12 @@ spec:
                           MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256.
                           Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16,
                           32, 64, 192, and 384). Defaults to 1.
+                        type: number
+                      secondsBeforeTimeout:
+                        description: Amount of time, in seconds, that Aurora Serverless
+                          v1 tries to find a scaling point to perform seamless scaling
+                          before enforcing the timeout action. Valid values are 60
+                          through 600. Defaults to 300.
                         type: number
                       secondsUntilAutoPause:
                         description: Time, in seconds, before an Aurora DB cluster

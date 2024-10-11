@@ -105,6 +105,9 @@ type JobInitParameters struct {
 	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
 	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
 
+	// Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.
+	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
+
 	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -181,6 +184,9 @@ type JobObservation struct {
 	// Job name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.
+	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
+
 	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
@@ -251,6 +257,10 @@ type JobParameters struct {
 	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
 	// +kubebuilder:validation:Optional
 	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
+
+	// Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.
+	// +kubebuilder:validation:Optional
+	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
 
 	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
 	// +kubebuilder:validation:Optional

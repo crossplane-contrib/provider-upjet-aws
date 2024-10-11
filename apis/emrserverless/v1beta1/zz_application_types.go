@@ -30,6 +30,9 @@ type ApplicationInitParameters struct {
 	// –  The capacity to initialize when the application is created.
 	InitialCapacity []InitialCapacityInitParameters `json:"initialCapacity,omitempty" tf:"initial_capacity,omitempty"`
 
+	// –  Enables the interactive use cases to use when running an application.
+	InteractiveConfiguration []InteractiveConfigurationInitParameters `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
+
 	// –  The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity []MaximumCapacityInitParameters `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
 
@@ -72,6 +75,9 @@ type ApplicationObservation struct {
 
 	// –  The capacity to initialize when the application is created.
 	InitialCapacity []InitialCapacityObservation `json:"initialCapacity,omitempty" tf:"initial_capacity,omitempty"`
+
+	// –  Enables the interactive use cases to use when running an application.
+	InteractiveConfiguration []InteractiveConfigurationObservation `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
 
 	// –  The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	MaximumCapacity []MaximumCapacityObservation `json:"maximumCapacity,omitempty" tf:"maximum_capacity,omitempty"`
@@ -118,6 +124,10 @@ type ApplicationParameters struct {
 	// –  The capacity to initialize when the application is created.
 	// +kubebuilder:validation:Optional
 	InitialCapacity []InitialCapacityParameters `json:"initialCapacity,omitempty" tf:"initial_capacity,omitempty"`
+
+	// –  Enables the interactive use cases to use when running an application.
+	// +kubebuilder:validation:Optional
+	InteractiveConfiguration []InteractiveConfigurationParameters `json:"interactiveConfiguration,omitempty" tf:"interactive_configuration,omitempty"`
 
 	// –  The maximum capacity to allocate when the application is created. This is cumulative across all workers at any given point in time, not just when an application is created. No new resources will be created once any one of the defined limits is hit.
 	// +kubebuilder:validation:Optional
@@ -273,6 +283,35 @@ type InitialCapacityParameters struct {
 	// The worker type for an analytics framework. For Spark applications, the key can either be set to Driver or Executor. For Hive applications, it can be set to HiveDriver or TezTask.
 	// +kubebuilder:validation:Optional
 	InitialCapacityType *string `json:"initialCapacityType" tf:"initial_capacity_type,omitempty"`
+}
+
+type InteractiveConfigurationInitParameters struct {
+
+	// Enables an Apache Livy endpoint that you can connect to and run interactive jobs.
+	LivyEndpointEnabled *bool `json:"livyEndpointEnabled,omitempty" tf:"livy_endpoint_enabled,omitempty"`
+
+	// Enables you to connect an application to Amazon EMR Studio to run interactive workloads in a notebook.
+	StudioEnabled *bool `json:"studioEnabled,omitempty" tf:"studio_enabled,omitempty"`
+}
+
+type InteractiveConfigurationObservation struct {
+
+	// Enables an Apache Livy endpoint that you can connect to and run interactive jobs.
+	LivyEndpointEnabled *bool `json:"livyEndpointEnabled,omitempty" tf:"livy_endpoint_enabled,omitempty"`
+
+	// Enables you to connect an application to Amazon EMR Studio to run interactive workloads in a notebook.
+	StudioEnabled *bool `json:"studioEnabled,omitempty" tf:"studio_enabled,omitempty"`
+}
+
+type InteractiveConfigurationParameters struct {
+
+	// Enables an Apache Livy endpoint that you can connect to and run interactive jobs.
+	// +kubebuilder:validation:Optional
+	LivyEndpointEnabled *bool `json:"livyEndpointEnabled,omitempty" tf:"livy_endpoint_enabled,omitempty"`
+
+	// Enables you to connect an application to Amazon EMR Studio to run interactive workloads in a notebook.
+	// +kubebuilder:validation:Optional
+	StudioEnabled *bool `json:"studioEnabled,omitempty" tf:"studio_enabled,omitempty"`
 }
 
 type MaximumCapacityInitParameters struct {

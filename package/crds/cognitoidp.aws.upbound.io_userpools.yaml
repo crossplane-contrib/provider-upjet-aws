@@ -1316,6 +1316,14 @@ spec:
                           description: Minimum length of the password policy that
                             you have set.
                           type: number
+                        passwordHistorySize:
+                          description: Number of previous passwords that you want
+                            Amazon Cognito to restrict each user from reusing. Users
+                            can't set a password that matches any of number of previous
+                            passwords specified by this argument. A value of 0 means
+                            that password history is not enforced. Valid values are
+                            between 0 and 24.
+                          type: number
                         requireLowercase:
                           description: Whether you have required users to use at least
                             one lowercase letter in their password.
@@ -2877,6 +2885,14 @@ spec:
                           description: Minimum length of the password policy that
                             you have set.
                           type: number
+                        passwordHistorySize:
+                          description: Number of previous passwords that you want
+                            Amazon Cognito to restrict each user from reusing. Users
+                            can't set a password that matches any of number of previous
+                            passwords specified by this argument. A value of 0 means
+                            that password history is not enforced. Valid values are
+                            between 0 and 24.
+                          type: number
                         requireLowercase:
                           description: Whether you have required users to use at least
                             one lowercase letter in their password.
@@ -3638,6 +3654,14 @@ spec:
                         minimumLength:
                           description: Minimum length of the password policy that
                             you have set.
+                          type: number
+                        passwordHistorySize:
+                          description: Number of previous passwords that you want
+                            Amazon Cognito to restrict each user from reusing. Users
+                            can't set a password that matches any of number of previous
+                            passwords specified by this argument. A value of 0 means
+                            that password history is not enforced. Valid values are
+                            between 0 and 24.
                           type: number
                         requireLowercase:
                           description: Whether you have required users to use at least
@@ -5208,6 +5232,14 @@ spec:
                         description: Minimum length of the password policy that you
                           have set.
                         type: number
+                      passwordHistorySize:
+                        description: Number of previous passwords that you want Amazon
+                          Cognito to restrict each user from reusing. Users can't
+                          set a password that matches any of number of previous passwords
+                          specified by this argument. A value of 0 means that password
+                          history is not enforced. Valid values are between 0 and
+                          24.
+                        type: number
                       requireLowercase:
                         description: Whether you have required users to use at least
                           one lowercase letter in their password.
@@ -6726,6 +6758,14 @@ spec:
                         description: Minimum length of the password policy that you
                           have set.
                         type: number
+                      passwordHistorySize:
+                        description: Number of previous passwords that you want Amazon
+                          Cognito to restrict each user from reusing. Users can't
+                          set a password that matches any of number of previous passwords
+                          specified by this argument. A value of 0 means that password
+                          history is not enforced. Valid values are between 0 and
+                          24.
+                        type: number
                       requireLowercase:
                         description: Whether you have required users to use at least
                           one lowercase letter in their password.
@@ -7444,6 +7484,14 @@ spec:
                       minimumLength:
                         description: Minimum length of the password policy that you
                           have set.
+                        type: number
+                      passwordHistorySize:
+                        description: Number of previous passwords that you want Amazon
+                          Cognito to restrict each user from reusing. Users can't
+                          set a password that matches any of number of previous passwords
+                          specified by this argument. A value of 0 means that password
+                          history is not enforced. Valid values are between 0 and
+                          24.
                         type: number
                       requireLowercase:
                         description: Whether you have required users to use at least

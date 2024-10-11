@@ -31,6 +31,9 @@ type AppInitParameters struct {
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
 
+	// Cache configuration for the Amplify app. See cache_config Block for details.
+	CacheConfig []CacheConfigInitParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
+
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
@@ -100,6 +103,9 @@ type AppObservation struct {
 
 	// The build specification (build spec) for an Amplify app.
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
+
+	// Cache configuration for the Amplify app. See cache_config Block for details.
+	CacheConfig []CacheConfigObservation `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
 	// The custom HTTP headers for an Amplify app.
 	CustomHeaders *string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
@@ -178,6 +184,10 @@ type AppParameters struct {
 	// The build specification (build spec) for an Amplify app.
 	// +kubebuilder:validation:Optional
 	BuildSpec *string `json:"buildSpec,omitempty" tf:"build_spec,omitempty"`
+
+	// Cache configuration for the Amplify app. See cache_config Block for details.
+	// +kubebuilder:validation:Optional
+	CacheConfig []CacheConfigParameters `json:"cacheConfig,omitempty" tf:"cache_config,omitempty"`
 
 	// The custom HTTP headers for an Amplify app.
 	// +kubebuilder:validation:Optional
@@ -360,6 +370,25 @@ type AutoBranchCreationConfigParameters struct {
 	// Describes the current stage for the autocreated branch. Valid values: PRODUCTION, BETA, DEVELOPMENT, EXPERIMENTAL, PULL_REQUEST.
 	// +kubebuilder:validation:Optional
 	Stage *string `json:"stage,omitempty" tf:"stage,omitempty"`
+}
+
+type CacheConfigInitParameters struct {
+
+	// Type of cache configuration to use for an Amplify app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type CacheConfigObservation struct {
+
+	// Type of cache configuration to use for an Amplify app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type CacheConfigParameters struct {
+
+	// Type of cache configuration to use for an Amplify app. Valid values: AMPLIFY_MANAGED, AMPLIFY_MANAGED_NO_COOKIES.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type CustomRuleInitParameters struct {

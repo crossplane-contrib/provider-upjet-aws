@@ -981,10 +981,20 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DashboardEndpointV2 != nil {
+		in, out := &in.DashboardEndpointV2, &out.DashboardEndpointV2
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainEndpointOptions != nil {
 		in, out := &in.DomainEndpointOptions, &out.DomainEndpointOptions
 		*out = new(DomainEndpointOptionsObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.DomainEndpointV2HostedZoneID != nil {
+		in, out := &in.DomainEndpointV2HostedZoneID, &out.DomainEndpointV2HostedZoneID
+		*out = new(string)
+		**out = **in
 	}
 	if in.DomainID != nil {
 		in, out := &in.DomainID, &out.DomainID
@@ -1008,6 +1018,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	}
 	if in.Endpoint != nil {
 		in, out := &in.Endpoint, &out.Endpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.EndpointV2 != nil {
+		in, out := &in.EndpointV2, &out.EndpointV2
 		*out = new(string)
 		**out = **in
 	}

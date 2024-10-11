@@ -143,6 +143,8 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  skipDestroy:
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -231,6 +233,8 @@ spec:
                   optionGroupDescription:
                     description: Description of the option group.
                     type: string
+                  skipDestroy:
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -491,6 +495,8 @@ spec:
                   optionGroupDescription:
                     description: Description of the option group.
                     type: string
+                  skipDestroy:
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string

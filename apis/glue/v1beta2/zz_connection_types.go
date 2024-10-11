@@ -16,16 +16,16 @@ import (
 type ConnectionInitParameters struct {
 	ConnectionProperties map[string]*string `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
+	// –  Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// –  Description of the connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  A list of criteria that can be used in selecting this connection.
+	// –  List of criteria that can be used in selecting this connection.
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
-	// A map of physical connection requirements, such as VPC and SecurityGroup. Defined below.
+	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements Block for details.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirementsInitParameters `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
 	// Key-value map of resource tags.
@@ -35,25 +35,25 @@ type ConnectionInitParameters struct {
 
 type ConnectionObservation struct {
 
-	// The ARN of the Glue Connection.
+	// ARN of the Glue Connection.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// –  The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+	// –  ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
 	CatalogID *string `json:"catalogId,omitempty" tf:"catalog_id,omitempty"`
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
+	// –  Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
 	// –  Description of the connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Catalog ID and name of the connection
+	// Catalog ID and name of the connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// –  A list of criteria that can be used in selecting this connection.
+	// –  List of criteria that can be used in selecting this connection.
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
-	// A map of physical connection requirements, such as VPC and SecurityGroup. Defined below.
+	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements Block for details.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirementsObservation `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 
 	// Key-value map of resource tags.
@@ -67,15 +67,15 @@ type ConnectionObservation struct {
 
 type ConnectionParameters struct {
 
-	// –  The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+	// –  ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
 	// +kubebuilder:validation:Required
 	CatalogID *string `json:"catalogId" tf:"catalog_id,omitempty"`
 
-	// value pairs used as parameters for this connection.
+	// value pairs used as parameters for this connection. For more information, see the AWS Documentation.
 	// +kubebuilder:validation:Optional
 	ConnectionPropertiesSecretRef *v1.SecretReference `json:"connectionPropertiesSecretRef,omitempty" tf:"-"`
 
-	// –  The type of the connection. Supported are: CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, and NETWORK. Defaults to JDBC.
+	// –  Type of the connection. Valid values: AZURECOSMOS, AZURESQL, BIGQUERY, CUSTOM, JDBC, KAFKA, MARKETPLACE, MONGODB, NETWORK, OPENSEARCH, SNOWFLAKE. Defaults to JDBC.
 	// +kubebuilder:validation:Optional
 	ConnectionType *string `json:"connectionType,omitempty" tf:"connection_type,omitempty"`
 
@@ -83,11 +83,11 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// –  A list of criteria that can be used in selecting this connection.
+	// –  List of criteria that can be used in selecting this connection.
 	// +kubebuilder:validation:Optional
 	MatchCriteria []*string `json:"matchCriteria,omitempty" tf:"match_criteria,omitempty"`
 
-	// A map of physical connection requirements, such as VPC and SecurityGroup. Defined below.
+	// Map of physical connection requirements, such as VPC and SecurityGroup. See physical_connection_requirements Block for details.
 	// +kubebuilder:validation:Optional
 	PhysicalConnectionRequirements *PhysicalConnectionRequirementsParameters `json:"physicalConnectionRequirements,omitempty" tf:"physical_connection_requirements,omitempty"`
 

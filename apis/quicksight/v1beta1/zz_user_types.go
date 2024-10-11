@@ -36,7 +36,7 @@ type UserInitParameters struct {
 	// The Amazon QuickSight user name that you want to create for the user you are registering. Only valid for registering a user with identity_type set to QUICKSIGHT.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, or ADMIN
+	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO or ADMIN_PRO.
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
@@ -68,7 +68,7 @@ type UserObservation struct {
 	// The Amazon QuickSight user name that you want to create for the user you are registering. Only valid for registering a user with identity_type set to QUICKSIGHT.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, or ADMIN
+	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO or ADMIN_PRO.
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }
 
@@ -107,7 +107,7 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, or ADMIN
+	// The Amazon QuickSight role of the user. The user role can be one of the following: READER, AUTHOR, ADMIN, READER_PRO, AUTHOR_PRO or ADMIN_PRO.
 	// +kubebuilder:validation:Optional
 	UserRole *string `json:"userRole,omitempty" tf:"user_role,omitempty"`
 }

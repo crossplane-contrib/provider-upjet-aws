@@ -59,6 +59,13 @@ type ReplicationGroupInitParameters struct {
 	// Whether to enable encryption at rest.
 	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
+	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
+	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
+	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
+
+	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
+
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine type "redis" and if the engine version is 6 or higher.
 	// Defaults to true.
@@ -96,6 +103,17 @@ type ReplicationGroupInitParameters struct {
 	// The ID of the global replication group to which this replication group should belong. If this parameter is specified, the replication group is added to the specified global replication group as a secondary replication group; otherwise, the replication group is not part of any global replication group. If global_replication_group_id is set, the num_node_groups parameter (or the num_node_groups parameter of the deprecated cluster_mode block) cannot be set.
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
 
+	// Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
+	// +kubebuilder:validation:Optional
+	GlobalReplicationGroupIDRef *v1.Reference `json:"globalReplicationGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
+	// +kubebuilder:validation:Optional
+	GlobalReplicationGroupIDSelector *v1.Selector `json:"globalReplicationGroupIdSelector,omitempty" tf:"-"`
+
+	// The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.
+	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
+
 	// The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at_rest_encryption_enabled = true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -116,6 +134,9 @@ type ReplicationGroupInitParameters struct {
 
 	// Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.
 	MultiAzEnabled *bool `json:"multiAzEnabled,omitempty" tf:"multi_az_enabled,omitempty"`
+
+	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -201,6 +222,12 @@ type ReplicationGroupInitParameters struct {
 	// Whether to enable encryption in transit.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 
+	// A setting that enables clients to migrate to in-transit encryption with no downtime.
+	// Valid values are preferred and required.
+	// When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply.
+	// See the TransitEncryptionMode field in the CreateReplicationGroup API documentation for additional details.
+	TransitEncryptionMode *string `json:"transitEncryptionMode,omitempty" tf:"transit_encryption_mode,omitempty"`
+
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
 	// +listType=set
 	UserGroupIds []*string `json:"userGroupIds,omitempty" tf:"user_group_ids,omitempty"`
@@ -266,6 +293,9 @@ type ReplicationGroupObservation struct {
 	// Whether to enable encryption at rest.
 	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
+	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
+
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine type "redis" and if the engine version is 6 or higher.
 	// Defaults to true.
@@ -315,6 +345,9 @@ type ReplicationGroupObservation struct {
 	// ID of the ElastiCache Replication Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.
+	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
+
 	// The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at_rest_encryption_enabled = true.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
@@ -330,6 +363,9 @@ type ReplicationGroupObservation struct {
 
 	// Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.
 	MultiAzEnabled *bool `json:"multiAzEnabled,omitempty" tf:"multi_az_enabled,omitempty"`
+
+	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -405,6 +441,12 @@ type ReplicationGroupObservation struct {
 	// Whether to enable encryption in transit.
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
 
+	// A setting that enables clients to migrate to in-transit encryption with no downtime.
+	// Valid values are preferred and required.
+	// When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply.
+	// See the TransitEncryptionMode field in the CreateReplicationGroup API documentation for additional details.
+	TransitEncryptionMode *string `json:"transitEncryptionMode,omitempty" tf:"transit_encryption_mode,omitempty"`
+
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
 	// +listType=set
 	UserGroupIds []*string `json:"userGroupIds,omitempty" tf:"user_group_ids,omitempty"`
@@ -423,6 +465,16 @@ type ReplicationGroupParameters struct {
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
 	// +kubebuilder:validation:Optional
 	AuthTokenSecretRef *v1.SecretKeySelector `json:"authTokenSecretRef,omitempty" tf:"-"`
+
+	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
+	// +kubebuilder:validation:Optional
+	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
+
+	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
+	// If true, the auth token will be auto-generated and stored in the Secret referenced by the authTokenSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGenerateAuthToken *bool `json:"autoGenerateAuthToken,omitempty" tf:"-"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
 	// Only supported for engine type "redis" and if the engine version is 6 or higher.
@@ -471,6 +523,18 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	GlobalReplicationGroupID *string `json:"globalReplicationGroupId,omitempty" tf:"global_replication_group_id,omitempty"`
 
+	// Reference to a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
+	// +kubebuilder:validation:Optional
+	GlobalReplicationGroupIDRef *v1.Reference `json:"globalReplicationGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a GlobalReplicationGroup in elasticache to populate globalReplicationGroupId.
+	// +kubebuilder:validation:Optional
+	GlobalReplicationGroupIDSelector *v1.Selector `json:"globalReplicationGroupIdSelector,omitempty" tf:"-"`
+
+	// The IP version to advertise in the discovery protocol. Valid values are ipv4 or ipv6.
+	// +kubebuilder:validation:Optional
+	IPDiscovery *string `json:"ipDiscovery,omitempty" tf:"ip_discovery,omitempty"`
+
 	// The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at_rest_encryption_enabled = true.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kms/v1beta1.Key
 	// +kubebuilder:validation:Optional
@@ -495,6 +559,10 @@ type ReplicationGroupParameters struct {
 	// Specifies whether to enable Multi-AZ Support for the replication group. If true, automatic_failover_enabled must also be enabled. Defaults to false.
 	// +kubebuilder:validation:Optional
 	MultiAzEnabled *bool `json:"multiAzEnabled,omitempty" tf:"multi_az_enabled,omitempty"`
+
+	// The IP versions for cache cluster connections. Valid values are ipv4, ipv6 or dual_stack.
+	// +kubebuilder:validation:Optional
+	NetworkType *string `json:"networkType,omitempty" tf:"network_type,omitempty"`
 
 	// Instance class to be used. See AWS documentation for information on supported node types and guidance on selecting node types. Required unless global_replication_group_id is set. Cannot be set if global_replication_group_id is set.
 	// +kubebuilder:validation:Optional
@@ -603,6 +671,13 @@ type ReplicationGroupParameters struct {
 	// Whether to enable encryption in transit.
 	// +kubebuilder:validation:Optional
 	TransitEncryptionEnabled *bool `json:"transitEncryptionEnabled,omitempty" tf:"transit_encryption_enabled,omitempty"`
+
+	// A setting that enables clients to migrate to in-transit encryption with no downtime.
+	// Valid values are preferred and required.
+	// When enabling encryption on an existing replication group, this must first be set to preferred before setting it to required in a subsequent apply.
+	// See the TransitEncryptionMode field in the CreateReplicationGroup API documentation for additional details.
+	// +kubebuilder:validation:Optional
+	TransitEncryptionMode *string `json:"transitEncryptionMode,omitempty" tf:"transit_encryption_mode,omitempty"`
 
 	// User Group ID to associate with the replication group. Only a maximum of one (1) user group ID is valid. NOTE: This argument is a set because the AWS specification allows for multiple IDs. However, in practice, AWS only allows a maximum size of one.
 	// +kubebuilder:validation:Optional

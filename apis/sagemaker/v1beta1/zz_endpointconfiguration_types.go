@@ -366,6 +366,45 @@ type EndpointConfigurationParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ManagedInstanceScalingInitParameters struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ManagedInstanceScalingObservation struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ManagedInstanceScalingParameters struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	// +kubebuilder:validation:Optional
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	// +kubebuilder:validation:Optional
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type NotificationConfigInitParameters struct {
 
 	// Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.
@@ -434,6 +473,9 @@ type ProductionVariantsInitParameters struct {
 	// The type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling []ManagedInstanceScalingInitParameters `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
+
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
@@ -488,6 +530,9 @@ type ProductionVariantsObservation struct {
 	// The type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling []ManagedInstanceScalingObservation `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
+
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
@@ -540,6 +585,10 @@ type ProductionVariantsParameters struct {
 	// The type of instance to start.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	// +kubebuilder:validation:Optional
+	ManagedInstanceScaling []ManagedInstanceScalingParameters `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
@@ -688,6 +737,9 @@ type ShadowProductionVariantsInitParameters struct {
 	// The type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
 
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling []ShadowProductionVariantsManagedInstanceScalingInitParameters `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
+
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
 
@@ -705,6 +757,45 @@ type ShadowProductionVariantsInitParameters struct {
 
 	// The size, in GB, of the ML storage volume attached to individual inference instance associated with the production variant. Valid values between 1 and 512.
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
+}
+
+type ShadowProductionVariantsManagedInstanceScalingInitParameters struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ShadowProductionVariantsManagedInstanceScalingObservation struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ShadowProductionVariantsManagedInstanceScalingParameters struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	// +kubebuilder:validation:Optional
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	// +kubebuilder:validation:Optional
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type ShadowProductionVariantsObservation struct {
@@ -732,6 +823,9 @@ type ShadowProductionVariantsObservation struct {
 
 	// The type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling []ShadowProductionVariantsManagedInstanceScalingObservation `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
@@ -785,6 +879,10 @@ type ShadowProductionVariantsParameters struct {
 	// The type of instance to start.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	// +kubebuilder:validation:Optional
+	ManagedInstanceScaling []ShadowProductionVariantsManagedInstanceScalingParameters `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional

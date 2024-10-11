@@ -85,20 +85,22 @@ type EnvironmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 
-	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs.
+	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	LoggingConfiguration *LoggingConfigurationInitParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
 	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
+	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
 	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
 	MinWorkers *float64 `json:"minWorkers,omitempty" tf:"min_workers,omitempty"`
 
-	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See Network configuration below for details.
+	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
 	NetworkConfiguration *NetworkConfigurationInitParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
 	// The plugins.zip file version you want to use.
@@ -179,20 +181,22 @@ type EnvironmentObservation struct {
 
 	LastUpdated []LastUpdatedObservation `json:"lastUpdated,omitempty" tf:"last_updated,omitempty"`
 
-	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs.
+	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	LoggingConfiguration *LoggingConfigurationObservation `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
 	// The maximum number of workers that can be automatically scaled up. Value need to be between 1 and 25. Will be 10 by default.
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
+	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
 	// The minimum number of workers that you want to run in your environment. Will be 1 by default.
 	MinWorkers *float64 `json:"minWorkers,omitempty" tf:"min_workers,omitempty"`
 
-	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See Network configuration below for details.
+	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
 	NetworkConfiguration *NetworkConfigurationObservation `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
 	// The plugins.zip file version you want to use.
@@ -295,10 +299,11 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeySelector *v1.Selector `json:"kmsKeySelector,omitempty" tf:"-"`
 
-	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs.
+	// The Apache Airflow logs you want to send to Amazon CloudWatch Logs. See logging_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	LoggingConfiguration *LoggingConfigurationParameters `json:"loggingConfiguration,omitempty" tf:"logging_configuration,omitempty"`
 
+	// The maximum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
 	// +kubebuilder:validation:Optional
 	MaxWebservers *float64 `json:"maxWebservers,omitempty" tf:"max_webservers,omitempty"`
 
@@ -306,6 +311,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxWorkers *float64 `json:"maxWorkers,omitempty" tf:"max_workers,omitempty"`
 
+	// The minimum number of web servers that you want to run in your environment. Value need to be between 2 and 5. Will be 2 by default.
 	// +kubebuilder:validation:Optional
 	MinWebservers *float64 `json:"minWebservers,omitempty" tf:"min_webservers,omitempty"`
 
@@ -313,7 +319,7 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	MinWorkers *float64 `json:"minWorkers,omitempty" tf:"min_workers,omitempty"`
 
-	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See Network configuration below for details.
+	// Specifies the network configuration for your Apache Airflow Environment. This includes two private subnets as well as security groups for the Airflow environment. Each subnet requires internet connection, otherwise the deployment will fail. See network_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	NetworkConfiguration *NetworkConfigurationParameters `json:"networkConfiguration,omitempty" tf:"network_configuration,omitempty"`
 
