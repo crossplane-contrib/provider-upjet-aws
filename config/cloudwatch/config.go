@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the cloudwatch group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_cloudwatch_metric_stream", func(r *config.Resource) {
 		config.MarkAsRequired(r.TerraformResource, "name")
 		r.LateInitializer = config.LateInitializer{

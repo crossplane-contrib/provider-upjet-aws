@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the cognitoidentity group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_cognito_identity_pool", func(r *config.Resource) {
 		r.References["saml_provider_arns"] = config.Reference{
 			TerraformName: "aws_iam_saml_provider",

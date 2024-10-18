@@ -12,7 +12,7 @@ import (
 )
 
 // Configure adds configurations for the opensearch group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_opensearch_domain", func(r *config.Resource) {
 		config.MoveToStatus(r.TerraformResource, "access_policies")
 		r.References["encrypt_at_rest.kms_key_id"] = config.Reference{

@@ -10,7 +10,7 @@ import (
 	"github.com/upbound/provider-aws/config/common"
 )
 
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_bedrockagent_agent", func(r *config.Resource) {
 		r.References["customer_encryption_key_arn"] = config.Reference{
 			TerraformName: "aws_kms_key",

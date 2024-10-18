@@ -8,7 +8,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 )
 
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_mwaa_environment", func(r *config.Resource) {
 		r.References["network_configuration.subnet_ids"] = config.Reference{
 			TerraformName: "aws_subnet",

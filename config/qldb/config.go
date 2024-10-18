@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the qldb group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_qldb_stream", func(r *config.Resource) {
 		r.References["kinesis_configuration.stream_arn"] = config.Reference{
 			TerraformName: "aws_kinesis_stream",

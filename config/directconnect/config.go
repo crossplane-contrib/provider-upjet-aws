@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the directconnect group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_dx_public_virtual_interface", func(r *config.Resource) {
 		r.References["connection_id"] = config.Reference{
 			TerraformName: "aws_dx_connection",

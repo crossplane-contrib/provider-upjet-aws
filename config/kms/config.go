@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the kms group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_kms_alias", func(r *config.Resource) {
 		r.References["target_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",

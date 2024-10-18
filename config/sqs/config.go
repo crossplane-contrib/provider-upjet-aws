@@ -14,7 +14,7 @@ import (
 )
 
 // Configure adds configurations for the sqs group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_sqs_queue_policy", func(r *config.Resource) {
 		r.References["queue_url"] = config.Reference{
 			TerraformName: "aws_sqs_queue",

@@ -7,7 +7,7 @@ package organization
 import "github.com/crossplane/upjet/pkg/config"
 
 // Configure adds configurations for the organization group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	// please see: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/organizations_account
 	// If `role_name` is used, it's stated that Terraform will always
 	// show a difference. Thus, that argument is removed here.
