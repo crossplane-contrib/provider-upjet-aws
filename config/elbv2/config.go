@@ -14,7 +14,7 @@ import (
 )
 
 // Configure adds configurations for the elbv2 group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_lb", func(r *config.Resource) {
 		r.ExternalName.OmittedFields = append(r.ExternalName.OmittedFields, "name_prefix")
 		r.References = config.References{
