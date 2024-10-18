@@ -7,7 +7,7 @@ package cloudformation
 import "github.com/crossplane/upjet/pkg/config"
 
 // Configure adds configurations for the cloudformation group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_cloudformation_stack_set_instance", func(r *config.Resource) {
 		r.TerraformConfigurationInjector = func(jsonMap map[string]any, params map[string]any) error {
 			params["region"] = jsonMap["region"]

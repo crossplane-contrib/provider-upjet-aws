@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the lakeformation group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_lakeformation_data_lake_settings", func(r *config.Resource) {
 		delete(r.References, "create_database_default_permissions.principal")
 		delete(r.References, "create_table_default_permissions.principal")

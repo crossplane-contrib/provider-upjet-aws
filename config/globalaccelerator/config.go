@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the globalaccelerator group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_globalaccelerator_endpoint_group", func(r *config.Resource) {
 		r.References = config.References{
 			"listener_arn": {

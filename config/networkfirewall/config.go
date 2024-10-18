@@ -17,7 +17,7 @@ import (
 )
 
 // Configure adds configurations for the networkfirewall group.
-func Configure(p *config.Provider) { // nolint:gocyclo
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_networkfirewall_firewall_policy", func(r *config.Resource) {
 		r.References = config.References{
 			"firewall_policy.stateless_rule_group_reference.resource_arn": {

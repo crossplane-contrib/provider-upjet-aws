@@ -12,7 +12,7 @@ import (
 )
 
 // Configure adds configurations for the glue group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_glue_catalog_database", func(r *config.Resource) {
 		// Required in ID but optional in schema since TF defaults to Account ID.
 		// This causes refresh to fail in the first reconcile.

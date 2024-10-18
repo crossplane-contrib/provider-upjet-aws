@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the kendra group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_kendra_thesaurus", func(r *config.Resource) {
 		r.Path = "thesaurus"
 	})

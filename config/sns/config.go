@@ -14,7 +14,7 @@ import (
 )
 
 // Configure adds configurations for the sns group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_sns_topic_subscription", func(r *config.Resource) {
 		r.References["endpoint"] = config.Reference{
 			TerraformName: "aws_sqs_queue",

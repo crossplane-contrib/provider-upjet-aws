@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the gamelift group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_gamelift_build", func(r *config.Resource) {
 		r.References["storage_location.role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",

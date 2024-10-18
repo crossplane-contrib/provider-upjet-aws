@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the grafana group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_grafana_workspace", func(r *config.Resource) {
 		r.References["role_arn"] = config.Reference{
 			TerraformName: "aws_iam_role",

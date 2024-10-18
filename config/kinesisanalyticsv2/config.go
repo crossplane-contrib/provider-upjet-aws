@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the kinesisanalytics2 group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_kinesisanalyticsv2_application", func(r *config.Resource) {
 		r.References["application_configuration.application_code_configuration.code_content.s3_content_location.bucket_arn"] = config.Reference{
 			TerraformName: "aws_s3_bucket",

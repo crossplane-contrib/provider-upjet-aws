@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the kinesisanalytics group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_kinesis_analytics_application", func(r *config.Resource) {
 		r.References["inputs.kinesis_stream.resource_arn"] = config.Reference{
 			TerraformName: "aws_kinesis_stream",

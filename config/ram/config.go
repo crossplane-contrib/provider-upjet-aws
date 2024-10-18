@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the ram group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_ram_resource_association", func(r *config.Resource) {
 		delete(r.References, "resource_arn")
 	})
