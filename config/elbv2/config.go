@@ -119,6 +119,19 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			s.Computed = false
 		}
 		r.LateInitializer.IgnoredFields = []string{"target_failover"}
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			// skip no diff or destroy diffs
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+
+			// ignore diff due to defaulting in the TF schema
+			udiDiff, ok := diff.Attributes["target_health_state.0.unhealthy_draining_interval"]
+			if ok && udiDiff.Old == "" && udiDiff.New == "0" {
+				delete(diff.Attributes, "target_health_state.0.unhealthy_draining_interval")
+			}
+			return diff, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_lb_target_group_attachment", func(r *config.Resource) {
