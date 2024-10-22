@@ -93,7 +93,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KMSKeyID),
-			Extract:      reference.ExternalName(),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.ForProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.ForProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -249,7 +249,7 @@ func (mg *Cluster) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KMSKeyID),
-			Extract:      reference.ExternalName(),
+			Extract:      common.ARNExtractor(),
 			Reference:    mg.Spec.InitProvider.KMSKeyIDRef,
 			Selector:     mg.Spec.InitProvider.KMSKeyIDSelector,
 			To:           reference.To{List: l, Managed: m},
