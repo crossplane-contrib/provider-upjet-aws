@@ -9,7 +9,6 @@ metadata:
 spec:
   forProvider:
     computeResources:
-<<<<<<< HEAD
       instanceRoleSelector:
         matchLabels:
           testing.upbound.io/example-name: ecs_instance_role
@@ -26,36 +25,13 @@ spec:
       subnetSelector:
         matchLabels:
           testing.upbound.io/example-name: sample_subnet
-=======
-      instanceRole: arn:aws:iam::<ACCOUNT_ID>:instance-profile/sample
-        # matchLabels:
-        #   testing.upbound.io/example-name: ecs_instance_role
-      instanceType:
-      - c4.large
-      maxVcpus: 16
-      minVcpus: 0
-      # placementGroupSelector:
-      #   matchLabels:
-      #     testing.upbound.io/example-name: sample
-      securityGroupIds:
-      - sg-1234567890abcdef0
-      subnets:
-      - subnet-1234567890abcdef0
-      - subnet-0987654321fedcba0
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
       type: EC2
     region: us-west-1
     serviceRoleSelector:
       matchLabels:
         testing.upbound.io/example-name: aws_batch_service_role
     type: MANAGED
-<<<<<<< HEAD
 ---
-=======
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: InstanceProfile
 metadata:
@@ -68,15 +44,8 @@ spec:
   forProvider:
     roleSelector:
       matchLabels:
-<<<<<<< HEAD
         testing.upbound.io/example-name: ecs_iam_role
 ---
-=======
-        testing.upbound.io/example-name: example
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
@@ -86,7 +55,6 @@ metadata:
     testing.upbound.io/example-name: aws_batch_service_role
   name: aws-batch-service-role
 spec:
-<<<<<<< HEAD
   deletionPolicy: Orphan
   forProvider:
     assumeRolePolicy: |
@@ -103,20 +71,12 @@ spec:
           ]
       }
 ---
-=======
-  forProvider:
-    assumeRolePolicy: ${data.aws_iam_policy_document.batch_assume_role.json}
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-<<<<<<< HEAD
     testing.upbound.io/example-name: ecs_iam_role
   name: ecs-instance-role
 spec:
@@ -135,23 +95,12 @@ spec:
           ]
       }
 ---
-=======
-    testing.upbound.io/example-name: ecs_instance_role
-  name: ecs-instance-role
-spec:
-  forProvider:
-    assumeRolePolicy: ${data.aws_iam_policy_document.ec2_assume_role.json}
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-<<<<<<< HEAD
     testing.upbound.io/example-name: aws_batch_service_role_attachment
   name: aws-batch-service-role
 spec:
@@ -164,69 +113,35 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: aws_batch_service_role
 ---
-=======
-    testing.upbound.io/example-name: aws_batch_service_role
-  name: aws-batch-service-role
-spec:
-  forProvider:
-    policyArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    roleSelector:
-      matchLabels:
-        testing.upbound.io/example-name: aws_batch_service_role
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-<<<<<<< HEAD
     testing.upbound.io/example-name: ecs_instance_role_attachment
-=======
-    testing.upbound.io/example-name: ecs_instance_role
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
   name: ecs-instance-role
 spec:
   forProvider:
     policyArnSelector:
       matchLabels:
-<<<<<<< HEAD
         testing.upbound.io/example-name: aws_ecs_service_policy
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: ecs_iam_role
 ---
-=======
-        testing.upbound.io/example-name: example
-    roleSelector:
-      matchLabels:
-        testing.upbound.io/example-name: ecs_instance_role
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: PlacementGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-<<<<<<< HEAD
     testing.upbound.io/example-name: sample_pg
-=======
-    testing.upbound.io/example-name: sample
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
   name: sample
 spec:
   forProvider:
     region: us-west-1
     strategy: cluster
-<<<<<<< HEAD
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
@@ -350,18 +265,12 @@ spec:
           ]
       }
 ---
-=======
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-<<<<<<< HEAD
     testing.upbound.io/example-name: sample_sg
   name: sample
 spec:
@@ -371,28 +280,13 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: sample
 ---
-=======
-    testing.upbound.io/example-name: sample
-  name: sample
-spec:
-  forProvider:
-    name: aws_batch_compute_environment_security_group
-    region: us-west-1
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
     meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
-<<<<<<< HEAD
     testing.upbound.io/example-name: sample_subnet
-=======
-    testing.upbound.io/example-name: sample
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
   name: sample
 spec:
   forProvider:
@@ -401,13 +295,7 @@ spec:
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: sample
-<<<<<<< HEAD
 ---
-=======
-
----
-
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
