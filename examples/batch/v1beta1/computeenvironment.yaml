@@ -232,7 +232,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
-    meta.upbound.io/example-id: iam/v1beta1/role
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
     testing.upbound.io/example-name: aws_batch_service_policy
   name: batch-sample-user-policy
@@ -322,7 +322,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
-    meta.upbound.io/example-id: iam/v1beta1/role
+    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
   labels:
     testing.upbound.io/example-name: aws_ecs_service_policy
   name: ecs-sample-user-policy

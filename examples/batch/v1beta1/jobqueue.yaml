@@ -22,7 +22,7 @@ apiVersion: batch.aws.upbound.io/v1beta1
 kind: ComputeEnvironment
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: sample
   name: sample
@@ -56,7 +56,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: InstanceProfile
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: ecs_instance_role
   name: ecs-instance-role
@@ -70,7 +70,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: aws_batch_service_role
   name: aws-batch-service-role
@@ -95,7 +95,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: ecs_iam_role
   name: ecs-instance-role
@@ -119,7 +119,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: aws_batch_service_role_attachment
   name: aws-batch-service-role
@@ -137,7 +137,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: ecs_instance_role_attachment
   name: ecs-instance-role
@@ -154,7 +154,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: PlacementGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: sample_pg
   name: sample
@@ -167,7 +167,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
-    meta.upbound.io/example-id: iam/v1beta1/role
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: aws_batch_service_policy
   name: batch-sample-user-policy
@@ -257,7 +257,7 @@ apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
 metadata:
   annotations:
-    meta.upbound.io/example-id: iam/v1beta1/role
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: aws_ecs_service_policy
   name: ecs-sample-user-policy
@@ -289,7 +289,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: SecurityGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: sample_sg
   name: sample
@@ -304,7 +304,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: sample_subnet
   name: sample
@@ -320,7 +320,7 @@ apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPC
 metadata:
   annotations:
-    meta.upbound.io/example-id: batch/v1beta1/computeenvironment
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
   labels:
     testing.upbound.io/example-name: sample
   name: sample
