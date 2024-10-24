@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the medialive group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_medialive_multiplex", func(r *config.Resource) {
 		r.Path = "multiplices"
 	})

@@ -12,7 +12,7 @@ import (
 )
 
 // Configure adds configurations for the dms group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_dms_endpoint", func(r *config.Resource) {
 		r.References = config.References{
 			"secrets_manager_access_role_arn": {

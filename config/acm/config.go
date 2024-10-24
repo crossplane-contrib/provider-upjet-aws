@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the acm group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_acm_certificate_validation", func(r *config.Resource) {
 		r.References = map[string]config.Reference{
 			"certificate_arn": {

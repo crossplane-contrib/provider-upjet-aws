@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the codeartifact group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_codeartifact_domain", func(r *config.Resource) {
 		r.References["encryption_key"] = config.Reference{
 			TerraformName: "aws_kms_key",

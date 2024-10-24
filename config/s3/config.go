@@ -10,7 +10,7 @@ import (
 )
 
 // Configure adds configurations for the s3 group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_s3_bucket", func(r *config.Resource) {
 		// Mutually exclusive with:
 		// aws_s3_bucket_accelerate_configuration

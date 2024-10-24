@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the apigateway group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_api_gateway_rest_api", func(r *config.Resource) {
 		config.MoveToStatus(r.TerraformResource, "policy")
 	})

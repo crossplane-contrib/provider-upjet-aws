@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the athena group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_athena_workgroup", func(r *config.Resource) {
 		r.References["configuration.result_configuration.encryption_configuration.kms_key_arn"] = config.Reference{
 			TerraformName: "aws_kms_key",
