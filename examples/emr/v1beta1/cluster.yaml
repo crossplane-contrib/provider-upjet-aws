@@ -1,0 +1,409 @@
+apiVersion: emr.aws.upbound.io/v1beta1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: emr_cluster_example
+  name: emr-cluster-example
+spec:
+  forProvider:
+    name: emr-cluster-example
+    releaseLabel: emr-4.6.0
+    applications:
+      - Spark
+    ec2Attributes:
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example_subnet
+      emrManagedMasterSecurityGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example_security_group
+      emrManagedSlaveSecurityGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example_security_group
+      instanceProfileSelector:
+        matchLabels:
+          testing.upbound.io/example-name: instance_profile_example
+    masterInstanceGroup:
+      instanceType: m1.medium
+    coreInstanceGroup:
+      instanceCount: 1
+      instanceType: m1.medium
+    terminationProtection: false
+    configurationsJson: |
+      [
+        {
+          "Classification": "hadoop-env",
+          "Configurations": [
+            {
+              "Classification": "export",
+              "Properties": {
+                "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+              }
+            }
+          ],
+          "Properties": {}
+        },
+        {
+          "Classification": "spark-env",
+          "Configurations": [
+            {
+              "Classification": "export",
+              "Properties": {
+                "JAVA_HOME": "/usr/lib/jvm/java-1.8.0"
+              }
+            }
+          ],
+          "Properties": {}
+        }
+      ]
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_service_role
+    tags:
+      for-use-with-amazon-emr-managed-policies: "true"
+    region: us-west-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_security_group
+  name: emr-security-group
+spec:
+  forProvider:
+    description: Allow inbound traffic
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_vpc
+    tags:
+      for-use-with-amazon-emr-managed-policies: "true"
+    region: us-west-1
+    revokeRulesOnDelete: true
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupIngressRule
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_ingress_rule
+  name: example-ingress-rule
+spec:
+  forProvider:
+    cidrIpv4: 10.0.0.0/16
+    fromPort: 0
+    ipProtocol: "-1"
+    toPort: 65535
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_security_group
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupEgressRule
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_egress_rule
+  name: example-egress-rule
+spec:
+  forProvider:
+    cidrIpv4: 0.0.0.0/0
+    ipProtocol: "-1"
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_security_group
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_vpc
+  name: vpc-emr-example
+spec:
+  forProvider:
+    region: us-west-1
+    cidrBlock: 10.0.0.0/16
+    enableDnsHostnames: true
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_subnet
+  name: example-subnet
+spec:
+  forProvider:
+    region: us-west-1
+    availabilityZone: us-west-1a
+    vpcIdRef:
+      name: vpc-emr-example
+    cidrBlock: 10.0.0.0/20
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: InternetGateway
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_internet_gateway
+  name: example-internet-gateway
+spec:
+  forProvider:
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_vpc
+    region: us-west-1
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Route
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: route
+spec:
+  forProvider:
+    region: us-west-1
+    destinationCidrBlock: 0.0.0.0/0
+    gatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_internet_gateway
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_rtb
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_rtb
+  name: example-rtb
+spec:
+  forProvider:
+    region: us-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_vpc
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: RouteTableAssociation
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_rta
+  name: example-rta
+spec:
+  forProvider:
+    region: us-west-1
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_rtb
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_subnet
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_service_role
+  name: example-service-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "elasticmapreduce.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_policy_attachment
+  name: example-policy-attachment
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/service-role/AmazonEMRServicePolicy_v2
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_service_role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_policy_attachment
+  name: example-policy-attachment2
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_service_policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_service_role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_service_policy
+  name: example-service-policy-custom
+spec:
+  forProvider:
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Sid": "CreateInNetwork",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:CreateNetworkInterface",
+                      "ec2:RunInstances",
+                      "ec2:CreateFleet",
+                      "ec2:CreateLaunchTemplate",
+                      "ec2:CreateLaunchTemplateVersion",
+                      "ec2:DeleteLaunchTemplate",
+                      "ec2:DescribeLaunchTemplates"
+                  ],
+                  "Resource": "*"
+              },
+              {
+                  "Sid": "ManageSecurityGroups",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:AuthorizeSecurityGroupEgress",
+                      "ec2:AuthorizeSecurityGroupIngress",
+                      "ec2:RevokeSecurityGroupEgress",
+                      "ec2:RevokeSecurityGroupIngress"
+                  ],
+                  "Resource": [
+                      "arn:aws:ec2:*:*:security-group/*"
+                  ]
+              },
+              {
+                  "Sid": "CreateDefaultSecurityGroupInVPC",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:CreateSecurityGroup"
+                  ],
+                  "Resource": [
+                      "arn:aws:ec2:*:*:vpc/*"
+                  ]
+              },
+              {
+                  "Sid": "PassRoleForEC2",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": "*",
+                  "Condition": {
+                      "StringLike": {
+                          "iam:PassedToService": "ec2.amazonaws.com"
+                      }
+                  }
+              }
+          ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: InstanceProfile
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: instance_profile_example
+  name: instance-profile-role
+spec:
+  forProvider:
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance_profile_role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: instance_profile_role
+  name: instance-profile-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
+    meta.upbound.io/example-id: emr/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example_policy_attachment2
+  name: example-policy-attachment3
+spec:
+  forProvider:
+    policyArn: arn:aws:iam::aws:policy/AmazonEMRFullAccessPolicy_v2
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: instance_profile_role
