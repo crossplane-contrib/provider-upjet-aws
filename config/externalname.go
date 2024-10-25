@@ -30,7 +30,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_appconfig_environment": appConfigEnvironment(),
 
 	// AWS Batch job queue can be imported using the name
-	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .client_metadata.account_id }}:job-queue/{{ .external_name }}"),
+	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:job-queue/{{ .external_name }}"),
 
 	// bedrockagent
 	//

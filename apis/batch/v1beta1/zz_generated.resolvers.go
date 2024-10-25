@@ -24,10 +24,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
-<<<<<<< HEAD
 	var mrsp reference.MultiResolutionResponse
-=======
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	var err error
 
 	if mg.Spec.ForProvider.ComputeResources != nil {
@@ -38,11 +35,8 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ComputeResources.InstanceRole),
-<<<<<<< HEAD
 				Extract:      reference.ExternalName(),
-=======
 				Extract:      resource.ExtractParamPath("arn", true),
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 				Reference:    mg.Spec.ForProvider.ComputeResources.InstanceRoleRef,
 				Selector:     mg.Spec.ForProvider.ComputeResources.InstanceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -76,7 +70,6 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 		mg.Spec.ForProvider.ComputeResources.PlacementGroupRef = rsp.ResolvedReference
 
 	}
-<<<<<<< HEAD
 	if mg.Spec.ForProvider.ComputeResources != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
@@ -119,8 +112,6 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 		mg.Spec.ForProvider.ComputeResources.SubnetRefs = mrsp.ResolvedReferences
 
 	}
-=======
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
@@ -128,11 +119,8 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceRole),
-<<<<<<< HEAD
 			Extract:      reference.ExternalName(),
-=======
 			Extract:      resource.ExtractParamPath("arn", true),
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 			Reference:    mg.Spec.ForProvider.ServiceRoleRef,
 			Selector:     mg.Spec.ForProvider.ServiceRoleSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -152,11 +140,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeResources.InstanceRole),
-<<<<<<< HEAD
 				Extract:      reference.ExternalName(),
-=======
-				Extract:      resource.ExtractParamPath("arn", true),
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 				Reference:    mg.Spec.InitProvider.ComputeResources.InstanceRoleRef,
 				Selector:     mg.Spec.InitProvider.ComputeResources.InstanceRoleSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -190,7 +174,6 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 		mg.Spec.InitProvider.ComputeResources.PlacementGroupRef = rsp.ResolvedReference
 
 	}
-<<<<<<< HEAD
 	if mg.Spec.InitProvider.ComputeResources != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
@@ -233,8 +216,6 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 		mg.Spec.InitProvider.ComputeResources.SubnetRefs = mrsp.ResolvedReferences
 
 	}
-=======
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
@@ -242,11 +223,7 @@ func (mg *ComputeEnvironment) ResolveReferences( // ResolveReferences of this Co
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceRole),
-<<<<<<< HEAD
 			Extract:      reference.ExternalName(),
-=======
-			Extract:      resource.ExtractParamPath("arn", true),
->>>>>>> d250edec9 (feat: add aws batch compute and job queue)
 			Reference:    mg.Spec.InitProvider.ServiceRoleRef,
 			Selector:     mg.Spec.InitProvider.ServiceRoleSelector,
 			To:           reference.To{List: l, Managed: m},
