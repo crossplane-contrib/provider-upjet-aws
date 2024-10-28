@@ -86,7 +86,87 @@ spec:
                   "Action": "sts:AssumeRole"
               }
           ]
-      }    
+      }  
+    inlinePolicy:
+      - name: batch-sample-user-policy
+        policy: |
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Sid": "AWSBatchPolicyStatement1",
+                    "Effect": "Allow",
+                    "Action": [
+                        "ec2:*",
+                        "autoscaling:*",
+                        "ecs:*",
+                        "logs:CreateLogGroup",
+                        "logs:CreateLogStream",
+                        "logs:PutLogEvents",
+                        "logs:DescribeLogGroups",
+                        "iam:GetInstanceProfile",
+                        "iam:GetRole"
+                    ],
+                    "Resource": "*"
+                },
+                {
+                    "Sid": "AWSBatchPolicyStatement2",
+                    "Effect": "Allow",
+                    "Action": "ecs:TagResource",
+                    "Resource": [
+                        "arn:aws:ecs:*:*:task/*_Batch_*"
+                    ]
+                },
+                {
+                    "Sid": "AWSBatchPolicyStatement3",
+                    "Effect": "Allow",
+                    "Action": "iam:PassRole",
+                    "Resource": [
+                        "*"
+                    ],
+                    "Condition": {
+                        "StringEquals": {
+                            "iam:PassedToService": [
+                                "ec2.amazonaws.com",
+                                "ec2.amazonaws.com.cn",
+                                "ecs-tasks.amazonaws.com"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "Sid": "AWSBatchPolicyStatement4",
+                    "Effect": "Allow",
+                    "Action": "iam:CreateServiceLinkedRole",
+                    "Resource": "*",
+                    "Condition": {
+                        "StringEquals": {
+                            "iam:AWSServiceName": [
+                                "spot.amazonaws.com",
+                                "spotfleet.amazonaws.com",
+                                "autoscaling.amazonaws.com",
+                                "ecs.amazonaws.com"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "Sid": "AWSBatchPolicyStatement5",
+                    "Effect": "Allow",
+                    "Action": [
+                        "ec2:CreateTags"
+                    ],
+                    "Resource": [
+                        "*"
+                    ],
+                    "Condition": {
+                        "StringEquals": {
+                            "ec2:CreateAction": "RunInstances"
+                        }
+                    }
+                }
+            ]
+          }           
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Role
@@ -112,23 +192,23 @@ spec:
           ]
       }   
 ---
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: RolePolicyAttachment
-metadata:
-  annotations:
-    meta.upbound.io/example-id: batch/v1beta1/jobqueue
-    uptest.upbound.io/pre-delete-hook: testhooks/delete-computeenvironment.sh
-  labels:
-    testing.upbound.io/example-name: aws_batch_service_role_attachment
-  name: aws-batch-service-role
-spec:
-  forProvider:
-    policyArnSelector:
-      matchLabels:
-        testing.upbound.io/example-name: aws_batch_service_policy
-    roleSelector:
-      matchLabels:
-        testing.upbound.io/example-name: aws_batch_service_role        
+# apiVersion: iam.aws.upbound.io/v1beta1
+# kind: RolePolicyAttachment
+# metadata:
+#   annotations:
+#     meta.upbound.io/example-id: batch/v1beta1/jobqueue
+#     uptest.upbound.io/pre-delete-hook: testhooks/delete-computeenvironment.sh
+#   labels:
+#     testing.upbound.io/example-name: aws_batch_service_role_attachment
+#   name: aws-batch-service-role
+# spec:
+#   forProvider:
+#     policyArnSelector:
+#       matchLabels:
+#         testing.upbound.io/example-name: aws_batch_service_policy
+#     roleSelector:
+#       matchLabels:
+#         testing.upbound.io/example-name: aws_batch_service_role        
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: RolePolicyAttachment
@@ -160,95 +240,95 @@ spec:
     region: eu-west-1
     strategy: cluster  
 ---
-apiVersion: iam.aws.upbound.io/v1beta1
-kind: Policy
-metadata:
-  annotations:
-    meta.upbound.io/example-id: batch/v1beta1/jobqueue
-    uptest.upbound.io/pre-delete-hook: testhooks/delete-computeenvironment.sh
-  labels:
-    testing.upbound.io/example-name: aws_batch_service_policy
-  name: batch-sample-user-policy
-spec:
-  forProvider:
-    policy: |
-      {
-          "Version": "2012-10-17",
-          "Statement": [
-              {
-                  "Sid": "AWSBatchPolicyStatement1",
-                  "Effect": "Allow",
-                  "Action": [
-                      "ec2:*",
-                      "autoscaling:*",
-                      "ecs:*",
-                      "logs:CreateLogGroup",
-                      "logs:CreateLogStream",
-                      "logs:PutLogEvents",
-                      "logs:DescribeLogGroups",
-                      "iam:GetInstanceProfile",
-                      "iam:GetRole"
-                  ],
-                  "Resource": "*"
-              },
-              {
-                  "Sid": "AWSBatchPolicyStatement2",
-                  "Effect": "Allow",
-                  "Action": "ecs:TagResource",
-                  "Resource": [
-                      "arn:aws:ecs:*:*:task/*_Batch_*"
-                  ]
-              },
-              {
-                  "Sid": "AWSBatchPolicyStatement3",
-                  "Effect": "Allow",
-                  "Action": "iam:PassRole",
-                  "Resource": [
-                      "*"
-                  ],
-                  "Condition": {
-                      "StringEquals": {
-                          "iam:PassedToService": [
-                              "ec2.amazonaws.com",
-                              "ec2.amazonaws.com.cn",
-                              "ecs-tasks.amazonaws.com"
-                          ]
-                      }
-                  }
-              },
-              {
-                  "Sid": "AWSBatchPolicyStatement4",
-                  "Effect": "Allow",
-                  "Action": "iam:CreateServiceLinkedRole",
-                  "Resource": "*",
-                  "Condition": {
-                      "StringEquals": {
-                          "iam:AWSServiceName": [
-                              "spot.amazonaws.com",
-                              "spotfleet.amazonaws.com",
-                              "autoscaling.amazonaws.com",
-                              "ecs.amazonaws.com"
-                          ]
-                      }
-                  }
-              },
-              {
-                  "Sid": "AWSBatchPolicyStatement5",
-                  "Effect": "Allow",
-                  "Action": [
-                      "ec2:CreateTags"
-                  ],
-                  "Resource": [
-                      "*"
-                  ],
-                  "Condition": {
-                      "StringEquals": {
-                          "ec2:CreateAction": "RunInstances"
-                      }
-                  }
-              }
-          ]
-      }    
+# apiVersion: iam.aws.upbound.io/v1beta1
+# kind: Policy
+# metadata:
+#   annotations:
+#     meta.upbound.io/example-id: batch/v1beta1/jobqueue
+#     uptest.upbound.io/pre-delete-hook: testhooks/delete-computeenvironment.sh
+#   labels:
+#     testing.upbound.io/example-name: aws_batch_service_policy
+#   name: batch-sample-user-policy
+# spec:
+#   forProvider:
+#     policy: |
+#       {
+#           "Version": "2012-10-17",
+#           "Statement": [
+#               {
+#                   "Sid": "AWSBatchPolicyStatement1",
+#                   "Effect": "Allow",
+#                   "Action": [
+#                       "ec2:*",
+#                       "autoscaling:*",
+#                       "ecs:*",
+#                       "logs:CreateLogGroup",
+#                       "logs:CreateLogStream",
+#                       "logs:PutLogEvents",
+#                       "logs:DescribeLogGroups",
+#                       "iam:GetInstanceProfile",
+#                       "iam:GetRole"
+#                   ],
+#                   "Resource": "*"
+#               },
+#               {
+#                   "Sid": "AWSBatchPolicyStatement2",
+#                   "Effect": "Allow",
+#                   "Action": "ecs:TagResource",
+#                   "Resource": [
+#                       "arn:aws:ecs:*:*:task/*_Batch_*"
+#                   ]
+#               },
+#               {
+#                   "Sid": "AWSBatchPolicyStatement3",
+#                   "Effect": "Allow",
+#                   "Action": "iam:PassRole",
+#                   "Resource": [
+#                       "*"
+#                   ],
+#                   "Condition": {
+#                       "StringEquals": {
+#                           "iam:PassedToService": [
+#                               "ec2.amazonaws.com",
+#                               "ec2.amazonaws.com.cn",
+#                               "ecs-tasks.amazonaws.com"
+#                           ]
+#                       }
+#                   }
+#               },
+#               {
+#                   "Sid": "AWSBatchPolicyStatement4",
+#                   "Effect": "Allow",
+#                   "Action": "iam:CreateServiceLinkedRole",
+#                   "Resource": "*",
+#                   "Condition": {
+#                       "StringEquals": {
+#                           "iam:AWSServiceName": [
+#                               "spot.amazonaws.com",
+#                               "spotfleet.amazonaws.com",
+#                               "autoscaling.amazonaws.com",
+#                               "ecs.amazonaws.com"
+#                           ]
+#                       }
+#                   }
+#               },
+#               {
+#                   "Sid": "AWSBatchPolicyStatement5",
+#                   "Effect": "Allow",
+#                   "Action": [
+#                       "ec2:CreateTags"
+#                   ],
+#                   "Resource": [
+#                       "*"
+#                   ],
+#                   "Condition": {
+#                       "StringEquals": {
+#                           "ec2:CreateAction": "RunInstances"
+#                       }
+#                   }
+#               }
+#           ]
+#       }    
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
