@@ -1,0 +1,330 @@
+apiVersion: batch.aws.upbound.io/v1beta1
+kind: JobQueue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: test_queue
+  name: test-queue
+spec:
+  forProvider:
+    computeEnvironmentOrder:
+      - computeEnvironmentSelector:
+          matchLabels:
+            testing.upbound.io/example-name: sample
+        order: 1
+    priority: 1
+    region: eu-west-1
+    state: ENABLED
+---
+apiVersion: batch.aws.upbound.io/v1beta1
+kind: ComputeEnvironment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: sample
+  name: sample
+spec:
+  forProvider:
+    computeResources:
+      instanceRoleSelector:
+        matchLabels:
+          testing.upbound.io/example-name: ecs_instance_role
+      instanceType:
+        - c4.large
+      maxVcpus: 16
+      minVcpus: 0
+      placementGroupSelector:
+        matchLabels:
+          testing.upbound.io/example-name: sample_pg
+      securityGroupIdsRefs:
+      - name: sample
+      subnetsRefs:
+      - name: sample
+      type: EC2
+    region: eu-west-1
+    serviceRoleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_batch_service_role
+    type: MANAGED
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: InstanceProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: ecs_instance_role
+  name: ecs-instance-role
+spec:
+  forProvider:
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ecs_iam_role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-computeenvironment.sh
+  labels:
+    testing.upbound.io/example-name: aws_batch_service_role
+  name: aws-batch-service-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Principal": {
+                      "Service": "batch.amazonaws.com"
+                  },
+                  "Action": "sts:AssumeRole"
+              }
+          ]
+      }    
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: ecs_iam_role
+  name: ecs-instance-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Principal": {
+                      "Service": "ec2.amazonaws.com"
+                  },
+                  "Action": "sts:AssumeRole"
+              }
+          ]
+      }   
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-computeenvironment.sh
+  labels:
+    testing.upbound.io/example-name: aws_batch_service_role_attachment
+  name: aws-batch-service-role
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_batch_service_policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_batch_service_role        
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: ecs_instance_role_attachment
+  name: ecs-instance-role
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: aws_ecs_service_policy
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: ecs_iam_role     
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: PlacementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: sample_pg
+  name: sample
+spec:
+  forProvider:
+    region: eu-west-1
+    strategy: cluster  
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-computeenvironment.sh
+  labels:
+    testing.upbound.io/example-name: aws_batch_service_policy
+  name: batch-sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Sid": "AWSBatchPolicyStatement1",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:*",
+                      "autoscaling:*",
+                      "ecs:*",
+                      "logs:CreateLogGroup",
+                      "logs:CreateLogStream",
+                      "logs:PutLogEvents",
+                      "logs:DescribeLogGroups",
+                      "iam:GetInstanceProfile",
+                      "iam:GetRole"
+                  ],
+                  "Resource": "*"
+              },
+              {
+                  "Sid": "AWSBatchPolicyStatement2",
+                  "Effect": "Allow",
+                  "Action": "ecs:TagResource",
+                  "Resource": [
+                      "arn:aws:ecs:*:*:task/*_Batch_*"
+                  ]
+              },
+              {
+                  "Sid": "AWSBatchPolicyStatement3",
+                  "Effect": "Allow",
+                  "Action": "iam:PassRole",
+                  "Resource": [
+                      "*"
+                  ],
+                  "Condition": {
+                      "StringEquals": {
+                          "iam:PassedToService": [
+                              "ec2.amazonaws.com",
+                              "ec2.amazonaws.com.cn",
+                              "ecs-tasks.amazonaws.com"
+                          ]
+                      }
+                  }
+              },
+              {
+                  "Sid": "AWSBatchPolicyStatement4",
+                  "Effect": "Allow",
+                  "Action": "iam:CreateServiceLinkedRole",
+                  "Resource": "*",
+                  "Condition": {
+                      "StringEquals": {
+                          "iam:AWSServiceName": [
+                              "spot.amazonaws.com",
+                              "spotfleet.amazonaws.com",
+                              "autoscaling.amazonaws.com",
+                              "ecs.amazonaws.com"
+                          ]
+                      }
+                  }
+              },
+              {
+                  "Sid": "AWSBatchPolicyStatement5",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ec2:CreateTags"
+                  ],
+                  "Resource": [
+                      "*"
+                  ],
+                  "Condition": {
+                      "StringEquals": {
+                          "ec2:CreateAction": "RunInstances"
+                      }
+                  }
+              }
+          ]
+      }    
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: aws_ecs_service_policy
+  name: ecs-sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Sid": "EcsOperations",
+                  "Effect": "Allow",
+                  "Action": [
+                      "ecs:*",
+                      "ec2:DescribeInstances"
+                  ],
+                  "Resource": "*"
+              },
+              {
+                  "Sid": "EcrOperations",
+                  "Effect": "Allow",
+                  "Action": "ecr:GetAuthorizationToken",
+                  "Resource": "*"
+              }
+          ]
+      }   
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: sample_sg
+  name: sample
+spec:
+  forProvider:
+    region: eu-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample  
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: sample_subnet
+  name: sample
+spec:
+  forProvider:
+    cidrBlock: 10.1.1.0/24
+    region: eu-west-1
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sample  
+---
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: VPC
+metadata:
+  annotations:
+    meta.upbound.io/example-id: batch/v1beta1/jobqueue
+  labels:
+    testing.upbound.io/example-name: sample
+  name: sample
+spec:
+  forProvider:
+    cidrBlock: 10.1.0.0/16
+    region: eu-west-1 
+
+
+
