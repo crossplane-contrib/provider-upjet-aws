@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the iam group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_iam_access_key", func(r *config.Resource) {
 		r.References["user"] = config.Reference{
 			TerraformName: "aws_iam_user",

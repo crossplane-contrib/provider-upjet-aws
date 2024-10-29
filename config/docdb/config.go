@@ -14,7 +14,7 @@ import (
 )
 
 // Configure adds configurations for the docdb group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_docdb_cluster", func(r *config.Resource) {
 		config.MoveToStatus(r.TerraformResource, "cluster_members")
 		r.UseAsync = true

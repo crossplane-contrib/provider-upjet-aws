@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the cloudwatchlogs group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_cloudwatch_log_destination", func(r *config.Resource) {
 		// the target_arn field is generated together with the associated
 		// referencer fields but the auto-generated extractor refers to

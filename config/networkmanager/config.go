@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the networkmanager group
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_networkmanager_link", func(r *config.Resource) {
 		r.References["site_id"] = config.Reference{
 			TerraformName: "aws_networkmanager_site",

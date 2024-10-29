@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the sagemaker group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_sagemaker_workforce", func(r *config.Resource) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"source_ip_config"},

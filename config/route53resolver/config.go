@@ -16,7 +16,7 @@ import (
 )
 
 // Configure adds configurations for the route53resolver group.
-func Configure(p *config.Provider) { // nolint:gocyclo
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_route53_resolver_query_log_config", func(r *config.Resource) {
 		delete(r.References, "destination_arn")
 	})

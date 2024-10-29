@@ -17,7 +17,7 @@ import (
 )
 
 // Configure adds configurations for the autoscaling group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_autoscaling_group", func(r *config.Resource) {
 		// These are mutually exclusive with aws_autoscaling_attachment.
 		config.MoveToStatus(r.TerraformResource, "load_balancers", "target_group_arns")

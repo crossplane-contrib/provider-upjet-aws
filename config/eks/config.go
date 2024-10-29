@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the eks group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_eks_cluster", func(r *config.Resource) {
 		r.References = config.References{
 			"role_arn": {

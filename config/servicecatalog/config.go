@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the servicecatalog group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	// done for proper normalization as the defaulting is done by Terraform
 	// please refer to this resource's external-name configuration for details.
 	p.AddResourceConfigurator("aws_servicecatalog_principal_portfolio_association", func(r *config.Resource) {

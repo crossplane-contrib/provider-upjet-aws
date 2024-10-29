@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the acmpca group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_acmpca_certificate_authority", func(r *config.Resource) {
 		// NOTE(muvaf): It causes circular dependency. See https://github.com/crossplane/crossplane-runtime/issues/313
 		delete(r.References, "revocation_configuration.crl_configuration.s3_bucket_name")

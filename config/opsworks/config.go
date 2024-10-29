@@ -7,7 +7,7 @@ package opsworks
 import "github.com/crossplane/upjet/pkg/config"
 
 // Configure adds configurations for the opsworks group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_opsworks_stack", func(r *config.Resource) {
 		r.References["default_subnet_id"] = config.Reference{
 			TerraformName: "aws_subnet",
