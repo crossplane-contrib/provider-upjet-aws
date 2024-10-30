@@ -11,8 +11,8 @@ PROJECT_NAME := provider-$(PROVIDER_NAME)
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.5.5
-export TERRAFORM_PROVIDER_VERSION := 5.68.0
-export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.2
+export TERRAFORM_PROVIDER_VERSION := 5.73.0
+export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.1
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r

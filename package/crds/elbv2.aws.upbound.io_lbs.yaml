@@ -1738,6 +1738,9 @@ spec:
                       the source port that the client used to connect to the load
                       balancer in application load balancers. Defaults to false.
                     type: boolean
+                  enableZonalShift:
+                    description: Whether zonal shift is enabled. Defaults to false.
+                    type: boolean
                   enforceSecurityGroupInboundRulesOnPrivateLinkTraffic:
                     description: Whether inbound security group rules are enforced
                       for traffic originating from a PrivateLink. Only valid for Load
@@ -2245,6 +2248,9 @@ spec:
                     description: Whether the X-Forwarded-For header should preserve
                       the source port that the client used to connect to the load
                       balancer in application load balancers. Defaults to false.
+                    type: boolean
+                  enableZonalShift:
+                    description: Whether zonal shift is enabled. Defaults to false.
                     type: boolean
                   enforceSecurityGroupInboundRulesOnPrivateLinkTraffic:
                     description: Whether inbound security group rules are enforced
@@ -2841,6 +2847,9 @@ spec:
                     description: Whether the X-Forwarded-For header should preserve
                       the source port that the client used to connect to the load
                       balancer in application load balancers. Defaults to false.
+                    type: boolean
+                  enableZonalShift:
+                    description: Whether zonal shift is enabled. Defaults to false.
                     type: boolean
                   enforceSecurityGroupInboundRulesOnPrivateLinkTraffic:
                     description: Whether inbound security group rules are enforced

@@ -1815,6 +1815,12 @@ spec:
                       later record is chosen. If the timestamp is older than the current
                       trim horizon, the oldest available record is chosen.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   topics:
                     description: The name of the Kafka topics. Only available for
                       MSK sources. A single topic name must be specified.
@@ -2210,6 +2216,12 @@ spec:
                       later record is chosen. If the timestamp is older than the current
                       trim horizon, the oldest available record is chosen.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
                   topics:
                     description: The name of the Kafka topics. Only available for
                       MSK sources. A single topic name must be specified.
@@ -2408,6 +2420,9 @@ spec:
                           See AmazonManagedKafkaEventSourceConfig Syntax.
                         type: string
                     type: object
+                  arn:
+                    description: The event source mapping ARN.
+                    type: string
                   batchSize:
                     description: The largest number of records that Lambda will retrieve
                       from your event source at the time of invocation. Defaults to
@@ -2485,7 +2500,7 @@ spec:
                         type: array
                     type: object
                   functionArn:
-                    description: 'The the ARN of the Lambda function the event source
+                    description: 'The ARN of the Lambda function the event source
                       mapping is sending events to. (Note: this is a computed value
                       that differs from function_name above.)'
                     type: string
@@ -2635,6 +2650,20 @@ spec:
                     description: The reason the event source mapping is in its current
                       state.
                     type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Key-value map of resource tags.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tagsAll:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags assigned to the resource, including
+                      those inherited from the provider default_tags configuration
+                      block.
+                    type: object
+                    x-kubernetes-map-type: granular
                   topics:
                     description: The name of the Kafka topics. Only available for
                       MSK sources. A single topic name must be specified.

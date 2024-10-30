@@ -15,6 +15,9 @@ import (
 
 type KinesisStreamingDestinationInitParameters struct {
 
+	// Toggle for the precision of Kinesis data stream timestamp. Valid values: MILLISECOND and MICROSECOND.
+	ApproximateCreationDateTimePrecision *string `json:"approximateCreationDateTimePrecision,omitempty" tf:"approximate_creation_date_time_precision,omitempty"`
+
 	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/kinesis/v1beta2.Stream
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.TerraformID()
@@ -28,8 +31,7 @@ type KinesisStreamingDestinationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 
-	// The name of the DynamoDB table. There
-	// can only be one Kinesis streaming destination for a given DynamoDB table.
+	// The name of the DynamoDB table. There can only be one Kinesis streaming destination for a given DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 
@@ -44,18 +46,24 @@ type KinesisStreamingDestinationInitParameters struct {
 
 type KinesisStreamingDestinationObservation struct {
 
+	// Toggle for the precision of Kinesis data stream timestamp. Valid values: MILLISECOND and MICROSECOND.
+	ApproximateCreationDateTimePrecision *string `json:"approximateCreationDateTimePrecision,omitempty" tf:"approximate_creation_date_time_precision,omitempty"`
+
 	// The table_name and stream_arn separated by a comma (,).
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The ARN for a Kinesis data stream. This must exist in the same account and region as the DynamoDB table.
 	StreamArn *string `json:"streamArn,omitempty" tf:"stream_arn,omitempty"`
 
-	// The name of the DynamoDB table. There
-	// can only be one Kinesis streaming destination for a given DynamoDB table.
+	// The name of the DynamoDB table. There can only be one Kinesis streaming destination for a given DynamoDB table.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type KinesisStreamingDestinationParameters struct {
+
+	// Toggle for the precision of Kinesis data stream timestamp. Valid values: MILLISECOND and MICROSECOND.
+	// +kubebuilder:validation:Optional
+	ApproximateCreationDateTimePrecision *string `json:"approximateCreationDateTimePrecision,omitempty" tf:"approximate_creation_date_time_precision,omitempty"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
@@ -76,8 +84,7 @@ type KinesisStreamingDestinationParameters struct {
 	// +kubebuilder:validation:Optional
 	StreamArnSelector *v1.Selector `json:"streamArnSelector,omitempty" tf:"-"`
 
-	// The name of the DynamoDB table. There
-	// can only be one Kinesis streaming destination for a given DynamoDB table.
+	// The name of the DynamoDB table. There can only be one Kinesis streaming destination for a given DynamoDB table.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dynamodb/v1beta2.Table
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`

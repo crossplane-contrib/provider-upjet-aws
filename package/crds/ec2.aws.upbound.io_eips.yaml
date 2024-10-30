@@ -167,6 +167,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  ipamPoolId:
+                    description: The ID of an IPAM pool which has an Amazon-provided
+                      or BYOIP public IPv4 CIDR provisioned to it.
+                    type: string
                   networkBorderGroup:
                     description: Location from which the IP address is advertised.
                       Use this parameter to limit the address to this location.
@@ -381,6 +385,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  ipamPoolId:
+                    description: The ID of an IPAM pool which has an Amazon-provided
+                      or BYOIP public IPv4 CIDR provisioned to it.
+                    type: string
                   networkBorderGroup:
                     description: Location from which the IP address is advertised.
                       Use this parameter to limit the address to this location.
@@ -692,6 +700,10 @@ spec:
                     type: string
                   instance:
                     description: EC2 instance ID.
+                    type: string
+                  ipamPoolId:
+                    description: The ID of an IPAM pool which has an Amazon-provided
+                      or BYOIP public IPv4 CIDR provisioned to it.
                     type: string
                   networkBorderGroup:
                     description: Location from which the IP address is advertised.

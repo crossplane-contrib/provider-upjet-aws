@@ -1477,6 +1477,22 @@ spec:
                         description: The Code Editor application settings. See code_editor_app_settings
                           Block below.
                         properties:
+                          appLifecycleManagement:
+                            description: Settings that are used to configure and manage
+                              the lifecycle of JupyterLab applications in a space.
+                              See app_lifecycle_management Block below.
+                            properties:
+                              idleSettings:
+                                description: Settings related to idle shutdown of
+                                  Studio applications. See idle_settings Block below.
+                                properties:
+                                  idleTimeoutInMinutes:
+                                    description: The time that SageMaker waits after
+                                      the application becomes idle before shutting
+                                      it down. Valid values are between 60 and 525600.
+                                    type: number
+                                type: object
+                            type: object
                           defaultResourceSpec:
                             description: The default instance type and the Amazon
                               Resource Name (ARN) of the SageMaker image created on
@@ -1522,6 +1538,22 @@ spec:
                         description: The settings for the JupyterLab application.
                           See jupyter_lab_app_settings Block below.
                         properties:
+                          appLifecycleManagement:
+                            description: Settings that are used to configure and manage
+                              the lifecycle of JupyterLab applications in a space.
+                              See app_lifecycle_management Block below.
+                            properties:
+                              idleSettings:
+                                description: Settings related to idle shutdown of
+                                  Studio applications. See idle_settings Block below.
+                                properties:
+                                  idleTimeoutInMinutes:
+                                    description: The time that SageMaker waits after
+                                      the application becomes idle before shutting
+                                      it down. Valid values are between 60 and 525600.
+                                    type: number
+                                type: object
+                            type: object
                           codeRepository:
                             description: A list of Git repositories that SageMaker
                               automatically displays to users for cloning in the JupyterServer
@@ -1809,6 +1841,22 @@ spec:
                         description: The Code Editor application settings. See code_editor_app_settings
                           Block below.
                         properties:
+                          appLifecycleManagement:
+                            description: Settings that are used to configure and manage
+                              the lifecycle of JupyterLab applications in a space.
+                              See app_lifecycle_management Block below.
+                            properties:
+                              idleSettings:
+                                description: Settings related to idle shutdown of
+                                  Studio applications. See idle_settings Block below.
+                                properties:
+                                  idleTimeoutInMinutes:
+                                    description: The time that SageMaker waits after
+                                      the application becomes idle before shutting
+                                      it down. Valid values are between 60 and 525600.
+                                    type: number
+                                type: object
+                            type: object
                           defaultResourceSpec:
                             description: The default instance type and the Amazon
                               Resource Name (ARN) of the SageMaker image created on
@@ -1854,6 +1902,22 @@ spec:
                         description: The settings for the JupyterLab application.
                           See jupyter_lab_app_settings Block below.
                         properties:
+                          appLifecycleManagement:
+                            description: Settings that are used to configure and manage
+                              the lifecycle of JupyterLab applications in a space.
+                              See app_lifecycle_management Block below.
+                            properties:
+                              idleSettings:
+                                description: Settings related to idle shutdown of
+                                  Studio applications. See idle_settings Block below.
+                                properties:
+                                  idleTimeoutInMinutes:
+                                    description: The time that SageMaker waits after
+                                      the application becomes idle before shutting
+                                      it down. Valid values are between 60 and 525600.
+                                    type: number
+                                type: object
+                            type: object
                           codeRepository:
                             description: A list of Git repositories that SageMaker
                               automatically displays to users for cloning in the JupyterServer
@@ -2239,6 +2303,22 @@ spec:
                         description: The Code Editor application settings. See code_editor_app_settings
                           Block below.
                         properties:
+                          appLifecycleManagement:
+                            description: Settings that are used to configure and manage
+                              the lifecycle of JupyterLab applications in a space.
+                              See app_lifecycle_management Block below.
+                            properties:
+                              idleSettings:
+                                description: Settings related to idle shutdown of
+                                  Studio applications. See idle_settings Block below.
+                                properties:
+                                  idleTimeoutInMinutes:
+                                    description: The time that SageMaker waits after
+                                      the application becomes idle before shutting
+                                      it down. Valid values are between 60 and 525600.
+                                    type: number
+                                type: object
+                            type: object
                           defaultResourceSpec:
                             description: The default instance type and the Amazon
                               Resource Name (ARN) of the SageMaker image created on
@@ -2284,6 +2364,22 @@ spec:
                         description: The settings for the JupyterLab application.
                           See jupyter_lab_app_settings Block below.
                         properties:
+                          appLifecycleManagement:
+                            description: Settings that are used to configure and manage
+                              the lifecycle of JupyterLab applications in a space.
+                              See app_lifecycle_management Block below.
+                            properties:
+                              idleSettings:
+                                description: Settings related to idle shutdown of
+                                  Studio applications. See idle_settings Block below.
+                                properties:
+                                  idleTimeoutInMinutes:
+                                    description: The time that SageMaker waits after
+                                      the application becomes idle before shutting
+                                      it down. Valid values are between 60 and 525600.
+                                    type: number
+                                type: object
+                            type: object
                           codeRepository:
                             description: A list of Git repositories that SageMaker
                               automatically displays to users for cloning in the JupyterServer

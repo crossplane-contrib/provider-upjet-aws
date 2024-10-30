@@ -8,6 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    approximateCreationDateTimePrecision: MICROSECOND
     region: us-west-1
     streamArnSelector:
       matchLabels:

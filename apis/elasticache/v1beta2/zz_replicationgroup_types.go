@@ -78,7 +78,7 @@ type ReplicationGroupInitParameters struct {
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
-	// Only supported for engine type "redis" and if the engine version is 6 or higher.
+	// Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
 	// Defaults to true.
 	AutoMinorVersionUpgrade *string `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
@@ -94,7 +94,7 @@ type ReplicationGroupInitParameters struct {
 	// created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.
+	// Name of the cache engine to be used for the clusters in this replication group. Valid values are redis or valkey.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Version number of the cache engine to be used for the cache clusters in this replication group.
@@ -136,7 +136,7 @@ type ReplicationGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Specifies the destination and format of Redis SLOWLOG or Redis Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
+	// Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
 	LogDeliveryConfiguration []LogDeliveryConfigurationInitParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
 	// ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
@@ -262,7 +262,7 @@ type ReplicationGroupObservation struct {
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
-	// Only supported for engine type "redis" and if the engine version is 6 or higher.
+	// Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
 	// Defaults to true.
 	AutoMinorVersionUpgrade *string `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
 
@@ -284,7 +284,7 @@ type ReplicationGroupObservation struct {
 	// created description for the replication group. Must not be empty.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.
+	// Name of the cache engine to be used for the clusters in this replication group. Valid values are redis or valkey.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// Version number of the cache engine to be used for the cache clusters in this replication group.
@@ -313,7 +313,7 @@ type ReplicationGroupObservation struct {
 	// The ARN of the key that you wish to use if encrypting at rest. If not supplied, uses service managed encryption. Can be specified only if at_rest_encryption_enabled = true.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// Specifies the destination and format of Redis SLOWLOG or Redis Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
+	// Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
 	LogDeliveryConfiguration []LogDeliveryConfigurationObservation `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 
 	// ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:05:00-sun:09:00
@@ -444,7 +444,7 @@ type ReplicationGroupParameters struct {
 	AutoGenerateAuthToken *bool `json:"autoGenerateAuthToken,omitempty" tf:"-"`
 
 	// Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
-	// Only supported for engine type "redis" and if the engine version is 6 or higher.
+	// Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
 	// Defaults to true.
 	// +kubebuilder:validation:Optional
 	AutoMinorVersionUpgrade *string `json:"autoMinorVersionUpgrade,omitempty" tf:"auto_minor_version_upgrade,omitempty"`
@@ -465,7 +465,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Name of the cache engine to be used for the clusters in this replication group. The only valid value is redis.
+	// Name of the cache engine to be used for the clusters in this replication group. Valid values are redis or valkey.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
@@ -513,7 +513,7 @@ type ReplicationGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// Specifies the destination and format of Redis SLOWLOG or Redis Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
+	// Specifies the destination and format of Redis OSS/Valkey SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation on Amazon ElastiCache. See Log Delivery Configuration below for more details.
 	// +kubebuilder:validation:Optional
 	LogDeliveryConfiguration []LogDeliveryConfigurationParameters `json:"logDeliveryConfiguration,omitempty" tf:"log_delivery_configuration,omitempty"`
 

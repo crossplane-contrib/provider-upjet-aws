@@ -18,10 +18,10 @@ type RuleInitParameters struct {
 	// DNS queries for this domain name are forwarded to the IP addresses that are specified using target_ip.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
+	// Friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
+	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53resolver/v1beta1.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -35,7 +35,7 @@ type RuleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolverEndpointIDSelector *v1.Selector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
 
-	// The rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
+	// Rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
 	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
 
 	// Key-value map of resource tags.
@@ -49,26 +49,26 @@ type RuleInitParameters struct {
 
 type RuleObservation struct {
 
-	// The ARN (Amazon Resource Name) for the resolver rule.
+	// ARN (Amazon Resource Name) for the resolver rule.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// DNS queries for this domain name are forwarded to the IP addresses that are specified using target_ip.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// The ID of the resolver rule.
+	// ID of the resolver rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
+	// Friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// When a rule is shared with another AWS account, the account ID of the account that the rule is shared with.
 	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
 
-	// The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
+	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
 	ResolverEndpointID *string `json:"resolverEndpointId,omitempty" tf:"resolver_endpoint_id,omitempty"`
 
-	// The rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
+	// Rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
 	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
 
 	// Whether the rules is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.
@@ -79,7 +79,7 @@ type RuleObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
@@ -94,7 +94,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// A friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
+	// Friendly name that lets you easily find a rule in the Resolver dashboard in the Route 53 console.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -103,7 +103,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
+	// ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
 	// This argument should only be specified for FORWARD type rules.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53resolver/v1beta1.Endpoint
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -118,7 +118,7 @@ type RuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResolverEndpointIDSelector *v1.Selector `json:"resolverEndpointIdSelector,omitempty" tf:"-"`
 
-	// The rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
+	// Rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
 	// +kubebuilder:validation:Optional
 	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
 
@@ -138,10 +138,13 @@ type TargetIPInitParameters struct {
 	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The port at ip that you want to forward DNS queries to. Default value is 53.
+	// One IPv6 address that you want to forward DNS queries to.
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// Port at ip that you want to forward DNS queries to. Default value is 53.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
+	// Protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
@@ -150,10 +153,13 @@ type TargetIPObservation struct {
 	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The port at ip that you want to forward DNS queries to. Default value is 53.
+	// One IPv6 address that you want to forward DNS queries to.
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// Port at ip that you want to forward DNS queries to. Default value is 53.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
+	// Protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
@@ -161,13 +167,17 @@ type TargetIPParameters struct {
 
 	// One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
 	// +kubebuilder:validation:Optional
-	IP *string `json:"ip" tf:"ip,omitempty"`
+	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The port at ip that you want to forward DNS queries to. Default value is 53.
+	// One IPv6 address that you want to forward DNS queries to.
+	// +kubebuilder:validation:Optional
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// Port at ip that you want to forward DNS queries to. Default value is 53.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
+	// Protocol for the resolver endpoint. Valid values can be found in the AWS documentation. Default value is Do53.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }

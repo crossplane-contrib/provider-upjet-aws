@@ -207,6 +207,9 @@ type RuleInitParameters struct {
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
+	// The timezone in which the schedule expression is set. Default value: "Etc/UTC".
+	ScheduleExpressionTimezone *string `json:"scheduleExpressionTimezone,omitempty" tf:"schedule_expression_timezone,omitempty"`
+
 	// The amount of time in minutes before beginning a backup.
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
@@ -286,6 +289,9 @@ type RuleObservation struct {
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
+	// The timezone in which the schedule expression is set. Default value: "Etc/UTC".
+	ScheduleExpressionTimezone *string `json:"scheduleExpressionTimezone,omitempty" tf:"schedule_expression_timezone,omitempty"`
+
 	// The amount of time in minutes before beginning a backup.
 	StartWindow *float64 `json:"startWindow,omitempty" tf:"start_window,omitempty"`
 
@@ -323,6 +329,10 @@ type RuleParameters struct {
 	// A CRON expression specifying when AWS Backup initiates a backup job.
 	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The timezone in which the schedule expression is set. Default value: "Etc/UTC".
+	// +kubebuilder:validation:Optional
+	ScheduleExpressionTimezone *string `json:"scheduleExpressionTimezone,omitempty" tf:"schedule_expression_timezone,omitempty"`
 
 	// The amount of time in minutes before beginning a backup.
 	// +kubebuilder:validation:Optional

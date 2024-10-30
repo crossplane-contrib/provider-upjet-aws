@@ -4922,6 +4922,8 @@ spec:
                               type: object
                           type: object
                         primaryIpv6:
+                          description: Whether the first IPv6 GUA will be made the
+                            primary IPv6 address.
                           type: string
                         privateIpAddress:
                           description: The primary private IPv4 address.
@@ -6292,6 +6294,8 @@ spec:
                               type: object
                           type: object
                         primaryIpv6:
+                          description: Whether the first IPv6 GUA will be made the
+                            primary IPv6 address.
                           type: string
                         privateIpAddress:
                           description: The primary private IPv4 address.
@@ -7522,6 +7526,8 @@ spec:
                           description: The ID of the network interface to attach.
                           type: string
                         primaryIpv6:
+                          description: Whether the first IPv6 GUA will be made the
+                            primary IPv6 address.
                           type: string
                         privateIpAddress:
                           description: The primary private IPv4 address.

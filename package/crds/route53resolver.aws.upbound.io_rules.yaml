@@ -78,8 +78,8 @@ spec:
                       the IP addresses that are specified using target_ip.
                     type: string
                   name:
-                    description: A friendly name that lets you easily find a rule
-                      in the Resolver dashboard in the Route 53 console.
+                    description: Friendly name that lets you easily find a rule in
+                      the Resolver dashboard in the Route 53 console.
                     type: string
                   region:
                     description: Region is the region you'd like your resource to
@@ -87,7 +87,7 @@ spec:
                     type: string
                   resolverEndpointId:
                     description: |-
-                      The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
+                      ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
                       This argument should only be specified for FORWARD type rules.
                     type: string
                   resolverEndpointIdRef:
@@ -167,8 +167,7 @@ spec:
                         type: object
                     type: object
                   ruleType:
-                    description: The rule type. Valid values are FORWARD, SYSTEM and
-                      RECURSIVE.
+                    description: Rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
                     type: string
                   tags:
                     additionalProperties:
@@ -186,14 +185,18 @@ spec:
                           description: One IP address that you want to forward DNS
                             queries to. You can specify only IPv4 addresses.
                           type: string
+                        ipv6:
+                          description: One IPv6 address that you want to forward DNS
+                            queries to.
+                          type: string
                         port:
-                          description: The port at ip that you want to forward DNS
-                            queries to. Default value is 53.
+                          description: Port at ip that you want to forward DNS queries
+                            to. Default value is 53.
                           type: number
                         protocol:
-                          description: The protocol for the resolver endpoint. Valid
-                            values can be found in the AWS documentation. Default
-                            value is Do53.
+                          description: Protocol for the resolver endpoint. Valid values
+                            can be found in the AWS documentation. Default value is
+                            Do53.
                           type: string
                       type: object
                     type: array
@@ -218,12 +221,12 @@ spec:
                       the IP addresses that are specified using target_ip.
                     type: string
                   name:
-                    description: A friendly name that lets you easily find a rule
-                      in the Resolver dashboard in the Route 53 console.
+                    description: Friendly name that lets you easily find a rule in
+                      the Resolver dashboard in the Route 53 console.
                     type: string
                   resolverEndpointId:
                     description: |-
-                      The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
+                      ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
                       This argument should only be specified for FORWARD type rules.
                     type: string
                   resolverEndpointIdRef:
@@ -303,8 +306,7 @@ spec:
                         type: object
                     type: object
                   ruleType:
-                    description: The rule type. Valid values are FORWARD, SYSTEM and
-                      RECURSIVE.
+                    description: Rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
                     type: string
                   tags:
                     additionalProperties:
@@ -322,14 +324,18 @@ spec:
                           description: One IP address that you want to forward DNS
                             queries to. You can specify only IPv4 addresses.
                           type: string
+                        ipv6:
+                          description: One IPv6 address that you want to forward DNS
+                            queries to.
+                          type: string
                         port:
-                          description: The port at ip that you want to forward DNS
-                            queries to. Default value is 53.
+                          description: Port at ip that you want to forward DNS queries
+                            to. Default value is 53.
                           type: number
                         protocol:
-                          description: The protocol for the resolver endpoint. Valid
-                            values can be found in the AWS documentation. Default
-                            value is Do53.
+                          description: Protocol for the resolver endpoint. Valid values
+                            can be found in the AWS documentation. Default value is
+                            Do53.
                           type: string
                       type: object
                     type: array
@@ -516,18 +522,18 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN (Amazon Resource Name) for the resolver rule.
+                    description: ARN (Amazon Resource Name) for the resolver rule.
                     type: string
                   domainName:
                     description: DNS queries for this domain name are forwarded to
                       the IP addresses that are specified using target_ip.
                     type: string
                   id:
-                    description: The ID of the resolver rule.
+                    description: ID of the resolver rule.
                     type: string
                   name:
-                    description: A friendly name that lets you easily find a rule
-                      in the Resolver dashboard in the Route 53 console.
+                    description: Friendly name that lets you easily find a rule in
+                      the Resolver dashboard in the Route 53 console.
                     type: string
                   ownerId:
                     description: When a rule is shared with another AWS account, the
@@ -535,12 +541,11 @@ spec:
                     type: string
                   resolverEndpointId:
                     description: |-
-                      The ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
+                      ID of the outbound resolver endpoint that you want to use to route DNS queries to the IP addresses that you specify using target_ip.
                       This argument should only be specified for FORWARD type rules.
                     type: string
                   ruleType:
-                    description: The rule type. Valid values are FORWARD, SYSTEM and
-                      RECURSIVE.
+                    description: Rule type. Valid values are FORWARD, SYSTEM and RECURSIVE.
                     type: string
                   shareStatus:
                     description: |-
@@ -556,9 +561,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                   targetIp:
@@ -571,14 +575,18 @@ spec:
                           description: One IP address that you want to forward DNS
                             queries to. You can specify only IPv4 addresses.
                           type: string
+                        ipv6:
+                          description: One IPv6 address that you want to forward DNS
+                            queries to.
+                          type: string
                         port:
-                          description: The port at ip that you want to forward DNS
-                            queries to. Default value is 53.
+                          description: Port at ip that you want to forward DNS queries
+                            to. Default value is 53.
                           type: number
                         protocol:
-                          description: The protocol for the resolver endpoint. Valid
-                            values can be found in the AWS documentation. Default
-                            value is Do53.
+                          description: Protocol for the resolver endpoint. Valid values
+                            can be found in the AWS documentation. Default value is
+                            Do53.
                           type: string
                       type: object
                     type: array

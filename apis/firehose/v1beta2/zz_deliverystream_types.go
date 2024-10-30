@@ -175,6 +175,9 @@ type DeliveryStreamInitParameters struct {
 	// Configuration options when destination is http_endpoint. Requires the user to also specify an s3_configuration block.  See http_endpoint_configuration block below for details.
 	HTTPEndpointConfiguration *HTTPEndpointConfigurationInitParameters `json:"httpEndpointConfiguration,omitempty" tf:"http_endpoint_configuration,omitempty"`
 
+	// Configuration options when destination is iceberg. See iceberg_configuration block below for details.
+	IcebergConfiguration *IcebergConfigurationInitParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
+
 	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	KinesisSourceConfiguration *KinesisSourceConfigurationInitParameters `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
 
@@ -230,6 +233,9 @@ type DeliveryStreamObservation struct {
 	HTTPEndpointConfiguration *HTTPEndpointConfigurationObservation `json:"httpEndpointConfiguration,omitempty" tf:"http_endpoint_configuration,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Configuration options when destination is iceberg. See iceberg_configuration block below for details.
+	IcebergConfiguration *IcebergConfigurationObservation `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 
 	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	KinesisSourceConfiguration *KinesisSourceConfigurationObservation `json:"kinesisSourceConfiguration,omitempty" tf:"kinesis_source_configuration,omitempty"`
@@ -290,6 +296,10 @@ type DeliveryStreamParameters struct {
 	// Configuration options when destination is http_endpoint. Requires the user to also specify an s3_configuration block.  See http_endpoint_configuration block below for details.
 	// +kubebuilder:validation:Optional
 	HTTPEndpointConfiguration *HTTPEndpointConfigurationParameters `json:"httpEndpointConfiguration,omitempty" tf:"http_endpoint_configuration,omitempty"`
+
+	// Configuration options when destination is iceberg. See iceberg_configuration block below for details.
+	// +kubebuilder:validation:Optional
+	IcebergConfiguration *IcebergConfigurationParameters `json:"icebergConfiguration,omitempty" tf:"iceberg_configuration,omitempty"`
 
 	// The stream and role Amazon Resource Names (ARNs) for a Kinesis data stream used as the source for a delivery stream. See kinesis_source_configuration block below for details.
 	// +kubebuilder:validation:Optional
@@ -370,6 +380,91 @@ type DeserializerParameters struct {
 	// Specifies the OpenX SerDe. See open_x_json_ser_de block below for details.
 	// +kubebuilder:validation:Optional
 	OpenXJSONSerDe *OpenXJSONSerDeParameters `json:"openXJsonSerDe,omitempty" tf:"open_x_json_ser_de,omitempty"`
+}
+
+type DestinationTableConfigurationInitParameters struct {
+
+	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogDatabase
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a CatalogDatabase in glue to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogDatabase in glue to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+
+	// The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
+	S3ErrorOutputPrefix *string `json:"s3ErrorOutputPrefix,omitempty" tf:"s3_error_output_prefix,omitempty"`
+
+	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogTable
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a CatalogTable in glue to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogTable in glue to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
+
+	// A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
+	UniqueKeys []*string `json:"uniqueKeys,omitempty" tf:"unique_keys,omitempty"`
+}
+
+type DestinationTableConfigurationObservation struct {
+
+	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
+	S3ErrorOutputPrefix *string `json:"s3ErrorOutputPrefix,omitempty" tf:"s3_error_output_prefix,omitempty"`
+
+	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
+	UniqueKeys []*string `json:"uniqueKeys,omitempty" tf:"unique_keys,omitempty"`
+}
+
+type DestinationTableConfigurationParameters struct {
+
+	// Specifies the name of the AWS Glue database that contains the schema for the output data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogDatabase
+	// +kubebuilder:validation:Optional
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a CatalogDatabase in glue to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogDatabase in glue to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+
+	// The table specific S3 error output prefix. All the errors that occurred while delivering to this table will be prefixed with this value in S3 destination.
+	// +kubebuilder:validation:Optional
+	S3ErrorOutputPrefix *string `json:"s3ErrorOutputPrefix,omitempty" tf:"s3_error_output_prefix,omitempty"`
+
+	// Specifies the AWS Glue table that contains the column information that constitutes your data schema.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogTable
+	// +kubebuilder:validation:Optional
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a CatalogTable in glue to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a CatalogTable in glue to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
+
+	// A list of unique keys for a given Apache Iceberg table. Firehose will use these for running Create, Update, or Delete operations on the given Iceberg table.
+	// +kubebuilder:validation:Optional
+	UniqueKeys []*string `json:"uniqueKeys,omitempty" tf:"unique_keys,omitempty"`
 }
 
 type DocumentIDOptionsInitParameters struct {
@@ -1118,7 +1213,7 @@ type HTTPEndpointConfigurationProcessingConfigurationProcessorsInitParameters st
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -1127,7 +1222,7 @@ type HTTPEndpointConfigurationProcessingConfigurationProcessorsObservation struc
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -1137,7 +1232,7 @@ type HTTPEndpointConfigurationProcessingConfigurationProcessorsParameters struct
 	// +kubebuilder:validation:Optional
 	Parameters []ProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -1340,6 +1435,445 @@ type HiveJSONSerDeParameters struct {
 	// A list of how you want Kinesis Data Firehose to parse the date and time stamps that may be present in your input data JSON. To specify these format strings, follow the pattern syntax of JodaTime's DateTimeFormat format strings. For more information, see Class DateTimeFormat. You can also use the special value millis to parse time stamps in epoch milliseconds. If you don't specify a format, Kinesis Data Firehose uses java.sql.Timestamp::valueOf by default.
 	// +kubebuilder:validation:Optional
 	TimestampFormats []*string `json:"timestampFormats,omitempty" tf:"timestamp_formats,omitempty"`
+}
+
+type IcebergConfigurationCloudwatchLoggingOptionsInitParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The CloudWatch group name for logging. This value is required if enabled is true.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
+}
+
+type IcebergConfigurationCloudwatchLoggingOptionsObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The CloudWatch group name for logging. This value is required if enabled is true.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
+}
+
+type IcebergConfigurationCloudwatchLoggingOptionsParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
+}
+
+type IcebergConfigurationInitParameters struct {
+
+	// Buffer incoming data for the specified period of time, in seconds between 0 and 900, before delivering it to the destination. The default value is 300.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 and 128, before delivering it to the destination. The default value is 5.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog
+	CatalogArn *string `json:"catalogArn,omitempty" tf:"catalog_arn,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	CloudwatchLoggingOptions *IcebergConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
+
+	// Destination table configurations which Firehose uses to deliver data to Apache Iceberg Tables. Firehose will write data with insert if table specific configuration is not provided. See destination_table_configuration block below for details.
+	DestinationTableConfiguration []DestinationTableConfigurationInitParameters `json:"destinationTableConfiguration,omitempty" tf:"destination_table_configuration,omitempty"`
+
+	// The data processing configuration.  See processing_configuration block below for details.
+	ProcessingConfiguration *IcebergConfigurationProcessingConfigurationInitParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
+
+	// The period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
+	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
+
+	// The S3 Configuration. See s3_configuration block below for details.
+	S3Configuration *IcebergConfigurationS3ConfigurationInitParameters `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type IcebergConfigurationObservation struct {
+
+	// Buffer incoming data for the specified period of time, in seconds between 0 and 900, before delivering it to the destination. The default value is 300.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 and 128, before delivering it to the destination. The default value is 5.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog
+	CatalogArn *string `json:"catalogArn,omitempty" tf:"catalog_arn,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	CloudwatchLoggingOptions *IcebergConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
+
+	// Destination table configurations which Firehose uses to deliver data to Apache Iceberg Tables. Firehose will write data with insert if table specific configuration is not provided. See destination_table_configuration block below for details.
+	DestinationTableConfiguration []DestinationTableConfigurationObservation `json:"destinationTableConfiguration,omitempty" tf:"destination_table_configuration,omitempty"`
+
+	// The data processing configuration.  See processing_configuration block below for details.
+	ProcessingConfiguration *IcebergConfigurationProcessingConfigurationObservation `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
+
+	// The period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
+	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
+
+	// The S3 Configuration. See s3_configuration block below for details.
+	S3Configuration *IcebergConfigurationS3ConfigurationObservation `json:"s3Configuration,omitempty" tf:"s3_configuration,omitempty"`
+}
+
+type IcebergConfigurationParameters struct {
+
+	// Buffer incoming data for the specified period of time, in seconds between 0 and 900, before delivering it to the destination. The default value is 300.
+	// +kubebuilder:validation:Optional
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 and 128, before delivering it to the destination. The default value is 5.
+	// +kubebuilder:validation:Optional
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// Glue catalog ARN identifier of the destination Apache Iceberg Tables. You must specify the ARN in the format arn:aws:glue:region:account-id:catalog
+	// +kubebuilder:validation:Optional
+	CatalogArn *string `json:"catalogArn" tf:"catalog_arn,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// +kubebuilder:validation:Optional
+	CloudwatchLoggingOptions *IcebergConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
+
+	// Destination table configurations which Firehose uses to deliver data to Apache Iceberg Tables. Firehose will write data with insert if table specific configuration is not provided. See destination_table_configuration block below for details.
+	// +kubebuilder:validation:Optional
+	DestinationTableConfiguration []DestinationTableConfigurationParameters `json:"destinationTableConfiguration,omitempty" tf:"destination_table_configuration,omitempty"`
+
+	// The data processing configuration.  See processing_configuration block below for details.
+	// +kubebuilder:validation:Optional
+	ProcessingConfiguration *IcebergConfigurationProcessingConfigurationParameters `json:"processingConfiguration,omitempty" tf:"processing_configuration,omitempty"`
+
+	// The period of time, in seconds between 0 to 7200, during which Firehose retries to deliver data to the specified destination.
+	// +kubebuilder:validation:Optional
+	RetryDuration *float64 `json:"retryDuration,omitempty" tf:"retry_duration,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling Apache Iceberg Tables.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+	// secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+	// +kubebuilder:validation:Optional
+	S3BackupMode *string `json:"s3BackupMode,omitempty" tf:"s3_backup_mode,omitempty"`
+
+	// The S3 Configuration. See s3_configuration block below for details.
+	// +kubebuilder:validation:Optional
+	S3Configuration *IcebergConfigurationS3ConfigurationParameters `json:"s3Configuration" tf:"s3_configuration,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationInitParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies the data processors as multiple blocks. See processors block below for details.
+	Processors []IcebergConfigurationProcessingConfigurationProcessorsInitParameters `json:"processors,omitempty" tf:"processors,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies the data processors as multiple blocks. See processors block below for details.
+	Processors []IcebergConfigurationProcessingConfigurationProcessorsObservation `json:"processors,omitempty" tf:"processors,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies the data processors as multiple blocks. See processors block below for details.
+	// +kubebuilder:validation:Optional
+	Processors []IcebergConfigurationProcessingConfigurationProcessorsParameters `json:"processors,omitempty" tf:"processors,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationProcessorsInitParameters struct {
+
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	Parameters []IcebergConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationProcessorsObservation struct {
+
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	Parameters []IcebergConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationProcessorsParameters struct {
+
+	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
+	// +kubebuilder:validation:Optional
+	Parameters []IcebergConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
+
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
+	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationProcessorsParametersObservation struct {
+
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
+
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
+	ParameterValue *string `json:"parameterValue,omitempty" tf:"parameter_value,omitempty"`
+}
+
+type IcebergConfigurationProcessingConfigurationProcessorsParametersParameters struct {
+
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
+	// +kubebuilder:validation:Optional
+	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
+
+	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
+	// +kubebuilder:validation:Optional
+	ParameterValue *string `json:"parameterValue" tf:"parameter_value,omitempty"`
+}
+
+type IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The CloudWatch group name for logging. This value is required if enabled is true.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
+}
+
+type IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation struct {
+
+	// Enables or disables the logging. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The CloudWatch group name for logging. This value is required if enabled is true.
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
+}
+
+type IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters struct {
+
+	// Enables or disables the logging. Defaults to false.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The CloudWatch group name for logging. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	LogGroupName *string `json:"logGroupName,omitempty" tf:"log_group_name,omitempty"`
+
+	// The CloudWatch log stream name for logging. This value is required if enabled is true.
+	// +kubebuilder:validation:Optional
+	LogStreamName *string `json:"logStreamName,omitempty" tf:"log_stream_name,omitempty"`
+}
+
+type IcebergConfigurationS3ConfigurationInitParameters struct {
+
+	// The ARN of the S3 bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	CloudwatchLoggingOptions *IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
+
+	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
+
+	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
+	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
+
+	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+	// be used.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+}
+
+type IcebergConfigurationS3ConfigurationObservation struct {
+
+	// The ARN of the S3 bucket
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	CloudwatchLoggingOptions *IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsObservation `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
+
+	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
+
+	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
+	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
+
+	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+	// be used.
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type IcebergConfigurationS3ConfigurationParameters struct {
+
+	// The ARN of the S3 bucket
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/s3/v1beta2.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	BucketArn *string `json:"bucketArn,omitempty" tf:"bucket_arn,omitempty"`
+
+	// Reference to a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnRef *v1.Reference `json:"bucketArnRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in s3 to populate bucketArn.
+	// +kubebuilder:validation:Optional
+	BucketArnSelector *v1.Selector `json:"bucketArnSelector,omitempty" tf:"-"`
+
+	// Buffer incoming data for the specified period of time, in seconds between 0 to 60, before delivering it to the destination.  The default value is 60s.
+	// +kubebuilder:validation:Optional
+	BufferingInterval *float64 `json:"bufferingInterval,omitempty" tf:"buffering_interval,omitempty"`
+
+	// Buffer incoming data to the specified size, in MBs between 1 to 5, before delivering it to the destination.  The default value is 5MB.
+	// +kubebuilder:validation:Optional
+	BufferingSize *float64 `json:"bufferingSize,omitempty" tf:"buffering_size,omitempty"`
+
+	// The CloudWatch Logging Options for the delivery stream. See cloudwatch_logging_options block below for details.
+	// +kubebuilder:validation:Optional
+	CloudwatchLoggingOptions *IcebergConfigurationS3ConfigurationCloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
+
+	// The compression format. If no value is specified, the default is UNCOMPRESSED. Other supported values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+	// +kubebuilder:validation:Optional
+	CompressionFormat *string `json:"compressionFormat,omitempty" tf:"compression_format,omitempty"`
+
+	// Prefix added to failed records before writing them to S3. Not currently supported for redshift destination. This prefix appears immediately following the bucket name. For information about how to specify this prefix, see Custom Prefixes for Amazon S3 Objects.
+	// +kubebuilder:validation:Optional
+	ErrorOutputPrefix *string `json:"errorOutputPrefix,omitempty" tf:"error_output_prefix,omitempty"`
+
+	// Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+	// be used.
+	// +kubebuilder:validation:Optional
+	KMSKeyArn *string `json:"kmsKeyArn,omitempty" tf:"kms_key_arn,omitempty"`
+
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered S3 files. You can specify an extra prefix to be added in front of the time format prefix. Note that if the prefix ends with a slash, it appears as a folder in the S3 bucket
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// The ARN of the IAM role to be assumed by Firehose for calling the Amazon EC2 configuration API and for creating network interfaces. Make sure role has necessary IAM permissions
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnRef *v1.Reference `json:"roleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate roleArn.
+	// +kubebuilder:validation:Optional
+	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
 }
 
 type InputFormatConfigurationInitParameters struct {
@@ -1743,7 +2277,7 @@ type OpensearchConfigurationProcessingConfigurationProcessorsInitParameters stru
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -1752,7 +2286,7 @@ type OpensearchConfigurationProcessingConfigurationProcessorsObservation struct 
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -1762,14 +2296,14 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters []OpensearchConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type OpensearchConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -1778,7 +2312,7 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParametersInitParam
 
 type OpensearchConfigurationProcessingConfigurationProcessorsParametersObservation struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -1787,7 +2321,7 @@ type OpensearchConfigurationProcessingConfigurationProcessorsParametersObservati
 
 type OpensearchConfigurationProcessingConfigurationProcessorsParametersParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
@@ -2276,7 +2810,7 @@ type OpensearchserverlessConfigurationProcessingConfigurationProcessorsInitParam
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -2285,7 +2819,7 @@ type OpensearchserverlessConfigurationProcessingConfigurationProcessorsObservati
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -2295,14 +2829,14 @@ type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParameter
 	// +kubebuilder:validation:Optional
 	Parameters []OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -2311,7 +2845,7 @@ type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParameter
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersObservation struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -2320,7 +2854,7 @@ type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParameter
 
 type OpensearchserverlessConfigurationProcessingConfigurationProcessorsParametersParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
@@ -2687,7 +3221,7 @@ type OutputFormatConfigurationParameters struct {
 
 type ParametersInitParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -2696,7 +3230,7 @@ type ParametersInitParameters struct {
 
 type ParametersObservation struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -2705,7 +3239,7 @@ type ParametersObservation struct {
 
 type ParametersParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
@@ -2817,7 +3351,7 @@ type ProcessingConfigurationProcessorsInitParameters struct {
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -2826,7 +3360,7 @@ type ProcessingConfigurationProcessorsObservation struct {
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -2836,14 +3370,14 @@ type ProcessingConfigurationProcessorsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters []ProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ProcessingConfigurationProcessorsParametersInitParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -2852,7 +3386,7 @@ type ProcessingConfigurationProcessorsParametersInitParameters struct {
 
 type ProcessingConfigurationProcessorsParametersObservation struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -2861,7 +3395,7 @@ type ProcessingConfigurationProcessorsParametersObservation struct {
 
 type ProcessingConfigurationProcessorsParametersParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
@@ -2875,7 +3409,7 @@ type ProcessorsInitParameters struct {
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -2884,7 +3418,7 @@ type ProcessorsObservation struct {
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -2894,14 +3428,14 @@ type ProcessorsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ProcessorsParametersInitParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -2910,7 +3444,7 @@ type ProcessorsParametersInitParameters struct {
 
 type ProcessorsParametersObservation struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -2919,7 +3453,7 @@ type ProcessorsParametersObservation struct {
 
 type ProcessorsParametersParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
@@ -3170,7 +3704,7 @@ type RedshiftConfigurationProcessingConfigurationProcessorsInitParameters struct
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -3179,7 +3713,7 @@ type RedshiftConfigurationProcessingConfigurationProcessorsObservation struct {
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -3189,14 +3723,14 @@ type RedshiftConfigurationProcessingConfigurationProcessorsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters []RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RedshiftConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -3205,7 +3739,7 @@ type RedshiftConfigurationProcessingConfigurationProcessorsParametersInitParamet
 
 type RedshiftConfigurationProcessingConfigurationProcessorsParametersObservation struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -3214,7 +3748,7 @@ type RedshiftConfigurationProcessingConfigurationProcessorsParametersObservation
 
 type RedshiftConfigurationProcessingConfigurationProcessorsParametersParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
@@ -4492,7 +5026,7 @@ type SnowflakeConfigurationProcessingConfigurationProcessorsInitParameters struc
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SnowflakeConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -4501,7 +5035,7 @@ type SnowflakeConfigurationProcessingConfigurationProcessorsObservation struct {
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SnowflakeConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -4511,14 +5045,14 @@ type SnowflakeConfigurationProcessingConfigurationProcessorsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters []SnowflakeConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SnowflakeConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -4527,7 +5061,7 @@ type SnowflakeConfigurationProcessingConfigurationProcessorsParametersInitParame
 
 type SnowflakeConfigurationProcessingConfigurationProcessorsParametersObservation struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -4536,7 +5070,7 @@ type SnowflakeConfigurationProcessingConfigurationProcessorsParametersObservatio
 
 type SnowflakeConfigurationProcessingConfigurationProcessorsParametersParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 
@@ -5015,7 +5549,7 @@ type SplunkConfigurationProcessingConfigurationProcessorsInitParameters struct {
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -5024,7 +5558,7 @@ type SplunkConfigurationProcessingConfigurationProcessorsObservation struct {
 	// Specifies the processor parameters as multiple blocks. See parameters block below for details.
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -5034,14 +5568,14 @@ type SplunkConfigurationProcessingConfigurationProcessorsParameters struct {
 	// +kubebuilder:validation:Optional
 	Parameters []SplunkConfigurationProcessingConfigurationProcessorsParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// The type of processor. Valid Values: RecordDeAggregation, Lambda, MetadataExtraction, AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SplunkConfigurationProcessingConfigurationProcessorsParametersInitParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -5050,7 +5584,7 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersInitParameter
 
 type SplunkConfigurationProcessingConfigurationProcessorsParametersObservation struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	ParameterName *string `json:"parameterName,omitempty" tf:"parameter_name,omitempty"`
 
 	// Parameter value. Must be between 1 and 512 length (inclusive). When providing a Lambda ARN, you should specify the resource version as well.
@@ -5059,7 +5593,7 @@ type SplunkConfigurationProcessingConfigurationProcessorsParametersObservation s
 
 type SplunkConfigurationProcessingConfigurationProcessorsParametersParameters struct {
 
-	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter. Validation is done against AWS SDK constants; so that values not explicitly listed may also work.
+	// Parameter name. Valid Values: LambdaArn, NumberOfRetries, MetadataExtractionQuery, JsonParsingEngine, RoleArn, BufferSizeInMBs, BufferIntervalInSeconds, SubRecordType, Delimiter, CompressionFormat, DataMessageExtraction. Validation is done against AWS SDK constants; so values not explicitly listed may also work.
 	// +kubebuilder:validation:Optional
 	ParameterName *string `json:"parameterName" tf:"parameter_name,omitempty"`
 

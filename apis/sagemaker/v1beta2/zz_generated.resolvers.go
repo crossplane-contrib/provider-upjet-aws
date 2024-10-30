@@ -1176,7 +1176,7 @@ func (mg *Workteam) ResolveReferences(ctx context.Context, c client.Reader) erro
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition.UserGroup),
-					Extract:      resource.ExtractResourceID(),
+					Extract:      resource.ExtractParamPath("name", false),
 					Reference:    mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition.UserGroupRef,
 					Selector:     mg.Spec.ForProvider.MemberDefinition[i3].CognitoMemberDefinition.UserGroupSelector,
 					To:           reference.To{List: l, Managed: m},
@@ -1264,7 +1264,7 @@ func (mg *Workteam) ResolveReferences(ctx context.Context, c client.Reader) erro
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MemberDefinition[i3].CognitoMemberDefinition.UserGroup),
-					Extract:      resource.ExtractResourceID(),
+					Extract:      resource.ExtractParamPath("name", false),
 					Reference:    mg.Spec.InitProvider.MemberDefinition[i3].CognitoMemberDefinition.UserGroupRef,
 					Selector:     mg.Spec.InitProvider.MemberDefinition[i3].CognitoMemberDefinition.UserGroupSelector,
 					To:           reference.To{List: l, Managed: m},

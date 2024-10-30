@@ -72,7 +72,7 @@ spec:
     roleSelector:
       matchLabels:
         testing.upbound.io/example-name: lambda_iam
-    runtime: nodejs16.x
+    runtime: nodejs20.x
 
 ---
 
