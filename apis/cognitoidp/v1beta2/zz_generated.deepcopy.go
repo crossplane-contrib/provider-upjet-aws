@@ -2135,6 +2135,11 @@ func (in *PasswordPolicyInitParameters) DeepCopyInto(out *PasswordPolicyInitPara
 		*out = new(float64)
 		**out = **in
 	}
+	if in.PasswordHistorySize != nil {
+		in, out := &in.PasswordHistorySize, &out.PasswordHistorySize
+		*out = new(float64)
+		**out = **in
+	}
 	if in.RequireLowercase != nil {
 		in, out := &in.RequireLowercase, &out.RequireLowercase
 		*out = new(bool)
@@ -2180,6 +2185,11 @@ func (in *PasswordPolicyObservation) DeepCopyInto(out *PasswordPolicyObservation
 		*out = new(float64)
 		**out = **in
 	}
+	if in.PasswordHistorySize != nil {
+		in, out := &in.PasswordHistorySize, &out.PasswordHistorySize
+		*out = new(float64)
+		**out = **in
+	}
 	if in.RequireLowercase != nil {
 		in, out := &in.RequireLowercase, &out.RequireLowercase
 		*out = new(bool)
@@ -2222,6 +2232,11 @@ func (in *PasswordPolicyParameters) DeepCopyInto(out *PasswordPolicyParameters) 
 	*out = *in
 	if in.MinimumLength != nil {
 		in, out := &in.MinimumLength, &out.MinimumLength
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PasswordHistorySize != nil {
+		in, out := &in.PasswordHistorySize, &out.PasswordHistorySize
 		*out = new(float64)
 		**out = **in
 	}

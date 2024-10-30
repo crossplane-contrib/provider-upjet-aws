@@ -87,6 +87,12 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -283,6 +289,20 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    items:
+                      properties:
+                        supportType:
+                          description: Support type to use for the cluster. If the
+                            cluster is set to EXTENDED, it will enter extended support
+                            at the end of standard support. If the cluster is set
+                            to STANDARD, it will be automatically upgraded at the
+                            end of standard support. Valid values are EXTENDED, STANDARD
+                          type: string
+                      type: object
+                    type: array
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
@@ -530,6 +550,12 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -722,6 +748,20 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    items:
+                      properties:
+                        supportType:
+                          description: Support type to use for the cluster. If the
+                            cluster is set to EXTENDED, it will enter extended support
+                            at the end of standard support. If the cluster is set
+                            to STANDARD, it will be automatically upgraded at the
+                            end of standard support. Valid values are EXTENDED, STANDARD
+                          type: string
+                      type: object
+                    type: array
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
@@ -1134,6 +1174,12 @@ spec:
                   arn:
                     description: ARN of the cluster.
                     type: string
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   certificateAuthority:
                     description: Attribute block containing certificate-authority-data
                       for your cluster. Detailed below.
@@ -1321,6 +1367,20 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    items:
+                      properties:
+                        supportType:
+                          description: Support type to use for the cluster. If the
+                            cluster is set to EXTENDED, it will enter extended support
+                            at the end of standard support. If the cluster is set
+                            to STANDARD, it will be automatically upgraded at the
+                            end of standard support. Valid values are EXTENDED, STANDARD
+                          type: string
+                      type: object
+                    type: array
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
@@ -1514,9 +1574,15 @@ spec:
                         type: string
                       bootstrapClusterCreatorAdminPermissions:
                         description: Whether or not to bootstrap the access config
-                          values to the cluster. Default is true.
+                          values to the cluster. Default is false.
                         type: boolean
                     type: object
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -1702,6 +1768,18 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    properties:
+                      supportType:
+                        description: Support type to use for the cluster. If the cluster
+                          is set to EXTENDED, it will enter extended support at the
+                          end of standard support. If the cluster is set to STANDARD,
+                          it will be automatically upgraded at the end of standard
+                          support. Valid values are EXTENDED, STANDARD
+                        type: string
+                    type: object
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
@@ -1934,9 +2012,15 @@ spec:
                         type: string
                       bootstrapClusterCreatorAdminPermissions:
                         description: Whether or not to bootstrap the access config
-                          values to the cluster. Default is true.
+                          values to the cluster. Default is false.
                         type: boolean
                     type: object
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -2118,6 +2202,18 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    properties:
+                      supportType:
+                        description: Support type to use for the cluster. If the cluster
+                          is set to EXTENDED, it will enter extended support at the
+                          end of standard support. If the cluster is set to STANDARD,
+                          it will be automatically upgraded at the end of standard
+                          support. Valid values are EXTENDED, STANDARD
+                        type: string
+                    type: object
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation
@@ -2512,12 +2608,18 @@ spec:
                         type: string
                       bootstrapClusterCreatorAdminPermissions:
                         description: Whether or not to bootstrap the access config
-                          values to the cluster. Default is true.
+                          values to the cluster. Default is false.
                         type: boolean
                     type: object
                   arn:
                     description: ARN of the cluster.
                     type: string
+                  bootstrapSelfManagedAddons:
+                    description: Install default unmanaged add-ons, such as aws-cni,
+                      kube-proxy, and CoreDNS during cluster creation. If false, you
+                      must manually install desired add-ons. Changing this value will
+                      force a new cluster to be created. Defaults to true.
+                    type: boolean
                   certificateAuthority:
                     description: Attribute block containing certificate-authority-data
                       for your cluster. Detailed below.
@@ -2694,6 +2796,18 @@ spec:
                       inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
+                  upgradePolicy:
+                    description: Configuration block for the support policy to use
+                      for the cluster.  See upgrade_policy for details.
+                    properties:
+                      supportType:
+                        description: Support type to use for the cluster. If the cluster
+                          is set to EXTENDED, it will enter extended support at the
+                          end of standard support. If the cluster is set to STANDARD,
+                          it will be automatically upgraded at the end of standard
+                          support. Valid values are EXTENDED, STANDARD
+                        type: string
+                    type: object
                   version:
                     description: –  Desired Kubernetes master version. If you do not
                       specify a value, the latest available version at resource creation

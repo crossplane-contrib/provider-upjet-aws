@@ -6,12 +6,13 @@ package opensearch
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-aws/config/common"
 )
 
 // Configure adds configurations for the opensearch group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_opensearch_domain", func(r *config.Resource) {
 		config.MoveToStatus(r.TerraformResource, "access_policies")
 		r.References["encrypt_at_rest.kms_key_id"] = config.Reference{
@@ -33,6 +34,26 @@ func Configure(p *config.Provider) {
 		}
 
 		r.UseAsync = true
+
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+				return diff, nil
+			}
+			asoDiff, ok := diff.Attributes["advanced_security_options.#"]
+			if ok && asoDiff.Old == "" && asoDiff.New == "" && asoDiff.NewComputed {
+				delete(diff.Attributes, "advanced_security_options.#")
+			}
+			return diff, nil
+		}
+
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["endpoint"].(string); ok {
+				conn["endpoint"] = []byte(a)
+			}
+			return conn, nil
+		}
+
 	})
 
 	p.AddResourceConfigurator("aws_opensearch_domain_policy", func(r *config.Resource) {

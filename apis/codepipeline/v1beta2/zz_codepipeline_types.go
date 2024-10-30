@@ -18,7 +18,7 @@ type ActionInitParameters struct {
 	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation.
+	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +mapType=granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
@@ -46,6 +46,8 @@ type ActionInitParameters struct {
 	// The order in which actions are run.
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+
 	// A string that identifies the action type.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -55,7 +57,7 @@ type ActionObservation struct {
 	// A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Possible values are Approval, Build, Deploy, Invoke, Source and Test.
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
-	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation.
+	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +mapType=granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
@@ -86,6 +88,8 @@ type ActionObservation struct {
 	// The order in which actions are run.
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
 
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
+
 	// A string that identifies the action type.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -96,7 +100,7 @@ type ActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Category *string `json:"category" tf:"category,omitempty"`
 
-	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation.
+	// A map of the action declaration's configuration. Configurations options for action types and providers can be found in the Pipeline Structure Reference and Action Structure Reference documentation. Note: The DetectChanges parameter  in the configuration section causes CodePipeline to automatically start your pipeline upon new commits. Please refer to AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Configuration map[string]*string `json:"configuration,omitempty" tf:"configuration,omitempty"`
@@ -136,6 +140,9 @@ type ActionParameters struct {
 	// The order in which actions are run.
 	// +kubebuilder:validation:Optional
 	RunOrder *float64 `json:"runOrder,omitempty" tf:"run_order,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	TimeoutInMinutes *float64 `json:"timeoutInMinutes,omitempty" tf:"timeout_in_minutes,omitempty"`
 
 	// A string that identifies the action type.
 	// +kubebuilder:validation:Optional
@@ -429,7 +436,7 @@ type GitConfigurationInitParameters struct {
 	// The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details. A push block is documented below.
 	Push []PushInitParameters `json:"push,omitempty" tf:"push,omitempty"`
 
-	// The name of the pipeline source action where the trigger configuration.
+	// The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 	SourceActionName *string `json:"sourceActionName,omitempty" tf:"source_action_name,omitempty"`
 }
 
@@ -441,7 +448,7 @@ type GitConfigurationObservation struct {
 	// The field where the repository event that will start the pipeline, such as pushing Git tags, is specified with details. A push block is documented below.
 	Push []PushObservation `json:"push,omitempty" tf:"push,omitempty"`
 
-	// The name of the pipeline source action where the trigger configuration.
+	// The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 	SourceActionName *string `json:"sourceActionName,omitempty" tf:"source_action_name,omitempty"`
 }
 
@@ -455,7 +462,7 @@ type GitConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Push []PushParameters `json:"push,omitempty" tf:"push,omitempty"`
 
-	// The name of the pipeline source action where the trigger configuration.
+	// The name of the pipeline source action where the trigger configuration, such as Git tags, is specified. The trigger configuration will start the pipeline upon the specified change only.
 	// +kubebuilder:validation:Optional
 	SourceActionName *string `json:"sourceActionName" tf:"source_action_name,omitempty"`
 }

@@ -7,7 +7,7 @@ package redshiftserverless
 import "github.com/crossplane/upjet/pkg/config"
 
 // Configure adds configurations for redshiftserverless group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_redshiftserverless_namespace", func(r *config.Resource) {
 		r.Kind = "RedshiftServerlessNamespace"
 		r.LateInitializer = config.LateInitializer{

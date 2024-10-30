@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the route53recoverycontrolconfig group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_route53recoverycontrolconfig_control_panel", func(r *config.Resource) {
 		r.References["cluster_arn"] = config.Reference{
 			TerraformName: "aws_route53recoverycontrolconfig_cluster",

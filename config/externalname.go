@@ -29,6 +29,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// terraform-plugin-framework
 	"aws_appconfig_environment": appConfigEnvironment(),
 
+	// batch
+	// AWS Batch job queue can be imported using the name
+	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:job-queue/{{ .external_name }}"),
+
+	// bedrockagent
+	//
+	// Bedrock Agent can be imported using the agent arn
+	"aws_bedrockagent_agent": bedrockAgent(),
+
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
 	"aws_codeguruprofiler_profiling_group": config.NameAsIdentifier,
@@ -49,6 +58,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_vpc_security_group_egress_rule": vpcSecurityGroupRule(),
 	// Imported by using the id: sgr-02108b27edd666983
 	"aws_vpc_security_group_ingress_rule": vpcSecurityGroupRule(),
+
+	// elasticache
+	//
+	// Imported by using the serverless cache name
+	"aws_elasticache_serverless_cache": config.NameAsIdentifier,
 
 	// eks
 	//
@@ -74,6 +88,16 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"aws_opensearchserverless_security_policy": config.NameAsIdentifier,
 	// VPCEndpoint can be imported using the AWS-assigned VPC Endpoint ID, i.e. vpce-0a957ae9ed5aee308
 	"aws_opensearchserverless_vpc_endpoint": opensearchserverlessVpcEndpoint(),
+
+	// osis
+	//
+	// OSIS Pipeline can be imported using the name
+	"aws_osis_pipeline": config.ParameterAsIdentifier("pipeline_name"),
+
+	// s3
+	//
+	// S3 directory bucket can be imported using the full id: [bucket_name]--[azid]--x-s3
+	"aws_s3_directory_bucket": config.ParameterAsIdentifier("bucket"),
 
 	// simpledb
 	//
@@ -101,6 +125,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// The Alternate Contact for the current account can be imported using the alternate_contact_type
 	"aws_account_alternate_contact": config.TemplatedStringAsIdentifier("", "{{ .parameters.alternate_contact_type }}"),
+	// The account region can be imported using region_name or a comma separated account_id and region_name
+	"aws_account_region": config.TemplatedStringAsIdentifier("", "{{ .parameters.region_name }}"),
 
 	// ACM
 	// Imported using ARN that has a random substring:
@@ -322,7 +348,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// aws_appsync_api_cache can be imported using the AppSync API ID
 	"aws_appsync_api_cache": config.IdentifierFromProvider,
 	// aws_appsync_api_key can be imported using the AppSync API ID and key separated by :
-	"aws_appsync_api_key": TemplatedStringAsIdentifierWithNoName("{{ .parameters.api_id }}:{{ .external_name }}"),
+	"aws_appsync_api_key": TemplatedStringAsProviderDefinedIdentifier("{{ .parameters.api_id }}:{{ .external_name }}"),
 	// aws_appsync_datasource can be imported with their api_id, a hyphen, and name
 	"aws_appsync_datasource": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_id }}-{{ .external_name }}"),
 	// aws_appsync_function can be imported using the AppSync API ID and Function ID separated by -
@@ -390,6 +416,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// batch
 	//
+	// AWS Batch compute can be imported using the compute_environment_name
+	"aws_batch_compute_environment": config.ParameterAsIdentifier("compute_environment_name"),
 	// Batch Job Definition can be imported using ARN that has a random substring, revision at the end:
 	// arn:aws:batch:us-east-1:123456789012:job-definition/sample:1
 	"aws_batch_job_definition": config.IdentifierFromProvider,
@@ -884,6 +912,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_ec2_carrier_gateway": config.IdentifierFromProvider,
 	// aws_ec2_instance_state can be imported by using the instance_id attribute
 	"aws_ec2_instance_state": config.IdentifierFromProvider,
+	// aws_ec2_fleet can be imported by using the Fleet identifier
+	"aws_ec2_fleet": config.IdentifierFromProvider,
 	// Network Insights Analyses can be imported using the id
 	"aws_ec2_network_insights_analysis": config.IdentifierFromProvider,
 	// Prefix Lists can be imported using the id
@@ -1110,10 +1140,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// eks
 	//
-	// my_cluster:my_eks_addon
+	// import EKS access entry using the cluster_name and principal_arn separated by a colon (:).
+	"aws_eks_access_entry": TemplatedStringAsIdentifierWithNoName("{{ .parameters.cluster_name }}:{{ .parameters.principal_arn }}"),
+	// import EKS access entry using the cluster_name principal_arn and policy_arn separated by a (#) which the tf provider docs incorrectly describe as a colon.
+	"aws_eks_access_policy_association": TemplatedStringAsIdentifierWithNoName("{{ .parameters.cluster_name }}#{{ .parameters.principal_arn }}#{{ .parameters.policy_arn }}"),
 	// "aws_eks_addon": config.TemplatedStringAsIdentifier("addon_name", "{{ .parameters.cluster_name }}:{{ .external_name }}"),
+	// my_cluster:my_eks_addon
 	"aws_eks_addon": FormattedIdentifierFromProvider(":", "cluster_name", "addon_name"),
-	//
+	// import EKS cluster using the name.
 	"aws_eks_cluster": config.NameAsIdentifier,
 	// my_cluster:my_fargate_profile
 	"aws_eks_fargate_profile": FormattedIdentifierUserDefinedNameLast("fargate_profile_name", ":", "cluster_name"),
@@ -1125,12 +1159,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// elasticache
 	//
-	"aws_elasticache_cluster":           config.ParameterAsIdentifier("cluster_id"),
-	"aws_elasticache_parameter_group":   config.IdentifierFromProvider,
-	"aws_elasticache_replication_group": config.ParameterAsIdentifier("replication_group_id"),
-	"aws_elasticache_subnet_group":      config.NameAsIdentifier,
-	"aws_elasticache_user":              config.ParameterAsIdentifier("user_id"),
-	"aws_elasticache_user_group":        config.ParameterAsIdentifier("user_group_id"),
+	"aws_elasticache_cluster": config.ParameterAsIdentifier("cluster_id"),
+	// ElastiCache Global Replication Groups can be imported using the global_replication_group_id
+	"aws_elasticache_global_replication_group": config.IdentifierFromProvider,
+	"aws_elasticache_parameter_group":          config.IdentifierFromProvider,
+	"aws_elasticache_replication_group":        config.ParameterAsIdentifier("replication_group_id"),
+	"aws_elasticache_subnet_group":             config.NameAsIdentifier,
+	"aws_elasticache_user":                     config.ParameterAsIdentifier("user_id"),
+	"aws_elasticache_user_group":               config.ParameterAsIdentifier("user_group_id"),
 
 	// elasticbeanstalk
 	//
@@ -1200,6 +1236,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_lb_target_group": config.IdentifierFromProvider,
 	// No import.
 	"aws_lb_target_group_attachment": config.IdentifierFromProvider,
+	// Trust Stores can be imported using their ARN
+	"aws_lb_trust_store": config.IdentifierFromProvider,
 
 	// emr
 	//
@@ -1927,6 +1965,11 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_pinpoint_app": config.IdentifierFromProvider,
 	// Pinpoint SMS Channel can be imported using the application-id
 	"aws_pinpoint_sms_channel": FormattedIdentifierFromProvider("", "application_id"),
+
+	// pipes
+	//
+	// Pipes can be imported using the name
+	"aws_pipes_pipe": config.NameAsIdentifier,
 
 	// qldb
 	//
@@ -2826,6 +2869,19 @@ func kmsAlias() config.ExternalName {
 	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]interface{}, _ map[string]interface{}) (string, error) {
 		if !strings.HasPrefix(externalName, "alias/") {
 			return fmt.Sprintf("alias/%s", externalName), nil
+		}
+		return externalName, nil
+	}
+	return e
+}
+
+func bedrockAgent() config.ExternalName {
+	// Terraform does not allow agent id to be empty.
+	// Using a stub value to pass validation.
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		if len(externalName) == 0 {
+			return "STUB123456", nil
 		}
 		return externalName, nil
 	}

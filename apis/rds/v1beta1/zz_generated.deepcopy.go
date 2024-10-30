@@ -887,6 +887,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.CACertificateIdentifier != nil {
+		in, out := &in.CACertificateIdentifier, &out.CACertificateIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClusterMembers != nil {
 		in, out := &in.ClusterMembers, &out.ClusterMembers
 		*out = make([]*string, len(*in))
@@ -1014,6 +1019,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineMode != nil {
 		in, out := &in.EngineMode, &out.EngineMode
 		*out = new(string)
@@ -1092,6 +1102,21 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsEnabled != nil {
+		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyID != nil {
+		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsRetentionPeriod != nil {
+		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
@@ -2027,6 +2052,16 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.CACertificateIdentifier != nil {
+		in, out := &in.CACertificateIdentifier, &out.CACertificateIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.CACertificateValidTill != nil {
+		in, out := &in.CACertificateValidTill, &out.CACertificateValidTill
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClusterMembers != nil {
 		in, out := &in.ClusterMembers, &out.ClusterMembers
 		*out = make([]*string, len(*in))
@@ -2134,6 +2169,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineMode != nil {
 		in, out := &in.EngineMode, &out.EngineMode
 		*out = new(string)
@@ -2220,6 +2260,21 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsEnabled != nil {
+		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyID != nil {
+		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsRetentionPeriod != nil {
+		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
@@ -2758,6 +2813,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.CACertificateIdentifier != nil {
+		in, out := &in.CACertificateIdentifier, &out.CACertificateIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.ClusterMembers != nil {
 		in, out := &in.ClusterMembers, &out.ClusterMembers
 		*out = make([]*string, len(*in))
@@ -2885,6 +2945,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineMode != nil {
 		in, out := &in.EngineMode, &out.EngineMode
 		*out = new(string)
@@ -2963,6 +3028,21 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	if in.NetworkType != nil {
 		in, out := &in.NetworkType, &out.NetworkType
 		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsEnabled != nil {
+		in, out := &in.PerformanceInsightsEnabled, &out.PerformanceInsightsEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PerformanceInsightsKMSKeyID != nil {
+		in, out := &in.PerformanceInsightsKMSKeyID, &out.PerformanceInsightsKMSKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PerformanceInsightsRetentionPeriod != nil {
+		in, out := &in.PerformanceInsightsRetentionPeriod, &out.PerformanceInsightsRetentionPeriod
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Port != nil {
@@ -3122,6 +3202,11 @@ func (in *ClusterRestoreToPointInTimeInitParameters) DeepCopyInto(out *ClusterRe
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.SourceClusterResourceID != nil {
+		in, out := &in.SourceClusterResourceID, &out.SourceClusterResourceID
+		*out = new(string)
+		**out = **in
+	}
 	if in.UseLatestRestorableTime != nil {
 		in, out := &in.UseLatestRestorableTime, &out.UseLatestRestorableTime
 		*out = new(bool)
@@ -3154,6 +3239,11 @@ func (in *ClusterRestoreToPointInTimeObservation) DeepCopyInto(out *ClusterResto
 	}
 	if in.SourceClusterIdentifier != nil {
 		in, out := &in.SourceClusterIdentifier, &out.SourceClusterIdentifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceClusterResourceID != nil {
+		in, out := &in.SourceClusterResourceID, &out.SourceClusterResourceID
 		*out = new(string)
 		**out = **in
 	}
@@ -3201,6 +3291,11 @@ func (in *ClusterRestoreToPointInTimeParameters) DeepCopyInto(out *ClusterRestor
 		in, out := &in.SourceClusterIdentifierSelector, &out.SourceClusterIdentifierSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceClusterResourceID != nil {
+		in, out := &in.SourceClusterResourceID, &out.SourceClusterResourceID
+		*out = new(string)
+		**out = **in
 	}
 	if in.UseLatestRestorableTime != nil {
 		in, out := &in.UseLatestRestorableTime, &out.UseLatestRestorableTime
@@ -3643,6 +3738,17 @@ func (in *ClusterSnapshotInitParameters) DeepCopyInto(out *ClusterSnapshotInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3767,6 +3873,17 @@ func (in *ClusterSnapshotObservation) DeepCopyInto(out *ClusterSnapshotObservati
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SnapshotType != nil {
 		in, out := &in.SnapshotType, &out.SnapshotType
 		*out = new(string)
@@ -3863,6 +3980,17 @@ func (in *ClusterSnapshotParameters) DeepCopyInto(out *ClusterSnapshotParameters
 		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
+	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
@@ -4414,6 +4542,17 @@ func (in *DBSnapshotCopyInitParameters) DeepCopyInto(out *DBSnapshotCopyInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SourceDBSnapshotIdentifier != nil {
 		in, out := &in.SourceDBSnapshotIdentifier, &out.SourceDBSnapshotIdentifier
 		*out = new(string)
@@ -4577,6 +4716,17 @@ func (in *DBSnapshotCopyObservation) DeepCopyInto(out *DBSnapshotCopyObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SnapshotType != nil {
 		in, out := &in.SnapshotType, &out.SnapshotType
 		*out = new(string)
@@ -4698,6 +4848,17 @@ func (in *DBSnapshotCopyParameters) DeepCopyInto(out *DBSnapshotCopyParameters) 
 		in, out := &in.Region, &out.Region
 		*out = new(string)
 		**out = **in
+	}
+	if in.SharedAccounts != nil {
+		in, out := &in.SharedAccounts, &out.SharedAccounts
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.SourceDBSnapshotIdentifier != nil {
 		in, out := &in.SourceDBSnapshotIdentifier, &out.SourceDBSnapshotIdentifier
@@ -5186,6 +5347,11 @@ func (in *GlobalClusterInitParameters) DeepCopyInto(out *GlobalClusterInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -5338,6 +5504,11 @@ func (in *GlobalClusterObservation) DeepCopyInto(out *GlobalClusterObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -5407,6 +5578,11 @@ func (in *GlobalClusterParameters) DeepCopyInto(out *GlobalClusterParameters) {
 	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
 		*out = new(string)
 		**out = **in
 	}
@@ -5552,6 +5728,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BackupTarget != nil {
+		in, out := &in.BackupTarget, &out.BackupTarget
+		*out = new(string)
+		**out = **in
+	}
 	if in.BackupWindow != nil {
 		in, out := &in.BackupWindow, &out.BackupWindow
 		*out = new(string)
@@ -5609,6 +5790,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DedicatedLogVolume != nil {
+		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeleteAutomatedBackups != nil {
 		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
 		*out = new(bool)
@@ -5624,8 +5810,34 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainAuthSecretArn != nil {
+		in, out := &in.DomainAuthSecretArn, &out.DomainAuthSecretArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainDNSIps != nil {
+		in, out := &in.DomainDNSIps, &out.DomainDNSIps
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DomainFqdn != nil {
+		in, out := &in.DomainFqdn, &out.DomainFqdn
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainIAMRoleName != nil {
 		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainOu != nil {
+		in, out := &in.DomainOu, &out.DomainOu
 		*out = new(string)
 		**out = **in
 	}
@@ -5645,6 +5857,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -5658,6 +5875,16 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 	if in.IAMDatabaseAuthenticationEnabled != nil {
 		in, out := &in.IAMDatabaseAuthenticationEnabled, &out.IAMDatabaseAuthenticationEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Identifier != nil {
+		in, out := &in.Identifier, &out.Identifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.IdentifierPrefix != nil {
+		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
+		*out = new(string)
 		**out = **in
 	}
 	if in.InstanceClass != nil {
@@ -5768,6 +5995,21 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 	if in.ParameterGroupName != nil {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
+		**out = **in
+	}
+	if in.ParameterGroupNameRef != nil {
+		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ParameterGroupNameSelector != nil {
+		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.PerformanceInsightsEnabled != nil {
@@ -5886,6 +6128,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.UpgradeStorageConfig != nil {
+		in, out := &in.UpgradeStorageConfig, &out.UpgradeStorageConfig
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -6001,6 +6248,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BackupTarget != nil {
+		in, out := &in.BackupTarget, &out.BackupTarget
+		*out = new(string)
+		**out = **in
+	}
 	if in.BackupWindow != nil {
 		in, out := &in.BackupWindow, &out.BackupWindow
 		*out = new(string)
@@ -6048,6 +6300,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DedicatedLogVolume != nil {
+		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeleteAutomatedBackups != nil {
 		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
 		*out = new(bool)
@@ -6063,8 +6320,34 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainAuthSecretArn != nil {
+		in, out := &in.DomainAuthSecretArn, &out.DomainAuthSecretArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainDNSIps != nil {
+		in, out := &in.DomainDNSIps, &out.DomainDNSIps
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DomainFqdn != nil {
+		in, out := &in.DomainFqdn, &out.DomainFqdn
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainIAMRoleName != nil {
 		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainOu != nil {
+		in, out := &in.DomainOu, &out.DomainOu
 		*out = new(string)
 		**out = **in
 	}
@@ -6086,6 +6369,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
 		*out = new(string)
 		**out = **in
 	}
@@ -6116,6 +6404,16 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.Identifier != nil {
+		in, out := &in.Identifier, &out.Identifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.IdentifierPrefix != nil {
+		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
 		*out = new(string)
 		**out = **in
 	}
@@ -6361,6 +6659,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.UpgradeStorageConfig != nil {
+		in, out := &in.UpgradeStorageConfig, &out.UpgradeStorageConfig
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -6427,6 +6730,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.BackupTarget != nil {
+		in, out := &in.BackupTarget, &out.BackupTarget
+		*out = new(string)
+		**out = **in
+	}
 	if in.BackupWindow != nil {
 		in, out := &in.BackupWindow, &out.BackupWindow
 		*out = new(string)
@@ -6484,6 +6792,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DedicatedLogVolume != nil {
+		in, out := &in.DedicatedLogVolume, &out.DedicatedLogVolume
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeleteAutomatedBackups != nil {
 		in, out := &in.DeleteAutomatedBackups, &out.DeleteAutomatedBackups
 		*out = new(bool)
@@ -6499,8 +6812,34 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainAuthSecretArn != nil {
+		in, out := &in.DomainAuthSecretArn, &out.DomainAuthSecretArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainDNSIps != nil {
+		in, out := &in.DomainDNSIps, &out.DomainDNSIps
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DomainFqdn != nil {
+		in, out := &in.DomainFqdn, &out.DomainFqdn
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainIAMRoleName != nil {
 		in, out := &in.DomainIAMRoleName, &out.DomainIAMRoleName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainOu != nil {
+		in, out := &in.DomainOu, &out.DomainOu
 		*out = new(string)
 		**out = **in
 	}
@@ -6520,6 +6859,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EngineLifecycleSupport != nil {
+		in, out := &in.EngineLifecycleSupport, &out.EngineLifecycleSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -6533,6 +6877,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	if in.IAMDatabaseAuthenticationEnabled != nil {
 		in, out := &in.IAMDatabaseAuthenticationEnabled, &out.IAMDatabaseAuthenticationEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.Identifier != nil {
+		in, out := &in.Identifier, &out.Identifier
+		*out = new(string)
+		**out = **in
+	}
+	if in.IdentifierPrefix != nil {
+		in, out := &in.IdentifierPrefix, &out.IdentifierPrefix
+		*out = new(string)
 		**out = **in
 	}
 	if in.InstanceClass != nil {
@@ -6644,6 +6998,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		in, out := &in.ParameterGroupName, &out.ParameterGroupName
 		*out = new(string)
 		**out = **in
+	}
+	if in.ParameterGroupNameRef != nil {
+		in, out := &in.ParameterGroupNameRef, &out.ParameterGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ParameterGroupNameSelector != nil {
+		in, out := &in.ParameterGroupNameSelector, &out.ParameterGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PasswordSecretRef != nil {
 		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
@@ -6769,6 +7133,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	if in.Timezone != nil {
 		in, out := &in.Timezone, &out.Timezone
 		*out = new(string)
+		**out = **in
+	}
+	if in.UpgradeStorageConfig != nil {
+		in, out := &in.UpgradeStorageConfig, &out.UpgradeStorageConfig
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Username != nil {
@@ -7252,6 +7621,11 @@ func (in *OptionGroupInitParameters) DeepCopyInto(out *OptionGroupInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -7347,6 +7721,11 @@ func (in *OptionGroupObservation) DeepCopyInto(out *OptionGroupObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -7419,6 +7798,11 @@ func (in *OptionGroupParameters) DeepCopyInto(out *OptionGroupParameters) {
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -7783,6 +8167,11 @@ func (in *ParameterGroupInitParameters) DeepCopyInto(out *ParameterGroupInitPara
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -7873,6 +8262,11 @@ func (in *ParameterGroupObservation) DeepCopyInto(out *ParameterGroupObservation
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -7940,6 +8334,11 @@ func (in *ParameterGroupParameters) DeepCopyInto(out *ParameterGroupParameters) 
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
 		*out = new(string)
+		**out = **in
+	}
+	if in.SkipDestroy != nil {
+		in, out := &in.SkipDestroy, &out.SkipDestroy
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -9634,6 +10033,11 @@ func (in *ScalingConfigurationInitParameters) DeepCopyInto(out *ScalingConfigura
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SecondsBeforeTimeout != nil {
+		in, out := &in.SecondsBeforeTimeout, &out.SecondsBeforeTimeout
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SecondsUntilAutoPause != nil {
 		in, out := &in.SecondsUntilAutoPause, &out.SecondsUntilAutoPause
 		*out = new(float64)
@@ -9674,6 +10078,11 @@ func (in *ScalingConfigurationObservation) DeepCopyInto(out *ScalingConfiguratio
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SecondsBeforeTimeout != nil {
+		in, out := &in.SecondsBeforeTimeout, &out.SecondsBeforeTimeout
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SecondsUntilAutoPause != nil {
 		in, out := &in.SecondsUntilAutoPause, &out.SecondsUntilAutoPause
 		*out = new(float64)
@@ -9711,6 +10120,11 @@ func (in *ScalingConfigurationParameters) DeepCopyInto(out *ScalingConfiguration
 	}
 	if in.MinCapacity != nil {
 		in, out := &in.MinCapacity, &out.MinCapacity
+		*out = new(float64)
+		**out = **in
+	}
+	if in.SecondsBeforeTimeout != nil {
+		in, out := &in.SecondsBeforeTimeout, &out.SecondsBeforeTimeout
 		*out = new(float64)
 		**out = **in
 	}

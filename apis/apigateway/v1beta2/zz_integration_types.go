@@ -106,7 +106,7 @@ type IntegrationInitParameters struct {
 	// TLS configuration. See below.
 	TLSConfig *TLSConfigInitParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds.
+	// Custom timeout between 50 and 300,000 milliseconds. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds.
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
@@ -183,7 +183,7 @@ type IntegrationObservation struct {
 	// TLS configuration. See below.
 	TLSConfig *TLSConfigObservation `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds.
+	// Custom timeout between 50 and 300,000 milliseconds. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds.
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 
 	// Integration input's type. Valid values are HTTP (for HTTP backends), MOCK (not calling any real backend), AWS (for AWS services), AWS_PROXY (for Lambda proxy integration) and HTTP_PROXY (for HTTP proxy integration). An HTTP or HTTP_PROXY integration with a connection_type of VPC_LINK is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
@@ -307,7 +307,7 @@ type IntegrationParameters struct {
 	// +kubebuilder:validation:Optional
 	TLSConfig *TLSConfigParameters `json:"tlsConfig,omitempty" tf:"tls_config,omitempty"`
 
-	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds.
+	// Custom timeout between 50 and 300,000 milliseconds. The default value is 29,000 milliseconds. You need to raise a Service Quota Ticket to increase time beyond 29,000 milliseconds.
 	// +kubebuilder:validation:Optional
 	TimeoutMilliseconds *float64 `json:"timeoutMilliseconds,omitempty" tf:"timeout_milliseconds,omitempty"`
 

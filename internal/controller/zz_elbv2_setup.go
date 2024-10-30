@@ -15,6 +15,7 @@ import (
 	lblistenerrule "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenerrule"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
+	lbtruststore "github.com/upbound/provider-aws/internal/controller/elbv2/lbtruststore"
 )
 
 // Setup_elbv2 creates all controllers with the supplied logger and adds them to
@@ -27,6 +28,7 @@ func Setup_elbv2(mgr ctrl.Manager, o controller.Options) error {
 		lblistenerrule.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
+		lbtruststore.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

@@ -323,6 +323,11 @@ func (in *ApplicationInitParameters) DeepCopyInto(out *ApplicationInitParameters
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ApplicationMode != nil {
+		in, out := &in.ApplicationMode, &out.ApplicationMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.CloudwatchLoggingOptions != nil {
 		in, out := &in.CloudwatchLoggingOptions, &out.CloudwatchLoggingOptions
 		*out = make([]CloudwatchLoggingOptionsInitParameters, len(*in))
@@ -434,6 +439,11 @@ func (in *ApplicationObservation) DeepCopyInto(out *ApplicationObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ApplicationMode != nil {
+		in, out := &in.ApplicationMode, &out.ApplicationMode
+		*out = new(string)
+		**out = **in
 	}
 	if in.Arn != nil {
 		in, out := &in.Arn, &out.Arn
@@ -550,6 +560,11 @@ func (in *ApplicationParameters) DeepCopyInto(out *ApplicationParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ApplicationMode != nil {
+		in, out := &in.ApplicationMode, &out.ApplicationMode
+		*out = new(string)
+		**out = **in
 	}
 	if in.CloudwatchLoggingOptions != nil {
 		in, out := &in.CloudwatchLoggingOptions, &out.CloudwatchLoggingOptions

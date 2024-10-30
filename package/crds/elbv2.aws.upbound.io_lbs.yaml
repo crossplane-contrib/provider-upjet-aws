@@ -1752,8 +1752,11 @@ spec:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean
                   ipAddressType:
-                    description: Type of IP addresses used by the subnets for your
-                      load balancer. The possible values are ipv4 and dualstack.
+                    description: 'Type of IP addresses used by the subnets for your
+                      load balancer. The possible values depend upon the load balancer
+                      type: ipv4 (all load balancer types), dualstack (all load balancer
+                      types), and dualstack-without-public-ipv4 (type application
+                      only).'
                     type: string
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values
@@ -2257,8 +2260,11 @@ spec:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean
                   ipAddressType:
-                    description: Type of IP addresses used by the subnets for your
-                      load balancer. The possible values are ipv4 and dualstack.
+                    description: 'Type of IP addresses used by the subnets for your
+                      load balancer. The possible values depend upon the load balancer
+                      type: ipv4 (all load balancer types), dualstack (all load balancer
+                      types), and dualstack-without-public-ipv4 (type application
+                      only).'
                     type: string
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values
@@ -2853,8 +2859,11 @@ spec:
                     description: If true, the LB will be internal. Defaults to false.
                     type: boolean
                   ipAddressType:
-                    description: Type of IP addresses used by the subnets for your
-                      load balancer. The possible values are ipv4 and dualstack.
+                    description: 'Type of IP addresses used by the subnets for your
+                      load balancer. The possible values depend upon the load balancer
+                      type: ipv4 (all load balancer types), dualstack (all load balancer
+                      types), and dualstack-without-public-ipv4 (type application
+                      only).'
                     type: string
                   loadBalancerType:
                     description: Type of load balancer to create. Possible values

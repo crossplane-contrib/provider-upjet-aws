@@ -14,6 +14,7 @@ import (
 	"github.com/upbound/provider-aws/config/athena"
 	"github.com/upbound/provider-aws/config/autoscaling"
 	"github.com/upbound/provider-aws/config/backup"
+	"github.com/upbound/provider-aws/config/batch"
 	"github.com/upbound/provider-aws/config/budgets"
 	"github.com/upbound/provider-aws/config/cloudformation"
 	"github.com/upbound/provider-aws/config/cloudfront"
@@ -105,6 +106,7 @@ func init() {
 	ProviderConfiguration.AddConfig(athena.Configure)
 	ProviderConfiguration.AddConfig(autoscaling.Configure)
 	ProviderConfiguration.AddConfig(backup.Configure)
+	ProviderConfiguration.AddConfig(batch.Configure)
 	ProviderConfiguration.AddConfig(cloudfront.Configure)
 	ProviderConfiguration.AddConfig(cloudsearch.Configure)
 	ProviderConfiguration.AddConfig(cloudwatch.Configure)

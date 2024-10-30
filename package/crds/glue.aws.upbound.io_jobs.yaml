@@ -139,6 +139,16 @@ spec:
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
                     type: string
+                  jobRunQueuingEnabled:
+                    description: Specifies whether job run queuing is enabled for
+                      the job runs for this job. A value of true means job run queuing
+                      is enabled for the job runs. If false or not populated, the
+                      job runs will not be considered for queueing.
+                    type: boolean
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
+                    type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
                       units (DPUs) that can be allocated when this job runs. Required
@@ -354,6 +364,16 @@ spec:
                     description: The version of glue to use, for example "1.0". Ray
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
+                    type: string
+                  jobRunQueuingEnabled:
+                    description: Specifies whether job run queuing is enabled for
+                      the job runs for this job. A value of true means job run queuing
+                      is enabled for the job runs. If false or not populated, the
+                      job runs will not be considered for queueing.
+                    type: boolean
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
@@ -734,6 +754,16 @@ spec:
                     type: string
                   id:
                     description: Job name
+                    type: string
+                  jobRunQueuingEnabled:
+                    description: Specifies whether job run queuing is enabled for
+                      the job runs for this job. A value of true means job run queuing
+                      is enabled for the job runs. If false or not populated, the
+                      job runs will not be considered for queueing.
+                    type: boolean
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
@@ -977,6 +1007,16 @@ spec:
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
                     type: string
+                  jobRunQueuingEnabled:
+                    description: Specifies whether job run queuing is enabled for
+                      the job runs for this job. A value of true means job run queuing
+                      is enabled for the job runs. If false or not populated, the
+                      job runs will not be considered for queueing.
+                    type: boolean
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
+                    type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
                       units (DPUs) that can be allocated when this job runs. Required
@@ -1186,6 +1226,16 @@ spec:
                     description: The version of glue to use, for example "1.0". Ray
                       jobs should set this to 4.0 or greater. For information about
                       available versions, see the AWS Glue Release Notes.
+                    type: string
+                  jobRunQueuingEnabled:
+                    description: Specifies whether job run queuing is enabled for
+                      the job runs for this job. A value of true means job run queuing
+                      is enabled for the job runs. If false or not populated, the
+                      job runs will not be considered for queueing.
+                    type: boolean
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing
@@ -1560,6 +1610,16 @@ spec:
                     type: string
                   id:
                     description: Job name
+                    type: string
+                  jobRunQueuingEnabled:
+                    description: Specifies whether job run queuing is enabled for
+                      the job runs for this job. A value of true means job run queuing
+                      is enabled for the job runs. If false or not populated, the
+                      job runs will not be considered for queueing.
+                    type: boolean
+                  maintenanceWindow:
+                    description: –  Specifies the day of the week and hour for the
+                      maintenance window for streaming jobs.
                     type: string
                   maxCapacity:
                     description: –  The maximum number of AWS Glue data processing

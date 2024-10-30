@@ -257,6 +257,105 @@ type LoadBalancerParameters struct {
 	TargetGroupArnSelector *v1.Selector `json:"targetGroupArnSelector,omitempty" tf:"-"`
 }
 
+type ManagedEBSVolumeInitParameters struct {
+
+	// Whether the volume should be encrypted. Default value is true.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Linux filesystem type for the volume. For volumes created from a snapshot, same filesystem type must be specified that the volume was using when the snapshot was created. Valid values are ext3, ext4, xfs. Default value is xfs.
+	FileSystemType *string `json:"fileSystemType,omitempty" tf:"file_system_type,omitempty"`
+
+	// Number of I/O operations per second (IOPS).
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Amazon ECS infrastructure IAM role that is used to manage your Amazon Web Services infrastructure. Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes IAM policy with this role.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Size of the volume in GiB. You must specify either a size_in_gb or a snapshot_id. You can optionally specify a volume size greater than or equal to the snapshot size.
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
+	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Volume type.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type ManagedEBSVolumeObservation struct {
+
+	// Whether the volume should be encrypted. Default value is true.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Linux filesystem type for the volume. For volumes created from a snapshot, same filesystem type must be specified that the volume was using when the snapshot was created. Valid values are ext3, ext4, xfs. Default value is xfs.
+	FileSystemType *string `json:"fileSystemType,omitempty" tf:"file_system_type,omitempty"`
+
+	// Number of I/O operations per second (IOPS).
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption.
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Amazon ECS infrastructure IAM role that is used to manage your Amazon Web Services infrastructure. Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes IAM policy with this role.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// Size of the volume in GiB. You must specify either a size_in_gb or a snapshot_id. You can optionally specify a volume size greater than or equal to the snapshot size.
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
+	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Volume type.
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
+type ManagedEBSVolumeParameters struct {
+
+	// Whether the volume should be encrypted. Default value is true.
+	// +kubebuilder:validation:Optional
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// Linux filesystem type for the volume. For volumes created from a snapshot, same filesystem type must be specified that the volume was using when the snapshot was created. Valid values are ext3, ext4, xfs. Default value is xfs.
+	// +kubebuilder:validation:Optional
+	FileSystemType *string `json:"fileSystemType,omitempty" tf:"file_system_type,omitempty"`
+
+	// Number of I/O operations per second (IOPS).
+	// +kubebuilder:validation:Optional
+	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
+
+	// Amazon Resource Name (ARN) identifier of the Amazon Web Services Key Management Service key to use for Amazon EBS encryption.
+	// +kubebuilder:validation:Optional
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Amazon ECS infrastructure IAM role that is used to manage your Amazon Web Services infrastructure. Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes IAM policy with this role.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+
+	// Size of the volume in GiB. You must specify either a size_in_gb or a snapshot_id. You can optionally specify a volume size greater than or equal to the snapshot size.
+	// +kubebuilder:validation:Optional
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+
+	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
+	// +kubebuilder:validation:Optional
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
+	// +kubebuilder:validation:Optional
+	Throughput *string `json:"throughput,omitempty" tf:"throughput,omitempty"`
+
+	// Volume type.
+	// +kubebuilder:validation:Optional
+	VolumeType *string `json:"volumeType,omitempty" tf:"volume_type,omitempty"`
+}
+
 type NetworkConfigurationInitParameters struct {
 
 	// Assign a public IP address to the ENI (Fargate launch type only). Valid values are true or false. Default false.
@@ -643,6 +742,9 @@ type ServiceInitParameters struct {
 	// Specifies whether to enable Amazon ECS Exec for the tasks within the service.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
 
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
+
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	ForceNewDeployment *bool `json:"forceNewDeployment,omitempty" tf:"force_new_deployment,omitempty"`
 
@@ -712,6 +814,9 @@ type ServiceInitParameters struct {
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
+	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
+	VolumeConfiguration *VolumeConfigurationInitParameters `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
+
 	// Default false.
 	WaitForSteadyState *bool `json:"waitForSteadyState,omitempty" tf:"wait_for_steady_state,omitempty"`
 }
@@ -747,6 +852,9 @@ type ServiceObservation struct {
 
 	// Specifies whether to enable Amazon ECS Exec for the tasks within the service.
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	ForceNewDeployment *bool `json:"forceNewDeployment,omitempty" tf:"force_new_deployment,omitempty"`
@@ -805,6 +913,9 @@ type ServiceObservation struct {
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
+	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
+	VolumeConfiguration *VolumeConfigurationObservation `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
+
 	// Default false.
 	WaitForSteadyState *bool `json:"waitForSteadyState,omitempty" tf:"wait_for_steady_state,omitempty"`
 }
@@ -859,6 +970,10 @@ type ServiceParameters struct {
 	// Specifies whether to enable Amazon ECS Exec for the tasks within the service.
 	// +kubebuilder:validation:Optional
 	EnableExecuteCommand *bool `json:"enableExecuteCommand,omitempty" tf:"enable_execute_command,omitempty"`
+
+	// Enable to delete a service even if it wasn't scaled down to zero tasks. It's only necessary to use this if the service uses the REPLICA scheduling strategy.
+	// +kubebuilder:validation:Optional
+	ForceDelete *bool `json:"forceDelete,omitempty" tf:"force_delete,omitempty"`
 
 	// Enable to force a new task deployment of the service. This can be used to update tasks to use a newer Docker image with same image/tag combination (e.g., myimage:latest), roll Fargate tasks onto a newer platform version, or immediately deploy ordered_placement_strategy and placement_constraints updates.
 	// +kubebuilder:validation:Optional
@@ -949,6 +1064,10 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
+
+	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
+	// +kubebuilder:validation:Optional
+	VolumeConfiguration *VolumeConfigurationParameters `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
 
 	// Default false.
 	// +kubebuilder:validation:Optional
@@ -1070,6 +1189,35 @@ type TimeoutParameters struct {
 	// The amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
 	// +kubebuilder:validation:Optional
 	PerRequestTimeoutSeconds *float64 `json:"perRequestTimeoutSeconds,omitempty" tf:"per_request_timeout_seconds,omitempty"`
+}
+
+type VolumeConfigurationInitParameters struct {
+
+	// Configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. See below.
+	ManagedEBSVolume *ManagedEBSVolumeInitParameters `json:"managedEbsVolume,omitempty" tf:"managed_ebs_volume,omitempty"`
+
+	// Name of the volume.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type VolumeConfigurationObservation struct {
+
+	// Configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. See below.
+	ManagedEBSVolume *ManagedEBSVolumeObservation `json:"managedEbsVolume,omitempty" tf:"managed_ebs_volume,omitempty"`
+
+	// Name of the volume.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type VolumeConfigurationParameters struct {
+
+	// Configuration for the Amazon EBS volume that Amazon ECS creates and manages on your behalf. See below.
+	// +kubebuilder:validation:Optional
+	ManagedEBSVolume *ManagedEBSVolumeParameters `json:"managedEbsVolume" tf:"managed_ebs_volume,omitempty"`
+
+	// Name of the volume.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // ServiceSpec defines the desired state of Service

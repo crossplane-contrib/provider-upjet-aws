@@ -98,6 +98,12 @@ spec:
                       see Importing DAGs on Amazon MWAA.
                     type: string
                   endpointManagement:
+                    description: Defines whether the VPC endpoints configured for
+                      the environment are created and managed by the customer or by
+                      AWS. If set to SERVICE, Amazon MWAA will create and manage the
+                      required VPC endpoints in your VPC. If set to CUSTOMER, you
+                      must create, and manage, the VPC endpoints for your VPC. Defaults
+                      to SERVICE if not set.
                     type: string
                   environmentClass:
                     description: Environment class for the cluster. Possible options
@@ -266,7 +272,7 @@ spec:
                     type: object
                   loggingConfiguration:
                     description: The Apache Airflow logs you want to send to Amazon
-                      CloudWatch Logs.
+                      CloudWatch Logs. See logging_configuration Block for details.
                     properties:
                       dagProcessingLogs:
                         description: Log configuration options for processing DAGs.
@@ -334,10 +340,20 @@ spec:
                             type: string
                         type: object
                     type: object
+                  maxWebservers:
+                    description: The maximum number of web servers that you want to
+                      run in your environment. Value need to be between 2 and 5. Will
+                      be 2 by default.
+                    type: number
                   maxWorkers:
                     description: The maximum number of workers that can be automatically
                       scaled up. Value need to be between 1 and 25. Will be 10 by
                       default.
+                    type: number
+                  minWebservers:
+                    description: The minimum number of web servers that you want to
+                      run in your environment. Value need to be between 2 and 5. Will
+                      be 2 by default.
                     type: number
                   minWorkers:
                     description: The minimum number of workers that you want to run
@@ -348,7 +364,7 @@ spec:
                       Airflow Environment. This includes two private subnets as well
                       as security groups for the Airflow environment. Each subnet
                       requires internet connection, otherwise the deployment will
-                      fail. See Network configuration below for details.
+                      fail. See network_configuration Block for details.
                     properties:
                       securityGroupIds:
                         description: Security groups IDs for the environment. At least
@@ -688,6 +704,12 @@ spec:
                       see Importing DAGs on Amazon MWAA.
                     type: string
                   endpointManagement:
+                    description: Defines whether the VPC endpoints configured for
+                      the environment are created and managed by the customer or by
+                      AWS. If set to SERVICE, Amazon MWAA will create and manage the
+                      required VPC endpoints in your VPC. If set to CUSTOMER, you
+                      must create, and manage, the VPC endpoints for your VPC. Defaults
+                      to SERVICE if not set.
                     type: string
                   environmentClass:
                     description: Environment class for the cluster. Possible options
@@ -856,7 +878,7 @@ spec:
                     type: object
                   loggingConfiguration:
                     description: The Apache Airflow logs you want to send to Amazon
-                      CloudWatch Logs.
+                      CloudWatch Logs. See logging_configuration Block for details.
                     properties:
                       dagProcessingLogs:
                         description: Log configuration options for processing DAGs.
@@ -924,10 +946,20 @@ spec:
                             type: string
                         type: object
                     type: object
+                  maxWebservers:
+                    description: The maximum number of web servers that you want to
+                      run in your environment. Value need to be between 2 and 5. Will
+                      be 2 by default.
+                    type: number
                   maxWorkers:
                     description: The maximum number of workers that can be automatically
                       scaled up. Value need to be between 1 and 25. Will be 10 by
                       default.
+                    type: number
+                  minWebservers:
+                    description: The minimum number of web servers that you want to
+                      run in your environment. Value need to be between 2 and 5. Will
+                      be 2 by default.
                     type: number
                   minWorkers:
                     description: The minimum number of workers that you want to run
@@ -938,7 +970,7 @@ spec:
                       Airflow Environment. This includes two private subnets as well
                       as security groups for the Airflow environment. Each subnet
                       requires internet connection, otherwise the deployment will
-                      fail. See Network configuration below for details.
+                      fail. See network_configuration Block for details.
                     properties:
                       securityGroupIds:
                         description: Security groups IDs for the environment. At least
@@ -1446,6 +1478,12 @@ spec:
                       database
                     type: string
                   endpointManagement:
+                    description: Defines whether the VPC endpoints configured for
+                      the environment are created and managed by the customer or by
+                      AWS. If set to SERVICE, Amazon MWAA will create and manage the
+                      required VPC endpoints in your VPC. If set to CUSTOMER, you
+                      must create, and manage, the VPC endpoints for your VPC. Defaults
+                      to SERVICE if not set.
                     type: string
                   environmentClass:
                     description: Environment class for the cluster. Possible options
@@ -1488,7 +1526,7 @@ spec:
                     type: array
                   loggingConfiguration:
                     description: The Apache Airflow logs you want to send to Amazon
-                      CloudWatch Logs.
+                      CloudWatch Logs. See logging_configuration Block for details.
                     properties:
                       dagProcessingLogs:
                         description: Log configuration options for processing DAGs.
@@ -1576,10 +1614,20 @@ spec:
                             type: string
                         type: object
                     type: object
+                  maxWebservers:
+                    description: The maximum number of web servers that you want to
+                      run in your environment. Value need to be between 2 and 5. Will
+                      be 2 by default.
+                    type: number
                   maxWorkers:
                     description: The maximum number of workers that can be automatically
                       scaled up. Value need to be between 1 and 25. Will be 10 by
                       default.
+                    type: number
+                  minWebservers:
+                    description: The minimum number of web servers that you want to
+                      run in your environment. Value need to be between 2 and 5. Will
+                      be 2 by default.
                     type: number
                   minWorkers:
                     description: The minimum number of workers that you want to run
@@ -1590,7 +1638,7 @@ spec:
                       Airflow Environment. This includes two private subnets as well
                       as security groups for the Airflow environment. Each subnet
                       requires internet connection, otherwise the deployment will
-                      fail. See Network configuration below for details.
+                      fail. See network_configuration Block for details.
                     properties:
                       securityGroupIds:
                         description: Security groups IDs for the environment. At least

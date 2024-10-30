@@ -5,7 +5,7 @@ labels: new-resource
 title: "Request for `INSERT RESOURCE NAME` resource"
 ---
 <!--
-Thank you for helping to improve Official AWS Provider!
+Thank you for helping to improve this provider!
 
 Please be sure to search for open issues before raising a new one. We use issues
 for bug reports and feature requests.

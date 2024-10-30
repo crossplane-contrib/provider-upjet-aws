@@ -185,10 +185,9 @@ spec:
                     description: A DB subnet group to associate with this DB instance.
                     type: string
                   deletionProtection:
-                    description: A value that indicates whether the DB cluster has
-                      deletion protection enabled. The database can't be deleted when
-                      deletion protection is enabled. By default, deletion protection
-                      is disabled.
+                    description: A boolean value that indicates whether the DB cluster
+                      has deletion protection enabled. The database can't be deleted
+                      when deletion protection is enabled. Defaults to false.
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: |-
@@ -331,6 +330,33 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  restoreToPointInTime:
+                    description: A configuration block for restoring a DB instance
+                      to an arbitrary point in time. Requires the identifier argument
+                      to be set with the name of the new DB instance to be created.
+                      See Restore To Point In Time below for details.
+                    properties:
+                      restoreToTime:
+                        description: The date and time to restore from. Value must
+                          be a time in Universal Coordinated Time (UTC) format and
+                          must be before the latest restorable time for the DB instance.
+                          Cannot be specified with use_latest_restorable_time.
+                        type: string
+                      restoreType:
+                        description: The type of restore to be performed. Valid values
+                          are full-copy, copy-on-write.
+                        type: string
+                      sourceClusterIdentifier:
+                        description: The identifier of the source DB cluster from
+                          which to restore. Must match the identifier of an existing
+                          DB cluster.
+                        type: string
+                      useLatestRestorableTime:
+                        description: A boolean value that indicates whether the DB
+                          cluster is restored from the latest backup time. Defaults
+                          to false. Cannot be specified with restore_to_time.
+                        type: boolean
+                    type: object
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB cluster is deleted. If true is specified, no DB
@@ -569,10 +595,9 @@ spec:
                     description: A DB subnet group to associate with this DB instance.
                     type: string
                   deletionProtection:
-                    description: A value that indicates whether the DB cluster has
-                      deletion protection enabled. The database can't be deleted when
-                      deletion protection is enabled. By default, deletion protection
-                      is disabled.
+                    description: A boolean value that indicates whether the DB cluster
+                      has deletion protection enabled. The database can't be deleted
+                      when deletion protection is enabled. Defaults to false.
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: |-
@@ -711,6 +736,33 @@ spec:
                     description: The weekly time range during which system maintenance
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
+                  restoreToPointInTime:
+                    description: A configuration block for restoring a DB instance
+                      to an arbitrary point in time. Requires the identifier argument
+                      to be set with the name of the new DB instance to be created.
+                      See Restore To Point In Time below for details.
+                    properties:
+                      restoreToTime:
+                        description: The date and time to restore from. Value must
+                          be a time in Universal Coordinated Time (UTC) format and
+                          must be before the latest restorable time for the DB instance.
+                          Cannot be specified with use_latest_restorable_time.
+                        type: string
+                      restoreType:
+                        description: The type of restore to be performed. Valid values
+                          are full-copy, copy-on-write.
+                        type: string
+                      sourceClusterIdentifier:
+                        description: The identifier of the source DB cluster from
+                          which to restore. Must match the identifier of an existing
+                          DB cluster.
+                        type: string
+                      useLatestRestorableTime:
+                        description: A boolean value that indicates whether the DB
+                          cluster is restored from the latest backup time. Defaults
+                          to false. Cannot be specified with restore_to_time.
+                        type: boolean
+                    type: object
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB cluster is deleted. If true is specified, no DB
@@ -1043,10 +1095,9 @@ spec:
                     description: A DB subnet group to associate with this DB instance.
                     type: string
                   deletionProtection:
-                    description: A value that indicates whether the DB cluster has
-                      deletion protection enabled. The database can't be deleted when
-                      deletion protection is enabled. By default, deletion protection
-                      is disabled.
+                    description: A boolean value that indicates whether the DB cluster
+                      has deletion protection enabled. The database can't be deleted
+                      when deletion protection is enabled. Defaults to false.
                     type: boolean
                   enabledCloudwatchLogsExports:
                     description: |-
@@ -1104,6 +1155,33 @@ spec:
                     description: A read-only endpoint for the DocumentDB cluster,
                       automatically load-balanced across replicas
                     type: string
+                  restoreToPointInTime:
+                    description: A configuration block for restoring a DB instance
+                      to an arbitrary point in time. Requires the identifier argument
+                      to be set with the name of the new DB instance to be created.
+                      See Restore To Point In Time below for details.
+                    properties:
+                      restoreToTime:
+                        description: The date and time to restore from. Value must
+                          be a time in Universal Coordinated Time (UTC) format and
+                          must be before the latest restorable time for the DB instance.
+                          Cannot be specified with use_latest_restorable_time.
+                        type: string
+                      restoreType:
+                        description: The type of restore to be performed. Valid values
+                          are full-copy, copy-on-write.
+                        type: string
+                      sourceClusterIdentifier:
+                        description: The identifier of the source DB cluster from
+                          which to restore. Must match the identifier of an existing
+                          DB cluster.
+                        type: string
+                      useLatestRestorableTime:
+                        description: A boolean value that indicates whether the DB
+                          cluster is restored from the latest backup time. Defaults
+                          to false. Cannot be specified with restore_to_time.
+                        type: boolean
+                    type: object
                   skipFinalSnapshot:
                     description: Determines whether a final DB snapshot is created
                       before the DB cluster is deleted. If true is specified, no DB

@@ -18,6 +18,8 @@ type CanvasAppSettingsInitParameters struct {
 	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
 	DirectDeploySettings []DirectDeploySettingsInitParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
+	GenerativeAISettings *GenerativeAISettingsInitParameters `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
+
 	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsInitParameters `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
 
@@ -38,6 +40,8 @@ type CanvasAppSettingsObservation struct {
 
 	// The model deployment settings for the SageMaker Canvas application. See direct_deploy_settings Block below.
 	DirectDeploySettings []DirectDeploySettingsObservation `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
+
+	GenerativeAISettings *GenerativeAISettingsObservation `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
 
 	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsObservation `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
@@ -61,6 +65,9 @@ type CanvasAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectDeploySettings []DirectDeploySettingsParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	GenerativeAISettings *GenerativeAISettingsParameters `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
+
 	// The settings for connecting to an external data source with OAuth. See identity_provider_oauth_settings Block below.
 	// +kubebuilder:validation:Optional
 	IdentityProviderOauthSettings []IdentityProviderOauthSettingsParameters `json:"identityProviderOauthSettings,omitempty" tf:"identity_provider_oauth_settings,omitempty"`
@@ -80,6 +87,45 @@ type CanvasAppSettingsParameters struct {
 	// The workspace settings for the SageMaker Canvas application. See workspace_settings Block below.
 	// +kubebuilder:validation:Optional
 	WorkspaceSettings []WorkspaceSettingsParameters `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
+}
+
+type CodeEditorAppSettingsCustomImageInitParameters struct {
+
+	// The name of the App Image Config.
+	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+
+	// The name of the Custom Image.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+}
+
+type CodeEditorAppSettingsCustomImageObservation struct {
+
+	// The name of the App Image Config.
+	AppImageConfigName *string `json:"appImageConfigName,omitempty" tf:"app_image_config_name,omitempty"`
+
+	// The name of the Custom Image.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
+}
+
+type CodeEditorAppSettingsCustomImageParameters struct {
+
+	// The name of the App Image Config.
+	// +kubebuilder:validation:Optional
+	AppImageConfigName *string `json:"appImageConfigName" tf:"app_image_config_name,omitempty"`
+
+	// The name of the Custom Image.
+	// +kubebuilder:validation:Optional
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
+
+	// The version number of the Custom Image.
+	// +kubebuilder:validation:Optional
+	ImageVersionNumber *float64 `json:"imageVersionNumber,omitempty" tf:"image_version_number,omitempty"`
 }
 
 type CodeEditorAppSettingsDefaultResourceSpecInitParameters struct {
@@ -143,6 +189,9 @@ type CodeEditorAppSettingsDefaultResourceSpecParameters struct {
 
 type CodeEditorAppSettingsInitParameters struct {
 
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	CustomImage []CodeEditorAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []CodeEditorAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -153,6 +202,9 @@ type CodeEditorAppSettingsInitParameters struct {
 
 type CodeEditorAppSettingsObservation struct {
 
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	CustomImage []CodeEditorAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	DefaultResourceSpec []CodeEditorAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
@@ -162,6 +214,10 @@ type CodeEditorAppSettingsObservation struct {
 }
 
 type CodeEditorAppSettingsParameters struct {
+
+	// A list of custom SageMaker images that are configured to run as a KernelGateway app. see custom_image Block below.
+	// +kubebuilder:validation:Optional
+	CustomImage []CodeEditorAppSettingsCustomImageParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see default_resource_spec Block below.
 	// +kubebuilder:validation:Optional
@@ -350,8 +406,17 @@ type DefaultResourceSpecParameters struct {
 
 type DefaultSpaceSettingsInitParameters struct {
 
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	CustomFileSystemConfig []CustomFileSystemConfigInitParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
+
+	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
+	CustomPosixUserConfig []CustomPosixUserConfigInitParameters `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
+
 	// The execution role for the space.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
+	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
+	JupyterLabAppSettings []JupyterLabAppSettingsInitParameters `json:"jupyterLabAppSettings,omitempty" tf:"jupyter_lab_app_settings,omitempty"`
 
 	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	JupyterServerAppSettings []JupyterServerAppSettingsInitParameters `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
@@ -362,12 +427,24 @@ type DefaultSpaceSettingsInitParameters struct {
 	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The storage settings for a private space. See space_storage_settings Block below.
+	SpaceStorageSettings []SpaceStorageSettingsInitParameters `json:"spaceStorageSettings,omitempty" tf:"space_storage_settings,omitempty"`
 }
 
 type DefaultSpaceSettingsObservation struct {
 
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	CustomFileSystemConfig []CustomFileSystemConfigObservation `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
+
+	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
+	CustomPosixUserConfig []CustomPosixUserConfigObservation `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
+
 	// The execution role for the space.
 	ExecutionRole *string `json:"executionRole,omitempty" tf:"execution_role,omitempty"`
+
+	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
+	JupyterLabAppSettings []JupyterLabAppSettingsObservation `json:"jupyterLabAppSettings,omitempty" tf:"jupyter_lab_app_settings,omitempty"`
 
 	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	JupyterServerAppSettings []JupyterServerAppSettingsObservation `json:"jupyterServerAppSettings,omitempty" tf:"jupyter_server_app_settings,omitempty"`
@@ -378,13 +455,28 @@ type DefaultSpaceSettingsObservation struct {
 	// The security groups for the Amazon Virtual Private Cloud that the space uses for communication.
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The storage settings for a private space. See space_storage_settings Block below.
+	SpaceStorageSettings []SpaceStorageSettingsObservation `json:"spaceStorageSettings,omitempty" tf:"space_storage_settings,omitempty"`
 }
 
 type DefaultSpaceSettingsParameters struct {
 
+	// The settings for assigning a custom file system to a user profile. Permitted users can access this file system in Amazon SageMaker Studio. See custom_file_system_config Block below.
+	// +kubebuilder:validation:Optional
+	CustomFileSystemConfig []CustomFileSystemConfigParameters `json:"customFileSystemConfig,omitempty" tf:"custom_file_system_config,omitempty"`
+
+	// Details about the POSIX identity that is used for file system operations. See custom_posix_user_config Block below.
+	// +kubebuilder:validation:Optional
+	CustomPosixUserConfig []CustomPosixUserConfigParameters `json:"customPosixUserConfig,omitempty" tf:"custom_posix_user_config,omitempty"`
+
 	// The execution role for the space.
 	// +kubebuilder:validation:Optional
 	ExecutionRole *string `json:"executionRole" tf:"execution_role,omitempty"`
+
+	// The settings for the JupyterLab application. See jupyter_lab_app_settings Block below.
+	// +kubebuilder:validation:Optional
+	JupyterLabAppSettings []JupyterLabAppSettingsParameters `json:"jupyterLabAppSettings,omitempty" tf:"jupyter_lab_app_settings,omitempty"`
 
 	// The Jupyter server's app settings. See jupyter_server_app_settings Block below.
 	// +kubebuilder:validation:Optional
@@ -398,6 +490,10 @@ type DefaultSpaceSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// The storage settings for a private space. See space_storage_settings Block below.
+	// +kubebuilder:validation:Optional
+	SpaceStorageSettings []SpaceStorageSettingsParameters `json:"spaceStorageSettings,omitempty" tf:"space_storage_settings,omitempty"`
 }
 
 type DefaultUserSettingsInitParameters struct {
@@ -457,6 +553,9 @@ type DefaultUserSettingsInitParameters struct {
 
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
+
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	StudioWebPortalSettings []StudioWebPortalSettingsInitParameters `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
 
 	// The TensorBoard app settings. See tensor_board_app_settings Block below.
 	TensorBoardAppSettings []TensorBoardAppSettingsInitParameters `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
@@ -672,6 +771,9 @@ type DefaultUserSettingsObservation struct {
 	// Whether the user can access Studio. If this value is set to DISABLED, the user cannot access Studio, even if that is the default experience for the domain. Valid values are ENABLED and DISABLED.
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
 
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	StudioWebPortalSettings []StudioWebPortalSettingsObservation `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
+
 	// The TensorBoard app settings. See tensor_board_app_settings Block below.
 	TensorBoardAppSettings []TensorBoardAppSettingsObservation `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
 }
@@ -749,6 +851,10 @@ type DefaultUserSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	StudioWebPortal *string `json:"studioWebPortal,omitempty" tf:"studio_web_portal,omitempty"`
 
+	// The Studio Web Portal settings. See studio_web_portal_settings Block below.
+	// +kubebuilder:validation:Optional
+	StudioWebPortalSettings []StudioWebPortalSettingsParameters `json:"studioWebPortalSettings,omitempty" tf:"studio_web_portal_settings,omitempty"`
+
 	// The TensorBoard app settings. See tensor_board_app_settings Block below.
 	// +kubebuilder:validation:Optional
 	TensorBoardAppSettings []TensorBoardAppSettingsParameters `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
@@ -771,6 +877,38 @@ type DirectDeploySettingsParameters struct {
 	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type DockerSettingsInitParameters struct {
+
+	// Indicates whether the domain can access Docker. Valid values are ENABLED and DISABLED.
+	EnableDockerAccess *string `json:"enableDockerAccess,omitempty" tf:"enable_docker_access,omitempty"`
+
+	// The list of Amazon Web Services accounts that are trusted when the domain is created in VPC-only mode.
+	// +listType=set
+	VPCOnlyTrustedAccounts []*string `json:"vpcOnlyTrustedAccounts,omitempty" tf:"vpc_only_trusted_accounts,omitempty"`
+}
+
+type DockerSettingsObservation struct {
+
+	// Indicates whether the domain can access Docker. Valid values are ENABLED and DISABLED.
+	EnableDockerAccess *string `json:"enableDockerAccess,omitempty" tf:"enable_docker_access,omitempty"`
+
+	// The list of Amazon Web Services accounts that are trusted when the domain is created in VPC-only mode.
+	// +listType=set
+	VPCOnlyTrustedAccounts []*string `json:"vpcOnlyTrustedAccounts,omitempty" tf:"vpc_only_trusted_accounts,omitempty"`
+}
+
+type DockerSettingsParameters struct {
+
+	// Indicates whether the domain can access Docker. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	EnableDockerAccess *string `json:"enableDockerAccess,omitempty" tf:"enable_docker_access,omitempty"`
+
+	// The list of Amazon Web Services accounts that are trusted when the domain is created in VPC-only mode.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	VPCOnlyTrustedAccounts []*string `json:"vpcOnlyTrustedAccounts,omitempty" tf:"vpc_only_trusted_accounts,omitempty"`
 }
 
 type DomainInitParameters struct {
@@ -998,6 +1136,9 @@ type DomainParameters struct {
 
 type DomainSettingsInitParameters struct {
 
+	// A collection of settings that configure the domain’s Docker interaction. see docker_settings Block below.
+	DockerSettings []DockerSettingsInitParameters `json:"dockerSettings,omitempty" tf:"docker_settings,omitempty"`
+
 	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
@@ -1011,6 +1152,9 @@ type DomainSettingsInitParameters struct {
 
 type DomainSettingsObservation struct {
 
+	// A collection of settings that configure the domain’s Docker interaction. see docker_settings Block below.
+	DockerSettings []DockerSettingsObservation `json:"dockerSettings,omitempty" tf:"docker_settings,omitempty"`
+
 	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	ExecutionRoleIdentityConfig *string `json:"executionRoleIdentityConfig,omitempty" tf:"execution_role_identity_config,omitempty"`
 
@@ -1023,6 +1167,10 @@ type DomainSettingsObservation struct {
 }
 
 type DomainSettingsParameters struct {
+
+	// A collection of settings that configure the domain’s Docker interaction. see docker_settings Block below.
+	// +kubebuilder:validation:Optional
+	DockerSettings []DockerSettingsParameters `json:"dockerSettings,omitempty" tf:"docker_settings,omitempty"`
 
 	// The configuration for attaching a SageMaker user profile name to the execution role as a sts:SourceIdentity key AWS Docs. Valid values are USER_PROFILE_NAME and DISABLED.
 	// +kubebuilder:validation:Optional
@@ -1065,6 +1213,25 @@ type EFSFileSystemConfigParameters struct {
 	// The path to the file system directory that is accessible in Amazon SageMaker Studio. Permitted users can access only this directory and below.
 	// +kubebuilder:validation:Optional
 	FileSystemPath *string `json:"fileSystemPath" tf:"file_system_path,omitempty"`
+}
+
+type GenerativeAISettingsInitParameters struct {
+
+	// The Amazon Resource Name (ARN) assigned by AWS to this Domain.
+	AmazonBedrockRoleArn *string `json:"amazonBedrockRoleArn,omitempty" tf:"amazon_bedrock_role_arn,omitempty"`
+}
+
+type GenerativeAISettingsObservation struct {
+
+	// The Amazon Resource Name (ARN) assigned by AWS to this Domain.
+	AmazonBedrockRoleArn *string `json:"amazonBedrockRoleArn,omitempty" tf:"amazon_bedrock_role_arn,omitempty"`
+}
+
+type GenerativeAISettingsParameters struct {
+
+	// The Amazon Resource Name (ARN) assigned by AWS to this Domain.
+	// +kubebuilder:validation:Optional
+	AmazonBedrockRoleArn *string `json:"amazonBedrockRoleArn,omitempty" tf:"amazon_bedrock_role_arn,omitempty"`
 }
 
 type IdentityProviderOauthSettingsInitParameters struct {
@@ -1960,6 +2127,41 @@ type SpaceStorageSettingsParameters struct {
 	// The default EBS storage settings for a private space. See default_ebs_storage_settings Block below.
 	// +kubebuilder:validation:Optional
 	DefaultEBSStorageSettings []DefaultEBSStorageSettingsParameters `json:"defaultEbsStorageSettings,omitempty" tf:"default_ebs_storage_settings,omitempty"`
+}
+
+type StudioWebPortalSettingsInitParameters struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
+}
+
+type StudioWebPortalSettingsObservation struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
+}
+
+type StudioWebPortalSettingsParameters struct {
+
+	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The machine learning tools that are hidden from the Studio left navigation pane.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
 }
 
 type TensorBoardAppSettingsDefaultResourceSpecInitParameters struct {

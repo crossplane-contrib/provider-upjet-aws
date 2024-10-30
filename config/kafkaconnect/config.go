@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the kafkaconnect group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_mskconnect_connector", func(r *config.Resource) {
 		// This will always refer to a Cluster in the kafka api group, if it refers to any managed resource at all,
 		// but which property from the status of that cluster to use depends on the authentication mechanism chosen.

@@ -436,28 +436,34 @@ type ServerSideEncryptionParameters struct {
 type TTLInitParameters struct {
 
 	// Name of the table attribute to store the TTL timestamp in.
+	// Required if enabled is true, must not be set otherwise.
 	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
 
 	// Whether TTL is enabled.
+	// Default value is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type TTLObservation struct {
 
 	// Name of the table attribute to store the TTL timestamp in.
+	// Required if enabled is true, must not be set otherwise.
 	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
 
 	// Whether TTL is enabled.
+	// Default value is false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type TTLParameters struct {
 
 	// Name of the table attribute to store the TTL timestamp in.
+	// Required if enabled is true, must not be set otherwise.
 	// +kubebuilder:validation:Optional
-	AttributeName *string `json:"attributeName" tf:"attribute_name,omitempty"`
+	AttributeName *string `json:"attributeName,omitempty" tf:"attribute_name,omitempty"`
 
 	// Whether TTL is enabled.
+	// Default value is false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
@@ -503,10 +509,13 @@ type TableInitParameters struct {
 	// Name of the table to restore. Must match the name of an existing table.
 	RestoreSourceName *string `json:"restoreSourceName,omitempty" tf:"restore_source_name,omitempty"`
 
+	// ARN of the source table to restore. Must be supplied for cross-region restores.
+	RestoreSourceTableArn *string `json:"restoreSourceTableArn,omitempty" tf:"restore_source_table_arn,omitempty"`
+
 	// If set, restores table to the most recent point-in-time recovery point.
 	RestoreToLatestTime *bool `json:"restoreToLatestTime,omitempty" tf:"restore_to_latest_time,omitempty"`
 
-	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS-owned Customer Master Key if this argument isn't specified. See below.
+	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS-owned Customer Master Key if this argument isn't specified. Must be supplied for cross-region restores. See below.
 	ServerSideEncryption *ServerSideEncryptionInitParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
 	// Whether Streams are enabled.
@@ -578,10 +587,13 @@ type TableObservation struct {
 	// Name of the table to restore. Must match the name of an existing table.
 	RestoreSourceName *string `json:"restoreSourceName,omitempty" tf:"restore_source_name,omitempty"`
 
+	// ARN of the source table to restore. Must be supplied for cross-region restores.
+	RestoreSourceTableArn *string `json:"restoreSourceTableArn,omitempty" tf:"restore_source_table_arn,omitempty"`
+
 	// If set, restores table to the most recent point-in-time recovery point.
 	RestoreToLatestTime *bool `json:"restoreToLatestTime,omitempty" tf:"restore_to_latest_time,omitempty"`
 
-	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS-owned Customer Master Key if this argument isn't specified. See below.
+	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS-owned Customer Master Key if this argument isn't specified. Must be supplied for cross-region restores. See below.
 	ServerSideEncryption *ServerSideEncryptionObservation `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 
 	// ARN of the Table Stream. Only available when stream_enabled = true
@@ -675,11 +687,15 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	RestoreSourceName *string `json:"restoreSourceName,omitempty" tf:"restore_source_name,omitempty"`
 
+	// ARN of the source table to restore. Must be supplied for cross-region restores.
+	// +kubebuilder:validation:Optional
+	RestoreSourceTableArn *string `json:"restoreSourceTableArn,omitempty" tf:"restore_source_table_arn,omitempty"`
+
 	// If set, restores table to the most recent point-in-time recovery point.
 	// +kubebuilder:validation:Optional
 	RestoreToLatestTime *bool `json:"restoreToLatestTime,omitempty" tf:"restore_to_latest_time,omitempty"`
 
-	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS-owned Customer Master Key if this argument isn't specified. See below.
+	// Encryption at rest options. AWS DynamoDB tables are automatically encrypted at rest with an AWS-owned Customer Master Key if this argument isn't specified. Must be supplied for cross-region restores. See below.
 	// +kubebuilder:validation:Optional
 	ServerSideEncryption *ServerSideEncryptionParameters `json:"serverSideEncryption,omitempty" tf:"server_side_encryption,omitempty"`
 

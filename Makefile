@@ -11,8 +11,8 @@ PROJECT_NAME := provider-$(PROVIDER_NAME)
 PROJECT_REPO := github.com/upbound/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.5.5
-export TERRAFORM_PROVIDER_VERSION := 5.50.0
-export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.1
+export TERRAFORM_PROVIDER_VERSION := 5.68.0
+export TERRAFORM_PROVIDER_RELEASE := v$(TERRAFORM_PROVIDER_VERSION)-upjet.2
 export TERRAFORM_PROVIDER_SOURCE := hashicorp/aws
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/hashicorp/terraform-provider-aws
 export TERRAFORM_DOCS_PATH ?= website/docs/r
@@ -77,12 +77,12 @@ export SUBPACKAGES := $(SUBPACKAGES)
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.23.0
-UP_VERSION = v0.31.0
+KIND_VERSION = v0.24.0
+UP_VERSION = v0.34.2
 UP_CHANNEL = stable
 UPTEST_VERSION = v0.11.1
-UPTEST_LOCAL_VERSION = v0.12.0-9.gac371c9
-UPTEST_LOCAL_CHANNEL = main
+UPTEST_LOCAL_VERSION = v0.13.0
+UPTEST_LOCAL_CHANNEL = stable
 KUSTOMIZE_VERSION = v5.3.0
 YQ_VERSION = v4.40.5
 CROSSPLANE_VERSION = 1.14.6
@@ -126,6 +126,12 @@ export XPKG_REG_ORGS := $(XPKG_REG_ORGS)
 export XPKG_REG_ORGS_NO_PROMOTE := $(XPKG_REG_ORGS_NO_PROMOTE)
 export XPKG_DIR := $(XPKG_DIR)
 export XPKG_IGNORE := $(XPKG_IGNORE)
+
+CONFIG_CRD_GROUP = $(PROVIDER_NAME)
+PROVIDER_AUTH_GROUP = $(PROVIDER_NAME)
+
+export CONFIG_CRD_GROUP := $(CONFIG_CRD_GROUP)
+export PROVIDER_AUTH_GROUP := $(PROVIDER_AUTH_GROUP)
 
 -include build/makelib/xpkg.mk
 

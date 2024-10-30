@@ -56,7 +56,10 @@ ifeq (-,$(findstring -,$(VERSION)))
 endif
 BUILD_ONLY ?= false
 STORE_PACKAGES ?= ""
+XPKG_CLEANUP_EXAMPLES_VERSION ?= v0.12.1
 batch-process: $(UP)
+	@rm -rf $(WORK_DIR)/xpkg-cleaned-examples
+	@GOOS=$(HOSTOS) GOARCH=$(TARGETARCH) go run github.com/upbound/uptest/cmd/cleanupexamples@$(XPKG_CLEANUP_EXAMPLES_VERSION) $(ROOT_DIR)/examples $(WORK_DIR)/xpkg-cleaned-examples || $(FAIL)
 	@$(INFO) Batch processing smaller provider packages for: "$(SUBPACKAGES)"
 	@mkdir -p "$(XPKG_OUTPUT_DIR)/$(PLATFORM)" && \
 	$(UP) xpkg batch --smaller-providers "$$(tr ' ' ',' <<< "$(SUBPACKAGES)")" \
@@ -69,14 +72,15 @@ batch-process: $(UP)
 		--output-dir $(XPKG_OUTPUT_DIR) \
 		--store-packages "$(STORE_PACKAGES)" \
 		--build-only=$(BUILD_ONLY) \
-		--examples-root $(ROOT_DIR)/examples \
+		--examples-root $(WORK_DIR)/xpkg-cleaned-examples \
 		--examples-group-override monolith=* --examples-group-override config=providerconfig \
 		--auth-ext $(XPKG_DIR)/auth.yaml \
 		--crd-root $(XPKG_DIR)/crds \
 		--ignore $(XPKG_IGNORE) \
-		--crd-group-override monolith=* --crd-group-override config=$(PROVIDER_NAME) \
+		--crd-group-override monolith=* --crd-group-override config=$(CONFIG_CRD_GROUP) \
 		--package-metadata-template $(XPKG_DIR)/crossplane.yaml.tmpl \
-		--template-var XpkgRegOrg=$(XPKG_REG_ORGS) --template-var DepConstraint="$(DEP_CONSTRAINT)" --template-var ProviderName=$(PROVIDER_NAME) \
+		--template-var XpkgRegOrg=$(XPKG_REG_ORGS) --template-var DepConstraint="$(DEP_CONSTRAINT)" --template-var ProviderName=$(PROVIDER_NAME) --template-var ProviderAuthGroup=$(PROVIDER_AUTH_GROUP) \
 		--concurrency $(CONCURRENCY) \
 		--push-retry 10 || $(FAIL)
 	@$(OK) Done processing smaller provider packages for: "$(SUBPACKAGES)"
+	@rm -rf $(WORK_DIR)/xpkg-cleaned-examples

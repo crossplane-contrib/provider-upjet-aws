@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the neptune group
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_neptune_cluster", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["snapshot_identifier"] = config.Reference{

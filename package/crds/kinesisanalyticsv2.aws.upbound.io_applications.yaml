@@ -1134,6 +1134,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   cloudwatchLoggingOptions:
                     description: A CloudWatch log stream to monitor application configuration
                       errors.
@@ -2402,6 +2406,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   cloudwatchLoggingOptions:
                     description: A CloudWatch log stream to monitor application configuration
                       errors.
@@ -3385,6 +3393,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   arn:
                     description: The ARN of the application.
                     type: string
@@ -4514,6 +4526,10 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   cloudwatchLoggingOptions:
                     description: A CloudWatch log stream to monitor application configuration
                       errors.
@@ -4613,7 +4629,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to
@@ -5663,6 +5679,10 @@ spec:
                             x-kubernetes-list-type: set
                         type: object
                     type: object
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   cloudwatchLoggingOptions:
                     description: A CloudWatch log stream to monitor application configuration
                       errors.
@@ -5758,7 +5778,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to
@@ -6533,6 +6553,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  applicationMode:
+                    description: The application's mode. Valid values are STREAMING,
+                      INTERACTIVE.
+                    type: string
                   arn:
                     description: The ARN of the application.
                     type: string
@@ -6568,7 +6592,7 @@ spec:
                   runtimeEnvironment:
                     description: 'The runtime environment for the application. Valid
                       values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13,
-                      FLINK-1_15, FLINK-1_18.'
+                      FLINK-1_15, FLINK-1_18, FLINK-1_19.'
                     type: string
                   serviceExecutionRole:
                     description: The ARN of the IAM role used by the application to

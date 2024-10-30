@@ -974,6 +974,11 @@ func (in *BusInitParameters) DeepCopyInto(out *BusInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1052,6 +1057,11 @@ func (in *BusObservation) DeepCopyInto(out *BusObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1101,6 +1111,11 @@ func (in *BusParameters) DeepCopyInto(out *BusParameters) {
 	*out = *in
 	if in.EventSourceName != nil {
 		in, out := &in.EventSourceName, &out.EventSourceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.KMSKeyIdentifier != nil {
+		in, out := &in.KMSKeyIdentifier, &out.KMSKeyIdentifier
 		*out = new(string)
 		**out = **in
 	}

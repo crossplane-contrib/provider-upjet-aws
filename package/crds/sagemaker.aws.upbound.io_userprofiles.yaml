@@ -199,6 +199,13 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              generativeAiSettings:
+                                properties:
+                                  amazonBedrockRoleArn:
+                                    description: The user profile Amazon Resource
+                                      Name (ARN).
+                                    type: string
+                                type: object
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -316,6 +323,24 @@ spec:
                             Editor App Settings below.
                           items:
                             properties:
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a CodeEditor app. see Custom
+                                  Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
@@ -725,6 +750,28 @@ spec:
                             even if that is the default experience for the domain.
                             Valid values are ENABLED and DISABLED.
                           type: string
+                        studioWebPortalSettings:
+                          description: The Studio Web Portal settings. See studio_web_portal_settings
+                            Block below.
+                          items:
+                            properties:
+                              hiddenAppTypes:
+                                description: The Applications supported in Studio
+                                  that are hidden from the Studio left navigation
+                                  pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              hiddenMlTools:
+                                description: The machine learning tools that are hidden
+                                  from the Studio left navigation pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See TensorBoard
                             App Settings below.
@@ -901,6 +948,13 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              generativeAiSettings:
+                                properties:
+                                  amazonBedrockRoleArn:
+                                    description: The user profile Amazon Resource
+                                      Name (ARN).
+                                    type: string
+                                type: object
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -1018,6 +1072,24 @@ spec:
                             Editor App Settings below.
                           items:
                             properties:
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a CodeEditor app. see Custom
+                                  Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
@@ -1427,6 +1499,28 @@ spec:
                             even if that is the default experience for the domain.
                             Valid values are ENABLED and DISABLED.
                           type: string
+                        studioWebPortalSettings:
+                          description: The Studio Web Portal settings. See studio_web_portal_settings
+                            Block below.
+                          items:
+                            properties:
+                              hiddenAppTypes:
+                                description: The Applications supported in Studio
+                                  that are hidden from the Studio left navigation
+                                  pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              hiddenMlTools:
+                                description: The machine learning tools that are hidden
+                                  from the Studio left navigation pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See TensorBoard
                             App Settings below.
@@ -1709,6 +1803,13 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              generativeAiSettings:
+                                properties:
+                                  amazonBedrockRoleArn:
+                                    description: The user profile Amazon Resource
+                                      Name (ARN).
+                                    type: string
+                                type: object
                               identityProviderOauthSettings:
                                 description: The settings for connecting to an external
                                   data source with OAuth. See Identity Provider OAuth
@@ -1826,6 +1927,24 @@ spec:
                             Editor App Settings below.
                           items:
                             properties:
+                              customImage:
+                                description: A list of custom SageMaker images that
+                                  are configured to run as a CodeEditor app. see Custom
+                                  Image below.
+                                items:
+                                  properties:
+                                    appImageConfigName:
+                                      description: The name of the App Image Config.
+                                      type: string
+                                    imageName:
+                                      description: The name of the Custom Image.
+                                      type: string
+                                    imageVersionNumber:
+                                      description: The version number of the Custom
+                                        Image.
+                                      type: number
+                                  type: object
+                                type: array
                               defaultResourceSpec:
                                 description: The default instance type and the Amazon
                                   Resource Name (ARN) of the SageMaker image created
@@ -2235,6 +2354,28 @@ spec:
                             even if that is the default experience for the domain.
                             Valid values are ENABLED and DISABLED.
                           type: string
+                        studioWebPortalSettings:
+                          description: The Studio Web Portal settings. See studio_web_portal_settings
+                            Block below.
+                          items:
+                            properties:
+                              hiddenAppTypes:
+                                description: The Applications supported in Studio
+                                  that are hidden from the Studio left navigation
+                                  pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              hiddenMlTools:
+                                description: The machine learning tools that are hidden
+                                  from the Studio left navigation pane.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                         tensorBoardAppSettings:
                           description: The TensorBoard app settings. See TensorBoard
                             App Settings below.
@@ -2510,6 +2651,13 @@ spec:
                                   Valid values are ENABLED and DISABLED.
                                 type: string
                             type: object
+                          generativeAiSettings:
+                            properties:
+                              amazonBedrockRoleArn:
+                                description: The user profile Amazon Resource Name
+                                  (ARN).
+                                type: string
+                            type: object
                           identityProviderOauthSettings:
                             description: The settings for connecting to an external
                               data source with OAuth. See Identity Provider OAuth
@@ -2610,6 +2758,23 @@ spec:
                         description: The Code Editor application settings. See Code
                           Editor App Settings below.
                         properties:
+                          customImage:
+                            description: A list of custom SageMaker images that are
+                              configured to run as a CodeEditor app. see Custom Image
+                              below.
+                            items:
+                              properties:
+                                appImageConfigName:
+                                  description: The name of the App Image Config.
+                                  type: string
+                                imageName:
+                                  description: The name of the Custom Image.
+                                  type: string
+                                imageVersionNumber:
+                                  description: The version number of the Custom Image.
+                                  type: number
+                              type: object
+                            type: array
                           defaultResourceSpec:
                             description: The default instance type and the Amazon
                               Resource Name (ARN) of the SageMaker image created on
@@ -2978,6 +3143,25 @@ spec:
                           if that is the default experience for the domain. Valid
                           values are ENABLED and DISABLED.
                         type: string
+                      studioWebPortalSettings:
+                        description: The Studio Web Portal settings. See studio_web_portal_settings
+                          Block below.
+                        properties:
+                          hiddenAppTypes:
+                            description: The Applications supported in Studio that
+                              are hidden from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          hiddenMlTools:
+                            description: The machine learning tools that are hidden
+                              from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       tensorBoardAppSettings:
                         description: The TensorBoard app settings. See TensorBoard
                           App Settings below.
@@ -3142,6 +3326,13 @@ spec:
                                   Valid values are ENABLED and DISABLED.
                                 type: string
                             type: object
+                          generativeAiSettings:
+                            properties:
+                              amazonBedrockRoleArn:
+                                description: The user profile Amazon Resource Name
+                                  (ARN).
+                                type: string
+                            type: object
                           identityProviderOauthSettings:
                             description: The settings for connecting to an external
                               data source with OAuth. See Identity Provider OAuth
@@ -3242,6 +3433,23 @@ spec:
                         description: The Code Editor application settings. See Code
                           Editor App Settings below.
                         properties:
+                          customImage:
+                            description: A list of custom SageMaker images that are
+                              configured to run as a CodeEditor app. see Custom Image
+                              below.
+                            items:
+                              properties:
+                                appImageConfigName:
+                                  description: The name of the App Image Config.
+                                  type: string
+                                imageName:
+                                  description: The name of the Custom Image.
+                                  type: string
+                                imageVersionNumber:
+                                  description: The version number of the Custom Image.
+                                  type: number
+                              type: object
+                            type: array
                           defaultResourceSpec:
                             description: The default instance type and the Amazon
                               Resource Name (ARN) of the SageMaker image created on
@@ -3610,6 +3818,25 @@ spec:
                           if that is the default experience for the domain. Valid
                           values are ENABLED and DISABLED.
                         type: string
+                      studioWebPortalSettings:
+                        description: The Studio Web Portal settings. See studio_web_portal_settings
+                          Block below.
+                        properties:
+                          hiddenAppTypes:
+                            description: The Applications supported in Studio that
+                              are hidden from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          hiddenMlTools:
+                            description: The machine learning tools that are hidden
+                              from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       tensorBoardAppSettings:
                         description: The TensorBoard app settings. See TensorBoard
                           App Settings below.
@@ -3880,6 +4107,13 @@ spec:
                                   Valid values are ENABLED and DISABLED.
                                 type: string
                             type: object
+                          generativeAiSettings:
+                            properties:
+                              amazonBedrockRoleArn:
+                                description: The user profile Amazon Resource Name
+                                  (ARN).
+                                type: string
+                            type: object
                           identityProviderOauthSettings:
                             description: The settings for connecting to an external
                               data source with OAuth. See Identity Provider OAuth
@@ -3980,6 +4214,23 @@ spec:
                         description: The Code Editor application settings. See Code
                           Editor App Settings below.
                         properties:
+                          customImage:
+                            description: A list of custom SageMaker images that are
+                              configured to run as a CodeEditor app. see Custom Image
+                              below.
+                            items:
+                              properties:
+                                appImageConfigName:
+                                  description: The name of the App Image Config.
+                                  type: string
+                                imageName:
+                                  description: The name of the Custom Image.
+                                  type: string
+                                imageVersionNumber:
+                                  description: The version number of the Custom Image.
+                                  type: number
+                              type: object
+                            type: array
                           defaultResourceSpec:
                             description: The default instance type and the Amazon
                               Resource Name (ARN) of the SageMaker image created on
@@ -4348,6 +4599,25 @@ spec:
                           if that is the default experience for the domain. Valid
                           values are ENABLED and DISABLED.
                         type: string
+                      studioWebPortalSettings:
+                        description: The Studio Web Portal settings. See studio_web_portal_settings
+                          Block below.
+                        properties:
+                          hiddenAppTypes:
+                            description: The Applications supported in Studio that
+                              are hidden from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          hiddenMlTools:
+                            description: The machine learning tools that are hidden
+                              from the Studio left navigation pane.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                       tensorBoardAppSettings:
                         description: The TensorBoard app settings. See TensorBoard
                           App Settings below.

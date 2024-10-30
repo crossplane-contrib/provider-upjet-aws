@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the appstream group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_appstream_fleet", func(r *config.Resource) {
 		r.References["vpc_config.subnet_ids"] = config.Reference{
 			TerraformName:     "aws_subnet",

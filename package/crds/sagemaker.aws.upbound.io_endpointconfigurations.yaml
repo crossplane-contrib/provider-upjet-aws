@@ -317,6 +317,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -328,6 +335,28 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          items:
+                            properties:
+                              maxInstanceCount:
+                                description: The maximum number of instances that
+                                  the endpoint can provision when it scales up to
+                                  accommodate an increase in traffic.
+                                type: number
+                              minInstanceCount:
+                                description: The minimum number of instances that
+                                  the endpoint must retain when it scales down to
+                                  accommodate a decrease in traffic.
+                                type: number
+                              status:
+                                description: Indicates whether managed instance scaling
+                                  is enabled. Valid values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -510,6 +539,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -521,6 +557,28 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          items:
+                            properties:
+                              maxInstanceCount:
+                                description: The maximum number of instances that
+                                  the endpoint can provision when it scales up to
+                                  accommodate an increase in traffic.
+                                type: number
+                              minInstanceCount:
+                                description: The minimum number of instances that
+                                  the endpoint must retain when it scales down to
+                                  accommodate a decrease in traffic.
+                                type: number
+                              status:
+                                description: Indicates whether managed instance scaling
+                                  is enabled. Valid values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -844,6 +902,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -855,6 +920,28 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          items:
+                            properties:
+                              maxInstanceCount:
+                                description: The maximum number of instances that
+                                  the endpoint can provision when it scales up to
+                                  accommodate an increase in traffic.
+                                type: number
+                              minInstanceCount:
+                                description: The minimum number of instances that
+                                  the endpoint must retain when it scales down to
+                                  accommodate a decrease in traffic.
+                                type: number
+                              status:
+                                description: Indicates whether managed instance scaling
+                                  is enabled. Valid values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -1033,6 +1120,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -1044,6 +1138,28 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          items:
+                            properties:
+                              maxInstanceCount:
+                                description: The maximum number of instances that
+                                  the endpoint can provision when it scales up to
+                                  accommodate an increase in traffic.
+                                type: number
+                              minInstanceCount:
+                                description: The minimum number of instances that
+                                  the endpoint must retain when it scales down to
+                                  accommodate a decrease in traffic.
+                                type: number
+                              status:
+                                description: Indicates whether managed instance scaling
+                                  is enabled. Valid values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -1462,6 +1578,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -1473,6 +1596,28 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          items:
+                            properties:
+                              maxInstanceCount:
+                                description: The maximum number of instances that
+                                  the endpoint can provision when it scales up to
+                                  accommodate an increase in traffic.
+                                type: number
+                              minInstanceCount:
+                                description: The minimum number of instances that
+                                  the endpoint must retain when it scales down to
+                                  accommodate a decrease in traffic.
+                                type: number
+                              status:
+                                description: Indicates whether managed instance scaling
+                                  is enabled. Valid values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -1575,6 +1720,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -1586,6 +1738,28 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          items:
+                            properties:
+                              maxInstanceCount:
+                                description: The maximum number of instances that
+                                  the endpoint can provision when it scales up to
+                                  accommodate an increase in traffic.
+                                type: number
+                              minInstanceCount:
+                                description: The minimum number of instances that
+                                  the endpoint must retain when it scales down to
+                                  accommodate a decrease in traffic.
+                                type: number
+                              status:
+                                description: Indicates whether managed instance scaling
+                                  is enabled. Valid values are ENABLED and DISABLED.
+                                type: string
+                            type: object
+                          type: array
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -1861,7 +2035,7 @@ spec:
                           properties:
                             captureMode:
                               description: Specifies the data to be captured. Should
-                                be one of Input or Output.
+                                be one of Input, Output or InputAndOutput.
                               type: string
                           type: object
                         type: array
@@ -2002,6 +2176,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -2013,6 +2194,26 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          properties:
+                            maxInstanceCount:
+                              description: The maximum number of instances that the
+                                endpoint can provision when it scales up to accommodate
+                                an increase in traffic.
+                              type: number
+                            minInstanceCount:
+                              description: The minimum number of instances that the
+                                endpoint must retain when it scales down to accommodate
+                                a decrease in traffic.
+                              type: number
+                            status:
+                              description: Indicates whether managed instance scaling
+                                is enabled. Valid values are ENABLED and DISABLED.
+                              type: string
+                          type: object
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -2191,6 +2392,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -2202,6 +2410,26 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          properties:
+                            maxInstanceCount:
+                              description: The maximum number of instances that the
+                                endpoint can provision when it scales up to accommodate
+                                an increase in traffic.
+                              type: number
+                            minInstanceCount:
+                              description: The minimum number of instances that the
+                                endpoint must retain when it scales down to accommodate
+                                a decrease in traffic.
+                              type: number
+                            status:
+                              description: Indicates whether managed instance scaling
+                                is enabled. Valid values are ENABLED and DISABLED.
+                              type: string
+                          type: object
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -2366,7 +2594,7 @@ spec:
                           properties:
                             captureMode:
                               description: Specifies the data to be captured. Should
-                                be one of Input or Output.
+                                be one of Input, Output or InputAndOutput.
                               type: string
                           type: object
                         type: array
@@ -2507,6 +2735,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -2518,6 +2753,26 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          properties:
+                            maxInstanceCount:
+                              description: The maximum number of instances that the
+                                endpoint can provision when it scales up to accommodate
+                                an increase in traffic.
+                              type: number
+                            minInstanceCount:
+                              description: The minimum number of instances that the
+                                endpoint must retain when it scales down to accommodate
+                                a decrease in traffic.
+                              type: number
+                            status:
+                              description: Indicates whether managed instance scaling
+                                is enabled. Valid values are ENABLED and DISABLED.
+                              type: string
+                          type: object
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -2692,6 +2947,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -2703,6 +2965,26 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          properties:
+                            maxInstanceCount:
+                              description: The maximum number of instances that the
+                                endpoint can provision when it scales up to accommodate
+                                an increase in traffic.
+                              type: number
+                            minInstanceCount:
+                              description: The minimum number of instances that the
+                                endpoint must retain when it scales down to accommodate
+                                a decrease in traffic.
+                              type: number
+                            status:
+                              description: Indicates whether managed instance scaling
+                                is enabled. Valid values are ENABLED and DISABLED.
+                              type: string
+                          type: object
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -3034,7 +3316,7 @@ spec:
                           properties:
                             captureMode:
                               description: Specifies the data to be captured. Should
-                                be one of Input or Output.
+                                be one of Input, Output or InputAndOutput.
                               type: string
                           type: object
                         type: array
@@ -3103,6 +3385,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -3114,6 +3403,26 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          properties:
+                            maxInstanceCount:
+                              description: The maximum number of instances that the
+                                endpoint can provision when it scales up to accommodate
+                                an increase in traffic.
+                              type: number
+                            minInstanceCount:
+                              description: The minimum number of instances that the
+                                endpoint must retain when it scales down to accommodate
+                                a decrease in traffic.
+                              type: number
+                            status:
+                              description: Indicates whether managed instance scaling
+                                is enabled. Valid values are ENABLED and DISABLED.
+                              type: string
+                          type: object
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon
@@ -3212,6 +3521,13 @@ spec:
                             access is disabled for all production variants behind
                             an endpoints.
                           type: boolean
+                        inferenceAmiVersion:
+                          description: Specifies an option from a collection of preconfigured
+                            Amazon Machine Image (AMI) images. Each image is configured
+                            by Amazon Web Services with a set of software and driver
+                            versions. Amazon Web Services optimizes these configurations
+                            for different machine learning workloads.
+                          type: string
                         initialInstanceCount:
                           description: Initial number of instances used for auto-scaling.
                           type: number
@@ -3223,6 +3539,26 @@ spec:
                         instanceType:
                           description: The type of instance to start.
                           type: string
+                        managedInstanceScaling:
+                          description: Settings that control the range in the number
+                            of instances that the endpoint provisions as it scales
+                            up or down to accommodate traffic.
+                          properties:
+                            maxInstanceCount:
+                              description: The maximum number of instances that the
+                                endpoint can provision when it scales up to accommodate
+                                an increase in traffic.
+                              type: number
+                            minInstanceCount:
+                              description: The minimum number of instances that the
+                                endpoint must retain when it scales down to accommodate
+                                a decrease in traffic.
+                              type: number
+                            status:
+                              description: Indicates whether managed instance scaling
+                                is enabled. Valid values are ENABLED and DISABLED.
+                              type: string
+                          type: object
                         modelDataDownloadTimeoutInSeconds:
                           description: The timeout value, in seconds, to download
                             and extract the model that you want to host from Amazon

@@ -128,19 +128,19 @@ type CaptureContentTypeHeaderParameters struct {
 
 type CaptureOptionsInitParameters struct {
 
-	// Specifies the data to be captured. Should be one of Input or Output.
+	// Specifies the data to be captured. Should be one of Input, Output or InputAndOutput.
 	CaptureMode *string `json:"captureMode,omitempty" tf:"capture_mode,omitempty"`
 }
 
 type CaptureOptionsObservation struct {
 
-	// Specifies the data to be captured. Should be one of Input or Output.
+	// Specifies the data to be captured. Should be one of Input, Output or InputAndOutput.
 	CaptureMode *string `json:"captureMode,omitempty" tf:"capture_mode,omitempty"`
 }
 
 type CaptureOptionsParameters struct {
 
-	// Specifies the data to be captured. Should be one of Input or Output.
+	// Specifies the data to be captured. Should be one of Input, Output or InputAndOutput.
 	// +kubebuilder:validation:Optional
 	CaptureMode *string `json:"captureMode" tf:"capture_mode,omitempty"`
 }
@@ -366,6 +366,45 @@ type EndpointConfigurationParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ManagedInstanceScalingInitParameters struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ManagedInstanceScalingObservation struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ManagedInstanceScalingParameters struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	// +kubebuilder:validation:Optional
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	// +kubebuilder:validation:Optional
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type NotificationConfigInitParameters struct {
 
 	// Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.
@@ -422,6 +461,9 @@ type ProductionVariantsInitParameters struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -430,6 +472,9 @@ type ProductionVariantsInitParameters struct {
 
 	// The type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling *ManagedInstanceScalingInitParameters `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
@@ -473,6 +518,9 @@ type ProductionVariantsObservation struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -481,6 +529,9 @@ type ProductionVariantsObservation struct {
 
 	// The type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling *ManagedInstanceScalingObservation `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
@@ -519,6 +570,10 @@ type ProductionVariantsParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	// +kubebuilder:validation:Optional
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
@@ -530,6 +585,10 @@ type ProductionVariantsParameters struct {
 	// The type of instance to start.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	// +kubebuilder:validation:Optional
+	ManagedInstanceScaling *ManagedInstanceScalingParameters `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional
@@ -666,6 +725,9 @@ type ShadowProductionVariantsInitParameters struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -674,6 +736,9 @@ type ShadowProductionVariantsInitParameters struct {
 
 	// The type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling *ShadowProductionVariantsManagedInstanceScalingInitParameters `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
@@ -694,6 +759,45 @@ type ShadowProductionVariantsInitParameters struct {
 	VolumeSizeInGb *float64 `json:"volumeSizeInGb,omitempty" tf:"volume_size_in_gb,omitempty"`
 }
 
+type ShadowProductionVariantsManagedInstanceScalingInitParameters struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ShadowProductionVariantsManagedInstanceScalingObservation struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type ShadowProductionVariantsManagedInstanceScalingParameters struct {
+
+	// The maximum number of instances that the endpoint can provision when it scales up to accommodate an increase in traffic.
+	// +kubebuilder:validation:Optional
+	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
+
+	// The minimum number of instances that the endpoint must retain when it scales down to accommodate a decrease in traffic.
+	// +kubebuilder:validation:Optional
+	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
+
+	// Indicates whether managed instance scaling is enabled. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type ShadowProductionVariantsObservation struct {
 
 	// The size of the Elastic Inference (EI) instance to use for the production variant.
@@ -708,6 +812,9 @@ type ShadowProductionVariantsObservation struct {
 	// You can use this parameter to turn on native Amazon Web Services Systems Manager (SSM) access for a production variant behind an endpoint. By default, SSM access is disabled for all production variants behind an endpoints.
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
 
@@ -716,6 +823,9 @@ type ShadowProductionVariantsObservation struct {
 
 	// The type of instance to start.
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	ManagedInstanceScaling *ShadowProductionVariantsManagedInstanceScalingObservation `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	ModelDataDownloadTimeoutInSeconds *float64 `json:"modelDataDownloadTimeoutInSeconds,omitempty" tf:"model_data_download_timeout_in_seconds,omitempty"`
@@ -754,6 +864,10 @@ type ShadowProductionVariantsParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableSsmAccess *bool `json:"enableSsmAccess,omitempty" tf:"enable_ssm_access,omitempty"`
 
+	// Specifies an option from a collection of preconfigured Amazon Machine Image (AMI) images. Each image is configured by Amazon Web Services with a set of software and driver versions. Amazon Web Services optimizes these configurations for different machine learning workloads.
+	// +kubebuilder:validation:Optional
+	InferenceAMIVersion *string `json:"inferenceAmiVersion,omitempty" tf:"inference_ami_version,omitempty"`
+
 	// Initial number of instances used for auto-scaling.
 	// +kubebuilder:validation:Optional
 	InitialInstanceCount *float64 `json:"initialInstanceCount,omitempty" tf:"initial_instance_count,omitempty"`
@@ -765,6 +879,10 @@ type ShadowProductionVariantsParameters struct {
 	// The type of instance to start.
 	// +kubebuilder:validation:Optional
 	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
+
+	// Settings that control the range in the number of instances that the endpoint provisions as it scales up or down to accommodate traffic.
+	// +kubebuilder:validation:Optional
+	ManagedInstanceScaling *ShadowProductionVariantsManagedInstanceScalingParameters `json:"managedInstanceScaling,omitempty" tf:"managed_instance_scaling,omitempty"`
 
 	// The timeout value, in seconds, to download and extract the model that you want to host from Amazon S3 to the individual inference instance associated with this production variant. Valid values between 60 and 3600.
 	// +kubebuilder:validation:Optional

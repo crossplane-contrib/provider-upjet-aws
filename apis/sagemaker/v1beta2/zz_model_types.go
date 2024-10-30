@@ -29,6 +29,9 @@ type ContainerInitParameters struct {
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	ImageConfig *ImageConfigInitParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
+	// The inference specification name in the model package version.
+	InferenceSpecificationName *string `json:"inferenceSpecificationName,omitempty" tf:"inference_specification_name,omitempty"`
+
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
@@ -40,6 +43,9 @@ type ContainerInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the model package to use to create the model.
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
+
+	// Specifies additional configuration for multi-model endpoints. see Multi Model Config.
+	MultiModelConfig *MultiModelConfigInitParameters `json:"multiModelConfig,omitempty" tf:"multi_model_config,omitempty"`
 }
 
 type ContainerObservation struct {
@@ -58,6 +64,9 @@ type ContainerObservation struct {
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	ImageConfig *ImageConfigObservation `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
+	// The inference specification name in the model package version.
+	InferenceSpecificationName *string `json:"inferenceSpecificationName,omitempty" tf:"inference_specification_name,omitempty"`
+
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
@@ -69,6 +78,9 @@ type ContainerObservation struct {
 
 	// The Amazon Resource Name (ARN) of the model package to use to create the model.
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
+
+	// Specifies additional configuration for multi-model endpoints. see Multi Model Config.
+	MultiModelConfig *MultiModelConfigObservation `json:"multiModelConfig,omitempty" tf:"multi_model_config,omitempty"`
 }
 
 type ContainerParameters struct {
@@ -91,6 +103,10 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageConfig *ImageConfigParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
+	// The inference specification name in the model package version.
+	// +kubebuilder:validation:Optional
+	InferenceSpecificationName *string `json:"inferenceSpecificationName,omitempty" tf:"inference_specification_name,omitempty"`
+
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -106,6 +122,10 @@ type ContainerParameters struct {
 	// The Amazon Resource Name (ARN) of the model package to use to create the model.
 	// +kubebuilder:validation:Optional
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
+
+	// Specifies additional configuration for multi-model endpoints. see Multi Model Config.
+	// +kubebuilder:validation:Optional
+	MultiModelConfig *MultiModelConfigParameters `json:"multiModelConfig,omitempty" tf:"multi_model_config,omitempty"`
 }
 
 type ImageConfigInitParameters struct {
@@ -175,6 +195,25 @@ type InferenceExecutionConfigParameters struct {
 	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
+type ModelAccessConfigInitParameters struct {
+
+	// Specifies agreement to the model end-user license agreement (EULA). The AcceptEula value must be explicitly defined as true in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.
+	AcceptEula *bool `json:"acceptEula,omitempty" tf:"accept_eula,omitempty"`
+}
+
+type ModelAccessConfigObservation struct {
+
+	// Specifies agreement to the model end-user license agreement (EULA). The AcceptEula value must be explicitly defined as true in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.
+	AcceptEula *bool `json:"acceptEula,omitempty" tf:"accept_eula,omitempty"`
+}
+
+type ModelAccessConfigParameters struct {
+
+	// Specifies agreement to the model end-user license agreement (EULA). The AcceptEula value must be explicitly defined as true in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.
+	// +kubebuilder:validation:Optional
+	AcceptEula *bool `json:"acceptEula" tf:"accept_eula,omitempty"`
+}
+
 type ModelDataSourceInitParameters struct {
 
 	// The S3 location of model data to deploy.
@@ -199,6 +238,9 @@ type ModelDataSourceS3DataSourceInitParameters struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. see Model Access Config.
+	ModelAccessConfig *S3DataSourceModelAccessConfigInitParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
+
 	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
 	S3DataType *string `json:"s3DataType,omitempty" tf:"s3_data_type,omitempty"`
 
@@ -210,6 +252,9 @@ type ModelDataSourceS3DataSourceObservation struct {
 
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. see Model Access Config.
+	ModelAccessConfig *S3DataSourceModelAccessConfigObservation `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
 	S3DataType *string `json:"s3DataType,omitempty" tf:"s3_data_type,omitempty"`
@@ -223,6 +268,10 @@ type ModelDataSourceS3DataSourceParameters struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	// +kubebuilder:validation:Optional
 	CompressionType *string `json:"compressionType" tf:"compression_type,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. see Model Access Config.
+	// +kubebuilder:validation:Optional
+	ModelAccessConfig *S3DataSourceModelAccessConfigParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
 	// +kubebuilder:validation:Optional
@@ -349,6 +398,25 @@ type ModelParameters struct {
 	VPCConfig *VPCConfigParameters `json:"vpcConfig,omitempty" tf:"vpc_config,omitempty"`
 }
 
+type MultiModelConfigInitParameters struct {
+
+	// Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to Disabled. Allowed values are: Enabled and Disabled.
+	ModelCacheSetting *string `json:"modelCacheSetting,omitempty" tf:"model_cache_setting,omitempty"`
+}
+
+type MultiModelConfigObservation struct {
+
+	// Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to Disabled. Allowed values are: Enabled and Disabled.
+	ModelCacheSetting *string `json:"modelCacheSetting,omitempty" tf:"model_cache_setting,omitempty"`
+}
+
+type MultiModelConfigParameters struct {
+
+	// Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to Disabled. Allowed values are: Enabled and Disabled.
+	// +kubebuilder:validation:Optional
+	ModelCacheSetting *string `json:"modelCacheSetting,omitempty" tf:"model_cache_setting,omitempty"`
+}
+
 type PrimaryContainerImageConfigInitParameters struct {
 
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). Allowed values are: Platform and Vpc.
@@ -394,6 +462,9 @@ type PrimaryContainerInitParameters struct {
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	ImageConfig *PrimaryContainerImageConfigInitParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
+	// The inference specification name in the model package version.
+	InferenceSpecificationName *string `json:"inferenceSpecificationName,omitempty" tf:"inference_specification_name,omitempty"`
+
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
@@ -405,6 +476,9 @@ type PrimaryContainerInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the model package to use to create the model.
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
+
+	// Specifies additional configuration for multi-model endpoints. see Multi Model Config.
+	MultiModelConfig *PrimaryContainerMultiModelConfigInitParameters `json:"multiModelConfig,omitempty" tf:"multi_model_config,omitempty"`
 }
 
 type PrimaryContainerModelDataSourceInitParameters struct {
@@ -426,6 +500,25 @@ type PrimaryContainerModelDataSourceParameters struct {
 	S3DataSource []ModelDataSourceS3DataSourceParameters `json:"s3DataSource" tf:"s3_data_source,omitempty"`
 }
 
+type PrimaryContainerMultiModelConfigInitParameters struct {
+
+	// Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to Disabled. Allowed values are: Enabled and Disabled.
+	ModelCacheSetting *string `json:"modelCacheSetting,omitempty" tf:"model_cache_setting,omitempty"`
+}
+
+type PrimaryContainerMultiModelConfigObservation struct {
+
+	// Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to Disabled. Allowed values are: Enabled and Disabled.
+	ModelCacheSetting *string `json:"modelCacheSetting,omitempty" tf:"model_cache_setting,omitempty"`
+}
+
+type PrimaryContainerMultiModelConfigParameters struct {
+
+	// Whether to cache models for a multi-model endpoint. By default, multi-model endpoints cache models so that a model does not have to be loaded into memory each time it is invoked. Some use cases do not benefit from model caching. For example, if an endpoint hosts a large number of models that are each invoked infrequently, the endpoint might perform better if you disable model caching. To disable model caching, set the value of this parameter to Disabled. Allowed values are: Enabled and Disabled.
+	// +kubebuilder:validation:Optional
+	ModelCacheSetting *string `json:"modelCacheSetting,omitempty" tf:"model_cache_setting,omitempty"`
+}
+
 type PrimaryContainerObservation struct {
 
 	// The DNS host name for the container.
@@ -442,6 +535,9 @@ type PrimaryContainerObservation struct {
 	// Specifies whether the model container is in Amazon ECR or a private Docker registry accessible from your Amazon Virtual Private Cloud (VPC). For more information see Using a Private Docker Registry for Real-Time Inference Containers. see Image Config.
 	ImageConfig *PrimaryContainerImageConfigObservation `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
+	// The inference specification name in the model package version.
+	InferenceSpecificationName *string `json:"inferenceSpecificationName,omitempty" tf:"inference_specification_name,omitempty"`
+
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
@@ -453,6 +549,9 @@ type PrimaryContainerObservation struct {
 
 	// The Amazon Resource Name (ARN) of the model package to use to create the model.
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
+
+	// Specifies additional configuration for multi-model endpoints. see Multi Model Config.
+	MultiModelConfig *PrimaryContainerMultiModelConfigObservation `json:"multiModelConfig,omitempty" tf:"multi_model_config,omitempty"`
 }
 
 type PrimaryContainerParameters struct {
@@ -475,6 +574,10 @@ type PrimaryContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageConfig *PrimaryContainerImageConfigParameters `json:"imageConfig,omitempty" tf:"image_config,omitempty"`
 
+	// The inference specification name in the model package version.
+	// +kubebuilder:validation:Optional
+	InferenceSpecificationName *string `json:"inferenceSpecificationName,omitempty" tf:"inference_specification_name,omitempty"`
+
 	// The container hosts value SingleModel/MultiModel. The default value is SingleModel.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
@@ -490,6 +593,10 @@ type PrimaryContainerParameters struct {
 	// The Amazon Resource Name (ARN) of the model package to use to create the model.
 	// +kubebuilder:validation:Optional
 	ModelPackageName *string `json:"modelPackageName,omitempty" tf:"model_package_name,omitempty"`
+
+	// Specifies additional configuration for multi-model endpoints. see Multi Model Config.
+	// +kubebuilder:validation:Optional
+	MultiModelConfig *PrimaryContainerMultiModelConfigParameters `json:"multiModelConfig,omitempty" tf:"multi_model_config,omitempty"`
 }
 
 type RepositoryAuthConfigInitParameters struct {
@@ -516,6 +623,9 @@ type S3DataSourceInitParameters struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
 
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. see Model Access Config.
+	ModelAccessConfig *ModelAccessConfigInitParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
+
 	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
 	S3DataType *string `json:"s3DataType,omitempty" tf:"s3_data_type,omitempty"`
 
@@ -523,10 +633,32 @@ type S3DataSourceInitParameters struct {
 	S3URI *string `json:"s3Uri,omitempty" tf:"s3_uri,omitempty"`
 }
 
+type S3DataSourceModelAccessConfigInitParameters struct {
+
+	// Specifies agreement to the model end-user license agreement (EULA). The AcceptEula value must be explicitly defined as true in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.
+	AcceptEula *bool `json:"acceptEula,omitempty" tf:"accept_eula,omitempty"`
+}
+
+type S3DataSourceModelAccessConfigObservation struct {
+
+	// Specifies agreement to the model end-user license agreement (EULA). The AcceptEula value must be explicitly defined as true in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.
+	AcceptEula *bool `json:"acceptEula,omitempty" tf:"accept_eula,omitempty"`
+}
+
+type S3DataSourceModelAccessConfigParameters struct {
+
+	// Specifies agreement to the model end-user license agreement (EULA). The AcceptEula value must be explicitly defined as true in order to accept the EULA that this model requires. You are responsible for reviewing and complying with any applicable license terms and making sure they are acceptable for your use case before downloading or using a model.
+	// +kubebuilder:validation:Optional
+	AcceptEula *bool `json:"acceptEula" tf:"accept_eula,omitempty"`
+}
+
 type S3DataSourceObservation struct {
 
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	CompressionType *string `json:"compressionType,omitempty" tf:"compression_type,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. see Model Access Config.
+	ModelAccessConfig *ModelAccessConfigObservation `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
 	S3DataType *string `json:"s3DataType,omitempty" tf:"s3_data_type,omitempty"`
@@ -540,6 +672,10 @@ type S3DataSourceParameters struct {
 	// How the model data is prepared. Allowed values are: None and Gzip.
 	// +kubebuilder:validation:Optional
 	CompressionType *string `json:"compressionType" tf:"compression_type,omitempty"`
+
+	// Specifies the access configuration file for the ML model. You can explicitly accept the model end-user license agreement (EULA) within the [model_access_config configuration block]. see Model Access Config.
+	// +kubebuilder:validation:Optional
+	ModelAccessConfig *ModelAccessConfigParameters `json:"modelAccessConfig,omitempty" tf:"model_access_config,omitempty"`
 
 	// The type of model data to deploy. Allowed values are: S3Object and S3Prefix.
 	// +kubebuilder:validation:Optional

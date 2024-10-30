@@ -233,6 +233,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest. Defaults to an AWS managed KMS Key.
@@ -764,6 +771,13 @@ spec:
                           type: string
                       type: object
                     type: array
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest. Defaults to an AWS managed KMS Key.
@@ -1388,6 +1402,13 @@ spec:
                     description: DNS name for the file system, e.g., fs-12345678.corp.example.com
                       (domain name matching the Active Directory domain name)
                     type: string
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   id:
                     description: Identifier of the file system (e.g. fs-12345678).
                     type: string
@@ -1733,7 +1754,7 @@ spec:
                     description: The configuration that Amazon FSx for Windows File
                       Server uses to audit and log user accesses of files, folders,
                       and file shares on the Amazon FSx for Windows File Server file
-                      system. See Audit Log Configuration below.
+                      system. See audit_log_configuration Block for details.
                     properties:
                       auditLogDestination:
                         description: The Amazon Resource Name (ARN) for the destination
@@ -1784,19 +1805,26 @@ spec:
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
-                      Windows File Server file system. See Disk Iops Configuration
-                      below.
+                      Windows File Server file system. See disk_iops_configuration
+                      Block for details.
                     properties:
                       iops:
-                        description: '- The total number of SSD IOPS provisioned for
-                          the file system.'
+                        description: The total number of SSD IOPS provisioned for
+                          the file system.
                         type: number
                       mode:
-                        description: '- Specifies whether the number of IOPS for the
+                        description: Specifies whether the number of IOPS for the
                           file system is using the system. Valid values are AUTOMATIC
-                          and USER_PROVISIONED. Default value is AUTOMATIC.'
+                          and USER_PROVISIONED. Default value is AUTOMATIC.
                         type: string
                     type: object
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest. Defaults to an AWS managed KMS Key.
@@ -1974,8 +2002,8 @@ spec:
                     description: Configuration block that Amazon FSx uses to join
                       the Windows File Server instance to your self-managed (including
                       on-premises) Microsoft Active Directory (AD) directory. Cannot
-                      be specified with active_directory_id. See Self-Managed Active
-                      Directory below.
+                      be specified with active_directory_id. See self_managed_active_directory
+                      Block for details.
                     properties:
                       dnsIps:
                         description: A list of up to two IP addresses of DNS servers
@@ -2256,7 +2284,7 @@ spec:
                     description: The configuration that Amazon FSx for Windows File
                       Server uses to audit and log user accesses of files, folders,
                       and file shares on the Amazon FSx for Windows File Server file
-                      system. See Audit Log Configuration below.
+                      system. See audit_log_configuration Block for details.
                     properties:
                       auditLogDestination:
                         description: The Amazon Resource Name (ARN) for the destination
@@ -2307,19 +2335,26 @@ spec:
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
-                      Windows File Server file system. See Disk Iops Configuration
-                      below.
+                      Windows File Server file system. See disk_iops_configuration
+                      Block for details.
                     properties:
                       iops:
-                        description: '- The total number of SSD IOPS provisioned for
-                          the file system.'
+                        description: The total number of SSD IOPS provisioned for
+                          the file system.
                         type: number
                       mode:
-                        description: '- Specifies whether the number of IOPS for the
+                        description: Specifies whether the number of IOPS for the
                           file system is using the system. Valid values are AUTOMATIC
-                          and USER_PROVISIONED. Default value is AUTOMATIC.'
+                          and USER_PROVISIONED. Default value is AUTOMATIC.
                         type: string
                     type: object
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   kmsKeyId:
                     description: ARN for the KMS Key to encrypt the file system at
                       rest. Defaults to an AWS managed KMS Key.
@@ -2493,8 +2528,8 @@ spec:
                     description: Configuration block that Amazon FSx uses to join
                       the Windows File Server instance to your self-managed (including
                       on-premises) Microsoft Active Directory (AD) directory. Cannot
-                      be specified with active_directory_id. See Self-Managed Active
-                      Directory below.
+                      be specified with active_directory_id. See self_managed_active_directory
+                      Block for details.
                     properties:
                       dnsIps:
                         description: A list of up to two IP addresses of DNS servers
@@ -2868,7 +2903,7 @@ spec:
                     description: The configuration that Amazon FSx for Windows File
                       Server uses to audit and log user accesses of files, folders,
                       and file shares on the Amazon FSx for Windows File Server file
-                      system. See Audit Log Configuration below.
+                      system. See audit_log_configuration Block for details.
                     properties:
                       auditLogDestination:
                         description: The Amazon Resource Name (ARN) for the destination
@@ -2919,23 +2954,30 @@ spec:
                     type: string
                   diskIopsConfiguration:
                     description: The SSD IOPS configuration for the Amazon FSx for
-                      Windows File Server file system. See Disk Iops Configuration
-                      below.
+                      Windows File Server file system. See disk_iops_configuration
+                      Block for details.
                     properties:
                       iops:
-                        description: '- The total number of SSD IOPS provisioned for
-                          the file system.'
+                        description: The total number of SSD IOPS provisioned for
+                          the file system.
                         type: number
                       mode:
-                        description: '- Specifies whether the number of IOPS for the
+                        description: Specifies whether the number of IOPS for the
                           file system is using the system. Valid values are AUTOMATIC
-                          and USER_PROVISIONED. Default value is AUTOMATIC.'
+                          and USER_PROVISIONED. Default value is AUTOMATIC.
                         type: string
                     type: object
                   dnsName:
                     description: DNS name for the file system, e.g., fs-12345678.corp.example.com
                       (domain name matching the Active Directory domain name)
                     type: string
+                  finalBackupTags:
+                    additionalProperties:
+                      type: string
+                    description: A map of tags to apply to the file system's final
+                      backup.
+                    type: object
+                    x-kubernetes-map-type: granular
                   id:
                     description: Identifier of the file system (e.g. fs-12345678).
                     type: string
@@ -2980,8 +3022,8 @@ spec:
                     description: Configuration block that Amazon FSx uses to join
                       the Windows File Server instance to your self-managed (including
                       on-premises) Microsoft Active Directory (AD) directory. Cannot
-                      be specified with active_directory_id. See Self-Managed Active
-                      Directory below.
+                      be specified with active_directory_id. See self_managed_active_directory
+                      Block for details.
                     properties:
                       dnsIps:
                         description: A list of up to two IP addresses of DNS servers

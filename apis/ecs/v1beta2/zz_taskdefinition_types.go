@@ -418,7 +418,7 @@ type TaskDefinitionInitParameters struct {
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 
-	// Whether should track latest task definition or the one created with the resource. Default is false.
+	// Whether should track latest ACTIVE task definition on AWS or the one created with the resource stored in state. Default is false. Useful in the event the task definition is modified outside of this resource.
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
 	// Configuration block for volumes that containers in your task may use. Detailed below.
@@ -495,7 +495,7 @@ type TaskDefinitionObservation struct {
 	// ARN of IAM role that allows your Amazon ECS container task to make calls to other AWS services.
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 
-	// Whether should track latest task definition or the one created with the resource. Default is false.
+	// Whether should track latest ACTIVE task definition on AWS or the one created with the resource stored in state. Default is false. Useful in the event the task definition is modified outside of this resource.
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
 	// Configuration block for volumes that containers in your task may use. Detailed below.
@@ -589,7 +589,7 @@ type TaskDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	TaskRoleArn *string `json:"taskRoleArn,omitempty" tf:"task_role_arn,omitempty"`
 
-	// Whether should track latest task definition or the one created with the resource. Default is false.
+	// Whether should track latest ACTIVE task definition on AWS or the one created with the resource stored in state. Default is false. Useful in the event the task definition is modified outside of this resource.
 	// +kubebuilder:validation:Optional
 	TrackLatest *bool `json:"trackLatest,omitempty" tf:"track_latest,omitempty"`
 
@@ -629,6 +629,9 @@ type TaskDefinitionPlacementConstraintsParameters struct {
 
 type VolumeInitParameters struct {
 
+	// Whether the volume should be configured at launch time. This is used to create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each task definition revision may only have one volume configured at launch in the volume configuration.
+	ConfigureAtLaunch *bool `json:"configureAtLaunch,omitempty" tf:"configure_at_launch,omitempty"`
+
 	// Configuration block to configure a docker volume. Detailed below.
 	DockerVolumeConfiguration *DockerVolumeConfigurationInitParameters `json:"dockerVolumeConfiguration,omitempty" tf:"docker_volume_configuration,omitempty"`
 
@@ -648,6 +651,9 @@ type VolumeInitParameters struct {
 
 type VolumeObservation struct {
 
+	// Whether the volume should be configured at launch time. This is used to create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each task definition revision may only have one volume configured at launch in the volume configuration.
+	ConfigureAtLaunch *bool `json:"configureAtLaunch,omitempty" tf:"configure_at_launch,omitempty"`
+
 	// Configuration block to configure a docker volume. Detailed below.
 	DockerVolumeConfiguration *DockerVolumeConfigurationObservation `json:"dockerVolumeConfiguration,omitempty" tf:"docker_volume_configuration,omitempty"`
 
@@ -666,6 +672,10 @@ type VolumeObservation struct {
 }
 
 type VolumeParameters struct {
+
+	// Whether the volume should be configured at launch time. This is used to create Amazon EBS volumes for standalone tasks or tasks created as part of a service. Each task definition revision may only have one volume configured at launch in the volume configuration.
+	// +kubebuilder:validation:Optional
+	ConfigureAtLaunch *bool `json:"configureAtLaunch,omitempty" tf:"configure_at_launch,omitempty"`
 
 	// Configuration block to configure a docker volume. Detailed below.
 	// +kubebuilder:validation:Optional

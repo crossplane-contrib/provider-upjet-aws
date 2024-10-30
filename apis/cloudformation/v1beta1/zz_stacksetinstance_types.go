@@ -15,6 +15,16 @@ import (
 
 type DeploymentTargetsInitParameters struct {
 
+	// Limit deployment targets to individual accounts or include additional accounts with provided OUs. Valid values: INTERSECTION, DIFFERENCE, UNION, NONE.
+	AccountFilterType *string `json:"accountFilterType,omitempty" tf:"account_filter_type,omitempty"`
+
+	// List of accounts to deploy stack set updates.
+	// +listType=set
+	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
+
+	// S3 URL of the file containing the list of accounts.
+	AccountsURL *string `json:"accountsUrl,omitempty" tf:"accounts_url,omitempty"`
+
 	// The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
 	// +listType=set
 	OrganizationalUnitIds []*string `json:"organizationalUnitIds,omitempty" tf:"organizational_unit_ids,omitempty"`
@@ -22,12 +32,35 @@ type DeploymentTargetsInitParameters struct {
 
 type DeploymentTargetsObservation struct {
 
+	// Limit deployment targets to individual accounts or include additional accounts with provided OUs. Valid values: INTERSECTION, DIFFERENCE, UNION, NONE.
+	AccountFilterType *string `json:"accountFilterType,omitempty" tf:"account_filter_type,omitempty"`
+
+	// List of accounts to deploy stack set updates.
+	// +listType=set
+	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
+
+	// S3 URL of the file containing the list of accounts.
+	AccountsURL *string `json:"accountsUrl,omitempty" tf:"accounts_url,omitempty"`
+
 	// The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
 	// +listType=set
 	OrganizationalUnitIds []*string `json:"organizationalUnitIds,omitempty" tf:"organizational_unit_ids,omitempty"`
 }
 
 type DeploymentTargetsParameters struct {
+
+	// Limit deployment targets to individual accounts or include additional accounts with provided OUs. Valid values: INTERSECTION, DIFFERENCE, UNION, NONE.
+	// +kubebuilder:validation:Optional
+	AccountFilterType *string `json:"accountFilterType,omitempty" tf:"account_filter_type,omitempty"`
+
+	// List of accounts to deploy stack set updates.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Accounts []*string `json:"accounts,omitempty" tf:"accounts,omitempty"`
+
+	// S3 URL of the file containing the list of accounts.
+	// +kubebuilder:validation:Optional
+	AccountsURL *string `json:"accountsUrl,omitempty" tf:"accounts_url,omitempty"`
 
 	// The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
 	// +kubebuilder:validation:Optional
@@ -127,6 +160,9 @@ type StackSetInstanceObservation struct {
 
 type StackSetInstanceOperationPreferencesInitParameters struct {
 
+	// Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.
+	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
+
 	// The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	FailureToleranceCount *float64 `json:"failureToleranceCount,omitempty" tf:"failure_tolerance_count,omitempty"`
 
@@ -148,6 +184,9 @@ type StackSetInstanceOperationPreferencesInitParameters struct {
 
 type StackSetInstanceOperationPreferencesObservation struct {
 
+	// Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.
+	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
+
 	// The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	FailureToleranceCount *float64 `json:"failureToleranceCount,omitempty" tf:"failure_tolerance_count,omitempty"`
 
@@ -168,6 +207,10 @@ type StackSetInstanceOperationPreferencesObservation struct {
 }
 
 type StackSetInstanceOperationPreferencesParameters struct {
+
+	// Specifies how the concurrency level behaves during the operation execution. Valid values are STRICT_FAILURE_TOLERANCE and SOFT_FAILURE_TOLERANCE.
+	// +kubebuilder:validation:Optional
+	ConcurrencyMode *string `json:"concurrencyMode,omitempty" tf:"concurrency_mode,omitempty"`
 
 	// The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region.
 	// +kubebuilder:validation:Optional

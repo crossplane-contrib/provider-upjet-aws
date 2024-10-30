@@ -31,6 +31,7 @@ import (
 	egressonlyinternetgateway "github.com/upbound/provider-aws/internal/controller/ec2/egressonlyinternetgateway"
 	eip "github.com/upbound/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/provider-aws/internal/controller/ec2/eipassociation"
+	fleet "github.com/upbound/provider-aws/internal/controller/ec2/fleet"
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
 	host "github.com/upbound/provider-aws/internal/controller/ec2/host"
 	instance "github.com/upbound/provider-aws/internal/controller/ec2/instance"
@@ -137,6 +138,7 @@ func Setup_ec2(mgr ctrl.Manager, o controller.Options) error {
 		egressonlyinternetgateway.Setup,
 		eip.Setup,
 		eipassociation.Setup,
+		fleet.Setup,
 		flowlog.Setup,
 		host.Setup,
 		instance.Setup,

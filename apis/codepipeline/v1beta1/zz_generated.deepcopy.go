@@ -89,6 +89,11 @@ func (in *ActionInitParameters) DeepCopyInto(out *ActionInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.TimeoutInMinutes != nil {
+		in, out := &in.TimeoutInMinutes, &out.TimeoutInMinutes
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -187,6 +192,11 @@ func (in *ActionObservation) DeepCopyInto(out *ActionObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.TimeoutInMinutes != nil {
+		in, out := &in.TimeoutInMinutes, &out.TimeoutInMinutes
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -282,6 +292,11 @@ func (in *ActionParameters) DeepCopyInto(out *ActionParameters) {
 	}
 	if in.RunOrder != nil {
 		in, out := &in.RunOrder, &out.RunOrder
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TimeoutInMinutes != nil {
+		in, out := &in.TimeoutInMinutes, &out.TimeoutInMinutes
 		*out = new(float64)
 		**out = **in
 	}

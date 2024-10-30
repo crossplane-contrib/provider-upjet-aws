@@ -17,7 +17,7 @@ import (
 )
 
 // Configure adds configurations for the ecs group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_ecs_cluster", func(r *config.Resource) {
 		r.ExternalName.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
 			// expected id format: arn:aws:ecs:us-west-2:123456789123:cluster/example-cluster

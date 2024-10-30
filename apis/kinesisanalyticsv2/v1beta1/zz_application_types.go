@@ -126,6 +126,9 @@ type ApplicationInitParameters struct {
 	// The application's configuration
 	ApplicationConfiguration []ApplicationConfigurationInitParameters `json:"applicationConfiguration,omitempty" tf:"application_configuration,omitempty"`
 
+	// The application's mode. Valid values are STREAMING, INTERACTIVE.
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
+
 	// A CloudWatch log stream to monitor application configuration errors.
 	CloudwatchLoggingOptions []CloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -163,6 +166,9 @@ type ApplicationObservation struct {
 
 	// The application's configuration
 	ApplicationConfiguration []ApplicationConfigurationObservation `json:"applicationConfiguration,omitempty" tf:"application_configuration,omitempty"`
+
+	// The application's mode. Valid values are STREAMING, INTERACTIVE.
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
 
 	// The ARN of the application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
@@ -214,6 +220,10 @@ type ApplicationParameters struct {
 	// The application's configuration
 	// +kubebuilder:validation:Optional
 	ApplicationConfiguration []ApplicationConfigurationParameters `json:"applicationConfiguration,omitempty" tf:"application_configuration,omitempty"`
+
+	// The application's mode. Valid values are STREAMING, INTERACTIVE.
+	// +kubebuilder:validation:Optional
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
 
 	// A CloudWatch log stream to monitor application configuration errors.
 	// +kubebuilder:validation:Optional

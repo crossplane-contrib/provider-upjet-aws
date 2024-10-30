@@ -263,6 +263,11 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ClusterMode != nil {
+		in, out := &in.ClusterMode, &out.ClusterMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DataTieringEnabled != nil {
 		in, out := &in.DataTieringEnabled, &out.DataTieringEnabled
 		*out = new(bool)
@@ -292,6 +297,16 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 		in, out := &in.GlobalReplicationGroupID, &out.GlobalReplicationGroupID
 		*out = new(string)
 		**out = **in
+	}
+	if in.GlobalReplicationGroupIDRef != nil {
+		in, out := &in.GlobalReplicationGroupIDRef, &out.GlobalReplicationGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GlobalReplicationGroupIDSelector != nil {
+		in, out := &in.GlobalReplicationGroupIDSelector, &out.GlobalReplicationGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPDiscovery != nil {
 		in, out := &in.IPDiscovery, &out.IPDiscovery
@@ -573,6 +588,11 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 	if in.ClusterEnabled != nil {
 		in, out := &in.ClusterEnabled, &out.ClusterEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.ClusterMode != nil {
+		in, out := &in.ClusterMode, &out.ClusterMode
+		*out = new(string)
 		**out = **in
 	}
 	if in.ConfigurationEndpointAddress != nil {
@@ -875,6 +895,11 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ClusterMode != nil {
+		in, out := &in.ClusterMode, &out.ClusterMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.DataTieringEnabled != nil {
 		in, out := &in.DataTieringEnabled, &out.DataTieringEnabled
 		*out = new(bool)
@@ -904,6 +929,16 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 		in, out := &in.GlobalReplicationGroupID, &out.GlobalReplicationGroupID
 		*out = new(string)
 		**out = **in
+	}
+	if in.GlobalReplicationGroupIDRef != nil {
+		in, out := &in.GlobalReplicationGroupIDRef, &out.GlobalReplicationGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.GlobalReplicationGroupIDSelector != nil {
+		in, out := &in.GlobalReplicationGroupIDSelector, &out.GlobalReplicationGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPDiscovery != nil {
 		in, out := &in.IPDiscovery, &out.IPDiscovery

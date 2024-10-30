@@ -105,6 +105,12 @@ type JobInitParameters struct {
 	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
 	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
 
+	// Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.
+	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
+
+	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
+	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
 	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
@@ -178,6 +184,12 @@ type JobObservation struct {
 	// Job name
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.
+	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
+
+	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
+	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
 	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
 	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
 
@@ -245,6 +257,14 @@ type JobParameters struct {
 	// The version of glue to use, for example "1.0". Ray jobs should set this to 4.0 or greater. For information about available versions, see the AWS Glue Release Notes.
 	// +kubebuilder:validation:Optional
 	GlueVersion *string `json:"glueVersion,omitempty" tf:"glue_version,omitempty"`
+
+	// Specifies whether job run queuing is enabled for the job runs for this job. A value of true means job run queuing is enabled for the job runs. If false or not populated, the job runs will not be considered for queueing.
+	// +kubebuilder:validation:Optional
+	JobRunQueuingEnabled *bool `json:"jobRunQueuingEnabled,omitempty" tf:"job_run_queuing_enabled,omitempty"`
+
+	// –  Specifies the day of the week and hour for the maintenance window for streaming jobs.
+	// +kubebuilder:validation:Optional
+	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// –  The maximum number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. Required when pythonshell is set, accept either 0.0625 or 1.0. Use number_of_workers and worker_type arguments instead with glue_version 2.0 and above.
 	// +kubebuilder:validation:Optional

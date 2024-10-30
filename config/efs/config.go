@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the efs group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_efs_mount_target", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["file_system_id"] = config.Reference{

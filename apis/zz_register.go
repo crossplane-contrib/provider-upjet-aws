@@ -52,6 +52,7 @@ import (
 	v1beta2backup "github.com/upbound/provider-aws/apis/backup/v1beta2"
 	v1beta1batch "github.com/upbound/provider-aws/apis/batch/v1beta1"
 	v1beta2batch "github.com/upbound/provider-aws/apis/batch/v1beta2"
+	v1beta1bedrockagent "github.com/upbound/provider-aws/apis/bedrockagent/v1beta1"
 	v1beta1budgets "github.com/upbound/provider-aws/apis/budgets/v1beta1"
 	v1beta2budgets "github.com/upbound/provider-aws/apis/budgets/v1beta2"
 	v1beta1ce "github.com/upbound/provider-aws/apis/ce/v1beta1"
@@ -222,8 +223,10 @@ import (
 	v1beta1opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta1"
 	v1beta2opsworks "github.com/upbound/provider-aws/apis/opsworks/v1beta2"
 	v1beta1organizations "github.com/upbound/provider-aws/apis/organizations/v1beta1"
+	v1beta1osis "github.com/upbound/provider-aws/apis/osis/v1beta1"
 	v1beta1pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta1"
 	v1beta2pinpoint "github.com/upbound/provider-aws/apis/pinpoint/v1beta2"
+	v1beta1pipes "github.com/upbound/provider-aws/apis/pipes/v1beta1"
 	v1beta1qldb "github.com/upbound/provider-aws/apis/qldb/v1beta1"
 	v1beta2qldb "github.com/upbound/provider-aws/apis/qldb/v1beta2"
 	v1beta1quicksight "github.com/upbound/provider-aws/apis/quicksight/v1beta1"
@@ -346,6 +349,7 @@ func init() {
 		v1beta2backup.SchemeBuilder.AddToScheme,
 		v1beta1batch.SchemeBuilder.AddToScheme,
 		v1beta2batch.SchemeBuilder.AddToScheme,
+		v1beta1bedrockagent.SchemeBuilder.AddToScheme,
 		v1beta1budgets.SchemeBuilder.AddToScheme,
 		v1beta2budgets.SchemeBuilder.AddToScheme,
 		v1beta1ce.SchemeBuilder.AddToScheme,
@@ -516,8 +520,10 @@ func init() {
 		v1beta1opsworks.SchemeBuilder.AddToScheme,
 		v1beta2opsworks.SchemeBuilder.AddToScheme,
 		v1beta1organizations.SchemeBuilder.AddToScheme,
+		v1beta1osis.SchemeBuilder.AddToScheme,
 		v1beta1pinpoint.SchemeBuilder.AddToScheme,
 		v1beta2pinpoint.SchemeBuilder.AddToScheme,
+		v1beta1pipes.SchemeBuilder.AddToScheme,
 		v1beta1qldb.SchemeBuilder.AddToScheme,
 		v1beta2qldb.SchemeBuilder.AddToScheme,
 		v1beta1quicksight.SchemeBuilder.AddToScheme,

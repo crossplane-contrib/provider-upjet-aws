@@ -11,3 +11,6 @@ func (tr *LBListenerCertificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LBTargetGroupAttachment) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *LBTrustStore) Hub() {}

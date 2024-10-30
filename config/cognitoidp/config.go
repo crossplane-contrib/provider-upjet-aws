@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the cognitoidp group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_cognito_user_pool_client", func(r *config.Resource) {
 		r.References["user_pool_id"] = config.Reference{
 			TerraformName: "aws_cognito_user_pool",

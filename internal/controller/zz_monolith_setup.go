@@ -12,6 +12,7 @@ import (
 	analyzer "github.com/upbound/provider-aws/internal/controller/accessanalyzer/analyzer"
 	archiverule "github.com/upbound/provider-aws/internal/controller/accessanalyzer/archiverule"
 	alternatecontact "github.com/upbound/provider-aws/internal/controller/account/alternatecontact"
+	region "github.com/upbound/provider-aws/internal/controller/account/region"
 	certificate "github.com/upbound/provider-aws/internal/controller/acm/certificate"
 	certificatevalidation "github.com/upbound/provider-aws/internal/controller/acm/certificatevalidation"
 	certificateacmpca "github.com/upbound/provider-aws/internal/controller/acmpca/certificate"
@@ -124,8 +125,11 @@ import (
 	vaultlockconfiguration "github.com/upbound/provider-aws/internal/controller/backup/vaultlockconfiguration"
 	vaultnotifications "github.com/upbound/provider-aws/internal/controller/backup/vaultnotifications"
 	vaultpolicy "github.com/upbound/provider-aws/internal/controller/backup/vaultpolicy"
+	computeenvironment "github.com/upbound/provider-aws/internal/controller/batch/computeenvironment"
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
+	jobqueue "github.com/upbound/provider-aws/internal/controller/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
+	agent "github.com/upbound/provider-aws/internal/controller/bedrockagent/agent"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
 	anomalymonitor "github.com/upbound/provider-aws/internal/controller/ce/anomalymonitor"
@@ -314,6 +318,7 @@ import (
 	egressonlyinternetgateway "github.com/upbound/provider-aws/internal/controller/ec2/egressonlyinternetgateway"
 	eip "github.com/upbound/provider-aws/internal/controller/ec2/eip"
 	eipassociation "github.com/upbound/provider-aws/internal/controller/ec2/eipassociation"
+	fleetec2 "github.com/upbound/provider-aws/internal/controller/ec2/fleet"
 	flowlog "github.com/upbound/provider-aws/internal/controller/ec2/flowlog"
 	hostec2 "github.com/upbound/provider-aws/internal/controller/ec2/host"
 	instanceec2 "github.com/upbound/provider-aws/internal/controller/ec2/instance"
@@ -413,6 +418,8 @@ import (
 	filesystempolicy "github.com/upbound/provider-aws/internal/controller/efs/filesystempolicy"
 	mounttarget "github.com/upbound/provider-aws/internal/controller/efs/mounttarget"
 	replicationconfigurationefs "github.com/upbound/provider-aws/internal/controller/efs/replicationconfiguration"
+	accessentry "github.com/upbound/provider-aws/internal/controller/eks/accessentry"
+	accesspolicyassociation "github.com/upbound/provider-aws/internal/controller/eks/accesspolicyassociation"
 	addon "github.com/upbound/provider-aws/internal/controller/eks/addon"
 	clustereks "github.com/upbound/provider-aws/internal/controller/eks/cluster"
 	clusterauth "github.com/upbound/provider-aws/internal/controller/eks/clusterauth"
@@ -421,8 +428,10 @@ import (
 	nodegroup "github.com/upbound/provider-aws/internal/controller/eks/nodegroup"
 	podidentityassociation "github.com/upbound/provider-aws/internal/controller/eks/podidentityassociation"
 	clusterelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/cluster"
+	globalreplicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/globalreplicationgroup"
 	parametergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/parametergroup"
 	replicationgroup "github.com/upbound/provider-aws/internal/controller/elasticache/replicationgroup"
+	serverlesscache "github.com/upbound/provider-aws/internal/controller/elasticache/serverlesscache"
 	subnetgroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/subnetgroup"
 	userelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/user"
 	usergroupelasticache "github.com/upbound/provider-aws/internal/controller/elasticache/usergroup"
@@ -449,6 +458,7 @@ import (
 	lblistenerrule "github.com/upbound/provider-aws/internal/controller/elbv2/lblistenerrule"
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
+	lbtruststore "github.com/upbound/provider-aws/internal/controller/elbv2/lbtruststore"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
 	applicationemrserverless "github.com/upbound/provider-aws/internal/controller/emrserverless/application"
 	feature "github.com/upbound/provider-aws/internal/controller/evidently/feature"
@@ -697,8 +707,10 @@ import (
 	organizationalunit "github.com/upbound/provider-aws/internal/controller/organizations/organizationalunit"
 	policyorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policy"
 	policyattachmentorganizations "github.com/upbound/provider-aws/internal/controller/organizations/policyattachment"
+	pipelineosis "github.com/upbound/provider-aws/internal/controller/osis/pipeline"
 	apppinpoint "github.com/upbound/provider-aws/internal/controller/pinpoint/app"
 	smschannel "github.com/upbound/provider-aws/internal/controller/pinpoint/smschannel"
+	pipe "github.com/upbound/provider-aws/internal/controller/pipes/pipe"
 	providerconfig "github.com/upbound/provider-aws/internal/controller/providerconfig"
 	ledger "github.com/upbound/provider-aws/internal/controller/qldb/ledger"
 	streamqldb "github.com/upbound/provider-aws/internal/controller/qldb/stream"
@@ -794,6 +806,7 @@ import (
 	bucketserversideencryptionconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketserversideencryptionconfiguration"
 	bucketversioning "github.com/upbound/provider-aws/internal/controller/s3/bucketversioning"
 	bucketwebsiteconfiguration "github.com/upbound/provider-aws/internal/controller/s3/bucketwebsiteconfiguration"
+	directorybucket "github.com/upbound/provider-aws/internal/controller/s3/directorybucket"
 	object "github.com/upbound/provider-aws/internal/controller/s3/object"
 	objectcopy "github.com/upbound/provider-aws/internal/controller/s3/objectcopy"
 	accesspoints3control "github.com/upbound/provider-aws/internal/controller/s3control/accesspoint"
@@ -964,6 +977,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		analyzer.Setup,
 		archiverule.Setup,
 		alternatecontact.Setup,
+		region.Setup,
 		certificate.Setup,
 		certificatevalidation.Setup,
 		certificateacmpca.Setup,
@@ -1076,8 +1090,11 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vaultlockconfiguration.Setup,
 		vaultnotifications.Setup,
 		vaultpolicy.Setup,
+		computeenvironment.Setup,
 		jobdefinition.Setup,
+		jobqueue.Setup,
 		schedulingpolicy.Setup,
+		agent.Setup,
 		budget.Setup,
 		budgetaction.Setup,
 		anomalymonitor.Setup,
@@ -1266,6 +1283,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		egressonlyinternetgateway.Setup,
 		eip.Setup,
 		eipassociation.Setup,
+		fleetec2.Setup,
 		flowlog.Setup,
 		hostec2.Setup,
 		instanceec2.Setup,
@@ -1365,6 +1383,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		filesystempolicy.Setup,
 		mounttarget.Setup,
 		replicationconfigurationefs.Setup,
+		accessentry.Setup,
+		accesspolicyassociation.Setup,
 		addon.Setup,
 		clustereks.Setup,
 		clusterauth.Setup,
@@ -1373,8 +1393,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		nodegroup.Setup,
 		podidentityassociation.Setup,
 		clusterelasticache.Setup,
+		globalreplicationgroup.Setup,
 		parametergroupelasticache.Setup,
 		replicationgroup.Setup,
+		serverlesscache.Setup,
 		subnetgroupelasticache.Setup,
 		userelasticache.Setup,
 		usergroupelasticache.Setup,
@@ -1401,6 +1423,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lblistenerrule.Setup,
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
+		lbtruststore.Setup,
 		securityconfiguration.Setup,
 		applicationemrserverless.Setup,
 		feature.Setup,
@@ -1649,8 +1672,10 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		organizationalunit.Setup,
 		policyorganizations.Setup,
 		policyattachmentorganizations.Setup,
+		pipelineosis.Setup,
 		apppinpoint.Setup,
 		smschannel.Setup,
+		pipe.Setup,
 		providerconfig.Setup,
 		ledger.Setup,
 		streamqldb.Setup,
@@ -1746,6 +1771,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		bucketserversideencryptionconfiguration.Setup,
 		bucketversioning.Setup,
 		bucketwebsiteconfiguration.Setup,
+		directorybucket.Setup,
 		object.Setup,
 		objectcopy.Setup,
 		accesspoints3control.Setup,

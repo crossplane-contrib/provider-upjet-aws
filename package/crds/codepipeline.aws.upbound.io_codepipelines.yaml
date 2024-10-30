@@ -343,6 +343,8 @@ spec:
                               runOrder:
                                 description: The order in which actions are run.
                                 type: number
+                              timeoutInMinutes:
+                                type: number
                               version:
                                 description: A string that identifies the action type.
                                 type: string
@@ -806,6 +808,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
+                                type: number
+                              timeoutInMinutes:
                                 type: number
                               version:
                                 description: A string that identifies the action type.
@@ -1302,6 +1306,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
+                                type: number
+                              timeoutInMinutes:
                                 type: number
                               version:
                                 description: A string that identifies the action type.
@@ -1841,10 +1847,14 @@ spec:
                               configuration:
                                 additionalProperties:
                                   type: string
-                                description: A map of the action declaration's configuration.
+                                description: 'A map of the action declaration''s configuration.
                                   Configurations options for action types and providers
                                   can be found in the Pipeline Structure Reference
-                                  and Action Structure Reference documentation.
+                                  and Action Structure Reference documentation. Note:
+                                  The DetectChanges parameter  in the configuration
+                                  section causes CodePipeline to automatically start
+                                  your pipeline upon new commits. Please refer to
+                                  AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.'
                                 type: object
                                 x-kubernetes-map-type: granular
                               inputArtifacts:
@@ -1886,6 +1896,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
+                                type: number
+                              timeoutInMinutes:
                                 type: number
                               version:
                                 description: A string that identifies the action type.
@@ -2039,7 +2051,9 @@ spec:
                               type: array
                             sourceActionName:
                               description: The name of the pipeline source action
-                                where the trigger configuration.
+                                where the trigger configuration, such as Git tags,
+                                is specified. The trigger configuration will start
+                                the pipeline upon the specified change only.
                               type: string
                           type: object
                         providerType:
@@ -2292,10 +2306,14 @@ spec:
                               configuration:
                                 additionalProperties:
                                   type: string
-                                description: A map of the action declaration's configuration.
+                                description: 'A map of the action declaration''s configuration.
                                   Configurations options for action types and providers
                                   can be found in the Pipeline Structure Reference
-                                  and Action Structure Reference documentation.
+                                  and Action Structure Reference documentation. Note:
+                                  The DetectChanges parameter  in the configuration
+                                  section causes CodePipeline to automatically start
+                                  your pipeline upon new commits. Please refer to
+                                  AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.'
                                 type: object
                                 x-kubernetes-map-type: granular
                               inputArtifacts:
@@ -2334,6 +2352,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
+                                type: number
+                              timeoutInMinutes:
                                 type: number
                               version:
                                 description: A string that identifies the action type.
@@ -2487,7 +2507,9 @@ spec:
                               type: array
                             sourceActionName:
                               description: The name of the pipeline source action
-                                where the trigger configuration.
+                                where the trigger configuration, such as Git tags,
+                                is specified. The trigger configuration will start
+                                the pipeline upon the specified change only.
                               type: string
                           type: object
                         providerType:
@@ -2769,10 +2791,14 @@ spec:
                               configuration:
                                 additionalProperties:
                                   type: string
-                                description: A map of the action declaration's configuration.
+                                description: 'A map of the action declaration''s configuration.
                                   Configurations options for action types and providers
                                   can be found in the Pipeline Structure Reference
-                                  and Action Structure Reference documentation.
+                                  and Action Structure Reference documentation. Note:
+                                  The DetectChanges parameter  in the configuration
+                                  section causes CodePipeline to automatically start
+                                  your pipeline upon new commits. Please refer to
+                                  AWS Documentation for more details: https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config.'
                                 type: object
                                 x-kubernetes-map-type: granular
                               inputArtifacts:
@@ -2814,6 +2840,8 @@ spec:
                                 type: string
                               runOrder:
                                 description: The order in which actions are run.
+                                type: number
+                              timeoutInMinutes:
                                 type: number
                               version:
                                 description: A string that identifies the action type.
@@ -2975,7 +3003,9 @@ spec:
                               type: array
                             sourceActionName:
                               description: The name of the pipeline source action
-                                where the trigger configuration.
+                                where the trigger configuration, such as Git tags,
+                                is specified. The trigger configuration will start
+                                the pipeline upon the specified change only.
                               type: string
                           type: object
                         providerType:

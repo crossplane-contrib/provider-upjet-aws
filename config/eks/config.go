@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the eks group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_eks_cluster", func(r *config.Resource) {
 		r.References = config.References{
 			"role_arn": {
@@ -54,6 +54,9 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{
 				"release_version",
 				"version",
+			},
+			ConditionalIgnoredFields: []string{
+				"scaling_config",
 			},
 		}
 		r.UseAsync = true
@@ -99,5 +102,39 @@ func Configure(p *config.Provider) {
 			},
 		}
 		r.UseAsync = true
+	})
+	p.AddResourceConfigurator("aws_eks_access_policy_association", func(r *config.Resource) {
+		r.References = config.References{
+			"cluster_name": {
+				TerraformName: "aws_eks_cluster",
+				// Use the terraform id instead of the external name because the external name is set before the cluster
+				// has been created.
+				Extractor: common.PathTerraformIDExtractor,
+			},
+			// Principal Arn can refer to either the ARN of an IAM user or an IAM role, with a strong best-practice
+			// recommendation to always use roles. However, the eks Access Policy resource won't do anything unless
+			// the principal arn matches a principal with an eks Access Entry defined on the same cluster. By retrieving
+			// the principal arn from the Access Entry, we provide an easy means of ordered creation.
+			"principal_arn": {
+				TerraformName: "aws_eks_access_entry",
+				Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_arn",true)`,
+			},
+		}
+	})
+	p.AddResourceConfigurator("aws_eks_access_entry", func(r *config.Resource) {
+		r.References = config.References{
+			"cluster_name": {
+				TerraformName: "aws_eks_cluster",
+				// Use the terraform id instead of the external name because the external name is set before the cluster
+				// has been created.
+				Extractor: common.PathTerraformIDExtractor,
+			},
+			"principal_arn": {
+				TerraformName:     "aws_iam_role",
+				Extractor:         common.PathARNExtractor,
+				RefFieldName:      "PrincipalArnFromRoleRef",
+				SelectorFieldName: "PrincipalArnFromRoleSelector",
+			},
+		}
 	})
 }

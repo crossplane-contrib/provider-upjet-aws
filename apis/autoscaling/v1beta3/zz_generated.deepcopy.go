@@ -1673,6 +1673,11 @@ func (in *InstanceRequirementsInitParameters) DeepCopyInto(out *InstanceRequirem
 			}
 		}
 	}
+	if in.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice != nil {
+		in, out := &in.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice, &out.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryGibPerVcpu != nil {
 		in, out := &in.MemoryGibPerVcpu, &out.MemoryGibPerVcpu
 		*out = new(MemoryGibPerVcpuInitParameters)
@@ -1851,6 +1856,11 @@ func (in *InstanceRequirementsObservation) DeepCopyInto(out *InstanceRequirement
 			}
 		}
 	}
+	if in.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice != nil {
+		in, out := &in.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice, &out.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+		*out = new(float64)
+		**out = **in
+	}
 	if in.MemoryGibPerVcpu != nil {
 		in, out := &in.MemoryGibPerVcpu, &out.MemoryGibPerVcpu
 		*out = new(MemoryGibPerVcpuObservation)
@@ -2028,6 +2038,11 @@ func (in *InstanceRequirementsParameters) DeepCopyInto(out *InstanceRequirements
 				**out = **in
 			}
 		}
+	}
+	if in.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice != nil {
+		in, out := &in.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice, &out.MaxSpotPriceAsPercentageOfOptimalOnDemandPrice
+		*out = new(float64)
+		**out = **in
 	}
 	if in.MemoryGibPerVcpu != nil {
 		in, out := &in.MemoryGibPerVcpu, &out.MemoryGibPerVcpu

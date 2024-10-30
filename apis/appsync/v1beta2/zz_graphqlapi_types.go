@@ -18,13 +18,13 @@ type AdditionalAuthenticationProviderInitParameters struct {
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
-	// Nested argument containing Lambda authorizer configuration. Defined below.
+	// Nested argument containing Lambda authorizer configuration. See lambda_authorizer_config Block for details.
 	LambdaAuthorizerConfig *LambdaAuthorizerConfigInitParameters `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
 
-	// Nested argument containing OpenID Connect configuration. Defined below.
+	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	OpenIDConnectConfig *OpenIDConnectConfigInitParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// Amazon Cognito User Pool configuration. Defined below.
+	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
 	UserPoolConfig *UserPoolConfigInitParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 }
 
@@ -33,13 +33,13 @@ type AdditionalAuthenticationProviderObservation struct {
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
-	// Nested argument containing Lambda authorizer configuration. Defined below.
+	// Nested argument containing Lambda authorizer configuration. See lambda_authorizer_config Block for details.
 	LambdaAuthorizerConfig *LambdaAuthorizerConfigObservation `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
 
-	// Nested argument containing OpenID Connect configuration. Defined below.
+	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	OpenIDConnectConfig *OpenIDConnectConfigObservation `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// Amazon Cognito User Pool configuration. Defined below.
+	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
 	UserPoolConfig *UserPoolConfigObservation `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 }
 
@@ -49,40 +49,98 @@ type AdditionalAuthenticationProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
 
-	// Nested argument containing Lambda authorizer configuration. Defined below.
+	// Nested argument containing Lambda authorizer configuration. See lambda_authorizer_config Block for details.
 	// +kubebuilder:validation:Optional
 	LambdaAuthorizerConfig *LambdaAuthorizerConfigParameters `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
 
-	// Nested argument containing OpenID Connect configuration. Defined below.
+	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	// +kubebuilder:validation:Optional
 	OpenIDConnectConfig *OpenIDConnectConfigParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
-	// Amazon Cognito User Pool configuration. Defined below.
+	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
 	// +kubebuilder:validation:Optional
 	UserPoolConfig *UserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 }
 
+type EnhancedMetricsConfigInitParameters struct {
+
+	// How data source metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+	DataSourceLevelMetricsBehavior *string `json:"dataSourceLevelMetricsBehavior,omitempty" tf:"data_source_level_metrics_behavior,omitempty"`
+
+	// How operation metrics will be emitted to CloudWatch. Valid values: ENABLED, DISABLED
+	OperationLevelMetricsConfig *string `json:"operationLevelMetricsConfig,omitempty" tf:"operation_level_metrics_config,omitempty"`
+
+	// How resolver metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+	ResolverLevelMetricsBehavior *string `json:"resolverLevelMetricsBehavior,omitempty" tf:"resolver_level_metrics_behavior,omitempty"`
+}
+
+type EnhancedMetricsConfigObservation struct {
+
+	// How data source metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+	DataSourceLevelMetricsBehavior *string `json:"dataSourceLevelMetricsBehavior,omitempty" tf:"data_source_level_metrics_behavior,omitempty"`
+
+	// How operation metrics will be emitted to CloudWatch. Valid values: ENABLED, DISABLED
+	OperationLevelMetricsConfig *string `json:"operationLevelMetricsConfig,omitempty" tf:"operation_level_metrics_config,omitempty"`
+
+	// How resolver metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+	ResolverLevelMetricsBehavior *string `json:"resolverLevelMetricsBehavior,omitempty" tf:"resolver_level_metrics_behavior,omitempty"`
+}
+
+type EnhancedMetricsConfigParameters struct {
+
+	// How data source metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_DATA_SOURCE_METRICS, PER_DATA_SOURCE_METRICS
+	// +kubebuilder:validation:Optional
+	DataSourceLevelMetricsBehavior *string `json:"dataSourceLevelMetricsBehavior" tf:"data_source_level_metrics_behavior,omitempty"`
+
+	// How operation metrics will be emitted to CloudWatch. Valid values: ENABLED, DISABLED
+	// +kubebuilder:validation:Optional
+	OperationLevelMetricsConfig *string `json:"operationLevelMetricsConfig" tf:"operation_level_metrics_config,omitempty"`
+
+	// How resolver metrics will be emitted to CloudWatch. Valid values: FULL_REQUEST_RESOLVER_METRICS, PER_RESOLVER_METRICS
+	// +kubebuilder:validation:Optional
+	ResolverLevelMetricsBehavior *string `json:"resolverLevelMetricsBehavior" tf:"resolver_level_metrics_behavior,omitempty"`
+}
+
 type GraphQLAPIInitParameters struct {
 
-	// One or more additional authentication providers for the GraphqlApi. Defined below.
+	// API type. Valid values are GRAPHQL or MERGED. A MERGED type requires merged_api_execution_role_arn to be set.
+	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
+
+	// One or more additional authentication providers for the GraphQL API. See additional_authentication_provider Block for details.
 	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderInitParameters `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
 
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// Enables and controls the enhanced metrics feature. See enhanced_metrics_config Block for details.
+	EnhancedMetricsConfig *EnhancedMetricsConfigInitParameters `json:"enhancedMetricsConfig,omitempty" tf:"enhanced_metrics_config,omitempty"`
+
 	// Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled. For more information about introspection, see GraphQL introspection.
 	IntrospectionConfig *string `json:"introspectionConfig,omitempty" tf:"introspection_config,omitempty"`
 
-	// Nested argument containing Lambda authorizer configuration. Defined below.
+	// Nested argument containing Lambda authorizer configuration. See lambda_authorizer_config Block for details.
 	LambdaAuthorizerConfig *GraphQLAPILambdaAuthorizerConfigInitParameters `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
 
-	// Nested argument containing logging configuration. Defined below.
+	// Nested argument containing logging configuration. See log_config Block for details.
 	LogConfig *LogConfigInitParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
 
-	// User-supplied name for the GraphqlApi.
+	// ARN of the execution role when api_type is set to MERGED.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate mergedApiExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArnRef *v1.Reference `json:"mergedApiExecutionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate mergedApiExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArnSelector *v1.Selector `json:"mergedApiExecutionRoleArnSelector,omitempty" tf:"-"`
+
+	// User-supplied name for the GraphQL API.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Nested argument containing OpenID Connect configuration. Defined below.
+	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	OpenIDConnectConfig *GraphQLAPIOpenIDConnectConfigInitParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
 	// The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
@@ -98,7 +156,7 @@ type GraphQLAPIInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Amazon Cognito User Pool configuration. Defined below.
+	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
 	UserPoolConfig *GraphQLAPIUserPoolConfigInitParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 
 	// Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
@@ -149,7 +207,10 @@ type GraphQLAPILambdaAuthorizerConfigParameters struct {
 
 type GraphQLAPIObservation struct {
 
-	// One or more additional authentication providers for the GraphqlApi. Defined below.
+	// API type. Valid values are GRAPHQL or MERGED. A MERGED type requires merged_api_execution_role_arn to be set.
+	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
+
+	// One or more additional authentication providers for the GraphQL API. See additional_authentication_provider Block for details.
 	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderObservation `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
 
 	// ARN
@@ -158,22 +219,28 @@ type GraphQLAPIObservation struct {
 	// Authentication type. Valid values: API_KEY, AWS_IAM, AMAZON_COGNITO_USER_POOLS, OPENID_CONNECT, AWS_LAMBDA
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// Enables and controls the enhanced metrics feature. See enhanced_metrics_config Block for details.
+	EnhancedMetricsConfig *EnhancedMetricsConfigObservation `json:"enhancedMetricsConfig,omitempty" tf:"enhanced_metrics_config,omitempty"`
+
 	// API ID
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled. For more information about introspection, see GraphQL introspection.
 	IntrospectionConfig *string `json:"introspectionConfig,omitempty" tf:"introspection_config,omitempty"`
 
-	// Nested argument containing Lambda authorizer configuration. Defined below.
+	// Nested argument containing Lambda authorizer configuration. See lambda_authorizer_config Block for details.
 	LambdaAuthorizerConfig *GraphQLAPILambdaAuthorizerConfigObservation `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
 
-	// Nested argument containing logging configuration. Defined below.
+	// Nested argument containing logging configuration. See log_config Block for details.
 	LogConfig *LogConfigObservation `json:"logConfig,omitempty" tf:"log_config,omitempty"`
 
-	// User-supplied name for the GraphqlApi.
+	// ARN of the execution role when api_type is set to MERGED.
+	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
+
+	// User-supplied name for the GraphQL API.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Nested argument containing OpenID Connect configuration. Defined below.
+	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	OpenIDConnectConfig *GraphQLAPIOpenIDConnectConfigObservation `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
 	// The maximum depth a query can have in a single request. Depth refers to the amount of nested levels allowed in the body of query. The default value is 0 (or unspecified), which indicates there's no depth limit. If you set a limit, it can be between 1 and 75 nested levels. This field will produce a limit error if the operation falls out of bounds.
@@ -193,11 +260,11 @@ type GraphQLAPIObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Map of URIs associated with the APIE.g., uris["GRAPHQL"] = https://ID.appsync-api.REGION.amazonaws.com/graphql
+	// Map of URIs associated with the API E.g., uris["GRAPHQL"] = https://ID.appsync-api.REGION.amazonaws.com/graphql
 	// +mapType=granular
 	Uris map[string]*string `json:"uris,omitempty" tf:"uris,omitempty"`
 
-	// Amazon Cognito User Pool configuration. Defined below.
+	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
 	UserPoolConfig *GraphQLAPIUserPoolConfigObservation `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 
 	// Sets the value of the GraphQL API to public (GLOBAL) or private (PRIVATE). If no value is provided, the visibility will be set to GLOBAL by default. This value cannot be changed once the API has been created.
@@ -258,7 +325,11 @@ type GraphQLAPIOpenIDConnectConfigParameters struct {
 
 type GraphQLAPIParameters struct {
 
-	// One or more additional authentication providers for the GraphqlApi. Defined below.
+	// API type. Valid values are GRAPHQL or MERGED. A MERGED type requires merged_api_execution_role_arn to be set.
+	// +kubebuilder:validation:Optional
+	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
+
+	// One or more additional authentication providers for the GraphQL API. See additional_authentication_provider Block for details.
 	// +kubebuilder:validation:Optional
 	AdditionalAuthenticationProvider []AdditionalAuthenticationProviderParameters `json:"additionalAuthenticationProvider,omitempty" tf:"additional_authentication_provider,omitempty"`
 
@@ -266,23 +337,41 @@ type GraphQLAPIParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// Enables and controls the enhanced metrics feature. See enhanced_metrics_config Block for details.
+	// +kubebuilder:validation:Optional
+	EnhancedMetricsConfig *EnhancedMetricsConfigParameters `json:"enhancedMetricsConfig,omitempty" tf:"enhanced_metrics_config,omitempty"`
+
 	// Sets the value of the GraphQL API to enable (ENABLED) or disable (DISABLED) introspection. If no value is provided, the introspection configuration will be set to ENABLED by default. This field will produce an error if the operation attempts to use the introspection feature while this field is disabled. For more information about introspection, see GraphQL introspection.
 	// +kubebuilder:validation:Optional
 	IntrospectionConfig *string `json:"introspectionConfig,omitempty" tf:"introspection_config,omitempty"`
 
-	// Nested argument containing Lambda authorizer configuration. Defined below.
+	// Nested argument containing Lambda authorizer configuration. See lambda_authorizer_config Block for details.
 	// +kubebuilder:validation:Optional
 	LambdaAuthorizerConfig *GraphQLAPILambdaAuthorizerConfigParameters `json:"lambdaAuthorizerConfig,omitempty" tf:"lambda_authorizer_config,omitempty"`
 
-	// Nested argument containing logging configuration. Defined below.
+	// Nested argument containing logging configuration. See log_config Block for details.
 	// +kubebuilder:validation:Optional
 	LogConfig *LogConfigParameters `json:"logConfig,omitempty" tf:"log_config,omitempty"`
 
-	// User-supplied name for the GraphqlApi.
+	// ARN of the execution role when api_type is set to MERGED.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArn *string `json:"mergedApiExecutionRoleArn,omitempty" tf:"merged_api_execution_role_arn,omitempty"`
+
+	// Reference to a Role in iam to populate mergedApiExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArnRef *v1.Reference `json:"mergedApiExecutionRoleArnRef,omitempty" tf:"-"`
+
+	// Selector for a Role in iam to populate mergedApiExecutionRoleArn.
+	// +kubebuilder:validation:Optional
+	MergedAPIExecutionRoleArnSelector *v1.Selector `json:"mergedApiExecutionRoleArnSelector,omitempty" tf:"-"`
+
+	// User-supplied name for the GraphQL API.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Nested argument containing OpenID Connect configuration. Defined below.
+	// Nested argument containing OpenID Connect configuration. See openid_connect_config Block for details.
 	// +kubebuilder:validation:Optional
 	OpenIDConnectConfig *GraphQLAPIOpenIDConnectConfigParameters `json:"openidConnectConfig,omitempty" tf:"openid_connect_config,omitempty"`
 
@@ -308,7 +397,7 @@ type GraphQLAPIParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Amazon Cognito User Pool configuration. Defined below.
+	// Amazon Cognito User Pool configuration. See user_pool_config Block for details.
 	// +kubebuilder:validation:Optional
 	UserPoolConfig *GraphQLAPIUserPoolConfigParameters `json:"userPoolConfig,omitempty" tf:"user_pool_config,omitempty"`
 

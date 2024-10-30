@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the dynamodb group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	// currently needs an ARN reference for external name
 	p.AddResourceConfigurator("aws_dynamodb_contributor_insights", func(r *config.Resource) {
 		r.References["table_name"] = config.Reference{

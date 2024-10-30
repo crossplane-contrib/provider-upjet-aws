@@ -1948,7 +1948,7 @@ spec:
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
                       that you want to configure for your SFTP server. See endpoint_details
-                      block below for details.
+                      Block below for details.
                     properties:
                       addressAllocationIds:
                         description: A list of address allocation IDs that are required
@@ -2236,7 +2236,7 @@ spec:
                     type: object
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server. See protocol_details block below for details.
+                      server. See protocol_details Block below for details.
                     properties:
                       as2Transports:
                         description: Indicates the transport method for the AS2 messages.
@@ -2279,7 +2279,7 @@ spec:
                   s3StorageOptions:
                     description: Specifies whether or not performance for your Amazon
                       S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options block below for details.
+                      s3_storage_options Block below for details.
                     properties:
                       directoryListingOptimization:
                         description: Specifies whether or not performance for your
@@ -2317,12 +2317,12 @@ spec:
                     type: string
                   workflowDetails:
                     description: Specifies the workflow details. See workflow_details
-                      block below for details.
+                      Block below for details.
                     properties:
                       onPartialUpload:
                         description: A trigger that starts a workflow if a file is
                           only partially uploaded. See Workflow Detail below. See
-                          on_partial_upload block below for details.
+                          on_partial_upload Block below for details.
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,
@@ -2337,7 +2337,7 @@ spec:
                       onUpload:
                         description: 'A trigger that starts a workflow: the workflow
                           begins to execute after a file is uploaded. See on_upload
-                          block below for details.'
+                          Block below for details.'
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,
@@ -2531,7 +2531,7 @@ spec:
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
                       that you want to configure for your SFTP server. See endpoint_details
-                      block below for details.
+                      Block below for details.
                     properties:
                       addressAllocationIds:
                         description: A list of address allocation IDs that are required
@@ -2819,7 +2819,7 @@ spec:
                     type: object
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server. See protocol_details block below for details.
+                      server. See protocol_details Block below for details.
                     properties:
                       as2Transports:
                         description: Indicates the transport method for the AS2 messages.
@@ -2858,7 +2858,7 @@ spec:
                   s3StorageOptions:
                     description: Specifies whether or not performance for your Amazon
                       S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options block below for details.
+                      s3_storage_options Block below for details.
                     properties:
                       directoryListingOptimization:
                         description: Specifies whether or not performance for your
@@ -2896,12 +2896,12 @@ spec:
                     type: string
                   workflowDetails:
                     description: Specifies the workflow details. See workflow_details
-                      block below for details.
+                      Block below for details.
                     properties:
                       onPartialUpload:
                         description: A trigger that starts a workflow if a file is
                           only partially uploaded. See Workflow Detail below. See
-                          on_partial_upload block below for details.
+                          on_partial_upload Block below for details.
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,
@@ -2916,7 +2916,7 @@ spec:
                       onUpload:
                         description: 'A trigger that starts a workflow: the workflow
                           begins to execute after a file is uploaded. See on_upload
-                          block below for details.'
+                          Block below for details.'
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,
@@ -3125,7 +3125,7 @@ spec:
                   endpointDetails:
                     description: The virtual private cloud (VPC) endpoint settings
                       that you want to configure for your SFTP server. See endpoint_details
-                      block below for details.
+                      Block below for details.
                     properties:
                       addressAllocationIds:
                         description: A list of address allocation IDs that are required
@@ -3216,7 +3216,7 @@ spec:
                     type: string
                   protocolDetails:
                     description: The protocol settings that are configured for your
-                      server. See protocol_details block below for details.
+                      server. See protocol_details Block below for details.
                     properties:
                       as2Transports:
                         description: Indicates the transport method for the AS2 messages.
@@ -3255,7 +3255,7 @@ spec:
                   s3StorageOptions:
                     description: Specifies whether or not performance for your Amazon
                       S3 directories is optimized. This is disabled by default. See
-                      s3_storage_options block below for details.
+                      s3_storage_options Block below for details.
                     properties:
                       directoryListingOptimization:
                         description: Specifies whether or not performance for your
@@ -3301,12 +3301,12 @@ spec:
                     type: string
                   workflowDetails:
                     description: Specifies the workflow details. See workflow_details
-                      block below for details.
+                      Block below for details.
                     properties:
                       onPartialUpload:
                         description: A trigger that starts a workflow if a file is
                           only partially uploaded. See Workflow Detail below. See
-                          on_partial_upload block below for details.
+                          on_partial_upload Block below for details.
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,
@@ -3321,7 +3321,7 @@ spec:
                       onUpload:
                         description: 'A trigger that starts a workflow: the workflow
                           begins to execute after a file is uploaded. See on_upload
-                          block below for details.'
+                          Block below for details.'
                         properties:
                           executionRole:
                             description: Includes the necessary permissions for S3,

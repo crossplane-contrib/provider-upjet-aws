@@ -830,6 +830,11 @@ func (in *DomainInitParameters) DeepCopyInto(out *DomainInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
+		*out = new(string)
+		**out = **in
+	}
 	if in.LogPublishingOptions != nil {
 		in, out := &in.LogPublishingOptions, &out.LogPublishingOptions
 		*out = make([]LogPublishingOptionsInitParameters, len(*in))
@@ -976,10 +981,20 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DashboardEndpointV2 != nil {
+		in, out := &in.DashboardEndpointV2, &out.DashboardEndpointV2
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainEndpointOptions != nil {
 		in, out := &in.DomainEndpointOptions, &out.DomainEndpointOptions
 		*out = new(DomainEndpointOptionsObservation)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.DomainEndpointV2HostedZoneID != nil {
+		in, out := &in.DomainEndpointV2HostedZoneID, &out.DomainEndpointV2HostedZoneID
+		*out = new(string)
+		**out = **in
 	}
 	if in.DomainID != nil {
 		in, out := &in.DomainID, &out.DomainID
@@ -1006,6 +1021,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EndpointV2 != nil {
+		in, out := &in.EndpointV2, &out.EndpointV2
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -1013,6 +1033,11 @@ func (in *DomainObservation) DeepCopyInto(out *DomainObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
 		*out = new(string)
 		**out = **in
 	}
@@ -1158,6 +1183,11 @@ func (in *DomainParameters) DeepCopyInto(out *DomainParameters) {
 	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPAddressType != nil {
+		in, out := &in.IPAddressType, &out.IPAddressType
 		*out = new(string)
 		**out = **in
 	}

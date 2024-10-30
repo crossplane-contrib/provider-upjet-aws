@@ -73,6 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  grafanaToken:
+                    description: A token from Grafana Labs that ties your AWS account
+                      with a Grafana Labs account.
+                    type: string
                   licenseType:
                     description: The type of license for the workspace license association.
                       Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
@@ -174,6 +178,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  grafanaToken:
+                    description: A token from Grafana Labs that ties your AWS account
+                      with a Grafana Labs account.
+                    type: string
                   licenseType:
                     description: The type of license for the workspace license association.
                       Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
@@ -436,6 +444,10 @@ spec:
                   freeTrialExpiration:
                     description: If license_type is set to ENTERPRISE_FREE_TRIAL,
                       this is the expiration date of the free trial.
+                    type: string
+                  grafanaToken:
+                    description: A token from Grafana Labs that ties your AWS account
+                      with a Grafana Labs account.
                     type: string
                   id:
                     type: string

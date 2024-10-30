@@ -257,6 +257,25 @@ type HostPathParameters struct {
 	Path *string `json:"path" tf:"path,omitempty"`
 }
 
+type ImagePullSecretInitParameters struct {
+
+	// Unique identifier.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type ImagePullSecretObservation struct {
+
+	// Unique identifier.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type ImagePullSecretParameters struct {
+
+	// Unique identifier.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
 type JobDefinitionInitParameters struct {
 
 	// A valid container properties provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
@@ -264,6 +283,9 @@ type JobDefinitionInitParameters struct {
 
 	// When updating a job definition a new revision is created. This parameter determines if the previous version is deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
 	DeregisterOnNewRevision *bool `json:"deregisterOnNewRevision,omitempty" tf:"deregister_on_new_revision,omitempty"`
+
+	// Valid ECS properties provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
+	EcsProperties *string `json:"ecsProperties,omitempty" tf:"ecs_properties,omitempty"`
 
 	// A valid eks properties. This parameter is only valid if the type parameter is container.
 	EksProperties []EksPropertiesInitParameters `json:"eksProperties,omitempty" tf:"eks_properties,omitempty"`
@@ -315,6 +337,9 @@ type JobDefinitionObservation struct {
 
 	// When updating a job definition a new revision is created. This parameter determines if the previous version is deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
 	DeregisterOnNewRevision *bool `json:"deregisterOnNewRevision,omitempty" tf:"deregister_on_new_revision,omitempty"`
+
+	// Valid ECS properties provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
+	EcsProperties *string `json:"ecsProperties,omitempty" tf:"ecs_properties,omitempty"`
 
 	// A valid eks properties. This parameter is only valid if the type parameter is container.
 	EksProperties []EksPropertiesObservation `json:"eksProperties,omitempty" tf:"eks_properties,omitempty"`
@@ -371,6 +396,10 @@ type JobDefinitionParameters struct {
 	// When updating a job definition a new revision is created. This parameter determines if the previous version is deregistered (INACTIVE) or left  ACTIVE. Defaults to true.
 	// +kubebuilder:validation:Optional
 	DeregisterOnNewRevision *bool `json:"deregisterOnNewRevision,omitempty" tf:"deregister_on_new_revision,omitempty"`
+
+	// Valid ECS properties provided as a single valid JSON document. This parameter is only valid if the type parameter is container.
+	// +kubebuilder:validation:Optional
+	EcsProperties *string `json:"ecsProperties,omitempty" tf:"ecs_properties,omitempty"`
 
 	// A valid eks properties. This parameter is only valid if the type parameter is container.
 	// +kubebuilder:validation:Optional
@@ -455,6 +484,9 @@ type PodPropertiesInitParameters struct {
 	// Indicates if the pod uses the hosts' network IP address. The default value is true. Setting this to false enables the Kubernetes pod networking model. Most AWS Batch workloads are egress-only and don't require the overhead of IP allocation for each pod for incoming connections.
 	HostNetwork *bool `json:"hostNetwork,omitempty" tf:"host_network,omitempty"`
 
+	// List of Kubernetes secret resources. See image_pull_secret below.
+	ImagePullSecret []ImagePullSecretInitParameters `json:"imagePullSecret,omitempty" tf:"image_pull_secret,omitempty"`
+
 	// Metadata about the Kubernetes pod.
 	Metadata []MetadataInitParameters `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
@@ -475,6 +507,9 @@ type PodPropertiesObservation struct {
 
 	// Indicates if the pod uses the hosts' network IP address. The default value is true. Setting this to false enables the Kubernetes pod networking model. Most AWS Batch workloads are egress-only and don't require the overhead of IP allocation for each pod for incoming connections.
 	HostNetwork *bool `json:"hostNetwork,omitempty" tf:"host_network,omitempty"`
+
+	// List of Kubernetes secret resources. See image_pull_secret below.
+	ImagePullSecret []ImagePullSecretObservation `json:"imagePullSecret,omitempty" tf:"image_pull_secret,omitempty"`
 
 	// Metadata about the Kubernetes pod.
 	Metadata []MetadataObservation `json:"metadata,omitempty" tf:"metadata,omitempty"`
@@ -499,6 +534,10 @@ type PodPropertiesParameters struct {
 	// Indicates if the pod uses the hosts' network IP address. The default value is true. Setting this to false enables the Kubernetes pod networking model. Most AWS Batch workloads are egress-only and don't require the overhead of IP allocation for each pod for incoming connections.
 	// +kubebuilder:validation:Optional
 	HostNetwork *bool `json:"hostNetwork,omitempty" tf:"host_network,omitempty"`
+
+	// List of Kubernetes secret resources. See image_pull_secret below.
+	// +kubebuilder:validation:Optional
+	ImagePullSecret []ImagePullSecretParameters `json:"imagePullSecret,omitempty" tf:"image_pull_secret,omitempty"`
 
 	// Metadata about the Kubernetes pod.
 	// +kubebuilder:validation:Optional

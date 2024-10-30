@@ -70,6 +70,9 @@ func (tr *EIP) Hub() {}
 func (tr *EIPAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *Fleet) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Host) Hub() {}
 
 // Hub marks this type as a conversion hub.

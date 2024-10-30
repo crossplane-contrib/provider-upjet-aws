@@ -84,6 +84,11 @@ spec:
                     description: Whether to allow Amazon EMR clusters to access data
                       managed by Lake Formation.
                     type: boolean
+                  allowFullTableExternalDataAccess:
+                    description: Whether to allow a third-party query engine to get
+                      data access credentials without session tags when a caller has
+                      full data access permissions.
+                    type: boolean
                   authorizedSessionTagValueList:
                     description: Lake Formation relies on a privileged process secured
                       by Amazon EMR or the third party integrator to tag the user's
@@ -189,6 +194,11 @@ spec:
                   allowExternalDataFiltering:
                     description: Whether to allow Amazon EMR clusters to access data
                       managed by Lake Formation.
+                    type: boolean
+                  allowFullTableExternalDataAccess:
+                    description: Whether to allow a third-party query engine to get
+                      data access credentials without session tags when a caller has
+                      full data access permissions.
                     type: boolean
                   authorizedSessionTagValueList:
                     description: Lake Formation relies on a privileged process secured
@@ -448,6 +458,11 @@ spec:
                   allowExternalDataFiltering:
                     description: Whether to allow Amazon EMR clusters to access data
                       managed by Lake Formation.
+                    type: boolean
+                  allowFullTableExternalDataAccess:
+                    description: Whether to allow a third-party query engine to get
+                      data access credentials without session tags when a caller has
+                      full data access permissions.
                     type: boolean
                   authorizedSessionTagValueList:
                     description: Lake Formation relies on a privileged process secured

@@ -104,6 +104,35 @@ type CloudwatchLogsConfigurationParameters struct {
 	LogGroupArn *string `json:"logGroupArn" tf:"log_group_arn,omitempty"`
 }
 
+type ExperimentOptionsInitParameters struct {
+
+	// Specifies the account targeting setting for experiment options. Supports single-account and multi-account.
+	AccountTargeting *string `json:"accountTargeting,omitempty" tf:"account_targeting,omitempty"`
+
+	// Specifies the empty target resolution mode for experiment options. Supports fail and skip.
+	EmptyTargetResolutionMode *string `json:"emptyTargetResolutionMode,omitempty" tf:"empty_target_resolution_mode,omitempty"`
+}
+
+type ExperimentOptionsObservation struct {
+
+	// Specifies the account targeting setting for experiment options. Supports single-account and multi-account.
+	AccountTargeting *string `json:"accountTargeting,omitempty" tf:"account_targeting,omitempty"`
+
+	// Specifies the empty target resolution mode for experiment options. Supports fail and skip.
+	EmptyTargetResolutionMode *string `json:"emptyTargetResolutionMode,omitempty" tf:"empty_target_resolution_mode,omitempty"`
+}
+
+type ExperimentOptionsParameters struct {
+
+	// Specifies the account targeting setting for experiment options. Supports single-account and multi-account.
+	// +kubebuilder:validation:Optional
+	AccountTargeting *string `json:"accountTargeting,omitempty" tf:"account_targeting,omitempty"`
+
+	// Specifies the empty target resolution mode for experiment options. Supports fail and skip.
+	// +kubebuilder:validation:Optional
+	EmptyTargetResolutionMode *string `json:"emptyTargetResolutionMode,omitempty" tf:"empty_target_resolution_mode,omitempty"`
+}
+
 type ExperimentTemplateInitParameters struct {
 
 	// Action to be performed during an experiment. See below.
@@ -111,6 +140,9 @@ type ExperimentTemplateInitParameters struct {
 
 	// Description for the experiment template.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The experiment options for the experiment template. See experiment_options below for more details!
+	ExperimentOptions []ExperimentOptionsInitParameters `json:"experimentOptions,omitempty" tf:"experiment_options,omitempty"`
 
 	// The configuration for experiment logging. See below.
 	LogConfiguration []LogConfigurationInitParameters `json:"logConfiguration,omitempty" tf:"log_configuration,omitempty"`
@@ -147,6 +179,9 @@ type ExperimentTemplateObservation struct {
 	// Description for the experiment template.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The experiment options for the experiment template. See experiment_options below for more details!
+	ExperimentOptions []ExperimentOptionsObservation `json:"experimentOptions,omitempty" tf:"experiment_options,omitempty"`
+
 	// Experiment Template ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -179,6 +214,10 @@ type ExperimentTemplateParameters struct {
 	// Description for the experiment template.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The experiment options for the experiment template. See experiment_options below for more details!
+	// +kubebuilder:validation:Optional
+	ExperimentOptions []ExperimentOptionsParameters `json:"experimentOptions,omitempty" tf:"experiment_options,omitempty"`
 
 	// The configuration for experiment logging. See below.
 	// +kubebuilder:validation:Optional

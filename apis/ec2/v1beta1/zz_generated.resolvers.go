@@ -1092,6 +1092,111 @@ func (mg *EgressOnlyInternetGateway) ResolveReferences(ctx context.Context, c cl
 	return nil
 }
 
+// ResolveReferences of this Fleet.
+func (mg *Fleet) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplateConfig); i3++ {
+		if mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "LaunchTemplate", "LaunchTemplateList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateID),
+					Extract:      resource.ExtractResourceID(),
+					Reference:    mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateIDRef,
+					Selector:     mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateID")
+			}
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LaunchTemplateConfig); i3++ {
+		if mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "LaunchTemplate", "LaunchTemplateList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.Version),
+					Extract:      resource.ExtractParamPath("latest_version", true),
+					Reference:    mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.VersionRef,
+					Selector:     mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.VersionSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.Version")
+			}
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.Version = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.VersionRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LaunchTemplateConfig); i3++ {
+		if mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "LaunchTemplate", "LaunchTemplateList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateID),
+					Extract:      resource.ExtractResourceID(),
+					Reference:    mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateIDRef,
+					Selector:     mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateID")
+			}
+			mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.LaunchTemplateIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LaunchTemplateConfig); i3++ {
+		if mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "LaunchTemplate", "LaunchTemplateList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.Version),
+					Extract:      resource.ExtractParamPath("latest_version", true),
+					Reference:    mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.VersionRef,
+					Selector:     mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.VersionSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.Version")
+			}
+			mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.Version = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.LaunchTemplateConfig[i3].LaunchTemplateSpecification.VersionRef = rsp.ResolvedReference
+
+		}
+	}
+
+	return nil
+}
+
 // ResolveReferences of this FlowLog.
 func (mg *FlowLog) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
@@ -5670,12 +5775,33 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SubnetConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubnetConfiguration[i3].SubnetID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.SubnetConfiguration[i3].SubnetIDRef,
+				Selector:     mg.Spec.ForProvider.SubnetConfiguration[i3].SubnetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.SubnetConfiguration[i3].SubnetID")
+		}
+		mg.Spec.ForProvider.SubnetConfiguration[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.SubnetConfiguration[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VPCID),
 			Extract:      reference.ExternalName(),
@@ -5708,12 +5834,33 @@ func (mg *VPCEndpoint) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServiceNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SubnetConfiguration); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetConfiguration[i3].SubnetID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SubnetConfiguration[i3].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SubnetConfiguration[i3].SubnetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.SubnetConfiguration[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.SubnetConfiguration[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.SubnetConfiguration[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VPCID),
 			Extract:      reference.ExternalName(),

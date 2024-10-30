@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the ebs group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_ebs_volume", func(r *config.Resource) {
 		r.References = map[string]config.Reference{
 			"kms_key_id": {

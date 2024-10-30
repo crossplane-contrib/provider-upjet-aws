@@ -126,6 +126,9 @@ type ApplicationInitParameters struct {
 	// The application's configuration
 	ApplicationConfiguration *ApplicationConfigurationInitParameters `json:"applicationConfiguration,omitempty" tf:"application_configuration,omitempty"`
 
+	// The application's mode. Valid values are STREAMING, INTERACTIVE.
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
+
 	// A CloudWatch log stream to monitor application configuration errors.
 	CloudwatchLoggingOptions *CloudwatchLoggingOptionsInitParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
 
@@ -135,7 +138,7 @@ type ApplicationInitParameters struct {
 	// Whether to force stop an unresponsive Flink-based application.
 	ForceStop *bool `json:"forceStop,omitempty" tf:"force_stop,omitempty"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19.
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 
 	// The ARN of the IAM role used by the application to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources.
@@ -164,6 +167,9 @@ type ApplicationObservation struct {
 	// The application's configuration
 	ApplicationConfiguration *ApplicationConfigurationObservation `json:"applicationConfiguration,omitempty" tf:"application_configuration,omitempty"`
 
+	// The application's mode. Valid values are STREAMING, INTERACTIVE.
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
+
 	// The ARN of the application.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -185,7 +191,7 @@ type ApplicationObservation struct {
 	// The current timestamp when the application was last updated.
 	LastUpdateTimestamp *string `json:"lastUpdateTimestamp,omitempty" tf:"last_update_timestamp,omitempty"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19.
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 
 	// The ARN of the IAM role used by the application to access Kinesis data streams, Kinesis Data Firehose delivery streams, Amazon S3 objects, and other external resources.
@@ -215,6 +221,10 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ApplicationConfiguration *ApplicationConfigurationParameters `json:"applicationConfiguration,omitempty" tf:"application_configuration,omitempty"`
 
+	// The application's mode. Valid values are STREAMING, INTERACTIVE.
+	// +kubebuilder:validation:Optional
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
+
 	// A CloudWatch log stream to monitor application configuration errors.
 	// +kubebuilder:validation:Optional
 	CloudwatchLoggingOptions *CloudwatchLoggingOptionsParameters `json:"cloudwatchLoggingOptions,omitempty" tf:"cloudwatch_logging_options,omitempty"`
@@ -232,7 +242,7 @@ type ApplicationParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18.
+	// The runtime environment for the application. Valid values: SQL-1_0, FLINK-1_6, FLINK-1_8, FLINK-1_11, FLINK-1_13, FLINK-1_15, FLINK-1_18, FLINK-1_19.
 	// +kubebuilder:validation:Optional
 	RuntimeEnvironment *string `json:"runtimeEnvironment,omitempty" tf:"runtime_environment,omitempty"`
 

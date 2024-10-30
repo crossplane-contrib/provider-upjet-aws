@@ -8,3 +8,6 @@ package v1beta1
 
 // Hub marks this type as a conversion hub.
 func (tr *AlternateContact) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *Region) Hub() {}

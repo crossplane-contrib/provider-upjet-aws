@@ -15,6 +15,9 @@ import (
 
 type LicenseAssociationInitParameters struct {
 
+	// A token from Grafana Labs that ties your AWS account with a Grafana Labs account.
+	GrafanaToken *string `json:"grafanaToken,omitempty" tf:"grafana_token,omitempty"`
+
 	// The type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
@@ -37,6 +40,9 @@ type LicenseAssociationObservation struct {
 	// If license_type is set to ENTERPRISE_FREE_TRIAL, this is the expiration date of the free trial.
 	FreeTrialExpiration *string `json:"freeTrialExpiration,omitempty" tf:"free_trial_expiration,omitempty"`
 
+	// A token from Grafana Labs that ties your AWS account with a Grafana Labs account.
+	GrafanaToken *string `json:"grafanaToken,omitempty" tf:"grafana_token,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// If license_type is set to ENTERPRISE, this is the expiration date of the enterprise license.
@@ -50,6 +56,10 @@ type LicenseAssociationObservation struct {
 }
 
 type LicenseAssociationParameters struct {
+
+	// A token from Grafana Labs that ties your AWS account with a Grafana Labs account.
+	// +kubebuilder:validation:Optional
+	GrafanaToken *string `json:"grafanaToken,omitempty" tf:"grafana_token,omitempty"`
 
 	// The type of license for the workspace license association. Valid values are ENTERPRISE and ENTERPRISE_FREE_TRIAL.
 	// +kubebuilder:validation:Optional

@@ -77,7 +77,13 @@ spec:
                 properties:
                   bgpAsn:
                     description: The gateway's Border Gateway Protocol (BGP) Autonomous
-                      System Number (ASN).
+                      System Number (ASN). Valid values are from  1 to 2147483647.
+                      Conflicts with bgp_asn_extended.
+                    type: string
+                  bgpAsnExtended:
+                    description: The gateway's Border Gateway Protocol (BGP) Autonomous
+                      System Number (ASN). Valid values are from  2147483648 to 4294967295
+                      Conflicts with bgp_asn.
                     type: string
                   certificateArn:
                     description: The Amazon Resource Name (ARN) for the customer gateway
@@ -123,7 +129,13 @@ spec:
                 properties:
                   bgpAsn:
                     description: The gateway's Border Gateway Protocol (BGP) Autonomous
-                      System Number (ASN).
+                      System Number (ASN). Valid values are from  1 to 2147483647.
+                      Conflicts with bgp_asn_extended.
+                    type: string
+                  bgpAsnExtended:
+                    description: The gateway's Border Gateway Protocol (BGP) Autonomous
+                      System Number (ASN). Valid values are from  2147483648 to 4294967295
+                      Conflicts with bgp_asn.
                     type: string
                   certificateArn:
                     description: The Amazon Resource Name (ARN) for the customer gateway
@@ -316,10 +328,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.bgpAsn is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.bgpAsn)
-                || (has(self.initProvider) && has(self.initProvider.bgpAsn))'
             - message: spec.forProvider.type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
@@ -334,7 +342,13 @@ spec:
                     type: string
                   bgpAsn:
                     description: The gateway's Border Gateway Protocol (BGP) Autonomous
-                      System Number (ASN).
+                      System Number (ASN). Valid values are from  1 to 2147483647.
+                      Conflicts with bgp_asn_extended.
+                    type: string
+                  bgpAsnExtended:
+                    description: The gateway's Border Gateway Protocol (BGP) Autonomous
+                      System Number (ASN). Valid values are from  2147483648 to 4294967295
+                      Conflicts with bgp_asn.
                     type: string
                   certificateArn:
                     description: The Amazon Resource Name (ARN) for the customer gateway
