@@ -97,6 +97,9 @@ spec:
               - type: FromCompositeFieldPath
                 fromFieldPath: spec.parameters.iam.userArn
                 toFieldPath: spec.parameters.iam.userArn
+              - type: ToCompositeFieldPath
+                fromFieldPath: status.eks
+                toFieldPath: status.eks
 
           ### Role and policies for EKS IRSA testing
           # XIRSA for IRSA-related role configuration
@@ -333,6 +336,133 @@ spec:
                   fromFieldPath: Required
                 type: CombineFromComposite
 
+          ### PodIdentity testing setup
+          # EKS pod identity addon
+          - name: eksPodIdentityAddon
+            base:
+              apiVersion: eks.aws.upbound.io/v1beta1
+              kind: Addon
+              metadata:
+                labels:
+                  component: eks-podidentity-addon
+              spec:
+                forProvider:
+                  addonName: eks-pod-identity-agent
+                  clusterName: "to-be-patched"
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.eks.clusterName
+                toFieldPath: spec.forProvider.clusterName
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.region
+                toFieldPath: spec.forProvider.region
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                policy:
+                  fromFieldPath: Required
+                toFieldPath: metadata.name
+                transforms:
+                  - string:
+                      fmt: '%s-eks-podidentity-addon'
+                      type: Format
+                    type: string
+
+          # IAM role for PodIdentity
+          - name: podIdentityRole
+            base:
+              apiVersion: iam.aws.upbound.io/v1beta1
+              kind: Role
+              metadata:
+                labels:
+                  resource: PodIdentityRole
+              spec:
+                forProvider:
+                  assumeRolePolicy: |
+                    {
+                      "Version":"2012-10-17",
+                      "Statement":[
+                        {
+                          "Effect":"Allow",
+                          "Principal":{
+                            "Service":"pods.eks.amazonaws.com"
+                          },
+                          "Action":[
+                            "sts:AssumeRole",
+                            "sts:TagSession"
+                          ]
+                        }
+                      ]
+                    }
+                  inlinePolicy:
+                    - name: kafka-access-test
+                      policy: |
+                        {
+                            "Version": "2012-10-17",
+                            "Statement": [
+                                {
+                                    "Action": [
+                                        "kafka:*"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": "*"
+                                }
+                            ]
+                        }
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.deletionPolicy
+              - fromFieldPath: spec.parameters.id
+                policy:
+                  fromFieldPath: Required
+                toFieldPath: metadata.name
+                type: ToCompositeFieldPath
+                transforms:
+                  - string:
+                      fmt: '%s-podidentity'
+                      type: Format
+                    type: string
+              - type: ToCompositeFieldPath
+                fromFieldPath: status.atProvider.arn
+                policy:
+                  fromFieldPath: Required
+                toFieldPath: status.podIdentity.roleArn
+
+          # EKS pod identity association
+          - name: podIdentityAssociationForEks
+            base:
+              apiVersion: eks.aws.upbound.io/v1beta1
+              kind: PodIdentityAssociation
+              metadata:
+                labels:
+                  component: eks-pod-identity-association
+              spec:
+                forProvider:
+                  clusterName: "to-be-patched"
+                  namespace: upbound-system
+                  serviceAccount: my-podidentity-xpsa
+                  roleArnSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      resource: PodIdentityRole
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: status.eks.clusterName
+                toFieldPath: spec.forProvider.clusterName
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                policy:
+                  fromFieldPath: Required
+                toFieldPath: spec.forProvider.serviceAccount
+                transforms:
+                  - string:
+                      fmt: '%s-podidentity-xpsa'
+                      type: Format
+                    type: string
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.region
+                toFieldPath: spec.forProvider.region
+
           ###
           # Crossplane Helm Deployment
           - name: CrossplaneDeploy
@@ -501,6 +631,67 @@ spec:
                 transforms:
                   - string:
                       fmt: '%s-webid-runtime-config'
+                      type: Format
+                    type: string
+
+          # Deployment Runtime Config with dedicated AWS PodIdentity-configured k8s service account
+          - name: PodIdentityRuntimeConfig
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              metadata:
+                name: podidentity-runtime-config
+                labels:
+                  component: podidentity-runtime-config
+              spec:
+                deletionPolicy: Delete
+                forProvider:
+                  manifest:
+                    apiVersion: pkg.crossplane.io/v1beta1
+                    kind: DeploymentRuntimeConfig
+                    metadata:
+                      name: podidentity-runtime-config
+                      namespace: upbound-system
+                    spec:
+                      serviceAccountTemplate:
+                        metadata:
+                          name: my-podidentity-xpsa
+                      deploymentTemplate: {}
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.deletionPolicy
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.providerConfigRef.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                policy:
+                  fromFieldPath: Required
+                toFieldPath: spec.forProvider.manifest.spec.serviceAccountTemplate.metadata.name
+                transforms:
+                  - string:
+                      fmt: '%s-podidentity-xpsa'
+                      type: Format
+                    type: string
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.forProvider.manifest.metadata.name
+                policy:
+                  fromFieldPath: Required
+                transforms:
+                  - string:
+                      fmt: '%s-podidentity-runtime-config'
+                      type: Format
+                    type: string
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: metadata.name
+                policy:
+                  fromFieldPath: Required
+                transforms:
+                  - string:
+                      fmt: '%s-podidentity-runtime-config'
                       type: Format
                     type: string
 
@@ -683,6 +874,66 @@ spec:
                 transforms:
                   - string:
                       fmt: '%s-webid-runtime-config'
+                      type: Format
+                    type: string
+
+          # AWS RDS provider - for non-IRSA provider config testing
+          - name: ProviderAWSKafka
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              metadata:
+                name: aws-provider-kafka
+                labels:
+                  component: aws-provider-kafka
+              spec:
+                readiness:
+                  policy: AllTrue
+                forProvider:
+                  manifest:
+                    apiVersion: pkg.crossplane.io/v1
+                    kind: Provider
+                    metadata:
+                      name: provider-aws-kafka
+                    spec:
+                      ignoreCrossplaneConstraints: false
+                      # package: xpkg.upbound.io/upbound/provider-aws-kafka:v1.3.1
+                      packagePullPolicy: IfNotPresent
+                      revisionActivationPolicy: Automatic
+                      revisionHistoryLimit: 1
+                      skipDependencyResolution: true
+                      runtimeConfigRef:
+                        name: my-podidentity-runtime-config
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.deletionPolicy
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.providerConfigRef.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.targetClusterParameters.provider.kafkaPackage
+                toFieldPath: spec.forProvider.manifest.spec.package
+                policy:
+                  fromFieldPath: Required
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: metadata.name
+                policy:
+                  fromFieldPath: Required
+                transforms:
+                  - string:
+                      fmt: '%s-provider-aws-kafka'
+                      type: Format
+                    type: string
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.forProvider.manifest.spec.runtimeConfigRef.name
+                policy:
+                  fromFieldPath: Required
+                transforms:
+                  - string:
+                      fmt: '%s-podidentity-runtime-config'
                       type: Format
                     type: string
 
@@ -907,6 +1158,34 @@ spec:
                 policy:
                   fromFieldPath: Required
                 toFieldPath: spec.forProvider.manifest.spec.assumeRoleChain[0].roleARN
+
+          # PodIdentity provider config
+          - name: PodIdentityProviderConfig
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              metadata:
+                name: podidentity-provider-config
+                labels:
+                  component: aws-podidentity-provider-config
+                  component-type: aws-provider-config
+              spec:
+                forProvider:
+                  manifest:
+                    apiVersion: aws.upbound.io/v1beta1
+                    kind: ProviderConfig
+                    metadata:
+                      name: podidentity-config
+                    spec:
+                      credentials:
+                        source: PodIdentity
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.deletionPolicy
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.providerConfigRef.name
 
           ### DEMO MRs FOR TESTING ###
           # Demo VPC MR for testing IRSA
@@ -1155,6 +1434,67 @@ spec:
                       type: Format
                     type: string
 
+          # Demo Kafka Configuration MR for testing PodIdentity
+          - name: DemoKafkaConfigurationPodIdentity
+            base:
+              apiVersion: kubernetes.crossplane.io/v1alpha2
+              kind: Object
+              metadata:
+                name: demo-kafkacfg-podidentity-mr
+                labels:
+                  resource-provider: aws-provider-kafka
+                  component: demo-kafkaconfiguration-podidentity
+              spec:
+                readiness:
+                  policy: AllTrue
+                forProvider:
+                  manifest:
+                    apiVersion: kafka.aws.upbound.io/v1beta1
+                    kind: Configuration
+                    metadata:
+                      name: sample-kafka-configuration-podidentity
+                      labels:
+                        testing.upbound.io/example-name: example
+                    spec:
+                      providerConfigRef:
+                        name: podidentity-config
+                      forProvider:
+                        region: us-west-2
+                        name: example-kafkaconfig
+                        kafkaVersions:
+                          - 2.6.0
+                        serverProperties: |
+                          auto.create.topics.enable = true
+                          delete.topic.enable = true
+
+            patches:
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.deletionPolicy
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.providerConfigRef.name
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: metadata.name
+                policy:
+                  fromFieldPath: Required
+                transforms:
+                  - string:
+                      fmt: '%s-demo-kafkacfg-podidentity-mr'
+                      type: Format
+                    type: string
+              - type: FromCompositeFieldPath
+                fromFieldPath: spec.parameters.id
+                toFieldPath: spec.forProvider.manifest.spec.forProvider.name
+                policy:
+                  fromFieldPath: Required
+                transforms:
+                  - string:
+                      fmt: '%s-example-kafkaconfig'
+                      type: Format
+                    type: string
+
           ####################
           ###    USAGES    ###
           ####################
@@ -1244,6 +1584,74 @@ spec:
             readinessChecks:
               - type: None
 
+          # PodIdentityAddon uses XEKS
+          - name: usageXEksByPodIdentityAddon
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: eks.aws.upbound.io/v1beta1
+                  kind: Addon
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: eks-podidentity-addon
+                of:
+                  apiVersion: aws.platform.upbound.io/v1alpha1
+                  kind: XEKS
+                  resourceSelector:
+                    matchControllerRef: true
+            readinessChecks:
+              - type: None
+
+          # PodIdentityAssociation uses XEKS
+          - name: usageXEksByPodIdentityAssociation
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: eks.aws.upbound.io/v1beta1
+                  kind: PodIdentityAssociation
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: eks-pod-identity-association
+                of:
+                  apiVersion: aws.platform.upbound.io/v1alpha1
+                  kind: XEKS
+                  resourceSelector:
+                    matchControllerRef: true
+            readinessChecks:
+              - type: None
+
+          # PodIdentityAssociation uses PodIdentity IAM role
+          - name: usagePodIdentityIAMRoleByPodIdentityAssociation
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: eks.aws.upbound.io/v1beta1
+                  kind: PodIdentityAssociation
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: eks-pod-identity-association
+                of:
+                  apiVersion: iam.aws.upbound.io/v1beta1
+                  kind: Role
+                  resourceSelector:
+                    matchLabels:
+                      resource: PodIdentityRole
+                    matchControllerRef: true
+            readinessChecks:
+              - type: None
+
           # IRSA Deployment Runtime Config depends on XIRSA
           - name: usageXIRSAByIRSADeploymentRuntime
             base:
@@ -1292,6 +1700,54 @@ spec:
             readinessChecks:
               - type: None
 
+          # PodIdentity Deployment Runtime config depends on EKS PodIdentityAssociation
+          - name: usagePodIdentityAssociationByPodIDDeploymentRuntime
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: podidentity-runtime-config
+                of:
+                  apiVersion: eks.aws.upbound.io/v1beta1
+                  kind: PodIdentityAssociation
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: eks-pod-identity-association
+            readinessChecks:
+              - type: None
+
+          # PodIdentity Deployment Runtime config depends on EKS PodIdentity Addon
+          - name: usageEksPodIdentityAddonByPodIDDeploymentRuntime
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: podidentity-runtime-config
+                of:
+                  apiVersion: eks.aws.upbound.io/v1beta1
+                  kind: Addon
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: eks-podidentity-addon
+            readinessChecks:
+              - type: None
+
           # IRSA Deployment Runtime Config depends on Crossplane Deployment
           - name: usageCrossplaneByDeploymentRuntime
             base:
@@ -1330,6 +1786,30 @@ spec:
                     matchControllerRef: true
                     matchLabels:
                       component: webidentity-runtime-config
+                of:
+                  apiVersion: helm.crossplane.io/v1alpha1
+                  kind: Release
+                  resourceSelector:
+                    matchLabels:
+                      component: crossplane-deployment
+                    matchControllerRef: true
+            readinessChecks:
+              - type: None
+
+          # PodIdentity Deployment Runtime config depends on Crossplane Deployment
+          - name: usageCrossplaneByPodIDDeploymentRuntime
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: podidentity-runtime-config
                 of:
                   apiVersion: helm.crossplane.io/v1alpha1
                   kind: Release
@@ -1440,6 +1920,31 @@ spec:
             readinessChecks:
               - type: None
 
+          # AWS Kafka Provider depends on PodIdentity Deployment Runtime Config
+          - name: usageRuntimeConfigByKafkaProvider
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: aws-provider-kafka
+                of:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: podidentity-runtime-config
+
+            readinessChecks:
+              - type: None
+
           ### AWS Providers depend on AWS Family Provider
           # AWS EC2 Provider depends on AWS Family Provider
           - name: usageFamilyProviderByEC2Provider
@@ -1480,6 +1985,31 @@ spec:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-provider-rds
+                of:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: aws-family-provider
+
+            readinessChecks:
+              - type: None
+
+          # AWS Kafka Provider depends on AWS Family Provider
+          - name: usageFamilyProviderByKafkaProvider
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: aws-provider-kafka
                 of:
                   apiVersion: kubernetes.crossplane.io/v1alpha2
                   kind: Object
@@ -1638,6 +2168,30 @@ spec:
             readinessChecks:
               - type: None
 
+          # PodIdentity provider config depend on Family Provider
+          - name: usageFamilyProviderByPodIdProviderConfig
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: aws-podidentity-provider-config
+                of:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: aws-family-provider
+            readinessChecks:
+              - type: None
+
           #################
           ### MR Usages of Providers ###
           #################
@@ -1734,7 +2288,7 @@ spec:
             readinessChecks:
               - type: None
 
-          - name: usageRDSProviderByPgWebIdFsMR
+          - name: usageRDSProviderByPgWebIdFsChainMR
             base:
               apiVersion: apiextensions.crossplane.io/v1alpha1
               kind: Usage
@@ -1754,6 +2308,29 @@ spec:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-provider-rds
+            readinessChecks:
+              - type: None
+
+          - name: usageKafkaProviderByKafkaCfgPodIdentityMR
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: demo-kafkaconfiguration-podidentity
+                of:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: aws-provider-kafka
             readinessChecks:
               - type: None
 
@@ -1873,5 +2450,28 @@ spec:
                     matchControllerRef: true
                     matchLabels:
                       component: aws-webidentity-fs-chain-config
+            readinessChecks:
+              - type: None
+
+          - name: usagePodIdentityProviderConfigByKafkaConfigMR
+            base:
+              apiVersion: apiextensions.crossplane.io/v1alpha1
+              kind: Usage
+              spec:
+                replayDeletion: true
+                by:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: demo-kafkaconfiguration-podidentity
+                of:
+                  apiVersion: kubernetes.crossplane.io/v1alpha2
+                  kind: Object
+                  resourceSelector:
+                    matchControllerRef: true
+                    matchLabels:
+                      component: aws-podidentity-provider-config
             readinessChecks:
               - type: None

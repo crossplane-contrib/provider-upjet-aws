@@ -54,7 +54,7 @@ spec:
   parameters:
     id: aws-pc-e2e-test
     region: us-west-2 # EKS cluster region
-    version: "1.28" # EKS cluster k8s version
+    version: "1.29" # EKS cluster k8s version
     iam:
       # replace with your custom roleArn that will administer the EKS cluster:
       roleArn: "arn:aws:iam::123456789012:role/mydefaulteksadminrole"
@@ -82,10 +82,11 @@ spec:
         namespace: upbound-system
     targetClusterParameters: # the parameters for the target EKS control plane cluster 
       provider: # provider package urls to be used in testing
-        familyPackage: "xpkg.upbound.io/upbound/provider-family-aws:v1.3.0"
-        ec2Package: "xpkg.upbound.io/upbound/provider-aws-ec2:v1.3.0"
-        rdsPackage: "xpkg.upbound.io/upbound/provider-aws-rds:v1.3.0"
-      crossplaneVersion: 1.15.2 # the crossplane version to be installed in the testing control plane
+        familyPackage: "xpkg.upbound.io/upbound/provider-family-aws:v1.16.0"
+        ec2Package: "xpkg.upbound.io/upbound/provider-aws-ec2:v1.16.0"
+        rdsPackage: "xpkg.upbound.io/upbound/provider-aws-rds:v1.16.0"
+        kafkaPackage: "xpkg.upbound.io/upbound/provider-aws-kafka:v1.16.0"
+      crossplaneVersion: 1.17.2 # the crossplane version to be installed in the testing control plane
   writeConnectionSecretToRef:
     name: aws-pc-e2e-test-kubeconfig
 status:
@@ -127,6 +128,7 @@ The make target expects the following environment variables to be set:
 - `AWS_FAMILY_PACKAGE_IMAGE`: The package URL for `provider-family-aws` 
 - `AWS_EC2_PACKAGE_IMAGE`: The package URL for `provider-aws-ec2`
 - `AWS_RDS_PACKAGE_IMAGE`: The package URL for `provider-aws-rds`
+- `AWS_KAFKA_PACKAGE_IMAGE`: The package URL for `provider-aws-kafka`
 - `AWS_EKS_IAM_DEFAULT_ADMIN_ROLE`: the ARN of an existing IAM role. This will be assigned as the E2E test EKS cluster default admin
 - `TARGET_CROSSPLANE_VERSION`: The target crossplane version to be deployed into the testing cluster
 - `UPTEST_CLOUD_CREDENTIALS`: The AWS credentials for the AWS account that the e2e tests will run on. Should be in the format of AWS CLI INI config. 
@@ -141,11 +143,12 @@ aws_secret_access_key = your-aws-secret-access-key
 ```
 
 ```shell
-export AWS_FAMILY_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-family-aws:1.4.0"
-export AWS_EC2_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-ec2:1.4.0"
-export AWS_RDS_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-rds:1.4.0"
+export AWS_FAMILY_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-family-aws:v1.16.0"
+export AWS_EC2_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-ec2:v1.16.0"
+export AWS_RDS_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-rds:v1.16.0"
+export AWS_KAFKA_PACKAGE_IMAGE="xpkg.upbound.io/upbound/provider-aws-kafka:v1.16.0"
 export AWS_EKS_IAM_DEFAULT_ADMIN_ROLE="arn:aws:iam::123456789012:role/mydefaulteksadminrole"
-export TARGET_CROSSPLANE_VERSION="1.15.2"
+export TARGET_CROSSPLANE_VERSION="1.17.2"
 export UPTEST_CLOUD_CREDENTIALS="$(cat my-aws-creds.txt)"
 # from repo root
 make -C e2e/providerconfig-aws-e2e-test e2e

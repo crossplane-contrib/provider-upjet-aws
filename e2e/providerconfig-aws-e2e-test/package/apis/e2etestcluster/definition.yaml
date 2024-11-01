@@ -132,10 +132,14 @@ spec:
                             rdsPackage:
                               type: string
                               description: provider-aws-iam package url to be used
+                            kafkaPackage:
+                              type: string
+                              description: provider-aws-kafka package url to be used
                           required:
                             - familyPackage
                             - ec2Package
                             - rdsPackage
+                            - kafkaPackage
                         crossplaneVersion:
                           type: string
                           description: crossplane version to be deployed on the cluster
@@ -160,6 +164,9 @@ spec:
                   type: array
                   items:
                     type: string
+                eks:
+                  x-kubernetes-preserve-unknown-fields: true
+                  type: object
                 irsa:
                   type: object
                   properties:
@@ -182,3 +189,8 @@ spec:
                       type: array
                       items:
                         type: string
+                podIdentity:
+                  type: object
+                  properties:
+                    roleArn:
+                      type: string

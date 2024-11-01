@@ -259,18 +259,20 @@ uptest: $(UPTEST_LOCAL) $(KUBECTL) $(KUTTL)
 # to be set. This is used for provisioning the target E2E test environment,
 # including the EKS cluster and necessary environments.
 providerconfig-e2e:
-	$(MAKE) SUBPACKAGES="ec2 rds config" build.all publish
+	$(MAKE) SUBPACKAGES="ec2 rds kafka config" build.all publish
 	AWS_FAMILY_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-family-aws:$(VERSION)" \
 	AWS_EC2_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-ec2:$(VERSION)" \
 	AWS_RDS_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-rds:$(VERSION)" \
-	TARGET_CROSSPLANE_VERSION="1.15.2" \
+	AWS_KAFKA_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-kafka:$(VERSION)" \
+	TARGET_CROSSPLANE_VERSION="1.17.2" \
 		$(MAKE) -C e2e/providerconfig-aws-e2e-test e2e
 
 providerconfig-e2e-nopublish:
 	AWS_FAMILY_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-family-aws:$(VERSION)" \
 	AWS_EC2_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-ec2:$(VERSION)" \
 	AWS_RDS_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-rds:$(VERSION)" \
-	TARGET_CROSSPLANE_VERSION="1.15.2" \
+	AWS_KAFKA_PACKAGE_IMAGE="$(XPKG_REG_ORGS)/provider-aws-kafka:$(VERSION)" \
+	TARGET_CROSSPLANE_VERSION="1.17.2" \
 		$(MAKE) -C e2e/providerconfig-aws-e2e-test e2e
 
 uptest-local:
