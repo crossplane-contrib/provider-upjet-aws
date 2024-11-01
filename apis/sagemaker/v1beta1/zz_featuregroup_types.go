@@ -13,6 +13,20 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CollectionConfigInitParameters struct {
+	VectorConfig []VectorConfigInitParameters `json:"vectorConfig,omitempty" tf:"vector_config,omitempty"`
+}
+
+type CollectionConfigObservation struct {
+	VectorConfig []VectorConfigObservation `json:"vectorConfig,omitempty" tf:"vector_config,omitempty"`
+}
+
+type CollectionConfigParameters struct {
+
+	// +kubebuilder:validation:Optional
+	VectorConfig []VectorConfigParameters `json:"vectorConfig,omitempty" tf:"vector_config,omitempty"`
+}
+
 type DataCatalogConfigInitParameters struct {
 
 	// The name of the Glue table catalog.
@@ -53,6 +67,9 @@ type DataCatalogConfigParameters struct {
 }
 
 type FeatureDefinitionInitParameters struct {
+	CollectionConfig []CollectionConfigInitParameters `json:"collectionConfig,omitempty" tf:"collection_config,omitempty"`
+
+	CollectionType *string `json:"collectionType,omitempty" tf:"collection_type,omitempty"`
 
 	// The name of a feature. feature_name cannot be any of the following: is_deleted, write_time, api_invocation_time.
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
@@ -62,6 +79,9 @@ type FeatureDefinitionInitParameters struct {
 }
 
 type FeatureDefinitionObservation struct {
+	CollectionConfig []CollectionConfigObservation `json:"collectionConfig,omitempty" tf:"collection_config,omitempty"`
+
+	CollectionType *string `json:"collectionType,omitempty" tf:"collection_type,omitempty"`
 
 	// The name of a feature. feature_name cannot be any of the following: is_deleted, write_time, api_invocation_time.
 	FeatureName *string `json:"featureName,omitempty" tf:"feature_name,omitempty"`
@@ -71,6 +91,12 @@ type FeatureDefinitionObservation struct {
 }
 
 type FeatureDefinitionParameters struct {
+
+	// +kubebuilder:validation:Optional
+	CollectionConfig []CollectionConfigParameters `json:"collectionConfig,omitempty" tf:"collection_config,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	CollectionType *string `json:"collectionType,omitempty" tf:"collection_type,omitempty"`
 
 	// The name of a feature. feature_name cannot be any of the following: is_deleted, write_time, api_invocation_time.
 	// +kubebuilder:validation:Optional
@@ -117,6 +143,8 @@ type FeatureGroupInitParameters struct {
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	ThroughputConfig []ThroughputConfigInitParameters `json:"throughputConfig,omitempty" tf:"throughput_config,omitempty"`
 }
 
 type FeatureGroupObservation struct {
@@ -154,6 +182,8 @@ type FeatureGroupObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	ThroughputConfig []ThroughputConfigObservation `json:"throughputConfig,omitempty" tf:"throughput_config,omitempty"`
 }
 
 type FeatureGroupParameters struct {
@@ -205,6 +235,9 @@ type FeatureGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ThroughputConfig []ThroughputConfigParameters `json:"throughputConfig,omitempty" tf:"throughput_config,omitempty"`
 }
 
 type OfflineStoreConfigInitParameters struct {
@@ -454,4 +487,46 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&FeatureGroup{}, &FeatureGroupList{})
+}
+
+type ThroughputConfigInitParameters struct {
+	ProvisionedReadCapacityUnits *float64 `json:"provisionedReadCapacityUnits,omitempty" tf:"provisioned_read_capacity_units,omitempty"`
+
+	ProvisionedWriteCapacityUnits *float64 `json:"provisionedWriteCapacityUnits,omitempty" tf:"provisioned_write_capacity_units,omitempty"`
+
+	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
+}
+
+type ThroughputConfigObservation struct {
+	ProvisionedReadCapacityUnits *float64 `json:"provisionedReadCapacityUnits,omitempty" tf:"provisioned_read_capacity_units,omitempty"`
+
+	ProvisionedWriteCapacityUnits *float64 `json:"provisionedWriteCapacityUnits,omitempty" tf:"provisioned_write_capacity_units,omitempty"`
+
+	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
+}
+
+type ThroughputConfigParameters struct {
+
+	// +kubebuilder:validation:Optional
+	ProvisionedReadCapacityUnits *float64 `json:"provisionedReadCapacityUnits,omitempty" tf:"provisioned_read_capacity_units,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ProvisionedWriteCapacityUnits *float64 `json:"provisionedWriteCapacityUnits,omitempty" tf:"provisioned_write_capacity_units,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ThroughputMode *string `json:"throughputMode,omitempty" tf:"throughput_mode,omitempty"`
+}
+
+type VectorConfigInitParameters struct {
+	Dimension *float64 `json:"dimension,omitempty" tf:"dimension,omitempty"`
+}
+
+type VectorConfigObservation struct {
+	Dimension *float64 `json:"dimension,omitempty" tf:"dimension,omitempty"`
+}
+
+type VectorConfigParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Dimension *float64 `json:"dimension,omitempty" tf:"dimension,omitempty"`
 }
