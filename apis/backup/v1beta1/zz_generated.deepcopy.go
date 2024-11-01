@@ -2272,6 +2272,11 @@ func (in *RuleInitParameters) DeepCopyInto(out *RuleInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ScheduleExpressionTimezone != nil {
+		in, out := &in.ScheduleExpressionTimezone, &out.ScheduleExpressionTimezone
+		*out = new(string)
+		**out = **in
+	}
 	if in.StartWindow != nil {
 		in, out := &in.StartWindow, &out.StartWindow
 		*out = new(float64)
@@ -2447,6 +2452,11 @@ func (in *RuleObservation) DeepCopyInto(out *RuleObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ScheduleExpressionTimezone != nil {
+		in, out := &in.ScheduleExpressionTimezone, &out.ScheduleExpressionTimezone
+		*out = new(string)
+		**out = **in
+	}
 	if in.StartWindow != nil {
 		in, out := &in.StartWindow, &out.StartWindow
 		*out = new(float64)
@@ -2519,6 +2529,11 @@ func (in *RuleParameters) DeepCopyInto(out *RuleParameters) {
 	}
 	if in.Schedule != nil {
 		in, out := &in.Schedule, &out.Schedule
+		*out = new(string)
+		**out = **in
+	}
+	if in.ScheduleExpressionTimezone != nil {
+		in, out := &in.ScheduleExpressionTimezone, &out.ScheduleExpressionTimezone
 		*out = new(string)
 		**out = **in
 	}

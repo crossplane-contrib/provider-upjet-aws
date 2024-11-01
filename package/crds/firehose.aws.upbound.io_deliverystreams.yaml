@@ -2012,6 +2012,596 @@ spec:
                           type: string
                       type: object
                     type: array
+                  icebergConfiguration:
+                    description: Configuration options when destination is iceberg.
+                      See iceberg_configuration block below for details.
+                    items:
+                      properties:
+                        bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 0 and 900, before delivering
+                            it to the destination. The default value is 300.
+                          type: number
+                        bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 and 128, before delivering it to the
+                            destination. The default value is 5.
+                          type: number
+                        catalogArn:
+                          description: Glue catalog ARN identifier of the destination
+                            Apache Iceberg Tables. You must specify the ARN in the
+                            format arn:aws:glue:region:account-id:catalog
+                          type: string
+                        cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. See cloudwatch_logging_options block below for
+                            details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              logGroupName:
+                                description: The CloudWatch group name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                              logStreamName:
+                                description: The CloudWatch log stream name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
+                        destinationTableConfiguration:
+                          description: Destination table configurations which Firehose
+                            uses to deliver data to Apache Iceberg Tables. Firehose
+                            will write data with insert if table specific configuration
+                            is not provided. See destination_table_configuration block
+                            below for details.
+                          items:
+                            properties:
+                              databaseName:
+                                description: Specifies the name of the AWS Glue database
+                                  that contains the schema for the output data.
+                                type: string
+                              databaseNameRef:
+                                description: Reference to a CatalogDatabase in glue
+                                  to populate databaseName.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              databaseNameSelector:
+                                description: Selector for a CatalogDatabase in glue
+                                  to populate databaseName.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              s3ErrorOutputPrefix:
+                                description: The table specific S3 error output prefix.
+                                  All the errors that occurred while delivering to
+                                  this table will be prefixed with this value in S3
+                                  destination.
+                                type: string
+                              tableName:
+                                description: Specifies the AWS Glue table that contains
+                                  the column information that constitutes your data
+                                  schema.
+                                type: string
+                              tableNameRef:
+                                description: Reference to a CatalogTable in glue to
+                                  populate tableName.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              tableNameSelector:
+                                description: Selector for a CatalogTable in glue to
+                                  populate tableName.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              uniqueKeys:
+                                description: A list of unique keys for a given Apache
+                                  Iceberg table. Firehose will use these for running
+                                  Create, Update, or Delete operations on the given
+                                  Iceberg table.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        processingConfiguration:
+                          description: The data processing configuration.  See processing_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              processors:
+                                description: Specifies the data processors as multiple
+                                  blocks. See processors block below for details.
+                                items:
+                                  properties:
+                                    parameters:
+                                      description: Specifies the processor parameters
+                                        as multiple blocks. See parameters block below
+                                        for details.
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            description: 'Parameter name. Valid Values:
+                                              LambdaArn, NumberOfRetries, MetadataExtractionQuery,
+                                              JsonParsingEngine, RoleArn, BufferSizeInMBs,
+                                              BufferIntervalInSeconds, SubRecordType,
+                                              Delimiter, CompressionFormat, DataMessageExtraction.
+                                              Validation is done against AWS SDK constants;
+                                              so values not explicitly listed may
+                                              also work.'
+                                            type: string
+                                          parameterValue:
+                                            description: Parameter value. Must be
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    type:
+                                      description: 'The type of processor. Valid Values:
+                                        RecordDeAggregation, Lambda, MetadataExtraction,
+                                        AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing.
+                                        Validation is done against AWS SDK constants;
+                                        so values not explicitly listed may also work.'
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        retryDuration:
+                          description: The period of time, in seconds between 0 to
+                            7200, during which Firehose retries to deliver data to
+                            the specified destination.
+                          type: number
+                        roleArn:
+                          description: The ARN of the IAM role to be assumed by Firehose
+                            for calling Apache Iceberg Tables.
+                          type: string
+                        roleArnRef:
+                          description: Reference to a Role in iam to populate roleArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        roleArnSelector:
+                          description: Selector for a Role in iam to populate roleArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        s3BackupMode:
+                          description: |-
+                            Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+                            secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+                          type: string
+                        s3Configuration:
+                          description: The S3 Configuration. See s3_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              bucketArn:
+                                description: The ARN of the S3 bucket
+                                type: string
+                              bucketArnRef:
+                                description: Reference to a Bucket in s3 to populate
+                                  bucketArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              bucketArnSelector:
+                                description: Selector for a Bucket in s3 to populate
+                                  bucketArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              bufferingInterval:
+                                description: Buffer incoming data for the specified
+                                  period of time, in seconds between 0 to 60, before
+                                  delivering it to the destination.  The default value
+                                  is 60s.
+                                type: number
+                              bufferingSize:
+                                description: Buffer incoming data to the specified
+                                  size, in MBs between 1 to 5, before delivering it
+                                  to the destination.  The default value is 5MB.
+                                type: number
+                              cloudwatchLoggingOptions:
+                                description: The CloudWatch Logging Options for the
+                                  delivery stream. See cloudwatch_logging_options
+                                  block below for details.
+                                items:
+                                  properties:
+                                    enabled:
+                                      description: Enables or disables the logging.
+                                        Defaults to false.
+                                      type: boolean
+                                    logGroupName:
+                                      description: The CloudWatch group name for logging.
+                                        This value is required if enabled is true.
+                                      type: string
+                                    logStreamName:
+                                      description: The CloudWatch log stream name
+                                        for logging. This value is required if enabled
+                                        is true.
+                                      type: string
+                                  type: object
+                                type: array
+                              compressionFormat:
+                                description: The compression format. If no value is
+                                  specified, the default is UNCOMPRESSED. Other supported
+                                  values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+                                type: string
+                              errorOutputPrefix:
+                                description: Prefix added to failed records before
+                                  writing them to S3. Not currently supported for
+                                  redshift destination. This prefix appears immediately
+                                  following the bucket name. For information about
+                                  how to specify this prefix, see Custom Prefixes
+                                  for Amazon S3 Objects.
+                                type: string
+                              kmsKeyArn:
+                                description: |-
+                                  Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+                                  be used.
+                                type: string
+                              prefix:
+                                description: The "YYYY/MM/DD/HH" time format prefix
+                                  is automatically used for delivered S3 files. You
+                                  can specify an extra prefix to be added in front
+                                  of the time format prefix. Note that if the prefix
+                                  ends with a slash, it appears as a folder in the
+                                  S3 bucket
+                                type: string
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              roleArnRef:
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              roleArnSelector:
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   kinesisSourceConfiguration:
                     description: The stream and role Amazon Resource Names (ARNs)
                       for a Kinesis data stream used as the source for a delivery
@@ -6754,6 +7344,596 @@ spec:
                           type: string
                       type: object
                     type: array
+                  icebergConfiguration:
+                    description: Configuration options when destination is iceberg.
+                      See iceberg_configuration block below for details.
+                    items:
+                      properties:
+                        bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 0 and 900, before delivering
+                            it to the destination. The default value is 300.
+                          type: number
+                        bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 and 128, before delivering it to the
+                            destination. The default value is 5.
+                          type: number
+                        catalogArn:
+                          description: Glue catalog ARN identifier of the destination
+                            Apache Iceberg Tables. You must specify the ARN in the
+                            format arn:aws:glue:region:account-id:catalog
+                          type: string
+                        cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. See cloudwatch_logging_options block below for
+                            details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              logGroupName:
+                                description: The CloudWatch group name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                              logStreamName:
+                                description: The CloudWatch log stream name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
+                        destinationTableConfiguration:
+                          description: Destination table configurations which Firehose
+                            uses to deliver data to Apache Iceberg Tables. Firehose
+                            will write data with insert if table specific configuration
+                            is not provided. See destination_table_configuration block
+                            below for details.
+                          items:
+                            properties:
+                              databaseName:
+                                description: Specifies the name of the AWS Glue database
+                                  that contains the schema for the output data.
+                                type: string
+                              databaseNameRef:
+                                description: Reference to a CatalogDatabase in glue
+                                  to populate databaseName.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              databaseNameSelector:
+                                description: Selector for a CatalogDatabase in glue
+                                  to populate databaseName.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              s3ErrorOutputPrefix:
+                                description: The table specific S3 error output prefix.
+                                  All the errors that occurred while delivering to
+                                  this table will be prefixed with this value in S3
+                                  destination.
+                                type: string
+                              tableName:
+                                description: Specifies the AWS Glue table that contains
+                                  the column information that constitutes your data
+                                  schema.
+                                type: string
+                              tableNameRef:
+                                description: Reference to a CatalogTable in glue to
+                                  populate tableName.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              tableNameSelector:
+                                description: Selector for a CatalogTable in glue to
+                                  populate tableName.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              uniqueKeys:
+                                description: A list of unique keys for a given Apache
+                                  Iceberg table. Firehose will use these for running
+                                  Create, Update, or Delete operations on the given
+                                  Iceberg table.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        processingConfiguration:
+                          description: The data processing configuration.  See processing_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              processors:
+                                description: Specifies the data processors as multiple
+                                  blocks. See processors block below for details.
+                                items:
+                                  properties:
+                                    parameters:
+                                      description: Specifies the processor parameters
+                                        as multiple blocks. See parameters block below
+                                        for details.
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            description: 'Parameter name. Valid Values:
+                                              LambdaArn, NumberOfRetries, MetadataExtractionQuery,
+                                              JsonParsingEngine, RoleArn, BufferSizeInMBs,
+                                              BufferIntervalInSeconds, SubRecordType,
+                                              Delimiter, CompressionFormat, DataMessageExtraction.
+                                              Validation is done against AWS SDK constants;
+                                              so values not explicitly listed may
+                                              also work.'
+                                            type: string
+                                          parameterValue:
+                                            description: Parameter value. Must be
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    type:
+                                      description: 'The type of processor. Valid Values:
+                                        RecordDeAggregation, Lambda, MetadataExtraction,
+                                        AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing.
+                                        Validation is done against AWS SDK constants;
+                                        so values not explicitly listed may also work.'
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        retryDuration:
+                          description: The period of time, in seconds between 0 to
+                            7200, during which Firehose retries to deliver data to
+                            the specified destination.
+                          type: number
+                        roleArn:
+                          description: The ARN of the IAM role to be assumed by Firehose
+                            for calling Apache Iceberg Tables.
+                          type: string
+                        roleArnRef:
+                          description: Reference to a Role in iam to populate roleArn.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        roleArnSelector:
+                          description: Selector for a Role in iam to populate roleArn.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        s3BackupMode:
+                          description: |-
+                            Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+                            secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+                          type: string
+                        s3Configuration:
+                          description: The S3 Configuration. See s3_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              bucketArn:
+                                description: The ARN of the S3 bucket
+                                type: string
+                              bucketArnRef:
+                                description: Reference to a Bucket in s3 to populate
+                                  bucketArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              bucketArnSelector:
+                                description: Selector for a Bucket in s3 to populate
+                                  bucketArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              bufferingInterval:
+                                description: Buffer incoming data for the specified
+                                  period of time, in seconds between 0 to 60, before
+                                  delivering it to the destination.  The default value
+                                  is 60s.
+                                type: number
+                              bufferingSize:
+                                description: Buffer incoming data to the specified
+                                  size, in MBs between 1 to 5, before delivering it
+                                  to the destination.  The default value is 5MB.
+                                type: number
+                              cloudwatchLoggingOptions:
+                                description: The CloudWatch Logging Options for the
+                                  delivery stream. See cloudwatch_logging_options
+                                  block below for details.
+                                items:
+                                  properties:
+                                    enabled:
+                                      description: Enables or disables the logging.
+                                        Defaults to false.
+                                      type: boolean
+                                    logGroupName:
+                                      description: The CloudWatch group name for logging.
+                                        This value is required if enabled is true.
+                                      type: string
+                                    logStreamName:
+                                      description: The CloudWatch log stream name
+                                        for logging. This value is required if enabled
+                                        is true.
+                                      type: string
+                                  type: object
+                                type: array
+                              compressionFormat:
+                                description: The compression format. If no value is
+                                  specified, the default is UNCOMPRESSED. Other supported
+                                  values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+                                type: string
+                              errorOutputPrefix:
+                                description: Prefix added to failed records before
+                                  writing them to S3. Not currently supported for
+                                  redshift destination. This prefix appears immediately
+                                  following the bucket name. For information about
+                                  how to specify this prefix, see Custom Prefixes
+                                  for Amazon S3 Objects.
+                                type: string
+                              kmsKeyArn:
+                                description: |-
+                                  Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+                                  be used.
+                                type: string
+                              prefix:
+                                description: The "YYYY/MM/DD/HH" time format prefix
+                                  is automatically used for delivered S3 files. You
+                                  can specify an extra prefix to be added in front
+                                  of the time format prefix. Note that if the prefix
+                                  ends with a slash, it appears as a folder in the
+                                  S3 bucket
+                                type: string
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                              roleArnRef:
+                                description: Reference to a Role in iam to populate
+                                  roleArn.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              roleArnSelector:
+                                description: Selector for a Role in iam to populate
+                                  roleArn.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   kinesisSourceConfiguration:
                     description: The stream and role Amazon Resource Names (ARNs)
                       for a Kinesis data stream used as the source for a delivery
@@ -10741,6 +11921,218 @@ spec:
                           description: The HTTP endpoint URL to which Kinesis Firehose
                             sends your data.
                           type: string
+                      type: object
+                    type: array
+                  icebergConfiguration:
+                    description: Configuration options when destination is iceberg.
+                      See iceberg_configuration block below for details.
+                    items:
+                      properties:
+                        bufferingInterval:
+                          description: Buffer incoming data for the specified period
+                            of time, in seconds between 0 and 900, before delivering
+                            it to the destination. The default value is 300.
+                          type: number
+                        bufferingSize:
+                          description: Buffer incoming data to the specified size,
+                            in MBs between 1 and 128, before delivering it to the
+                            destination. The default value is 5.
+                          type: number
+                        catalogArn:
+                          description: Glue catalog ARN identifier of the destination
+                            Apache Iceberg Tables. You must specify the ARN in the
+                            format arn:aws:glue:region:account-id:catalog
+                          type: string
+                        cloudwatchLoggingOptions:
+                          description: The CloudWatch Logging Options for the delivery
+                            stream. See cloudwatch_logging_options block below for
+                            details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              logGroupName:
+                                description: The CloudWatch group name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                              logStreamName:
+                                description: The CloudWatch log stream name for logging.
+                                  This value is required if enabled is true.
+                                type: string
+                            type: object
+                          type: array
+                        destinationTableConfiguration:
+                          description: Destination table configurations which Firehose
+                            uses to deliver data to Apache Iceberg Tables. Firehose
+                            will write data with insert if table specific configuration
+                            is not provided. See destination_table_configuration block
+                            below for details.
+                          items:
+                            properties:
+                              databaseName:
+                                description: Specifies the name of the AWS Glue database
+                                  that contains the schema for the output data.
+                                type: string
+                              s3ErrorOutputPrefix:
+                                description: The table specific S3 error output prefix.
+                                  All the errors that occurred while delivering to
+                                  this table will be prefixed with this value in S3
+                                  destination.
+                                type: string
+                              tableName:
+                                description: Specifies the AWS Glue table that contains
+                                  the column information that constitutes your data
+                                  schema.
+                                type: string
+                              uniqueKeys:
+                                description: A list of unique keys for a given Apache
+                                  Iceberg table. Firehose will use these for running
+                                  Create, Update, or Delete operations on the given
+                                  Iceberg table.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        processingConfiguration:
+                          description: The data processing configuration.  See processing_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              enabled:
+                                description: Enables or disables the logging. Defaults
+                                  to false.
+                                type: boolean
+                              processors:
+                                description: Specifies the data processors as multiple
+                                  blocks. See processors block below for details.
+                                items:
+                                  properties:
+                                    parameters:
+                                      description: Specifies the processor parameters
+                                        as multiple blocks. See parameters block below
+                                        for details.
+                                      items:
+                                        properties:
+                                          parameterName:
+                                            description: 'Parameter name. Valid Values:
+                                              LambdaArn, NumberOfRetries, MetadataExtractionQuery,
+                                              JsonParsingEngine, RoleArn, BufferSizeInMBs,
+                                              BufferIntervalInSeconds, SubRecordType,
+                                              Delimiter, CompressionFormat, DataMessageExtraction.
+                                              Validation is done against AWS SDK constants;
+                                              so values not explicitly listed may
+                                              also work.'
+                                            type: string
+                                          parameterValue:
+                                            description: Parameter value. Must be
+                                              between 1 and 512 length (inclusive).
+                                              When providing a Lambda ARN, you should
+                                              specify the resource version as well.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    type:
+                                      description: 'The type of processor. Valid Values:
+                                        RecordDeAggregation, Lambda, MetadataExtraction,
+                                        AppendDelimiterToRecord, Decompression, CloudWatchLogProcessing.
+                                        Validation is done against AWS SDK constants;
+                                        so values not explicitly listed may also work.'
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        retryDuration:
+                          description: The period of time, in seconds between 0 to
+                            7200, during which Firehose retries to deliver data to
+                            the specified destination.
+                          type: number
+                        roleArn:
+                          description: The ARN of the IAM role to be assumed by Firehose
+                            for calling Apache Iceberg Tables.
+                          type: string
+                        s3BackupMode:
+                          description: |-
+                            Defines how documents should be delivered to Amazon S3.  Valid values are FailedEventsOnly and AllEvents.  Default value is FailedEventsOnly.
+                            secrets_manager_configuration -  The Secrets Manager configuration. See secrets_manager_configuration block below for details. This value is required if hec_token is not provided.
+                          type: string
+                        s3Configuration:
+                          description: The S3 Configuration. See s3_configuration
+                            block below for details.
+                          items:
+                            properties:
+                              bucketArn:
+                                description: The ARN of the S3 bucket
+                                type: string
+                              bufferingInterval:
+                                description: Buffer incoming data for the specified
+                                  period of time, in seconds between 0 to 60, before
+                                  delivering it to the destination.  The default value
+                                  is 60s.
+                                type: number
+                              bufferingSize:
+                                description: Buffer incoming data to the specified
+                                  size, in MBs between 1 to 5, before delivering it
+                                  to the destination.  The default value is 5MB.
+                                type: number
+                              cloudwatchLoggingOptions:
+                                description: The CloudWatch Logging Options for the
+                                  delivery stream. See cloudwatch_logging_options
+                                  block below for details.
+                                items:
+                                  properties:
+                                    enabled:
+                                      description: Enables or disables the logging.
+                                        Defaults to false.
+                                      type: boolean
+                                    logGroupName:
+                                      description: The CloudWatch group name for logging.
+                                        This value is required if enabled is true.
+                                      type: string
+                                    logStreamName:
+                                      description: The CloudWatch log stream name
+                                        for logging. This value is required if enabled
+                                        is true.
+                                      type: string
+                                  type: object
+                                type: array
+                              compressionFormat:
+                                description: The compression format. If no value is
+                                  specified, the default is UNCOMPRESSED. Other supported
+                                  values are GZIP, ZIP, Snappy, & HADOOP_SNAPPY.
+                                type: string
+                              errorOutputPrefix:
+                                description: Prefix added to failed records before
+                                  writing them to S3. Not currently supported for
+                                  redshift destination. This prefix appears immediately
+                                  following the bucket name. For information about
+                                  how to specify this prefix, see Custom Prefixes
+                                  for Amazon S3 Objects.
+                                type: string
+                              kmsKeyArn:
+                                description: |-
+                                  Specifies the KMS key ARN the stream will use to encrypt data. If not set, no encryption will
+                                  be used.
+                                type: string
+                              prefix:
+                                description: The "YYYY/MM/DD/HH" time format prefix
+                                  is automatically used for delivered S3 files. You
+                                  can specify an extra prefix to be added in front
+                                  of the time format prefix. Note that if the prefix
+                                  ends with a slash, it appears as a folder in the
+                                  S3 bucket
+                                type: string
+                              roleArn:
+                                description: The ARN of the IAM role to be assumed
+                                  by Firehose for calling the Amazon EC2 configuration
+                                  API and for creating network interfaces. Make sure
+                                  role has necessary IAM permissions
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   id:

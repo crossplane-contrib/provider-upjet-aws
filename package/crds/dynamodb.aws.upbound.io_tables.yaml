@@ -117,6 +117,25 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        onDemandThroughput:
+                          description: Sets the maximum number of read and write units
+                            for the specified on-demand table. See below.
+                          items:
+                            properties:
+                              maxReadRequestUnits:
+                                description: Maximum number of read request units
+                                  for the specified table. To specify set the value
+                                  greater than or equal to 1. To remove set the value
+                                  to -1.
+                                type: number
+                              maxWriteRequestUnits:
+                                description: Maximum number of write request units
+                                  for the specified table. To specify set the value
+                                  greater than or equal to 1. To remove set the value
+                                  to -1.
+                                type: number
+                            type: object
+                          type: array
                         projectionType:
                           description: One of ALL, INCLUDE or KEYS_ONLY where ALL
                             projects every attribute into the index, KEYS_ONLY projects  into
@@ -233,6 +252,23 @@ spec:
                         rangeKey:
                           description: Name of the range key.
                           type: string
+                      type: object
+                    type: array
+                  onDemandThroughput:
+                    description: Sets the maximum number of read and write units for
+                      the specified on-demand table. See below.
+                    items:
+                      properties:
+                        maxReadRequestUnits:
+                          description: Maximum number of read request units for the
+                            specified table. To specify set the value greater than
+                            or equal to 1. To remove set the value to -1.
+                          type: number
+                        maxWriteRequestUnits:
+                          description: Maximum number of write request units for the
+                            specified table. To specify set the value greater than
+                            or equal to 1. To remove set the value to -1.
+                          type: number
                       type: object
                     type: array
                   pointInTimeRecovery:
@@ -428,6 +464,25 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        onDemandThroughput:
+                          description: Sets the maximum number of read and write units
+                            for the specified on-demand table. See below.
+                          items:
+                            properties:
+                              maxReadRequestUnits:
+                                description: Maximum number of read request units
+                                  for the specified table. To specify set the value
+                                  greater than or equal to 1. To remove set the value
+                                  to -1.
+                                type: number
+                              maxWriteRequestUnits:
+                                description: Maximum number of write request units
+                                  for the specified table. To specify set the value
+                                  greater than or equal to 1. To remove set the value
+                                  to -1.
+                                type: number
+                            type: object
+                          type: array
                         projectionType:
                           description: One of ALL, INCLUDE or KEYS_ONLY where ALL
                             projects every attribute into the index, KEYS_ONLY projects  into
@@ -544,6 +599,23 @@ spec:
                         rangeKey:
                           description: Name of the range key.
                           type: string
+                      type: object
+                    type: array
+                  onDemandThroughput:
+                    description: Sets the maximum number of read and write units for
+                      the specified on-demand table. See below.
+                    items:
+                      properties:
+                        maxReadRequestUnits:
+                          description: Maximum number of read request units for the
+                            specified table. To specify set the value greater than
+                            or equal to 1. To remove set the value to -1.
+                          type: number
+                        maxWriteRequestUnits:
+                          description: Maximum number of write request units for the
+                            specified table. To specify set the value greater than
+                            or equal to 1. To remove set the value to -1.
+                          type: number
                       type: object
                     type: array
                   pointInTimeRecovery:
@@ -895,6 +967,25 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        onDemandThroughput:
+                          description: Sets the maximum number of read and write units
+                            for the specified on-demand table. See below.
+                          items:
+                            properties:
+                              maxReadRequestUnits:
+                                description: Maximum number of read request units
+                                  for the specified table. To specify set the value
+                                  greater than or equal to 1. To remove set the value
+                                  to -1.
+                                type: number
+                              maxWriteRequestUnits:
+                                description: Maximum number of write request units
+                                  for the specified table. To specify set the value
+                                  greater than or equal to 1. To remove set the value
+                                  to -1.
+                                type: number
+                            type: object
+                          type: array
                         projectionType:
                           description: One of ALL, INCLUDE or KEYS_ONLY where ALL
                             projects every attribute into the index, KEYS_ONLY projects  into
@@ -1014,6 +1105,23 @@ spec:
                         rangeKey:
                           description: Name of the range key.
                           type: string
+                      type: object
+                    type: array
+                  onDemandThroughput:
+                    description: Sets the maximum number of read and write units for
+                      the specified on-demand table. See below.
+                    items:
+                      properties:
+                        maxReadRequestUnits:
+                          description: Maximum number of read request units for the
+                            specified table. To specify set the value greater than
+                            or equal to 1. To remove set the value to -1.
+                          type: number
+                        maxWriteRequestUnits:
+                          description: Maximum number of write request units for the
+                            specified table. To specify set the value greater than
+                            or equal to 1. To remove set the value to -1.
+                          type: number
                       type: object
                     type: array
                   pointInTimeRecovery:

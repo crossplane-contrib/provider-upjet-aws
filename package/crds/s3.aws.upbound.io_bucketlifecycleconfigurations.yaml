@@ -348,6 +348,15 @@ spec:
                           type: array
                       type: object
                     type: array
+                  transitionDefaultMinimumObjectSize:
+                    description: 'The default minimum object size behavior applied
+                      to the lifecycle configuration. Valid values: all_storage_classes_128K
+                      (default), varies_by_storage_class. To customize the minimum
+                      object size for any transition you can add a filter that specifies
+                      a custom object_size_greater_than or object_size_less_than value.
+                      Custom filters always take precedence over the default transition
+                      behavior.'
+                    type: string
                 required:
                 - region
                 type: object
@@ -634,6 +643,15 @@ spec:
                           type: array
                       type: object
                     type: array
+                  transitionDefaultMinimumObjectSize:
+                    description: 'The default minimum object size behavior applied
+                      to the lifecycle configuration. Valid values: all_storage_classes_128K
+                      (default), varies_by_storage_class. To customize the minimum
+                      object size for any transition you can add a filter that specifies
+                      a custom object_size_greater_than or object_size_less_than value.
+                      Custom filters always take precedence over the default transition
+                      behavior.'
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -1012,6 +1030,15 @@ spec:
                           type: array
                       type: object
                     type: array
+                  transitionDefaultMinimumObjectSize:
+                    description: 'The default minimum object size behavior applied
+                      to the lifecycle configuration. Valid values: all_storage_classes_128K
+                      (default), varies_by_storage_class. To customize the minimum
+                      object size for any transition you can add a filter that specifies
+                      a custom object_size_greater_than or object_size_less_than value.
+                      Custom filters always take precedence over the default transition
+                      behavior.'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

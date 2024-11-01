@@ -73,6 +73,18 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  appsyncTarget:
+                    description: Parameters used when you are using the rule to invoke
+                      an AppSync GraphQL API mutation. Documented below. A maximum
+                      of 1 are allowed.
+                    items:
+                      properties:
+                        graphqlOperation:
+                          description: Contains the GraphQL mutation to be parsed
+                            and executed.
+                          type: string
+                      type: object
+                    type: array
                   arn:
                     description: The Amazon Resource Name (ARN) of the target.
                     type: string
@@ -778,6 +790,18 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  appsyncTarget:
+                    description: Parameters used when you are using the rule to invoke
+                      an AppSync GraphQL API mutation. Documented below. A maximum
+                      of 1 are allowed.
+                    items:
+                      properties:
+                        graphqlOperation:
+                          description: Contains the GraphQL mutation to be parsed
+                            and executed.
+                          type: string
+                      type: object
+                    type: array
                   arn:
                     description: The Amazon Resource Name (ARN) of the target.
                     type: string
@@ -1641,6 +1665,18 @@ spec:
             properties:
               atProvider:
                 properties:
+                  appsyncTarget:
+                    description: Parameters used when you are using the rule to invoke
+                      an AppSync GraphQL API mutation. Documented below. A maximum
+                      of 1 are allowed.
+                    items:
+                      properties:
+                        graphqlOperation:
+                          description: Contains the GraphQL mutation to be parsed
+                            and executed.
+                          type: string
+                      type: object
+                    type: array
                   arn:
                     description: The Amazon Resource Name (ARN) of the target.
                     type: string

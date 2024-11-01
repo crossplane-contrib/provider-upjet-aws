@@ -1090,6 +1090,32 @@ spec:
                                       description: Object path specified in the SAPOData
                                         flow destination.
                                       type: string
+                                    paginationConfig:
+                                      description: Sets the page size for each concurrent
+                                        process that transfers OData records from
+                                        your SAP instance.
+                                      items:
+                                        properties:
+                                          maxPageSize:
+                                            description: he maximum number of records
+                                              that Amazon AppFlow receives in each
+                                              page of the response from your SAP application.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    parallelismConfig:
+                                      description: Sets the number of concurrent processes
+                                        that transfers OData records from your SAP
+                                        instance.
+                                      items:
+                                        properties:
+                                          maxPageSize:
+                                            description: he maximum number of records
+                                              that Amazon AppFlow receives in each
+                                              page of the response from your SAP application.
+                                            type: number
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                               serviceNow:
@@ -2399,6 +2425,32 @@ spec:
                                       description: Object path specified in the SAPOData
                                         flow destination.
                                       type: string
+                                    paginationConfig:
+                                      description: Sets the page size for each concurrent
+                                        process that transfers OData records from
+                                        your SAP instance.
+                                      items:
+                                        properties:
+                                          maxPageSize:
+                                            description: he maximum number of records
+                                              that Amazon AppFlow receives in each
+                                              page of the response from your SAP application.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    parallelismConfig:
+                                      description: Sets the number of concurrent processes
+                                        that transfers OData records from your SAP
+                                        instance.
+                                      items:
+                                        properties:
+                                          maxPageSize:
+                                            description: he maximum number of records
+                                              that Amazon AppFlow receives in each
+                                              page of the response from your SAP application.
+                                            type: number
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                               serviceNow:
@@ -3738,6 +3790,32 @@ spec:
                                       description: Object path specified in the SAPOData
                                         flow destination.
                                       type: string
+                                    paginationConfig:
+                                      description: Sets the page size for each concurrent
+                                        process that transfers OData records from
+                                        your SAP instance.
+                                      items:
+                                        properties:
+                                          maxPageSize:
+                                            description: he maximum number of records
+                                              that Amazon AppFlow receives in each
+                                              page of the response from your SAP application.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    parallelismConfig:
+                                      description: Sets the number of concurrent processes
+                                        that transfers OData records from your SAP
+                                        instance.
+                                      items:
+                                        properties:
+                                          maxPageSize:
+                                            description: he maximum number of records
+                                              that Amazon AppFlow receives in each
+                                              page of the response from your SAP application.
+                                            type: number
+                                        type: object
+                                      type: array
                                   type: object
                                 type: array
                               serviceNow:

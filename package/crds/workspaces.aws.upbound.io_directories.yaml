@@ -162,6 +162,25 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  samlProperties:
+                    description: –  Configuration of SAML authentication integration.
+                      Defined below.
+                    items:
+                      properties:
+                        relayStateParameterName:
+                          description: The relay state parameter name supported by
+                            the SAML 2.0 identity provider (IdP). Default RelayState.
+                          type: string
+                        status:
+                          description: Status of SAML 2.0 authentication. Default
+                            DISABLED.
+                          type: string
+                        userAccessUrl:
+                          description: The SAML 2.0 identity provider (IdP) user access
+                            URL.
+                          type: string
+                      type: object
+                    type: array
                   selfServicePermissions:
                     description: service capabilities. Defined below.
                     items:
@@ -528,6 +547,25 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  samlProperties:
+                    description: –  Configuration of SAML authentication integration.
+                      Defined below.
+                    items:
+                      properties:
+                        relayStateParameterName:
+                          description: The relay state parameter name supported by
+                            the SAML 2.0 identity provider (IdP). Default RelayState.
+                          type: string
+                        status:
+                          description: Status of SAML 2.0 authentication. Default
+                            DISABLED.
+                          type: string
+                        userAccessUrl:
+                          description: The SAML 2.0 identity provider (IdP) user access
+                            URL.
+                          type: string
+                      type: object
+                    type: array
                   selfServicePermissions:
                     description: service capabilities. Defined below.
                     items:
@@ -1008,6 +1046,25 @@ spec:
                       the code that users enter in their Amazon WorkSpaces client
                       application to connect to the directory.
                     type: string
+                  samlProperties:
+                    description: –  Configuration of SAML authentication integration.
+                      Defined below.
+                    items:
+                      properties:
+                        relayStateParameterName:
+                          description: The relay state parameter name supported by
+                            the SAML 2.0 identity provider (IdP). Default RelayState.
+                          type: string
+                        status:
+                          description: Status of SAML 2.0 authentication. Default
+                            DISABLED.
+                          type: string
+                        userAccessUrl:
+                          description: The SAML 2.0 identity provider (IdP) user access
+                            URL.
+                          type: string
+                      type: object
+                    type: array
                   selfServicePermissions:
                     description: service capabilities. Defined below.
                     items:
