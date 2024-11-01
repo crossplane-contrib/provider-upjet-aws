@@ -15,7 +15,7 @@ on:
   # See also backport-trigger.yml for the /backport triggered variant of this workflow.
 
 jobs:
-  backport:
+  open-pr:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged
     steps:
