@@ -18,8 +18,8 @@ spec:
     snsTopicArnSelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    sourceIds:
-    - ${aws_redshift_cluster.default.id}
+    sourceIdsRefs:
+    - name: default
     sourceType: cluster
     tags:
       Name: default

@@ -67,8 +67,8 @@ spec:
           }
         }}
     name: ${each.value.name}
-    records:
-    - ${each.value.record}
+    recordsRefs:
+    - name: value
     region: us-west-1
     ttl: 60
     type: ${each.value.type}

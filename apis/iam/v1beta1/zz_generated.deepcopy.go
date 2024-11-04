@@ -2277,6 +2277,18 @@ func (in *RoleInitParameters) DeepCopyInto(out *RoleInitParameters) {
 			}
 		}
 	}
+	if in.ManagedPolicyArnsRefs != nil {
+		in, out := &in.ManagedPolicyArnsRefs, &out.ManagedPolicyArnsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ManagedPolicyArnsSelector != nil {
+		in, out := &in.ManagedPolicyArnsSelector, &out.ManagedPolicyArnsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MaxSessionDuration != nil {
 		in, out := &in.MaxSessionDuration, &out.MaxSessionDuration
 		*out = new(float64)
@@ -2502,6 +2514,18 @@ func (in *RoleParameters) DeepCopyInto(out *RoleParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.ManagedPolicyArnsRefs != nil {
+		in, out := &in.ManagedPolicyArnsRefs, &out.ManagedPolicyArnsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ManagedPolicyArnsSelector != nil {
+		in, out := &in.ManagedPolicyArnsSelector, &out.ManagedPolicyArnsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MaxSessionDuration != nil {
 		in, out := &in.MaxSessionDuration, &out.MaxSessionDuration
