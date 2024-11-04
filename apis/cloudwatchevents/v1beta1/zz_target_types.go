@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppsyncTargetInitParameters struct {
+
+	// Contains the GraphQL mutation to be parsed and executed.
+	GraphQLOperation *string `json:"graphqlOperation,omitempty" tf:"graphql_operation,omitempty"`
+}
+
+type AppsyncTargetObservation struct {
+
+	// Contains the GraphQL mutation to be parsed and executed.
+	GraphQLOperation *string `json:"graphqlOperation,omitempty" tf:"graphql_operation,omitempty"`
+}
+
+type AppsyncTargetParameters struct {
+
+	// Contains the GraphQL mutation to be parsed and executed.
+	// +kubebuilder:validation:Optional
+	GraphQLOperation *string `json:"graphqlOperation,omitempty" tf:"graphql_operation,omitempty"`
+}
+
 type BatchTargetInitParameters struct {
 
 	// The size of the array, if this is an array batch job. Valid values are integers between 2 and 10,000.
@@ -677,6 +696,9 @@ type SqsTargetParameters struct {
 
 type TargetInitParameters struct {
 
+	// Parameters used when you are using the rule to invoke an AppSync GraphQL API mutation. Documented below. A maximum of 1 are allowed.
+	AppsyncTarget []AppsyncTargetInitParameters `json:"appsyncTarget,omitempty" tf:"appsync_target,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the target.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -766,6 +788,9 @@ type TargetInitParameters struct {
 
 type TargetObservation struct {
 
+	// Parameters used when you are using the rule to invoke an AppSync GraphQL API mutation. Documented below. A maximum of 1 are allowed.
+	AppsyncTarget []AppsyncTargetObservation `json:"appsyncTarget,omitempty" tf:"appsync_target,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the target.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
@@ -828,6 +853,10 @@ type TargetObservation struct {
 }
 
 type TargetParameters struct {
+
+	// Parameters used when you are using the rule to invoke an AppSync GraphQL API mutation. Documented below. A maximum of 1 are allowed.
+	// +kubebuilder:validation:Optional
+	AppsyncTarget []AppsyncTargetParameters `json:"appsyncTarget,omitempty" tf:"appsync_target,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the target.
 	// +kubebuilder:validation:Optional

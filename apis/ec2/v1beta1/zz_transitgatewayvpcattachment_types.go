@@ -24,6 +24,9 @@ type TransitGatewayVPCAttachmentInitParameters struct {
 	// Whether IPv6 support is enabled. Valid values: disable, enable. Default value: disable.
 	IPv6Support *string `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 
+	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable.
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
+
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional
 	SubnetIDRefs []v1.Reference `json:"subnetIdRefs,omitempty" tf:"-"`
@@ -88,6 +91,9 @@ type TransitGatewayVPCAttachmentObservation struct {
 	// Whether IPv6 support is enabled. Valid values: disable, enable. Default value: disable.
 	IPv6Support *string `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 
+	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable.
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
+
 	// Identifiers of EC2 Subnets.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -134,6 +140,10 @@ type TransitGatewayVPCAttachmentParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable.
+	// +kubebuilder:validation:Optional
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
 
 	// References to Subnet in ec2 to populate subnetIds.
 	// +kubebuilder:validation:Optional

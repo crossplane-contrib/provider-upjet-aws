@@ -1721,6 +1721,7 @@ type NetworkInterfacesInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 
 	// The primary private IPv4 address.
@@ -1811,6 +1812,7 @@ type NetworkInterfacesObservation struct {
 	// The ID of the network interface to attach.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 
 	// The primary private IPv4 address.
@@ -1906,6 +1908,7 @@ type NetworkInterfacesParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	// +kubebuilder:validation:Optional
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 

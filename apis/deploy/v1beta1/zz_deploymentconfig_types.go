@@ -23,6 +23,9 @@ type DeploymentConfigInitParameters struct {
 
 	// A traffic_routing_config block. Traffic Routing Config is documented below.
 	TrafficRoutingConfig []TrafficRoutingConfigInitParameters `json:"trafficRoutingConfig,omitempty" tf:"traffic_routing_config,omitempty"`
+
+	// A zonal_config block. Zonal Config is documented below.
+	ZonalConfig []ZonalConfigInitParameters `json:"zonalConfig,omitempty" tf:"zonal_config,omitempty"`
 }
 
 type DeploymentConfigObservation struct {
@@ -44,6 +47,9 @@ type DeploymentConfigObservation struct {
 
 	// A traffic_routing_config block. Traffic Routing Config is documented below.
 	TrafficRoutingConfig []TrafficRoutingConfigObservation `json:"trafficRoutingConfig,omitempty" tf:"traffic_routing_config,omitempty"`
+
+	// A zonal_config block. Zonal Config is documented below.
+	ZonalConfig []ZonalConfigObservation `json:"zonalConfig,omitempty" tf:"zonal_config,omitempty"`
 }
 
 type DeploymentConfigParameters struct {
@@ -64,6 +70,10 @@ type DeploymentConfigParameters struct {
 	// A traffic_routing_config block. Traffic Routing Config is documented below.
 	// +kubebuilder:validation:Optional
 	TrafficRoutingConfig []TrafficRoutingConfigParameters `json:"trafficRoutingConfig,omitempty" tf:"traffic_routing_config,omitempty"`
+
+	// A zonal_config block. Zonal Config is documented below.
+	// +kubebuilder:validation:Optional
+	ZonalConfig []ZonalConfigParameters `json:"zonalConfig,omitempty" tf:"zonal_config,omitempty"`
 }
 
 type MinimumHealthyHostsInitParameters struct {
@@ -100,6 +110,35 @@ type MinimumHealthyHostsParameters struct {
 	// a percentage of the total number of instances in the deployment. If you specify FLEET_PERCENT, at the start of the
 	// deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances.
 	// When the type is HOST_COUNT, the value represents the minimum number of healthy instances as an absolute value.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MinimumHealthyHostsPerZoneInitParameters struct {
+
+	// The type can either be FLEET_PERCENT or HOST_COUNT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value when the type is FLEET_PERCENT represents the minimum number of healthy instances as a percentage of the total number of instances in the Availability Zone during a deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances. When the type is HOST_COUNT, the value represents the minimum number of healthy instances in the Availability Zone as an absolute value.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MinimumHealthyHostsPerZoneObservation struct {
+
+	// The type can either be FLEET_PERCENT or HOST_COUNT.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value when the type is FLEET_PERCENT represents the minimum number of healthy instances as a percentage of the total number of instances in the Availability Zone during a deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances. When the type is HOST_COUNT, the value represents the minimum number of healthy instances in the Availability Zone as an absolute value.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MinimumHealthyHostsPerZoneParameters struct {
+
+	// The type can either be FLEET_PERCENT or HOST_COUNT.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value when the type is FLEET_PERCENT represents the minimum number of healthy instances as a percentage of the total number of instances in the Availability Zone during a deployment. If you specify FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy converts the percentage to the equivalent number of instance and rounds up fractional instances. When the type is HOST_COUNT, the value represents the minimum number of healthy instances in the Availability Zone as an absolute value.
 	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
@@ -260,4 +299,43 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&DeploymentConfig{}, &DeploymentConfigList{})
+}
+
+type ZonalConfigInitParameters struct {
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing a deployment to the first Availability Zone. CodeDeploy will wait this amount of time before starting a deployment to the second Availability Zone. If you don't specify a value for first_zone_monitor_duration_in_seconds, then CodeDeploy uses the monitor_duration_in_seconds value for the first Availability Zone.
+	FirstZoneMonitorDurationInSeconds *float64 `json:"firstZoneMonitorDurationInSeconds,omitempty" tf:"first_zone_monitor_duration_in_seconds,omitempty"`
+
+	// The number or percentage of instances that must remain available per Availability Zone during a deployment. If you don't specify a value under minimum_healthy_hosts_per_zone, then CodeDeploy uses a default value of 0 percent. This block is more documented below.
+	MinimumHealthyHostsPerZone []MinimumHealthyHostsPerZoneInitParameters `json:"minimumHealthyHostsPerZone,omitempty" tf:"minimum_healthy_hosts_per_zone,omitempty"`
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing a deployment to an Availability Zone. CodeDeploy will wait this amount of time before starting a deployment to the next Availability Zone. If you don't specify a monitor_duration_in_seconds, CodeDeploy starts deploying to the next Availability Zone immediately.
+	MonitorDurationInSeconds *float64 `json:"monitorDurationInSeconds,omitempty" tf:"monitor_duration_in_seconds,omitempty"`
+}
+
+type ZonalConfigObservation struct {
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing a deployment to the first Availability Zone. CodeDeploy will wait this amount of time before starting a deployment to the second Availability Zone. If you don't specify a value for first_zone_monitor_duration_in_seconds, then CodeDeploy uses the monitor_duration_in_seconds value for the first Availability Zone.
+	FirstZoneMonitorDurationInSeconds *float64 `json:"firstZoneMonitorDurationInSeconds,omitempty" tf:"first_zone_monitor_duration_in_seconds,omitempty"`
+
+	// The number or percentage of instances that must remain available per Availability Zone during a deployment. If you don't specify a value under minimum_healthy_hosts_per_zone, then CodeDeploy uses a default value of 0 percent. This block is more documented below.
+	MinimumHealthyHostsPerZone []MinimumHealthyHostsPerZoneObservation `json:"minimumHealthyHostsPerZone,omitempty" tf:"minimum_healthy_hosts_per_zone,omitempty"`
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing a deployment to an Availability Zone. CodeDeploy will wait this amount of time before starting a deployment to the next Availability Zone. If you don't specify a monitor_duration_in_seconds, CodeDeploy starts deploying to the next Availability Zone immediately.
+	MonitorDurationInSeconds *float64 `json:"monitorDurationInSeconds,omitempty" tf:"monitor_duration_in_seconds,omitempty"`
+}
+
+type ZonalConfigParameters struct {
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing a deployment to the first Availability Zone. CodeDeploy will wait this amount of time before starting a deployment to the second Availability Zone. If you don't specify a value for first_zone_monitor_duration_in_seconds, then CodeDeploy uses the monitor_duration_in_seconds value for the first Availability Zone.
+	// +kubebuilder:validation:Optional
+	FirstZoneMonitorDurationInSeconds *float64 `json:"firstZoneMonitorDurationInSeconds,omitempty" tf:"first_zone_monitor_duration_in_seconds,omitempty"`
+
+	// The number or percentage of instances that must remain available per Availability Zone during a deployment. If you don't specify a value under minimum_healthy_hosts_per_zone, then CodeDeploy uses a default value of 0 percent. This block is more documented below.
+	// +kubebuilder:validation:Optional
+	MinimumHealthyHostsPerZone []MinimumHealthyHostsPerZoneParameters `json:"minimumHealthyHostsPerZone,omitempty" tf:"minimum_healthy_hosts_per_zone,omitempty"`
+
+	// The period of time, in seconds, that CodeDeploy must wait after completing a deployment to an Availability Zone. CodeDeploy will wait this amount of time before starting a deployment to the next Availability Zone. If you don't specify a monitor_duration_in_seconds, CodeDeploy starts deploying to the next Availability Zone immediately.
+	// +kubebuilder:validation:Optional
+	MonitorDurationInSeconds *float64 `json:"monitorDurationInSeconds,omitempty" tf:"monitor_duration_in_seconds,omitempty"`
 }

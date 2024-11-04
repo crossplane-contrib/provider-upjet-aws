@@ -104,6 +104,9 @@ type BucketLifecycleConfigurationInitParameters struct {
 
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketLifecycleConfigurationRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
+	TransitionDefaultMinimumObjectSize *string `json:"transitionDefaultMinimumObjectSize,omitempty" tf:"transition_default_minimum_object_size,omitempty"`
 }
 
 type BucketLifecycleConfigurationObservation struct {
@@ -119,6 +122,9 @@ type BucketLifecycleConfigurationObservation struct {
 
 	// List of configuration blocks describing the rules managing the replication. See below.
 	Rule []BucketLifecycleConfigurationRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
+	TransitionDefaultMinimumObjectSize *string `json:"transitionDefaultMinimumObjectSize,omitempty" tf:"transition_default_minimum_object_size,omitempty"`
 }
 
 type BucketLifecycleConfigurationParameters struct {
@@ -149,6 +155,10 @@ type BucketLifecycleConfigurationParameters struct {
 	// List of configuration blocks describing the rules managing the replication. See below.
 	// +kubebuilder:validation:Optional
 	Rule []BucketLifecycleConfigurationRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The default minimum object size behavior applied to the lifecycle configuration. Valid values: all_storage_classes_128K (default), varies_by_storage_class. To customize the minimum object size for any transition you can add a filter that specifies a custom object_size_greater_than or object_size_less_than value. Custom filters always take precedence over the default transition behavior.
+	// +kubebuilder:validation:Optional
+	TransitionDefaultMinimumObjectSize *string `json:"transitionDefaultMinimumObjectSize,omitempty" tf:"transition_default_minimum_object_size,omitempty"`
 }
 
 type BucketLifecycleConfigurationRuleInitParameters struct {

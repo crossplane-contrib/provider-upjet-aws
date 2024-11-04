@@ -10182,6 +10182,11 @@ func (in *EIPInitParameters) DeepCopyInto(out *EIPInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.IpamPoolID != nil {
+		in, out := &in.IpamPoolID, &out.IpamPoolID
+		*out = new(string)
+		**out = **in
+	}
 	if in.NetworkBorderGroup != nil {
 		in, out := &in.NetworkBorderGroup, &out.NetworkBorderGroup
 		*out = new(string)
@@ -10330,6 +10335,11 @@ func (in *EIPObservation) DeepCopyInto(out *EIPObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IpamPoolID != nil {
+		in, out := &in.IpamPoolID, &out.IpamPoolID
+		*out = new(string)
+		**out = **in
+	}
 	if in.NetworkBorderGroup != nil {
 		in, out := &in.NetworkBorderGroup, &out.NetworkBorderGroup
 		*out = new(string)
@@ -10456,6 +10466,11 @@ func (in *EIPParameters) DeepCopyInto(out *EIPParameters) {
 		in, out := &in.InstanceSelector, &out.InstanceSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.IpamPoolID != nil {
+		in, out := &in.IpamPoolID, &out.IpamPoolID
+		*out = new(string)
+		**out = **in
 	}
 	if in.NetworkBorderGroup != nil {
 		in, out := &in.NetworkBorderGroup, &out.NetworkBorderGroup
@@ -43115,6 +43130,11 @@ func (in *TransitGatewayInitParameters_2) DeepCopyInto(out *TransitGatewayInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -44309,6 +44329,11 @@ func (in *TransitGatewayObservation_2) DeepCopyInto(out *TransitGatewayObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -44424,6 +44449,11 @@ func (in *TransitGatewayParameters_2) DeepCopyInto(out *TransitGatewayParameters
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
 		*out = new(string)
 		**out = **in
 	}
@@ -46929,6 +46959,11 @@ func (in *TransitGatewayVPCAttachmentAccepterObservation) DeepCopyInto(out *Tran
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -47128,6 +47163,11 @@ func (in *TransitGatewayVPCAttachmentInitParameters) DeepCopyInto(out *TransitGa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetIDRefs != nil {
 		in, out := &in.SubnetIDRefs, &out.SubnetIDRefs
 		*out = make([]v1.Reference, len(*in))
@@ -47274,6 +47314,11 @@ func (in *TransitGatewayVPCAttachmentObservation) DeepCopyInto(out *TransitGatew
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -47374,6 +47419,11 @@ func (in *TransitGatewayVPCAttachmentParameters) DeepCopyInto(out *TransitGatewa
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecurityGroupReferencingSupport != nil {
+		in, out := &in.SecurityGroupReferencingSupport, &out.SecurityGroupReferencingSupport
 		*out = new(string)
 		**out = **in
 	}
@@ -50900,6 +50950,11 @@ func (in *VPCIpamInitParameters) DeepCopyInto(out *VPCIpamInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnablePrivateGua != nil {
+		in, out := &in.EnablePrivateGua, &out.EnablePrivateGua
+		*out = new(bool)
+		**out = **in
+	}
 	if in.OperatingRegions != nil {
 		in, out := &in.OperatingRegions, &out.OperatingRegions
 		*out = make([]OperatingRegionsInitParameters, len(*in))
@@ -51000,6 +51055,11 @@ func (in *VPCIpamObservation) DeepCopyInto(out *VPCIpamObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EnablePrivateGua != nil {
+		in, out := &in.EnablePrivateGua, &out.EnablePrivateGua
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -51087,6 +51147,11 @@ func (in *VPCIpamParameters) DeepCopyInto(out *VPCIpamParameters) {
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
+		**out = **in
+	}
+	if in.EnablePrivateGua != nil {
+		in, out := &in.EnablePrivateGua, &out.EnablePrivateGua
+		*out = new(bool)
 		**out = **in
 	}
 	if in.OperatingRegions != nil {

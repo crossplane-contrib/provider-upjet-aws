@@ -162,6 +162,17 @@ spec:
                   foundationModel:
                     description: Foundation model used for orchestration by the agent.
                     type: string
+                  guardrailConfiguration:
+                    items:
+                      properties:
+                        guardrailIdentifier:
+                          description: Unique identifier of the guardrail.
+                          type: string
+                        guardrailVersion:
+                          description: Version of the guardrail.
+                          type: string
+                      type: object
+                    type: array
                   idleSessionTtlInSeconds:
                     description: Number of seconds for which Amazon Bedrock keeps
                       information about a user's conversation with the agent. A user
@@ -395,6 +406,17 @@ spec:
                   foundationModel:
                     description: Foundation model used for orchestration by the agent.
                     type: string
+                  guardrailConfiguration:
+                    items:
+                      properties:
+                        guardrailIdentifier:
+                          description: Unique identifier of the guardrail.
+                          type: string
+                        guardrailVersion:
+                          description: Version of the guardrail.
+                          type: string
+                      type: object
+                    type: array
                   idleSessionTtlInSeconds:
                     description: Number of seconds for which Amazon Bedrock keeps
                       information about a user's conversation with the agent. A user
@@ -725,6 +747,17 @@ spec:
                   foundationModel:
                     description: Foundation model used for orchestration by the agent.
                     type: string
+                  guardrailConfiguration:
+                    items:
+                      properties:
+                        guardrailIdentifier:
+                          description: Unique identifier of the guardrail.
+                          type: string
+                        guardrailVersion:
+                          description: Version of the guardrail.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: Unique identifier of the agent.
                     type: string

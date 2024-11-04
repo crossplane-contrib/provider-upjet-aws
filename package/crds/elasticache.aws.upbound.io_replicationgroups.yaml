@@ -1893,7 +1893,7 @@ spec:
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
-                      Only supported for engine type "redis" and if the engine version is 6 or higher.
+                      Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
                       Defaults to true.
                     type: string
                   automaticFailoverEnabled:
@@ -1918,7 +1918,7 @@ spec:
                     type: string
                   engine:
                     description: Name of the cache engine to be used for the clusters
-                      in this replication group. The only valid value is redis.
+                      in this replication group. Valid values are redis or valkey.
                     type: string
                   engineVersion:
                     description: |-
@@ -2102,9 +2102,10 @@ spec:
                         type: object
                     type: object
                   logDeliveryConfiguration:
-                    description: Specifies the destination and format of Redis SLOWLOG
-                      or Redis Engine Log. See the documentation on Amazon ElastiCache.
-                      See Log Delivery Configuration below for more details.
+                    description: Specifies the destination and format of Redis OSS/Valkey
+                      SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation
+                      on Amazon ElastiCache. See Log Delivery Configuration below
+                      for more details.
                     items:
                       properties:
                         destination:
@@ -2471,7 +2472,7 @@ spec:
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
-                      Only supported for engine type "redis" and if the engine version is 6 or higher.
+                      Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
                       Defaults to true.
                     type: string
                   automaticFailoverEnabled:
@@ -2496,7 +2497,7 @@ spec:
                     type: string
                   engine:
                     description: Name of the cache engine to be used for the clusters
-                      in this replication group. The only valid value is redis.
+                      in this replication group. Valid values are redis or valkey.
                     type: string
                   engineVersion:
                     description: |-
@@ -2680,9 +2681,10 @@ spec:
                         type: object
                     type: object
                   logDeliveryConfiguration:
-                    description: Specifies the destination and format of Redis SLOWLOG
-                      or Redis Engine Log. See the documentation on Amazon ElastiCache.
-                      See Log Delivery Configuration below for more details.
+                    description: Specifies the destination and format of Redis OSS/Valkey
+                      SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation
+                      on Amazon ElastiCache. See Log Delivery Configuration below
+                      for more details.
                     items:
                       properties:
                         destination:
@@ -3191,7 +3193,7 @@ spec:
                   autoMinorVersionUpgrade:
                     description: |-
                       Specifies whether minor version engine upgrades will be applied automatically to the underlying Cache Cluster instances during the maintenance window.
-                      Only supported for engine type "redis" and if the engine version is 6 or higher.
+                      Only supported for engine types "redis" and "valkey" and if the engine version is 6 or higher.
                       Defaults to true.
                     type: string
                   automaticFailoverEnabled:
@@ -3223,7 +3225,7 @@ spec:
                     type: string
                   engine:
                     description: Name of the cache engine to be used for the clusters
-                      in this replication group. The only valid value is redis.
+                      in this replication group. Valid values are redis or valkey.
                     type: string
                   engineVersion:
                     description: |-
@@ -3265,9 +3267,10 @@ spec:
                       be specified only if at_rest_encryption_enabled = true.
                     type: string
                   logDeliveryConfiguration:
-                    description: Specifies the destination and format of Redis SLOWLOG
-                      or Redis Engine Log. See the documentation on Amazon ElastiCache.
-                      See Log Delivery Configuration below for more details.
+                    description: Specifies the destination and format of Redis OSS/Valkey
+                      SLOWLOG or Redis OSS/Valkey Engine Log. See the documentation
+                      on Amazon ElastiCache. See Log Delivery Configuration below
+                      for more details.
                     items:
                       properties:
                         destination:

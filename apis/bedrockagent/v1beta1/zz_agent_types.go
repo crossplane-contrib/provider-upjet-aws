@@ -40,6 +40,8 @@ type AgentInitParameters struct {
 	// Foundation model used for orchestration by the agent.
 	FoundationModel *string `json:"foundationModel,omitempty" tf:"foundation_model,omitempty"`
 
+	GuardrailConfiguration []GuardrailConfigurationInitParameters `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
+
 	// Number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
@@ -85,6 +87,8 @@ type AgentObservation struct {
 
 	// Foundation model used for orchestration by the agent.
 	FoundationModel *string `json:"foundationModel,omitempty" tf:"foundation_model,omitempty"`
+
+	GuardrailConfiguration []GuardrailConfigurationObservation `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
 	// Unique identifier of the agent.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -145,6 +149,9 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	FoundationModel *string `json:"foundationModel,omitempty" tf:"foundation_model,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	GuardrailConfiguration []GuardrailConfigurationParameters `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
+
 	// Number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
 	// +kubebuilder:validation:Optional
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
@@ -174,6 +181,35 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type GuardrailConfigurationInitParameters struct {
+
+	// Unique identifier of the guardrail.
+	GuardrailIdentifier *string `json:"guardrailIdentifier,omitempty" tf:"guardrail_identifier"`
+
+	// Version of the guardrail.
+	GuardrailVersion *string `json:"guardrailVersion,omitempty" tf:"guardrail_version"`
+}
+
+type GuardrailConfigurationObservation struct {
+
+	// Unique identifier of the guardrail.
+	GuardrailIdentifier *string `json:"guardrailIdentifier,omitempty" tf:"guardrail_identifier,omitempty"`
+
+	// Version of the guardrail.
+	GuardrailVersion *string `json:"guardrailVersion,omitempty" tf:"guardrail_version,omitempty"`
+}
+
+type GuardrailConfigurationParameters struct {
+
+	// Unique identifier of the guardrail.
+	// +kubebuilder:validation:Optional
+	GuardrailIdentifier *string `json:"guardrailIdentifier,omitempty" tf:"guardrail_identifier"`
+
+	// Version of the guardrail.
+	// +kubebuilder:validation:Optional
+	GuardrailVersion *string `json:"guardrailVersion,omitempty" tf:"guardrail_version"`
 }
 
 type InferenceConfigurationInitParameters struct {

@@ -461,6 +461,9 @@ type LBListenerInitParameters struct {
 	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
+	// TCP idle timeout value in seconds. Can only be set if protocol is TCP on Network Load Balancer, or with a Gateway Load Balancer. Not supported for Application Load Balancers. Valid values are between 60 and 6000 inclusive. Default: 350.
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -497,6 +500,9 @@ type LBListenerObservation struct {
 
 	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
+
+	// TCP idle timeout value in seconds. Can only be set if protocol is TCP on Network Load Balancer, or with a Gateway Load Balancer. Not supported for Application Load Balancers. Valid values are between 60 and 6000 inclusive. Default: 350.
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -554,6 +560,10 @@ type LBListenerParameters struct {
 	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
 	// +kubebuilder:validation:Optional
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
+
+	// TCP idle timeout value in seconds. Can only be set if protocol is TCP on Network Load Balancer, or with a Gateway Load Balancer. Not supported for Application Load Balancers. Valid values are between 60 and 6000 inclusive. Default: 350.
+	// +kubebuilder:validation:Optional
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

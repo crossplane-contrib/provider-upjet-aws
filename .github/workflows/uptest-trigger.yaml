@@ -9,7 +9,6 @@ on:
     types: [created]
 
 env:
-  TRIGGER_KEYWORD: "/test-examples"
   GO_VERSION: "1.22"
 
 jobs:
@@ -18,14 +17,14 @@ jobs:
     steps:
       - name: Debug
         run: |
-          echo "Trigger keyword: ${{ env.TRIGGER_KEYWORD }}"
+          echo "Trigger keyword: '/test-examples'"
           echo "Go version: ${{ env.GO_VERSION }}"
           echo "github.event.comment.author_association: ${{ github.event.comment.author_association }}"
 
   get-example-list:
     if: ${{ (github.event.comment.author_association == 'OWNER' || github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'COLLABORATOR' || github.event.comment.author_association == 'CONTRIBUTOR' ) &&
       github.event.issue.pull_request &&
-      contains(github.event.comment.body, env.TRIGGER_KEYWORD ) }}
+      contains(github.event.comment.body, '/test-examples' ) }}
     runs-on: ubuntu-latest
     outputs:
       example_list: ${{ steps.get-example-list-name.outputs.example-list }}
@@ -82,7 +81,7 @@ jobs:
   uptest:
     if: ${{ (github.event.comment.author_association == 'OWNER' || github.event.comment.author_association == 'MEMBER' || github.event.comment.author_association == 'COLLABORATOR' || github.event.comment.author_association == 'CONTRIBUTOR' ) &&
       github.event.issue.pull_request &&
-      contains(github.event.comment.body, env.TRIGGER_KEYWORD ) }}
+      contains(github.event.comment.body, '/test-examples' ) }}
     runs-on: ubuntu-latest
     needs: get-example-list
 

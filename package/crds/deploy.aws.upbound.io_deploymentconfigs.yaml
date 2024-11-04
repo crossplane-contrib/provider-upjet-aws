@@ -139,6 +139,56 @@ spec:
                           type: string
                       type: object
                     type: array
+                  zonalConfig:
+                    description: A zonal_config block. Zonal Config is documented
+                      below.
+                    items:
+                      properties:
+                        firstZoneMonitorDurationInSeconds:
+                          description: The period of time, in seconds, that CodeDeploy
+                            must wait after completing a deployment to the first Availability
+                            Zone. CodeDeploy will wait this amount of time before
+                            starting a deployment to the second Availability Zone.
+                            If you don't specify a value for first_zone_monitor_duration_in_seconds,
+                            then CodeDeploy uses the monitor_duration_in_seconds value
+                            for the first Availability Zone.
+                          type: number
+                        minimumHealthyHostsPerZone:
+                          description: The number or percentage of instances that
+                            must remain available per Availability Zone during a deployment.
+                            If you don't specify a value under minimum_healthy_hosts_per_zone,
+                            then CodeDeploy uses a default value of 0 percent. This
+                            block is more documented below.
+                          items:
+                            properties:
+                              type:
+                                description: The type can either be FLEET_PERCENT
+                                  or HOST_COUNT.
+                                type: string
+                              value:
+                                description: The value when the type is FLEET_PERCENT
+                                  represents the minimum number of healthy instances
+                                  as a percentage of the total number of instances
+                                  in the Availability Zone during a deployment. If
+                                  you specify FLEET_PERCENT, at the start of the deployment,
+                                  AWS CodeDeploy converts the percentage to the equivalent
+                                  number of instance and rounds up fractional instances.
+                                  When the type is HOST_COUNT, the value represents
+                                  the minimum number of healthy instances in the Availability
+                                  Zone as an absolute value.
+                                type: number
+                            type: object
+                          type: array
+                        monitorDurationInSeconds:
+                          description: The period of time, in seconds, that CodeDeploy
+                            must wait after completing a deployment to an Availability
+                            Zone. CodeDeploy will wait this amount of time before
+                            starting a deployment to the next Availability Zone. If
+                            you don't specify a monitor_duration_in_seconds, CodeDeploy
+                            starts deploying to the next Availability Zone immediately.
+                          type: number
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -215,6 +265,56 @@ spec:
                           description: Type of traffic routing config. One of TimeBasedCanary,
                             TimeBasedLinear, AllAtOnce.
                           type: string
+                      type: object
+                    type: array
+                  zonalConfig:
+                    description: A zonal_config block. Zonal Config is documented
+                      below.
+                    items:
+                      properties:
+                        firstZoneMonitorDurationInSeconds:
+                          description: The period of time, in seconds, that CodeDeploy
+                            must wait after completing a deployment to the first Availability
+                            Zone. CodeDeploy will wait this amount of time before
+                            starting a deployment to the second Availability Zone.
+                            If you don't specify a value for first_zone_monitor_duration_in_seconds,
+                            then CodeDeploy uses the monitor_duration_in_seconds value
+                            for the first Availability Zone.
+                          type: number
+                        minimumHealthyHostsPerZone:
+                          description: The number or percentage of instances that
+                            must remain available per Availability Zone during a deployment.
+                            If you don't specify a value under minimum_healthy_hosts_per_zone,
+                            then CodeDeploy uses a default value of 0 percent. This
+                            block is more documented below.
+                          items:
+                            properties:
+                              type:
+                                description: The type can either be FLEET_PERCENT
+                                  or HOST_COUNT.
+                                type: string
+                              value:
+                                description: The value when the type is FLEET_PERCENT
+                                  represents the minimum number of healthy instances
+                                  as a percentage of the total number of instances
+                                  in the Availability Zone during a deployment. If
+                                  you specify FLEET_PERCENT, at the start of the deployment,
+                                  AWS CodeDeploy converts the percentage to the equivalent
+                                  number of instance and rounds up fractional instances.
+                                  When the type is HOST_COUNT, the value represents
+                                  the minimum number of healthy instances in the Availability
+                                  Zone as an absolute value.
+                                type: number
+                            type: object
+                          type: array
+                        monitorDurationInSeconds:
+                          description: The period of time, in seconds, that CodeDeploy
+                            must wait after completing a deployment to an Availability
+                            Zone. CodeDeploy will wait this amount of time before
+                            starting a deployment to the next Availability Zone. If
+                            you don't specify a monitor_duration_in_seconds, CodeDeploy
+                            starts deploying to the next Availability Zone immediately.
+                          type: number
                       type: object
                     type: array
                 type: object
@@ -459,6 +559,56 @@ spec:
                           description: Type of traffic routing config. One of TimeBasedCanary,
                             TimeBasedLinear, AllAtOnce.
                           type: string
+                      type: object
+                    type: array
+                  zonalConfig:
+                    description: A zonal_config block. Zonal Config is documented
+                      below.
+                    items:
+                      properties:
+                        firstZoneMonitorDurationInSeconds:
+                          description: The period of time, in seconds, that CodeDeploy
+                            must wait after completing a deployment to the first Availability
+                            Zone. CodeDeploy will wait this amount of time before
+                            starting a deployment to the second Availability Zone.
+                            If you don't specify a value for first_zone_monitor_duration_in_seconds,
+                            then CodeDeploy uses the monitor_duration_in_seconds value
+                            for the first Availability Zone.
+                          type: number
+                        minimumHealthyHostsPerZone:
+                          description: The number or percentage of instances that
+                            must remain available per Availability Zone during a deployment.
+                            If you don't specify a value under minimum_healthy_hosts_per_zone,
+                            then CodeDeploy uses a default value of 0 percent. This
+                            block is more documented below.
+                          items:
+                            properties:
+                              type:
+                                description: The type can either be FLEET_PERCENT
+                                  or HOST_COUNT.
+                                type: string
+                              value:
+                                description: The value when the type is FLEET_PERCENT
+                                  represents the minimum number of healthy instances
+                                  as a percentage of the total number of instances
+                                  in the Availability Zone during a deployment. If
+                                  you specify FLEET_PERCENT, at the start of the deployment,
+                                  AWS CodeDeploy converts the percentage to the equivalent
+                                  number of instance and rounds up fractional instances.
+                                  When the type is HOST_COUNT, the value represents
+                                  the minimum number of healthy instances in the Availability
+                                  Zone as an absolute value.
+                                type: number
+                            type: object
+                          type: array
+                        monitorDurationInSeconds:
+                          description: The period of time, in seconds, that CodeDeploy
+                            must wait after completing a deployment to an Availability
+                            Zone. CodeDeploy will wait this amount of time before
+                            starting a deployment to the next Availability Zone. If
+                            you don't specify a monitor_duration_in_seconds, CodeDeploy
+                            starts deploying to the next Availability Zone immediately.
+                          type: number
                       type: object
                     type: array
                 type: object
@@ -636,6 +786,51 @@ spec:
                           TimeBasedLinear, AllAtOnce.
                         type: string
                     type: object
+                  zonalConfig:
+                    description: A zonal_config block. Zonal Config is documented
+                      below.
+                    properties:
+                      firstZoneMonitorDurationInSeconds:
+                        description: The period of time, in seconds, that CodeDeploy
+                          must wait after completing a deployment to the first Availability
+                          Zone. CodeDeploy will wait this amount of time before starting
+                          a deployment to the second Availability Zone. If you don't
+                          specify a value for first_zone_monitor_duration_in_seconds,
+                          then CodeDeploy uses the monitor_duration_in_seconds value
+                          for the first Availability Zone.
+                        type: number
+                      minimumHealthyHostsPerZone:
+                        description: The number or percentage of instances that must
+                          remain available per Availability Zone during a deployment.
+                          If you don't specify a value under minimum_healthy_hosts_per_zone,
+                          then CodeDeploy uses a default value of 0 percent. This
+                          block is more documented below.
+                        properties:
+                          type:
+                            description: The type can either be FLEET_PERCENT or HOST_COUNT.
+                            type: string
+                          value:
+                            description: The value when the type is FLEET_PERCENT
+                              represents the minimum number of healthy instances as
+                              a percentage of the total number of instances in the
+                              Availability Zone during a deployment. If you specify
+                              FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy
+                              converts the percentage to the equivalent number of
+                              instance and rounds up fractional instances. When the
+                              type is HOST_COUNT, the value represents the minimum
+                              number of healthy instances in the Availability Zone
+                              as an absolute value.
+                            type: number
+                        type: object
+                      monitorDurationInSeconds:
+                        description: The period of time, in seconds, that CodeDeploy
+                          must wait after completing a deployment to an Availability
+                          Zone. CodeDeploy will wait this amount of time before starting
+                          a deployment to the next Availability Zone. If you don't
+                          specify a monitor_duration_in_seconds, CodeDeploy starts
+                          deploying to the next Availability Zone immediately.
+                        type: number
+                    type: object
                 required:
                 - region
                 type: object
@@ -705,6 +900,51 @@ spec:
                         description: Type of traffic routing config. One of TimeBasedCanary,
                           TimeBasedLinear, AllAtOnce.
                         type: string
+                    type: object
+                  zonalConfig:
+                    description: A zonal_config block. Zonal Config is documented
+                      below.
+                    properties:
+                      firstZoneMonitorDurationInSeconds:
+                        description: The period of time, in seconds, that CodeDeploy
+                          must wait after completing a deployment to the first Availability
+                          Zone. CodeDeploy will wait this amount of time before starting
+                          a deployment to the second Availability Zone. If you don't
+                          specify a value for first_zone_monitor_duration_in_seconds,
+                          then CodeDeploy uses the monitor_duration_in_seconds value
+                          for the first Availability Zone.
+                        type: number
+                      minimumHealthyHostsPerZone:
+                        description: The number or percentage of instances that must
+                          remain available per Availability Zone during a deployment.
+                          If you don't specify a value under minimum_healthy_hosts_per_zone,
+                          then CodeDeploy uses a default value of 0 percent. This
+                          block is more documented below.
+                        properties:
+                          type:
+                            description: The type can either be FLEET_PERCENT or HOST_COUNT.
+                            type: string
+                          value:
+                            description: The value when the type is FLEET_PERCENT
+                              represents the minimum number of healthy instances as
+                              a percentage of the total number of instances in the
+                              Availability Zone during a deployment. If you specify
+                              FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy
+                              converts the percentage to the equivalent number of
+                              instance and rounds up fractional instances. When the
+                              type is HOST_COUNT, the value represents the minimum
+                              number of healthy instances in the Availability Zone
+                              as an absolute value.
+                            type: number
+                        type: object
+                      monitorDurationInSeconds:
+                        description: The period of time, in seconds, that CodeDeploy
+                          must wait after completing a deployment to an Availability
+                          Zone. CodeDeploy will wait this amount of time before starting
+                          a deployment to the next Availability Zone. If you don't
+                          specify a monitor_duration_in_seconds, CodeDeploy starts
+                          deploying to the next Availability Zone immediately.
+                        type: number
                     type: object
                 type: object
               managementPolicies:
@@ -941,6 +1181,51 @@ spec:
                         description: Type of traffic routing config. One of TimeBasedCanary,
                           TimeBasedLinear, AllAtOnce.
                         type: string
+                    type: object
+                  zonalConfig:
+                    description: A zonal_config block. Zonal Config is documented
+                      below.
+                    properties:
+                      firstZoneMonitorDurationInSeconds:
+                        description: The period of time, in seconds, that CodeDeploy
+                          must wait after completing a deployment to the first Availability
+                          Zone. CodeDeploy will wait this amount of time before starting
+                          a deployment to the second Availability Zone. If you don't
+                          specify a value for first_zone_monitor_duration_in_seconds,
+                          then CodeDeploy uses the monitor_duration_in_seconds value
+                          for the first Availability Zone.
+                        type: number
+                      minimumHealthyHostsPerZone:
+                        description: The number or percentage of instances that must
+                          remain available per Availability Zone during a deployment.
+                          If you don't specify a value under minimum_healthy_hosts_per_zone,
+                          then CodeDeploy uses a default value of 0 percent. This
+                          block is more documented below.
+                        properties:
+                          type:
+                            description: The type can either be FLEET_PERCENT or HOST_COUNT.
+                            type: string
+                          value:
+                            description: The value when the type is FLEET_PERCENT
+                              represents the minimum number of healthy instances as
+                              a percentage of the total number of instances in the
+                              Availability Zone during a deployment. If you specify
+                              FLEET_PERCENT, at the start of the deployment, AWS CodeDeploy
+                              converts the percentage to the equivalent number of
+                              instance and rounds up fractional instances. When the
+                              type is HOST_COUNT, the value represents the minimum
+                              number of healthy instances in the Availability Zone
+                              as an absolute value.
+                            type: number
+                        type: object
+                      monitorDurationInSeconds:
+                        description: The period of time, in seconds, that CodeDeploy
+                          must wait after completing a deployment to an Availability
+                          Zone. CodeDeploy will wait this amount of time before starting
+                          a deployment to the next Availability Zone. If you don't
+                          specify a monitor_duration_in_seconds, CodeDeploy starts
+                          deploying to the next Availability Zone immediately.
+                        type: number
                     type: object
                 type: object
               conditions:

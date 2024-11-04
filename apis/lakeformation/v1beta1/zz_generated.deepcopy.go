@@ -396,6 +396,22 @@ func (in *DataLakeSettingsInitParameters) DeepCopyInto(out *DataLakeSettingsInit
 			}
 		}
 	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.ReadOnlyAdmins != nil {
 		in, out := &in.ReadOnlyAdmins, &out.ReadOnlyAdmins
 		*out = make([]*string, len(*in))
@@ -532,6 +548,22 @@ func (in *DataLakeSettingsObservation) DeepCopyInto(out *DataLakeSettingsObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.ReadOnlyAdmins != nil {
 		in, out := &in.ReadOnlyAdmins, &out.ReadOnlyAdmins
 		*out = make([]*string, len(*in))
@@ -629,6 +661,22 @@ func (in *DataLakeSettingsParameters) DeepCopyInto(out *DataLakeSettingsParamete
 				*out = new(string)
 				**out = **in
 			}
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.ReadOnlyAdmins != nil {

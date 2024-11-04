@@ -52,6 +52,9 @@ type TransitGatewayVPCAttachmentAccepterObservation struct {
 	// Whether IPv6 support is enabled. Valid values: disable, enable.
 	IPv6Support *string `json:"ipv6Support,omitempty" tf:"ipv6_support,omitempty"`
 
+	// Whether Security Group Referencing Support is enabled. Valid values: disable, enable.
+	SecurityGroupReferencingSupport *string `json:"securityGroupReferencingSupport,omitempty" tf:"security_group_referencing_support,omitempty"`
+
 	// Identifiers of EC2 Subnets.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`

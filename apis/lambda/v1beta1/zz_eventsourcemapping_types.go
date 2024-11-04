@@ -178,6 +178,10 @@ type EventSourceMappingInitParameters struct {
 	// A timestamp in RFC3339 format of the data record which to start reading when using starting_position set to AT_TIMESTAMP. If a record with this exact timestamp does not exist, the next later record is chosen. If the timestamp is older than the current trim horizon, the oldest available record is chosen.
 	StartingPositionTimestamp *string `json:"startingPositionTimestamp,omitempty" tf:"starting_position_timestamp,omitempty"`
 
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
 	// The name of the Kafka topics. Only available for MSK sources. A single topic name must be specified.
 	// +listType=set
 	Topics []*string `json:"topics,omitempty" tf:"topics,omitempty"`
@@ -190,6 +194,9 @@ type EventSourceMappingObservation struct {
 
 	// Additional configuration block for Amazon Managed Kafka sources. Incompatible with "self_managed_event_source" and "self_managed_kafka_event_source_config". Detailed below.
 	AmazonManagedKafkaEventSourceConfig []AmazonManagedKafkaEventSourceConfigObservation `json:"amazonManagedKafkaEventSourceConfig,omitempty" tf:"amazon_managed_kafka_event_source_config,omitempty"`
+
+	// The event source mapping ARN.
+	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The largest number of records that Lambda will retrieve from your event source at the time of invocation. Defaults to 100 for DynamoDB, Kinesis, MQ and MSK, 10 for SQS.
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
@@ -271,6 +278,14 @@ type EventSourceMappingObservation struct {
 
 	// The reason the event source mapping is in its current state.
 	StateTransitionReason *string `json:"stateTransitionReason,omitempty" tf:"state_transition_reason,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
 	// The name of the Kafka topics. Only available for MSK sources. A single topic name must be specified.
 	// +listType=set
@@ -397,6 +412,11 @@ type EventSourceMappingParameters struct {
 	// A timestamp in RFC3339 format of the data record which to start reading when using starting_position set to AT_TIMESTAMP. If a record with this exact timestamp does not exist, the next later record is chosen. If the timestamp is older than the current trim horizon, the oldest available record is chosen.
 	// +kubebuilder:validation:Optional
 	StartingPositionTimestamp *string `json:"startingPositionTimestamp,omitempty" tf:"starting_position_timestamp,omitempty"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The name of the Kafka topics. Only available for MSK sources. A single topic name must be specified.
 	// +kubebuilder:validation:Optional

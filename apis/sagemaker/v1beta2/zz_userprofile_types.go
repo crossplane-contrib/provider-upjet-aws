@@ -32,6 +32,35 @@ type CanvasAppSettingsDirectDeploySettingsParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
+type CanvasAppSettingsEmrServerlessSettingsInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type CanvasAppSettingsEmrServerlessSettingsObservation struct {
+
+	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
+type CanvasAppSettingsEmrServerlessSettingsParameters struct {
+
+	// The Amazon Resource Name (ARN) of the AWS IAM role that is assumed for running Amazon EMR Serverless jobs in SageMaker Canvas. This role should have the necessary permissions to read and write data attached and a trust relationship with EMR Serverless.
+	// +kubebuilder:validation:Optional
+	ExecutionRoleArn *string `json:"executionRoleArn,omitempty" tf:"execution_role_arn,omitempty"`
+
+	// Describes whether time series forecasting is enabled or disabled in the Canvas app. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+}
+
 type CanvasAppSettingsGenerativeAISettingsInitParameters struct {
 
 	// The user profile Amazon Resource Name (ARN).
@@ -311,6 +340,9 @@ type UserSettingsCanvasAppSettingsInitParameters struct {
 	// The model deployment settings for the SageMaker Canvas application. See Direct Deploy Settings below.
 	DirectDeploySettings *CanvasAppSettingsDirectDeploySettingsInitParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
+	// The settings for running Amazon EMR Serverless jobs in SageMaker Canvas. See emr_serverless_settings Block below.
+	EmrServerlessSettings *CanvasAppSettingsEmrServerlessSettingsInitParameters `json:"emrServerlessSettings,omitempty" tf:"emr_serverless_settings,omitempty"`
+
 	GenerativeAISettings *CanvasAppSettingsGenerativeAISettingsInitParameters `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
 
 	// The settings for connecting to an external data source with OAuth. See Identity Provider OAuth Settings below.
@@ -333,6 +365,9 @@ type UserSettingsCanvasAppSettingsObservation struct {
 
 	// The model deployment settings for the SageMaker Canvas application. See Direct Deploy Settings below.
 	DirectDeploySettings *CanvasAppSettingsDirectDeploySettingsObservation `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
+
+	// The settings for running Amazon EMR Serverless jobs in SageMaker Canvas. See emr_serverless_settings Block below.
+	EmrServerlessSettings *CanvasAppSettingsEmrServerlessSettingsObservation `json:"emrServerlessSettings,omitempty" tf:"emr_serverless_settings,omitempty"`
 
 	GenerativeAISettings *CanvasAppSettingsGenerativeAISettingsObservation `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
 
@@ -358,6 +393,10 @@ type UserSettingsCanvasAppSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectDeploySettings *CanvasAppSettingsDirectDeploySettingsParameters `json:"directDeploySettings,omitempty" tf:"direct_deploy_settings,omitempty"`
 
+	// The settings for running Amazon EMR Serverless jobs in SageMaker Canvas. See emr_serverless_settings Block below.
+	// +kubebuilder:validation:Optional
+	EmrServerlessSettings *CanvasAppSettingsEmrServerlessSettingsParameters `json:"emrServerlessSettings,omitempty" tf:"emr_serverless_settings,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	GenerativeAISettings *CanvasAppSettingsGenerativeAISettingsParameters `json:"generativeAiSettings,omitempty" tf:"generative_ai_settings,omitempty"`
 
@@ -380,6 +419,74 @@ type UserSettingsCanvasAppSettingsParameters struct {
 	// The workspace settings for the SageMaker Canvas application. See Workspace Settings below.
 	// +kubebuilder:validation:Optional
 	WorkspaceSettings *CanvasAppSettingsWorkspaceSettingsParameters `json:"workspaceSettings,omitempty" tf:"workspace_settings,omitempty"`
+}
+
+type UserSettingsCodeEditorAppSettingsAppLifecycleManagementIdleSettingsInitParameters struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+
+	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
+	LifecycleManagement *string `json:"lifecycleManagement,omitempty" tf:"lifecycle_management,omitempty"`
+
+	// The maximum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	MaxIdleTimeoutInMinutes *float64 `json:"maxIdleTimeoutInMinutes,omitempty" tf:"max_idle_timeout_in_minutes,omitempty"`
+
+	// The minimum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	MinIdleTimeoutInMinutes *float64 `json:"minIdleTimeoutInMinutes,omitempty" tf:"min_idle_timeout_in_minutes,omitempty"`
+}
+
+type UserSettingsCodeEditorAppSettingsAppLifecycleManagementIdleSettingsObservation struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+
+	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
+	LifecycleManagement *string `json:"lifecycleManagement,omitempty" tf:"lifecycle_management,omitempty"`
+
+	// The maximum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	MaxIdleTimeoutInMinutes *float64 `json:"maxIdleTimeoutInMinutes,omitempty" tf:"max_idle_timeout_in_minutes,omitempty"`
+
+	// The minimum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	MinIdleTimeoutInMinutes *float64 `json:"minIdleTimeoutInMinutes,omitempty" tf:"min_idle_timeout_in_minutes,omitempty"`
+}
+
+type UserSettingsCodeEditorAppSettingsAppLifecycleManagementIdleSettingsParameters struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// +kubebuilder:validation:Optional
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+
+	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	LifecycleManagement *string `json:"lifecycleManagement,omitempty" tf:"lifecycle_management,omitempty"`
+
+	// The maximum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	// +kubebuilder:validation:Optional
+	MaxIdleTimeoutInMinutes *float64 `json:"maxIdleTimeoutInMinutes,omitempty" tf:"max_idle_timeout_in_minutes,omitempty"`
+
+	// The minimum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	// +kubebuilder:validation:Optional
+	MinIdleTimeoutInMinutes *float64 `json:"minIdleTimeoutInMinutes,omitempty" tf:"min_idle_timeout_in_minutes,omitempty"`
+}
+
+type UserSettingsCodeEditorAppSettingsAppLifecycleManagementInitParameters struct {
+
+	// Settings related to idle shutdown of Studio applications. see idle_settings Block below.
+	IdleSettings *UserSettingsCodeEditorAppSettingsAppLifecycleManagementIdleSettingsInitParameters `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
+type UserSettingsCodeEditorAppSettingsAppLifecycleManagementObservation struct {
+
+	// Settings related to idle shutdown of Studio applications. see idle_settings Block below.
+	IdleSettings *UserSettingsCodeEditorAppSettingsAppLifecycleManagementIdleSettingsObservation `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
+type UserSettingsCodeEditorAppSettingsAppLifecycleManagementParameters struct {
+
+	// Settings related to idle shutdown of Studio applications. see idle_settings Block below.
+	// +kubebuilder:validation:Optional
+	IdleSettings *UserSettingsCodeEditorAppSettingsAppLifecycleManagementIdleSettingsParameters `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
 }
 
 type UserSettingsCodeEditorAppSettingsCustomImageInitParameters struct {
@@ -482,6 +589,12 @@ type UserSettingsCodeEditorAppSettingsDefaultResourceSpecParameters struct {
 
 type UserSettingsCodeEditorAppSettingsInitParameters struct {
 
+	// Indicates whether idle shutdown is activated for JupyterLab applications. see app_lifecycle_management Block below.
+	AppLifecycleManagement *UserSettingsCodeEditorAppSettingsAppLifecycleManagementInitParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
+	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
+	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
+
 	// A list of custom SageMaker images that are configured to run as a CodeEditor app. see Custom Image below.
 	CustomImage []UserSettingsCodeEditorAppSettingsCustomImageInitParameters `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
@@ -495,6 +608,12 @@ type UserSettingsCodeEditorAppSettingsInitParameters struct {
 
 type UserSettingsCodeEditorAppSettingsObservation struct {
 
+	// Indicates whether idle shutdown is activated for JupyterLab applications. see app_lifecycle_management Block below.
+	AppLifecycleManagement *UserSettingsCodeEditorAppSettingsAppLifecycleManagementObservation `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
+	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
+	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
+
 	// A list of custom SageMaker images that are configured to run as a CodeEditor app. see Custom Image below.
 	CustomImage []UserSettingsCodeEditorAppSettingsCustomImageObservation `json:"customImage,omitempty" tf:"custom_image,omitempty"`
 
@@ -507,6 +626,14 @@ type UserSettingsCodeEditorAppSettingsObservation struct {
 }
 
 type UserSettingsCodeEditorAppSettingsParameters struct {
+
+	// Indicates whether idle shutdown is activated for JupyterLab applications. see app_lifecycle_management Block below.
+	// +kubebuilder:validation:Optional
+	AppLifecycleManagement *UserSettingsCodeEditorAppSettingsAppLifecycleManagementParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
+	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
+	// +kubebuilder:validation:Optional
+	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
 	// A list of custom SageMaker images that are configured to run as a CodeEditor app. see Custom Image below.
 	// +kubebuilder:validation:Optional
@@ -601,6 +728,9 @@ type UserSettingsCustomPosixUserConfigParameters struct {
 
 type UserSettingsInitParameters struct {
 
+	// Indicates whether auto-mounting of an EFS volume is supported for the user profile. The DefaultAsDomain value is only supported for user profiles. Do not use the DefaultAsDomain value when setting this parameter for a domain. Valid values are: Enabled, Disabled, and DefaultAsDomain.
+	AutoMountHomeEFS *string `json:"autoMountHomeEfs,omitempty" tf:"auto_mount_home_efs,omitempty"`
+
 	// The Canvas app settings. See Canvas App Settings below.
 	CanvasAppSettings *UserSettingsCanvasAppSettingsInitParameters `json:"canvasAppSettings,omitempty" tf:"canvas_app_settings,omitempty"`
 
@@ -652,6 +782,74 @@ type UserSettingsInitParameters struct {
 
 	// The TensorBoard app settings. See TensorBoard App Settings below.
 	TensorBoardAppSettings *UserSettingsTensorBoardAppSettingsInitParameters `json:"tensorBoardAppSettings,omitempty" tf:"tensor_board_app_settings,omitempty"`
+}
+
+type UserSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsInitParameters struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+
+	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
+	LifecycleManagement *string `json:"lifecycleManagement,omitempty" tf:"lifecycle_management,omitempty"`
+
+	// The maximum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	MaxIdleTimeoutInMinutes *float64 `json:"maxIdleTimeoutInMinutes,omitempty" tf:"max_idle_timeout_in_minutes,omitempty"`
+
+	// The minimum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	MinIdleTimeoutInMinutes *float64 `json:"minIdleTimeoutInMinutes,omitempty" tf:"min_idle_timeout_in_minutes,omitempty"`
+}
+
+type UserSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsObservation struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+
+	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
+	LifecycleManagement *string `json:"lifecycleManagement,omitempty" tf:"lifecycle_management,omitempty"`
+
+	// The maximum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	MaxIdleTimeoutInMinutes *float64 `json:"maxIdleTimeoutInMinutes,omitempty" tf:"max_idle_timeout_in_minutes,omitempty"`
+
+	// The minimum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	MinIdleTimeoutInMinutes *float64 `json:"minIdleTimeoutInMinutes,omitempty" tf:"min_idle_timeout_in_minutes,omitempty"`
+}
+
+type UserSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsParameters struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// +kubebuilder:validation:Optional
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+
+	// Indicates whether idle shutdown is activated for the application type. Valid values are ENABLED and DISABLED.
+	// +kubebuilder:validation:Optional
+	LifecycleManagement *string `json:"lifecycleManagement,omitempty" tf:"lifecycle_management,omitempty"`
+
+	// The maximum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	// +kubebuilder:validation:Optional
+	MaxIdleTimeoutInMinutes *float64 `json:"maxIdleTimeoutInMinutes,omitempty" tf:"max_idle_timeout_in_minutes,omitempty"`
+
+	// The minimum value in minutes that custom idle shutdown can be set to by the user. Valid values are between 60 and 525600.
+	// +kubebuilder:validation:Optional
+	MinIdleTimeoutInMinutes *float64 `json:"minIdleTimeoutInMinutes,omitempty" tf:"min_idle_timeout_in_minutes,omitempty"`
+}
+
+type UserSettingsJupyterLabAppSettingsAppLifecycleManagementInitParameters struct {
+
+	// Settings related to idle shutdown of Studio applications. see idle_settings Block below.
+	IdleSettings *UserSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsInitParameters `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
+type UserSettingsJupyterLabAppSettingsAppLifecycleManagementObservation struct {
+
+	// Settings related to idle shutdown of Studio applications. see idle_settings Block below.
+	IdleSettings *UserSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsObservation `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
+type UserSettingsJupyterLabAppSettingsAppLifecycleManagementParameters struct {
+
+	// Settings related to idle shutdown of Studio applications. see idle_settings Block below.
+	// +kubebuilder:validation:Optional
+	IdleSettings *UserSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsParameters `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
 }
 
 type UserSettingsJupyterLabAppSettingsCodeRepositoryInitParameters struct {
@@ -771,7 +969,48 @@ type UserSettingsJupyterLabAppSettingsDefaultResourceSpecParameters struct {
 	SagemakerImageVersionArn *string `json:"sagemakerImageVersionArn,omitempty" tf:"sagemaker_image_version_arn,omitempty"`
 }
 
+type UserSettingsJupyterLabAppSettingsEmrSettingsInitParameters struct {
+
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// +listType=set
+	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
+
+	// An array of Amazon Resource Names (ARNs) of the IAM roles used by the Amazon EMR cluster instances or job execution environments to access other AWS services and resources needed during the runtime of your Amazon EMR or Amazon EMR Serverless workloads, such as Amazon S3 for data access, Amazon CloudWatch for logging, or other AWS services based on the particular workload requirements.
+	// +listType=set
+	ExecutionRoleArns []*string `json:"executionRoleArns,omitempty" tf:"execution_role_arns,omitempty"`
+}
+
+type UserSettingsJupyterLabAppSettingsEmrSettingsObservation struct {
+
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// +listType=set
+	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
+
+	// An array of Amazon Resource Names (ARNs) of the IAM roles used by the Amazon EMR cluster instances or job execution environments to access other AWS services and resources needed during the runtime of your Amazon EMR or Amazon EMR Serverless workloads, such as Amazon S3 for data access, Amazon CloudWatch for logging, or other AWS services based on the particular workload requirements.
+	// +listType=set
+	ExecutionRoleArns []*string `json:"executionRoleArns,omitempty" tf:"execution_role_arns,omitempty"`
+}
+
+type UserSettingsJupyterLabAppSettingsEmrSettingsParameters struct {
+
+	// An array of Amazon Resource Names (ARNs) of the IAM roles that the execution role of SageMaker can assume for performing operations or tasks related to Amazon EMR clusters or Amazon EMR Serverless applications. These roles define the permissions and access policies required when performing Amazon EMR-related operations, such as listing, connecting to, or terminating Amazon EMR clusters or Amazon EMR Serverless applications. They are typically used in cross-account access scenarios, where the Amazon EMR resources (clusters or serverless applications) are located in a different AWS account than the SageMaker domain.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AssumableRoleArns []*string `json:"assumableRoleArns,omitempty" tf:"assumable_role_arns,omitempty"`
+
+	// An array of Amazon Resource Names (ARNs) of the IAM roles used by the Amazon EMR cluster instances or job execution environments to access other AWS services and resources needed during the runtime of your Amazon EMR or Amazon EMR Serverless workloads, such as Amazon S3 for data access, Amazon CloudWatch for logging, or other AWS services based on the particular workload requirements.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	ExecutionRoleArns []*string `json:"executionRoleArns,omitempty" tf:"execution_role_arns,omitempty"`
+}
+
 type UserSettingsJupyterLabAppSettingsInitParameters struct {
+
+	// Indicates whether idle shutdown is activated for JupyterLab applications. see app_lifecycle_management Block below.
+	AppLifecycleManagement *UserSettingsJupyterLabAppSettingsAppLifecycleManagementInitParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
+	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
+	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
 	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
 	CodeRepository []UserSettingsJupyterLabAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
@@ -782,12 +1021,21 @@ type UserSettingsJupyterLabAppSettingsInitParameters struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	DefaultResourceSpec *UserSettingsJupyterLabAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	EmrSettings *UserSettingsJupyterLabAppSettingsEmrSettingsInitParameters `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
 type UserSettingsJupyterLabAppSettingsObservation struct {
+
+	// Indicates whether idle shutdown is activated for JupyterLab applications. see app_lifecycle_management Block below.
+	AppLifecycleManagement *UserSettingsJupyterLabAppSettingsAppLifecycleManagementObservation `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
+	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
+	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
 	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
 	CodeRepository []UserSettingsJupyterLabAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
@@ -798,12 +1046,23 @@ type UserSettingsJupyterLabAppSettingsObservation struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	DefaultResourceSpec *UserSettingsJupyterLabAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	EmrSettings *UserSettingsJupyterLabAppSettingsEmrSettingsObservation `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
+
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +listType=set
 	LifecycleConfigArns []*string `json:"lifecycleConfigArns,omitempty" tf:"lifecycle_config_arns,omitempty"`
 }
 
 type UserSettingsJupyterLabAppSettingsParameters struct {
+
+	// Indicates whether idle shutdown is activated for JupyterLab applications. see app_lifecycle_management Block below.
+	// +kubebuilder:validation:Optional
+	AppLifecycleManagement *UserSettingsJupyterLabAppSettingsAppLifecycleManagementParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
+	// The lifecycle configuration that runs before the default lifecycle configuration. It can override changes made in the default lifecycle configuration.
+	// +kubebuilder:validation:Optional
+	BuiltInLifecycleConfigArn *string `json:"builtInLifecycleConfigArn,omitempty" tf:"built_in_lifecycle_config_arn,omitempty"`
 
 	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
 	// +kubebuilder:validation:Optional
@@ -816,6 +1075,10 @@ type UserSettingsJupyterLabAppSettingsParameters struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
 	DefaultResourceSpec *UserSettingsJupyterLabAppSettingsDefaultResourceSpecParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
+
+	// The configuration parameters that specify the IAM roles assumed by the execution role of SageMaker (assumable roles) and the cluster instances or job execution environments (execution roles or runtime roles) to manage and access resources required for running Amazon EMR clusters or Amazon EMR Serverless applications. see emr_settings Block below.
+	// +kubebuilder:validation:Optional
+	EmrSettings *UserSettingsJupyterLabAppSettingsEmrSettingsParameters `json:"emrSettings,omitempty" tf:"emr_settings,omitempty"`
 
 	// The Amazon Resource Name (ARN) of the Lifecycle Configurations.
 	// +kubebuilder:validation:Optional
@@ -1085,6 +1348,9 @@ type UserSettingsKernelGatewayAppSettingsParameters struct {
 
 type UserSettingsObservation struct {
 
+	// Indicates whether auto-mounting of an EFS volume is supported for the user profile. The DefaultAsDomain value is only supported for user profiles. Do not use the DefaultAsDomain value when setting this parameter for a domain. Valid values are: Enabled, Disabled, and DefaultAsDomain.
+	AutoMountHomeEFS *string `json:"autoMountHomeEfs,omitempty" tf:"auto_mount_home_efs,omitempty"`
+
 	// The Canvas app settings. See Canvas App Settings below.
 	CanvasAppSettings *UserSettingsCanvasAppSettingsObservation `json:"canvasAppSettings,omitempty" tf:"canvas_app_settings,omitempty"`
 
@@ -1139,6 +1405,10 @@ type UserSettingsObservation struct {
 }
 
 type UserSettingsParameters struct {
+
+	// Indicates whether auto-mounting of an EFS volume is supported for the user profile. The DefaultAsDomain value is only supported for user profiles. Do not use the DefaultAsDomain value when setting this parameter for a domain. Valid values are: Enabled, Disabled, and DefaultAsDomain.
+	// +kubebuilder:validation:Optional
+	AutoMountHomeEFS *string `json:"autoMountHomeEfs,omitempty" tf:"auto_mount_home_efs,omitempty"`
 
 	// The Canvas app settings. See Canvas App Settings below.
 	// +kubebuilder:validation:Optional
@@ -1459,6 +1729,10 @@ type UserSettingsStudioWebPortalSettingsInitParameters struct {
 	// +listType=set
 	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
 
+	// The instance types you are hiding from the Studio user interface.
+	// +listType=set
+	HiddenInstanceTypes []*string `json:"hiddenInstanceTypes,omitempty" tf:"hidden_instance_types,omitempty"`
+
 	// The machine learning tools that are hidden from the Studio left navigation pane.
 	// +listType=set
 	HiddenMLTools []*string `json:"hiddenMlTools,omitempty" tf:"hidden_ml_tools,omitempty"`
@@ -1469,6 +1743,10 @@ type UserSettingsStudioWebPortalSettingsObservation struct {
 	// The Applications supported in Studio that are hidden from the Studio left navigation pane.
 	// +listType=set
 	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The instance types you are hiding from the Studio user interface.
+	// +listType=set
+	HiddenInstanceTypes []*string `json:"hiddenInstanceTypes,omitempty" tf:"hidden_instance_types,omitempty"`
 
 	// The machine learning tools that are hidden from the Studio left navigation pane.
 	// +listType=set
@@ -1481,6 +1759,11 @@ type UserSettingsStudioWebPortalSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	HiddenAppTypes []*string `json:"hiddenAppTypes,omitempty" tf:"hidden_app_types,omitempty"`
+
+	// The instance types you are hiding from the Studio user interface.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	HiddenInstanceTypes []*string `json:"hiddenInstanceTypes,omitempty" tf:"hidden_instance_types,omitempty"`
 
 	// The machine learning tools that are hidden from the Studio left navigation pane.
 	// +kubebuilder:validation:Optional

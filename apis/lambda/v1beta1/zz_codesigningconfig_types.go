@@ -65,6 +65,10 @@ type CodeSigningConfigInitParameters struct {
 
 	// A configuration block of code signing policies that define the actions to take if the validation checks fail. Detailed below.
 	Policies []PoliciesInitParameters `json:"policies,omitempty" tf:"policies,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type CodeSigningConfigObservation struct {
@@ -88,6 +92,14 @@ type CodeSigningConfigObservation struct {
 
 	// A configuration block of code signing policies that define the actions to take if the validation checks fail. Detailed below.
 	Policies []PoliciesObservation `json:"policies,omitempty" tf:"policies,omitempty"`
+
+	// Key-value map of resource tags.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// +mapType=granular
+	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type CodeSigningConfigParameters struct {
@@ -108,6 +120,11 @@ type CodeSigningConfigParameters struct {
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// Key-value map of resource tags.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PoliciesInitParameters struct {

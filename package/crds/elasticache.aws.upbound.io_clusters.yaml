@@ -100,7 +100,7 @@ spec:
                     type: string
                   engine:
                     description: –  Name of the cache engine to be used for this cache
-                      cluster. Valid values are memcached or redis.
+                      cluster. Valid values are memcached and redis.
                     type: string
                   engineVersion:
                     description: |-
@@ -606,7 +606,7 @@ spec:
                     type: string
                   engine:
                     description: –  Name of the cache engine to be used for this cache
-                      cluster. Valid values are memcached or redis.
+                      cluster. Valid values are memcached and redis.
                     type: string
                   engineVersion:
                     description: |-
@@ -1299,7 +1299,7 @@ spec:
                     type: string
                   engine:
                     description: –  Name of the cache engine to be used for this cache
-                      cluster. Valid values are memcached or redis.
+                      cluster. Valid values are memcached and redis.
                     type: string
                   engineVersion:
                     description: |-

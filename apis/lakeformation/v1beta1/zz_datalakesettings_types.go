@@ -105,6 +105,10 @@ type DataLakeSettingsInitParameters struct {
 	// +listType=set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
+	// Key-value map of additional configuration. Valid values for the CROSS_ACCOUNT_VERSION key are "1", "2", "3", or "4". SET_CONTEXT is also returned with a value of TRUE. In a fresh account, prior to configuring, CROSS_ACCOUNT_VERSION is "1". Destroying this resource sets the CROSS_ACCOUNT_VERSION to "1".
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +listType=set
 	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
@@ -142,6 +146,10 @@ type DataLakeSettingsObservation struct {
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Key-value map of additional configuration. Valid values for the CROSS_ACCOUNT_VERSION key are "1", "2", "3", or "4". SET_CONTEXT is also returned with a value of TRUE. In a fresh account, prior to configuring, CROSS_ACCOUNT_VERSION is "1". Destroying this resource sets the CROSS_ACCOUNT_VERSION to "1".
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +listType=set
@@ -186,6 +194,11 @@ type DataLakeSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
+
+	// Key-value map of additional configuration. Valid values for the CROSS_ACCOUNT_VERSION key are "1", "2", "3", or "4". SET_CONTEXT is also returned with a value of TRUE. In a fresh account, prior to configuring, CROSS_ACCOUNT_VERSION is "1". Destroying this resource sets the CROSS_ACCOUNT_VERSION to "1".
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +kubebuilder:validation:Optional

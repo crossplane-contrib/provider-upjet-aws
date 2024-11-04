@@ -280,6 +280,9 @@ type ManagedEBSVolumeInitParameters struct {
 	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
 
+	// The tags to apply to the volume. See below.
+	TagSpecifications []TagSpecificationsInitParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
+
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
@@ -309,6 +312,9 @@ type ManagedEBSVolumeObservation struct {
 
 	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// The tags to apply to the volume. See below.
+	TagSpecifications []TagSpecificationsObservation `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
@@ -346,6 +352,10 @@ type ManagedEBSVolumeParameters struct {
 	// Snapshot that Amazon ECS uses to create the volume. You must specify either a size_in_gb or a snapshot_id.
 	// +kubebuilder:validation:Optional
 	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
+	// The tags to apply to the volume. See below.
+	// +kubebuilder:validation:Optional
+	TagSpecifications []TagSpecificationsParameters `json:"tagSpecifications,omitempty" tf:"tag_specifications,omitempty"`
 
 	// Throughput to provision for a volume, in MiB/s, with a maximum of 1,000 MiB/s.
 	// +kubebuilder:validation:Optional
@@ -1160,6 +1170,48 @@ type TLSParameters struct {
 	// ARN of the IAM Role that's associated with the Service Connect TLS.
 	// +kubebuilder:validation:Optional
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+}
+
+type TagSpecificationsInitParameters struct {
+
+	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// The type of volume resource. Valid values, volume.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type TagSpecificationsObservation struct {
+
+	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// The type of volume resource. Valid values, volume.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type TagSpecificationsParameters struct {
+
+	// Determines whether to propagate the tags from the task definition to the Amazon EBS volume.
+	// +kubebuilder:validation:Optional
+	PropagateTags *string `json:"propagateTags,omitempty" tf:"propagate_tags,omitempty"`
+
+	// The type of volume resource. Valid values, volume.
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+
+	// The tags applied to this Amazon EBS volume. AmazonECSCreated and AmazonECSManaged are reserved tags that can't be used.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type TimeoutInitParameters struct {

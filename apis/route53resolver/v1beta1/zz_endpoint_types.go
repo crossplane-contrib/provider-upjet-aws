@@ -15,23 +15,24 @@ import (
 
 type EndpointInitParameters struct {
 
-	// The direction of DNS queries to or from the Route 53 Resolver endpoint.
+	// Direction of DNS queries to or from the Route 53 Resolver endpoint.
 	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
 	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
-	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
+	// Subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
 	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
 	IPAddress []IPAddressInitParameters `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// The friendly name of the Route 53 Resolver endpoint.
+	// Friendly name of the Route 53 Resolver endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// Protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// The Route 53 Resolver endpoint IP address type. Valid values: IPV4, IPV6, DUALSTACK.
+	// Endpoint IP type. This endpoint type is applied to all IP addresses.
+	// Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
 	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -42,7 +43,7 @@ type EndpointInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// The ID of one or more security groups that you want to use to control access to this VPC.
+	// ID of one or more security groups that you want to use to control access to this VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -56,35 +57,36 @@ type EndpointInitParameters struct {
 
 type EndpointObservation struct {
 
-	// The ARN of the Route 53 Resolver endpoint.
+	// ARN of the Route 53 Resolver endpoint.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The direction of DNS queries to or from the Route 53 Resolver endpoint.
+	// Direction of DNS queries to or from the Route 53 Resolver endpoint.
 	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
 	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
-	// The ID of the VPC that you want to create the resolver endpoint in.
+	// ID of the VPC that you want to create the resolver endpoint in.
 	HostVPCID *string `json:"hostVpcId,omitempty" tf:"host_vpc_id,omitempty"`
 
-	// The ID of the Route 53 Resolver endpoint.
+	// ID of the Route 53 Resolver endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
+	// Subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
 	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
 	IPAddress []IPAddressObservation `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// The friendly name of the Route 53 Resolver endpoint.
+	// Friendly name of the Route 53 Resolver endpoint.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// Protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// The Route 53 Resolver endpoint IP address type. Valid values: IPV4, IPV6, DUALSTACK.
+	// Endpoint IP type. This endpoint type is applied to all IP addresses.
+	// Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
 	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
 
-	// The ID of one or more security groups that you want to use to control access to this VPC.
+	// ID of one or more security groups that you want to use to control access to this VPC.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -92,29 +94,29 @@ type EndpointObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
+	// Map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
 type EndpointParameters struct {
 
-	// The direction of DNS queries to or from the Route 53 Resolver endpoint.
+	// Direction of DNS queries to or from the Route 53 Resolver endpoint.
 	// Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
 	// or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
 	// +kubebuilder:validation:Optional
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
-	// The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
+	// Subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
 	// to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
 	// +kubebuilder:validation:Optional
 	IPAddress []IPAddressParameters `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
-	// The friendly name of the Route 53 Resolver endpoint.
+	// Friendly name of the Route 53 Resolver endpoint.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
+	// Protocols you want to use for the Route 53 Resolver endpoint. Valid values: DoH, Do53, DoH-FIPS.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
@@ -124,7 +126,8 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// The Route 53 Resolver endpoint IP address type. Valid values: IPV4, IPV6, DUALSTACK.
+	// Endpoint IP type. This endpoint type is applied to all IP addresses.
+	// Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
 	// +kubebuilder:validation:Optional
 	ResolverEndpointType *string `json:"resolverEndpointType,omitempty" tf:"resolver_endpoint_type,omitempty"`
 
@@ -136,7 +139,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIDSelector *v1.Selector `json:"securityGroupIdSelector,omitempty" tf:"-"`
 
-	// The ID of one or more security groups that you want to use to control access to this VPC.
+	// ID of one or more security groups that you want to use to control access to this VPC.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:refFieldName=SecurityGroupIDRefs
 	// +crossplane:generate:reference:selectorFieldName=SecurityGroupIDSelector
@@ -152,10 +155,13 @@ type EndpointParameters struct {
 
 type IPAddressInitParameters struct {
 
-	// The IP address in the subnet that you want to use for DNS queries.
+	// IPv4 address in the subnet that you want to use for DNS queries.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The ID of the subnet that contains the IP address.
+	// IPv6 address in the subnet that you want to use for DNS queries.
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// ID of the subnet that contains the IP address.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -171,23 +177,30 @@ type IPAddressInitParameters struct {
 
 type IPAddressObservation struct {
 
-	// The IP address in the subnet that you want to use for DNS queries.
+	// IPv4 address in the subnet that you want to use for DNS queries.
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The ID of the Route 53 Resolver endpoint.
+	// ID of the Route 53 Resolver endpoint.
 	IPID *string `json:"ipId,omitempty" tf:"ip_id,omitempty"`
 
-	// The ID of the subnet that contains the IP address.
+	// IPv6 address in the subnet that you want to use for DNS queries.
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// ID of the subnet that contains the IP address.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type IPAddressParameters struct {
 
-	// The IP address in the subnet that you want to use for DNS queries.
+	// IPv4 address in the subnet that you want to use for DNS queries.
 	// +kubebuilder:validation:Optional
 	IP *string `json:"ip,omitempty" tf:"ip,omitempty"`
 
-	// The ID of the subnet that contains the IP address.
+	// IPv6 address in the subnet that you want to use for DNS queries.
+	// +kubebuilder:validation:Optional
+	IPv6 *string `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
+
+	// ID of the subnet that contains the IP address.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

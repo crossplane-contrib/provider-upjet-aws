@@ -13,6 +13,25 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CodeEditorAppSettingsAppLifecycleManagementIdleSettingsInitParameters struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+}
+
+type CodeEditorAppSettingsAppLifecycleManagementIdleSettingsObservation struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+}
+
+type CodeEditorAppSettingsAppLifecycleManagementIdleSettingsParameters struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// +kubebuilder:validation:Optional
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+}
+
 type CustomFileSystemInitParameters struct {
 
 	// A custom file system in Amazon EFS. see EFS File System below.
@@ -207,6 +226,25 @@ type SpaceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementInitParameters struct {
+
+	// Settings related to idle shutdown of Studio applications. See idle_settings Block below.
+	IdleSettings []CodeEditorAppSettingsAppLifecycleManagementIdleSettingsInitParameters `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
+type SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementObservation struct {
+
+	// Settings related to idle shutdown of Studio applications. See idle_settings Block below.
+	IdleSettings []CodeEditorAppSettingsAppLifecycleManagementIdleSettingsObservation `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
+type SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementParameters struct {
+
+	// Settings related to idle shutdown of Studio applications. See idle_settings Block below.
+	// +kubebuilder:validation:Optional
+	IdleSettings []CodeEditorAppSettingsAppLifecycleManagementIdleSettingsParameters `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
 type SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecInitParameters struct {
 
 	// The instance type.
@@ -268,17 +306,27 @@ type SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecParameters struct {
 
 type SpaceSettingsCodeEditorAppSettingsInitParameters struct {
 
+	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
+	AppLifecycleManagement []SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementInitParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	DefaultResourceSpec []SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecInitParameters `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type SpaceSettingsCodeEditorAppSettingsObservation struct {
 
+	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
+	AppLifecycleManagement []SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementObservation `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	DefaultResourceSpec []SpaceSettingsCodeEditorAppSettingsDefaultResourceSpecObservation `json:"defaultResourceSpec,omitempty" tf:"default_resource_spec,omitempty"`
 }
 
 type SpaceSettingsCodeEditorAppSettingsParameters struct {
+
+	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
+	// +kubebuilder:validation:Optional
+	AppLifecycleManagement []SpaceSettingsCodeEditorAppSettingsAppLifecycleManagementParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
 
 	// The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. see Default Resource Spec below.
 	// +kubebuilder:validation:Optional
@@ -306,6 +354,44 @@ type SpaceSettingsInitParameters struct {
 	KernelGatewayAppSettings []SpaceSettingsKernelGatewayAppSettingsInitParameters `json:"kernelGatewayAppSettings,omitempty" tf:"kernel_gateway_app_settings,omitempty"`
 
 	SpaceStorageSettings []SpaceSettingsSpaceStorageSettingsInitParameters `json:"spaceStorageSettings,omitempty" tf:"space_storage_settings,omitempty"`
+}
+
+type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsInitParameters struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+}
+
+type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsObservation struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+}
+
+type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsParameters struct {
+
+	// The time that SageMaker waits after the application becomes idle before shutting it down. Valid values are between 60 and 525600.
+	// +kubebuilder:validation:Optional
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+}
+
+type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementInitParameters struct {
+
+	// Settings related to idle shutdown of Studio applications. See idle_settings Block below.
+	IdleSettings []SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsInitParameters `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
+type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementObservation struct {
+
+	// Settings related to idle shutdown of Studio applications. See idle_settings Block below.
+	IdleSettings []SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsObservation `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
+}
+
+type SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementParameters struct {
+
+	// Settings related to idle shutdown of Studio applications. See idle_settings Block below.
+	// +kubebuilder:validation:Optional
+	IdleSettings []SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementIdleSettingsParameters `json:"idleSettings,omitempty" tf:"idle_settings,omitempty"`
 }
 
 type SpaceSettingsJupyterLabAppSettingsCodeRepositoryInitParameters struct {
@@ -388,6 +474,9 @@ type SpaceSettingsJupyterLabAppSettingsDefaultResourceSpecParameters struct {
 
 type SpaceSettingsJupyterLabAppSettingsInitParameters struct {
 
+	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
+	AppLifecycleManagement []SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementInitParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
 	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
 	CodeRepository []SpaceSettingsJupyterLabAppSettingsCodeRepositoryInitParameters `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
@@ -397,6 +486,9 @@ type SpaceSettingsJupyterLabAppSettingsInitParameters struct {
 
 type SpaceSettingsJupyterLabAppSettingsObservation struct {
 
+	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
+	AppLifecycleManagement []SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementObservation `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
+
 	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
 	CodeRepository []SpaceSettingsJupyterLabAppSettingsCodeRepositoryObservation `json:"codeRepository,omitempty" tf:"code_repository,omitempty"`
 
@@ -405,6 +497,10 @@ type SpaceSettingsJupyterLabAppSettingsObservation struct {
 }
 
 type SpaceSettingsJupyterLabAppSettingsParameters struct {
+
+	// Settings that are used to configure and manage the lifecycle of JupyterLab applications in a space. See app_lifecycle_management Block below.
+	// +kubebuilder:validation:Optional
+	AppLifecycleManagement []SpaceSettingsJupyterLabAppSettingsAppLifecycleManagementParameters `json:"appLifecycleManagement,omitempty" tf:"app_lifecycle_management,omitempty"`
 
 	// A list of Git repositories that SageMaker automatically displays to users for cloning in the JupyterServer application. see Code Repository below.
 	// +kubebuilder:validation:Optional
