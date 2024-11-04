@@ -1,0 +1,56 @@
+apiVersion: aws.platformref.upbound.io/v1alpha1
+kind: E2ETestCluster
+metadata:
+  name: aws-pc-e2e-test
+  namespace: default
+spec:
+  compositeDeletePolicy: Foreground
+  parameters:
+    id: aws-pc-e2e-test
+    region: us-west-2
+    version: "1.28"
+    iam:
+      # replace with your custom roleArn that will administer the EKS cluster:
+      # "arn:aws:iam::123456789012:role/myeksadminrole"
+      roleArn: ${data.aws_eks_iam_default_admin}
+    nodes:
+      count: 1
+      instanceType: t3.medium
+    irsa:
+      condition: StringEquals
+      policyDocument: |
+        {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Action": [
+                        "ec2:*"
+                    ],
+                    "Effect": "Allow",
+                    "Resource": "*"
+                }
+            ]
+        }
+      serviceAccount:
+        name: my-xpsa
+        namespace: upbound-system
+    targetClusterParameters:
+      provider:
+        familyPackage: "xpkg.upbound.io/upbound/provider-family-aws:v1.3.0"
+        ec2Package: "xpkg.upbound.io/upbound/provider-aws-ec2:v1.3.0"
+        rdsPackage: "xpkg.upbound.io/upbound/provider-aws-rds:v1.3.0"
+        kafkaPackage: "xpkg.upbound.io/upbound/provider-aws-kafka:v1.3.0"
+      crossplaneVersion: 1.15.2
+  writeConnectionSecretToRef:
+    name: aws-pc-e2e-test-kubeconfig
+status:
+  irsa:
+    roleArn: abc
+    chainedRoleARNs:
+      - "chained-role-arn"
+  webIdentity:
+    roleArn: webid-role-arn
+    chainedRoleARNs:
+      - "chained-role-arn"
+  podIdentity:
+    roleArn: podidentity-role-arn
