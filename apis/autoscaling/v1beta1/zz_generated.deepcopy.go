@@ -6799,6 +6799,18 @@ func (in *NotificationInitParameters) DeepCopyInto(out *NotificationInitParamete
 			}
 		}
 	}
+	if in.GroupNamesRefs != nil {
+		in, out := &in.GroupNamesRefs, &out.GroupNamesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.GroupNamesSelector != nil {
+		in, out := &in.GroupNamesSelector, &out.GroupNamesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Notifications != nil {
 		in, out := &in.Notifications, &out.Notifications
 		*out = make([]*string, len(*in))
@@ -6929,6 +6941,18 @@ func (in *NotificationParameters) DeepCopyInto(out *NotificationParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.GroupNamesRefs != nil {
+		in, out := &in.GroupNamesRefs, &out.GroupNamesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.GroupNamesSelector != nil {
+		in, out := &in.GroupNamesSelector, &out.GroupNamesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Notifications != nil {
 		in, out := &in.Notifications, &out.Notifications

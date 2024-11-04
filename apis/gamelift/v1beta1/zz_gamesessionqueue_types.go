@@ -19,7 +19,17 @@ type GameSessionQueueInitParameters struct {
 	CustomEventData *string `json:"customEventData,omitempty" tf:"custom_event_data,omitempty"`
 
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/gamelift/v1beta2.Fleet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
+	// References to Fleet in gamelift to populate destinations.
+	// +kubebuilder:validation:Optional
+	DestinationsRefs []v1.Reference `json:"destinationsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Fleet in gamelift to populate destinations.
+	// +kubebuilder:validation:Optional
+	DestinationsSelector *v1.Selector `json:"destinationsSelector,omitempty" tf:"-"`
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
@@ -83,8 +93,18 @@ type GameSessionQueueParameters struct {
 	CustomEventData *string `json:"customEventData,omitempty" tf:"custom_event_data,omitempty"`
 
 	// List of fleet/alias ARNs used by session queue for placing game sessions.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/gamelift/v1beta2.Fleet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
+	// References to Fleet in gamelift to populate destinations.
+	// +kubebuilder:validation:Optional
+	DestinationsRefs []v1.Reference `json:"destinationsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Fleet in gamelift to populate destinations.
+	// +kubebuilder:validation:Optional
+	DestinationsSelector *v1.Selector `json:"destinationsSelector,omitempty" tf:"-"`
 
 	// An SNS topic ARN that is set up to receive game session placement notifications.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic

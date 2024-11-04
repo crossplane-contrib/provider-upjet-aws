@@ -1298,6 +1298,18 @@ func (in *GameSessionQueueInitParameters) DeepCopyInto(out *GameSessionQueueInit
 			}
 		}
 	}
+	if in.DestinationsRefs != nil {
+		in, out := &in.DestinationsRefs, &out.DestinationsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.DestinationsSelector != nil {
+		in, out := &in.DestinationsSelector, &out.DestinationsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.NotificationTarget != nil {
 		in, out := &in.NotificationTarget, &out.NotificationTarget
 		*out = new(string)
@@ -1493,6 +1505,18 @@ func (in *GameSessionQueueParameters) DeepCopyInto(out *GameSessionQueueParamete
 				**out = **in
 			}
 		}
+	}
+	if in.DestinationsRefs != nil {
+		in, out := &in.DestinationsRefs, &out.DestinationsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.DestinationsSelector != nil {
+		in, out := &in.DestinationsSelector, &out.DestinationsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.NotificationTarget != nil {
 		in, out := &in.NotificationTarget, &out.NotificationTarget

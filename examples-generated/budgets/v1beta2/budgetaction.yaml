@@ -21,8 +21,8 @@ spec:
       - policyArnSelector:
           matchLabels:
             testing.upbound.io/example-name: example
-        roles:
-        - ${aws_iam_role.example.name}
+        rolesRefs:
+        - name: example
     executionRoleArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example

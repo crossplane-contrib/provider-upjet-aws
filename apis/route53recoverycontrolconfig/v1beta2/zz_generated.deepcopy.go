@@ -182,6 +182,18 @@ func (in *SafetyRuleInitParameters) DeepCopyInto(out *SafetyRuleInitParameters) 
 			}
 		}
 	}
+	if in.GatingControlsRefs != nil {
+		in, out := &in.GatingControlsRefs, &out.GatingControlsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.GatingControlsSelector != nil {
+		in, out := &in.GatingControlsSelector, &out.GatingControlsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -202,6 +214,18 @@ func (in *SafetyRuleInitParameters) DeepCopyInto(out *SafetyRuleInitParameters) 
 				**out = **in
 			}
 		}
+	}
+	if in.TargetControlsRefs != nil {
+		in, out := &in.TargetControlsRefs, &out.TargetControlsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.TargetControlsSelector != nil {
+		in, out := &in.TargetControlsSelector, &out.TargetControlsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.WaitPeriodMs != nil {
 		in, out := &in.WaitPeriodMs, &out.WaitPeriodMs
@@ -387,6 +411,18 @@ func (in *SafetyRuleParameters) DeepCopyInto(out *SafetyRuleParameters) {
 			}
 		}
 	}
+	if in.GatingControlsRefs != nil {
+		in, out := &in.GatingControlsRefs, &out.GatingControlsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.GatingControlsSelector != nil {
+		in, out := &in.GatingControlsSelector, &out.GatingControlsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -412,6 +448,18 @@ func (in *SafetyRuleParameters) DeepCopyInto(out *SafetyRuleParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.TargetControlsRefs != nil {
+		in, out := &in.TargetControlsRefs, &out.TargetControlsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.TargetControlsSelector != nil {
+		in, out := &in.TargetControlsSelector, &out.TargetControlsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.WaitPeriodMs != nil {
 		in, out := &in.WaitPeriodMs, &out.WaitPeriodMs

@@ -36,8 +36,18 @@ type EventSubscriptionInitParameters struct {
 	SnsTopicSelector *v1.Selector `json:"snsTopicSelector,omitempty" tf:"-"`
 
 	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// References to Instance in rds to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsRefs []v1.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in rds to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster, db-cluster-snapshot, or db-proxy. If not set, all sources will be subscribed to.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
@@ -115,9 +125,19 @@ type EventSubscriptionParameters struct {
 	SnsTopicSelector *v1.Selector `json:"snsTopicSelector,omitempty" tf:"-"`
 
 	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// References to Instance in rds to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsRefs []v1.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in rds to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster, db-cluster-snapshot, or db-proxy. If not set, all sources will be subscribed to.
 	// +kubebuilder:validation:Optional

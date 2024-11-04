@@ -25,8 +25,8 @@ spec:
     snsTopicArnSelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    sourceIds:
-    - ${aws_neptune_cluster_instance.example.id}
+    sourceIdsRefs:
+    - name: example
     sourceType: db-instance
     tags:
       env: test

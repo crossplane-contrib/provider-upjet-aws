@@ -70,8 +70,18 @@ type SelectionInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
+
+	// References to Instance in rds to populate notResources.
+	// +kubebuilder:validation:Optional
+	NotResourcesRefs []v1.Reference `json:"notResourcesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in rds to populate notResources.
+	// +kubebuilder:validation:Optional
+	NotResourcesSelector *v1.Selector `json:"notResourcesSelector,omitempty" tf:"-"`
 
 	// The backup plan ID to be associated with the selection of resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta2.Plan
@@ -86,8 +96,18 @@ type SelectionInitParameters struct {
 	PlanIDSelector *v1.Selector `json:"planIdSelector,omitempty" tf:"-"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
+
+	// References to Instance in rds to populate resources.
+	// +kubebuilder:validation:Optional
+	ResourcesRefs []v1.Reference `json:"resourcesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in rds to populate resources.
+	// +kubebuilder:validation:Optional
+	ResourcesSelector *v1.Selector `json:"resourcesSelector,omitempty" tf:"-"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
 	SelectionTag []SelectionTagInitParameters `json:"selectionTag,omitempty" tf:"selection_tag,omitempty"`
@@ -147,9 +167,19 @@ type SelectionParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to exclude from a backup plan.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NotResources []*string `json:"notResources,omitempty" tf:"not_resources,omitempty"`
+
+	// References to Instance in rds to populate notResources.
+	// +kubebuilder:validation:Optional
+	NotResourcesRefs []v1.Reference `json:"notResourcesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in rds to populate notResources.
+	// +kubebuilder:validation:Optional
+	NotResourcesSelector *v1.Selector `json:"notResourcesSelector,omitempty" tf:"-"`
 
 	// The backup plan ID to be associated with the selection of resources.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/backup/v1beta2.Plan
@@ -170,9 +200,19 @@ type SelectionParameters struct {
 	Region *string `json:"region" tf:"-"`
 
 	// An array of strings that either contain Amazon Resource Names (ARNs) or match patterns of resources to assign to a backup plan.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Resources []*string `json:"resources,omitempty" tf:"resources,omitempty"`
+
+	// References to Instance in rds to populate resources.
+	// +kubebuilder:validation:Optional
+	ResourcesRefs []v1.Reference `json:"resourcesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in rds to populate resources.
+	// +kubebuilder:validation:Optional
+	ResourcesSelector *v1.Selector `json:"resourcesSelector,omitempty" tf:"-"`
 
 	// Tag-based conditions used to specify a set of resources to assign to a backup plan.
 	// +kubebuilder:validation:Optional
