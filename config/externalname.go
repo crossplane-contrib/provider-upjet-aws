@@ -3252,7 +3252,7 @@ func apiGatewayAccount() config.ExternalName {
 // the aws partition, service, region, account id, and resource. This is by far the most common form of ARN.
 // e.g. arn:aws:ec2:ap-south-1:123456789012:instance/i-1234567890ab
 func fullARNTemplate(service string, resource string) string {
-	return genericARNTemplate(service, resource, false, false)
+	return genericARNTemplate(service, resource, false)
 
 }
 
@@ -3261,22 +3261,17 @@ func fullARNTemplate(service string, resource string) string {
 // resource.
 // e.g. arn:aws:iam::123456789012:role/example
 func regionlessARNTemplate(service string, resource string) string {
-	return genericARNTemplate(service, resource, false, true)
+	return genericARNTemplate(service, resource, true)
 }
 
 // genericARNTemplate builds a templated string for constructing a terraform id component which is an ARN of any format.
 // It always includes the aws partition, service, and resource. Unless you specify to elide them, it will also include
 // templates which resolve to the region (from the spec.forProvider) and the account id (calculated from the provider
 // config).
-func genericARNTemplate(service string, resource string, elideAccountId bool, elideRegion bool) string {
+func genericARNTemplate(service string, resource string, elideRegion bool) string {
 	region := "{{ .setup.configuration.region }}"
 	if elideRegion {
 		region = ""
 	}
-	accountId := "{{ .setup.client_metadata.account_id }}"
-	if elideAccountId {
-		accountId = ""
-	}
-	partition := "{{ .setup.client_metadata.partition }}"
-	return fmt.Sprintf("arn:%s:%s:%s:%s:%s", partition, service, region, accountId, resource)
+	return fmt.Sprintf("arn:{{ .setup.client_metadata.partition }}:%s:%s:{{ .setup.client_metadata.account_id }}:%s", service, region, resource)
 }
