@@ -18,7 +18,7 @@ require (
 	github.com/aws/smithy-go v1.22.1
 	github.com/crossplane/crossplane-runtime v1.16.0-rc.2.0.20240510094504-3f697876fa57
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
-	github.com/crossplane/upjet v1.4.1-0.20241007154751-5cdf36996e4a
+	github.com/crossplane/upjet v1.4.1-0.20241020211140-a18bd41b7ac6
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/awspolicyequivalence v1.6.0
