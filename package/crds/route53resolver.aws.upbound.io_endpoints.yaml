@@ -75,22 +75,26 @@ spec:
                 properties:
                   direction:
                     description: |-
-                      The direction of DNS queries to or from the Route 53 Resolver endpoint.
+                      Direction of DNS queries to or from the Route 53 Resolver endpoint.
                       Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
                       or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
                     type: string
                   ipAddress:
                     description: |-
-                      The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
+                      Subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
                       to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
                     items:
                       properties:
                         ip:
-                          description: The IP address in the subnet that you want
-                            to use for DNS queries.
+                          description: IPv4 address in the subnet that you want to
+                            use for DNS queries.
+                          type: string
+                        ipv6:
+                          description: IPv6 address in the subnet that you want to
+                            use for DNS queries.
                           type: string
                         subnetId:
-                          description: The ID of the subnet that contains the IP address.
+                          description: ID of the subnet that contains the IP address.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in ec2 to populate subnetId.
@@ -169,10 +173,10 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The friendly name of the Route 53 Resolver endpoint.
+                    description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'The protocols you want to use for the Route 53 Resolver
+                    description: 'Protocols you want to use for the Route 53 Resolver
                       endpoint. Valid values: DoH, Do53, DoH-FIPS.'
                     items:
                       type: string
@@ -183,8 +187,9 @@ spec:
                       be created in.
                     type: string
                   resolverEndpointType:
-                    description: 'The Route 53 Resolver endpoint IP address type.
-                      Valid values: IPV4, IPV6, DUALSTACK.'
+                    description: |-
+                      Endpoint IP type. This endpoint type is applied to all IP addresses.
+                      Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -265,8 +270,8 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
-                    description: The ID of one or more security groups that you want
-                      to use to control access to this VPC.
+                    description: ID of one or more security groups that you want to
+                      use to control access to this VPC.
                     items:
                       type: string
                     type: array
@@ -295,22 +300,26 @@ spec:
                 properties:
                   direction:
                     description: |-
-                      The direction of DNS queries to or from the Route 53 Resolver endpoint.
+                      Direction of DNS queries to or from the Route 53 Resolver endpoint.
                       Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
                       or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
                     type: string
                   ipAddress:
                     description: |-
-                      The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
+                      Subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
                       to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
                     items:
                       properties:
                         ip:
-                          description: The IP address in the subnet that you want
-                            to use for DNS queries.
+                          description: IPv4 address in the subnet that you want to
+                            use for DNS queries.
+                          type: string
+                        ipv6:
+                          description: IPv6 address in the subnet that you want to
+                            use for DNS queries.
                           type: string
                         subnetId:
-                          description: The ID of the subnet that contains the IP address.
+                          description: ID of the subnet that contains the IP address.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in ec2 to populate subnetId.
@@ -389,18 +398,19 @@ spec:
                       type: object
                     type: array
                   name:
-                    description: The friendly name of the Route 53 Resolver endpoint.
+                    description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'The protocols you want to use for the Route 53 Resolver
+                    description: 'Protocols you want to use for the Route 53 Resolver
                       endpoint. Valid values: DoH, Do53, DoH-FIPS.'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   resolverEndpointType:
-                    description: 'The Route 53 Resolver endpoint IP address type.
-                      Valid values: IPV4, IPV6, DUALSTACK.'
+                    description: |-
+                      Endpoint IP type. This endpoint type is applied to all IP addresses.
+                      Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
                     type: string
                   securityGroupIdRefs:
                     description: References to SecurityGroup in ec2 to populate securityGroupIds.
@@ -481,8 +491,8 @@ spec:
                         type: object
                     type: object
                   securityGroupIds:
-                    description: The ID of one or more security groups that you want
-                      to use to control access to this VPC.
+                    description: ID of one or more security groups that you want to
+                      use to control access to this VPC.
                     items:
                       type: string
                     type: array
@@ -676,56 +686,61 @@ spec:
               atProvider:
                 properties:
                   arn:
-                    description: The ARN of the Route 53 Resolver endpoint.
+                    description: ARN of the Route 53 Resolver endpoint.
                     type: string
                   direction:
                     description: |-
-                      The direction of DNS queries to or from the Route 53 Resolver endpoint.
+                      Direction of DNS queries to or from the Route 53 Resolver endpoint.
                       Valid values are INBOUND (resolver forwards DNS queries to the DNS service for a VPC from your network or another VPC)
                       or OUTBOUND (resolver forwards DNS queries from the DNS service for a VPC to your network or another VPC).
                     type: string
                   hostVpcId:
-                    description: The ID of the VPC that you want to create the resolver
+                    description: ID of the VPC that you want to create the resolver
                       endpoint in.
                     type: string
                   id:
-                    description: The ID of the Route 53 Resolver endpoint.
+                    description: ID of the Route 53 Resolver endpoint.
                     type: string
                   ipAddress:
                     description: |-
-                      The subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
+                      Subnets and IP addresses in your VPC that you want DNS queries to pass through on the way from your VPCs
                       to your network (for outbound endpoints) or on the way from your network to your VPCs (for inbound endpoints). Described below.
                     items:
                       properties:
                         ip:
-                          description: The IP address in the subnet that you want
-                            to use for DNS queries.
+                          description: IPv4 address in the subnet that you want to
+                            use for DNS queries.
                           type: string
                         ipId:
-                          description: The ID of the Route 53 Resolver endpoint.
+                          description: ID of the Route 53 Resolver endpoint.
+                          type: string
+                        ipv6:
+                          description: IPv6 address in the subnet that you want to
+                            use for DNS queries.
                           type: string
                         subnetId:
-                          description: The ID of the subnet that contains the IP address.
+                          description: ID of the subnet that contains the IP address.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: The friendly name of the Route 53 Resolver endpoint.
+                    description: Friendly name of the Route 53 Resolver endpoint.
                     type: string
                   protocols:
-                    description: 'The protocols you want to use for the Route 53 Resolver
+                    description: 'Protocols you want to use for the Route 53 Resolver
                       endpoint. Valid values: DoH, Do53, DoH-FIPS.'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   resolverEndpointType:
-                    description: 'The Route 53 Resolver endpoint IP address type.
-                      Valid values: IPV4, IPV6, DUALSTACK.'
+                    description: |-
+                      Endpoint IP type. This endpoint type is applied to all IP addresses.
+                      Valid values are IPV6,IPV4 or DUALSTACK (both IPv4 and IPv6).
                     type: string
                   securityGroupIds:
-                    description: The ID of one or more security groups that you want
-                      to use to control access to this VPC.
+                    description: ID of one or more security groups that you want to
+                      use to control access to this VPC.
                     items:
                       type: string
                     type: array
@@ -739,9 +754,8 @@ spec:
                   tagsAll:
                     additionalProperties:
                       type: string
-                    description: A map of tags assigned to the resource, including
-                      those inherited from the provider default_tags configuration
-                      block.
+                    description: Map of tags assigned to the resource, including those
+                      inherited from the provider default_tags configuration block.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

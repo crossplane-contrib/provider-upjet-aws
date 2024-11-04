@@ -2992,6 +2992,11 @@ func (in *LBInitParameters) DeepCopyInto(out *LBInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableZonalShift != nil {
+		in, out := &in.EnableZonalShift, &out.EnableZonalShift
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic != nil {
 		in, out := &in.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, &out.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic
 		*out = new(string)
@@ -3448,6 +3453,11 @@ func (in *LBListenerInitParameters) DeepCopyInto(out *LBListenerInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.TCPIdleTimeoutSeconds != nil {
+		in, out := &in.TCPIdleTimeoutSeconds, &out.TCPIdleTimeoutSeconds
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3565,6 +3575,11 @@ func (in *LBListenerObservation) DeepCopyInto(out *LBListenerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TCPIdleTimeoutSeconds != nil {
+		in, out := &in.TCPIdleTimeoutSeconds, &out.TCPIdleTimeoutSeconds
+		*out = new(float64)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3669,6 +3684,11 @@ func (in *LBListenerParameters) DeepCopyInto(out *LBListenerParameters) {
 	if in.SSLPolicy != nil {
 		in, out := &in.SSLPolicy, &out.SSLPolicy
 		*out = new(string)
+		**out = **in
+	}
+	if in.TCPIdleTimeoutSeconds != nil {
+		in, out := &in.TCPIdleTimeoutSeconds, &out.TCPIdleTimeoutSeconds
+		*out = new(float64)
 		**out = **in
 	}
 	if in.Tags != nil {
@@ -4131,6 +4151,11 @@ func (in *LBObservation) DeepCopyInto(out *LBObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnableZonalShift != nil {
+		in, out := &in.EnableZonalShift, &out.EnableZonalShift
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic != nil {
 		in, out := &in.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic, &out.EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic
 		*out = new(string)
@@ -4328,6 +4353,11 @@ func (in *LBParameters) DeepCopyInto(out *LBParameters) {
 	}
 	if in.EnableXffClientPort != nil {
 		in, out := &in.EnableXffClientPort, &out.EnableXffClientPort
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnableZonalShift != nil {
+		in, out := &in.EnableZonalShift, &out.EnableZonalShift
 		*out = new(bool)
 		**out = **in
 	}

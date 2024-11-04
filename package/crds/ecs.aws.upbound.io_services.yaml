@@ -1001,6 +1001,29 @@ spec:
                             description: Snapshot that Amazon ECS uses to create the
                               volume. You must specify either a size_in_gb or a snapshot_id.
                             type: string
+                          tagSpecifications:
+                            description: The tags to apply to the volume. See below.
+                            items:
+                              properties:
+                                propagateTags:
+                                  description: Determines whether to propagate the
+                                    tags from the task definition to the Amazon EBS
+                                    volume.
+                                  type: string
+                                resourceType:
+                                  description: The type of volume resource. Valid
+                                    values, volume.
+                                  type: string
+                                tags:
+                                  additionalProperties:
+                                    type: string
+                                  description: The tags applied to this Amazon EBS
+                                    volume. AmazonECSCreated and AmazonECSManaged
+                                    are reserved tags that can't be used.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                              type: object
+                            type: array
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
@@ -1957,6 +1980,29 @@ spec:
                             description: Snapshot that Amazon ECS uses to create the
                               volume. You must specify either a size_in_gb or a snapshot_id.
                             type: string
+                          tagSpecifications:
+                            description: The tags to apply to the volume. See below.
+                            items:
+                              properties:
+                                propagateTags:
+                                  description: Determines whether to propagate the
+                                    tags from the task definition to the Amazon EBS
+                                    volume.
+                                  type: string
+                                resourceType:
+                                  description: The type of volume resource. Valid
+                                    values, volume.
+                                  type: string
+                                tags:
+                                  additionalProperties:
+                                    type: string
+                                  description: The tags applied to this Amazon EBS
+                                    volume. AmazonECSCreated and AmazonECSManaged
+                                    are reserved tags that can't be used.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                              type: object
+                            type: array
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
@@ -2624,6 +2670,29 @@ spec:
                             description: Snapshot that Amazon ECS uses to create the
                               volume. You must specify either a size_in_gb or a snapshot_id.
                             type: string
+                          tagSpecifications:
+                            description: The tags to apply to the volume. See below.
+                            items:
+                              properties:
+                                propagateTags:
+                                  description: Determines whether to propagate the
+                                    tags from the task definition to the Amazon EBS
+                                    volume.
+                                  type: string
+                                resourceType:
+                                  description: The type of volume resource. Valid
+                                    values, volume.
+                                  type: string
+                                tags:
+                                  additionalProperties:
+                                    type: string
+                                  description: The tags applied to this Amazon EBS
+                                    volume. AmazonECSCreated and AmazonECSManaged
+                                    are reserved tags that can't be used.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                              type: object
+                            type: array
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
@@ -3654,6 +3723,29 @@ spec:
                             description: Snapshot that Amazon ECS uses to create the
                               volume. You must specify either a size_in_gb or a snapshot_id.
                             type: string
+                          tagSpecifications:
+                            description: The tags to apply to the volume. See below.
+                            items:
+                              properties:
+                                propagateTags:
+                                  description: Determines whether to propagate the
+                                    tags from the task definition to the Amazon EBS
+                                    volume.
+                                  type: string
+                                resourceType:
+                                  description: The type of volume resource. Valid
+                                    values, volume.
+                                  type: string
+                                tags:
+                                  additionalProperties:
+                                    type: string
+                                  description: The tags applied to this Amazon EBS
+                                    volume. AmazonECSCreated and AmazonECSManaged
+                                    are reserved tags that can't be used.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                              type: object
+                            type: array
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
@@ -4580,6 +4672,29 @@ spec:
                             description: Snapshot that Amazon ECS uses to create the
                               volume. You must specify either a size_in_gb or a snapshot_id.
                             type: string
+                          tagSpecifications:
+                            description: The tags to apply to the volume. See below.
+                            items:
+                              properties:
+                                propagateTags:
+                                  description: Determines whether to propagate the
+                                    tags from the task definition to the Amazon EBS
+                                    volume.
+                                  type: string
+                                resourceType:
+                                  description: The type of volume resource. Valid
+                                    values, volume.
+                                  type: string
+                                tags:
+                                  additionalProperties:
+                                    type: string
+                                  description: The tags applied to this Amazon EBS
+                                    volume. AmazonECSCreated and AmazonECSManaged
+                                    are reserved tags that can't be used.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                              type: object
+                            type: array
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.
@@ -5217,6 +5332,29 @@ spec:
                             description: Snapshot that Amazon ECS uses to create the
                               volume. You must specify either a size_in_gb or a snapshot_id.
                             type: string
+                          tagSpecifications:
+                            description: The tags to apply to the volume. See below.
+                            items:
+                              properties:
+                                propagateTags:
+                                  description: Determines whether to propagate the
+                                    tags from the task definition to the Amazon EBS
+                                    volume.
+                                  type: string
+                                resourceType:
+                                  description: The type of volume resource. Valid
+                                    values, volume.
+                                  type: string
+                                tags:
+                                  additionalProperties:
+                                    type: string
+                                  description: The tags applied to this Amazon EBS
+                                    volume. AmazonECSCreated and AmazonECSManaged
+                                    are reserved tags that can't be used.
+                                  type: object
+                                  x-kubernetes-map-type: granular
+                              type: object
+                            type: array
                           throughput:
                             description: Throughput to provision for a volume, in
                               MiB/s, with a maximum of 1,000 MiB/s.

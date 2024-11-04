@@ -81,6 +81,10 @@ spec:
                   description:
                     description: A description for the IPAM.
                     type: string
+                  enablePrivateGua:
+                    description: 'Enable this option to use your own GUA ranges as
+                      private IPv6 addresses. Default: false.'
+                    type: boolean
                   operatingRegions:
                     description: Determines which locales can be chosen when you create
                       pools. Locale is the Region where you want to make an IPAM pool
@@ -135,6 +139,10 @@ spec:
                   description:
                     description: A description for the IPAM.
                     type: string
+                  enablePrivateGua:
+                    description: 'Enable this option to use your own GUA ranges as
+                      private IPv6 addresses. Default: false.'
+                    type: boolean
                   operatingRegions:
                     description: Determines which locales can be chosen when you create
                       pools. Locale is the Region where you want to make an IPAM pool
@@ -357,6 +365,10 @@ spec:
                   description:
                     description: A description for the IPAM.
                     type: string
+                  enablePrivateGua:
+                    description: 'Enable this option to use your own GUA ranges as
+                      private IPv6 addresses. Default: false.'
+                    type: boolean
                   id:
                     description: The ID of the IPAM
                     type: string

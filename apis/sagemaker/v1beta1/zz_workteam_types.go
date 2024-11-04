@@ -30,7 +30,7 @@ type CognitoMemberDefinitionInitParameters struct {
 
 	// An identifier for a user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	UserGroup *string `json:"userGroup,omitempty" tf:"user_group,omitempty"`
 
 	// Reference to a UserGroup in cognitoidp to populate userGroup.
@@ -85,7 +85,7 @@ type CognitoMemberDefinitionParameters struct {
 
 	// An identifier for a user group.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cognitoidp/v1beta1.UserGroup
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	UserGroup *string `json:"userGroup,omitempty" tf:"user_group,omitempty"`
 
@@ -267,7 +267,7 @@ type WorkteamInitParameters struct {
 	// Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL. see Worker Access Configuration details below.
 	WorkerAccessConfiguration *WorkerAccessConfigurationInitParameters `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
 
-	// The name of the Workteam (must be unique).
+	// The name of the workforce.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Workforce
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	WorkforceName *string `json:"workforceName,omitempty" tf:"workforce_name,omitempty"`
@@ -312,7 +312,7 @@ type WorkteamObservation struct {
 	// Use this optional parameter to constrain access to an Amazon S3 resource based on the IP address using supported IAM global condition keys. The Amazon S3 resource is accessed in the worker portal using a Amazon S3 presigned URL. see Worker Access Configuration details below.
 	WorkerAccessConfiguration *WorkerAccessConfigurationObservation `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
 
-	// The name of the Workteam (must be unique).
+	// The name of the workforce.
 	WorkforceName *string `json:"workforceName,omitempty" tf:"workforce_name,omitempty"`
 }
 
@@ -344,7 +344,7 @@ type WorkteamParameters struct {
 	// +kubebuilder:validation:Optional
 	WorkerAccessConfiguration *WorkerAccessConfigurationParameters `json:"workerAccessConfiguration,omitempty" tf:"worker_access_configuration,omitempty"`
 
-	// The name of the Workteam (must be unique).
+	// The name of the workforce.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sagemaker/v1beta1.Workforce
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
