@@ -36,7 +36,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// batch
 	// AWS Batch job queue can be imported using the name
-	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:job-queue/{{ .external_name }}"),
+	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", fullArnTemplate("batch", "job-queue/{{ .external_name }}")),
 
 	// bedrockagent
 	//
@@ -576,13 +576,13 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// codeartifact
 	//
 	// CodeArtifact Domain can be imported using the CodeArtifact Domain arn
-	"aws_codeartifact_domain": config.TemplatedStringAsIdentifier("", "arn:aws:codeartifact:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .external_name }}"),
+	"aws_codeartifact_domain": config.TemplatedStringAsIdentifier("", fullArnTemplate("codeartifact", "domain/{{ .external_name }}")),
 	// CodeArtifact Domain Permissions Policies can be imported using the CodeArtifact Domain ARN
-	"aws_codeartifact_domain_permissions_policy": config.TemplatedStringAsIdentifier("", "arn:aws:codeartifact:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .parameters.domain }}"),
+	"aws_codeartifact_domain_permissions_policy": config.TemplatedStringAsIdentifier("", fullArnTemplate("codeartifact", "domain/{{ .parameters.domain }}")),
 	// CodeArtifact Repository can be imported using the CodeArtifact Repository ARN
-	"aws_codeartifact_repository": config.TemplatedStringAsIdentifier("", "arn:aws:codeartifact:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:repository/{{ .parameters.domain }}/{{ .external_name }}"),
+	"aws_codeartifact_repository": config.TemplatedStringAsIdentifier("", fullArnTemplate("codeartifact", "repository/{{ .parameters.domain }}/{{ .external_name }}")),
 	// CodeArtifact Repository Permissions Policies can be imported using the CodeArtifact Repository ARN
-	"aws_codeartifact_repository_permissions_policy": config.TemplatedStringAsIdentifier("", "arn:aws:codeartifact:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:repository/{{ .parameters.domain }}/{{ .parameters.repository }}"),
+	"aws_codeartifact_repository_permissions_policy": config.TemplatedStringAsIdentifier("", fullArnTemplate("codeartifact", "repository/{{ .parameters.domain }}/{{ .parameters.repository }}")),
 
 	// codecommit
 	//
@@ -1117,7 +1117,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	"aws_ecs_capacity_provider": config.TemplatedStringAsIdentifier("name", fullArnTemplate("ecs", "capacity-provider/{{ .external_name }}")),
 	//
-	"aws_ecs_cluster": config.TemplatedStringAsIdentifier("name", "arn:aws:ecs:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:cluster/{{ .external_name }}"),
+	"aws_ecs_cluster": config.TemplatedStringAsIdentifier("name", fullArnTemplate("ecs", "cluster/{{ .external_name }}")),
 	// ECS cluster capacity providers can be imported using the cluster_name attribute
 	"aws_ecs_cluster_capacity_providers": config.IdentifierFromProvider,
 	//
@@ -1183,7 +1183,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// elasticsearch
 	//
 	// Elasticsearch domains can be imported using the domain_name
-	"aws_elasticsearch_domain": config.TemplatedStringAsIdentifier("domain_name", "arn:aws:es:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:domain/{{ .external_name }}"),
+	"aws_elasticsearch_domain": config.TemplatedStringAsIdentifier("domain_name", fullArnTemplate("es", "domain/{{ .external_name }}")),
 	// No import
 	"aws_elasticsearch_domain_policy": config.IdentifierFromProvider,
 	// Elasticsearch domains can be imported using the domain_name
@@ -1552,13 +1552,13 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	//
 	// MSK Connect Connector can be imported using the connector's arn
 	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:connector/example/264edee4-17a3-412e-bd76-6681cfc93805-3
-	"aws_mskconnect_connector": TemplatedStringAsProviderDefinedIdentifier("arn:aws:kafkaconnect:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:connector/{{ .parameters.name }}/{{ .external_name }}"),
+	"aws_mskconnect_connector": TemplatedStringAsProviderDefinedIdentifier(fullArnTemplate("kafkaconnect", "connector/{{ .parameters.name }}/{{ .external_name }}")),
 	// MSK Connect Custom Plugin can be imported using the plugin's arn
 	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:custom-plugin/debezium-example/abcdefgh-1234-5678-9abc-defghijklmno-4
-	"aws_mskconnect_custom_plugin": TemplatedStringAsProviderDefinedIdentifier("arn:aws:kafkaconnect:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:custom-plugin/{{ .parameters.name }}/{{ .external_name }}"),
+	"aws_mskconnect_custom_plugin": TemplatedStringAsProviderDefinedIdentifier(fullArnTemplate("kafkaconnect", "custom-plugin/{{ .parameters.name }}/{{ .external_name }}")),
 	// MSK Connect Worker Configuration can be imported using the worker configuration's arn
 	// Example: arn:aws:kafkaconnect:eu-central-1:123456789012:worker-configuration/example/8848493b-7fcc-478c-a646-4a52634e3378-4
-	"aws_mskconnect_worker_configuration": TemplatedStringAsProviderDefinedIdentifier("arn:aws:kafkaconnect:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:worker-configuration/{{ .parameters.name }}/{{ .external_name }}"),
+	"aws_mskconnect_worker_configuration": TemplatedStringAsProviderDefinedIdentifier(fullArnTemplate("kafkaconnect", "worker-configuration/{{ .parameters.name }}/{{ .external_name }}")),
 
 	// kendra
 	//
@@ -1855,7 +1855,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_networkmanager_core_network": config.IdentifierFromProvider,
 	// aws_networkmanager_customer_gateway_association can be imported using the global network ID and customer gateway ARN
 	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:customer-gateway/cgw-123abc05e04123abc
-	"aws_networkmanager_customer_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:customer-gateway/{{ .parameters.customer_gateway_arn }}"),
+	"aws_networkmanager_customer_gateway_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:{{ .setup.client_metadata.partition }}:ec2:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:customer-gateway/{{ .parameters.customer_gateway_arn }}"),
 	// aws_networkmanager_device can be imported using the device ARN
 	// Example: arn:aws:networkmanager::123456789012:device/global-network-0d47f6t230mz46dy4/device-07f6fd08867abc123
 	"aws_networkmanager_device": config.IdentifierFromProvider,
@@ -1872,7 +1872,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_networkmanager_site": config.IdentifierFromProvider,
 	// aws_networkmanager_transit_gateway_connect_peer_association can be imported using the global network ID and customer gateway ARN
 	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:transit-gateway-connect-peer/tgw-connect-peer-12345678
-	"aws_networkmanager_transit_gateway_connect_peer_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:aws:ec2:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:transit-gateway-connect-peer/{{ .parameters.transit_gateway_connect_peer_arn }}"),
+	"aws_networkmanager_transit_gateway_connect_peer_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},arn:{{ .setup.client_metadata.partition }}:ec2:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:transit-gateway-connect-peer/{{ .parameters.transit_gateway_connect_peer_arn }}"),
 	// aws_networkmanager_transit_gateway_registration can be imported using the global network ID and transit gateway ARN
 	// Example: global-network-0d47f6t230mz46dy4,arn:aws:ec2:us-west-2:123456789012:transit-gateway/tgw-123abc05e04123abc
 	"aws_networkmanager_transit_gateway_registration": config.TemplatedStringAsIdentifier("", "{{ .parameters.global_network_id }},{{ .parameters.transit_gateway_arn }}"),
@@ -2826,7 +2826,8 @@ func iamPolicy() config.ExternalName {
 			path = "/"
 		}
 		accountID := setup["client_metadata"].(map[string]string)["account_id"]
-		return fmt.Sprintf("arn:aws:iam::%s:policy%s%s", accountID, path, externalName), nil
+		partition := setup["client_metadata"].(map[string]string)["partition"]
+		return fmt.Sprintf("arn:%s:iam::%s:policy%s%s", partition, accountID, path, externalName), nil
 	}
 
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -3001,7 +3002,8 @@ func PermissionSetIdAsExternalName() config.ExternalName {
 			}
 			instanceId := strings.Split(iaStr, "/")[1]
 
-			return fmt.Sprintf("arn:aws:sso:::permissionSet/%s/%s,%s", instanceId, externalName, iaStr), nil
+			partition := setup["client_metadata"].(map[string]string)["partition"]
+			return fmt.Sprintf("arn:%s:sso:::permissionSet/%s/%s,%s", partition, instanceId, externalName, iaStr), nil
 		},
 		DisableNameInitializer: true,
 	}
