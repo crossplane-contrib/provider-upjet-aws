@@ -3275,6 +3275,6 @@ func genericArnTemplate(service string, resource string, elideAccountId bool, el
 	if elideAccountId {
 		accountId = ""
 	}
-	partition := "{{ .setup.configuration.partition }}"
+	partition := "{{ .setup.client_metadata.partition }}"
 	return fmt.Sprintf("arn:%s:%s:%s:%s:%s", partition, service, region, accountId, resource)
 }
