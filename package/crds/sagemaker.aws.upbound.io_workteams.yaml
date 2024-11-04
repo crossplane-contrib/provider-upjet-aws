@@ -419,7 +419,7 @@ spec:
                         type: object
                     type: object
                   workforceName:
-                    description: The name of the Workteam (must be unique).
+                    description: The name of the workforce.
                     type: string
                   workforceNameRef:
                     description: Reference to a Workforce in sagemaker to populate
@@ -855,7 +855,7 @@ spec:
                         type: object
                     type: object
                   workforceName:
-                    description: The name of the Workteam (must be unique).
+                    description: The name of the workforce.
                     type: string
                   workforceNameRef:
                     description: Reference to a Workforce in sagemaker to populate
@@ -1247,7 +1247,7 @@ spec:
                         type: object
                     type: object
                   workforceName:
-                    description: The name of the Workteam (must be unique).
+                    description: The name of the workforce.
                     type: string
                 type: object
               conditions:
