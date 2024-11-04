@@ -43,7 +43,7 @@ type SetupConfig struct {
 var iamRegions = map[string]string{
 	"aws":        "us-east-1",
 	"aws-us-gov": "us-gov-west-1",
-	"aws-cn":     "cn-northeast-1",
+	"aws-cn":     "cn-north-1",
 	"aws-iso":    "us-iso-east-1",
 	"aws-iso-b":  "us-isob-east-1",
 	"aws-iso-e":  "eu-isoe-west-1",
