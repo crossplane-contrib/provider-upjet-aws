@@ -1,0 +1,89 @@
+apiVersion: sagemaker.aws.upbound.io/v1beta1
+kind: MlflowTrackingServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    artifactStoreUri: s3://${aws_s3_bucket.example.bucket}/path
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    trackingServerName: example
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Role
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
+  labels:
+    testing.upbound.io/example-name: example-mlflowtrackingserver
+  name: sample-role
+spec:
+  forProvider:
+    assumeRolePolicy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Principal": {
+              "Service": "sagemaker.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+          }
+        ]
+      }
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: RolePolicyAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
+  labels:
+    testing.upbound.io/example-name: example-mlflowtrackingserver
+  name: sample-policy-attachment
+spec:
+  forProvider:
+    policyArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+    roleSelector:
+      matchLabels:
+        testing.upbound.io/example-name: role
+---
+apiVersion: iam.aws.upbound.io/v1beta1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1beta1/role
+  labels:
+    testing.upbound.io/example-name: example-mlflowtrackingserver
+  name: sample-user-policy
+spec:
+  forProvider:
+    policy: |
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+              "Sid": "VisualEditor0",
+              "Effect": "Allow",
+              "Action": [
+                "s3:Get*",
+                "s3:Put*",
+                "sagemaker:AddTags",
+                "sagemaker:CreateModelPackageGroup",
+                "sagemaker:CreateModelPackage",
+                "sagemaker:DescribeModelPackageGroup",
+                "sagemaker:UpdateModelPackage",
+                "s3:List*"
+            ],
+              "Resource": "*"
+          }
+        ]
+      }
