@@ -13,6 +13,9 @@ func (tr *Image) Hub() {}
 func (tr *ImageVersion) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *MlflowTrackingServer) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ModelPackageGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
