@@ -782,6 +782,7 @@
 "aws_sagemaker_feature_group",
 "aws_sagemaker_image",
 "aws_sagemaker_image_version",
+"aws_sagemaker_mlflow_tracking_server",
 "aws_sagemaker_model",
 "aws_sagemaker_model_package_group",
 "aws_sagemaker_model_package_group_policy",
