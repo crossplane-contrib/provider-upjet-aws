@@ -83,6 +83,14 @@ type SafetyRuleInitParameters struct {
 	// Gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
 	GatingControls []*string `json:"gatingControls,omitempty" tf:"gating_controls,omitempty"`
 
+	// References to RoutingControl in route53recoverycontrolconfig to populate gatingControls.
+	// +kubebuilder:validation:Optional
+	GatingControlsRefs []v1.Reference `json:"gatingControlsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate gatingControls.
+	// +kubebuilder:validation:Optional
+	GatingControlsSelector *v1.Selector `json:"gatingControlsSelector,omitempty" tf:"-"`
+
 	// Name describing the safety rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -91,6 +99,14 @@ type SafetyRuleInitParameters struct {
 
 	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
 	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
+
+	// References to RoutingControl in route53recoverycontrolconfig to populate targetControls.
+	// +kubebuilder:validation:Optional
+	TargetControlsRefs []v1.Reference `json:"targetControlsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate targetControls.
+	// +kubebuilder:validation:Optional
+	TargetControlsSelector *v1.Selector `json:"targetControlsSelector,omitempty" tf:"-"`
 
 	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
 	WaitPeriodMs *float64 `json:"waitPeriodMs,omitempty" tf:"wait_period_ms,omitempty"`
@@ -162,6 +178,14 @@ type SafetyRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	GatingControls []*string `json:"gatingControls,omitempty" tf:"gating_controls,omitempty"`
 
+	// References to RoutingControl in route53recoverycontrolconfig to populate gatingControls.
+	// +kubebuilder:validation:Optional
+	GatingControlsRefs []v1.Reference `json:"gatingControlsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate gatingControls.
+	// +kubebuilder:validation:Optional
+	GatingControlsSelector *v1.Selector `json:"gatingControlsSelector,omitempty" tf:"-"`
+
 	// Name describing the safety rule.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -178,6 +202,14 @@ type SafetyRuleParameters struct {
 	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
 	// +kubebuilder:validation:Optional
 	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
+
+	// References to RoutingControl in route53recoverycontrolconfig to populate targetControls.
+	// +kubebuilder:validation:Optional
+	TargetControlsRefs []v1.Reference `json:"targetControlsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of RoutingControl in route53recoverycontrolconfig to populate targetControls.
+	// +kubebuilder:validation:Optional
+	TargetControlsSelector *v1.Selector `json:"targetControlsSelector,omitempty" tf:"-"`
 
 	// Evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail.
 	// +kubebuilder:validation:Optional

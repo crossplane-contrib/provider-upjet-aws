@@ -385,6 +385,14 @@ type ExcludeInitParameters struct {
 	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
 
+	// References to Bucket in s3 to populate buckets.
+	// +kubebuilder:validation:Optional
+	BucketsRefs []v1.Reference `json:"bucketsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Bucket in s3 to populate buckets.
+	// +kubebuilder:validation:Optional
+	BucketsSelector *v1.Selector `json:"bucketsSelector,omitempty" tf:"-"`
+
 	// List of AWS Regions.
 	// +listType=set
 	Regions []*string `json:"regions,omitempty" tf:"regions,omitempty"`
@@ -407,6 +415,14 @@ type ExcludeParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Buckets []*string `json:"buckets,omitempty" tf:"buckets,omitempty"`
+
+	// References to Bucket in s3 to populate buckets.
+	// +kubebuilder:validation:Optional
+	BucketsRefs []v1.Reference `json:"bucketsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Bucket in s3 to populate buckets.
+	// +kubebuilder:validation:Optional
+	BucketsSelector *v1.Selector `json:"bucketsSelector,omitempty" tf:"-"`
 
 	// List of AWS Regions.
 	// +kubebuilder:validation:Optional

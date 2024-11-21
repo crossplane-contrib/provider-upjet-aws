@@ -32,6 +32,14 @@ type DirectoryInitParameters struct {
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
+	// References to IPGroup in workspaces to populate ipGroupIds.
+	// +kubebuilder:validation:Optional
+	IPGroupIdsRefs []v1.Reference `json:"ipGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IPGroup in workspaces to populate ipGroupIds.
+	// +kubebuilder:validation:Optional
+	IPGroupIdsSelector *v1.Selector `json:"ipGroupIdsSelector,omitempty" tf:"-"`
+
 	// –  Configuration of SAML authentication integration. Defined below.
 	SAMLProperties []SAMLPropertiesInitParameters `json:"samlProperties,omitempty" tf:"saml_properties,omitempty"`
 
@@ -146,6 +154,14 @@ type DirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
+
+	// References to IPGroup in workspaces to populate ipGroupIds.
+	// +kubebuilder:validation:Optional
+	IPGroupIdsRefs []v1.Reference `json:"ipGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IPGroup in workspaces to populate ipGroupIds.
+	// +kubebuilder:validation:Optional
+	IPGroupIdsSelector *v1.Selector `json:"ipGroupIdsSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

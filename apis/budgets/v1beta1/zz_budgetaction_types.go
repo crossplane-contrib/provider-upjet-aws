@@ -276,6 +276,14 @@ type IAMActionDefinitionInitParameters struct {
 	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
+	// References to Role in iam to populate roles.
+	// +kubebuilder:validation:Optional
+	RolesRefs []v1.Reference `json:"rolesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Role in iam to populate roles.
+	// +kubebuilder:validation:Optional
+	RolesSelector *v1.Selector `json:"rolesSelector,omitempty" tf:"-"`
+
 	// A list of users to be attached. There must be at least one user.
 	// +listType=set
 	Users []*string `json:"users,omitempty" tf:"users,omitempty"`
@@ -324,6 +332,14 @@ type IAMActionDefinitionParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
+
+	// References to Role in iam to populate roles.
+	// +kubebuilder:validation:Optional
+	RolesRefs []v1.Reference `json:"rolesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Role in iam to populate roles.
+	// +kubebuilder:validation:Optional
+	RolesSelector *v1.Selector `json:"rolesSelector,omitempty" tf:"-"`
 
 	// A list of users to be attached. There must be at least one user.
 	// +kubebuilder:validation:Optional

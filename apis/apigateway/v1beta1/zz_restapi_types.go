@@ -21,6 +21,14 @@ type RestAPIEndpointConfigurationInitParameters struct {
 	// Set of VPC Endpoint identifiers. It is only supported for PRIVATE endpoint type. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension vpcEndpointIds property. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
 	// +listType=set
 	VPCEndpointIds []*string `json:"vpcEndpointIds,omitempty" tf:"vpc_endpoint_ids,omitempty"`
+
+	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIdsRefs []v1.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIdsSelector *v1.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIEndpointConfigurationObservation struct {
@@ -43,6 +51,14 @@ type RestAPIEndpointConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCEndpointIds []*string `json:"vpcEndpointIds,omitempty" tf:"vpc_endpoint_ids,omitempty"`
+
+	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIdsRefs []v1.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIdsSelector *v1.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIInitParameters struct {
