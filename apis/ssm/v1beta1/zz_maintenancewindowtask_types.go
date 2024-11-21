@@ -37,7 +37,17 @@ type AutomationParametersParameterInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The array of strings.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+
+	// References to Instance in ec2 to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in ec2 to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type AutomationParametersParameterObservation struct {
@@ -56,8 +66,18 @@ type AutomationParametersParameterParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The array of strings.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.Instance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+
+	// References to Instance in ec2 to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in ec2 to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type AutomationParametersParameters struct {
