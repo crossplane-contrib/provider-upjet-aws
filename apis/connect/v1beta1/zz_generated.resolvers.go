@@ -963,6 +963,7 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
@@ -1003,6 +1004,25 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.RoutingProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoutingProfileIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta1", "SecurityProfile", "SecurityProfileList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityProfileIds),
+			Extract:       resource.ExtractParamPath("security_profile_id", true),
+			References:    mg.Spec.ForProvider.SecurityProfileIdsRefs,
+			Selector:      mg.Spec.ForProvider.SecurityProfileIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityProfileIds")
+	}
+	mg.Spec.ForProvider.SecurityProfileIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecurityProfileIdsRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta1", "Instance", "InstanceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -1040,6 +1060,25 @@ func (mg *User) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.InitProvider.RoutingProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RoutingProfileIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("connect.aws.upbound.io", "v1beta1", "SecurityProfile", "SecurityProfileList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityProfileIds),
+			Extract:       resource.ExtractParamPath("security_profile_id", true),
+			References:    mg.Spec.InitProvider.SecurityProfileIdsRefs,
+			Selector:      mg.Spec.InitProvider.SecurityProfileIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityProfileIds")
+	}
+	mg.Spec.InitProvider.SecurityProfileIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecurityProfileIdsRefs = mrsp.ResolvedReferences
 
 	return nil
 }

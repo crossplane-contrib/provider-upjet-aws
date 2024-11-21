@@ -2255,6 +2255,18 @@ func (in *ExcludeInitParameters) DeepCopyInto(out *ExcludeInitParameters) {
 			}
 		}
 	}
+	if in.BucketsRefs != nil {
+		in, out := &in.BucketsRefs, &out.BucketsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.BucketsSelector != nil {
+		in, out := &in.BucketsSelector, &out.BucketsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Regions != nil {
 		in, out := &in.Regions, &out.Regions
 		*out = make([]*string, len(*in))
@@ -2328,6 +2340,18 @@ func (in *ExcludeParameters) DeepCopyInto(out *ExcludeParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.BucketsRefs != nil {
+		in, out := &in.BucketsRefs, &out.BucketsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.BucketsSelector != nil {
+		in, out := &in.BucketsSelector, &out.BucketsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Regions != nil {
 		in, out := &in.Regions, &out.Regions
