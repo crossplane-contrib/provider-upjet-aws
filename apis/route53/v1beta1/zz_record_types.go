@@ -268,6 +268,8 @@ type RecordInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("public_ip",true)
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
@@ -415,6 +417,8 @@ type RecordParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("public_ip",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`

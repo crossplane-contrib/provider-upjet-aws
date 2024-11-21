@@ -29,6 +29,8 @@ type DirectoryInitParameters struct {
 	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// The identifiers of the IP access control groups associated with the directory.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/workspaces/v1beta1.IPGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
@@ -151,6 +153,8 @@ type DirectoryParameters struct {
 	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
 	// The identifiers of the IP access control groups associated with the directory.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/workspaces/v1beta1.IPGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`

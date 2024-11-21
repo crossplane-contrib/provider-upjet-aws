@@ -37,6 +37,7 @@ type CatalogTargetInitParameters struct {
 	EventQueueArn *string `json:"eventQueueArn,omitempty" tf:"event_queue_arn,omitempty"`
 
 	// A list of catalog tables to be synchronized.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogTable
 	Tables []*string `json:"tables,omitempty" tf:"tables,omitempty"`
 
 	// References to CatalogTable in glue to populate tables.
@@ -94,6 +95,7 @@ type CatalogTargetParameters struct {
 	EventQueueArn *string `json:"eventQueueArn,omitempty" tf:"event_queue_arn,omitempty"`
 
 	// A list of catalog tables to be synchronized.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogTable
 	// +kubebuilder:validation:Optional
 	Tables []*string `json:"tables" tf:"tables,omitempty"`
 
