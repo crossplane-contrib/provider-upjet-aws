@@ -1642,6 +1642,8 @@ type SQLApplicationConfigurationParameters struct {
 type VPCConfigurationInitParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
@@ -1654,6 +1656,8 @@ type VPCConfigurationInitParameters struct {
 	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// The Subnet IDs used by the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
@@ -1686,6 +1690,8 @@ type VPCConfigurationObservation struct {
 type VPCConfigurationParameters struct {
 
 	// The Security Group IDs used by the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds" tf:"security_group_ids,omitempty"`
@@ -1699,6 +1705,8 @@ type VPCConfigurationParameters struct {
 	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// The Subnet IDs used by the VPC configuration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds" tf:"subnet_ids,omitempty"`

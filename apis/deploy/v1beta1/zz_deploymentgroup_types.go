@@ -715,6 +715,8 @@ type OnPremisesInstanceTagFilterParameters struct {
 type ProdTrafficRouteInitParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBListener
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 
@@ -737,6 +739,8 @@ type ProdTrafficRouteObservation struct {
 type ProdTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBListener
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
