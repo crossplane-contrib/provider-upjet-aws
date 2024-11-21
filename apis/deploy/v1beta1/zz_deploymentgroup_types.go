@@ -743,7 +743,7 @@ type ProdTrafficRouteParameters struct {
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
+	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
 
 	// References to LBListener in elbv2 to populate listenerArns.
 	// +kubebuilder:validation:Optional
