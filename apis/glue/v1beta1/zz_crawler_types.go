@@ -97,7 +97,7 @@ type CatalogTargetParameters struct {
 	// A list of catalog tables to be synchronized.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/glue/v1beta2.CatalogTable
 	// +kubebuilder:validation:Optional
-	Tables []*string `json:"tables" tf:"tables,omitempty"`
+	Tables []*string `json:"tables,omitempty" tf:"tables,omitempty"`
 
 	// References to CatalogTable in glue to populate tables.
 	// +kubebuilder:validation:Optional
