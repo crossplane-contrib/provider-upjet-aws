@@ -121,6 +121,14 @@ type PhysicalConnectionRequirementsInitParameters struct {
 	// +listType=set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
 
+	// References to SecurityGroup in ec2 to populate securityGroupIdList.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDListRefs []v1.Reference `json:"securityGroupIdListRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIdList.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDListSelector *v1.Selector `json:"securityGroupIdListSelector,omitempty" tf:"-"`
+
 	// The subnet ID used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -168,6 +176,14 @@ type PhysicalConnectionRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIDList []*string `json:"securityGroupIdList,omitempty" tf:"security_group_id_list,omitempty"`
+
+	// References to SecurityGroup in ec2 to populate securityGroupIdList.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDListRefs []v1.Reference `json:"securityGroupIdListRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in ec2 to populate securityGroupIdList.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIDListSelector *v1.Selector `json:"securityGroupIdListSelector,omitempty" tf:"-"`
 
 	// The subnet ID used by the connection.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet

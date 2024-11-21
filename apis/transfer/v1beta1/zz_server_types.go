@@ -19,6 +19,14 @@ type EndpointDetailsInitParameters struct {
 	// +listType=set
 	AddressAllocationIds []*string `json:"addressAllocationIds,omitempty" tf:"address_allocation_ids,omitempty"`
 
+	// References to EIP in ec2 to populate addressAllocationIds.
+	// +kubebuilder:validation:Optional
+	AddressAllocationIdsRefs []v1.Reference `json:"addressAllocationIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of EIP in ec2 to populate addressAllocationIds.
+	// +kubebuilder:validation:Optional
+	AddressAllocationIdsSelector *v1.Selector `json:"addressAllocationIdsSelector,omitempty" tf:"-"`
+
 	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -26,6 +34,14 @@ type EndpointDetailsInitParameters struct {
 	// A list of subnet IDs that are required to host your SFTP server endpoint in your VPC. This property can only be used when endpoint_type is set to VPC.
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
 	VPCEndpointID *string `json:"vpcEndpointId,omitempty" tf:"vpc_endpoint_id,omitempty"`
@@ -72,6 +88,14 @@ type EndpointDetailsParameters struct {
 	// +listType=set
 	AddressAllocationIds []*string `json:"addressAllocationIds,omitempty" tf:"address_allocation_ids,omitempty"`
 
+	// References to EIP in ec2 to populate addressAllocationIds.
+	// +kubebuilder:validation:Optional
+	AddressAllocationIdsRefs []v1.Reference `json:"addressAllocationIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of EIP in ec2 to populate addressAllocationIds.
+	// +kubebuilder:validation:Optional
+	AddressAllocationIdsSelector *v1.Selector `json:"addressAllocationIdsSelector,omitempty" tf:"-"`
+
 	// A list of security groups IDs that are available to attach to your server's endpoint. If no security groups are specified, the VPC's default security groups are automatically assigned to your endpoint. This property can only be used when endpoint_type is set to VPC.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -81,6 +105,14 @@ type EndpointDetailsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// The ID of the VPC endpoint. This property can only be used when endpoint_type is set to VPC_ENDPOINT
 	// +kubebuilder:validation:Optional

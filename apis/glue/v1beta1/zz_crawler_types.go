@@ -38,6 +38,14 @@ type CatalogTargetInitParameters struct {
 
 	// A list of catalog tables to be synchronized.
 	Tables []*string `json:"tables,omitempty" tf:"tables,omitempty"`
+
+	// References to CatalogTable in glue to populate tables.
+	// +kubebuilder:validation:Optional
+	TablesRefs []v1.Reference `json:"tablesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of CatalogTable in glue to populate tables.
+	// +kubebuilder:validation:Optional
+	TablesSelector *v1.Selector `json:"tablesSelector,omitempty" tf:"-"`
 }
 
 type CatalogTargetObservation struct {
@@ -88,6 +96,14 @@ type CatalogTargetParameters struct {
 	// A list of catalog tables to be synchronized.
 	// +kubebuilder:validation:Optional
 	Tables []*string `json:"tables" tf:"tables,omitempty"`
+
+	// References to CatalogTable in glue to populate tables.
+	// +kubebuilder:validation:Optional
+	TablesRefs []v1.Reference `json:"tablesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of CatalogTable in glue to populate tables.
+	// +kubebuilder:validation:Optional
+	TablesSelector *v1.Selector `json:"tablesSelector,omitempty" tf:"-"`
 }
 
 type CrawlerInitParameters struct {
