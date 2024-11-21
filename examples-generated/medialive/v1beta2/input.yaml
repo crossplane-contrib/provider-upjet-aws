@@ -8,8 +8,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    inputSecurityGroups:
-    - ${aws_medialive_input_security_group.example.id}
+    inputSecurityGroupsRefs:
+    - name: example
     name: example-input
     region: us-west-1
     tags:

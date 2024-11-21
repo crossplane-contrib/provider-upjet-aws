@@ -57,8 +57,18 @@ type RoleInitParameters struct {
 	InlinePolicy []InlinePolicyInitParameters `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
 	// Set of exclusive IAM managed policy ARNs to attach to the IAM role. If this attribute is not configured, Crossplane will ignore policy attachments to this resource. When configured, Crossplane will align the role's managed policy attachments with this set by attaching or detaching managed policies. Configuring an empty set (i.e., managed_policy_arns = []) will cause Crossplane to remove all managed policy attachments.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
+
+	// References to Policy in iam to populate managedPolicyArns.
+	// +kubebuilder:validation:Optional
+	ManagedPolicyArnsRefs []v1.Reference `json:"managedPolicyArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Policy in iam to populate managedPolicyArns.
+	// +kubebuilder:validation:Optional
+	ManagedPolicyArnsSelector *v1.Selector `json:"managedPolicyArnsSelector,omitempty" tf:"-"`
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
 	MaxSessionDuration *float64 `json:"maxSessionDuration,omitempty" tf:"max_session_duration,omitempty"`
@@ -141,9 +151,19 @@ type RoleParameters struct {
 	InlinePolicy []InlinePolicyParameters `json:"inlinePolicy,omitempty" tf:"inline_policy,omitempty"`
 
 	// Set of exclusive IAM managed policy ARNs to attach to the IAM role. If this attribute is not configured, Crossplane will ignore policy attachments to this resource. When configured, Crossplane will align the role's managed policy attachments with this set by attaching or detaching managed policies. Configuring an empty set (i.e., managed_policy_arns = []) will cause Crossplane to remove all managed policy attachments.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ManagedPolicyArns []*string `json:"managedPolicyArns,omitempty" tf:"managed_policy_arns,omitempty"`
+
+	// References to Policy in iam to populate managedPolicyArns.
+	// +kubebuilder:validation:Optional
+	ManagedPolicyArnsRefs []v1.Reference `json:"managedPolicyArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Policy in iam to populate managedPolicyArns.
+	// +kubebuilder:validation:Optional
+	ManagedPolicyArnsSelector *v1.Selector `json:"managedPolicyArnsSelector,omitempty" tf:"-"`
 
 	// Maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours.
 	// +kubebuilder:validation:Optional

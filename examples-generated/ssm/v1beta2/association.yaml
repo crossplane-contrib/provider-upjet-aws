@@ -14,5 +14,5 @@ spec:
     region: us-west-1
     targets:
     - key: InstanceIds
-      values:
-      - ${aws_instance.example.id}
+      valuesRefs:
+      - name: example

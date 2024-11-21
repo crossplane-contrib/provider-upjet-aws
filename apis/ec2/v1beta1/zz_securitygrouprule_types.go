@@ -16,7 +16,17 @@ import (
 type SecurityGroupRuleInitParameters_2 struct {
 
 	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+
+	// References to VPC in ec2 to populate cidrBlocks.
+	// +kubebuilder:validation:Optional
+	CidrBlocksRefs []v1.Reference `json:"cidrBlocksRefs,omitempty" tf:"-"`
+
+	// Selector for a list of VPC in ec2 to populate cidrBlocks.
+	// +kubebuilder:validation:Optional
+	CidrBlocksSelector *v1.Selector `json:"cidrBlocksSelector,omitempty" tf:"-"`
 
 	// Description of the rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -25,7 +35,17 @@ type SecurityGroupRuleInitParameters_2 struct {
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// List of IPv6 CIDR blocks. Cannot be specified with source_security_group_id or self.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ipv6_cidr_block",false)
 	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
+
+	// References to VPC in ec2 to populate ipv6CidrBlocks.
+	// +kubebuilder:validation:Optional
+	IPv6CidrBlocksRefs []v1.Reference `json:"ipv6CidrBlocksRefs,omitempty" tf:"-"`
+
+	// Selector for a list of VPC in ec2 to populate ipv6CidrBlocks.
+	// +kubebuilder:validation:Optional
+	IPv6CidrBlocksSelector *v1.Selector `json:"ipv6CidrBlocksSelector,omitempty" tf:"-"`
 
 	// References to ManagedPrefixList in ec2 to populate prefixListIds.
 	// +kubebuilder:validation:Optional
@@ -125,8 +145,18 @@ type SecurityGroupRuleObservation_2 struct {
 type SecurityGroupRuleParameters_2 struct {
 
 	// List of CIDR blocks. Cannot be specified with source_security_group_id or self.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("cidr_block",false)
 	// +kubebuilder:validation:Optional
 	CidrBlocks []*string `json:"cidrBlocks,omitempty" tf:"cidr_blocks,omitempty"`
+
+	// References to VPC in ec2 to populate cidrBlocks.
+	// +kubebuilder:validation:Optional
+	CidrBlocksRefs []v1.Reference `json:"cidrBlocksRefs,omitempty" tf:"-"`
+
+	// Selector for a list of VPC in ec2 to populate cidrBlocks.
+	// +kubebuilder:validation:Optional
+	CidrBlocksSelector *v1.Selector `json:"cidrBlocksSelector,omitempty" tf:"-"`
 
 	// Description of the rule.
 	// +kubebuilder:validation:Optional
@@ -137,8 +167,18 @@ type SecurityGroupRuleParameters_2 struct {
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// List of IPv6 CIDR blocks. Cannot be specified with source_security_group_id or self.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.VPC
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ipv6_cidr_block",false)
 	// +kubebuilder:validation:Optional
 	IPv6CidrBlocks []*string `json:"ipv6CidrBlocks,omitempty" tf:"ipv6_cidr_blocks,omitempty"`
+
+	// References to VPC in ec2 to populate ipv6CidrBlocks.
+	// +kubebuilder:validation:Optional
+	IPv6CidrBlocksRefs []v1.Reference `json:"ipv6CidrBlocksRefs,omitempty" tf:"-"`
+
+	// Selector for a list of VPC in ec2 to populate ipv6CidrBlocks.
+	// +kubebuilder:validation:Optional
+	IPv6CidrBlocksSelector *v1.Selector `json:"ipv6CidrBlocksSelector,omitempty" tf:"-"`
 
 	// References to ManagedPrefixList in ec2 to populate prefixListIds.
 	// +kubebuilder:validation:Optional

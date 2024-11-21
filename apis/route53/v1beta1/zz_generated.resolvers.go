@@ -24,7 +24,27 @@ func (mg *HealthCheck) ResolveReferences( // ResolveReferences of this HealthChe
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("route53.aws.upbound.io", "v1beta1", "HealthCheck", "HealthCheckList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ChildHealthchecks),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.ChildHealthchecksRefs,
+			Selector:      mg.Spec.ForProvider.ChildHealthchecksSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ChildHealthchecks")
+	}
+	mg.Spec.ForProvider.ChildHealthchecks = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ChildHealthchecksRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io", "v1beta2", "MetricAlarm", "MetricAlarmList")
 		if err != nil {
@@ -44,6 +64,25 @@ func (mg *HealthCheck) ResolveReferences( // ResolveReferences of this HealthChe
 	}
 	mg.Spec.ForProvider.CloudwatchAlarmName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudwatchAlarmNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("route53.aws.upbound.io", "v1beta1", "HealthCheck", "HealthCheckList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ChildHealthchecks),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.ChildHealthchecksRefs,
+			Selector:      mg.Spec.InitProvider.ChildHealthchecksSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ChildHealthchecks")
+	}
+	mg.Spec.InitProvider.ChildHealthchecks = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ChildHealthchecksRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("cloudwatch.aws.upbound.io", "v1beta2", "MetricAlarm", "MetricAlarmList")
 		if err != nil {

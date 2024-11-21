@@ -2259,6 +2259,7 @@ func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "EIP", "EIPList")
@@ -2279,6 +2280,25 @@ func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.AllocationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AllocationIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "EIP", "EIPList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecondaryAllocationIds),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.SecondaryAllocationIdsRefs,
+			Selector:      mg.Spec.ForProvider.SecondaryAllocationIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecondaryAllocationIds")
+	}
+	mg.Spec.ForProvider.SecondaryAllocationIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SecondaryAllocationIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
@@ -2317,6 +2337,25 @@ func (mg *NATGateway) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.InitProvider.AllocationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AllocationIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "EIP", "EIPList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecondaryAllocationIds),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.SecondaryAllocationIdsRefs,
+			Selector:      mg.Spec.InitProvider.SecondaryAllocationIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecondaryAllocationIds")
+	}
+	mg.Spec.InitProvider.SecondaryAllocationIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SecondaryAllocationIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
@@ -3762,6 +3801,44 @@ func (mg *SecurityGroupRule) ResolveReferences(ctx context.Context, c client.Rea
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CidrBlocks),
+			Extract:       resource.ExtractParamPath("cidr_block", false),
+			References:    mg.Spec.ForProvider.CidrBlocksRefs,
+			Selector:      mg.Spec.ForProvider.CidrBlocksSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CidrBlocks")
+	}
+	mg.Spec.ForProvider.CidrBlocks = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.CidrBlocksRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IPv6CidrBlocks),
+			Extract:       resource.ExtractParamPath("ipv6_cidr_block", false),
+			References:    mg.Spec.ForProvider.IPv6CidrBlocksRefs,
+			Selector:      mg.Spec.ForProvider.IPv6CidrBlocksSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IPv6CidrBlocks")
+	}
+	mg.Spec.ForProvider.IPv6CidrBlocks = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.IPv6CidrBlocksRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "ManagedPrefixList", "ManagedPrefixListList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -3818,6 +3895,44 @@ func (mg *SecurityGroupRule) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.SourceSecurityGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceSecurityGroupIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CidrBlocks),
+			Extract:       resource.ExtractParamPath("cidr_block", false),
+			References:    mg.Spec.InitProvider.CidrBlocksRefs,
+			Selector:      mg.Spec.InitProvider.CidrBlocksSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CidrBlocks")
+	}
+	mg.Spec.InitProvider.CidrBlocks = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.CidrBlocksRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "VPC", "VPCList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IPv6CidrBlocks),
+			Extract:       resource.ExtractParamPath("ipv6_cidr_block", false),
+			References:    mg.Spec.InitProvider.IPv6CidrBlocksRefs,
+			Selector:      mg.Spec.InitProvider.IPv6CidrBlocksSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IPv6CidrBlocks")
+	}
+	mg.Spec.InitProvider.IPv6CidrBlocks = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.IPv6CidrBlocksRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "ManagedPrefixList", "ManagedPrefixListList")
 		if err != nil {
@@ -6138,6 +6253,94 @@ func (mg *VPCEndpointSecurityGroupAssociation) ResolveReferences(ctx context.Con
 	}
 	mg.Spec.InitProvider.VPCEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.VPCEndpointIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this VPCEndpointService.
+func (mg *VPCEndpointService) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.GatewayLoadBalancerArns),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.ForProvider.GatewayLoadBalancerArnsRefs,
+			Selector:      mg.Spec.ForProvider.GatewayLoadBalancerArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GatewayLoadBalancerArns")
+	}
+	mg.Spec.ForProvider.GatewayLoadBalancerArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.GatewayLoadBalancerArnsRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkLoadBalancerArns),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.ForProvider.NetworkLoadBalancerArnsRefs,
+			Selector:      mg.Spec.ForProvider.NetworkLoadBalancerArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkLoadBalancerArns")
+	}
+	mg.Spec.ForProvider.NetworkLoadBalancerArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.NetworkLoadBalancerArnsRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.GatewayLoadBalancerArns),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.InitProvider.GatewayLoadBalancerArnsRefs,
+			Selector:      mg.Spec.InitProvider.GatewayLoadBalancerArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GatewayLoadBalancerArns")
+	}
+	mg.Spec.InitProvider.GatewayLoadBalancerArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.GatewayLoadBalancerArnsRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LB", "LBList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkLoadBalancerArns),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.InitProvider.NetworkLoadBalancerArnsRefs,
+			Selector:      mg.Spec.InitProvider.NetworkLoadBalancerArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkLoadBalancerArns")
+	}
+	mg.Spec.InitProvider.NetworkLoadBalancerArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.NetworkLoadBalancerArnsRefs = mrsp.ResolvedReferences
 
 	return nil
 }

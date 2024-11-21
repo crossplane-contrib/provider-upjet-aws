@@ -80,8 +80,18 @@ type CreateTableDefaultPermissionsParameters struct {
 type DataLakeSettingsInitParameters struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
+
+	// References to User in iam to populate admins.
+	// +kubebuilder:validation:Optional
+	AdminsRefs []v1.Reference `json:"adminsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of User in iam to populate admins.
+	// +kubebuilder:validation:Optional
+	AdminsSelector *v1.Selector `json:"adminsSelector,omitempty" tf:"-"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
@@ -162,9 +172,19 @@ type DataLakeSettingsObservation struct {
 type DataLakeSettingsParameters struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
+
+	// References to User in iam to populate admins.
+	// +kubebuilder:validation:Optional
+	AdminsRefs []v1.Reference `json:"adminsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of User in iam to populate admins.
+	// +kubebuilder:validation:Optional
+	AdminsSelector *v1.Selector `json:"adminsSelector,omitempty" tf:"-"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	// +kubebuilder:validation:Optional

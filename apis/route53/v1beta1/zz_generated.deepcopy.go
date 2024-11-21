@@ -740,6 +740,18 @@ func (in *HealthCheckInitParameters) DeepCopyInto(out *HealthCheckInitParameters
 			}
 		}
 	}
+	if in.ChildHealthchecksRefs != nil {
+		in, out := &in.ChildHealthchecksRefs, &out.ChildHealthchecksRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ChildHealthchecksSelector != nil {
+		in, out := &in.ChildHealthchecksSelector, &out.ChildHealthchecksSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CloudwatchAlarmName != nil {
 		in, out := &in.CloudwatchAlarmName, &out.CloudwatchAlarmName
 		*out = new(string)
@@ -1093,6 +1105,18 @@ func (in *HealthCheckParameters) DeepCopyInto(out *HealthCheckParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.ChildHealthchecksRefs != nil {
+		in, out := &in.ChildHealthchecksRefs, &out.ChildHealthchecksRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ChildHealthchecksSelector != nil {
+		in, out := &in.ChildHealthchecksSelector, &out.ChildHealthchecksSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CloudwatchAlarmName != nil {
 		in, out := &in.CloudwatchAlarmName, &out.CloudwatchAlarmName

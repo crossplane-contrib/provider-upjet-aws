@@ -25,6 +25,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	if mg.Spec.ForProvider.ElasticsearchConfiguration != nil {
@@ -135,6 +136,52 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			}
 			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.ElasticsearchConfiguration != nil {
+		if mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.ForProvider.ElasticsearchConfiguration != nil {
+		if mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
 
 		}
 	}
@@ -518,6 +565,52 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			}
 			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.OpensearchConfiguration != nil {
+		if mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.ForProvider.OpensearchConfiguration != nil {
+		if mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIds")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
 
 		}
 	}
@@ -946,6 +1039,52 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 
 		}
 	}
+	if mg.Spec.InitProvider.ElasticsearchConfiguration != nil {
+		if mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.InitProvider.ElasticsearchConfiguration != nil {
+		if mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds")
+			}
+			mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	if mg.Spec.InitProvider.ExtendedS3Configuration != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
@@ -1326,6 +1465,52 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			}
 			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.OpensearchConfiguration != nil {
+		if mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.InitProvider.OpensearchConfiguration != nil {
+		if mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIds")
+			}
+			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
 
 		}
 	}
