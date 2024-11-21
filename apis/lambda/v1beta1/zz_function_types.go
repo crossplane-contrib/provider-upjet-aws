@@ -169,6 +169,14 @@ type FunctionInitParameters struct {
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
 
+	// References to LayerVersion in lambda to populate layers.
+	// +kubebuilder:validation:Optional
+	LayersRefs []v1.Reference `json:"layersRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LayerVersion in lambda to populate layers.
+	// +kubebuilder:validation:Optional
+	LayersSelector *v1.Selector `json:"layersSelector,omitempty" tf:"-"`
+
 	// Configuration block used to specify advanced logging settings. Detailed below.
 	LoggingConfig []LoggingConfigInitParameters `json:"loggingConfig,omitempty" tf:"logging_config,omitempty"`
 
@@ -449,6 +457,14 @@ type FunctionParameters struct {
 	// List of Lambda Layer Version ARNs (maximum of 5) to attach to your Lambda Function. See Lambda Layers
 	// +kubebuilder:validation:Optional
 	Layers []*string `json:"layers,omitempty" tf:"layers,omitempty"`
+
+	// References to LayerVersion in lambda to populate layers.
+	// +kubebuilder:validation:Optional
+	LayersRefs []v1.Reference `json:"layersRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LayerVersion in lambda to populate layers.
+	// +kubebuilder:validation:Optional
+	LayersSelector *v1.Selector `json:"layersSelector,omitempty" tf:"-"`
 
 	// Configuration block used to specify advanced logging settings. Detailed below.
 	// +kubebuilder:validation:Optional

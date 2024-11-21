@@ -717,6 +717,14 @@ type ProdTrafficRouteInitParameters struct {
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
+
+	// References to LBListener in elbv2 to populate listenerArns.
+	// +kubebuilder:validation:Optional
+	ListenerArnsRefs []v1.Reference `json:"listenerArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LBListener in elbv2 to populate listenerArns.
+	// +kubebuilder:validation:Optional
+	ListenerArnsSelector *v1.Selector `json:"listenerArnsSelector,omitempty" tf:"-"`
 }
 
 type ProdTrafficRouteObservation struct {
@@ -732,6 +740,14 @@ type ProdTrafficRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
+
+	// References to LBListener in elbv2 to populate listenerArns.
+	// +kubebuilder:validation:Optional
+	ListenerArnsRefs []v1.Reference `json:"listenerArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LBListener in elbv2 to populate listenerArns.
+	// +kubebuilder:validation:Optional
+	ListenerArnsSelector *v1.Selector `json:"listenerArnsSelector,omitempty" tf:"-"`
 }
 
 type TargetGroupInfoInitParameters struct {

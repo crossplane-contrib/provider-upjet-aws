@@ -102,6 +102,14 @@ type UserInitParameters struct {
 	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
 
+	// References to SecurityProfile in connect to populate securityProfileIds.
+	// +kubebuilder:validation:Optional
+	SecurityProfileIdsRefs []v1.Reference `json:"securityProfileIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityProfile in connect to populate securityProfileIds.
+	// +kubebuilder:validation:Optional
+	SecurityProfileIdsSelector *v1.Selector `json:"securityProfileIdsSelector,omitempty" tf:"-"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -216,6 +224,14 @@ type UserParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
+
+	// References to SecurityProfile in connect to populate securityProfileIds.
+	// +kubebuilder:validation:Optional
+	SecurityProfileIdsRefs []v1.Reference `json:"securityProfileIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityProfile in connect to populate securityProfileIds.
+	// +kubebuilder:validation:Optional
+	SecurityProfileIdsSelector *v1.Selector `json:"securityProfileIdsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

@@ -344,6 +344,14 @@ type MaintenanceWindowTaskTargetsInitParameters struct {
 
 	// The array of strings.
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+
+	// References to Instance in ec2 to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in ec2 to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceWindowTaskTargetsObservation struct {
@@ -361,6 +369,14 @@ type MaintenanceWindowTaskTargetsParameters struct {
 	// The array of strings.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values" tf:"values,omitempty"`
+
+	// References to Instance in ec2 to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Instance in ec2 to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type NotificationConfigInitParameters struct {

@@ -49,6 +49,14 @@ type PipelineConfigInitParameters struct {
 
 	// A list of Function objects.
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
+
+	// References to Function in appsync to populate functions.
+	// +kubebuilder:validation:Optional
+	FunctionsRefs []v1.Reference `json:"functionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Function in appsync to populate functions.
+	// +kubebuilder:validation:Optional
+	FunctionsSelector *v1.Selector `json:"functionsSelector,omitempty" tf:"-"`
 }
 
 type PipelineConfigObservation struct {
@@ -62,6 +70,14 @@ type PipelineConfigParameters struct {
 	// A list of Function objects.
 	// +kubebuilder:validation:Optional
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
+
+	// References to Function in appsync to populate functions.
+	// +kubebuilder:validation:Optional
+	FunctionsRefs []v1.Reference `json:"functionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Function in appsync to populate functions.
+	// +kubebuilder:validation:Optional
+	FunctionsSelector *v1.Selector `json:"functionsSelector,omitempty" tf:"-"`
 }
 
 type ResolverInitParameters struct {

@@ -22,6 +22,14 @@ type MetricAlarmInitParameters struct {
 	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
+	// References to Policy in autoscaling to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Policy in autoscaling to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+
 	// The description for the alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
 
@@ -65,6 +73,14 @@ type MetricAlarmInitParameters struct {
 	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
+
+	// References to Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 30, or any multiple of 60.
@@ -190,6 +206,14 @@ type MetricAlarmParameters struct {
 	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
 
+	// References to Policy in autoscaling to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Policy in autoscaling to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
+
 	// The description for the alarm.
 	// +kubebuilder:validation:Optional
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
@@ -245,6 +269,14 @@ type MetricAlarmParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
+
+	// References to Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 30, or any multiple of 60.
