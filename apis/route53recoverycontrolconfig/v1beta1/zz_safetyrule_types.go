@@ -81,6 +81,8 @@ type SafetyRuleInitParameters struct {
 	ControlPanelArnSelector *v1.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
 
 	// Gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	GatingControls []*string `json:"gatingControls,omitempty" tf:"gating_controls,omitempty"`
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate gatingControls.
@@ -98,6 +100,8 @@ type SafetyRuleInitParameters struct {
 	RuleConfig []RuleConfigInitParameters `json:"ruleConfig,omitempty" tf:"rule_config,omitempty"`
 
 	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
 
 	// References to RoutingControl in route53recoverycontrolconfig to populate targetControls.
@@ -175,6 +179,8 @@ type SafetyRuleParameters struct {
 	ControlPanelArnSelector *v1.Selector `json:"controlPanelArnSelector,omitempty" tf:"-"`
 
 	// Gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	GatingControls []*string `json:"gatingControls,omitempty" tf:"gating_controls,omitempty"`
 
@@ -200,6 +206,8 @@ type SafetyRuleParameters struct {
 	RuleConfig []RuleConfigParameters `json:"ruleConfig,omitempty" tf:"rule_config,omitempty"`
 
 	// Routing controls that can only be set or unset if the specified rule_config evaluates to true for the specified gating_controls.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53recoverycontrolconfig/v1beta1.RoutingControl
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	TargetControls []*string `json:"targetControls,omitempty" tf:"target_controls,omitempty"`
 

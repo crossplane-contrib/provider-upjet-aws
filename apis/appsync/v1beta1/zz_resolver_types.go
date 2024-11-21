@@ -48,6 +48,8 @@ type CachingConfigParameters struct {
 type PipelineConfigInitParameters struct {
 
 	// A list of Function objects.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("function_id",true)
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 
 	// References to Function in appsync to populate functions.
@@ -68,6 +70,8 @@ type PipelineConfigObservation struct {
 type PipelineConfigParameters struct {
 
 	// A list of Function objects.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/appsync/v1beta2.Function
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("function_id",true)
 	// +kubebuilder:validation:Optional
 	Functions []*string `json:"functions,omitempty" tf:"functions,omitempty"`
 
