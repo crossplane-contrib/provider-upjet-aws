@@ -25,6 +25,7 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("deploy.aws.upbound.io", "v1beta1", "App", "AppList")
@@ -109,6 +110,31 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 			mg.Spec.ForProvider.LoadBalancerInfo[i3].ELBInfo[i4].Name = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.LoadBalancerInfo[i3].ELBInfo[i4].NameRef = rsp.ResolvedReference
 
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoadBalancerInfo); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LBListener", "LBListenerList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+						CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArns),
+						Extract:       resource.ExtractParamPath("arn", true),
+						References:    mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArnsRefs,
+						Selector:      mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArnsSelector,
+						To:            reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArns")
+				}
+				mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArns = reference.ToPtrValues(mrsp.ResolvedValues)
+				mg.Spec.ForProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArnsRefs = mrsp.ResolvedReferences
+
+			}
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.LoadBalancerInfo); i3++ {
@@ -239,6 +265,31 @@ func (mg *DeploymentGroup) ResolveReferences( // ResolveReferences of this Deplo
 			mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo[i4].Name = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.LoadBalancerInfo[i3].ELBInfo[i4].NameRef = rsp.ResolvedReference
 
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoadBalancerInfo); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("elbv2.aws.upbound.io", "v1beta2", "LBListener", "LBListenerList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+						CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArns),
+						Extract:       resource.ExtractParamPath("arn", true),
+						References:    mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArnsRefs,
+						Selector:      mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArnsSelector,
+						To:            reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArns")
+				}
+				mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArns = reference.ToPtrValues(mrsp.ResolvedValues)
+				mg.Spec.InitProvider.LoadBalancerInfo[i3].TargetGroupPairInfo[i4].ProdTrafficRoute[i5].ListenerArnsRefs = mrsp.ResolvedReferences
+
+			}
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.LoadBalancerInfo); i3++ {

@@ -25,6 +25,7 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
@@ -187,6 +188,52 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 
 				}
 			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIdsRefs,
+					Selector:      mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds")
+			}
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIdsRefs = mrsp.ResolvedReferences
+
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CloudwatchLoggingOptions); i3++ {
@@ -389,6 +436,52 @@ func (mg *Application) ResolveReferences( // ResolveReferences of this Applicati
 
 				}
 			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIdsRefs,
+					Selector:      mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ApplicationConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds")
+			}
+			mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.ApplicationConfiguration[i3].VPCConfiguration[i4].SubnetIdsRefs = mrsp.ResolvedReferences
+
 		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.CloudwatchLoggingOptions); i3++ {
