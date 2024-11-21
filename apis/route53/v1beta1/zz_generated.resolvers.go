@@ -163,6 +163,7 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("route53.aws.upbound.io", "v1beta1", "HealthCheck", "HealthCheckList")
@@ -183,6 +184,25 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.HealthCheckID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.HealthCheckIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "EIP", "EIPList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Records),
+			Extract:       resource.ExtractParamPath("public_ip", true),
+			References:    mg.Spec.ForProvider.RecordsRefs,
+			Selector:      mg.Spec.ForProvider.RecordsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Records")
+	}
+	mg.Spec.ForProvider.Records = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.RecordsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("route53.aws.upbound.io", "v1beta1", "Zone", "ZoneList")
 		if err != nil {
@@ -221,6 +241,25 @@ func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.InitProvider.HealthCheckID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.HealthCheckIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "EIP", "EIPList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Records),
+			Extract:       resource.ExtractParamPath("public_ip", true),
+			References:    mg.Spec.InitProvider.RecordsRefs,
+			Selector:      mg.Spec.InitProvider.RecordsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Records")
+	}
+	mg.Spec.InitProvider.Records = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.RecordsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("route53.aws.upbound.io", "v1beta1", "Zone", "ZoneList")
 		if err != nil {
