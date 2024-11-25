@@ -202,11 +202,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				for i, rp := range readerendpoints {
 					if readerendpoint, ok := rp.(map[string]any); ok && len(readerendpoint) > 0 {
 						if address, ok := readerendpoint["address"].(string); ok {
-							key := fmt.Sprintf("cluster_endpoint_%d_address", i)
+							key := fmt.Sprintf("reader_endpoint_%d_address", i)
 							conn[key] = []byte(address)
 						}
 						if port, ok := readerendpoint["port"].(float64); ok {
-							key := fmt.Sprintf("cluster_endpoint_%d_port", i)
+							key := fmt.Sprintf("reader_endpoint_%d_port", i)
 							conn[key] = []byte(fmt.Sprintf("%g", port))
 						}
 					}
