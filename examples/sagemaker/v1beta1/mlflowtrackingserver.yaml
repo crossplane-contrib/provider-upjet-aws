@@ -4,7 +4,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
   labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: example-mlflowtrackingserver
   name: example
 spec:
   forProvider:
@@ -12,7 +12,7 @@ spec:
     region: us-west-1
     roleArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-role-mlflowtrackingserver
     trackingServerName: example
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
@@ -21,8 +21,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: iam/v1beta1/role
   labels:
-    testing.upbound.io/example-name: example-mlflowtrackingserver
-  name: sample-role
+    testing.upbound.io/example-name: example-role-mlflowtrackingserver
+  name: example-role
 spec:
   forProvider:
     assumeRolePolicy: |
@@ -45,16 +45,16 @@ metadata:
   annotations:
     meta.upbound.io/example-id: iam/v1beta1/role
   labels:
-    testing.upbound.io/example-name: example-mlflowtrackingserver
-  name: sample-policy-attachment
+    testing.upbound.io/example-name: example-rpa-mlflowtrackingserver
+  name: example-policy-attachment
 spec:
   forProvider:
     policyArnSelector:
       matchLabels:
-        testing.upbound.io/example-name: role
+        testing.upbound.io/example-name: example-policy-mlflowtrackingserver
     roleSelector:
       matchLabels:
-        testing.upbound.io/example-name: role
+        testing.upbound.io/example-name: example-role-mlflowtrackingserverrole
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
@@ -62,7 +62,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: iam/v1beta1/role
   labels:
-    testing.upbound.io/example-name: example-mlflowtrackingserver
+    testing.upbound.io/example-name: example-policy-mlflowtrackingserver
   name: sample-user-policy
 spec:
   forProvider:
