@@ -191,9 +191,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 							key := fmt.Sprintf("endpoint_%d_address", i)
 							conn[key] = []byte(address)
 						}
-						if port, ok := endpoint["port"].(float64); ok {
+						if port, ok := endpoint["port"]; ok {
 							key := fmt.Sprintf("endpoint_%d_port", i)
-							conn[key] = []byte(fmt.Sprintf("%g", port))
+							conn[key] = []byte(fmt.Sprintf("%v", port))
 						}
 					}
 				}
@@ -205,9 +205,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 							key := fmt.Sprintf("reader_endpoint_%d_address", i)
 							conn[key] = []byte(address)
 						}
-						if port, ok := readerendpoint["port"].(float64); ok {
+						if port, ok := readerendpoint["port"]; ok {
 							key := fmt.Sprintf("reader_endpoint_%d_port", i)
-							conn[key] = []byte(fmt.Sprintf("%g", port))
+							conn[key] = []byte(fmt.Sprintf("%v", port))
 						}
 					}
 				}
