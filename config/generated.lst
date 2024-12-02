@@ -888,6 +888,7 @@
 "aws_ssoadmin_permissions_boundary_attachment",
 "aws_subnet",
 "aws_swf_domain",
+"aws_timestreaminfluxdb_db_instance",
 "aws_timestreamwrite_database",
 "aws_timestreamwrite_table",
 "aws_transcribe_language_model",

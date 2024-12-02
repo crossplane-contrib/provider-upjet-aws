@@ -927,6 +927,7 @@ import (
 	permissionset "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionset"
 	permissionsetinlinepolicy "github.com/upbound/provider-aws/internal/controller/ssoadmin/permissionsetinlinepolicy"
 	domainswf "github.com/upbound/provider-aws/internal/controller/swf/domain"
+	dbinstance "github.com/upbound/provider-aws/internal/controller/timestreaminfluxdb/dbinstance"
 	databasetimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/database"
 	tabletimestreamwrite "github.com/upbound/provider-aws/internal/controller/timestreamwrite/table"
 	languagemodel "github.com/upbound/provider-aws/internal/controller/transcribe/languagemodel"
@@ -1892,6 +1893,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		permissionset.Setup,
 		permissionsetinlinepolicy.Setup,
 		domainswf.Setup,
+		dbinstance.Setup,
 		databasetimestreamwrite.Setup,
 		tabletimestreamwrite.Setup,
 		languagemodel.Setup,

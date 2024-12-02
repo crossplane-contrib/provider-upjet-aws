@@ -284,6 +284,7 @@ import (
 	v1beta1ssoadmin "github.com/upbound/provider-aws/apis/ssoadmin/v1beta1"
 	v1beta2ssoadmin "github.com/upbound/provider-aws/apis/ssoadmin/v1beta2"
 	v1beta1swf "github.com/upbound/provider-aws/apis/swf/v1beta1"
+	v1beta1timestreaminfluxdb "github.com/upbound/provider-aws/apis/timestreaminfluxdb/v1beta1"
 	v1beta1timestreamwrite "github.com/upbound/provider-aws/apis/timestreamwrite/v1beta1"
 	v1beta2timestreamwrite "github.com/upbound/provider-aws/apis/timestreamwrite/v1beta2"
 	v1beta1transcribe "github.com/upbound/provider-aws/apis/transcribe/v1beta1"
@@ -581,6 +582,7 @@ func init() {
 		v1beta1ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta2ssoadmin.SchemeBuilder.AddToScheme,
 		v1beta1swf.SchemeBuilder.AddToScheme,
+		v1beta1timestreaminfluxdb.SchemeBuilder.AddToScheme,
 		v1beta1timestreamwrite.SchemeBuilder.AddToScheme,
 		v1beta2timestreamwrite.SchemeBuilder.AddToScheme,
 		v1beta1transcribe.SchemeBuilder.AddToScheme,

@@ -1,0 +1,25 @@
+apiVersion: timestreaminfluxdb.aws.upbound.io/v1beta1
+kind: DBInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timestreaminfluxdb/v1beta1/dbinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocatedStorage: 20
+    bucket: example-bucket-name
+    dbInstanceType: db.influx.medium
+    name: example-db-instance
+    organization: organization
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    region: us-west-1
+    username: admin
+    vpcSecurityGroupIdRefs:
+    - name: example
+    vpcSubnetIds:
+    - ${aws_subnet.exampleid}
