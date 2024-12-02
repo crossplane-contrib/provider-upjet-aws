@@ -52,5 +52,15 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			return diff, nil
 		}
+		// Add the topicARN into the secret
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+
+			if a, ok := attr["arn"].(string); ok {
+				conn["topic_arn"] = []byte(a)
+			}
+
+			return conn, nil
+		}
 	})
 }
