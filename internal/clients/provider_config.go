@@ -64,6 +64,7 @@ const GlobalRegion = "aws-global"
 const (
 	URLConfigTypeStatic  = "Static"
 	URLConfigTypeDynamic = "Dynamic"
+	URLConfigTypeAuto    = "Auto"
 )
 
 // userAgentV2 constructs the Crossplane user agent for AWS v2 clients
@@ -133,7 +134,7 @@ func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runti
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot get credentials")
 	}
-	return SetResolver(pc, cfg), nil
+	return SetResolver(pc, cfg)
 }
 
 // GetAWSConfigWithTracking obtains the provider config referenced by the
@@ -165,9 +166,15 @@ func (a awsEndpointResolverAdaptorWithOptions) ResolveEndpoint(service, region s
 
 // SetResolver parses annotations from the managed resource
 // and returns a configuration accordingly.
-func SetResolver(pc *v1beta1.ProviderConfig, cfg *aws.Config) *aws.Config { // nolint:gocyclo
+func SetResolver(pc *v1beta1.ProviderConfig, cfg *aws.Config) (*aws.Config, error) { // nolint:gocyclo
 	if pc.Spec.Endpoint == nil {
-		return cfg
+		return cfg, nil
+	}
+	if pc.Spec.Endpoint.URL.Type == URLConfigTypeAuto {
+		if pc.Spec.Endpoint.PartitionID == nil || *pc.Spec.Endpoint.PartitionID == "" {
+			return nil, errors.Errorf("partitionId is required when the Endpoint URL type is %q", URLConfigTypeAuto)
+		}
+		return cfg, nil
 	}
 	cfg.EndpointResolverWithOptions = awsEndpointResolverAdaptorWithOptions(func(service, region string, options interface{}) (aws.Endpoint, error) { //nolint:staticcheck
 		fullURL := ""
@@ -219,7 +226,7 @@ func SetResolver(pc *v1beta1.ProviderConfig, cfg *aws.Config) *aws.Config { // n
 		}
 		return e, nil
 	})
-	return cfg
+	return cfg, nil
 }
 
 // CredentialsIDSecret retrieves AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from the data which contains
