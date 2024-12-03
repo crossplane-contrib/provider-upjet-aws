@@ -76,6 +76,9 @@ type GlobalClusterObservation struct {
 	// If the Global Cluster should have deletion protection enabled. The database can't be deleted when this value is set to true. The default is false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
+	// Writer endpoint for the new global database cluster. This endpoint always points to the writer DB instance in the current primary cluster.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
 	// Name of the database engine to be used for this DB cluster. Valid values: aurora, aurora-mysql, aurora-postgresql. Defaults to aurora. Conflicts with source_db_cluster_identifier.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 

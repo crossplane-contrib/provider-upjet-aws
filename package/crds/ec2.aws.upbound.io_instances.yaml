@@ -3625,7 +3625,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -3635,12 +3635,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:
@@ -4531,7 +4531,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -4541,12 +4541,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:
@@ -5369,7 +5369,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -5379,12 +5379,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:

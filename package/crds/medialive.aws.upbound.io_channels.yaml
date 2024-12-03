@@ -13085,6 +13085,7 @@ spec:
                                         of the video.
                                       type: number
                                     minIInterval:
+                                      description: Min interval.
                                       type: number
                                     numRefFrames:
                                       description: Number of reference frames to use.
@@ -13256,7 +13257,19 @@ spec:
                                         of the video.
                                       type: number
                                     minIInterval:
+                                      description: Min interval.
                                       type: number
+                                    minQp:
+                                      description: Set the minimum QP.
+                                      type: number
+                                    mvOverPictureBoundaries:
+                                      description: Enables or disables motion vector
+                                        over picture boundaries.
+                                      type: string
+                                    mvTemporalPredictor:
+                                      description: Enables or disables the motion
+                                        vector temporal predictor.
+                                      type: string
                                     parDenominator:
                                       description: Pixel Aspect Ratio denominator.
                                       type: number
@@ -13285,6 +13298,16 @@ spec:
                                     tier:
                                       description: Set the H265 tier in the output.
                                       type: string
+                                    tileHeight:
+                                      description: Sets the height of tiles.
+                                      type: number
+                                    tilePadding:
+                                      description: Enables or disables padding of
+                                        tiles.
+                                      type: string
+                                    tileWidth:
+                                      description: Sets the width of tiles.
+                                      type: number
                                     timecodeBurninSettings:
                                       description: Apply a burned in timecode. See
                                         H265 Timecode Burnin Settings for more details.
@@ -13305,6 +13328,9 @@ spec:
                                     timecodeInsertion:
                                       description: Determines how timecodes should
                                         be inserted into the video elementary stream.
+                                      type: string
+                                    treeblockSize:
+                                      description: Sets the size of the treeblock.
                                       type: string
                                   type: object
                               type: object
@@ -16180,6 +16206,7 @@ spec:
                                         of the video.
                                       type: number
                                     minIInterval:
+                                      description: Min interval.
                                       type: number
                                     numRefFrames:
                                       description: Number of reference frames to use.
@@ -16351,7 +16378,19 @@ spec:
                                         of the video.
                                       type: number
                                     minIInterval:
+                                      description: Min interval.
                                       type: number
+                                    minQp:
+                                      description: Set the minimum QP.
+                                      type: number
+                                    mvOverPictureBoundaries:
+                                      description: Enables or disables motion vector
+                                        over picture boundaries.
+                                      type: string
+                                    mvTemporalPredictor:
+                                      description: Enables or disables the motion
+                                        vector temporal predictor.
+                                      type: string
                                     parDenominator:
                                       description: Pixel Aspect Ratio denominator.
                                       type: number
@@ -16380,6 +16419,16 @@ spec:
                                     tier:
                                       description: Set the H265 tier in the output.
                                       type: string
+                                    tileHeight:
+                                      description: Sets the height of tiles.
+                                      type: number
+                                    tilePadding:
+                                      description: Enables or disables padding of
+                                        tiles.
+                                      type: string
+                                    tileWidth:
+                                      description: Sets the width of tiles.
+                                      type: number
                                     timecodeBurninSettings:
                                       description: Apply a burned in timecode. See
                                         H265 Timecode Burnin Settings for more details.
@@ -16400,6 +16449,9 @@ spec:
                                     timecodeInsertion:
                                       description: Determines how timecodes should
                                         be inserted into the video elementary stream.
+                                      type: string
+                                    treeblockSize:
+                                      description: Sets the size of the treeblock.
                                       type: string
                                   type: object
                               type: object
@@ -19460,6 +19512,7 @@ spec:
                                         of the video.
                                       type: number
                                     minIInterval:
+                                      description: Min interval.
                                       type: number
                                     numRefFrames:
                                       description: Number of reference frames to use.
@@ -19631,7 +19684,19 @@ spec:
                                         of the video.
                                       type: number
                                     minIInterval:
+                                      description: Min interval.
                                       type: number
+                                    minQp:
+                                      description: Set the minimum QP.
+                                      type: number
+                                    mvOverPictureBoundaries:
+                                      description: Enables or disables motion vector
+                                        over picture boundaries.
+                                      type: string
+                                    mvTemporalPredictor:
+                                      description: Enables or disables the motion
+                                        vector temporal predictor.
+                                      type: string
                                     parDenominator:
                                       description: Pixel Aspect Ratio denominator.
                                       type: number
@@ -19660,6 +19725,16 @@ spec:
                                     tier:
                                       description: Set the H265 tier in the output.
                                       type: string
+                                    tileHeight:
+                                      description: Sets the height of tiles.
+                                      type: number
+                                    tilePadding:
+                                      description: Enables or disables padding of
+                                        tiles.
+                                      type: string
+                                    tileWidth:
+                                      description: Sets the width of tiles.
+                                      type: number
                                     timecodeBurninSettings:
                                       description: Apply a burned in timecode. See
                                         H265 Timecode Burnin Settings for more details.
@@ -19680,6 +19755,9 @@ spec:
                                     timecodeInsertion:
                                       description: Determines how timecodes should
                                         be inserted into the video elementary stream.
+                                      type: string
+                                    treeblockSize:
+                                      description: Sets the size of the treeblock.
                                       type: string
                                   type: object
                               type: object

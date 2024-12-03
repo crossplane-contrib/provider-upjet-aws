@@ -2844,6 +2844,13 @@ spec:
                           back to the last deployment that completed successfully.
                         type: boolean
                     type: object
+                  availabilityZoneRebalancing:
+                    description: ECS automatically redistributes tasks within a service
+                      across Availability Zones (AZs) to mitigate the risk of impaired
+                      application availability due to underlying infrastructure failures
+                      and task lifecycle activities. The valid values are ENABLED
+                      and DISABLED. Defaults to DISABLED.
+                    type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
                       Can be one or more. These can be updated without destroying
@@ -3708,10 +3715,9 @@ spec:
                               use for Amazon EBS encryption.
                             type: string
                           roleArn:
-                            description: Amazon ECS infrastructure IAM role that is
-                              used to manage your Amazon Web Services infrastructure.
-                              Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes
-                              IAM policy with this role.
+                            description: The ARN of the IAM role to associate with
+                              this volume. This is the Amazon ECS infrastructure IAM
+                              role that is used to manage your AWS infrastructure.
                             type: string
                           sizeInGb:
                             description: Size of the volume in GiB. You must specify
@@ -3728,9 +3734,9 @@ spec:
                             items:
                               properties:
                                 propagateTags:
-                                  description: Determines whether to propagate the
-                                    tags from the task definition to the Amazon EBS
-                                    volume.
+                                  description: Whether to propagate the tags from
+                                    the task definition or the service to the tasks.
+                                    The valid values are SERVICE and TASK_DEFINITION.
                                   type: string
                                 resourceType:
                                   description: The type of volume resource. Valid
@@ -3739,9 +3745,7 @@ spec:
                                 tags:
                                   additionalProperties:
                                     type: string
-                                  description: The tags applied to this Amazon EBS
-                                    volume. AmazonECSCreated and AmazonECSManaged
-                                    are reserved tags that can't be used.
+                                  description: Key-value map of resource tags.
                                   type: object
                                   x-kubernetes-map-type: granular
                               type: object
@@ -3758,6 +3762,27 @@ spec:
                         description: Name of the volume.
                         type: string
                     type: object
+                  vpcLatticeConfigurations:
+                    description: The VPC Lattice configuration for your service that
+                      allows Lattice to connect, secure, and monitor your service
+                      across multiple accounts and VPCs. See below.
+                    items:
+                      properties:
+                        portName:
+                          description: The name of the port for a target group associated
+                            with the VPC Lattice configuration.
+                          type: string
+                        roleArn:
+                          description: The ARN of the IAM role to associate with this
+                            volume. This is the Amazon ECS infrastructure IAM role
+                            that is used to manage your AWS infrastructure.
+                          type: string
+                        targetGroupArn:
+                          description: The full ARN of the target group or groups
+                            associated with the VPC Lattice configuration.
+                          type: string
+                      type: object
+                    type: array
                   waitForSteadyState:
                     description: Default false.
                     type: boolean
@@ -3797,6 +3822,13 @@ spec:
                           back to the last deployment that completed successfully.
                         type: boolean
                     type: object
+                  availabilityZoneRebalancing:
+                    description: ECS automatically redistributes tasks within a service
+                      across Availability Zones (AZs) to mitigate the risk of impaired
+                      application availability due to underlying infrastructure failures
+                      and task lifecycle activities. The valid values are ENABLED
+                      and DISABLED. Defaults to DISABLED.
+                    type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
                       Can be one or more. These can be updated without destroying
@@ -4657,10 +4689,9 @@ spec:
                               use for Amazon EBS encryption.
                             type: string
                           roleArn:
-                            description: Amazon ECS infrastructure IAM role that is
-                              used to manage your Amazon Web Services infrastructure.
-                              Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes
-                              IAM policy with this role.
+                            description: The ARN of the IAM role to associate with
+                              this volume. This is the Amazon ECS infrastructure IAM
+                              role that is used to manage your AWS infrastructure.
                             type: string
                           sizeInGb:
                             description: Size of the volume in GiB. You must specify
@@ -4677,9 +4708,9 @@ spec:
                             items:
                               properties:
                                 propagateTags:
-                                  description: Determines whether to propagate the
-                                    tags from the task definition to the Amazon EBS
-                                    volume.
+                                  description: Whether to propagate the tags from
+                                    the task definition or the service to the tasks.
+                                    The valid values are SERVICE and TASK_DEFINITION.
                                   type: string
                                 resourceType:
                                   description: The type of volume resource. Valid
@@ -4688,9 +4719,7 @@ spec:
                                 tags:
                                   additionalProperties:
                                     type: string
-                                  description: The tags applied to this Amazon EBS
-                                    volume. AmazonECSCreated and AmazonECSManaged
-                                    are reserved tags that can't be used.
+                                  description: Key-value map of resource tags.
                                   type: object
                                   x-kubernetes-map-type: granular
                               type: object
@@ -4707,6 +4736,27 @@ spec:
                         description: Name of the volume.
                         type: string
                     type: object
+                  vpcLatticeConfigurations:
+                    description: The VPC Lattice configuration for your service that
+                      allows Lattice to connect, secure, and monitor your service
+                      across multiple accounts and VPCs. See below.
+                    items:
+                      properties:
+                        portName:
+                          description: The name of the port for a target group associated
+                            with the VPC Lattice configuration.
+                          type: string
+                        roleArn:
+                          description: The ARN of the IAM role to associate with this
+                            volume. This is the Amazon ECS infrastructure IAM role
+                            that is used to manage your AWS infrastructure.
+                          type: string
+                        targetGroupArn:
+                          description: The full ARN of the target group or groups
+                            associated with the VPC Lattice configuration.
+                          type: string
+                      type: object
+                    type: array
                   waitForSteadyState:
                     description: Default false.
                     type: boolean
@@ -4903,6 +4953,13 @@ spec:
                           back to the last deployment that completed successfully.
                         type: boolean
                     type: object
+                  availabilityZoneRebalancing:
+                    description: ECS automatically redistributes tasks within a service
+                      across Availability Zones (AZs) to mitigate the risk of impaired
+                      application availability due to underlying infrastructure failures
+                      and task lifecycle activities. The valid values are ENABLED
+                      and DISABLED. Defaults to DISABLED.
+                    type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
                       Can be one or more. These can be updated without destroying
@@ -5317,10 +5374,9 @@ spec:
                               use for Amazon EBS encryption.
                             type: string
                           roleArn:
-                            description: Amazon ECS infrastructure IAM role that is
-                              used to manage your Amazon Web Services infrastructure.
-                              Recommended using the Amazon ECS-managed AmazonECSInfrastructureRolePolicyForVolumes
-                              IAM policy with this role.
+                            description: The ARN of the IAM role to associate with
+                              this volume. This is the Amazon ECS infrastructure IAM
+                              role that is used to manage your AWS infrastructure.
                             type: string
                           sizeInGb:
                             description: Size of the volume in GiB. You must specify
@@ -5337,9 +5393,9 @@ spec:
                             items:
                               properties:
                                 propagateTags:
-                                  description: Determines whether to propagate the
-                                    tags from the task definition to the Amazon EBS
-                                    volume.
+                                  description: Whether to propagate the tags from
+                                    the task definition or the service to the tasks.
+                                    The valid values are SERVICE and TASK_DEFINITION.
                                   type: string
                                 resourceType:
                                   description: The type of volume resource. Valid
@@ -5348,9 +5404,7 @@ spec:
                                 tags:
                                   additionalProperties:
                                     type: string
-                                  description: The tags applied to this Amazon EBS
-                                    volume. AmazonECSCreated and AmazonECSManaged
-                                    are reserved tags that can't be used.
+                                  description: Key-value map of resource tags.
                                   type: object
                                   x-kubernetes-map-type: granular
                               type: object
@@ -5367,6 +5421,27 @@ spec:
                         description: Name of the volume.
                         type: string
                     type: object
+                  vpcLatticeConfigurations:
+                    description: The VPC Lattice configuration for your service that
+                      allows Lattice to connect, secure, and monitor your service
+                      across multiple accounts and VPCs. See below.
+                    items:
+                      properties:
+                        portName:
+                          description: The name of the port for a target group associated
+                            with the VPC Lattice configuration.
+                          type: string
+                        roleArn:
+                          description: The ARN of the IAM role to associate with this
+                            volume. This is the Amazon ECS infrastructure IAM role
+                            that is used to manage your AWS infrastructure.
+                          type: string
+                        targetGroupArn:
+                          description: The full ARN of the target group or groups
+                            associated with the VPC Lattice configuration.
+                          type: string
+                      type: object
+                    type: array
                   waitForSteadyState:
                     description: Default false.
                     type: boolean

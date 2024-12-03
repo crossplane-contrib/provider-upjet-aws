@@ -1419,97 +1419,102 @@ spec:
                           containers:
                             description: Properties of the container that's used on
                               the Amazon EKS pod. See containers below.
-                            properties:
-                              args:
-                                description: Array of arguments to the entrypoint.
-                                  If this isn't specified, the CMD of the container
-                                  image is used. This corresponds to the args member
-                                  in the Entrypoint portion of the Pod in Kubernetes.
-                                  Environment variable references are expanded using
-                                  the container's environment.
-                                items:
+                            items:
+                              properties:
+                                args:
+                                  description: Array of arguments to the entrypoint.
+                                    If this isn't specified, the CMD of the container
+                                    image is used. This corresponds to the args member
+                                    in the Entrypoint portion of the Pod in Kubernetes.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                command:
+                                  description: Entrypoint for the container. This
+                                    isn't run within a shell. If this isn't specified,
+                                    the ENTRYPOINT of the container image is used.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                env:
+                                  description: Environment variables to pass to a
+                                    container. See EKS Environment below.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      value:
+                                        description: Value of the environment variable.
+                                        type: string
+                                    type: object
+                                  type: array
+                                image:
+                                  description: Docker image used to start the container.
                                   type: string
-                                type: array
-                              command:
-                                description: Entrypoint for the container. This isn't
-                                  run within a shell. If this isn't specified, the
-                                  ENTRYPOINT of the container image is used. Environment
-                                  variable references are expanded using the container's
-                                  environment.
-                                items:
+                                imagePullPolicy:
+                                  description: Image pull policy for the container.
+                                    Supported values are Always, IfNotPresent, and
+                                    Never.
                                   type: string
-                                type: array
-                              env:
-                                description: Environment variables to pass to a container.
-                                  See EKS Environment below.
-                                items:
+                                name:
+                                  description: Name of the container. If the name
+                                    isn't specified, the default name "Default" is
+                                    used. Each container in a pod must have a unique
+                                    name.
+                                  type: string
+                                resources:
+                                  description: Type and amount of resources to assign
+                                    to a container. The supported resources include
+                                    memory, cpu, and nvidia.com/gpu.
                                   properties:
-                                    name:
-                                      description: Name of the job definition.
-                                      type: string
-                                    value:
-                                      description: Value of the environment variable.
-                                      type: string
+                                    limits:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    requests:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
-                                type: array
-                              image:
-                                description: Docker image used to start the container.
-                                type: string
-                              imagePullPolicy:
-                                description: Image pull policy for the container.
-                                  Supported values are Always, IfNotPresent, and Never.
-                                type: string
-                              name:
-                                description: Name of the container. If the name isn't
-                                  specified, the default name "Default" is used. Each
-                                  container in a pod must have a unique name.
-                                type: string
-                              resources:
-                                description: Type and amount of resources to assign
-                                  to a container. The supported resources include
-                                  memory, cpu, and nvidia.com/gpu.
-                                properties:
-                                  limits:
-                                    additionalProperties:
-                                      type: string
-                                    type: object
-                                    x-kubernetes-map-type: granular
-                                  requests:
-                                    additionalProperties:
-                                      type: string
-                                    type: object
-                                    x-kubernetes-map-type: granular
-                                type: object
-                              securityContext:
-                                description: Security context for a job.
-                                properties:
-                                  privileged:
-                                    type: boolean
-                                  readOnlyRootFileSystem:
-                                    type: boolean
-                                  runAsGroup:
-                                    type: number
-                                  runAsNonRoot:
-                                    type: boolean
-                                  runAsUser:
-                                    type: number
-                                type: object
-                              volumeMounts:
-                                description: Volume mounts for the container.
-                                items:
+                                securityContext:
+                                  description: Security context for a job.
                                   properties:
-                                    mountPath:
-                                      description: Path of the file or directory on
-                                        the host to mount into containers on the pod.
-                                      type: string
-                                    name:
-                                      description: Name of the job definition.
-                                      type: string
-                                    readOnly:
+                                    privileged:
                                       type: boolean
+                                    readOnlyRootFileSystem:
+                                      type: boolean
+                                    runAsGroup:
+                                      type: number
+                                    runAsNonRoot:
+                                      type: boolean
+                                    runAsUser:
+                                      type: number
                                   type: object
-                                type: array
-                            type: object
+                                volumeMounts:
+                                  description: Volume mounts for the container.
+                                  items:
+                                    properties:
+                                      mountPath:
+                                        description: Path of the file or directory
+                                          on the host to mount into containers on
+                                          the pod.
+                                        type: string
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      readOnly:
+                                        type: boolean
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           dnsPolicy:
                             description: DNS policy for the pod. The default value
                               is ClusterFirst. If the host_network argument is not
@@ -1538,12 +1543,114 @@ spec:
                                   type: string
                               type: object
                             type: array
+                          initContainers:
+                            description: Containers which run before application containers,
+                              always runs to completion, and must complete successfully
+                              before the next container starts. These containers are
+                              registered with the Amazon EKS Connector agent and persists
+                              the registration information in the Kubernetes backend
+                              data store. See containers below.
+                            items:
+                              properties:
+                                args:
+                                  description: Array of arguments to the entrypoint.
+                                    If this isn't specified, the CMD of the container
+                                    image is used. This corresponds to the args member
+                                    in the Entrypoint portion of the Pod in Kubernetes.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                command:
+                                  description: Entrypoint for the container. This
+                                    isn't run within a shell. If this isn't specified,
+                                    the ENTRYPOINT of the container image is used.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                env:
+                                  description: Environment variables to pass to a
+                                    container. See EKS Environment below.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      value:
+                                        description: Value of the environment variable.
+                                        type: string
+                                    type: object
+                                  type: array
+                                image:
+                                  description: Docker image used to start the container.
+                                  type: string
+                                imagePullPolicy:
+                                  description: Image pull policy for the container.
+                                    Supported values are Always, IfNotPresent, and
+                                    Never.
+                                  type: string
+                                name:
+                                  description: Name of the job definition.
+                                  type: string
+                                resources:
+                                  description: Type and amount of resources to assign
+                                    to a container. The supported resources include
+                                    memory, cpu, and nvidia.com/gpu.
+                                  properties:
+                                    limits:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    requests:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                securityContext:
+                                  description: Security context for a job.
+                                  properties:
+                                    privileged:
+                                      type: boolean
+                                    readOnlyRootFileSystem:
+                                      type: boolean
+                                    runAsGroup:
+                                      type: number
+                                    runAsNonRoot:
+                                      type: boolean
+                                    runAsUser:
+                                      type: number
+                                  type: object
+                                volumeMounts:
+                                  description: Volume mounts for the container.
+                                  items:
+                                    properties:
+                                      mountPath:
+                                        description: Path of the file or directory
+                                          on the host to mount into containers on
+                                          the pod.
+                                        type: string
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      readOnly:
+                                        type: boolean
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           metadata:
                             description: Metadata about the Kubernetes pod.
                             properties:
                               labels:
                                 additionalProperties:
                                   type: string
+                                description: Key-value pairs used to identify, sort,
+                                  and organize cube resources.
                                 type: object
                                 x-kubernetes-map-type: granular
                             type: object
@@ -1551,6 +1658,11 @@ spec:
                             description: Name of the service account that's used to
                               run the pod.
                             type: string
+                          shareProcessNamespace:
+                            description: Indicates if the processes in a container
+                              are shared, or visible, to other containers in the same
+                              pod.
+                            type: boolean
                           volumes:
                             description: Volumes for a job definition that uses Amazon
                               EKS resources. AWS Batch supports emptyDir, hostPath,
@@ -1731,97 +1843,102 @@ spec:
                           containers:
                             description: Properties of the container that's used on
                               the Amazon EKS pod. See containers below.
-                            properties:
-                              args:
-                                description: Array of arguments to the entrypoint.
-                                  If this isn't specified, the CMD of the container
-                                  image is used. This corresponds to the args member
-                                  in the Entrypoint portion of the Pod in Kubernetes.
-                                  Environment variable references are expanded using
-                                  the container's environment.
-                                items:
+                            items:
+                              properties:
+                                args:
+                                  description: Array of arguments to the entrypoint.
+                                    If this isn't specified, the CMD of the container
+                                    image is used. This corresponds to the args member
+                                    in the Entrypoint portion of the Pod in Kubernetes.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                command:
+                                  description: Entrypoint for the container. This
+                                    isn't run within a shell. If this isn't specified,
+                                    the ENTRYPOINT of the container image is used.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                env:
+                                  description: Environment variables to pass to a
+                                    container. See EKS Environment below.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      value:
+                                        description: Value of the environment variable.
+                                        type: string
+                                    type: object
+                                  type: array
+                                image:
+                                  description: Docker image used to start the container.
                                   type: string
-                                type: array
-                              command:
-                                description: Entrypoint for the container. This isn't
-                                  run within a shell. If this isn't specified, the
-                                  ENTRYPOINT of the container image is used. Environment
-                                  variable references are expanded using the container's
-                                  environment.
-                                items:
+                                imagePullPolicy:
+                                  description: Image pull policy for the container.
+                                    Supported values are Always, IfNotPresent, and
+                                    Never.
                                   type: string
-                                type: array
-                              env:
-                                description: Environment variables to pass to a container.
-                                  See EKS Environment below.
-                                items:
+                                name:
+                                  description: Name of the container. If the name
+                                    isn't specified, the default name "Default" is
+                                    used. Each container in a pod must have a unique
+                                    name.
+                                  type: string
+                                resources:
+                                  description: Type and amount of resources to assign
+                                    to a container. The supported resources include
+                                    memory, cpu, and nvidia.com/gpu.
                                   properties:
-                                    name:
-                                      description: Name of the job definition.
-                                      type: string
-                                    value:
-                                      description: Value of the environment variable.
-                                      type: string
+                                    limits:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    requests:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
-                                type: array
-                              image:
-                                description: Docker image used to start the container.
-                                type: string
-                              imagePullPolicy:
-                                description: Image pull policy for the container.
-                                  Supported values are Always, IfNotPresent, and Never.
-                                type: string
-                              name:
-                                description: Name of the container. If the name isn't
-                                  specified, the default name "Default" is used. Each
-                                  container in a pod must have a unique name.
-                                type: string
-                              resources:
-                                description: Type and amount of resources to assign
-                                  to a container. The supported resources include
-                                  memory, cpu, and nvidia.com/gpu.
-                                properties:
-                                  limits:
-                                    additionalProperties:
-                                      type: string
-                                    type: object
-                                    x-kubernetes-map-type: granular
-                                  requests:
-                                    additionalProperties:
-                                      type: string
-                                    type: object
-                                    x-kubernetes-map-type: granular
-                                type: object
-                              securityContext:
-                                description: Security context for a job.
-                                properties:
-                                  privileged:
-                                    type: boolean
-                                  readOnlyRootFileSystem:
-                                    type: boolean
-                                  runAsGroup:
-                                    type: number
-                                  runAsNonRoot:
-                                    type: boolean
-                                  runAsUser:
-                                    type: number
-                                type: object
-                              volumeMounts:
-                                description: Volume mounts for the container.
-                                items:
+                                securityContext:
+                                  description: Security context for a job.
                                   properties:
-                                    mountPath:
-                                      description: Path of the file or directory on
-                                        the host to mount into containers on the pod.
-                                      type: string
-                                    name:
-                                      description: Name of the job definition.
-                                      type: string
-                                    readOnly:
+                                    privileged:
                                       type: boolean
+                                    readOnlyRootFileSystem:
+                                      type: boolean
+                                    runAsGroup:
+                                      type: number
+                                    runAsNonRoot:
+                                      type: boolean
+                                    runAsUser:
+                                      type: number
                                   type: object
-                                type: array
-                            type: object
+                                volumeMounts:
+                                  description: Volume mounts for the container.
+                                  items:
+                                    properties:
+                                      mountPath:
+                                        description: Path of the file or directory
+                                          on the host to mount into containers on
+                                          the pod.
+                                        type: string
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      readOnly:
+                                        type: boolean
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           dnsPolicy:
                             description: DNS policy for the pod. The default value
                               is ClusterFirst. If the host_network argument is not
@@ -1850,12 +1967,114 @@ spec:
                                   type: string
                               type: object
                             type: array
+                          initContainers:
+                            description: Containers which run before application containers,
+                              always runs to completion, and must complete successfully
+                              before the next container starts. These containers are
+                              registered with the Amazon EKS Connector agent and persists
+                              the registration information in the Kubernetes backend
+                              data store. See containers below.
+                            items:
+                              properties:
+                                args:
+                                  description: Array of arguments to the entrypoint.
+                                    If this isn't specified, the CMD of the container
+                                    image is used. This corresponds to the args member
+                                    in the Entrypoint portion of the Pod in Kubernetes.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                command:
+                                  description: Entrypoint for the container. This
+                                    isn't run within a shell. If this isn't specified,
+                                    the ENTRYPOINT of the container image is used.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                env:
+                                  description: Environment variables to pass to a
+                                    container. See EKS Environment below.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      value:
+                                        description: Value of the environment variable.
+                                        type: string
+                                    type: object
+                                  type: array
+                                image:
+                                  description: Docker image used to start the container.
+                                  type: string
+                                imagePullPolicy:
+                                  description: Image pull policy for the container.
+                                    Supported values are Always, IfNotPresent, and
+                                    Never.
+                                  type: string
+                                name:
+                                  description: Name of the job definition.
+                                  type: string
+                                resources:
+                                  description: Type and amount of resources to assign
+                                    to a container. The supported resources include
+                                    memory, cpu, and nvidia.com/gpu.
+                                  properties:
+                                    limits:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    requests:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                securityContext:
+                                  description: Security context for a job.
+                                  properties:
+                                    privileged:
+                                      type: boolean
+                                    readOnlyRootFileSystem:
+                                      type: boolean
+                                    runAsGroup:
+                                      type: number
+                                    runAsNonRoot:
+                                      type: boolean
+                                    runAsUser:
+                                      type: number
+                                  type: object
+                                volumeMounts:
+                                  description: Volume mounts for the container.
+                                  items:
+                                    properties:
+                                      mountPath:
+                                        description: Path of the file or directory
+                                          on the host to mount into containers on
+                                          the pod.
+                                        type: string
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      readOnly:
+                                        type: boolean
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           metadata:
                             description: Metadata about the Kubernetes pod.
                             properties:
                               labels:
                                 additionalProperties:
                                   type: string
+                                description: Key-value pairs used to identify, sort,
+                                  and organize cube resources.
                                 type: object
                                 x-kubernetes-map-type: granular
                             type: object
@@ -1863,6 +2082,11 @@ spec:
                             description: Name of the service account that's used to
                               run the pod.
                             type: string
+                          shareProcessNamespace:
+                            description: Indicates if the processes in a container
+                              are shared, or visible, to other containers in the same
+                              pod.
+                            type: boolean
                           volumes:
                             description: Volumes for a job definition that uses Amazon
                               EKS resources. AWS Batch supports emptyDir, hostPath,
@@ -2211,97 +2435,102 @@ spec:
                           containers:
                             description: Properties of the container that's used on
                               the Amazon EKS pod. See containers below.
-                            properties:
-                              args:
-                                description: Array of arguments to the entrypoint.
-                                  If this isn't specified, the CMD of the container
-                                  image is used. This corresponds to the args member
-                                  in the Entrypoint portion of the Pod in Kubernetes.
-                                  Environment variable references are expanded using
-                                  the container's environment.
-                                items:
+                            items:
+                              properties:
+                                args:
+                                  description: Array of arguments to the entrypoint.
+                                    If this isn't specified, the CMD of the container
+                                    image is used. This corresponds to the args member
+                                    in the Entrypoint portion of the Pod in Kubernetes.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                command:
+                                  description: Entrypoint for the container. This
+                                    isn't run within a shell. If this isn't specified,
+                                    the ENTRYPOINT of the container image is used.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                env:
+                                  description: Environment variables to pass to a
+                                    container. See EKS Environment below.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      value:
+                                        description: Value of the environment variable.
+                                        type: string
+                                    type: object
+                                  type: array
+                                image:
+                                  description: Docker image used to start the container.
                                   type: string
-                                type: array
-                              command:
-                                description: Entrypoint for the container. This isn't
-                                  run within a shell. If this isn't specified, the
-                                  ENTRYPOINT of the container image is used. Environment
-                                  variable references are expanded using the container's
-                                  environment.
-                                items:
+                                imagePullPolicy:
+                                  description: Image pull policy for the container.
+                                    Supported values are Always, IfNotPresent, and
+                                    Never.
                                   type: string
-                                type: array
-                              env:
-                                description: Environment variables to pass to a container.
-                                  See EKS Environment below.
-                                items:
+                                name:
+                                  description: Name of the container. If the name
+                                    isn't specified, the default name "Default" is
+                                    used. Each container in a pod must have a unique
+                                    name.
+                                  type: string
+                                resources:
+                                  description: Type and amount of resources to assign
+                                    to a container. The supported resources include
+                                    memory, cpu, and nvidia.com/gpu.
                                   properties:
-                                    name:
-                                      description: Name of the job definition.
-                                      type: string
-                                    value:
-                                      description: Value of the environment variable.
-                                      type: string
+                                    limits:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    requests:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
                                   type: object
-                                type: array
-                              image:
-                                description: Docker image used to start the container.
-                                type: string
-                              imagePullPolicy:
-                                description: Image pull policy for the container.
-                                  Supported values are Always, IfNotPresent, and Never.
-                                type: string
-                              name:
-                                description: Name of the container. If the name isn't
-                                  specified, the default name "Default" is used. Each
-                                  container in a pod must have a unique name.
-                                type: string
-                              resources:
-                                description: Type and amount of resources to assign
-                                  to a container. The supported resources include
-                                  memory, cpu, and nvidia.com/gpu.
-                                properties:
-                                  limits:
-                                    additionalProperties:
-                                      type: string
-                                    type: object
-                                    x-kubernetes-map-type: granular
-                                  requests:
-                                    additionalProperties:
-                                      type: string
-                                    type: object
-                                    x-kubernetes-map-type: granular
-                                type: object
-                              securityContext:
-                                description: Security context for a job.
-                                properties:
-                                  privileged:
-                                    type: boolean
-                                  readOnlyRootFileSystem:
-                                    type: boolean
-                                  runAsGroup:
-                                    type: number
-                                  runAsNonRoot:
-                                    type: boolean
-                                  runAsUser:
-                                    type: number
-                                type: object
-                              volumeMounts:
-                                description: Volume mounts for the container.
-                                items:
+                                securityContext:
+                                  description: Security context for a job.
                                   properties:
-                                    mountPath:
-                                      description: Path of the file or directory on
-                                        the host to mount into containers on the pod.
-                                      type: string
-                                    name:
-                                      description: Name of the job definition.
-                                      type: string
-                                    readOnly:
+                                    privileged:
                                       type: boolean
+                                    readOnlyRootFileSystem:
+                                      type: boolean
+                                    runAsGroup:
+                                      type: number
+                                    runAsNonRoot:
+                                      type: boolean
+                                    runAsUser:
+                                      type: number
                                   type: object
-                                type: array
-                            type: object
+                                volumeMounts:
+                                  description: Volume mounts for the container.
+                                  items:
+                                    properties:
+                                      mountPath:
+                                        description: Path of the file or directory
+                                          on the host to mount into containers on
+                                          the pod.
+                                        type: string
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      readOnly:
+                                        type: boolean
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           dnsPolicy:
                             description: DNS policy for the pod. The default value
                               is ClusterFirst. If the host_network argument is not
@@ -2330,12 +2559,114 @@ spec:
                                   type: string
                               type: object
                             type: array
+                          initContainers:
+                            description: Containers which run before application containers,
+                              always runs to completion, and must complete successfully
+                              before the next container starts. These containers are
+                              registered with the Amazon EKS Connector agent and persists
+                              the registration information in the Kubernetes backend
+                              data store. See containers below.
+                            items:
+                              properties:
+                                args:
+                                  description: Array of arguments to the entrypoint.
+                                    If this isn't specified, the CMD of the container
+                                    image is used. This corresponds to the args member
+                                    in the Entrypoint portion of the Pod in Kubernetes.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                command:
+                                  description: Entrypoint for the container. This
+                                    isn't run within a shell. If this isn't specified,
+                                    the ENTRYPOINT of the container image is used.
+                                    Environment variable references are expanded using
+                                    the container's environment.
+                                  items:
+                                    type: string
+                                  type: array
+                                env:
+                                  description: Environment variables to pass to a
+                                    container. See EKS Environment below.
+                                  items:
+                                    properties:
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      value:
+                                        description: Value of the environment variable.
+                                        type: string
+                                    type: object
+                                  type: array
+                                image:
+                                  description: Docker image used to start the container.
+                                  type: string
+                                imagePullPolicy:
+                                  description: Image pull policy for the container.
+                                    Supported values are Always, IfNotPresent, and
+                                    Never.
+                                  type: string
+                                name:
+                                  description: Name of the job definition.
+                                  type: string
+                                resources:
+                                  description: Type and amount of resources to assign
+                                    to a container. The supported resources include
+                                    memory, cpu, and nvidia.com/gpu.
+                                  properties:
+                                    limits:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                    requests:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                securityContext:
+                                  description: Security context for a job.
+                                  properties:
+                                    privileged:
+                                      type: boolean
+                                    readOnlyRootFileSystem:
+                                      type: boolean
+                                    runAsGroup:
+                                      type: number
+                                    runAsNonRoot:
+                                      type: boolean
+                                    runAsUser:
+                                      type: number
+                                  type: object
+                                volumeMounts:
+                                  description: Volume mounts for the container.
+                                  items:
+                                    properties:
+                                      mountPath:
+                                        description: Path of the file or directory
+                                          on the host to mount into containers on
+                                          the pod.
+                                        type: string
+                                      name:
+                                        description: Name of the job definition.
+                                        type: string
+                                      readOnly:
+                                        type: boolean
+                                    type: object
+                                  type: array
+                              type: object
+                            type: array
                           metadata:
                             description: Metadata about the Kubernetes pod.
                             properties:
                               labels:
                                 additionalProperties:
                                   type: string
+                                description: Key-value pairs used to identify, sort,
+                                  and organize cube resources.
                                 type: object
                                 x-kubernetes-map-type: granular
                             type: object
@@ -2343,6 +2674,11 @@ spec:
                             description: Name of the service account that's used to
                               run the pod.
                             type: string
+                          shareProcessNamespace:
+                            description: Indicates if the processes in a container
+                              are shared, or visible, to other containers in the same
+                              pod.
+                            type: boolean
                           volumes:
                             description: Volumes for a job definition that uses Amazon
                               EKS resources. AWS Batch supports emptyDir, hostPath,
