@@ -183,7 +183,7 @@ type URLConfig struct {
 	// and region by choosing Static type. Alternatively, you can provide
 	// configuration for dynamically resolving the URL with the config you provide
 	// once you set the type as Dynamic.
-	// +kubebuilder:validation:Enum=Static;Dynamic
+	// +kubebuilder:validation:Enum=Static;Dynamic;Auto
 	Type string `json:"type"`
 
 	// Static is the full URL you'd like the AWS SDK to use.
