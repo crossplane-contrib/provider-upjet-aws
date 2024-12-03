@@ -15,7 +15,7 @@ import (
 
 type AlarmConfigurationInitParameters struct {
 
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// A list of alarms configured for the deployment group.
 	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
@@ -28,7 +28,7 @@ type AlarmConfigurationInitParameters struct {
 
 type AlarmConfigurationObservation struct {
 
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// A list of alarms configured for the deployment group.
 	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
@@ -41,7 +41,7 @@ type AlarmConfigurationObservation struct {
 
 type AlarmConfigurationParameters struct {
 
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms can be added to a deployment group.
+	// A list of alarms configured for the deployment group.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
@@ -182,6 +182,9 @@ type DeploymentGroupInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
+
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	TriggerConfiguration []TriggerConfigurationInitParameters `json:"triggerConfiguration,omitempty" tf:"trigger_configuration,omitempty"`
 }
@@ -250,6 +253,9 @@ type DeploymentGroupObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	TriggerConfiguration []TriggerConfigurationObservation `json:"triggerConfiguration,omitempty" tf:"trigger_configuration,omitempty"`
@@ -342,6 +348,10 @@ type DeploymentGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	// +kubebuilder:validation:Optional
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	// +kubebuilder:validation:Optional

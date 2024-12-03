@@ -328,7 +328,7 @@ type ActionForwardInitParameters struct {
 	// The target group stickiness for the rule.
 	Stickiness *ForwardStickinessInitParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
-	// One or more target groups block.
+	// One or more target group blocks.
 	TargetGroup []ForwardTargetGroupInitParameters `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
@@ -337,7 +337,7 @@ type ActionForwardObservation struct {
 	// The target group stickiness for the rule.
 	Stickiness *ForwardStickinessObservation `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
-	// One or more target groups block.
+	// One or more target group blocks.
 	TargetGroup []ForwardTargetGroupObservation `json:"targetGroup,omitempty" tf:"target_group,omitempty"`
 }
 
@@ -347,7 +347,7 @@ type ActionForwardParameters struct {
 	// +kubebuilder:validation:Optional
 	Stickiness *ForwardStickinessParameters `json:"stickiness,omitempty" tf:"stickiness,omitempty"`
 
-	// One or more target groups block.
+	// One or more target group blocks.
 	// +kubebuilder:validation:Optional
 	TargetGroup []ForwardTargetGroupParameters `json:"targetGroup" tf:"target_group,omitempty"`
 }
