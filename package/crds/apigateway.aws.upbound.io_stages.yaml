@@ -997,6 +997,9 @@ spec:
                     description: Configuration settings of a canary deployment. See
                       Canary Settings below.
                     properties:
+                      deploymentId:
+                        description: ID of the deployment that the stage points to
+                        type: string
                       percentTraffic:
                         description: Percent 0.0 - 100.0 of traffic to divert to the
                           canary deployment.
@@ -1248,6 +1251,9 @@ spec:
                     description: Configuration settings of a canary deployment. See
                       Canary Settings below.
                     properties:
+                      deploymentId:
+                        description: ID of the deployment that the stage points to
+                        type: string
                       percentTraffic:
                         description: Percent 0.0 - 100.0 of traffic to divert to the
                           canary deployment.
@@ -1660,6 +1666,9 @@ spec:
                     description: Configuration settings of a canary deployment. See
                       Canary Settings below.
                     properties:
+                      deploymentId:
+                        description: ID of the deployment that the stage points to
+                        type: string
                       percentTraffic:
                         description: Percent 0.0 - 100.0 of traffic to divert to the
                           canary deployment.

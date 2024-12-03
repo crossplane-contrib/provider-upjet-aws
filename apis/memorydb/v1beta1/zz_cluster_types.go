@@ -42,7 +42,10 @@ type ClusterInitParameters struct {
 	// Description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Version number of the Redis engine to be used for the cluster. Downgrades are not supported.
+	// The engine that will run on your nodes. Supported values are redis and valkey.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Version number of the engine to be used for the cluster. Downgrades are not supported.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Name of the final cluster snapshot to be created when this resource is deleted. If omitted, no final snapshot will be made.
@@ -148,10 +151,13 @@ type ClusterObservation struct {
 	// Description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Patch version number of the Redis engine used by the cluster.
+	// The engine that will run on your nodes. Supported values are redis and valkey.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Patch version number of the engine used by the cluster.
 	EnginePatchVersion *string `json:"enginePatchVersion,omitempty" tf:"engine_patch_version,omitempty"`
 
-	// Version number of the Redis engine to be used for the cluster. Downgrades are not supported.
+	// Version number of the engine to be used for the cluster. Downgrades are not supported.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Name of the final cluster snapshot to be created when this resource is deleted. If omitted, no final snapshot will be made.
@@ -236,7 +242,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Version number of the Redis engine to be used for the cluster. Downgrades are not supported.
+	// The engine that will run on your nodes. Supported values are redis and valkey.
+	// +kubebuilder:validation:Optional
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Version number of the engine to be used for the cluster. Downgrades are not supported.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 

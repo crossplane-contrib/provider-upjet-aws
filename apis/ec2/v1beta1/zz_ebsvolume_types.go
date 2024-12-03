@@ -64,7 +64,7 @@ type EBSVolumeInitParameters struct {
 
 type EBSVolumeObservation struct {
 
-	// The volume ARN (e.g., arn:aws:ec2:us-east-1:0123456789012:volume/vol-59fcb34e).
+	// The volume ARN (e.g., arn:aws:ec2:us-east-1:123456789012:volume/vol-59fcb34e).
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The AZ where the EBS volume will exist.

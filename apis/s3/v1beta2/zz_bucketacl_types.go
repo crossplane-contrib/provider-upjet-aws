@@ -73,7 +73,7 @@ type AccessControlPolicyParameters struct {
 
 type BucketACLInitParameters struct {
 
-	// Canned ACL to apply to the bucket.
+	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
@@ -98,7 +98,7 @@ type BucketACLInitParameters struct {
 
 type BucketACLObservation struct {
 
-	// Canned ACL to apply to the bucket.
+	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// Configuration block that sets the ACL permissions for an object per grantee. See below.
@@ -116,7 +116,7 @@ type BucketACLObservation struct {
 
 type BucketACLParameters struct {
 
-	// Canned ACL to apply to the bucket.
+	// Specifies the Canned ACL to apply to the bucket. Valid values: private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write. Full details are available on the AWS documentation.
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 

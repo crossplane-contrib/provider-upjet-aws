@@ -599,9 +599,11 @@ spec:
                         description:
                           description: Description for the cluster.
                           type: string
+                        engine:
+                          description: The engine that will run on cluster nodes.
+                          type: string
                         engineVersion:
-                          description: Version number of the Redis engine used by
-                            the cluster.
+                          description: Version number of the engine used by the cluster.
                           type: string
                         maintenanceWindow:
                           description: The weekly time range during which maintenance

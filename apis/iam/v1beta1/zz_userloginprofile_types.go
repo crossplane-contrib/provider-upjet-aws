@@ -47,9 +47,6 @@ type UserLoginProfileObservation struct {
 	// The fingerprint of the PGP key used to encrypt the password.
 	KeyFingerprint *string `json:"keyFingerprint,omitempty" tf:"key_fingerprint,omitempty"`
 
-	// The plain text password, only available when pgp_key is not provided.
-	Password *string `json:"password,omitempty" tf:"password,omitempty"`
-
 	// The length of the generated password on resource creation. Only applies on resource creation. Drift detection is not possible with this argument. Default value is 20.
 	PasswordLength *float64 `json:"passwordLength,omitempty" tf:"password_length,omitempty"`
 

@@ -157,6 +157,12 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  resetOnDelete:
+                    description: |-
+                      If true, destroying the resource will reset account settings to default, otherwise account settings are not modified.
+                      Defaults to false.
+                      Will be removed in a future major version of the provider.
+                    type: boolean
                 required:
                 - region
                 type: object
@@ -253,6 +259,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  resetOnDelete:
+                    description: |-
+                      If true, destroying the resource will reset account settings to default, otherwise account settings are not modified.
+                      Defaults to false.
+                      Will be removed in a future major version of the provider.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -443,6 +455,12 @@ spec:
                     x-kubernetes-list-type: set
                   id:
                     type: string
+                  resetOnDelete:
+                    description: |-
+                      If true, destroying the resource will reset account settings to default, otherwise account settings are not modified.
+                      Defaults to false.
+                      Will be removed in a future major version of the provider.
+                    type: boolean
                   throttleSettings:
                     description: Account-Level throttle settings. See exported fields
                       below.
