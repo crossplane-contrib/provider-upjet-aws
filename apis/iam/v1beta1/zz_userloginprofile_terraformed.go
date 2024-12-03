@@ -21,7 +21,7 @@ func (mg *UserLoginProfile) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this UserLoginProfile
 func (tr *UserLoginProfile) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"password": "status.atProvider.password"}
 }
 
 // GetObservation of this UserLoginProfile

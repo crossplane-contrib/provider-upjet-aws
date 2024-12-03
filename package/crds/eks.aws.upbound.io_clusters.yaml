@@ -1592,8 +1592,7 @@ spec:
                     x-kubernetes-list-type: set
                   encryptionConfig:
                     description: Configuration block with encryption configuration
-                      for the cluster. Only available on Kubernetes 1.13 and above
-                      clusters created after March 6, 2020. Detailed below.
+                      for the cluster. Detailed below.
                     properties:
                       provider:
                         description: Configuration block with provider for encryption.
@@ -1986,6 +1985,14 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                     type: object
+                  zonalShiftConfig:
+                    description: Configuration block with zonal shift configuration
+                      for the cluster. Detailed below.
+                    properties:
+                      enabled:
+                        description: Whether zonal shift is enabled for the cluster.
+                        type: boolean
+                    type: object
                 required:
                 - region
                 type: object
@@ -2030,8 +2037,7 @@ spec:
                     x-kubernetes-list-type: set
                   encryptionConfig:
                     description: Configuration block with encryption configuration
-                      for the cluster. Only available on Kubernetes 1.13 and above
-                      clusters created after March 6, 2020. Detailed below.
+                      for the cluster. Detailed below.
                     properties:
                       provider:
                         description: Configuration block with provider for encryption.
@@ -2420,6 +2426,14 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                     type: object
+                  zonalShiftConfig:
+                    description: Configuration block with zonal shift configuration
+                      for the cluster. Detailed below.
+                    properties:
+                      enabled:
+                        description: Whether zonal shift is enabled for the cluster.
+                        type: boolean
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -2650,8 +2664,7 @@ spec:
                     x-kubernetes-list-type: set
                   encryptionConfig:
                     description: Configuration block with encryption configuration
-                      for the cluster. Only available on Kubernetes 1.13 and above
-                      clusters created after March 6, 2020. Detailed below.
+                      for the cluster. Detailed below.
                     properties:
                       provider:
                         description: Configuration block with provider for encryption.
@@ -2864,6 +2877,14 @@ spec:
                       vpcId:
                         description: ID of the VPC associated with your cluster.
                         type: string
+                    type: object
+                  zonalShiftConfig:
+                    description: Configuration block with zonal shift configuration
+                      for the cluster. Detailed below.
+                    properties:
+                      enabled:
+                        description: Whether zonal shift is enabled for the cluster.
+                        type: boolean
                     type: object
                 type: object
               conditions:
