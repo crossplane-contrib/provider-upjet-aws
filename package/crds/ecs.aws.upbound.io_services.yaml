@@ -95,6 +95,13 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  availabilityZoneRebalancing:
+                    description: ECS automatically redistributes tasks within a service
+                      across Availability Zones (AZs) to mitigate the risk of impaired
+                      application availability due to underlying infrastructure failures
+                      and task lifecycle activities. The valid values are ENABLED
+                      and DISABLED. Defaults to DISABLED.
+                    type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
                       Can be one or more. These can be updated without destroying
@@ -1036,6 +1043,27 @@ spec:
                         description: Name of the volume.
                         type: string
                     type: object
+                  vpcLatticeConfigurations:
+                    description: The VPC Lattice configuration for your service that
+                      allows Lattice to connect, secure, and monitor your service
+                      across multiple accounts and VPCs. See below.
+                    items:
+                      properties:
+                        portName:
+                          description: The name of the port for a target group associated
+                            with the VPC Lattice configuration.
+                          type: string
+                        roleArn:
+                          description: The ARN of the IAM role to associate with this
+                            volume. This is the Amazon ECS infrastructure IAM role
+                            that is used to manage your AWS infrastructure.
+                          type: string
+                        targetGroupArn:
+                          description: The full ARN of the target group or groups
+                            associated with the VPC Lattice configuration.
+                          type: string
+                      type: object
+                    type: array
                   waitForSteadyState:
                     description: Default false.
                     type: boolean
@@ -1078,6 +1106,13 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  availabilityZoneRebalancing:
+                    description: ECS automatically redistributes tasks within a service
+                      across Availability Zones (AZs) to mitigate the risk of impaired
+                      application availability due to underlying infrastructure failures
+                      and task lifecycle activities. The valid values are ENABLED
+                      and DISABLED. Defaults to DISABLED.
+                    type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
                       Can be one or more. These can be updated without destroying
@@ -2015,6 +2050,27 @@ spec:
                         description: Name of the volume.
                         type: string
                     type: object
+                  vpcLatticeConfigurations:
+                    description: The VPC Lattice configuration for your service that
+                      allows Lattice to connect, secure, and monitor your service
+                      across multiple accounts and VPCs. See below.
+                    items:
+                      properties:
+                        portName:
+                          description: The name of the port for a target group associated
+                            with the VPC Lattice configuration.
+                          type: string
+                        roleArn:
+                          description: The ARN of the IAM role to associate with this
+                            volume. This is the Amazon ECS infrastructure IAM role
+                            that is used to manage your AWS infrastructure.
+                          type: string
+                        targetGroupArn:
+                          description: The full ARN of the target group or groups
+                            associated with the VPC Lattice configuration.
+                          type: string
+                      type: object
+                    type: array
                   waitForSteadyState:
                     description: Default false.
                     type: boolean
@@ -2214,6 +2270,13 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  availabilityZoneRebalancing:
+                    description: ECS automatically redistributes tasks within a service
+                      across Availability Zones (AZs) to mitigate the risk of impaired
+                      application availability due to underlying infrastructure failures
+                      and task lifecycle activities. The valid values are ENABLED
+                      and DISABLED. Defaults to DISABLED.
+                    type: string
                   capacityProviderStrategy:
                     description: Capacity provider strategies to use for the service.
                       Can be one or more. These can be updated without destroying
@@ -2705,6 +2768,27 @@ spec:
                         description: Name of the volume.
                         type: string
                     type: object
+                  vpcLatticeConfigurations:
+                    description: The VPC Lattice configuration for your service that
+                      allows Lattice to connect, secure, and monitor your service
+                      across multiple accounts and VPCs. See below.
+                    items:
+                      properties:
+                        portName:
+                          description: The name of the port for a target group associated
+                            with the VPC Lattice configuration.
+                          type: string
+                        roleArn:
+                          description: The ARN of the IAM role to associate with this
+                            volume. This is the Amazon ECS infrastructure IAM role
+                            that is used to manage your AWS infrastructure.
+                          type: string
+                        targetGroupArn:
+                          description: The full ARN of the target group or groups
+                            associated with the VPC Lattice configuration.
+                          type: string
+                      type: object
+                    type: array
                   waitForSteadyState:
                     description: Default false.
                     type: boolean
