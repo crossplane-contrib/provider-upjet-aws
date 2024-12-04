@@ -4002,6 +4002,15 @@ type H265SettingsInitParameters struct {
 
 	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
+	// Set the minimum QP.
+	MinQp *float64 `json:"minQp,omitempty" tf:"min_qp,omitempty"`
+
+	// Enables or disables motion vector over picture boundaries.
+	MvOverPictureBoundaries *string `json:"mvOverPictureBoundaries,omitempty" tf:"mv_over_picture_boundaries,omitempty"`
+
+	// Enables or disables the motion vector temporal predictor.
+	MvTemporalPredictor *string `json:"mvTemporalPredictor,omitempty" tf:"mv_temporal_predictor,omitempty"`
+
 	// Pixel Aspect Ratio denominator.
 	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
 
@@ -4029,11 +4038,23 @@ type H265SettingsInitParameters struct {
 	// Set the H265 tier in the output.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
+	// Sets the height of tiles.
+	TileHeight *float64 `json:"tileHeight,omitempty" tf:"tile_height,omitempty"`
+
+	// Enables or disables padding of tiles.
+	TilePadding *string `json:"tilePadding,omitempty" tf:"tile_padding,omitempty"`
+
+	// Sets the width of tiles.
+	TileWidth *float64 `json:"tileWidth,omitempty" tf:"tile_width,omitempty"`
+
 	// Apply a burned in timecode. See H265 Timecode Burnin Settings for more details.
 	TimecodeBurninSettings []TimecodeBurninSettingsInitParameters `json:"timecodeBurninSettings,omitempty" tf:"timecode_burnin_settings,omitempty"`
 
 	// Determines how timecodes should be inserted into the video elementary stream.
 	TimecodeInsertion *string `json:"timecodeInsertion,omitempty" tf:"timecode_insertion,omitempty"`
+
+	// Sets the size of the treeblock.
+	TreeblockSize *string `json:"treeblockSize,omitempty" tf:"treeblock_size,omitempty"`
 }
 
 type H265SettingsObservation struct {
@@ -4093,6 +4114,15 @@ type H265SettingsObservation struct {
 
 	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
+	// Set the minimum QP.
+	MinQp *float64 `json:"minQp,omitempty" tf:"min_qp,omitempty"`
+
+	// Enables or disables motion vector over picture boundaries.
+	MvOverPictureBoundaries *string `json:"mvOverPictureBoundaries,omitempty" tf:"mv_over_picture_boundaries,omitempty"`
+
+	// Enables or disables the motion vector temporal predictor.
+	MvTemporalPredictor *string `json:"mvTemporalPredictor,omitempty" tf:"mv_temporal_predictor,omitempty"`
+
 	// Pixel Aspect Ratio denominator.
 	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
 
@@ -4120,11 +4150,23 @@ type H265SettingsObservation struct {
 	// Set the H265 tier in the output.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
+	// Sets the height of tiles.
+	TileHeight *float64 `json:"tileHeight,omitempty" tf:"tile_height,omitempty"`
+
+	// Enables or disables padding of tiles.
+	TilePadding *string `json:"tilePadding,omitempty" tf:"tile_padding,omitempty"`
+
+	// Sets the width of tiles.
+	TileWidth *float64 `json:"tileWidth,omitempty" tf:"tile_width,omitempty"`
+
 	// Apply a burned in timecode. See H265 Timecode Burnin Settings for more details.
 	TimecodeBurninSettings []TimecodeBurninSettingsObservation `json:"timecodeBurninSettings,omitempty" tf:"timecode_burnin_settings,omitempty"`
 
 	// Determines how timecodes should be inserted into the video elementary stream.
 	TimecodeInsertion *string `json:"timecodeInsertion,omitempty" tf:"timecode_insertion,omitempty"`
+
+	// Sets the size of the treeblock.
+	TreeblockSize *string `json:"treeblockSize,omitempty" tf:"treeblock_size,omitempty"`
 }
 
 type H265SettingsParameters struct {
@@ -4203,6 +4245,18 @@ type H265SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	MinIInterval *float64 `json:"minIInterval,omitempty" tf:"min_i_interval,omitempty"`
 
+	// Set the minimum QP.
+	// +kubebuilder:validation:Optional
+	MinQp *float64 `json:"minQp,omitempty" tf:"min_qp,omitempty"`
+
+	// Enables or disables motion vector over picture boundaries.
+	// +kubebuilder:validation:Optional
+	MvOverPictureBoundaries *string `json:"mvOverPictureBoundaries,omitempty" tf:"mv_over_picture_boundaries,omitempty"`
+
+	// Enables or disables the motion vector temporal predictor.
+	// +kubebuilder:validation:Optional
+	MvTemporalPredictor *string `json:"mvTemporalPredictor,omitempty" tf:"mv_temporal_predictor,omitempty"`
+
 	// Pixel Aspect Ratio denominator.
 	// +kubebuilder:validation:Optional
 	ParDenominator *float64 `json:"parDenominator,omitempty" tf:"par_denominator,omitempty"`
@@ -4239,6 +4293,18 @@ type H265SettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
+	// Sets the height of tiles.
+	// +kubebuilder:validation:Optional
+	TileHeight *float64 `json:"tileHeight,omitempty" tf:"tile_height,omitempty"`
+
+	// Enables or disables padding of tiles.
+	// +kubebuilder:validation:Optional
+	TilePadding *string `json:"tilePadding,omitempty" tf:"tile_padding,omitempty"`
+
+	// Sets the width of tiles.
+	// +kubebuilder:validation:Optional
+	TileWidth *float64 `json:"tileWidth,omitempty" tf:"tile_width,omitempty"`
+
 	// Apply a burned in timecode. See H265 Timecode Burnin Settings for more details.
 	// +kubebuilder:validation:Optional
 	TimecodeBurninSettings []TimecodeBurninSettingsParameters `json:"timecodeBurninSettings,omitempty" tf:"timecode_burnin_settings,omitempty"`
@@ -4246,6 +4312,10 @@ type H265SettingsParameters struct {
 	// Determines how timecodes should be inserted into the video elementary stream.
 	// +kubebuilder:validation:Optional
 	TimecodeInsertion *string `json:"timecodeInsertion,omitempty" tf:"timecode_insertion,omitempty"`
+
+	// Sets the size of the treeblock.
+	// +kubebuilder:validation:Optional
+	TreeblockSize *string `json:"treeblockSize,omitempty" tf:"treeblock_size,omitempty"`
 }
 
 type HTMLMotionGraphicsSettingsInitParameters struct {
