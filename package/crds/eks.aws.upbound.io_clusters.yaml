@@ -519,6 +519,16 @@ spec:
                     x-kubernetes-list-map-keys:
                     - index
                     x-kubernetes-list-type: map
+                  zonalShiftConfig:
+                    description: Configuration block with zonal shift configuration
+                      for the cluster. Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether zonal shift is enabled for the cluster.
+                          type: boolean
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -978,6 +988,16 @@ spec:
                     x-kubernetes-list-map-keys:
                     - index
                     x-kubernetes-list-type: map
+                  zonalShiftConfig:
+                    description: Configuration block with zonal shift configuration
+                      for the cluster. Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether zonal shift is enabled for the cluster.
+                          type: boolean
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -1448,6 +1468,16 @@ spec:
                     x-kubernetes-list-map-keys:
                     - index
                     x-kubernetes-list-type: map
+                  zonalShiftConfig:
+                    description: Configuration block with zonal shift configuration
+                      for the cluster. Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Whether zonal shift is enabled for the cluster.
+                          type: boolean
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

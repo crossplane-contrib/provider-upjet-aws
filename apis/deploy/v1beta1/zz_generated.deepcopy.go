@@ -952,6 +952,11 @@ func (in *DeploymentGroupInitParameters) DeepCopyInto(out *DeploymentGroupInitPa
 			(*out)[key] = outVal
 		}
 	}
+	if in.TerminationHookEnabled != nil {
+		in, out := &in.TerminationHookEnabled, &out.TerminationHookEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.TriggerConfiguration != nil {
 		in, out := &in.TriggerConfiguration, &out.TriggerConfiguration
 		*out = make([]TriggerConfigurationInitParameters, len(*in))
@@ -1152,6 +1157,11 @@ func (in *DeploymentGroupObservation) DeepCopyInto(out *DeploymentGroupObservati
 			(*out)[key] = outVal
 		}
 	}
+	if in.TerminationHookEnabled != nil {
+		in, out := &in.TerminationHookEnabled, &out.TerminationHookEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.TriggerConfiguration != nil {
 		in, out := &in.TriggerConfiguration, &out.TriggerConfiguration
 		*out = make([]TriggerConfigurationObservation, len(*in))
@@ -1308,6 +1318,11 @@ func (in *DeploymentGroupParameters) DeepCopyInto(out *DeploymentGroupParameters
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TerminationHookEnabled != nil {
+		in, out := &in.TerminationHookEnabled, &out.TerminationHookEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.TriggerConfiguration != nil {
 		in, out := &in.TriggerConfiguration, &out.TriggerConfiguration
