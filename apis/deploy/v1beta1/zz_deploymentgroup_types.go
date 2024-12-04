@@ -182,6 +182,9 @@ type DeploymentGroupInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
+
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	TriggerConfiguration []TriggerConfigurationInitParameters `json:"triggerConfiguration,omitempty" tf:"trigger_configuration,omitempty"`
 }
@@ -250,6 +253,9 @@ type DeploymentGroupObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	TriggerConfiguration []TriggerConfigurationObservation `json:"triggerConfiguration,omitempty" tf:"trigger_configuration,omitempty"`
@@ -342,6 +348,10 @@ type DeploymentGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	// +kubebuilder:validation:Optional
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	// +kubebuilder:validation:Optional
