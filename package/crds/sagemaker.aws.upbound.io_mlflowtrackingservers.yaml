@@ -177,10 +177,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                  trackingServerName:
-                    description: A unique string identifying the tracking server name.
-                      This string is part of the tracking server ARN.
-                    type: string
                   trackingServerSize:
                     description: The size of the tracking server you want to create.
                       You can choose between "Small", "Medium", and "Large". The default
@@ -310,10 +306,6 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
-                  trackingServerName:
-                    description: A unique string identifying the tracking server name.
-                      This string is part of the tracking server ARN.
-                    type: string
                   trackingServerSize:
                     description: The size of the tracking server you want to create.
                       You can choose between "Small", "Medium", and "Large". The default
@@ -500,10 +492,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.artifactStoreUri)
                 || (has(self.initProvider) && has(self.initProvider.artifactStoreUri))'
-            - message: spec.forProvider.trackingServerName is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.trackingServerName)
-                || (has(self.initProvider) && has(self.initProvider.trackingServerName))'
           status:
             description: MlflowTrackingServerStatus defines the observed state of
               MlflowTrackingServer.
@@ -551,10 +539,6 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
-                  trackingServerName:
-                    description: A unique string identifying the tracking server name.
-                      This string is part of the tracking server ARN.
-                    type: string
                   trackingServerSize:
                     description: The size of the tracking server you want to create.
                       You can choose between "Small", "Medium", and "Large". The default
