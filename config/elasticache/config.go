@@ -180,6 +180,41 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["kms_key_id"] = config.Reference{
 			TerraformName: "aws_kms_key",
 		}
+
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+
+			if endpoints, ok := attr["endpoint"].([]any); ok {
+				for i, ep := range endpoints {
+					if endpoint, ok := ep.(map[string]any); ok && len(endpoint) > 0 {
+						if address, ok := endpoint["address"].(string); ok {
+							key := fmt.Sprintf("endpoint_%d_address", i)
+							conn[key] = []byte(address)
+						}
+						if port, ok := endpoint["port"]; ok {
+							key := fmt.Sprintf("endpoint_%d_port", i)
+							conn[key] = []byte(fmt.Sprintf("%v", port))
+						}
+					}
+				}
+			}
+			if readerendpoints, ok := attr["reader_endpoint"].([]any); ok {
+				for i, rp := range readerendpoints {
+					if readerendpoint, ok := rp.(map[string]any); ok && len(readerendpoint) > 0 {
+						if address, ok := readerendpoint["address"].(string); ok {
+							key := fmt.Sprintf("reader_endpoint_%d_address", i)
+							conn[key] = []byte(address)
+						}
+						if port, ok := readerendpoint["port"]; ok {
+							key := fmt.Sprintf("reader_endpoint_%d_port", i)
+							conn[key] = []byte(fmt.Sprintf("%v", port))
+						}
+					}
+				}
+			}
+
+			return conn, nil
+		}
 	})
 
 	p.AddResourceConfigurator("aws_elasticache_user_group", func(r *config.Resource) {
