@@ -2282,7 +2282,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// SageMaker Code Images can be imported using the name
 	"aws_sagemaker_image_version": config.IdentifierFromProvider,
 	// Sagemaker MLFlow tracking server can be imported using the name
-	"aws_sagemaker_mlflow_tracking_server": config.NameAsIdentifier,
+	"aws_sagemaker_mlflow_tracking_server": config.ParameterAsIdentifier("tracking_server_name"),
 	// Models can be imported using the name
 	"aws_sagemaker_model": config.NameAsIdentifier,
 	// SageMaker Model Package Groups can be imported using the name

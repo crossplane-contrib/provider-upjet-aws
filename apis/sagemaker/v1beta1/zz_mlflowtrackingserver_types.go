@@ -41,9 +41,6 @@ type MlflowTrackingServerInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A unique string identifying the tracking server name. This string is part of the tracking server ARN.
-	TrackingServerName *string `json:"trackingServerName,omitempty" tf:"tracking_server_name,omitempty"`
-
 	// The size of the tracking server you want to create. You can choose between "Small", "Medium", and "Large". The default MLflow Tracking Server configuration size is "Small". You can choose a size depending on the projected use of the tracking server such as the volume of data logged, number of users, and frequency of use.
 	TrackingServerSize *string `json:"trackingServerSize,omitempty" tf:"tracking_server_size,omitempty"`
 
@@ -78,9 +75,6 @@ type MlflowTrackingServerObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
-
-	// A unique string identifying the tracking server name. This string is part of the tracking server ARN.
-	TrackingServerName *string `json:"trackingServerName,omitempty" tf:"tracking_server_name,omitempty"`
 
 	// The size of the tracking server you want to create. You can choose between "Small", "Medium", and "Large". The default MLflow Tracking Server configuration size is "Small". You can choose a size depending on the projected use of the tracking server such as the volume of data logged, number of users, and frequency of use.
 	TrackingServerSize *string `json:"trackingServerSize,omitempty" tf:"tracking_server_size,omitempty"`
@@ -130,10 +124,6 @@ type MlflowTrackingServerParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A unique string identifying the tracking server name. This string is part of the tracking server ARN.
-	// +kubebuilder:validation:Optional
-	TrackingServerName *string `json:"trackingServerName,omitempty" tf:"tracking_server_name,omitempty"`
-
 	// The size of the tracking server you want to create. You can choose between "Small", "Medium", and "Large". The default MLflow Tracking Server configuration size is "Small". You can choose a size depending on the projected use of the tracking server such as the volume of data logged, number of users, and frequency of use.
 	// +kubebuilder:validation:Optional
 	TrackingServerSize *string `json:"trackingServerSize,omitempty" tf:"tracking_server_size,omitempty"`
@@ -180,7 +170,6 @@ type MlflowTrackingServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.artifactStoreUri) || (has(self.initProvider) && has(self.initProvider.artifactStoreUri))",message="spec.forProvider.artifactStoreUri is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trackingServerName) || (has(self.initProvider) && has(self.initProvider.trackingServerName))",message="spec.forProvider.trackingServerName is a required parameter"
 	Spec   MlflowTrackingServerSpec   `json:"spec"`
 	Status MlflowTrackingServerStatus `json:"status,omitempty"`
 }
