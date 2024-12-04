@@ -716,6 +716,9 @@ type ServiceInitParameters struct {
 	// Information about the CloudWatch alarms. See below.
 	Alarms []AlarmsInitParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
 
+	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. Defaults to DISABLED.
+	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
+
 	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
 	CapacityProviderStrategy []CapacityProviderStrategyInitParameters `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
 
@@ -824,6 +827,9 @@ type ServiceInitParameters struct {
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
+	// The VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
+	VPCLatticeConfigurations []VPCLatticeConfigurationsInitParameters `json:"vpcLatticeConfigurations,omitempty" tf:"vpc_lattice_configurations,omitempty"`
+
 	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
 	VolumeConfiguration *VolumeConfigurationInitParameters `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
 
@@ -835,6 +841,9 @@ type ServiceObservation struct {
 
 	// Information about the CloudWatch alarms. See below.
 	Alarms []AlarmsObservation `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. Defaults to DISABLED.
+	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
 	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
 	CapacityProviderStrategy []CapacityProviderStrategyObservation `json:"capacityProviderStrategy,omitempty" tf:"capacity_provider_strategy,omitempty"`
@@ -923,6 +932,9 @@ type ServiceObservation struct {
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
+	// The VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
+	VPCLatticeConfigurations []VPCLatticeConfigurationsObservation `json:"vpcLatticeConfigurations,omitempty" tf:"vpc_lattice_configurations,omitempty"`
+
 	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
 	VolumeConfiguration *VolumeConfigurationObservation `json:"volumeConfiguration,omitempty" tf:"volume_configuration,omitempty"`
 
@@ -935,6 +947,10 @@ type ServiceParameters struct {
 	// Information about the CloudWatch alarms. See below.
 	// +kubebuilder:validation:Optional
 	Alarms []AlarmsParameters `json:"alarms,omitempty" tf:"alarms,omitempty"`
+
+	// ECS automatically redistributes tasks within a service across Availability Zones (AZs) to mitigate the risk of impaired application availability due to underlying infrastructure failures and task lifecycle activities. The valid values are ENABLED and DISABLED. Defaults to DISABLED.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneRebalancing *string `json:"availabilityZoneRebalancing,omitempty" tf:"availability_zone_rebalancing,omitempty"`
 
 	// Capacity provider strategies to use for the service. Can be one or more. These can be updated without destroying and recreating the service only if force_new_deployment = true and not changing from 0 capacity_provider_strategy blocks to greater than 0, or vice versa. See below. Conflicts with launch_type.
 	// +kubebuilder:validation:Optional
@@ -1074,6 +1090,10 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
+
+	// The VPC Lattice configuration for your service that allows Lattice to connect, secure, and monitor your service across multiple accounts and VPCs. See below.
+	// +kubebuilder:validation:Optional
+	VPCLatticeConfigurations []VPCLatticeConfigurationsParameters `json:"vpcLatticeConfigurations,omitempty" tf:"vpc_lattice_configurations,omitempty"`
 
 	// Configuration for a volume specified in the task definition as a volume that is configured at launch time. Currently, the only supported volume type is an Amazon EBS volume. See below.
 	// +kubebuilder:validation:Optional
@@ -1241,6 +1261,45 @@ type TimeoutParameters struct {
 	// The amount of time in seconds for the upstream to respond with a complete response per request. A value of 0 can be set to disable perRequestTimeout. Can only be set when appProtocol isn't TCP.
 	// +kubebuilder:validation:Optional
 	PerRequestTimeoutSeconds *float64 `json:"perRequestTimeoutSeconds,omitempty" tf:"per_request_timeout_seconds,omitempty"`
+}
+
+type VPCLatticeConfigurationsInitParameters struct {
+
+	// The name of the port for a target group associated with the VPC Lattice configuration.
+	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
+
+	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The full ARN of the target group or groups associated with the VPC Lattice configuration.
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+}
+
+type VPCLatticeConfigurationsObservation struct {
+
+	// The name of the port for a target group associated with the VPC Lattice configuration.
+	PortName *string `json:"portName,omitempty" tf:"port_name,omitempty"`
+
+	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The full ARN of the target group or groups associated with the VPC Lattice configuration.
+	TargetGroupArn *string `json:"targetGroupArn,omitempty" tf:"target_group_arn,omitempty"`
+}
+
+type VPCLatticeConfigurationsParameters struct {
+
+	// The name of the port for a target group associated with the VPC Lattice configuration.
+	// +kubebuilder:validation:Optional
+	PortName *string `json:"portName" tf:"port_name,omitempty"`
+
+	// The ARN of the IAM role to associate with this volume. This is the Amazon ECS infrastructure IAM role that is used to manage your AWS infrastructure.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+
+	// The full ARN of the target group or groups associated with the VPC Lattice configuration.
+	// +kubebuilder:validation:Optional
+	TargetGroupArn *string `json:"targetGroupArn" tf:"target_group_arn,omitempty"`
 }
 
 type VolumeConfigurationInitParameters struct {
