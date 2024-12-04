@@ -23,6 +23,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 
+	// apigateway
+	//
+	// API Gateway Accounts can be imported using the word api-gateway-account
+	"aws_api_gateway_account": config.IdentifierFromProvider,
+
 	// appconfig
 	//
 	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
@@ -172,8 +177,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// apigateway
 	//
-	// API Gateway Accounts can be imported using the word api-gateway-account
-	"aws_api_gateway_account": config.IdentifierFromProvider,
 	// API Gateway Keys can be imported using the id
 	"aws_api_gateway_api_key": config.IdentifierFromProvider,
 	// AWS API Gateway Authorizer can be imported using the REST-API-ID/AUTHORIZER-ID
