@@ -842,6 +842,11 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  terminationHookEnabled:
+                    description: Indicates whether the deployment group was configured
+                      to have CodeDeploy install a termination hook into an Auto Scaling
+                      group.
+                    type: boolean
                   triggerConfiguration:
                     description: Configuration block(s) of the triggers for the deployment
                       group (documented below).
@@ -1644,6 +1649,11 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  terminationHookEnabled:
+                    description: Indicates whether the deployment group was configured
+                      to have CodeDeploy install a termination hook into an Auto Scaling
+                      group.
+                    type: boolean
                   triggerConfiguration:
                     description: Configuration block(s) of the triggers for the deployment
                       group (documented below).
@@ -2252,6 +2262,11 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  terminationHookEnabled:
+                    description: Indicates whether the deployment group was configured
+                      to have CodeDeploy install a termination hook into an Auto Scaling
+                      group.
+                    type: boolean
                   triggerConfiguration:
                     description: Configuration block(s) of the triggers for the deployment
                       group (documented below).
