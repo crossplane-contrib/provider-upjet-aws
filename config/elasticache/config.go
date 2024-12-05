@@ -205,21 +205,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 							key := fmt.Sprintf("reader_endpoint_%d_address", i)
 							conn[key] = []byte(address)
 						}
-<<<<<<< HEAD
-<<<<<<< HEAD
 						if port, ok := readerendpoint["port"]; ok {
 							key := fmt.Sprintf("reader_endpoint_%d_port", i)
 							conn[key] = []byte(fmt.Sprintf("%v", port))
-=======
-						if port, ok := readerendpoint["port"].(float64); ok {
-							key := fmt.Sprintf("reader_endpoint_%d_port", i)
-							conn[key] = []byte(fmt.Sprintf("%g", port))
->>>>>>> 8e83741cc (feat(elasticache/serverless): fix reader_endpoint name)
-=======
-						if port, ok := readerendpoint["port"]; ok {
-							key := fmt.Sprintf("reader_endpoint_%d_port", i)
-							conn[key] = []byte(fmt.Sprintf("%v", port))
->>>>>>> 79a73eb3c (feat(elasticache/serverless): fix reader_endpoint port type)
 						}
 					}
 				}
