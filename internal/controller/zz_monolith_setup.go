@@ -828,6 +828,7 @@ import (
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
 	imagesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
 	imageversion "github.com/upbound/provider-aws/internal/controller/sagemaker/imageversion"
+	mlflowtrackingserver "github.com/upbound/provider-aws/internal/controller/sagemaker/mlflowtrackingserver"
 	modelsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/model"
 	modelpackagegroup "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegroup"
 	modelpackagegrouppolicy "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegrouppolicy"
@@ -1793,6 +1794,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		featuregroup.Setup,
 		imagesagemaker.Setup,
 		imageversion.Setup,
+		mlflowtrackingserver.Setup,
 		modelsagemaker.Setup,
 		modelpackagegroup.Setup,
 		modelpackagegrouppolicy.Setup,
