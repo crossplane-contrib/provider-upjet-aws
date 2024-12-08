@@ -262,6 +262,7 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	if mg.Spec.ForProvider.StorageLensConfiguration != nil {
@@ -289,6 +290,29 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 			}
 		}
 	}
+	if mg.Spec.ForProvider.StorageLensConfiguration != nil {
+		if mg.Spec.ForProvider.StorageLensConfiguration.Exclude != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.StorageLensConfiguration.Exclude.Buckets),
+					Extract:       resource.ExtractParamPath("arn", true),
+					References:    mg.Spec.ForProvider.StorageLensConfiguration.Exclude.BucketsRefs,
+					Selector:      mg.Spec.ForProvider.StorageLensConfiguration.Exclude.BucketsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.StorageLensConfiguration.Exclude.Buckets")
+			}
+			mg.Spec.ForProvider.StorageLensConfiguration.Exclude.Buckets = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.StorageLensConfiguration.Exclude.BucketsRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	if mg.Spec.InitProvider.StorageLensConfiguration != nil {
 		if mg.Spec.InitProvider.StorageLensConfiguration.DataExport != nil {
 			if mg.Spec.InitProvider.StorageLensConfiguration.DataExport.S3BucketDestination != nil {
@@ -312,6 +336,29 @@ func (mg *StorageLensConfiguration) ResolveReferences(ctx context.Context, c cli
 				mg.Spec.InitProvider.StorageLensConfiguration.DataExport.S3BucketDestination.ArnRef = rsp.ResolvedReference
 
 			}
+		}
+	}
+	if mg.Spec.InitProvider.StorageLensConfiguration != nil {
+		if mg.Spec.InitProvider.StorageLensConfiguration.Exclude != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.StorageLensConfiguration.Exclude.Buckets),
+					Extract:       resource.ExtractParamPath("arn", true),
+					References:    mg.Spec.InitProvider.StorageLensConfiguration.Exclude.BucketsRefs,
+					Selector:      mg.Spec.InitProvider.StorageLensConfiguration.Exclude.BucketsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.StorageLensConfiguration.Exclude.Buckets")
+			}
+			mg.Spec.InitProvider.StorageLensConfiguration.Exclude.Buckets = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.StorageLensConfiguration.Exclude.BucketsRefs = mrsp.ResolvedReferences
+
 		}
 	}
 

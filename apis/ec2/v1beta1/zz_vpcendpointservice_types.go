@@ -40,12 +40,32 @@ type VPCEndpointServiceInitParameters struct {
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
+	// References to LB in elbv2 to populate gatewayLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	GatewayLoadBalancerArnsRefs []v1.Reference `json:"gatewayLoadBalancerArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LB in elbv2 to populate gatewayLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	GatewayLoadBalancerArnsSelector *v1.Selector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
+
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
+
+	// References to LB in elbv2 to populate networkLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	NetworkLoadBalancerArnsRefs []v1.Reference `json:"networkLoadBalancerArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LB in elbv2 to populate networkLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	NetworkLoadBalancerArnsSelector *v1.Selector `json:"networkLoadBalancerArnsSelector,omitempty" tf:"-"`
 
 	// The private DNS name for the service.
 	PrivateDNSName *string `json:"privateDnsName,omitempty" tf:"private_dns_name,omitempty"`
@@ -128,14 +148,34 @@ type VPCEndpointServiceParameters struct {
 	AcceptanceRequired *bool `json:"acceptanceRequired,omitempty" tf:"acceptance_required,omitempty"`
 
 	// Amazon Resource Names (ARNs) of one or more Gateway Load Balancers for the endpoint service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	GatewayLoadBalancerArns []*string `json:"gatewayLoadBalancerArns,omitempty" tf:"gateway_load_balancer_arns,omitempty"`
 
+	// References to LB in elbv2 to populate gatewayLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	GatewayLoadBalancerArnsRefs []v1.Reference `json:"gatewayLoadBalancerArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LB in elbv2 to populate gatewayLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	GatewayLoadBalancerArnsSelector *v1.Selector `json:"gatewayLoadBalancerArnsSelector,omitempty" tf:"-"`
+
 	// Amazon Resource Names (ARNs) of one or more Network Load Balancers for the endpoint service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LB
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NetworkLoadBalancerArns []*string `json:"networkLoadBalancerArns,omitempty" tf:"network_load_balancer_arns,omitempty"`
+
+	// References to LB in elbv2 to populate networkLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	NetworkLoadBalancerArnsRefs []v1.Reference `json:"networkLoadBalancerArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LB in elbv2 to populate networkLoadBalancerArns.
+	// +kubebuilder:validation:Optional
+	NetworkLoadBalancerArnsSelector *v1.Selector `json:"networkLoadBalancerArnsSelector,omitempty" tf:"-"`
 
 	// The private DNS name for the service.
 	// +kubebuilder:validation:Optional

@@ -16,8 +16,17 @@ import (
 type NotificationInitParameters struct {
 
 	// List of AutoScaling Group Names
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta3.AutoscalingGroup
 	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
+
+	// References to AutoscalingGroup in autoscaling to populate groupNames.
+	// +kubebuilder:validation:Optional
+	GroupNamesRefs []v1.Reference `json:"groupNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of AutoscalingGroup in autoscaling to populate groupNames.
+	// +kubebuilder:validation:Optional
+	GroupNamesSelector *v1.Selector `json:"groupNamesSelector,omitempty" tf:"-"`
 
 	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
@@ -58,9 +67,18 @@ type NotificationObservation struct {
 type NotificationParameters struct {
 
 	// List of AutoScaling Group Names
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta3.AutoscalingGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	GroupNames []*string `json:"groupNames,omitempty" tf:"group_names,omitempty"`
+
+	// References to AutoscalingGroup in autoscaling to populate groupNames.
+	// +kubebuilder:validation:Optional
+	GroupNamesRefs []v1.Reference `json:"groupNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of AutoscalingGroup in autoscaling to populate groupNames.
+	// +kubebuilder:validation:Optional
+	GroupNamesSelector *v1.Selector `json:"groupNamesSelector,omitempty" tf:"-"`
 
 	// List of Notification Types that trigger
 	// notifications. Acceptable values are documented in the AWS documentation here
@@ -124,7 +142,6 @@ type NotificationStatus struct {
 type Notification struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupNames) || (has(self.initProvider) && has(self.initProvider.groupNames))",message="spec.forProvider.groupNames is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notifications) || (has(self.initProvider) && has(self.initProvider.notifications))",message="spec.forProvider.notifications is a required parameter"
 	Spec   NotificationSpec   `json:"spec"`
 	Status NotificationStatus `json:"status,omitempty"`

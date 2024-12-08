@@ -25,6 +25,7 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("budgets.aws.upbound.io", "v1beta2", "Budget", "BudgetList")
@@ -66,6 +67,29 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 			}
 			mg.Spec.ForProvider.Definition.IAMActionDefinition.PolicyArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Definition.IAMActionDefinition.PolicyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.Definition != nil {
+		if mg.Spec.ForProvider.Definition.IAMActionDefinition != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Definition.IAMActionDefinition.Roles),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.ForProvider.Definition.IAMActionDefinition.RolesRefs,
+					Selector:      mg.Spec.ForProvider.Definition.IAMActionDefinition.RolesSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Definition.IAMActionDefinition.Roles")
+			}
+			mg.Spec.ForProvider.Definition.IAMActionDefinition.Roles = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Definition.IAMActionDefinition.RolesRefs = mrsp.ResolvedReferences
 
 		}
 	}
@@ -127,6 +151,29 @@ func (mg *BudgetAction) ResolveReferences( // ResolveReferences of this BudgetAc
 			}
 			mg.Spec.InitProvider.Definition.IAMActionDefinition.PolicyArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.Definition.IAMActionDefinition.PolicyArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.Definition != nil {
+		if mg.Spec.InitProvider.Definition.IAMActionDefinition != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Definition.IAMActionDefinition.Roles),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.InitProvider.Definition.IAMActionDefinition.RolesRefs,
+					Selector:      mg.Spec.InitProvider.Definition.IAMActionDefinition.RolesSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Definition.IAMActionDefinition.Roles")
+			}
+			mg.Spec.InitProvider.Definition.IAMActionDefinition.Roles = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Definition.IAMActionDefinition.RolesRefs = mrsp.ResolvedReferences
 
 		}
 	}

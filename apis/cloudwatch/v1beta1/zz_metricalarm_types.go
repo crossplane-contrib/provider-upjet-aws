@@ -19,8 +19,18 @@ type MetricAlarmInitParameters struct {
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
+
+	// References to Policy in autoscaling to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Policy in autoscaling to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
 	// The description for the alarm.
 	AlarmDescription *string `json:"alarmDescription,omitempty" tf:"alarm_description,omitempty"`
@@ -63,8 +73,18 @@ type MetricAlarmInitParameters struct {
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
+
+	// References to Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 30, or any multiple of 60.
@@ -186,9 +206,19 @@ type MetricAlarmParameters struct {
 	ActionsEnabled *bool `json:"actionsEnabled,omitempty" tf:"actions_enabled,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an ALARM state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/autoscaling/v1beta2.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AlarmActions []*string `json:"alarmActions,omitempty" tf:"alarm_actions,omitempty"`
+
+	// References to Policy in autoscaling to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsRefs []v1.Reference `json:"alarmActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Policy in autoscaling to populate alarmActions.
+	// +kubebuilder:validation:Optional
+	AlarmActionsSelector *v1.Selector `json:"alarmActionsSelector,omitempty" tf:"-"`
 
 	// The description for the alarm.
 	// +kubebuilder:validation:Optional
@@ -242,9 +272,19 @@ type MetricAlarmParameters struct {
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
 	// The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/sns/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	OkActions []*string `json:"okActions,omitempty" tf:"ok_actions,omitempty"`
+
+	// References to Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsRefs []v1.Reference `json:"okActionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Topic in sns to populate okActions.
+	// +kubebuilder:validation:Optional
+	OkActionsSelector *v1.Selector `json:"okActionsSelector,omitempty" tf:"-"`
 
 	// The period in seconds over which the specified statistic is applied.
 	// Valid values are 10, 30, or any multiple of 60.

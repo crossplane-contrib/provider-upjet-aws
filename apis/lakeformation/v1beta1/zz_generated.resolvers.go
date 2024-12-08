@@ -18,8 +18,58 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func (mg *Permissions) ResolveReferences( // ResolveReferences of this Permissions.
+func (mg *DataLakeSettings) ResolveReferences( // ResolveReferences of this DataLakeSettings.
 	ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "User", "UserList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Admins),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.ForProvider.AdminsRefs,
+			Selector:      mg.Spec.ForProvider.AdminsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Admins")
+	}
+	mg.Spec.ForProvider.Admins = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.AdminsRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "User", "UserList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Admins),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.InitProvider.AdminsRefs,
+			Selector:      mg.Spec.InitProvider.AdminsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Admins")
+	}
+	mg.Spec.InitProvider.Admins = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.AdminsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this Permissions.
+func (mg *Permissions) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)

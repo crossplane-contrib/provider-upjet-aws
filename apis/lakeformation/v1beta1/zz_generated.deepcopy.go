@@ -345,6 +345,18 @@ func (in *DataLakeSettingsInitParameters) DeepCopyInto(out *DataLakeSettingsInit
 			}
 		}
 	}
+	if in.AdminsRefs != nil {
+		in, out := &in.AdminsRefs, &out.AdminsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AdminsSelector != nil {
+		in, out := &in.AdminsSelector, &out.AdminsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AllowExternalDataFiltering != nil {
 		in, out := &in.AllowExternalDataFiltering, &out.AllowExternalDataFiltering
 		*out = new(bool)
@@ -611,6 +623,18 @@ func (in *DataLakeSettingsParameters) DeepCopyInto(out *DataLakeSettingsParamete
 				**out = **in
 			}
 		}
+	}
+	if in.AdminsRefs != nil {
+		in, out := &in.AdminsRefs, &out.AdminsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AdminsSelector != nil {
+		in, out := &in.AdminsSelector, &out.AdminsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AllowExternalDataFiltering != nil {
 		in, out := &in.AllowExternalDataFiltering, &out.AllowExternalDataFiltering
