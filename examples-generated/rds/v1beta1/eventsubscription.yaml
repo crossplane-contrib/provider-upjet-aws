@@ -23,8 +23,8 @@ spec:
     snsTopicSelector:
       matchLabels:
         testing.upbound.io/example-name: default
-    sourceIds:
-    - ${aws_db_instance.default.identifier}
+    sourceIdsRefs:
+    - name: default
     sourceType: db-instance
 
 ---

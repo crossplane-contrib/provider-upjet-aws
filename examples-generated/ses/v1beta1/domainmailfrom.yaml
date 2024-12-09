@@ -27,8 +27,8 @@ metadata:
 spec:
   forProvider:
     name: example.com
-    records:
-    - 10 feedback-smtp.us-east-1.amazonses.com
+    recordsRefs:
+    - name: example
     region: us-west-1
     ttl: "600"
     type: MX
@@ -49,8 +49,8 @@ metadata:
 spec:
   forProvider:
     name: example.com
-    records:
-    - v=spf1 include:amazonses.com ~all
+    recordsRefs:
+    - name: example
     region: us-west-1
     ttl: "600"
     type: TXT

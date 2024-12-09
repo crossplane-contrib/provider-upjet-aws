@@ -439,6 +439,7 @@ func (mg *ClusterEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
@@ -460,6 +461,44 @@ func (mg *ClusterEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIdentifierRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ClusterInstance", "ClusterInstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ExcludedMembers),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.ExcludedMembersRefs,
+			Selector:      mg.Spec.ForProvider.ExcludedMembersSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ExcludedMembers")
+	}
+	mg.Spec.ForProvider.ExcludedMembers = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ExcludedMembersRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ClusterInstance", "ClusterInstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.StaticMembers),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.StaticMembersRefs,
+			Selector:      mg.Spec.ForProvider.StaticMembersSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StaticMembers")
+	}
+	mg.Spec.ForProvider.StaticMembers = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.StaticMembersRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -478,6 +517,44 @@ func (mg *ClusterEndpoint) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.InitProvider.ClusterIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ClusterIdentifierRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ClusterInstance", "ClusterInstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ExcludedMembers),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.ExcludedMembersRefs,
+			Selector:      mg.Spec.InitProvider.ExcludedMembersSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ExcludedMembers")
+	}
+	mg.Spec.InitProvider.ExcludedMembers = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ExcludedMembersRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta1", "ClusterInstance", "ClusterInstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.StaticMembers),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.StaticMembersRefs,
+			Selector:      mg.Spec.InitProvider.StaticMembersSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StaticMembers")
+	}
+	mg.Spec.InitProvider.StaticMembers = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.StaticMembersRefs = mrsp.ResolvedReferences
 
 	return nil
 }
@@ -1005,6 +1082,7 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
@@ -1026,6 +1104,25 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.SnsTopic = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SnsTopicRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta3", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SourceIds),
+			Extract:       resource.ExtractParamPath("identifier", false),
+			References:    mg.Spec.ForProvider.SourceIdsRefs,
+			Selector:      mg.Spec.ForProvider.SourceIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SourceIds")
+	}
+	mg.Spec.ForProvider.SourceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.SourceIdsRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -1044,6 +1141,25 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.InitProvider.SnsTopic = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SnsTopicRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta3", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SourceIds),
+			Extract:       resource.ExtractParamPath("identifier", false),
+			References:    mg.Spec.InitProvider.SourceIdsRefs,
+			Selector:      mg.Spec.InitProvider.SourceIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceIds")
+	}
+	mg.Spec.InitProvider.SourceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.SourceIdsRefs = mrsp.ResolvedReferences
 
 	return nil
 }
@@ -1495,6 +1611,25 @@ func (mg *Proxy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.VPCSubnetIds),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.VPCSubnetIdsRefs,
+			Selector:      mg.Spec.ForProvider.VPCSubnetIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VPCSubnetIds")
+	}
+	mg.Spec.ForProvider.VPCSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.VPCSubnetIdsRefs = mrsp.ResolvedReferences
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Auth); i3++ {
 		{
@@ -1554,6 +1689,25 @@ func (mg *Proxy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.InitProvider.VPCSecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.VPCSecurityGroupIDRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VPCSubnetIds),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.VPCSubnetIdsRefs,
+			Selector:      mg.Spec.InitProvider.VPCSubnetIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VPCSubnetIds")
+	}
+	mg.Spec.InitProvider.VPCSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.VPCSubnetIdsRefs = mrsp.ResolvedReferences
 
 	return nil
 }

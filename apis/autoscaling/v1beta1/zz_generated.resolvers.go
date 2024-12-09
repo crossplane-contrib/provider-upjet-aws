@@ -619,7 +619,27 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta3", "AutoscalingGroup", "AutoscalingGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.GroupNames),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.GroupNamesRefs,
+			Selector:      mg.Spec.ForProvider.GroupNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.GroupNames")
+	}
+	mg.Spec.ForProvider.GroupNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.GroupNamesRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {
@@ -639,6 +659,25 @@ func (mg *Notification) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.TopicArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TopicArnRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("autoscaling.aws.upbound.io", "v1beta3", "AutoscalingGroup", "AutoscalingGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.GroupNames),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.GroupNamesRefs,
+			Selector:      mg.Spec.InitProvider.GroupNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GroupNames")
+	}
+	mg.Spec.InitProvider.GroupNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.GroupNamesRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("sns.aws.upbound.io", "v1beta1", "Topic", "TopicList")
 		if err != nil {

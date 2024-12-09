@@ -23369,6 +23369,18 @@ func (in *NATGatewayInitParameters_2) DeepCopyInto(out *NATGatewayInitParameters
 			}
 		}
 	}
+	if in.SecondaryAllocationIdsRefs != nil {
+		in, out := &in.SecondaryAllocationIdsRefs, &out.SecondaryAllocationIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecondaryAllocationIdsSelector != nil {
+		in, out := &in.SecondaryAllocationIdsSelector, &out.SecondaryAllocationIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SecondaryPrivateIPAddressCount != nil {
 		in, out := &in.SecondaryPrivateIPAddressCount, &out.SecondaryPrivateIPAddressCount
 		*out = new(float64)
@@ -23662,6 +23674,18 @@ func (in *NATGatewayParameters_2) DeepCopyInto(out *NATGatewayParameters_2) {
 				**out = **in
 			}
 		}
+	}
+	if in.SecondaryAllocationIdsRefs != nil {
+		in, out := &in.SecondaryAllocationIdsRefs, &out.SecondaryAllocationIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecondaryAllocationIdsSelector != nil {
+		in, out := &in.SecondaryAllocationIdsSelector, &out.SecondaryAllocationIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SecondaryPrivateIPAddressCount != nil {
 		in, out := &in.SecondaryPrivateIPAddressCount, &out.SecondaryPrivateIPAddressCount
@@ -35399,6 +35423,18 @@ func (in *SecurityGroupRuleInitParameters_2) DeepCopyInto(out *SecurityGroupRule
 			}
 		}
 	}
+	if in.CidrBlocksRefs != nil {
+		in, out := &in.CidrBlocksRefs, &out.CidrBlocksRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CidrBlocksSelector != nil {
+		in, out := &in.CidrBlocksSelector, &out.CidrBlocksSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -35419,6 +35455,18 @@ func (in *SecurityGroupRuleInitParameters_2) DeepCopyInto(out *SecurityGroupRule
 				**out = **in
 			}
 		}
+	}
+	if in.IPv6CidrBlocksRefs != nil {
+		in, out := &in.IPv6CidrBlocksRefs, &out.IPv6CidrBlocksRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IPv6CidrBlocksSelector != nil {
+		in, out := &in.IPv6CidrBlocksSelector, &out.IPv6CidrBlocksSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrefixListIDRefs != nil {
 		in, out := &in.PrefixListIDRefs, &out.PrefixListIDRefs
@@ -35711,6 +35759,18 @@ func (in *SecurityGroupRuleParameters_2) DeepCopyInto(out *SecurityGroupRulePara
 			}
 		}
 	}
+	if in.CidrBlocksRefs != nil {
+		in, out := &in.CidrBlocksRefs, &out.CidrBlocksRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.CidrBlocksSelector != nil {
+		in, out := &in.CidrBlocksSelector, &out.CidrBlocksSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -35731,6 +35791,18 @@ func (in *SecurityGroupRuleParameters_2) DeepCopyInto(out *SecurityGroupRulePara
 				**out = **in
 			}
 		}
+	}
+	if in.IPv6CidrBlocksRefs != nil {
+		in, out := &in.IPv6CidrBlocksRefs, &out.IPv6CidrBlocksRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IPv6CidrBlocksSelector != nil {
+		in, out := &in.IPv6CidrBlocksSelector, &out.IPv6CidrBlocksSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrefixListIDRefs != nil {
 		in, out := &in.PrefixListIDRefs, &out.PrefixListIDRefs
@@ -49950,6 +50022,18 @@ func (in *VPCEndpointServiceInitParameters) DeepCopyInto(out *VPCEndpointService
 			}
 		}
 	}
+	if in.GatewayLoadBalancerArnsRefs != nil {
+		in, out := &in.GatewayLoadBalancerArnsRefs, &out.GatewayLoadBalancerArnsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.GatewayLoadBalancerArnsSelector != nil {
+		in, out := &in.GatewayLoadBalancerArnsSelector, &out.GatewayLoadBalancerArnsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.NetworkLoadBalancerArns != nil {
 		in, out := &in.NetworkLoadBalancerArns, &out.NetworkLoadBalancerArns
 		*out = make([]*string, len(*in))
@@ -49960,6 +50044,18 @@ func (in *VPCEndpointServiceInitParameters) DeepCopyInto(out *VPCEndpointService
 				**out = **in
 			}
 		}
+	}
+	if in.NetworkLoadBalancerArnsRefs != nil {
+		in, out := &in.NetworkLoadBalancerArnsRefs, &out.NetworkLoadBalancerArnsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.NetworkLoadBalancerArnsSelector != nil {
+		in, out := &in.NetworkLoadBalancerArnsSelector, &out.NetworkLoadBalancerArnsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrivateDNSName != nil {
 		in, out := &in.PrivateDNSName, &out.PrivateDNSName
@@ -50216,6 +50312,18 @@ func (in *VPCEndpointServiceParameters) DeepCopyInto(out *VPCEndpointServicePara
 			}
 		}
 	}
+	if in.GatewayLoadBalancerArnsRefs != nil {
+		in, out := &in.GatewayLoadBalancerArnsRefs, &out.GatewayLoadBalancerArnsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.GatewayLoadBalancerArnsSelector != nil {
+		in, out := &in.GatewayLoadBalancerArnsSelector, &out.GatewayLoadBalancerArnsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.NetworkLoadBalancerArns != nil {
 		in, out := &in.NetworkLoadBalancerArns, &out.NetworkLoadBalancerArns
 		*out = make([]*string, len(*in))
@@ -50226,6 +50334,18 @@ func (in *VPCEndpointServiceParameters) DeepCopyInto(out *VPCEndpointServicePara
 				**out = **in
 			}
 		}
+	}
+	if in.NetworkLoadBalancerArnsRefs != nil {
+		in, out := &in.NetworkLoadBalancerArnsRefs, &out.NetworkLoadBalancerArnsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.NetworkLoadBalancerArnsSelector != nil {
+		in, out := &in.NetworkLoadBalancerArnsSelector, &out.NetworkLoadBalancerArnsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PrivateDNSName != nil {
 		in, out := &in.PrivateDNSName, &out.PrivateDNSName

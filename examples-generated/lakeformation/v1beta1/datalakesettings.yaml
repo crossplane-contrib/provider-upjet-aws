@@ -8,7 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    admins:
-    - ${aws_iam_user.test.arn}
-    - ${aws_iam_role.test.arn}
+    adminsRefs:
+    - name: test
+    - name: test
     region: us-west-1

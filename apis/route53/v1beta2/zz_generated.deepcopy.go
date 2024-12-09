@@ -670,6 +670,18 @@ func (in *RecordInitParameters) DeepCopyInto(out *RecordInitParameters) {
 			}
 		}
 	}
+	if in.RecordsRefs != nil {
+		in, out := &in.RecordsRefs, &out.RecordsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.RecordsSelector != nil {
+		in, out := &in.RecordsSelector, &out.RecordsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SetIdentifier != nil {
 		in, out := &in.SetIdentifier, &out.SetIdentifier
 		*out = new(string)
@@ -933,6 +945,18 @@ func (in *RecordParameters) DeepCopyInto(out *RecordParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.RecordsRefs != nil {
+		in, out := &in.RecordsRefs, &out.RecordsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.RecordsSelector != nil {
+		in, out := &in.RecordsSelector, &out.RecordsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

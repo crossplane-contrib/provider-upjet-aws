@@ -445,6 +445,61 @@ func (mg *MethodSettings) ResolveReferences(ctx context.Context, c client.Reader
 	return nil
 }
 
+// ResolveReferences of this RestAPI.
+func (mg *RestAPI) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var mrsp reference.MultiResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.EndpointConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIds),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIdsRefs,
+				Selector:      mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIds")
+		}
+		mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.EndpointConfiguration.VPCEndpointIdsRefs = mrsp.ResolvedReferences
+
+	}
+	if mg.Spec.InitProvider.EndpointConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "VPCEndpoint", "VPCEndpointList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIds),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIdsRefs,
+				Selector:      mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIds")
+		}
+		mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.EndpointConfiguration.VPCEndpointIdsRefs = mrsp.ResolvedReferences
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this Stage.
 func (mg *Stage) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

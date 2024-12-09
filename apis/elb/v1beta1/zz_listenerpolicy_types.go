@@ -31,8 +31,18 @@ type ListenerPolicyInitParameters struct {
 	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("policy_name",false)
 	// +listType=set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
+
+	// References to Policy in elb to populate policyNames.
+	// +kubebuilder:validation:Optional
+	PolicyNamesRefs []v1.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Policy in elb to populate policyNames.
+	// +kubebuilder:validation:Optional
+	PolicyNamesSelector *v1.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
 
 	// Map of arbitrary keys and values that, when changed, will trigger an update.
 	// +mapType=granular
@@ -79,9 +89,19 @@ type ListenerPolicyParameters struct {
 	LoadBalancerPort *float64 `json:"loadBalancerPort,omitempty" tf:"load_balancer_port,omitempty"`
 
 	// List of Policy Names to apply to the backend server.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elb/v1beta1.Policy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("policy_name",false)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	PolicyNames []*string `json:"policyNames,omitempty" tf:"policy_names,omitempty"`
+
+	// References to Policy in elb to populate policyNames.
+	// +kubebuilder:validation:Optional
+	PolicyNamesRefs []v1.Reference `json:"policyNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Policy in elb to populate policyNames.
+	// +kubebuilder:validation:Optional
+	PolicyNamesSelector *v1.Selector `json:"policyNamesSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-

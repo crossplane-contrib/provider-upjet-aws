@@ -36,8 +36,17 @@ type EventSubscriptionInitParameters struct {
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.ReplicationTask
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// References to ReplicationTask in dms to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsRefs []v1.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ReplicationTask in dms to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// Type of source for events. Valid values: replication-instance or replication-task
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
@@ -111,9 +120,18 @@ type EventSubscriptionParameters struct {
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// Ids of sources to listen to. If you don't specify a value, notifications are provided for all sources.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/dms/v1beta1.ReplicationTask
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// References to ReplicationTask in dms to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsRefs []v1.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ReplicationTask in dms to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// Type of source for events. Valid values: replication-instance or replication-task
 	// +kubebuilder:validation:Optional

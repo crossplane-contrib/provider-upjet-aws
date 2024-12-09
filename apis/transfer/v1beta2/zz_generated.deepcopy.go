@@ -1680,6 +1680,18 @@ func (in *EndpointDetailsInitParameters) DeepCopyInto(out *EndpointDetailsInitPa
 			}
 		}
 	}
+	if in.AddressAllocationIdsRefs != nil {
+		in, out := &in.AddressAllocationIdsRefs, &out.AddressAllocationIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AddressAllocationIdsSelector != nil {
+		in, out := &in.AddressAllocationIdsSelector, &out.AddressAllocationIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -1701,6 +1713,18 @@ func (in *EndpointDetailsInitParameters) DeepCopyInto(out *EndpointDetailsInitPa
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCEndpointID != nil {
 		in, out := &in.VPCEndpointID, &out.VPCEndpointID
@@ -1806,6 +1830,18 @@ func (in *EndpointDetailsParameters) DeepCopyInto(out *EndpointDetailsParameters
 			}
 		}
 	}
+	if in.AddressAllocationIdsRefs != nil {
+		in, out := &in.AddressAllocationIdsRefs, &out.AddressAllocationIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AddressAllocationIdsSelector != nil {
+		in, out := &in.AddressAllocationIdsSelector, &out.AddressAllocationIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -1827,6 +1863,18 @@ func (in *EndpointDetailsParameters) DeepCopyInto(out *EndpointDetailsParameters
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.VPCEndpointID != nil {
 		in, out := &in.VPCEndpointID, &out.VPCEndpointID
