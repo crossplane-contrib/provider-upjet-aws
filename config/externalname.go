@@ -26,7 +26,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// apigateway
 	//
 	// API Gateway Accounts can be imported using the word api-gateway-account
-	"aws_api_gateway_account": config.IdentifierFromProvider,
+	"aws_api_gateway_account": apiGatewayAccount(),
 
 	// appconfig
 	//
@@ -3230,6 +3230,18 @@ func eksPodIdentityAssociation() config.ExternalName {
 				base["association_id"] = externalName
 			}
 		}
+	}
+	return e
+}
+
+func apiGatewayAccount() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		if len(externalName) == 0 {
+			// https://github.com/upbound/terraform-provider-aws/blob/e0753cc85e93ad146356533bf005c26591969299/internal/service/apigateway/account.go#L138-L137
+			return "api-gateway-account", nil
+		}
+		return externalName, nil
 	}
 	return e
 }
