@@ -38,6 +38,9 @@ type AddonInitParameters struct {
 	// custom configuration values for addons with single JSON string. This JSON string value must match the JSON schema derived from describe-addon-configuration.
 	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
 
+	// Configuration block with EKS Pod Identity association settings. See pod_identity_association below for details.
+	PodIdentityAssociation []PodIdentityAssociationInitParameters `json:"podIdentityAssociation,omitempty" tf:"pod_identity_association,omitempty"`
+
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
@@ -101,6 +104,9 @@ type AddonObservation struct {
 	// Date and time in RFC3339 format that the EKS add-on was updated.
 	ModifiedAt *string `json:"modifiedAt,omitempty" tf:"modified_at,omitempty"`
 
+	// Configuration block with EKS Pod Identity association settings. See pod_identity_association below for details.
+	PodIdentityAssociation []PodIdentityAssociationObservation `json:"podIdentityAssociation,omitempty" tf:"pod_identity_association,omitempty"`
+
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
 
@@ -159,6 +165,10 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationValues *string `json:"configurationValues,omitempty" tf:"configuration_values,omitempty"`
 
+	// Configuration block with EKS Pod Identity association settings. See pod_identity_association below for details.
+	// +kubebuilder:validation:Optional
+	PodIdentityAssociation []PodIdentityAssociationParameters `json:"podIdentityAssociation,omitempty" tf:"pod_identity_association,omitempty"`
+
 	// Indicates if you want to preserve the created resources when deleting the EKS add-on.
 	// +kubebuilder:validation:Optional
 	Preserve *bool `json:"preserve,omitempty" tf:"preserve,omitempty"`
@@ -203,6 +213,35 @@ type AddonParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type PodIdentityAssociationInitParameters struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
+	ServiceAccount *string `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
+}
+
+type PodIdentityAssociationObservation struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
+
+	// The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
+	ServiceAccount *string `json:"serviceAccount,omitempty" tf:"service_account,omitempty"`
+}
+
+type PodIdentityAssociationParameters struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role to associate with the service account. The EKS Pod Identity agent manages credentials to assume this role for applications in the containers in the pods that use this service account.
+	// +kubebuilder:validation:Optional
+	RoleArn *string `json:"roleArn" tf:"role_arn,omitempty"`
+
+	// The name of the Kubernetes service account inside the cluster to associate the IAM credentials with.
+	// +kubebuilder:validation:Optional
+	ServiceAccount *string `json:"serviceAccount" tf:"service_account,omitempty"`
 }
 
 // AddonSpec defines the desired state of Addon

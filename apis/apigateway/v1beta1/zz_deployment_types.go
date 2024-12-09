@@ -57,7 +57,8 @@ type DeploymentCanarySettingsParameters struct {
 
 type DeploymentInitParameters struct {
 
-	// Input configuration for the canary deployment when the deployment is a canary release deployment. See `canary_settings below.
+	// Input configuration for the canary deployment when the deployment is a canary release deployment.
+	// See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
 	CanarySettings *DeploymentCanarySettingsInitParameters `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 
 	// Description of the deployment
@@ -77,9 +78,12 @@ type DeploymentInitParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Description to set on the stage managed by the stage_name argument.
+	// Has no effect when stage_name is not set.
 	StageDescription *string `json:"stageDescription,omitempty" tf:"stage_description,omitempty"`
 
-	// Name of the stage to create with this deployment. If the specified stage already exists, it will be updated to point to the new deployment. We recommend using the aws_api_gateway_stage resource instead to manage stages.
+	// Name of the stage to create with this deployment.
+	// If the specified stage already exists, it will be updated to point to the new deployment.
+	// We recommend using the aws_api_gateway_stage resource instead to manage stages.
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
@@ -93,7 +97,8 @@ type DeploymentInitParameters struct {
 
 type DeploymentObservation struct {
 
-	// Input configuration for the canary deployment when the deployment is a canary release deployment. See `canary_settings below.
+	// Input configuration for the canary deployment when the deployment is a canary release deployment.
+	// See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
 	CanarySettings *DeploymentCanarySettingsObservation `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 
 	// Creation date of the deployment
@@ -118,9 +123,12 @@ type DeploymentObservation struct {
 	RestAPIID *string `json:"restApiId,omitempty" tf:"rest_api_id,omitempty"`
 
 	// Description to set on the stage managed by the stage_name argument.
+	// Has no effect when stage_name is not set.
 	StageDescription *string `json:"stageDescription,omitempty" tf:"stage_description,omitempty"`
 
-	// Name of the stage to create with this deployment. If the specified stage already exists, it will be updated to point to the new deployment. We recommend using the aws_api_gateway_stage resource instead to manage stages.
+	// Name of the stage to create with this deployment.
+	// If the specified stage already exists, it will be updated to point to the new deployment.
+	// We recommend using the aws_api_gateway_stage resource instead to manage stages.
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 
 	// argument or explicit resource references using the resource . The triggers argument should be preferred over depends_on, since depends_on can only capture dependency ordering and will not cause the resource to recreate (redeploy the REST API) with upstream configuration changes.
@@ -134,7 +142,8 @@ type DeploymentObservation struct {
 
 type DeploymentParameters struct {
 
-	// Input configuration for the canary deployment when the deployment is a canary release deployment. See `canary_settings below.
+	// Input configuration for the canary deployment when the deployment is a canary release deployment.
+	// See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
 	// +kubebuilder:validation:Optional
 	CanarySettings *DeploymentCanarySettingsParameters `json:"canarySettings,omitempty" tf:"canary_settings,omitempty"`
 
@@ -162,10 +171,13 @@ type DeploymentParameters struct {
 	RestAPIIDSelector *v1.Selector `json:"restApiIdSelector,omitempty" tf:"-"`
 
 	// Description to set on the stage managed by the stage_name argument.
+	// Has no effect when stage_name is not set.
 	// +kubebuilder:validation:Optional
 	StageDescription *string `json:"stageDescription,omitempty" tf:"stage_description,omitempty"`
 
-	// Name of the stage to create with this deployment. If the specified stage already exists, it will be updated to point to the new deployment. We recommend using the aws_api_gateway_stage resource instead to manage stages.
+	// Name of the stage to create with this deployment.
+	// If the specified stage already exists, it will be updated to point to the new deployment.
+	// We recommend using the aws_api_gateway_stage resource instead to manage stages.
 	// +kubebuilder:validation:Optional
 	StageName *string `json:"stageName,omitempty" tf:"stage_name,omitempty"`
 

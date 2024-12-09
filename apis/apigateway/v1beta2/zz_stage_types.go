@@ -47,6 +47,9 @@ type AccessLogSettingsParameters struct {
 
 type CanarySettingsInitParameters struct {
 
+	// ID of the deployment that the stage points to
+	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
+
 	// Percent 0.0 - 100.0 of traffic to divert to the canary deployment.
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
@@ -60,6 +63,9 @@ type CanarySettingsInitParameters struct {
 
 type CanarySettingsObservation struct {
 
+	// ID of the deployment that the stage points to
+	DeploymentID *string `json:"deploymentId,omitempty" tf:"deployment_id,omitempty"`
+
 	// Percent 0.0 - 100.0 of traffic to divert to the canary deployment.
 	PercentTraffic *float64 `json:"percentTraffic,omitempty" tf:"percent_traffic,omitempty"`
 
@@ -72,6 +78,10 @@ type CanarySettingsObservation struct {
 }
 
 type CanarySettingsParameters struct {
+
+	// ID of the deployment that the stage points to
+	// +kubebuilder:validation:Optional
+	DeploymentID *string `json:"deploymentId" tf:"deployment_id,omitempty"`
 
 	// Percent 0.0 - 100.0 of traffic to divert to the canary deployment.
 	// +kubebuilder:validation:Optional

@@ -5499,6 +5499,11 @@ func (in *GlobalClusterObservation) DeepCopyInto(out *GlobalClusterObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.Endpoint != nil {
+		in, out := &in.Endpoint, &out.Endpoint
+		*out = new(string)
+		**out = **in
+	}
 	if in.Engine != nil {
 		in, out := &in.Engine, &out.Engine
 		*out = new(string)

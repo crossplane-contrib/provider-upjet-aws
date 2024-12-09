@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type PodIdentityAssociationInitParameters struct {
+type PodIdentityAssociationInitParameters_2 struct {
 
 	// The name of the cluster to create the association in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
@@ -51,7 +51,7 @@ type PodIdentityAssociationInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type PodIdentityAssociationObservation struct {
+type PodIdentityAssociationObservation_2 struct {
 
 	// The Amazon Resource Name (ARN) of the association.
 	AssociationArn *string `json:"associationArn,omitempty" tf:"association_arn,omitempty"`
@@ -82,7 +82,7 @@ type PodIdentityAssociationObservation struct {
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 }
 
-type PodIdentityAssociationParameters struct {
+type PodIdentityAssociationParameters_2 struct {
 
 	// The name of the cluster to create the association in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/eks/v1beta2.Cluster
@@ -133,7 +133,7 @@ type PodIdentityAssociationParameters struct {
 // PodIdentityAssociationSpec defines the desired state of PodIdentityAssociation
 type PodIdentityAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     PodIdentityAssociationParameters `json:"forProvider"`
+	ForProvider     PodIdentityAssociationParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -144,13 +144,13 @@ type PodIdentityAssociationSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider PodIdentityAssociationInitParameters `json:"initProvider,omitempty"`
+	InitProvider PodIdentityAssociationInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // PodIdentityAssociationStatus defines the observed state of PodIdentityAssociation.
 type PodIdentityAssociationStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        PodIdentityAssociationObservation `json:"atProvider,omitempty"`
+	AtProvider        PodIdentityAssociationObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

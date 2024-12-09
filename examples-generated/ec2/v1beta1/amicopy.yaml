@@ -8,7 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    description: A copy of ami-xxxxxxxx
     name: terraform-example
     region: us-west-1
     sourceAmiIdSelector:

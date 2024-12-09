@@ -23,6 +23,11 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	// ********** When adding new services please keep them alphabetized by their aws go sdk package name **********
 
+	// apigateway
+	//
+	// API Gateway Accounts can be imported using the word api-gateway-account
+	"aws_api_gateway_account": apiGatewayAccount(),
+
 	// appconfig
 	//
 	// AppConfig Environments can be imported by using the environment ID and application ID separated by a colon (:)
@@ -172,8 +177,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// apigateway
 	//
-	// API Gateway Accounts can be imported using the word api-gateway-account
-	"aws_api_gateway_account": config.IdentifierFromProvider,
 	// API Gateway Keys can be imported using the id
 	"aws_api_gateway_api_key": config.IdentifierFromProvider,
 	// AWS API Gateway Authorizer can be imported using the REST-API-ID/AUTHORIZER-ID
@@ -3225,6 +3228,18 @@ func eksPodIdentityAssociation() config.ExternalName {
 				base["association_id"] = externalName
 			}
 		}
+	}
+	return e
+}
+
+func apiGatewayAccount() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetIDFn = func(ctx context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
+		if len(externalName) == 0 {
+			// https://github.com/upbound/terraform-provider-aws/blob/e0753cc85e93ad146356533bf005c26591969299/internal/service/apigateway/account.go#L138-L137
+			return "api-gateway-account", nil
+		}
+		return externalName, nil
 	}
 	return e
 }
