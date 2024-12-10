@@ -21,7 +21,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
   labels:
-    testing.upbound.io/example-name: example-role-mlflowtrackingserver
+    testing.upbound.io/example-name: example-role-mlflowtrackingserver-role
   name: example-role
 spec:
   forProvider:
@@ -54,7 +54,7 @@ spec:
         testing.upbound.io/example-name: example-policy-mlflowtrackingserver
     roleSelector:
       matchLabels:
-        testing.upbound.io/example-name: example-role-mlflowtrackingserverrole
+        testing.upbound.io/example-name: example-role-mlflowtrackingserver-role
 ---
 apiVersion: iam.aws.upbound.io/v1beta1
 kind: Policy
