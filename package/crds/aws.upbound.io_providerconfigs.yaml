@@ -63,6 +63,25 @@ spec:
                       description: ExternalID is the external ID used when assuming
                         role.
                       type: string
+                    externalIDSecretRef:
+                      description: |-
+                        An ExternalIDSecretRef is a reference to a secret key that contains the external ID
+                        that must be used to assume the role.
+                      properties:
+                        key:
+                          description: The key to select.
+                          type: string
+                        name:
+                          description: Name of the secret.
+                          type: string
+                        namespace:
+                          description: Namespace of the secret.
+                          type: string
+                      required:
+                      - key
+                      - name
+                      - namespace
+                      type: object
                     roleARN:
                       description: AssumeRoleARN to assume with provider credentials
                       type: string
