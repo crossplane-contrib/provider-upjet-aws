@@ -26,7 +26,7 @@ spec:
         testing.upbound.io/example-name: example
     taskInvocationParameters:
       - lambdaParameters:
-          - clientContext: eyJrZXkiOiAidmFsdWUifQ==
+        - clientContext: eyJrZXkiOiAidmFsdWUifQ==
     taskType: LAMBDA
     windowIdSelector:
       matchLabels:
@@ -44,13 +44,13 @@ metadata:
   name: test
 spec:
   forProvider:
+    ami: ami-005c26e61b65bc5a4
+    instanceType: t4g.micro
     networkInterface:
       - deviceIndex: 0
         networkInterfaceIdRef:
           name: test
-    region: us-east-1
-    ami: ami-0b5eea76982371e91
-    instanceType: t2.micro
+    region: us-west-1
 
 ---
 
@@ -64,7 +64,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-east-1
+    region: us-west-1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnetattach
@@ -81,8 +81,8 @@ metadata:
   name: subnetattach
 spec:
   forProvider:
-    availabilityZone: us-east-1b
-    region: us-east-1
+    availabilityZone: us-west-1b
+    region: us-west-1
     cidrBlock: 10.0.5.0/24
     vpcIdSelector:
       matchLabels:
@@ -100,7 +100,7 @@ metadata:
   name: vpcattach
 spec:
   forProvider:
-    region: us-east-1
+    region: us-west-1
     cidrBlock: 10.0.0.0/16
 
 ---
@@ -120,7 +120,7 @@ spec:
     environment:
       - variables:
           foo: bar
-    s3Bucket: upbound-provider-test-data
+    s3Bucket: official-provider-test-data
     s3Key: hello-python.zip
     handler: index.py
     roleRef:
