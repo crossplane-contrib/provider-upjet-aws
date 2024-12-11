@@ -212,6 +212,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			return conn, nil
 		}
+	})
 
 	p.AddResourceConfigurator("aws_db_proxy", func(r *config.Resource) {
 		r.UseAsync = true
