@@ -26,5 +26,5 @@ spec:
     routingProfileIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    securityProfileIds:
-    - ${aws_connect_security_profile.example.security_profile_id}
+    securityProfileIdsRefs:
+    - name: example

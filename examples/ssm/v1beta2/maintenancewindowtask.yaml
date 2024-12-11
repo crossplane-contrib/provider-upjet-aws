@@ -44,13 +44,13 @@ metadata:
   name: test
 spec:
   forProvider:
-    ami: ami-0b5eea76982371e91
-    instanceType: t2.micro
+    ami: ami-005c26e61b65bc5a4
+    instanceType: t4g.micro
     networkInterface:
     - deviceIndex: 0
       networkInterfaceIdRef:
         name: test
-    region: us-east-1
+    region: us-west-1
 
 ---
 
@@ -64,7 +64,7 @@ metadata:
   name: test
 spec:
   forProvider:
-    region: us-east-1
+    region: us-west-1
     subnetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: subnetattach
@@ -81,9 +81,9 @@ metadata:
   name: subnetattach
 spec:
   forProvider:
-    availabilityZone: us-east-1b
+    availabilityZone: us-west-1b
+    region: us-west-1
     cidrBlock: 10.0.5.0/24
-    region: us-east-1
     vpcIdSelector:
       matchLabels:
         testing.upbound.io/example-name: vpcattach
@@ -101,7 +101,7 @@ metadata:
 spec:
   forProvider:
     cidrBlock: 10.0.0.0/16
-    region: us-east-1
+    region: us-west-1
 
 ---
 
@@ -123,7 +123,7 @@ spec:
     roleRef:
       name: sample-role
     runtime: python3.9
-    s3Bucket: upbound-provider-test-data
+    s3Bucket: official-provider-test-data
     s3Key: hello-python.zip
 
 ---

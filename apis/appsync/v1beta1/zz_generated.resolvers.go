@@ -441,6 +441,7 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "GraphQLAPI", "GraphQLAPIList")
@@ -480,12 +481,33 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.DataSource = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DataSourceRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PipelineConfig); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PipelineConfig[i3].Functions),
+				Extract:       resource.ExtractParamPath("function_id", true),
+				References:    mg.Spec.ForProvider.PipelineConfig[i3].FunctionsRefs,
+				Selector:      mg.Spec.ForProvider.PipelineConfig[i3].FunctionsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PipelineConfig[i3].Functions")
+		}
+		mg.Spec.ForProvider.PipelineConfig[i3].Functions = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.PipelineConfig[i3].FunctionsRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta1", "Datasource", "DatasourceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataSource),
 			Extract:      reference.ExternalName(),
@@ -499,6 +521,28 @@ func (mg *Resolver) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.InitProvider.DataSource = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DataSourceRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PipelineConfig); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("appsync.aws.upbound.io", "v1beta2", "Function", "FunctionList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.PipelineConfig[i3].Functions),
+				Extract:       resource.ExtractParamPath("function_id", true),
+				References:    mg.Spec.InitProvider.PipelineConfig[i3].FunctionsRefs,
+				Selector:      mg.Spec.InitProvider.PipelineConfig[i3].FunctionsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.PipelineConfig[i3].Functions")
+		}
+		mg.Spec.InitProvider.PipelineConfig[i3].Functions = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.PipelineConfig[i3].FunctionsRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }

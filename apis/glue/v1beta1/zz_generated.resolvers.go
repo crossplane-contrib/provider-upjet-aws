@@ -56,6 +56,7 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PhysicalConnectionRequirements); i3++ {
@@ -77,6 +78,27 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 		}
 		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZone = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].AvailabilityZoneRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PhysicalConnectionRequirements); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDList),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListRefs,
+				Selector:      mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDList")
+		}
+		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDList = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListRefs = mrsp.ResolvedReferences
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PhysicalConnectionRequirements); i3++ {
@@ -123,6 +145,27 @@ func (mg *Connection) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PhysicalConnectionRequirements); i3++ {
 		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDList),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListRefs,
+				Selector:      mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDList")
+		}
+		mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDList = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.PhysicalConnectionRequirements[i3].SecurityGroupIDListRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PhysicalConnectionRequirements); i3++ {
+		{
 			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -153,6 +196,7 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CatalogTarget); i3++ {
@@ -174,6 +218,27 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 		mg.Spec.ForProvider.CatalogTarget[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.CatalogTarget[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CatalogTarget); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogTable", "CatalogTableList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CatalogTarget[i3].Tables),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.ForProvider.CatalogTarget[i3].TablesRefs,
+				Selector:      mg.Spec.ForProvider.CatalogTarget[i3].TablesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.CatalogTarget[i3].Tables")
+		}
+		mg.Spec.ForProvider.CatalogTarget[i3].Tables = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.CatalogTarget[i3].TablesRefs = mrsp.ResolvedReferences
 
 	}
 	{
@@ -275,6 +340,27 @@ func (mg *Crawler) ResolveReferences(ctx context.Context, c client.Reader) error
 		}
 		mg.Spec.InitProvider.CatalogTarget[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.CatalogTarget[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CatalogTarget); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogTable", "CatalogTableList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CatalogTarget[i3].Tables),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.CatalogTarget[i3].TablesRefs,
+				Selector:      mg.Spec.InitProvider.CatalogTarget[i3].TablesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CatalogTarget[i3].Tables")
+		}
+		mg.Spec.InitProvider.CatalogTarget[i3].Tables = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.CatalogTarget[i3].TablesRefs = mrsp.ResolvedReferences
 
 	}
 	{

@@ -69,6 +69,18 @@ func (in *DirectoryInitParameters) DeepCopyInto(out *DirectoryInitParameters) {
 			}
 		}
 	}
+	if in.IPGroupIdsRefs != nil {
+		in, out := &in.IPGroupIdsRefs, &out.IPGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IPGroupIdsSelector != nil {
+		in, out := &in.IPGroupIdsSelector, &out.IPGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SAMLProperties != nil {
 		in, out := &in.SAMLProperties, &out.SAMLProperties
 		*out = make([]SAMLPropertiesInitParameters, len(*in))
@@ -361,6 +373,18 @@ func (in *DirectoryParameters) DeepCopyInto(out *DirectoryParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.IPGroupIdsRefs != nil {
+		in, out := &in.IPGroupIdsRefs, &out.IPGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IPGroupIdsSelector != nil {
+		in, out := &in.IPGroupIdsSelector, &out.IPGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Region != nil {
 		in, out := &in.Region, &out.Region

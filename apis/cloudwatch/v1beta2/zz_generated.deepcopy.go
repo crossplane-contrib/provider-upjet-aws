@@ -574,6 +574,18 @@ func (in *MetricAlarmInitParameters) DeepCopyInto(out *MetricAlarmInitParameters
 			}
 		}
 	}
+	if in.AlarmActionsRefs != nil {
+		in, out := &in.AlarmActionsRefs, &out.AlarmActionsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AlarmActionsSelector != nil {
+		in, out := &in.AlarmActionsSelector, &out.AlarmActionsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AlarmDescription != nil {
 		in, out := &in.AlarmDescription, &out.AlarmDescription
 		*out = new(string)
@@ -658,6 +670,18 @@ func (in *MetricAlarmInitParameters) DeepCopyInto(out *MetricAlarmInitParameters
 				**out = **in
 			}
 		}
+	}
+	if in.OkActionsRefs != nil {
+		in, out := &in.OkActionsRefs, &out.OkActionsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.OkActionsSelector != nil {
+		in, out := &in.OkActionsSelector, &out.OkActionsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Period != nil {
 		in, out := &in.Period, &out.Period
@@ -956,6 +980,18 @@ func (in *MetricAlarmParameters) DeepCopyInto(out *MetricAlarmParameters) {
 			}
 		}
 	}
+	if in.AlarmActionsRefs != nil {
+		in, out := &in.AlarmActionsRefs, &out.AlarmActionsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AlarmActionsSelector != nil {
+		in, out := &in.AlarmActionsSelector, &out.AlarmActionsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AlarmDescription != nil {
 		in, out := &in.AlarmDescription, &out.AlarmDescription
 		*out = new(string)
@@ -1040,6 +1076,18 @@ func (in *MetricAlarmParameters) DeepCopyInto(out *MetricAlarmParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.OkActionsRefs != nil {
+		in, out := &in.OkActionsRefs, &out.OkActionsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.OkActionsSelector != nil {
+		in, out := &in.OkActionsSelector, &out.OkActionsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Period != nil {
 		in, out := &in.Period, &out.Period
