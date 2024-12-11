@@ -3,6 +3,7 @@ kind: MlflowTrackingServer
 metadata:
   annotations:
     meta.upbound.io/example-id: sagemaker/v1beta1/mlflowtrackingserver
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example-mlflowtrackingserver
   name: example
