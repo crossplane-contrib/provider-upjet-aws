@@ -74,9 +74,9 @@ spec:
               forProvider:
                 properties:
                   canarySettings:
-                    description: Input configuration for the canary deployment when
-                      the deployment is a canary release deployment. See `canary_settings
-                      below.
+                    description: |-
+                      Input configuration for the canary deployment when the deployment is a canary release deployment.
+                      See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
                     properties:
                       percentTraffic:
                         description: Percentage (0.0-100.0) of traffic routed to the
@@ -184,14 +184,15 @@ spec:
                         type: object
                     type: object
                   stageDescription:
-                    description: Description to set on the stage managed by the stage_name
-                      argument.
+                    description: |-
+                      Description to set on the stage managed by the stage_name argument.
+                      Has no effect when stage_name is not set.
                     type: string
                   stageName:
-                    description: Name of the stage to create with this deployment.
-                      If the specified stage already exists, it will be updated to
-                      point to the new deployment. We recommend using the aws_api_gateway_stage
-                      resource instead to manage stages.
+                    description: |-
+                      Name of the stage to create with this deployment.
+                      If the specified stage already exists, it will be updated to point to the new deployment.
+                      We recommend using the aws_api_gateway_stage resource instead to manage stages.
                     type: string
                   triggers:
                     additionalProperties:
@@ -227,9 +228,9 @@ spec:
                   autoscaler.
                 properties:
                   canarySettings:
-                    description: Input configuration for the canary deployment when
-                      the deployment is a canary release deployment. See `canary_settings
-                      below.
+                    description: |-
+                      Input configuration for the canary deployment when the deployment is a canary release deployment.
+                      See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
                     properties:
                       percentTraffic:
                         description: Percentage (0.0-100.0) of traffic routed to the
@@ -333,14 +334,15 @@ spec:
                         type: object
                     type: object
                   stageDescription:
-                    description: Description to set on the stage managed by the stage_name
-                      argument.
+                    description: |-
+                      Description to set on the stage managed by the stage_name argument.
+                      Has no effect when stage_name is not set.
                     type: string
                   stageName:
-                    description: Name of the stage to create with this deployment.
-                      If the specified stage already exists, it will be updated to
-                      point to the new deployment. We recommend using the aws_api_gateway_stage
-                      resource instead to manage stages.
+                    description: |-
+                      Name of the stage to create with this deployment.
+                      If the specified stage already exists, it will be updated to point to the new deployment.
+                      We recommend using the aws_api_gateway_stage resource instead to manage stages.
                     type: string
                   triggers:
                     additionalProperties:
@@ -533,9 +535,9 @@ spec:
               atProvider:
                 properties:
                   canarySettings:
-                    description: Input configuration for the canary deployment when
-                      the deployment is a canary release deployment. See `canary_settings
-                      below.
+                    description: |-
+                      Input configuration for the canary deployment when the deployment is a canary release deployment.
+                      See [canary_settings](#canary_settings-argument-reference) below. Has no effect when stage_name` is not set.
                     properties:
                       percentTraffic:
                         description: Percentage (0.0-100.0) of traffic routed to the
@@ -580,14 +582,15 @@ spec:
                     description: REST API identifier.
                     type: string
                   stageDescription:
-                    description: Description to set on the stage managed by the stage_name
-                      argument.
+                    description: |-
+                      Description to set on the stage managed by the stage_name argument.
+                      Has no effect when stage_name is not set.
                     type: string
                   stageName:
-                    description: Name of the stage to create with this deployment.
-                      If the specified stage already exists, it will be updated to
-                      point to the new deployment. We recommend using the aws_api_gateway_stage
-                      resource instead to manage stages.
+                    description: |-
+                      Name of the stage to create with this deployment.
+                      If the specified stage already exists, it will be updated to point to the new deployment.
+                      We recommend using the aws_api_gateway_stage resource instead to manage stages.
                     type: string
                   triggers:
                     additionalProperties:

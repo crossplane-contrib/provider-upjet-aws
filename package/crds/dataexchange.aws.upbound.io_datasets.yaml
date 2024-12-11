@@ -74,8 +74,9 @@ spec:
               forProvider:
                 properties:
                   assetType:
-                    description: 'The type of asset that is added to a data set. Valid
-                      values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.'
+                    description: The type of asset that is added to a data set. Valid
+                      values include API_GATEWAY_API, LAKE_FORMATION_DATA_PERMISSION,
+                      REDSHIFT_DATA_SHARE, S3_DATA_ACCESS, S3_SNAPSHOT.
                     type: string
                   description:
                     description: A description for the data set.
@@ -110,8 +111,9 @@ spec:
                   autoscaler.
                 properties:
                   assetType:
-                    description: 'The type of asset that is added to a data set. Valid
-                      values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.'
+                    description: The type of asset that is added to a data set. Valid
+                      values include API_GATEWAY_API, LAKE_FORMATION_DATA_PERMISSION,
+                      REDSHIFT_DATA_SHARE, S3_DATA_ACCESS, S3_SNAPSHOT.
                     type: string
                   description:
                     description: A description for the data set.
@@ -315,8 +317,9 @@ spec:
                     description: The Amazon Resource Name of this data set.
                     type: string
                   assetType:
-                    description: 'The type of asset that is added to a data set. Valid
-                      values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.'
+                    description: The type of asset that is added to a data set. Valid
+                      values include API_GATEWAY_API, LAKE_FORMATION_DATA_PERMISSION,
+                      REDSHIFT_DATA_SHARE, S3_DATA_ACCESS, S3_SNAPSHOT.
                     type: string
                   description:
                     description: A description for the data set.

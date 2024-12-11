@@ -780,7 +780,10 @@ spec:
                         type: object
                     type: object
                   acl:
-                    description: Canned ACL to apply to the bucket.
+                    description: 'Specifies the Canned ACL to apply to the bucket.
+                      Valid values: private, public-read, public-read-write, aws-exec-read,
+                      authenticated-read, bucket-owner-read, bucket-owner-full-control,
+                      log-delivery-write. Full details are available on the AWS documentation.'
                     type: string
                   bucket:
                     description: Bucket to which to apply the ACL.
@@ -932,7 +935,10 @@ spec:
                         type: object
                     type: object
                   acl:
-                    description: Canned ACL to apply to the bucket.
+                    description: 'Specifies the Canned ACL to apply to the bucket.
+                      Valid values: private, public-read, public-read-write, aws-exec-read,
+                      authenticated-read, bucket-owner-read, bucket-owner-full-control,
+                      log-delivery-write. Full details are available on the AWS documentation.'
                     type: string
                   bucket:
                     description: Bucket to which to apply the ACL.
@@ -1240,7 +1246,10 @@ spec:
                         type: object
                     type: object
                   acl:
-                    description: Canned ACL to apply to the bucket.
+                    description: 'Specifies the Canned ACL to apply to the bucket.
+                      Valid values: private, public-read, public-read-write, aws-exec-read,
+                      authenticated-read, bucket-owner-read, bucket-owner-full-control,
+                      log-delivery-write. Full details are available on the AWS documentation.'
                     type: string
                   bucket:
                     description: Bucket to which to apply the ACL.
