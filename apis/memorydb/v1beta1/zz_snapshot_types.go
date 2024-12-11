@@ -21,7 +21,10 @@ type ClusterConfigurationObservation struct {
 	// Description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Version number of the Redis engine used by the cluster.
+	// The engine that will run on cluster nodes.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Version number of the engine used by the cluster.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// The weekly time range during which maintenance on the cluster is performed.

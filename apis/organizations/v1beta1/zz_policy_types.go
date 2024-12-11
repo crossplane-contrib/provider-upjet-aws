@@ -15,7 +15,11 @@ import (
 
 type PolicyInitParameters struct {
 
-	// The policy content to add to the new policy. For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see the Service Control Policy Syntax documentation and for more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+	// The policy content to add to the new policy.
+	// For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles.
+	// For more information about the RCP syntax, see the Resource Control Policy Syntax documentation.
+	// For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
+	// For more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// A description to assign to the policy.
@@ -31,7 +35,7 @@ type PolicyInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
+	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY (RCP), SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -40,7 +44,11 @@ type PolicyObservation struct {
 	// Amazon Resource Name (ARN) of the policy.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The policy content to add to the new policy. For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see the Service Control Policy Syntax documentation and for more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+	// The policy content to add to the new policy.
+	// For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles.
+	// For more information about the RCP syntax, see the Resource Control Policy Syntax documentation.
+	// For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
+	// For more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// A description to assign to the policy.
@@ -63,13 +71,17 @@ type PolicyObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
+	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY (RCP), SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type PolicyParameters struct {
 
-	// The policy content to add to the new policy. For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles. For more information about the SCP syntax, see the Service Control Policy Syntax documentation and for more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
+	// The policy content to add to the new policy.
+	// For example, if you create a service control policy (SCP), this string must be JSON text that specifies the permissions that admins in attached accounts can delegate to their users, groups, and roles.
+	// For more information about the RCP syntax, see the Resource Control Policy Syntax documentation.
+	// For more information about the SCP syntax, see the Service Control Policy Syntax documentation.
+	// For more information on the Tag Policy syntax, see the Tag Policy Syntax documentation.
 	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
@@ -95,7 +107,7 @@ type PolicyParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
+	// The type of policy to create. Valid values are AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY (RCP), SERVICE_CONTROL_POLICY (SCP), and TAG_POLICY. Defaults to SERVICE_CONTROL_POLICY.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

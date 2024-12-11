@@ -15,7 +15,7 @@ import (
 
 type DataSetInitParameters struct {
 
-	// The type of asset that is added to a data set. Valid values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.
+	// The type of asset that is added to a data set. Valid values include API_GATEWAY_API, LAKE_FORMATION_DATA_PERMISSION, REDSHIFT_DATA_SHARE, S3_DATA_ACCESS, S3_SNAPSHOT.
 	AssetType *string `json:"assetType,omitempty" tf:"asset_type,omitempty"`
 
 	// A description for the data set.
@@ -34,7 +34,7 @@ type DataSetObservation struct {
 	// The Amazon Resource Name of this data set.
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
-	// The type of asset that is added to a data set. Valid values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.
+	// The type of asset that is added to a data set. Valid values include API_GATEWAY_API, LAKE_FORMATION_DATA_PERMISSION, REDSHIFT_DATA_SHARE, S3_DATA_ACCESS, S3_SNAPSHOT.
 	AssetType *string `json:"assetType,omitempty" tf:"asset_type,omitempty"`
 
 	// A description for the data set.
@@ -57,7 +57,7 @@ type DataSetObservation struct {
 
 type DataSetParameters struct {
 
-	// The type of asset that is added to a data set. Valid values are: S3_SNAPSHOT, REDSHIFT_DATA_SHARE, and API_GATEWAY_API.
+	// The type of asset that is added to a data set. Valid values include API_GATEWAY_API, LAKE_FORMATION_DATA_PERMISSION, REDSHIFT_DATA_SHARE, S3_DATA_ACCESS, S3_SNAPSHOT.
 	// +kubebuilder:validation:Optional
 	AssetType *string `json:"assetType,omitempty" tf:"asset_type,omitempty"`
 

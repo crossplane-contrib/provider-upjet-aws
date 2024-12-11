@@ -451,10 +451,6 @@ spec:
                     description: The fingerprint of the PGP key used to encrypt the
                       password.
                     type: string
-                  password:
-                    description: The plain text password, only available when pgp_key
-                      is not provided.
-                    type: string
                   passwordLength:
                     description: The length of the generated password on resource
                       creation. Only applies on resource creation. Drift detection
