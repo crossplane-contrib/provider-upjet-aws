@@ -154,8 +154,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		// aws_vpc_endpoint_route_table_association
 		// aws_vpc_endpoint_security_group_association
 		r.LateInitializer = config.LateInitializer{
-			// NOTE(muvaf): Conflicts with AvailabilityZone. See the following
-			// for more details: https://github.com/crossplane/upjet/issues/107
+			// Conflicts with VPCEndpointSubnetAssociation
 			IgnoredFields: []string{
 				"subnet_configuration",
 			},
