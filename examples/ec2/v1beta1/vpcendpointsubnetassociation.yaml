@@ -5,6 +5,8 @@
 apiVersion: ec2.aws.upbound.io/v1beta1
 kind: VPCEndpointSubnetAssociation
 metadata:
+  annotations:
+    uptest.upbound.io/disable-import: "true"
   labels:
     testing.upbound.io/example-name: sn_ec2
   name: sn-ec2
