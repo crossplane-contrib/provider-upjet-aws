@@ -9,6 +9,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
@@ -80,6 +81,7 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
@@ -101,6 +103,25 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IAMRoleArnRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta3", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NotResources),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.ForProvider.NotResourcesRefs,
+			Selector:      mg.Spec.ForProvider.NotResourcesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NotResources")
+	}
+	mg.Spec.ForProvider.NotResources = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.NotResourcesRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("backup.aws.upbound.io", "v1beta2", "Plan", "PlanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -119,6 +140,25 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	mg.Spec.ForProvider.PlanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PlanIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta3", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Resources),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.ForProvider.ResourcesRefs,
+			Selector:      mg.Spec.ForProvider.ResourcesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Resources")
+	}
+	mg.Spec.ForProvider.Resources = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ResourcesRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
 		if err != nil {
@@ -139,6 +179,25 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.InitProvider.IAMRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IAMRoleArnRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta3", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NotResources),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.InitProvider.NotResourcesRefs,
+			Selector:      mg.Spec.InitProvider.NotResourcesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NotResources")
+	}
+	mg.Spec.InitProvider.NotResources = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.NotResourcesRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("backup.aws.upbound.io", "v1beta2", "Plan", "PlanList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -157,6 +216,25 @@ func (mg *Selection) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	mg.Spec.InitProvider.PlanID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PlanIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("rds.aws.upbound.io", "v1beta3", "Instance", "InstanceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Resources),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.InitProvider.ResourcesRefs,
+			Selector:      mg.Spec.InitProvider.ResourcesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Resources")
+	}
+	mg.Spec.InitProvider.Resources = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ResourcesRefs = mrsp.ResolvedReferences
 
 	return nil
 }

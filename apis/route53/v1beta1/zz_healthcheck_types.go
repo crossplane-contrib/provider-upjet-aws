@@ -19,8 +19,18 @@ type HealthCheckInitParameters struct {
 	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.HealthCheck
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
+
+	// References to HealthCheck in route53 to populate childHealthchecks.
+	// +kubebuilder:validation:Optional
+	ChildHealthchecksRefs []v1.Reference `json:"childHealthchecksRefs,omitempty" tf:"-"`
+
+	// Selector for a list of HealthCheck in route53 to populate childHealthchecks.
+	// +kubebuilder:validation:Optional
+	ChildHealthchecksSelector *v1.Selector `json:"childHealthchecksSelector,omitempty" tf:"-"`
 
 	// The name of the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta2.MetricAlarm
@@ -179,9 +189,19 @@ type HealthCheckParameters struct {
 	ChildHealthThreshold *float64 `json:"childHealthThreshold,omitempty" tf:"child_health_threshold,omitempty"`
 
 	// For a specified parent health check, a list of HealthCheckId values for the associated child health checks.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/route53/v1beta1.HealthCheck
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ChildHealthchecks []*string `json:"childHealthchecks,omitempty" tf:"child_healthchecks,omitempty"`
+
+	// References to HealthCheck in route53 to populate childHealthchecks.
+	// +kubebuilder:validation:Optional
+	ChildHealthchecksRefs []v1.Reference `json:"childHealthchecksRefs,omitempty" tf:"-"`
+
+	// Selector for a list of HealthCheck in route53 to populate childHealthchecks.
+	// +kubebuilder:validation:Optional
+	ChildHealthchecksSelector *v1.Selector `json:"childHealthchecksSelector,omitempty" tf:"-"`
 
 	// The name of the CloudWatch alarm.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/cloudwatch/v1beta2.MetricAlarm

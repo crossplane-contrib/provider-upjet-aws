@@ -18,7 +18,7 @@ require (
 	github.com/aws/smithy-go v1.22.1
 	github.com/crossplane/crossplane-runtime v1.16.0-rc.2.0.20240510094504-3f697876fa57
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
-	github.com/crossplane/upjet v1.4.1-0.20240911184956-3afbb7796d46
+	github.com/crossplane/upjet v1.4.1-0.20241115173542-ba35c31702ca
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/awspolicyequivalence v1.6.0
@@ -408,15 +408,15 @@ require (
 	go.opentelemetry.io/otel/trace v1.32.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.26.0 // indirect
-	golang.org/x/crypto v0.29.0 // indirect
+	golang.org/x/crypto v0.31.0 // indirect
 	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225 // indirect
 	golang.org/x/mod v0.22.0 // indirect
 	golang.org/x/net v0.31.0 // indirect
 	golang.org/x/oauth2 v0.23.0 // indirect
-	golang.org/x/sync v0.9.0 // indirect
-	golang.org/x/sys v0.27.0 // indirect
-	golang.org/x/term v0.26.0 // indirect
-	golang.org/x/text v0.20.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sys v0.28.0 // indirect
+	golang.org/x/term v0.27.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.27.0 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect

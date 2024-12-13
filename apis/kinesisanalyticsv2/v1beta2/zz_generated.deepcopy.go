@@ -3939,6 +3939,18 @@ func (in *VPCConfigurationInitParameters) DeepCopyInto(out *VPCConfigurationInit
 			}
 		}
 	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -3949,6 +3961,18 @@ func (in *VPCConfigurationInitParameters) DeepCopyInto(out *VPCConfigurationInit
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -4023,6 +4047,18 @@ func (in *VPCConfigurationParameters) DeepCopyInto(out *VPCConfigurationParamete
 			}
 		}
 	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -4033,6 +4069,18 @@ func (in *VPCConfigurationParameters) DeepCopyInto(out *VPCConfigurationParamete
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

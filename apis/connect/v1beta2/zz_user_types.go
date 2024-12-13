@@ -99,8 +99,18 @@ type UserInitParameters struct {
 	RoutingProfileIDSelector *v1.Selector `json:"routingProfileIdSelector,omitempty" tf:"-"`
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.SecurityProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("security_profile_id",true)
 	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
+
+	// References to SecurityProfile in connect to populate securityProfileIds.
+	// +kubebuilder:validation:Optional
+	SecurityProfileIdsRefs []v1.Reference `json:"securityProfileIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityProfile in connect to populate securityProfileIds.
+	// +kubebuilder:validation:Optional
+	SecurityProfileIdsSelector *v1.Selector `json:"securityProfileIdsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -213,9 +223,19 @@ type UserParameters struct {
 	RoutingProfileIDSelector *v1.Selector `json:"routingProfileIdSelector,omitempty" tf:"-"`
 
 	// A list of identifiers for the security profiles for the user. Specify a minimum of 1 and maximum of 10 security profile ids. For more information, see Best Practices for Security Profiles in the Amazon Connect Administrator Guide.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/connect/v1beta1.SecurityProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("security_profile_id",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityProfileIds []*string `json:"securityProfileIds,omitempty" tf:"security_profile_ids,omitempty"`
+
+	// References to SecurityProfile in connect to populate securityProfileIds.
+	// +kubebuilder:validation:Optional
+	SecurityProfileIdsRefs []v1.Reference `json:"securityProfileIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityProfile in connect to populate securityProfileIds.
+	// +kubebuilder:validation:Optional
+	SecurityProfileIdsSelector *v1.Selector `json:"securityProfileIdsSelector,omitempty" tf:"-"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -309,7 +329,6 @@ type User struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.phoneConfig) || (has(self.initProvider) && has(self.initProvider.phoneConfig))",message="spec.forProvider.phoneConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.securityProfileIds) || (has(self.initProvider) && has(self.initProvider.securityProfileIds))",message="spec.forProvider.securityProfileIds is a required parameter"
 	Spec   UserSpec   `json:"spec"`
 	Status UserStatus `json:"status,omitempty"`
 }

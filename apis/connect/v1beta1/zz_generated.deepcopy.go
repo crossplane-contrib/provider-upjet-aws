@@ -6476,6 +6476,18 @@ func (in *UserInitParameters) DeepCopyInto(out *UserInitParameters) {
 			}
 		}
 	}
+	if in.SecurityProfileIdsRefs != nil {
+		in, out := &in.SecurityProfileIdsRefs, &out.SecurityProfileIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityProfileIdsSelector != nil {
+		in, out := &in.SecurityProfileIdsSelector, &out.SecurityProfileIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -6730,6 +6742,18 @@ func (in *UserParameters) DeepCopyInto(out *UserParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.SecurityProfileIdsRefs != nil {
+		in, out := &in.SecurityProfileIdsRefs, &out.SecurityProfileIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityProfileIdsSelector != nil {
+		in, out := &in.SecurityProfileIdsSelector, &out.SecurityProfileIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags

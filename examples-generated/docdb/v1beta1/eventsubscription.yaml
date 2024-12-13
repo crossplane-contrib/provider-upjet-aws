@@ -16,8 +16,8 @@ spec:
     snsTopicArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    sourceIds:
-    - ${aws_docdb_cluster.example.id}
+    sourceIdsRefs:
+    - name: example
     sourceType: db-cluster
 
 ---
