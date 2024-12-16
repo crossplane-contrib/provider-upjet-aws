@@ -57,7 +57,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			conn := map[string][]byte{}
 
 			if a, ok := attr["arn"].(string); ok {
-				conn["topic_arn"] = []byte(a)
+				conn["arn"] = []byte(a)
 			}
 
 			return conn, nil
