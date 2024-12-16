@@ -15,7 +15,7 @@ import (
 
 type ApprovalRuleInitParameters struct {
 
-	// Number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Valid Range: 0 to 100. Conflicts with approve_until_date.
+	// Number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Valid Range: 0 to 360. Conflicts with approve_until_date.
 	ApproveAfterDays *float64 `json:"approveAfterDays,omitempty" tf:"approve_after_days,omitempty"`
 
 	// Cutoff date for auto approval of released patches. Any patches released on or before this date are installed automatically. Date is formatted as YYYY-MM-DD. Conflicts with approve_after_days
@@ -33,7 +33,7 @@ type ApprovalRuleInitParameters struct {
 
 type ApprovalRuleObservation struct {
 
-	// Number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Valid Range: 0 to 100. Conflicts with approve_until_date.
+	// Number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Valid Range: 0 to 360. Conflicts with approve_until_date.
 	ApproveAfterDays *float64 `json:"approveAfterDays,omitempty" tf:"approve_after_days,omitempty"`
 
 	// Cutoff date for auto approval of released patches. Any patches released on or before this date are installed automatically. Date is formatted as YYYY-MM-DD. Conflicts with approve_after_days
@@ -51,7 +51,7 @@ type ApprovalRuleObservation struct {
 
 type ApprovalRuleParameters struct {
 
-	// Number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Valid Range: 0 to 100. Conflicts with approve_until_date.
+	// Number of days after the release date of each patch matched by the rule the patch is marked as approved in the patch baseline. Valid Range: 0 to 360. Conflicts with approve_until_date.
 	// +kubebuilder:validation:Optional
 	ApproveAfterDays *float64 `json:"approveAfterDays,omitempty" tf:"approve_after_days,omitempty"`
 

@@ -15,6 +15,9 @@ import (
 
 type KeyspaceInitParameters struct {
 
+	// The replication specification of the keyspace.
+	ReplicationSpecification *ReplicationSpecificationInitParameters `json:"replicationSpecification,omitempty" tf:"replication_specification,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -27,6 +30,9 @@ type KeyspaceObservation struct {
 
 	// The name of the keyspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The replication specification of the keyspace.
+	ReplicationSpecification *ReplicationSpecificationObservation `json:"replicationSpecification,omitempty" tf:"replication_specification,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -44,10 +50,46 @@ type KeyspaceParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// The replication specification of the keyspace.
+	// +kubebuilder:validation:Optional
+	ReplicationSpecification *ReplicationSpecificationParameters `json:"replicationSpecification,omitempty" tf:"replication_specification,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type ReplicationSpecificationInitParameters struct {
+
+	// Replication regions. If replication_strategy is MULTI_REGION, region_list requires the current Region and at least one additional AWS Region where the keyspace is going to be replicated in.
+	// +listType=set
+	RegionList []*string `json:"regionList,omitempty" tf:"region_list,omitempty"`
+
+	// Replication strategy. Valid values: SINGLE_REGION and MULTI_REGION.
+	ReplicationStrategy *string `json:"replicationStrategy,omitempty" tf:"replication_strategy,omitempty"`
+}
+
+type ReplicationSpecificationObservation struct {
+
+	// Replication regions. If replication_strategy is MULTI_REGION, region_list requires the current Region and at least one additional AWS Region where the keyspace is going to be replicated in.
+	// +listType=set
+	RegionList []*string `json:"regionList,omitempty" tf:"region_list,omitempty"`
+
+	// Replication strategy. Valid values: SINGLE_REGION and MULTI_REGION.
+	ReplicationStrategy *string `json:"replicationStrategy,omitempty" tf:"replication_strategy,omitempty"`
+}
+
+type ReplicationSpecificationParameters struct {
+
+	// Replication regions. If replication_strategy is MULTI_REGION, region_list requires the current Region and at least one additional AWS Region where the keyspace is going to be replicated in.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	RegionList []*string `json:"regionList,omitempty" tf:"region_list,omitempty"`
+
+	// Replication strategy. Valid values: SINGLE_REGION and MULTI_REGION.
+	// +kubebuilder:validation:Optional
+	ReplicationStrategy *string `json:"replicationStrategy,omitempty" tf:"replication_strategy,omitempty"`
 }
 
 // KeyspaceSpec defines the desired state of Keyspace

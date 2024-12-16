@@ -159,8 +159,8 @@ spec:
                       be created in.
                     type: string
                   sharedAccounts:
-                    description: List of AWS Account ids to share snapshot with, use
-                      all to make snaphot public.
+                    description: List of AWS Account IDs to share the snapshot with.
+                      Use all to make the snapshot public.
                     items:
                       type: string
                     type: array
@@ -269,8 +269,8 @@ spec:
                     description: The Identifier for the snapshot.
                     type: string
                   sharedAccounts:
-                    description: List of AWS Account ids to share snapshot with, use
-                      all to make snaphot public.
+                    description: List of AWS Account IDs to share the snapshot with.
+                      Use all to make the snapshot public.
                     items:
                       type: string
                     type: array
@@ -501,8 +501,8 @@ spec:
                       time of the snapshot.
                     type: number
                   sharedAccounts:
-                    description: List of AWS Account ids to share snapshot with, use
-                      all to make snaphot public.
+                    description: List of AWS Account IDs to share the snapshot with.
+                      Use all to make the snapshot public.
                     items:
                       type: string
                     type: array

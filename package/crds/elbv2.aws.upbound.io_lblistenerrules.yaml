@@ -2859,7 +2859,7 @@ spec:
                                   type: boolean
                               type: object
                             targetGroup:
-                              description: One or more target groups block.
+                              description: One or more target group blocks.
                               items:
                                 properties:
                                   arn:
@@ -3708,7 +3708,7 @@ spec:
                                   type: boolean
                               type: object
                             targetGroup:
-                              description: One or more target groups block.
+                              description: One or more target group blocks.
                               items:
                                 properties:
                                   arn:
@@ -4472,7 +4472,7 @@ spec:
                                   type: boolean
                               type: object
                             targetGroup:
-                              description: One or more target groups block.
+                              description: One or more target group blocks.
                               items:
                                 properties:
                                   arn:

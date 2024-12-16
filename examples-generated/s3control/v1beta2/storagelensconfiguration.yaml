@@ -32,8 +32,8 @@ spec:
           outputSchemaVersion: V_1
       enabled: true
       exclude:
-      - buckets:
-        - ${aws_s3_bucket.b1.arn}
-        - ${aws_s3_bucket.b2.arn}
+      - bucketsRefs:
+        - name: b1
+        - name: b2
         regions:
         - us-east-2

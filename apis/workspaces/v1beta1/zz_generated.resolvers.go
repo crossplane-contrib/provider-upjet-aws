@@ -46,6 +46,25 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 	mg.Spec.ForProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DirectoryIDRef = rsp.ResolvedReference
 	{
+		m, l, err = apisresolver.GetManagedResource("workspaces.aws.upbound.io", "v1beta1", "IPGroup", "IPGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IPGroupIds),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.IPGroupIdsRefs,
+			Selector:      mg.Spec.ForProvider.IPGroupIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.IPGroupIds")
+	}
+	mg.Spec.ForProvider.IPGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.IPGroupIdsRefs = mrsp.ResolvedReferences
+	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -104,6 +123,25 @@ func (mg *Directory) ResolveReferences( // ResolveReferences of this Directory.
 	}
 	mg.Spec.InitProvider.DirectoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DirectoryIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("workspaces.aws.upbound.io", "v1beta1", "IPGroup", "IPGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IPGroupIds),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.IPGroupIdsRefs,
+			Selector:      mg.Spec.InitProvider.IPGroupIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IPGroupIds")
+	}
+	mg.Spec.InitProvider.IPGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.IPGroupIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {

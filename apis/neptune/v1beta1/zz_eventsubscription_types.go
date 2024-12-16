@@ -36,8 +36,18 @@ type EventSubscriptionInitParameters struct {
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// References to ClusterInstance in neptune to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsRefs []v1.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ClusterInstance in neptune to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster or db-cluster-snapshot. If not set, all sources will be subscribed to.
 	SourceType *string `json:"sourceType,omitempty" tf:"source_type,omitempty"`
@@ -115,9 +125,19 @@ type EventSubscriptionParameters struct {
 	SnsTopicArnSelector *v1.Selector `json:"snsTopicArnSelector,omitempty" tf:"-"`
 
 	// A list of identifiers of the event sources for which events will be returned. If not specified, then all sources are included in the response. If specified, a source_type must also be specified.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/neptune/v1beta1.ClusterInstance
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SourceIds []*string `json:"sourceIds,omitempty" tf:"source_ids,omitempty"`
+
+	// References to ClusterInstance in neptune to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsRefs []v1.Reference `json:"sourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ClusterInstance in neptune to populate sourceIds.
+	// +kubebuilder:validation:Optional
+	SourceIdsSelector *v1.Selector `json:"sourceIdsSelector,omitempty" tf:"-"`
 
 	// The type of source that will be generating the events. Valid options are db-instance, db-security-group, db-parameter-group, db-snapshot, db-cluster or db-cluster-snapshot. If not set, all sources will be subscribed to.
 	// +kubebuilder:validation:Optional

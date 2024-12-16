@@ -152,8 +152,18 @@ type ProxyInitParameters struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate vpcSubnetIds.
+	// +kubebuilder:validation:Optional
+	VPCSubnetIdsRefs []v1.Reference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate vpcSubnetIds.
+	// +kubebuilder:validation:Optional
+	VPCSubnetIdsSelector *v1.Selector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type ProxyObservation struct {
@@ -265,9 +275,19 @@ type ProxyParameters struct {
 	VPCSecurityGroupIds []*string `json:"vpcSecurityGroupIds,omitempty" tf:"vpc_security_group_ids,omitempty"`
 
 	// One or more VPC subnet IDs to associate with the new proxy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCSubnetIds []*string `json:"vpcSubnetIds,omitempty" tf:"vpc_subnet_ids,omitempty"`
+
+	// References to Subnet in ec2 to populate vpcSubnetIds.
+	// +kubebuilder:validation:Optional
+	VPCSubnetIdsRefs []v1.Reference `json:"vpcSubnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in ec2 to populate vpcSubnetIds.
+	// +kubebuilder:validation:Optional
+	VPCSubnetIdsSelector *v1.Selector `json:"vpcSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 // ProxySpec defines the desired state of Proxy
@@ -308,7 +328,6 @@ type Proxy struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.auth) || (has(self.initProvider) && has(self.initProvider.auth))",message="spec.forProvider.auth is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.engineFamily) || (has(self.initProvider) && has(self.initProvider.engineFamily))",message="spec.forProvider.engineFamily is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpcSubnetIds) || (has(self.initProvider) && has(self.initProvider.vpcSubnetIds))",message="spec.forProvider.vpcSubnetIds is a required parameter"
 	Spec   ProxySpec   `json:"spec"`
 	Status ProxyStatus `json:"status,omitempty"`
 }

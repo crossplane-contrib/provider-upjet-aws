@@ -249,6 +249,9 @@ type DistributionInitParameters struct {
 	// Set of Amazon Resource Names (ARNs) of License Manager License Configurations.
 	// +listType=set
 	LicenseConfigurationArns []*string `json:"licenseConfigurationArns,omitempty" tf:"license_configuration_arns,omitempty"`
+
+	// Configuration block with S3 export settings. Detailed below.
+	S3ExportConfiguration []S3ExportConfigurationInitParameters `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
 }
 
 type DistributionObservation struct {
@@ -271,6 +274,9 @@ type DistributionObservation struct {
 
 	// AWS Region for the distribution.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Configuration block with S3 export settings. Detailed below.
+	S3ExportConfiguration []S3ExportConfigurationObservation `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
 }
 
 type DistributionParameters struct {
@@ -299,6 +305,10 @@ type DistributionParameters struct {
 	// AWS Region for the distribution.
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
+
+	// Configuration block with S3 export settings. Detailed below.
+	// +kubebuilder:validation:Optional
+	S3ExportConfiguration []S3ExportConfigurationParameters `json:"s3ExportConfiguration,omitempty" tf:"s3_export_configuration,omitempty"`
 }
 
 type FastLaunchConfigurationInitParameters struct {
@@ -497,6 +507,55 @@ type LaunchTemplateParameters struct {
 	// The version of the launch template to use for faster launching for a Windows AMI.
 	// +kubebuilder:validation:Optional
 	LaunchTemplateVersion *string `json:"launchTemplateVersion,omitempty" tf:"launch_template_version,omitempty"`
+}
+
+type S3ExportConfigurationInitParameters struct {
+
+	// The disk image format of the exported image (RAW, VHD, or VMDK)
+	DiskImageFormat *string `json:"diskImageFormat,omitempty" tf:"disk_image_format,omitempty"`
+
+	// The name of the IAM role to use for exporting.
+	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
+
+	// The name of the S3 bucket to store the exported image in. The bucket needs to exist before the export configuration is created.
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+
+	// The prefix for the exported image.
+	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
+}
+
+type S3ExportConfigurationObservation struct {
+
+	// The disk image format of the exported image (RAW, VHD, or VMDK)
+	DiskImageFormat *string `json:"diskImageFormat,omitempty" tf:"disk_image_format,omitempty"`
+
+	// The name of the IAM role to use for exporting.
+	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
+
+	// The name of the S3 bucket to store the exported image in. The bucket needs to exist before the export configuration is created.
+	S3Bucket *string `json:"s3Bucket,omitempty" tf:"s3_bucket,omitempty"`
+
+	// The prefix for the exported image.
+	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
+}
+
+type S3ExportConfigurationParameters struct {
+
+	// The disk image format of the exported image (RAW, VHD, or VMDK)
+	// +kubebuilder:validation:Optional
+	DiskImageFormat *string `json:"diskImageFormat" tf:"disk_image_format,omitempty"`
+
+	// The name of the IAM role to use for exporting.
+	// +kubebuilder:validation:Optional
+	RoleName *string `json:"roleName" tf:"role_name,omitempty"`
+
+	// The name of the S3 bucket to store the exported image in. The bucket needs to exist before the export configuration is created.
+	// +kubebuilder:validation:Optional
+	S3Bucket *string `json:"s3Bucket" tf:"s3_bucket,omitempty"`
+
+	// The prefix for the exported image.
+	// +kubebuilder:validation:Optional
+	S3Prefix *string `json:"s3Prefix,omitempty" tf:"s3_prefix,omitempty"`
 }
 
 type SnapshotConfigurationInitParameters struct {

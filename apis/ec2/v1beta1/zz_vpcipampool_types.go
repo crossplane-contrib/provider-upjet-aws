@@ -62,7 +62,7 @@ type VPCIpamPoolInitParameters struct {
 	// The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Valid values are byoip or amazon. Default is byoip.
 	PublicIPSource *string `json:"publicIpSource,omitempty" tf:"public_ip_source,omitempty"`
 
-	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon".
+	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon". Setting this argument to true when it is not available may result in erroneous differences being reported.
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
 
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
@@ -133,7 +133,7 @@ type VPCIpamPoolObservation struct {
 	// The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Valid values are byoip or amazon. Default is byoip.
 	PublicIPSource *string `json:"publicIpSource,omitempty" tf:"public_ip_source,omitempty"`
 
-	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon".
+	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon". Setting this argument to true when it is not available may result in erroneous differences being reported.
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
 
 	// The ID of the source IPAM pool. Use this argument to create a child pool within an existing pool.
@@ -212,7 +212,7 @@ type VPCIpamPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPSource *string `json:"publicIpSource,omitempty" tf:"public_ip_source,omitempty"`
 
-	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon".
+	// Defines whether or not IPv6 pool space is publicly advertisable over the internet. This argument is required if address_family = "ipv6" and public_ip_source = "byoip", default is false. This option is not available for IPv4 pool space or if public_ip_source = "amazon". Setting this argument to true when it is not available may result in erroneous differences being reported.
 	// +kubebuilder:validation:Optional
 	PubliclyAdvertisable *bool `json:"publiclyAdvertisable,omitempty" tf:"publicly_advertisable,omitempty"`
 

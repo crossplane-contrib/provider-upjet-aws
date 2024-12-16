@@ -60,7 +60,17 @@ type InputInitParameters struct {
 	InputDevices []InputDevicesInitParameters `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
 
 	// List of input security groups.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/medialive/v1beta1.InputSecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	InputSecurityGroups []*string `json:"inputSecurityGroups,omitempty" tf:"input_security_groups,omitempty"`
+
+	// References to InputSecurityGroup in medialive to populate inputSecurityGroups.
+	// +kubebuilder:validation:Optional
+	InputSecurityGroupsRefs []v1.Reference `json:"inputSecurityGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of InputSecurityGroup in medialive to populate inputSecurityGroups.
+	// +kubebuilder:validation:Optional
+	InputSecurityGroupsSelector *v1.Selector `json:"inputSecurityGroupsSelector,omitempty" tf:"-"`
 
 	// A list of the MediaConnect Flows. See Media Connect Flows for more details.
 	MediaConnectFlows []MediaConnectFlowsInitParameters `json:"mediaConnectFlows,omitempty" tf:"media_connect_flows,omitempty"`
@@ -161,8 +171,18 @@ type InputParameters struct {
 	InputDevices []InputDevicesParameters `json:"inputDevices,omitempty" tf:"input_devices,omitempty"`
 
 	// List of input security groups.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/medialive/v1beta1.InputSecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	InputSecurityGroups []*string `json:"inputSecurityGroups,omitempty" tf:"input_security_groups,omitempty"`
+
+	// References to InputSecurityGroup in medialive to populate inputSecurityGroups.
+	// +kubebuilder:validation:Optional
+	InputSecurityGroupsRefs []v1.Reference `json:"inputSecurityGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of InputSecurityGroup in medialive to populate inputSecurityGroups.
+	// +kubebuilder:validation:Optional
+	InputSecurityGroupsSelector *v1.Selector `json:"inputSecurityGroupsSelector,omitempty" tf:"-"`
 
 	// A list of the MediaConnect Flows. See Media Connect Flows for more details.
 	// +kubebuilder:validation:Optional

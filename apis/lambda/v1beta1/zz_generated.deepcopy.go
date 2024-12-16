@@ -2756,6 +2756,18 @@ func (in *FunctionInitParameters) DeepCopyInto(out *FunctionInitParameters) {
 			}
 		}
 	}
+	if in.LayersRefs != nil {
+		in, out := &in.LayersRefs, &out.LayersRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.LayersSelector != nil {
+		in, out := &in.LayersSelector, &out.LayersSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.LoggingConfig != nil {
 		in, out := &in.LoggingConfig, &out.LoggingConfig
 		*out = make([]LoggingConfigInitParameters, len(*in))
@@ -3334,6 +3346,18 @@ func (in *FunctionParameters) DeepCopyInto(out *FunctionParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.LayersRefs != nil {
+		in, out := &in.LayersRefs, &out.LayersRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.LayersSelector != nil {
+		in, out := &in.LayersSelector, &out.LayersSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.LoggingConfig != nil {
 		in, out := &in.LoggingConfig, &out.LoggingConfig

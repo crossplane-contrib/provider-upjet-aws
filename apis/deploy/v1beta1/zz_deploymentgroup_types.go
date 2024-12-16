@@ -182,6 +182,9 @@ type DeploymentGroupInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
+
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	TriggerConfiguration []TriggerConfigurationInitParameters `json:"triggerConfiguration,omitempty" tf:"trigger_configuration,omitempty"`
 }
@@ -250,6 +253,9 @@ type DeploymentGroupObservation struct {
 	// A map of tags assigned to the resource, including those inherited from the provider default_tags configuration block.
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
+
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	TriggerConfiguration []TriggerConfigurationObservation `json:"triggerConfiguration,omitempty" tf:"trigger_configuration,omitempty"`
@@ -342,6 +348,10 @@ type DeploymentGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Indicates whether the deployment group was configured to have CodeDeploy install a termination hook into an Auto Scaling group.
+	// +kubebuilder:validation:Optional
+	TerminationHookEnabled *bool `json:"terminationHookEnabled,omitempty" tf:"termination_hook_enabled,omitempty"`
 
 	// Configuration block(s) of the triggers for the deployment group (documented below).
 	// +kubebuilder:validation:Optional
@@ -705,8 +715,18 @@ type OnPremisesInstanceTagFilterParameters struct {
 type ProdTrafficRouteInitParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBListener
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
+
+	// References to LBListener in elbv2 to populate listenerArns.
+	// +kubebuilder:validation:Optional
+	ListenerArnsRefs []v1.Reference `json:"listenerArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LBListener in elbv2 to populate listenerArns.
+	// +kubebuilder:validation:Optional
+	ListenerArnsSelector *v1.Selector `json:"listenerArnsSelector,omitempty" tf:"-"`
 }
 
 type ProdTrafficRouteObservation struct {
@@ -719,9 +739,19 @@ type ProdTrafficRouteObservation struct {
 type ProdTrafficRouteParameters struct {
 
 	// List of Amazon Resource Names (ARNs) of the load balancer listeners.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/elbv2/v1beta2.LBListener
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	ListenerArns []*string `json:"listenerArns" tf:"listener_arns,omitempty"`
+	ListenerArns []*string `json:"listenerArns,omitempty" tf:"listener_arns,omitempty"`
+
+	// References to LBListener in elbv2 to populate listenerArns.
+	// +kubebuilder:validation:Optional
+	ListenerArnsRefs []v1.Reference `json:"listenerArnsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of LBListener in elbv2 to populate listenerArns.
+	// +kubebuilder:validation:Optional
+	ListenerArnsSelector *v1.Selector `json:"listenerArnsSelector,omitempty" tf:"-"`
 }
 
 type TargetGroupInfoInitParameters struct {

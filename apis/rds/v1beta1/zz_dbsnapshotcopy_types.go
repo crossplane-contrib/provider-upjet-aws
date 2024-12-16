@@ -39,7 +39,7 @@ type DBSnapshotCopyInitParameters struct {
 	// he URL that contains a Signature Version 4 signed request.
 	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
 
-	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
@@ -113,7 +113,7 @@ type DBSnapshotCopyObservation struct {
 	// he URL that contains a Signature Version 4 signed request.
 	PresignedURL *string `json:"presignedUrl,omitempty" tf:"presigned_url,omitempty"`
 
-	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
@@ -182,7 +182,7 @@ type DBSnapshotCopyParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`

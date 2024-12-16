@@ -75,6 +75,7 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("ssm.aws.upbound.io", "v1beta1", "Document", "DocumentList")
@@ -95,12 +96,33 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.Name = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Targets); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Targets[i3].Values),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.ForProvider.Targets[i3].ValuesRefs,
+				Selector:      mg.Spec.ForProvider.Targets[i3].ValuesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Targets[i3].Values")
+		}
+		mg.Spec.ForProvider.Targets[i3].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Targets[i3].ValuesRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("ssm.aws.upbound.io", "v1beta1", "Document", "DocumentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Name),
 			Extract:      reference.ExternalName(),
@@ -114,6 +136,28 @@ func (mg *Association) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.Name = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Targets); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Targets[i3].Values),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.InitProvider.Targets[i3].ValuesRefs,
+				Selector:      mg.Spec.InitProvider.Targets[i3].ValuesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Targets[i3].Values")
+		}
+		mg.Spec.InitProvider.Targets[i3].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Targets[i3].ValuesRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }
@@ -263,6 +307,7 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
@@ -283,12 +328,33 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 	}
 	mg.Spec.ForProvider.ServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Targets); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Targets[i3].Values),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.ForProvider.Targets[i3].ValuesRefs,
+				Selector:      mg.Spec.ForProvider.Targets[i3].ValuesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Targets[i3].Values")
+		}
+		mg.Spec.ForProvider.Targets[i3].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Targets[i3].ValuesRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TaskArn),
 			Extract:      resource.ExtractParamPath("arn", true),
@@ -303,6 +369,31 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.TaskArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TaskArnRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.TaskInvocationParameters); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.TaskInvocationParameters[i3].AutomationParameters); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+						CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].Values),
+						Extract:       resource.ExtractResourceID(),
+						References:    mg.Spec.ForProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].ValuesRefs,
+						Selector:      mg.Spec.ForProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].ValuesSelector,
+						To:            reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].Values")
+				}
+				mg.Spec.ForProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+				mg.Spec.ForProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].ValuesRefs = mrsp.ResolvedReferences
+
+			}
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.TaskInvocationParameters); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.ForProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig); i5++ {
@@ -411,12 +502,33 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 	}
 	mg.Spec.InitProvider.ServiceRoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServiceRoleArnRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Targets); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Targets[i3].Values),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.InitProvider.Targets[i3].ValuesRefs,
+				Selector:      mg.Spec.InitProvider.Targets[i3].ValuesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Targets[i3].Values")
+		}
+		mg.Spec.InitProvider.Targets[i3].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Targets[i3].ValuesRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("lambda.aws.upbound.io", "v1beta1", "Function", "FunctionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TaskArn),
 			Extract:      resource.ExtractParamPath("arn", true),
@@ -431,6 +543,31 @@ func (mg *MaintenanceWindowTask) ResolveReferences(ctx context.Context, c client
 	mg.Spec.InitProvider.TaskArn = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.TaskArnRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.TaskInvocationParameters); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.TaskInvocationParameters[i3].AutomationParameters); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter); i5++ {
+				{
+					m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta2", "Instance", "InstanceList")
+					if err != nil {
+						return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+					}
+					mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+						CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].Values),
+						Extract:       resource.ExtractResourceID(),
+						References:    mg.Spec.InitProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].ValuesRefs,
+						Selector:      mg.Spec.InitProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].ValuesSelector,
+						To:            reference.To{List: l, Managed: m},
+					})
+				}
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].Values")
+				}
+				mg.Spec.InitProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+				mg.Spec.InitProvider.TaskInvocationParameters[i3].AutomationParameters[i4].Parameter[i5].ValuesRefs = mrsp.ResolvedReferences
+
+			}
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.TaskInvocationParameters); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters); i4++ {
 			for i5 := 0; i5 < len(mg.Spec.InitProvider.TaskInvocationParameters[i3].RunCommandParameters[i4].NotificationConfig); i5++ {

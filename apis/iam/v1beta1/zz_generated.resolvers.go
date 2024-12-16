@@ -294,6 +294,56 @@ func (mg *InstanceProfile) ResolveReferences(ctx context.Context, c client.Reade
 	return nil
 }
 
+// ResolveReferences of this Role.
+func (mg *Role) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ManagedPolicyArns),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.ForProvider.ManagedPolicyArnsRefs,
+			Selector:      mg.Spec.ForProvider.ManagedPolicyArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagedPolicyArns")
+	}
+	mg.Spec.ForProvider.ManagedPolicyArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.ManagedPolicyArnsRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Policy", "PolicyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ManagedPolicyArns),
+			Extract:       resource.ExtractParamPath("arn", true),
+			References:    mg.Spec.InitProvider.ManagedPolicyArnsRefs,
+			Selector:      mg.Spec.InitProvider.ManagedPolicyArnsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedPolicyArns")
+	}
+	mg.Spec.InitProvider.ManagedPolicyArns = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ManagedPolicyArnsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
 // ResolveReferences of this RolePolicy.
 func (mg *RolePolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

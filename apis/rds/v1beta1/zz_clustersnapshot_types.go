@@ -31,7 +31,7 @@ type ClusterSnapshotInitParameters struct {
 	// The Identifier for the snapshot.
 	DBClusterSnapshotIdentifier *string `json:"dbClusterSnapshotIdentifier,omitempty" tf:"db_cluster_snapshot_identifier,omitempty"`
 
-	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
@@ -74,7 +74,7 @@ type ClusterSnapshotObservation struct {
 	// Port that the DB cluster was listening on at the time of the snapshot.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`
 
@@ -126,7 +126,7 @@ type ClusterSnapshotParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
-	// List of AWS Account ids to share snapshot with, use all to make snaphot public.
+	// List of AWS Account IDs to share the snapshot with. Use all to make the snapshot public.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SharedAccounts []*string `json:"sharedAccounts,omitempty" tf:"shared_accounts,omitempty"`

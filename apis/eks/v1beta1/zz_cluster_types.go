@@ -102,6 +102,9 @@ type ClusterInitParameters struct {
 
 	// –  Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Configuration block with zonal shift configuration for the cluster. Detailed below.
+	ZonalShiftConfig []ZonalShiftConfigInitParameters `json:"zonalShiftConfig,omitempty" tf:"zonal_shift_config,omitempty"`
 }
 
 type ClusterObservation struct {
@@ -173,6 +176,9 @@ type ClusterObservation struct {
 
 	// –  Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Configuration block with zonal shift configuration for the cluster. Detailed below.
+	ZonalShiftConfig []ZonalShiftConfigObservation `json:"zonalShiftConfig,omitempty" tf:"zonal_shift_config,omitempty"`
 }
 
 type ClusterParameters struct {
@@ -239,6 +245,10 @@ type ClusterParameters struct {
 	// –  Desired Kubernetes master version. If you do not specify a value, the latest available version at resource creation is used and no upgrades will occur except those automatically triggered by EKS. The value must be configured and increased to upgrade the version when desired. Downgrades are not supported by EKS.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+
+	// Configuration block with zonal shift configuration for the cluster. Detailed below.
+	// +kubebuilder:validation:Optional
+	ZonalShiftConfig []ZonalShiftConfigParameters `json:"zonalShiftConfig,omitempty" tf:"zonal_shift_config,omitempty"`
 }
 
 type ControlPlanePlacementInitParameters struct {
@@ -622,4 +632,23 @@ var (
 
 func init() {
 	SchemeBuilder.Register(&Cluster{}, &ClusterList{})
+}
+
+type ZonalShiftConfigInitParameters struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ZonalShiftConfigObservation struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ZonalShiftConfigParameters struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
