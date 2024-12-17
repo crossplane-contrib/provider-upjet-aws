@@ -20,6 +20,7 @@ import (
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
 	image "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
 	imageversion "github.com/upbound/provider-aws/internal/controller/sagemaker/imageversion"
+	mlflowtrackingserver "github.com/upbound/provider-aws/internal/controller/sagemaker/mlflowtrackingserver"
 	model "github.com/upbound/provider-aws/internal/controller/sagemaker/model"
 	modelpackagegroup "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegroup"
 	modelpackagegrouppolicy "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegrouppolicy"
@@ -48,6 +49,7 @@ func Setup_sagemaker(mgr ctrl.Manager, o controller.Options) error {
 		featuregroup.Setup,
 		image.Setup,
 		imageversion.Setup,
+		mlflowtrackingserver.Setup,
 		model.Setup,
 		modelpackagegroup.Setup,
 		modelpackagegrouppolicy.Setup,
