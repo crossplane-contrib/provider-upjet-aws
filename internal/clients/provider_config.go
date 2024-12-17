@@ -129,7 +129,7 @@ func GetAWSConfigWithoutTracking(ctx context.Context, c client.Client, obj runti
 		}
 	}
 
-	cfg, err = GetRoleChainConfig(ctx, &pc.Spec, cfg)
+	cfg, err = GetRoleChainConfig(ctx, c, &pc.Spec, cfg)
 	if err != nil {
 		return nil, errors.Wrap(err, "cannot get credentials")
 	}
@@ -293,13 +293,13 @@ func UseProviderSecret(ctx context.Context, data []byte, profile, region string)
 
 // GetRoleChainConfig returns an aws.Config capable of doing role chaining with
 // AssumeRoleWithWebIdentity & AssumeRoles.
-func GetRoleChainConfig(ctx context.Context, pcs *v1beta1.ProviderConfigSpec, cfg *aws.Config) (*aws.Config, error) {
+func GetRoleChainConfig(ctx context.Context, kube client.Client, pcs *v1beta1.ProviderConfigSpec, cfg *aws.Config) (*aws.Config, error) {
 	pCfg := cfg
 	for _, aro := range pcs.AssumeRoleChain {
 		stsAssume := stscreds.NewAssumeRoleProvider(
 			sts.NewFromConfig(*pCfg, stsRegionOrDefault(cfg.Region)), //nolint:contextcheck
 			aws.ToString(aro.RoleARN),
-			SetAssumeRoleOptions(aro),
+			SetAssumeRoleOptions(ctx, kube, aro),
 		)
 		cfgWithAssumeRole, err := config.LoadDefaultConfig(
 			ctx,
@@ -450,10 +450,38 @@ func UseUpbound(ctx context.Context, region string, pcs *v1beta1.ProviderConfigS
 	return GetAssumeRoleWithWebIdentityConfig(ctx, cfg, *pcs.Credentials.Upbound.WebIdentity, upboundProviderIdentityTokenFile)
 }
 
+// ExtractSecretValue extracts the value from a secret using a v1.SecretKeySelector, to reuse resource.ExtractSecret that does it using v1.CommonCredentialSelectors
+func ExtractSecretValue(ctx context.Context, kube client.Client, selector *v1.SecretKeySelector) ([]byte, error) {
+	if selector == nil {
+		return nil, errors.New("SecretKeySelector is nil")
+	}
+
+	// Wrap SecretKeySelector in CommonCredentialSelectors
+	credSelectors := v1.CommonCredentialSelectors{
+		SecretRef: selector,
+	}
+
+	// Reuse ExtractSecret function (https://github.com/crossplane/crossplane-runtime/blob/19d95a69cc03690c4b867ff91d89681fcf872a93/pkg/resource/providerconfig.go#L77-L87)
+	return resource.ExtractSecret(ctx, kube, credSelectors)
+}
+
 // SetAssumeRoleOptions sets options when Assuming an IAM Role
-func SetAssumeRoleOptions(aro v1beta1.AssumeRoleOptions) func(*stscreds.AssumeRoleOptions) {
+func SetAssumeRoleOptions(ctx context.Context, kube client.Client, aro v1beta1.AssumeRoleOptions) func(*stscreds.AssumeRoleOptions) {
 	return func(opt *stscreds.AssumeRoleOptions) {
-		opt.ExternalID = aro.ExternalID
+		if aro.ExternalID != nil {
+			opt.ExternalID = aro.ExternalID
+		}
+		if aro.ExternalIDSecretRef != nil {
+			// Fetch secret value
+			secretValue, err := ExtractSecretValue(ctx, kube, aro.ExternalIDSecretRef)
+			if err != nil {
+				fmt.Printf("Error fetching ExternalID from secret: %v\n", err)
+				return
+			}
+			secretValueStr := string(secretValue)
+			opt.ExternalID = &secretValueStr
+		}
+
 		for _, t := range aro.Tags {
 			opt.Tags = append(
 				opt.Tags,
