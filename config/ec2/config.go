@@ -153,6 +153,12 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		// aws_vpc_endpoint_subnet_association
 		// aws_vpc_endpoint_route_table_association
 		// aws_vpc_endpoint_security_group_association
+		r.LateInitializer = config.LateInitializer{
+			// Conflicts with VPCEndpointSubnetAssociation
+			IgnoredFields: []string{
+				"subnet_configuration",
+			},
+		}
 		config.MoveToStatus(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
 		delete(r.References, "vpc_endpoint_type")
 	})
