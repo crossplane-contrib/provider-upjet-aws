@@ -12,6 +12,7 @@ configured by means of `aws.upbound.io/v1beta1/ProviderConfig` resources.
 `provider-aws` currently supports the following authentication mechanisms:
 - Authentication with long-term IAM user credentials
 - Authentication using *I*AM *R*oles for *S*ervice *A*ccounts (IRSA)
+- Authentication using EKS Pod Identity
 - Authentication using an assumed Web identity
 
 The authentication mechanism to be used can be selected by setting the
@@ -22,6 +23,8 @@ values:
 - `WebIdentity`
 to configure long-term credentials, IRSA and authentication with an assumed Web
 identity, respectively.
+- `PodIdentity`
+to configure authentication by utilizing EKS Pod Identity to assume an IAM role.
 
 If no authentication mechanism is specified, the default is to use the
 `Secret` authentication mechanism.
@@ -253,6 +256,56 @@ chain) must have the required privileges on the AWS API to manage the AWS
 resources. Please note that this is an ordered list of IAM Roles, which must
 match the chain of the trust policies defined among the roles.
 
+### EKS Pod Identity
+
+EKS Pod Identity authentication is available when `provider-aws` is running on an EKS cluster and [EKS Pod Identity has been configured for that cluster](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html). Unlike IRSA, EKS Pod Identity eliminates the need for an OIDC provider. Instead, it relies on the built-in `pods.eks.amazonaws.com` service principal and the EKS Pod Identity Agent for managing IAM roles and credentials.
+
+Configuring EKS Pod Identity for EKS involves: 
+1) [Installing EKS Pod Identity Agent](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-agent-setup.html)
+2) Associating a Kubernetes `ServiceAccount` with an IAM role so that an EKS workload running under that `ServiceAccount` will be authenticated as its associated IAM Role against the AWS API. [The association between the Kubernetes `ServiceAccount` and the IAM role](https://docs.aws.amazon.com/eks/latest/userguide/pod-id-association.html#pod-id-association-create) is done by creating an EKS Pod Identity association between the `ServiceAccount` and `namespace` on the EKS cluster and the IAM role on the AWS account.
+
+The `ServiceAccount` under which `provider-aws` is running, and the `namespace` in which the `provider-aws` is deployed, must match the configuration of the previously configured Pod Identity association. 
+
+It can be done by using a `DeploymentRuntimeConfig` while installing the provider:
+
+```yaml
+apiVersion: pkg.crossplane.io/v1beta1
+kind: DeploymentRuntimeConfig
+metadata:
+    name: podidentity-drc
+spec:
+    serviceAccountTemplate:
+        metadata:
+            name: provider-aws
+    deploymentTemplate: {}
+
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: upbound-provider-aws-ec2
+spec:
+  package: xpkg.upbound.io/upbound/provider-aws-ec2:v1.4.0
+  runtimeConfigRef:
+    name: podidentity-drc
+```
+
+`ProviderConfig` can be configured to use EKS Pod Identity authentication by setting the `source` field to `PodIdentity`: 
+
+```yaml
+apiVersion: aws.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+    name: podidentity-example
+spec:
+    credentials:
+        source: PodIdentity
+```
+
+[EKS Pod Identity troubleshooting tips](https://docs.aws.amazon.com/eks/latest/userguide/addon-id-troubleshoot.html):
+- Validate the `namespace` and `ServiceAccount` match the Pod Identity association.
+- Confirm that the Pod Identity Agent has been deployed and is functional.
+- Review the IAM role's trust policy for Pod Identity
 
 [1]:
     https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html
