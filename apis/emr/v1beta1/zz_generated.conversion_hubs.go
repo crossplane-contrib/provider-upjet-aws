@@ -7,4 +7,13 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *Cluster) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *InstanceFleet) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *InstanceGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SecurityConfiguration) Hub() {}
