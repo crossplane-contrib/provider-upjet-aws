@@ -53,6 +53,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				"cpu_threads_per_core",
 			},
 		}
+		r.TerraformCustomDiff = common.RemoveDiffIfEmpty([]string{
+			"volume_tags.%",
+		})
 		config.MoveToStatus(r.TerraformResource, "security_groups")
 	})
 	p.AddResourceConfigurator("aws_eip", func(r *config.Resource) {
