@@ -4,7 +4,6 @@ import "github.com/crossplane/upjet/pkg/config"
 
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("aws_emr_cluster", func(r *config.Resource) {
-
 		r.References["ec2_attributes.additional_master_security_groups"] = config.Reference{
 			TerraformName: "aws_security_group",
 		}
@@ -16,6 +15,15 @@ func Configure(p *config.Provider) {
 		}
 		r.References["log_uri"] = config.Reference{
 			TerraformName: "aws_s3_bucket",
+		}
+
+		// Configure late initialization to handle mutually exclusive fields
+		// This prevents conflicts between instance group and instance fleet configurations
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"master_instance_fleet", // Ignore when using master_instance_group
+				"core_instance_fleet",   // Ignore when using core_instance_group
+			},
 		}
 	})
 }

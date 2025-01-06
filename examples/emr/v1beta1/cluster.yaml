@@ -151,7 +151,7 @@ metadata:
 spec:
   forProvider:
     region: us-west-1
-    availabilityZone: us-west-1a
+    availabilityZone: us-west-1b
     vpcIdRef:
       name: vpc-emr-example
     cidrBlock: 10.0.0.0/20
