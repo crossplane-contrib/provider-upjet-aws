@@ -566,7 +566,7 @@ type CoreInstanceGroupEBSConfigInitParameters struct {
 	// The throughput, in mebibyte per second (MiB/s).
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
@@ -584,7 +584,7 @@ type CoreInstanceGroupEBSConfigObservation struct {
 	// The throughput, in mebibyte per second (MiB/s).
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
@@ -605,7 +605,7 @@ type CoreInstanceGroupEBSConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
@@ -694,7 +694,7 @@ type EBSConfigInitParameters struct {
 	// Volume size, in gibibytes (GiB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
@@ -709,7 +709,7 @@ type EBSConfigObservation struct {
 	// Volume size, in gibibytes (GiB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
@@ -726,7 +726,7 @@ type EBSConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size" tf:"size,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
@@ -1063,7 +1063,7 @@ type InstanceTypeConfigsEBSConfigInitParameters struct {
 	// Volume size, in gibibytes (GiB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
@@ -1078,7 +1078,7 @@ type InstanceTypeConfigsEBSConfigObservation struct {
 	// Volume size, in gibibytes (GiB).
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
@@ -1095,7 +1095,7 @@ type InstanceTypeConfigsEBSConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size" tf:"size,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
@@ -1495,7 +1495,7 @@ type MasterInstanceGroupEBSConfigInitParameters struct {
 	// The throughput, in mebibyte per second (MiB/s).
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
@@ -1513,7 +1513,7 @@ type MasterInstanceGroupEBSConfigObservation struct {
 	// The throughput, in mebibyte per second (MiB/s).
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
@@ -1534,7 +1534,7 @@ type MasterInstanceGroupEBSConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 
-	// Volume type. Valid options are gp3, gp2, io1, standard, st1 and sc1. See EBS Volume Types.
+	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 

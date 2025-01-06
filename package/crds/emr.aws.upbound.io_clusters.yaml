@@ -196,8 +196,8 @@ spec:
                                     type: number
                                   type:
                                     description: Volume type. Valid options are gp3,
-                                      gp2, io1, standard, st1 and sc1. See EBS Volume
-                                      Types.
+                                      gp2, io1, io2, standard, st1 and sc1. See EBS
+                                      Volume Types.
                                     type: string
                                   volumesPerInstance:
                                     description: Number of EBS volumes with this configuration
@@ -326,7 +326,7 @@ spec:
                               type: number
                             type:
                               description: Volume type. Valid options are gp3, gp2,
-                                io1, standard, st1 and sc1. See EBS Volume Types.
+                                io1, io2, standard, st1 and sc1. See EBS Volume Types.
                               type: string
                             volumesPerInstance:
                               description: Number of EBS volumes with this configuration
@@ -1153,8 +1153,8 @@ spec:
                                     type: number
                                   type:
                                     description: Volume type. Valid options are gp3,
-                                      gp2, io1, standard, st1 and sc1. See EBS Volume
-                                      Types.
+                                      gp2, io1, io2, standard, st1 and sc1. See EBS
+                                      Volume Types.
                                     type: string
                                   volumesPerInstance:
                                     description: Number of EBS volumes with this configuration
@@ -1281,7 +1281,7 @@ spec:
                               type: number
                             type:
                               description: Volume type. Valid options are gp3, gp2,
-                                io1, standard, st1 and sc1. See EBS Volume Types.
+                                io1, io2, standard, st1 and sc1. See EBS Volume Types.
                               type: string
                             volumesPerInstance:
                               description: Number of EBS volumes with this configuration
@@ -1627,8 +1627,8 @@ spec:
                                     type: number
                                   type:
                                     description: Volume type. Valid options are gp3,
-                                      gp2, io1, standard, st1 and sc1. See EBS Volume
-                                      Types.
+                                      gp2, io1, io2, standard, st1 and sc1. See EBS
+                                      Volume Types.
                                     type: string
                                   volumesPerInstance:
                                     description: Number of EBS volumes with this configuration
@@ -1757,7 +1757,7 @@ spec:
                               type: number
                             type:
                               description: Volume type. Valid options are gp3, gp2,
-                                io1, standard, st1 and sc1. See EBS Volume Types.
+                                io1, io2, standard, st1 and sc1. See EBS Volume Types.
                               type: string
                             volumesPerInstance:
                               description: Number of EBS volumes with this configuration
@@ -2586,8 +2586,8 @@ spec:
                                     type: number
                                   type:
                                     description: Volume type. Valid options are gp3,
-                                      gp2, io1, standard, st1 and sc1. See EBS Volume
-                                      Types.
+                                      gp2, io1, io2, standard, st1 and sc1. See EBS
+                                      Volume Types.
                                     type: string
                                   volumesPerInstance:
                                     description: Number of EBS volumes with this configuration
@@ -2714,7 +2714,7 @@ spec:
                               type: number
                             type:
                               description: Volume type. Valid options are gp3, gp2,
-                                io1, standard, st1 and sc1. See EBS Volume Types.
+                                io1, io2, standard, st1 and sc1. See EBS Volume Types.
                               type: string
                             volumesPerInstance:
                               description: Number of EBS volumes with this configuration
@@ -3231,8 +3231,8 @@ spec:
                                     type: number
                                   type:
                                     description: Volume type. Valid options are gp3,
-                                      gp2, io1, standard, st1 and sc1. See EBS Volume
-                                      Types.
+                                      gp2, io1, io2, standard, st1 and sc1. See EBS
+                                      Volume Types.
                                     type: string
                                   volumesPerInstance:
                                     description: Number of EBS volumes with this configuration
@@ -3365,7 +3365,7 @@ spec:
                               type: number
                             type:
                               description: Volume type. Valid options are gp3, gp2,
-                                io1, standard, st1 and sc1. See EBS Volume Types.
+                                io1, io2, standard, st1 and sc1. See EBS Volume Types.
                               type: string
                             volumesPerInstance:
                               description: Number of EBS volumes with this configuration
@@ -3546,8 +3546,8 @@ spec:
                                     type: number
                                   type:
                                     description: Volume type. Valid options are gp3,
-                                      gp2, io1, standard, st1 and sc1. See EBS Volume
-                                      Types.
+                                      gp2, io1, io2, standard, st1 and sc1. See EBS
+                                      Volume Types.
                                     type: string
                                   volumesPerInstance:
                                     description: Number of EBS volumes with this configuration
@@ -3678,7 +3678,7 @@ spec:
                               type: number
                             type:
                               description: Volume type. Valid options are gp3, gp2,
-                                io1, standard, st1 and sc1. See EBS Volume Types.
+                                io1, io2, standard, st1 and sc1. See EBS Volume Types.
                               type: string
                             volumesPerInstance:
                               description: Number of EBS volumes with this configuration
