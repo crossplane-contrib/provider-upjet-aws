@@ -19,9 +19,9 @@ func Configure(p *config.Provider) {
 
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
-				"masterInstanceFleet", // Cannot be specified with master_instance_group
-				"coreInstanceFleet",   // Cannot be specified with core_instance_group
-				"configurationsJson",  // Alternative to configurations
+				"master_instance_fleet", // Cannot be specified with master_instance_group
+				"core_instance_fleet",   // Cannot be specified with core_instance_group
+				"configurations_json",   // Alternative to configurations
 			},
 		}
 	})
