@@ -17,12 +17,11 @@ func Configure(p *config.Provider) {
 			TerraformName: "aws_s3_bucket",
 		}
 
-		// Configure late initialization to handle mutually exclusive fields
-		// This prevents conflicts between instance group and instance fleet configurations
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
-				"master_instance_fleet", // Ignore when using master_instance_group
-				"core_instance_fleet",   // Ignore when using core_instance_group
+				"masterInstanceFleet", // Cannot be specified with master_instance_group
+				"coreInstanceFleet",   // Cannot be specified with core_instance_group
+				"configurationsJson",  // Alternative to configurations
 			},
 		}
 	})
