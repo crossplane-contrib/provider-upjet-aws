@@ -1269,6 +1269,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  serviceRegion:
+                    description: '- The AWS region of the VPC Endpoint Service. If
+                      specified, the VPC endpoint will connect to the service in the
+                      provided region. Applicable for endpoints of type Interface.'
+                    type: string
                   subnetConfiguration:
                     description: Subnet configuration for the endpoint, used to select
                       specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration
@@ -1586,6 +1591,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  serviceRegion:
+                    description: '- The AWS region of the VPC Endpoint Service. If
+                      specified, the VPC endpoint will connect to the service in the
+                      provided region. Applicable for endpoints of type Interface.'
+                    type: string
                   subnetConfiguration:
                     description: Subnet configuration for the endpoint, used to select
                       specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration
@@ -2041,6 +2051,11 @@ spec:
                       is usually in the form com.amazonaws.<region>.<service> (the
                       SageMaker Notebook service is an exception to this rule, the
                       service name is in the form aws.sagemaker.<region>.notebook).
+                    type: string
+                  serviceRegion:
+                    description: '- The AWS region of the VPC Endpoint Service. If
+                      specified, the VPC endpoint will connect to the service in the
+                      provided region. Applicable for endpoints of type Interface.'
                     type: string
                   state:
                     description: The state of the VPC endpoint.

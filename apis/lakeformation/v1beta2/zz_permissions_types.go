@@ -295,9 +295,11 @@ type PermissionsInitParameters struct {
 	LfTagPolicy *LfTagPolicyInitParameters `json:"lfTagPolicy,omitempty" tf:"lf_tag_policy,omitempty"`
 
 	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, ASSOCIATE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Subset of permissions which the principal can pass.
+	// +listType=set
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
 	// account permissions. For more information, see Lake Formation Permissions Reference.
@@ -336,9 +338,11 @@ type PermissionsObservation struct {
 	LfTagPolicy *LfTagPolicyObservation `json:"lfTagPolicy,omitempty" tf:"lf_tag_policy,omitempty"`
 
 	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, ASSOCIATE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Subset of permissions which the principal can pass.
+	// +listType=set
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
 	// account permissions. For more information, see Lake Formation Permissions Reference.
@@ -383,10 +387,12 @@ type PermissionsParameters struct {
 
 	// –  List of permissions granted to the principal. Valid values may include ALL, ALTER, ASSOCIATE, CREATE_DATABASE, CREATE_TABLE, DATA_LOCATION_ACCESS, DELETE, DESCRIBE, DROP, INSERT, and SELECT. For details on each permission, see Lake Formation Permissions Reference.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Subset of permissions which the principal can pass.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PermissionsWithGrantOption []*string `json:"permissionsWithGrantOption,omitempty" tf:"permissions_with_grant_option,omitempty"`
 
 	// account permissions. For more information, see Lake Formation Permissions Reference.

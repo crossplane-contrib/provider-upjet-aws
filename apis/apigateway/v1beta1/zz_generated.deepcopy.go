@@ -1166,6 +1166,11 @@ func (in *BasePathMappingInitParameters) DeepCopyInto(out *BasePathMappingInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainNameID != nil {
+		in, out := &in.DomainNameID, &out.DomainNameID
+		*out = new(string)
+		**out = **in
+	}
 	if in.DomainNameRef != nil {
 		in, out := &in.DomainNameRef, &out.DomainNameRef
 		*out = new(v1.Reference)
@@ -1253,6 +1258,11 @@ func (in *BasePathMappingObservation) DeepCopyInto(out *BasePathMappingObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainNameID != nil {
+		in, out := &in.DomainNameID, &out.DomainNameID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -1300,6 +1310,11 @@ func (in *BasePathMappingParameters) DeepCopyInto(out *BasePathMappingParameters
 	}
 	if in.DomainName != nil {
 		in, out := &in.DomainName, &out.DomainName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DomainNameID != nil {
+		in, out := &in.DomainNameID, &out.DomainNameID
 		*out = new(string)
 		**out = **in
 	}

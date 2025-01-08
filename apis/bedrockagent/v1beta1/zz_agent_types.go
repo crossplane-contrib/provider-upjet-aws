@@ -15,6 +15,9 @@ import (
 
 type AgentInitParameters struct {
 
+	// Agents collaboration role. Valid values: SUPERVISOR, SUPERVISOR_ROUTER, DISABLED.
+	AgentCollaboration *string `json:"agentCollaboration,omitempty" tf:"agent_collaboration,omitempty"`
+
 	// Name of the agent.
 	AgentName *string `json:"agentName,omitempty" tf:"agent_name,omitempty"`
 
@@ -40,12 +43,13 @@ type AgentInitParameters struct {
 	// Foundation model used for orchestration by the agent.
 	FoundationModel *string `json:"foundationModel,omitempty" tf:"foundation_model,omitempty"`
 
+	// Details about the guardrail associated with the agent. See guardrail_configuration Block for details.
 	GuardrailConfiguration []GuardrailConfigurationInitParameters `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
 	// Number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users.
+	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 8000 characters.
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 
 	// Whether to prepare the agent after creation or modification. Defaults to true.
@@ -66,6 +70,9 @@ type AgentObservation struct {
 
 	// ARN of the agent.
 	AgentArn *string `json:"agentArn,omitempty" tf:"agent_arn,omitempty"`
+
+	// Agents collaboration role. Valid values: SUPERVISOR, SUPERVISOR_ROUTER, DISABLED.
+	AgentCollaboration *string `json:"agentCollaboration,omitempty" tf:"agent_collaboration,omitempty"`
 
 	// Unique identifier of the agent.
 	AgentID *string `json:"agentId,omitempty" tf:"agent_id,omitempty"`
@@ -88,6 +95,7 @@ type AgentObservation struct {
 	// Foundation model used for orchestration by the agent.
 	FoundationModel *string `json:"foundationModel,omitempty" tf:"foundation_model,omitempty"`
 
+	// Details about the guardrail associated with the agent. See guardrail_configuration Block for details.
 	GuardrailConfiguration []GuardrailConfigurationObservation `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
 	// Unique identifier of the agent.
@@ -96,7 +104,7 @@ type AgentObservation struct {
 	// Number of seconds for which Amazon Bedrock keeps information about a user's conversation with the agent. A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Bedrock deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users.
+	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 8000 characters.
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 
 	// Whether to prepare the agent after creation or modification. Defaults to true.
@@ -118,6 +126,10 @@ type AgentObservation struct {
 }
 
 type AgentParameters struct {
+
+	// Agents collaboration role. Valid values: SUPERVISOR, SUPERVISOR_ROUTER, DISABLED.
+	// +kubebuilder:validation:Optional
+	AgentCollaboration *string `json:"agentCollaboration,omitempty" tf:"agent_collaboration,omitempty"`
 
 	// Name of the agent.
 	// +kubebuilder:validation:Optional
@@ -149,6 +161,7 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	FoundationModel *string `json:"foundationModel,omitempty" tf:"foundation_model,omitempty"`
 
+	// Details about the guardrail associated with the agent. See guardrail_configuration Block for details.
 	// +kubebuilder:validation:Optional
 	GuardrailConfiguration []GuardrailConfigurationParameters `json:"guardrailConfiguration,omitempty" tf:"guardrail_configuration,omitempty"`
 
@@ -156,7 +169,7 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	IdleSessionTTLInSeconds *float64 `json:"idleSessionTtlInSeconds,omitempty" tf:"idle_session_ttl_in_seconds,omitempty"`
 
-	// Instructions that tell the agent what it should do and how it should interact with users.
+	// Instructions that tell the agent what it should do and how it should interact with users. The valid range is 40 - 8000 characters.
 	// +kubebuilder:validation:Optional
 	Instruction *string `json:"instruction,omitempty" tf:"instruction,omitempty"`
 

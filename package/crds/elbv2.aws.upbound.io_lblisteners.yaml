@@ -2133,6 +2133,9 @@ spec:
                     description: The mutual authentication configuration information.
                       See below.
                     properties:
+                      advertiseTrustStoreCaNames:
+                        description: Valid values are off and on.
+                        type: string
                       ignoreClientCertificateExpiry:
                         description: Whether client certificate expiry is ignored.
                           Default is false.
@@ -2642,6 +2645,9 @@ spec:
                     description: The mutual authentication configuration information.
                       See below.
                     properties:
+                      advertiseTrustStoreCaNames:
+                        description: Valid values are off and on.
+                        type: string
                       ignoreClientCertificateExpiry:
                         description: Whether client certificate expiry is ignored.
                           Default is false.
@@ -3070,6 +3076,9 @@ spec:
                     description: The mutual authentication configuration information.
                       See below.
                     properties:
+                      advertiseTrustStoreCaNames:
+                        description: Valid values are off and on.
+                        type: string
                       ignoreClientCertificateExpiry:
                         description: Whether client certificate expiry is ignored.
                           Default is false.

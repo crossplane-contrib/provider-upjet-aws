@@ -260,6 +260,13 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  supportedRegions:
+                    description: The set of regions from which service consumers can
+                      access the service.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
@@ -461,6 +468,13 @@ spec:
                   supportedIpAddressTypes:
                     description: The supported IP address types. The possible values
                       are ipv4 and ipv6.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  supportedRegions:
+                    description: The set of regions from which service consumers can
+                      access the service.
                     items:
                       type: string
                     type: array
@@ -736,6 +750,13 @@ spec:
                   supportedIpAddressTypes:
                     description: The supported IP address types. The possible values
                       are ipv4 and ipv6.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  supportedRegions:
+                    description: The set of regions from which service consumers can
+                      access the service.
                     items:
                       type: string
                     type: array

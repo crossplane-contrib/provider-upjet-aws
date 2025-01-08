@@ -1144,6 +1144,11 @@ func (in *LustreFileSystemInitParameters) DeepCopyInto(out *LustreFileSystemInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.EfaEnabled != nil {
+		in, out := &in.EfaEnabled, &out.EfaEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ExportPath != nil {
 		in, out := &in.ExportPath, &out.ExportPath
 		*out = new(string)
@@ -1394,6 +1399,11 @@ func (in *LustreFileSystemObservation) DeepCopyInto(out *LustreFileSystemObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.EfaEnabled != nil {
+		in, out := &in.EfaEnabled, &out.EfaEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ExportPath != nil {
 		in, out := &in.ExportPath, &out.ExportPath
 		*out = new(string)
@@ -1613,6 +1623,11 @@ func (in *LustreFileSystemParameters) DeepCopyInto(out *LustreFileSystemParamete
 	if in.DriveCacheType != nil {
 		in, out := &in.DriveCacheType, &out.DriveCacheType
 		*out = new(string)
+		**out = **in
+	}
+	if in.EfaEnabled != nil {
+		in, out := &in.EfaEnabled, &out.EfaEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ExportPath != nil {

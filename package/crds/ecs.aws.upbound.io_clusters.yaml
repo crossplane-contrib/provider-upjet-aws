@@ -787,7 +787,7 @@ spec:
                           type: string
                         value:
                           description: 'Value to assign to the setting. Valid values:
-                            enabled, disabled.'
+                            enhanced, enabled, disabled.'
                           type: string
                       type: object
                     type: array
@@ -893,7 +893,7 @@ spec:
                           type: string
                         value:
                           description: 'Value to assign to the setting. Valid values:
-                            enabled, disabled.'
+                            enhanced, enabled, disabled.'
                           type: string
                       type: object
                     type: array
@@ -1162,7 +1162,7 @@ spec:
                           type: string
                         value:
                           description: 'Value to assign to the setting. Valid values:
-                            enabled, disabled.'
+                            enhanced, enabled, disabled.'
                           type: string
                       type: object
                     type: array

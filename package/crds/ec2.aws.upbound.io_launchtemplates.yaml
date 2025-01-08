@@ -4767,15 +4767,15 @@ spec:
                     items:
                       properties:
                         associateCarrierIpAddress:
-                          description: |-
-                            Associate a Carrier IP address with eth0 for a new network interface.
-                            Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-                            Boolean value, can be left unset.
+                          description: Associate a Carrier IP address with eth0 for
+                            a new network interface. Use this option when you launch
+                            an instance in a Wavelength Zone and want to associate
+                            a Carrier IP address with the network interface. Boolean
+                            value, can be left unset.
                           type: string
                         associatePublicIpAddress:
-                          description: |-
-                            Associate a public ip address with the network interface.
-                            Boolean value, can be left unset.
+                          description: Associate a public ip address with the network
+                            interface. Boolean value, can be left unset.
                           type: string
                         deleteOnTermination:
                           description: Whether the network interface should be destroyed
@@ -6139,15 +6139,15 @@ spec:
                     items:
                       properties:
                         associateCarrierIpAddress:
-                          description: |-
-                            Associate a Carrier IP address with eth0 for a new network interface.
-                            Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-                            Boolean value, can be left unset.
+                          description: Associate a Carrier IP address with eth0 for
+                            a new network interface. Use this option when you launch
+                            an instance in a Wavelength Zone and want to associate
+                            a Carrier IP address with the network interface. Boolean
+                            value, can be left unset.
                           type: string
                         associatePublicIpAddress:
-                          description: |-
-                            Associate a public ip address with the network interface.
-                            Boolean value, can be left unset.
+                          description: Associate a public ip address with the network
+                            interface. Boolean value, can be left unset.
                           type: string
                         deleteOnTermination:
                           description: Whether the network interface should be destroyed
@@ -7447,15 +7447,15 @@ spec:
                     items:
                       properties:
                         associateCarrierIpAddress:
-                          description: |-
-                            Associate a Carrier IP address with eth0 for a new network interface.
-                            Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-                            Boolean value, can be left unset.
+                          description: Associate a Carrier IP address with eth0 for
+                            a new network interface. Use this option when you launch
+                            an instance in a Wavelength Zone and want to associate
+                            a Carrier IP address with the network interface. Boolean
+                            value, can be left unset.
                           type: string
                         associatePublicIpAddress:
-                          description: |-
-                            Associate a public ip address with the network interface.
-                            Boolean value, can be left unset.
+                          description: Associate a public ip address with the network
+                            interface. Boolean value, can be left unset.
                           type: string
                         deleteOnTermination:
                           description: Whether the network interface should be destroyed

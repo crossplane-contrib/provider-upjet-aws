@@ -59,8 +59,11 @@ type AttachmentAccepterObservation struct {
 	// The id of a core network.
 	CoreNetworkID *string `json:"coreNetworkId,omitempty" tf:"core_network_id,omitempty"`
 
-	// The Region where the edge is located.
+	// The Region where the edge is located. This is returned for all attachment types except a Direct Connect gateway attachment, which instead returns edge_locations.
 	EdgeLocation *string `json:"edgeLocation,omitempty" tf:"edge_location,omitempty"`
+
+	// The edge locations that the Direct Connect gateway is associated with. This is returned only for Direct Connect gateway attachments. All other attachment types return edge_location
+	EdgeLocations []*string `json:"edgeLocations,omitempty" tf:"edge_locations,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

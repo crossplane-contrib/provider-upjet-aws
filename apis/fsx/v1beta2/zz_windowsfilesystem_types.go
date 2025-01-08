@@ -255,7 +255,7 @@ type WindowsFileSystemInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
+	// Throughput (megabytes per second) of the file system. For valid values, refer to the AWS documentation.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone.
@@ -351,7 +351,7 @@ type WindowsFileSystemObservation struct {
 	// +mapType=granular
 	TagsAll map[string]*string `json:"tagsAll,omitempty" tf:"tags_all,omitempty"`
 
-	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
+	// Throughput (megabytes per second) of the file system. For valid values, refer to the AWS documentation.
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 
 	// Identifier of the Virtual Private Cloud for the file system.
@@ -490,7 +490,7 @@ type WindowsFileSystemParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Throughput (megabytes per second) of the file system in power of 2 increments. Minimum of 8 and maximum of 2048.
+	// Throughput (megabytes per second) of the file system. For valid values, refer to the AWS documentation.
 	// +kubebuilder:validation:Optional
 	ThroughputCapacity *float64 `json:"throughputCapacity,omitempty" tf:"throughput_capacity,omitempty"`
 

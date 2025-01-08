@@ -90,10 +90,11 @@ spec:
                     items:
                       properties:
                         name:
-                          description: Availability Zone ID.
+                          description: Availability Zone ID or Local Zone ID.
                           type: string
                         type:
-                          description: 'Location type. Valid values: AvailabilityZone.'
+                          description: 'Location type. Valid values: AvailabilityZone,
+                            LocalZone.'
                           type: string
                       type: object
                     type: array
@@ -137,10 +138,11 @@ spec:
                     items:
                       properties:
                         name:
-                          description: Availability Zone ID.
+                          description: Availability Zone ID or Local Zone ID.
                           type: string
                         type:
-                          description: 'Location type. Valid values: AvailabilityZone.'
+                          description: 'Location type. Valid values: AvailabilityZone,
+                            LocalZone.'
                           type: string
                       type: object
                     type: array
@@ -343,10 +345,11 @@ spec:
                     items:
                       properties:
                         name:
-                          description: Availability Zone ID.
+                          description: Availability Zone ID or Local Zone ID.
                           type: string
                         type:
-                          description: 'Location type. Valid values: AvailabilityZone.'
+                          description: 'Location type. Valid values: AvailabilityZone,
+                            LocalZone.'
                           type: string
                       type: object
                     type: array

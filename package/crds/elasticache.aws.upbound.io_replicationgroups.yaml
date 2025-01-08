@@ -1860,8 +1860,11 @@ spec:
                       or during the next maintenance window. Default is false.
                     type: boolean
                   atRestEncryptionEnabled:
-                    description: Whether to enable encryption at rest.
-                    type: boolean
+                    description: |-
+                      Whether to enable encryption at rest.
+                      When engine is redis, default is false.
+                      When engine is valkey, default is true.
+                    type: string
                   authTokenSecretRef:
                     description: |-
                       Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
@@ -1917,8 +1920,10 @@ spec:
                       not be empty.
                     type: string
                   engine:
-                    description: Name of the cache engine to be used for the clusters
-                      in this replication group. Valid values are redis or valkey.
+                    description: |-
+                      Name of the cache engine to be used for the clusters in this replication group.
+                      Valid values are redis or valkey.
+                      Default is redis.
                     type: string
                   engineVersion:
                     description: |-
@@ -2444,8 +2449,11 @@ spec:
                       or during the next maintenance window. Default is false.
                     type: boolean
                   atRestEncryptionEnabled:
-                    description: Whether to enable encryption at rest.
-                    type: boolean
+                    description: |-
+                      Whether to enable encryption at rest.
+                      When engine is redis, default is false.
+                      When engine is valkey, default is true.
+                    type: string
                   authTokenSecretRef:
                     description: |-
                       Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
@@ -2496,8 +2504,10 @@ spec:
                       not be empty.
                     type: string
                   engine:
-                    description: Name of the cache engine to be used for the clusters
-                      in this replication group. Valid values are redis or valkey.
+                    description: |-
+                      Name of the cache engine to be used for the clusters in this replication group.
+                      Valid values are redis or valkey.
+                      Default is redis.
                     type: string
                   engineVersion:
                     description: |-
@@ -3184,8 +3194,11 @@ spec:
                     description: ARN of the created ElastiCache Replication Group.
                     type: string
                   atRestEncryptionEnabled:
-                    description: Whether to enable encryption at rest.
-                    type: boolean
+                    description: |-
+                      Whether to enable encryption at rest.
+                      When engine is redis, default is false.
+                      When engine is valkey, default is true.
+                    type: string
                   authTokenUpdateStrategy:
                     description: Strategy to use when updating the auth_token. Valid
                       values are SET, ROTATE, and DELETE. Defaults to ROTATE.
@@ -3224,8 +3237,10 @@ spec:
                       not be empty.
                     type: string
                   engine:
-                    description: Name of the cache engine to be used for the clusters
-                      in this replication group. Valid values are redis or valkey.
+                    description: |-
+                      Name of the cache engine to be used for the clusters in this replication group.
+                      Valid values are redis or valkey.
+                      Default is redis.
                     type: string
                   engineVersion:
                     description: |-

@@ -66,6 +66,9 @@ type ClusterInitParameters struct {
 	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
+	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
+
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
@@ -172,6 +175,9 @@ type ClusterObservation struct {
 	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
+	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
+
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
@@ -270,6 +276,10 @@ type ClusterParameters struct {
 	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	// +kubebuilder:validation:Optional
+	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
 
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	// +kubebuilder:validation:Optional

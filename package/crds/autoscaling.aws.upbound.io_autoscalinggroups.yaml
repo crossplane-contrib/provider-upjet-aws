@@ -7464,6 +7464,16 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    properties:
+                      capacityDistributionStrategy:
+                        description: The strategy to use for distributing capacity
+                          across the Availability Zones. Valid values are balanced-only
+                          and balanced-best-effort. Default is balanced-best-effort.
+                        type: string
+                    type: object
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the
@@ -8760,6 +8770,16 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    properties:
+                      capacityDistributionStrategy:
+                        description: The strategy to use for distributing capacity
+                          across the Availability Zones. Valid values are balanced-only
+                          and balanced-best-effort. Default is balanced-best-effort.
+                        type: string
+                    type: object
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the
@@ -10221,6 +10241,16 @@ spec:
                   arn:
                     description: ARN for this Auto Scaling Group
                     type: string
+                  availabilityZoneDistribution:
+                    description: The instance capacity distribution across Availability
+                      Zones. See Availability Zone Distribution below for more details.
+                    properties:
+                      capacityDistributionStrategy:
+                        description: The strategy to use for distributing capacity
+                          across the Availability Zones. Valid values are balanced-only
+                          and balanced-best-effort. Default is balanced-best-effort.
+                        type: string
+                    type: object
                   availabilityZones:
                     description: A list of Availability Zones where instances in the
                       Auto Scaling group can be created. Used for launching into the

@@ -154,8 +154,14 @@ type EventSourceMappingInitParameters struct {
 	// The maximum number of times to retry when the function returns an error. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of -1 (forever), maximum of 10000.
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
+	// CloudWatch metrics configuration of the event source. Only available for stream sources (DynamoDB and Kinesis) and SQS queues. Detailed below.
+	MetricsConfig *MetricsConfigInitParameters `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
+
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
+
+	// Event poller configuration for the event source. Only valid for Amazon MSK or self-managed Apache Kafka sources. Detailed below.
+	ProvisionedPollerConfig *ProvisionedPollerConfigInitParameters `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
@@ -249,8 +255,14 @@ type EventSourceMappingObservation struct {
 	// The maximum number of times to retry when the function returns an error. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of -1 (forever), maximum of 10000.
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
+	// CloudWatch metrics configuration of the event source. Only available for stream sources (DynamoDB and Kinesis) and SQS queues. Detailed below.
+	MetricsConfig *MetricsConfigObservation `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
+
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
+
+	// Event poller configuration for the event source. Only valid for Amazon MSK or self-managed Apache Kafka sources. Detailed below.
+	ProvisionedPollerConfig *ProvisionedPollerConfigObservation `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
@@ -376,9 +388,17 @@ type EventSourceMappingParameters struct {
 	// +kubebuilder:validation:Optional
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
+	// CloudWatch metrics configuration of the event source. Only available for stream sources (DynamoDB and Kinesis) and SQS queues. Detailed below.
+	// +kubebuilder:validation:Optional
+	MetricsConfig *MetricsConfigParameters `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
+
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	// +kubebuilder:validation:Optional
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
+
+	// Event poller configuration for the event source. Only valid for Amazon MSK or self-managed Apache Kafka sources. Detailed below.
+	// +kubebuilder:validation:Optional
+	ProvisionedPollerConfig *ProvisionedPollerConfigParameters `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	// +kubebuilder:validation:Optional
@@ -466,6 +486,28 @@ type FilterParameters struct {
 	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
 }
 
+type MetricsConfigInitParameters struct {
+
+	// A list containing the metrics to be produced by the event source mapping. Valid values: EventCount.
+	// +listType=set
+	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
+}
+
+type MetricsConfigObservation struct {
+
+	// A list containing the metrics to be produced by the event source mapping. Valid values: EventCount.
+	// +listType=set
+	Metrics []*string `json:"metrics,omitempty" tf:"metrics,omitempty"`
+}
+
+type MetricsConfigParameters struct {
+
+	// A list containing the metrics to be produced by the event source mapping. Valid values: EventCount.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Metrics []*string `json:"metrics" tf:"metrics,omitempty"`
+}
+
 type OnFailureInitParameters struct {
 
 	// The Amazon Resource Name (ARN) of the destination resource.
@@ -483,6 +525,35 @@ type OnFailureParameters struct {
 	// The Amazon Resource Name (ARN) of the destination resource.
 	// +kubebuilder:validation:Optional
 	DestinationArn *string `json:"destinationArn" tf:"destination_arn,omitempty"`
+}
+
+type ProvisionedPollerConfigInitParameters struct {
+
+	// The maximum number of event pollers this event source can scale up to. The range is between 1 and 2000.
+	MaximumPollers *float64 `json:"maximumPollers,omitempty" tf:"maximum_pollers,omitempty"`
+
+	// The minimum number of event pollers this event source can scale down to. The range is between 1 and 200.
+	MinimumPollers *float64 `json:"minimumPollers,omitempty" tf:"minimum_pollers,omitempty"`
+}
+
+type ProvisionedPollerConfigObservation struct {
+
+	// The maximum number of event pollers this event source can scale up to. The range is between 1 and 2000.
+	MaximumPollers *float64 `json:"maximumPollers,omitempty" tf:"maximum_pollers,omitempty"`
+
+	// The minimum number of event pollers this event source can scale down to. The range is between 1 and 200.
+	MinimumPollers *float64 `json:"minimumPollers,omitempty" tf:"minimum_pollers,omitempty"`
+}
+
+type ProvisionedPollerConfigParameters struct {
+
+	// The maximum number of event pollers this event source can scale up to. The range is between 1 and 2000.
+	// +kubebuilder:validation:Optional
+	MaximumPollers *float64 `json:"maximumPollers,omitempty" tf:"maximum_pollers,omitempty"`
+
+	// The minimum number of event pollers this event source can scale down to. The range is between 1 and 200.
+	// +kubebuilder:validation:Optional
+	MinimumPollers *float64 `json:"minimumPollers,omitempty" tf:"minimum_pollers,omitempty"`
 }
 
 type ScalingConfigInitParameters struct {
