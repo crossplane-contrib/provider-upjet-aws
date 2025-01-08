@@ -16,7 +16,11 @@ func Configure(p *config.Provider) {
 		r.References["log_uri"] = config.Reference{
 			TerraformName: "aws_s3_bucket",
 		}
-
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{
+				"master_instance_fleet", // Cannot be specified with master_instance_group
+			},
+		}
 		config.MoveToStatus(r.TerraformResource, "master_instance_fleet")
 
 	})
