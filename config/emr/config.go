@@ -17,12 +17,7 @@ func Configure(p *config.Provider) {
 			TerraformName: "aws_s3_bucket",
 		}
 
-		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{
-				"master_instance_fleet", // Cannot be specified with master_instance_group
-				"core_instance_fleet",   // Cannot be specified with core_instance_group
-				"configurations_json",   // Alternative to configurations
-			},
-		}
+		config.MoveToStatus(r.TerraformResource, "master_instance_fleet")
+
 	})
 }
