@@ -135,9 +135,6 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LogURISelector *v1.Selector `json:"logUriSelector,omitempty" tf:"-"`
 
-	// Configuration block to use an Instance Fleet for the master node type. Cannot be specified if any master_instance_group configuration blocks are set. Detailed below.
-	MasterInstanceFleet *MasterInstanceFleetInitParameters `json:"masterInstanceFleet,omitempty" tf:"master_instance_fleet,omitempty"`
-
 	// Configuration block to use an Instance Group for the master node type.
 	MasterInstanceGroup *MasterInstanceGroupInitParameters `json:"masterInstanceGroup,omitempty" tf:"master_instance_group,omitempty"`
 
@@ -383,10 +380,6 @@ type ClusterParameters struct {
 	// Selector for a Bucket in s3 to populate logUri.
 	// +kubebuilder:validation:Optional
 	LogURISelector *v1.Selector `json:"logUriSelector,omitempty" tf:"-"`
-
-	// Configuration block to use an Instance Fleet for the master node type. Cannot be specified if any master_instance_group configuration blocks are set. Detailed below.
-	// +kubebuilder:validation:Optional
-	MasterInstanceFleet *MasterInstanceFleetParameters `json:"masterInstanceFleet,omitempty" tf:"master_instance_fleet,omitempty"`
 
 	// Configuration block to use an Instance Group for the master node type.
 	// +kubebuilder:validation:Optional
@@ -1024,13 +1017,6 @@ type HadoopJarStepParameters struct {
 }
 
 type InstanceTypeConfigsConfigurationsInitParameters struct {
-
-	// Classification within a configuration.
-	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
-
-	// Key-Value map of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.
-	// +mapType=granular
-	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
 type InstanceTypeConfigsConfigurationsObservation struct {
@@ -1044,30 +1030,9 @@ type InstanceTypeConfigsConfigurationsObservation struct {
 }
 
 type InstanceTypeConfigsConfigurationsParameters struct {
-
-	// Classification within a configuration.
-	// +kubebuilder:validation:Optional
-	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
-
-	// Key-Value map of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
 type InstanceTypeConfigsEBSConfigInitParameters struct {
-
-	// Number of I/O operations per second (IOPS) that the volume supports.
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
-
-	// Volume size, in gibibytes (GiB).
-	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
-
-	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
-	VolumesPerInstance *float64 `json:"volumesPerInstance,omitempty" tf:"volumes_per_instance,omitempty"`
 }
 
 type InstanceTypeConfigsEBSConfigObservation struct {
@@ -1086,22 +1051,6 @@ type InstanceTypeConfigsEBSConfigObservation struct {
 }
 
 type InstanceTypeConfigsEBSConfigParameters struct {
-
-	// Number of I/O operations per second (IOPS) that the volume supports.
-	// +kubebuilder:validation:Optional
-	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
-
-	// Volume size, in gibibytes (GiB).
-	// +kubebuilder:validation:Optional
-	Size *float64 `json:"size" tf:"size,omitempty"`
-
-	// Volume type. Valid options are gp3, gp2, io1, io2, standard, st1 and sc1. See EBS Volume Types.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type" tf:"type,omitempty"`
-
-	// Number of EBS volumes with this configuration to attach to each EC2 instance in the instance group (default is 1).
-	// +kubebuilder:validation:Optional
-	VolumesPerInstance *float64 `json:"volumesPerInstance,omitempty" tf:"volumes_per_instance,omitempty"`
 }
 
 type InstanceTypeConfigsInitParameters struct {
@@ -1242,9 +1191,6 @@ type LaunchSpecificationsObservation struct {
 }
 
 type LaunchSpecificationsOnDemandSpecificationInitParameters struct {
-
-	// Specifies the strategy to use in launching Spot instance fleets. Valid values include capacity-optimized, diversified, lowest-price, price-capacity-optimized. See the AWS documentation for details on each strategy type.
-	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
 }
 
 type LaunchSpecificationsOnDemandSpecificationObservation struct {
@@ -1254,10 +1200,6 @@ type LaunchSpecificationsOnDemandSpecificationObservation struct {
 }
 
 type LaunchSpecificationsOnDemandSpecificationParameters struct {
-
-	// Specifies the strategy to use in launching Spot instance fleets. Valid values include capacity-optimized, diversified, lowest-price, price-capacity-optimized. See the AWS documentation for details on each strategy type.
-	// +kubebuilder:validation:Optional
-	AllocationStrategy *string `json:"allocationStrategy" tf:"allocation_strategy,omitempty"`
 }
 
 type LaunchSpecificationsParameters struct {
@@ -1272,18 +1214,6 @@ type LaunchSpecificationsParameters struct {
 }
 
 type LaunchSpecificationsSpotSpecificationInitParameters struct {
-
-	// Specifies the strategy to use in launching Spot instance fleets. Valid values include capacity-optimized, diversified, lowest-price, price-capacity-optimized. See the AWS documentation for details on each strategy type.
-	AllocationStrategy *string `json:"allocationStrategy,omitempty" tf:"allocation_strategy,omitempty"`
-
-	// Defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
-
-	// Action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired; that is, when all Spot instances could not be provisioned within the Spot provisioning timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
-	TimeoutAction *string `json:"timeoutAction,omitempty" tf:"timeout_action,omitempty"`
-
-	// Spot provisioning timeout period in minutes. If Spot instances are not provisioned within this time period, the TimeOutAction is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.
-	TimeoutDurationMinutes *float64 `json:"timeoutDurationMinutes,omitempty" tf:"timeout_duration_minutes,omitempty"`
 }
 
 type LaunchSpecificationsSpotSpecificationObservation struct {
@@ -1302,61 +1232,12 @@ type LaunchSpecificationsSpotSpecificationObservation struct {
 }
 
 type LaunchSpecificationsSpotSpecificationParameters struct {
-
-	// Specifies the strategy to use in launching Spot instance fleets. Valid values include capacity-optimized, diversified, lowest-price, price-capacity-optimized. See the AWS documentation for details on each strategy type.
-	// +kubebuilder:validation:Optional
-	AllocationStrategy *string `json:"allocationStrategy" tf:"allocation_strategy,omitempty"`
-
-	// Defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates.
-	// +kubebuilder:validation:Optional
-	BlockDurationMinutes *float64 `json:"blockDurationMinutes,omitempty" tf:"block_duration_minutes,omitempty"`
-
-	// Action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired; that is, when all Spot instances could not be provisioned within the Spot provisioning timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
-	// +kubebuilder:validation:Optional
-	TimeoutAction *string `json:"timeoutAction" tf:"timeout_action,omitempty"`
-
-	// Spot provisioning timeout period in minutes. If Spot instances are not provisioned within this time period, the TimeOutAction is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.
-	// +kubebuilder:validation:Optional
-	TimeoutDurationMinutes *float64 `json:"timeoutDurationMinutes" tf:"timeout_duration_minutes,omitempty"`
 }
 
 type MasterInstanceFleetInitParameters struct {
-
-	// Configuration block for instance fleet.
-	InstanceTypeConfigs []MasterInstanceFleetInstanceTypeConfigsInitParameters `json:"instanceTypeConfigs,omitempty" tf:"instance_type_configs,omitempty"`
-
-	// Configuration block for launch specification.
-	LaunchSpecifications *MasterInstanceFleetLaunchSpecificationsInitParameters `json:"launchSpecifications,omitempty" tf:"launch_specifications,omitempty"`
-
-	// Friendly name given to the instance fleet.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision.
-	TargetOnDemandCapacity *float64 `json:"targetOnDemandCapacity,omitempty" tf:"target_on_demand_capacity,omitempty"`
-
-	// Target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision.
-	TargetSpotCapacity *float64 `json:"targetSpotCapacity,omitempty" tf:"target_spot_capacity,omitempty"`
 }
 
 type MasterInstanceFleetInstanceTypeConfigsInitParameters struct {
-
-	// Bid price for each EC2 instance in the instance group, expressed in USD. By setting this attribute, the instance group is being declared as a Spot Instance, and will implicitly create a Spot request. Leave this blank to use On-Demand Instances.
-	BidPrice *string `json:"bidPrice,omitempty" tf:"bid_price,omitempty"`
-
-	// Bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by instance_type. Expressed as a number (for example, 20 specifies 20%). If neither bid_price nor bid_price_as_percentage_of_on_demand_price is provided, bid_price_as_percentage_of_on_demand_price defaults to 100%.
-	BidPriceAsPercentageOfOnDemandPrice *float64 `json:"bidPriceAsPercentageOfOnDemandPrice,omitempty" tf:"bid_price_as_percentage_of_on_demand_price,omitempty"`
-
-	// Configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software that run on the cluster. List of configuration blocks.
-	Configurations []InstanceTypeConfigsConfigurationsInitParameters `json:"configurations,omitempty" tf:"configurations,omitempty"`
-
-	// Configuration block(s) for EBS volumes attached to each instance in the instance group. Detailed below.
-	EBSConfig []InstanceTypeConfigsEBSConfigInitParameters `json:"ebsConfig,omitempty" tf:"ebs_config,omitempty"`
-
-	// EC2 instance type for all instances in the instance group.
-	InstanceType *string `json:"instanceType,omitempty" tf:"instance_type,omitempty"`
-
-	// Number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in aws_emr_instance_fleet.
-	WeightedCapacity *float64 `json:"weightedCapacity,omitempty" tf:"weighted_capacity,omitempty"`
 }
 
 type MasterInstanceFleetInstanceTypeConfigsObservation struct {
@@ -1381,39 +1262,9 @@ type MasterInstanceFleetInstanceTypeConfigsObservation struct {
 }
 
 type MasterInstanceFleetInstanceTypeConfigsParameters struct {
-
-	// Bid price for each EC2 instance in the instance group, expressed in USD. By setting this attribute, the instance group is being declared as a Spot Instance, and will implicitly create a Spot request. Leave this blank to use On-Demand Instances.
-	// +kubebuilder:validation:Optional
-	BidPrice *string `json:"bidPrice,omitempty" tf:"bid_price,omitempty"`
-
-	// Bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by instance_type. Expressed as a number (for example, 20 specifies 20%). If neither bid_price nor bid_price_as_percentage_of_on_demand_price is provided, bid_price_as_percentage_of_on_demand_price defaults to 100%.
-	// +kubebuilder:validation:Optional
-	BidPriceAsPercentageOfOnDemandPrice *float64 `json:"bidPriceAsPercentageOfOnDemandPrice,omitempty" tf:"bid_price_as_percentage_of_on_demand_price,omitempty"`
-
-	// Configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software that run on the cluster. List of configuration blocks.
-	// +kubebuilder:validation:Optional
-	Configurations []InstanceTypeConfigsConfigurationsParameters `json:"configurations,omitempty" tf:"configurations,omitempty"`
-
-	// Configuration block(s) for EBS volumes attached to each instance in the instance group. Detailed below.
-	// +kubebuilder:validation:Optional
-	EBSConfig []InstanceTypeConfigsEBSConfigParameters `json:"ebsConfig,omitempty" tf:"ebs_config,omitempty"`
-
-	// EC2 instance type for all instances in the instance group.
-	// +kubebuilder:validation:Optional
-	InstanceType *string `json:"instanceType" tf:"instance_type,omitempty"`
-
-	// Number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in aws_emr_instance_fleet.
-	// +kubebuilder:validation:Optional
-	WeightedCapacity *float64 `json:"weightedCapacity,omitempty" tf:"weighted_capacity,omitempty"`
 }
 
 type MasterInstanceFleetLaunchSpecificationsInitParameters struct {
-
-	// Configuration block for on demand instances launch specifications.
-	OnDemandSpecification []LaunchSpecificationsOnDemandSpecificationInitParameters `json:"onDemandSpecification,omitempty" tf:"on_demand_specification,omitempty"`
-
-	// Configuration block for spot instances launch specifications.
-	SpotSpecification []LaunchSpecificationsSpotSpecificationInitParameters `json:"spotSpecification,omitempty" tf:"spot_specification,omitempty"`
 }
 
 type MasterInstanceFleetLaunchSpecificationsObservation struct {
@@ -1426,14 +1277,6 @@ type MasterInstanceFleetLaunchSpecificationsObservation struct {
 }
 
 type MasterInstanceFleetLaunchSpecificationsParameters struct {
-
-	// Configuration block for on demand instances launch specifications.
-	// +kubebuilder:validation:Optional
-	OnDemandSpecification []LaunchSpecificationsOnDemandSpecificationParameters `json:"onDemandSpecification,omitempty" tf:"on_demand_specification,omitempty"`
-
-	// Configuration block for spot instances launch specifications.
-	// +kubebuilder:validation:Optional
-	SpotSpecification []LaunchSpecificationsSpotSpecificationParameters `json:"spotSpecification,omitempty" tf:"spot_specification,omitempty"`
 }
 
 type MasterInstanceFleetObservation struct {
@@ -1462,26 +1305,6 @@ type MasterInstanceFleetObservation struct {
 }
 
 type MasterInstanceFleetParameters struct {
-
-	// Configuration block for instance fleet.
-	// +kubebuilder:validation:Optional
-	InstanceTypeConfigs []MasterInstanceFleetInstanceTypeConfigsParameters `json:"instanceTypeConfigs,omitempty" tf:"instance_type_configs,omitempty"`
-
-	// Configuration block for launch specification.
-	// +kubebuilder:validation:Optional
-	LaunchSpecifications *MasterInstanceFleetLaunchSpecificationsParameters `json:"launchSpecifications,omitempty" tf:"launch_specifications,omitempty"`
-
-	// Friendly name given to the instance fleet.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision.
-	// +kubebuilder:validation:Optional
-	TargetOnDemandCapacity *float64 `json:"targetOnDemandCapacity,omitempty" tf:"target_on_demand_capacity,omitempty"`
-
-	// Target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision.
-	// +kubebuilder:validation:Optional
-	TargetSpotCapacity *float64 `json:"targetSpotCapacity,omitempty" tf:"target_spot_capacity,omitempty"`
 }
 
 type MasterInstanceGroupEBSConfigInitParameters struct {
