@@ -93,7 +93,7 @@ type AlarmSpecificationParameters struct {
 type AutoscalingGroupInitParameters struct {
 
 	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
-	AvailabilityZoneDistribution *AvailabilityZoneDistributionInitParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionInitParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +listType=set
@@ -274,7 +274,7 @@ type AutoscalingGroupObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
-	AvailabilityZoneDistribution *AvailabilityZoneDistributionObservation `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionObservation `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +listType=set
@@ -433,7 +433,7 @@ type AutoscalingGroupParameters struct {
 
 	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
 	// +kubebuilder:validation:Optional
-	AvailabilityZoneDistribution *AvailabilityZoneDistributionParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +kubebuilder:validation:Optional

@@ -389,7 +389,7 @@ type RuleVariablesParameters struct {
 type StatefulEngineOptionsInitParameters struct {
 
 	// Amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
-	FlowTimeouts *FlowTimeoutsInitParameters `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
+	FlowTimeouts []FlowTimeoutsInitParameters `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
@@ -401,7 +401,7 @@ type StatefulEngineOptionsInitParameters struct {
 type StatefulEngineOptionsObservation struct {
 
 	// Amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
-	FlowTimeouts *FlowTimeoutsObservation `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
+	FlowTimeouts []FlowTimeoutsObservation `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
@@ -414,7 +414,7 @@ type StatefulEngineOptionsParameters struct {
 
 	// Amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
 	// +kubebuilder:validation:Optional
-	FlowTimeouts *FlowTimeoutsParameters `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
+	FlowTimeouts []FlowTimeoutsParameters `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	// +kubebuilder:validation:Optional

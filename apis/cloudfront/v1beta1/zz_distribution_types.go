@@ -1396,7 +1396,7 @@ type OriginInitParameters struct {
 	S3OriginConfig []S3OriginConfigInitParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 
 	// The VPC origin configuration.
-	VPCOriginConfig *VPCOriginConfigInitParameters `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
+	VPCOriginConfig []VPCOriginConfigInitParameters `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
 }
 
 type OriginObservation struct {
@@ -1432,7 +1432,7 @@ type OriginObservation struct {
 	S3OriginConfig []S3OriginConfigObservation `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
 
 	// The VPC origin configuration.
-	VPCOriginConfig *VPCOriginConfigObservation `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
+	VPCOriginConfig []VPCOriginConfigObservation `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
 }
 
 type OriginParameters struct {
@@ -1489,7 +1489,7 @@ type OriginParameters struct {
 
 	// The VPC origin configuration.
 	// +kubebuilder:validation:Optional
-	VPCOriginConfig *VPCOriginConfigParameters `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
+	VPCOriginConfig []VPCOriginConfigParameters `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
 }
 
 type OriginShieldInitParameters struct {

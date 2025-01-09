@@ -155,13 +155,13 @@ type EventSourceMappingInitParameters struct {
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
 	// CloudWatch metrics configuration of the event source. Only available for stream sources (DynamoDB and Kinesis) and SQS queues. Detailed below.
-	MetricsConfig *MetricsConfigInitParameters `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
+	MetricsConfig []MetricsConfigInitParameters `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
 
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
 	// Event poller configuration for the event source. Only valid for Amazon MSK or self-managed Apache Kafka sources. Detailed below.
-	ProvisionedPollerConfig *ProvisionedPollerConfigInitParameters `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
+	ProvisionedPollerConfig []ProvisionedPollerConfigInitParameters `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
@@ -256,13 +256,13 @@ type EventSourceMappingObservation struct {
 	MaximumRetryAttempts *float64 `json:"maximumRetryAttempts,omitempty" tf:"maximum_retry_attempts,omitempty"`
 
 	// CloudWatch metrics configuration of the event source. Only available for stream sources (DynamoDB and Kinesis) and SQS queues. Detailed below.
-	MetricsConfig *MetricsConfigObservation `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
+	MetricsConfig []MetricsConfigObservation `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
 
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	ParallelizationFactor *float64 `json:"parallelizationFactor,omitempty" tf:"parallelization_factor,omitempty"`
 
 	// Event poller configuration for the event source. Only valid for Amazon MSK or self-managed Apache Kafka sources. Detailed below.
-	ProvisionedPollerConfig *ProvisionedPollerConfigObservation `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
+	ProvisionedPollerConfig []ProvisionedPollerConfigObservation `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	Queues []*string `json:"queues,omitempty" tf:"queues,omitempty"`
@@ -390,7 +390,7 @@ type EventSourceMappingParameters struct {
 
 	// CloudWatch metrics configuration of the event source. Only available for stream sources (DynamoDB and Kinesis) and SQS queues. Detailed below.
 	// +kubebuilder:validation:Optional
-	MetricsConfig *MetricsConfigParameters `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
+	MetricsConfig []MetricsConfigParameters `json:"metricsConfig,omitempty" tf:"metrics_config,omitempty"`
 
 	// The number of batches to process from each shard concurrently. Only available for stream sources (DynamoDB and Kinesis). Minimum and default of 1, maximum of 10.
 	// +kubebuilder:validation:Optional
@@ -398,7 +398,7 @@ type EventSourceMappingParameters struct {
 
 	// Event poller configuration for the event source. Only valid for Amazon MSK or self-managed Apache Kafka sources. Detailed below.
 	// +kubebuilder:validation:Optional
-	ProvisionedPollerConfig *ProvisionedPollerConfigParameters `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
+	ProvisionedPollerConfig []ProvisionedPollerConfigParameters `json:"provisionedPollerConfig,omitempty" tf:"provisioned_poller_config,omitempty"`
 
 	// The name of the Amazon MQ broker destination queue to consume. Only available for MQ sources. The list must contain exactly one queue name.
 	// +kubebuilder:validation:Optional
