@@ -100,13 +100,12 @@ type InstanceInitParameters struct {
 	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// Name of DB subnet group. DB instance will
-	// be created in the VPC associated with the DB subnet group. If unspecified, will
-	// be created in the default VPC, or in EC2 Classic, if available. When working
-	// with read replicas, it should be specified only if the source database
-	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
-	// action CreateDBInstanceReadReplica
-	// for additional read replica constraints.
+	// Name of DB subnet group.
+	// DB instance will be created in the VPC associated with the DB subnet group.
+	// If unspecified, will be created in the default Subnet Group.
+	// When working with read replicas created in the same region, defaults to the Subnet Group Name of the source DB.
+	// When working with read replicas created in a different region, defaults to the default Subnet Group.
+	// See DBSubnetGroupName in API action CreateDBInstanceReadReplica for additional read replica constraints.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.SubnetGroup
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
@@ -298,15 +297,12 @@ type InstanceInitParameters struct {
 	// is only supported by Oracle instances. Oracle replicas operate in open-read-only mode unless otherwise specified. See Working with Oracle Read Replicas for more information.
 	ReplicaMode *string `json:"replicaMode,omitempty" tf:"replica_mode,omitempty"`
 
-	// Specifies that this resource is a Replicate
-	// database, and to use this value as the source database. This correlates to the
-	// identifier of another Amazon RDS Database to replicate (if replicating within
-	// a single region) or ARN of the Amazon RDS Database to replicate (if replicating
-	// cross-region). Note that if you are
-	// creating a cross-region replica of an encrypted database you will also need to
-	// specify a kms_key_id. See DB Instance Replication and Working with
-	// PostgreSQL and MySQL Read Replicas
-	// for more information on using Replication.
+	// Specifies that this resource is a Replica database, and to use this value as the source database.
+	// If replicating an Amazon RDS Database Instance in the same region, use the identifier of the source DB, unless also specifying the db_subnet_group_name.
+	// If specifying the db_subnet_group_name in the same region, use the arn of the source DB.
+	// If replicating an Instance in a different region, use the arn of the source DB.
+	// Note that if you are creating a cross-region replica of an encrypted database you will also need to specify a kms_key_id.
+	// See DB Instance Replication and Working with PostgreSQL and MySQL Read Replicas for more information on using Replication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
@@ -319,7 +315,9 @@ type InstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicateSourceDBSelector *v1.Selector `json:"replicateSourceDbSelector,omitempty" tf:"-"`
 
-	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
+	// A configuration block for restoring a DB instance to an arbitrary point in time.
+	// Requires the identifier argument to be set with the name of the new DB instance to be created.
+	// See Restore To Point In Time below for details.
 	RestoreToPointInTime *RestoreToPointInTimeInitParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
@@ -332,9 +330,8 @@ type InstanceInitParameters struct {
 	// is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this
-	// database from a snapshot. This correlates to the snapshot ID you'd find in the
-	// RDS console, e.g: rds:production-2015-06-26-06-05.
+	// Specifies whether or not to create this database from a snapshot.
+	// This corresponds to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// Specifies whether the DB instance is
@@ -363,7 +360,8 @@ type InstanceInitParameters struct {
 	// for more information.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
-	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	// Whether to upgrade the storage file system configuration on the read replica.
+	// Can only be set with replicate_source_db.
 	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
 
 	// Username for the master DB user. Cannot be specified for a replica.
@@ -457,13 +455,12 @@ type InstanceObservation struct {
 	// The name of the database to create when the DB instance is created. If this parameter is not specified, no database is created in the DB instance. Note that this does not apply for Oracle or SQL Server engines. See the AWS documentation for more details on what applies for those engines. If you are providing an Oracle db name, it needs to be in all upper case. Cannot be specified for a replica.
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// Name of DB subnet group. DB instance will
-	// be created in the VPC associated with the DB subnet group. If unspecified, will
-	// be created in the default VPC, or in EC2 Classic, if available. When working
-	// with read replicas, it should be specified only if the source database
-	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
-	// action CreateDBInstanceReadReplica
-	// for additional read replica constraints.
+	// Name of DB subnet group.
+	// DB instance will be created in the VPC associated with the DB subnet group.
+	// If unspecified, will be created in the default Subnet Group.
+	// When working with read replicas created in the same region, defaults to the Subnet Group Name of the source DB.
+	// When working with read replicas created in a different region, defaults to the default Subnet Group.
+	// See DBSubnetGroupName in API action CreateDBInstanceReadReplica for additional read replica constraints.
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
 
 	// Use a dedicated log volume (DLV) for the DB instance. Requires Provisioned IOPS. See the AWS documentation for more details.
@@ -626,21 +623,20 @@ type InstanceObservation struct {
 
 	Replicas []*string `json:"replicas,omitempty" tf:"replicas,omitempty"`
 
-	// Specifies that this resource is a Replicate
-	// database, and to use this value as the source database. This correlates to the
-	// identifier of another Amazon RDS Database to replicate (if replicating within
-	// a single region) or ARN of the Amazon RDS Database to replicate (if replicating
-	// cross-region). Note that if you are
-	// creating a cross-region replica of an encrypted database you will also need to
-	// specify a kms_key_id. See DB Instance Replication and Working with
-	// PostgreSQL and MySQL Read Replicas
-	// for more information on using Replication.
+	// Specifies that this resource is a Replica database, and to use this value as the source database.
+	// If replicating an Amazon RDS Database Instance in the same region, use the identifier of the source DB, unless also specifying the db_subnet_group_name.
+	// If specifying the db_subnet_group_name in the same region, use the arn of the source DB.
+	// If replicating an Instance in a different region, use the arn of the source DB.
+	// Note that if you are creating a cross-region replica of an encrypted database you will also need to specify a kms_key_id.
+	// See DB Instance Replication and Working with PostgreSQL and MySQL Read Replicas for more information on using Replication.
 	ReplicateSourceDB *string `json:"replicateSourceDb,omitempty" tf:"replicate_source_db,omitempty"`
 
 	// The RDS Resource ID of this instance.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
-	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
+	// A configuration block for restoring a DB instance to an arbitrary point in time.
+	// Requires the identifier argument to be set with the name of the new DB instance to be created.
+	// See Restore To Point In Time below for details.
 	RestoreToPointInTime *RestoreToPointInTimeObservation `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
 	// Restore from a Percona Xtrabackup in S3.  See Importing Data into an Amazon RDS MySQL DB Instance
@@ -653,9 +649,8 @@ type InstanceObservation struct {
 	// is false.
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this
-	// database from a snapshot. This correlates to the snapshot ID you'd find in the
-	// RDS console, e.g: rds:production-2015-06-26-06-05.
+	// Specifies whether or not to create this database from a snapshot.
+	// This corresponds to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05.
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
 	// The RDS instance status.
@@ -691,7 +686,8 @@ type InstanceObservation struct {
 	// for more information.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
-	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	// Whether to upgrade the storage file system configuration on the read replica.
+	// Can only be set with replicate_source_db.
 	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
 
 	// Username for the master DB user. Cannot be specified for a replica.
@@ -790,13 +786,12 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	DBName *string `json:"dbName,omitempty" tf:"db_name,omitempty"`
 
-	// Name of DB subnet group. DB instance will
-	// be created in the VPC associated with the DB subnet group. If unspecified, will
-	// be created in the default VPC, or in EC2 Classic, if available. When working
-	// with read replicas, it should be specified only if the source database
-	// specifies an instance in another AWS Region. See DBSubnetGroupName in API
-	// action CreateDBInstanceReadReplica
-	// for additional read replica constraints.
+	// Name of DB subnet group.
+	// DB instance will be created in the VPC associated with the DB subnet group.
+	// If unspecified, will be created in the default Subnet Group.
+	// When working with read replicas created in the same region, defaults to the Subnet Group Name of the source DB.
+	// When working with read replicas created in a different region, defaults to the default Subnet Group.
+	// See DBSubnetGroupName in API action CreateDBInstanceReadReplica for additional read replica constraints.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta1.SubnetGroup
 	// +kubebuilder:validation:Optional
 	DBSubnetGroupName *string `json:"dbSubnetGroupName,omitempty" tf:"db_subnet_group_name,omitempty"`
@@ -1033,15 +1028,12 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicaMode *string `json:"replicaMode,omitempty" tf:"replica_mode,omitempty"`
 
-	// Specifies that this resource is a Replicate
-	// database, and to use this value as the source database. This correlates to the
-	// identifier of another Amazon RDS Database to replicate (if replicating within
-	// a single region) or ARN of the Amazon RDS Database to replicate (if replicating
-	// cross-region). Note that if you are
-	// creating a cross-region replica of an encrypted database you will also need to
-	// specify a kms_key_id. See DB Instance Replication and Working with
-	// PostgreSQL and MySQL Read Replicas
-	// for more information on using Replication.
+	// Specifies that this resource is a Replica database, and to use this value as the source database.
+	// If replicating an Amazon RDS Database Instance in the same region, use the identifier of the source DB, unless also specifying the db_subnet_group_name.
+	// If specifying the db_subnet_group_name in the same region, use the arn of the source DB.
+	// If replicating an Instance in a different region, use the arn of the source DB.
+	// Note that if you are creating a cross-region replica of an encrypted database you will also need to specify a kms_key_id.
+	// See DB Instance Replication and Working with PostgreSQL and MySQL Read Replicas for more information on using Replication.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/rds/v1beta3.Instance
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("identifier",false)
 	// +kubebuilder:validation:Optional
@@ -1055,7 +1047,9 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ReplicateSourceDBSelector *v1.Selector `json:"replicateSourceDbSelector,omitempty" tf:"-"`
 
-	// A configuration block for restoring a DB instance to an arbitrary point in time. Requires the identifier argument to be set with the name of the new DB instance to be created. See Restore To Point In Time below for details.
+	// A configuration block for restoring a DB instance to an arbitrary point in time.
+	// Requires the identifier argument to be set with the name of the new DB instance to be created.
+	// See Restore To Point In Time below for details.
 	// +kubebuilder:validation:Optional
 	RestoreToPointInTime *RestoreToPointInTimeParameters `json:"restoreToPointInTime,omitempty" tf:"restore_to_point_in_time,omitempty"`
 
@@ -1071,9 +1065,8 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SkipFinalSnapshot *bool `json:"skipFinalSnapshot,omitempty" tf:"skip_final_snapshot,omitempty"`
 
-	// Specifies whether or not to create this
-	// database from a snapshot. This correlates to the snapshot ID you'd find in the
-	// RDS console, e.g: rds:production-2015-06-26-06-05.
+	// Specifies whether or not to create this database from a snapshot.
+	// This corresponds to the snapshot ID you'd find in the RDS console, e.g: rds:production-2015-06-26-06-05.
 	// +kubebuilder:validation:Optional
 	SnapshotIdentifier *string `json:"snapshotIdentifier,omitempty" tf:"snapshot_identifier,omitempty"`
 
@@ -1108,7 +1101,8 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
-	// Whether to upgrade the storage file system configuration on the read replica. Can only be set with replicate_source_db.
+	// Whether to upgrade the storage file system configuration on the read replica.
+	// Can only be set with replicate_source_db.
 	// +kubebuilder:validation:Optional
 	UpgradeStorageConfig *bool `json:"upgradeStorageConfig,omitempty" tf:"upgrade_storage_config,omitempty"`
 

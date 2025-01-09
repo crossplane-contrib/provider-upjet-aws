@@ -9,7 +9,8 @@ metadata:
 spec:
   forProvider:
     deliveryOptions:
-    - tlsPolicy: REQUIRE
+    - maxDeliverySeconds: 300
+      tlsPolicy: REQUIRE
     region: us-west-1
     reputationOptions:
     - reputationMetricsEnabled: false
@@ -21,3 +22,4 @@ spec:
       - COMPLAINT
     trackingOptions:
     - customRedirectDomain: example.com
+      httpsPolicy: REQUIRE

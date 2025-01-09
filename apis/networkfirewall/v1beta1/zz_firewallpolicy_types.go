@@ -264,6 +264,25 @@ type FirewallPolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type FlowTimeoutsInitParameters struct {
+
+	// Number of seconds that can pass without any TCP traffic sent through the firewall before the firewall determines that the connection is idle. After the idle timeout passes, data packets are dropped, however, the next TCP SYN packet is considered a new flow and is processed by the firewall. Clients or targets can use TCP keepalive packets to reset the idle timeout. Default value: 350.
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
+}
+
+type FlowTimeoutsObservation struct {
+
+	// Number of seconds that can pass without any TCP traffic sent through the firewall before the firewall determines that the connection is idle. After the idle timeout passes, data packets are dropped, however, the next TCP SYN packet is considered a new flow and is processed by the firewall. Clients or targets can use TCP keepalive packets to reset the idle timeout. Default value: 350.
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
+}
+
+type FlowTimeoutsParameters struct {
+
+	// Number of seconds that can pass without any TCP traffic sent through the firewall before the firewall determines that the connection is idle. After the idle timeout passes, data packets are dropped, however, the next TCP SYN packet is considered a new flow and is processed by the firewall. Clients or targets can use TCP keepalive packets to reset the idle timeout. Default value: 350.
+	// +kubebuilder:validation:Optional
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
+}
+
 type IPSetInitParameters struct {
 
 	// Set of IPv4 or IPv6 addresses in CIDR notation to use for the Suricata HOME_NET variable.
@@ -369,6 +388,9 @@ type RuleVariablesParameters struct {
 
 type StatefulEngineOptionsInitParameters struct {
 
+	// Amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
+	FlowTimeouts []FlowTimeoutsInitParameters `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
+
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
 
@@ -378,6 +400,9 @@ type StatefulEngineOptionsInitParameters struct {
 
 type StatefulEngineOptionsObservation struct {
 
+	// Amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
+	FlowTimeouts []FlowTimeoutsObservation `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
+
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	RuleOrder *string `json:"ruleOrder,omitempty" tf:"rule_order,omitempty"`
 
@@ -386,6 +411,10 @@ type StatefulEngineOptionsObservation struct {
 }
 
 type StatefulEngineOptionsParameters struct {
+
+	// Amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle.
+	// +kubebuilder:validation:Optional
+	FlowTimeouts []FlowTimeoutsParameters `json:"flowTimeouts,omitempty" tf:"flow_timeouts,omitempty"`
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy. Default value: DEFAULT_ACTION_ORDER. Valid values: DEFAULT_ACTION_ORDER, STRICT_ORDER.
 	// +kubebuilder:validation:Optional

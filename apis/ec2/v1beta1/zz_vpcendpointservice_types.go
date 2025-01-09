@@ -74,6 +74,10 @@ type VPCEndpointServiceInitParameters struct {
 	// +listType=set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
 
+	// The set of regions from which service consumers can access the service.
+	// +listType=set
+	SupportedRegions []*string `json:"supportedRegions,omitempty" tf:"supported_regions,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -131,6 +135,10 @@ type VPCEndpointServiceObservation struct {
 	// The supported IP address types. The possible values are ipv4 and ipv6.
 	// +listType=set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
+
+	// The set of regions from which service consumers can access the service.
+	// +listType=set
+	SupportedRegions []*string `json:"supportedRegions,omitempty" tf:"supported_regions,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -190,6 +198,11 @@ type VPCEndpointServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SupportedIPAddressTypes []*string `json:"supportedIpAddressTypes,omitempty" tf:"supported_ip_address_types,omitempty"`
+
+	// The set of regions from which service consumers can access the service.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SupportedRegions []*string `json:"supportedRegions,omitempty" tf:"supported_regions,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional

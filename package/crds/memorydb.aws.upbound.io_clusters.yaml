@@ -186,6 +186,10 @@ spec:
                       ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
                       window is a 60 minute period. Example: sun:23:00-mon:01:30.'
                     type: string
+                  multiRegionClusterName:
+                    description: The multi region cluster identifier specified on
+                      aws_memorydb_multi_region_cluster.
+                    type: string
                   nodeType:
                     description: The compute and memory capacity of the nodes in the
                       cluster. See AWS documentation on supported node types as well
@@ -540,6 +544,10 @@ spec:
                       on the cluster is performed. Specify as a range in the format
                       ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
                       window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    type: string
+                  multiRegionClusterName:
+                    description: The multi region cluster identifier specified on
+                      aws_memorydb_multi_region_cluster.
                     type: string
                   nodeType:
                     description: The compute and memory capacity of the nodes in the
@@ -1004,6 +1012,10 @@ spec:
                       on the cluster is performed. Specify as a range in the format
                       ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
                       window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    type: string
+                  multiRegionClusterName:
+                    description: The multi region cluster identifier specified on
+                      aws_memorydb_multi_region_cluster.
                     type: string
                   nodeType:
                     description: The compute and memory capacity of the nodes in the

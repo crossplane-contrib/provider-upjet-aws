@@ -2286,7 +2286,7 @@ func (in *ReplicationGroupInitParameters) DeepCopyInto(out *ReplicationGroupInit
 	}
 	if in.AtRestEncryptionEnabled != nil {
 		in, out := &in.AtRestEncryptionEnabled, &out.AtRestEncryptionEnabled
-		*out = new(bool)
+		*out = new(string)
 		**out = **in
 	}
 	if in.AuthTokenSecretRef != nil {
@@ -2741,7 +2741,7 @@ func (in *ReplicationGroupObservation) DeepCopyInto(out *ReplicationGroupObserva
 	}
 	if in.AtRestEncryptionEnabled != nil {
 		in, out := &in.AtRestEncryptionEnabled, &out.AtRestEncryptionEnabled
-		*out = new(bool)
+		*out = new(string)
 		**out = **in
 	}
 	if in.AuthTokenUpdateStrategy != nil {
@@ -3064,7 +3064,7 @@ func (in *ReplicationGroupParameters) DeepCopyInto(out *ReplicationGroupParamete
 	}
 	if in.AtRestEncryptionEnabled != nil {
 		in, out := &in.AtRestEncryptionEnabled, &out.AtRestEncryptionEnabled
-		*out = new(bool)
+		*out = new(string)
 		**out = **in
 	}
 	if in.AuthTokenSecretRef != nil {

@@ -75,29 +75,29 @@ type DirectoryBucketParameters struct {
 
 type LocationInitParameters struct {
 
-	// Availability Zone ID.
+	// Availability Zone ID or Local Zone ID.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Location type. Valid values: AvailabilityZone.
+	// Location type. Valid values: AvailabilityZone, LocalZone.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LocationObservation struct {
 
-	// Availability Zone ID.
+	// Availability Zone ID or Local Zone ID.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Location type. Valid values: AvailabilityZone.
+	// Location type. Valid values: AvailabilityZone, LocalZone.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LocationParameters struct {
 
-	// Availability Zone ID.
+	// Availability Zone ID or Local Zone ID.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Location type. Valid values: AvailabilityZone.
+	// Location type. Valid values: AvailabilityZone, LocalZone.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

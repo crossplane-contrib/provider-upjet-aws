@@ -71,7 +71,29 @@ type AcceleratorTotalMemoryMibParameters struct {
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 }
 
+type AlarmSpecificationInitParameters struct {
+
+	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+}
+
+type AlarmSpecificationObservation struct {
+
+	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+}
+
+type AlarmSpecificationParameters struct {
+
+	// List of Cloudwatch alarms. If any of these alarms goes into ALARM state, Instance Refresh is failed.
+	// +kubebuilder:validation:Optional
+	Alarms []*string `json:"alarms,omitempty" tf:"alarms,omitempty"`
+}
+
 type AutoscalingGroupInitParameters struct {
+
+	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionInitParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +listType=set
@@ -117,6 +139,9 @@ type AutoscalingGroupInitParameters struct {
 	// "EC2" or "ELB". Controls how health checking is done.
 	HealthCheckType *string `json:"healthCheckType,omitempty" tf:"health_check_type,omitempty"`
 
+	// Whether to ignore failed Auto Scaling scaling activities while waiting for capacity. The default is false -- failed scaling activities cause errors to be returned.
+	IgnoreFailedScalingActivities *bool `json:"ignoreFailedScalingActivities,omitempty" tf:"ignore_failed_scaling_activities,omitempty"`
+
 	// One or more
 	// Lifecycle Hooks
 	// to attach to the Auto Scaling Group before instances are launched. The
@@ -125,6 +150,9 @@ type AutoscalingGroupInitParameters struct {
 	// resource, without the autoscaling_group_name attribute. Please note that this will only work when creating
 	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	InitialLifecycleHook []InitialLifecycleHookInitParameters `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
+
+	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
+	InstanceMaintenancePolicy []InstanceMaintenancePolicyInitParameters `json:"instanceMaintenancePolicy,omitempty" tf:"instance_maintenance_policy,omitempty"`
 
 	// If this block is configured, start an
 	// Instance Refresh
@@ -210,6 +238,9 @@ type AutoscalingGroupInitParameters struct {
 	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
+	// Attaches one or more traffic sources to the specified Auto Scaling group.
+	TrafficSource []TrafficSourceInitParameters `json:"trafficSource,omitempty" tf:"traffic_source,omitempty"`
+
 	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +listType=set
@@ -241,6 +272,9 @@ type AutoscalingGroupObservation struct {
 
 	// ARN for this Auto Scaling Group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
+
+	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionObservation `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +listType=set
@@ -289,6 +323,9 @@ type AutoscalingGroupObservation struct {
 	// Auto Scaling Group id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Whether to ignore failed Auto Scaling scaling activities while waiting for capacity. The default is false -- failed scaling activities cause errors to be returned.
+	IgnoreFailedScalingActivities *bool `json:"ignoreFailedScalingActivities,omitempty" tf:"ignore_failed_scaling_activities,omitempty"`
+
 	// One or more
 	// Lifecycle Hooks
 	// to attach to the Auto Scaling Group before instances are launched. The
@@ -297,6 +334,9 @@ type AutoscalingGroupObservation struct {
 	// resource, without the autoscaling_group_name attribute. Please note that this will only work when creating
 	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	InitialLifecycleHook []InitialLifecycleHookObservation `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
+
+	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
+	InstanceMaintenancePolicy []InstanceMaintenancePolicyObservation `json:"instanceMaintenancePolicy,omitempty" tf:"instance_maintenance_policy,omitempty"`
 
 	// If this block is configured, start an
 	// Instance Refresh
@@ -365,6 +405,9 @@ type AutoscalingGroupObservation struct {
 	// List of policies to decide how the instances in the Auto Scaling Group should be terminated. The allowed values are OldestInstance, NewestInstance, OldestLaunchConfiguration, ClosestToNextInstanceHour, OldestLaunchTemplate, AllocationStrategy, Default. Additionally, the ARN of a Lambda function can be specified for custom termination policies.
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
+	// Attaches one or more traffic sources to the specified Auto Scaling group.
+	TrafficSource []TrafficSourceObservation `json:"trafficSource,omitempty" tf:"traffic_source,omitempty"`
+
 	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
 	// +listType=set
 	VPCZoneIdentifier []*string `json:"vpcZoneIdentifier,omitempty" tf:"vpc_zone_identifier,omitempty"`
@@ -387,6 +430,10 @@ type AutoscalingGroupObservation struct {
 }
 
 type AutoscalingGroupParameters struct {
+
+	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// List of one or more availability zones for the group. Used for EC2-Classic, attaching a network interface via id from a launch template and default subnets when not specified with vpc_zone_identifier argument. Conflicts with vpc_zone_identifier.
 	// +kubebuilder:validation:Optional
@@ -444,6 +491,10 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	HealthCheckType *string `json:"healthCheckType,omitempty" tf:"health_check_type,omitempty"`
 
+	// Whether to ignore failed Auto Scaling scaling activities while waiting for capacity. The default is false -- failed scaling activities cause errors to be returned.
+	// +kubebuilder:validation:Optional
+	IgnoreFailedScalingActivities *bool `json:"ignoreFailedScalingActivities,omitempty" tf:"ignore_failed_scaling_activities,omitempty"`
+
 	// One or more
 	// Lifecycle Hooks
 	// to attach to the Auto Scaling Group before instances are launched. The
@@ -453,6 +504,10 @@ type AutoscalingGroupParameters struct {
 	// a new Auto Scaling Group. For all other use-cases, please use aws_autoscaling_lifecycle_hook resource.
 	// +kubebuilder:validation:Optional
 	InitialLifecycleHook []InitialLifecycleHookParameters `json:"initialLifecycleHook,omitempty" tf:"initial_lifecycle_hook,omitempty"`
+
+	// If this block is configured, add a instance maintenance policy to the specified Auto Scaling group. Defined below.
+	// +kubebuilder:validation:Optional
+	InstanceMaintenancePolicy []InstanceMaintenancePolicyParameters `json:"instanceMaintenancePolicy,omitempty" tf:"instance_maintenance_policy,omitempty"`
 
 	// If this block is configured, start an
 	// Instance Refresh
@@ -559,6 +614,10 @@ type AutoscalingGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	TerminationPolicies []*string `json:"terminationPolicies,omitempty" tf:"termination_policies,omitempty"`
 
+	// Attaches one or more traffic sources to the specified Auto Scaling group.
+	// +kubebuilder:validation:Optional
+	TrafficSource []TrafficSourceParameters `json:"trafficSource,omitempty" tf:"traffic_source,omitempty"`
+
 	// List of subnet IDs to launch resources in. Subnets automatically determine which availability zones the group will reside. Conflicts with availability_zones.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.Subnet
 	// +kubebuilder:validation:Optional
@@ -588,6 +647,25 @@ type AutoscalingGroupParameters struct {
 	// to the specified Auto Scaling group. Defined below
 	// +kubebuilder:validation:Optional
 	WarmPool []WarmPoolParameters `json:"warmPool,omitempty" tf:"warm_pool,omitempty"`
+}
+
+type AvailabilityZoneDistributionInitParameters struct {
+
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
+}
+
+type AvailabilityZoneDistributionObservation struct {
+
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
+}
+
+type AvailabilityZoneDistributionParameters struct {
+
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	// +kubebuilder:validation:Optional
+	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
 }
 
 type BaselineEBSBandwidthMbpsInitParameters struct {
@@ -684,6 +762,35 @@ type InitialLifecycleHookParameters struct {
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 }
 
+type InstanceMaintenancePolicyInitParameters struct {
+
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
+
+	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
+	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
+}
+
+type InstanceMaintenancePolicyObservation struct {
+
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
+
+	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
+	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
+}
+
+type InstanceMaintenancePolicyParameters struct {
+
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	// +kubebuilder:validation:Optional
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage" tf:"max_healthy_percentage,omitempty"`
+
+	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
+	// +kubebuilder:validation:Optional
+	MinHealthyPercentage *float64 `json:"minHealthyPercentage" tf:"min_healthy_percentage,omitempty"`
+}
+
 type InstanceRefreshInitParameters struct {
 
 	// Override default parameters for Instance Refresh.
@@ -778,6 +885,9 @@ type InstanceRequirementsInitParameters struct {
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
 
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
+
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
 	MemoryGibPerVcpu []MemoryGibPerVcpuInitParameters `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
 
@@ -857,6 +967,9 @@ type InstanceRequirementsObservation struct {
 	// List of local storage type names. Default any storage type.
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
 	MemoryGibPerVcpu []MemoryGibPerVcpuObservation `json:"memoryGibPerVcpu,omitempty" tf:"memory_gib_per_vcpu,omitempty"`
@@ -951,6 +1064,10 @@ type InstanceRequirementsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	LocalStorageTypes []*string `json:"localStorageTypes,omitempty" tf:"local_storage_types,omitempty"`
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll pay for a Spot Instance, expressed as a percentage higher than the cheapest M, C, or R instance type with your specified attributes. When Amazon EC2 Auto Scaling selects instance types with your attributes, we will exclude instance types whose price is higher than your threshold. The parameter accepts an integer, which Amazon EC2 Auto Scaling interprets as a percentage. To turn off price protection, specify a high value, such as 999999. Conflicts with spot_max_price_percentage_over_lowest_price
+	// +kubebuilder:validation:Optional
+	MaxSpotPriceAsPercentageOfOptimalOnDemandPrice *float64 `json:"maxSpotPriceAsPercentageOfOptimalOnDemandPrice,omitempty" tf:"max_spot_price_as_percentage_of_optimal_on_demand_price,omitempty"`
 
 	// Block describing the minimum and maximum amount of memory (GiB) per vCPU. Default is no minimum or maximum.
 	// +kubebuilder:validation:Optional
@@ -1479,6 +1596,9 @@ type OverrideParameters struct {
 
 type PreferencesInitParameters struct {
 
+	// Alarm Specification for Instance Refresh.
+	AlarmSpecification []AlarmSpecificationInitParameters `json:"alarmSpecification,omitempty" tf:"alarm_specification,omitempty"`
+
 	// Automatically rollback if instance refresh fails. Defaults to false.
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
 
@@ -1491,15 +1611,27 @@ type PreferencesInitParameters struct {
 	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
+
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
+	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
+	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
+
 	// Replace instances that already have your desired configuration. Defaults to false.
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
+
+	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
+	StandbyInstances *string `json:"standbyInstances,omitempty" tf:"standby_instances,omitempty"`
 }
 
 type PreferencesObservation struct {
 
+	// Alarm Specification for Instance Refresh.
+	AlarmSpecification []AlarmSpecificationObservation `json:"alarmSpecification,omitempty" tf:"alarm_specification,omitempty"`
+
 	// Automatically rollback if instance refresh fails. Defaults to false.
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
 
@@ -1512,15 +1644,28 @@ type PreferencesObservation struct {
 	// Number of seconds until a newly launched instance is configured and ready to use. Default behavior is to use the Auto Scaling Group's health check grace period.
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
+
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
+	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
+	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
+
 	// Replace instances that already have your desired configuration. Defaults to false.
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
+
+	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
+	StandbyInstances *string `json:"standbyInstances,omitempty" tf:"standby_instances,omitempty"`
 }
 
 type PreferencesParameters struct {
 
+	// Alarm Specification for Instance Refresh.
+	// +kubebuilder:validation:Optional
+	AlarmSpecification []AlarmSpecificationParameters `json:"alarmSpecification,omitempty" tf:"alarm_specification,omitempty"`
+
 	// Automatically rollback if instance refresh fails. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AutoRollback *bool `json:"autoRollback,omitempty" tf:"auto_rollback,omitempty"`
@@ -1537,13 +1682,25 @@ type PreferencesParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceWarmup *string `json:"instanceWarmup,omitempty" tf:"instance_warmup,omitempty"`
 
+	// Amount of capacity in the Auto Scaling group that can be in service and healthy, or pending, to support your workload when an instance refresh is in place, as a percentage of the desired capacity of the Auto Scaling group. Values must be between 100 and 200, defaults to 100.
+	// +kubebuilder:validation:Optional
+	MaxHealthyPercentage *float64 `json:"maxHealthyPercentage,omitempty" tf:"max_healthy_percentage,omitempty"`
+
 	// Amount of capacity in the Auto Scaling group that must remain healthy during an instance refresh to allow the operation to continue, as a percentage of the desired capacity of the Auto Scaling group. Defaults to 90.
 	// +kubebuilder:validation:Optional
 	MinHealthyPercentage *float64 `json:"minHealthyPercentage,omitempty" tf:"min_healthy_percentage,omitempty"`
 
+	// Behavior when encountering instances protected from scale in are found. Available behaviors are Refresh, Ignore, and Wait. Default is Ignore.
+	// +kubebuilder:validation:Optional
+	ScaleInProtectedInstances *string `json:"scaleInProtectedInstances,omitempty" tf:"scale_in_protected_instances,omitempty"`
+
 	// Replace instances that already have your desired configuration. Defaults to false.
 	// +kubebuilder:validation:Optional
 	SkipMatching *bool `json:"skipMatching,omitempty" tf:"skip_matching,omitempty"`
+
+	// Behavior when encountering instances in the Standby state in are found. Available behaviors are Terminate, Ignore, and Wait. Default is Ignore.
+	// +kubebuilder:validation:Optional
+	StandbyInstances *string `json:"standbyInstances,omitempty" tf:"standby_instances,omitempty"`
 }
 
 type TagInitParameters struct {
@@ -1615,6 +1772,47 @@ type TotalLocalStorageGbParameters struct {
 	// Minimum.
 	// +kubebuilder:validation:Optional
 	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+}
+
+type TrafficSourceInitParameters struct {
+
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Provides additional context for the value of Identifier.
+	// The following lists the valid values:
+	// elb if identifier is the name of a Classic Load Balancer.
+	// elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+	// vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type TrafficSourceObservation struct {
+
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	Identifier *string `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Provides additional context for the value of Identifier.
+	// The following lists the valid values:
+	// elb if identifier is the name of a Classic Load Balancer.
+	// elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+	// vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type TrafficSourceParameters struct {
+
+	// Identifies the traffic source. For Application Load Balancers, Gateway Load Balancers, Network Load Balancers, and VPC Lattice, this will be the Amazon Resource Name (ARN) for a target group in this account and Region. For Classic Load Balancers, this will be the name of the Classic Load Balancer in this account and Region.
+	// +kubebuilder:validation:Optional
+	Identifier *string `json:"identifier" tf:"identifier,omitempty"`
+
+	// Provides additional context for the value of Identifier.
+	// The following lists the valid values:
+	// elb if identifier is the name of a Classic Load Balancer.
+	// elbv2 if identifier is the ARN of an Application Load Balancer, Gateway Load Balancer, or Network Load Balancer target group.
+	// vpc-lattice if identifier is the ARN of a VPC Lattice target group.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type VcpuCountInitParameters struct {

@@ -36,6 +36,9 @@ type NetworkInterfaceInitParameters_2 struct {
 	// Description for the network interface.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
+
 	// Number of IPv4 prefixes that AWS automatically assigns to the network interface.
 	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
 
@@ -49,7 +52,7 @@ type NetworkInterfaceInitParameters_2 struct {
 	// List of private IPs to assign to the ENI in sequential order.
 	IPv6AddressList []*string `json:"ipv6AddressList,omitempty" tf:"ipv6_address_list,omitempty"`
 
-	// Whether ipv6_address_list is allowed and controls the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count become read-only. Default false.
+	// Whether ipv6_address_list is allowed and controls the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count become read-only. Default is false.
 	IPv6AddressListEnabled *bool `json:"ipv6AddressListEnabled,omitempty" tf:"ipv6_address_list_enabled,omitempty"`
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Addresses are assigned without regard to order. You can't use this option if you're specifying ipv6_address_count.
@@ -71,7 +74,7 @@ type NetworkInterfaceInitParameters_2 struct {
 	// List of private IPs to assign to the ENI in sequential order. Requires setting private_ip_list_enabled to true.
 	PrivateIPList []*string `json:"privateIpList,omitempty" tf:"private_ip_list,omitempty"`
 
-	// Whether private_ip_list is allowed and controls the IPs to assign to the ENI and private_ips and private_ips_count become read-only. Default false.
+	// Whether private_ip_list is allowed and controls the IPs to assign to the ENI and private_ips and private_ips_count become read-only. Default is false.
 	PrivateIPListEnabled *bool `json:"privateIpListEnabled,omitempty" tf:"private_ip_list_enabled,omitempty"`
 
 	// List of private IPs to assign to the ENI without regard to order.
@@ -127,6 +130,9 @@ type NetworkInterfaceObservation_2 struct {
 	// Description for the network interface.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
+
 	// ID of the network interface.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -143,7 +149,7 @@ type NetworkInterfaceObservation_2 struct {
 	// List of private IPs to assign to the ENI in sequential order.
 	IPv6AddressList []*string `json:"ipv6AddressList,omitempty" tf:"ipv6_address_list,omitempty"`
 
-	// Whether ipv6_address_list is allowed and controls the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count become read-only. Default false.
+	// Whether ipv6_address_list is allowed and controls the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count become read-only. Default is false.
 	IPv6AddressListEnabled *bool `json:"ipv6AddressListEnabled,omitempty" tf:"ipv6_address_list_enabled,omitempty"`
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet. Addresses are assigned without regard to order. You can't use this option if you're specifying ipv6_address_count.
@@ -177,7 +183,7 @@ type NetworkInterfaceObservation_2 struct {
 	// List of private IPs to assign to the ENI in sequential order. Requires setting private_ip_list_enabled to true.
 	PrivateIPList []*string `json:"privateIpList,omitempty" tf:"private_ip_list,omitempty"`
 
-	// Whether private_ip_list is allowed and controls the IPs to assign to the ENI and private_ips and private_ips_count become read-only. Default false.
+	// Whether private_ip_list is allowed and controls the IPs to assign to the ENI and private_ips and private_ips_count become read-only. Default is false.
 	PrivateIPListEnabled *bool `json:"privateIpListEnabled,omitempty" tf:"private_ip_list_enabled,omitempty"`
 
 	// List of private IPs to assign to the ENI without regard to order.
@@ -212,6 +218,10 @@ type NetworkInterfaceParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Enables assigning a primary IPv6 Global Unicast Address (GUA) to the network interface (ENI) in dual-stack or IPv6-only subnets. This ensures the instance attached to the ENI retains a consistent IPv6 address. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains assigned until the instance is terminated or the ENI is detached. Enabling and subsequent disabling forces recreation of the ENI.
+	// +kubebuilder:validation:Optional
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
+
 	// Number of IPv4 prefixes that AWS automatically assigns to the network interface.
 	// +kubebuilder:validation:Optional
 	IPv4PrefixCount *float64 `json:"ipv4PrefixCount,omitempty" tf:"ipv4_prefix_count,omitempty"`
@@ -229,7 +239,7 @@ type NetworkInterfaceParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	IPv6AddressList []*string `json:"ipv6AddressList,omitempty" tf:"ipv6_address_list,omitempty"`
 
-	// Whether ipv6_address_list is allowed and controls the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count become read-only. Default false.
+	// Whether ipv6_address_list is allowed and controls the IPs to assign to the ENI and ipv6_addresses and ipv6_address_count become read-only. Default is false.
 	// +kubebuilder:validation:Optional
 	IPv6AddressListEnabled *bool `json:"ipv6AddressListEnabled,omitempty" tf:"ipv6_address_list_enabled,omitempty"`
 
@@ -258,7 +268,7 @@ type NetworkInterfaceParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	PrivateIPList []*string `json:"privateIpList,omitempty" tf:"private_ip_list,omitempty"`
 
-	// Whether private_ip_list is allowed and controls the IPs to assign to the ENI and private_ips and private_ips_count become read-only. Default false.
+	// Whether private_ip_list is allowed and controls the IPs to assign to the ENI and private_ips and private_ips_count become read-only. Default is false.
 	// +kubebuilder:validation:Optional
 	PrivateIPListEnabled *bool `json:"privateIpListEnabled,omitempty" tf:"private_ip_list_enabled,omitempty"`
 

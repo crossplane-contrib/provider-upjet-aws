@@ -57,7 +57,9 @@ type ReplicationGroupInitParameters struct {
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
 	// Whether to enable encryption at rest.
-	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
+	// When engine is redis, default is false.
+	// When engine is valkey, default is true.
+	AtRestEncryptionEnabled *string `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
 	// If you set autoGenerateAuthToken to true, the Secret referenced here will be created or updated with generated auth token if it does not already contain one.
@@ -291,7 +293,9 @@ type ReplicationGroupObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// Whether to enable encryption at rest.
-	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
+	// When engine is redis, default is false.
+	// When engine is valkey, default is true.
+	AtRestEncryptionEnabled *string `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
 	// Strategy to use when updating the auth_token. Valid values are SET, ROTATE, and DELETE. Defaults to ROTATE.
 	AuthTokenUpdateStrategy *string `json:"authTokenUpdateStrategy,omitempty" tf:"auth_token_update_strategy,omitempty"`
@@ -459,8 +463,10 @@ type ReplicationGroupParameters struct {
 	ApplyImmediately *bool `json:"applyImmediately,omitempty" tf:"apply_immediately,omitempty"`
 
 	// Whether to enable encryption at rest.
+	// When engine is redis, default is false.
+	// When engine is valkey, default is true.
 	// +kubebuilder:validation:Optional
-	AtRestEncryptionEnabled *bool `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
+	AtRestEncryptionEnabled *string `json:"atRestEncryptionEnabled,omitempty" tf:"at_rest_encryption_enabled,omitempty"`
 
 	// Password used to access a password protected server. Can be specified only if transit_encryption_enabled = true.
 	// +kubebuilder:validation:Optional

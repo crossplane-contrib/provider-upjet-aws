@@ -228,7 +228,7 @@ func configureNoForkAWSClient(ctx context.Context, ps *terraform.Setup, config *
 	// the resulting TF AWS Client has empty account ID.
 	// Fill with previously calculated account ID.
 	// No need for nil check on ps.ClientMetadata per golang spec.
-	tfAwsConnsClient.AccountID = ps.ClientMetadata[keyAccountID]
+	tfAwsConnsClient.SetAccountID(ps.ClientMetadata[keyAccountID])
 	ps.Meta = tfAwsConnsClient
 	fwProvider := xpprovider.GetFrameworkProviderWithMeta(&metaOnlyPrimary{meta: tfAwsConnsClient})
 	ps.FrameworkProvider = fwProvider

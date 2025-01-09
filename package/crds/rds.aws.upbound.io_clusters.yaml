@@ -977,6 +977,11 @@ spec:
                             256. Valid Aurora PostgreSQL capacity values are (2, 4,
                             8, 16, 32, 64, 192, and 384). Defaults to 1.
                           type: number
+                        secondsUntilAutoPause:
+                          description: Time, in seconds, before an Aurora DB cluster
+                            in serverless mode is paused. Valid values are 300 through
+                            86400. Defaults to 300.
+                          type: number
                       type: object
                     type: array
                   skipFinalSnapshot:
@@ -2017,6 +2022,11 @@ spec:
                             256. Valid Aurora PostgreSQL capacity values are (2, 4,
                             8, 16, 32, 64, 192, and 384). Defaults to 1.
                           type: number
+                        secondsUntilAutoPause:
+                          description: Time, in seconds, before an Aurora DB cluster
+                            in serverless mode is paused. Valid values are 300 through
+                            86400. Defaults to 300.
+                          type: number
                       type: object
                     type: array
                   skipFinalSnapshot:
@@ -2729,6 +2739,11 @@ spec:
                             MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128,
                             256. Valid Aurora PostgreSQL capacity values are (2, 4,
                             8, 16, 32, 64, 192, and 384). Defaults to 1.
+                          type: number
+                        secondsUntilAutoPause:
+                          description: Time, in seconds, before an Aurora DB cluster
+                            in serverless mode is paused. Valid values are 300 through
+                            86400. Defaults to 300.
                           type: number
                       type: object
                     type: array
@@ -3501,21 +3516,19 @@ spec:
                       DUAL.'
                     type: string
                   performanceInsightsEnabled:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
-                      Performance Insights for the RDS Cluster
+                    description: Enables Performance Insights for the RDS Cluster
                     type: boolean
                   performanceInsightsKmsKeyId:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
-                      the KMS Key ID to encrypt Performance Insights data. If not
-                      specified, the default RDS KMS key will be used (aws/rds).
+                    description: Specifies the KMS Key ID to encrypt Performance Insights
+                      data. If not specified, the default RDS KMS key will be used
+                      (aws/rds).
                     type: string
                   performanceInsightsRetentionPeriod:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
-                      the amount of time to retain performance insights data for.
-                      Defaults to 7 days if Performance Insights are enabled. Valid
-                      values are 7, month * 31 (where month is a number of months
-                      from 1-23), and 731. See here for more information on retention
-                      periods.
+                    description: Specifies the amount of time to retain performance
+                      insights data for. Defaults to 7 days if Performance Insights
+                      are enabled. Valid values are 7, month * 31 (where month is
+                      a number of months from 1-23), and 731. See here for more information
+                      on retention periods.
                     type: number
                   port:
                     description: Port on which the DB accepts connections.
@@ -3535,8 +3548,10 @@ spec:
                       be created in.
                     type: string
                   replicationSourceIdentifier:
-                    description: ARN of a source DB cluster or DB instance if this
-                      DB cluster is to be created as a Read Replica.
+                    description: 'ARN of a source DB cluster or DB instance if this
+                      DB cluster is to be created as a Read Replica. Note: Removing
+                      this attribute after creation will promote the read replica
+                      to a standalone cluster.'
                     type: string
                   restoreToPointInTime:
                     description: Nested attribute for point in time restore. More
@@ -3801,6 +3816,11 @@ spec:
                           MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256.
                           Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16,
                           32, 64, 192, and 384). Defaults to 1.
+                        type: number
+                      secondsUntilAutoPause:
+                        description: Time, in seconds, before an Aurora DB cluster
+                          in serverless mode is paused. Valid values are 300 through
+                          86400. Defaults to 300.
                         type: number
                     type: object
                   skipFinalSnapshot:
@@ -4537,21 +4557,19 @@ spec:
                       DUAL.'
                     type: string
                   performanceInsightsEnabled:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
-                      Performance Insights for the RDS Cluster
+                    description: Enables Performance Insights for the RDS Cluster
                     type: boolean
                   performanceInsightsKmsKeyId:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
-                      the KMS Key ID to encrypt Performance Insights data. If not
-                      specified, the default RDS KMS key will be used (aws/rds).
+                    description: Specifies the KMS Key ID to encrypt Performance Insights
+                      data. If not specified, the default RDS KMS key will be used
+                      (aws/rds).
                     type: string
                   performanceInsightsRetentionPeriod:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
-                      the amount of time to retain performance insights data for.
-                      Defaults to 7 days if Performance Insights are enabled. Valid
-                      values are 7, month * 31 (where month is a number of months
-                      from 1-23), and 731. See here for more information on retention
-                      periods.
+                    description: Specifies the amount of time to retain performance
+                      insights data for. Defaults to 7 days if Performance Insights
+                      are enabled. Valid values are 7, month * 31 (where month is
+                      a number of months from 1-23), and 731. See here for more information
+                      on retention periods.
                     type: number
                   port:
                     description: Port on which the DB accepts connections.
@@ -4567,8 +4585,10 @@ spec:
                       can occur, in (UTC) e.g., wed:04:00-wed:04:30
                     type: string
                   replicationSourceIdentifier:
-                    description: ARN of a source DB cluster or DB instance if this
-                      DB cluster is to be created as a Read Replica.
+                    description: 'ARN of a source DB cluster or DB instance if this
+                      DB cluster is to be created as a Read Replica. Note: Removing
+                      this attribute after creation will promote the read replica
+                      to a standalone cluster.'
                     type: string
                   restoreToPointInTime:
                     description: Nested attribute for point in time restore. More
@@ -4833,6 +4853,11 @@ spec:
                           MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256.
                           Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16,
                           32, 64, 192, and 384). Defaults to 1.
+                        type: number
+                      secondsUntilAutoPause:
+                        description: Time, in seconds, before an Aurora DB cluster
+                          in serverless mode is paused. Valid values are 300 through
+                          86400. Defaults to 300.
                         type: number
                     type: object
                   skipFinalSnapshot:
@@ -5385,21 +5410,19 @@ spec:
                       DUAL.'
                     type: string
                   performanceInsightsEnabled:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Enables
-                      Performance Insights for the RDS Cluster
+                    description: Enables Performance Insights for the RDS Cluster
                     type: boolean
                   performanceInsightsKmsKeyId:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
-                      the KMS Key ID to encrypt Performance Insights data. If not
-                      specified, the default RDS KMS key will be used (aws/rds).
+                    description: Specifies the KMS Key ID to encrypt Performance Insights
+                      data. If not specified, the default RDS KMS key will be used
+                      (aws/rds).
                     type: string
                   performanceInsightsRetentionPeriod:
-                    description: Valid only for Non-Aurora Multi-AZ DB Clusters. Specifies
-                      the amount of time to retain performance insights data for.
-                      Defaults to 7 days if Performance Insights are enabled. Valid
-                      values are 7, month * 31 (where month is a number of months
-                      from 1-23), and 731. See here for more information on retention
-                      periods.
+                    description: Specifies the amount of time to retain performance
+                      insights data for. Defaults to 7 days if Performance Insights
+                      are enabled. Valid values are 7, month * 31 (where month is
+                      a number of months from 1-23), and 731. See here for more information
+                      on retention periods.
                     type: number
                   port:
                     description: Port on which the DB accepts connections.
@@ -5420,8 +5443,10 @@ spec:
                       load-balanced across replicas
                     type: string
                   replicationSourceIdentifier:
-                    description: ARN of a source DB cluster or DB instance if this
-                      DB cluster is to be created as a Read Replica.
+                    description: 'ARN of a source DB cluster or DB instance if this
+                      DB cluster is to be created as a Read Replica. Note: Removing
+                      this attribute after creation will promote the read replica
+                      to a standalone cluster.'
                     type: string
                   restoreToPointInTime:
                     description: Nested attribute for point in time restore. More
@@ -5538,6 +5563,11 @@ spec:
                           MySQL capacity values are 1, 2, 4, 8, 16, 32, 64, 128, 256.
                           Valid Aurora PostgreSQL capacity values are (2, 4, 8, 16,
                           32, 64, 192, and 384). Defaults to 1.
+                        type: number
+                      secondsUntilAutoPause:
+                        description: Time, in seconds, before an Aurora DB cluster
+                          in serverless mode is paused. Valid values are 300 through
+                          86400. Defaults to 300.
                         type: number
                     type: object
                   skipFinalSnapshot:

@@ -362,11 +362,42 @@ spec:
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
                     type: number
+                  metricsConfig:
+                    description: CloudWatch metrics configuration of the event source.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      SQS queues. Detailed below.
+                    items:
+                      properties:
+                        metrics:
+                          description: 'A list containing the metrics to be produced
+                            by the event source mapping. Valid values: EventCount.'
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
                     type: number
+                  provisionedPollerConfig:
+                    description: Event poller configuration for the event source.
+                      Only valid for Amazon MSK or self-managed Apache Kafka sources.
+                      Detailed below.
+                    items:
+                      properties:
+                        maximumPollers:
+                          description: The maximum number of event pollers this event
+                            source can scale up to. The range is between 1 and 2000.
+                          type: number
+                        minimumPollers:
+                          description: The minimum number of event pollers this event
+                            source can scale down to. The range is between 1 and 200.
+                          type: number
+                      type: object
+                    type: array
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain
@@ -782,11 +813,42 @@ spec:
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
                     type: number
+                  metricsConfig:
+                    description: CloudWatch metrics configuration of the event source.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      SQS queues. Detailed below.
+                    items:
+                      properties:
+                        metrics:
+                          description: 'A list containing the metrics to be produced
+                            by the event source mapping. Valid values: EventCount.'
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
                     type: number
+                  provisionedPollerConfig:
+                    description: Event poller configuration for the event source.
+                      Only valid for Amazon MSK or self-managed Apache Kafka sources.
+                      Detailed below.
+                    items:
+                      properties:
+                        maximumPollers:
+                          description: The maximum number of event pollers this event
+                            source can scale up to. The range is between 1 and 2000.
+                          type: number
+                        minimumPollers:
+                          description: The minimum number of event pollers this event
+                            source can scale down to. The range is between 1 and 200.
+                          type: number
+                      type: object
+                    type: array
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain
@@ -1224,11 +1286,42 @@ spec:
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
                     type: number
+                  metricsConfig:
+                    description: CloudWatch metrics configuration of the event source.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      SQS queues. Detailed below.
+                    items:
+                      properties:
+                        metrics:
+                          description: 'A list containing the metrics to be produced
+                            by the event source mapping. Valid values: EventCount.'
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
                     type: number
+                  provisionedPollerConfig:
+                    description: Event poller configuration for the event source.
+                      Only valid for Amazon MSK or self-managed Apache Kafka sources.
+                      Detailed below.
+                    items:
+                      properties:
+                        maximumPollers:
+                          description: The maximum number of event pollers this event
+                            source can scale up to. The range is between 1 and 2000.
+                          type: number
+                        minimumPollers:
+                          description: The minimum number of event pollers this event
+                            source can scale down to. The range is between 1 and 200.
+                          type: number
+                      type: object
+                    type: array
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain
@@ -1751,11 +1844,38 @@ spec:
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
                     type: number
+                  metricsConfig:
+                    description: CloudWatch metrics configuration of the event source.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      SQS queues. Detailed below.
+                    properties:
+                      metrics:
+                        description: 'A list containing the metrics to be produced
+                          by the event source mapping. Valid values: EventCount.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
                     type: number
+                  provisionedPollerConfig:
+                    description: Event poller configuration for the event source.
+                      Only valid for Amazon MSK or self-managed Apache Kafka sources.
+                      Detailed below.
+                    properties:
+                      maximumPollers:
+                        description: The maximum number of event pollers this event
+                          source can scale up to. The range is between 1 and 2000.
+                        type: number
+                      minimumPollers:
+                        description: The minimum number of event pollers this event
+                          source can scale down to. The range is between 1 and 200.
+                        type: number
+                    type: object
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain
@@ -2156,11 +2276,38 @@ spec:
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
                     type: number
+                  metricsConfig:
+                    description: CloudWatch metrics configuration of the event source.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      SQS queues. Detailed below.
+                    properties:
+                      metrics:
+                        description: 'A list containing the metrics to be produced
+                          by the event source mapping. Valid values: EventCount.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
                     type: number
+                  provisionedPollerConfig:
+                    description: Event poller configuration for the event source.
+                      Only valid for Amazon MSK or self-managed Apache Kafka sources.
+                      Detailed below.
+                    properties:
+                      maximumPollers:
+                        description: The maximum number of event pollers this event
+                          source can scale up to. The range is between 1 and 2000.
+                        type: number
+                      minimumPollers:
+                        description: The minimum number of event pollers this event
+                          source can scale down to. The range is between 1 and 200.
+                        type: number
+                    type: object
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain
@@ -2583,11 +2730,38 @@ spec:
                       and Kinesis). Minimum and default of -1 (forever), maximum of
                       10000.
                     type: number
+                  metricsConfig:
+                    description: CloudWatch metrics configuration of the event source.
+                      Only available for stream sources (DynamoDB and Kinesis) and
+                      SQS queues. Detailed below.
+                    properties:
+                      metrics:
+                        description: 'A list containing the metrics to be produced
+                          by the event source mapping. Valid values: EventCount.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
                   parallelizationFactor:
                     description: The number of batches to process from each shard
                       concurrently. Only available for stream sources (DynamoDB and
                       Kinesis). Minimum and default of 1, maximum of 10.
                     type: number
+                  provisionedPollerConfig:
+                    description: Event poller configuration for the event source.
+                      Only valid for Amazon MSK or self-managed Apache Kafka sources.
+                      Detailed below.
+                    properties:
+                      maximumPollers:
+                        description: The maximum number of event pollers this event
+                          source can scale up to. The range is between 1 and 2000.
+                        type: number
+                      minimumPollers:
+                        description: The minimum number of event pollers this event
+                          source can scale down to. The range is between 1 and 200.
+                        type: number
+                    type: object
                   queues:
                     description: The name of the Amazon MQ broker destination queue
                       to consume. Only available for MQ sources. The list must contain

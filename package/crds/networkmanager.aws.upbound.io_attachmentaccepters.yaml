@@ -601,8 +601,17 @@ spec:
                     description: The id of a core network.
                     type: string
                   edgeLocation:
-                    description: The Region where the edge is located.
+                    description: The Region where the edge is located. This is returned
+                      for all attachment types except a Direct Connect gateway attachment,
+                      which instead returns edge_locations.
                     type: string
+                  edgeLocations:
+                    description: The edge locations that the Direct Connect gateway
+                      is associated with. This is returned only for Direct Connect
+                      gateway attachments. All other attachment types return edge_location
+                    items:
+                      type: string
+                    type: array
                   id:
                     type: string
                   ownerAccountId:

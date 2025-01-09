@@ -93,6 +93,33 @@ spec:
                       must manually install desired add-ons. Changing this value will
                       force a new cluster to be created. Defaults to true.
                     type: boolean
+                  computeConfig:
+                    description: Configuration block with compute configuration for
+                      EKS Auto Mode. Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Request to enable or disable the compute capability
+                            on your EKS Auto Mode cluster. If the compute capability
+                            is enabled, EKS Auto Mode will create and delete EC2 Managed
+                            Instances in your Amazon Web Services account.
+                          type: boolean
+                        nodePools:
+                          description: Configuration for node pools that defines the
+                            compute resources for your EKS Auto Mode cluster. Valid
+                            options are general-purpose and system.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        nodeRoleArn:
+                          description: The ARN of the IAM Role EKS will assign to
+                            EC2 Managed Instances in your EKS Auto Mode cluster. This
+                            value cannot be changed after the compute capability of
+                            EKS Auto Mode is enabled..
+                          type: string
+                      type: object
+                    type: array
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -136,6 +163,17 @@ spec:
                       for the cluster. Detailed below.
                     items:
                       properties:
+                        elasticLoadBalancing:
+                          description: Configuration block with elastic load balancing
+                            configuration for the cluster. Detailed below.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether zonal shift is enabled for the
+                                  cluster.
+                                type: boolean
+                            type: object
+                          type: array
                         ipFamily:
                           description: The IP family used to assign Kubernetes pod
                             and service addresses. Valid values are ipv4 (default)
@@ -200,6 +238,41 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  remoteNetworkConfig:
+                    description: Configuration block with remote network configuration
+                      for EKS Hybrid Nodes. Detailed below.
+                    items:
+                      properties:
+                        remoteNodeNetworks:
+                          description: Configuration block with remote node network
+                            configuration for EKS Hybrid Nodes. Detailed below.
+                          items:
+                            properties:
+                              cidrs:
+                                description: List of network CIDRs that can contain
+                                  hybrid nodes.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                        remotePodNetworks:
+                          description: Configuration block with remote pod network
+                            configuration for EKS Hybrid Nodes. Detailed below.
+                          items:
+                            properties:
+                              cidrs:
+                                description: List of network CIDRs that can contain
+                                  pods that run Kubernetes webhooks on hybrid nodes.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   roleArn:
                     description: ARN of the IAM role that provides permissions for
                       the Kubernetes control plane to make calls to AWS API operations
@@ -283,6 +356,22 @@ spec:
                             type: string
                         type: object
                     type: object
+                  storageConfig:
+                    description: Configuration block with storage configuration for
+                      EKS Auto Mode. Detailed below.
+                    items:
+                      properties:
+                        blockStorage:
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether zonal shift is enabled for the
+                                  cluster.
+                                type: boolean
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -566,6 +655,33 @@ spec:
                       must manually install desired add-ons. Changing this value will
                       force a new cluster to be created. Defaults to true.
                     type: boolean
+                  computeConfig:
+                    description: Configuration block with compute configuration for
+                      EKS Auto Mode. Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Request to enable or disable the compute capability
+                            on your EKS Auto Mode cluster. If the compute capability
+                            is enabled, EKS Auto Mode will create and delete EC2 Managed
+                            Instances in your Amazon Web Services account.
+                          type: boolean
+                        nodePools:
+                          description: Configuration for node pools that defines the
+                            compute resources for your EKS Auto Mode cluster. Valid
+                            options are general-purpose and system.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        nodeRoleArn:
+                          description: The ARN of the IAM Role EKS will assign to
+                            EC2 Managed Instances in your EKS Auto Mode cluster. This
+                            value cannot be changed after the compute capability of
+                            EKS Auto Mode is enabled..
+                          type: string
+                      type: object
+                    type: array
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -609,6 +725,17 @@ spec:
                       for the cluster. Detailed below.
                     items:
                       properties:
+                        elasticLoadBalancing:
+                          description: Configuration block with elastic load balancing
+                            configuration for the cluster. Detailed below.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether zonal shift is enabled for the
+                                  cluster.
+                                type: boolean
+                            type: object
+                          type: array
                         ipFamily:
                           description: The IP family used to assign Kubernetes pod
                             and service addresses. Valid values are ipv4 (default)
@@ -667,6 +794,41 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  remoteNetworkConfig:
+                    description: Configuration block with remote network configuration
+                      for EKS Hybrid Nodes. Detailed below.
+                    items:
+                      properties:
+                        remoteNodeNetworks:
+                          description: Configuration block with remote node network
+                            configuration for EKS Hybrid Nodes. Detailed below.
+                          items:
+                            properties:
+                              cidrs:
+                                description: List of network CIDRs that can contain
+                                  hybrid nodes.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                        remotePodNetworks:
+                          description: Configuration block with remote pod network
+                            configuration for EKS Hybrid Nodes. Detailed below.
+                          items:
+                            properties:
+                              cidrs:
+                                description: List of network CIDRs that can contain
+                                  pods that run Kubernetes webhooks on hybrid nodes.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
                       type: object
                     type: array
                   roleArn:
@@ -752,6 +914,22 @@ spec:
                             type: string
                         type: object
                     type: object
+                  storageConfig:
+                    description: Configuration block with storage configuration for
+                      EKS Auto Mode. Detailed below.
+                    items:
+                      properties:
+                        blockStorage:
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether zonal shift is enabled for the
+                                  cluster.
+                                type: boolean
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -1217,6 +1395,33 @@ spec:
                       Outpost. This attribute isn't available for an AWS EKS cluster
                       on AWS cloud.
                     type: string
+                  computeConfig:
+                    description: Configuration block with compute configuration for
+                      EKS Auto Mode. Detailed below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Request to enable or disable the compute capability
+                            on your EKS Auto Mode cluster. If the compute capability
+                            is enabled, EKS Auto Mode will create and delete EC2 Managed
+                            Instances in your Amazon Web Services account.
+                          type: boolean
+                        nodePools:
+                          description: Configuration for node pools that defines the
+                            compute resources for your EKS Auto Mode cluster. Valid
+                            options are general-purpose and system.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        nodeRoleArn:
+                          description: The ARN of the IAM Role EKS will assign to
+                            EC2 Managed Instances in your EKS Auto Mode cluster. This
+                            value cannot be changed after the compute capability of
+                            EKS Auto Mode is enabled..
+                          type: string
+                      type: object
+                    type: array
                   createdAt:
                     description: Unix epoch timestamp in seconds for when the cluster
                       was created.
@@ -1290,6 +1495,17 @@ spec:
                       for the cluster. Detailed below.
                     items:
                       properties:
+                        elasticLoadBalancing:
+                          description: Configuration block with elastic load balancing
+                            configuration for the cluster. Detailed below.
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether zonal shift is enabled for the
+                                  cluster.
+                                type: boolean
+                            type: object
+                          type: array
                         ipFamily:
                           description: The IP family used to assign Kubernetes pod
                             and service addresses. Valid values are ipv4 (default)
@@ -1361,6 +1577,41 @@ spec:
                   platformVersion:
                     description: Platform version for the cluster.
                     type: string
+                  remoteNetworkConfig:
+                    description: Configuration block with remote network configuration
+                      for EKS Hybrid Nodes. Detailed below.
+                    items:
+                      properties:
+                        remoteNodeNetworks:
+                          description: Configuration block with remote node network
+                            configuration for EKS Hybrid Nodes. Detailed below.
+                          items:
+                            properties:
+                              cidrs:
+                                description: List of network CIDRs that can contain
+                                  hybrid nodes.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                        remotePodNetworks:
+                          description: Configuration block with remote pod network
+                            configuration for EKS Hybrid Nodes. Detailed below.
+                          items:
+                            properties:
+                              cidrs:
+                                description: List of network CIDRs that can contain
+                                  pods that run Kubernetes webhooks on hybrid nodes.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   roleArn:
                     description: ARN of the IAM role that provides permissions for
                       the Kubernetes control plane to make calls to AWS API operations
@@ -1374,6 +1625,22 @@ spec:
                     description: Status of the EKS cluster. One of CREATING, ACTIVE,
                       DELETING, FAILED.
                     type: string
+                  storageConfig:
+                    description: Configuration block with storage configuration for
+                      EKS Auto Mode. Detailed below.
+                    items:
+                      properties:
+                        blockStorage:
+                          items:
+                            properties:
+                              enabled:
+                                description: Whether zonal shift is enabled for the
+                                  cluster.
+                                type: boolean
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -1613,6 +1880,31 @@ spec:
                       must manually install desired add-ons. Changing this value will
                       force a new cluster to be created. Defaults to true.
                     type: boolean
+                  computeConfig:
+                    description: Configuration block with compute configuration for
+                      EKS Auto Mode. Detailed below.
+                    properties:
+                      enabled:
+                        description: Request to enable or disable the compute capability
+                          on your EKS Auto Mode cluster. If the compute capability
+                          is enabled, EKS Auto Mode will create and delete EC2 Managed
+                          Instances in your Amazon Web Services account.
+                        type: boolean
+                      nodePools:
+                        description: Configuration for node pools that defines the
+                          compute resources for your EKS Auto Mode cluster. Valid
+                          options are general-purpose and system.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      nodeRoleArn:
+                        description: The ARN of the IAM Role EKS will assign to EC2
+                          Managed Instances in your EKS Auto Mode cluster. This value
+                          cannot be changed after the compute capability of EKS Auto
+                          Mode is enabled..
+                        type: string
+                    type: object
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -1650,6 +1942,14 @@ spec:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
                     properties:
+                      elasticLoadBalancing:
+                        description: Configuration block with elastic load balancing
+                          configuration for the cluster. Detailed below.
+                        properties:
+                          enabled:
+                            description: Whether zonal shift is enabled for the cluster.
+                            type: boolean
+                        type: object
                       ipFamily:
                         description: The IP family used to assign Kubernetes pod and
                           service addresses. Valid values are ipv4 (default) and ipv6.
@@ -1708,6 +2008,35 @@ spec:
                     description: Region is the region you'd like your resource to
                       be created in.
                     type: string
+                  remoteNetworkConfig:
+                    description: Configuration block with remote network configuration
+                      for EKS Hybrid Nodes. Detailed below.
+                    properties:
+                      remoteNodeNetworks:
+                        description: Configuration block with remote node network
+                          configuration for EKS Hybrid Nodes. Detailed below.
+                        properties:
+                          cidrs:
+                            description: List of network CIDRs that can contain hybrid
+                              nodes.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
+                      remotePodNetworks:
+                        description: Configuration block with remote pod network configuration
+                          for EKS Hybrid Nodes. Detailed below.
+                        properties:
+                          cidrs:
+                            description: List of network CIDRs that can contain pods
+                              that run Kubernetes webhooks on hybrid nodes.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
+                    type: object
                   roleArn:
                     description: ARN of the IAM role that provides permissions for
                       the Kubernetes control plane to make calls to AWS API operations
@@ -1789,6 +2118,17 @@ spec:
                             - Always
                             - IfNotPresent
                             type: string
+                        type: object
+                    type: object
+                  storageConfig:
+                    description: Configuration block with storage configuration for
+                      EKS Auto Mode. Detailed below.
+                    properties:
+                      blockStorage:
+                        properties:
+                          enabled:
+                            description: Whether zonal shift is enabled for the cluster.
+                            type: boolean
                         type: object
                     type: object
                   tags:
@@ -2058,6 +2398,31 @@ spec:
                       must manually install desired add-ons. Changing this value will
                       force a new cluster to be created. Defaults to true.
                     type: boolean
+                  computeConfig:
+                    description: Configuration block with compute configuration for
+                      EKS Auto Mode. Detailed below.
+                    properties:
+                      enabled:
+                        description: Request to enable or disable the compute capability
+                          on your EKS Auto Mode cluster. If the compute capability
+                          is enabled, EKS Auto Mode will create and delete EC2 Managed
+                          Instances in your Amazon Web Services account.
+                        type: boolean
+                      nodePools:
+                        description: Configuration for node pools that defines the
+                          compute resources for your EKS Auto Mode cluster. Valid
+                          options are general-purpose and system.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      nodeRoleArn:
+                        description: The ARN of the IAM Role EKS will assign to EC2
+                          Managed Instances in your EKS Auto Mode cluster. This value
+                          cannot be changed after the compute capability of EKS Auto
+                          Mode is enabled..
+                        type: string
+                    type: object
                   enabledClusterLogTypes:
                     description: List of the desired control plane logging to enable.
                       For more information, see Amazon EKS Control Plane Logging.
@@ -2095,6 +2460,14 @@ spec:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
                     properties:
+                      elasticLoadBalancing:
+                        description: Configuration block with elastic load balancing
+                          configuration for the cluster. Detailed below.
+                        properties:
+                          enabled:
+                            description: Whether zonal shift is enabled for the cluster.
+                            type: boolean
+                        type: object
                       ipFamily:
                         description: The IP family used to assign Kubernetes pod and
                           service addresses. Valid values are ipv4 (default) and ipv6.
@@ -2148,6 +2521,35 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                    type: object
+                  remoteNetworkConfig:
+                    description: Configuration block with remote network configuration
+                      for EKS Hybrid Nodes. Detailed below.
+                    properties:
+                      remoteNodeNetworks:
+                        description: Configuration block with remote node network
+                          configuration for EKS Hybrid Nodes. Detailed below.
+                        properties:
+                          cidrs:
+                            description: List of network CIDRs that can contain hybrid
+                              nodes.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
+                      remotePodNetworks:
+                        description: Configuration block with remote pod network configuration
+                          for EKS Hybrid Nodes. Detailed below.
+                        properties:
+                          cidrs:
+                            description: List of network CIDRs that can contain pods
+                              that run Kubernetes webhooks on hybrid nodes.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
                     type: object
                   roleArn:
                     description: ARN of the IAM role that provides permissions for
@@ -2230,6 +2632,17 @@ spec:
                             - Always
                             - IfNotPresent
                             type: string
+                        type: object
+                    type: object
+                  storageConfig:
+                    description: Configuration block with storage configuration for
+                      EKS Auto Mode. Detailed below.
+                    properties:
+                      blockStorage:
+                        properties:
+                          enabled:
+                            description: Whether zonal shift is enabled for the cluster.
+                            type: boolean
                         type: object
                     type: object
                   tags:
@@ -2681,6 +3094,31 @@ spec:
                       Outpost. This attribute isn't available for an AWS EKS cluster
                       on AWS cloud.
                     type: string
+                  computeConfig:
+                    description: Configuration block with compute configuration for
+                      EKS Auto Mode. Detailed below.
+                    properties:
+                      enabled:
+                        description: Request to enable or disable the compute capability
+                          on your EKS Auto Mode cluster. If the compute capability
+                          is enabled, EKS Auto Mode will create and delete EC2 Managed
+                          Instances in your Amazon Web Services account.
+                        type: boolean
+                      nodePools:
+                        description: Configuration for node pools that defines the
+                          compute resources for your EKS Auto Mode cluster. Valid
+                          options are general-purpose and system.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      nodeRoleArn:
+                        description: The ARN of the IAM Role EKS will assign to EC2
+                          Managed Instances in your EKS Auto Mode cluster. This value
+                          cannot be changed after the compute capability of EKS Auto
+                          Mode is enabled..
+                        type: string
+                    type: object
                   createdAt:
                     description: Unix epoch timestamp in seconds for when the cluster
                       was created.
@@ -2748,6 +3186,14 @@ spec:
                     description: Configuration block with kubernetes network configuration
                       for the cluster. Detailed below.
                     properties:
+                      elasticLoadBalancing:
+                        description: Configuration block with elastic load balancing
+                          configuration for the cluster. Detailed below.
+                        properties:
+                          enabled:
+                            description: Whether zonal shift is enabled for the cluster.
+                            type: boolean
+                        type: object
                       ipFamily:
                         description: The IP family used to assign Kubernetes pod and
                           service addresses. Valid values are ipv4 (default) and ipv6.
@@ -2768,7 +3214,7 @@ spec:
                       serviceIpv6Cidr:
                         description: The CIDR block that Kubernetes pod and service
                           IP addresses are assigned from if you specified ipv6 for
-                          ipFamily when you created the cluster. Kubernetes assigns
+                          ip_family when you created the cluster. Kubernetes assigns
                           service addresses from the unique local address range (fc00::/7)
                           because you can't specify a custom IPv6 CIDR block when
                           you create the cluster.
@@ -2813,6 +3259,35 @@ spec:
                   platformVersion:
                     description: Platform version for the cluster.
                     type: string
+                  remoteNetworkConfig:
+                    description: Configuration block with remote network configuration
+                      for EKS Hybrid Nodes. Detailed below.
+                    properties:
+                      remoteNodeNetworks:
+                        description: Configuration block with remote node network
+                          configuration for EKS Hybrid Nodes. Detailed below.
+                        properties:
+                          cidrs:
+                            description: List of network CIDRs that can contain hybrid
+                              nodes.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
+                      remotePodNetworks:
+                        description: Configuration block with remote pod network configuration
+                          for EKS Hybrid Nodes. Detailed below.
+                        properties:
+                          cidrs:
+                            description: List of network CIDRs that can contain pods
+                              that run Kubernetes webhooks on hybrid nodes.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                        type: object
+                    type: object
                   roleArn:
                     description: ARN of the IAM role that provides permissions for
                       the Kubernetes control plane to make calls to AWS API operations
@@ -2826,6 +3301,17 @@ spec:
                     description: Status of the EKS cluster. One of CREATING, ACTIVE,
                       DELETING, FAILED.
                     type: string
+                  storageConfig:
+                    description: Configuration block with storage configuration for
+                      EKS Auto Mode. Detailed below.
+                    properties:
+                      blockStorage:
+                        properties:
+                          enabled:
+                            description: Whether zonal shift is enabled for the cluster.
+                            type: boolean
+                        type: object
+                    type: object
                   tags:
                     additionalProperties:
                       type: string

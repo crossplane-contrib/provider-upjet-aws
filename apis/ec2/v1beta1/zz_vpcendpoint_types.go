@@ -147,6 +147,9 @@ type VPCEndpointInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
+	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
+	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
+
 	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
 	SubnetConfiguration []SubnetConfigurationInitParameters `json:"subnetConfiguration,omitempty" tf:"subnet_configuration,omitempty"`
 
@@ -225,6 +228,9 @@ type VPCEndpointObservation_2 struct {
 	// The service name. For AWS services the service name is usually in the form com.amazonaws.<region>.<service> (the SageMaker Notebook service is an exception to this rule, the service name is in the form aws.sagemaker.<region>.notebook).
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 
+	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
+	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
+
 	// The state of the VPC endpoint.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -291,6 +297,10 @@ type VPCEndpointParameters_2 struct {
 	// Selector for a VPCEndpointService in ec2 to populate serviceName.
 	// +kubebuilder:validation:Optional
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
+
+	// - The AWS region of the VPC Endpoint Service. If specified, the VPC endpoint will connect to the service in the provided region. Applicable for endpoints of type Interface.
+	// +kubebuilder:validation:Optional
+	ServiceRegion *string `json:"serviceRegion,omitempty" tf:"service_region,omitempty"`
 
 	// Subnet configuration for the endpoint, used to select specific IPv4 and/or IPv6 addresses to the endpoint. See subnet_configuration below.
 	// +kubebuilder:validation:Optional
