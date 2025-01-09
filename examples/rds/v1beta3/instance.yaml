@@ -20,7 +20,7 @@ spec:
     backupWindow: 09:46-10:16
     dbName: example
     engine: postgres
-    engineVersion: "16.1"
+    engineVersion: "16.6"
     instanceClass: db.t3.micro
     kmsKeyIdSelector:
       matchLabels:
