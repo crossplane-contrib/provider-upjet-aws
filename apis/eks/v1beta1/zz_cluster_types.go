@@ -42,6 +42,25 @@ type AccessConfigParameters struct {
 	BootstrapClusterCreatorAdminPermissions *bool `json:"bootstrapClusterCreatorAdminPermissions,omitempty" tf:"bootstrap_cluster_creator_admin_permissions,omitempty"`
 }
 
+type BlockStorageInitParameters struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type BlockStorageObservation struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type BlockStorageParameters struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type CertificateAuthorityInitParameters struct {
 }
 
@@ -62,6 +81,9 @@ type ClusterInitParameters struct {
 	// Install default unmanaged add-ons, such as aws-cni, kube-proxy, and CoreDNS during cluster creation. If false, you must manually install desired add-ons. Changing this value will force a new cluster to be created. Defaults to true.
 	BootstrapSelfManagedAddons *bool `json:"bootstrapSelfManagedAddons,omitempty" tf:"bootstrap_self_managed_addons,omitempty"`
 
+	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
+	ComputeConfig *ComputeConfigInitParameters `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
+
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +listType=set
 	EnabledClusterLogTypes []*string `json:"enabledClusterLogTypes,omitempty" tf:"enabled_cluster_log_types,omitempty"`
@@ -75,6 +97,9 @@ type ClusterInitParameters struct {
 	// Configuration block representing the configuration of your local Amazon EKS cluster on an AWS Outpost. This block isn't available for creating Amazon EKS clusters on the AWS cloud.
 	OutpostConfig []OutpostConfigInitParameters `json:"outpostConfig,omitempty" tf:"outpost_config,omitempty"`
 
+	// Configuration block with remote network configuration for EKS Hybrid Nodes. Detailed below.
+	RemoteNetworkConfig *RemoteNetworkConfigInitParameters `json:"remoteNetworkConfig,omitempty" tf:"remote_network_config,omitempty"`
+
 	// ARN of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf. Ensure the resource configuration includes explicit dependencies on the IAM Role permissions by adding depends_on if using the aws_iam_role_policy resource or aws_iam_role_policy_attachment resource, otherwise EKS cannot delete EKS managed EC2 infrastructure such as Security Groups on EKS Cluster deletion.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -87,6 +112,9 @@ type ClusterInitParameters struct {
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// Configuration block with storage configuration for EKS Auto Mode. Detailed below.
+	StorageConfig *StorageConfigInitParameters `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -124,6 +152,9 @@ type ClusterObservation struct {
 	// The ID of your local Amazon EKS cluster on the AWS Outpost. This attribute isn't available for an AWS EKS cluster on AWS cloud.
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
+	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
+	ComputeConfig *ComputeConfigObservation `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
+
 	// Unix epoch timestamp in seconds for when the cluster was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
@@ -152,11 +183,17 @@ type ClusterObservation struct {
 	// Platform version for the cluster.
 	PlatformVersion *string `json:"platformVersion,omitempty" tf:"platform_version,omitempty"`
 
+	// Configuration block with remote network configuration for EKS Hybrid Nodes. Detailed below.
+	RemoteNetworkConfig *RemoteNetworkConfigObservation `json:"remoteNetworkConfig,omitempty" tf:"remote_network_config,omitempty"`
+
 	// ARN of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf. Ensure the resource configuration includes explicit dependencies on the IAM Role permissions by adding depends_on if using the aws_iam_role_policy resource or aws_iam_role_policy_attachment resource, otherwise EKS cannot delete EKS managed EC2 infrastructure such as Security Groups on EKS Cluster deletion.
 	RoleArn *string `json:"roleArn,omitempty" tf:"role_arn,omitempty"`
 
 	// Status of the EKS cluster. One of CREATING, ACTIVE, DELETING, FAILED.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Configuration block with storage configuration for EKS Auto Mode. Detailed below.
+	StorageConfig *StorageConfigObservation `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -191,6 +228,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	BootstrapSelfManagedAddons *bool `json:"bootstrapSelfManagedAddons,omitempty" tf:"bootstrap_self_managed_addons,omitempty"`
 
+	// Configuration block with compute configuration for EKS Auto Mode. Detailed below.
+	// +kubebuilder:validation:Optional
+	ComputeConfig *ComputeConfigParameters `json:"computeConfig,omitempty" tf:"compute_config,omitempty"`
+
 	// List of the desired control plane logging to enable. For more information, see Amazon EKS Control Plane Logging.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -213,6 +254,10 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
 
+	// Configuration block with remote network configuration for EKS Hybrid Nodes. Detailed below.
+	// +kubebuilder:validation:Optional
+	RemoteNetworkConfig *RemoteNetworkConfigParameters `json:"remoteNetworkConfig,omitempty" tf:"remote_network_config,omitempty"`
+
 	// ARN of the IAM role that provides permissions for the Kubernetes control plane to make calls to AWS API operations on your behalf. Ensure the resource configuration includes explicit dependencies on the IAM Role permissions by adding depends_on if using the aws_iam_role_policy resource or aws_iam_role_policy_attachment resource, otherwise EKS cannot delete EKS managed EC2 infrastructure such as Security Groups on EKS Cluster deletion.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.Role
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-aws/config/common.ARNExtractor()
@@ -226,6 +271,10 @@ type ClusterParameters struct {
 	// Selector for a Role in iam to populate roleArn.
 	// +kubebuilder:validation:Optional
 	RoleArnSelector *v1.Selector `json:"roleArnSelector,omitempty" tf:"-"`
+
+	// Configuration block with storage configuration for EKS Auto Mode. Detailed below.
+	// +kubebuilder:validation:Optional
+	StorageConfig *StorageConfigParameters `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
 
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
@@ -251,6 +300,48 @@ type ClusterParameters struct {
 	ZonalShiftConfig []ZonalShiftConfigParameters `json:"zonalShiftConfig,omitempty" tf:"zonal_shift_config,omitempty"`
 }
 
+type ComputeConfigInitParameters struct {
+
+	// Request to enable or disable the compute capability on your EKS Auto Mode cluster. If the compute capability is enabled, EKS Auto Mode will create and delete EC2 Managed Instances in your Amazon Web Services account.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration for node pools that defines the compute resources for your EKS Auto Mode cluster. Valid options are general-purpose and system.
+	// +listType=set
+	NodePools []*string `json:"nodePools,omitempty" tf:"node_pools,omitempty"`
+
+	// The ARN of the IAM Role EKS will assign to EC2 Managed Instances in your EKS Auto Mode cluster. This value cannot be changed after the compute capability of EKS Auto Mode is enabled..
+	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
+}
+
+type ComputeConfigObservation struct {
+
+	// Request to enable or disable the compute capability on your EKS Auto Mode cluster. If the compute capability is enabled, EKS Auto Mode will create and delete EC2 Managed Instances in your Amazon Web Services account.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration for node pools that defines the compute resources for your EKS Auto Mode cluster. Valid options are general-purpose and system.
+	// +listType=set
+	NodePools []*string `json:"nodePools,omitempty" tf:"node_pools,omitempty"`
+
+	// The ARN of the IAM Role EKS will assign to EC2 Managed Instances in your EKS Auto Mode cluster. This value cannot be changed after the compute capability of EKS Auto Mode is enabled..
+	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
+}
+
+type ComputeConfigParameters struct {
+
+	// Request to enable or disable the compute capability on your EKS Auto Mode cluster. If the compute capability is enabled, EKS Auto Mode will create and delete EC2 Managed Instances in your Amazon Web Services account.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Configuration for node pools that defines the compute resources for your EKS Auto Mode cluster. Valid options are general-purpose and system.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	NodePools []*string `json:"nodePools,omitempty" tf:"node_pools,omitempty"`
+
+	// The ARN of the IAM Role EKS will assign to EC2 Managed Instances in your EKS Auto Mode cluster. This value cannot be changed after the compute capability of EKS Auto Mode is enabled..
+	// +kubebuilder:validation:Optional
+	NodeRoleArn *string `json:"nodeRoleArn,omitempty" tf:"node_role_arn,omitempty"`
+}
+
 type ControlPlanePlacementInitParameters struct {
 
 	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
@@ -268,6 +359,25 @@ type ControlPlanePlacementParameters struct {
 	// The name of the placement group for the Kubernetes control plane instances. This setting can't be changed after cluster creation.
 	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName" tf:"group_name,omitempty"`
+}
+
+type ElasticLoadBalancingInitParameters struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ElasticLoadBalancingObservation struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type ElasticLoadBalancingParameters struct {
+
+	// Whether zonal shift is enabled for the cluster.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type EncryptionConfigInitParameters struct {
@@ -316,6 +426,9 @@ type IdentityParameters struct {
 
 type KubernetesNetworkConfigInitParameters struct {
 
+	// Configuration block with elastic load balancing configuration for the cluster. Detailed below.
+	ElasticLoadBalancing *ElasticLoadBalancingInitParameters `json:"elasticLoadBalancing,omitempty" tf:"elastic_load_balancing,omitempty"`
+
 	// The IP family used to assign Kubernetes pod and service addresses. Valid values are ipv4 (default) and ipv6. You can only specify an IP family when you create a cluster, changing this value will force a new cluster to be created.
 	IPFamily *string `json:"ipFamily,omitempty" tf:"ip_family,omitempty"`
 
@@ -324,6 +437,9 @@ type KubernetesNetworkConfigInitParameters struct {
 }
 
 type KubernetesNetworkConfigObservation struct {
+
+	// Configuration block with elastic load balancing configuration for the cluster. Detailed below.
+	ElasticLoadBalancing *ElasticLoadBalancingObservation `json:"elasticLoadBalancing,omitempty" tf:"elastic_load_balancing,omitempty"`
 
 	// The IP family used to assign Kubernetes pod and service addresses. Valid values are ipv4 (default) and ipv6. You can only specify an IP family when you create a cluster, changing this value will force a new cluster to be created.
 	IPFamily *string `json:"ipFamily,omitempty" tf:"ip_family,omitempty"`
@@ -336,6 +452,10 @@ type KubernetesNetworkConfigObservation struct {
 }
 
 type KubernetesNetworkConfigParameters struct {
+
+	// Configuration block with elastic load balancing configuration for the cluster. Detailed below.
+	// +kubebuilder:validation:Optional
+	ElasticLoadBalancing *ElasticLoadBalancingParameters `json:"elasticLoadBalancing,omitempty" tf:"elastic_load_balancing,omitempty"`
 
 	// The IP family used to assign Kubernetes pod and service addresses. Valid values are ipv4 (default) and ipv6. You can only specify an IP family when you create a cluster, changing this value will force a new cluster to be created.
 	// +kubebuilder:validation:Optional
@@ -420,6 +540,93 @@ type ProviderParameters struct {
 	// ARN of the Key Management Service (KMS) customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
 	// +kubebuilder:validation:Optional
 	KeyArn *string `json:"keyArn" tf:"key_arn,omitempty"`
+}
+
+type RemoteNetworkConfigInitParameters struct {
+
+	// Configuration block with remote node network configuration for EKS Hybrid Nodes. Detailed below.
+	RemoteNodeNetworks *RemoteNodeNetworksInitParameters `json:"remoteNodeNetworks,omitempty" tf:"remote_node_networks,omitempty"`
+
+	// Configuration block with remote pod network configuration for EKS Hybrid Nodes. Detailed below.
+	RemotePodNetworks *RemotePodNetworksInitParameters `json:"remotePodNetworks,omitempty" tf:"remote_pod_networks,omitempty"`
+}
+
+type RemoteNetworkConfigObservation struct {
+
+	// Configuration block with remote node network configuration for EKS Hybrid Nodes. Detailed below.
+	RemoteNodeNetworks *RemoteNodeNetworksObservation `json:"remoteNodeNetworks,omitempty" tf:"remote_node_networks,omitempty"`
+
+	// Configuration block with remote pod network configuration for EKS Hybrid Nodes. Detailed below.
+	RemotePodNetworks *RemotePodNetworksObservation `json:"remotePodNetworks,omitempty" tf:"remote_pod_networks,omitempty"`
+}
+
+type RemoteNetworkConfigParameters struct {
+
+	// Configuration block with remote node network configuration for EKS Hybrid Nodes. Detailed below.
+	// +kubebuilder:validation:Optional
+	RemoteNodeNetworks *RemoteNodeNetworksParameters `json:"remoteNodeNetworks" tf:"remote_node_networks,omitempty"`
+
+	// Configuration block with remote pod network configuration for EKS Hybrid Nodes. Detailed below.
+	// +kubebuilder:validation:Optional
+	RemotePodNetworks *RemotePodNetworksParameters `json:"remotePodNetworks,omitempty" tf:"remote_pod_networks,omitempty"`
+}
+
+type RemoteNodeNetworksInitParameters struct {
+
+	// List of network CIDRs that can contain hybrid nodes.
+	// +listType=set
+	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+}
+
+type RemoteNodeNetworksObservation struct {
+
+	// List of network CIDRs that can contain hybrid nodes.
+	// +listType=set
+	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+}
+
+type RemoteNodeNetworksParameters struct {
+
+	// List of network CIDRs that can contain hybrid nodes.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+}
+
+type RemotePodNetworksInitParameters struct {
+
+	// List of network CIDRs that can contain pods that run Kubernetes webhooks on hybrid nodes.
+	// +listType=set
+	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+}
+
+type RemotePodNetworksObservation struct {
+
+	// List of network CIDRs that can contain pods that run Kubernetes webhooks on hybrid nodes.
+	// +listType=set
+	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+}
+
+type RemotePodNetworksParameters struct {
+
+	// List of network CIDRs that can contain pods that run Kubernetes webhooks on hybrid nodes.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
+}
+
+type StorageConfigInitParameters struct {
+	BlockStorage *BlockStorageInitParameters `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
+}
+
+type StorageConfigObservation struct {
+	BlockStorage *BlockStorageObservation `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
+}
+
+type StorageConfigParameters struct {
+
+	// +kubebuilder:validation:Optional
+	BlockStorage *BlockStorageParameters `json:"blockStorage,omitempty" tf:"block_storage,omitempty"`
 }
 
 type UpgradePolicyInitParameters struct {

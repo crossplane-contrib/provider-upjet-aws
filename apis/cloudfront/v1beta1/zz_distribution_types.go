@@ -1394,6 +1394,9 @@ type OriginInitParameters struct {
 
 	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	S3OriginConfig []S3OriginConfigInitParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
+
+	// The VPC origin configuration.
+	VPCOriginConfig *VPCOriginConfigInitParameters `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
 }
 
 type OriginObservation struct {
@@ -1427,6 +1430,9 @@ type OriginObservation struct {
 
 	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	S3OriginConfig []S3OriginConfigObservation `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
+
+	// The VPC origin configuration.
+	VPCOriginConfig *VPCOriginConfigObservation `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
 }
 
 type OriginParameters struct {
@@ -1480,6 +1486,10 @@ type OriginParameters struct {
 	// CloudFront S3 origin configuration information. If a custom origin is required, use custom_origin_config instead.
 	// +kubebuilder:validation:Optional
 	S3OriginConfig []S3OriginConfigParameters `json:"s3OriginConfig,omitempty" tf:"s3_origin_config,omitempty"`
+
+	// The VPC origin configuration.
+	// +kubebuilder:validation:Optional
+	VPCOriginConfig *VPCOriginConfigParameters `json:"vpcOriginConfig,omitempty" tf:"vpc_origin_config,omitempty"`
 }
 
 type OriginShieldInitParameters struct {
@@ -1608,6 +1618,45 @@ type TrustedSignersObservation struct {
 }
 
 type TrustedSignersParameters struct {
+}
+
+type VPCOriginConfigInitParameters struct {
+
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
+	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+
+	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
+	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
+
+	// The VPC origin ID.
+	VPCOriginID *string `json:"vpcOriginId,omitempty" tf:"vpc_origin_id,omitempty"`
+}
+
+type VPCOriginConfigObservation struct {
+
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
+	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+
+	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
+	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
+
+	// The VPC origin ID.
+	VPCOriginID *string `json:"vpcOriginId,omitempty" tf:"vpc_origin_id,omitempty"`
+}
+
+type VPCOriginConfigParameters struct {
+
+	// The Custom KeepAlive timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 5.
+	// +kubebuilder:validation:Optional
+	OriginKeepaliveTimeout *float64 `json:"originKeepaliveTimeout,omitempty" tf:"origin_keepalive_timeout,omitempty"`
+
+	// The Custom Read timeout, in seconds. By default, AWS enforces an upper limit of 60. But you can request an increase. Defaults to 30.
+	// +kubebuilder:validation:Optional
+	OriginReadTimeout *float64 `json:"originReadTimeout,omitempty" tf:"origin_read_timeout,omitempty"`
+
+	// The VPC origin ID.
+	// +kubebuilder:validation:Optional
+	VPCOriginID *string `json:"vpcOriginId" tf:"vpc_origin_id,omitempty"`
 }
 
 type ViewerCertificateInitParameters struct {

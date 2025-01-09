@@ -68,6 +68,9 @@ type LustreFileSystemInitParameters struct {
 	// - The type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
 	DriveCacheType *string `json:"driveCacheType,omitempty" tf:"drive_cache_type,omitempty"`
 
+	// Adds support for Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS) to Lustre. This must be set at creation. If set this cannot be changed and this prevents changes to per_unit_storage_throughput. This is only supported when deployment_type is set to PERSISTENT_2, metadata_configuration is used, and an EFA-enabled security group is attached.
+	EfaEnabled *bool `json:"efaEnabled,omitempty" tf:"efa_enabled,omitempty"`
+
 	// S3 URI (with optional prefix) where the root of your Amazon FSx file system is exported. Can only be specified with import_path argument and the path must use the same Amazon S3 bucket as specified in import_path. Set equal to import_path to overwrite files on export. Defaults to s3://{IMPORT BUCKET}/FSxLustre{CREATION TIMESTAMP}. Only supported on PERSISTENT_1 deployment types.
 	ExportPath *string `json:"exportPath,omitempty" tf:"export_path,omitempty"`
 
@@ -186,6 +189,9 @@ type LustreFileSystemObservation struct {
 	// - The type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
 	DriveCacheType *string `json:"driveCacheType,omitempty" tf:"drive_cache_type,omitempty"`
 
+	// Adds support for Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS) to Lustre. This must be set at creation. If set this cannot be changed and this prevents changes to per_unit_storage_throughput. This is only supported when deployment_type is set to PERSISTENT_2, metadata_configuration is used, and an EFA-enabled security group is attached.
+	EfaEnabled *bool `json:"efaEnabled,omitempty" tf:"efa_enabled,omitempty"`
+
 	// S3 URI (with optional prefix) where the root of your Amazon FSx file system is exported. Can only be specified with import_path argument and the path must use the same Amazon S3 bucket as specified in import_path. Set equal to import_path to overwrite files on export. Defaults to s3://{IMPORT BUCKET}/FSxLustre{CREATION TIMESTAMP}. Only supported on PERSISTENT_1 deployment types.
 	ExportPath *string `json:"exportPath,omitempty" tf:"export_path,omitempty"`
 
@@ -293,6 +299,10 @@ type LustreFileSystemParameters struct {
 	// - The type of drive cache used by PERSISTENT_1 filesystems that are provisioned with HDD storage_type. Required for HDD storage_type, set to either READ or NONE.
 	// +kubebuilder:validation:Optional
 	DriveCacheType *string `json:"driveCacheType,omitempty" tf:"drive_cache_type,omitempty"`
+
+	// Adds support for Elastic Fabric Adapter (EFA) and GPUDirect Storage (GDS) to Lustre. This must be set at creation. If set this cannot be changed and this prevents changes to per_unit_storage_throughput. This is only supported when deployment_type is set to PERSISTENT_2, metadata_configuration is used, and an EFA-enabled security group is attached.
+	// +kubebuilder:validation:Optional
+	EfaEnabled *bool `json:"efaEnabled,omitempty" tf:"efa_enabled,omitempty"`
 
 	// S3 URI (with optional prefix) where the root of your Amazon FSx file system is exported. Can only be specified with import_path argument and the path must use the same Amazon S3 bucket as specified in import_path. Set equal to import_path to overwrite files on export. Defaults to s3://{IMPORT BUCKET}/FSxLustre{CREATION TIMESTAMP}. Only supported on PERSISTENT_1 deployment types.
 	// +kubebuilder:validation:Optional
