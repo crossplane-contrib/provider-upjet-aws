@@ -348,11 +348,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   permissionsWithGrantOption:
                     description: Subset of permissions which the principal can pass.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   principal:
                     description: account permissions. For more information, see Lake
                       Formation Permissions Reference.
@@ -782,11 +784,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   permissionsWithGrantOption:
                     description: Subset of permissions which the principal can pass.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   principal:
                     description: account permissions. For more information, see Lake
                       Formation Permissions Reference.
@@ -1228,11 +1232,13 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   permissionsWithGrantOption:
                     description: Subset of permissions which the principal can pass.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   principal:
                     description: account permissions. For more information, see Lake
                       Formation Permissions Reference.

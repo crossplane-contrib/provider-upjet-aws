@@ -48959,6 +48959,11 @@ func (in *VPCEndpointInitParameters_2) DeepCopyInto(out *VPCEndpointInitParamete
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ServiceRegion != nil {
+		in, out := &in.ServiceRegion, &out.ServiceRegion
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetConfiguration != nil {
 		in, out := &in.SubnetConfiguration, &out.SubnetConfiguration
 		*out = make([]SubnetConfigurationInitParameters, len(*in))
@@ -49187,6 +49192,11 @@ func (in *VPCEndpointObservation_2) DeepCopyInto(out *VPCEndpointObservation_2) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.ServiceRegion != nil {
+		in, out := &in.ServiceRegion, &out.ServiceRegion
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -49328,6 +49338,11 @@ func (in *VPCEndpointParameters_2) DeepCopyInto(out *VPCEndpointParameters_2) {
 		in, out := &in.ServiceNameSelector, &out.ServiceNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceRegion != nil {
+		in, out := &in.ServiceRegion, &out.ServiceRegion
+		*out = new(string)
+		**out = **in
 	}
 	if in.SubnetConfiguration != nil {
 		in, out := &in.SubnetConfiguration, &out.SubnetConfiguration
