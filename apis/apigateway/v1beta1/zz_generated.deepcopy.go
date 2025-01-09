@@ -2787,6 +2787,11 @@ func (in *DomainNameInitParameters) DeepCopyInto(out *DomainNameInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Policy != nil {
+		in, out := &in.Policy, &out.Policy
+		*out = new(string)
+		**out = **in
+	}
 	if in.RegionalCertificateArn != nil {
 		in, out := &in.RegionalCertificateArn, &out.RegionalCertificateArn
 		*out = new(string)
@@ -2920,6 +2925,11 @@ func (in *DomainNameObservation) DeepCopyInto(out *DomainNameObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DomainNameID != nil {
+		in, out := &in.DomainNameID, &out.DomainNameID
+		*out = new(string)
+		**out = **in
+	}
 	if in.EndpointConfiguration != nil {
 		in, out := &in.EndpointConfiguration, &out.EndpointConfiguration
 		*out = make([]EndpointConfigurationObservation, len(*in))
@@ -2941,6 +2951,11 @@ func (in *DomainNameObservation) DeepCopyInto(out *DomainNameObservation) {
 	}
 	if in.OwnershipVerificationCertificateArn != nil {
 		in, out := &in.OwnershipVerificationCertificateArn, &out.OwnershipVerificationCertificateArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Policy != nil {
+		in, out := &in.Policy, &out.Policy
 		*out = new(string)
 		**out = **in
 	}
@@ -3072,6 +3087,11 @@ func (in *DomainNameParameters) DeepCopyInto(out *DomainNameParameters) {
 	}
 	if in.OwnershipVerificationCertificateArn != nil {
 		in, out := &in.OwnershipVerificationCertificateArn, &out.OwnershipVerificationCertificateArn
+		*out = new(string)
+		**out = **in
+	}
+	if in.Policy != nil {
+		in, out := &in.Policy, &out.Policy
 		*out = new(string)
 		**out = **in
 	}

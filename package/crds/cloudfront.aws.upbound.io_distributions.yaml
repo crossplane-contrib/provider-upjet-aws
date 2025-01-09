@@ -941,6 +941,25 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        vpcOriginConfig:
+                          description: The VPC origin configuration.
+                          items:
+                            properties:
+                              originKeepaliveTimeout:
+                                description: The Custom KeepAlive timeout, in seconds.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 5.
+                                type: number
+                              originReadTimeout:
+                                description: The Custom Read timeout, in seconds.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 30.
+                                type: number
+                              vpcOriginId:
+                                description: The VPC origin ID.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   originGroup:
@@ -1972,6 +1991,25 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        vpcOriginConfig:
+                          description: The VPC origin configuration.
+                          items:
+                            properties:
+                              originKeepaliveTimeout:
+                                description: The Custom KeepAlive timeout, in seconds.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 5.
+                                type: number
+                              originReadTimeout:
+                                description: The Custom Read timeout, in seconds.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 30.
+                                type: number
+                              vpcOriginId:
+                                description: The VPC origin ID.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   originGroup:
@@ -2900,6 +2938,25 @@ spec:
                               originAccessIdentity:
                                 description: The CloudFront origin access identity
                                   to associate with the origin.
+                                type: string
+                            type: object
+                          type: array
+                        vpcOriginConfig:
+                          description: The VPC origin configuration.
+                          items:
+                            properties:
+                              originKeepaliveTimeout:
+                                description: The Custom KeepAlive timeout, in seconds.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 5.
+                                type: number
+                              originReadTimeout:
+                                description: The Custom Read timeout, in seconds.
+                                  By default, AWS enforces an upper limit of 60. But
+                                  you can request an increase. Defaults to 30.
+                                type: number
+                              vpcOriginId:
+                                description: The VPC origin ID.
                                 type: string
                             type: object
                           type: array

@@ -241,6 +241,12 @@ spec:
                       an ACM Private CA or mutual_tls_authentication is configured
                       with an ACM-imported certificate.)
                     type: string
+                  policy:
+                    description: A stringified JSON policy document that applies to
+                      the execute-api service for this DomainName regardless of the
+                      caller and Method configuration. Supported only for private
+                      custom domain names.
+                    type: string
                   region:
                     description: Region is the region you'd like your resource to
                       be created in.
@@ -527,6 +533,12 @@ spec:
                       custom domain ownership (when certificate_arn is issued via
                       an ACM Private CA or mutual_tls_authentication is configured
                       with an ACM-imported certificate.)
+                    type: string
+                  policy:
+                    description: A stringified JSON policy document that applies to
+                      the execute-api service for this DomainName regardless of the
+                      caller and Method configuration. Supported only for private
+                      custom domain names.
                     type: string
                   regionalCertificateArn:
                     description: ARN for an AWS-managed certificate. AWS Certificate
@@ -848,6 +860,10 @@ spec:
                   domainName:
                     description: Fully-qualified domain name to register.
                     type: string
+                  domainNameId:
+                    description: The identifier for the domain name resource. Supported
+                      only for private custom domain names.
+                    type: string
                   endpointConfiguration:
                     description: Configuration block defining API endpoint information
                       including type. See below.
@@ -894,6 +910,12 @@ spec:
                       custom domain ownership (when certificate_arn is issued via
                       an ACM Private CA or mutual_tls_authentication is configured
                       with an ACM-imported certificate.)
+                    type: string
+                  policy:
+                    description: A stringified JSON policy document that applies to
+                      the execute-api service for this DomainName regardless of the
+                      caller and Method configuration. Supported only for private
+                      custom domain names.
                     type: string
                   regionalCertificateArn:
                     description: ARN for an AWS-managed certificate. AWS Certificate

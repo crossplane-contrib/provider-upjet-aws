@@ -169,6 +169,8 @@ spec:
                     type: array
                   ebsOptimized:
                     type: boolean
+                  enablePrimaryIpv6:
+                    type: boolean
                   enclaveOptions:
                     items:
                       properties:
@@ -652,6 +654,8 @@ spec:
                       type: object
                     type: array
                   ebsOptimized:
+                    type: boolean
+                  enablePrimaryIpv6:
                     type: boolean
                   enclaveOptions:
                     items:
@@ -1294,6 +1298,8 @@ spec:
                       type: object
                     type: array
                   ebsOptimized:
+                    type: boolean
+                  enablePrimaryIpv6:
                     type: boolean
                   enclaveOptions:
                     items:
