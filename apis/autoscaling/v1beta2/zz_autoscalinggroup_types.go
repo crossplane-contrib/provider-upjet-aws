@@ -93,7 +93,7 @@ type AlarmSpecificationParameters struct {
 type AutoscalingGroupInitParameters struct {
 
 	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
-	AvailabilityZoneDistribution *AvailabilityZoneDistributionInitParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionInitParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	// +listType=set
@@ -273,7 +273,7 @@ type AutoscalingGroupObservation struct {
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
 	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
-	AvailabilityZoneDistribution *AvailabilityZoneDistributionObservation `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionObservation `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	// +listType=set
@@ -431,7 +431,7 @@ type AutoscalingGroupParameters struct {
 
 	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
 	// +kubebuilder:validation:Optional
-	AvailabilityZoneDistribution *AvailabilityZoneDistributionParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
+	AvailabilityZoneDistribution []AvailabilityZoneDistributionParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	// +kubebuilder:validation:Optional
