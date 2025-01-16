@@ -38,10 +38,15 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	// AWS Batch job queue can be imported using the name
 	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:job-queue/{{ .external_name }}"),
 
+	// bedrock
+	//
+	// Bedrock inference profile can be imported using the ID: inference_profile-id-12345678
+	"aws_bedrock_inference_profile": identifierFromProviderWithDefaultStub("bedrock12345"),
+
 	// bedrockagent
 	//
 	// Bedrock Agent can be imported using the agent arn
-	"aws_bedrockagent_agent": bedrockAgent(),
+	"aws_bedrockagent_agent": identifierFromProviderWithDefaultStub("STUB123456"),
 
 	// CodeGuru Profiler
 	// Profiling Group can be imported using the the profiling group name
@@ -2881,13 +2886,13 @@ func kmsAlias() config.ExternalName {
 	return e
 }
 
-func bedrockAgent() config.ExternalName {
-	// Terraform does not allow agent id to be empty.
+func identifierFromProviderWithDefaultStub(defaultstub string) config.ExternalName {
+	// Terraform does not always allow id to be empty.
 	// Using a stub value to pass validation.
 	e := config.IdentifierFromProvider
 	e.GetIDFn = func(_ context.Context, externalName string, _ map[string]any, _ map[string]any) (string, error) {
 		if len(externalName) == 0 {
-			return "STUB123456", nil
+			return defaultstub, nil
 		}
 		return externalName, nil
 	}

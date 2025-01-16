@@ -52,6 +52,7 @@ import (
 	v1beta2backup "github.com/upbound/provider-aws/apis/backup/v1beta2"
 	v1beta1batch "github.com/upbound/provider-aws/apis/batch/v1beta1"
 	v1beta2batch "github.com/upbound/provider-aws/apis/batch/v1beta2"
+	v1beta1bedrock "github.com/upbound/provider-aws/apis/bedrock/v1beta1"
 	v1beta1bedrockagent "github.com/upbound/provider-aws/apis/bedrockagent/v1beta1"
 	v1beta1budgets "github.com/upbound/provider-aws/apis/budgets/v1beta1"
 	v1beta2budgets "github.com/upbound/provider-aws/apis/budgets/v1beta2"
@@ -349,6 +350,7 @@ func init() {
 		v1beta2backup.SchemeBuilder.AddToScheme,
 		v1beta1batch.SchemeBuilder.AddToScheme,
 		v1beta2batch.SchemeBuilder.AddToScheme,
+		v1beta1bedrock.SchemeBuilder.AddToScheme,
 		v1beta1bedrockagent.SchemeBuilder.AddToScheme,
 		v1beta1budgets.SchemeBuilder.AddToScheme,
 		v1beta2budgets.SchemeBuilder.AddToScheme,
