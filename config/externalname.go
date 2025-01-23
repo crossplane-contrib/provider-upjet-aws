@@ -1170,6 +1170,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"aws_elasticache_subnet_group":             config.NameAsIdentifier,
 	"aws_elasticache_user":                     config.ParameterAsIdentifier("user_id"),
 	"aws_elasticache_user_group":               config.ParameterAsIdentifier("user_group_id"),
+	// Imported using the associated User Group ID and User ID separated by a forward comma (,)
+	"aws_elasticache_user_group_association":   config.IdentifierFromProvider,
 
 	// elasticbeanstalk
 	//
