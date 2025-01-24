@@ -56,9 +56,11 @@ var (
 			name:      "AWS ISO (US)",
 			dnsSuffix: "c2s.ic.gov",
 			serviceToDefaultRegions: map[string]string{
-				"iam":     "us-iso-east-1",
-				"route53": "us-iso-east-1",
-				"support": "us-iso-east-1",
+				"budgets":       "us-iso-east-1",
+				"iam":           "us-iso-east-1",
+				"organizations": "us-iso-east-1",
+				"route53":       "us-iso-east-1",
+				"support":       "us-iso-east-1",
 			},
 		},
 		"aws-iso-b": {
@@ -66,9 +68,11 @@ var (
 			name:      "AWS ISOB (US)",
 			dnsSuffix: "sc2s.sgov.gov",
 			serviceToDefaultRegions: map[string]string{
-				"iam":     "us-isob-east-1",
-				"route53": "us-isob-east-1",
-				"support": "us-isob-east-1",
+				"budgets":       "us-isob-east-1",
+				"iam":           "us-isob-east-1",
+				"organizations": "us-isob-east-1",
+				"route53":       "us-isob-east-1",
+				"support":       "us-isob-east-1",
 			},
 		},
 		"aws-iso-e": {
