@@ -102,7 +102,7 @@ func usage() {
 	fmt.Fprintf(os.Stderr, "\tmain.go <aws-sdk-go-v2-endpoints-json-url>\n\n")
 }
 
-func main() {
+func main() { //nolint:gocyclo
 	flag.Usage = usage
 	flag.Parse()
 
@@ -183,13 +183,13 @@ func main() {
 	}
 	defer func() {
 		if err := targetFile.Close(); err != nil {
-			log.Fatalf("Failed to close the templated main %q: %s", targetFilename, err.Error())
+			log.Fatalf("Failed to close the file %q: %s", targetFilename, err.Error())
 		}
 	}()
 
 	buf := &bytes.Buffer{}
 	if err := tmpl.Execute(buf, templateData); err != nil {
-		log.Fatalf("cannot execute template: %v", err)
+		log.Fatalf("cannot execute template: %v", err) //nolint:gocritic
 	}
 	gofmtFormattedBytes, err := format.Source(buf.Bytes())
 	if err != nil {
@@ -203,7 +203,7 @@ func main() {
 }
 
 func readEndpointsDocumentFromURL(url string, to *EndpointsDocument) error {
-	r, err := http.Get(url)
+	r, err := http.Get(url) //nolint:gosec only for endpoint generation, with a fixed AWS url
 	if err != nil {
 		return errors.Wrap(err, "cannot fetch remote endpoints document")
 	}
