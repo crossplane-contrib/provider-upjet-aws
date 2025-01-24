@@ -203,14 +203,19 @@ func main() { //nolint:gocyclo
 }
 
 func readEndpointsDocumentFromURL(url string, to *EndpointsDocument) error {
-	r, err := http.Get(url) //nolint:gosec only for endpoint generation, with a fixed AWS url
+	r, err := http.Get(url) //nolint only for endpoint generation, with a fixed AWS url
 	if err != nil {
 		return errors.Wrap(err, "cannot fetch remote endpoints document")
 	}
 	if r.StatusCode < 200 || r.StatusCode > 299 {
 		return errors.Errorf("fetching endpoints document returned non-2xx HTTP status code: %s", r.Status)
 	}
-	defer r.Body.Close()
+
+	defer func() {
+		if err := r.Body.Close(); err != nil {
+			log.Printf("error closing response body: %v", err)
+		}
+	}()
 
 	epDocumentRaw, err := io.ReadAll(r.Body)
 	if err != nil {
