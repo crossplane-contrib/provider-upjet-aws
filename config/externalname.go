@@ -1173,7 +1173,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// ElastiCache user group associations can be imported using the user_group_id and user_id:
 	// userGoupId1,userId
 	"aws_elasticache_user_group_association": FormattedIdentifierFromProvider(",", "user_group_id", "user_id"),
-	
+
 	// elasticbeanstalk
 	//
 	// Elastic Beanstalk Applications can be imported using the name
