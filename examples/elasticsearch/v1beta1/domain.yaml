@@ -10,27 +10,13 @@ metadata:
     uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: uptest-example
 spec:
   forProvider:
-    accessPolicies: |
-      {
-        "Version": "2012-10-17",
-        "Statement": [
-          {
-            "Effect": "Allow",
-            "Principal": {
-              "AWS": "*"
-            },
-          "Action": "es:*",
-          "Resource": "arn:aws:es:us-west-1:domain/example/*"
-          }
-        ]
-      }
     clusterConfig:
     - instanceType: r4.large.elasticsearch
     ebsOptions:
     - ebsEnabled: true
       volumeSize: 30
-    elasticsearchVersion: "5.3"
+    elasticsearchVersion: "7.1"
     region: us-west-1
