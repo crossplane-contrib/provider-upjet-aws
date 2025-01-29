@@ -14,4 +14,4 @@ spec:
     - some-audience
     thumbprintList:
     - 15e29108718111e59b3dad31954647e3c344a231
-    url: https://token.actions.githubusercontent.com
+    url: https://accounts.google.com
