@@ -13,6 +13,7 @@ metadata:
   name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
+    atRestEncryptionEnabled: "true"
     automaticFailoverEnabled: true
     description: example description
     engineVersion: "7.1"
