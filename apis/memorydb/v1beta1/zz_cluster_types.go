@@ -42,7 +42,10 @@ type ClusterInitParameters struct {
 	// Description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Version number of the Redis engine to be used for the cluster. Downgrades are not supported.
+	// The engine that will run on your nodes. Supported values are redis and valkey.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Version number of the engine to be used for the cluster. Downgrades are not supported.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Name of the final cluster snapshot to be created when this resource is deleted. If omitted, no final snapshot will be made.
@@ -62,6 +65,9 @@ type ClusterInitParameters struct {
 
 	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
 
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -148,10 +154,13 @@ type ClusterObservation struct {
 	// Description for the cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Patch version number of the Redis engine used by the cluster.
+	// The engine that will run on your nodes. Supported values are redis and valkey.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Patch version number of the engine used by the cluster.
 	EnginePatchVersion *string `json:"enginePatchVersion,omitempty" tf:"engine_patch_version,omitempty"`
 
-	// Version number of the Redis engine to be used for the cluster. Downgrades are not supported.
+	// Version number of the engine to be used for the cluster. Downgrades are not supported.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
 	// Name of the final cluster snapshot to be created when this resource is deleted. If omitted, no final snapshot will be made.
@@ -165,6 +174,9 @@ type ClusterObservation struct {
 
 	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
 
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
@@ -236,7 +248,11 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Version number of the Redis engine to be used for the cluster. Downgrades are not supported.
+	// The engine that will run on your nodes. Supported values are redis and valkey.
+	// +kubebuilder:validation:Optional
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// Version number of the engine to be used for the cluster. Downgrades are not supported.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
@@ -260,6 +276,10 @@ type ClusterParameters struct {
 	// Specifies the weekly time range during which maintenance on the cluster is performed. Specify as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60 minute period. Example: sun:23:00-mon:01:30.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// The multi region cluster identifier specified on aws_memorydb_multi_region_cluster.
+	// +kubebuilder:validation:Optional
+	MultiRegionClusterName *string `json:"multiRegionClusterName,omitempty" tf:"multi_region_cluster_name,omitempty"`
 
 	// The compute and memory capacity of the nodes in the cluster. See AWS documentation on supported node types as well as vertical scaling.
 	// +kubebuilder:validation:Optional

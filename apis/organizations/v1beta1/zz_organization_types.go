@@ -67,7 +67,7 @@ type OrganizationInitParameters struct {
 	// +listType=set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
-	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
 	// +listType=set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
 
@@ -87,7 +87,7 @@ type OrganizationObservation struct {
 	// +listType=set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
-	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
 	// +listType=set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`
 
@@ -123,7 +123,7 @@ type OrganizationParameters struct {
 	// +listType=set
 	AwsServiceAccessPrincipals []*string `json:"awsServiceAccessPrincipals,omitempty" tf:"aws_service_access_principals,omitempty"`
 
-	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
+	// List of Organizations policy types to enable in the Organization Root. Organization must have feature_set set to ALL. For additional information about valid policy types (e.g., AISERVICES_OPT_OUT_POLICY, BACKUP_POLICY, RESOURCE_CONTROL_POLICY, SERVICE_CONTROL_POLICY, and TAG_POLICY), see the AWS Organizations API Reference.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	EnabledPolicyTypes []*string `json:"enabledPolicyTypes,omitempty" tf:"enabled_policy_types,omitempty"`

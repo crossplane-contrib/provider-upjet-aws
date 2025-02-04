@@ -30,15 +30,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	// aws_appsync_domain_name_api_association can be imported using the AppSync domain name
 	"aws_appsync_domain_name_api_association": config.ParameterAsIdentifier("domain_name"),
 
-	// batch
-	//
-	// AWS Batch compute can be imported using the compute_environment_name
-	"aws_batch_compute_environment": config.ParameterAsIdentifier("compute_environment_name"),
-	// Batch Job Definition can be imported using the arn: arn:aws:batch:us-east-1:123456789012:job-definition/sample
-	"aws_batch_job_definition": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:job-definition/{{ .external_name }}"),
-	// Batch Job Queue can be imported using the arn: arn:aws:batch:us-east-1:123456789012:job-queue/sample
-	"aws_batch_job_queue": config.TemplatedStringAsIdentifier("name", "arn:aws:batch:{{ .setup.configuration.region }}:{{ .setup.client_metadata.account_id }}:job-queue/{{ .external_name }}"),
-
 	// ce
 	//
 	// aws_ce_cost_category can be imported using the id

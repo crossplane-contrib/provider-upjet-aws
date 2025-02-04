@@ -80,8 +80,18 @@ type CreateTableDefaultPermissionsParameters struct {
 type DataLakeSettingsInitParameters struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +listType=set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
+
+	// References to User in iam to populate admins.
+	// +kubebuilder:validation:Optional
+	AdminsRefs []v1.Reference `json:"adminsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of User in iam to populate admins.
+	// +kubebuilder:validation:Optional
+	AdminsSelector *v1.Selector `json:"adminsSelector,omitempty" tf:"-"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	AllowExternalDataFiltering *bool `json:"allowExternalDataFiltering,omitempty" tf:"allow_external_data_filtering,omitempty"`
@@ -104,6 +114,10 @@ type DataLakeSettingsInitParameters struct {
 	// A list of the account IDs of Amazon Web Services accounts with Amazon EMR clusters that are to perform data filtering.
 	// +listType=set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
+
+	// Key-value map of additional configuration. Valid values for the CROSS_ACCOUNT_VERSION key are "1", "2", "3", or "4". SET_CONTEXT is also returned with a value of TRUE. In a fresh account, prior to configuring, CROSS_ACCOUNT_VERSION is "1". Destroying this resource sets the CROSS_ACCOUNT_VERSION to "1".
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +listType=set
@@ -143,6 +157,10 @@ type DataLakeSettingsObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Key-value map of additional configuration. Valid values for the CROSS_ACCOUNT_VERSION key are "1", "2", "3", or "4". SET_CONTEXT is also returned with a value of TRUE. In a fresh account, prior to configuring, CROSS_ACCOUNT_VERSION is "1". Destroying this resource sets the CROSS_ACCOUNT_VERSION to "1".
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +listType=set
 	ReadOnlyAdmins []*string `json:"readOnlyAdmins,omitempty" tf:"read_only_admins,omitempty"`
@@ -154,9 +172,19 @@ type DataLakeSettingsObservation struct {
 type DataLakeSettingsParameters struct {
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/iam/v1beta1.User
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("arn",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Admins []*string `json:"admins,omitempty" tf:"admins,omitempty"`
+
+	// References to User in iam to populate admins.
+	// +kubebuilder:validation:Optional
+	AdminsRefs []v1.Reference `json:"adminsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of User in iam to populate admins.
+	// +kubebuilder:validation:Optional
+	AdminsSelector *v1.Selector `json:"adminsSelector,omitempty" tf:"-"`
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
 	// +kubebuilder:validation:Optional
@@ -186,6 +214,11 @@ type DataLakeSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ExternalDataFilteringAllowList []*string `json:"externalDataFilteringAllowList,omitempty" tf:"external_data_filtering_allow_list,omitempty"`
+
+	// Key-value map of additional configuration. Valid values for the CROSS_ACCOUNT_VERSION key are "1", "2", "3", or "4". SET_CONTEXT is also returned with a value of TRUE. In a fresh account, prior to configuring, CROSS_ACCOUNT_VERSION is "1". Destroying this resource sets the CROSS_ACCOUNT_VERSION to "1".
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// –  Set of ARNs of AWS Lake Formation principals (IAM users or roles) with only view access to the resources.
 	// +kubebuilder:validation:Optional

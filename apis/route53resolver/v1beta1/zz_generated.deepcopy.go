@@ -400,6 +400,11 @@ func (in *IPAddressInitParameters) DeepCopyInto(out *IPAddressInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPv6 != nil {
+		in, out := &in.IPv6, &out.IPv6
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
@@ -440,6 +445,11 @@ func (in *IPAddressObservation) DeepCopyInto(out *IPAddressObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPv6 != nil {
+		in, out := &in.IPv6, &out.IPv6
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
@@ -462,6 +472,11 @@ func (in *IPAddressParameters) DeepCopyInto(out *IPAddressParameters) {
 	*out = *in
 	if in.IP != nil {
 		in, out := &in.IP, &out.IP
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPv6 != nil {
+		in, out := &in.IPv6, &out.IPv6
 		*out = new(string)
 		**out = **in
 	}
@@ -1063,6 +1078,11 @@ func (in *TargetIPInitParameters) DeepCopyInto(out *TargetIPInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPv6 != nil {
+		in, out := &in.IPv6, &out.IPv6
+		*out = new(string)
+		**out = **in
+	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
@@ -1093,6 +1113,11 @@ func (in *TargetIPObservation) DeepCopyInto(out *TargetIPObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.IPv6 != nil {
+		in, out := &in.IPv6, &out.IPv6
+		*out = new(string)
+		**out = **in
+	}
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
@@ -1120,6 +1145,11 @@ func (in *TargetIPParameters) DeepCopyInto(out *TargetIPParameters) {
 	*out = *in
 	if in.IP != nil {
 		in, out := &in.IP, &out.IP
+		*out = new(string)
+		**out = **in
+	}
+	if in.IPv6 != nil {
+		in, out := &in.IPv6, &out.IPv6
 		*out = new(string)
 		**out = **in
 	}

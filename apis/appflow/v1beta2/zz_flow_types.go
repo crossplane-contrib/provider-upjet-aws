@@ -1015,6 +1015,44 @@ type MetadataCatalogConfigParameters struct {
 	GlueDataCatalog *GlueDataCatalogParameters `json:"glueDataCatalog,omitempty" tf:"glue_data_catalog,omitempty"`
 }
 
+type PaginationConfigInitParameters struct {
+
+	// he maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application.
+	MaxPageSize *float64 `json:"maxPageSize,omitempty" tf:"max_page_size,omitempty"`
+}
+
+type PaginationConfigObservation struct {
+
+	// he maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application.
+	MaxPageSize *float64 `json:"maxPageSize,omitempty" tf:"max_page_size,omitempty"`
+}
+
+type PaginationConfigParameters struct {
+
+	// he maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application.
+	// +kubebuilder:validation:Optional
+	MaxPageSize *float64 `json:"maxPageSize" tf:"max_page_size,omitempty"`
+}
+
+type ParallelismConfigInitParameters struct {
+
+	// he maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application.
+	MaxPageSize *float64 `json:"maxPageSize,omitempty" tf:"max_page_size,omitempty"`
+}
+
+type ParallelismConfigObservation struct {
+
+	// he maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application.
+	MaxPageSize *float64 `json:"maxPageSize,omitempty" tf:"max_page_size,omitempty"`
+}
+
+type ParallelismConfigParameters struct {
+
+	// he maximum number of records that Amazon AppFlow receives in each page of the response from your SAP application.
+	// +kubebuilder:validation:Optional
+	MaxPageSize *float64 `json:"maxPageSize" tf:"max_page_size,omitempty"`
+}
+
 type PrefixConfigInitParameters struct {
 
 	// Determines the level of granularity that's included in the prefix. Valid values are YEAR, MONTH, DAY, HOUR, and MINUTE.
@@ -2059,12 +2097,24 @@ type SourceConnectorPropertiesSapoDataInitParameters struct {
 
 	// Object path specified in the SAPOData flow destination.
 	ObjectPath *string `json:"objectPath,omitempty" tf:"object_path,omitempty"`
+
+	// Sets the page size for each concurrent process that transfers OData records from your SAP instance.
+	PaginationConfig *PaginationConfigInitParameters `json:"paginationConfig,omitempty" tf:"pagination_config,omitempty"`
+
+	// Sets the number of concurrent processes that transfers OData records from your SAP instance.
+	ParallelismConfig *ParallelismConfigInitParameters `json:"parallelismConfig,omitempty" tf:"parallelism_config,omitempty"`
 }
 
 type SourceConnectorPropertiesSapoDataObservation struct {
 
 	// Object path specified in the SAPOData flow destination.
 	ObjectPath *string `json:"objectPath,omitempty" tf:"object_path,omitempty"`
+
+	// Sets the page size for each concurrent process that transfers OData records from your SAP instance.
+	PaginationConfig *PaginationConfigObservation `json:"paginationConfig,omitempty" tf:"pagination_config,omitempty"`
+
+	// Sets the number of concurrent processes that transfers OData records from your SAP instance.
+	ParallelismConfig *ParallelismConfigObservation `json:"parallelismConfig,omitempty" tf:"parallelism_config,omitempty"`
 }
 
 type SourceConnectorPropertiesSapoDataParameters struct {
@@ -2072,6 +2122,14 @@ type SourceConnectorPropertiesSapoDataParameters struct {
 	// Object path specified in the SAPOData flow destination.
 	// +kubebuilder:validation:Optional
 	ObjectPath *string `json:"objectPath" tf:"object_path,omitempty"`
+
+	// Sets the page size for each concurrent process that transfers OData records from your SAP instance.
+	// +kubebuilder:validation:Optional
+	PaginationConfig *PaginationConfigParameters `json:"paginationConfig,omitempty" tf:"pagination_config,omitempty"`
+
+	// Sets the number of concurrent processes that transfers OData records from your SAP instance.
+	// +kubebuilder:validation:Optional
+	ParallelismConfig *ParallelismConfigParameters `json:"parallelismConfig,omitempty" tf:"parallelism_config,omitempty"`
 }
 
 type SourceConnectorPropertiesZendeskInitParameters struct {

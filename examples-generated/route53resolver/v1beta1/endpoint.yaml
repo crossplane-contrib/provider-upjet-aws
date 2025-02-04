@@ -22,6 +22,7 @@ spec:
     - Do53
     - DoH
     region: us-west-1
+    resolverEndpointType: IPV4
     securityGroupIdRefs:
     - name: sg1
     - name: sg2

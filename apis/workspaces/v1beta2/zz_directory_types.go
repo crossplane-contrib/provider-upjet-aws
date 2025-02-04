@@ -28,9 +28,22 @@ type DirectoryInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
-	// The identifiers of the IP access control groups associated with the directory.
+	// –  The identifiers of the IP access control groups associated with the directory.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/workspaces/v1beta1.IPGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
+
+	// References to IPGroup in workspaces to populate ipGroupIds.
+	// +kubebuilder:validation:Optional
+	IPGroupIdsRefs []v1.Reference `json:"ipGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IPGroup in workspaces to populate ipGroupIds.
+	// +kubebuilder:validation:Optional
+	IPGroupIdsSelector *v1.Selector `json:"ipGroupIdsSelector,omitempty" tf:"-"`
+
+	// –  Configuration of SAML authentication integration. Defined below.
+	SAMLProperties *SAMLPropertiesInitParameters `json:"samlProperties,omitempty" tf:"saml_properties,omitempty"`
 
 	// service capabilities. Defined below.
 	SelfServicePermissions *SelfServicePermissionsInitParameters `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
@@ -88,12 +101,15 @@ type DirectoryObservation struct {
 	// The WorkSpaces directory identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identifiers of the IP access control groups associated with the directory.
+	// –  The identifiers of the IP access control groups associated with the directory.
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
 
 	// The registration code for the directory. This is the code that users enter in their Amazon WorkSpaces client application to connect to the directory.
 	RegistrationCode *string `json:"registrationCode,omitempty" tf:"registration_code,omitempty"`
+
+	// –  Configuration of SAML authentication integration. Defined below.
+	SAMLProperties *SAMLPropertiesObservation `json:"samlProperties,omitempty" tf:"saml_properties,omitempty"`
 
 	// service capabilities. Defined below.
 	SelfServicePermissions *SelfServicePermissionsObservation `json:"selfServicePermissions,omitempty" tf:"self_service_permissions,omitempty"`
@@ -136,15 +152,29 @@ type DirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	DirectoryIDSelector *v1.Selector `json:"directoryIdSelector,omitempty" tf:"-"`
 
-	// The identifiers of the IP access control groups associated with the directory.
+	// –  The identifiers of the IP access control groups associated with the directory.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/workspaces/v1beta1.IPGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IPGroupIds []*string `json:"ipGroupIds,omitempty" tf:"ip_group_ids,omitempty"`
+
+	// References to IPGroup in workspaces to populate ipGroupIds.
+	// +kubebuilder:validation:Optional
+	IPGroupIdsRefs []v1.Reference `json:"ipGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IPGroup in workspaces to populate ipGroupIds.
+	// +kubebuilder:validation:Optional
+	IPGroupIdsSelector *v1.Selector `json:"ipGroupIdsSelector,omitempty" tf:"-"`
 
 	// Region is the region you'd like your resource to be created in.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"-"`
+
+	// –  Configuration of SAML authentication integration. Defined below.
+	// +kubebuilder:validation:Optional
+	SAMLProperties *SAMLPropertiesParameters `json:"samlProperties,omitempty" tf:"saml_properties,omitempty"`
 
 	// service capabilities. Defined below.
 	// +kubebuilder:validation:Optional
@@ -178,6 +208,45 @@ type DirectoryParameters struct {
 	// –  Default properties that are used for creating WorkSpaces. Defined below.
 	// +kubebuilder:validation:Optional
 	WorkspaceCreationProperties *WorkspaceCreationPropertiesParameters `json:"workspaceCreationProperties,omitempty" tf:"workspace_creation_properties,omitempty"`
+}
+
+type SAMLPropertiesInitParameters struct {
+
+	// The relay state parameter name supported by the SAML 2.0 identity provider (IdP). Default RelayState.
+	RelayStateParameterName *string `json:"relayStateParameterName,omitempty" tf:"relay_state_parameter_name,omitempty"`
+
+	// Status of SAML 2.0 authentication. Default DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The SAML 2.0 identity provider (IdP) user access URL.
+	UserAccessURL *string `json:"userAccessUrl,omitempty" tf:"user_access_url,omitempty"`
+}
+
+type SAMLPropertiesObservation struct {
+
+	// The relay state parameter name supported by the SAML 2.0 identity provider (IdP). Default RelayState.
+	RelayStateParameterName *string `json:"relayStateParameterName,omitempty" tf:"relay_state_parameter_name,omitempty"`
+
+	// Status of SAML 2.0 authentication. Default DISABLED.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The SAML 2.0 identity provider (IdP) user access URL.
+	UserAccessURL *string `json:"userAccessUrl,omitempty" tf:"user_access_url,omitempty"`
+}
+
+type SAMLPropertiesParameters struct {
+
+	// The relay state parameter name supported by the SAML 2.0 identity provider (IdP). Default RelayState.
+	// +kubebuilder:validation:Optional
+	RelayStateParameterName *string `json:"relayStateParameterName,omitempty" tf:"relay_state_parameter_name,omitempty"`
+
+	// Status of SAML 2.0 authentication. Default DISABLED.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The SAML 2.0 identity provider (IdP) user access URL.
+	// +kubebuilder:validation:Optional
+	UserAccessURL *string `json:"userAccessUrl,omitempty" tf:"user_access_url,omitempty"`
 }
 
 type SelfServicePermissionsInitParameters struct {

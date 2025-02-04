@@ -73,6 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  deletionProtectionEnabled:
+                    description: Whether deletion protection is enabled (true) or
+                      disabled (false) on the table replica.
+                    type: boolean
                   globalTableArn:
                     description: ARN of the main or global table which this resource
                       will replicate.
@@ -234,7 +238,7 @@ spec:
                     type: object
                   pointInTimeRecovery:
                     description: Whether to enable Point In Time Recovery for the
-                      replica. Default is false.
+                      table replica. Default is false.
                     type: boolean
                   region:
                     description: Region is the region you'd like your resource to
@@ -267,6 +271,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  deletionProtectionEnabled:
+                    description: Whether deletion protection is enabled (true) or
+                      disabled (false) on the table replica.
+                    type: boolean
                   globalTableArn:
                     description: ARN of the main or global table which this resource
                       will replicate.
@@ -428,7 +436,7 @@ spec:
                     type: object
                   pointInTimeRecovery:
                     description: Whether to enable Point In Time Recovery for the
-                      replica. Default is false.
+                      table replica. Default is false.
                     type: boolean
                   tableClassOverride:
                     description: Storage class of the table replica. Valid values
@@ -617,6 +625,10 @@ spec:
                   arn:
                     description: ARN of the table replica.
                     type: string
+                  deletionProtectionEnabled:
+                    description: Whether deletion protection is enabled (true) or
+                      disabled (false) on the table replica.
+                    type: boolean
                   globalTableArn:
                     description: ARN of the main or global table which this resource
                       will replicate.
@@ -634,7 +646,7 @@ spec:
                     type: string
                   pointInTimeRecovery:
                     description: Whether to enable Point In Time Recovery for the
-                      replica. Default is false.
+                      table replica. Default is false.
                     type: boolean
                   tableClassOverride:
                     description: Storage class of the table replica. Valid values

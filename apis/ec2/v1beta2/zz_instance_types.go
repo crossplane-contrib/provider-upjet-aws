@@ -371,6 +371,9 @@ type InstanceInitParameters struct {
 	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
+	// Whether to assign a primary IPv6 Global Unicast Address (GUA) to the instance when launched in a dual-stack or IPv6-only subnet. A primary IPv6 address ensures a consistent IPv6 address for the instance and is automatically assigned by AWS to the ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains until the instance is terminated or the ENI is detached. Disabling enable_primary_ipv6 after it has been enabled forces recreation of the instance.
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
+
 	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
 	EnclaveOptions *EnclaveOptionsInitParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
@@ -466,13 +469,13 @@ type InstanceInitParameters struct {
 	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
-	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
-	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate when set to true. Defaults to false if not set.
+	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate of the EC2 instance when set to true. Defaults to false if not set.
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 
 	// References to SecurityGroup in ec2 to populate vpcSecurityGroupIds.
@@ -564,6 +567,9 @@ type InstanceObservation struct {
 
 	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
+
+	// Whether to assign a primary IPv6 Global Unicast Address (GUA) to the instance when launched in a dual-stack or IPv6-only subnet. A primary IPv6 address ensures a consistent IPv6 address for the instance and is automatically assigned by AWS to the ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains until the instance is terminated or the ENI is detached. Disabling enable_primary_ipv6 after it has been enabled forces recreation of the instance.
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
 
 	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
 	EnclaveOptions *EnclaveOptionsObservation `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
@@ -689,13 +695,13 @@ type InstanceObservation struct {
 	// Tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the import-instance command. Valid values are default, dedicated, and host.
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
-	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
-	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate when set to true. Defaults to false if not set.
+	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate of the EC2 instance when set to true. Defaults to false if not set.
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 
 	// List of security group IDs to associate with.
@@ -756,6 +762,10 @@ type InstanceParameters struct {
 	// If true, the launched EC2 instance will be EBS-optimized. Note that if this is not set on an instance type that is optimized by default then this will show as disabled but if the instance type is optimized by default then there is no need to set this and there is no effect to disabling it. See the EBS Optimized section of the AWS User Guide for more information.
 	// +kubebuilder:validation:Optional
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
+
+	// Whether to assign a primary IPv6 Global Unicast Address (GUA) to the instance when launched in a dual-stack or IPv6-only subnet. A primary IPv6 address ensures a consistent IPv6 address for the instance and is automatically assigned by AWS to the ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6 address and cannot be disabled. The primary IPv6 address remains until the instance is terminated or the ENI is detached. Disabling enable_primary_ipv6 after it has been enabled forces recreation of the instance.
+	// +kubebuilder:validation:Optional
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
 
 	// Enable Nitro Enclaves on launched instances. See Enclave Options below for more details.
 	// +kubebuilder:validation:Optional
@@ -885,15 +895,15 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	Tenancy *string `json:"tenancy,omitempty" tf:"tenancy,omitempty"`
 
-	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// User data to provide when launching the instance. Do not pass gzip-compressed data via this argument; see user_data_base64 instead. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate.
+	// Can be used instead of user_data to pass base64-encoded binary data directly. Use this instead of user_data whenever the value is not a valid UTF-8 string. For example, gzip-encoded user data must be base64-encoded and passed via this argument to avoid corruption. Updates to this field will trigger a stop/start of the EC2 instance by default. If the user_data_replace_on_change is set then updates to this field will trigger a destroy and recreate of the EC2 instance.
 	// +kubebuilder:validation:Optional
 	UserDataBase64 *string `json:"userDataBase64,omitempty" tf:"user_data_base64,omitempty"`
 
-	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate when set to true. Defaults to false if not set.
+	// When used in combination with user_data or user_data_base64 will trigger a destroy and recreate of the EC2 instance when set to true. Defaults to false if not set.
 	// +kubebuilder:validation:Optional
 	UserDataReplaceOnChange *bool `json:"userDataReplaceOnChange,omitempty" tf:"user_data_replace_on_change,omitempty"`
 

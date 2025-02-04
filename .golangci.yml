@@ -4,13 +4,14 @@
 
 run:
   timeout: 90m
-  show-stats: true
   concurrency: 1
 
 output:
   # colored-line-number|line-number|json|tab|checkstyle|code-climate, default is "colored-line-number"
-  format: colored-line-number
+  formats:
+    - format: colored-line-number
   print-linter-name: true
+  show-stats: true
 
 linters-settings:
   errcheck:
@@ -22,10 +23,10 @@ linters-settings:
     # default is false: such cases aren't reported by default.
     check-blank: false
 
-    # [deprecated] comma-separated list of pairs of the form pkg:regex
-    # the regex is used to ignore names within pkg. (default "fmt:.*").
-    # see https://github.com/kisielk/errcheck#the-deprecated-method for details
-    ignore: fmt:.*,io/ioutil:^Read.*
+    exclude-functions:
+      - io/ioutil.ReadFile
+      - io/ioutil.ReadDir
+      - io/ioutil.ReadAll
 
   govet:
     # report about shadowed variables
@@ -48,10 +49,6 @@ linters-settings:
     # minimal code complexity to report, 30 by default (but we recommend 10-20)
     min-complexity: 10
 
-  maligned:
-    # print struct with more effective memory layout or not, false by default
-    suggest-new: true
-
   dupl:
     # tokens count to trigger issue, 150 by default
     threshold: 100
@@ -65,13 +62,6 @@ linters-settings:
   lll:
     # tab width in spaces. Default to 1.
     tab-width: 1
-
-  unused:
-    # treat code as a program (not a library) and report unused exported identifiers; default is false.
-    # XXX: if you enable this setting, unused will report a lot of false-positives in text editors:
-    # if it's called for subdir of a project it can't find funcs usages. All text editor integrations
-    # with golangci-lint call it on a directory with the changed file.
-    check-exported: false
 
   unparam:
     # Inspect exported functions, default is false. Set to true if no external program/library imports your code.
@@ -108,17 +98,18 @@ linters-settings:
 
 linters:
   enable:
-    - megacheck
     - govet
     - gocyclo
     - gocritic
-    - interfacer
     - goconst
     - goimports
     - gofmt  # We enable this as well as goimports for its simplify mode.
+    - gosimple
     - prealloc
     - revive
+    - staticcheck
     - unconvert
+    - unused
     - misspell
     - nakedret
 
@@ -126,7 +117,6 @@ linters:
     - bugs
     - unused
   fast: false
-
 
 issues:
   # Excluding configuration per-path and per-linter
@@ -140,7 +130,7 @@ issues:
         - gosec
         - scopelint
         - unparam
-    
+
     # Ease some gocritic warnings on test files.
     - path: _test\.go
       text: "(unnamedResult|exitAfterDefer)"
@@ -193,7 +183,7 @@ issues:
   new: false
 
   # Maximum issues count per one linter. Set to 0 to disable. Default is 50.
-  max-per-linter: 0
+  max-issues-per-linter: 0
 
   # Maximum count of issues with the same text. Set to 0 to disable. Default is 3.
   max-same-issues: 0

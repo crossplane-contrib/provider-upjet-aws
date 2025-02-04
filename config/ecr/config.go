@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the ecr group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_ecr_repository", func(r *config.Resource) {
 		r.References = map[string]config.Reference{
 			"encryption_configuration.kms_key": {

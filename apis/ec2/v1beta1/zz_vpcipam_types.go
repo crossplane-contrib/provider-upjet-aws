@@ -40,6 +40,9 @@ type VPCIpamInitParameters struct {
 	// A description for the IPAM.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Enable this option to use your own GUA ranges as private IPv6 addresses. Default: false.
+	EnablePrivateGua *bool `json:"enablePrivateGua,omitempty" tf:"enable_private_gua,omitempty"`
+
 	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
 	OperatingRegions []OperatingRegionsInitParameters `json:"operatingRegions,omitempty" tf:"operating_regions,omitempty"`
 
@@ -67,6 +70,9 @@ type VPCIpamObservation struct {
 
 	// A description for the IPAM.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Enable this option to use your own GUA ranges as private IPv6 addresses. Default: false.
+	EnablePrivateGua *bool `json:"enablePrivateGua,omitempty" tf:"enable_private_gua,omitempty"`
 
 	// The ID of the IPAM
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -105,6 +111,10 @@ type VPCIpamParameters struct {
 	// A description for the IPAM.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Enable this option to use your own GUA ranges as private IPv6 addresses. Default: false.
+	// +kubebuilder:validation:Optional
+	EnablePrivateGua *bool `json:"enablePrivateGua,omitempty" tf:"enable_private_gua,omitempty"`
 
 	// Determines which locales can be chosen when you create pools. Locale is the Region where you want to make an IPAM pool available for allocations. You can only create pools with locales that match the operating Regions of the IPAM. You can only create VPCs from a pool whose locale matches the VPC's Region. You specify a region using the region_name parameter. You must set your provider block region as an operating_region.
 	// +kubebuilder:validation:Optional

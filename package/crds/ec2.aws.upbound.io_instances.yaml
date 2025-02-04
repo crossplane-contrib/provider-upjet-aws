@@ -315,6 +315,17 @@ spec:
                       and there is no effect to disabling it. See the EBS Optimized
                       section of the AWS User Guide for more information.
                     type: boolean
+                  enablePrimaryIpv6:
+                    description: Whether to assign a primary IPv6 Global Unicast Address
+                      (GUA) to the instance when launched in a dual-stack or IPv6-only
+                      subnet. A primary IPv6 address ensures a consistent IPv6 address
+                      for the instance and is automatically assigned by AWS to the
+                      ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6
+                      address and cannot be disabled. The primary IPv6 address remains
+                      until the instance is terminated or the ENI is detached. Disabling
+                      enable_primary_ipv6 after it has been enabled forces recreation
+                      of the instance.
+                    type: boolean
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
                       Enclave Options below for more details.
@@ -1253,6 +1264,17 @@ spec:
                       type is optimized by default then there is no need to set this
                       and there is no effect to disabling it. See the EBS Optimized
                       section of the AWS User Guide for more information.
+                    type: boolean
+                  enablePrimaryIpv6:
+                    description: Whether to assign a primary IPv6 Global Unicast Address
+                      (GUA) to the instance when launched in a dual-stack or IPv6-only
+                      subnet. A primary IPv6 address ensures a consistent IPv6 address
+                      for the instance and is automatically assigned by AWS to the
+                      ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6
+                      address and cannot be disabled. The primary IPv6 address remains
+                      until the instance is terminated or the ENI is detached. Disabling
+                      enable_primary_ipv6 after it has been enabled forces recreation
+                      of the instance.
                     type: boolean
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
@@ -2278,6 +2300,17 @@ spec:
                       type is optimized by default then there is no need to set this
                       and there is no effect to disabling it. See the EBS Optimized
                       section of the AWS User Guide for more information.
+                    type: boolean
+                  enablePrimaryIpv6:
+                    description: Whether to assign a primary IPv6 Global Unicast Address
+                      (GUA) to the instance when launched in a dual-stack or IPv6-only
+                      subnet. A primary IPv6 address ensures a consistent IPv6 address
+                      for the instance and is automatically assigned by AWS to the
+                      ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6
+                      address and cannot be disabled. The primary IPv6 address remains
+                      until the instance is terminated or the ENI is detached. Disabling
+                      enable_primary_ipv6 after it has been enabled forces recreation
+                      of the instance.
                     type: boolean
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
@@ -3070,6 +3103,17 @@ spec:
                       and there is no effect to disabling it. See the EBS Optimized
                       section of the AWS User Guide for more information.
                     type: boolean
+                  enablePrimaryIpv6:
+                    description: Whether to assign a primary IPv6 Global Unicast Address
+                      (GUA) to the instance when launched in a dual-stack or IPv6-only
+                      subnet. A primary IPv6 address ensures a consistent IPv6 address
+                      for the instance and is automatically assigned by AWS to the
+                      ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6
+                      address and cannot be disabled. The primary IPv6 address remains
+                      until the instance is terminated or the ENI is detached. Disabling
+                      enable_primary_ipv6 after it has been enabled forces recreation
+                      of the instance.
+                    type: boolean
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
                       Enclave Options below for more details.
@@ -3625,7 +3669,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -3635,12 +3679,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:
@@ -3979,6 +4023,17 @@ spec:
                       type is optimized by default then there is no need to set this
                       and there is no effect to disabling it. See the EBS Optimized
                       section of the AWS User Guide for more information.
+                    type: boolean
+                  enablePrimaryIpv6:
+                    description: Whether to assign a primary IPv6 Global Unicast Address
+                      (GUA) to the instance when launched in a dual-stack or IPv6-only
+                      subnet. A primary IPv6 address ensures a consistent IPv6 address
+                      for the instance and is automatically assigned by AWS to the
+                      ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6
+                      address and cannot be disabled. The primary IPv6 address remains
+                      until the instance is terminated or the ENI is detached. Disabling
+                      enable_primary_ipv6 after it has been enabled forces recreation
+                      of the instance.
                     type: boolean
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
@@ -4531,7 +4586,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -4541,12 +4596,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:
@@ -4976,6 +5031,17 @@ spec:
                       and there is no effect to disabling it. See the EBS Optimized
                       section of the AWS User Guide for more information.
                     type: boolean
+                  enablePrimaryIpv6:
+                    description: Whether to assign a primary IPv6 Global Unicast Address
+                      (GUA) to the instance when launched in a dual-stack or IPv6-only
+                      subnet. A primary IPv6 address ensures a consistent IPv6 address
+                      for the instance and is automatically assigned by AWS to the
+                      ENI. Once enabled, the first IPv6 GUA becomes the primary IPv6
+                      address and cannot be disabled. The primary IPv6 address remains
+                      until the instance is terminated or the ENI is detached. Disabling
+                      enable_primary_ipv6 after it has been enabled forces recreation
+                      of the instance.
+                    type: boolean
                   enclaveOptions:
                     description: Enable Nitro Enclaves on launched instances. See
                       Enclave Options below for more details.
@@ -5369,7 +5435,7 @@ spec:
                       instead. Updates to this field will trigger a stop/start of
                       the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataBase64:
                     description: Can be used instead of user_data to pass base64-encoded
@@ -5379,12 +5445,12 @@ spec:
                       to avoid corruption. Updates to this field will trigger a stop/start
                       of the EC2 instance by default. If the user_data_replace_on_change
                       is set then updates to this field will trigger a destroy and
-                      recreate.
+                      recreate of the EC2 instance.
                     type: string
                   userDataReplaceOnChange:
                     description: When used in combination with user_data or user_data_base64
-                      will trigger a destroy and recreate when set to true. Defaults
-                      to false if not set.
+                      will trigger a destroy and recreate of the EC2 instance when
+                      set to true. Defaults to false if not set.
                     type: boolean
                   volumeTags:
                     additionalProperties:

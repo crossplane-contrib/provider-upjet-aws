@@ -50,7 +50,7 @@ type ClusterInitParameters struct {
 	// Whether the nodes in this Memcached node group are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region. Valid values for this parameter are single-az or cross-az, default is single-az. If you want to choose cross-az, num_cache_nodes must be greater than 1.
 	AzMode *string `json:"azMode,omitempty" tf:"az_mode,omitempty"`
 
-	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached or redis.
+	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached and redis.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// –  Version number of the cache engine to be used.
@@ -200,7 +200,7 @@ type ClusterObservation struct {
 	// (Memcached only) Configuration endpoint to allow host discovery.
 	ConfigurationEndpoint *string `json:"configurationEndpoint,omitempty" tf:"configuration_endpoint,omitempty"`
 
-	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached or redis.
+	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached and redis.
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// –  Version number of the cache engine to be used.
@@ -312,7 +312,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AzMode *string `json:"azMode,omitempty" tf:"az_mode,omitempty"`
 
-	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached or redis.
+	// –  Name of the cache engine to be used for this cache cluster. Valid values are memcached and redis.
 	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 

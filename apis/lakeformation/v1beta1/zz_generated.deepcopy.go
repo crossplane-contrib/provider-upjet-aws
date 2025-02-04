@@ -345,6 +345,18 @@ func (in *DataLakeSettingsInitParameters) DeepCopyInto(out *DataLakeSettingsInit
 			}
 		}
 	}
+	if in.AdminsRefs != nil {
+		in, out := &in.AdminsRefs, &out.AdminsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AdminsSelector != nil {
+		in, out := &in.AdminsSelector, &out.AdminsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AllowExternalDataFiltering != nil {
 		in, out := &in.AllowExternalDataFiltering, &out.AllowExternalDataFiltering
 		*out = new(bool)
@@ -394,6 +406,22 @@ func (in *DataLakeSettingsInitParameters) DeepCopyInto(out *DataLakeSettingsInit
 				*out = new(string)
 				**out = **in
 			}
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.ReadOnlyAdmins != nil {
@@ -532,6 +560,22 @@ func (in *DataLakeSettingsObservation) DeepCopyInto(out *DataLakeSettingsObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.ReadOnlyAdmins != nil {
 		in, out := &in.ReadOnlyAdmins, &out.ReadOnlyAdmins
 		*out = make([]*string, len(*in))
@@ -579,6 +623,18 @@ func (in *DataLakeSettingsParameters) DeepCopyInto(out *DataLakeSettingsParamete
 				**out = **in
 			}
 		}
+	}
+	if in.AdminsRefs != nil {
+		in, out := &in.AdminsRefs, &out.AdminsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AdminsSelector != nil {
+		in, out := &in.AdminsSelector, &out.AdminsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AllowExternalDataFiltering != nil {
 		in, out := &in.AllowExternalDataFiltering, &out.AllowExternalDataFiltering
@@ -629,6 +685,22 @@ func (in *DataLakeSettingsParameters) DeepCopyInto(out *DataLakeSettingsParamete
 				*out = new(string)
 				**out = **in
 			}
+		}
+	}
+	if in.Parameters != nil {
+		in, out := &in.Parameters, &out.Parameters
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
 		}
 	}
 	if in.ReadOnlyAdmins != nil {

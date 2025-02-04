@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the apprunner group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_apprunner_vpc_connector", func(r *config.Resource) {
 		r.References["subnets"] = config.Reference{
 			TerraformName:     "aws_subnet",

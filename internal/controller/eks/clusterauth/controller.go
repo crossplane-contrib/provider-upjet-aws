@@ -197,6 +197,10 @@ func (e *external) Update(ctx context.Context, mg resource.Managed) (managed.Ext
 	return managed.ExternalUpdate{ConnectionDetails: conn}, nil
 }
 
-func (e *external) Delete(_ context.Context, _ resource.Managed) error {
+func (e *external) Delete(_ context.Context, _ resource.Managed) (managed.ExternalDelete, error) {
+	return managed.ExternalDelete{}, nil
+}
+
+func (e *external) Disconnect(_ context.Context) error {
 	return nil
 }

@@ -25,6 +25,7 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	if mg.Spec.ForProvider.ElasticsearchConfiguration != nil {
@@ -135,6 +136,52 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			}
 			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.ElasticsearchConfiguration != nil {
+		if mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.ForProvider.ElasticsearchConfiguration != nil {
+		if mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds")
+			}
+			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
 
 		}
 	}
@@ -297,6 +344,119 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 
 		}
 	}
+	if mg.Spec.ForProvider.IcebergConfiguration != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogDatabase", "CatalogDatabaseList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameRef,
+					Selector:     mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseName")
+			}
+			mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.IcebergConfiguration != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogTable", "CatalogTableList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameRef,
+					Selector:     mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableName")
+			}
+			mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.IcebergConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.ForProvider.IcebergConfiguration.RoleArnRef,
+				Selector:     mg.Spec.ForProvider.IcebergConfiguration.RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.IcebergConfiguration.RoleArn")
+		}
+		mg.Spec.ForProvider.IcebergConfiguration.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.IcebergConfiguration.RoleArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.IcebergConfiguration != nil {
+		if mg.Spec.ForProvider.IcebergConfiguration.S3Configuration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArnRef,
+					Selector:     mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArn")
+			}
+			mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.IcebergConfiguration != nil {
+		if mg.Spec.ForProvider.IcebergConfiguration.S3Configuration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArnRef,
+					Selector:     mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArn")
+			}
+			mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.IcebergConfiguration.S3Configuration.RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
 	if mg.Spec.ForProvider.OpensearchConfiguration != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io", "v1beta2", "Domain", "DomainList")
@@ -405,6 +565,52 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			}
 			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.ForProvider.OpensearchConfiguration != nil {
+		if mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.ForProvider.OpensearchConfiguration != nil {
+		if mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIds")
+			}
+			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
 
 		}
 	}
@@ -833,6 +1039,52 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 
 		}
 	}
+	if mg.Spec.InitProvider.ElasticsearchConfiguration != nil {
+		if mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.InitProvider.ElasticsearchConfiguration != nil {
+		if mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds")
+			}
+			mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.ElasticsearchConfiguration.VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	if mg.Spec.InitProvider.ExtendedS3Configuration != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
@@ -992,6 +1244,119 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 
 		}
 	}
+	if mg.Spec.InitProvider.IcebergConfiguration != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogDatabase", "CatalogDatabaseList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameRef,
+					Selector:     mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseName")
+			}
+			mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].DatabaseNameRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.IcebergConfiguration != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("glue.aws.upbound.io", "v1beta2", "CatalogTable", "CatalogTableList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableName),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameRef,
+					Selector:     mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableName")
+			}
+			mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.IcebergConfiguration.DestinationTableConfiguration[i4].TableNameRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.IcebergConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.RoleArn),
+				Extract:      resource.ExtractParamPath("arn", true),
+				Reference:    mg.Spec.InitProvider.IcebergConfiguration.RoleArnRef,
+				Selector:     mg.Spec.InitProvider.IcebergConfiguration.RoleArnSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.IcebergConfiguration.RoleArn")
+		}
+		mg.Spec.InitProvider.IcebergConfiguration.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IcebergConfiguration.RoleArnRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.IcebergConfiguration != nil {
+		if mg.Spec.InitProvider.IcebergConfiguration.S3Configuration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("s3.aws.upbound.io", "v1beta2", "Bucket", "BucketList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArnRef,
+					Selector:     mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArn")
+			}
+			mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.BucketArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.IcebergConfiguration != nil {
+		if mg.Spec.InitProvider.IcebergConfiguration.S3Configuration != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("iam.aws.upbound.io", "v1beta1", "Role", "RoleList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArn),
+					Extract:      resource.ExtractParamPath("arn", true),
+					Reference:    mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArnRef,
+					Selector:     mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArnSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArn")
+			}
+			mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.IcebergConfiguration.S3Configuration.RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
 	if mg.Spec.InitProvider.OpensearchConfiguration != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("opensearch.aws.upbound.io", "v1beta2", "Domain", "DomainList")
@@ -1100,6 +1465,52 @@ func (mg *DeliveryStream) ResolveReferences( // ResolveReferences of this Delive
 			}
 			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.RoleArn = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.RoleArnRef = rsp.ResolvedReference
+
+		}
+	}
+	if mg.Spec.InitProvider.OpensearchConfiguration != nil {
+		if mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "SecurityGroup", "SecurityGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs,
+					Selector:      mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	if mg.Spec.InitProvider.OpensearchConfiguration != nil {
+		if mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig != nil {
+			{
+				m, l, err = apisresolver.GetManagedResource("ec2.aws.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIds),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIdsSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIds")
+			}
+			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.OpensearchConfiguration.VPCConfig.SubnetIdsRefs = mrsp.ResolvedReferences
 
 		}
 	}

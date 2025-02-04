@@ -13,3 +13,5 @@ spec:
     instanceAlias: friendly-name-connect
     outboundCallsEnabled: true
     region: us-west-1
+    tags:
+      hello: world

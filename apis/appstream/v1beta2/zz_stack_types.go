@@ -314,7 +314,7 @@ type StreamingExperienceSettingsParameters struct {
 type UserSettingsInitParameters struct {
 
 	// Action that is enabled or disabled.
-	// Valid values are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
+	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Whether the action is enabled or disabled.
@@ -325,7 +325,7 @@ type UserSettingsInitParameters struct {
 type UserSettingsObservation struct {
 
 	// Action that is enabled or disabled.
-	// Valid values are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
+	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Whether the action is enabled or disabled.
@@ -336,7 +336,7 @@ type UserSettingsObservation struct {
 type UserSettingsParameters struct {
 
 	// Action that is enabled or disabled.
-	// Valid values are CLIPBOARD_COPY_FROM_LOCAL_DEVICE,  CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, or DOMAIN_SMART_CARD_SIGNIN.
+	// Valid values are AUTO_TIME_ZONE_REDIRECTION, CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, FILE_UPLOAD, FILE_DOWNLOAD, or PRINTING_TO_LOCAL_DEVICE.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action" tf:"action,omitempty"`
 

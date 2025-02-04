@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the ssoadmin group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_ssoadmin_account_assignment", func(r *config.Resource) {
 		r.References["principal_id"] = config.Reference{
 			TerraformName:     "aws_identitystore_group",

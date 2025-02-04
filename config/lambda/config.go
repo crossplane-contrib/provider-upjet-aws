@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the lambda group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_lambda_alias", func(r *config.Resource) {
 		r.References["function_name"] = config.Reference{
 			TerraformName: "aws_lambda_function",

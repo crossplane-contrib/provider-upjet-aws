@@ -12,9 +12,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: default
     customEndpointType: READER
-    excludedMembers:
-    - ${aws_rds_cluster_instance.test1.id}
-    - ${aws_rds_cluster_instance.test2.id}
+    excludedMembersRefs:
+    - name: test1
+    - name: test2
     region: us-west-1
 
 ---

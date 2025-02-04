@@ -279,6 +279,8 @@ type SpotInstanceRequestInitParameters struct {
 
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
+
 	EnclaveOptions *SpotInstanceRequestEnclaveOptionsInitParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
 	EphemeralBlockDevice []SpotInstanceRequestEphemeralBlockDeviceInitParameters `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
@@ -560,6 +562,8 @@ type SpotInstanceRequestObservation struct {
 
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
 
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
+
 	EnclaveOptions *SpotInstanceRequestEnclaveOptionsObservation `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`
 
 	EphemeralBlockDevice []SpotInstanceRequestEphemeralBlockDeviceObservation `json:"ephemeralBlockDevice,omitempty" tf:"ephemeral_block_device,omitempty"`
@@ -744,6 +748,9 @@ type SpotInstanceRequestParameters struct {
 
 	// +kubebuilder:validation:Optional
 	EBSOptimized *bool `json:"ebsOptimized,omitempty" tf:"ebs_optimized,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	EnablePrimaryIPv6 *bool `json:"enablePrimaryIpv6,omitempty" tf:"enable_primary_ipv6,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	EnclaveOptions *SpotInstanceRequestEnclaveOptionsParameters `json:"enclaveOptions,omitempty" tf:"enclave_options,omitempty"`

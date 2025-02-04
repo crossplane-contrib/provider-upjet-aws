@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the osis group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_osis_pipeline", func(r *config.Resource) {
 		r.References["vpc_options.security_group_ids"] = config.Reference{
 			TerraformName:     "aws_security_group",

@@ -15,6 +15,9 @@ import (
 
 type EndpointConfigurationInitParameters struct {
 
+	// An ARN of an exposed cross-account attachment. See the AWS documentation for more details.
+	AttachmentArn *string `json:"attachmentArn,omitempty" tf:"attachment_arn,omitempty"`
+
 	// Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. See the AWS documentation for more details. The default value is false.
 	ClientIPPreservationEnabled *bool `json:"clientIpPreservationEnabled,omitempty" tf:"client_ip_preservation_enabled,omitempty"`
 
@@ -27,6 +30,9 @@ type EndpointConfigurationInitParameters struct {
 
 type EndpointConfigurationObservation struct {
 
+	// An ARN of an exposed cross-account attachment. See the AWS documentation for more details.
+	AttachmentArn *string `json:"attachmentArn,omitempty" tf:"attachment_arn,omitempty"`
+
 	// Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. See the AWS documentation for more details. The default value is false.
 	ClientIPPreservationEnabled *bool `json:"clientIpPreservationEnabled,omitempty" tf:"client_ip_preservation_enabled,omitempty"`
 
@@ -38,6 +44,10 @@ type EndpointConfigurationObservation struct {
 }
 
 type EndpointConfigurationParameters struct {
+
+	// An ARN of an exposed cross-account attachment. See the AWS documentation for more details.
+	// +kubebuilder:validation:Optional
+	AttachmentArn *string `json:"attachmentArn,omitempty" tf:"attachment_arn,omitempty"`
 
 	// Indicates whether client IP address preservation is enabled for an Application Load Balancer endpoint. See the AWS documentation for more details. The default value is false.
 	// +kubebuilder:validation:Optional

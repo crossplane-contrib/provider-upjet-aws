@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the opensearchserverless group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_opensearchserverless_security_config", func(r *config.Resource) {
 		r.RemoveSingletonListConversion("saml_options")
 		// set the path saml_options as an embedded object to honor

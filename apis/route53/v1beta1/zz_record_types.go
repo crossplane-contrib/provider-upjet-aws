@@ -268,8 +268,18 @@ type RecordInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("public_ip",true)
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
+
+	// References to EIP in ec2 to populate records.
+	// +kubebuilder:validation:Optional
+	RecordsRefs []v1.Reference `json:"recordsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of EIP in ec2 to populate records.
+	// +kubebuilder:validation:Optional
+	RecordsSelector *v1.Selector `json:"recordsSelector,omitempty" tf:"-"`
 
 	// Unique identifier to differentiate records with routing policies from one another. Required if using cidr_routing_policy, failover_routing_policy, geolocation_routing_policy,geoproximity_routing_policy, latency_routing_policy, multivalue_answer_routing_policy, or weighted_routing_policy.
 	SetIdentifier *string `json:"setIdentifier,omitempty" tf:"set_identifier,omitempty"`
@@ -407,9 +417,19 @@ type RecordParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A string list of records.g., "first255characters\"\"morecharacters").
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta1.EIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("public_ip",true)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
+
+	// References to EIP in ec2 to populate records.
+	// +kubebuilder:validation:Optional
+	RecordsRefs []v1.Reference `json:"recordsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of EIP in ec2 to populate records.
+	// +kubebuilder:validation:Optional
+	RecordsSelector *v1.Selector `json:"recordsSelector,omitempty" tf:"-"`
 
 	// An AWS region from which to measure latency. See http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-latency
 	// Region is the region you'd like your resource to be created in.

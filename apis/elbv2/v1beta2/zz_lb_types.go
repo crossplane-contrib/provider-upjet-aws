@@ -150,6 +150,9 @@ type LBInitParameters struct {
 	// Whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
 	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
 
+	// Whether zonal shift is enabled. Defaults to false.
+	EnableZonalShift *bool `json:"enableZonalShift,omitempty" tf:"enable_zonal_shift,omitempty"`
+
 	// Whether inbound security group rules are enforced for traffic originating from a PrivateLink. Only valid for Load Balancers of type network. The possible values are on and off.
 	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string `json:"enforceSecurityGroupInboundRulesOnPrivateLinkTraffic,omitempty" tf:"enforce_security_group_inbound_rules_on_private_link_traffic,omitempty"`
 
@@ -262,6 +265,9 @@ type LBObservation struct {
 	// Whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
 	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
 
+	// Whether zonal shift is enabled. Defaults to false.
+	EnableZonalShift *bool `json:"enableZonalShift,omitempty" tf:"enable_zonal_shift,omitempty"`
+
 	// Whether inbound security group rules are enforced for traffic originating from a PrivateLink. Only valid for Load Balancers of type network. The possible values are on and off.
 	EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic *string `json:"enforceSecurityGroupInboundRulesOnPrivateLinkTraffic,omitempty" tf:"enforce_security_group_inbound_rules_on_private_link_traffic,omitempty"`
 
@@ -368,6 +374,10 @@ type LBParameters struct {
 	// Whether the X-Forwarded-For header should preserve the source port that the client used to connect to the load balancer in application load balancers. Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableXffClientPort *bool `json:"enableXffClientPort,omitempty" tf:"enable_xff_client_port,omitempty"`
+
+	// Whether zonal shift is enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	EnableZonalShift *bool `json:"enableZonalShift,omitempty" tf:"enable_zonal_shift,omitempty"`
 
 	// Whether inbound security group rules are enforced for traffic originating from a PrivateLink. Only valid for Load Balancers of type network. The possible values are on and off.
 	// +kubebuilder:validation:Optional

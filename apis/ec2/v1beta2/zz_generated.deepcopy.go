@@ -3432,6 +3432,11 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnablePrimaryIPv6 != nil {
+		in, out := &in.EnablePrimaryIPv6, &out.EnablePrimaryIPv6
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnclaveOptions != nil {
 		in, out := &in.EnclaveOptions, &out.EnclaveOptions
 		*out = new(EnclaveOptionsInitParameters)
@@ -3972,6 +3977,11 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnablePrimaryIPv6 != nil {
+		in, out := &in.EnablePrimaryIPv6, &out.EnablePrimaryIPv6
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnclaveOptions != nil {
 		in, out := &in.EnclaveOptions, &out.EnclaveOptions
 		*out = new(EnclaveOptionsObservation)
@@ -4332,6 +4342,11 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 	}
 	if in.EBSOptimized != nil {
 		in, out := &in.EBSOptimized, &out.EBSOptimized
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnablePrimaryIPv6 != nil {
+		in, out := &in.EnablePrimaryIPv6, &out.EnablePrimaryIPv6
 		*out = new(bool)
 		**out = **in
 	}
@@ -13116,6 +13131,11 @@ func (in *SpotInstanceRequestInitParameters) DeepCopyInto(out *SpotInstanceReque
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnablePrimaryIPv6 != nil {
+		in, out := &in.EnablePrimaryIPv6, &out.EnablePrimaryIPv6
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnclaveOptions != nil {
 		in, out := &in.EnclaveOptions, &out.EnclaveOptions
 		*out = new(SpotInstanceRequestEnclaveOptionsInitParameters)
@@ -13882,6 +13902,11 @@ func (in *SpotInstanceRequestObservation) DeepCopyInto(out *SpotInstanceRequestO
 		*out = new(bool)
 		**out = **in
 	}
+	if in.EnablePrimaryIPv6 != nil {
+		in, out := &in.EnablePrimaryIPv6, &out.EnablePrimaryIPv6
+		*out = new(bool)
+		**out = **in
+	}
 	if in.EnclaveOptions != nil {
 		in, out := &in.EnclaveOptions, &out.EnclaveOptions
 		*out = new(SpotInstanceRequestEnclaveOptionsObservation)
@@ -14282,6 +14307,11 @@ func (in *SpotInstanceRequestParameters) DeepCopyInto(out *SpotInstanceRequestPa
 	}
 	if in.EBSOptimized != nil {
 		in, out := &in.EBSOptimized, &out.EBSOptimized
+		*out = new(bool)
+		**out = **in
+	}
+	if in.EnablePrimaryIPv6 != nil {
+		in, out := &in.EnablePrimaryIPv6, &out.EnablePrimaryIPv6
 		*out = new(bool)
 		**out = **in
 	}
@@ -16092,6 +16122,11 @@ func (in *VPCEndpointInitParameters) DeepCopyInto(out *VPCEndpointInitParameters
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ServiceRegion != nil {
+		in, out := &in.ServiceRegion, &out.ServiceRegion
+		*out = new(string)
+		**out = **in
+	}
 	if in.SubnetConfiguration != nil {
 		in, out := &in.SubnetConfiguration, &out.SubnetConfiguration
 		*out = make([]SubnetConfigurationInitParameters, len(*in))
@@ -16288,6 +16323,11 @@ func (in *VPCEndpointObservation) DeepCopyInto(out *VPCEndpointObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ServiceRegion != nil {
+		in, out := &in.ServiceRegion, &out.ServiceRegion
+		*out = new(string)
+		**out = **in
+	}
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
@@ -16412,6 +16452,11 @@ func (in *VPCEndpointParameters) DeepCopyInto(out *VPCEndpointParameters) {
 		in, out := &in.ServiceNameSelector, &out.ServiceNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceRegion != nil {
+		in, out := &in.ServiceRegion, &out.ServiceRegion
+		*out = new(string)
+		**out = **in
 	}
 	if in.SubnetConfiguration != nil {
 		in, out := &in.SubnetConfiguration, &out.SubnetConfiguration

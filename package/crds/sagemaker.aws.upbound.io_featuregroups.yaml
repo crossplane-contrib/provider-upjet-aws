@@ -85,6 +85,20 @@ spec:
                       Below.
                     items:
                       properties:
+                        collectionConfig:
+                          items:
+                            properties:
+                              vectorConfig:
+                                items:
+                                  properties:
+                                    dimension:
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        collectionType:
+                          type: string
                         featureName:
                           description: 'The name of a feature. feature_name cannot
                             be any of the following: is_deleted, write_time, api_invocation_time.'
@@ -283,6 +297,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputConfig:
+                    items:
+                      properties:
+                        provisionedReadCapacityUnits:
+                          type: number
+                        provisionedWriteCapacityUnits:
+                          type: number
+                        throughputMode:
+                          type: string
+                      type: object
+                    type: array
                 required:
                 - region
                 type: object
@@ -311,6 +336,20 @@ spec:
                       Below.
                     items:
                       properties:
+                        collectionConfig:
+                          items:
+                            properties:
+                              vectorConfig:
+                                items:
+                                  properties:
+                                    dimension:
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        collectionType:
+                          type: string
                         featureName:
                           description: 'The name of a feature. feature_name cannot
                             be any of the following: is_deleted, write_time, api_invocation_time.'
@@ -505,6 +544,17 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputConfig:
+                    items:
+                      properties:
+                        provisionedReadCapacityUnits:
+                          type: number
+                        provisionedWriteCapacityUnits:
+                          type: number
+                        throughputMode:
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -708,6 +758,20 @@ spec:
                       Below.
                     items:
                       properties:
+                        collectionConfig:
+                          items:
+                            properties:
+                              vectorConfig:
+                                items:
+                                  properties:
+                                    dimension:
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        collectionType:
+                          type: string
                         featureName:
                           description: 'The name of a feature. feature_name cannot
                             be any of the following: is_deleted, write_time, api_invocation_time.'
@@ -838,6 +902,17 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputConfig:
+                    items:
+                      properties:
+                        provisionedReadCapacityUnits:
+                          type: number
+                        provisionedWriteCapacityUnits:
+                          type: number
+                        throughputMode:
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.
@@ -967,6 +1042,16 @@ spec:
                       Below.
                     items:
                       properties:
+                        collectionConfig:
+                          properties:
+                            vectorConfig:
+                              properties:
+                                dimension:
+                                  type: number
+                              type: object
+                          type: object
+                        collectionType:
+                          type: string
                         featureName:
                           description: 'The name of a feature. feature_name cannot
                             be any of the following: is_deleted, write_time, api_invocation_time.'
@@ -1152,6 +1237,15 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputConfig:
+                    properties:
+                      provisionedReadCapacityUnits:
+                        type: number
+                      provisionedWriteCapacityUnits:
+                        type: number
+                      throughputMode:
+                        type: string
+                    type: object
                 required:
                 - region
                 type: object
@@ -1180,6 +1274,16 @@ spec:
                       Below.
                     items:
                       properties:
+                        collectionConfig:
+                          properties:
+                            vectorConfig:
+                              properties:
+                                dimension:
+                                  type: number
+                              type: object
+                          type: object
+                        collectionType:
+                          type: string
                         featureName:
                           description: 'The name of a feature. feature_name cannot
                             be any of the following: is_deleted, write_time, api_invocation_time.'
@@ -1361,6 +1465,15 @@ spec:
                     description: Key-value map of resource tags.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputConfig:
+                    properties:
+                      provisionedReadCapacityUnits:
+                        type: number
+                      provisionedWriteCapacityUnits:
+                        type: number
+                      throughputMode:
+                        type: string
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -1564,6 +1677,16 @@ spec:
                       Below.
                     items:
                       properties:
+                        collectionConfig:
+                          properties:
+                            vectorConfig:
+                              properties:
+                                dimension:
+                                  type: number
+                              type: object
+                          type: object
+                        collectionType:
+                          type: string
                         featureName:
                           description: 'The name of a feature. feature_name cannot
                             be any of the following: is_deleted, write_time, api_invocation_time.'
@@ -1681,6 +1804,15 @@ spec:
                       block.
                     type: object
                     x-kubernetes-map-type: granular
+                  throughputConfig:
+                    properties:
+                      provisionedReadCapacityUnits:
+                        type: number
+                      provisionedWriteCapacityUnits:
+                        type: number
+                      throughputMode:
+                        type: string
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

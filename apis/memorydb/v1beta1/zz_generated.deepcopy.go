@@ -404,6 +404,11 @@ func (in *ClusterConfigurationObservation) DeepCopyInto(out *ClusterConfiguratio
 		*out = new(string)
 		**out = **in
 	}
+	if in.Engine != nil {
+		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -569,6 +574,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Engine != nil {
+		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -596,6 +606,11 @@ func (in *ClusterInitParameters) DeepCopyInto(out *ClusterInitParameters) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
+		*out = new(string)
+		**out = **in
+	}
+	if in.MultiRegionClusterName != nil {
+		in, out := &in.MultiRegionClusterName, &out.MultiRegionClusterName
 		*out = new(string)
 		**out = **in
 	}
@@ -793,6 +808,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Engine != nil {
+		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnginePatchVersion != nil {
 		in, out := &in.EnginePatchVersion, &out.EnginePatchVersion
 		*out = new(string)
@@ -820,6 +840,11 @@ func (in *ClusterObservation) DeepCopyInto(out *ClusterObservation) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
+		*out = new(string)
+		**out = **in
+	}
+	if in.MultiRegionClusterName != nil {
+		in, out := &in.MultiRegionClusterName, &out.MultiRegionClusterName
 		*out = new(string)
 		**out = **in
 	}
@@ -974,6 +999,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Engine != nil {
+		in, out := &in.Engine, &out.Engine
+		*out = new(string)
+		**out = **in
+	}
 	if in.EngineVersion != nil {
 		in, out := &in.EngineVersion, &out.EngineVersion
 		*out = new(string)
@@ -1001,6 +1031,11 @@ func (in *ClusterParameters) DeepCopyInto(out *ClusterParameters) {
 	}
 	if in.MaintenanceWindow != nil {
 		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
+		*out = new(string)
+		**out = **in
+	}
+	if in.MultiRegionClusterName != nil {
+		in, out := &in.MultiRegionClusterName, &out.MultiRegionClusterName
 		*out = new(string)
 		**out = **in
 	}

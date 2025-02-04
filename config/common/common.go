@@ -16,6 +16,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	corev1 "k8s.io/api/core/v1"
@@ -141,4 +142,32 @@ func RemovePolicyVersion(p string) (string, error) {
 	delete(m, "Version")
 	r, err := jsoniter.ConfigCompatibleWithStandardLibrary.Marshal(m)
 	return string(r), errors.Wrap(err, "failed to marshal the policy map as JSON")
+}
+
+// RemoveDiffIfEmpty removes supplied keys from Terraform diffs, if old and new
+// values for the key are empty (""). It is probably safe to delete all such
+// keys in the diff. Until we decide to do so, we'll specify the keys, to be on
+// the safe side.
+func RemoveDiffIfEmpty(keys []string) config.CustomDiff { //nolint:gocyclo // The implementation is pretty straightforward as of this writing.
+	return func(diff *terraform.InstanceDiff, state *terraform.InstanceState, config *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+		// Skip diff customization on create
+		if state == nil || state.Empty() {
+			return diff, nil
+		}
+		if config == nil {
+			return nil, errors.New("resource config cannot be nil")
+		}
+		// Skip no diff or destroy diffs
+		if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
+			return diff, nil
+		}
+
+		for _, key := range keys {
+			if diff.Attributes[key] != nil && diff.Attributes[key].Old == "" && diff.Attributes[key].New == "" {
+				delete(diff.Attributes, key)
+			}
+		}
+
+		return diff, nil
+	}
 }

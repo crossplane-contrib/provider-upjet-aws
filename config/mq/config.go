@@ -12,7 +12,7 @@ import (
 )
 
 // Configure adds configurations for the mq group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_mq_broker", func(r *config.Resource) {
 		r.References["security_groups"] = config.Reference{
 			TerraformName:     "aws_security_group",

@@ -77,6 +77,9 @@ type ClusterInstanceInitParameters struct {
 	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_cluster_instance will not update the engine_version.
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
 
+	// Forces an instance to be destroyed when a part of a read replica cluster. Note: will promote the read replica to a standalone cluster before instance deletion.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
+
 	// Instance class to use. For details on CPU and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details. For Aurora Serverless v2 use db.serverless.
 	InstanceClass *string `json:"instanceClass,omitempty" tf:"instance_class,omitempty"`
 
@@ -178,6 +181,9 @@ type ClusterInstanceObservation struct {
 
 	// Database engine version
 	EngineVersionActual *string `json:"engineVersionActual,omitempty" tf:"engine_version_actual,omitempty"`
+
+	// Forces an instance to be destroyed when a part of a read replica cluster. Note: will promote the read replica to a standalone cluster before instance deletion.
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Instance identifier
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -310,6 +316,10 @@ type ClusterInstanceParameters struct {
 	// Database engine version. Please note that to upgrade the engine_version of the instance, it must be done on the aws_rds_cluster engine_version. Trying to upgrade in aws_cluster_instance will not update the engine_version.
 	// +kubebuilder:validation:Optional
 	EngineVersion *string `json:"engineVersion,omitempty" tf:"engine_version,omitempty"`
+
+	// Forces an instance to be destroyed when a part of a read replica cluster. Note: will promote the read replica to a standalone cluster before instance deletion.
+	// +kubebuilder:validation:Optional
+	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
 
 	// Instance class to use. For details on CPU and memory, see Scaling Aurora DB Instances. Aurora uses db.* instance classes/types. Please see AWS Documentation for currently available instance classes and complete details. For Aurora Serverless v2 use db.serverless.
 	// +kubebuilder:validation:Optional

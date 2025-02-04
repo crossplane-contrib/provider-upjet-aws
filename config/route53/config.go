@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the route53 group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_route53_traffic_policy_instance", func(r *config.Resource) {
 		r.References["hosted_zone_id"] = config.Reference{
 			TerraformName: "aws_route53_zone",

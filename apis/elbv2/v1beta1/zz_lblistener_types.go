@@ -461,6 +461,9 @@ type LBListenerInitParameters struct {
 	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
+	// TCP idle timeout value in seconds. Can only be set if protocol is TCP on Network Load Balancer, or with a Gateway Load Balancer. Not supported for Application Load Balancers. Valid values are between 60 and 6000 inclusive. Default: 350.
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
+
 	// Key-value map of resource tags.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -497,6 +500,9 @@ type LBListenerObservation struct {
 
 	// Name of the SSL Policy for the listener. Required if protocol is HTTPS or TLS.
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
+
+	// TCP idle timeout value in seconds. Can only be set if protocol is TCP on Network Load Balancer, or with a Gateway Load Balancer. Not supported for Application Load Balancers. Valid values are between 60 and 6000 inclusive. Default: 350.
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
 
 	// Key-value map of resource tags.
 	// +mapType=granular
@@ -555,6 +561,10 @@ type LBListenerParameters struct {
 	// +kubebuilder:validation:Optional
 	SSLPolicy *string `json:"sslPolicy,omitempty" tf:"ssl_policy,omitempty"`
 
+	// TCP idle timeout value in seconds. Can only be set if protocol is TCP on Network Load Balancer, or with a Gateway Load Balancer. Not supported for Application Load Balancers. Valid values are between 60 and 6000 inclusive. Default: 350.
+	// +kubebuilder:validation:Optional
+	TCPIdleTimeoutSeconds *float64 `json:"tcpIdleTimeoutSeconds,omitempty" tf:"tcp_idle_timeout_seconds,omitempty"`
+
 	// Key-value map of resource tags.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -562,6 +572,9 @@ type LBListenerParameters struct {
 }
 
 type MutualAuthenticationInitParameters struct {
+
+	// Valid values are off and on.
+	AdvertiseTrustStoreCANames *string `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
 
 	// Whether client certificate expiry is ignored. Default is false.
 	IgnoreClientCertificateExpiry *bool `json:"ignoreClientCertificateExpiry,omitempty" tf:"ignore_client_certificate_expiry,omitempty"`
@@ -575,6 +588,9 @@ type MutualAuthenticationInitParameters struct {
 
 type MutualAuthenticationObservation struct {
 
+	// Valid values are off and on.
+	AdvertiseTrustStoreCANames *string `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
+
 	// Whether client certificate expiry is ignored. Default is false.
 	IgnoreClientCertificateExpiry *bool `json:"ignoreClientCertificateExpiry,omitempty" tf:"ignore_client_certificate_expiry,omitempty"`
 
@@ -586,6 +602,10 @@ type MutualAuthenticationObservation struct {
 }
 
 type MutualAuthenticationParameters struct {
+
+	// Valid values are off and on.
+	// +kubebuilder:validation:Optional
+	AdvertiseTrustStoreCANames *string `json:"advertiseTrustStoreCaNames,omitempty" tf:"advertise_trust_store_ca_names,omitempty"`
 
 	// Whether client certificate expiry is ignored. Default is false.
 	// +kubebuilder:validation:Optional

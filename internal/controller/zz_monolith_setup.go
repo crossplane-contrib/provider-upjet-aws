@@ -125,7 +125,9 @@ import (
 	vaultlockconfiguration "github.com/upbound/provider-aws/internal/controller/backup/vaultlockconfiguration"
 	vaultnotifications "github.com/upbound/provider-aws/internal/controller/backup/vaultnotifications"
 	vaultpolicy "github.com/upbound/provider-aws/internal/controller/backup/vaultpolicy"
+	computeenvironment "github.com/upbound/provider-aws/internal/controller/batch/computeenvironment"
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
+	jobqueue "github.com/upbound/provider-aws/internal/controller/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
 	agent "github.com/upbound/provider-aws/internal/controller/bedrockagent/agent"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
@@ -826,6 +828,7 @@ import (
 	featuregroup "github.com/upbound/provider-aws/internal/controller/sagemaker/featuregroup"
 	imagesagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/image"
 	imageversion "github.com/upbound/provider-aws/internal/controller/sagemaker/imageversion"
+	mlflowtrackingserver "github.com/upbound/provider-aws/internal/controller/sagemaker/mlflowtrackingserver"
 	modelsagemaker "github.com/upbound/provider-aws/internal/controller/sagemaker/model"
 	modelpackagegroup "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegroup"
 	modelpackagegrouppolicy "github.com/upbound/provider-aws/internal/controller/sagemaker/modelpackagegrouppolicy"
@@ -1088,7 +1091,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		vaultlockconfiguration.Setup,
 		vaultnotifications.Setup,
 		vaultpolicy.Setup,
+		computeenvironment.Setup,
 		jobdefinition.Setup,
+		jobqueue.Setup,
 		schedulingpolicy.Setup,
 		agent.Setup,
 		budget.Setup,
@@ -1789,6 +1794,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		featuregroup.Setup,
 		imagesagemaker.Setup,
 		imageversion.Setup,
+		mlflowtrackingserver.Setup,
 		modelsagemaker.Setup,
 		modelpackagegroup.Setup,
 		modelpackagegrouppolicy.Setup,

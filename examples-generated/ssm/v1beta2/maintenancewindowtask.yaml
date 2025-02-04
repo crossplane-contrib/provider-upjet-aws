@@ -14,8 +14,8 @@ spec:
     region: us-west-1
     targets:
     - key: InstanceIds
-      values:
-      - ${aws_instance.example.id}
+      valuesRefs:
+      - name: example
     taskArnSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -24,8 +24,8 @@ spec:
       - documentVersion: $LATEST
         parameter:
         - name: InstanceId
-          values:
-          - ${aws_instance.example.id}
+          valuesRefs:
+          - name: example
     taskType: AUTOMATION
     windowIdSelector:
       matchLabels:

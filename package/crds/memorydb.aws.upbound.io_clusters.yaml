@@ -89,9 +89,13 @@ spec:
                   description:
                     description: Description for the cluster.
                     type: string
+                  engine:
+                    description: The engine that will run on your nodes. Supported
+                      values are redis and valkey.
+                    type: string
                   engineVersion:
-                    description: Version number of the Redis engine to be used for
-                      the cluster. Downgrades are not supported.
+                    description: Version number of the engine to be used for the cluster.
+                      Downgrades are not supported.
                     type: string
                   finalSnapshotName:
                     description: Name of the final cluster snapshot to be created
@@ -181,6 +185,10 @@ spec:
                       on the cluster is performed. Specify as a range in the format
                       ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
                       window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    type: string
+                  multiRegionClusterName:
+                    description: The multi region cluster identifier specified on
+                      aws_memorydb_multi_region_cluster.
                     type: string
                   nodeType:
                     description: The compute and memory capacity of the nodes in the
@@ -440,9 +448,13 @@ spec:
                   description:
                     description: Description for the cluster.
                     type: string
+                  engine:
+                    description: The engine that will run on your nodes. Supported
+                      values are redis and valkey.
+                    type: string
                   engineVersion:
-                    description: Version number of the Redis engine to be used for
-                      the cluster. Downgrades are not supported.
+                    description: Version number of the engine to be used for the cluster.
+                      Downgrades are not supported.
                     type: string
                   finalSnapshotName:
                     description: Name of the final cluster snapshot to be created
@@ -532,6 +544,10 @@ spec:
                       on the cluster is performed. Specify as a range in the format
                       ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
                       window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    type: string
+                  multiRegionClusterName:
+                    description: The multi region cluster identifier specified on
+                      aws_memorydb_multi_region_cluster.
                     type: string
                   nodeType:
                     description: The compute and memory capacity of the nodes in the
@@ -968,13 +984,16 @@ spec:
                   description:
                     description: Description for the cluster.
                     type: string
+                  engine:
+                    description: The engine that will run on your nodes. Supported
+                      values are redis and valkey.
+                    type: string
                   enginePatchVersion:
-                    description: Patch version number of the Redis engine used by
-                      the cluster.
+                    description: Patch version number of the engine used by the cluster.
                     type: string
                   engineVersion:
-                    description: Version number of the Redis engine to be used for
-                      the cluster. Downgrades are not supported.
+                    description: Version number of the engine to be used for the cluster.
+                      Downgrades are not supported.
                     type: string
                   finalSnapshotName:
                     description: Name of the final cluster snapshot to be created
@@ -993,6 +1012,10 @@ spec:
                       on the cluster is performed. Specify as a range in the format
                       ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
                       window is a 60 minute period. Example: sun:23:00-mon:01:30.'
+                    type: string
+                  multiRegionClusterName:
+                    description: The multi region cluster identifier specified on
+                      aws_memorydb_multi_region_cluster.
                     type: string
                   nodeType:
                     description: The compute and memory capacity of the nodes in the

@@ -9,7 +9,7 @@ import (
 )
 
 // Configure adds configurations for the ecrpublic group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_ecrpublic_repository", func(r *config.Resource) {
 		// Deletion takes a while.
 		r.UseAsync = true

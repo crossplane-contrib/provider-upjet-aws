@@ -12,8 +12,8 @@ spec:
     loadBalancerNameSelector:
       matchLabels:
         testing.upbound.io/example-name: wu-tang
-    policyNames:
-    - ${aws_load_balancer_policy.wu-tang-root-ca-backend-auth-policy.policy_name}
+    policyNamesRefs:
+    - name: wu-tang-root-ca-backend-auth-policy
     region: us-west-1
 
 ---

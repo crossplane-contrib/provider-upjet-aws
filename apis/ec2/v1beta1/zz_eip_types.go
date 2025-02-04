@@ -39,6 +39,9 @@ type EIPInitParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
 
+	// The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it.
+	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
+
 	// Location from which the IP address is advertised. Use this parameter to limit the address to this location.
 	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
 
@@ -100,6 +103,9 @@ type EIPObservation struct {
 
 	// EC2 instance ID.
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
+
+	// The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it.
+	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
 
 	// Location from which the IP address is advertised. Use this parameter to limit the address to this location.
 	NetworkBorderGroup *string `json:"networkBorderGroup,omitempty" tf:"network_border_group,omitempty"`
@@ -169,6 +175,10 @@ type EIPParameters struct {
 	// Selector for a Instance in ec2 to populate instance.
 	// +kubebuilder:validation:Optional
 	InstanceSelector *v1.Selector `json:"instanceSelector,omitempty" tf:"-"`
+
+	// The ID of an IPAM pool which has an Amazon-provided or BYOIP public IPv4 CIDR provisioned to it.
+	// +kubebuilder:validation:Optional
+	IpamPoolID *string `json:"ipamPoolId,omitempty" tf:"ipam_pool_id,omitempty"`
 
 	// Location from which the IP address is advertised. Use this parameter to limit the address to this location.
 	// +kubebuilder:validation:Optional

@@ -11,7 +11,7 @@ import (
 )
 
 // Configure adds configurations for the apigatewayv2 group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_apigatewayv2_api_mapping", func(r *config.Resource) {
 		r.References["api_id"] = config.Reference{
 			TerraformName: "aws_apigatewayv2_api",

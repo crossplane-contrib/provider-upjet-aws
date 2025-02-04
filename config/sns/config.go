@@ -14,7 +14,7 @@ import (
 )
 
 // Configure adds configurations for the sns group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_sns_topic_subscription", func(r *config.Resource) {
 		r.References["endpoint"] = config.Reference{
 			TerraformName: "aws_sqs_queue",
@@ -51,6 +51,16 @@ func Configure(p *config.Provider) {
 				delete(diff.Attributes, "policy")
 			}
 			return diff, nil
+		}
+		// Add the topicARN into the secret
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+
+			if a, ok := attr["arn"].(string); ok {
+				conn["arn"] = []byte(a)
+			}
+
+			return conn, nil
 		}
 	})
 }

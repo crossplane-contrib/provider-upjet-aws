@@ -12,6 +12,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     region: us-west-1
+    samlProperties:
+    - status: ENABLED
+      userAccessUrl: https://sso.example.com/
     selfServicePermissions:
     - changeComputeType: true
       increaseVolumeSize: true

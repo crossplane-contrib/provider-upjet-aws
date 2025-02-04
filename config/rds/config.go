@@ -37,6 +37,10 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.References["db_instance_parameter_group_name"] = config.Reference{
 			TerraformName: "aws_db_parameter_group",
 		}
+		r.References["kms_key_id"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
+		}
 		r.UseAsync = true
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
 			conn := map[string][]byte{}
@@ -95,6 +99,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				}
 			}
 			return diff, nil
+		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"enabled_cloudwatch_logs_exports"},
 		}
 	})
 
@@ -196,6 +203,17 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 				}
 			}
 			return diff, nil
+		}
+	})
+
+	p.AddResourceConfigurator("aws_rds_global_cluster", func(r *config.Resource) {
+		r.UseAsync = true
+		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]any) (map[string][]byte, error) {
+			conn := map[string][]byte{}
+			if a, ok := attr["endpoint"].(string); ok {
+				conn["endpoint"] = []byte(a)
+			}
+			return conn, nil
 		}
 	})
 

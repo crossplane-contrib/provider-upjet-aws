@@ -86,6 +86,9 @@ type GlobalSecondaryIndexInitParameters struct {
 	// +listType=set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
 
+	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	OnDemandThroughput *OnDemandThroughputInitParameters `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
+
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
 	ProjectionType *string `json:"projectionType,omitempty" tf:"projection_type,omitempty"`
 
@@ -110,6 +113,9 @@ type GlobalSecondaryIndexObservation struct {
 	// Only required with INCLUDE as a projection type; a list of attributes to project into the index. These do not need to be defined as attributes on the table.
 	// +listType=set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
+
+	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	OnDemandThroughput *OnDemandThroughputObservation `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
 	ProjectionType *string `json:"projectionType,omitempty" tf:"projection_type,omitempty"`
@@ -138,6 +144,10 @@ type GlobalSecondaryIndexParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	NonKeyAttributes []*string `json:"nonKeyAttributes,omitempty" tf:"non_key_attributes,omitempty"`
+
+	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	// +kubebuilder:validation:Optional
+	OnDemandThroughput *OnDemandThroughputParameters `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
 	// One of ALL, INCLUDE or KEYS_ONLY where ALL projects every attribute into the index, KEYS_ONLY projects  into the index only the table and index hash_key and sort_key attributes ,  INCLUDE projects into the index all of the attributes that are defined in non_key_attributes in addition to the attributes that thatKEYS_ONLY project.
 	// +kubebuilder:validation:Optional
@@ -286,6 +296,35 @@ type LocalSecondaryIndexParameters struct {
 	// Name of the range key.
 	// +kubebuilder:validation:Optional
 	RangeKey *string `json:"rangeKey" tf:"range_key,omitempty"`
+}
+
+type OnDemandThroughputInitParameters struct {
+
+	// Maximum number of read request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	MaxReadRequestUnits *float64 `json:"maxReadRequestUnits,omitempty" tf:"max_read_request_units,omitempty"`
+
+	// Maximum number of write request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	MaxWriteRequestUnits *float64 `json:"maxWriteRequestUnits,omitempty" tf:"max_write_request_units,omitempty"`
+}
+
+type OnDemandThroughputObservation struct {
+
+	// Maximum number of read request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	MaxReadRequestUnits *float64 `json:"maxReadRequestUnits,omitempty" tf:"max_read_request_units,omitempty"`
+
+	// Maximum number of write request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	MaxWriteRequestUnits *float64 `json:"maxWriteRequestUnits,omitempty" tf:"max_write_request_units,omitempty"`
+}
+
+type OnDemandThroughputParameters struct {
+
+	// Maximum number of read request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	// +kubebuilder:validation:Optional
+	MaxReadRequestUnits *float64 `json:"maxReadRequestUnits,omitempty" tf:"max_read_request_units,omitempty"`
+
+	// Maximum number of write request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	// +kubebuilder:validation:Optional
+	MaxWriteRequestUnits *float64 `json:"maxWriteRequestUnits,omitempty" tf:"max_write_request_units,omitempty"`
 }
 
 type PointInTimeRecoveryInitParameters struct {
@@ -491,6 +530,9 @@ type TableInitParameters struct {
 	// Describe an LSI on the table; these can only be allocated at creation so you cannot change this definition after you have created the resource. See below.
 	LocalSecondaryIndex []LocalSecondaryIndexInitParameters `json:"localSecondaryIndex,omitempty" tf:"local_secondary_index,omitempty"`
 
+	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	OnDemandThroughput *TableOnDemandThroughputInitParameters `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
+
 	// Enable point-in-time recovery options. See below.
 	PointInTimeRecovery *PointInTimeRecoveryInitParameters `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
@@ -569,6 +611,9 @@ type TableObservation struct {
 	// Describe an LSI on the table; these can only be allocated at creation so you cannot change this definition after you have created the resource. See below.
 	LocalSecondaryIndex []LocalSecondaryIndexObservation `json:"localSecondaryIndex,omitempty" tf:"local_secondary_index,omitempty"`
 
+	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	OnDemandThroughput *TableOnDemandThroughputObservation `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
+
 	// Enable point-in-time recovery options. See below.
 	PointInTimeRecovery *PointInTimeRecoveryObservation `json:"pointInTimeRecovery,omitempty" tf:"point_in_time_recovery,omitempty"`
 
@@ -628,6 +673,35 @@ type TableObservation struct {
 	WriteCapacity *float64 `json:"writeCapacity,omitempty" tf:"write_capacity,omitempty"`
 }
 
+type TableOnDemandThroughputInitParameters struct {
+
+	// Maximum number of read request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	MaxReadRequestUnits *float64 `json:"maxReadRequestUnits,omitempty" tf:"max_read_request_units,omitempty"`
+
+	// Maximum number of write request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	MaxWriteRequestUnits *float64 `json:"maxWriteRequestUnits,omitempty" tf:"max_write_request_units,omitempty"`
+}
+
+type TableOnDemandThroughputObservation struct {
+
+	// Maximum number of read request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	MaxReadRequestUnits *float64 `json:"maxReadRequestUnits,omitempty" tf:"max_read_request_units,omitempty"`
+
+	// Maximum number of write request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	MaxWriteRequestUnits *float64 `json:"maxWriteRequestUnits,omitempty" tf:"max_write_request_units,omitempty"`
+}
+
+type TableOnDemandThroughputParameters struct {
+
+	// Maximum number of read request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	// +kubebuilder:validation:Optional
+	MaxReadRequestUnits *float64 `json:"maxReadRequestUnits,omitempty" tf:"max_read_request_units,omitempty"`
+
+	// Maximum number of write request units for the specified table. To specify set the value greater than or equal to 1. To remove set the value to -1.
+	// +kubebuilder:validation:Optional
+	MaxWriteRequestUnits *float64 `json:"maxWriteRequestUnits,omitempty" tf:"max_write_request_units,omitempty"`
+}
+
 type TableParameters struct {
 
 	// Set of nested attribute definitions. Only required for hash_key and range_key attributes. See below.
@@ -657,6 +731,10 @@ type TableParameters struct {
 	// Describe an LSI on the table; these can only be allocated at creation so you cannot change this definition after you have created the resource. See below.
 	// +kubebuilder:validation:Optional
 	LocalSecondaryIndex []LocalSecondaryIndexParameters `json:"localSecondaryIndex,omitempty" tf:"local_secondary_index,omitempty"`
+
+	// Sets the maximum number of read and write units for the specified on-demand table. See below.
+	// +kubebuilder:validation:Optional
+	OnDemandThroughput *TableOnDemandThroughputParameters `json:"onDemandThroughput,omitempty" tf:"on_demand_throughput,omitempty"`
 
 	// Enable point-in-time recovery options. See below.
 	// +kubebuilder:validation:Optional

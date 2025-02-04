@@ -9070,6 +9070,21 @@ func (in *H265SettingsInitParameters) DeepCopyInto(out *H265SettingsInitParamete
 		*out = new(float64)
 		**out = **in
 	}
+	if in.MinQp != nil {
+		in, out := &in.MinQp, &out.MinQp
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MvOverPictureBoundaries != nil {
+		in, out := &in.MvOverPictureBoundaries, &out.MvOverPictureBoundaries
+		*out = new(string)
+		**out = **in
+	}
+	if in.MvTemporalPredictor != nil {
+		in, out := &in.MvTemporalPredictor, &out.MvTemporalPredictor
+		*out = new(string)
+		**out = **in
+	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
 		*out = new(float64)
@@ -9115,6 +9130,21 @@ func (in *H265SettingsInitParameters) DeepCopyInto(out *H265SettingsInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.TileHeight != nil {
+		in, out := &in.TileHeight, &out.TileHeight
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TilePadding != nil {
+		in, out := &in.TilePadding, &out.TilePadding
+		*out = new(string)
+		**out = **in
+	}
+	if in.TileWidth != nil {
+		in, out := &in.TileWidth, &out.TileWidth
+		*out = new(float64)
+		**out = **in
+	}
 	if in.TimecodeBurninSettings != nil {
 		in, out := &in.TimecodeBurninSettings, &out.TimecodeBurninSettings
 		*out = make([]TimecodeBurninSettingsInitParameters, len(*in))
@@ -9124,6 +9154,11 @@ func (in *H265SettingsInitParameters) DeepCopyInto(out *H265SettingsInitParamete
 	}
 	if in.TimecodeInsertion != nil {
 		in, out := &in.TimecodeInsertion, &out.TimecodeInsertion
+		*out = new(string)
+		**out = **in
+	}
+	if in.TreeblockSize != nil {
+		in, out := &in.TreeblockSize, &out.TreeblockSize
 		*out = new(string)
 		**out = **in
 	}
@@ -9241,6 +9276,21 @@ func (in *H265SettingsObservation) DeepCopyInto(out *H265SettingsObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.MinQp != nil {
+		in, out := &in.MinQp, &out.MinQp
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MvOverPictureBoundaries != nil {
+		in, out := &in.MvOverPictureBoundaries, &out.MvOverPictureBoundaries
+		*out = new(string)
+		**out = **in
+	}
+	if in.MvTemporalPredictor != nil {
+		in, out := &in.MvTemporalPredictor, &out.MvTemporalPredictor
+		*out = new(string)
+		**out = **in
+	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
 		*out = new(float64)
@@ -9286,6 +9336,21 @@ func (in *H265SettingsObservation) DeepCopyInto(out *H265SettingsObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TileHeight != nil {
+		in, out := &in.TileHeight, &out.TileHeight
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TilePadding != nil {
+		in, out := &in.TilePadding, &out.TilePadding
+		*out = new(string)
+		**out = **in
+	}
+	if in.TileWidth != nil {
+		in, out := &in.TileWidth, &out.TileWidth
+		*out = new(float64)
+		**out = **in
+	}
 	if in.TimecodeBurninSettings != nil {
 		in, out := &in.TimecodeBurninSettings, &out.TimecodeBurninSettings
 		*out = make([]TimecodeBurninSettingsObservation, len(*in))
@@ -9295,6 +9360,11 @@ func (in *H265SettingsObservation) DeepCopyInto(out *H265SettingsObservation) {
 	}
 	if in.TimecodeInsertion != nil {
 		in, out := &in.TimecodeInsertion, &out.TimecodeInsertion
+		*out = new(string)
+		**out = **in
+	}
+	if in.TreeblockSize != nil {
+		in, out := &in.TreeblockSize, &out.TreeblockSize
 		*out = new(string)
 		**out = **in
 	}
@@ -9412,6 +9482,21 @@ func (in *H265SettingsParameters) DeepCopyInto(out *H265SettingsParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.MinQp != nil {
+		in, out := &in.MinQp, &out.MinQp
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MvOverPictureBoundaries != nil {
+		in, out := &in.MvOverPictureBoundaries, &out.MvOverPictureBoundaries
+		*out = new(string)
+		**out = **in
+	}
+	if in.MvTemporalPredictor != nil {
+		in, out := &in.MvTemporalPredictor, &out.MvTemporalPredictor
+		*out = new(string)
+		**out = **in
+	}
 	if in.ParDenominator != nil {
 		in, out := &in.ParDenominator, &out.ParDenominator
 		*out = new(float64)
@@ -9457,6 +9542,21 @@ func (in *H265SettingsParameters) DeepCopyInto(out *H265SettingsParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TileHeight != nil {
+		in, out := &in.TileHeight, &out.TileHeight
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TilePadding != nil {
+		in, out := &in.TilePadding, &out.TilePadding
+		*out = new(string)
+		**out = **in
+	}
+	if in.TileWidth != nil {
+		in, out := &in.TileWidth, &out.TileWidth
+		*out = new(float64)
+		**out = **in
+	}
 	if in.TimecodeBurninSettings != nil {
 		in, out := &in.TimecodeBurninSettings, &out.TimecodeBurninSettings
 		*out = make([]TimecodeBurninSettingsParameters, len(*in))
@@ -9466,6 +9566,11 @@ func (in *H265SettingsParameters) DeepCopyInto(out *H265SettingsParameters) {
 	}
 	if in.TimecodeInsertion != nil {
 		in, out := &in.TimecodeInsertion, &out.TimecodeInsertion
+		*out = new(string)
+		**out = **in
+	}
+	if in.TreeblockSize != nil {
+		in, out := &in.TreeblockSize, &out.TreeblockSize
 		*out = new(string)
 		**out = **in
 	}
@@ -11824,6 +11929,18 @@ func (in *InputInitParameters) DeepCopyInto(out *InputInitParameters) {
 			}
 		}
 	}
+	if in.InputSecurityGroupsRefs != nil {
+		in, out := &in.InputSecurityGroupsRefs, &out.InputSecurityGroupsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.InputSecurityGroupsSelector != nil {
+		in, out := &in.InputSecurityGroupsSelector, &out.InputSecurityGroupsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.MediaConnectFlows != nil {
 		in, out := &in.MediaConnectFlows, &out.MediaConnectFlows
 		*out = make([]MediaConnectFlowsInitParameters, len(*in))
@@ -12383,6 +12500,18 @@ func (in *InputParameters) DeepCopyInto(out *InputParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.InputSecurityGroupsRefs != nil {
+		in, out := &in.InputSecurityGroupsRefs, &out.InputSecurityGroupsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.InputSecurityGroupsSelector != nil {
+		in, out := &in.InputSecurityGroupsSelector, &out.InputSecurityGroupsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaConnectFlows != nil {
 		in, out := &in.MediaConnectFlows, &out.MediaConnectFlows

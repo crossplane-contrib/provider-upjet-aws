@@ -1657,13 +1657,10 @@ type NetworkInterfaceCountParameters struct {
 
 type NetworkInterfacesInitParameters struct {
 
-	// Associate a Carrier IP address with eth0 for a new network interface.
-	// Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value, can be left unset.
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a public ip address with the network interface. Boolean value, can be left unset.
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
 	// Whether the network interface should be destroyed on instance termination.
@@ -1721,6 +1718,7 @@ type NetworkInterfacesInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 
 	// The primary private IPv4 address.
@@ -1756,13 +1754,10 @@ type NetworkInterfacesInitParameters struct {
 
 type NetworkInterfacesObservation struct {
 
-	// Associate a Carrier IP address with eth0 for a new network interface.
-	// Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value, can be left unset.
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a public ip address with the network interface. Boolean value, can be left unset.
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
 	// Whether the network interface should be destroyed on instance termination.
@@ -1811,6 +1806,7 @@ type NetworkInterfacesObservation struct {
 	// The ID of the network interface to attach.
 	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 
 	// The primary private IPv4 address.
@@ -1826,14 +1822,11 @@ type NetworkInterfacesObservation struct {
 
 type NetworkInterfacesParameters struct {
 
-	// Associate a Carrier IP address with eth0 for a new network interface.
-	// Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. Boolean value, can be left unset.
 	// +kubebuilder:validation:Optional
 	AssociateCarrierIPAddress *string `json:"associateCarrierIpAddress,omitempty" tf:"associate_carrier_ip_address,omitempty"`
 
-	// Associate a public ip address with the network interface.
-	// Boolean value, can be left unset.
+	// Associate a public ip address with the network interface. Boolean value, can be left unset.
 	// +kubebuilder:validation:Optional
 	AssociatePublicIPAddress *string `json:"associatePublicIpAddress,omitempty" tf:"associate_public_ip_address,omitempty"`
 
@@ -1906,6 +1899,7 @@ type NetworkInterfacesParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 
+	// Whether the first IPv6 GUA will be made the primary IPv6 address.
 	// +kubebuilder:validation:Optional
 	PrimaryIPv6 *string `json:"primaryIpv6,omitempty" tf:"primary_ipv6,omitempty"`
 

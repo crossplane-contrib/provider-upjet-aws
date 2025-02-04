@@ -12,7 +12,7 @@ import (
 )
 
 // Configure adds configurations for the firehose group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_kinesis_firehose_delivery_stream", func(r *config.Resource) {
 		r.TerraformResource.Schema["splunk_configuration"].Elem.(*schema.Resource).Schema["hec_token"].Sensitive = true
 

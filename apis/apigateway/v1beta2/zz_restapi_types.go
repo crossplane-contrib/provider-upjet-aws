@@ -19,8 +19,18 @@ type RestAPIEndpointConfigurationInitParameters struct {
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 
 	// Set of VPC Endpoint identifiers. It is only supported for PRIVATE endpoint type. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension vpcEndpointIds property. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPCEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	VPCEndpointIds []*string `json:"vpcEndpointIds,omitempty" tf:"vpc_endpoint_ids,omitempty"`
+
+	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIdsRefs []v1.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIdsSelector *v1.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIEndpointConfigurationObservation struct {
@@ -40,9 +50,19 @@ type RestAPIEndpointConfigurationParameters struct {
 	Types []*string `json:"types" tf:"types,omitempty"`
 
 	// Set of VPC Endpoint identifiers. It is only supported for PRIVATE endpoint type. If importing an OpenAPI specification via the body argument, this corresponds to the x-amazon-apigateway-endpoint-configuration extension vpcEndpointIds property. If the argument value is provided and is different than the OpenAPI value, the argument value will override the OpenAPI value.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-aws/apis/ec2/v1beta2.VPCEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPCEndpointIds []*string `json:"vpcEndpointIds,omitempty" tf:"vpc_endpoint_ids,omitempty"`
+
+	// References to VPCEndpoint in ec2 to populate vpcEndpointIds.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIdsRefs []v1.Reference `json:"vpcEndpointIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of VPCEndpoint in ec2 to populate vpcEndpointIds.
+	// +kubebuilder:validation:Optional
+	VPCEndpointIdsSelector *v1.Selector `json:"vpcEndpointIdsSelector,omitempty" tf:"-"`
 }
 
 type RestAPIInitParameters struct {

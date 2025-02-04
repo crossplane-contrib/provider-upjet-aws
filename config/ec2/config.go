@@ -12,7 +12,7 @@ import (
 )
 
 // Configure adds configurations for the ec2 group.
-func Configure(p *config.Provider) {
+func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("aws_instance", func(r *config.Resource) {
 		r.UseAsync = true
 		r.References["subnet_id"] = config.Reference{
@@ -53,6 +53,9 @@ func Configure(p *config.Provider) {
 				"cpu_threads_per_core",
 			},
 		}
+		r.TerraformCustomDiff = common.RemoveDiffIfEmpty([]string{
+			"volume_tags.%",
+		})
 		config.MoveToStatus(r.TerraformResource, "security_groups")
 	})
 	p.AddResourceConfigurator("aws_eip", func(r *config.Resource) {
@@ -153,6 +156,12 @@ func Configure(p *config.Provider) {
 		// aws_vpc_endpoint_subnet_association
 		// aws_vpc_endpoint_route_table_association
 		// aws_vpc_endpoint_security_group_association
+		r.LateInitializer = config.LateInitializer{
+			// Conflicts with VPCEndpointSubnetAssociation
+			IgnoredFields: []string{
+				"subnet_configuration",
+			},
+		}
 		config.MoveToStatus(r.TerraformResource, "subnet_ids", "security_group_ids", "route_table_ids")
 		delete(r.References, "vpc_endpoint_type")
 	})

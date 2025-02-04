@@ -92,6 +92,9 @@ type AlarmSpecificationParameters struct {
 
 type AutoscalingGroupInitParameters struct {
 
+	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	AvailabilityZoneDistribution *AvailabilityZoneDistributionInitParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
+
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
@@ -269,6 +272,9 @@ type AutoscalingGroupObservation struct {
 	// ARN for this Auto Scaling Group
 	Arn *string `json:"arn,omitempty" tf:"arn,omitempty"`
 
+	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	AvailabilityZoneDistribution *AvailabilityZoneDistributionObservation `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
+
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	// +listType=set
 	AvailabilityZones []*string `json:"availabilityZones,omitempty" tf:"availability_zones,omitempty"`
@@ -422,6 +428,10 @@ type AutoscalingGroupObservation struct {
 }
 
 type AutoscalingGroupParameters struct {
+
+	// The instance capacity distribution across Availability Zones. See Availability Zone Distribution below for more details.
+	// +kubebuilder:validation:Optional
+	AvailabilityZoneDistribution *AvailabilityZoneDistributionParameters `json:"availabilityZoneDistribution,omitempty" tf:"availability_zone_distribution,omitempty"`
 
 	// A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the vpc_zone_identifier attribute, or for attaching a network interface when an existing network interface ID is specified in a launch template. Conflicts with vpc_zone_identifier.
 	// +kubebuilder:validation:Optional
@@ -633,6 +643,25 @@ type AutoscalingGroupParameters struct {
 	// to the specified Auto Scaling group. Defined below
 	// +kubebuilder:validation:Optional
 	WarmPool *WarmPoolParameters `json:"warmPool,omitempty" tf:"warm_pool,omitempty"`
+}
+
+type AvailabilityZoneDistributionInitParameters struct {
+
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
+}
+
+type AvailabilityZoneDistributionObservation struct {
+
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
+}
+
+type AvailabilityZoneDistributionParameters struct {
+
+	// The strategy to use for distributing capacity across the Availability Zones. Valid values are balanced-only and balanced-best-effort. Default is balanced-best-effort.
+	// +kubebuilder:validation:Optional
+	CapacityDistributionStrategy *string `json:"capacityDistributionStrategy,omitempty" tf:"capacity_distribution_strategy,omitempty"`
 }
 
 type BaselineEBSBandwidthMbpsInitParameters struct {
