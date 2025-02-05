@@ -3231,8 +3231,13 @@ func eksPodIdentityAssociation() config.ExternalName {
 			} else {
 				base["association_id"] = externalName
 			}
+		} else {
+			if externalName != "" && base["association_id"] != externalName {
+				base["association_id"] = externalName
+			}
 		}
 	}
+
 	return e
 }
 
