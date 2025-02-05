@@ -11,10 +11,10 @@ spec:
     region: us-west-1
     userGroupIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: exampleGroup
     userIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: exampleUser
 
 ---
 
@@ -24,30 +24,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
   labels:
-    testing.upbound.io/example-name: default
-  name: default
-spec:
-  forProvider:
-    accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
-      -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
-      -georadiusbymember
-    engine: REDIS
-    passwordsSecretRef:
-    - key: example-key
-      name: example-secret
-      namespace: upbound-system
-    region: us-west-1
-    userName: default
-
----
-
-apiVersion: elasticache.aws.upbound.io/v1beta1
-kind: User
-metadata:
-  annotations:
-    meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
-  labels:
-    testing.upbound.io/example-name: example
+    testing.upbound.io/example-name: exampleUser
   name: example
 spec:
   forProvider:
@@ -55,10 +32,8 @@ spec:
       -hset -hsetnx -hmset -hincrby -hincrbyfloat -hdel -bitop -geoadd -georadius
       -georadiusbymember
     engine: REDIS
-    passwordsSecretRef:
-    - key: example-key
-      name: example-secret
-      namespace: upbound-system
+    authenticationMode:
+      - type: iam
     region: us-west-1
     userName: exampleuser
 
@@ -68,13 +43,14 @@ apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: UserGroup
 metadata:
   annotations:
+    upjet.upbound.io/manual-intervention: "This resource needs a User resource and this User resource needs secrets that must contain valid credentials."
     meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: exampleGroup
+  name: test
 spec:
   forProvider:
     engine: REDIS
     region: us-west-1
     userIdRefs:
-    - name: default
+    - name: test
