@@ -3227,6 +3227,7 @@ func eksPodIdentityAssociation() config.ExternalName {
 
 	// If the association_id is equal to the stub value, we replace it with the external name.
 	// Means that we are probably using a resource status that was not updated after creation due to write conflicts in the k8s API.
+	// https://github.com/crossplane-contrib/provider-upjet-aws/issues/1437
 
 	// must be 19 chars long and match regex ^a-[0-9a-z]*$
 	stubAssocId := "a-stubassocid123456"
