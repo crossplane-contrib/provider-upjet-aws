@@ -94,7 +94,7 @@ func TestGetIAMDefaultSigningRegions(t *testing.T) {
 		"AWSISO":               {"aws-iso", "us-iso-east-1", true},
 		"AWSISOB":              {"aws-iso-b", "us-isob-east-1", true},
 		"AWSISOE":              {"aws-iso-e", "", false},
-		"AWSISOF":              {"aws-iso-f", "", false},
+		"AWSISOF":              {"aws-iso-f", "us-isof-south-1", true},
 		"AWSUSGov":             {"aws-us-gov", "us-gov-west-1", true},
 		"NonExistentPartition": {"aws-foo", "", false},
 	}
