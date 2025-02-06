@@ -101,7 +101,7 @@ type repeatedDiffCheckerForData struct {
 // UpdateLoopPreventionFunc checks for repeated diffs in the resource's "data"
 // attribute. If the diff has not changed since the previous reconciliation
 // loop, it blocks the update by returning an appropriate result.
-func (c *repeatedDiffCheckerForData) UpdateLoopPreventionFunc(diff *terraform.InstanceDiff, mg xpresource.Managed) (*config.UpdateLoopPreventResult, error) {
+func (c *repeatedDiffCheckerForData) UpdateLoopPreventionFunc(diff *terraform.InstanceDiff, mg xpresource.Managed) (*config.UpdateLoopPreventResult, error) { //nolint:gocyclo // easier to follow as a unit
 	// Skip processing if there is no diff, the diff is empty, or it is a destroy operation.
 	if diff == nil || diff.Empty() || diff.Destroy || diff.Attributes == nil {
 		return nil, nil
