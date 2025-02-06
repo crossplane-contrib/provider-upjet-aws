@@ -43,6 +43,11 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"name_prefix"},
 		}
+		// The kms_key_id field actually references the KMS ARN
+		r.References["kms_key_id"] = config.Reference{
+			TerraformName: "aws_kms_key",
+			Extractor:     common.PathARNExtractor,
+		}
 	})
 
 }
