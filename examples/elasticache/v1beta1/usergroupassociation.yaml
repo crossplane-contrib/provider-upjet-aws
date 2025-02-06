@@ -25,6 +25,7 @@ metadata:
     meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
   labels:
     testing.upbound.io/example-name: exampleUser
+    crossplane.io/external-name: exampleUser
   name: example
 spec:
   forProvider:
@@ -35,7 +36,7 @@ spec:
     authenticationMode:
       - type: iam
     region: us-west-1
-    userName: exampleuser
+    userName: exampleUser
 
 ---
 
