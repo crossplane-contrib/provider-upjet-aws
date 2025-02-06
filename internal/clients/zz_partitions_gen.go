@@ -82,10 +82,16 @@ var (
 			serviceToDefaultRegions: map[string]string{},
 		},
 		"aws-iso-f": {
-			id:                      "aws-iso-f",
-			name:                    "AWS ISOF",
-			dnsSuffix:               "csp.hci.ic.gov",
-			serviceToDefaultRegions: map[string]string{},
+			id:        "aws-iso-f",
+			name:      "AWS ISOF",
+			dnsSuffix: "csp.hci.ic.gov",
+			serviceToDefaultRegions: map[string]string{
+				"budgets":       "us-isof-south-1",
+				"iam":           "us-isof-south-1",
+				"organizations": "us-isof-south-1",
+				"route53":       "us-isof-south-1",
+				"savingsplans":  "us-isof-south-1",
+			},
 		},
 		"aws-us-gov": {
 			id:        "aws-us-gov",
