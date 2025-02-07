@@ -25,6 +25,7 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{
 				"availability_zones",
+				"instance_refresh",
 			},
 		}
 
