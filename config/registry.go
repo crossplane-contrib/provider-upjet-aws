@@ -236,14 +236,44 @@ func configureSingletonListAPIConverters(r *config.Resource) error {
 	// no need for a Terraform conversion.
 	r.ControllerReconcileVersion = currentVer
 
+	// This block is to fix the issue described in the following PR: https://github.com/crossplane/upjet/pull/465
+	// In EKS Cluster object v1beta1, for spec.vpcConfig field, we mark
+	// +listType as "map" and +listMapKey as "index". During conversion between
+	// v1beta1 to v1beta2, we convert the that field from array to object,
+	// losing the index field since it is not in the schema. This is fine in
+	// most cases since in v1beta1 of the object schema index defaults to "0",
+	// even though conversion doesn't output the index field in the object.
+	//
+	// However, with Server Side Apply, apparently some on the fly conversions
+	// happening when different managers using different api versions and losing
+	// index field causing unexpected merging results and drop of the whole
+	// spec.forProvider.vpcConfig object. This is surfaced with an error like
+	// below:
+	/// cannot patch the managed resource via server-side apply: Cluster.eks.aws.upbound.io
+	//  "some-eks-cluster" is invalid: [spec.forProvider.vpcConfig: Invalid
+	//  value: "null": spec.forProvider.vpcConfig in body must be of type array: "null",
+	//  <nil>: Invalid value: "null": some validation rules were not checked because
+	//  the object was invalid; correct the existing errors to complete validation]
+	var opts []conversion.SingletonListConversionOption
+	if r.Name == "aws_eks_cluster" {
+		opts = append(opts, conversion.WithConvertOptions(&conversion.ConvertOptions{
+			ListInjectKeys: map[string]conversion.SingletonListInjectKey{
+				"vpcConfig": {
+					Key:   "index",
+					Value: "0",
+				},
+			},
+		}))
+	}
+
 	// assumes the first element is the identity conversion from
 	// the default resource and removes it because we will register another
 	// identity converter below.
 	r.Conversions = r.Conversions[1:]
 	r.Conversions = append([]conversion.Conversion{
 		conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
-		conversion.NewSingletonListConversion(conversion.AllVersions, bumped, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
-		conversion.NewSingletonListConversion(bumped, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList),
+		conversion.NewSingletonListConversion(conversion.AllVersions, bumped, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject, opts...),
+		conversion.NewSingletonListConversion(bumped, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList, opts...),
 	}, r.Conversions...)
 
 	return nil
