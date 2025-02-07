@@ -129,6 +129,7 @@ import (
 	jobdefinition "github.com/upbound/provider-aws/internal/controller/batch/jobdefinition"
 	jobqueue "github.com/upbound/provider-aws/internal/controller/batch/jobqueue"
 	schedulingpolicy "github.com/upbound/provider-aws/internal/controller/batch/schedulingpolicy"
+	inferenceprofile "github.com/upbound/provider-aws/internal/controller/bedrock/inferenceprofile"
 	agent "github.com/upbound/provider-aws/internal/controller/bedrockagent/agent"
 	budget "github.com/upbound/provider-aws/internal/controller/budgets/budget"
 	budgetaction "github.com/upbound/provider-aws/internal/controller/budgets/budgetaction"
@@ -1095,6 +1096,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		jobdefinition.Setup,
 		jobqueue.Setup,
 		schedulingpolicy.Setup,
+		inferenceprofile.Setup,
 		agent.Setup,
 		budget.Setup,
 		budgetaction.Setup,
