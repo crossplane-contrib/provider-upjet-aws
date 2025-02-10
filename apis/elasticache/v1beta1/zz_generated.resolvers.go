@@ -586,3 +586,91 @@ func (mg *UserGroup) ResolveReferences(ctx context.Context, c client.Reader) err
 
 	return nil
 }
+
+// ResolveReferences of this UserGroupAssociation.
+func (mg *UserGroupAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "UserGroup", "UserGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserGroupID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.UserGroupIDRef,
+			Selector:     mg.Spec.ForProvider.UserGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserGroupID")
+	}
+	mg.Spec.ForProvider.UserGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserGroupIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "User", "UserList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.UserIDRef,
+			Selector:     mg.Spec.ForProvider.UserIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserID")
+	}
+	mg.Spec.ForProvider.UserID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta1", "UserGroup", "UserGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserGroupID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.UserGroupIDRef,
+			Selector:     mg.Spec.InitProvider.UserGroupIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserGroupID")
+	}
+	mg.Spec.InitProvider.UserGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserGroupIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("elasticache.aws.upbound.io", "v1beta2", "User", "UserList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.UserIDRef,
+			Selector:     mg.Spec.InitProvider.UserIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserID")
+	}
+	mg.Spec.InitProvider.UserID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserIDRef = rsp.ResolvedReference
+
+	return nil
+}
