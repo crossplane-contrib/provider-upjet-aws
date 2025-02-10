@@ -394,6 +394,7 @@ spec:
                         enum:
                         - Static
                         - Dynamic
+                        - Auto
                         type: string
                     required:
                     - type

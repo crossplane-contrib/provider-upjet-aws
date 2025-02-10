@@ -17,6 +17,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/metrics"
 	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/hashicorp/aws-sdk-go-base/v2/endpoints"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-provider-aws/xpprovider"
 	"github.com/pkg/errors"
@@ -30,6 +31,7 @@ import (
 const (
 	keyAccountID        = "account_id"
 	keyRegion           = "region"
+	keyPartition        = "partition"
 	localstackAccountID = "000000000"
 )
 
@@ -37,6 +39,9 @@ type SetupConfig struct {
 	TerraformProvider *schema.Provider
 	Logger            logging.Logger
 }
+
+// iamRegions holds the region used for signing IAM credentials for each AWS partition.
+var iamRegions = getIAMDefaultSigningRegions()
 
 func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:gocyclo
 	credsCache := NewAWSCredentialsProviderCache(WithCacheLogger(config.Logger))
@@ -93,7 +98,13 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 		ps.ClientMetadata = map[string]string{
 			keyAccountID: credCache.accountID,
+			keyPartition: "aws",
 		}
+
+		if err := setPartition(awsCfg, pc, &ps); err != nil {
+			return terraform.Setup{}, errors.Wrap(err, "cannot configure AWS partition")
+		}
+
 		// several external name configs depend on the setup.Configuration for templating region
 		ps.Configuration = map[string]any{
 			keyRegion: awsCfg.Region,
@@ -103,6 +114,37 @@ func SelectTerraformSetup(config *SetupConfig) terraform.SetupFn { // nolint:goc
 		}
 		return ps, errors.Wrap(configureNoForkAWSClient(ctx, &ps, config, awsCfg.Region, credCache.creds, pc), "could not configure the no-fork AWS client")
 	}
+}
+
+func setPartition(awsCfg *aws.Config, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
+	var partitionFromConfig string
+	if pc.Spec.Endpoint != nil && pc.Spec.Endpoint.PartitionID != nil {
+		partitionFromConfig = *pc.Spec.Endpoint.PartitionID
+		ps.ClientMetadata[keyPartition] = partitionFromConfig
+	}
+	// region should never be empty, but defensively code to preserve existing behavior
+	if awsCfg.Region == "" {
+		return nil
+	}
+
+	// TODO(erhan): localstack environments with ALLOW_NONSTANDARD_REGIONS configuration
+	// might fail this check. Consider introducing a config that opt-out from partition
+	// resolution
+	partitionFromRegion, ok := endpoints.PartitionForRegion(endpoints.DefaultPartitions(), awsCfg.Region)
+	if !ok || partitionFromRegion.ID() == "" {
+		// tolerate unknown region and honor when explicit partition config exists
+		if partitionFromConfig != "" {
+			return nil
+		}
+		return errors.Errorf("managed resource region %q does not belong to a known partition", awsCfg.Region)
+	}
+
+	if partitionFromConfig != "" && partitionFromConfig != partitionFromRegion.ID() {
+		return errors.Errorf("conflicting partition config: managed resource region %q does not belong to configured partition %q at provider config", awsCfg.Region, *pc.Spec.Endpoint.PartitionID)
+	}
+
+	ps.ClientMetadata[keyPartition] = partitionFromRegion.ID()
+	return nil
 }
 
 // getAccountId retrieves the account ID associated with the given credentials.
@@ -127,9 +169,20 @@ func getAWSConfigWithDefaultRegion(ctx context.Context, c client.Client, obj run
 		return nil, err
 	}
 	if cfg.Region == "" && obj.GetObjectKind().GroupVersionKind().Group == "iam.aws.upbound.io" {
-		cfg.Region = "us-east-1"
+		cfg.Region = getIAMRegion(pc)
 	}
 	return cfg, nil
+}
+
+func getIAMRegion(pc *v1beta1.ProviderConfig) string {
+	defaultRegion := "us-east-1"
+	if pc == nil || pc.Spec.Endpoint == nil || pc.Spec.Endpoint.PartitionID == nil {
+		return defaultRegion
+	}
+	if region, ok := iamRegions[*pc.Spec.Endpoint.PartitionID]; ok {
+		return region
+	}
+	return defaultRegion
 }
 
 type metaOnlyPrimary struct {

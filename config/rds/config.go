@@ -100,6 +100,9 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 			}
 			return diff, nil
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"enabled_cloudwatch_logs_exports"},
+		}
 	})
 
 	p.AddResourceConfigurator("aws_rds_cluster_instance", func(r *config.Resource) {
