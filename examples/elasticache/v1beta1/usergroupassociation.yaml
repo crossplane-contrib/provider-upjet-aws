@@ -14,7 +14,7 @@ spec:
         testing.upbound.io/example-name: exampleGroup
     userIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: exampleUser
+        testing.upbound.io/example-name: exampleuser
 
 ---
 
@@ -24,9 +24,9 @@ metadata:
   annotations:
     meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
   labels:
-    testing.upbound.io/example-name: exampleUser
-    crossplane.io/external-name: exampleUser
-  name: example
+    testing.upbound.io/example-name: exampleuser
+    crossplane.io/external-name: exampleuser
+  name: exampleuser
 spec:
   forProvider:
     accessString: on ~app::* -@all +@read +@hash +@bitmap +@geo -setbit -bitfield
@@ -36,7 +36,7 @@ spec:
     authenticationMode:
       - type: iam
     region: us-west-1
-    userName: exampleUser
+    userName: exampleuser
 
 ---
 
@@ -44,7 +44,6 @@ apiVersion: elasticache.aws.upbound.io/v1beta1
 kind: UserGroup
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource needs a User resource and this User resource needs secrets that must contain valid credentials."
     meta.upbound.io/example-id: elasticache/v1beta1/usergroupassociation
   labels:
     testing.upbound.io/example-name: exampleGroup
@@ -53,5 +52,5 @@ spec:
   forProvider:
     engine: REDIS
     region: us-west-1
-    userIdRefs:
-    - name: test
+    userIds:
+      - default
