@@ -18,7 +18,7 @@ require (
 	github.com/aws/smithy-go v1.22.1
 	github.com/crossplane/crossplane-runtime v1.17.0
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
-	github.com/crossplane/upjet v1.4.1-0.20250206162150-1a6d69bbd22a
+	github.com/crossplane/upjet v1.5.0
 	github.com/go-ini/ini v1.46.0
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.59
@@ -37,8 +37,6 @@ require (
 	sigs.k8s.io/controller-runtime v0.18.2
 	sigs.k8s.io/controller-tools v0.14.0
 )
-
-replace github.com/crossplane/upjet => github.com/sergenyalcin/upjet v0.0.0-20250206141927-3d9beef6728a
 
 require (
 	github.com/ProtonMail/go-crypto v1.1.3 // indirect
