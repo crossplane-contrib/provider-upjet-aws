@@ -4,7 +4,7 @@
 
 module github.com/upbound/provider-aws
 
-go 1.23.3
+go 1.23.6
 
 require (
 	dario.cat/mergo v1.0.0
