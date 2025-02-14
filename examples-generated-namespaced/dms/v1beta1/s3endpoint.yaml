@@ -1,0 +1,16 @@
+apiVersion: dms.aws.upbound.io/v1beta1
+kind: S3Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dms/v1beta1/s3endpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bucketName: beckut_name
+    endpointType: target
+    region: us-west-1
+    serviceAccessRoleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

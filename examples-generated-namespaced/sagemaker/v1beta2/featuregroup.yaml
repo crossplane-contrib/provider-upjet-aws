@@ -1,0 +1,21 @@
+apiVersion: sagemaker.aws.upbound.io/v1beta2
+kind: FeatureGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta2/featuregroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventTimeFeatureName: example
+    featureDefinition:
+    - featureName: example
+      featureType: String
+    onlineStoreConfig:
+    - enableOnlineStore: true
+    recordIdentifierFeatureName: example
+    region: us-west-1
+    roleArnSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test

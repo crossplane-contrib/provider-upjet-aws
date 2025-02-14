@@ -1,0 +1,15 @@
+apiVersion: sagemaker.aws.upbound.io/v1beta2
+kind: Space
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sagemaker/v1beta2/space
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domainIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    region: us-west-1
+    spaceName: example

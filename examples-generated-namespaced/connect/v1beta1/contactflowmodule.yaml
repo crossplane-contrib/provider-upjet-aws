@@ -1,0 +1,64 @@
+apiVersion: connect.aws.upbound.io/v1beta1
+kind: ContactFlowModule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connect/v1beta1/contactflowmodule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    content: |-
+      ${jsonencode({
+          Version     = "2019-10-30"
+          StartAction = "12345678-1234-1234-1234-123456789012"
+          Actions = [
+            {
+              Identifier = "12345678-1234-1234-1234-123456789012"
+
+              Parameters = {
+                Text = "Hello contact flow module"
+              }
+
+              Transitions = {
+                NextAction = "abcdef-abcd-abcd-abcd-abcdefghijkl"
+                Errors     = []
+                Conditions = []
+              }
+
+              Type = "MessageParticipant"
+            },
+            {
+              Identifier  = "abcdef-abcd-abcd-abcd-abcdefghijkl"
+              Type        = "DisconnectParticipant"
+              Parameters  = {}
+              Transitions = {}
+            }
+          ]
+          Settings = {
+            InputParameters  = []
+            OutputParameters = []
+            Transitions = [
+              {
+                DisplayName   = "Success"
+                ReferenceName = "Success"
+                Description   = ""
+              },
+              {
+                DisplayName   = "Error"
+                ReferenceName = "Error"
+                Description   = ""
+              }
+            ]
+          }
+        })}
+    description: Example Contact Flow Module Description
+    instanceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: Example
+    region: us-west-1
+    tags:
+      Application: Terraform
+      Method: Create
+      Name: Example Contact Flow Module

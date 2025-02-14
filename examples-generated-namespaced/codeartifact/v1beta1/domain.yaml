@@ -1,0 +1,12 @@
+apiVersion: codeartifact.aws.upbound.io/v1beta1
+kind: Domain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: codeartifact/v1beta1/domain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: example
+    region: us-west-1

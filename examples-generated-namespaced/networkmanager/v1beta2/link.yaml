@@ -1,0 +1,21 @@
+apiVersion: networkmanager.aws.upbound.io/v1beta2
+kind: Link
+metadata:
+  annotations:
+    meta.upbound.io/example-id: networkmanager/v1beta2/link
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bandwidth:
+    - downloadSpeed: 50
+      uploadSpeed: 10
+    globalNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    providerName: MegaCorp
+    region: us-west-1
+    siteIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
