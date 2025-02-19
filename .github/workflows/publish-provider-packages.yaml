@@ -1,0 +1,40 @@
+name: Publish Provider Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      subpackages:
+        description: 'Subpackages to be built individually (e.g. config ec2)'
+        default: 'config'
+        required: false
+      size:
+        description: "Number of smaller provider packages to build and push with each build job"
+        default: '30'
+        required: true
+      concurrency:
+        description: "Number of parallel package builds within each build job"
+        default: '1'
+        required: false
+      version:
+        description: "Version string to use while publishing the packages (e.g. v1.0.0-alpha.1)"
+        default: ''
+        required: false
+      go-version:
+        description: 'Go version to use if building needs to be done'
+        default: '1.23'
+        required: false
+
+jobs:
+  publish-provider-packages:
+    uses: crossplane-contrib/provider-workflows/.github/workflows/publish-provider-family.yml@main
+    with:
+      subpackages: ${{ github.event.inputs.subpackages }}
+      size: ${{ github.event.inputs.size }}
+      concurrency: ${{ github.event.inputs.concurrency }}
+      repository: provider-aws
+      version: ${{ github.event.inputs.version }}
+      go-version: ${{ github.event.inputs.go-version }}
+      cleanup-disk: true
+    secrets:
+      GHCR_PAT: ${{ secrets.GITHUB_TOKEN }}
+      XPKG_UPBOUND_TOKEN: ${{ secrets.XPKG_UPBOUND_TOKEN }}
