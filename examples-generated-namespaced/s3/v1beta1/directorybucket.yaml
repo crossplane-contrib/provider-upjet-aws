@@ -1,0 +1,13 @@
+apiVersion: s3.aws.upbound.io/v1beta1
+kind: DirectoryBucket
+metadata:
+  annotations:
+    meta.upbound.io/example-id: s3/v1beta1/directorybucket
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location:
+    - name: usw2-az1
+    region: us-west-1

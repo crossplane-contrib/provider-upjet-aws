@@ -1,0 +1,73 @@
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: DomainMailFrom
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domainSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    mailFromDomain: bounce.${aws_ses_domain_identity.example.domain}
+    region: us-west-1
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta2
+kind: Record
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+  labels:
+    testing.upbound.io/example-name: example_ses_domain_mail_from_mx
+  name: example-ses-domain-mail-from-mx
+spec:
+  forProvider:
+    name: example.com
+    recordsRefs:
+    - name: example
+    region: us-west-1
+    ttl: "600"
+    type: MX
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: route53.aws.upbound.io/v1beta2
+kind: Record
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+  labels:
+    testing.upbound.io/example-name: example_ses_domain_mail_from_txt
+  name: example-ses-domain-mail-from-txt
+spec:
+  forProvider:
+    name: example.com
+    recordsRefs:
+    - name: example
+    region: us-west-1
+    ttl: "600"
+    type: TXT
+    zoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: ses.aws.upbound.io/v1beta1
+kind: DomainIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ses/v1beta1/domainmailfrom
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1

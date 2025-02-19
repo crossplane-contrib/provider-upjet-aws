@@ -1,0 +1,35 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NetworkInsightsAnalysis
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/networkinsightsanalysis
+  labels:
+    testing.upbound.io/example-name: analysis
+  name: analysis
+spec:
+  forProvider:
+    networkInsightsPathIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: path
+    region: us-west-1
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: NetworkInsightsPath
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/networkinsightsanalysis
+  labels:
+    testing.upbound.io/example-name: path
+  name: path
+spec:
+  forProvider:
+    destinationSelector:
+      matchLabels:
+        testing.upbound.io/example-name: destination
+    protocol: tcp
+    region: us-west-1
+    sourceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: source

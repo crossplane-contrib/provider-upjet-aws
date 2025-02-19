@@ -1,0 +1,12 @@
+apiVersion: rum.aws.upbound.io/v1beta2
+kind: AppMonitor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: rum/v1beta2/appmonitor
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    domain: localhost
+    region: us-west-1

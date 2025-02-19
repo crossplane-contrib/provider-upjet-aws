@@ -6,6 +6,8 @@ module github.com/upbound/provider-aws
 
 go 1.23.6
 
+replace github.com/crossplane/upjet => github.com/negz/upjet v0.0.0-20250213232742-febdb738e9a7
+
 require (
 	dario.cat/mergo v1.0.1
 	github.com/aws/aws-sdk-go v1.55.5

@@ -1,0 +1,98 @@
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: allow_tls
+  name: allow-tls
+spec:
+  forProvider:
+    description: Allow TLS inbound traffic and all outbound traffic
+    name: allow_tls
+    region: us-west-1
+    tags:
+      Name: allow_tls
+    vpcIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: main
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupEgressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: allow_all_traffic_ipv4
+  name: allow-all-traffic-ipv4
+spec:
+  forProvider:
+    cidrIpv4: 0.0.0.0/0
+    ipProtocol: "-1"
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: allow_tls
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupEgressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: allow_all_traffic_ipv6
+  name: allow-all-traffic-ipv6
+spec:
+  forProvider:
+    cidrIpv6: ::/0
+    ipProtocol: "-1"
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: allow_tls
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupIngressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: allow_tls_ipv4
+  name: allow-tls-ipv4
+spec:
+  forProvider:
+    cidrIpv4: ${aws_vpc.main.cidr_block}
+    fromPort: 443
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: allow_tls
+    toPort: 443
+
+---
+
+apiVersion: ec2.aws.upbound.io/v1beta1
+kind: SecurityGroupIngressRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ec2/v1beta1/securitygroup
+  labels:
+    testing.upbound.io/example-name: allow_tls_ipv6
+  name: allow-tls-ipv6
+spec:
+  forProvider:
+    cidrIpv6: ${aws_vpc.main.ipv6_cidr_block}
+    fromPort: 443
+    ipProtocol: tcp
+    region: us-west-1
+    securityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: allow_tls
+    toPort: 443
