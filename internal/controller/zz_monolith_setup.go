@@ -459,6 +459,9 @@ import (
 	lbtargetgroup "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroup"
 	lbtargetgroupattachment "github.com/upbound/provider-aws/internal/controller/elbv2/lbtargetgroupattachment"
 	lbtruststore "github.com/upbound/provider-aws/internal/controller/elbv2/lbtruststore"
+	clusteremr "github.com/upbound/provider-aws/internal/controller/emr/cluster"
+	instancefleet "github.com/upbound/provider-aws/internal/controller/emr/instancefleet"
+	instancegroup "github.com/upbound/provider-aws/internal/controller/emr/instancegroup"
 	securityconfiguration "github.com/upbound/provider-aws/internal/controller/emr/securityconfiguration"
 	applicationemrserverless "github.com/upbound/provider-aws/internal/controller/emrserverless/application"
 	feature "github.com/upbound/provider-aws/internal/controller/evidently/feature"
@@ -1425,6 +1428,9 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		lbtargetgroup.Setup,
 		lbtargetgroupattachment.Setup,
 		lbtruststore.Setup,
+		clusteremr.Setup,
+		instancefleet.Setup,
+		instancegroup.Setup,
 		securityconfiguration.Setup,
 		applicationemrserverless.Setup,
 		feature.Setup,
