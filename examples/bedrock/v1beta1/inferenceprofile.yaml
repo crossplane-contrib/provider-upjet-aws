@@ -1,0 +1,17 @@
+apiVersion: bedrock.aws.upbound.io/v1beta1
+kind: InferenceProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: bedrock/v1beta1/inferenceprofile
+  labels:
+    testing.upbound.io/example-name: example-llama-app
+  name: example-llama-app
+spec:
+  forProvider:
+    description: Profile with tag for cost allocation tracking
+    modelSource:
+    - copyFrom: arn:aws:bedrock:eu-central-1:964273356747:inference-profile/eu.meta.llama3-2-1b-instruct-v1:0
+    name: llama-app
+    region: eu-central-1
+    tags:
+      ProjectID: "123"
