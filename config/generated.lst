@@ -598,6 +598,7 @@
 "aws_mq_user",
 "aws_msk_cluster",
 "aws_msk_configuration",
+"aws_msk_replicator",
 "aws_msk_scram_secret_association",
 "aws_msk_serverless_cluster",
 "aws_mskconnect_connector",
