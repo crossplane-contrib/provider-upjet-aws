@@ -11,6 +11,7 @@ import (
 
 	cluster "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	replicator "github.com/upbound/provider-aws/internal/controller/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
 )
@@ -21,6 +22,7 @@ func Setup_kafka(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		cluster.Setup,
 		configuration.Setup,
+		replicator.Setup,
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
 	} {
