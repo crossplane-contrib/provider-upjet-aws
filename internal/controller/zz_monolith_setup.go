@@ -559,6 +559,7 @@ import (
 	recordingconfiguration "github.com/upbound/provider-aws/internal/controller/ivs/recordingconfiguration"
 	clusterkafka "github.com/upbound/provider-aws/internal/controller/kafka/cluster"
 	configuration "github.com/upbound/provider-aws/internal/controller/kafka/configuration"
+	replicator "github.com/upbound/provider-aws/internal/controller/kafka/replicator"
 	scramsecretassociation "github.com/upbound/provider-aws/internal/controller/kafka/scramsecretassociation"
 	serverlesscluster "github.com/upbound/provider-aws/internal/controller/kafka/serverlesscluster"
 	connector "github.com/upbound/provider-aws/internal/controller/kafkaconnect/connector"
@@ -1525,6 +1526,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		recordingconfiguration.Setup,
 		clusterkafka.Setup,
 		configuration.Setup,
+		replicator.Setup,
 		scramsecretassociation.Setup,
 		serverlesscluster.Setup,
 		connector.Setup,
