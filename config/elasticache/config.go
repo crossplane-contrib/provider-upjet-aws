@@ -16,8 +16,8 @@ import (
 	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/types/comments"
 
-	"github.com/upbound/provider-aws/apis/elasticache/v1beta1"
-	"github.com/upbound/provider-aws/apis/elasticache/v1beta2"
+	"github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta1"
+	"github.com/upbound/provider-aws/apis/cluster/elasticache/v1beta2"
 	"github.com/upbound/provider-aws/config/common"
 )
 
