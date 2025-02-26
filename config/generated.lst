@@ -900,6 +900,7 @@
 "aws_transfer_tag",
 "aws_transfer_user",
 "aws_transfer_workflow",
+"aws_verifiedaccess_trust_provider",
 "aws_volume_attachment",
 "aws_vpc",
 "aws_vpc_dhcp_options",
