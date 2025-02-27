@@ -1,0 +1,41 @@
+apiVersion: applicationinsights.aws.upbound.io/v1beta1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: applicationinsights/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+
+---
+
+apiVersion: resourcegroups.aws.upbound.io/v1beta2
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: applicationinsights/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    region: us-west-1
+    resourceQuery:
+    - query: |-
+        ${jsonencode({
+              ResourceTypeFilters = [
+                "AWS::EC2::Instance"
+              ]
+
+              TagFilters = [
+                {
+                  Key = "Stage"
+                  Values = [
+                    "Test"
+                  ]
+                }
+              ]
+            })}

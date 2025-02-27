@@ -9,8 +9,8 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
 
-	"github.com/upbound/provider-aws/apis/kafka/v1beta1"
-	"github.com/upbound/provider-aws/apis/kafka/v1beta2"
+	"github.com/upbound/provider-aws/apis/cluster/kafka/v1beta1"
+	"github.com/upbound/provider-aws/apis/cluster/kafka/v1beta2"
 	"github.com/upbound/provider-aws/config/common"
 )
 

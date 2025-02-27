@@ -9,8 +9,8 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
 
-	"github.com/upbound/provider-aws/apis/connect/v1beta1"
-	"github.com/upbound/provider-aws/apis/connect/v1beta2"
+	"github.com/upbound/provider-aws/apis/cluster/connect/v1beta1"
+	"github.com/upbound/provider-aws/apis/cluster/connect/v1beta2"
 )
 
 // Configure adds configurations for the connect group.

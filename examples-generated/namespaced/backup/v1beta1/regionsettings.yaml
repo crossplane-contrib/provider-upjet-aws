@@ -1,0 +1,30 @@
+apiVersion: backup.aws.upbound.io/v1beta1
+kind: RegionSettings
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1beta1/regionsettings
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    region: us-west-1
+    resourceTypeManagementPreference:
+      DynamoDB: true
+      EFS: true
+    resourceTypeOptInPreference:
+      Aurora: true
+      CloudFormation: true
+      DocumentDB: true
+      DynamoDB: true
+      EBS: true
+      EC2: true
+      EFS: true
+      FSx: true
+      Neptune: true
+      RDS: true
+      Redshift: true
+      S3: true
+      SAP HANA on Amazon EC2: true
+      Storage Gateway: true
+      VirtualMachine: true

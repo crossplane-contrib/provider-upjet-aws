@@ -1,0 +1,14 @@
+apiVersion: ecr.aws.upbound.io/v1beta2
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ecr/v1beta2/repository
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    imageScanningConfiguration:
+    - scanOnPush: true
+    imageTagMutability: MUTABLE
+    region: us-west-1

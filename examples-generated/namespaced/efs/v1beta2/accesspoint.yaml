@@ -1,0 +1,14 @@
+apiVersion: efs.aws.upbound.io/v1beta2
+kind: AccessPoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: efs/v1beta2/accesspoint
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    fileSystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    region: us-west-1

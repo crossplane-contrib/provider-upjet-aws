@@ -9,7 +9,7 @@ import (
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/upbound/provider-aws/apis/lambda/v1beta1"
+	"github.com/upbound/provider-aws/apis/cluster/lambda/v1beta1"
 )
 
 // FunctionInvokeARN returns the invoke ARN value of the lambda function.
